@@ -1,0 +1,9 @@
+{
+  "name": "@ant-ui/react",
+  "version": "1.0.0",
+  "author": "X1ng Yu",
+  "scripts": {},
+  "main": "src/index.ts",
+  "dependencies": {
+  }
+}

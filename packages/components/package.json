@@ -1,0 +1,12 @@
+{
+  "name": "@ant-ui/components",
+  "version": "1.0.0",
+  "author": "X1ng Yu",
+  "scripts": {},
+  "devDependencies": {
+    "react": "^18.3.1"
+  },
+  "dependencies": {
+    "@ant-ui/theme": "workspace:*"
+  }
+}

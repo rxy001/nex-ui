@@ -1,0 +1,6 @@
+.next/*
+*.css
+dist
+public/*
+!.storybook
+*.css

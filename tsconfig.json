@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["dom", "esnext"],
+    "declaration": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "baseUrl": "./"
+  },
+  "include": ["packages", "packages/storybook/.storybook/vite.config.js"],
+  "exclude": ["**/node_modules", "**/dist", "**/.turbo"]
+}
