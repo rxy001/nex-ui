@@ -22,15 +22,12 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": true
   },
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "import/resolver": {
-      "typescript": true,
-      "node": true
     }
   },
   "rules": {
@@ -41,6 +38,15 @@
       { "extensions": [".tsx", ".jsx"] }
     ],
     "import/extensions": "off",
-    "import/no-extraneous-dependencies": "off"
-  }
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "jsx-a11y/control-has-associated-label": "off"
+  },
+  "overrides": [
+    {
+      "extends": ["plugin:@typescript-eslint/disable-type-checked"],
+      "files": ["./**/*.js"]
+    }
+  ]
 }

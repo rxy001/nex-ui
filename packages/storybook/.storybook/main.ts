@@ -7,6 +7,7 @@ export default {
   },
   stories: [
     '../../components/**/stories/**/*.stories.@(js|jsx|ts|tsx)',
-    '../../core/theme/stories/*.stories.@(js|jsx|ts|tsx)',
+    '../../theme/stories/*.stories.@(js|jsx|ts|tsx)',
   ],
+  addons: ['storybook-dark-mode'],
 } satisfies StorybookConfig

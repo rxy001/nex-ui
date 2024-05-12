@@ -4,8 +4,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["dom", "esnext"],
-    "declaration": true,
-    "sourceMap": true,
+    "declaration": false,
     "skipLibCheck": true,
     "strict": true,
     "isolatedModules": true,
@@ -16,6 +15,6 @@
     "noUnusedLocals": true,
     "baseUrl": "./"
   },
-  "include": ["packages", "packages/storybook/.storybook/vite.config.js"],
+  "include": ["packages", "packages/storybook/.storybook/*.ts", "typing.d.ts"],
   "exclude": ["**/node_modules", "**/dist", "**/.turbo"]
 }

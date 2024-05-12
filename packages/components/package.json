@@ -2,11 +2,20 @@
   "name": "@ant-ui/components",
   "version": "1.0.0",
   "author": "X1ng Yu",
-  "scripts": {},
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin typescript"
+  },
+  "type": "module",
+  "main": "./src/index.ts",
   "devDependencies": {
     "react": "^18.3.1"
   },
   "dependencies": {
-    "@ant-ui/theme": "workspace:*"
+    "@ant-ui/theme": "workspace:*",
+    "@vanilla-extract/dynamic": "2.1.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
