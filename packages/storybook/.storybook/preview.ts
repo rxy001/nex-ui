@@ -1,7 +1,6 @@
-import type { Preview } from '@storybook/react'
 import { themes } from '@storybook/theming'
 
-export const parameters: Preview['parameters'] = {
+export const preview = {
   darkMode: {
     current: 'dark',
     stylePreview: true,
@@ -13,6 +12,14 @@ export const parameters: Preview['parameters'] = {
     },
     light: {
       ...themes.light,
+    },
+  },
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
     },
   },
 }

@@ -1,1 +1,1 @@
-export * from './createThemeContract'
+export * from './vanllla-utils'

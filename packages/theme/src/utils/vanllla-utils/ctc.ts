@@ -1,13 +1,11 @@
-import { createThemeContract as ctc } from '@vanilla-extract/css'
+import { createThemeContract } from '@vanilla-extract/css'
 
 type ThemeContract<T extends readonly string[]> = {
   [P in T[number]]: null
 }
 
-export const createThemeContract = <T extends readonly string[]>(
-  properties: T,
-) =>
-  ctc(
+export const ctc = <T extends readonly string[]>(properties: T) =>
+  createThemeContract(
     properties.reduce(
       (vars, property) => ({
         ...vars,

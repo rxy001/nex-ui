@@ -2,11 +2,11 @@ import { daybreakBlue } from './daybreak-blue'
 import { dustRed } from './dust-red'
 import { volcano } from './volcano'
 
-function toColorObject(colors: string[]) {
-  return colors.reduce<PlainObject>(
+function toColorObject(key: string, colors: string[]) {
+  return colors.reduce<Record<string, string>>(
     (obj, color, index) => ({
       ...obj,
-      [index]: color,
+      [`${key}-${index}`]: color,
     }),
     {},
   )
@@ -14,20 +14,20 @@ function toColorObject(colors: string[]) {
 
 const object = {
   volcano,
-  daybreakBlue,
-  dustRed,
+  'daybreak-blue': daybreakBlue,
+  'dust-red': dustRed,
 }
 
 type ColorTypes = keyof typeof object
 
 type BuiltInColors = {
-  [P in ColorTypes]: ReturnType<typeof toColorObject>
+  [P in ColorTypes]: string
 }
 
 export const builtInColors = (Object.keys(object) as ColorTypes[]).reduce(
   (obj, key) => ({
     ...obj,
-    [key]: toColorObject(object[key]),
+    ...toColorObject(key, object[key]),
   }),
   {} as BuiltInColors,
 )

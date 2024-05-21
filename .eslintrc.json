@@ -40,8 +40,11 @@
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
+
+    "jsx-a11y/control-has-associated-label": "off",
+
     "@typescript-eslint/no-explicit-any": "off",
-    "jsx-a11y/control-has-associated-label": "off"
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "overrides": [
     {

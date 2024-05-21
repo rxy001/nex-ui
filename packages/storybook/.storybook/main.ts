@@ -9,5 +9,5 @@ export default {
     '../../components/**/stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../../theme/stories/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: ['storybook-dark-mode'],
+  addons: ['@storybook/addon-essentials', 'storybook-dark-mode'],
 } satisfies StorybookConfig
