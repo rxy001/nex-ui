@@ -8,25 +8,20 @@ import type {
   RuntimeFn,
   StyleRule,
   SlotClasses,
+  CompoundVariantsSelection,
 } from './types'
 import { mapValues } from './mapValues'
 import { createRuntimeFn } from './createRuntimeFn'
 
 export function recipe<Variants extends VariantGroups, Base extends StyleRule>(
-  options: Pick<
-    RecipeOptions<Variants, Base>,
-    'base' | 'defaultVariants' | 'variants'
-  >,
+  options: Omit<RecipeOptions<Variants, Base, undefined>, 'slots'>,
 ): RuntimeFn<Variants, string>
 
 export function recipe<
   Variants extends VariantGroups,
   Slots extends SlotGroups,
 >(
-  options: Pick<
-    RecipeOptions<Variants, undefined, Slots>,
-    'slots' | 'defaultVariants' | 'variants'
-  >,
+  options: Omit<RecipeOptions<Variants, undefined, Slots>, 'base'>,
 ): RuntimeFn<Variants, SlotClasses<Slots>>
 
 export function recipe<
@@ -36,34 +31,71 @@ export function recipe<
 >(
   options: RecipeOptions<Variants, Base, Slots>,
 ): RuntimeFn<Variants, SlotClasses<Slots> | string> {
-  const { variants = {}, defaultVariants = {}, slots, base } = options
+  const {
+    slots,
+    base,
+    variants = {},
+    defaultVariants = {},
+    compoundVariants,
+  } = options
 
-  let slotClasses: SlotClasses<Slots> | string = ''
+  let classes: SlotClasses<Slots> | string = ''
   const variantClasses = mapValues(variants, (variant) =>
     mapValues(variant, (styleRule) =>
       typeof styleRule === 'string' ? styleRule : style(styleRule),
     ),
   ) as VariantClasses<Variants>
 
-  if (base) {
-    if (typeof base === 'string') {
-      slotClasses = base
-    } else if (typeof base === 'object') {
-      slotClasses = style(base)
-    }
-  } else if (slots) {
-    slotClasses = mapValues(slots, (slot) => {
+  if (slots && typeof slots === 'object') {
+    classes = mapValues(slots, (slot) => {
       if (typeof slot === 'string') {
         return slot
       }
       return style(slot)
     })
+  } else if (typeof base === 'string') {
+    classes = base
+  } else if (typeof base === 'object') {
+    classes = style(base)
+  }
+
+  function compoundStyle(styleRule: StyleRule | Slots) {
+    if (styleRule && typeof styleRule === 'object') {
+      const isSlotStyles = Object.keys(styleRule).every(
+        (key) => !!variantClasses[key],
+      )
+
+      if (!isSlotStyles) {
+        return style(styleRule)
+      }
+
+      return mapValues(styleRule as Slots, (slot) => {
+        if (typeof slot === 'string') {
+          return slot
+        }
+        return style(slot!)
+      })
+    }
+
+    return styleRule
+  }
+
+  const compounds: Array<
+    [CompoundVariantsSelection<Variants>, string | SlotClasses<Slots>]
+  > = []
+
+  if (compoundVariants) {
+    for (const compound of compoundVariants) {
+      const { style: cStyle, ...cVariants } = compound
+      compounds.push([cVariants as any, compoundStyle(cStyle)])
+    }
   }
 
   const config = {
+    classes,
     variantClasses,
     defaultVariants,
-    slotClasses,
+    compoundVariants: compounds,
   }
 
   return addFunctionSerializer(createRuntimeFn(config), {

@@ -6,17 +6,29 @@ export type Resolve<T> = {
 
 export type StyleRule = ComplexStyleRule | string
 
-type StyleDefinations = Record<string, StyleRule>
-
 export type SlotGroups = Record<string, StyleRule>
 
-export type VariantGroups = Record<string, StyleDefinations>
+export type VariantGroups = Record<string, Record<string, StyleRule>>
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 
 export type VariantSelection<Variants extends VariantGroups> = {
   [VariantGroup in keyof Variants]?: BooleanMap<keyof Variants[VariantGroup]>
 }
+
+export type CompoundVariantsSelection<Variants extends VariantGroups> = {
+  [VariantGroup in keyof Variants]?:
+    | BooleanMap<keyof Variants[VariantGroup]>
+    | BooleanMap<keyof Variants[VariantGroup]>[]
+}
+
+export type CompoundVariants<Variants extends VariantGroups, Slots> = Array<
+  CompoundVariantsSelection<Variants> & {
+    style: Slots extends SlotGroups
+      ? Record<keyof Slots, StyleRule> | StyleRule
+      : StyleRule
+  }
+>
 
 export type RecipeOptions<
   Variants extends VariantGroups,
@@ -27,6 +39,7 @@ export type RecipeOptions<
   slots?: Slots
   variants?: Variants
   defaultVariants?: VariantSelection<Variants>
+  compoundVariants?: CompoundVariants<Variants, Slots>
 }
 
 export type VariantClasses<Variants extends VariantGroups> = {
@@ -39,10 +52,11 @@ export type SlotClasses<Slots extends SlotGroups> = {
   [p in keyof Slots]: string
 }
 
-export type RuntimeConfig<Variants extends VariantGroups, SlotsCls> = {
-  slotClasses: SlotsCls
+export type RuntimeConfig<Variants extends VariantGroups, Classes> = {
+  classes: Classes
   variantClasses: VariantClasses<Variants>
   defaultVariants: VariantSelection<Variants>
+  compoundVariants?: Array<[CompoundVariantsSelection<Variants>, Classes]>
 }
 
 export type RuntimeFn<Variants extends VariantGroups, SlotCls> = (
