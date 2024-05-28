@@ -18,11 +18,7 @@ export default defineConfig({
     vanillaExtractPlugin(),
   ],
   input: './src/index.ts',
-  external: [
-    '@vanilla-extract/css',
-    '@vanilla-extract/recipes',
-    '@vanilla-extract/recipes/createRuntimeFn',
-  ],
+  external: ['@vanilla-extract/css'],
   output: {
     preserveModules: true,
     assetFileNames({ name }) {

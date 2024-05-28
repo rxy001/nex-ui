@@ -13,6 +13,22 @@ import type {
 import { mapValues } from './mapValues'
 import { createRuntimeFn } from './createRuntimeFn'
 
+function processStyleRule(styleRule: StyleRule): string {
+  if (typeof styleRule === 'string') {
+    return styleRule
+  }
+  if (Array.isArray(styleRule)) {
+    return styleRule.map((k) => processStyleRule(k)).join(' ')
+  }
+  if (Object.prototype.toString.call(styleRule) === '[object Object]') {
+    return style(styleRule)
+  }
+
+  throw new Error(
+    `ProcessStyleRule: This style rule is't supported ${styleRule}`,
+  )
+}
+
 export function recipe<Variants extends VariantGroups, Base extends StyleRule>(
   options: Omit<RecipeOptions<Variants, Base, undefined>, 'slots'>,
 ): RuntimeFn<Variants, string>
@@ -47,18 +63,10 @@ export function recipe<
   ) as VariantClasses<Variants>
 
   if (slots && typeof slots === 'object') {
-    classes = mapValues(slots, (slot) => {
-      if (typeof slot === 'string') {
-        return slot
-      }
-      return style(slot)
-    })
-  } else if (typeof base === 'string') {
-    classes = base
-  } else if (typeof base === 'object') {
-    classes = style(base)
+    classes = mapValues(slots, processStyleRule)
+  } else if (base !== undefined) {
+    classes = processStyleRule(base)
   }
-
   function compoundStyle(styleRule: StyleRule | Slots) {
     if (styleRule && typeof styleRule === 'object') {
       const isSlotStyles = Object.keys(styleRule).every(

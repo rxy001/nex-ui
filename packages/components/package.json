@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "author": "X1ng Yu",
   "scripts": {
-    "build": "rollup --config rollup.config.ts --configPlugin typescript"
+    "build": "rollup --config rollup.config.ts --configPlugin typescript",
+    "type-check": "tsc --noEmit"
   },
   "type": "module",
   "main": "./src/index.ts",
@@ -13,7 +14,10 @@
   },
   "dependencies": {
     "@ant-ui/theme": "workspace:*",
-    "@vanilla-extract/dynamic": "2.1.0"
+    "@ant-ui/utils": "workspace:*",
+    "@iconify/react": "4.1.1",
+    "classnames": "2.5.1",
+    "framer-motion": "11.2.4"
   },
   "peerDependencies": {
     "react": "^18.0.0",

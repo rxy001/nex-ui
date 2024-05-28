@@ -1,11 +1,29 @@
-import { button, ButtonVariants } from '@ant-ui/theme'
+import { WaterWave } from '../waterWave'
+import type { ButtonProps } from './types'
+import { useButton } from './useButton'
 
-export function Button(props: ButtonVariants = {}) {
-  const { type, size } = props
+export function Button(props: ButtonProps) {
+  const { children, disabled, type, href } = props
+
+  const { getProps } = useButton(props)
+
+  const rootProps = {
+    ...getProps(),
+  }
+
+  if (href !== undefined) {
+    return (
+      <a href={href} data-disabled={disabled} {...rootProps}>
+        {children}
+      </a>
+    )
+  }
 
   return (
-    <button type="button" className={`${button({ type, size })}`}>
-      button
-    </button>
+    <WaterWave>
+      <button type={type} disabled={disabled} {...rootProps}>
+        {children}
+      </button>
+    </WaterWave>
   )
 }

@@ -33,10 +33,16 @@
   "rules": {
     "no-console": "warn",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [
       "error",
       { "extensions": [".tsx", ".jsx"] }
     ],
+    "react/button-has-type": "off",
+    "react/function-component-definition": "off",
+
+    "no-restricted-syntax": "off",
+    "consistent-return": "off",
     "import/extensions": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
@@ -44,7 +50,17 @@
     "jsx-a11y/control-has-associated-label": "off",
 
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "prefer": "type-imports", "fixStyle": "separate-type-imports" }
+    ],
+    "@typescript-eslint/consistent-type-exports": [
+      "error",
+      {
+        "fixMixedExportsWithInlineTypeSpecifier": false
+      }
+    ]
   },
   "overrides": [
     {

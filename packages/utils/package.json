@@ -1,5 +1,5 @@
 {
-  "name": "@ant-ui/theme",
+  "name": "@ant-ui/utils",
   "version": "1.0.0",
   "author": "X1ng Yu",
   "scripts": {
@@ -8,14 +8,11 @@
   },
   "main": "./src/index.ts",
   "type": "module",
-  "devDependencies": {
-    "@vanilla-extract/rollup-plugin": "1.3.4"
-  },
   "dependencies": {
-    "@vanilla-extract/css": "1.15.1",
-    "@vanilla-extract/css-utils": "0.1.4",
-    "@vanilla-extract/dynamic": "2.1.0",
-    "@vanilla-extract/sprinkles": "1.6.1"
+    "react-is": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react-is": "18.3.0"
   },
   "peerDependencies": {
     "react": "^18.0.0",
