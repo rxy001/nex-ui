@@ -3,7 +3,7 @@ import type {
   ButtonHTMLAttributes,
   AnchorHTMLAttributes,
 } from 'react'
-import type { ButtonVariants } from '@wui/theme'
+import type { ButtonVariants } from '@nex-ui/theme'
 
 export type UseButtonParameters = ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement> &

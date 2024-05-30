@@ -1,7 +1,8 @@
 {
-  "name": "@wui/storybook",
+  "name": "@nex-ui/storybook",
   "version": "1.0.0",
   "author": "X1ng Yu",
+  "private": true,
   "scripts": {
     "dev": "storybook dev -p 6006",
     "type-check": "tsc --noEmit"

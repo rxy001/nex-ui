@@ -1,6 +1,6 @@
 import { cloneElement, isValidElement, useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
-import { composeRef, supportRef, addEventListener } from '@wui/utils'
+import { composeRef, supportRef, addEventListener } from '@nex-ui/utils'
 import { WaveMotion } from './WaveMotion'
 import type { WaveProps } from './types'
 

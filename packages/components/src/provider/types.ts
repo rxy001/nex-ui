@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import type { Tokens, BtnTokens } from '@wui/theme'
+import type { Tokens, BtnTokens } from '@nex-ui/theme'
 
 export type ComponentTokens = {
   button: Partial<BtnTokens & Tokens>

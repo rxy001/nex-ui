@@ -113,7 +113,7 @@ export function recipe<
   return addFunctionSerializer(createRuntimeFn(config), {
     importPath:
       process.env.NODE_ENV === 'production'
-        ? '@wui/theme'
+        ? '@nex-ui/theme'
         : '../../utils/vanllla-utils/recipe/createRuntimeFn',
     importName: 'createRuntimeFn',
     // @ts-ignore

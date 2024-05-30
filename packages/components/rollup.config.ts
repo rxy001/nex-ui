@@ -20,8 +20,8 @@ export default defineConfig([
     input: './src/index.ts',
     external: [
       'react/jsx-runtime',
-      '@wui/utils',
-      '@wui/theme',
+      '@nex-ui/utils',
+      '@nex-ui/theme',
       'react',
       'react-dom/client',
       'classnames',

@@ -19,17 +19,27 @@ export default defineConfig({
   ],
   input: './src/index.ts',
   external: [
-    '@wui/theme',
+    '@nex-ui/theme',
     '@vanilla-extract/dynamic',
     '@vanilla-extract/css',
     '@vanilla-extract/css/functionSerializer',
   ],
-  output: {
-    preserveModules: true,
-    assetFileNames({ name }) {
-      return name?.replace(/^src\//, '') ?? ''
+  output: [
+    {
+      preserveModules: true,
+      assetFileNames({ name }) {
+        return name?.replace(/^src\//, '') ?? ''
+      },
+      format: 'es',
+      dir: './dist/es',
     },
-    format: 'es',
-    dir: './dist',
-  },
+    {
+      preserveModules: true,
+      assetFileNames({ name }) {
+        return name?.replace(/^src\//, '') ?? ''
+      },
+      format: 'cjs',
+      dir: './dist/lib',
+    },
+  ],
 })

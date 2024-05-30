@@ -1,4 +1,4 @@
-import { wave } from '@wui/theme'
+import { wave } from '@nex-ui/theme'
 import { motion, useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import { getWaveColor } from './utils'

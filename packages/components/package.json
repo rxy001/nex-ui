@@ -1,12 +1,12 @@
 {
-  "name": "@wui/components",
-  "version": "1.0.0",
+  "name": "@nex-ui/react",
+  "version": "1.0.2",
   "author": "X1ng Yu",
   "scripts": {
     "build": "rollup --config ./rollup.config.ts --configPlugin typescript",
     "type-check": "tsc --noEmit",
-    "prebuild": "clean-package",
-    "postbuild": "clean-package restore"
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "type": "module",
   "main": "./src/index.ts",
@@ -18,8 +18,8 @@
     "react": "^18.3.1"
   },
   "dependencies": {
-    "@wui/theme": "workspace:*",
-    "@wui/utils": "workspace:*",
+    "@nex-ui/theme": "workspace:*",
+    "@nex-ui/utils": "workspace:*",
     "@iconify/react": "4.1.1",
     "classnames": "2.5.1",
     "framer-motion": "11.2.4"

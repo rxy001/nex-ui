@@ -1,13 +1,18 @@
 {
-  "name": "@wui/utils",
-  "version": "1.0.0",
+  "name": "@nex-ui/utils",
+  "version": "1.0.2",
   "author": "X1ng Yu",
   "scripts": {
     "build": "rollup --config ./rollup.config.ts --configPlugin typescript",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "main": "./src/index.ts",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "react-is": "18.3.1"
   },

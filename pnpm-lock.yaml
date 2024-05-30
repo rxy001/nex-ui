@@ -80,10 +80,10 @@ importers:
       '@iconify/react':
         specifier: 4.1.1
         version: 4.1.1(react@18.3.1)
-      '@wui/theme':
+      '@nex-ui/theme':
         specifier: workspace:*
         version: link:../theme
-      '@wui/utils':
+      '@nex-ui/utils':
         specifier: workspace:*
         version: link:../utils
       classnames:

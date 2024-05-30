@@ -1,5 +1,5 @@
 import { createContext, useMemo } from 'react'
-// import { setElementVars, globalTokens } from '@wui/theme'
+// import { setElementVars, globalTokens } from '@nex-ui/theme'
 import type { AntUIProviderProps } from './types'
 
 export const ThemeContext = createContext<AntUIProviderProps['theme']>({})

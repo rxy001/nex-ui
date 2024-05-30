@@ -4,7 +4,7 @@ import {
   buttonEndIcon,
   dynamicVars,
   btnTokens,
-} from '@wui/theme'
+} from '@nex-ui/theme'
 import { useMemo } from 'react'
 import classNames from 'classnames'
 import { useTheme } from '../provider'
