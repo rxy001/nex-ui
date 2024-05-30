@@ -1,11 +1,16 @@
+import { forwardRef } from 'react'
+import type { Ref } from 'react'
 import { WaterWave } from '../waterWave'
 import type { ButtonProps } from './types'
 import { useButton } from './useButton'
 
-export function Button(props: ButtonProps) {
-  const { children, disabled, type, href } = props
+export const Button = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  ButtonProps
+>((props, ref) => {
+  const { children, disabled, type, href, loading } = props
 
-  const { getProps } = useButton(props)
+  const { getProps, startIcon, endIcon } = useButton(props)
 
   const rootProps = {
     ...getProps(),
@@ -13,17 +18,29 @@ export function Button(props: ButtonProps) {
 
   if (href !== undefined) {
     return (
-      <a href={href} data-disabled={disabled} {...rootProps}>
+      <a
+        href={href}
+        ref={ref as Ref<HTMLAnchorElement>}
+        data-disabled={disabled}
+        {...rootProps}
+      >
         {children}
       </a>
     )
   }
 
   return (
-    <WaterWave>
-      <button type={type} disabled={disabled} {...rootProps}>
+    <WaterWave disabled={loading}>
+      <button
+        type={type}
+        disabled={disabled}
+        ref={ref as Ref<HTMLButtonElement>}
+        {...rootProps}
+      >
+        {startIcon}
         {children}
+        {endIcon}
       </button>
     </WaterWave>
   )
-}
+})

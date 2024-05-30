@@ -1,4 +1,5 @@
-import { style } from '@vanilla-extract/css'
+import { style, generateIdentifier, globalStyle } from '@vanilla-extract/css'
+// import {} from '@vanilla-extract/css'
 import { addFunctionSerializer } from '@vanilla-extract/css/functionSerializer'
 import type {
   RecipeOptions,
@@ -21,7 +22,9 @@ function processStyleRule(styleRule: StyleRule): string {
     return styleRule.map((k) => processStyleRule(k)).join(' ')
   }
   if (Object.prototype.toString.call(styleRule) === '[object Object]') {
-    return style(styleRule)
+    const className = generateIdentifier()
+    globalStyle(`:where(.${className})`, styleRule)
+    return className
   }
 
   throw new Error(
@@ -67,6 +70,7 @@ export function recipe<
   } else if (base !== undefined) {
     classes = processStyleRule(base)
   }
+
   function compoundStyle(styleRule: StyleRule | Slots) {
     if (styleRule && typeof styleRule === 'object') {
       const isSlotStyles = Object.keys(styleRule).every(
@@ -107,7 +111,10 @@ export function recipe<
   }
 
   return addFunctionSerializer(createRuntimeFn(config), {
-    importPath: '../../utils/vanllla-utils/recipe/createRuntimeFn',
+    importPath:
+      process.env.NODE_ENV === 'production'
+        ? '@wui/theme'
+        : '../../utils/vanllla-utils/recipe/createRuntimeFn',
     importName: 'createRuntimeFn',
     // @ts-ignore
     args: [config],

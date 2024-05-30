@@ -1,9 +1,9 @@
 {
-  "name": "@ant-ui/utils",
+  "name": "@wui/utils",
   "version": "1.0.0",
   "author": "X1ng Yu",
   "scripts": {
-    "build": "rollup --config rollup.config.ts --configPlugin typescript",
+    "build": "rollup --config ./rollup.config.ts --configPlugin typescript",
     "type-check": "tsc --noEmit"
   },
   "main": "./src/index.ts",
@@ -17,5 +17,7 @@
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
-  }
+  },
+  "sideEffects": false,
+  "clean-package": "../../clean-package.config.json"
 }

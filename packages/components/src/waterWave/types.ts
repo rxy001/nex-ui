@@ -3,6 +3,7 @@ import type { Root } from 'react-dom/client'
 
 export type WaveProps = {
   children: ReactElement
+  disabled?: boolean
 }
 
 export type WaveMotionProps = {

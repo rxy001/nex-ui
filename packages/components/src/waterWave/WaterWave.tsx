@@ -1,6 +1,6 @@
 import { cloneElement, isValidElement, useEffect, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
-import { composeRef, supportRef, addEventListener } from '@ant-ui/utils'
+import { composeRef, supportRef, addEventListener } from '@wui/utils'
 import { WaveMotion } from './WaveMotion'
 import type { WaveProps } from './types'
 
@@ -17,19 +17,19 @@ function showWaveMotion(node: HTMLElement) {
   root.render(<WaveMotion target={node} root={root} />)
 }
 
-export const WaterWave = ({ children }: WaveProps) => {
+export const WaterWave = ({ children, disabled }: WaveProps) => {
   const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const node = ref.current
-    if (!node) {
+    if (!node || disabled) {
       return
     }
 
     return addEventListener(node, 'click', () => {
       showWaveMotion(node)
     })
-  }, [])
+  }, [disabled])
 
   if (!isValidElement<any>(children)) {
     return children

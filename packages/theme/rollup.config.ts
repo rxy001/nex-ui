@@ -1,9 +1,9 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'rollup'
-import typescript from '@rollup/plugin-typescript'
 import { vanillaExtractPlugin } from '@vanilla-extract/rollup-plugin'
 import del from 'rollup-plugin-delete'
+import typescript from '@rollup/plugin-typescript'
 
 const dirname = fileURLToPath(new URL('./', import.meta.url))
 
@@ -18,7 +18,12 @@ export default defineConfig({
     vanillaExtractPlugin(),
   ],
   input: './src/index.ts',
-  external: ['@vanilla-extract/css'],
+  external: [
+    '@wui/theme',
+    '@vanilla-extract/dynamic',
+    '@vanilla-extract/css',
+    '@vanilla-extract/css/functionSerializer',
+  ],
   output: {
     preserveModules: true,
     assetFileNames({ name }) {

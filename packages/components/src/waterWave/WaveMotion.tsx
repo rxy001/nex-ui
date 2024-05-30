@@ -1,4 +1,4 @@
-import { wave } from '@ant-ui/theme'
+import { wave } from '@wui/theme'
 import { motion, useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import { getWaveColor } from './utils'

@@ -13,30 +13,22 @@ export default defineConfig([
       del({
         targets: './dist/*',
       }),
+
       typescript({
         tsconfig: path.resolve(dirname, 'tsconfig.json'),
       }),
     ],
     input: './src/index.ts',
-    external: [
-      'react/jsx-runtime',
-      '@wui/utils',
-      '@wui/theme',
-      'react',
-      'react-dom/client',
-      'classnames',
-      'framer-motion',
-      '@iconify/react',
-    ],
+    external: ['react'],
     output: [
       {
-        preserveModules: true,
         format: 'es',
         dir: './dist/es',
+        preserveModules: true,
       },
       {
-        preserveModules: true,
         format: 'cjs',
+        preserveModules: true,
         dir: './dist/lib',
       },
     ],
@@ -44,10 +36,6 @@ export default defineConfig([
   {
     plugins: [dts()],
     input: './src/index.ts',
-    output: {
-      dir: './dist/types',
-      format: 'es',
-      preserveModules: true,
-    },
+    output: { dir: './dist/types', format: 'es', preserveModules: true },
   },
 ])

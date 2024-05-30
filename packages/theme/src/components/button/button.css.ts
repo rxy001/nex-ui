@@ -1,27 +1,9 @@
 import { calc } from '@vanilla-extract/css-utils'
-import { globalStyle } from '@vanilla-extract/css'
+import { globalKeyframes } from '@vanilla-extract/css'
 import { globalTokens } from '../../globalTokens.css'
 import { btnClass, btnTokens } from './tokens.css'
 import { recipe } from '../../utils'
 import type { RecipeVariants } from '../../utils'
-
-globalStyle(':where(.antui-btn)', {
-  outline: 'none',
-  userSelect: 'none',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  border: '1px solid transparent',
-  cursor: 'pointer',
-  position: 'relative',
-  transition: '.3s',
-  textDecoration: 'none',
-  display: 'inline-block',
-  boxSizing: 'border-box',
-  fontFamily: globalTokens.fontFamily,
-  lineHeight: globalTokens.lineHeight,
-  textAlign: 'center',
-  backgroundColor: 'transparent',
-})
 
 function variantStyle(
   backgroundColor?: string,
@@ -71,7 +53,25 @@ function roundStyle(controlHeight: string) {
 }
 
 export const button = recipe({
-  base: ['antui-btn', btnClass],
+  base: [
+    btnClass,
+    {
+      outline: 'none',
+      userSelect: 'none',
+      border: '1px solid transparent',
+      cursor: 'pointer',
+      position: 'relative',
+      transition: '.3s',
+      textDecoration: 'none',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      fontFamily: globalTokens.fontFamily,
+      lineHeight: globalTokens.lineHeight,
+      backgroundColor: 'transparent',
+    },
+  ],
   variants: {
     variant: {
       outline: variantStyle(
@@ -158,6 +158,18 @@ export const button = recipe({
       default: '',
       round: '',
     },
+    loading: {
+      true: {
+        cursor: 'default',
+        opacity: 0.65,
+      },
+    },
+    iconOnly: {
+      true: {
+        paddingInlineStart: 0,
+        paddingInlineEnd: 0,
+      },
+    },
   },
   defaultVariants: {
     variant: 'primary',
@@ -191,7 +203,68 @@ export const button = recipe({
       shape: 'round',
       style: roundStyle(globalTokens.controlHeight),
     },
+    {
+      size: 'large',
+      iconOnly: true,
+      style: {
+        width: globalTokens.controlHeightLG,
+      },
+    },
+    {
+      size: 'medium',
+      iconOnly: true,
+      style: {
+        width: globalTokens.controlHeight,
+      },
+    },
+    {
+      size: 'small',
+      iconOnly: true,
+      style: {
+        width: globalTokens.controlHeightSM,
+      },
+    },
   ],
+})
+
+globalKeyframes('loadingCircle', {
+  '0%': { transform: 'rotate(0deg)' },
+  '100%': { transform: 'rotate(360deg)' },
+})
+
+export const buttonStartIcon = recipe({
+  base: {
+    display: 'inherit',
+    marginRight: 8,
+    marginLeft: -4,
+  },
+  variants: {
+    size: {
+      small: {
+        marginLeft: -2,
+      },
+    },
+    spin: {
+      true: {
+        animation: 'loadingCircle 1s infinite linear;',
+      },
+    },
+  },
+})
+
+export const buttonEndIcon = recipe({
+  base: {
+    display: 'inherit',
+    marginLeft: 8,
+    marginRight: -4,
+  },
+  variants: {
+    size: {
+      small: {
+        marginRight: -2,
+      },
+    },
+  },
 })
 
 export type ButtonVariants = RecipeVariants<typeof button>

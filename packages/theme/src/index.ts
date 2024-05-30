@@ -2,7 +2,7 @@ export * from './components'
 
 export * from './globalTokens.css'
 
-export { dynamicVars } from './utils'
+export { dynamicVars, createRuntimeFn } from './utils'
 
 export { setElementVars } from '@vanilla-extract/dynamic'
 

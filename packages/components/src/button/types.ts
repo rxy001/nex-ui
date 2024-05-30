@@ -3,13 +3,22 @@ import type {
   ButtonHTMLAttributes,
   AnchorHTMLAttributes,
 } from 'react'
-import type { ButtonVariants } from '@ant-ui/theme'
+import type { ButtonVariants } from '@wui/theme'
 
 export type UseButtonParameters = ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement> &
-  ButtonVariants
+  ButtonVariants & {
+    startIcon?: ReactNode
+    endIcon?: ReactNode
+    loading?: boolean
+  }
 
 export type ButtonProps = UseButtonParameters & {
   children?: ReactNode
-  href?: string
+}
+
+export type ButtonIconProps = {
+  children?: ReactNode
+  size?: ButtonProps['size']
+  spin?: boolean
 }

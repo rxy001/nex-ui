@@ -1,20 +1,25 @@
 {
-  "name": "@ant-ui/components",
+  "name": "@wui/components",
   "version": "1.0.0",
   "author": "X1ng Yu",
   "scripts": {
-    "build": "rollup --config rollup.config.ts --configPlugin typescript",
-    "type-check": "tsc --noEmit"
+    "build": "rollup --config ./rollup.config.ts --configPlugin typescript",
+    "type-check": "tsc --noEmit",
+    "prebuild": "clean-package",
+    "postbuild": "clean-package restore"
   },
   "type": "module",
   "main": "./src/index.ts",
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@storybook/react": "8.0.10",
     "react": "^18.3.1"
   },
   "dependencies": {
-    "@ant-ui/theme": "workspace:*",
-    "@ant-ui/utils": "workspace:*",
+    "@wui/theme": "workspace:*",
+    "@wui/utils": "workspace:*",
     "@iconify/react": "4.1.1",
     "classnames": "2.5.1",
     "framer-motion": "11.2.4"
@@ -22,5 +27,7 @@
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
-  }
+  },
+  "sideEffects": false,
+  "clean-package": "../../clean-package.config.json"
 }

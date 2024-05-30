@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import type { Tokens, BtnTokens } from '@ant-ui/theme'
+import type { Tokens, BtnTokens } from '@wui/theme'
 
 export type ComponentTokens = {
   button: Partial<BtnTokens & Tokens>
