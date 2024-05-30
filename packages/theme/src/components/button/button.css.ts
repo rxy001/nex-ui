@@ -21,12 +21,12 @@ function variantStyle(
     borderColor,
     color,
     selectors: {
-      '&:not(:disabled):hover': {
+      '&:not(:disabled):not([data-disabled=true]):hover': {
         backgroundColor: hoverBgc,
         borderColor: hoverBorderColor,
         color: hoverColor,
       },
-      '&:not(:disabled):active': {
+      '&:not(:disabled):not([data-disabled=true]):active': {
         backgroundColor: activeBgc,
         borderColor: activeBorderColor,
         color: activeFontColor,
@@ -142,7 +142,7 @@ export const button = recipe({
     disabled: {
       true: {
         selectors: {
-          '&:disabled': {
+          '&:disabled, &[data-disabled=true]': {
             cursor: 'not-allowed',
             color: btnTokens.fontColorDisabled,
           },
@@ -181,7 +181,7 @@ export const button = recipe({
       disabled: true,
       style: {
         selectors: {
-          '&:disabled': {
+          '&:disabled, &[data-disabled=true]': {
             backgroundColor: btnTokens.backgroundColorDisabled,
             borderColor: btnTokens.borderColorDisabled,
           },

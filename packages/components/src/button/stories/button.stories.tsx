@@ -26,6 +26,9 @@ const meta = {
         type: 'select',
       },
     },
+    href: {
+      type: 'string',
+    },
   },
 } satisfies Meta<typeof Button>
 

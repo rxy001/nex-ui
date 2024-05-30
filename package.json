@@ -6,9 +6,10 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
+    "type-check": "turbo type-check",
     "changeset": "changeset",
-    "type-check": "turbo type-check"
+    "version": "changeset version",
+    "publish": "changeset publish"
   },
   "type": "module",
   "devDependencies": {

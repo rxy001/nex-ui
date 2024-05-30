@@ -30,7 +30,7 @@ export const Button = forwardRef<
   }
 
   return (
-    <WaterWave disabled={loading}>
+    <WaterWave disabled={loading || disabled}>
       <button
         type={type}
         disabled={disabled}

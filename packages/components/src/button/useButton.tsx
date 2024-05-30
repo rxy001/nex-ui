@@ -61,7 +61,7 @@ export const useButton = ({
   const onClick = (
     event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>,
   ) => {
-    if (loading) {
+    if (loading || disabled) {
       event.preventDefault()
       return
     }
