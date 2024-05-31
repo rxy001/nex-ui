@@ -1,0 +1,90 @@
+import { Button } from '@nex-ui/react'
+import { Cards } from 'nextra/components'
+
+# Button 按钮
+
+按钮允许用户进行操作和选择，只需轻轻点击。
+
+### 按钮类型
+
+按钮有四种类型: primary (default)、outline、text 和 link。
+
+<Cards>
+  <Button>Button</Button>
+  <Button variant="outline">Button</Button>
+  <Button variant="text">Button</Button>
+  <Button variant="link">Button</Button>
+</Cards>
+```tsx
+<Button>Button</Button>
+<Button variant="outline">Button</Button>
+<Button variant="text">Button</Button>
+<Button variant="link">Button</Button>
+```
+
+#### Primary Button
+
+<Cards>
+  <Button variant="primary">Button</Button>
+  <Button variant="primary" disabled>
+    Button
+  </Button>
+</Cards>
+```tsx
+<Button variant="primary">Button</Button>
+<Button variant="primary" disabled>
+  Button
+</Button>
+```
+
+#### Default Button
+
+<Cards>
+  <Button variant="default">Button</Button>
+  <Button variant="default" disabled>
+    Button
+  </Button>
+</Cards>
+```tsx
+<Button variant="default">Button</Button>
+<Button variant="default" disabled>
+  Button
+</Button>
+```
+
+#### Text Button
+
+<Cards>
+  <Button variant="text">Button</Button>
+  <Button variant="text" disabled>
+    Button
+  </Button>
+</Cards>
+```tsx
+<Button variant="text">Button</Button>
+<Button variant="text" disabled>
+  Button
+</Button>
+```
+
+#### Link Button
+
+<Cards>
+  <Button variant="link">Button</Button>
+  <Button variant="link" disabled>
+    Button
+  </Button>
+  <Button variant="link" href="#link-button">
+    Button
+  </Button>
+</Cards>
+
+```tsx
+  <Button variant="link">Button</Button>
+  <Button variant="link" disabled>
+    Button
+  </Button>
+  <Button variant="link" href="#link-button">
+    Button
+  </Button>
+```

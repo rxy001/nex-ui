@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "./theme.config.jsx",
+    "./pages",
+    "./next-env.d.ts",
+    "./middleware.ts",
+    "./components"
+  ],
+  "exclude": []
+}

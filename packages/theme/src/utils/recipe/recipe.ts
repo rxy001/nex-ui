@@ -114,7 +114,7 @@ export function recipe<
     importPath:
       process.env.NODE_ENV === 'production'
         ? '@nex-ui/theme'
-        : '../../utils/vanllla-utils/recipe/createRuntimeFn',
+        : '../../utils/recipe/createRuntimeFn',
     importName: 'createRuntimeFn',
     // @ts-ignore
     args: [config],

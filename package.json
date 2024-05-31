@@ -6,6 +6,8 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "dev:docs": "turbo dev -F @nex-ui/docs",
+    "dev:sb": "turbo dev -F @nex-ui/storybook",
     "type-check": "turbo type-check",
     "changeset": "changeset",
     "version": "changeset version",
