@@ -1,3 +1,4 @@
+import { forEach, every } from '@nex-ui/utils'
 import type {
   VariantGroups,
   RuntimeConfig,
@@ -11,23 +12,15 @@ const shouldApplyCompound = <Variants extends VariantGroups>(
   selections: VariantSelection<Variants>,
   defaultVariants: VariantSelection<Variants>,
 ) => {
-  for (const key in compoundCheck) {
-    if (Object.prototype.hasOwnProperty.call(compoundCheck, key)) {
-      const variantValue = selections[key] ?? defaultVariants[key]
-      if (
-        !(
-          (Array.isArray(compoundCheck[key]) &&
-            // @ts-ignore
-            compoundCheck[key]?.includes(variantValue)) ||
-          compoundCheck[key] === variantValue
-        )
-      ) {
-        return false
-      }
-    }
-  }
-
-  return true
+  return every(compoundCheck, (value, key) => {
+    const variantValue = selections[key] ?? defaultVariants[key]
+    return (
+      (Array.isArray(value) &&
+        // @ts-ignore
+        value?.includes(variantValue)) ||
+      value === variantValue
+    )
+  })
 }
 
 export function createRuntimeFn<Variants extends VariantGroups, SlotCls>(
@@ -48,46 +41,34 @@ export function createRuntimeFn<Variants extends VariantGroups, SlotCls>(
 
     const variantSelectedClasses = {} as Record<keyof Variants, string>
 
-    for (const variantName in selections) {
-      if (Object.prototype.hasOwnProperty.call(selections, variantName)) {
-        const variantSelection =
-          selections[variantName] ?? defaultVariants[variantName]
+    forEach(selections, (value, variantName: keyof Variants) => {
+      const variantSelection = value ?? defaultVariants[variantName]
 
-        if (variantSelection != null) {
-          let selection = variantSelection as string | boolean
+      if (variantSelection != null) {
+        let selection = variantSelection as string | boolean
 
-          if (typeof selection === 'boolean') {
-            selection = selection === true ? 'true' : 'false'
-          }
+        if (typeof selection === 'boolean') {
+          selection = selection === true ? 'true' : 'false'
+        }
 
-          const selectionCls = variantClasses[variantName][selection]
+        const selectionCls = variantClasses[variantName][selection]
 
-          if (selectionCls) {
-            variantSelectedClasses[variantName] = selectionCls
-          }
+        if (selectionCls) {
+          variantSelectedClasses[variantName] = selectionCls
         }
       }
-    }
+    })
 
     if (classes && typeof classes === 'object') {
       const slotClasses = { ...classes } as any
 
-      for (const variantName in variantSelectedClasses) {
-        if (
-          Object.prototype.hasOwnProperty.call(
-            variantSelectedClasses,
-            variantName,
-          )
-        ) {
-          const selectedClasses = variantSelectedClasses[variantName]
-
-          if (slotClasses[variantName]) {
-            slotClasses[variantName] += ` ${selectedClasses}`
-          }
+      forEach(variantSelectedClasses, (selectedClasses, variantName) => {
+        if (slotClasses[variantName]) {
+          slotClasses[variantName] += ` ${selectedClasses}`
         }
-      }
+      })
 
-      for (const [compoundCheck, compoundClassName] of compoundVariants) {
+      forEach(compoundVariants, ([compoundCheck, compoundClassName]) => {
         if (shouldApplyCompound(compoundCheck, selections, defaultVariants)) {
           for (const slotName in compoundClassName) {
             if (
@@ -97,28 +78,22 @@ export function createRuntimeFn<Variants extends VariantGroups, SlotCls>(
             }
           }
         }
-      }
+      })
 
       return slotClasses
     }
 
     let baseClass = classes as string
-    for (const variantName in variantSelectedClasses) {
-      if (
-        Object.prototype.hasOwnProperty.call(
-          variantSelectedClasses,
-          variantName,
-        )
-      ) {
-        baseClass += ` ${variantSelectedClasses[variantName]}`
-      }
-    }
 
-    for (const [compoundCheck, compoundClassName] of compoundVariants) {
+    forEach(variantSelectedClasses, (variantClass) => {
+      baseClass += ` ${variantClass}`
+    })
+
+    forEach(compoundVariants, ([compoundCheck, compoundClassName]) => {
       if (shouldApplyCompound(compoundCheck, selections, defaultVariants)) {
         baseClass += ` ${compoundClassName}`
       }
-    }
+    })
 
     return baseClass
   }

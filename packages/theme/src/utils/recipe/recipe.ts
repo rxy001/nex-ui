@@ -1,5 +1,6 @@
 import { style, generateIdentifier, globalStyle } from '@vanilla-extract/css'
-// import {} from '@vanilla-extract/css'
+import type { StyleRule as OriginalStyleRule } from '@vanilla-extract/css'
+import { forEach, isPlainObject } from '@nex-ui/utils'
 import { addFunctionSerializer } from '@vanilla-extract/css/functionSerializer'
 import type {
   RecipeOptions,
@@ -14,17 +15,35 @@ import type {
 import { mapValues } from './mapValues'
 import { createRuntimeFn } from './createRuntimeFn'
 
-function processStyleRule(styleRule: StyleRule): string {
+function filterNonNullableStyle(styleRule: OriginalStyleRule) {
+  const filtered: OriginalStyleRule = {}
+  forEach(styleRule, (value, key) => {
+    if (value !== null && value !== undefined) {
+      // @ts-ignore
+      filtered[key] = isPlainObject(value)
+        ? // @ts-ignore
+          filterNonNullableStyle(value)
+        : value
+    }
+  })
+  return filtered
+}
+
+function processStyle(styleRule: StyleRule, whereSelector?: boolean): string {
   if (typeof styleRule === 'string') {
     return styleRule
   }
   if (Array.isArray(styleRule)) {
-    return styleRule.map((k) => processStyleRule(k)).join(' ')
+    return styleRule.map((k) => processStyle(k, whereSelector)).join(' ')
   }
-  if (Object.prototype.toString.call(styleRule) === '[object Object]') {
+  if (whereSelector === true && isPlainObject(styleRule)) {
     const className = generateIdentifier()
-    globalStyle(`:where(.${className})`, styleRule)
+    globalStyle(`:where(.${className})`, filterNonNullableStyle(styleRule))
     return className
+  }
+
+  if (isPlainObject(styleRule)) {
+    return style(filterNonNullableStyle(styleRule))
   }
 
   throw new Error(
@@ -60,15 +79,13 @@ export function recipe<
 
   let classes: SlotClasses<Slots> | string = ''
   const variantClasses = mapValues(variants, (variant) =>
-    mapValues(variant, (styleRule) =>
-      typeof styleRule === 'string' ? styleRule : style(styleRule),
-    ),
+    mapValues(variant, (styleRule) => processStyle(styleRule)),
   ) as VariantClasses<Variants>
 
   if (slots && typeof slots === 'object') {
-    classes = mapValues(slots, processStyleRule)
+    classes = mapValues(slots, (value) => processStyle(value, true))
   } else if (base !== undefined) {
-    classes = processStyleRule(base)
+    classes = processStyle(base, true)
   }
 
   function compoundStyle(styleRule: StyleRule | Slots) {
@@ -78,15 +95,10 @@ export function recipe<
       )
 
       if (!isSlotStyles) {
-        return style(styleRule)
+        return processStyle(styleRule)
       }
 
-      return mapValues(styleRule as Slots, (slot) => {
-        if (typeof slot === 'string') {
-          return slot
-        }
-        return style(slot!)
-      })
+      return mapValues(styleRule as Slots, (slot) => processStyle(slot))
     }
 
     return styleRule
