@@ -1,5 +1,6 @@
 import { Button } from '@nex-ui/react'
 import { Cards } from 'nextra/components'
+import { createRef } from 'react'
 
 # Button 按钮
 
@@ -37,17 +38,17 @@ import { Cards } from 'nextra/components'
 </Button>
 ```
 
-#### Default Button
+#### Outline Button
 
 <Cards>
-  <Button variant="default">Button</Button>
-  <Button variant="default" disabled>
+  <Button variant="outline">Button</Button>
+  <Button variant="outline" disabled>
     Button
   </Button>
 </Cards>
 ```tsx
-<Button variant="default">Button</Button>
-<Button variant="default" disabled>
+<Button variant="outline">Button</Button>
+<Button variant="outline" disabled>
   Button
 </Button>
 ```
@@ -74,17 +75,11 @@ import { Cards } from 'nextra/components'
   <Button variant="link" disabled>
     Button
   </Button>
-  <Button variant="link" href="#link-button">
-    Button
-  </Button>
 </Cards>
 
 ```tsx
   <Button variant="link">Button</Button>
   <Button variant="link" disabled>
-    Button
-  </Button>
-  <Button variant="link" href="#link-button">
     Button
   </Button>
 ```

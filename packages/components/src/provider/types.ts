@@ -6,9 +6,10 @@ export type ComponentTokens = {
   global: Partial<Tokens>
 }
 
-export type AntUIProviderProps = {
+export type NexUIProviderProps = {
   theme?: Partial<ComponentTokens>
   children?: ReactNode
+  prefix?: string
 }
 
 export type ComponentKey = keyof ComponentTokens

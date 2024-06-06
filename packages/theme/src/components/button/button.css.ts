@@ -11,7 +11,7 @@ function variantStyle(
   color?: string,
   hoverBgc?: string,
   hoverBorderColor?: string,
-  hoverColor?: string | undefined,
+  hoverColor?: string,
   activeBgc?: string,
   activeBorderColor?: string,
   activeFontColor?: string,
@@ -145,6 +145,14 @@ export const button = recipe({
           '&:disabled, &[data-disabled=true]': {
             cursor: 'not-allowed',
             color: btnTokens.fontColorDisabled,
+            '& > *': {
+              pointerEvents: 'none',
+            },
+            '& > a': {
+              color: btnTokens.fontColorDisabled,
+              outline: 'none',
+              textDecoration: 'none',
+            },
           },
         },
       },
@@ -168,6 +176,7 @@ export const button = recipe({
       true: {
         paddingInlineStart: 0,
         paddingInlineEnd: 0,
+        borderRadius: '50%',
       },
     },
   },

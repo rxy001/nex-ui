@@ -15,6 +15,38 @@ import type {
 import { mapValues } from './mapValues'
 import { createRuntimeFn } from './createRuntimeFn'
 
+/**
+ *
+ * features:
+ *
+ * 1. Compatible with the original @vanilla-extract/recipe.
+ *
+ * 2. Slots allows you to separate an component into multiple parts, can add slots by using the slots key.
+ *
+ * {
+ *   slots: [
+ *      slot: StyleRule[] | StyleRule
+ *   ],
+ *   variants: {
+ *      // variant must exist in slots.
+ *      variant: {
+ *         variantValue: StyleRule[] | StyleRule
+ *      }
+ *   },
+ *   compoundVariants: [
+ *     {
+ *       variant: variantValue,
+ *       style: {
+ *          [slot: string]: StyleRule[] | StyleRule // -> classes will be applied to slot
+ *       }
+ *     }
+ *   ]
+ * }
+ *
+ * 3. StyleRule supports nullable types.
+ *
+ */
+
 function filterNonNullableStyle(styleRule: OriginalStyleRule) {
   const filtered: OriginalStyleRule = {}
   forEach(styleRule, (value, key) => {
@@ -33,9 +65,11 @@ function processStyle(styleRule: StyleRule, whereSelector?: boolean): string {
   if (typeof styleRule === 'string') {
     return styleRule
   }
+
   if (Array.isArray(styleRule)) {
     return styleRule.map((k) => processStyle(k, whereSelector)).join(' ')
   }
+
   if (whereSelector === true && isPlainObject(styleRule)) {
     const className = generateIdentifier()
     globalStyle(`:where(.${className})`, filterNonNullableStyle(styleRule))

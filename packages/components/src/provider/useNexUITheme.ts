@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import type { ComponentKey, ComponentTokens } from './types'
-import { ThemeContext } from './AntUIProvider'
+import { ThemeContext } from './NexUIProvider'
 
-export function useTheme(): Partial<ComponentTokens>
-export function useTheme(
+export function useNexUITheme(): Partial<ComponentTokens>
+export function useNexUITheme(
   componentKey: ComponentKey,
 ): ComponentTokens[ComponentKey]
-export function useTheme(componentKey?: ComponentKey) {
+export function useNexUITheme(componentKey?: ComponentKey) {
   const theme = useContext(ThemeContext)
 
   if (!theme) {

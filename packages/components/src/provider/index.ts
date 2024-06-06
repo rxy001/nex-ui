@@ -1,5 +1,7 @@
-export { AntUIProvider } from './AntUIProvider'
+export { NexUIProvider } from './NexUIProvider'
 
-export type { AntUIProviderProps } from './types'
+export type { NexUIProviderProps } from './types'
 
-export { useTheme } from './useTheme'
+export { useNexUITheme } from './useNexUITheme'
+
+export { useNexUIConfig } from './useNexUIConfig'

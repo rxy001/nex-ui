@@ -7,38 +7,58 @@ import {
 } from '@nex-ui/theme'
 import { useMemo } from 'react'
 import classNames from 'classnames'
-import { useTheme } from '../provider'
-import type { ButtonIconProps, UseButtonParameters } from './types'
+import { useNexUIConfig, useNexUITheme } from '../provider'
+import type { ButtonIconProps, ButtonProps } from './types'
 import { Icon } from '../icon'
 
-const ButtonStartIcon = ({ children, size, spin }: ButtonIconProps) => (
-  // @ts-ignore
-  <span className={buttonStartIcon({ size, spin })}>{children}</span>
-)
+const ButtonStartIcon = ({ children, size, spin }: ButtonIconProps) => {
+  const { prefix } = useNexUIConfig()
 
-const ButtonEndIcon = ({ children, size }: ButtonIconProps) => (
-  // @ts-ignore
-  <span className={buttonEndIcon({ size })}>{children}</span>
-)
+  return (
+    <span
+      className={classNames(
+        `${prefix}-start-icon`,
+        buttonStartIcon({ size: size === 'small' ? size : undefined, spin }),
+      )}
+    >
+      {children}
+    </span>
+  )
+}
 
-const LoadingIcon = () => <Icon icon="ant-design:loading-outlined" />
+const ButtonEndIcon = ({ children, size }: ButtonIconProps) => {
+  const { prefix } = useNexUIConfig()
+
+  return (
+    <span
+      className={classNames(
+        `${prefix}-end-icon`,
+        buttonEndIcon({ size: size === 'small' ? size : undefined }),
+      )}
+    >
+      {children}
+    </span>
+  )
+}
 
 export const useButton = ({
   style,
   className,
+  iconOnly = false,
   size = 'medium',
+  loading = false,
   disabled = false,
   shape = 'default',
   variant = 'primary',
   block = false,
+  type = 'button',
   startIcon: startIconProp,
   endIcon: endIconProp,
-  loading,
   onClick: onClickProp,
-  iconOnly,
-  ...props
-}: UseButtonParameters) => {
-  const theme = useTheme('button')
+  ...restProps
+}: ButtonProps) => {
+  const theme = useNexUITheme('button')
+  const { prefix } = useNexUIConfig()
 
   const mergedStyle = useMemo(
     () => ({
@@ -51,11 +71,21 @@ export const useButton = ({
   const mergedClassName = useMemo(
     () =>
       classNames(
-        'antui-btn',
+        `${prefix}-btn`,
         button({ variant, size, disabled, block, shape, loading, iconOnly }),
         className,
       ),
-    [block, className, disabled, shape, size, variant, loading, iconOnly],
+    [
+      prefix,
+      block,
+      className,
+      disabled,
+      shape,
+      size,
+      variant,
+      loading,
+      iconOnly,
+    ],
   )
 
   const onClick = (
@@ -65,24 +95,27 @@ export const useButton = ({
       event.preventDefault()
       return
     }
-    ;(
-      onClickProp as React.MouseEventHandler<
-        HTMLButtonElement | HTMLAnchorElement
-      >
-    )?.(event)
+
+    ;(onClickProp as ButtonProps['onClick'])?.(event)
   }
 
   return {
-    getProps: () => ({
+    getRootProps: () => ({
+      onClick,
+      type,
+      disabled,
       style: mergedStyle,
       className: mergedClassName,
-      onClick,
-      ...props,
+      ...restProps,
     }),
     startIcon:
       loading || startIconProp ? (
         <ButtonStartIcon size={size} spin={loading}>
-          {loading ? <LoadingIcon /> : startIconProp}
+          {loading ? (
+            <Icon icon="ant-design:loading-outlined" />
+          ) : (
+            startIconProp
+          )}
         </ButtonStartIcon>
       ) : null,
     endIcon: endIconProp ? (

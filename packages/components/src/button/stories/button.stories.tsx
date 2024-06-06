@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { AntUIProvider } from '../../provider'
-import { type AntUIProviderStore } from '../../provider/stories/provider.stories'
+import { NexUIProvider } from '../../provider'
+import { type NexUIProviderStore } from '../../provider/stories/provider.stories'
 import { Button } from '../index'
 import { Icon } from '../../icon'
 
@@ -29,6 +29,9 @@ const meta = {
     href: {
       type: 'string',
     },
+    iconOnly: {
+      type: 'boolean',
+    },
   },
 } satisfies Meta<typeof Button>
 
@@ -46,7 +49,9 @@ const commonArgs: Story['args'] = {
 }
 
 export const Basic: Story = {
-  args: commonArgs,
+  args: {
+    ...commonArgs,
+  },
 }
 
 export const Disabled: Story = {
@@ -90,7 +95,7 @@ export const WithIcons: Story = {
   },
 }
 
-export const ComponentToken: AntUIProviderStore = {
+export const ComponentToken: NexUIProviderStore = {
   args: {
     theme: {
       button: {
@@ -99,14 +104,14 @@ export const ComponentToken: AntUIProviderStore = {
         controlHeightLG: '50px',
       },
     },
+    ...commonArgs,
   },
   render: (props) => {
-    const { theme } = props
+    const { theme, ...rest } = props
     return (
-      <AntUIProvider theme={theme}>
-        <Button {...Basic.args} />
-        <Button {...Disabled.args} />
-      </AntUIProvider>
+      <NexUIProvider theme={theme}>
+        <Button {...rest} />
+      </NexUIProvider>
     )
   },
 }

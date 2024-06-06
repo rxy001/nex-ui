@@ -8,39 +8,36 @@ export const Button = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   ButtonProps
 >((props, ref) => {
-  const { children, disabled, type, href, loading } = props
+  const { loading } = props
 
-  const { getProps, startIcon, endIcon } = useButton(props)
+  const { getRootProps, startIcon, endIcon } = useButton(props)
 
-  const rootProps = {
-    ...getProps(),
-  }
+  const { type, href, disabled, children, ...rootProps } = getRootProps()
 
-  if (href !== undefined) {
-    return (
+  const childNode =
+    href !== undefined ? (
       <a
-        href={href}
         ref={ref as Ref<HTMLAnchorElement>}
-        data-disabled={disabled}
+        data-disabled={disabled || null}
+        href={href}
         {...rootProps}
       >
+        {startIcon}
         {children}
+        {endIcon}
       </a>
-    )
-  }
-
-  return (
-    <WaterWave disabled={loading || disabled}>
+    ) : (
       <button
         type={type}
-        disabled={disabled}
         ref={ref as Ref<HTMLButtonElement>}
+        disabled={disabled}
         {...rootProps}
       >
         {startIcon}
         {children}
         {endIcon}
       </button>
-    </WaterWave>
-  )
+    )
+
+  return <WaterWave disabled={loading || disabled}>{childNode}</WaterWave>
 })
