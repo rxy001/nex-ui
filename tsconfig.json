@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "types": ["@testing-library/jest-dom/jest-globals"],
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["dom", "esnext"],
@@ -13,8 +14,16 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "include": ["./packages", "./packages/storybook/.storybook/*.ts"],
+  "include": [
+    "./packages",
+    "./packages/storybook/.storybook/*.ts",
+    "./jest.config.ts",
+    "./tests"
+  ],
   "exclude": ["**/node_modules", "**/dist", "**/.turbo"]
 }
