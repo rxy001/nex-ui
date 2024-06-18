@@ -1,2 +1,2 @@
 import '@testing-library/jest-dom/jest-globals'
-import './vanilla.setup'
+import '@nex-ui/css-system/jestSetup'

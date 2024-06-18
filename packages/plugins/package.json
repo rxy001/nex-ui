@@ -1,0 +1,24 @@
+{
+  "name": "@nex-ui/plugins",
+  "version": "1.0.2",
+  "author": "X1ng Yu",
+  "scripts": {
+    "build": "rollup --config ./rollup.config.ts --configPlugin typescript",
+    "type-check": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@vanilla-extract/rollup-plugin": "1.3.6",
+    "@vanilla-extract/vite-plugin": "4.0.9"
+  },
+  "sideEffects": false,
+  "clean-package": "../../clean-package.config.json"
+}

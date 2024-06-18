@@ -9,6 +9,7 @@
         "import": "./dist/es/index.js",
         "require": "./dist/lib/index.js"
       },
+      "./*": "./dist/*",
       "./package.json": "./package.json"
     }
   },

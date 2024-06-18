@@ -1,12 +1,16 @@
 import { defineConfig } from 'vite'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react-swc'
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
+import { nexUIVitePlugin } from '@nex-ui/plugins'
+
+const dirname = fileURLToPath(new URL('./', import.meta.url))
 
 export default defineConfig((config) => {
   return {
     plugins: [
       react(),
-      vanillaExtractPlugin({
+      nexUIVitePlugin({
         unstable_mode: config.mode === 'development' ? 'transform' : 'emitCss',
       }),
     ],
@@ -21,6 +25,14 @@ export default defineConfig((config) => {
         '.json',
         '.css',
       ],
+      alias: {
+        '@theme': '../../theme',
+        '@vanilla-extract/css/fileScope': path.join(
+          dirname,
+          '../css-system',
+          'node_modules/@vanilla-extract/css/fileScope',
+        ),
+      },
     },
   }
 })

@@ -14,16 +14,6 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  },
-  "include": [
-    "./packages",
-    "./packages/storybook/.storybook/*.ts",
-    "./jest.config.ts",
-    "./tests"
-  ],
-  "exclude": ["**/node_modules", "**/dist", "**/.turbo"]
+    "baseUrl": "./"
+  }
 }

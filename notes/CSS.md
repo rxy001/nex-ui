@@ -1,0 +1,66 @@
+# CSS 方案
+
+1.  sass、less.
+
+    - 优点
+      1. 编译后的 css 文件，可直接由浏览器解析，主题之间无缝切换，无额外的性能消耗。
+    - 缺点
+      1. 灵活定制主题的能力不足，如嵌套主题 (实际可通过 style 设置 css variables)。
+      2. 无法使用 JS 常量。
+      3. css 与 js 分布与不同的位置，随着应用的发展，难以发现现有 css 文件中的 dead code。
+      4. 无样式静态类型。
+      5. 样式无法懒加载。
+
+2.  CSS-in-JS. 这也是 Antd、MUI 等组件库的实现方案。
+
+    - 优势
+      1. 局部作用域. (css variable 也可以使用 css module)
+      2. 普通 CSS 与组件处于不同的文件，无论 CSS 文件在什么地方都将全局应用。CSS-in-JS 方案 CSS 与 组件在同一文件里，极大地改善代码的可维护性。
+      3. 在 styles 中可以使用 js 变量. 某些情况下能够减少重复. 普通 CSS 无法应用 JS 变量，有时需要定义两份常量.
+    - 缺点
+
+           1. CSS-in-JS增加了运行时开销。当你的组件渲染时，CSS-in- js库必须将你的样式“序列化”为可以插入到文档中的普通CSS.
+           2. CSS-in-JS会增加包的大小。这是显而易见的——每个访问你网站的用户现在都必须下载CSS-in-JS库的JavaScript代码。
+           3. CSS-in-JS搅乱了React开发者工具。对于每个使用了css prop的元素，Emotion将渲染 `<EmotionCssPropInternal>` 和 `<Insertion>`组件。如果你在许多元素上使用css prop, Emotion的内部组件会扰乱React开发者工具。
+           4. 频繁地插入CSS规则会迫使浏览器做很多额外的工作。Sebastian Markbåge是React核心团队的成员，也是React Hooks的最初设计者，他在React 18工作组中写了一篇内容丰富的讨论，讨论了CSS-in-JS库需要如何更改才能与React 18一起工作，以及一般的CSS-in-JS运行时的未来。他特别指出:
+              在并发渲染中，React可以在渲染之间屈服于浏览器。如果你在组件中插入一个新规则，那么React会产生结果，然后浏览器必须查看这些规则是否适用于现有的树。所以它会重新计算样式规则。然后React渲染下一个组件，然后该组件发现一个新规则，然后它再次发生。
+              这实际上导致React在渲染时，对每一帧的所有DOM节点重新计算所有CSS规则。这非常慢。
+
+           ```jsx
+           function MyComponent() {
+             return (
+               <div
+                 css={{
+                   backgroundColor: 'blue',
+                   width: 100,
+                   height: 100,
+                 }}
+               />
+             )
+           }
+           ```
+
+           `MyComponent` 组件的重复渲染，都将重新序列化 style 并插入，造成巨大的性能开销。
+
+           ```jsx
+           const myCss = css({
+             backgroundColor: 'blue',
+             width: 100,
+             height: 100,
+           })
+
+           function MyComponent() {
+             return <div css={myCss} />
+           }
+           ```
+
+           移动外组建外后，序列化只在组建加载时执行一次，而不是每次渲染时。 但失去了访问 props/state 的能力。
+
+      https://juejin.cn/post/7165670146017591309
+
+上述是运行时 css-in-js, 目前还有另外一种方案编译时 css-in-js，没有运行时的消耗，在编译时生成所需 css 文件，有点类似于 module css。
+
+3. Atomic CSS
+   - 当项目达到一定体量时，CSS 体积保持稳定，没有重复的 CSS 规则，大幅减少 CSS 体积
+   - 提高可维护性，随意修改元素样式，无需担心会影响其他元素
+   - 但会将所有 css 打包成一个 css 文件，目前好像没有支持分割成不同 CSS 文件去懒加载的
