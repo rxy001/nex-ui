@@ -1,5 +1,6 @@
 import { createTheme } from '@nex-ui/css-system'
 import { globalTokens } from '../../globalTokens.css'
+import { normalizeVar } from '../../utils'
 
 const tokens = {
   // medium size
@@ -8,23 +9,23 @@ const tokens = {
   fontSize: '14px',
 
   // small size
-  paddingYSM: '0px',
-  paddingXSM: '7px',
-  fontSizeSM: '14px',
+  paddingYSm: '0px',
+  paddingXSm: '7px',
+  fontSizeSm: '14px',
 
   // large size
-  paddingYLG: '7px',
-  paddingXLG: '15px',
-  fontSizeLG: '16px',
+  paddingYLg: '7px',
+  paddingXLg: '15px',
+  fontSizeLg: '16px',
 
   // disabled
   fontColorDisabled: 'rgba(0, 0, 0, 0.25)',
   backgroundColorDisabled: 'rgba(0, 0, 0, 0.04)',
   borderColorDisabled: '#d9d9d9',
 
-  // primary variant
-  primaryFontColor: '#fff',
-  primaryBorderColor: 'transparent',
+  // solid variant
+  solidFontColor: '#fff',
+  solidBorderColor: 'transparent',
 
   // outline variant
   outlineBorderColor: '#d9d9d9',
@@ -46,6 +47,9 @@ const tokens = {
   linkActiveBgc: 'transparent',
 }
 
-export const [tokenClasses, btnTokens] = createTheme(tokens)
+export const [tokenClasses, btnTokens] = createTheme(
+  tokens,
+  normalizeVar('nexui-btn'),
+)
 
 export type BtnTokens = typeof tokens

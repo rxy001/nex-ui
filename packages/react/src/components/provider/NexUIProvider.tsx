@@ -19,13 +19,6 @@ export function NexUIProvider(props: NexUIProviderProps) {
   )
   const themeCOntextValue = useMemo(() => theme, [theme])
 
-  // useEffect(() => {
-  //   const html = document.getElementsByTagName('html')
-  //   setElementVars(html[0], {
-  //     [globalTokens.colorPrimary]: 'blue',
-  //   })
-  // }, [])
-
   return (
     <ConfigContext.Provider value={configContextValue}>
       <ThemeContext.Provider value={themeCOntextValue}>

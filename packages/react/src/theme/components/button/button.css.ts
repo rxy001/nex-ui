@@ -83,10 +83,10 @@ export const button = recipe({
         btnTokens.outlineActiveBorderColor,
         btnTokens.outlineActiveFontColor,
       ),
-      primary: variantStyle(
+      solid: variantStyle(
         globalTokens.colorPrimary,
-        btnTokens.primaryBorderColor,
-        btnTokens.primaryFontColor,
+        btnTokens.solidBorderColor,
+        btnTokens.solidFontColor,
         globalTokens.colorPrimaryHover,
         undefined,
         globalTokens.lightFontColor,
@@ -119,10 +119,10 @@ export const button = recipe({
     },
     size: {
       small: sizeStyle(
-        `${btnTokens.paddingYSM} ${btnTokens.paddingXSM}`,
-        globalTokens.borderRadiusSM,
-        globalTokens.controlHeightSM,
-        btnTokens.fontSizeSM,
+        `${btnTokens.paddingYSm} ${btnTokens.paddingXSm}`,
+        globalTokens.borderRadiusSm,
+        globalTokens.controlHeightSm,
+        btnTokens.fontSizeSm,
       ),
       medium: sizeStyle(
         `${btnTokens.paddingY} ${btnTokens.paddingX}`,
@@ -131,10 +131,10 @@ export const button = recipe({
         btnTokens.fontSize,
       ),
       large: sizeStyle(
-        `${btnTokens.paddingYLG} ${btnTokens.paddingXLG}`,
-        globalTokens.borderRadiusLG,
-        globalTokens.controlHeightLG,
-        btnTokens.fontSizeLG,
+        `${btnTokens.paddingYLg} ${btnTokens.paddingXLg}`,
+        globalTokens.borderRadiusLg,
+        globalTokens.controlHeightLg,
+        btnTokens.fontSizeLg,
       ),
     },
     disabled: {
@@ -171,12 +171,12 @@ export const button = recipe({
     },
   },
   defaultVariants: {
-    variant: 'primary',
+    variant: 'solid',
     size: 'medium',
   },
   compoundVariants: [
     {
-      variant: ['outline', 'primary'],
+      variant: ['outline', 'solid'],
       disabled: true,
       style: {
         selectors: {
@@ -190,12 +190,12 @@ export const button = recipe({
     {
       size: 'large',
       shape: 'round',
-      style: roundStyle(globalTokens.controlHeightLG),
+      style: roundStyle(globalTokens.controlHeightLg),
     },
     {
       size: 'small',
       shape: 'round',
-      style: roundStyle(globalTokens.controlHeightSM),
+      style: roundStyle(globalTokens.controlHeightSm),
     },
     {
       size: 'medium',
@@ -206,7 +206,7 @@ export const button = recipe({
       size: 'large',
       iconOnly: true,
       style: {
-        width: globalTokens.controlHeightLG,
+        width: globalTokens.controlHeightLg,
       },
     },
     {
@@ -220,7 +220,7 @@ export const button = recipe({
       size: 'small',
       iconOnly: true,
       style: {
-        width: globalTokens.controlHeightSM,
+        width: globalTokens.controlHeightSm,
       },
     },
   ],

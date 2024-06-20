@@ -9,7 +9,7 @@ const meta = {
   component: Button,
   argTypes: {
     variant: {
-      options: ['primary', 'outline', 'text', 'link'],
+      options: ['solid', 'outline', 'text', 'link'],
       control: {
         type: 'select',
       },
@@ -44,7 +44,7 @@ const commonArgs: Story['args'] = {
   disabled: false,
   block: false,
   size: 'medium',
-  variant: 'primary',
+  variant: 'solid',
   shape: 'default',
 }
 
@@ -100,8 +100,8 @@ export const ComponentToken: NexUIProviderStore = {
     theme: {
       button: {
         colorPrimary: 'red',
-        paddingXLG: '30px',
-        controlHeightLG: '50px',
+        paddingXLg: '30px',
+        controlHeightLg: '50px',
       },
     },
     ...commonArgs,

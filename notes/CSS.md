@@ -3,28 +3,33 @@
 1.  sass、less.
 
     - 优点
-      1. 编译后的 css 文件，可直接由浏览器解析，主题之间无缝切换，无额外的性能消耗。
+
+      1. 编译后的 css 文件，可直接由浏览器解析，主题之间无缝切换，无额外的性能消耗.
+      2. css 文件浏览器缓存.
+
     - 缺点
-      1. 灵活定制主题的能力不足，如嵌套主题 (实际可通过 style 设置 css variables)。
+      1. 灵活定制主题的能力不足。
+         在多主题以及嵌套主题时，使用 css 变量有很多欠缺点. 例如在 Antd(5.x 开启 css 变量) 采用抽取出一套 tokens 和定制的 classname ，消费者只能使用这些 tokens 定制主题. 假设想要修改 primary = type、 small = size 的 Button 组件样式时，只能通过 classname, 而这种方式在嵌套主题下还需要使用额外的选择器.
       2. 无法使用 JS 常量。
+         根据 props、state 使用不同的样式非常常见，css 只用人肉映射。
       3. css 与 js 分布与不同的位置，随着应用的发展，难以发现现有 css 文件中的 dead code。
       4. 无样式静态类型。
-      5. 样式无法懒加载。
 
-2.  CSS-in-JS. 这也是 Antd、MUI 等组件库的实现方案。
+2.  css-in-js. 这也是 Antd、MUI 等组件库的实现方案。
 
-    - 优势
-      1. 局部作用域. (css variable 也可以使用 css module)
-      2. 普通 CSS 与组件处于不同的文件，无论 CSS 文件在什么地方都将全局应用。CSS-in-JS 方案 CSS 与 组件在同一文件里，极大地改善代码的可维护性。
-      3. 在 styles 中可以使用 js 变量. 某些情况下能够减少重复. 普通 CSS 无法应用 JS 变量，有时需要定义两份常量.
+    - 优点
+
+      1. 无样式冲突, 无特指度烦恼, 也无需顾虑 css 插入顺序.
+      2. 能够使用 js 变量. 利用 props、state 灵活应用不同的样式. 定制主题时动态生成 css.
+
     - 缺点
 
-           1. CSS-in-JS增加了运行时开销。当你的组件渲染时，CSS-in- js库必须将你的样式“序列化”为可以插入到文档中的普通CSS.
-           2. CSS-in-JS会增加包的大小。这是显而易见的——每个访问你网站的用户现在都必须下载CSS-in-JS库的JavaScript代码。
-           3. CSS-in-JS搅乱了React开发者工具。对于每个使用了css prop的元素，Emotion将渲染 `<EmotionCssPropInternal>` 和 `<Insertion>`组件。如果你在许多元素上使用css prop, Emotion的内部组件会扰乱React开发者工具。
+           1. CSS-in-JS增加了运行时开销。当你的组件渲染时，css-in-js 库必须将你的样式“序列化”为可以插入到文档中的普通CSS. (重要)
+           2. CSS-in-JS会增加包的大小。这是显而易见的——每个访问你网站的用户现在都必须下载CSS-in-JS库的JavaScript代码. (无关紧要)
+           3. CSS-in-JS搅乱了React开发者工具。对于每个使用了css prop的元素，Emotion将渲染 `<EmotionCssPropInternal>` 和 `<Insertion>`组件。如果你在许多元素上使用css prop, Emotion的内部组件会扰乱React开发者工具. (无关紧要)
            4. 频繁地插入CSS规则会迫使浏览器做很多额外的工作。Sebastian Markbåge是React核心团队的成员，也是React Hooks的最初设计者，他在React 18工作组中写了一篇内容丰富的讨论，讨论了CSS-in-JS库需要如何更改才能与React 18一起工作，以及一般的CSS-in-JS运行时的未来。他特别指出:
               在并发渲染中，React可以在渲染之间屈服于浏览器。如果你在组件中插入一个新规则，那么React会产生结果，然后浏览器必须查看这些规则是否适用于现有的树。所以它会重新计算样式规则。然后React渲染下一个组件，然后该组件发现一个新规则，然后它再次发生。
-              这实际上导致React在渲染时，对每一帧的所有DOM节点重新计算所有CSS规则。这非常慢。
+              这实际上导致React在渲染时，对每一帧的所有DOM节点重新计算所有CSS规则。这非常慢。 (重要)
 
            ```jsx
            function MyComponent() {
@@ -63,4 +68,4 @@
 3. Atomic CSS
    - 当项目达到一定体量时，CSS 体积保持稳定，没有重复的 CSS 规则，大幅减少 CSS 体积
    - 提高可维护性，随意修改元素样式，无需担心会影响其他元素
-   - 但会将所有 css 打包成一个 css 文件，目前好像没有支持分割成不同 CSS 文件去懒加载的
+   - 但会将所有 css 打包成一个 css 文件

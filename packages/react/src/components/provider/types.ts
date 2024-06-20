@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
-import type { Tokens, BtnTokens } from '@theme'
+import type { GlobalTokens, BtnTokens } from '@theme'
 
 export type ComponentTokens = {
-  button: Partial<BtnTokens & Tokens>
-  global: Partial<Tokens>
+  button: Partial<BtnTokens & GlobalTokens>
+  global: Partial<GlobalTokens>
 }
 
 export type NexUIProviderProps = {

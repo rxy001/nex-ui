@@ -1,18 +1,32 @@
-import { createThemeContract as ctc } from '@vanilla-extract/css'
+import { walkObject } from '@vanilla-extract/private'
+import type { Tokens, NullableTokens, ThemeVars, Normalize } from './types'
 
-type ThemeContract<T extends readonly string[]> = {
-  [P in T[number]]: null
+export function createThemeContract<ThemeTokens extends Tokens>(
+  tokens: ThemeTokens,
+): ThemeVars<ThemeTokens>
+export function createThemeContract<ThemeTokens extends NullableTokens>(
+  tokens: ThemeTokens,
+  mapFn: Normalize,
+): ThemeVars<ThemeTokens>
+export function createThemeContract(
+  tokens: Tokens | NullableTokens,
+  mapFn?: Normalize | undefined,
+) {
+  return walkObject(tokens, (value, path) => {
+    const rawVarName =
+      typeof mapFn === 'function'
+        ? mapFn(value as string | null, path)
+        : (value as string)
+
+    const varName =
+      typeof rawVarName === 'string' ? rawVarName.replace(/^--/, '') : null
+
+    if (typeof varName !== 'string') {
+      throw new Error(
+        `Invalid variable name for "${path.join('.')}": ${varName}`,
+      )
+    }
+
+    return `var(--${varName})`
+  })
 }
-
-export const createThemeContract = <T extends readonly string[]>(
-  properties: T,
-) =>
-  ctc(
-    properties.reduce(
-      (vars, property) => ({
-        ...vars,
-        [property]: null,
-      }),
-      {},
-    ) as ThemeContract<T>,
-  )

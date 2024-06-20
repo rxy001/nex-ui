@@ -1,18 +1,19 @@
 import { createGlobalTheme } from '@nex-ui/css-system'
 import { daybreakBlue } from './colors'
+import { normalizeVar } from './utils'
 
 const tokens = {
   colorPrimary: daybreakBlue[5],
   colorPrimaryHover: daybreakBlue[4],
   colorPrimaryActive: daybreakBlue[6],
 
-  controlHeightSM: '24px',
+  controlHeightSm: '24px',
   controlHeight: '32px',
-  controlHeightLG: '40px',
+  controlHeightLg: '40px',
 
-  borderRadiusSM: '4px',
+  borderRadiusSm: '4px',
   borderRadius: '6px',
-  borderRadiusLG: '8px',
+  borderRadiusLg: '8px',
 
   lightFontColor: '#fff',
 
@@ -23,6 +24,10 @@ const tokens = {
   lineHeight: '1.5666',
 }
 
-export const globalTokens = createGlobalTheme(':root', tokens)
+export const globalTokens = createGlobalTheme(
+  ':root',
+  tokens,
+  normalizeVar('nexui'),
+)
 
-export type Tokens = typeof tokens
+export type GlobalTokens = typeof tokens

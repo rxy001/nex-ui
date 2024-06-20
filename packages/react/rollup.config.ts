@@ -17,7 +17,9 @@ export default defineConfig([
       typescript({
         tsconfig: path.resolve(dirname, 'tsconfig.json'),
       }),
-      nexUIRollupPlugin(),
+      nexUIRollupPlugin({
+        identifiers: ({ hash }) => `css_${hash}`,
+      }),
     ],
     input: './src/index.ts',
     external: [
@@ -53,13 +55,13 @@ export default defineConfig([
       },
     ],
   },
-  {
-    plugins: [dts()],
-    input: './src/index.ts',
-    output: {
-      dir: './dist/types',
-      format: 'es',
-      preserveModules: true,
-    },
-  },
+  // {
+  //   plugins: [dts()],
+  //   input: './src/index.ts',
+  //   output: {
+  //     dir: './dist/types',
+  //     format: 'es',
+  //     preserveModules: true,
+  //   },
+  // },
 ])

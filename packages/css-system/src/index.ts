@@ -4,11 +4,15 @@ export * from './createThemeContract'
 
 export * from '@vanilla-extract/css-utils'
 
+export * from './createTheme'
+
+export * from './createGlobalTheme'
+
+export * from './createGlobalThemeContract'
+
 export {
   style,
-  createTheme,
   globalFontFace,
-  createGlobalTheme,
   keyframes,
   globalKeyframes,
   globalStyle,
@@ -18,7 +22,6 @@ export {
   assignVars,
   fontFace,
   layer,
-  createGlobalThemeContract,
   fallbackVar,
   createContainer,
 } from '@vanilla-extract/css'

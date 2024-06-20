@@ -50,7 +50,7 @@ export const useButton = ({
   loading = false,
   disabled = false,
   shape = 'default',
-  variant = 'primary',
+  variant = 'solid',
   block = false,
   type = 'button',
   startIcon: startIconProp,
