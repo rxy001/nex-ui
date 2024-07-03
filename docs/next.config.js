@@ -1,7 +1,4 @@
 import nextra from 'nextra'
-import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
-
-const withVanillaExtract = createVanillaExtractPlugin()
 
 const withNextra = nextra({
   theme: 'nextra-theme-docs',
@@ -14,7 +11,7 @@ export default {
   webpack: (config, options) => {
     const nextraWebpack = withNextra().webpack(config, options)
 
-    return withVanillaExtract().webpack(nextraWebpack, options)
+    return nextraWebpack
   },
   i18n: {
     locales: ['default', 'en', 'zh'],

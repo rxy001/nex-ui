@@ -17,7 +17,6 @@ const jestConfig: JestConfigWithTsJest = {
     }),
   },
   transform: {
-    '\\.css\\.ts$': '@vanilla-extract/jest-transform',
     '^.+\\.tsx?$': [
       'ts-jest',
       {

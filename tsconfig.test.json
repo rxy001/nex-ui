@@ -5,7 +5,7 @@
   "compilerOptions": {
     "paths": {
       "~/*": ["./*"],
-      "@theme": ["./packages/react/src/theme"]
+      "@theme": ["./packages/nex-react/src/theme"]
     }
   }
 }

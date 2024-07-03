@@ -1,19 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "types": ["@testing-library/jest-dom/jest-globals"],
     "target": "ESNext",
     "module": "ESNext",
+    "noImplicitAny": false,
     "lib": ["dom", "esnext"],
     "declaration": false,
     "skipLibCheck": true,
     "strict": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
     "esModuleInterop": true,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "baseUrl": "./"
+    "jsx": "react-jsx"
   }
 }
