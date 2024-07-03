@@ -12,7 +12,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "publish": "changeset publish",
-    "test": "jest --config ./jest.config.ts"
+    "test": "jest --config ./jest.config.ts",
+    "prepare": "husky"
   },
   "type": "module",
   "devDependencies": {
@@ -20,20 +21,16 @@
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@jest/globals": "29.7.0",
-    "@nex-ui/css-system": "workspace:*",
     "@rollup/plugin-typescript": "11.1.6",
     "@testing-library/dom": "10.1.0",
     "@testing-library/jest-dom": "6.4.5",
-    "@testing-library/react": "15.0.7",
-    "@testing-library/react-hooks": "8.0.1",
+    "@testing-library/react": "16.0.0",
     "@testing-library/user-event": "14.5.2",
-    "@types/node": "20.12.13",
+    "@types/node": "20.14.12",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
-    "@vanilla-extract/jest-transform": "1.1.5",
-    "clean-package": "2.2.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -45,17 +42,21 @@
     "jest-environment-jsdom": "29.7.0",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "react": "^18.3.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "rollup": "4.17.2",
     "rollup-plugin-delete": "2.0.0",
-    "rollup-plugin-dts": "6.1.0",
+    "rollup-plugin-dts": "6.1.1",
     "ts-jest": "29.1.4",
     "ts-node": "10.9.2",
     "turbo": "latest",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.4"
   },
   "packageManager": "pnpm@9.0.6",
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "@testing-library/react": {}
   }
 }

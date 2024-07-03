@@ -1,0 +1,48 @@
+{
+  "name": "@nex-ui/react",
+  "version": "1.0.2",
+  "author": "X1ng Yu",
+  "scripts": {
+    "build": "rollup --config ./rollup.config.ts --configPlugin typescript",
+    "type-check": "tsc --noEmit"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/es/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/lib/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "devDependencies": {
+    "@storybook/react": "8.0.10"
+  },
+  "dependencies": {
+    "@emotion/utils": "1.4.0",
+    "@iconify/react": "4.1.1",
+    "@nex-ui/styled": "workspace:*",
+    "@nex-ui/system": "workspace:*",
+    "@nex-ui/utils": "workspace:*",
+    "classnames": "2.5.1",
+    "framer-motion": "11.2.4"
+  },
+  "peerDependencies": {
+    "@emotion/react": ">=11",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "sideEffects": false
+}

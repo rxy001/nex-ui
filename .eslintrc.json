@@ -17,9 +17,7 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    // 指定 ECMAScript 语法版本
     "ecmaVersion": "latest",
-    // ECMAScript modules.
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -37,9 +35,12 @@
     }
   },
   "rules": {
-    "no-console": "warn",
+    "no-console": ["warn", { "allow": ["error"] }],
+    "no-use-before-define": ["error", { "functions": false }],
+    "no-sparse-arrays": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "react/jsx-filename-extension": [
       "error",
       { "extensions": [".tsx", ".jsx"] }

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { NexProvider } from '@nex-ui/react'
 
 export default {
   logo: <Image src="/logo.svg" width={140} height={90} />,
@@ -27,4 +28,7 @@ export default {
     { locale: 'zh', text: '中文' },
     { locale: 'en', text: 'English' },
   ],
+  main: ({ children }) => {
+    return <NexProvider>{children}</NexProvider>
+  },
 }
