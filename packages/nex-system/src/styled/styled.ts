@@ -1,4 +1,3 @@
-import { useCSSSystem } from '@nex-ui/system'
 import { withEmotionCache } from '@emotion/react'
 import { createElement, Fragment } from 'react'
 import {
@@ -12,6 +11,7 @@ import { serializeStyles } from '@emotion/serialize'
 import { useInsertionEffectAlwaysWithSyncFallback } from '@emotion/use-insertion-effect-with-fallbacks'
 import { getDefaultShouldForwardProp, isSerializedStyles } from './utils'
 import { tags } from './tags'
+import { useCSSSystem } from '../Provider'
 import type { NexStyled, HTMLElementTagName } from './types'
 
 const isBrowser = typeof document !== 'undefined'
@@ -114,14 +114,16 @@ const createStyledComponent = (tag: any) => {
       newProps.ref = ref
     }
 
-    return createElement(Fragment, {}, [
+    return createElement(
+      Fragment,
+      {},
       createElement(Insertion, {
         cache,
         serialized,
         isStringTag: typeof FinalTag === 'string',
       }),
       createElement(FinalTag, { ...newProps }),
-    ])
+    )
   })
 }
 

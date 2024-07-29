@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "include": [],
   "exclude": [],
+  "types": ["@testing-library/jest-dom/jest-globals"],
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
       "~/*": ["./*"],
       "@theme": ["./packages/nex-react/src/theme"]

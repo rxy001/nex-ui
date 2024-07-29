@@ -16,11 +16,10 @@ const tsconfig = path.resolve(dirname, 'tsconfig.json')
 
 const external = [
   ...Object.keys(pkg.dependencies),
-  'react',
+  ...Object.keys(pkg.peerDependencies),
   'react/jsx-runtime',
   'react-dom/client',
   '@emotion/cache',
-  '@nex-ui/system',
   '@emotion/serialize',
 ]
 

@@ -1,5 +1,5 @@
-import type { StyleObject } from '@nex-ui/system'
 import type { FunctionComponent } from 'react'
+import type { StyleObject } from '../types'
 
 type StyledComponent<
   ComponentProps extends Record<string, any>,

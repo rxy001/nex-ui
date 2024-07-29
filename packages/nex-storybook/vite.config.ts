@@ -20,7 +20,6 @@ export default defineConfig(() => {
         '@theme': resolve('../nex-react/src/theme'),
         '@nex-ui/react': resolve('../nex-react/src'),
         '@nex-ui/utils': resolve('../nex-utils/src'),
-        '@nex-ui/styled': resolve('../nex-styled/src'),
         '@nex-ui/system': resolve('../nex-system/src'),
       },
     },

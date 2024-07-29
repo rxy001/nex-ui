@@ -33,7 +33,6 @@
   "dependencies": {
     "@emotion/utils": "1.4.0",
     "@iconify/react": "4.1.1",
-    "@nex-ui/styled": "workspace:*",
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
     "classnames": "2.5.1",

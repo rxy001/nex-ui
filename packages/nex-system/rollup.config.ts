@@ -16,7 +16,7 @@ const tsconfig = path.resolve(dirname, 'tsconfig.json')
 
 const external = [
   ...Object.keys(pkg.dependencies),
-  'react',
+  ...Object.keys(pkg.peerDependencies),
   'react/jsx-runtime',
 ]
 
@@ -42,6 +42,7 @@ export default defineConfig([
         format: 'cjs',
         preserveModules: true,
         dir: './dist/lib',
+        interop: 'auto',
       },
     ],
   },
