@@ -7,7 +7,12 @@ export * from './styled'
 export { createSystem } from './system'
 
 export { defineStyles } from './styles'
-export type { StylesFn, ExtractVariants } from './styles'
+export type {
+  StylesFn,
+  ExtractVariants,
+  BaseStylesDefinition,
+  SlotStylesDefinition,
+} from './styles'
 
 export { defineConfig } from './defineConfig'
 
