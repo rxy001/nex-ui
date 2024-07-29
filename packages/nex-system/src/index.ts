@@ -2,6 +2,8 @@ export * from '@emotion/react'
 
 export * from './Provider'
 
+export * from './styled'
+
 export { createSystem } from './system'
 
 export { defineStyles } from './styles'

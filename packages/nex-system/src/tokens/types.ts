@@ -54,10 +54,10 @@ export type TokenDefinitions = {
   colors?: ColorsDefinition
   spacing?: SpacingDefinition
   sizes?: SizesDefinition
-  fontFamilies: FontFamiliesDefinition
-  fontSizes: FontSizesDefinition
-  fontWeights: FontWeightsDefinition
-  lineHeights: LineHeightsDefinition
+  fontFamilies?: FontFamiliesDefinition
+  fontSizes?: FontSizesDefinition
+  fontWeights?: FontWeightsDefinition
+  lineHeights?: LineHeightsDefinition
   borders?: BordersDefinition
   radii?: RadiiDefinition
   // semanticTokens?: SemanticDefinition

@@ -1,2 +1,3 @@
 export { mountTest } from './mountTest'
 export { refTest } from './refTest'
+export { renderWithProvider } from './renderWithProvider'

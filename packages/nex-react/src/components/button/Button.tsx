@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { nex } from '@nex-ui/styled'
+import { nex } from '@nex-ui/system'
 import { WaterWave } from '../utils'
 import { useButton } from './useButton'
 import type { ButtonProps } from './types'

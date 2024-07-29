@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { button } from '@theme'
-import type { HTMLElementTagName } from '@nex-ui/styled'
+import type { HTMLElementTagName } from '@nex-ui/system'
 import { useNexContext } from '../provider'
 import { Icon } from '../icon'
 import { ButtonStartIcon } from './ButtonStartIcon'
