@@ -62,8 +62,6 @@ export type RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> = (
   options?: { specifiedColorPalette?: string },
 ) => R
 
-export type GetFn<T> = (key: string) => T | undefined
-
 export type CreateStylesFnConfig = {
   normalize: NormalizeFn
 }
