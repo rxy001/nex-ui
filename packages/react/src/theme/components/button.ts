@@ -17,10 +17,13 @@ export const button = defineStyles({
     boxSizing: 'border-box',
     lineHeight: 'base',
     borderColor: 'transparent',
-    // _bg: 'white',
+    _bg: 'white',
     fontFamily: 'body',
     '& svg': {
       _fs: '1.25em',
+    },
+    '& a': {
+      pointerEvents: 'none',
     },
   },
   variants: {

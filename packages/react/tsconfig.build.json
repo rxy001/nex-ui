@@ -1,12 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["./src"],
+  "exclude": ["./src/**/__tests__/**/*"],
   "compilerOptions": {
-    "types": ["@testing-library/jest-dom/jest-globals"],
-    "baseUrl": ".",
-    "customConditions": ["source"],
+    "baseUrl": "./",
     "paths": {
-      "~/*": ["../../*"],
       "@theme": ["./src/theme"]
     }
   }
