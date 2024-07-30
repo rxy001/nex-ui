@@ -72,9 +72,8 @@ const commonArgs: Story['args'] = {
   children: 'Button',
   disabled: false,
   block: false,
-  size: 'md',
+  size: 'lg',
   variant: 'solid',
-  radius: 'md',
 }
 
 export const Basic: Story = {
