@@ -1,4 +1,4 @@
-import { NexProvider, defaultTheme } from '@nex-ui/react'
+import { NexProvider } from '@nex-ui/react'
 import { themes } from '@storybook/theming'
 
 const preview = {
@@ -25,7 +25,7 @@ const preview = {
   },
   decorators: [
     (Story: any) => (
-      <NexProvider theme={defaultTheme}>
+      <NexProvider>
         <Story />
       </NexProvider>
     ),

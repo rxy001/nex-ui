@@ -1,5 +1,4 @@
 import { defineConfig } from '@nex-ui/system'
-import { button } from './components'
 import {
   colors,
   fontFamilies,
@@ -27,9 +26,3 @@ export const defaultConfig = defineConfig({
   borders,
   radii,
 })
-
-export const defaultTheme = {
-  components: {
-    button,
-  },
-}
