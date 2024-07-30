@@ -7,7 +7,7 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["./*"],
-      "@theme": ["./packages/nex-react/src/theme"]
+      "@theme": ["./packages/react/src/theme"]
     }
   }
 }

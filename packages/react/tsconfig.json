@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["@testing-library/jest-dom/jest-globals"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["../../*"],
+      "@theme": ["./src/theme"]
+    }
+  },
+  "include": ["./src"]
+}

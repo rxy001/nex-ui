@@ -5,7 +5,7 @@ import path from 'node:path'
 import dts from 'rollup-plugin-dts'
 import typescript from '@rollup/plugin-typescript'
 import { rollup } from 'rollup'
-import { readFileSync, rmSync } from 'node:fs'
+import fs from 'node:fs'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 
 build()
@@ -16,9 +16,7 @@ async function build() {
   const cwd = process.cwd()
 
   const pkg = JSON.parse(
-    readFileSync(
-      new URL(path.resolve(cwd, 'package.json'), import.meta.url),
-    ).toString(),
+    fs.readFileSync(path.resolve(cwd, 'package.json')).toString(),
   )
 
   const { name } = pkg
@@ -33,36 +31,26 @@ async function build() {
     '@emotion/serialize',
   ]
 
-  const tsconfig = path.resolve(cwd, 'tsconfig.json')
+  let tsconfig = path.resolve(cwd, 'tsconfig.build.json')
+
+  try {
+    fs.accessSync(tsconfig)
+  } catch (err) {
+    tsconfig = path.resolve(cwd, 'tsconfig.json')
+  }
 
   console.log(`[${name}] Building...`)
 
-  const distDir = path.join(cwd, 'dist')
-  rmSync(distDir, { recursive: true, force: true })
+  if (args.clean) {
+    const distDir = path.join(cwd, 'dist')
+    fs.rmSync(distDir, { recursive: true, force: true })
+  }
 
   await generateModules({ tsconfig, external, name })
 
   if (args.dts) {
     await generateTypes({ tsconfig, external, name })
   }
-}
-
-async function generateTypes({ external, tsconfig, name }) {
-  const config = {
-    external,
-    input: './src/index.ts',
-    plugins: [
-      nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
-      dts({
-        tsconfig,
-        respectExternal: true,
-      }),
-    ],
-    output: { dir: './dist/types', format: 'es', preserveModules: true },
-  }
-  await runRollup(config)
-
-  console.log(`[${name}] [DTS] Generated type definitions ✅`)
 }
 
 async function generateModules({ external, tsconfig, name }) {
@@ -72,6 +60,7 @@ async function generateModules({ external, tsconfig, name }) {
     plugins: [
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       typescript({
+        exclude: ['./src/__tests__'],
         tsconfig,
       }),
     ],
@@ -94,6 +83,24 @@ async function generateModules({ external, tsconfig, name }) {
   await runRollup(config)
 
   console.log(`[${name}] [JS] Generated CJS and ESM files ✅`)
+}
+
+async function generateTypes({ external, tsconfig, name }) {
+  const config = {
+    external,
+    input: './src/index.ts',
+    plugins: [
+      nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
+      dts({
+        tsconfig,
+        respectExternal: true,
+      }),
+    ],
+    output: { dir: './dist/types', format: 'es', preserveModules: true },
+  }
+  await runRollup(config)
+
+  console.log(`[${name}] [DTS] Generated type definitions ✅`)
 }
 
 async function runRollup(config) {
