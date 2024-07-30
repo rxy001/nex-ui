@@ -38,6 +38,8 @@
     "no-console": ["warn", { "allow": ["error"] }],
     "no-use-before-define": ["error", { "functions": false }],
     "no-sparse-arrays": "off",
+
+    "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/no-unknown-property": ["error", { "ignore": ["css"] }],
