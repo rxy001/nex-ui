@@ -30,7 +30,16 @@
     },
     "import/resolver": {
       "typescript": {
-        "project": ["tsconfig.json", "packages/**/tsconfig.json"]
+        "project": ["./tsconfig.json", "./packages/**/tsconfig.json"],
+        "conditionNames": [
+          "types",
+          "source",
+          "import",
+          "require",
+          "node",
+          "browser",
+          "default"
+        ]
       }
     }
   },
