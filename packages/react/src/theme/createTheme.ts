@@ -1,9 +1,7 @@
-import type { defaultConfig } from './preset'
+import type { defaultConfig, Components } from './preset'
 
 export type ThemeConfig = Partial<typeof defaultConfig> & {
-  components?: {
-    button: any
-  }
+  components?: Components
 }
 
 export function createTheme(theme: ThemeConfig) {
