@@ -45,6 +45,7 @@ export type StylesDefinition<
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: CompoundVariants<V, S>
+  colorPalette?: string
 }
 
 export type BaseStylesDefinition<
@@ -69,9 +70,3 @@ export type CreateStylesFnConfig = {
 export type MultipleSerializedStyles<V> = {
   [K in keyof V]: SerializedStyles
 }
-
-export type ExtractVariants<T> = T extends { variants?: infer V }
-  ? {
-      [K in keyof V]?: BooleanMap<keyof V[K]>
-    }
-  : unknown

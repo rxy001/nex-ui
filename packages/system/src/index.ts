@@ -7,9 +7,9 @@ export { createSystem } from './system'
 export { defineStyles } from './styles'
 export type {
   StylesFn,
-  ExtractVariants,
   BaseStylesDefinition,
   SlotStylesDefinition,
+  StylesDefinition,
 } from './styles'
 
 export { defineConfig } from './defineConfig'

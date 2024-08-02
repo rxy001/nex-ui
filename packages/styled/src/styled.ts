@@ -1,16 +1,18 @@
 import { withEmotionCache } from '@emotion/react'
 import { createElement, Fragment } from 'react'
+import type { EmotionCache } from '@emotion/cache'
 import {
   getRegisteredStyles,
   registerStyles,
   insertStyles,
 } from '@emotion/utils'
-import { useCSSSystem } from '@nex-ui/system'
 import { forEach } from '@nex-ui/utils'
 import { serializeStyles } from '@emotion/serialize'
+import type { SerializedStyles } from '@emotion/serialize'
 // @ts-ignore
 import { useInsertionEffectAlwaysWithSyncFallback } from '@emotion/use-insertion-effect-with-fallbacks'
-import { getDefaultShouldForwardProp, isSerializedStyles } from './utils'
+import type { ElementType, Ref } from 'react'
+import { getDefaultShouldForwardProp } from './utils'
 import { tags } from './tags'
 import type { NexStyled, HTMLElementTagName } from './types'
 
@@ -21,9 +23,9 @@ const Insertion = ({
   serialized,
   isStringTag,
 }: {
-  cache: any
-  serialized: any
-  isStringTag: any
+  cache: EmotionCache
+  serialized: SerializedStyles
+  isStringTag: boolean
 }) => {
   registerStyles(cache, serialized, isStringTag)
 
@@ -48,7 +50,7 @@ const Insertion = ({
   return null
 }
 
-const createStyledComponent = (tag: any) => {
+const createStyledComponent = (tag: ElementType) => {
   if (process.env.NODE_ENV !== 'production') {
     if (tag === undefined) {
       throw new Error(
@@ -61,70 +63,69 @@ const createStyledComponent = (tag: any) => {
 
   const shouldUseAs = !defaultShouldForwardProp('as')
 
-  return withEmotionCache((props: any, cache: any, ref: any) => {
-    const { normalize } = useCSSSystem()
-    let cssProp = props.css
+  return withEmotionCache(
+    (props: Record<string, any>, cache: EmotionCache, ref: Ref<any>) => {
+      let cssProp = props.css
 
-    if (
-      typeof cssProp === 'string' &&
-      cache.registered[cssProp] !== undefined
-    ) {
-      cssProp = cache.registered[cssProp]
-    } else if (!isSerializedStyles(cssProp)) {
-      cssProp = normalize(cssProp)
-    }
-
-    const FinalTag = (shouldUseAs && props.as) || tag
-
-    let className = ''
-    const registeredStyles = [cssProp]
-
-    if (typeof props.className === 'string') {
-      className = getRegisteredStyles(
-        cache.registered,
-        registeredStyles,
-        props.className,
-      )
-    } else if (props.className != null) {
-      className = `${props.className} `
-    }
-
-    const serialized = serializeStyles(
-      registeredStyles,
-      cache.registered,
-      props,
-    )
-
-    className += `${cache.key}-${serialized.name}`
-
-    const finalShouldForwardProp = shouldUseAs
-      ? getDefaultShouldForwardProp(FinalTag)
-      : defaultShouldForwardProp
-
-    const newProps: any = {}
-
-    forEach(props, (prop, key) => {
-      if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
-        newProps[key] = prop
+      if (
+        typeof cssProp === 'string' &&
+        cache.registered[cssProp] !== undefined
+      ) {
+        cssProp = cache.registered[cssProp]
       }
-    })
 
-    newProps.className = className
-    if (ref) {
-      newProps.ref = ref
-    }
+      const FinalTag = (shouldUseAs && props.as) || tag
 
-    return createElement(
-      Fragment,
-      {},
-      createElement(Insertion, {
-        cache,
-        serialized,
-        isStringTag: typeof FinalTag === 'string',
-      }),
-      createElement(FinalTag, { ...newProps }),
-    )
-  })
+      let className = ''
+      const registeredStyles = [cssProp]
+
+      if (typeof props.className === 'string') {
+        className = getRegisteredStyles(
+          cache.registered,
+          registeredStyles,
+          props.className,
+        )
+      } else if (props.className != null) {
+        className = `${props.className} `
+      }
+
+      const serialized = serializeStyles(
+        registeredStyles,
+        cache.registered,
+        props,
+      )
+
+      className += `${cache.key}-${serialized.name}`
+
+      const finalShouldForwardProp = shouldUseAs
+        ? getDefaultShouldForwardProp(FinalTag)
+        : defaultShouldForwardProp
+
+      const newProps: any = {}
+
+      forEach(props, (prop: any, key: string) => {
+        if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
+          newProps[key] = prop
+        }
+      })
+
+      newProps.className = className
+      if (ref) {
+        newProps.ref = ref
+      }
+
+      return createElement(
+        Fragment,
+        {},
+        createElement(Insertion, {
+          cache,
+          serialized,
+          isStringTag: typeof FinalTag === 'string',
+        }),
+        createElement(FinalTag, { ...newProps }),
+      )
+    },
+  )
 }
 
 // bind it to avoid mutating the original function

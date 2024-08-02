@@ -1,5 +1,5 @@
 import { defineStyles, keyframes } from '@nex-ui/system'
-import type { ExtractVariants } from '@nex-ui/system'
+import type { ExtractComponentType, ExtractVariants } from '../types'
 
 export const button = defineStyles({
   base: {
@@ -17,7 +17,6 @@ export const button = defineStyles({
     boxSizing: 'border-box',
     lineHeight: 'base',
     borderColor: 'transparent',
-    _bg: 'white',
     fontFamily: 'body',
     '& svg': {
       _fs: '1.25em',
@@ -213,3 +212,5 @@ export const buttonEndIcon = defineStyles({
 })
 
 export type ButtonVariants = ExtractVariants<typeof button>
+
+export type ButtonComponentStyles = ExtractComponentType<typeof button>

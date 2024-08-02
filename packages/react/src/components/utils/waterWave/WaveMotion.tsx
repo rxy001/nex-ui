@@ -1,9 +1,9 @@
-import { motion, useAnimate } from 'framer-motion'
+import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import { getWaveColor } from './utils'
 import type { WaveMotionProps } from './types'
 
-export const WaveMotion = ({ target, root }: WaveMotionProps) => {
+export const WaveMotion = ({ target, onMotionFinished }: WaveMotionProps) => {
   const { borderRadius, width, height } = window.getComputedStyle(target)
   const color = getWaveColor(target)
 
@@ -20,16 +20,12 @@ export const WaveMotion = ({ target, root }: WaveMotionProps) => {
         duration: 0.6,
         ease: 'easeInOut',
       },
-    ).then(() => {
-      const parent = scope.current.parentElement!
-      root.unmount()
-      target.removeChild(parent)
-    })
+    ).then(onMotionFinished)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animate, scope])
 
   return (
-    <motion.div
+    <div
       ref={scope}
       style={{
         width,

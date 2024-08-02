@@ -1,6 +1,6 @@
 import { forEach, isPlainObject, isString } from '@nex-ui/utils'
 import { pathToName } from './utils'
-import type { SystemConfig, StyleObject } from './types'
+import type { SystemConfig } from './types'
 import { createStylesFn } from './styles'
 import { createTokens } from './tokens'
 import { createScales } from './scales'
@@ -18,19 +18,18 @@ export const createSystem = (config: SystemConfig) => {
 
   const { getProperties } = createAliases({ aliases })
 
-  function normalize<T extends StyleObject>(
+  const normalize = <T extends Record<string, any>>(
     style: T,
     specifiedColorPalette?: string,
-  ) {
-    const result: StyleObject = {}
+  ) => {
+    const result: any = Array.isArray(style) ? [] : {}
 
-    forEach(style, (value: T[keyof T], key: string) => {
+    forEach(style, (value: any, key: string) => {
       const properties = getProperties(key) ?? [key]
-
       forEach(properties, (property: string) => {
         const category = getPropScale(property)
         if (category) {
-          let newValue = value as any
+          let newValue = value
           switch (category) {
             case 'colors':
               if (isString(newValue)) {
@@ -49,9 +48,9 @@ export const createSystem = (config: SystemConfig) => {
 
           const token = getToken(pathToName([category, newValue]))
           result[property] = token?.value ?? value
-        } else if (isPlainObject(value)) {
+        } else if (isPlainObject(value) || Array.isArray(value)) {
           // cssobject
-          result[property] = normalize(value as StyleObject)
+          result[property] = normalize(value as any, specifiedColorPalette)
         } else {
           // 标准 css 值
           result[property] = value

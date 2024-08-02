@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@nex-ui/react": "workspace:*",
+    "@nex-ui/system": "workspace:*",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },

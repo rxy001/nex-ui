@@ -20,3 +20,5 @@ export const Button = forwardRef<
 
   return <WaterWave disabled={loading || disabled}>{childNode}</WaterWave>
 })
+
+Button.displayName = 'Button'

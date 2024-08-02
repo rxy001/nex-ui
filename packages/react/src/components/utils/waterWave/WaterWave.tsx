@@ -14,7 +14,15 @@ function showWaveMotion(node: HTMLElement) {
 
   const root = createRoot(div)
 
-  root.render(<WaveMotion target={node} root={root} />)
+  root.render(
+    <WaveMotion
+      target={node}
+      onMotionFinished={() => {
+        node.removeChild(div)
+        root.unmount()
+      }}
+    />,
+  )
 }
 
 export const WaterWave = ({ children, disabled }: WaveProps) => {
