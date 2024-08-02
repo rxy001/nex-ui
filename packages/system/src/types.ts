@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import type * as CSS from 'csstype'
+import type { Keyframes } from '@emotion/react'
 import type { ScaleDefinition } from './scales'
 import type { TokenDefinitions } from './tokens'
 import type { AliasDefinition } from './aliases'
@@ -10,6 +11,12 @@ export type SystemConfig = {
   aliases?: AliasDefinition
 } & TokenDefinitions
 
+export type NormalizeFn<T extends Record<string, any> = Record<string, any>> = (
+  style: T,
+  specifiedColorPalette?: string,
+) => T
+
+/* StyleObject------start */
 export interface OverwriteCSSProperties {}
 
 type CSSPseudos = { [K in CSS.Pseudos]?: StyleObject }
@@ -21,9 +28,13 @@ export type CSSInterpolation =
   | number
   | string
   | StyleObject
+  | Keyframes
+
+export interface ArrayCSSInterpolation
+  extends ReadonlyArray<CSSInterpolation> {}
 
 interface CSSOthersObject {
-  [propertiesName: string]: CSSInterpolation
+  [propertiesName: string]: CSSInterpolation | ArrayCSSInterpolation
 }
 
 export interface SystemDefinition {}
@@ -52,11 +63,15 @@ type Scales = SystemDefinition extends { scales: ScaleDefinition }
   ? SystemDefinition['scales']
   : NonNullable<unknown>
 
+type RawCSSProperties = CSS.PropertiesFallback<number | string>
+
 type ExtraCSSProperties = {
-  [K in keyof Scales]?: ExtraProperty[Scales[K]] | CSS.Properties[K]
+  [K in keyof Scales]?:
+    | ExtraProperty[Scales[K]]
+    | (RawCSSProperties[K] & { __type?: never })
 }
 
-export type CSSProperties = Omit<CSS.Properties, keyof ExtraCSSProperties> &
+export type CSSProperties = Omit<RawCSSProperties, keyof ExtraCSSProperties> &
   ExtraCSSProperties
 
 export interface StyleObject
@@ -64,8 +79,4 @@ export interface StyleObject
     OverwriteCSSProperties,
     CSSPseudos,
     CSSOthersObject {}
-
-export type NormalizeFn<T extends StyleObject = StyleObject> = (
-  style: T,
-  specifiedColorPalette?: string,
-) => T
+/* StyleObject------end */

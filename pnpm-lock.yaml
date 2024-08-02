@@ -47,6 +47,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
+      '@types/yargs-parser':
+        specifier: 21.0.3
+        version: 21.0.3
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.1.0
         version: 7.17.0(@typescript-eslint/parser@7.17.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -198,9 +201,6 @@ importers:
       '@emotion/utils':
         specifier: 1.4.0
         version: 1.4.0
-      '@nex-ui/system':
-        specifier: workspace:*
-        version: link:../system
       '@nex-ui/utils':
         specifier: workspace:*
         version: link:../utils
@@ -210,6 +210,10 @@ importers:
       react:
         specifier: '>=18'
         version: 18.3.1
+    devDependencies:
+      '@emotion/cache':
+        specifier: 11.13.1
+        version: 11.13.1
 
   packages/system:
     dependencies:
@@ -313,6 +317,9 @@ importers:
       '@nex-ui/react':
         specifier: workspace:*
         version: link:../packages/react
+      '@nex-ui/system':
+        specifier: workspace:*
+        version: link:../packages/system
       react:
         specifier: 18.3.1
         version: 18.3.1

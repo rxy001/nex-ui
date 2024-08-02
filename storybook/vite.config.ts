@@ -21,6 +21,7 @@ export default defineConfig(() => {
         '@nex-ui/react': resolve('../packages/react/src'),
         '@nex-ui/utils': resolve('../packages/utils/src'),
         '@nex-ui/system': resolve('../packages/system/src'),
+        '@nex-ui/styled': resolve('../packages/styled/src'),
       },
     },
   }

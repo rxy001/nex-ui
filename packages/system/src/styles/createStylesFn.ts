@@ -1,6 +1,5 @@
-import { forEach, merge, reduce } from '@nex-ui/utils'
-import { css } from '@emotion/react'
-import type { SerializedStyles } from '@emotion/react'
+import { forEach, merge } from '@nex-ui/utils'
+import type { CSSObject } from '@emotion/react'
 import type { StyleObject } from '../types'
 import type {
   VariantGroups,
@@ -12,25 +11,31 @@ import type {
   VariantSelection,
   CompoundVariantsSelection,
   CreateStylesFnConfig,
-  MultipleSerializedStyles,
 } from './types'
 
 export function createStylesFn({ normalize }: CreateStylesFnConfig) {
   function stylesFn<B extends StyleObject, V extends VariantGroups<B>>(
     options: BaseStylesDefinition<B, V>,
-  ): RuntimeFn<V, SerializedStyles>
+  ): RuntimeFn<V, CSSObject>
 
   function stylesFn<S extends SlotGroups, V extends VariantGroups<S>>(
     options: SlotStylesDefinition<S, V>,
-  ): RuntimeFn<V, MultipleSerializedStyles<V>>
+  ): RuntimeFn<V, Record<keyof S, CSSObject>>
 
   function stylesFn<
     S extends SlotGroups | StyleObject,
     V extends VariantGroups<S>,
-  >(
-    options: StylesDefinition<S, V>,
-  ): RuntimeFn<V, SerializedStyles | MultipleSerializedStyles<V>> {
-    const { base, slots, variants, defaultVariants, compoundVariants } = options
+  >({
+    colorPalette,
+    ...options
+  }: StylesDefinition<S, V>): RuntimeFn<
+    V,
+    CSSObject | Record<string, CSSObject>
+  > {
+    const normalizedOptions = normalize(options, colorPalette)
+
+    const { base, slots, variants, defaultVariants, compoundVariants } =
+      normalizedOptions
 
     type CompoundVariants = CompoundVariantsSelection<V> & {
       css: S extends SlotGroups ? Record<keyof S, StyleObject> : StyleObject
@@ -126,7 +131,6 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
 
       forEach(compoundVariants, (compoundVariant: CompoundVariants) => {
         const { css: compoundVariantCSS, ...compoundCheck } = compoundVariant
-
         if (shouldApplyCompound(compoundCheck as any, selections)) {
           styles = merge({}, styles, compoundVariantCSS)
         }
@@ -134,29 +138,14 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
       return styles
     }
 
-    return (config: VariantSelection<V>, { specifiedColorPalette } = {}) => {
+    return (config: VariantSelection<V>) => {
       const isSlotsVariants = !!slots
 
       const styles = isSlotsVariants
         ? slotRuntimeFn(config)
         : baseRuntimeFn(config)
 
-      if (isSlotsVariants) {
-        return reduce(
-          styles as SlotGroups,
-          (
-            obj: MultipleSerializedStyles<V>,
-            value: StyleObject,
-            key: string,
-          ) => ({
-            ...obj,
-            [key]: css(normalize(value, specifiedColorPalette)),
-          }),
-          {} as MultipleSerializedStyles<V>,
-        )
-      }
-
-      return css(normalize(styles, specifiedColorPalette))
+      return styles
     }
   }
 

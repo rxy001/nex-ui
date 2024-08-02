@@ -5,8 +5,11 @@ import path from 'node:path'
 import dts from 'rollup-plugin-dts'
 import typescript from '@rollup/plugin-typescript'
 import { rollup } from 'rollup'
+import type { RollupOptions, RollupBuild } from 'rollup'
 import fs from 'node:fs'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+
+type SharedConfigs = { external: string[]; tsconfig: string; name: string }
 
 build()
 
@@ -53,8 +56,8 @@ async function build() {
   }
 }
 
-async function generateModules({ external, tsconfig, name }) {
-  const config = {
+async function generateModules({ external, tsconfig, name }: SharedConfigs) {
+  const config: RollupOptions = {
     external,
     input: './src/index.ts',
     plugins: [
@@ -85,8 +88,8 @@ async function generateModules({ external, tsconfig, name }) {
   console.log(`[${name}] [JS] Generated CJS and ESM files ✅`)
 }
 
-async function generateTypes({ external, tsconfig, name }) {
-  const config = {
+async function generateTypes({ external, tsconfig, name }: SharedConfigs) {
+  const config: RollupOptions = {
     external,
     input: './src/index.ts',
     plugins: [
@@ -103,8 +106,8 @@ async function generateTypes({ external, tsconfig, name }) {
   console.log(`[${name}] [DTS] Generated type definitions ✅`)
 }
 
-async function runRollup(config) {
-  let bundle
+async function runRollup(config: RollupOptions) {
+  let bundle: RollupBuild
   try {
     bundle = await rollup(config)
 
@@ -112,11 +115,9 @@ async function runRollup(config) {
       ? config.output
       : [config.output]
 
-    await Promise.all(output.map((o) => bundle.write(o)))
-  } catch (error) {
-    console.log(error)
-
-    process.exit(0)
+    await Promise.all(output.map((o) => bundle.write(o!)))
+  } catch (error: any) {
+    throw new Error(error)
   }
 
   if (bundle) {

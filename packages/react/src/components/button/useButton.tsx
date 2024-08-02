@@ -1,10 +1,13 @@
 import classNames from 'classnames'
 import { button } from '@theme'
+import { useMemo } from 'react'
+import { useEvent } from '@nex-ui/utils'
 import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
 import { Icon } from '../icon'
 import { ButtonStartIcon } from './ButtonStartIcon'
 import { ButtonEndIcon } from './ButtonEndIcon'
+import { useMergeAndNormalizeTheme } from '../utils'
 import type { ButtonProps } from './types'
 
 export const useButton = ({
@@ -24,37 +27,59 @@ export const useButton = ({
   onClick: onClickProp,
   ...restProps
 }: ButtonProps) => {
-  const { prefix, styles } = useNexContext()
+  const { prefix } = useNexContext()
+
+  const variantsProp = useMemo(
+    () => ({
+      size,
+      loading,
+      iconOnly,
+      variant,
+      block,
+      disabled,
+      radius: radius ?? size,
+    }),
+    [block, disabled, iconOnly, loading, radius, size, variant],
+  )
+
+  const mergedStyles = useMemo(
+    () => ({
+      ...button,
+      colorPalette: color,
+    }),
+    [color],
+  )
+
+  const cssProp = useMergeAndNormalizeTheme(
+    'button',
+    mergedStyles,
+    variantsProp,
+  )
 
   const htmlElement: HTMLElementTagName =
     typeof href === 'string' && href ? 'a' : 'button'
 
-  const onClick = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>,
-  ) => {
-    if (loading || disabled) {
-      event.preventDefault()
-      return
-    }
+  const onClick = useEvent(
+    (
+      event: React.MouseEvent<
+        HTMLButtonElement | HTMLAnchorElement,
+        MouseEvent
+      >,
+    ) => {
+      if (loading || disabled) {
+        event.preventDefault()
+        return
+      }
 
-    ;(onClickProp as ButtonProps['onClick'])?.(event)
-  }
+      ;(onClickProp as ButtonProps['onClick'])?.(event)
+    },
+  )
 
   return {
     rootProps: {
       onClick,
+      css: cssProp,
       className: classNames(`${prefix}-btn`, className),
-      css: styles(button)(
-        {
-          size,
-          iconOnly,
-          variant,
-          block,
-          disabled,
-          radius: radius ?? size,
-        },
-        { specifiedColorPalette: color },
-      ),
       ...(htmlElement === 'a'
         ? {
             href,

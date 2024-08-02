@@ -39,7 +39,9 @@
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
-    "@nex-ui/system": "workspace:*",
     "react": ">=18"
+  },
+  "devDependencies": {
+    "@emotion/cache": "11.13.1"
   }
 }

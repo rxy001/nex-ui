@@ -1,4 +1,5 @@
 import { defineConfig } from '@nex-ui/system'
+import type { StyleObject } from '@nex-ui/system'
 import {
   colors,
   fontFamilies,
@@ -12,8 +13,7 @@ import {
   aliases,
   radii,
 } from './system'
-import type { button } from './components'
-import type { ExtractComponentType } from './types'
+import type { ButtonComponentStyles, ButtonVariants } from './components'
 
 export const defaultConfig = defineConfig({
   aliases,
@@ -29,6 +29,8 @@ export const defaultConfig = defineConfig({
   radii,
 })
 
+type ComponentThemeFn<P> = (ownerState: Required<P>) => StyleObject | void
+
 export type Components = {
-  button?: ExtractComponentType<typeof button>
+  button?: ButtonComponentStyles | ComponentThemeFn<ButtonVariants>
 }
