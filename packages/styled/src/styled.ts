@@ -136,6 +136,10 @@ const cache = new Map<string, (...args: any[]) => any>()
 
 const nexProxy = new Proxy(styledComponent, {
   get: (_, tag: HTMLElementTagName) => {
+    if (['prototype', 'name', 'displayName'].includes(tag)) {
+      return
+    }
+
     if (!cache.has(tag)) {
       if (!tags.includes(tag)) {
         console.error('system: Please pass in the correct html tags.')

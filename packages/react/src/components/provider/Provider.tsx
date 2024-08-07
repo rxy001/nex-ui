@@ -1,7 +1,7 @@
 import { merge } from '@nex-ui/utils'
 import { CSSSystemProvider, useCSSSystem } from '@nex-ui/system'
-import { defaultConfig } from '@theme'
 import { useMemo } from 'react'
+import { defaultTheme } from '../../theme'
 import { NexContextProvider } from './Context'
 import type { NexProviderProps, InnerProviderProps } from './types'
 
@@ -18,13 +18,11 @@ function InnerProvider({ components, prefix, children }: InnerProviderProps) {
 }
 
 export function NexProvider(props: NexProviderProps) {
-  const { theme = {}, prefix = 'nexui', children } = props
-
-  const { components, ...sysConfig } = theme
+  const { theme = {}, components, prefix = 'nexui', children } = props
 
   const mergedSysConfig = useMemo(
-    () => merge({ cssVarsPrefix: prefix }, defaultConfig, sysConfig),
-    [prefix, sysConfig],
+    () => merge({ cssVarsPrefix: prefix }, defaultTheme, theme),
+    [prefix, theme],
   )
 
   return (

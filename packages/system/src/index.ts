@@ -21,4 +21,20 @@ export type {
   OverwriteCSSProperties,
   StyleObject,
   NormalizeFn,
+  ColorPalette,
 } from './types'
+
+export type { AliasesDefinition } from './aliases'
+export type { ScalesDefinition } from './scales'
+export type {
+  BordersDefinition,
+  ColorsDefinition,
+  LineHeightsDefinition,
+  FontFamiliesDefinition,
+  FontSizesDefinition,
+  FontWeightsDefinition,
+  SizesDefinition,
+  SpacingDefinition,
+  RadiiDefinition,
+  // SemanticDefinition,
+} from './tokens'

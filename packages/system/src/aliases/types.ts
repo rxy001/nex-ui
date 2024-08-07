@@ -1,7 +1,7 @@
-export type AliasDefinition = {
+export type AliasesDefinition = {
   [alias: string]: string | string[]
 }
 
 export type CreateAliasesConfig = {
-  aliases?: AliasDefinition
+  aliases?: AliasesDefinition
 }

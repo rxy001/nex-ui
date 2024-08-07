@@ -1,5 +1,5 @@
-import type { AliasDefinition } from './aliases'
-import type { ScaleDefinition } from './scales'
+import type { AliasesDefinition } from './aliases'
+import type { ScalesDefinition } from './scales'
 import type {
   BordersDefinition,
   ColorsDefinition,
@@ -25,6 +25,6 @@ defineConfig.fontWeights = <T extends FontWeightsDefinition>(v: T): T => v
 defineConfig.sizes = <T extends SizesDefinition>(v: T): T => v
 defineConfig.spaceing = <T extends SpacingDefinition>(v: T): T => v
 // defineConfig.semanticTokens = (v: SemanticDefinition) => v
-defineConfig.scales = <T extends ScaleDefinition>(v: T): T => v
-defineConfig.aliases = <T extends AliasDefinition>(v: T): T => v
+defineConfig.scales = <T extends ScalesDefinition>(v: T): T => v
+defineConfig.aliases = <T extends AliasesDefinition>(v: T): T => v
 defineConfig.radii = <T extends RadiiDefinition>(v: T): T => v

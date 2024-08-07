@@ -1,3 +1,3 @@
 export * from './createAliases'
 
-export type { AliasDefinition } from './types'
+export type { AliasesDefinition } from './types'

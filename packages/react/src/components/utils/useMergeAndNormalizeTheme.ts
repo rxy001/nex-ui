@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { isPlainObject, isFunction, merge } from '@nex-ui/utils'
-import type { Components } from '@theme'
+import type { ComponentTheme } from '../../theme'
 import { useNexContext } from '../provider'
 
 export const useMergeAndNormalizeTheme = (
-  componentName: keyof Components,
+  componentName: keyof ComponentTheme,
   componentStyles: any,
   variantProps: any = {},
 ) => {

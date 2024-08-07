@@ -1,14 +1,14 @@
 /* eslint-disable no-use-before-define */
 import type * as CSS from 'csstype'
 import type { Keyframes } from '@emotion/react'
-import type { ScaleDefinition } from './scales'
+import type { ScalesDefinition } from './scales'
 import type { TokenDefinitions } from './tokens'
-import type { AliasDefinition } from './aliases'
+import type { AliasesDefinition } from './aliases'
 
 export type SystemConfig = {
   cssVarsPrefix?: string
-  scales?: ScaleDefinition
-  aliases?: AliasDefinition
+  scales?: ScalesDefinition
+  aliases?: AliasesDefinition
 } & TokenDefinitions
 
 export type NormalizeFn<T extends Record<string, any> = Record<string, any>> = (
@@ -59,7 +59,7 @@ type ExtractTokens<T> = {
 
 type ExtraProperty = ExtractTokens<SystemDefinition>
 
-type Scales = SystemDefinition extends { scales: ScaleDefinition }
+type Scales = SystemDefinition extends { scales: ScalesDefinition }
   ? SystemDefinition['scales']
   : NonNullable<unknown>
 
@@ -80,3 +80,11 @@ export interface StyleObject
     CSSPseudos,
     CSSOthersObject {}
 /* StyleObject------end */
+
+export type ColorPalette = SystemDefinition extends { colors: object }
+  ? keyof {
+      [K in keyof SystemDefinition['colors'] as SystemDefinition['colors'][K] extends object
+        ? K
+        : never]: true
+    }
+  : never

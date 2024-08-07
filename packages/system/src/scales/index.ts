@@ -1,3 +1,3 @@
 export { createScales } from './createScales'
 
-export type { ScaleDefinition } from './types'
+export type { ScalesDefinition } from './types'
