@@ -1,11 +1,5 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["./src"],
-  "exclude": ["./src/**/__tests__/**/*"],
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@theme": ["./src/theme"]
-    }
-  }
+  "exclude": ["./src/**/__tests__/**/*"]
 }

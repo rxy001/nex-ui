@@ -5,7 +5,8 @@ import type {
   CSSProperties,
   MouseEventHandler,
 } from 'react'
-import type { ButtonVariants } from '@theme'
+import type { ColorPalette } from '@nex-ui/system'
+import type { ButtonVariants } from '../../theme'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   AnchorHTMLAttributes<HTMLAnchorElement> &
@@ -16,6 +17,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     style?: CSSProperties
     className?: string
     onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>
+    color?: ColorPalette
   }
 
 export type ButtonIconProps = {

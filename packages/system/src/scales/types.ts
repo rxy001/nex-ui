@@ -3,10 +3,10 @@ import type { TokenCategory } from '../tokens'
 
 export type CSSProperty = keyof CSSProperties
 
-export type ScaleDefinition = {
+export type ScalesDefinition = {
   [property in CSSProperty]?: TokenCategory
 }
 
 export type CreateScalesConfig = {
-  scales?: ScaleDefinition
+  scales?: ScalesDefinition
 }

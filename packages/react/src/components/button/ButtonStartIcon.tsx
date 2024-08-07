@@ -1,5 +1,5 @@
 import { nex } from '@nex-ui/styled'
-import { buttonStartIcon } from '@theme'
+import { buttonStartIcon } from '../../theme'
 import { useNexContext } from '../provider'
 import type { ButtonIconProps } from './types'
 

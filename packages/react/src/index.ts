@@ -1,3 +1,5 @@
 export * from './components'
 
-export * from './theme'
+export { defineBasicTheme, defineComponentTheme } from './theme'
+
+export type { Theme } from './theme'

@@ -1,5 +1,5 @@
 export * from './components'
 export * from './preset'
-export type { ThemeConfig } from './createTheme'
+export type { Theme, ComponentTheme, BasicTheme } from './types'
 
-export { createTheme } from './createTheme'
+export { defineBasicTheme, defineComponentTheme } from './defineTheme'
