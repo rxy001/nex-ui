@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react'
 import type { StylesFn, NormalizeFn } from '@nex-ui/system'
-import type { BasicTheme, ComponentTheme } from '../../theme'
+import type { BasicTheme, ComponentsTheme } from '../../theme'
 
 export type InnerProviderProps = {
-  components?: ComponentTheme
+  components?: ComponentsTheme
   prefix: string
   children?: ReactNode
 }
 
 export type NexProviderProps = {
   theme?: BasicTheme
-  components?: ComponentTheme
+  components?: ComponentsTheme
   children?: ReactNode
   prefix?: string
 }

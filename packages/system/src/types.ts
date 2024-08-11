@@ -17,7 +17,7 @@ export type NormalizeFn<T extends Record<string, any> = Record<string, any>> = (
 ) => T
 
 /* StyleObject------start */
-export interface OverwriteCSSProperties {}
+export interface CSSPropertiesOverrides {}
 
 type CSSPseudos = { [K in CSS.Pseudos]?: StyleObject }
 
@@ -75,16 +75,8 @@ export type CSSProperties = Omit<RawCSSProperties, keyof ExtraCSSProperties> &
   ExtraCSSProperties
 
 export interface StyleObject
-  extends Omit<CSSProperties, keyof OverwriteCSSProperties>,
-    OverwriteCSSProperties,
+  extends Omit<CSSProperties, keyof CSSPropertiesOverrides>,
+    CSSPropertiesOverrides,
     CSSPseudos,
     CSSOthersObject {}
 /* StyleObject------end */
-
-export type ColorPalette = SystemDefinition extends { colors: object }
-  ? keyof {
-      [K in keyof SystemDefinition['colors'] as SystemDefinition['colors'][K] extends object
-        ? K
-        : never]: true
-    }
-  : never

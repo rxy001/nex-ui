@@ -15,7 +15,10 @@ import type {
   ScalesDefinition,
 } from '@nex-ui/system'
 import type { defaultTheme } from './preset'
-import type { ButtonComponentStyles, ButtonVariants } from './components'
+import type { ButtonComponentStyles } from './components'
+import type { ButtonProps } from '../components'
+
+type DefaultTheme = typeof defaultTheme
 
 type Merge<A, B> = {
   [K in keyof A | keyof B]: K extends keyof B
@@ -52,9 +55,12 @@ export type ExtractComponentType<T> = ('base' extends keyof T
                 ? { [S in keyof T['slots']]?: StyleObject }
                 : StyleObject
             }
-          }
-          defaultVariants?: {
-            [L in keyof U]?: BooleanMap<keyof U[L]>
+          } & {
+            [K: string]: {
+              [J: string]: 'slots' extends keyof T
+                ? { [S in keyof T['slots']]?: StyleObject }
+                : StyleObject
+            }
           }
           compoundVariants?: Array<
             {
@@ -79,11 +85,7 @@ export type ExtractVariants<T> = T extends { variants?: infer V }
     }
   : unknown
 
-export type ComponentThemeFn<P> = (
-  ownerState: Required<P>,
-) => StyleObject | void
-
-type DefaultTheme = typeof defaultTheme
+export type ComponentThemeFn<P> = (ownerState: P) => StyleObject | void
 
 export type BasicTheme = {
   aliases?: AliasesDefinition & Partial<DefaultTheme['aliases']>
@@ -99,11 +101,7 @@ export type BasicTheme = {
   scales?: ScalesDefinition & Partial<DefaultTheme['scales']>
 }
 
-export type ComponentTheme = {
-  button?: ButtonComponentStyles | ComponentThemeFn<ButtonVariants>
-}
-
-export interface Theme {}
+export interface ThemeOverrides {}
 
 export interface Aliases {
   _hover?: CSSInterpolation
@@ -133,8 +131,25 @@ export interface Aliases {
   _m?: CSSProperties['margin']
 }
 
-declare module '@nex-ui/system' {
-  interface SystemDefinition extends Merge<DefaultTheme, Theme> {}
+type System = Merge<DefaultTheme, ThemeOverrides>
 
-  interface OverwriteCSSProperties extends Aliases {}
+export type ColorPalette = System extends { colors: object }
+  ? keyof {
+      [K in keyof System['colors'] as System['colors'][K] extends object
+        ? K
+        : never]: true
+    }
+  : never
+
+declare module '@nex-ui/system' {
+  interface SystemDefinition extends System {}
+
+  interface CSSPropertiesOverrides extends Aliases {}
+}
+
+export type ComponentsTheme = {
+  button?: {
+    styleOverrides?: ButtonComponentStyles | ComponentThemeFn<ButtonProps>
+    defaultProps?: ButtonProps
+  }
 }

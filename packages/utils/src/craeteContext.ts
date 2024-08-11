@@ -8,6 +8,7 @@ type CreateContextOptions<T> = {
   hookName?: string
   providerName?: string
   defaultValue?: T
+  strict?: boolean
 }
 
 export type CreateContextReturn<T> = [
@@ -26,6 +27,7 @@ export function createContext<T>(options: CreateContextOptions<T>) {
     contextName,
     hookName = 'useContext',
     providerName = 'Provider',
+    strict = true,
   } = options
   const Context = createReactContenxt<T | undefined>(defaultValue)
 
@@ -34,7 +36,7 @@ export function createContext<T>(options: CreateContextOptions<T>) {
   function useContext() {
     const context = useReactContext(Context)
 
-    if (!context) {
+    if (!context && strict) {
       const error = new Error(getErrorMessage(hookName, providerName))
       error.name = 'ContextError'
       if (Error.captureStackTrace) {

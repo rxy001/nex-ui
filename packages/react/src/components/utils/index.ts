@@ -1,2 +1,3 @@
 export { WaterWave } from './waterWave'
-export { useMergeAndNormalizeTheme } from './useMergeAndNormalizeTheme'
+export { useMergedTheme } from './useMergedTheme'
+export { useDefaultProps } from './useDefaultProps'

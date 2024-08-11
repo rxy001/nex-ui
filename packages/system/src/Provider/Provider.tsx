@@ -2,8 +2,9 @@ import { useMemo } from 'react'
 import type { ReactNode } from 'react'
 import { Global } from '@emotion/react'
 import { createSystem } from '../system'
-import { SystemProvider } from './Context'
+import { SystemProvider, useCSSSystem, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { SystemConfig } from '../types'
+import type { SystemContext } from './Context'
 
 export type CSSSystemProviderProps = {
   children: ReactNode
@@ -14,13 +15,25 @@ export const CSSSystemProvider = ({
   config = {},
   children,
 }: CSSSystemProviderProps) => {
-  const { styles, globalCssVars, normalize } = createSystem(config)
+  const outer = useCSSSystem()
+
+  const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE
+
+  let styles: SystemContext['styles']
+  let globalCssVars
+  let normalize: SystemContext['normalize']
+
+  if (isTopLevel) {
+    ;({ styles, globalCssVars, normalize } = createSystem(config))
+  } else {
+    ;({ styles, normalize } = outer)
+  }
 
   const methods = useMemo(() => ({ styles, normalize }), [styles, normalize])
 
   return (
     <SystemProvider value={methods}>
-      <Global styles={globalCssVars} />
+      {isTopLevel && <Global styles={globalCssVars} />}
       {children}
     </SystemProvider>
   )
