@@ -1,5 +1,10 @@
 export * from './components'
 export * from './preset'
-export type { Theme, ComponentTheme, BasicTheme } from './types'
+export type {
+  ThemeOverrides,
+  BasicTheme,
+  ComponentsTheme,
+  ColorPalette,
+} from './types'
 
-export { defineBasicTheme, defineComponentTheme } from './defineTheme'
+export { defineBasicTheme, defineComponentsTheme } from './defineTheme'

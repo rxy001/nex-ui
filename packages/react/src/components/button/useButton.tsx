@@ -1,46 +1,40 @@
 import classNames from 'classnames'
 import { useMemo } from 'react'
 import { useEvent } from '@nex-ui/utils'
+import type { MouseEvent } from 'react'
 import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
 import { Icon } from '../icon'
 import { button } from '../../theme'
 import { ButtonStartIcon } from './ButtonStartIcon'
 import { ButtonEndIcon } from './ButtonEndIcon'
-import { useMergeAndNormalizeTheme } from '../utils'
+import { useMergedTheme, useDefaultProps } from '../utils'
 import type { ButtonProps } from './types'
 
-export const useButton = ({
-  className,
-  href,
-  variant = 'solid',
-  radius = 'md',
-  size = 'md',
-  iconOnly = false,
-  loading = false,
-  disabled = false,
-  block = false,
-  type = 'button',
-  color = 'blue',
-  startIcon: startIconProp,
-  endIcon: endIconProp,
-  onClick: onClickProp,
-  ...restProps
-}: ButtonProps) => {
+const COMPONENT_NAME = 'button'
+
+export const useButton = (inProps: ButtonProps) => {
+  const props = useDefaultProps({ name: COMPONENT_NAME, props: inProps })
+
   const { prefix } = useNexContext()
 
-  const variantsProp = useMemo(
-    () => ({
-      size,
-      loading,
-      iconOnly,
-      variant,
-      block,
-      disabled,
-      radius: radius ?? size,
-    }),
-    [block, disabled, iconOnly, loading, radius, size, variant],
-  )
+  const {
+    href,
+    className,
+    variant = 'solid',
+    radius = 'md',
+    size = 'md',
+    iconOnly = false,
+    loading = false,
+    disabled = false,
+    block = false,
+    type = 'button',
+    color = 'blue',
+    startIcon: startIconProp,
+    endIcon: endIconProp,
+    onClick: onClickProp,
+    ...restProps
+  } = props
 
   const mergedStyles = useMemo(
     () => ({
@@ -50,22 +44,28 @@ export const useButton = ({
     [color],
   )
 
-  const cssProp = useMergeAndNormalizeTheme(
-    'button',
-    mergedStyles,
-    variantsProp,
-  )
+  const cssProp = useMergedTheme({
+    name: COMPONENT_NAME,
+    styles: mergedStyles,
+    props: {
+      ...props,
+      variant,
+      radius,
+      size,
+      iconOnly,
+      loading,
+      disabled,
+      block,
+      type,
+      color,
+    },
+  })
 
   const htmlElement: HTMLElementTagName =
     typeof href === 'string' && href ? 'a' : 'button'
 
   const onClick = useEvent(
-    (
-      event: React.MouseEvent<
-        HTMLButtonElement | HTMLAnchorElement,
-        MouseEvent
-      >,
-    ) => {
+    (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
       if (loading || disabled) {
         event.preventDefault()
         return
@@ -75,7 +75,19 @@ export const useButton = ({
     },
   )
 
+  const startIcon = (loading || startIconProp) && (
+    <ButtonStartIcon size={size} spin={loading}>
+      {loading ? <Icon icon="ant-design:loading-outlined" /> : startIconProp}
+    </ButtonStartIcon>
+  )
+
+  const endIcon = endIconProp && (
+    <ButtonEndIcon size={size}>{endIconProp}</ButtonEndIcon>
+  )
+
   return {
+    startIcon,
+    endIcon,
     rootProps: {
       onClick,
       css: cssProp,
@@ -92,13 +104,5 @@ export const useButton = ({
           }),
       ...restProps,
     },
-    startIcon: (loading || startIconProp) && (
-      <ButtonStartIcon size={size} spin={loading}>
-        {loading ? <Icon icon="ant-design:loading-outlined" /> : startIconProp}
-      </ButtonStartIcon>
-    ),
-    endIcon: endIconProp && (
-      <ButtonEndIcon size={size}>{endIconProp}</ButtonEndIcon>
-    ),
   }
 }

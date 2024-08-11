@@ -29,3 +29,5 @@ export { default as merge } from 'lodash.merge'
 export { default as memoize } from 'lodash.memoize'
 
 export { default as reduce } from 'lodash.reduce'
+
+export { default as mergeWith } from 'lodash.mergeWith'

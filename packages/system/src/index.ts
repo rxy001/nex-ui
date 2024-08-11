@@ -18,10 +18,9 @@ export type {
   CSSInterpolation,
   CSSProperties,
   SystemDefinition,
-  OverwriteCSSProperties,
+  CSSPropertiesOverrides,
   StyleObject,
   NormalizeFn,
-  ColorPalette,
 } from './types'
 
 export type { AliasesDefinition } from './aliases'

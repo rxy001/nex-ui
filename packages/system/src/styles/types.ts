@@ -1,5 +1,5 @@
 import type { SerializedStyles } from '@emotion/react'
-import type { StyleObject, NormalizeFn, ColorPalette } from '../types'
+import type { StyleObject, NormalizeFn } from '../types'
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 
@@ -45,7 +45,7 @@ export type StylesDefinition<
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: CompoundVariants<V, S>
-  colorPalette?: ColorPalette
+  colorPalette?: string
 }
 
 export type BaseStylesDefinition<

@@ -5,20 +5,26 @@ import type {
   CSSProperties,
   MouseEventHandler,
 } from 'react'
-import type { ColorPalette } from '@nex-ui/system'
-import type { ButtonVariants } from '../../theme'
+import type { ButtonVariants, ColorPalette } from '../../theme'
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  AnchorHTMLAttributes<HTMLAnchorElement> &
-  ButtonVariants & {
-    children?: ReactNode
-    startIcon?: ReactNode
-    endIcon?: ReactNode
-    style?: CSSProperties
-    className?: string
-    onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>
-    color?: ColorPalette
-  }
+type MergedHTMLAttributes = ButtonHTMLAttributes<HTMLElement> &
+  AnchorHTMLAttributes<HTMLElement>
+
+interface InnerButtonProps extends MergedHTMLAttributes, ButtonVariants {
+  children?: ReactNode
+  startIcon?: ReactNode
+  endIcon?: ReactNode
+  style?: CSSProperties
+  className?: string
+  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>
+  color?: ColorPalette
+}
+
+export interface ButtonPropsVariantOverrides {}
+
+export interface ButtonProps
+  extends InnerButtonProps,
+    ButtonPropsVariantOverrides {}
 
 export type ButtonIconProps = {
   children?: ReactNode
