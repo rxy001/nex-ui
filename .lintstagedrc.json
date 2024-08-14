@@ -1,4 +1,4 @@
 {
   "**/*.{cjs,mjs,js,ts,jsx,tsx}": "eslint -c .eslintrc.json --max-warnings=0 --fix",
-  "**/*": "prettier --write"
+  "**/*.{!svg}": "prettier --write"
 }

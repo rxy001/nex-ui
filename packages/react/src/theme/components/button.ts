@@ -91,7 +91,7 @@ export const button = defineStyles({
       true: {
         _disabled: {
           cursor: 'not-allowed',
-          color: 'gray.300',
+          opacity: 0.6,
         },
       },
     },
@@ -130,16 +130,6 @@ export const button = defineStyles({
     },
   },
   compoundVariants: [
-    {
-      variant: ['outline', 'solid'],
-      disabled: true,
-      css: {
-        _disabled: {
-          _bg: 'rgba(0, 0, 0, 0.04)',
-          borderColor: 'gray.300',
-        },
-      },
-    },
     {
       size: 'sm',
       iconOnly: true,

@@ -35,5 +35,5 @@ export type {
   SizesDefinition,
   SpacingDefinition,
   RadiiDefinition,
-  // SemanticDefinition,
+  SemanticDefinition,
 } from './tokens'

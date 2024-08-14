@@ -63,12 +63,10 @@ type Scales = SystemDefinition extends { scales: ScalesDefinition }
   ? SystemDefinition['scales']
   : NonNullable<unknown>
 
-type RawCSSProperties = CSS.PropertiesFallback<number | string>
+export type RawCSSProperties = CSS.PropertiesFallback<number | string>
 
 type ExtraCSSProperties = {
-  [K in keyof Scales]?:
-    | ExtraProperty[Scales[K]]
-    | (RawCSSProperties[K] & { __type?: never })
+  [K in keyof Scales]?: ExtraProperty[Scales[K]] | RawCSSProperties[K]
 }
 
 export type CSSProperties = Omit<RawCSSProperties, keyof ExtraCSSProperties> &

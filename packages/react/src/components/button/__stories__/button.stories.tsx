@@ -35,7 +35,9 @@ const meta = {
     return (
       <>
         <Button {...args}>Button</Button>
-        <Button {...args}>Button</Button>
+        <Button {...args} color="purple">
+          Button
+        </Button>
         <Button {...args} color="gray">
           Button
         </Button>
@@ -45,16 +47,13 @@ const meta = {
         <Button {...args} color="cyan">
           Button
         </Button>
-        <Button {...args} color="purple">
-          Button
-        </Button>
         <Button {...args} color="pink">
           Button
         </Button>
         <Button {...args} color="yellow">
           Button
         </Button>
-        <Button {...args} color="green">
+        <Button {...args} color="blue">
           Button
         </Button>
       </>
