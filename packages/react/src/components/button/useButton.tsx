@@ -29,17 +29,17 @@ export const useButton = (inProps: ButtonProps) => {
     disabled = false,
     block = false,
     type = 'button',
-    color = 'blue',
+    color,
     startIcon: startIconProp,
     endIcon: endIconProp,
     onClick: onClickProp,
-    ...restProps
+    ...remainingProps
   } = props
 
   const mergedStyles = useMemo(
     () => ({
       ...button,
-      colorPalette: color,
+      colorPalette: color ?? 'primary',
     }),
     [color],
   )
@@ -102,7 +102,7 @@ export const useButton = (inProps: ButtonProps) => {
             type,
             disabled,
           }),
-      ...restProps,
+      ...remainingProps,
     },
   }
 }

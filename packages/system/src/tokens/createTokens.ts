@@ -7,7 +7,12 @@ import type {
 } from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
-import { checkTokenValue, createCssVarName, pathToName } from '../utils'
+import {
+  createCssVarName,
+  pathToName,
+  checkTokenValue,
+  checkTokenCategory,
+} from '../utils'
 import type { Token } from './createToken'
 
 export function createTokens(config: CreateTokensConfig) {
@@ -92,15 +97,17 @@ export function createTokens(config: CreateTokensConfig) {
     function callback(value: string | number, path: string[]) {
       if (!checkTokenValue(value, path)) return
 
-      const dependend = tokenMap.get(String(value))
-
-      const dependendValue = dependend?.cssVar?.ref || dependend?.value
-
       const category = path[0]
 
-      if (!checkTokenCategory) {
+      if (!checkTokenCategory(category)) {
         return
       }
+
+      const dependend =
+        tokenMap.get(String(value)) ??
+        tokenMap.get(pathToName([category, String(value)]))
+
+      const dependendValue = dependend?.cssVar?.ref || dependend?.value
 
       currentToken = createToken({
         path,
@@ -114,9 +121,27 @@ export function createTokens(config: CreateTokensConfig) {
       processToken()
     }
 
-    walkObject(paramTokens, callback)
+    function predicate(_: any, path: string[]) {
+      const category = path[0]
 
-    // walkObject({ semanticTokens }, callback)
+      // 过滤掉不被支持的类型
+      switch (category) {
+        case 'colors':
+          return path.length > 3
+        default:
+          return path.length > 2
+      }
+    }
+
+    const { semantic, ...other } = paramTokens
+
+    walkObject(other, callback, {
+      predicate,
+    })
+
+    walkObject({ ...semantic }, callback, {
+      predicate,
+    })
   }
 
   processTokens()
@@ -124,23 +149,5 @@ export function createTokens(config: CreateTokensConfig) {
   return {
     getToken: (key: string) => tokenMap.get(key),
     getCssVars: () => Object.fromEntries(cssVarMap.entries()),
-  }
-}
-
-export function checkTokenCategory(category: string): boolean {
-  switch (category) {
-    case 'colors':
-    case 'fontFamilies':
-    case 'fontSizes':
-    case 'fontWeights':
-    case 'sizes':
-    case 'spacing':
-    case 'lineHeights':
-    case 'borders':
-    case 'radii':
-      return true
-    default:
-      console.error(`system: Unknown token category: '${category}'`)
-      return false
   }
 }

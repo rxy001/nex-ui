@@ -1,5 +1,5 @@
 import { forEach, isString } from '@nex-ui/utils'
-import { checkTokenCategory } from '../tokens'
+import { checkTokenCategory } from '../utils'
 import type { TokenCategory } from '../tokens'
 import type { CreateScalesConfig, CSSProperty } from './types'
 

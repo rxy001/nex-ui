@@ -81,4 +81,4 @@
 使用 css 变量替换 utilities 中的值
 
 - 避免 emotion 序列化;
-- 减少主题上下文中token值的运行时计算;
+- 减少主题上下文中 token 值的运行时计算;

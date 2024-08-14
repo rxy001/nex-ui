@@ -28,9 +28,27 @@ export function createCssVarName(prefix: string, path: string[]) {
 export function checkTokenValue(value: any, path: string[]) {
   if (!isString(value) && !isNumber(value)) {
     console.error(
-      `system: The token value must be either a string or a number. ${path}: ${value}`,
+      `system: The token value must be either a string or a number. ${path}: ${JSON.stringify(value)}`,
     )
     return false
   }
   return true
+}
+
+export function checkTokenCategory(category: string): boolean {
+  switch (category) {
+    case 'colors':
+    case 'fontFamilies':
+    case 'fontSizes':
+    case 'fontWeights':
+    case 'sizes':
+    case 'spacing':
+    case 'lineHeights':
+    case 'borders':
+    case 'radii':
+      return true
+    default:
+      console.error(`system: Unknown token category: '${category}'`)
+      return false
+  }
 }

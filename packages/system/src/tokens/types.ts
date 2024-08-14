@@ -1,3 +1,4 @@
+import type { RawCSSProperties, CSSProperties } from '../types'
 import type { Token } from './createToken'
 
 export type TokenValue = string | number
@@ -17,17 +18,17 @@ export type TokenCategory =
 
 export type ColorsDefinition = Dictionary<
   | {
-      50: string
-      100: string
-      200: string
-      300: string
-      400: string
-      500: string
-      600: string
-      700: string
-      800: string
-      900: string
-      contrastText?: string
+      50: RawCSSProperties['color']
+      100: RawCSSProperties['color']
+      200: RawCSSProperties['color']
+      300: RawCSSProperties['color']
+      400: RawCSSProperties['color']
+      500: RawCSSProperties['color']
+      600: RawCSSProperties['color']
+      700: RawCSSProperties['color']
+      800: RawCSSProperties['color']
+      900: RawCSSProperties['color']
+      contrastText?: RawCSSProperties['color']
     }
   | string
 >
@@ -46,7 +47,25 @@ export type FontWeightsDefinition = Dictionary<string | number>
 
 export type LineHeightsDefinition = Dictionary<string | number>
 
-// export type SemanticDefinition = Dictionary<string | Dictionary<string>>
+export type SemanticDefinition = {
+  colors?: {
+    [key: string]:
+      | {
+          50: CSSProperties['color']
+          100: CSSProperties['color']
+          200: CSSProperties['color']
+          300: CSSProperties['color']
+          400: CSSProperties['color']
+          500: CSSProperties['color']
+          600: CSSProperties['color']
+          700: CSSProperties['color']
+          800: CSSProperties['color']
+          900: CSSProperties['color']
+          contrastText?: CSSProperties['color']
+        }
+      | CSSProperties['color']
+  }
+}
 
 export type BordersDefinition = Dictionary<string>
 
@@ -60,7 +79,7 @@ export type TokenDefinitions = {
   lineHeights?: LineHeightsDefinition
   borders?: BordersDefinition
   radii?: RadiiDefinition
-  // semanticTokens?: SemanticDefinition
+  semantic?: SemanticDefinition
 }
 
 export type CreateTokensConfig = {
