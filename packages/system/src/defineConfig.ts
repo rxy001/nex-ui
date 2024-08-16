@@ -25,8 +25,8 @@ defineConfig.fontWeights = <T extends FontWeightsDefinition>(v: T): T => v
 defineConfig.sizes = <T extends SizesDefinition>(v: T): T => v
 defineConfig.spaceing = <T extends SpacingDefinition>(v: T): T => v
 // todo: ts error ?
-// defineConfig.semantic = <T extends SemanticDefinition>(v: T): T => v
-defineConfig.semantic = (v: SemanticDefinition) => v
+defineConfig.semantic = <T extends SemanticDefinition>(v: T): T => v
+// defineConfig.semantic = (v: SemanticDefinition) => v
 defineConfig.scales = <T extends ScalesDefinition>(v: T): T => v
 defineConfig.aliases = <T extends AliasesDefinition>(v: T): T => v
 defineConfig.radii = <T extends RadiiDefinition>(v: T): T => v

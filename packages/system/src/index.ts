@@ -5,12 +5,7 @@ export * from './Provider'
 export { createSystem } from './system'
 
 export { defineStyles } from './styles'
-export type {
-  StylesFn,
-  BaseStylesDefinition,
-  SlotStylesDefinition,
-  StylesDefinition,
-} from './styles'
+export type { StylesFn } from './styles'
 
 export { defineConfig } from './defineConfig'
 

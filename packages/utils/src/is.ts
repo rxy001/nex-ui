@@ -10,3 +10,6 @@ export const isPlainObject = (value: any): boolean =>
 
 export const isString = (value?: any): value is string =>
   typeof value === 'string'
+
+export const isUndefined = (value?: any): value is undefined =>
+  typeof value === 'undefined'

@@ -30,7 +30,7 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
     ...options
   }: StylesDefinition<S, V>): RuntimeFn<
     V,
-    CSSObject | Record<string, CSSObject>
+    CSSObject | Record<keyof S, CSSObject>
   > {
     const normalizedOptions = normalize(options, colorPalette)
 
@@ -64,14 +64,14 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
       return true
     }
 
-    function baseRuntimeFn(config: VariantSelection<V>): StyleObject {
+    function runtimeFn(styles: S, config: VariantSelection<V>): S {
+      let mergedStyles = {
+        ...styles,
+      }
+
       const selections: VariantSelection<V> = {
         ...defaultVariants,
         ...config,
-      }
-
-      let style: StyleObject = {
-        ...base,
       }
 
       forEach(
@@ -86,7 +86,11 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
             if (typeof selection === 'boolean') {
               selection = selection === true ? 'true' : 'false'
             }
-            style = merge({}, style, variants?.[variantName]?.[selection])
+            mergedStyles = merge(
+              {},
+              mergedStyles,
+              variants?.[variantName]?.[selection],
+            )
           }
         },
       )
@@ -95,55 +99,19 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
         const { css: compoundVariantCSS, ...compoundCheck } = compoundVariant
 
         if (shouldApplyCompound(compoundCheck as any, selections)) {
-          style = merge({}, style, compoundVariantCSS)
+          mergedStyles = merge({}, mergedStyles, compoundVariantCSS)
         }
       })
 
-      return style
-    }
-
-    function slotRuntimeFn(config: VariantSelection<V>) {
-      const selections: VariantSelection<V> = {
-        ...defaultVariants,
-        ...config,
-      }
-
-      let styles = {
-        ...slots,
-      } as SlotGroups
-
-      forEach(
-        selections,
-        (
-          variantSelection: VariantSelection<V>[keyof V],
-          variantName: string,
-        ) => {
-          if (variantSelection !== null) {
-            let selection = variantSelection as string | boolean
-
-            if (typeof selection === 'boolean') {
-              selection = selection === true ? 'true' : 'false'
-            }
-            styles = merge({}, styles, styles?.[variantName]?.[selection])
-          }
-        },
-      )
-
-      forEach(compoundVariants, (compoundVariant: CompoundVariants) => {
-        const { css: compoundVariantCSS, ...compoundCheck } = compoundVariant
-        if (shouldApplyCompound(compoundCheck as any, selections)) {
-          styles = merge({}, styles, compoundVariantCSS)
-        }
-      })
-      return styles
+      return mergedStyles
     }
 
     return (config: VariantSelection<V>) => {
       const isSlotsVariants = !!slots
 
       const styles = isSlotsVariants
-        ? slotRuntimeFn(config)
-        : baseRuntimeFn(config)
+        ? runtimeFn(slots, config)
+        : runtimeFn(base, config)
 
       return styles
     }

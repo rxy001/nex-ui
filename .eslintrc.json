@@ -49,7 +49,12 @@
   },
   "rules": {
     "no-console": ["warn", { "allow": ["error"] }],
-    "no-use-before-define": ["error", { "functions": false }],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
     "no-sparse-arrays": "off",
 
     "react/require-default-props": "off",
