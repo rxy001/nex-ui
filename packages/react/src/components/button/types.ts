@@ -25,9 +25,3 @@ export interface ButtonPropsVariantOverrides {}
 export interface ButtonProps
   extends InnerButtonProps,
     ButtonPropsVariantOverrides {}
-
-export type ButtonIconProps = {
-  children?: ReactNode
-  size?: ButtonProps['size']
-  spin?: boolean
-}

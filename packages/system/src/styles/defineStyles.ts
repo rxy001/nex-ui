@@ -1,8 +1,8 @@
 import type { StyleObject } from '../types'
 import type {
   VariantGroups,
-  BaseStylesDefinition,
   SlotGroups,
+  BaseStylesDefinition,
   SlotStylesDefinition,
   StylesDefinition,
 } from './types'

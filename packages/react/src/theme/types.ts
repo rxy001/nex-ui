@@ -42,7 +42,7 @@ export type ExtractComponentType<T> = ('base' extends keyof T
   ('slots' extends keyof T
     ? {
         slots?: {
-          [L in keyof T['slots']]: StyleObject
+          [L in keyof T['slots']]?: StyleObject
         }
       }
     : unknown) &
@@ -133,6 +133,9 @@ export interface Aliases {
 
 type System = Merge<DefaultTheme, ThemeOverrides>
 
+/**
+ * 根据 System 推导出定义的 colors key, 不包含 semantic 中的 colors
+ */
 export type ColorPalette = System extends { colors: object }
   ? keyof {
       [K in keyof System['colors'] as System['colors'][K] extends object

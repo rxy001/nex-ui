@@ -1,13 +1,12 @@
 import classNames from 'classnames'
 import { useMemo } from 'react'
 import { useEvent } from '@nex-ui/utils'
+import { nex } from '@nex-ui/styled'
 import type { MouseEvent } from 'react'
 import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
 import { Icon } from '../icon'
 import { button } from '../../theme'
-import { ButtonStartIcon } from './ButtonStartIcon'
-import { ButtonEndIcon } from './ButtonEndIcon'
 import { useMergedTheme, useDefaultProps } from '../utils'
 import type { ButtonProps } from './types'
 
@@ -44,7 +43,11 @@ export const useButton = (inProps: ButtonProps) => {
     [color],
   )
 
-  const cssProp = useMergedTheme({
+  const {
+    root: rootCSS,
+    startIcon: startIconCSS,
+    endIcon: endIconCSS,
+  } = useMergedTheme({
     name: COMPONENT_NAME,
     styles: mergedStyles,
     props: {
@@ -75,14 +78,23 @@ export const useButton = (inProps: ButtonProps) => {
     },
   )
 
-  const startIcon = (loading || startIconProp) && (
-    <ButtonStartIcon size={size} spin={loading}>
-      {loading ? <Icon icon="ant-design:loading-outlined" /> : startIconProp}
-    </ButtonStartIcon>
+  const startIcon = useMemo(
+    () =>
+      (loading || startIconProp) && (
+        <nex.span css={startIconCSS} className={`${prefix}-start-icon`}>
+          {loading ? (
+            <Icon icon="ant-design:loading-outlined" />
+          ) : (
+            startIconProp
+          )}
+        </nex.span>
+      ),
+    [loading, prefix, startIconCSS, startIconProp],
   )
 
-  const endIcon = endIconProp && (
-    <ButtonEndIcon size={size}>{endIconProp}</ButtonEndIcon>
+  const endIcon = useMemo(
+    () => endIconProp && <nex.span css={endIconCSS}>{endIconProp}</nex.span>,
+    [endIconCSS, endIconProp],
   )
 
   return {
@@ -90,7 +102,7 @@ export const useButton = (inProps: ButtonProps) => {
     endIcon,
     rootProps: {
       onClick,
-      css: cssProp,
+      css: rootCSS,
       className: classNames(`${prefix}-btn`, className),
       ...(htmlElement === 'a'
         ? {

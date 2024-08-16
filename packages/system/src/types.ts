@@ -19,8 +19,6 @@ export type NormalizeFn<T extends Record<string, any> = Record<string, any>> = (
 /* StyleObject------start */
 export interface CSSPropertiesOverrides {}
 
-type CSSPseudos = { [K in CSS.Pseudos]?: StyleObject }
-
 export type CSSInterpolation =
   | null
   | undefined
@@ -33,13 +31,11 @@ export type CSSInterpolation =
 export interface ArrayCSSInterpolation
   extends ReadonlyArray<CSSInterpolation> {}
 
-interface CSSOthersObject {
-  [propertiesName: string]: CSSInterpolation | ArrayCSSInterpolation
-}
-
 export interface SystemDefinition {}
 
-type Join<K, P> = K extends string | number
+export type RawCSSProperties = CSS.PropertiesFallback<number | string>
+
+type ConnectKey<K, P> = K extends string | number
   ? P extends string | number
     ? `${K}.${P}`
     : never
@@ -47,30 +43,53 @@ type Join<K, P> = K extends string | number
 
 type ExtractKeys<T> = {
   [K in keyof T]: T[K] extends object
-    ? Join<K, keyof T[K]>
+    ? ConnectKey<K, keyof T[K]>
     : K extends string | number
       ? `${K}`
       : never
 }[keyof T]
 
-type ExtractTokens<T> = {
-  [K in keyof T]: ExtractKeys<T[K]>
+type ExtraProperty = {
+  [K in keyof SystemDefinition]: ExtractKeys<SystemDefinition[K]>
 }
-
-type ExtraProperty = ExtractTokens<SystemDefinition>
 
 type Scales = SystemDefinition extends { scales: ScalesDefinition }
   ? SystemDefinition['scales']
   : NonNullable<unknown>
 
-export type RawCSSProperties = CSS.PropertiesFallback<number | string>
-
-type ExtraCSSProperties = {
-  [K in keyof Scales]?: ExtraProperty[Scales[K]] | RawCSSProperties[K]
-}
+/**
+ * 根据 scales 和及其相应的 token 推导出额外的 CSSPropertyValue
+ *
+ * 例如:
+ * const colors = {
+ *   primary: '#fff',
+ * }
+ *
+ * const sclase = {
+ *   color: 'colors'
+ * }
+ *
+ * defineStyles({
+ *   base: {
+ *     color: '' // base: StyleObject,  给 color 赋值时会有 'primary' 的提示.
+ *   }
+ * })
+ *
+ */
+type ExtraCSSProperties = SystemDefinition extends { scales: ScalesDefinition }
+  ? {
+      [K in keyof Scales]?: ExtraProperty[Scales[K]] | RawCSSProperties[K]
+    }
+  : NonNullable<unknown>
 
 export type CSSProperties = Omit<RawCSSProperties, keyof ExtraCSSProperties> &
   ExtraCSSProperties
+
+type CSSPseudos = { [K in CSS.Pseudos]?: StyleObject }
+
+interface CSSOthersObject {
+  [propertiesName: string]: CSSInterpolation | ArrayCSSInterpolation
+}
 
 export interface StyleObject
   extends Omit<CSSProperties, keyof CSSPropertiesOverrides>,

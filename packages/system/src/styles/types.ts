@@ -23,7 +23,11 @@ export type CompoundVariants<
   S,
 > = Array<
   CompoundVariantsSelection<V> & {
-    css: S extends SlotGroups ? Record<keyof S, StyleObject> : StyleObject
+    css: S extends SlotGroups
+      ? {
+          [K in keyof S]?: StyleObject
+        }
+      : StyleObject
   }
 >
 
@@ -51,12 +55,24 @@ export type StylesDefinition<
 export type BaseStylesDefinition<
   B extends StyleObject,
   V extends VariantGroups<B>,
-> = Omit<StylesDefinition<B, V>, 'slots'>
+> = {
+  base: B
+  variants?: V
+  defaultVariants?: VariantSelection<V>
+  compoundVariants?: CompoundVariants<V, B>
+  colorPalette?: string
+}
 
 export type SlotStylesDefinition<
   S extends SlotGroups,
   V extends VariantGroups<S>,
-> = Omit<StylesDefinition<S, V>, 'base'>
+> = {
+  slots: S
+  variants?: V
+  defaultVariants?: VariantSelection<V>
+  compoundVariants?: CompoundVariants<V, S>
+  colorPalette?: string
+}
 
 export type RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> = (
   styles: VariantSelection<V>,
