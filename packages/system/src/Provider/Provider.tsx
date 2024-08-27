@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import type { ReactNode } from 'react'
 import { Global } from '@emotion/react'
+import type { Interpolation } from '@emotion/react'
 import { createSystem } from '../system'
 import { SystemProvider, useCSSSystem, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { SystemConfig } from '../types'
@@ -20,7 +21,7 @@ export const CSSSystemProvider = ({
   const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE
 
   let styles: SystemContext['styles']
-  let globalCssVars
+  let globalCssVars: Interpolation
   let normalize: SystemContext['normalize']
 
   if (isTopLevel) {

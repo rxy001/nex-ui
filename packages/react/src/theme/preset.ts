@@ -11,7 +11,6 @@ import {
   borders,
   aliases,
   radii,
-  semantic,
 } from './system'
 
 export const defaultTheme = defineConfig({
@@ -26,5 +25,4 @@ export const defaultTheme = defineConfig({
   scales,
   borders,
   radii,
-  semantic,
 })

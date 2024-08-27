@@ -1,5 +1,6 @@
 import { forEach, merge } from '@nex-ui/utils'
 import type { CSSObject } from '@emotion/react'
+import { memoizeFn } from '../utils'
 import type { StyleObject } from '../types'
 import type {
   VariantGroups,
@@ -10,10 +11,9 @@ import type {
   RuntimeFn,
   VariantSelection,
   CompoundVariantsSelection,
-  CreateStylesFnConfig,
 } from './types'
 
-export function createStylesFn({ normalize }: CreateStylesFnConfig) {
+export function createStylesFn() {
   function stylesFn<B extends StyleObject, V extends VariantGroups<B>>(
     options: BaseStylesDefinition<B, V>,
   ): RuntimeFn<V, CSSObject>
@@ -25,21 +25,10 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
   function stylesFn<
     S extends SlotGroups | StyleObject,
     V extends VariantGroups<S>,
-  >({
-    colorPalette,
-    ...options
-  }: StylesDefinition<S, V>): RuntimeFn<
-    V,
-    CSSObject | Record<keyof S, CSSObject>
-  > {
-    const normalizedOptions = normalize(options, colorPalette)
-
-    const { base, slots, variants, defaultVariants, compoundVariants } =
-      normalizedOptions
-
-    type CompoundVariants = CompoundVariantsSelection<V> & {
-      css: S extends SlotGroups ? Record<keyof S, StyleObject> : StyleObject
-    }
+  >(
+    options: StylesDefinition<S, V>,
+  ): RuntimeFn<V, CSSObject | Record<keyof S, CSSObject>> {
+    const { base, slots, variants, defaultVariants, compoundVariants } = options
 
     function shouldApplyCompound(
       compoundCheck: CompoundVariantsSelection<V>,
@@ -95,26 +84,34 @@ export function createStylesFn({ normalize }: CreateStylesFnConfig) {
         },
       )
 
-      forEach(compoundVariants, (compoundVariant: CompoundVariants) => {
-        const { css: compoundVariantCSS, ...compoundCheck } = compoundVariant
+      forEach(
+        compoundVariants,
+        (
+          compoundVariant: CompoundVariantsSelection<V> & {
+            css: S extends SlotGroups
+              ? { [K in keyof S]?: StyleObject | undefined }
+              : StyleObject
+          },
+        ) => {
+          const { css: compoundVariantCSS, ...compoundCheck } = compoundVariant
 
-        if (shouldApplyCompound(compoundCheck as any, selections)) {
-          mergedStyles = merge({}, mergedStyles, compoundVariantCSS)
-        }
-      })
+          if (shouldApplyCompound(compoundCheck as any, selections)) {
+            mergedStyles = merge({}, mergedStyles, compoundVariantCSS)
+          }
+        },
+      )
 
       return mergedStyles
     }
 
-    return (config: VariantSelection<V>) => {
+    return memoizeFn((config: VariantSelection<V>) => {
       const isSlotsVariants = !!slots
-
       const styles = isSlotsVariants
-        ? runtimeFn(slots, config)
-        : runtimeFn(base, config)
+        ? runtimeFn(slots as any, config)
+        : runtimeFn(base as any, config)
 
       return styles
-    }
+    })
   }
 
   return stylesFn

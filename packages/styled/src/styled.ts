@@ -7,6 +7,7 @@ import {
   insertStyles,
 } from '@emotion/utils'
 import { forEach } from '@nex-ui/utils'
+import { useCSSSystem } from '@nex-ui/system'
 import { serializeStyles } from '@emotion/serialize'
 import type { SerializedStyles } from '@emotion/serialize'
 // @ts-ignore
@@ -50,6 +51,10 @@ const Insertion = ({
   return null
 }
 
+// 目前在 Next.js 使用 css props 有些 bug. 因为编译时先使用了 emotion-dev-jsx, 然后在调用了该函数，该函数 props
+// 没有 css props, 因此将根据类名获取到 style string (getRegisteredStyles)，多了一个 ';'，
+// 使得实际为同一个 css object， emotion 序列化时却生成了两份样式表
+
 const createStyledComponent = (tag: ElementType) => {
   if (process.env.NODE_ENV !== 'production') {
     if (tag === undefined) {
@@ -65,7 +70,11 @@ const createStyledComponent = (tag: ElementType) => {
 
   return withEmotionCache(
     (props: Record<string, any>, cache: EmotionCache, ref: Ref<any>) => {
-      let cssProp = props.css
+      const { normalize } = useCSSSystem()
+
+      let cssProp = props.sx
+        ? normalize(props.sx, props.colorPalette)
+        : props.sx
 
       if (
         typeof cssProp === 'string' &&
@@ -77,7 +86,7 @@ const createStyledComponent = (tag: ElementType) => {
       const FinalTag = (shouldUseAs && props.as) || tag
 
       let className = ''
-      const registeredStyles = [cssProp]
+      const registeredStyles = cssProp ? [cssProp] : []
 
       if (typeof props.className === 'string') {
         className = getRegisteredStyles(

@@ -18,7 +18,7 @@ function InnerProvider({ components, prefix, children }: InnerProviderProps) {
 }
 
 export function NexProvider(props: NexProviderProps) {
-  const { theme = {}, components, prefix = 'nexui', children } = props
+  const { theme = {}, components, prefix = 'nex', children } = props
 
   const mergedSysConfig = useMemo(
     () => merge({ cssVarsPrefix: prefix }, defaultTheme, theme),

@@ -1,5 +1,5 @@
 import type { SerializedStyles } from '@emotion/react'
-import type { StyleObject, NormalizeFn } from '../types'
+import type { StyleObject } from '../types'
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 
@@ -49,7 +49,6 @@ export type StylesDefinition<
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: CompoundVariants<V, S>
-  colorPalette?: string
 }
 
 export type BaseStylesDefinition<
@@ -60,7 +59,6 @@ export type BaseStylesDefinition<
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: CompoundVariants<V, B>
-  colorPalette?: string
 }
 
 export type SlotStylesDefinition<
@@ -71,17 +69,12 @@ export type SlotStylesDefinition<
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: CompoundVariants<V, S>
-  colorPalette?: string
 }
 
 export type RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> = (
   styles: VariantSelection<V>,
   options?: { specifiedColorPalette?: string },
 ) => R
-
-export type CreateStylesFnConfig = {
-  normalize: NormalizeFn
-}
 
 export type MultipleSerializedStyles<V> = {
   [K in keyof V]: SerializedStyles

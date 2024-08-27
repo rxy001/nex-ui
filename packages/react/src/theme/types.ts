@@ -151,7 +151,7 @@ declare module '@nex-ui/system' {
 }
 
 export type ComponentsTheme = {
-  button?: {
+  Button?: {
     styleOverrides?: ButtonComponentStyles | ComponentThemeFn<ButtonProps>
     defaultProps?: ButtonProps
   }

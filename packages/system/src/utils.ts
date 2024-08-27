@@ -1,4 +1,5 @@
-import { isNumber, isString } from '@nex-ui/utils'
+import { isNumber, isString, memoize } from '@nex-ui/utils'
+import type { Noop } from '@nex-ui/utils'
 
 export function pathToName(path: string[]) {
   return path.join('.')
@@ -51,4 +52,8 @@ export function checkTokenCategory(category: string): boolean {
       console.error(`system: Unknown token category: '${category}'`)
       return false
   }
+}
+
+export function memoizeFn<T extends Noop>(fn: T): T {
+  return memoize(fn, (...args) => JSON.stringify(args))
 }

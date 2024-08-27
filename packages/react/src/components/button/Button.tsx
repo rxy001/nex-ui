@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { Ref } from 'react'
@@ -11,6 +13,7 @@ export const Button = forwardRef<
 >((props, ref) => {
   const { loading, disabled, children } = props
   const { rootProps, startIcon, endIcon } = useButton(props)
+
   const childNode = (
     <nex.button ref={ref as Ref<HTMLButtonElement>} {...rootProps}>
       {startIcon}
