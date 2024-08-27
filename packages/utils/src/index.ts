@@ -12,6 +12,8 @@ export * from './craeteContext'
 
 export * from './walkObject'
 
+export type { Noop } from './types'
+
 export { default as map } from 'lodash.map'
 
 export { default as forEach } from 'lodash.foreach'

@@ -1,3 +1,5 @@
+'use client'
+
 import classNames from 'classnames'
 import { useMemo } from 'react'
 import { useEvent } from '@nex-ui/utils'
@@ -10,7 +12,7 @@ import { button } from '../../theme'
 import { useMergedTheme, useDefaultProps } from '../utils'
 import type { ButtonProps } from './types'
 
-const COMPONENT_NAME = 'button'
+const COMPONENT_NAME = 'Button'
 
 export const useButton = (inProps: ButtonProps) => {
   const props = useDefaultProps({ name: COMPONENT_NAME, props: inProps })
@@ -28,20 +30,12 @@ export const useButton = (inProps: ButtonProps) => {
     disabled = false,
     block = false,
     type = 'button',
-    color,
+    color = 'green',
     startIcon: startIconProp,
     endIcon: endIconProp,
     onClick: onClickProp,
     ...remainingProps
   } = props
-
-  const mergedStyles = useMemo(
-    () => ({
-      ...button,
-      colorPalette: color ?? 'primary',
-    }),
-    [color],
-  )
 
   const {
     root: rootCSS,
@@ -49,7 +43,7 @@ export const useButton = (inProps: ButtonProps) => {
     endIcon: endIconCSS,
   } = useMergedTheme({
     name: COMPONENT_NAME,
-    styles: mergedStyles,
+    styles: button,
     props: {
       ...props,
       variant,
@@ -81,7 +75,7 @@ export const useButton = (inProps: ButtonProps) => {
   const startIcon = useMemo(
     () =>
       (loading || startIconProp) && (
-        <nex.span css={startIconCSS} className={`${prefix}-start-icon`}>
+        <nex.span sx={startIconCSS} className={`${prefix}-start-icon`}>
           {loading ? (
             <Icon icon="ant-design:loading-outlined" />
           ) : (
@@ -93,7 +87,7 @@ export const useButton = (inProps: ButtonProps) => {
   )
 
   const endIcon = useMemo(
-    () => endIconProp && <nex.span css={endIconCSS}>{endIconProp}</nex.span>,
+    () => endIconProp && <nex.span sx={endIconCSS}>{endIconProp}</nex.span>,
     [endIconCSS, endIconProp],
   )
 
@@ -102,7 +96,8 @@ export const useButton = (inProps: ButtonProps) => {
     endIcon,
     rootProps: {
       onClick,
-      css: rootCSS,
+      sx: rootCSS,
+      colorPalette: color,
       className: classNames(`${prefix}-btn`, className),
       ...(htmlElement === 'a'
         ? {

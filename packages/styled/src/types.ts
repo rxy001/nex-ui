@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react'
-import type { CSSInterpolation } from '@emotion/serialize'
+import type { StyleObject } from '@nex-ui/system'
 
 type StyledComponent<
   ComponentProps extends Record<string, any>,
@@ -12,7 +12,8 @@ export type StyledTags = {
   [Tag in HTMLElementTagName]: StyledComponent<
     {
       as?: HTMLElementTagName
-      css?: CSSInterpolation
+      sx?: StyleObject
+      colorPalette?: string
     },
     JSX.IntrinsicElements[Tag]
   >

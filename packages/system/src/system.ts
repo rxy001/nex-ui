@@ -1,5 +1,5 @@
 import { forEach, isPlainObject, isString } from '@nex-ui/utils'
-import { pathToName } from './utils'
+import { pathToName, memoizeFn } from './utils'
 import type { SystemConfig } from './types'
 import { createStylesFn } from './styles'
 import { createTokens } from './tokens'
@@ -18,7 +18,7 @@ export const createSystem = (config: SystemConfig) => {
 
   const { getProperties } = createAliases({ aliases })
 
-  const normalize = <T extends Record<string, any>>(
+  const normalizeImpl = <T extends Record<string, any>>(
     style: T,
     specifiedColorPalette?: string,
   ) => {
@@ -40,17 +40,15 @@ export const createSystem = (config: SystemConfig) => {
                     )
                   : newValue
               }
-
               break
             default:
               break
           }
-
           const token = getToken(pathToName([category, newValue]))
           result[property] = token?.value ?? value
         } else if (isPlainObject(value) || Array.isArray(value)) {
           // cssobject
-          result[property] = normalize(value as any, specifiedColorPalette)
+          result[property] = normalizeImpl(value as any, specifiedColorPalette)
         } else {
           // 标准 css 值
           result[property] = value
@@ -61,9 +59,9 @@ export const createSystem = (config: SystemConfig) => {
     return result as T
   }
 
-  const styles = createStylesFn({
-    normalize,
-  })
+  const normalize = memoizeFn(normalizeImpl)
+
+  const styles = memoizeFn(createStylesFn())
 
   return {
     styles,

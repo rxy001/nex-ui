@@ -5,6 +5,8 @@
     "types": ["@testing-library/jest-dom/jest-globals"],
     "baseUrl": ".",
     "customConditions": ["source"],
+    "jsxImportSource": "@emotion/react",
+    "jsx": "react-jsx",
     "paths": {
       "~/*": ["../../*"]
     }
