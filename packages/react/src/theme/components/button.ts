@@ -24,6 +24,7 @@ export const button = defineStyles({
       lineHeight: 'base',
       borderColor: 'transparent',
       fontFamily: 'body',
+      _bg: 'white',
       '& svg': {
         _fs: '1.25em',
       },

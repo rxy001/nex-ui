@@ -1,10 +1,10 @@
 import type { ComponentType } from 'react'
 import { it, expect } from '@jest/globals'
-import { render } from '@testing-library/react'
+import { renderWithNexProvider } from './renderWithProvider'
 
 export const mountTest = (Component: ComponentType) => {
   it(`component could be updated and unmounted without errors`, () => {
-    const { unmount, rerender } = render(<Component />)
+    const { unmount, rerender } = renderWithNexProvider(<Component />)
     expect(() => {
       rerender(<Component />)
       unmount()

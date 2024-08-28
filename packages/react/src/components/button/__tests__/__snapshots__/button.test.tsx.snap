@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders correctly 1`] = `
+<button
+  class="nex-btn nex-btn-variant-solid nex-btn-radius-md nex-btn-size-md nex-btn-color-green emotion-0"
+  type="button"
+>
+  Button
+</button>
+`;
+
+exports[`Button should support link button 1`] = `
+<a
+  class="nex-btn nex-btn-variant-solid nex-btn-radius-md nex-btn-size-md nex-btn-color-green emotion-0"
+  href="https://"
+  target="_blank"
+>
+  Link Button
+</a>
+`;

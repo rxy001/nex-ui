@@ -1,12 +1,13 @@
 {
   "extends": "./tsconfig.json",
-  "include": [],
-  "exclude": [],
   "types": ["@testing-library/jest-dom/jest-globals"],
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./*"],
+      "@nex-ui/styled": ["./packages/styled/src"],
+      "@nex-ui/utils": ["./packages/utils/src"],
+      "@nex-ui/system": ["./packages/system/src"]
     }
   }
 }

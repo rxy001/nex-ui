@@ -9,19 +9,67 @@ import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
 import { Icon } from '../icon'
 import { button } from '../../theme'
-import { useMergedTheme, useDefaultProps } from '../utils'
+import { useMergedTheme, useDefaultProps, composeClasses } from '../utils'
 import type { ButtonProps } from './types'
+import { getButtonUtilityClass } from './buttonClasses'
+
+const useUtilityClasses = (ownerState: ButtonProps) => {
+  const { prefix } = useNexContext()
+
+  const btnRoot = `${prefix}-btn`
+
+  const {
+    color,
+    variant,
+    radius,
+    size,
+    iconOnly,
+    loading,
+    disabled,
+    block,
+    classes,
+  } = ownerState
+
+  const slots = {
+    root: [
+      'root',
+      `variant-${variant}`,
+      `radius-${radius}`,
+      `size-${size}`,
+      `color-${color}`,
+      iconOnly && `icon-only`,
+      loading && `loading`,
+      disabled && `disabled`,
+      block && `block`,
+    ],
+    startIcon: [
+      `icon`,
+      `start-icon`,
+      `icon-size-${size}`,
+      loading && `icon-loading`,
+    ],
+    endIcon: [`icon`, `end-icon`, `icon-size-${size}`],
+  }
+
+  const composedClasses = composeClasses(
+    slots,
+    getButtonUtilityClass(btnRoot),
+    ownerState,
+    classes,
+  )
+
+  return composedClasses
+}
 
 const COMPONENT_NAME = 'Button'
 
 export const useButton = (inProps: ButtonProps) => {
   const props = useDefaultProps({ name: COMPONENT_NAME, props: inProps })
 
-  const { prefix } = useNexContext()
-
   const {
     href,
     className,
+    children,
     variant = 'solid',
     radius = 'md',
     size = 'md',
@@ -37,26 +85,26 @@ export const useButton = (inProps: ButtonProps) => {
     ...remainingProps
   } = props
 
-  const {
-    root: rootCSS,
-    startIcon: startIconCSS,
-    endIcon: endIconCSS,
-  } = useMergedTheme({
+  const ownerState = {
+    ...props,
+    variant,
+    radius,
+    size,
+    iconOnly,
+    loading,
+    disabled,
+    block,
+    type,
+    color,
+  }
+
+  const styles = useMergedTheme({
     name: COMPONENT_NAME,
     styles: button,
-    props: {
-      ...props,
-      variant,
-      radius,
-      size,
-      iconOnly,
-      loading,
-      disabled,
-      block,
-      type,
-      color,
-    },
+    props: ownerState,
   })
+
+  const classes = useUtilityClasses(ownerState)
 
   const htmlElement: HTMLElementTagName =
     typeof href === 'string' && href ? 'a' : 'button'
@@ -75,7 +123,7 @@ export const useButton = (inProps: ButtonProps) => {
   const startIcon = useMemo(
     () =>
       (loading || startIconProp) && (
-        <nex.span sx={startIconCSS} className={`${prefix}-start-icon`}>
+        <nex.span sx={styles.startIcon} className={classes.startIcon}>
           {loading ? (
             <Icon icon="ant-design:loading-outlined" />
           ) : (
@@ -83,22 +131,28 @@ export const useButton = (inProps: ButtonProps) => {
           )}
         </nex.span>
       ),
-    [loading, prefix, startIconCSS, startIconProp],
+    [loading, startIconProp, classes.startIcon, styles.startIcon],
   )
 
   const endIcon = useMemo(
-    () => endIconProp && <nex.span sx={endIconCSS}>{endIconProp}</nex.span>,
-    [endIconCSS, endIconProp],
+    () =>
+      endIconProp && (
+        <nex.span className={classes.endIcon} sx={styles.endIcon}>
+          {endIconProp}
+        </nex.span>
+      ),
+    [endIconProp, classes.endIcon, styles.endIcon],
   )
 
   return {
     startIcon,
     endIcon,
+    children,
     rootProps: {
       onClick,
-      sx: rootCSS,
+      sx: styles.root,
       colorPalette: color,
-      className: classNames(`${prefix}-btn`, className),
+      className: classNames(classes.root, className),
       ...(htmlElement === 'a'
         ? {
             href,
