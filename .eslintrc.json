@@ -56,6 +56,7 @@
       }
     ],
     "no-sparse-arrays": "off",
+    "no-nested-ternary": "off",
 
     "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",

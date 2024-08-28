@@ -7,9 +7,13 @@ import { NexProvider } from '../../packages/react/src'
 import { CSSSystemProvider } from '../../packages/system/src'
 
 export const renderWithNexProvider = (component: ReactNode) => {
-  return render(<NexProvider>{component}</NexProvider>)
+  return render(component, {
+    wrapper: (props) => <NexProvider>{props.children}</NexProvider>,
+  })
 }
 
 export const renderWithCSSProvider = (component: ReactNode) => {
-  return render(<CSSSystemProvider>{component}</CSSSystemProvider>)
+  return render(component, {
+    wrapper: (props) => <CSSSystemProvider>{props.children}</CSSSystemProvider>,
+  })
 }

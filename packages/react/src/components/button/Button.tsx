@@ -11,8 +11,8 @@ export const Button = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   ButtonProps
 >((props, ref) => {
-  const { loading, disabled, children } = props
-  const { rootProps, startIcon, endIcon } = useButton(props)
+  const { loading, disabled } = props
+  const { rootProps, startIcon, endIcon, children } = useButton(props)
 
   const childNode = (
     <nex.button ref={ref as Ref<HTMLButtonElement>} {...rootProps}>

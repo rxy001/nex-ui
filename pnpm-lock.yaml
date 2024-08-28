@@ -17,6 +17,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.2.2
         version: 19.2.2
+      '@emotion/jest':
+        specifier: 11.13.0
+        version: 11.13.0
       '@jest/globals':
         specifier: 29.7.0
         version: 29.7.0
@@ -247,6 +250,9 @@ importers:
 
   packages/utils:
     dependencies:
+      lodash.capitalize:
+        specifier: 4.2.1
+        version: 4.2.1
       lodash.every:
         specifier: 4.6.0
         version: 4.6.0
@@ -287,6 +293,9 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
     devDependencies:
+      '@types/lodash.capitalize':
+        specifier: 4.2.9
+        version: 4.2.9
       '@types/lodash.every':
         specifier: 4.6.9
         version: 4.6.9
@@ -1147,11 +1156,25 @@ packages:
   '@emotion/cache@11.13.1':
     resolution: {integrity: sha512-iqouYkuEblRcXmylXIwwOodiEK5Ifl7JcX7o6V4jI3iW4mLXX3dmt5xwBtIkJiQEXFAI+pC8X0i67yiPkH9Ucw==}
 
+  '@emotion/css-prettifier@1.1.4':
+    resolution: {integrity: sha512-lEjrAxtju83kkF2N7nPoFSPa00o+h1QujXM2F60kudDWuwBbuxJSG1dGKHVnr9tjxmLho2B0HGfmVThpR+scWw==}
+
   '@emotion/hash@0.9.2':
     resolution: {integrity: sha512-MyqliTZGuOm3+5ZRSaaBGP3USLw6+EGykkwZns2EPC5g8jJ4z9OrdZY9apkl3+UP9+sdz76YYkwCKP5gh8iY3g==}
 
   '@emotion/is-prop-valid@1.3.0':
     resolution: {integrity: sha512-SHetuSLvJDzuNbOdtPVbq6yMMMlLoW5Q94uDqJZqy50gcmAjxFkVqmzqSGEFq9gT2iMuIeKV1PXVWmvUhuZLlQ==}
+
+  '@emotion/jest@11.13.0':
+    resolution: {integrity: sha512-XyoUbJ9fthKdlXjTvjzd6aQ8yVWe68InZawFdGTFkJQRW44rsLHK1qjKB/+L7RiGgdm0BYFv7+tz8znQzRQOBw==}
+    peerDependencies:
+      '@types/jest': ^26.0.14 || ^27.0.0 || ^28.0.0 || ^29.0.0
+      enzyme-to-json: ^3.2.1
+    peerDependenciesMeta:
+      '@types/jest':
+        optional: true
+      enzyme-to-json:
+        optional: true
 
   '@emotion/memoize@0.9.0':
     resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==}
@@ -2635,6 +2658,9 @@ packages:
 
   '@types/katex@0.16.7':
     resolution: {integrity: sha512-HMwFiRujE5PjrgwHQ25+bsLJgowjGjm5Z8FVSf0N6PwgJrwxH0QxzHYDcKsTfV3wva0vzrpqMTJS2jXPr5BMEQ==}
+
+  '@types/lodash.capitalize@4.2.9':
+    resolution: {integrity: sha512-SV1dav/WbuI816SVig4trFz8ID/m5maVzC8I/E/DejPvmlXvIhw7Y0GWxJ03UhU6qaZOj6qQnR1xxC0mP7ZXoQ==}
 
   '@types/lodash.every@4.6.9':
     resolution: {integrity: sha512-nBxOUJCteXcxYOoDkjM3dbBRsXrTr+UC5yvcDYV7ykmHslF6pL/KvN9r1w91HwlSRTBsT+0pE5RTaXiiPthlxw==}
@@ -5179,6 +5205,9 @@ packages:
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
 
+  lodash.capitalize@4.2.1:
+    resolution: {integrity: sha512-kZzYOKspf8XVX5AvmQF94gQW0lejFVgb80G85bU4ZWzoJ6C03PQg3coYAUpSTpQWelrZELd3XWgHzw4Ck5kaIw==}
+
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
@@ -6469,6 +6498,10 @@ packages:
 
   spawndamnit@2.0.0:
     resolution: {integrity: sha512-j4JKEcncSjFlqIwU5L/rp2N5SIPsdxaRsIv678+TZxZ0SRDJTm8JrxJMjE/XuiEZNEir3S8l0Fa3Ke339WI4qA==}
+
+  specificity@0.4.1:
+    resolution: {integrity: sha512-1klA3Gi5PD1Wv9Q0wUoOQN1IWAuPu0D1U03ThXTr0cJ20+/iq2tHSDnK7Kk/0LXJ1ztUB2/1Os0wKmfyNgUQfg==}
+    hasBin: true
 
   split2@4.2.0:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
@@ -8435,11 +8468,24 @@ snapshots:
       '@emotion/weak-memoize': 0.4.0
       stylis: 4.2.0
 
+  '@emotion/css-prettifier@1.1.4':
+    dependencies:
+      '@emotion/memoize': 0.9.0
+      stylis: 4.2.0
+
   '@emotion/hash@0.9.2': {}
 
   '@emotion/is-prop-valid@1.3.0':
     dependencies:
       '@emotion/memoize': 0.9.0
+
+  '@emotion/jest@11.13.0':
+    dependencies:
+      '@babel/runtime': 7.25.0
+      '@emotion/css-prettifier': 1.1.4
+      chalk: 4.1.2
+      specificity: 0.4.1
+      stylis: 4.2.0
 
   '@emotion/memoize@0.9.0': {}
 
@@ -10155,6 +10201,10 @@ snapshots:
   '@types/json5@0.0.29': {}
 
   '@types/katex@0.16.7': {}
+
+  '@types/lodash.capitalize@4.2.9':
+    dependencies:
+      '@types/lodash': 4.17.7
 
   '@types/lodash.every@4.6.9':
     dependencies:
@@ -13340,6 +13390,8 @@ snapshots:
 
   lodash.camelcase@4.3.0: {}
 
+  lodash.capitalize@4.2.1: {}
+
   lodash.debounce@4.0.8: {}
 
   lodash.every@4.6.0: {}
@@ -15009,6 +15061,8 @@ snapshots:
     dependencies:
       cross-spawn: 5.1.0
       signal-exit: 3.0.7
+
+  specificity@0.4.1: {}
 
   split2@4.2.0: {}
 

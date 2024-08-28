@@ -33,3 +33,5 @@ export { default as memoize } from 'lodash.memoize'
 export { default as reduce } from 'lodash.reduce'
 
 export { default as mergeWith } from 'lodash.mergeWith'
+
+export { default as capitalize } from 'lodash.capitalize'

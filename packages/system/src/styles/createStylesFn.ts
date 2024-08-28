@@ -1,5 +1,4 @@
 import { forEach, merge } from '@nex-ui/utils'
-import type { CSSObject } from '@emotion/react'
 import { memoizeFn } from '../utils'
 import type { StyleObject } from '../types'
 import type {
@@ -16,18 +15,18 @@ import type {
 export function createStylesFn() {
   function stylesFn<B extends StyleObject, V extends VariantGroups<B>>(
     options: BaseStylesDefinition<B, V>,
-  ): RuntimeFn<V, CSSObject>
+  ): RuntimeFn<V, StyleObject>
 
   function stylesFn<S extends SlotGroups, V extends VariantGroups<S>>(
     options: SlotStylesDefinition<S, V>,
-  ): RuntimeFn<V, Record<keyof S, CSSObject>>
+  ): RuntimeFn<V, Record<keyof S, StyleObject>>
 
   function stylesFn<
     S extends SlotGroups | StyleObject,
     V extends VariantGroups<S>,
   >(
     options: StylesDefinition<S, V>,
-  ): RuntimeFn<V, CSSObject | Record<keyof S, CSSObject>> {
+  ): RuntimeFn<V, StyleObject | Record<keyof S, StyleObject>> {
     const { base, slots, variants, defaultVariants, compoundVariants } = options
 
     function shouldApplyCompound(
