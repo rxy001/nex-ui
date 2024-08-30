@@ -78,7 +78,7 @@ export const useButton = (inProps: ButtonProps) => {
     disabled = false,
     block = false,
     type = 'button',
-    color = 'green',
+    color = 'blue',
     startIcon: startIconProp,
     endIcon: endIconProp,
     onClick: onClickProp,
