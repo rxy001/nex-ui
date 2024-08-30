@@ -55,5 +55,12 @@ export function checkTokenCategory(category: string): boolean {
 }
 
 export function memoizeFn<T extends Noop>(fn: T): T {
-  return memoize(fn, (...args) => JSON.stringify(args))
+  return memoize(fn, (...args) =>
+    JSON.stringify(args, (_key, value) => {
+      if (value && (value.$$typeof || typeof value === 'function')) {
+        return undefined
+      }
+      return value
+    }),
+  )
 }

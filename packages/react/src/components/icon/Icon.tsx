@@ -1,3 +1,5 @@
+'use client'
+
 import { Icon as OriginalIcon } from '@iconify/react'
 import type { IconProps } from './types'
 

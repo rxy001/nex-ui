@@ -1,3 +1,5 @@
+'use client'
+
 import { merge } from '@nex-ui/utils'
 import { CSSSystemProvider, useCSSSystem } from '@nex-ui/system'
 import { useMemo } from 'react'
