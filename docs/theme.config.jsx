@@ -13,6 +13,9 @@ export default {
   footer: {
     component: null,
   },
+  search: {
+    placeholder: 'Search...',
+  },
   toc: {
     backToTop: true,
     title: 'CONTENTS',
