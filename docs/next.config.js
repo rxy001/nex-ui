@@ -21,9 +21,9 @@ export default {
   ...withNextra(),
   webpack: (config, options) => {
     const nextraWebpack = withNextra().webpack(config, options)
-
     nextraWebpack.resolve.alias = {
       ...nextraWebpack.resolve.alias,
+      '@': resolve('.'),
       '@nex-ui/react': resolve('../packages/react/src'),
       '@nex-ui/utils': resolve('../packages/utils/src'),
       '@nex-ui/system': resolve('../packages/system/src'),
