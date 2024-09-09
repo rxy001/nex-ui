@@ -1,4 +1,4 @@
-import type { RawCSSProperties, CSSProperties } from '../types'
+import type { RawCSSProperties } from '../types'
 import type { Token } from './createToken'
 
 export type TokenValue = string | number
@@ -15,6 +15,7 @@ export type TokenCategory =
   | 'sizes'
   | 'borders'
   | 'radii'
+  | 'breakpoints'
 
 export type ColorsDefinition = Dictionary<
   | {
@@ -47,25 +48,25 @@ export type FontWeightsDefinition = Dictionary<string | number>
 
 export type LineHeightsDefinition = Dictionary<string | number>
 
-export type SemanticDefinition = {
-  colors?: {
-    [key: string]:
-      | {
-          50: CSSProperties['color']
-          100: CSSProperties['color']
-          200: CSSProperties['color']
-          300: CSSProperties['color']
-          400: CSSProperties['color']
-          500: CSSProperties['color']
-          600: CSSProperties['color']
-          700: CSSProperties['color']
-          800: CSSProperties['color']
-          900: CSSProperties['color']
-          contrastText?: CSSProperties['color']
-        }
-      | CSSProperties['color']
-  }
-}
+// export type SemanticDefinition = {
+//   colors?: {
+//     [key: string]:
+//       | {
+//           50: CSSProperties['color']
+//           100: CSSProperties['color']
+//           200: CSSProperties['color']
+//           300: CSSProperties['color']
+//           400: CSSProperties['color']
+//           500: CSSProperties['color']
+//           600: CSSProperties['color']
+//           700: CSSProperties['color']
+//           800: CSSProperties['color']
+//           900: CSSProperties['color']
+//           contrastText?: CSSProperties['color']
+//         }
+//       | CSSProperties['color']
+//   }
+// }
 
 export type BordersDefinition = Dictionary<string>
 
@@ -79,7 +80,7 @@ export type TokenDefinitions = {
   lineHeights?: LineHeightsDefinition
   borders?: BordersDefinition
   radii?: RadiiDefinition
-  semantic?: SemanticDefinition
+  // semantic?: SemanticDefinition
 }
 
 export type CreateTokensConfig = {

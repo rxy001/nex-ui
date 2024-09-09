@@ -14,5 +14,5 @@ export type {
   TokenDefinitions,
   BordersDefinition,
   RadiiDefinition,
-  SemanticDefinition,
+  // SemanticDefinition,
 } from './types'

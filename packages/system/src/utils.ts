@@ -47,6 +47,7 @@ export function checkTokenCategory(category: string): boolean {
     case 'lineHeights':
     case 'borders':
     case 'radii':
+    case 'breakpoints':
       return true
     default:
       console.error(`system: Unknown token category: '${category}'`)

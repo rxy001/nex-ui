@@ -11,15 +11,19 @@ export { defineConfig } from './defineConfig'
 
 export type {
   CSSInterpolation,
-  CSSProperties,
+  NexCSSProperties,
   SystemDefinition,
   CSSPropertiesOverrides,
   StyleObject,
   NormalizeFn,
 } from './types'
 
+export type { BreakpointsDefinition } from './breakpoints'
+
 export type { AliasesDefinition } from './aliases'
+
 export type { ScalesDefinition } from './scales'
+
 export type {
   BordersDefinition,
   ColorsDefinition,
@@ -30,5 +34,5 @@ export type {
   SizesDefinition,
   SpacingDefinition,
   RadiiDefinition,
-  SemanticDefinition,
+  // SemanticDefinition,
 } from './tokens'

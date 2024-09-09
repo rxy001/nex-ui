@@ -19,6 +19,7 @@ export function createScales({ scales }: CreateScalesConfig) {
   }
 
   return {
-    getPropScale: (key: string) => scaleMap.get(key as CSSProperty),
+    getCategoryBasedOnProperty: (key: string) =>
+      scaleMap.get(key as CSSProperty),
   }
 }

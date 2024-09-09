@@ -16,47 +16,40 @@ import {
 import type { Token } from './createToken'
 
 export function createTokens(config: CreateTokensConfig) {
-  const { tokens: paramTokens, prefix } = config
-
-  const tokens: Array<Token> = []
+  const { tokens, prefix } = config
 
   const tokenMap: TokenMap = new Map()
 
   const cssVarMap: CssVarMap = new Map()
 
-  let currentToken: Token | null = null
-
-  function pushToTokens() {
-    tokens.push(currentToken!)
-    tokenMap.set(currentToken!.name, currentToken!)
-  }
+  let workInProgress: Token | null = null
 
   function createCssVar() {
-    if (currentToken) {
-      const { path, originalValue } = currentToken
+    if (workInProgress) {
+      const { path, originalValue } = workInProgress
 
       const variableName = createCssVarName(prefix, path)
 
       const newValue = `var(${variableName})`
 
-      currentToken.cssVar = {
+      workInProgress.cssVar = {
         var: variableName,
         ref: newValue,
       }
 
-      currentToken.value = newValue
+      workInProgress.value = newValue
 
       cssVarMap.set(variableName, originalValue)
     }
   }
 
   function createNegativeToken() {
-    if (currentToken) {
-      const { category, value, path, originalValue, cssVar } = currentToken
+    if (workInProgress) {
+      const { category, value, path, originalValue, cssVar } = workInProgress
       const newPath = [...path]
       newPath.push(`-${newPath.pop()}`)
 
-      currentToken = createToken({
+      workInProgress = createToken({
         category,
         originalValue,
         path: newPath,
@@ -67,13 +60,14 @@ export function createTokens(config: CreateTokensConfig) {
     }
   }
 
-  function processToken() {
-    while (currentToken) {
-      const { category, value, derivative } = currentToken
+  function handleToken() {
+    while (workInProgress) {
+      const { category, value, derivative } = workInProgress
 
-      pushToTokens()
+      tokenMap.set(workInProgress.name, workInProgress)
 
       if (derivative === true) {
+        workInProgress = null
         return
       }
 
@@ -87,13 +81,13 @@ export function createTokens(config: CreateTokensConfig) {
           createNegativeToken()
           break
         default:
-          currentToken = null
+          workInProgress = null
           break
       }
     }
   }
 
-  function processTokens() {
+  function workloop() {
     function callback(value: string | number, path: string[]) {
       if (!checkTokenValue(value, path)) return
 
@@ -109,7 +103,7 @@ export function createTokens(config: CreateTokensConfig) {
 
       const dependendValue = dependend?.cssVar?.ref || dependend?.value
 
-      currentToken = createToken({
+      workInProgress = createToken({
         path,
         category: category as TokenCategory,
         value: dependendValue ?? value,
@@ -118,7 +112,7 @@ export function createTokens(config: CreateTokensConfig) {
         derivative: !!dependendValue,
       })
 
-      processToken()
+      handleToken()
     }
 
     function predicate(_: any, path: string[]) {
@@ -133,18 +127,18 @@ export function createTokens(config: CreateTokensConfig) {
       }
     }
 
-    const { semantic, ...other } = paramTokens
+    const { ...other } = tokens
 
     walkObject(other, callback, {
       predicate,
     })
 
-    walkObject({ ...semantic }, callback, {
-      predicate,
-    })
+    // walkObject({ ...semantic }, callback, {
+    //   predicate,
+    // })
   }
 
-  processTokens()
+  workloop()
 
   return {
     getToken: (key: string) => tokenMap.get(key),
