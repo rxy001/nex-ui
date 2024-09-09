@@ -1,62 +1,24 @@
 /* eslint-disable no-use-before-define */
 import type * as CSS from 'csstype'
-import type { Keyframes } from '@emotion/react'
+import type { CSSObject, Keyframes } from '@emotion/react'
 import type { ScalesDefinition } from './scales'
 import type { TokenDefinitions } from './tokens'
 import type { AliasesDefinition } from './aliases'
+import type { BreakpointsDefinition } from './breakpoints'
 
 export type SystemConfig = {
   cssVarsPrefix?: string
   scales?: ScalesDefinition
   aliases?: AliasesDefinition
+  breakpoints?: BreakpointsDefinition
 } & TokenDefinitions
 
-export type NormalizeFn<T extends Record<string, any> = Record<string, any>> = (
-  style: T,
+export type NormalizeFn = (
+  style: StyleObject,
   specifiedColorPalette?: string,
-) => T
+) => CSSObject
 
 /* StyleObject------start */
-export interface CSSPropertiesOverrides {}
-
-export type CSSInterpolation =
-  | null
-  | undefined
-  | boolean
-  | number
-  | string
-  | StyleObject
-  | Keyframes
-
-export interface ArrayCSSInterpolation
-  extends ReadonlyArray<CSSInterpolation> {}
-
-export interface SystemDefinition {}
-
-export type RawCSSProperties = CSS.PropertiesFallback<number | string>
-
-type ConnectKey<K, P> = K extends string | number
-  ? P extends string | number
-    ? `${K}.${P}`
-    : never
-  : never
-
-type ExtractKeys<T> = {
-  [K in keyof T]: T[K] extends object
-    ? ConnectKey<K, keyof T[K]>
-    : K extends string | number
-      ? `${K}`
-      : never
-}[keyof T]
-
-type ExtraProperty = {
-  [K in keyof SystemDefinition]: ExtractKeys<SystemDefinition[K]>
-}
-
-type Scales = SystemDefinition extends { scales: ScalesDefinition }
-  ? SystemDefinition['scales']
-  : NonNullable<unknown>
-
 /**
  * 根据 scales 和及其相应的 token 推导出额外的 CSSPropertyValue
  *
@@ -76,14 +38,72 @@ type Scales = SystemDefinition extends { scales: ScalesDefinition }
  * })
  *
  */
-type ExtraCSSProperties = SystemDefinition extends { scales: ScalesDefinition }
+
+export interface CSSPropertiesOverrides {}
+
+export interface SystemDefinition {}
+
+export type CSSInterpolation =
+  | null
+  | undefined
+  | boolean
+  | number
+  | string
+  | StyleObject
+  | Keyframes
+
+export interface ArrayCSSInterpolation
+  extends ReadonlyArray<CSSInterpolation> {}
+
+export type RawCSSProperties = CSS.PropertiesFallback<number | string>
+
+type ConcatValue<K, P> = K extends string | number
+  ? P extends string | number
+    ? `${K}.${P}`
+    : never
+  : never
+
+type ExtractValues<T, H> = {
+  [K in keyof T]: T[K] extends object
+    ? ConcatValue<K, keyof T[K]>
+    : K extends string | number
+      ? H extends 'spacing'
+        ? `${K}` | `-${K}`
+        : `${K}`
+      : never
+}[keyof T]
+
+type ExtraPropertyValue = {
+  [K in keyof SystemDefinition]: ExtractValues<SystemDefinition[K], K>
+}
+
+type ExtraCSSProperties = SystemDefinition extends { scales: infer Scales }
   ? {
-      [K in keyof Scales]?: ExtraProperty[Scales[K]] | RawCSSProperties[K]
+      [K in keyof Scales]?:
+        | (Scales[K] extends keyof ExtraPropertyValue
+            ? ExtraPropertyValue[Scales[K]]
+            : never)
+        | (K extends keyof RawCSSProperties
+            ? RawCSSProperties[K] & { __type?: never }
+            : never)
     }
   : NonNullable<unknown>
 
-export type CSSProperties = Omit<RawCSSProperties, keyof ExtraCSSProperties> &
+type CSSProperties = Omit<RawCSSProperties, keyof ExtraCSSProperties> &
   ExtraCSSProperties
+
+export type NexCSSProperties = SystemDefinition extends {
+  breakpoints: infer Breakpoints
+}
+  ? {
+      [K in keyof CSSProperties]?:
+        | CSSProperties[K]
+        | Array<CSSProperties[K]>
+        | {
+            [J in keyof Breakpoints]?: CSSProperties[K]
+          }
+    }
+  : CSSProperties
 
 type CSSPseudos = { [K in CSS.Pseudos]?: StyleObject }
 
@@ -92,7 +112,7 @@ interface CSSOthersObject {
 }
 
 export interface StyleObject
-  extends Omit<CSSProperties, keyof CSSPropertiesOverrides>,
+  extends Omit<NexCSSProperties, keyof CSSPropertiesOverrides>,
     CSSPropertiesOverrides,
     CSSPseudos,
     CSSOthersObject {}

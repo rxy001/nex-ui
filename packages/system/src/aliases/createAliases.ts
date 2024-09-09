@@ -16,6 +16,6 @@ export function createAliases({ aliases }: CreateAliasesConfig) {
   })
 
   return {
-    getProperties: (key: string) => aliasMap.get(key),
+    getPropertiesBasedOnAlias: (key: string) => aliasMap.get(key),
   }
 }

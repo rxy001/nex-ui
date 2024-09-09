@@ -11,6 +11,7 @@ import {
   borders,
   aliases,
   radii,
+  breakpoints,
 } from './system'
 
 export const defaultTheme = defineConfig({
@@ -25,4 +26,5 @@ export const defaultTheme = defineConfig({
   scales,
   borders,
   radii,
+  breakpoints,
 })

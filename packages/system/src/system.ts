@@ -1,62 +1,80 @@
-import { forEach, isPlainObject, isString } from '@nex-ui/utils'
+import { forEach, isPlainObject, isString, merge } from '@nex-ui/utils'
+import type { CSSObject } from '@emotion/react'
 import { pathToName, memoizeFn } from './utils'
-import type { SystemConfig } from './types'
+import type { SystemConfig, NormalizeFn } from './types'
 import { createStylesFn } from './styles'
 import { createTokens } from './tokens'
 import { createScales } from './scales'
 import { createAliases } from './aliases'
+import { createBreakpoints } from './breakpoints'
 
 export const createSystem = (config: SystemConfig) => {
-  const { cssVarsPrefix = 'system', scales, aliases, ...tokens } = config
-
+  const {
+    cssVarsPrefix = 'system',
+    scales,
+    aliases,
+    breakpoints,
+    ...tokens
+  } = config
   const { getToken, getCssVars } = createTokens({
     tokens,
     prefix: cssVarsPrefix,
   })
 
-  const { getPropScale } = createScales({ scales })
+  const { getCategoryBasedOnProperty } = createScales({ scales })
 
-  const { getProperties } = createAliases({ aliases })
+  const { getPropertiesBasedOnAlias } = createAliases({ aliases })
 
-  const normalizeImpl = <T extends Record<string, any>>(
-    style: T,
-    specifiedColorPalette?: string,
-  ) => {
-    const result: any = Array.isArray(style) ? [] : {}
+  const { handleBreakpoints } = createBreakpoints(breakpoints)
 
-    forEach(style, (value: any, key: string) => {
-      const properties = getProperties(key) ?? [key]
+  const normalizeImpl: NormalizeFn = (style, specifiedColorPalette) => {
+    const result: CSSObject = {}
+
+    forEach(style, (propertyValue: any, alias: string) => {
+      const mediaQueries = handleBreakpoints(alias, propertyValue)
+      if (Object.keys(mediaQueries).length > 0) {
+        merge(result, normalizeImpl(mediaQueries, specifiedColorPalette))
+        return
+      }
+
+      let newPropertyValue = propertyValue
+
+      if (isPlainObject(newPropertyValue)) {
+        newPropertyValue = normalizeImpl(
+          newPropertyValue,
+          specifiedColorPalette,
+        )
+      }
+
+      // alias 可能有多个值
+      const properties = getPropertiesBasedOnAlias(alias) ?? [alias]
+
       forEach(properties, (property: string) => {
-        const category = getPropScale(property)
+        const category = getCategoryBasedOnProperty(property)
         if (category) {
-          let newValue = value
           switch (category) {
             case 'colors':
-              if (isString(newValue)) {
-                newValue = specifiedColorPalette
-                  ? newValue.replace(
+              if (isString(newPropertyValue)) {
+                newPropertyValue = specifiedColorPalette
+                  ? newPropertyValue.replace(
                       /^colorPalette(?=\.)/,
                       specifiedColorPalette,
                     )
-                  : newValue
+                  : newPropertyValue
               }
               break
             default:
               break
           }
-          const token = getToken(pathToName([category, newValue]))
-          result[property] = token?.value ?? value
-        } else if (isPlainObject(value) || Array.isArray(value)) {
-          // cssobject
-          result[property] = normalizeImpl(value as any, specifiedColorPalette)
+          const token = getToken(pathToName([category, newPropertyValue]))
+          result[property] = token?.value ?? newPropertyValue
         } else {
-          // 标准 css 值
-          result[property] = value
+          result[property] = newPropertyValue
         }
       })
     })
 
-    return result as T
+    return result
   }
 
   const normalize = memoizeFn(normalizeImpl)

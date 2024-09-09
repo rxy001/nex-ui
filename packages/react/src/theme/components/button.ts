@@ -98,7 +98,7 @@ export const button = defineStyles({
     },
     size: {
       sm: {
-        root: { _px: '2', _py: '0.5', _fs: 'sm' },
+        root: { _px: '2', _py: '0.5', _fs: 'sm', _h: '6' },
         startIcon: {
           _ml: '-0.5',
           _mr: '1.5',
@@ -109,10 +109,10 @@ export const button = defineStyles({
         },
       },
       md: {
-        root: { _px: '3', _py: '1', _fs: 'md' },
+        root: { _px: '3', _py: '1', _fs: 'md', _h: '8' },
       },
       lg: {
-        root: { _px: '4', _py: '1.5', _fs: 'lg' },
+        root: { _px: '4', _py: '1.5', _fs: 'lg', _h: '10' },
       },
     },
     disabled: {

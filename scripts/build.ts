@@ -99,7 +99,7 @@ async function generateTypes({ external, tsconfig, name }: SharedConfigs) {
         respectExternal: true,
       }),
     ],
-    output: { dir: './dist/types', format: 'es', preserveModules: true },
+    output: { dir: './dist/types', format: 'es' },
   }
   await runRollup(config)
 

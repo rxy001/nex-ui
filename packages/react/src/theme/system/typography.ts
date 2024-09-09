@@ -7,9 +7,9 @@ export const fontFamilies = defineConfig.fontFamilies({
 })
 
 export const fontSizes = defineConfig.fontSizes({
-  sm: '0.75rem',
-  md: '0.875rem',
-  lg: '1rem',
+  sm: '12px',
+  md: '14px',
+  lg: '16px',
 })
 
 export const fontWeights = defineConfig.fontWeights({

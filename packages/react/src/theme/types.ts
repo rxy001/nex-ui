@@ -1,5 +1,5 @@
 import type {
-  CSSProperties,
+  NexCSSProperties,
   CSSInterpolation,
   StyleObject,
   ColorsDefinition,
@@ -108,27 +108,27 @@ export interface Aliases {
   _active?: CSSInterpolation
   _disabled?: CSSInterpolation
 
-  _bg?: CSSProperties['backgroundColor']
-  _fs?: CSSProperties['fontSize']
-  _lh?: CSSProperties['lineHeight']
-  _w?: CSSProperties['width']
-  _h?: CSSProperties['height']
+  _bg?: NexCSSProperties['backgroundColor']
+  _fs?: NexCSSProperties['fontSize']
+  _lh?: NexCSSProperties['lineHeight']
+  _w?: NexCSSProperties['width']
+  _h?: NexCSSProperties['height']
 
-  _py?: CSSProperties['paddingTop']
-  _px?: CSSProperties['paddingLeft']
-  _pt?: CSSProperties['paddingTop']
-  _pb?: CSSProperties['paddingBottom']
-  _pl?: CSSProperties['paddingLeft']
-  _pr?: CSSProperties['paddingRight']
-  _p?: CSSProperties['padding']
+  _py?: NexCSSProperties['paddingTop']
+  _px?: NexCSSProperties['paddingLeft']
+  _pt?: NexCSSProperties['paddingTop']
+  _pb?: NexCSSProperties['paddingBottom']
+  _pl?: NexCSSProperties['paddingLeft']
+  _pr?: NexCSSProperties['paddingRight']
+  _p?: NexCSSProperties['padding']
 
-  _mt?: CSSProperties['marginTop']
-  _mb?: CSSProperties['marginBottom']
-  _ml?: CSSProperties['marginLeft']
-  _mr?: CSSProperties['marginRight']
-  _mx?: CSSProperties['marginLeft']
-  _my?: CSSProperties['marginTop']
-  _m?: CSSProperties['margin']
+  _mt?: NexCSSProperties['marginTop']
+  _mb?: NexCSSProperties['marginBottom']
+  _ml?: NexCSSProperties['marginLeft']
+  _mr?: NexCSSProperties['marginRight']
+  _mx?: NexCSSProperties['marginLeft']
+  _my?: NexCSSProperties['marginTop']
+  _m?: NexCSSProperties['margin']
 }
 
 type System = Merge<DefaultTheme, ThemeOverrides>
