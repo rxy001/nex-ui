@@ -25,6 +25,7 @@
     "@vitejs/plugin-react-swc": "3.6.0",
     "storybook": "^8.1.10",
     "storybook-dark-mode": "4.0.1",
-    "vite": "5.2.11"
+    "vite": "5.2.11",
+    "vite-plugin-svgr": "4.2.0"
   }
 }

@@ -77,6 +77,12 @@ type ExtraPropertyValue = {
   [K in keyof SystemDefinition]: ExtractValues<SystemDefinition[K], K>
 }
 
+type FilterdString<T> = T extends string
+  ? string extends T
+    ? T & { __type?: never }
+    : T
+  : T
+
 type ExtraCSSProperties = SystemDefinition extends { scales: infer Scales }
   ? {
       [K in keyof Scales]?:
@@ -84,7 +90,7 @@ type ExtraCSSProperties = SystemDefinition extends { scales: infer Scales }
             ? ExtraPropertyValue[Scales[K]]
             : never)
         | (K extends keyof RawCSSProperties
-            ? RawCSSProperties[K] & { __type?: never }
+            ? FilterdString<RawCSSProperties[K]>
             : never)
     }
   : NonNullable<unknown>

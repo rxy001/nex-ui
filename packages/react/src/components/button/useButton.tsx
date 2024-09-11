@@ -1,13 +1,13 @@
 'use client'
 
 import classNames from 'classnames'
+import { LoadingOutlined } from '@nex-ui/icons'
 import { useMemo } from 'react'
 import { useEvent } from '@nex-ui/utils'
 import { nex } from '@nex-ui/styled'
 import type { MouseEvent } from 'react'
 import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
-import { Icon } from '../icon'
 import { button } from '../../theme'
 import { useMergedTheme, useDefaultProps, composeClasses } from '../utils'
 import type { ButtonProps } from './types'
@@ -124,11 +124,7 @@ export const useButton = (inProps: ButtonProps) => {
     () =>
       (loading || startIconProp) && (
         <nex.span sx={styles.startIcon} className={classes.startIcon}>
-          {loading ? (
-            <Icon icon="ant-design:loading-outlined" />
-          ) : (
-            startIconProp
-          )}
+          {loading ? <LoadingOutlined fontSize="sm" /> : startIconProp}
         </nex.span>
       ),
     [loading, startIconProp, classes.startIcon, styles.startIcon],
@@ -157,11 +153,11 @@ export const useButton = (inProps: ButtonProps) => {
         ? {
             href,
             as: htmlElement,
-            'data-disabled': disabled || null,
+            'data-disabled': disabled || loading || null,
           }
         : {
             type,
-            disabled,
+            disabled: disabled || loading,
           }),
       ...remainingProps,
     },

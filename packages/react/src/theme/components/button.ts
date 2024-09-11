@@ -1,10 +1,5 @@
-import { defineStyles, keyframes } from '@nex-ui/system'
+import { defineStyles } from '@nex-ui/system'
 import type { ExtractComponentType, ExtractVariants } from '../types'
-
-const loadingCircle = keyframes({
-  '0%': { transform: 'rotate(0deg)' },
-  '100%': { transform: 'rotate(360deg)' },
-})
 
 export const button = defineStyles({
   slots: {
@@ -25,9 +20,6 @@ export const button = defineStyles({
       borderColor: 'transparent',
       fontFamily: 'body',
       _bg: 'white',
-      '& svg': {
-        _fs: '1.25em',
-      },
       '& a': {
         pointerEvents: 'none',
       },
@@ -125,6 +117,16 @@ export const button = defineStyles({
         },
       },
     },
+    loading: {
+      true: {
+        root: {
+          _disabled: {
+            cursor: 'not-allowed',
+            opacity: 0.6,
+          },
+        },
+      },
+    },
     block: {
       true: {
         root: { _w: '100%' },
@@ -142,12 +144,6 @@ export const button = defineStyles({
       },
       full: {
         root: { borderRadius: '9999px' },
-      },
-    },
-    loading: {
-      true: {
-        root: { cursor: 'default', opacity: 0.65 },
-        startIcon: { animation: `${loadingCircle} 1s infinite linear` },
       },
     },
     iconOnly: {
