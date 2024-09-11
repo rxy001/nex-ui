@@ -31,7 +31,7 @@ const meta = {
       type: 'boolean',
     },
   },
-  render: ({ ...args }) => {
+  render: (args) => {
     return (
       <>
         <Button {...args}>Button</Button>

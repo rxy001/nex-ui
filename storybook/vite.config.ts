@@ -1,10 +1,15 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react-swc'
+import svgr from 'vite-plugin-svgr'
 
 export default defineConfig(() => {
   return {
-    plugins: [react({ jsxImportSource: '@emotion/react' })],
+    plugins: [
+      svgr({
+        include: '**/*.svg',
+      }),
+      react(),
+    ],
     resolve: {
       extensions: [
         '.mjs',
@@ -16,12 +21,7 @@ export default defineConfig(() => {
         '.json',
         '.css',
       ],
-      alias: {
-        '@nex-ui/react': resolve('../packages/react/src'),
-        '@nex-ui/utils': resolve('../packages/utils/src'),
-        '@nex-ui/system': resolve('../packages/system/src'),
-        '@nex-ui/styled': resolve('../packages/styled/src'),
-      },
+      conditions: ['source', 'import', 'module', 'browser'],
     },
   }
 })

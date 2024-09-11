@@ -5,8 +5,6 @@ export default {
     name: '@storybook/react-vite',
     options: {},
   },
-  stories: [
-    '../../packages/react/**/__stories__/**/*.stories.@(js|jsx|ts|tsx)',
-  ],
+  stories: ['../../packages/**/__stories__/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: ['@storybook/addon-essentials', 'storybook-dark-mode'],
 } satisfies StorybookConfig

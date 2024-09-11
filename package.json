@@ -24,6 +24,7 @@
     "@jest/globals": "29.7.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-typescript": "11.1.6",
+    "@svgr/rollup": "8.1.0",
     "@testing-library/dom": "10.1.0",
     "@testing-library/jest-dom": "6.4.5",
     "@testing-library/react": "16.0.0",

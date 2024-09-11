@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["./src", "./builder.ts"],
+  "compilerOptions": {
+    "customConditions": ["source"],
+    "jsxImportSource": "@emotion/react",
+    "jsx": "react-jsx"
+  }
+}
