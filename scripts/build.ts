@@ -4,10 +4,11 @@ import argsParse from 'yargs-parser'
 import path from 'node:path'
 import dts from 'rollup-plugin-dts'
 import typescript from '@rollup/plugin-typescript'
-import { rollup } from 'rollup'
-import type { RollupOptions, RollupBuild } from 'rollup'
 import fs from 'node:fs'
+import svgr from '@svgr/rollup'
+import { rollup } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+import type { RollupOptions, RollupBuild } from 'rollup'
 
 type SharedConfigs = { external: string[]; tsconfig: string; name: string }
 
@@ -61,9 +62,9 @@ async function generateModules({ external, tsconfig, name }: SharedConfigs) {
     external,
     input: './src/index.ts',
     plugins: [
+      svgr(),
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       typescript({
-        exclude: ['./src/__tests__'],
         tsconfig,
       }),
     ],

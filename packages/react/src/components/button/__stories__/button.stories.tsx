@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { AppleOutlined } from '@nex-ui/icons'
 import { Button } from '../index'
-import { Icon } from '../../icon'
 
 const meta = {
   title: 'Components/Button',
@@ -34,28 +34,14 @@ const meta = {
   render: (args) => {
     return (
       <>
-        <Button {...args}>Button</Button>
-        <Button {...args} color="purple">
-          Button
-        </Button>
-        <Button {...args} color="gray">
-          Button
-        </Button>
-        <Button {...args} color="red">
-          Button
-        </Button>
-        <Button {...args} color="cyan">
-          Button
-        </Button>
-        <Button {...args} color="pink">
-          Button
-        </Button>
-        <Button {...args} color="yellow">
-          Button
-        </Button>
-        <Button {...args} color="blue">
-          Button
-        </Button>
+        <Button {...args} />
+        <Button {...args} color="purple" />
+        <Button {...args} color="gray" />
+        <Button {...args} color="red" />
+        <Button {...args} color="cyan" />
+        <Button {...args} color="pink" />
+        <Button {...args} color="yellow" />
+        <Button {...args} color="green" />
       </>
     )
   },
@@ -105,7 +91,7 @@ export const IconButton: Story = {
   args: {
     ...commonArgs,
     iconOnly: true,
-    children: <Icon icon="material-symbols:send-outline" />,
+    children: <AppleOutlined />,
   },
 }
 
@@ -113,7 +99,7 @@ export const WithIcons: Story = {
   args: {
     ...commonArgs,
     children: 'Button',
-    startIcon: <Icon icon="eos-icons:loading" color="#fff" />,
-    endIcon: <Icon icon="material-symbols:send-outline" />,
+    startIcon: <AppleOutlined />,
+    endIcon: <AppleOutlined />,
   },
 }

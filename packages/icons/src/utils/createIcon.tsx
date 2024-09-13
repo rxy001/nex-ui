@@ -2,31 +2,40 @@ import { jsx, keyframes } from '@emotion/react'
 import { useCSSSystem } from '@nex-ui/system'
 import { forwardRef, useMemo } from 'react'
 import type { NexCSSProperties, StyleObject } from '@nex-ui/system'
-import type { FunctionComponent, SVGAttributes } from 'react'
+import type { SVGAttributes, ComponentType } from 'react'
+import { useNexIcons } from './Context'
 
 const circle = keyframes({
   '0%': { transform: 'rotate(0deg)' },
   '100%': { transform: 'rotate(360deg)' },
 })
 
-export interface IconProps extends Omit<SVGAttributes<SVGAElement>, 'color'> {
+export interface IconProps
+  extends Omit<SVGAttributes<SVGElement>, 'color' | 'width' | 'height'> {
+  width?: NexCSSProperties['width']
+  height?: NexCSSProperties['height']
   spin?: boolean
-  sx?: StyleObject
   color?: NexCSSProperties['color']
-  fontSize?: 'sm' | 'md' | 'lg' | (string & { __type?: never })
+  fontSize?: 'sm' | 'md' | 'lg' | number | (string & { __type?: never })
+  sx?: StyleObject
 }
 
 export const createIcon = (
-  svgComponent: FunctionComponent<any>,
+  svgComponent: ComponentType<any>,
   defaultProps?: IconProps,
 ) => {
   // @ts-ignore
   return forwardRef((inProps: IconProps, ref: SVGElement) => {
+    const { prefix = 'nui' } = useNexIcons()
+
     const {
       spin,
       color,
       sx,
+      className,
       fontSize = 'md',
+      width = '1em',
+      height = '1em',
       ...props
     } = {
       ...defaultProps,
@@ -52,9 +61,8 @@ export const createIcon = (
     return jsx(svgComponent, {
       css: normalize({
         color,
-        _w: '1em',
-        _h: '1em',
-        _fs: '24px',
+        width,
+        height,
         userSelect: 'none',
         display: 'inline-block',
         flexShrink: 0,
@@ -62,6 +70,7 @@ export const createIcon = (
         fontSize: mergedFontSize,
         ...sx,
       }),
+      className: `${prefix}-icon${className ? ` ${className}` : ''}`,
       ref,
       ...props,
     })
