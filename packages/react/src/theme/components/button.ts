@@ -20,9 +20,6 @@ export const button = defineStyles({
       borderColor: 'transparent',
       fontFamily: 'body',
       _bg: 'white',
-      '& a': {
-        pointerEvents: 'none',
-      },
     },
     startIcon: {
       display: 'inherit',
@@ -113,6 +110,9 @@ export const button = defineStyles({
           _disabled: {
             cursor: 'not-allowed',
             opacity: 0.6,
+            '& a': {
+              pointerEvents: 'none',
+            },
           },
         },
       },
@@ -123,6 +123,9 @@ export const button = defineStyles({
           _disabled: {
             cursor: 'not-allowed',
             opacity: 0.6,
+            '& a': {
+              pointerEvents: 'none',
+            },
           },
         },
       },
@@ -150,9 +153,7 @@ export const button = defineStyles({
       true: {
         root: {
           borderRadius: '50%',
-          '& svg': {
-            _fs: '1.5em',
-          },
+          _p: '0.5',
         },
       },
     },
@@ -162,21 +163,21 @@ export const button = defineStyles({
       size: 'sm',
       iconOnly: true,
       css: {
-        root: { color: '0.5' },
+        root: { _w: '6' },
       },
     },
     {
       size: 'md',
       iconOnly: true,
       css: {
-        root: { _p: '0.5' },
+        root: { _w: '8' },
       },
     },
     {
       size: 'lg',
       iconOnly: true,
       css: {
-        root: { _p: '1.5' },
+        root: { _w: '10' },
       },
     },
   ],
