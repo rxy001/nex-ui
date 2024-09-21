@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import UserDelete from '../../svg/outlined/user-delete.svg'
+import type { IconProps } from '../../types'
 
-export const UserDeleteOutlined = createIcon(UserDelete)
+export const UserDeleteOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(UserDelete)
+    return <Icon {...props} ref={ref} />
+  },
+)

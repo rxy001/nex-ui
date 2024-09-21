@@ -1,4 +1,10 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import Yahoo from '../../svg/filled/yahoo.svg'
+import type { IconProps } from '../../types'
 
-export const YahooFilled = createIcon(Yahoo)
+export const YahooFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
+  const { createIcon } = useNexIcons()
+  const Icon = createIcon(Yahoo)
+  return <Icon {...props} ref={ref} />
+})

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { isPlainObject, isFunction, mergeWith } from '@nex-ui/utils'
 import type { StyleObject } from '@nex-ui/system'
-import { useNexContext } from '../provider'
+import { useNexContext } from '../provider/Context'
 import type { ComponentsTheme } from '../../theme'
 
 type Config<T extends object> = {

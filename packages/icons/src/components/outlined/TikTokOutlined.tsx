@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import TikTok from '../../svg/outlined/tik-tok.svg'
+import type { IconProps } from '../../types'
 
-export const TikTokOutlined = createIcon(TikTok)
+export const TikTokOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(TikTok)
+    return <Icon {...props} ref={ref} />
+  },
+)

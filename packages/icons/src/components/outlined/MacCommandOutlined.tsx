@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import MacCommand from '../../svg/outlined/mac-command.svg'
+import type { IconProps } from '../../types'
 
-export const MacCommandOutlined = createIcon(MacCommand)
+export const MacCommandOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(MacCommand)
+    return <Icon {...props} ref={ref} />
+  },
+)

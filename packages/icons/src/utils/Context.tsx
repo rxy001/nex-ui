@@ -1,7 +1,8 @@
 import { createContext } from '@nex-ui/utils'
+import type { Noop } from '@nex-ui/utils'
 
 export interface IconsContext {
-  prefix?: string
+  createIcon: Noop
 }
 
 const DEFAULT_CONTEXT_VALUE = '__nex-icons-default-value'

@@ -1,4 +1,10 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import Gitlab from '../../svg/filled/gitlab.svg'
+import type { IconProps } from '../../types'
 
-export const GitlabFilled = createIcon(Gitlab)
+export const GitlabFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
+  const { createIcon } = useNexIcons()
+  const Icon = createIcon(Gitlab)
+  return <Icon {...props} ref={ref} />
+})

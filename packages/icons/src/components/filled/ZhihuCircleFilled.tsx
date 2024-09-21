@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import ZhihuCircle from '../../svg/filled/zhihu-circle.svg'
+import type { IconProps } from '../../types'
 
-export const ZhihuCircleFilled = createIcon(ZhihuCircle)
+export const ZhihuCircleFilled = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(ZhihuCircle)
+    return <Icon {...props} ref={ref} />
+  },
+)

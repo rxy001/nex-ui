@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import LineChart from '../../svg/outlined/line-chart.svg'
+import type { IconProps } from '../../types'
 
-export const LineChartOutlined = createIcon(LineChart)
+export const LineChartOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(LineChart)
+    return <Icon {...props} ref={ref} />
+  },
+)

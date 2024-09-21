@@ -5,6 +5,6 @@ export type {
   ColorPalette,
 } from './types'
 
-export * from './components'
+export * from './styles'
 export * from './preset'
 export * from './defineTheme'

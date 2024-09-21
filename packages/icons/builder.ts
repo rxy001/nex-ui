@@ -81,15 +81,32 @@ function run() {
 
     if (!existsSync(tsxPath)) {
       const tsx =
-        `import { createIcon } from '../../utils'` +
+        "import { forwardRef } from 'react'" +
+        '\n' +
+        "import { useNexIcons } from '../../utils/Context'" +
         '\n' +
         `import ${svgComponentName} from '../../svg/${category}/${svgFileName}.svg'` +
-        '\n\n' +
-        `export const ${iconComponentName} = createIcon(${svgComponentName}${
+        '\n' +
+        "import type { IconProps } from '../../types'" +
+        '\n' +
+        '\n' +
+        `export const ${iconComponentName} = forwardRef<SVGAElement, IconProps>(` +
+        '\n' +
+        '  (props, ref) => {' +
+        '\n' +
+        '    const { createIcon } = useNexIcons()' +
+        '\n' +
+        `    const Icon = createIcon(${svgComponentName}${
           options[iconComponentName]
             ? `,${JSON.stringify(options[iconComponentName])}`
             : ''
         })` +
+        '\n' +
+        '    return <Icon {...props} ref={ref} />' +
+        '\n' +
+        '  }' +
+        '\n' +
+        ')' +
         '\n'
 
       writeFileSync(tsxPath, tsx)

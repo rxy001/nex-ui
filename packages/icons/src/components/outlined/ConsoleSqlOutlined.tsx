@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import ConsoleSql from '../../svg/outlined/console-sql.svg'
+import type { IconProps } from '../../types'
 
-export const ConsoleSqlOutlined = createIcon(ConsoleSql)
+export const ConsoleSqlOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(ConsoleSql)
+    return <Icon {...props} ref={ref} />
+  },
+)

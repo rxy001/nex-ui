@@ -1,4 +1,10 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import Diff from '../../svg/filled/diff.svg'
+import type { IconProps } from '../../types'
 
-export const DiffFilled = createIcon(Diff)
+export const DiffFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
+  const { createIcon } = useNexIcons()
+  const Icon = createIcon(Diff)
+  return <Icon {...props} ref={ref} />
+})

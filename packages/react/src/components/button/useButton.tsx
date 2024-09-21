@@ -8,7 +8,7 @@ import { nex } from '@nex-ui/styled'
 import type { MouseEvent } from 'react'
 import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
-import { button } from '../../theme'
+import { buttonStyles } from '../../theme'
 import { useMergedTheme, useDefaultProps, composeClasses } from '../utils'
 import type { ButtonProps } from './types'
 import { getButtonUtilityClass } from './buttonClasses'
@@ -87,20 +87,25 @@ export const useButton = (inProps: ButtonProps) => {
 
   const ownerState = {
     ...props,
+    href,
+    className,
     variant,
-    radius,
     size,
+    radius,
     iconOnly,
     loading,
     disabled,
     block,
     type,
     color,
+    startIcon: startIconProp,
+    endIcon: endIconProp,
+    onClick: onClickProp,
   }
 
   const styles = useMergedTheme({
     name: COMPONENT_NAME,
-    styles: button,
+    styles: buttonStyles,
     props: ownerState,
   })
 

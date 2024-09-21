@@ -20,8 +20,4 @@ interface InnerButtonProps extends MergedHTMLAttributes, ButtonVariants {
   >
 }
 
-export interface ButtonPropsVariantOverrides {}
-
-export interface ButtonProps
-  extends InnerButtonProps,
-    ButtonPropsVariantOverrides {}
+export interface ButtonProps extends InnerButtonProps {}

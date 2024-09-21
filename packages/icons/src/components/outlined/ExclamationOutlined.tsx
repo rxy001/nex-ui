@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import Exclamation from '../../svg/outlined/exclamation.svg'
+import type { IconProps } from '../../types'
 
-export const ExclamationOutlined = createIcon(Exclamation)
+export const ExclamationOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(Exclamation)
+    return <Icon {...props} ref={ref} />
+  },
+)

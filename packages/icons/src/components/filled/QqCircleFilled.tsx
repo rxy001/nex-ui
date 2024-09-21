@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import QqCircle from '../../svg/filled/qq-circle.svg'
+import type { IconProps } from '../../types'
 
-export const QqCircleFilled = createIcon(QqCircle)
+export const QqCircleFilled = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(QqCircle)
+    return <Icon {...props} ref={ref} />
+  },
+)

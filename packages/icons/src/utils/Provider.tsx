@@ -8,13 +8,13 @@ export interface NexIconsProviderProps extends IconsContext {
 }
 
 export const NexIconsProvider = (props: NexIconsProviderProps) => {
-  const { children, prefix } = props
+  const { createIcon, children } = props
 
   const value = useMemo(
     () => ({
-      prefix,
+      createIcon,
     }),
-    [prefix],
+    [createIcon],
   )
 
   return <IconsProvider value={value}>{children}</IconsProvider>

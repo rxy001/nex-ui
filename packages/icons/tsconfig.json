@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src", "./builder.ts"],
+  "include": ["./src", "./builder.ts", "./types.d.ts"],
   "compilerOptions": {
     "customConditions": ["source"],
     "jsxImportSource": "@emotion/react",

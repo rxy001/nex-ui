@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import HarmonyOS from '../../svg/outlined/harmony-o-s.svg'
+import type { IconProps } from '../../types'
 
-export const HarmonyOSOutlined = createIcon(HarmonyOS)
+export const HarmonyOSOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(HarmonyOS)
+    return <Icon {...props} ref={ref} />
+  },
+)

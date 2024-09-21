@@ -15,8 +15,9 @@ import type {
   ScalesDefinition,
 } from '@nex-ui/system'
 import type { defaultTheme } from './preset'
-import type { ButtonComponentStyles } from './components'
+import type { ButtonComponentStyles, IconComponentStyles } from './styles'
 import type { ButtonProps } from '../components'
+import type { InnerIconProps } from '../components/icon/types'
 
 type DefaultTheme = typeof defaultTheme
 
@@ -150,9 +151,17 @@ declare module '@nex-ui/system' {
   interface CSSPropertiesOverrides extends Aliases {}
 }
 
+declare module '@nex-ui/icons' {
+  interface IconProps extends InnerIconProps {}
+}
+
 export type ComponentsTheme = {
   Button?: {
     styleOverrides?: ButtonComponentStyles | ComponentThemeFn<ButtonProps>
     defaultProps?: ButtonProps
+  }
+  Icon?: {
+    styleOverrides?: IconComponentStyles | ComponentThemeFn<InnerIconProps>
+    defaultProps?: InnerIconProps
   }
 }

@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import FileImage from '../../svg/filled/file-image.svg'
+import type { IconProps } from '../../types'
 
-export const FileImageFilled = createIcon(FileImage)
+export const FileImageFilled = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(FileImage)
+    return <Icon {...props} ref={ref} />
+  },
+)

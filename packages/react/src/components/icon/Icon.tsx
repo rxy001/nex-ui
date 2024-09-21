@@ -1,14 +1,15 @@
 'use client'
 
-import { __NEX_ICONS_CREATE_ICON } from '@nex-ui/icons'
+import { forwardRef } from 'react'
+import { createIcon } from './createIcon'
 import type { IconProps } from './types'
 
-export function Icon(inProps: IconProps) {
+export const Icon = forwardRef<SVGElement, IconProps>((inProps, ref) => {
   const { component, ...props } = inProps
 
-  const InnerIcon = __NEX_ICONS_CREATE_ICON(component)
+  const InnerIcon = createIcon(component)
 
-  return <InnerIcon {...props} />
-}
+  return <InnerIcon {...props} ref={ref} />
+})
 
 Icon.displayName = 'Icon'

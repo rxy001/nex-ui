@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import Hourglass from '../../svg/outlined/hourglass.svg'
+import type { IconProps } from '../../types'
 
-export const HourglassOutlined = createIcon(Hourglass)
+export const HourglassOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(Hourglass)
+    return <Icon {...props} ref={ref} />
+  },
+)

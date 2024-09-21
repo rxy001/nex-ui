@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import GoogleSquare from '../../svg/filled/google-square.svg'
+import type { IconProps } from '../../types'
 
-export const GoogleSquareFilled = createIcon(GoogleSquare)
+export const GoogleSquareFilled = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(GoogleSquare)
+    return <Icon {...props} ref={ref} />
+  },
+)

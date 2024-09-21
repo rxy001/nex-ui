@@ -6,6 +6,7 @@ import { useMemo } from 'react'
 import { __NEX_ICON_PROVIDER as NexIconsProvider } from '@nex-ui/icons'
 import { defaultTheme } from '../../theme'
 import { NexContextProvider } from './Context'
+import { createIcon } from '../icon/createIcon'
 import type { NexProviderProps, InnerProviderProps } from './types'
 
 function InnerProvider({ components, prefix, children }: InnerProviderProps) {
@@ -31,7 +32,7 @@ export function NexProvider(props: NexProviderProps) {
   return (
     <CSSSystemProvider config={mergedSysConfig}>
       <InnerProvider components={components} prefix={prefix}>
-        <NexIconsProvider prefix={prefix}>{children}</NexIconsProvider>
+        <NexIconsProvider createIcon={createIcon}>{children}</NexIconsProvider>
       </InnerProvider>
     </CSSSystemProvider>
   )

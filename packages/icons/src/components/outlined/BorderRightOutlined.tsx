@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import BorderRight from '../../svg/outlined/border-right.svg'
+import type { IconProps } from '../../types'
 
-export const BorderRightOutlined = createIcon(BorderRight)
+export const BorderRightOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(BorderRight)
+    return <Icon {...props} ref={ref} />
+  },
+)

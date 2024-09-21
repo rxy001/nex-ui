@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import OpenAI from '../../svg/outlined/open-a-i.svg'
+import type { IconProps } from '../../types'
 
-export const OpenAIOutlined = createIcon(OpenAI)
+export const OpenAIOutlined = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(OpenAI)
+    return <Icon {...props} ref={ref} />
+  },
+)

@@ -1,4 +1,12 @@
-import { createIcon } from '../../utils'
+import { forwardRef } from 'react'
+import { useNexIcons } from '../../utils/Context'
 import CiCircle from '../../svg/filled/ci-circle.svg'
+import type { IconProps } from '../../types'
 
-export const CiCircleFilled = createIcon(CiCircle)
+export const CiCircleFilled = forwardRef<SVGAElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = createIcon(CiCircle)
+    return <Icon {...props} ref={ref} />
+  },
+)
