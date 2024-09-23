@@ -11,7 +11,7 @@ export const getDefaultShouldForwardProp = (tag: ElementType) =>
   // a 为 97，小于 97 即为大写
   tag.charCodeAt(0) > 96
     ? isPropValid
-    : (key: string) => key !== 'theme'
+    : (key: string) => key !== 'theme' && key !== 'sx'
 
 export const isSerializedStyles = (object: any) =>
   isPlainObject(object) &&

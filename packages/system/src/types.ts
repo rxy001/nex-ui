@@ -5,6 +5,7 @@ import type { ScalesDefinition } from './scales'
 import type { TokenDefinitions } from './tokens'
 import type { AliasesDefinition } from './aliases'
 import type { BreakpointsDefinition } from './breakpoints'
+import type { ExtraCSSProperties } from './utils.type'
 
 export type SystemConfig = {
   cssVarsPrefix?: string
@@ -57,46 +58,11 @@ export interface ArrayCSSInterpolation
 
 export type RawCSSProperties = CSS.PropertiesFallback<number | string>
 
-type ConcatValue<K, P> = K extends string | number
-  ? P extends string | number
-    ? `${K}.${P}`
-    : never
-  : never
-
-type ExtractValues<T, H> = {
-  [K in keyof T]: T[K] extends object
-    ? ConcatValue<K, keyof T[K]>
-    : K extends string | number
-      ? H extends 'spacing'
-        ? `${K}` | `-${K}`
-        : `${K}`
-      : never
-}[keyof T]
-
-type ExtraPropertyValue = {
-  [K in keyof SystemDefinition]: ExtractValues<SystemDefinition[K], K>
-}
-
-type FilterdString<T> = T extends string
-  ? string extends T
-    ? T & { __type?: never }
-    : T
-  : T
-
-type ExtraCSSProperties = SystemDefinition extends { scales: infer Scales }
-  ? {
-      [K in keyof Scales]?:
-        | (Scales[K] extends keyof ExtraPropertyValue
-            ? ExtraPropertyValue[Scales[K]]
-            : never)
-        | (K extends keyof RawCSSProperties
-            ? FilterdString<RawCSSProperties[K]>
-            : never)
-    }
-  : NonNullable<unknown>
-
-type CSSProperties = Omit<RawCSSProperties, keyof ExtraCSSProperties> &
-  ExtraCSSProperties
+type CSSProperties = Omit<
+  RawCSSProperties,
+  keyof ExtraCSSProperties<SystemDefinition, RawCSSProperties>
+> &
+  ExtraCSSProperties<SystemDefinition, RawCSSProperties>
 
 export type NexCSSProperties = SystemDefinition extends {
   breakpoints: infer Breakpoints

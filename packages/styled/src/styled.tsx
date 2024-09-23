@@ -160,10 +160,10 @@ const nexProxy = new Proxy(styledComponent, {
     }
     return cache.get(tag)
   },
-  // apply(_, __, args) {
-  //   // @ts-ignore
-  //   return styledComponent(...args)
-  // },
+  apply(_, __, args) {
+    // @ts-ignore
+    return styledComponent(...args)
+  },
 })
 
 export const nex = nexProxy as unknown as NexStyled

@@ -1,22 +1,25 @@
-import type { FunctionComponent } from 'react'
+import type { FunctionComponent, ElementType, ComponentProps } from 'react'
 import type { StyleObject } from '@nex-ui/system'
-
-type StyledComponent<
-  ComponentProps extends Record<string, any>,
-  SpecificComponentProps extends Record<string, any> = Record<string, any>,
-> = FunctionComponent<ComponentProps & SpecificComponentProps>
 
 export type HTMLElementTagName = keyof JSX.IntrinsicElements
 
-export type StyledTags = {
-  [Tag in HTMLElementTagName]: StyledComponent<
-    {
-      as?: HTMLElementTagName
-      sx?: StyleObject
-      colorPalette?: string
-    },
-    JSX.IntrinsicElements[Tag]
-  >
+export type ExtraComponentProps = {
+  as?: HTMLElementTagName
+  sx?: StyleObject
+  colorPalette?: string
 }
 
-export interface NexStyled extends StyledTags {}
+type StyledComponent<
+  P extends Record<string, any>,
+  JSXProps extends Record<string, any> = NonNullable<unknown>,
+> = FunctionComponent<P & ExtraComponentProps & JSXProps>
+
+export type StyledElements = {
+  [Tag in HTMLElementTagName]: StyledComponent<JSX.IntrinsicElements[Tag]>
+}
+
+export type CreateStyledComponent = {
+  <T extends ElementType>(tag: T): StyledComponent<ComponentProps<T>>
+}
+
+export type NexStyled = StyledElements & CreateStyledComponent

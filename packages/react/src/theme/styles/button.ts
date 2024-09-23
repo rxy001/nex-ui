@@ -1,5 +1,8 @@
 import { defineStyles } from '@nex-ui/system'
-import type { ExtractComponentType, ExtractVariants } from '../types'
+import type {
+  ExtractComponentStyles,
+  ExtractComponentVariants,
+} from '../utils.types'
 
 export const buttonStyles = defineStyles({
   slots: {
@@ -188,6 +191,6 @@ export const buttonStyles = defineStyles({
   },
 })
 
-export type ButtonVariants = ExtractVariants<typeof buttonStyles>
+export type ButtonVariants = ExtractComponentVariants<typeof buttonStyles>
 
-export type ButtonComponentStyles = ExtractComponentType<typeof buttonStyles>
+export type ButtonComponentStyles = ExtractComponentStyles<typeof buttonStyles>

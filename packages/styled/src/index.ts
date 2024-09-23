@@ -1,3 +1,3 @@
 export * from './styled'
 
-export type { HTMLElementTagName } from './types'
+export type { HTMLElementTagName, ExtraComponentProps } from './types'

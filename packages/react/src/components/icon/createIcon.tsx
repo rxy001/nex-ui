@@ -1,8 +1,9 @@
-import { jsx } from '@emotion/react'
+/* eslint-disable react/prop-types */
+
 import classNames from 'classnames'
 import { forwardRef } from 'react'
-import type { StyleObject } from '@nex-ui/system'
-import type { ComponentType } from 'react'
+import { nex } from '@nex-ui/styled'
+import type { ComponentType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
 import { iconStyles } from '../../theme'
 import { useDefaultProps, useMergedTheme } from '../utils'
@@ -15,8 +16,8 @@ export const createIcon = (
   defaultProps?: InnerIconProps,
 ) => {
   // @ts-ignore
-  return forwardRef((inProps: InnerIconProps, ref: SVGElement) => {
-    const { prefix = 'nui', normalize } = useNexContext()
+  return forwardRef((inProps: InnerIconProps, ref: Ref<SVGElement>) => {
+    const { prefix = 'nui' } = useNexContext()
 
     const props = useDefaultProps({
       name: COMPONENT_NAME,
@@ -49,17 +50,21 @@ export const createIcon = (
       props: ownerState,
     })
 
-    return jsx(svgComponent, {
-      css: normalize({
-        color,
-        width,
-        height,
-        _fs: fontSize,
-        ...styles,
-      } as StyleObject),
-      ref,
-      className: classNames(`${prefix}-icon`, className),
-      ...remainingProps,
-    })
+    const Icon = nex(svgComponent)
+
+    return (
+      <Icon
+        sx={{
+          color,
+          width,
+          height,
+          _fs: fontSize,
+          ...styles,
+        }}
+        ref={ref}
+        className={classNames(`${prefix}-icon`, className)}
+        {...remainingProps}
+      />
+    )
   })
 }
