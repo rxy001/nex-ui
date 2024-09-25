@@ -6,7 +6,7 @@ import {
   isNumber,
 } from '@nex-ui/utils'
 
-import type { BreakpointsDefinition } from './types'
+export type BreakpointsDefinition = Record<string, string>
 
 export const createBreakpoints = (breakpoints?: BreakpointsDefinition) => {
   const breakpointsMap = new Map<string, string>()
@@ -56,3 +56,5 @@ export const createBreakpoints = (breakpoints?: BreakpointsDefinition) => {
     handleBreakpoints,
   }
 }
+
+export type Breakpoints = ReturnType<typeof createBreakpoints>

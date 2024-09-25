@@ -20,17 +20,17 @@ export const CSSSystemProvider = ({
 
   const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE
 
-  let styles: SystemContext['styles']
+  let cva: SystemContext['cva']
   let globalCssVars: Interpolation
-  let normalize: SystemContext['normalize']
+  let css: SystemContext['css']
 
   if (isTopLevel) {
-    ;({ styles, globalCssVars, normalize } = createSystem(config))
+    ;({ cva, globalCssVars, css } = createSystem(config))
   } else {
-    ;({ styles, normalize } = outer)
+    ;({ cva, css } = outer)
   }
 
-  const methods = useMemo(() => ({ styles, normalize }), [styles, normalize])
+  const methods = useMemo(() => ({ cva, css }), [cva, css])
 
   return (
     <SystemProvider value={methods}>

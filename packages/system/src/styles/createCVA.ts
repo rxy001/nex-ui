@@ -12,19 +12,16 @@ import type {
   CompoundVariantsSelection,
 } from './types'
 
-export function createStylesFn() {
-  function stylesFn<B extends StyleObject, V extends VariantGroups<B>>(
+export function createCvaFn() {
+  function cva<B extends StyleObject, V extends VariantGroups<B>>(
     options: BaseStylesDefinition<B, V>,
   ): RuntimeFn<V, StyleObject>
 
-  function stylesFn<S extends SlotGroups, V extends VariantGroups<S>>(
+  function cva<S extends SlotGroups, V extends VariantGroups<S>>(
     options: SlotStylesDefinition<S, V>,
   ): RuntimeFn<V, Record<keyof S, StyleObject>>
 
-  function stylesFn<
-    S extends SlotGroups | StyleObject,
-    V extends VariantGroups<S>,
-  >(
+  function cva<S extends SlotGroups | StyleObject, V extends VariantGroups<S>>(
     options: StylesDefinition<S, V>,
   ): RuntimeFn<V, StyleObject | Record<keyof S, StyleObject>> {
     const { base, slots, variants, defaultVariants, compoundVariants } = options
@@ -113,7 +110,7 @@ export function createStylesFn() {
     })
   }
 
-  return stylesFn
+  return cva
 }
 
-export type StylesFn = ReturnType<typeof createStylesFn>
+export type CvaFn = ReturnType<typeof createCvaFn>

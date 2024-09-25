@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import type * as CSS from 'csstype'
-import type { CSSObject, Keyframes } from '@emotion/react'
+import type { Keyframes } from '@emotion/react'
 import type { ScalesDefinition } from './scales'
 import type { TokenDefinitions } from './tokens'
 import type { AliasesDefinition } from './aliases'
@@ -13,11 +13,6 @@ export type SystemConfig = {
   aliases?: AliasesDefinition
   breakpoints?: BreakpointsDefinition
 } & TokenDefinitions
-
-export type NormalizeFn = (
-  style: StyleObject,
-  specifiedColorPalette?: string,
-) => CSSObject
 
 /* StyleObject------start */
 /**

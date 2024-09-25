@@ -52,8 +52,8 @@ export type StylesDefinition<
 }
 
 export type BaseStylesDefinition<
-  B extends StyleObject,
-  V extends VariantGroups<B>,
+  B extends StyleObject = StyleObject,
+  V extends VariantGroups<B> = VariantGroups<B>,
 > = {
   base: B
   variants?: V
@@ -62,8 +62,8 @@ export type BaseStylesDefinition<
 }
 
 export type SlotStylesDefinition<
-  S extends SlotGroups,
-  V extends VariantGroups<S>,
+  S extends SlotGroups = SlotGroups,
+  V extends VariantGroups<S> = VariantGroups<S>,
 > = {
   slots: S
   variants?: V

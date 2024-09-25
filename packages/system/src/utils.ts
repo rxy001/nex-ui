@@ -29,7 +29,7 @@ export function createCssVarName(prefix: string, path: string[]) {
 export function checkTokenValue(value: any, path: string[]) {
   if (!isString(value) && !isNumber(value)) {
     console.error(
-      `system: The token value must be either a string or a number. ${path}: ${JSON.stringify(value)}`,
+      `system: The token value must be either a string or a number. but currently received is ${typeof value} (${path.join('.')})`,
     )
     return false
   }

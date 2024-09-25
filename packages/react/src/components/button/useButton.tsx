@@ -8,12 +8,11 @@ import { nex } from '@nex-ui/styled'
 import type { MouseEvent } from 'react'
 import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
-import { buttonStyles } from '../../theme'
-import { useMergedTheme, useDefaultProps, composeClasses } from '../utils'
-import type { ButtonProps } from './types'
+import { useStyles, useDefaultProps, composeClasses } from '../utils'
 import { getButtonUtilityClass } from './buttonClasses'
+import type { ButtonProps, ButtonOwnerState } from './types'
 
-const useUtilityClasses = (ownerState: ButtonProps) => {
+const useUtilityClasses = (ownerState: ButtonOwnerState) => {
   const { prefix } = useNexContext()
 
   const btnRoot = `${prefix}-btn`
@@ -61,10 +60,11 @@ const useUtilityClasses = (ownerState: ButtonProps) => {
   return composedClasses
 }
 
-const COMPONENT_NAME = 'Button'
-
 export const useButton = (inProps: ButtonProps) => {
-  const props = useDefaultProps({ name: COMPONENT_NAME, props: inProps })
+  const props = useDefaultProps({
+    name: 'Button',
+    props: inProps,
+  })
 
   const {
     href,
@@ -85,7 +85,7 @@ export const useButton = (inProps: ButtonProps) => {
     ...remainingProps
   } = props
 
-  const ownerState = {
+  const ownerState: ButtonOwnerState = {
     ...props,
     href,
     className,
@@ -103,13 +103,12 @@ export const useButton = (inProps: ButtonProps) => {
     onClick: onClickProp,
   }
 
-  const styles = useMergedTheme({
-    name: COMPONENT_NAME,
-    styles: buttonStyles,
-    props: ownerState,
-  })
-
   const classes = useUtilityClasses(ownerState)
+
+  const styles = useStyles({
+    ownerState,
+    name: 'Button',
+  })
 
   const htmlElement: HTMLElementTagName =
     typeof href === 'string' && href ? 'a' : 'button'

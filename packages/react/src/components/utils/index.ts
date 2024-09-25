@@ -1,5 +1,5 @@
 export { WaterWave } from './waterWave'
-export { useMergedTheme } from './useMergedTheme'
+export { useStyles } from './useStyles'
 export { useDefaultProps } from './useDefaultProps'
 export { composeClasses } from './composeClasses'
 export { generateUtilityClasses } from './generateUtilityClasses'

@@ -1,4 +1,4 @@
-export { createTokens } from './createTokens'
+export { createTokens, type Tokens } from './createTokens'
 
 export type { Token } from './createToken'
 

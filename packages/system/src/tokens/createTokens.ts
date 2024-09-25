@@ -1,10 +1,5 @@
 import { walkObject } from '@nex-ui/utils'
-import type {
-  CreateTokensConfig,
-  TokenMap,
-  CssVarMap,
-  TokenCategory,
-} from './types'
+import type { Config, TokenMap, CssVarMap, TokenCategory } from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
@@ -15,7 +10,7 @@ import {
 } from '../utils'
 import type { Token } from './createToken'
 
-export function createTokens(config: CreateTokensConfig) {
+export function createTokens(config: Config) {
   const { tokens, prefix } = config
 
   const tokenMap: TokenMap = new Map()
@@ -118,7 +113,6 @@ export function createTokens(config: CreateTokensConfig) {
     function predicate(_: any, path: string[]) {
       const category = path[0]
 
-      // 过滤掉不被支持的类型
       switch (category) {
         case 'colors':
           return path.length > 3
@@ -145,3 +139,5 @@ export function createTokens(config: CreateTokensConfig) {
     getCssVars: () => Object.fromEntries(cssVarMap.entries()),
   }
 }
+
+export type Tokens = ReturnType<typeof createTokens>

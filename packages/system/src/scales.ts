@@ -1,9 +1,16 @@
 import { forEach, isString } from '@nex-ui/utils'
-import { checkTokenCategory } from '../utils'
-import type { TokenCategory } from '../tokens'
-import type { CreateScalesConfig, CSSProperty } from './types'
+import type { CSSProperties } from 'react'
 
-export function createScales({ scales }: CreateScalesConfig) {
+import { checkTokenCategory } from './utils'
+import type { TokenCategory } from './tokens'
+
+export type CSSProperty = keyof CSSProperties
+
+export type ScalesDefinition = {
+  [property in CSSProperty]?: TokenCategory
+}
+
+export function createScales(scales?: ScalesDefinition) {
   const scaleMap = new Map<CSSProperty, TokenCategory>()
 
   if (scales) {
@@ -19,7 +26,8 @@ export function createScales({ scales }: CreateScalesConfig) {
   }
 
   return {
-    getCategoryBasedOnProperty: (key: string) =>
-      scaleMap.get(key as CSSProperty),
+    getCategoryByProperty: (key: string) => scaleMap.get(key as CSSProperty),
   }
 }
+
+export type Scales = ReturnType<typeof createScales>

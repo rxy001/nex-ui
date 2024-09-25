@@ -15,8 +15,8 @@ import type {
 } from '@nex-ui/system'
 import type { defaultTheme } from './preset'
 import type { ButtonComponentStyles, IconComponentStyles } from './styles'
-import type { ButtonProps } from '../components'
-import type { InnerIconProps } from '../components/icon/types'
+import type { ButtonProps, ButtonOwnerState } from '../components'
+import type { InnerIconProps, IconOwnerState } from '../components/icon/types'
 import type { DeepMerge, ComponentThemeFn } from './utils.types'
 
 type DefaultTheme = typeof defaultTheme
@@ -90,11 +90,13 @@ declare module '@nex-ui/icons' {
 
 export type ComponentsTheme = {
   Button?: {
-    styleOverrides?: ButtonComponentStyles | ComponentThemeFn<ButtonProps>
+    styleOverrides?: ButtonComponentStyles | ComponentThemeFn<ButtonOwnerState>
     defaultProps?: ButtonProps
   }
   Icon?: {
-    styleOverrides?: IconComponentStyles | ComponentThemeFn<InnerIconProps>
+    styleOverrides?: IconComponentStyles | ComponentThemeFn<IconOwnerState>
     defaultProps?: InnerIconProps
   }
 }
+
+export type ComponentNames = keyof ComponentsTheme

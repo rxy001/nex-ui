@@ -6,10 +6,8 @@ import { nex } from '@nex-ui/styled'
 import type { ComponentType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
 import { iconStyles } from '../../theme'
-import { useDefaultProps, useMergedTheme } from '../utils'
-import type { InnerIconProps } from './types'
-
-const COMPONENT_NAME = 'Icon'
+import { useDefaultProps, useStyles } from '../utils'
+import type { IconOwnerState, InnerIconProps } from './types'
 
 export const createIcon = (
   svgComponent: ComponentType<any>,
@@ -20,7 +18,7 @@ export const createIcon = (
     const { prefix = 'nui' } = useNexContext()
 
     const props = useDefaultProps({
-      name: COMPONENT_NAME,
+      name: 'Icon',
       props: { ...defaultProps, ...inProps },
     })
 
@@ -34,7 +32,7 @@ export const createIcon = (
       ...remainingProps
     } = props
 
-    const ownerState = {
+    const ownerState: IconOwnerState = {
       ...props,
       color,
       spin,
@@ -44,10 +42,10 @@ export const createIcon = (
       height,
     }
 
-    const styles = useMergedTheme({
-      name: COMPONENT_NAME,
+    const styles = useStyles({
+      ownerState,
+      name: 'Icon',
       styles: iconStyles,
-      props: ownerState,
     })
 
     const Icon = nex(svgComponent)

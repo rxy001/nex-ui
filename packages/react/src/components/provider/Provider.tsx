@@ -10,11 +10,11 @@ import { createIcon } from '../icon/createIcon'
 import type { NexProviderProps, InnerProviderProps } from './types'
 
 function InnerProvider({ components, prefix, children }: InnerProviderProps) {
-  const { styles, normalize } = useCSSSystem()
+  const { cva, css } = useCSSSystem()
 
   const contextValue = useMemo(
-    () => ({ components, prefix, styles, normalize }),
-    [components, normalize, prefix, styles],
+    () => ({ components, prefix, sys: { cva, css } }),
+    [components, css, cva, prefix],
   )
   return (
     <NexContextProvider value={contextValue}>{children}</NexContextProvider>

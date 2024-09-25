@@ -1,7 +1,10 @@
 import { forEach, isString } from '@nex-ui/utils'
-import type { CreateAliasesConfig } from './types'
 
-export function createAliases({ aliases }: CreateAliasesConfig) {
+export type AliasesDefinition = {
+  [alias: string]: string | string[]
+}
+
+export function createAliases(aliases?: AliasesDefinition) {
   const aliasMap: Map<string, string[]> = new Map()
 
   forEach(aliases, (value: string | string[], key: string) => {
@@ -15,7 +18,7 @@ export function createAliases({ aliases }: CreateAliasesConfig) {
     }
   })
 
-  return {
-    getPropertiesBasedOnAlias: (key: string) => aliasMap.get(key),
-  }
+  return { getPropertiesByAlias: (key: string) => aliasMap.get(key) }
 }
+
+export type Aliases = ReturnType<typeof createAliases>

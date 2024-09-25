@@ -31,7 +31,7 @@ export type ColorsDefinition = Dictionary<
       900: RawCSSProperties['color']
       contrastText?: RawCSSProperties['color']
     }
-  | string
+  | RawCSSProperties['color']
 >
 
 export type RadiiDefinition = Dictionary<string>
@@ -83,7 +83,7 @@ export type TokenDefinitions = {
   // semantic?: SemanticDefinition
 }
 
-export type CreateTokensConfig = {
+export type Config = {
   tokens: TokenDefinitions
   prefix: string
 }

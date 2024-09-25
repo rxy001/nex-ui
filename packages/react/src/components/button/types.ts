@@ -21,3 +21,5 @@ interface InnerButtonProps extends MergedHTMLAttributes, ButtonVariants {
 }
 
 export interface ButtonProps extends InnerButtonProps {}
+
+export interface ButtonOwnerState extends ButtonProps {}

@@ -4,5 +4,5 @@ export type {
   SlotStylesDefinition,
   StylesDefinition,
 } from './types'
-export { createStylesFn } from './createStylesFn'
-export type { StylesFn } from './createStylesFn'
+export { createCvaFn } from './createCVA'
+export type { CvaFn } from './createCVA'

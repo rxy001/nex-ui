@@ -5,7 +5,11 @@ export * from './Provider'
 export { createSystem } from './system'
 
 export { defineStyles } from './styles'
-export type { StylesFn } from './styles'
+export type {
+  CvaFn,
+  BaseStylesDefinition,
+  SlotStylesDefinition,
+} from './styles'
 
 export { defineConfig } from './defineConfig'
 
@@ -15,8 +19,9 @@ export type {
   SystemDefinition,
   CSSPropertiesOverrides,
   StyleObject,
-  NormalizeFn,
 } from './types'
+
+export type { CssFn } from './css'
 
 export type { BreakpointsDefinition } from './breakpoints'
 

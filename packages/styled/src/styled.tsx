@@ -72,11 +72,9 @@ const createStyledComponent = (tag: ElementType) => {
 
   return withEmotionCache(
     (props: Record<string, any>, cache: EmotionCache, ref: Ref<any>) => {
-      const { normalize } = useCSSSystem()
+      const { css } = useCSSSystem()
 
-      let cssProp = props.sx
-        ? normalize(props.sx, props.colorPalette)
-        : props.sx
+      let cssProp = props.sx ? css(props.sx, props.colorPalette) : props.sx
 
       if (
         typeof cssProp === 'string' &&

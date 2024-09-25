@@ -16,3 +16,4 @@ export interface IconProps
 }
 
 export type InnerIconProps = Omit<IconProps, 'component'>
+export interface IconOwnerState extends InnerIconProps {}

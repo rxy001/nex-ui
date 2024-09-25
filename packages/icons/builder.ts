@@ -10,9 +10,8 @@ import {
 import { fileURLToPath } from 'node:url'
 import { forEach, map } from '@nex-ui/utils'
 import { dirname, resolve, basename } from 'node:path'
-import type { IconProps } from './src/utils'
 
-const options: Record<string, IconProps> = {
+const options: Record<string, any> = {
   LoadingOutlined: {
     spin: true,
   },

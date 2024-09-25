@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { merge } from '@nex-ui/utils'
 import { useNexContext } from '../provider/Context'
-import type { ComponentsTheme } from '../../theme'
+import type { ComponentNames } from '../../theme'
 
 type Config<T> = {
-  name: keyof ComponentsTheme
+  name: ComponentNames
   props: T
 }
 
