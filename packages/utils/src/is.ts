@@ -13,3 +13,5 @@ export const isString = (value?: any): value is string =>
 
 export const isUndefined = (value?: any): value is undefined =>
   typeof value === 'undefined'
+
+export const isArray = (value: any): value is Array<any> => Array.isArray(value)

@@ -5,6 +5,7 @@
   "author": "X1ng Yu",
   "scripts": {
     "build": "turbo build",
+    "build:sys-ts": "tsx ./scripts/sysTs",
     "dev": "turbo dev",
     "dev:docs": "turbo dev -F @nex-ui/docs",
     "dev:sb": "turbo dev -F @nex-ui/storybook",
@@ -35,6 +36,7 @@
     "@types/yargs-parser": "21.0.3",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
+    "esbuild": "0.24.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -55,7 +57,7 @@
     "ts-node": "10.9.2",
     "tsx": "4.16.2",
     "turbo": "latest",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.3",
     "yargs-parser": "21.1.1"
   },
   "packageManager": "pnpm@9.0.6",

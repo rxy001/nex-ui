@@ -3,3 +3,5 @@
 
 3. system 支持 深色模式 响应式
 <!-- 4. .test.ts 需使用 `"types": ["@testing-library/jest-dom/jest-globals", "node", "react"],` -->
+
+4. 提供 webpack 、vite 插件动态生成 sys-ts
