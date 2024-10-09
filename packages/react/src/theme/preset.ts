@@ -1,30 +1,18 @@
 import { defineConfig } from '@nex-ui/system'
 import {
-  colors,
-  fontFamilies,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  spacing,
   scales,
-  sizes,
-  borders,
   aliases,
-  radii,
   breakpoints,
+  tokens,
+  semanticTokens,
+  selectors,
 } from './system'
 
-export const defaultTheme = defineConfig({
+export const defaultConfig = defineConfig({
   aliases,
-  colors,
-  fontFamilies,
-  fontSizes,
-  fontWeights,
-  lineHeights,
-  spacing,
-  sizes,
   scales,
-  borders,
-  radii,
   breakpoints,
+  selectors,
+  tokens,
+  semanticTokens,
 })

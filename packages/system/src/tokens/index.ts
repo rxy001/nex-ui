@@ -10,9 +10,9 @@ export type {
   FontSizesDefinition,
   FontWeightsDefinition,
   LineHeightsDefinition,
-  TokenCategory,
-  TokenDefinitions,
+  TokenCategories,
+  TokensDefinition,
   BordersDefinition,
   RadiiDefinition,
-  // SemanticDefinition,
+  SemanticTokensDefinition,
 } from './types'

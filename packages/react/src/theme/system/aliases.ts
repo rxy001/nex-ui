@@ -1,12 +1,6 @@
 import { defineConfig } from '@nex-ui/system'
 
 export const aliases = defineConfig.aliases({
-  /** compound selectors */
-  hover: '&:not(:disabled):not([data-disabled=true]):hover',
-  active: '&:not(:disabled):not([data-disabled=true]):active',
-  disabled: ':disabled, &[data-disabled=true]',
-  /** compound selectors */
-
   /** aliases */
   bg: 'backgroundColor',
   fs: 'fontSize',

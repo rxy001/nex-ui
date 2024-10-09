@@ -1,10 +1,6 @@
-import { defineStyles } from '@nex-ui/system'
-import type {
-  ExtractComponentStyles,
-  ExtractComponentVariants,
-} from '../utils.types'
+import { defineSlotStyles } from '@nex-ui/system'
 
-export const buttonStyles = defineStyles({
+export const buttonStyles = defineSlotStyles({
   slots: {
     root: {
       outline: 'none',
@@ -22,17 +18,17 @@ export const buttonStyles = defineStyles({
       lineHeight: 'base',
       borderColor: 'transparent',
       fontFamily: 'body',
-      _bg: 'white',
+      bg: 'white',
     },
     startIcon: {
       display: 'inherit',
-      _mr: '2',
-      _ml: '-1',
+      mr: '2',
+      ml: '-1',
     },
     endIcon: {
       display: 'inherit',
-      _ml: '2',
-      _mr: '-1',
+      ml: '2',
+      mr: '-1',
     },
   },
   variants: {
@@ -53,14 +49,14 @@ export const buttonStyles = defineStyles({
       },
       solid: {
         root: {
-          _bg: 'colorPalette.500',
+          bg: 'colorPalette.500',
           color: 'colorPalette.contrastText',
           _hover: {
-            _bg: 'colorPalette.400',
+            bg: 'colorPalette.400',
             color: 'colorPalette.contrastText',
           },
           _active: {
-            _bg: 'colorPalette.600',
+            bg: 'colorPalette.600',
             color: 'colorPalette.contrastText',
           },
         },
@@ -69,10 +65,10 @@ export const buttonStyles = defineStyles({
         root: {
           color: 'colorPalette.500',
           _hover: {
-            _bg: 'colorPalette.100',
+            bg: 'colorPalette.100',
           },
           _active: {
-            _bg: 'colorPalette.200',
+            bg: 'colorPalette.200',
           },
         },
       },
@@ -90,21 +86,21 @@ export const buttonStyles = defineStyles({
     },
     size: {
       sm: {
-        root: { _px: '2', _py: '0.5', _fs: 'sm', _h: '6' },
+        root: { px: '2', py: '0.5', fs: 'sm', h: '6' },
         startIcon: {
-          _ml: '-0.5',
-          _mr: '1.5',
+          ml: '-0.5',
+          mr: '1.5',
         },
         endIcon: {
-          _mr: '-0.5',
-          _ml: '1.5',
+          mr: '-0.5',
+          ml: '1.5',
         },
       },
       md: {
-        root: { _px: '3', _py: '1', _fs: 'md', _h: '8' },
+        root: { px: '3', py: '1', fs: 'md', h: '8' },
       },
       lg: {
-        root: { _px: '4', _py: '1.5', _fs: 'lg', _h: '10' },
+        root: { px: '4', py: '1.5', fs: 'lg', h: '10' },
       },
     },
     disabled: {
@@ -135,7 +131,7 @@ export const buttonStyles = defineStyles({
     },
     block: {
       true: {
-        root: { _w: '100%' },
+        root: { w: '100%' },
       },
     },
     radius: {
@@ -156,7 +152,7 @@ export const buttonStyles = defineStyles({
       true: {
         root: {
           borderRadius: '50%',
-          _p: '0.5',
+          p: '0.5',
         },
       },
     },
@@ -166,21 +162,21 @@ export const buttonStyles = defineStyles({
       size: 'sm',
       iconOnly: true,
       css: {
-        root: { _w: '6' },
+        root: { w: '6' },
       },
     },
     {
       size: 'md',
       iconOnly: true,
       css: {
-        root: { _w: '8' },
+        root: { w: '8' },
       },
     },
     {
       size: 'lg',
       iconOnly: true,
       css: {
-        root: { _w: '10' },
+        root: { w: '10' },
       },
     },
   ],
@@ -190,7 +186,3 @@ export const buttonStyles = defineStyles({
     radius: 'md',
   },
 })
-
-export type ButtonVariants = ExtractComponentVariants<typeof buttonStyles>
-
-export type ButtonComponentStyles = ExtractComponentStyles<typeof buttonStyles>

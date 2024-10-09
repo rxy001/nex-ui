@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { isPlainObject, isFunction, mergeWith } from '@nex-ui/utils'
+import { isPlainObject, isFunction, mergeWith, isArray } from '@nex-ui/utils'
 import type { StyleObject } from '@nex-ui/system'
 import { styles } from '../../theme'
 import { useNexContext } from '../provider/Context'
@@ -11,7 +11,7 @@ type UseStylesConfig<T> = {
 }
 
 function customizer(objValue: any, srcValue: any) {
-  if (Array.isArray(objValue)) {
+  if (isArray(objValue)) {
     return objValue.concat(srcValue)
   }
 }
@@ -28,18 +28,25 @@ export function useStyles<T extends ComponentNames>({
   const componentStyles = styles[name] as any
 
   return useMemo(() => {
-    const styleOverrides = components?.[name]?.styleOverrides
+    let fn: any
 
+    if (componentStyles.slots) {
+      fn = sys.sva
+    } else {
+      fn = sys.cva
+    }
+
+    const styleOverrides = components?.[name]?.styleOverrides
     if (isPlainObject(styleOverrides)) {
-      return sys.cva(mergeStyles(componentStyles, styleOverrides))(ownerState)
+      return fn(mergeStyles(componentStyles, styleOverrides))(ownerState)
     }
 
     if (isFunction(styleOverrides)) {
       return mergeStyles(
-        sys.cva(componentStyles)(ownerState),
+        fn(componentStyles)(ownerState),
         styleOverrides(ownerState) ?? {},
       )
     }
-    return sys.cva(componentStyles)(ownerState)
+    return fn(componentStyles)(ownerState)
   }, [components, name, sys, componentStyles, ownerState])
 }

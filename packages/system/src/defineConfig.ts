@@ -1,18 +1,45 @@
+import type { AliasesDefinition } from './aliases'
+import type { BreakpointsDefinition } from './breakpoints'
+import type { ScalesDefinition } from './scales'
+import type { SelectorsDefinition } from './selectors'
+import type {
+  ColorsDefinition,
+  BordersDefinition,
+  LineHeightsDefinition,
+  FontWeightsDefinition,
+  FontFamiliesDefinition,
+  FontSizesDefinition,
+  SizesDefinition,
+  SpacingDefinition,
+  RadiiDefinition,
+  SemanticTokensDefinition,
+  TokensDefinition,
+} from './tokens'
 import type { SystemConfig } from './types'
 
-export const defineConfig = <T extends SystemConfig>(config: T): T => config
-
-defineConfig.colors = <T extends SystemConfig['colors']>(v: T): T => v
-defineConfig.borders = <T extends SystemConfig['borders']>(v: T): T => v
-defineConfig.lineHeights = <T extends SystemConfig['lineHeights']>(v: T): T => v
-defineConfig.fontFamilies = <T extends SystemConfig['fontFamilies']>(v: T): T =>
+export const defineConfig = (config: SystemConfig): SystemConfig => config
+defineConfig.selectors = (v: SelectorsDefinition): SelectorsDefinition => v
+defineConfig.aliases = (v: AliasesDefinition): AliasesDefinition => v
+defineConfig.scales = (v: ScalesDefinition): ScalesDefinition => v
+defineConfig.breakpoints = (v: BreakpointsDefinition): BreakpointsDefinition =>
   v
-defineConfig.fontSizes = <T extends SystemConfig['fontSizes']>(v: T): T => v
-defineConfig.fontWeights = <T extends SystemConfig['fontWeights']>(v: T): T => v
-defineConfig.sizes = <T extends SystemConfig['sizes']>(v: T): T => v
-defineConfig.spaceing = <T extends SystemConfig['spacing']>(v: T): T => v
-// defineConfig.semantic = <T extends SemanticDefinition>(v: T): T => v
-defineConfig.scales = <T extends SystemConfig['scales']>(v: T): T => v
-defineConfig.aliases = <T extends SystemConfig['aliases']>(v: T): T => v
-defineConfig.radii = <T extends SystemConfig['radii']>(v: T): T => v
-defineConfig.breakpoints = <T extends SystemConfig['breakpoints']>(v: T): T => v
+
+export const defineTokens = (v: TokensDefinition): TokensDefinition => v
+
+defineTokens.colors = (v: ColorsDefinition): ColorsDefinition => v
+defineTokens.borders = (v: BordersDefinition): BordersDefinition => v
+defineTokens.lineHeights = (v: LineHeightsDefinition): LineHeightsDefinition =>
+  v
+defineTokens.fontFamilies = (
+  v: FontFamiliesDefinition,
+): FontFamiliesDefinition => v
+defineTokens.fontSizes = (v: FontSizesDefinition): FontSizesDefinition => v
+defineTokens.fontWeights = (v: FontWeightsDefinition): FontWeightsDefinition =>
+  v
+defineTokens.sizes = (v: SizesDefinition): SizesDefinition => v
+defineTokens.spaceing = (v: SpacingDefinition): SpacingDefinition => v
+defineTokens.radii = (v: RadiiDefinition): RadiiDefinition => v
+
+export const defineSemanticTokens = (v: SemanticTokensDefinition) => v
+
+defineSemanticTokens.colors = (v: SemanticTokensDefinition['colors']) => v

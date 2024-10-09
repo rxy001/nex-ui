@@ -1,6 +1,6 @@
-import { defineConfig } from '@nex-ui/system'
+import { defineTokens } from '@nex-ui/system'
 
-export const sizes = defineConfig.sizes({
+export const sizes = defineTokens.sizes({
   max: 'max-content',
   min: 'min-content',
   full: '100%',

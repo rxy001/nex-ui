@@ -61,4 +61,10 @@ export type ExtractComponentVariants<T> = T extends { variants?: infer V }
     }
   : unknown
 
-export type ComponentThemeFn<P> = (ownerState: P) => StyleObject | void
+export type ComponentThemeFn<P, S = undefined> = (
+  ownerState: P,
+) => 'slots' extends keyof S
+  ? {
+      [k in keyof S['slots']]?: StyleObject
+    }
+  : StyleObject

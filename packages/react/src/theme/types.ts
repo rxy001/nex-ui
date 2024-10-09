@@ -1,6 +1,4 @@
 import type {
-  NexCSSProperties,
-  CSSInterpolation,
   ColorsDefinition,
   SpacingDefinition,
   SizesDefinition,
@@ -12,91 +10,69 @@ import type {
   RadiiDefinition,
   AliasesDefinition,
   ScalesDefinition,
+  BreakpointsDefinition,
 } from '@nex-ui/system'
-import type { defaultTheme } from './preset'
-import type { ButtonComponentStyles, IconComponentStyles } from './styles'
+import type { ButtonStyles, IconStyles } from './styles'
 import type { ButtonProps, ButtonOwnerState } from '../components'
 import type { InnerIconProps, IconOwnerState } from '../components/icon/types'
-import type { DeepMerge, ComponentThemeFn } from './utils.types'
+import type { ComponentThemeFn, ExtractComponentStyles } from './utils.types'
+import type { Aliases } from './generated/aliases'
+import type { Scales } from './generated/scales'
+import type { Breakpoints } from './generated/breakpoints'
+import type {
+  FontFamilies,
+  Colors,
+  FontSizes,
+  FontWeights,
+  Sizes,
+  Spacing,
+  Radii,
+  Borders,
+  LineHeights,
+} from './generated/tokens'
+import type { CSSPropertiesOverrides as CSSProperties } from './generated/cssProperties'
 
-type DefaultTheme = typeof defaultTheme
-
-export type BasicTheme = {
-  aliases?: AliasesDefinition & Partial<DefaultTheme['aliases']>
-  borders?: BordersDefinition & Partial<DefaultTheme['borders']>
-  spacing?: SpacingDefinition & Partial<DefaultTheme['spacing']>
-  colors?: ColorsDefinition & Partial<DefaultTheme['colors']>
-  sizes?: SizesDefinition & Partial<DefaultTheme['sizes']>
-  fontFamilies?: FontFamiliesDefinition & Partial<DefaultTheme['fontFamilies']>
-  fontSizes?: FontSizesDefinition & Partial<DefaultTheme['fontSizes']>
-  fontWeights?: FontWeightsDefinition & Partial<DefaultTheme['fontWeights']>
-  lineHeights?: LineHeightsDefinition & Partial<DefaultTheme['lineHeights']>
-  radii?: RadiiDefinition & Partial<DefaultTheme['radii']>
-  scales?: ScalesDefinition & Partial<DefaultTheme['scales']>
-}
-
-export interface ThemeOverrides {}
-
-export interface Aliases {
-  _hover?: CSSInterpolation
-  _active?: CSSInterpolation
-  _disabled?: CSSInterpolation
-
-  _bg?: NexCSSProperties['backgroundColor']
-  _fs?: NexCSSProperties['fontSize']
-  _lh?: NexCSSProperties['lineHeight']
-  _w?: NexCSSProperties['width']
-  _h?: NexCSSProperties['height']
-
-  _py?: NexCSSProperties['paddingTop']
-  _px?: NexCSSProperties['paddingLeft']
-  _pt?: NexCSSProperties['paddingTop']
-  _pb?: NexCSSProperties['paddingBottom']
-  _pl?: NexCSSProperties['paddingLeft']
-  _pr?: NexCSSProperties['paddingRight']
-  _p?: NexCSSProperties['padding']
-
-  _mt?: NexCSSProperties['marginTop']
-  _mb?: NexCSSProperties['marginBottom']
-  _ml?: NexCSSProperties['marginLeft']
-  _mr?: NexCSSProperties['marginRight']
-  _mx?: NexCSSProperties['marginLeft']
-  _my?: NexCSSProperties['marginTop']
-  _m?: NexCSSProperties['margin']
-}
-
-type System = DeepMerge<DefaultTheme, ThemeOverrides>
-
-/**
- * 根据 System 推导出定义的 colors key, 不包含 semantic 中的 colors
- */
-export type ColorPalette = System extends { colors: object }
-  ? keyof {
-      [K in keyof System['colors'] as System['colors'][K] extends object
-        ? K
-        : never]: true
-    }
-  : never
-
-declare module '@nex-ui/system' {
-  interface SystemDefinition extends System {}
-
-  interface CSSPropertiesOverrides extends Aliases {}
-}
+export type ColorPalette = keyof Colors
 
 declare module '@nex-ui/icons' {
   interface IconProps extends InnerIconProps {}
 }
 
+declare module '@nex-ui/system' {
+  interface CSSPropertiesOverrides extends CSSProperties {}
+}
+
 export type ComponentsTheme = {
   Button?: {
-    styleOverrides?: ButtonComponentStyles | ComponentThemeFn<ButtonOwnerState>
+    styleOverrides?:
+      | ExtractComponentStyles<ButtonStyles>
+      | ComponentThemeFn<ButtonOwnerState, ButtonStyles>
     defaultProps?: ButtonProps
   }
   Icon?: {
-    styleOverrides?: IconComponentStyles | ComponentThemeFn<IconOwnerState>
+    styleOverrides?:
+      | ExtractComponentStyles<IconStyles>
+      | ComponentThemeFn<IconOwnerState>
     defaultProps?: InnerIconProps
   }
 }
 
 export type ComponentNames = keyof ComponentsTheme
+
+export type Theme = {
+  aliases?: AliasesDefinition & Aliases
+  scales?: ScalesDefinition & Scales
+  breakpoints?: BreakpointsDefinition & Breakpoints
+  tokens?: {
+    borders?: BordersDefinition & Borders
+    spacing?: SpacingDefinition & Spacing
+    colors?: ColorsDefinition & Colors
+    sizes?: SizesDefinition & Sizes
+    fontFamilies?: FontFamiliesDefinition & FontFamilies
+    fontSizes?: FontSizesDefinition & FontSizes
+    fontWeights?: FontWeightsDefinition & FontWeights
+    lineHeights?: LineHeightsDefinition & LineHeights
+    radii?: RadiiDefinition & Radii
+  }
+  components?: ComponentsTheme
+}

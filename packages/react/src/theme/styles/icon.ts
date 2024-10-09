@@ -1,16 +1,12 @@
 import { keyframes } from '@emotion/react'
-import { defineStyles } from '@nex-ui/system'
-import type {
-  ExtractComponentStyles,
-  ExtractComponentVariants,
-} from '../utils.types'
+import { defineBaseStyles } from '@nex-ui/system'
 
 const circle = keyframes({
   '0%': { transform: 'rotate(0deg)' },
   '100%': { transform: 'rotate(360deg)' },
 })
 
-export const iconStyles = defineStyles({
+export const iconStyles = defineBaseStyles({
   base: {
     userSelect: 'none',
     display: 'inline-block',
@@ -35,7 +31,3 @@ export const iconStyles = defineStyles({
     },
   },
 })
-
-export type IconVariants = ExtractComponentVariants<typeof iconStyles>
-
-export type IconComponentStyles = ExtractComponentStyles<typeof iconStyles>

@@ -1,4 +1,4 @@
-import { defineConfig } from '@nex-ui/system'
+import { defineTokens } from '@nex-ui/system'
 
 const blue = {
   50: '#e6f4ff',
@@ -124,7 +124,7 @@ const green = {
   contrastText: '#fff',
 }
 
-export const colors = defineConfig.colors({
+export const colors = defineTokens.colors({
   transparent: 'transparent',
   current: 'currentColor',
   white: '#fff',

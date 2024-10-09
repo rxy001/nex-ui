@@ -1,18 +1,18 @@
-import { defineConfig } from '@nex-ui/system'
+import { defineTokens } from '@nex-ui/system'
 
-export const fontFamilies = defineConfig.fontFamilies({
+export const fontFamilies = defineTokens.fontFamilies({
   heading: 'Roboto, Helvetica, Arial, sans-serif',
   body: 'Roboto, Helvetica, Arial, sans-serif',
   mono: `SFMono-Regular, Menlo,Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
 })
 
-export const fontSizes = defineConfig.fontSizes({
+export const fontSizes = defineTokens.fontSizes({
   sm: '12px',
   md: '14px',
   lg: '16px',
 })
 
-export const fontWeights = defineConfig.fontWeights({
+export const fontWeights = defineTokens.fontWeights({
   hairline: 100,
   thin: 200,
   light: 300,
@@ -24,7 +24,7 @@ export const fontWeights = defineConfig.fontWeights({
   black: 900,
 })
 
-export const lineHeights = defineConfig.lineHeights({
+export const lineHeights = defineTokens.lineHeights({
   normal: 'normal',
   none: 1,
   shorter: 1.25,

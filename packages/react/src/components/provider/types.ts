@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import type { CvaFn, CssFn } from '@nex-ui/system'
-import type { BasicTheme, ComponentsTheme } from '../../theme'
+import type { SystemContext } from '@nex-ui/system'
+import type { ComponentsTheme, Theme } from '../../theme'
 
 export type InnerProviderProps = {
   components?: ComponentsTheme
@@ -9,8 +9,7 @@ export type InnerProviderProps = {
 }
 
 export type NexProviderProps = {
-  theme?: BasicTheme
-  components?: ComponentsTheme
+  theme?: Theme
   children?: ReactNode
   prefix?: string
 }
@@ -18,8 +17,5 @@ export type NexProviderProps = {
 export type NexContext = {
   prefix: string
   components?: InnerProviderProps['components']
-  sys: {
-    cva: CvaFn
-    css: CssFn
-  }
+  sys: SystemContext
 }

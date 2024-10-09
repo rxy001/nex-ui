@@ -1,8 +1,3 @@
-export { defineStyles } from './defineStyles'
-export type {
-  BaseStylesDefinition,
-  SlotStylesDefinition,
-  StylesDefinition,
-} from './types'
-export { createCvaFn } from './createCVA'
-export type { CvaFn } from './createCVA'
+export { defineBaseStyles, defineSlotStyles } from './defineStyles'
+export { createCvaFn, createSvaFn } from './createRuntimeFn'
+export type { CvaFn, SvaFn } from './createRuntimeFn'
