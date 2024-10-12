@@ -1,11 +1,9 @@
-import type { RawCSSProperties } from '../types'
+import type { RawCSSProperties, Dictionary } from '../types'
 import type { Token } from './createToken'
 
 export type TokenValue = string | number
 
-type Dictionary<T> = Record<string, T>
-
-export type TokenCategory =
+export type TokenCategories =
   | 'fontFamilies'
   | 'fontSizes'
   | 'fontWeights'
@@ -15,7 +13,6 @@ export type TokenCategory =
   | 'sizes'
   | 'borders'
   | 'radii'
-  | 'breakpoints'
 
 export type ColorsDefinition = Dictionary<
   | {
@@ -34,43 +31,42 @@ export type ColorsDefinition = Dictionary<
   | RawCSSProperties['color']
 >
 
-export type RadiiDefinition = Dictionary<string>
+export type RadiiDefinition = Dictionary<string | number>
 
-export type SpacingDefinition = Dictionary<string>
+export type SpacingDefinition = Dictionary<string | number>
 
-export type SizesDefinition = Dictionary<string>
+export type SizesDefinition = Dictionary<string | number>
 
-export type FontFamiliesDefinition = Dictionary<string>
-
-export type FontSizesDefinition = Dictionary<string>
+export type FontSizesDefinition = Dictionary<string | number>
 
 export type FontWeightsDefinition = Dictionary<string | number>
 
 export type LineHeightsDefinition = Dictionary<string | number>
 
-// export type SemanticDefinition = {
-//   colors?: {
-//     [key: string]:
-//       | {
-//           50: CSSProperties['color']
-//           100: CSSProperties['color']
-//           200: CSSProperties['color']
-//           300: CSSProperties['color']
-//           400: CSSProperties['color']
-//           500: CSSProperties['color']
-//           600: CSSProperties['color']
-//           700: CSSProperties['color']
-//           800: CSSProperties['color']
-//           900: CSSProperties['color']
-//           contrastText?: CSSProperties['color']
-//         }
-//       | CSSProperties['color']
-//   }
-// }
+export type FontFamiliesDefinition = Dictionary<string>
+
+interface Recursive<T> {
+  [key: string]: T | Recursive<T>
+}
+
+type SemanticColorToken =
+  | RawCSSProperties['color']
+  | {
+      base?: RawCSSProperties['color']
+      light?: RawCSSProperties['color']
+      dark?: RawCSSProperties['color']
+    }
+
+export type SemanticTokensDefinition = {
+  colors?: Recursive<{
+    DEFAULT?: SemanticColorToken
+    [key: string]: SemanticColorToken
+  }>
+}
 
 export type BordersDefinition = Dictionary<string>
 
-export type TokenDefinitions = {
+export type TokensDefinition = {
   colors?: ColorsDefinition
   spacing?: SpacingDefinition
   sizes?: SizesDefinition
@@ -80,14 +76,14 @@ export type TokenDefinitions = {
   lineHeights?: LineHeightsDefinition
   borders?: BordersDefinition
   radii?: RadiiDefinition
-  // semantic?: SemanticDefinition
 }
 
 export type Config = {
-  tokens: TokenDefinitions
+  tokens: TokensDefinition
+  semanticTokens: SemanticTokensDefinition
   prefix: string
 }
 
 export type TokenMap = Map<string, Token>
 
-export type CssVarMap = Map<string, string | number>
+export type CssVarMap = Map<string, Map<string, string | number>>

@@ -1,9 +1,5 @@
-import type { BasicTheme, ComponentsTheme } from './types'
+import type { Theme } from './types'
 
-export function defineBasicTheme<T extends BasicTheme>(theme: T): T {
-  return theme
-}
-
-export function defineComponentsTheme<T extends ComponentsTheme>(theme: T) {
+export function defineTheme(theme: Theme) {
   return theme
 }

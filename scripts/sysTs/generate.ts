@@ -145,7 +145,7 @@ export async function generateCSSProperties(sys: any) {
   import type { Breakpoints } from './breakpoints'
 
   type ColorScheme<T> = {
-    DEFALUT?: T
+    DEFAULT?: T
     _dark?: T
     _light?: T
   }

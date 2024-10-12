@@ -1,5 +1,6 @@
-import { walkObject } from '@nex-ui/utils'
-import type { Config, TokenMap, CssVarMap, TokenCategory } from './types'
+import { forEach, isPlainObject, isString, walkObject } from '@nex-ui/utils'
+import type { Noop } from '@nex-ui/utils'
+import type { Config, TokenMap, CssVarMap, TokenCategories } from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
@@ -9,9 +10,15 @@ import {
   checkTokenCategory,
 } from '../utils'
 import type { Token } from './createToken'
+import type { Dictionary } from '../types'
+
+function filterDefault(path: string[]) {
+  if (path[0] === 'DEFAULT') return path
+  return path.filter((item) => item !== 'DEFAULT')
+}
 
 export function createTokens(config: Config) {
-  const { tokens, prefix } = config
+  const { tokens, semanticTokens, prefix } = config
 
   const tokenMap: TokenMap = new Map()
 
@@ -19,9 +26,15 @@ export function createTokens(config: Config) {
 
   let workInProgress: Token | null = null
 
+  function addToTokenMap() {
+    if (workInProgress) {
+      tokenMap.set(workInProgress.name, workInProgress)
+    }
+  }
+
   function createCssVar() {
     if (workInProgress) {
-      const { path, originalValue } = workInProgress
+      const { path } = workInProgress
 
       const variableName = createCssVarName(prefix, path)
 
@@ -33,12 +46,10 @@ export function createTokens(config: Config) {
       }
 
       workInProgress.value = newValue
-
-      cssVarMap.set(variableName, originalValue)
     }
   }
 
-  function createNegativeToken() {
+  function addNegativeToken() {
     if (workInProgress) {
       const { category, value, path, originalValue, cssVar } = workInProgress
       const newPath = [...path]
@@ -50,94 +61,185 @@ export function createTokens(config: Config) {
         path: newPath,
         name: pathToName(newPath),
         value: negate(cssVar?.ref ?? value),
-        derivative: true,
+      })
+
+      addToTokenMap()
+    }
+  }
+
+  function buildCssVars() {
+    if (workInProgress) {
+      const { conditions, cssVar } = workInProgress
+
+      const variableName = cssVar?.var as string
+
+      forEach(conditions, (value, condition) => {
+        if (!value) {
+          return
+        }
+
+        if (!cssVarMap.has(condition)) {
+          cssVarMap.set(condition, new Map())
+        }
+
+        cssVarMap.get(condition)!.set(variableName, value)
       })
     }
   }
 
   function handleToken() {
-    while (workInProgress) {
-      const { category, value, derivative } = workInProgress
-
-      tokenMap.set(workInProgress.name, workInProgress)
-
-      if (derivative === true) {
-        workInProgress = null
-        return
-      }
-
+    if (workInProgress) {
       createCssVar()
+      buildCssVars()
+      addToTokenMap()
+
+      const { category, value } = workInProgress
 
       switch (category) {
         case 'spacing':
           if (value === '0rem' || value === 0) {
             return
           }
-          createNegativeToken()
+          addNegativeToken()
           break
         default:
-          workInProgress = null
           break
       }
+
+      workInProgress = null
+    }
+  }
+
+  function getTokenValueByCategory(category: TokenCategories) {
+    return (value: string) => {
+      if (isString(value)) {
+        const regex = /\{(.*?)\}/
+        const match = value.match(regex)
+        if (match && match[1]) {
+          const token = tokenMap.get(`${category}.${match[1]}`)
+
+          return token?.value ?? value
+        }
+      }
+
+      return value
     }
   }
 
   function workloop() {
-    function callback(value: string | number, path: string[]) {
-      if (!checkTokenValue(value, path)) return
+    walkObject(
+      tokens,
+      (value: string | number, path: string[]) => {
+        if (!checkTokenValue(value, path)) return
 
-      const category = path[0]
+        const category = path[0]
 
-      if (!checkTokenCategory(category)) {
-        return
-      }
+        if (!checkTokenCategory(category)) {
+          return
+        }
 
-      const dependend =
-        tokenMap.get(String(value)) ??
-        tokenMap.get(pathToName([category, String(value)]))
+        workInProgress = createToken({
+          path,
+          value,
+          category: category as TokenCategories,
+          name: pathToName(path),
+          originalValue: value,
+          conditions: {
+            base: value,
+          },
+        })
 
-      const dependendValue = dependend?.cssVar?.ref || dependend?.value
+        handleToken()
+      },
+      {
+        predicate: (_: any, path: string[]) => {
+          const category = path[0]
+          switch (category) {
+            case 'colors':
+              return path.length > 3
+            default:
+              return path.length > 2
+          }
+        },
+      },
+    )
 
-      workInProgress = createToken({
-        path,
-        category: category as TokenCategory,
-        value: dependendValue ?? value,
-        name: pathToName(path),
-        originalValue: value,
-        derivative: !!dependendValue,
-      })
+    walkObject(
+      semanticTokens,
+      (value: any, path: string[]) => {
+        if (!checkTokenCategory(path[0])) {
+          return
+        }
 
-      handleToken()
-    }
+        const category = path[0] as TokenCategories
 
-    function predicate(_: any, path: string[]) {
-      const category = path[0]
+        const newPath = filterDefault(path)
 
-      switch (category) {
-        case 'colors':
-          return path.length > 3
-        default:
-          return path.length > 2
-      }
-    }
+        const t = getTokenValueByCategory(category)
 
-    const { ...other } = tokens
+        const conditions = isPlainObject(value)
+          ? pick(value as Dictionary, ['base', 'light', 'dark'], t)
+          : { base: t(value) }
 
-    walkObject(other, callback, {
-      predicate,
-    })
+        workInProgress = createToken({
+          value,
+          category,
+          conditions,
+          path: newPath,
+          name: pathToName(newPath),
+          originalValue: value,
+        })
 
-    // walkObject({ ...semantic }, callback, {
-    //   predicate,
-    // })
+        handleToken()
+      },
+      {
+        predicate: (value: any) =>
+          isPlainObject(value) && (value.light || value.dark || value.base),
+      },
+    )
   }
 
   workloop()
 
   return {
     getToken: (key: string) => tokenMap.get(key),
-    getCssVars: () => Object.fromEntries(cssVarMap.entries()),
+    getGlobalCssVars: () => {
+      const result: Dictionary = {}
+      const globalPrefix = ':root'
+
+      cssVarMap.forEach((value, key) => {
+        const cssVar = Object.fromEntries(value.entries())
+
+        if (Object.keys(cssVar).length === 0) {
+          return
+        }
+
+        if (key === 'base') {
+          result[globalPrefix] = cssVar
+        } else {
+          result[`.${key}${globalPrefix}`] = cssVar
+        }
+      })
+
+      return result
+    },
   }
+}
+
+function pick<T extends Dictionary, K extends keyof T>(
+  obj: T,
+  keys: K[],
+  t: Noop,
+) {
+  const result = {} as Pick<T, K>
+
+  forEach(keys, (key) => {
+    if (obj[key]) {
+      result[key] = t(obj[key])
+    }
+  })
+
+  return result
 }
 
 export type Tokens = ReturnType<typeof createTokens>

@@ -4,20 +4,19 @@ export * from './Provider'
 
 export { createSystem } from './system'
 
-export { defineStyles } from './styles'
-export type {
-  CvaFn,
-  BaseStylesDefinition,
-  SlotStylesDefinition,
-} from './styles'
+export { defineBaseStyles, defineSlotStyles } from './styles'
+export type { BaseStylesDefinition, SlotStylesDefinition } from './styles'
 
-export { defineConfig } from './defineConfig'
+export {
+  defineConfig,
+  defineTokens,
+  defineSemanticTokens,
+} from './defineConfig'
 
 export type {
   CSSInterpolation,
-  NexCSSProperties,
-  SystemDefinition,
   CSSPropertiesOverrides,
+  RawCSSProperties,
   StyleObject,
 } from './types'
 
@@ -39,5 +38,4 @@ export type {
   SizesDefinition,
   SpacingDefinition,
   RadiiDefinition,
-  // SemanticDefinition,
 } from './tokens'

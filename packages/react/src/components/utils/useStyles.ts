@@ -1,45 +1,78 @@
 import { useMemo } from 'react'
-import { isPlainObject, isFunction, mergeWith } from '@nex-ui/utils'
-import type { StyleObject } from '@nex-ui/system'
+import { isPlainObject, isFunction, mergeWith, isArray } from '@nex-ui/utils'
+import type {
+  StyleObject,
+  BaseStylesDefinition,
+  SlotStylesDefinition,
+} from '@nex-ui/system'
 import { styles } from '../../theme'
 import { useNexContext } from '../provider/Context'
-import type { ComponentNames, Styles } from '../../theme'
+import type { Styles } from '../../theme'
 
-type UseStylesConfig<T> = {
+type UseStylesConfig<T, K> = {
   name: T
-  ownerState: any
+  ownerState: K
 }
 
-function customizer(objValue: any, srcValue: any) {
-  if (Array.isArray(objValue)) {
-    return objValue.concat(srcValue)
-  }
-}
-
-const mergeStyles = (a: any, b: any) => mergeWith({}, a, b, customizer)
-
-export function useStyles<T extends ComponentNames>({
-  name,
-  ownerState = {},
-}: UseStylesConfig<T>): 'slots' extends keyof Styles[T]
+type UseStyles = <T extends keyof Styles, K extends Record<string, any>>(
+  option: UseStylesConfig<T, K>,
+) => 'slots' extends keyof Styles[T]
   ? Record<keyof Styles[T]['slots'], StyleObject>
-  : StyleObject {
+  : StyleObject
+
+const mergeStyles = <T extends Record<string, any>>(a: T, b: T): T =>
+  mergeWith({}, a, b, (objValue: any, srcValue: any) => {
+    if (isArray(objValue)) {
+      return objValue.concat(srcValue)
+    }
+  })
+
+export const useStyles: UseStyles = ({ name, ownerState = {} }) => {
   const { sys, components } = useNexContext()
   const componentStyles = styles[name] as any
+  const styleOverrides = components?.[name]?.styleOverrides
 
   return useMemo(() => {
-    const styleOverrides = components?.[name]?.styleOverrides
+    if (componentStyles.slots) {
+      const s = styles[name] as SlotStylesDefinition
+
+      if (isPlainObject(styleOverrides)) {
+        const runtimeFn = sys.sva(
+          mergeStyles(s, styleOverrides as SlotStylesDefinition),
+        )
+        return runtimeFn(runtimeFn.splitVariantProps(ownerState))
+      }
+
+      if (isFunction(styleOverrides)) {
+        const runtimeFn = sys.sva(s)
+        return mergeStyles(
+          runtimeFn(runtimeFn.splitVariantProps(ownerState)),
+          (styleOverrides(ownerState) ?? {}) as any,
+        )
+      }
+
+      const runtimeFn = sys.sva(s)
+      return runtimeFn(runtimeFn.splitVariantProps(ownerState))
+    }
+
+    const s = styles[name] as BaseStylesDefinition
 
     if (isPlainObject(styleOverrides)) {
-      return sys.cva(mergeStyles(componentStyles, styleOverrides))(ownerState)
+      const runtimeFn = sys.cva(
+        mergeStyles(s, styleOverrides as BaseStylesDefinition),
+      )
+      return runtimeFn(runtimeFn.splitVariantProps(ownerState))
     }
 
     if (isFunction(styleOverrides)) {
+      const runtimeFn = sys.cva(s)
       return mergeStyles(
-        sys.cva(componentStyles)(ownerState),
+        runtimeFn(runtimeFn.splitVariantProps(ownerState)),
         styleOverrides(ownerState) ?? {},
       )
     }
-    return sys.cva(componentStyles)(ownerState)
-  }, [components, name, sys, componentStyles, ownerState])
+
+    const runtimeFn = sys.cva(s)
+    return runtimeFn(runtimeFn.splitVariantProps(ownerState))
+  }, [componentStyles.slots, name, styleOverrides, sys, ownerState])
 }

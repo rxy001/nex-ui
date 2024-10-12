@@ -1,9 +1,8 @@
 export type {
-  ThemeOverrides,
-  BasicTheme,
   ComponentsTheme,
   ColorPalette,
   ComponentNames,
+  Theme,
 } from './types'
 
 export * from './styles'

@@ -1,15 +1,14 @@
-import type { SerializedStyles } from '@emotion/react'
-import type { StyleObject } from '../types'
+import type { StyleObject, Dictionary } from '../types'
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 
-export type SlotGroups = Record<string, StyleObject>
+export type SlotGroups = Dictionary<StyleObject>
 
-type BaseVariantGroups = Record<string, Record<string, StyleObject>>
+export type BaseVariantGroups = Dictionary<Dictionary<StyleObject>>
 
-type SlotVariantGroups<S extends SlotGroups | string = string> = Record<
+export type SlotVariantGroups<S extends SlotGroups | string = string> = Record<
   string,
-  Record<string, Partial<Record<keyof S, StyleObject>>>
+  Dictionary<Partial<Record<keyof S, StyleObject>>>
 >
 
 export type CompoundVariantsSelection<
@@ -18,64 +17,41 @@ export type CompoundVariantsSelection<
   [K in keyof V]?: BooleanMap<keyof V[K]> | BooleanMap<keyof V[K]>[]
 }
 
-export type CompoundVariants<
-  V extends BaseVariantGroups | SlotVariantGroups,
-  S,
-> = Array<
-  CompoundVariantsSelection<V> & {
-    css: S extends SlotGroups
-      ? {
-          [K in keyof S]?: StyleObject
-        }
-      : StyleObject
-  }
->
-
-export type VariantGroups<S> = S extends SlotGroups
-  ? SlotVariantGroups<S>
-  : BaseVariantGroups
-
 export type VariantSelection<V extends BaseVariantGroups | SlotVariantGroups> =
   {
     [K in keyof V]?: BooleanMap<keyof V[K]>
   }
 
-export type StylesDefinition<
-  S extends StyleObject | SlotGroups,
-  V extends VariantGroups<S>,
-> = {
-  slots?: S
-  base?: S
-  variants?: V
-  defaultVariants?: VariantSelection<V>
-  compoundVariants?: CompoundVariants<V, S>
-}
-
 export type BaseStylesDefinition<
-  B extends StyleObject = StyleObject,
-  V extends VariantGroups<B> = VariantGroups<B>,
+  V extends BaseVariantGroups = BaseVariantGroups,
 > = {
-  base: B
+  base: StyleObject
   variants?: V
   defaultVariants?: VariantSelection<V>
-  compoundVariants?: CompoundVariants<V, B>
+  compoundVariants?: Array<CompoundVariantsSelection<V> & { css?: StyleObject }>
 }
 
 export type SlotStylesDefinition<
   S extends SlotGroups = SlotGroups,
-  V extends VariantGroups<S> = VariantGroups<S>,
+  V extends SlotVariantGroups<S> = SlotVariantGroups<S>,
 > = {
   slots: S
   variants?: V
   defaultVariants?: VariantSelection<V>
-  compoundVariants?: CompoundVariants<V, S>
+  compoundVariants?: Array<
+    CompoundVariantsSelection<V> & {
+      css?: {
+        [K in keyof S]?: StyleObject
+      }
+    }
+  >
 }
 
-export type RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> = (
-  styles: VariantSelection<V>,
-  options?: { specifiedColorPalette?: string },
-) => R
+export type PickVariant<T, K extends keyof any> = K extends keyof T
+  ? T[K]
+  : never
 
-export type MultipleSerializedStyles<V> = {
-  [K in keyof V]: SerializedStyles
+export interface RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> {
+  (variants: VariantSelection<V>): R
+  splitVariantProps: <T extends Dictionary>(props: T) => PickVariant<T, keyof V>
 }

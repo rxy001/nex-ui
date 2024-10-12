@@ -1,4 +1,4 @@
-import type { TokenValue, TokenCategory } from './types'
+import type { TokenValue, TokenCategories } from './types'
 
 export class Token {
   path: string[]
@@ -9,13 +9,17 @@ export class Token {
 
   originalValue: TokenValue
 
-  category: TokenCategory
-
-  derivative: boolean
+  category: TokenCategories
 
   cssVar?: {
     var: string
     ref: string
+  }
+
+  conditions?: {
+    base?: string | number
+    light?: string | number
+    dark?: string | number
   }
 
   constructor({
@@ -24,16 +28,16 @@ export class Token {
     category,
     name,
     originalValue,
-    derivative,
     cssVar,
+    conditions,
   }: Token) {
     this.path = path
     this.value = value
     this.category = category
     this.name = name
     this.originalValue = originalValue
-    this.derivative = derivative
     this.cssVar = cssVar
+    this.conditions = conditions
   }
 }
 

@@ -1,6 +1,6 @@
-import { defineConfig } from '@nex-ui/system'
+import { defineTokens } from '@nex-ui/system'
 
-export const spacing = defineConfig.spaceing({
+export const spacing = defineTokens.spaceing({
   px: '1px',
   0.5: '2px',
   1: '4px',

@@ -29,7 +29,7 @@ export function createCssVarName(prefix: string, path: string[]) {
 export function checkTokenValue(value: any, path: string[]) {
   if (!isString(value) && !isNumber(value)) {
     console.error(
-      `system: The token value must be either a string or a number. but currently received is ${typeof value} (${path.join('.')})`,
+      `nex-system: The token value must be either a string or a number. but currently received is ${typeof value} (${path.join('.')})`,
     )
     return false
   }
@@ -50,7 +50,7 @@ export function checkTokenCategory(category: string): boolean {
     case 'breakpoints':
       return true
     default:
-      console.error(`system: Unknown token category: '${category}'`)
+      console.error(`nex-system: Unknown token category: '${category}'`)
       return false
   }
 }
