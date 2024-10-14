@@ -21,7 +21,7 @@ export const createCssFn = ({
 
     const handlePaths = (paths: string[]) => {
       return paths
-        .filter((v) => v !== 'DEFAULT')
+        .filter((v) => v !== '_DEFAULT')
         .sort((a) => 96 - a.charCodeAt(0))
         .map((p) => {
           // 0 - 9

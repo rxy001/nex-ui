@@ -1,5 +1,4 @@
-import { forEach, isPlainObject, isString, walkObject } from '@nex-ui/utils'
-import type { Noop } from '@nex-ui/utils'
+import { forEach, isString, walkObject } from '@nex-ui/utils'
 import type { Config, TokenMap, CssVarMap, TokenCategories } from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
@@ -8,6 +7,7 @@ import {
   pathToName,
   checkTokenValue,
   checkTokenCategory,
+  isResponsiveColor,
 } from '../utils'
 import type { Token } from './createToken'
 import type { Dictionary } from '../types'
@@ -177,8 +177,12 @@ export function createTokens(config: Config) {
 
         const t = getTokenValueByCategory(category)
 
-        const conditions = isPlainObject(value)
-          ? pick(value as Dictionary, ['base', 'light', 'dark'], t)
+        const conditions = isResponsiveColor(value)
+          ? {
+              base: t(value._DEFAULT),
+              dark: t(value._dark),
+              light: t(value._light),
+            }
           : { base: t(value) }
 
         workInProgress = createToken({
@@ -193,8 +197,7 @@ export function createTokens(config: Config) {
         handleToken()
       },
       {
-        predicate: (value: any) =>
-          isPlainObject(value) && (value.light || value.dark || value.base),
+        predicate: isResponsiveColor,
       },
     )
   }
@@ -224,22 +227,6 @@ export function createTokens(config: Config) {
       return result
     },
   }
-}
-
-function pick<T extends Dictionary, K extends keyof T>(
-  obj: T,
-  keys: K[],
-  t: Noop,
-) {
-  const result = {} as Pick<T, K>
-
-  forEach(keys, (key) => {
-    if (obj[key]) {
-      result[key] = t(obj[key])
-    }
-  })
-
-  return result
 }
 
 export type Tokens = ReturnType<typeof createTokens>

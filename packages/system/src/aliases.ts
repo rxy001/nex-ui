@@ -13,11 +13,6 @@ export function createAliases(aliases: AliasesDefinition) {
     if (isArray(array)) {
       aliasMap.set(key, array)
     }
-    // else {
-    //   console.error(
-    //     `system: The value of this alias must be a string. ${key}: ${value}`,
-    //   )
-    // }
   })
 
   return {

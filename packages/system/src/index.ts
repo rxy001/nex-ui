@@ -18,6 +18,7 @@ export type {
   CSSPropertiesOverrides,
   RawCSSProperties,
   StyleObject,
+  SystemConfig,
 } from './types'
 
 export type { CssFn } from './css'

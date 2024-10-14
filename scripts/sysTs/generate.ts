@@ -1,7 +1,46 @@
+import { walkObject, filter } from 'packages/utils/src'
+import { isResponsiveColor } from 'packages/system/src/utils'
 import { pretty } from '../utils'
 
 function capitalize(str: string) {
   return str.replace(/^\w/, (c) => c.toUpperCase())
+}
+
+function unionType(types: any[]) {
+  return types.join(' | ')
+}
+
+function filterDefault(path: string[]) {
+  if (path[0] === 'DEFAULT') return path
+  return path.filter((item) => item !== 'DEFAULT')
+}
+
+export async function generateSemanticTokens(sys: any) {
+  const keys = Object.keys(sys.semanticTokens)
+
+  const result = `
+      export interface SemanticTokens {
+       ${keys
+         .map((tokenCategory) => {
+           const token = sys.semanticTokens[tokenCategory]
+           const types: string[] = []
+           walkObject(
+             token,
+             (_value: string | number, path: string[]) => {
+               types.push(`'${filterDefault(path).join('.')}'`)
+             },
+             {
+               predicate: isResponsiveColor,
+             },
+           )
+
+           return `${tokenCategory}: ${unionType(types)}`
+         })
+         .join('\n')}
+      }
+  `
+
+  return pretty(result)
 }
 
 export async function generateTokens(sys: any) {
@@ -34,7 +73,7 @@ export async function generateTokens(sys: any) {
               }
             })
 
-            return `${tokenCategory}: ${types.join('|')}`
+            return `${tokenCategory}: ${unionType(types)}`
           })
           .join('\n')}
       }
@@ -138,14 +177,26 @@ export async function generateCSSProperties(sys: any) {
   const scaleKeys = Object.keys(sys.scales)
   const selectorKeys = Object.keys(sys.selectors)
   const aliasKeys = Object.keys(sys.aliases)
+  const { semanticTokens } = sys
+
+  function extraType(category: string) {
+    return filter(
+      [
+        `Tokens['${category}']`,
+        semanticTokens[category] ? `SemanticTokens['${category}']` : '',
+      ],
+      Boolean,
+    )
+  }
 
   const result = `
   import type { RawCSSProperties, CSSInterpolation } from '@nex-ui/system'
   import type { Tokens } from './tokens'
+  import type { SemanticTokens } from './semanticTokens'
   import type { Breakpoints } from './breakpoints'
 
   type ColorScheme<T> = {
-    DEFAULT?: T
+    _DEFAULT?: T
     _dark?: T
     _light?: T
   }
@@ -165,8 +216,8 @@ export async function generateCSSProperties(sys: any) {
       .join('\n')}
     ${scaleKeys
       .map((key) => {
-        const value = sys.scales[key]
-        return `${key}?: RawCSSProperties['${key}'] | Tokens['${value}']`
+        const category = sys.scales[key]
+        return `${key}?: ${unionType([`RawCSSProperties['${key}']`, ...extraType(category)])}`
       })
       .join('\n')}
     ${aliasKeys
@@ -174,14 +225,11 @@ export async function generateCSSProperties(sys: any) {
         let value = sys.aliases[key]
         value = Array.isArray(value) ? value[0] : value
 
-        const str = `${key}?: RawCSSProperties['${value}']`
-
         const category = sys.scales[value]
         if (category) {
-          return `${str} | Tokens['${category}']`
+          return `${key}?: ${unionType([`RawCSSProperties['${value}']`, ...extraType(category)])}`
         }
-
-        return str
+        return `${key}?: RawCSSProperties['${value}']}`
       })
       .join('\n')}
     }

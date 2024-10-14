@@ -10,6 +10,7 @@ import {
   generateSelectors,
   generateCSSProperties,
   generateBreakpoints,
+  generateSemanticTokens,
 } from './generate'
 
 const log = (message: any) => {
@@ -139,6 +140,12 @@ async function builder(sys: any) {
       title: 'selectors',
       task: async () => {
         writeFile('selectors', await generateSelectors(sys))
+      },
+    },
+    {
+      title: 'semanticTokens',
+      task: async () => {
+        writeFile('semanticTokens', await generateSemanticTokens(sys))
       },
     },
     {

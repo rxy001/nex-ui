@@ -43,6 +43,8 @@ export type FontWeightsDefinition = Dictionary<string | number>
 
 export type LineHeightsDefinition = Dictionary<string | number>
 
+export type BordersDefinition = Dictionary<string | number>
+
 export type FontFamiliesDefinition = Dictionary<string>
 
 interface Recursive<T> {
@@ -52,9 +54,9 @@ interface Recursive<T> {
 type SemanticColorToken =
   | RawCSSProperties['color']
   | {
-      base?: RawCSSProperties['color']
-      light?: RawCSSProperties['color']
-      dark?: RawCSSProperties['color']
+      _DEFAULT?: RawCSSProperties['color']
+      _light?: RawCSSProperties['color']
+      _dark?: RawCSSProperties['color']
     }
 
 export type SemanticTokensDefinition = {
@@ -63,8 +65,6 @@ export type SemanticTokensDefinition = {
     [key: string]: SemanticColorToken
   }>
 }
-
-export type BordersDefinition = Dictionary<string>
 
 export type TokensDefinition = {
   colors?: ColorsDefinition

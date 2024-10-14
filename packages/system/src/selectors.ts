@@ -16,12 +16,11 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
   forEach(selectors, (value: string, key: string) => {
     if (isString(value)) {
       selectorMap.set(`_${key}`, value)
+    } else {
+      console.error(
+        `system: The value of this selector must be a string. ${key}: ${value}`,
+      )
     }
-    // else {
-    //   console.error(
-    //     `system: The value of this alias must be a string. ${key}: ${value}`,
-    //   )
-    // }
   })
 
   const mediaSelectors = getMediaSelectors()

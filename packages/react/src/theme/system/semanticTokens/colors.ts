@@ -3,16 +3,17 @@ import { defineSemanticTokens } from '@nex-ui/system'
 export const colors = defineSemanticTokens.colors({
   primary: {
     DEFAULT: {
-      base: '{blue.500}',
-      dark: '{blue.300}',
+      _DEFAULT: '{blue.500}',
+      _light: '{blue.500}',
+      _dark: '{blue.300}',
     },
     hover: {
-      base: '{blue.400}',
-      dark: '{blue.200}',
+      _DEFAULT: '{blue.400}',
+      _dark: '{blue.200}',
     },
     active: {
-      base: '{blue.600}',
-      dark: '{blue.400}',
+      _DEFAULT: '{blue.600}',
+      _dark: '{blue.400}',
     },
     contrastText: '#fff',
   },

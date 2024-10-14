@@ -1,9 +1,10 @@
 import type { RawCSSProperties, CSSInterpolation } from '@nex-ui/system'
 import type { Tokens } from './tokens'
+import type { SemanticTokens } from './semanticTokens'
 import type { Breakpoints } from './breakpoints'
 
 type ColorScheme<T> = {
-  DEFAULT?: T
+  _DEFAULT?: T
   _dark?: T
   _light?: T
 }
@@ -20,9 +21,18 @@ interface CSSProperties extends RawCSSProperties {
   _disabled?: CSSInterpolation
   _dark?: CSSInterpolation
   _light?: CSSInterpolation
-  color?: RawCSSProperties['color'] | Tokens['colors']
-  borderColor?: RawCSSProperties['borderColor'] | Tokens['colors']
-  backgroundColor?: RawCSSProperties['backgroundColor'] | Tokens['colors']
+  color?:
+    | RawCSSProperties['color']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+  borderColor?:
+    | RawCSSProperties['borderColor']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+  backgroundColor?:
+    | RawCSSProperties['backgroundColor']
+    | Tokens['colors']
+    | SemanticTokens['colors']
   fontSize?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
   borderWidth?: RawCSSProperties['borderWidth'] | Tokens['borders']
   width?: RawCSSProperties['width'] | Tokens['sizes']
@@ -52,7 +62,10 @@ interface CSSProperties extends RawCSSProperties {
     | RawCSSProperties['borderBottomLeftRadius']
     | Tokens['radii']
   fontFamily?: RawCSSProperties['fontFamily'] | Tokens['fontFamilies']
-  bg?: RawCSSProperties['backgroundColor'] | Tokens['colors']
+  bg?:
+    | RawCSSProperties['backgroundColor']
+    | Tokens['colors']
+    | SemanticTokens['colors']
   fs?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
   lh?: RawCSSProperties['lineHeight'] | Tokens['lineHeights']
   w?: RawCSSProperties['width'] | Tokens['sizes']

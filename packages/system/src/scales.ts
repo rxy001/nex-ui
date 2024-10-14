@@ -17,9 +17,9 @@ export function createScales(scales: ScalesDefinition) {
     const property = p as CSSProperty
     if (isString(category) && checkTokenCategory(category)) {
       scaleMap.set(property, category)
+    } else {
+      console.error(`nex-system: Unknown token category '${category}'`)
     }
-
-    // console.error(`system: Unknown token category '${category}'`)
   })
 
   return {

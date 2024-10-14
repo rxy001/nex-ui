@@ -151,7 +151,7 @@ const nexProxy = new Proxy(styledComponent, {
 
     if (!cache.has(tag)) {
       if (!tags.includes(tag)) {
-        console.error('system: Please pass in the correct html tags.')
+        console.error('nex-styled: Please pass in the correct html tags.')
         return
       }
       cache.set(tag, styledComponent(tag))

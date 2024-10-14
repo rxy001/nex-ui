@@ -35,9 +35,16 @@ export const createNormalize = ({
       if (category) {
         switch (category) {
           case 'colors':
-            if (isString(newPropValue)) {
+            // eslint-disable-next-line no-case-declarations
+            const regExp = /^colorPalette(?=\.?)/
+
+            if (isString(newPropValue) && regExp.test(newPropValue)) {
+              if (!colorPalette) {
+                console.error('nex-system: The color palette was not provided.')
+              }
+
               newPropValue = colorPalette
-                ? newPropValue.replace(/^colorPalette(?=\.?)/, colorPalette)
+                ? newPropValue.replace(regExp, colorPalette)
                 : newPropValue
             }
 

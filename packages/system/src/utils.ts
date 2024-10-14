@@ -1,4 +1,4 @@
-import { isNumber, isString, memoize } from '@nex-ui/utils'
+import { isNumber, isString, memoize, isPlainObject } from '@nex-ui/utils'
 import type { Noop } from '@nex-ui/utils'
 
 export function pathToName(path: string[]) {
@@ -64,4 +64,8 @@ export function memoizeFn<T extends Noop>(fn: T): T {
       return value
     }),
   )
+}
+
+export function isResponsiveColor(value: any) {
+  return isPlainObject(value) && (value._light || value._dark || value._DEFAULT)
 }
