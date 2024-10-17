@@ -42,6 +42,7 @@ const meta = {
         <Button {...args} color="pink" />
         <Button {...args} color="yellow" />
         <Button {...args} color="green" />
+        <Button {...args} color="orange" />
       </>
     )
   },

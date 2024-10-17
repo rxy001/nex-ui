@@ -6,7 +6,7 @@ export type SlotGroups = Dictionary<StyleObject>
 
 export type BaseVariantGroups = Dictionary<Dictionary<StyleObject>>
 
-export type SlotVariantGroups<S extends SlotGroups | string = string> = Record<
+export type SlotVariantGroups<S extends SlotGroups = SlotGroups> = Record<
   string,
   Dictionary<Partial<Record<keyof S, StyleObject>>>
 >
@@ -14,12 +14,14 @@ export type SlotVariantGroups<S extends SlotGroups | string = string> = Record<
 export type CompoundVariantsSelection<
   V extends BaseVariantGroups | SlotVariantGroups,
 > = {
-  [K in keyof V]?: BooleanMap<keyof V[K]> | BooleanMap<keyof V[K]>[]
+  [K in keyof V]?: string extends K
+    ? unknown
+    : BooleanMap<keyof V[K]> | BooleanMap<keyof V[K]>[]
 }
 
 export type VariantSelection<V extends BaseVariantGroups | SlotVariantGroups> =
   {
-    [K in keyof V]?: BooleanMap<keyof V[K]>
+    [K in keyof V]?: string extends K ? unknown : BooleanMap<keyof V[K]>
   }
 
 export type BaseStylesDefinition<

@@ -6,5 +6,5 @@ export default {
     options: {},
   },
   stories: ['../../packages/**/__stories__/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-essentials', 'storybook-dark-mode'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-themes'],
 } satisfies StorybookConfig

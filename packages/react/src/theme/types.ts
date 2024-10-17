@@ -11,6 +11,7 @@ import type {
   AliasesDefinition,
   ScalesDefinition,
   BreakpointsDefinition,
+  SemanticTokensDefinition,
 } from '@nex-ui/system'
 import type { ButtonStyles, IconStyles } from './styles'
 import type { ButtonProps, ButtonOwnerState } from '../components'
@@ -20,6 +21,7 @@ import type { Aliases } from './generated/aliases'
 import type { Scales } from './generated/scales'
 import type { Breakpoints } from './generated/breakpoints'
 import type {
+  Tokens,
   FontFamilies,
   Colors,
   FontSizes,
@@ -30,9 +32,21 @@ import type {
   Borders,
   LineHeights,
 } from './generated/tokens'
+import type { SemanticTokens } from './generated/semanticTokens'
 import type { CSSPropertiesOverrides as CSSProperties } from './generated/cssProperties'
 
-export type ColorPalette = keyof Colors
+export type ColorPalette = Tokens['colors'] | SemanticTokens['colors']
+
+export type ComponentColor =
+  | 'blue'
+  | 'gray'
+  | 'pink'
+  | 'purple'
+  | 'cyan'
+  | 'yellow'
+  | 'orange'
+  | 'red'
+  | 'green'
 
 declare module '@nex-ui/icons' {
   interface IconProps extends InnerIconProps {}
@@ -52,7 +66,7 @@ export type ComponentsTheme = {
   Icon?: {
     styleOverrides?:
       | ExtractComponentStyles<IconStyles>
-      | ComponentThemeFn<IconOwnerState>
+      | ComponentThemeFn<IconOwnerState, IconStyles>
     defaultProps?: InnerIconProps
   }
 }
@@ -75,4 +89,5 @@ export type Theme = {
     radii?: RadiiDefinition & Radii
   }
   components?: ComponentsTheme
+  semanticTokens?: SemanticTokensDefinition
 }

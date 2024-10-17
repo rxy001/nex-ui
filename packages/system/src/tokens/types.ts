@@ -16,16 +16,16 @@ export type TokenCategories =
 
 export type ColorsDefinition = Dictionary<
   | {
-      50: RawCSSProperties['color']
-      100: RawCSSProperties['color']
-      200: RawCSSProperties['color']
-      300: RawCSSProperties['color']
-      400: RawCSSProperties['color']
-      500: RawCSSProperties['color']
-      600: RawCSSProperties['color']
-      700: RawCSSProperties['color']
-      800: RawCSSProperties['color']
-      900: RawCSSProperties['color']
+      50?: RawCSSProperties['color']
+      100?: RawCSSProperties['color']
+      200?: RawCSSProperties['color']
+      300?: RawCSSProperties['color']
+      400?: RawCSSProperties['color']
+      500?: RawCSSProperties['color']
+      600?: RawCSSProperties['color']
+      700?: RawCSSProperties['color']
+      800?: RawCSSProperties['color']
+      900?: RawCSSProperties['color']
       contrastText?: RawCSSProperties['color']
     }
   | RawCSSProperties['color']
@@ -47,23 +47,76 @@ export type BordersDefinition = Dictionary<string | number>
 
 export type FontFamiliesDefinition = Dictionary<string>
 
-interface Recursive<T> {
-  [key: string]: T | Recursive<T>
+type ResponsiveColor = {
+  _DEFAULT?: RawCSSProperties['color']
+  _light?: RawCSSProperties['color']
+  _dark?: RawCSSProperties['color']
 }
-
-type SemanticColorToken =
-  | RawCSSProperties['color']
+type ExclusiveColor =
   | {
-      _DEFAULT?: RawCSSProperties['color']
-      _light?: RawCSSProperties['color']
-      _dark?: RawCSSProperties['color']
+      DEFAULT?: RawCSSProperties['color'] | ResponsiveColor
+      _DEFAULT?: never
+      _light?: never
+      _dark?: never
     }
+  | ({
+      DEFAULT?: never
+    } & ResponsiveColor)
+
+type NestedColor =
+  | RawCSSProperties['color'] // Directly a color value
+  | (ExclusiveColor & {
+      [key: string]: NestedColor // Nested colors, applying the mutually exclusive rule
+    }) // Either `DEFAULT` or ResponsiveColor properties
+
+type SemanticColorDefinition = Dictionary<NestedColor>
+
+type SemanticTokenDefinition<T> =
+  | T
+  | ({
+      DEFAULT?: T
+    } & { [key: string]: SemanticTokenDefinition<T> })
+
+type SemanticSpacingDefinition = Dictionary<
+  SemanticTokenDefinition<string | number>
+>
+
+type SemanticSizesDefinition = Dictionary<
+  SemanticTokenDefinition<string | number>
+>
+
+type SemanticFontFamiliesDefinition = Dictionary<
+  SemanticTokenDefinition<string>
+>
+
+type SemanticFontSizesDefinition = Dictionary<
+  SemanticTokenDefinition<string | number>
+>
+
+type SemanticFontWeightsDefinition = Dictionary<
+  SemanticTokenDefinition<string | number>
+>
+
+type SemanticLineHeightsDefinition = Dictionary<
+  SemanticTokenDefinition<string | number>
+>
+type SemanticBordersDefinition = Dictionary<
+  SemanticTokenDefinition<string | number>
+>
+type SemanticRadiiDefinition = Dictionary<
+  SemanticTokenDefinition<string | number>
+>
 
 export type SemanticTokensDefinition = {
-  colors?: Recursive<{
-    DEFAULT?: SemanticColorToken
-    [key: string]: SemanticColorToken
-  }>
+  colors?: SemanticColorDefinition
+  spacing?: SemanticSpacingDefinition
+  sizes?: SemanticSizesDefinition
+  fontFamilies?: SemanticFontFamiliesDefinition
+  fontSizes?: SemanticFontSizesDefinition
+  fontWeights?: SemanticFontWeightsDefinition
+  lineHeights?: SemanticLineHeightsDefinition
+  borders?: SemanticBordersDefinition
+  radii?: SemanticRadiiDefinition
 }
 
 export type TokensDefinition = {
@@ -78,7 +131,7 @@ export type TokensDefinition = {
   radii?: RadiiDefinition
 }
 
-export type Config = {
+export type CreateTokensConfig = {
   tokens: TokensDefinition
   semanticTokens: SemanticTokensDefinition
   prefix: string

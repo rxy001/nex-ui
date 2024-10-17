@@ -1,5 +1,10 @@
 import { forEach, isString, walkObject } from '@nex-ui/utils'
-import type { Config, TokenMap, CssVarMap, TokenCategories } from './types'
+import type {
+  CreateTokensConfig,
+  TokenMap,
+  CssVarMap,
+  TokenCategories,
+} from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
@@ -17,7 +22,7 @@ function filterDefault(path: string[]) {
   return path.filter((item) => item !== 'DEFAULT')
 }
 
-export function createTokens(config: Config) {
+export function createTokens(config: CreateTokensConfig) {
   const { tokens, semanticTokens, prefix } = config
 
   const tokenMap: TokenMap = new Map()

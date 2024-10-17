@@ -31,7 +31,6 @@
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
-    "@nex-ui/react": "workspace:*",
     "react": ">=18",
     "react-dom": ">=18"
   },

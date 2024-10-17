@@ -4,3 +4,5 @@
 <!-- 4. .test.ts 需使用 `"types": ["@testing-library/jest-dom/jest-globals", "node", "react"],` -->
 
 4. 提供 webpack 、vite 插件动态生成 sys-ts
+
+5. components 添加 sx api

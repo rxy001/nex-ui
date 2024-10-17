@@ -184,6 +184,7 @@ export async function generateCSSProperties(sys: any) {
       [
         `Tokens['${category}']`,
         semanticTokens[category] ? `SemanticTokens['${category}']` : '',
+        category === 'colors' ? 'VirtualColors' : '',
       ],
       Boolean,
     )
@@ -195,7 +196,7 @@ export async function generateCSSProperties(sys: any) {
   import type { SemanticTokens } from './semanticTokens'
   import type { Breakpoints } from './breakpoints'
 
-  type ColorScheme<T> = {
+  type ResponsiveColor<T> = {
     _DEFAULT?: T
     _dark?: T
     _light?: T
@@ -207,6 +208,12 @@ export async function generateCSSProperties(sys: any) {
 
   type BreakpointArray= (string | number)[]
 
+  
+  type TransformColors<T> = T extends \`\${string}.\${infer U}\`
+    ? \`colorPalette.\${U}\`
+    : 'colorPalette'
+
+  type VirtualColors = TransformColors<Tokens['colors']> | TransformColors<SemanticTokens['colors']> 
 
   interface CSSProperties extends RawCSSProperties {
     ${selectorKeys
@@ -237,10 +244,9 @@ export async function generateCSSProperties(sys: any) {
   type ExtraCSSPropertyValue<T> = {
     [K in keyof T]?:
       | T[K]
-      | BreakpointObject<T[K]>
       | BreakpointArray
-      | ColorScheme<T[K]>
-
+      | ResponsiveColor<T[K]>
+      | BreakpointObject<T[K]>
   }
 
   export type CSSPropertiesOverrides = ExtraCSSPropertyValue<CSSProperties>

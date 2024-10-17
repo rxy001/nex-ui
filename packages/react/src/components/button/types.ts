@@ -3,7 +3,7 @@ import type {
   ButtonHTMLAttributes,
   AnchorHTMLAttributes,
 } from 'react'
-import type { ButtonVariants, ColorPalette } from '../../theme'
+import type { ButtonVariants, ComponentColor } from '../../theme'
 import type { ComponentClasses } from '../type'
 
 type MergedHTMLAttributes = ButtonHTMLAttributes<HTMLElement> &
@@ -12,7 +12,7 @@ type MergedHTMLAttributes = ButtonHTMLAttributes<HTMLElement> &
 interface InnerButtonProps extends MergedHTMLAttributes, ButtonVariants {
   startIcon?: ReactNode
   endIcon?: ReactNode
-  color?: ColorPalette
+  color?: ComponentColor
   classes?: ComponentClasses<
     // eslint-disable-next-line no-use-before-define
     ButtonProps,

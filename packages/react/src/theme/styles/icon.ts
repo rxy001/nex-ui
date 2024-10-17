@@ -20,13 +20,13 @@ export const iconStyles = defineBaseStyles({
     },
     fontSize: {
       sm: {
-        _fs: '1.25em',
+        fs: '1.25em',
       },
       md: {
-        _fs: '1.5em',
+        fs: '1.5em',
       },
       lg: {
-        _fs: '1.75em',
+        fs: '1.75em',
       },
     },
   },
