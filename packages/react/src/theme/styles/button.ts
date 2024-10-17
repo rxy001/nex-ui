@@ -18,7 +18,7 @@ export const buttonStyles = defineSlotStyles({
       lineHeight: 'base',
       borderColor: 'transparent',
       fontFamily: 'body',
-      bg: 'white',
+      bg: 'transparent',
     },
     startIcon: {
       display: 'inherit',
@@ -35,51 +35,51 @@ export const buttonStyles = defineSlotStyles({
     variant: {
       outline: {
         root: {
-          borderColor: 'colorPalette.500',
-          color: 'colorPalette.500',
+          borderColor: 'colorPalette.outline.fg',
+          color: 'colorPalette.outline.fg',
           _hover: {
-            borderColor: 'colorPalette.400',
-            color: 'colorPalette.400',
+            borderColor: 'colorPalette.outline.hover',
+            color: 'colorPalette.outline.hover',
           },
           _active: {
-            borderColor: 'colorPalette.600',
-            color: 'colorPalette.600',
+            borderColor: 'colorPalette.outline.active',
+            color: 'colorPalette.outline.active',
           },
         },
       },
       solid: {
         root: {
-          bg: 'colorPalette.500',
-          color: 'colorPalette.contrastText',
+          bg: 'colorPalette.solid.fg',
+          color: 'colorPalette.solid.contrastText',
           _hover: {
-            bg: 'colorPalette.400',
-            color: 'colorPalette.contrastText',
+            bg: 'colorPalette.solid.hover',
+            color: 'colorPalette.solid.contrastText',
           },
           _active: {
-            bg: 'colorPalette.600',
-            color: 'colorPalette.contrastText',
+            bg: 'colorPalette.solid.active',
+            color: 'colorPalette.solid.contrastText',
           },
         },
       },
       text: {
         root: {
-          color: 'colorPalette.500',
+          color: 'colorPalette.text.fg',
           _hover: {
-            bg: 'colorPalette.100',
+            bg: 'colorPalette.text.hover',
           },
           _active: {
-            bg: 'colorPalette.200',
+            bg: 'colorPalette.text.active',
           },
         },
       },
       link: {
         root: {
-          color: 'colorPalette.500',
+          color: 'colorPalette.link.fg',
           _hover: {
-            color: 'colorPalette.400',
+            color: 'colorPalette.link.hover',
           },
           _active: {
-            color: 'colorPalette.600',
+            color: 'colorPalette.link.active',
           },
         },
       },
@@ -89,18 +89,34 @@ export const buttonStyles = defineSlotStyles({
         root: { px: '2', py: '0.5', fs: 'sm', h: '6' },
         startIcon: {
           ml: '-0.5',
-          mr: '1.5',
+          mr: '1',
         },
         endIcon: {
           mr: '-0.5',
-          ml: '1.5',
+          ml: '1',
         },
       },
       md: {
-        root: { px: '3', py: '1', fs: 'md', h: '8' },
+        root: {
+          px: '3',
+          py: '1',
+          fs: 'md',
+          h: '8',
+          '& svg': {
+            fs: '1.3em',
+          },
+        },
       },
       lg: {
-        root: { px: '4', py: '1.5', fs: 'lg', h: '10' },
+        root: {
+          px: '4',
+          py: '1.5',
+          fs: 'lg',
+          h: '10',
+          '& svg': {
+            fs: '1.5em',
+          },
+        },
       },
     },
     disabled: {
@@ -162,21 +178,27 @@ export const buttonStyles = defineSlotStyles({
       size: 'sm',
       iconOnly: true,
       css: {
-        root: { w: '6' },
+        root: {
+          w: '6',
+        },
       },
     },
     {
       size: 'md',
       iconOnly: true,
       css: {
-        root: { w: '8' },
+        root: {
+          w: '8',
+        },
       },
     },
     {
       size: 'lg',
       iconOnly: true,
       css: {
-        root: { w: '10' },
+        root: {
+          w: '10',
+        },
       },
     },
   ],

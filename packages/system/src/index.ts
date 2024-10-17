@@ -29,6 +29,8 @@ export type { AliasesDefinition } from './aliases'
 
 export type { ScalesDefinition } from './scales'
 
+export type { SelectorsDefinition } from './selectors'
+
 export type {
   BordersDefinition,
   ColorsDefinition,
@@ -39,4 +41,5 @@ export type {
   SizesDefinition,
   SpacingDefinition,
   RadiiDefinition,
+  SemanticTokensDefinition,
 } from './tokens'

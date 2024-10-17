@@ -27,7 +27,7 @@ export const createNormalize = ({
 
     const properties = getPropertiesByAlias(propKey) ?? [propKey]
 
-    forEach(properties, (property) => {
+    forEach(properties, (property: string) => {
       const category = getCategoryByProperty(property)
 
       let newPropValue = propValue

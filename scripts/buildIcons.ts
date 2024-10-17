@@ -8,8 +8,9 @@ import {
   mkdirSync,
 } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { forEach, map } from '@nex-ui/utils'
 import { dirname, resolve, basename } from 'node:path'
+import { forEach, map } from 'packages/utils/src'
+import { pretty } from './utils'
 
 const options: Record<string, any> = {
   LoadingOutlined: {
@@ -24,41 +25,43 @@ function upperFirst(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-function run() {
+async function run() {
   const cwd = dirname(fileURLToPath(import.meta.url))
 
-  const svgDirPath = resolve(cwd, './src/svg')
+  const svgDirPath = resolve(cwd, '../packages/icons/src/svg')
 
-  const componentsDirPath = resolve(cwd, './src/components')
+  const componentsDirPath = resolve(cwd, '../packages/icons/src/components')
 
   const newTsxs: Record<string, string[]> = {}
 
-  console.log(`[builder] Building...`)
+  console.log(`[build-icons] Building...`)
 
-  recursive(svgDirPath, generateTsx)
+  await recursive(svgDirPath, generateTsx)
 
-  writeImports()
+  await writeImports()
 
-  console.log(`[builder] Generated files ✅`)
+  console.log(`[build-icons] Generated files ✅`)
 
-  function recursive(
+  async function recursive(
     dirPath: string,
-    cb: (filePath: string, parentDir: string) => void,
+    cb: (filePath: string, parentDir: string) => Promise<void>,
   ) {
     const files = readdirSync(dirPath)
     const parentDir = basename(dirPath)
 
-    forEach(files, (file: string) => {
-      const filePath = resolve(dirPath, file)
-      if (statSync(filePath).isDirectory()) {
-        recursive(filePath, cb)
-      } else {
-        cb(filePath, parentDir)
-      }
-    })
+    await Promise.all(
+      map(files, async (file: string) => {
+        const filePath = resolve(dirPath, file)
+        if (statSync(filePath).isDirectory()) {
+          await recursive(filePath, cb)
+        } else {
+          await cb(filePath, parentDir)
+        }
+      }),
+    )
   }
 
-  function generateTsx(svgFilePath: string, category: string) {
+  async function generateTsx(svgFilePath: string, category: string) {
     const svgFileName = basename(svgFilePath, '.svg')
 
     const svgComponentName = svgFileName
@@ -108,7 +111,7 @@ function run() {
         ')' +
         '\n'
 
-      writeFileSync(tsxPath, tsx)
+      writeFileSync(tsxPath, await pretty(tsx))
 
       if (newTsxs[category]) {
         newTsxs[category].push(iconComponentName)
@@ -118,7 +121,7 @@ function run() {
     }
   }
 
-  function writeImports() {
+  async function writeImports() {
     const indexPath = resolve(componentsDirPath, './index.tsx')
 
     let tsx = ''
@@ -139,7 +142,7 @@ function run() {
         ).join('\n')
     })
 
-    writeFileSync(indexPath, tsx)
+    writeFileSync(indexPath, await pretty(tsx))
   }
 }
 

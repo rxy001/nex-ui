@@ -1,20 +1,9 @@
+import { withThemeByClassName } from '@storybook/addon-themes'
 import { NexProvider } from '@nex-ui/react'
+import type { ReactRenderer, Preview } from '@storybook/react'
 import { themes } from '@storybook/theming'
 
-const preview = {
-  darkMode: {
-    current: 'dark',
-    stylePreview: true,
-    darkClass: 'dark',
-    lightClass: 'light',
-    classTarget: 'html',
-    dark: {
-      ...themes.dark,
-    },
-    light: {
-      ...themes.light,
-    },
-  },
+const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
@@ -22,8 +11,19 @@ const preview = {
         date: /Date$/,
       },
     },
+    docs: {
+      theme: themes.dark,
+    },
   },
+
   decorators: [
+    withThemeByClassName<ReactRenderer>({
+      defaultTheme: 'light',
+      themes: {
+        light: 'light',
+        dark: 'dark',
+      },
+    }),
     (Story: any) => (
       <NexProvider>
         <Story />

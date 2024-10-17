@@ -11,15 +11,23 @@ import type {
   AliasesDefinition,
   ScalesDefinition,
   BreakpointsDefinition,
+  SemanticTokensDefinition,
+  SelectorsDefinition,
 } from '@nex-ui/system'
 import type { ButtonStyles, IconStyles } from './styles'
 import type { ButtonProps, ButtonOwnerState } from '../components'
 import type { InnerIconProps, IconOwnerState } from '../components/icon/types'
-import type { ComponentThemeFn, ExtractComponentStyles } from './utils.types'
+import type {
+  ComponentThemeFn,
+  ExtractComponentStyles,
+  TokenDefinition,
+  ReplaceValuesWithColor,
+} from './utils.types'
 import type { Aliases } from './generated/aliases'
 import type { Scales } from './generated/scales'
 import type { Breakpoints } from './generated/breakpoints'
 import type {
+  Tokens,
   FontFamilies,
   Colors,
   FontSizes,
@@ -30,9 +38,22 @@ import type {
   Borders,
   LineHeights,
 } from './generated/tokens'
+import type { SemanticTokens } from './generated/semanticTokens'
 import type { CSSPropertiesOverrides as CSSProperties } from './generated/cssProperties'
+import type { Selectors } from './generated/selectors'
 
-export type ColorPalette = keyof Colors
+export type ColorPalette = Tokens['colors'] | SemanticTokens['colors']
+
+export type ComponentColor =
+  | 'blue'
+  | 'gray'
+  | 'pink'
+  | 'purple'
+  | 'cyan'
+  | 'yellow'
+  | 'orange'
+  | 'red'
+  | 'green'
 
 declare module '@nex-ui/icons' {
   interface IconProps extends InnerIconProps {}
@@ -52,7 +73,7 @@ export type ComponentsTheme = {
   Icon?: {
     styleOverrides?:
       | ExtractComponentStyles<IconStyles>
-      | ComponentThemeFn<IconOwnerState>
+      | ComponentThemeFn<IconOwnerState, IconStyles>
     defaultProps?: InnerIconProps
   }
 }
@@ -62,17 +83,19 @@ export type ComponentNames = keyof ComponentsTheme
 export type Theme = {
   aliases?: AliasesDefinition & Aliases
   scales?: ScalesDefinition & Scales
-  breakpoints?: BreakpointsDefinition & Breakpoints
+  breakpoints?: TokenDefinition<Breakpoints, BreakpointsDefinition>
+  selectors?: SelectorsDefinition & Selectors
   tokens?: {
-    borders?: BordersDefinition & Borders
-    spacing?: SpacingDefinition & Spacing
-    colors?: ColorsDefinition & Colors
-    sizes?: SizesDefinition & Sizes
-    fontFamilies?: FontFamiliesDefinition & FontFamilies
-    fontSizes?: FontSizesDefinition & FontSizes
-    fontWeights?: FontWeightsDefinition & FontWeights
-    lineHeights?: LineHeightsDefinition & LineHeights
-    radii?: RadiiDefinition & Radii
+    borders?: TokenDefinition<Borders, BordersDefinition>
+    spacing?: TokenDefinition<Spacing, SpacingDefinition>
+    colors?: ColorsDefinition & ReplaceValuesWithColor<Colors>
+    sizes?: TokenDefinition<Sizes, SizesDefinition>
+    fontFamilies?: TokenDefinition<FontFamilies, FontFamiliesDefinition>
+    fontSizes?: TokenDefinition<FontSizes, FontSizesDefinition>
+    fontWeights?: TokenDefinition<FontWeights, FontWeightsDefinition>
+    lineHeights?: TokenDefinition<LineHeights, LineHeightsDefinition>
+    radii?: TokenDefinition<Radii, RadiiDefinition>
   }
   components?: ComponentsTheme
+  semanticTokens?: SemanticTokensDefinition
 }

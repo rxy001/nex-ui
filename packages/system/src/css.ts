@@ -64,7 +64,7 @@ export const createCssFn = ({
 function mergeByPath(target: any, paths: string[], value: any) {
   let acc = target
 
-  forEach(paths, (path) => {
+  forEach(paths, (path: string) => {
     if (!path) return
     if (!acc[path]) acc[path] = Object.create(null)
     acc = acc[path]

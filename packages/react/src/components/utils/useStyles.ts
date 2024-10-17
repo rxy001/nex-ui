@@ -16,11 +16,11 @@ type UseStylesConfig<T, K> = {
 
 type UseStyles = <T extends keyof Styles, K extends Record<string, any>>(
   option: UseStylesConfig<T, K>,
-) => 'slots' extends keyof Styles[T]
+) => Styles[T] extends SlotStylesDefinition
   ? Record<keyof Styles[T]['slots'], StyleObject>
   : StyleObject
 
-const mergeStyles = <T extends Record<string, any>>(a: T, b: T): T =>
+const mergeStyles = (a: any, b: any) =>
   mergeWith({}, a, b, (objValue: any, srcValue: any) => {
     if (isArray(objValue)) {
       return objValue.concat(srcValue)
@@ -37,9 +37,7 @@ export const useStyles: UseStyles = ({ name, ownerState = {} }) => {
       const s = styles[name] as SlotStylesDefinition
 
       if (isPlainObject(styleOverrides)) {
-        const runtimeFn = sys.sva(
-          mergeStyles(s, styleOverrides as SlotStylesDefinition),
-        )
+        const runtimeFn = sys.sva(mergeStyles(s, styleOverrides))
         return runtimeFn(runtimeFn.splitVariantProps(ownerState))
       }
 
@@ -47,7 +45,7 @@ export const useStyles: UseStyles = ({ name, ownerState = {} }) => {
         const runtimeFn = sys.sva(s)
         return mergeStyles(
           runtimeFn(runtimeFn.splitVariantProps(ownerState)),
-          (styleOverrides(ownerState) ?? {}) as any,
+          styleOverrides(ownerState) ?? {},
         )
       }
 
@@ -58,9 +56,7 @@ export const useStyles: UseStyles = ({ name, ownerState = {} }) => {
     const s = styles[name] as BaseStylesDefinition
 
     if (isPlainObject(styleOverrides)) {
-      const runtimeFn = sys.cva(
-        mergeStyles(s, styleOverrides as BaseStylesDefinition),
-      )
+      const runtimeFn = sys.cva(mergeStyles(s, styleOverrides))
       return runtimeFn(runtimeFn.splitVariantProps(ownerState))
     }
 

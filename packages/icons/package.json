@@ -5,7 +5,6 @@
   "scripts": {
     "build": "tsx ../../scripts/build.ts --dts",
     "build:fast": "tsx ../../scripts/build.ts",
-    "build:components": "tsx ./builder.ts",
     "type-check": "tsc --noEmit"
   },
   "type": "module",
@@ -31,7 +30,6 @@
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
-    "@nex-ui/react": "workspace:*",
     "react": ">=18",
     "react-dom": ">=18"
   },

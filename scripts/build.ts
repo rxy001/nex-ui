@@ -83,6 +83,13 @@ async function generateModules({ external, tsconfig, name }: SharedConfigs) {
         interop: 'auto',
       },
     ],
+    onwarn(warning, warn) {
+      // Suppress "Module level directives cause errors when bundled" warnings
+      if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+        return
+      }
+      warn(warning)
+    },
   }
   await runRollup(config)
 

@@ -47,10 +47,6 @@ export async function generateTokens(sys: any) {
   const keys = Object.keys(sys.tokens)
 
   let result = `
-      import type {
-        RawCSSProperties
-      } from '@nex-ui/system'
-
       export interface Tokens {
         ${keys
           .map((tokenCategory) => {
@@ -82,37 +78,19 @@ export async function generateTokens(sys: any) {
     .map((tokenCategory) => {
       const token = sys.tokens[tokenCategory]
 
-      function valueType(value?: any) {
-        switch (tokenCategory) {
-          case 'fontFamilies':
-            return 'string'
-
-          case 'colors':
-            return typeof value === 'object'
-              ? `{
-                50?: RawCSSProperties['color']
-                100?: RawCSSProperties['color']
-                200?: RawCSSProperties['color']
-                300?: RawCSSProperties['color']
-                400?: RawCSSProperties['color']
-                500?: RawCSSProperties['color']
-                600?: RawCSSProperties['color']
-                700?: RawCSSProperties['color']
-                800?: RawCSSProperties['color']
-                900?: RawCSSProperties['color']
-                contrastText?: RawCSSProperties['color']
-              } `
-              : `RawCSSProperties['color']`
-
-          default:
-            return 'string | number'
-        }
-      }
-
       return `
         export interface ${capitalize(tokenCategory)} {
           ${Object.keys(token)
-            .map((key) => `${key}?: ${valueType(token[key])}`)
+            .map(
+              (key) =>
+                `${key}?: ${
+                  typeof token[key] === 'object'
+                    ? `{${Object.keys(token[key])
+                        .map((k) => `${k}?: '${token[key][k]}'`)
+                        .join('\n')} }`
+                    : `'${token[key]}'`
+                }`,
+            )
             .join('\n')}
         }
       `
@@ -184,6 +162,7 @@ export async function generateCSSProperties(sys: any) {
       [
         `Tokens['${category}']`,
         semanticTokens[category] ? `SemanticTokens['${category}']` : '',
+        category === 'colors' ? 'VirtualColors' : '',
       ],
       Boolean,
     )
@@ -195,18 +174,24 @@ export async function generateCSSProperties(sys: any) {
   import type { SemanticTokens } from './semanticTokens'
   import type { Breakpoints } from './breakpoints'
 
-  type ColorScheme<T> = {
+  type ResponsiveColor<T> = {
     _DEFAULT?: T
     _dark?: T
     _light?: T
   }
 
   type BreakpointObject<T> = {
-    [key in keyof Breakpoints as \`_\${key}\`]: T
+    [K in keyof Breakpoints as \`_\${K}\`]: T
   }
 
   type BreakpointArray= (string | number)[]
 
+  
+  type TransformColors<T> = T extends \`\${string}.\${infer U}\`
+    ? \`colorPalette.\${U}\`
+    : 'colorPalette'
+
+  type VirtualColors = TransformColors<Tokens['colors']> | TransformColors<SemanticTokens['colors']> 
 
   interface CSSProperties extends RawCSSProperties {
     ${selectorKeys
@@ -237,10 +222,9 @@ export async function generateCSSProperties(sys: any) {
   type ExtraCSSPropertyValue<T> = {
     [K in keyof T]?:
       | T[K]
-      | BreakpointObject<T[K]>
       | BreakpointArray
-      | ColorScheme<T[K]>
-
+      | ResponsiveColor<T[K]>
+      | BreakpointObject<T[K]>
   }
 
   export type CSSPropertiesOverrides = ExtraCSSPropertyValue<CSSProperties>
@@ -257,7 +241,7 @@ export async function generateBreakpoints(sys: any) {
       export interface Breakpoints {
         ${keys
           .map((key) => {
-            return `${key}?: string | number`
+            return `${key}?: '${sys.breakpoints[key]}'`
           })
           .join('\n')}
       }

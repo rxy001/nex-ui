@@ -4,8 +4,10 @@
   "version": "1.0.0",
   "author": "X1ng Yu",
   "scripts": {
-    "build": "turbo build",
+    "build": "pnpm run build:sys-ts && turbo build",
     "build:sys-ts": "tsx ./scripts/sysTs",
+    "build:icons": "tsx ./scripts/buildIcons",
+    "build:fast": "turbo build:fast",
     "dev": "turbo dev",
     "dev:docs": "turbo dev -F @nex-ui/docs",
     "dev:sb": "turbo dev -F @nex-ui/storybook",

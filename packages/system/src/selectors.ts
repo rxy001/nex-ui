@@ -25,7 +25,7 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
 
   const mediaSelectors = getMediaSelectors()
 
-  forEach(mediaSelectors, (selector, key) => {
+  forEach(mediaSelectors, (selector: string, key: string) => {
     const k = `_${key}`
 
     if (selectorMap.get(k)) {

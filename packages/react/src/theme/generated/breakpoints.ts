@@ -1,7 +1,7 @@
 export interface Breakpoints {
-  xs?: string | number
-  sm?: string | number
-  md?: string | number
-  lg?: string | number
-  xl?: string | number
+  xs?: '0px'
+  sm?: '600px'
+  md?: '900px'
+  lg?: '1200px'
+  xl?: '1536px'
 }

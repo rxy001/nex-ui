@@ -5,7 +5,6 @@ import { forwardRef } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { ComponentType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
-import { iconStyles } from '../../theme'
 import { useDefaultProps, useStyles } from '../utils'
 import type { IconOwnerState, InnerIconProps } from './types'
 
@@ -45,7 +44,6 @@ export const createIcon = (
     const styles = useStyles({
       ownerState,
       name: 'Icon',
-      styles: iconStyles,
     })
 
     const Icon = nex(svgComponent)

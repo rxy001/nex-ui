@@ -3,17 +3,25 @@ import type { Tokens } from './tokens'
 import type { SemanticTokens } from './semanticTokens'
 import type { Breakpoints } from './breakpoints'
 
-type ColorScheme<T> = {
+type ResponsiveColor<T> = {
   _DEFAULT?: T
   _dark?: T
   _light?: T
 }
 
 type BreakpointObject<T> = {
-  [key in keyof Breakpoints as `_${key}`]: T
+  [K in keyof Breakpoints as `_${K}`]: T
 }
 
 type BreakpointArray = (string | number)[]
+
+type TransformColors<T> = T extends `${string}.${infer U}`
+  ? `colorPalette.${U}`
+  : 'colorPalette'
+
+type VirtualColors =
+  | TransformColors<Tokens['colors']>
+  | TransformColors<SemanticTokens['colors']>
 
 interface CSSProperties extends RawCSSProperties {
   _hover?: CSSInterpolation
@@ -25,14 +33,17 @@ interface CSSProperties extends RawCSSProperties {
     | RawCSSProperties['color']
     | Tokens['colors']
     | SemanticTokens['colors']
+    | VirtualColors
   borderColor?:
     | RawCSSProperties['borderColor']
     | Tokens['colors']
     | SemanticTokens['colors']
+    | VirtualColors
   backgroundColor?:
     | RawCSSProperties['backgroundColor']
     | Tokens['colors']
     | SemanticTokens['colors']
+    | VirtualColors
   fontSize?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
   borderWidth?: RawCSSProperties['borderWidth'] | Tokens['borders']
   width?: RawCSSProperties['width'] | Tokens['sizes']
@@ -66,6 +77,7 @@ interface CSSProperties extends RawCSSProperties {
     | RawCSSProperties['backgroundColor']
     | Tokens['colors']
     | SemanticTokens['colors']
+    | VirtualColors
   fs?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
   lh?: RawCSSProperties['lineHeight'] | Tokens['lineHeights']
   w?: RawCSSProperties['width'] | Tokens['sizes']
@@ -89,9 +101,9 @@ interface CSSProperties extends RawCSSProperties {
 type ExtraCSSPropertyValue<T> = {
   [K in keyof T]?:
     | T[K]
-    | BreakpointObject<T[K]>
     | BreakpointArray
-    | ColorScheme<T[K]>
+    | ResponsiveColor<T[K]>
+    | BreakpointObject<T[K]>
 }
 
 export type CSSPropertiesOverrides = ExtraCSSPropertyValue<CSSProperties>

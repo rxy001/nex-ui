@@ -3,6 +3,7 @@ export type {
   ColorPalette,
   ComponentNames,
   Theme,
+  ComponentColor,
 } from './types'
 
 export * from './styles'
