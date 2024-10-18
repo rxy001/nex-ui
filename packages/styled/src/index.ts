@@ -1,3 +1,7 @@
 export * from './styled'
 
-export type { HTMLElementTagName, ExtraComponentProps } from './types'
+export type {
+  HTMLElementTagName,
+  ExtraComponentProps,
+  NexStyled,
+} from './types'

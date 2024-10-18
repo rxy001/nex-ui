@@ -13,7 +13,7 @@ type BreakpointObject<T> = {
   [K in keyof Breakpoints as `_${K}`]: T
 }
 
-type BreakpointArray = (string | number)[]
+type BreakpointArray = (string | number)[] | readonly (string | number)[]
 
 type TransformColors<T> = T extends `${string}.${infer U}`
   ? `colorPalette.${U}`

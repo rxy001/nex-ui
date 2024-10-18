@@ -144,7 +144,7 @@ const styledComponent = createStyledComponent.bind()
 const cache = new Map<string, (...args: any[]) => any>()
 
 const nexProxy = new Proxy(styledComponent, {
-  get: (_, tag: HTMLElementTagName) => {
+  get: (_, tag: HTMLElementTagName): NexStyled[HTMLElementTagName] | void => {
     if (['prototype', 'name', 'displayName'].includes(tag)) {
       return
     }

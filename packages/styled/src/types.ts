@@ -22,4 +22,4 @@ export type CreateStyledComponent = {
   <T extends ElementType>(tag: T): StyledComponent<ComponentProps<T>>
 }
 
-export type NexStyled = StyledElements & CreateStyledComponent
+export type NexStyled = CreateStyledComponent & StyledElements
