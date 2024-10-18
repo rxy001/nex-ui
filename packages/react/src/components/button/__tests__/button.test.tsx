@@ -15,7 +15,7 @@ describe('Button', () => {
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it('should render with the root, variantSolid, sizeMd, radiusMd, and colorGreen buttonClasses but no others', () => {
+  it('should render with the root, variantSolid, sizeMd, radiusMd, and colorBlue buttonClasses but no others', () => {
     const { container } = renderWithNexProvider(<Button>Button</Button>)
 
     const button = container.firstElementChild
@@ -24,12 +24,12 @@ describe('Button', () => {
     expect(button).toHaveClass(buttonClasses['variant-solid'])
     expect(button).toHaveClass(buttonClasses['size-md'])
     expect(button).toHaveClass(buttonClasses['radius-md'])
-    expect(button).toHaveClass(buttonClasses['color-green'])
+    expect(button).toHaveClass(buttonClasses['color-blue'])
 
     expect(button).not.toHaveClass(buttonClasses['variant-link'])
     expect(button).not.toHaveClass(buttonClasses['variant-outline'])
     expect(button).not.toHaveClass(buttonClasses['variant-text'])
-    expect(button).not.toHaveClass(buttonClasses['color-blue'])
+    expect(button).not.toHaveClass(buttonClasses['color-green'])
     expect(button).not.toHaveClass(buttonClasses['color-cyan'])
     expect(button).not.toHaveClass(buttonClasses['color-orange'])
     expect(button).not.toHaveClass(buttonClasses['color-pink'])

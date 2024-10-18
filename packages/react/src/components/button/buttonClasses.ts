@@ -5,7 +5,7 @@ export const getButtonUtilityClass = (prefix: string) => (slot: string) => {
 }
 
 // 用于单元测试
-export const buttonClasses = generateUtilityClasses('nex-btn', [
+export const buttonClasses = generateUtilityClasses('nui-btn', [
   // ---------root---------
   'root',
   // "link" | "text" | "solid" | "outline"

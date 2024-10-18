@@ -6,3 +6,5 @@
 4. 提供 webpack 、vite 插件动态生成 sys-ts
 
 5. components 添加 sx api
+
+6. 目前 component theme 支持定义默认 props 和以函数方式返回样式，是否抽离 styles 通过 provider 传入以支持完全自定义主题 和 unstyled ？

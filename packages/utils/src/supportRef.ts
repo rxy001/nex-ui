@@ -1,8 +1,17 @@
-import type { ReactElement } from 'react'
+import type {
+  ReactElement,
+  MemoExoticComponent,
+  ForwardRefExoticComponent,
+} from 'react'
 import { isForwardRef, isMemo, ForwardRef } from 'react-is'
 
-export function supportRef(nodeOrComponent: ReactElement) {
-  if (typeof nodeOrComponent.type === 'string') {
+export function supportRef(
+  nodeOrComponent:
+    | ReactElement
+    | MemoExoticComponent<any>
+    | ForwardRefExoticComponent<any>,
+) {
+  if (typeof (nodeOrComponent as any).type === 'string') {
     return true
   }
 

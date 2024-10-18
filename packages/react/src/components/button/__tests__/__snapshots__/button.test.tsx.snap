@@ -2,7 +2,7 @@
 
 exports[`Button renders correctly 1`] = `
 <button
-  class="nex-btn nex-btn-variant-solid nex-btn-radius-md nex-btn-size-md nex-btn-color-green emotion-0"
+  class="nui-btn nui-btn-variant-solid nui-btn-radius-md nui-btn-size-md nui-btn-color-blue emotion-0"
   type="button"
 >
   Button
@@ -11,7 +11,7 @@ exports[`Button renders correctly 1`] = `
 
 exports[`Button should support link button 1`] = `
 <a
-  class="nex-btn nex-btn-variant-solid nex-btn-radius-md nex-btn-size-md nex-btn-color-green emotion-0"
+  class="nui-btn nui-btn-variant-solid nui-btn-radius-md nui-btn-size-md nui-btn-color-blue emotion-0"
   href="https://"
   target="_blank"
 >
