@@ -12,6 +12,7 @@ export interface IconProps
   height?: StyleObject['height']
   color?: StyleObject['color']
   fontSize?: IconVariants['fontSize'] | number | (string & NonNullable<unknown>)
+  sx?: StyleObject
   component: ComponentType<any>
 }
 

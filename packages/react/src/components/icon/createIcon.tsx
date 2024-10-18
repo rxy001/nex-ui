@@ -23,6 +23,7 @@ export const createIcon = (
 
     const {
       color,
+      sx,
       className,
       spin = false,
       fontSize = 'md',
@@ -54,8 +55,9 @@ export const createIcon = (
           color,
           width,
           height,
-          _fs: fontSize,
+          fs: fontSize,
           ...styles,
+          ...sx,
         }}
         ref={ref}
         className={classNames(`${prefix}-icon`, className)}

@@ -68,6 +68,7 @@ export const useButton = (inProps: ButtonProps) => {
 
   const {
     href,
+    sx,
     className,
     children,
     variant = 'solid',
@@ -150,9 +151,12 @@ export const useButton = (inProps: ButtonProps) => {
     children,
     rootProps: {
       onClick,
-      sx: styles.root,
       colorPalette: color,
       className: classNames(classes.root, className),
+      sx: {
+        ...styles.root,
+        ...sx,
+      },
       ...(htmlElement === 'a'
         ? {
             href,

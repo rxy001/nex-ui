@@ -27,7 +27,6 @@ export const Basic: Story = {
   args: {
     component: HeartSvg,
     color: '#1677ff',
-    width: 50,
-    height: 50,
+    fontSize: 'lg',
   },
 }

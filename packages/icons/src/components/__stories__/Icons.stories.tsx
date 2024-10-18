@@ -4,7 +4,7 @@ import * as Icon from '../index'
 import type { IconProps } from '../../types'
 
 const meta = {
-  title: 'Components',
+  title: 'Components/Icon',
   argTypes: {
     fontSize: {
       options: ['sm', 'md', 'lg', '50px'],

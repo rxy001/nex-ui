@@ -1,12 +1,12 @@
 import type { FunctionComponent, ElementType, ComponentProps } from 'react'
-import type { StyleObject } from '@nex-ui/system'
+import type { StyleObject, RawCSSProperties } from '@nex-ui/system'
 
 export type HTMLElementTagName = keyof JSX.IntrinsicElements
 
 export type ExtraComponentProps = {
   as?: HTMLElementTagName
   sx?: StyleObject
-  colorPalette?: string
+  colorPalette?: RawCSSProperties['color']
 }
 
 type StyledComponent<

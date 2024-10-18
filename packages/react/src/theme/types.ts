@@ -13,6 +13,7 @@ import type {
   BreakpointsDefinition,
   SemanticTokensDefinition,
   SelectorsDefinition,
+  RawCSSProperties,
 } from '@nex-ui/system'
 import type { ButtonStyles, IconStyles } from './styles'
 import type { ButtonProps, ButtonOwnerState } from '../components'
@@ -42,7 +43,10 @@ import type { SemanticTokens } from './generated/semanticTokens'
 import type { CSSPropertiesOverrides as CSSProperties } from './generated/cssProperties'
 import type { Selectors } from './generated/selectors'
 
-export type ColorPalette = Tokens['colors'] | SemanticTokens['colors']
+export type ColorPalette =
+  | Tokens['colors']
+  | SemanticTokens['colors']
+  | RawCSSProperties['color']
 
 export type ComponentColor =
   | 'blue'
