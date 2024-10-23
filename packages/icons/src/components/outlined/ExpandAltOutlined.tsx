@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const ExpandAltOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(ExpandAlt)
+    const Icon = createIcon(ExpandAlt, { className: 'expand-alt-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

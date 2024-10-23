@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const TrademarkCircleOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(TrademarkCircle)
+    const Icon = createIcon(TrademarkCircle, {
+      className: 'trademark-circle-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const DingtalkOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Dingtalk)
+    const Icon = createIcon(Dingtalk, { className: 'dingtalk-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

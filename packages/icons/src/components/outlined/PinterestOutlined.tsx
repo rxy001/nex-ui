@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const PinterestOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Pinterest)
+    const Icon = createIcon(Pinterest, { className: 'pinterest-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

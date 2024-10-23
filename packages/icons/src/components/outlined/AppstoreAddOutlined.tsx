@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const AppstoreAddOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(AppstoreAdd)
+    const Icon = createIcon(AppstoreAdd, { className: 'appstore-add-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

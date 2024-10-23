@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const AntCloudOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(AntCloud)
+    const Icon = createIcon(AntCloud, { className: 'ant-cloud-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const BarChartOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(BarChart)
+    const Icon = createIcon(BarChart, { className: 'bar-chart-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

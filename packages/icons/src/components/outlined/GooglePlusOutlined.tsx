@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const GooglePlusOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(GooglePlus)
+    const Icon = createIcon(GooglePlus, { className: 'google-plus-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

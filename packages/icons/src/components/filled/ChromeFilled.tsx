@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const ChromeFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Chrome)
+  const Icon = createIcon(Chrome, { className: 'chrome-filled' })
   return <Icon {...props} ref={ref} />
 })

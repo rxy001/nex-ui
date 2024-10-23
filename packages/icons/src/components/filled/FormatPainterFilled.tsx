@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const FormatPainterFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(FormatPainter)
+    const Icon = createIcon(FormatPainter, {
+      className: 'format-painter-filled',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

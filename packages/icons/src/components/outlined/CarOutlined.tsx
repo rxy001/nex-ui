@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const CarOutlined = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Car)
+  const Icon = createIcon(Car, { className: 'car-outlined' })
   return <Icon {...props} ref={ref} />
 })

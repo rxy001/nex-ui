@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const MacCommandOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(MacCommand)
+    const Icon = createIcon(MacCommand, { className: 'mac-command-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

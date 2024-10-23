@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const AliyunOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Aliyun)
+    const Icon = createIcon(Aliyun, { className: 'aliyun-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

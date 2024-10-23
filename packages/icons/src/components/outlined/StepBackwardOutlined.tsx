@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const StepBackwardOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(StepBackward)
+    const Icon = createIcon(StepBackward, {
+      className: 'step-backward-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

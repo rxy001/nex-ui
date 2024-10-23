@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const DiffFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Diff)
+  const Icon = createIcon(Diff, { className: 'diff-filled' })
   return <Icon {...props} ref={ref} />
 })

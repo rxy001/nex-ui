@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const YuqueFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Yuque)
+  const Icon = createIcon(Yuque, { className: 'yuque-filled' })
   return <Icon {...props} ref={ref} />
 })

@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const DiffOutlined = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Diff)
+  const Icon = createIcon(Diff, { className: 'diff-outlined' })
   return <Icon {...props} ref={ref} />
 })

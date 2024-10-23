@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const TwitchFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Twitch)
+  const Icon = createIcon(Twitch, { className: 'twitch-filled' })
   return <Icon {...props} ref={ref} />
 })

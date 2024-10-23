@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const VideoCameraFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(VideoCamera)
+    const Icon = createIcon(VideoCamera, { className: 'video-camera-filled' })
     return <Icon {...props} ref={ref} />
   },
 )

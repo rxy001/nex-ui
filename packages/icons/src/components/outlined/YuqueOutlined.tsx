@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const YuqueOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Yuque)
+    const Icon = createIcon(Yuque, { className: 'yuque-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

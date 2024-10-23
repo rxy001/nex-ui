@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const AudioOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Audio)
+    const Icon = createIcon(Audio, { className: 'audio-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

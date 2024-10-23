@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const ShareAltOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(ShareAlt)
+    const Icon = createIcon(ShareAlt, { className: 'share-alt-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

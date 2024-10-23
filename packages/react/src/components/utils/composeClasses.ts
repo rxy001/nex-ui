@@ -1,4 +1,4 @@
-import { forEach, merge, reduce, isFunction, isString } from '@nex-ui/utils'
+import { forEach, reduce, isFunction, isString } from '@nex-ui/utils'
 import type { Noop } from '@nex-ui/utils'
 
 export function composeClasses<ClassKey extends string>(
@@ -11,20 +11,20 @@ export function composeClasses<ClassKey extends string>(
 
   // @ts-expect-error
   forEach(slots, (value: string[], slot: ClassKey) => {
-    let classNames = classes?.[slot]
+    let className = (classes?.[slot] ?? []) as string[]
 
-    classNames = isFunction(classNames)
-      ? classNames(ownerState)
-      : isString(classNames)
-        ? [classNames]
-        : classNames
+    if (isFunction(className)) {
+      className = className(ownerState)
+    }
+
+    className = isString(className) ? [className] : className
 
     const result = reduce(
       value,
       (acc, key) => {
         if (key) {
           const utilityClass = getUtilityClass(key)
-          if (utilityClass && utilityClass !== '') {
+          if (utilityClass !== '') {
             acc.push(utilityClass)
           }
         }
@@ -33,7 +33,7 @@ export function composeClasses<ClassKey extends string>(
       [] as string[],
     )
 
-    output[slot] = merge(result, classNames).join(' ')
+    output[slot] = [...className, ...result].join(' ')
   })
 
   return output

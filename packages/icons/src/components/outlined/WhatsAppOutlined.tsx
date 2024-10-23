@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const WhatsAppOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(WhatsApp)
+    const Icon = createIcon(WhatsApp, { className: 'whats-app-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

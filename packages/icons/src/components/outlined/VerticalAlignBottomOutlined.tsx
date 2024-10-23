@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const VerticalAlignBottomOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(VerticalAlignBottom)
+    const Icon = createIcon(VerticalAlignBottom, {
+      className: 'vertical-align-bottom-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

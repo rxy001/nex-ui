@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const DribbbleCircleFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(DribbbleCircle)
+    const Icon = createIcon(DribbbleCircle, {
+      className: 'dribbble-circle-filled',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const BoxPlotFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(BoxPlot)
+    const Icon = createIcon(BoxPlot, { className: 'box-plot-filled' })
     return <Icon {...props} ref={ref} />
   },
 )

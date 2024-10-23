@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const SortDescendingOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(SortDescending)
+    const Icon = createIcon(SortDescending, {
+      className: 'sort-descending-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

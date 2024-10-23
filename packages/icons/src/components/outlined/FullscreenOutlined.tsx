@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const FullscreenOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Fullscreen)
+    const Icon = createIcon(Fullscreen, { className: 'fullscreen-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

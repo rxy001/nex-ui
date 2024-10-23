@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const HarmonyOSOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(HarmonyOS)
+    const Icon = createIcon(HarmonyOS, { className: 'harmony-o-s-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

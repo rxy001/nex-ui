@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const DotNetOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(DotNet)
+    const Icon = createIcon(DotNet, { className: 'dot-net-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

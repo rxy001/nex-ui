@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const RotateLeftOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(RotateLeft)
+    const Icon = createIcon(RotateLeft, { className: 'rotate-left-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

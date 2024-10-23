@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const BehanceOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Behance)
+    const Icon = createIcon(Behance, { className: 'behance-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

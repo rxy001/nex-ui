@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const CiCircleOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(CiCircle)
+    const Icon = createIcon(CiCircle, { className: 'ci-circle-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

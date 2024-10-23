@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const HourglassFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Hourglass)
+    const Icon = createIcon(Hourglass, { className: 'hourglass-filled' })
     return <Icon {...props} ref={ref} />
   },
 )

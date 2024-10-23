@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const FileExcelOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(FileExcel)
+    const Icon = createIcon(FileExcel, { className: 'file-excel-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

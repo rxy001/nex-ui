@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const DatabaseOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Database)
+    const Icon = createIcon(Database, { className: 'database-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

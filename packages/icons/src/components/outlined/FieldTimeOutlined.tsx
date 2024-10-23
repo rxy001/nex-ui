@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const FieldTimeOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(FieldTime)
+    const Icon = createIcon(FieldTime, { className: 'field-time-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const GoogleCircleFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(GoogleCircle)
+    const Icon = createIcon(GoogleCircle, { className: 'google-circle-filled' })
     return <Icon {...props} ref={ref} />
   },
 )

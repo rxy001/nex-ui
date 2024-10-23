@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const BorderBottomOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(BorderBottom)
+    const Icon = createIcon(BorderBottom, {
+      className: 'border-bottom-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const YoutubeOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Youtube)
+    const Icon = createIcon(Youtube, { className: 'youtube-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const EyeInvisibleFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(EyeInvisible)
+    const Icon = createIcon(EyeInvisible, { className: 'eye-invisible-filled' })
     return <Icon {...props} ref={ref} />
   },
 )

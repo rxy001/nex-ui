@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const UnorderedListOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(UnorderedList)
+    const Icon = createIcon(UnorderedList, {
+      className: 'unordered-list-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

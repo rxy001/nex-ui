@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const FontSizeOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(FontSize)
+    const Icon = createIcon(FontSize, { className: 'font-size-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

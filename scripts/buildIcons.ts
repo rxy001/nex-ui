@@ -75,6 +75,10 @@ async function run() {
 
     const categoryDirPath = resolve(componentsDirPath, category)
 
+    const defaultProps = {
+      className: `${svgFileName}-${category}`,
+    }
+
     if (!existsSync(categoryDirPath)) {
       mkdirSync(categoryDirPath)
     }
@@ -100,8 +104,8 @@ async function run() {
         '\n' +
         `    const Icon = createIcon(${svgComponentName}${
           options[iconComponentName]
-            ? `,${JSON.stringify(options[iconComponentName])}`
-            : ''
+            ? `,${JSON.stringify({ ...options[iconComponentName], ...defaultProps })}`
+            : `,${JSON.stringify(defaultProps)}`
         })` +
         '\n' +
         '    return <Icon {...props} ref={ref} />' +

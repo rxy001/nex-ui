@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const GitlabFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Gitlab)
+  const Icon = createIcon(Gitlab, { className: 'gitlab-filled' })
   return <Icon {...props} ref={ref} />
 })

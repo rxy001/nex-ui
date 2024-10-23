@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const ColumnWidthOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(ColumnWidth)
+    const Icon = createIcon(ColumnWidth, { className: 'column-width-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

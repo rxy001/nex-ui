@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const AlipayCircleOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(AlipayCircle)
+    const Icon = createIcon(AlipayCircle, {
+      className: 'alipay-circle-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

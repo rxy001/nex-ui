@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const InsertRowRightOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(InsertRowRight)
+    const Icon = createIcon(InsertRowRight, {
+      className: 'insert-row-right-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const JavaScriptOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(JavaScript)
+    const Icon = createIcon(JavaScript, { className: 'java-script-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

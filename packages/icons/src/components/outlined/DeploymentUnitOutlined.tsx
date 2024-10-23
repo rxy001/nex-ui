@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const DeploymentUnitOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(DeploymentUnit)
+    const Icon = createIcon(DeploymentUnit, {
+      className: 'deployment-unit-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

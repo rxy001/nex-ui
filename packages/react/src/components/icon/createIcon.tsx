@@ -42,7 +42,10 @@ const useUtilityClasses = (ownerState: IconOwnerState) => {
 
 export const createIcon = (
   svgComponent: ComponentType<any>,
-  defaultProps?: InnerIconProps,
+  {
+    className: defaultClassName,
+    ...defaultProps
+  }: InnerIconProps | undefined = {},
 ) => {
   // @ts-ignore
   return forwardRef((inProps: InnerIconProps, ref: Ref<SVGElement>) => {
@@ -96,7 +99,7 @@ export const createIcon = (
         colorPalette={colorPalette}
         as={as}
         ref={ref}
-        className={classNames(classes.root, className)}
+        className={classNames(classes.root, defaultClassName, className)}
         {...remainingProps}
         classes={null}
       />

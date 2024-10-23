@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const ExceptionOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Exception)
+    const Icon = createIcon(Exception, { className: 'exception-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

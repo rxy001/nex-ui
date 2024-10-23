@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const MergeCellsOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(MergeCells)
+    const Icon = createIcon(MergeCells, { className: 'merge-cells-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

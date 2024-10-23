@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const WeiboCircleOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(WeiboCircle)
+    const Icon = createIcon(WeiboCircle, { className: 'weibo-circle-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

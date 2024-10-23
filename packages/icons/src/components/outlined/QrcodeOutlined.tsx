@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const QrcodeOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Qrcode)
+    const Icon = createIcon(Qrcode, { className: 'qrcode-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

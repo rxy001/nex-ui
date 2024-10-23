@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const QqSquareFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(QqSquare)
+    const Icon = createIcon(QqSquare, { className: 'qq-square-filled' })
     return <Icon {...props} ref={ref} />
   },
 )

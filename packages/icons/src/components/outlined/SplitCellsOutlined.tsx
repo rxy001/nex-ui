@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const SplitCellsOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(SplitCells)
+    const Icon = createIcon(SplitCells, { className: 'split-cells-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

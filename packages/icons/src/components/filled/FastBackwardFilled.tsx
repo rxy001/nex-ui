@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const FastBackwardFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(FastBackward)
+    const Icon = createIcon(FastBackward, { className: 'fast-backward-filled' })
     return <Icon {...props} ref={ref} />
   },
 )

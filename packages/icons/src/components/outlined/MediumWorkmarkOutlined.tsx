@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const MediumWorkmarkOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(MediumWorkmark)
+    const Icon = createIcon(MediumWorkmark, {
+      className: 'medium-workmark-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

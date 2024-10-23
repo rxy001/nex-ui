@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const OpenAIOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(OpenAI)
+    const Icon = createIcon(OpenAI, { className: 'open-a-i-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

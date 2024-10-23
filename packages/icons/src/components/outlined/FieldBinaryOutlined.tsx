@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const FieldBinaryOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(FieldBinary)
+    const Icon = createIcon(FieldBinary, { className: 'field-binary-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

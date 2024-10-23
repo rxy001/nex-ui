@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const WechatFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Wechat)
+  const Icon = createIcon(Wechat, { className: 'wechat-filled' })
   return <Icon {...props} ref={ref} />
 })

@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const BehanceSquareFilled = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(BehanceSquare)
+    const Icon = createIcon(BehanceSquare, {
+      className: 'behance-square-filled',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

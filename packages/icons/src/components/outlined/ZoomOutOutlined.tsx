@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const ZoomOutOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(ZoomOut)
+    const Icon = createIcon(ZoomOut, { className: 'zoom-out-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

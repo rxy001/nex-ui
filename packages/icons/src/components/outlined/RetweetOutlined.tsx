@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const RetweetOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Retweet)
+    const Icon = createIcon(Retweet, { className: 'retweet-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

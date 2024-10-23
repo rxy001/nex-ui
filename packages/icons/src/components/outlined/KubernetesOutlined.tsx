@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const KubernetesOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Kubernetes)
+    const Icon = createIcon(Kubernetes, { className: 'kubernetes-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

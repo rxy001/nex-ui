@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const HeatMapOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(HeatMap)
+    const Icon = createIcon(HeatMap, { className: 'heat-map-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

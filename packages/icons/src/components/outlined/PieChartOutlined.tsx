@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const PieChartOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(PieChart)
+    const Icon = createIcon(PieChart, { className: 'pie-chart-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const CloudUploadOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(CloudUpload)
+    const Icon = createIcon(CloudUpload, { className: 'cloud-upload-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

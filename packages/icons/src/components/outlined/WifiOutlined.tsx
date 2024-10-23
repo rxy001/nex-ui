@@ -5,6 +5,6 @@ import type { IconProps } from '../../types'
 
 export const WifiOutlined = forwardRef<SVGAElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Wifi)
+  const Icon = createIcon(Wifi, { className: 'wifi-outlined' })
   return <Icon {...props} ref={ref} />
 })

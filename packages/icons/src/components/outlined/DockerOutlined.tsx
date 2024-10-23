@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const DockerOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Docker)
+    const Icon = createIcon(Docker, { className: 'docker-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

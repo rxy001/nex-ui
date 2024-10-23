@@ -6,7 +6,9 @@ import type { IconProps } from '../../types'
 export const StrikethroughOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Strikethrough)
+    const Icon = createIcon(Strikethrough, {
+      className: 'strikethrough-outlined',
+    })
     return <Icon {...props} ref={ref} />
   },
 )

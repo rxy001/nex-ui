@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const CloudSyncOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(CloudSync)
+    const Icon = createIcon(CloudSync, { className: 'cloud-sync-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )

@@ -6,7 +6,7 @@ import type { IconProps } from '../../types'
 export const BilibiliOutlined = forwardRef<SVGAElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Bilibili)
+    const Icon = createIcon(Bilibili, { className: 'bilibili-outlined' })
     return <Icon {...props} ref={ref} />
   },
 )
