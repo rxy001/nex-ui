@@ -75,7 +75,12 @@ const createStyledComponent = (tag: ElementType) => {
       const { css } = useCSSSystem()
 
       let cssProp = props.sx ? css(props.sx, props.colorPalette) : props.sx
-
+      cssProp = props.css
+        ? {
+            ...cssProp,
+            ...props.css,
+          }
+        : cssProp
       if (
         typeof cssProp === 'string' &&
         cache.registered[cssProp] !== undefined

@@ -15,15 +15,9 @@ import type {
   SelectorsDefinition,
   RawCSSProperties,
 } from '@nex-ui/system'
-import type { ButtonStyles, IconStyles } from './styles'
-import type { ButtonProps, ButtonOwnerState } from '../components'
-import type { InnerIconProps, IconOwnerState } from '../components/icon/types'
-import type {
-  ComponentThemeFn,
-  ExtractComponentStyles,
-  TokenDefinition,
-  ReplaceValuesWithColor,
-} from './utils.types'
+import type { NexStyledComponentProps as StyledComponentProps } from '@nex-ui/styled'
+import type { InnerIconProps } from '../components/icon/types'
+import type { TokenDefinition, ReplaceValuesWithColor } from './utils.types'
 import type { Aliases } from './generated/aliases'
 import type { Scales } from './generated/scales'
 import type { Breakpoints } from './generated/breakpoints'
@@ -40,13 +34,21 @@ import type {
   LineHeights,
 } from './generated/tokens'
 import type { SemanticTokens } from './generated/semanticTokens'
-import type { CSSPropertiesOverrides as CSSProperties } from './generated/cssProperties'
+import type { StyleObjectOverrides } from './generated/cssProperties'
 import type { Selectors } from './generated/selectors'
+import type { ComponentsTheme } from './componentsTheme.types'
 
-export type ColorPalette =
+type ColorPalette =
   | Tokens['colors']
   | SemanticTokens['colors']
   | RawCSSProperties['color']
+
+export type NexStyledComponentProps<T> = Omit<
+  StyledComponentProps<T>,
+  'colorPalette'
+> & {
+  colorPalette?: ColorPalette
+}
 
 export type ComponentColor =
   | 'blue'
@@ -54,35 +56,18 @@ export type ComponentColor =
   | 'pink'
   | 'purple'
   | 'cyan'
-  | 'yellow'
-  | 'orange'
   | 'red'
   | 'green'
+  | 'yellow'
+  | 'orange'
 
 declare module '@nex-ui/icons' {
   interface IconProps extends InnerIconProps {}
 }
 
 declare module '@nex-ui/system' {
-  interface CSSPropertiesOverrides extends CSSProperties {}
+  interface StyleObject extends StyleObjectOverrides {}
 }
-
-export type ComponentsTheme = {
-  Button?: {
-    styleOverrides?:
-      | ExtractComponentStyles<ButtonStyles>
-      | ComponentThemeFn<ButtonOwnerState, ButtonStyles>
-    defaultProps?: ButtonProps
-  }
-  Icon?: {
-    styleOverrides?:
-      | ExtractComponentStyles<IconStyles>
-      | ComponentThemeFn<IconOwnerState, IconStyles>
-    defaultProps?: InnerIconProps
-  }
-}
-
-export type ComponentNames = keyof ComponentsTheme
 
 export type Theme = {
   aliases?: AliasesDefinition & Aliases

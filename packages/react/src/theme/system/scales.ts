@@ -13,6 +13,8 @@ export const scales = defineConfig.scales({
 
   lineHeight: 'lineHeights',
 
+  gap: 'spacing',
+
   padding: 'spacing',
   paddingTop: 'spacing',
   paddingBottom: 'spacing',

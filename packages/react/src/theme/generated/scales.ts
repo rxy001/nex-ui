@@ -7,6 +7,7 @@ export interface Scales {
   width?: 'sizes'
   height?: 'sizes'
   lineHeight?: 'lineHeights'
+  gap?: 'spacing'
   padding?: 'spacing'
   paddingTop?: 'spacing'
   paddingBottom?: 'spacing'

@@ -11,7 +11,12 @@ import type {
 } from './types'
 
 export function createRuntimeFn(styles: any) {
-  const { defaultVariants, variants, compoundVariants, mainStyles } = styles
+  const {
+    mainStyles,
+    variants = {},
+    compoundVariants = [],
+    defaultVariants = {},
+  } = styles
 
   function shouldApplyCompound(compoundCheck: any, selections: any) {
     for (const key in compoundCheck) {

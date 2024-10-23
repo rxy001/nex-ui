@@ -1,8 +1,4 @@
-import { generateUtilityClasses, generateUtilityClass } from '../utils'
-
-export const getButtonUtilityClass = (prefix: string) => (slot: string) => {
-  return generateUtilityClass(prefix, slot)
-}
+import { generateUtilityClasses } from '../utils'
 
 // 用于单元测试
 export const buttonClasses = generateUtilityClasses('nui-btn', [

@@ -3,23 +3,21 @@ import type { StyleObject, RawCSSProperties } from '@nex-ui/system'
 
 export type HTMLElementTagName = keyof JSX.IntrinsicElements
 
-export type ExtraComponentProps = {
+export type NexStyledComponentProps<T = NonNullable<unknown>> = {
   as?: HTMLElementTagName
   sx?: StyleObject
   colorPalette?: RawCSSProperties['color']
-}
+} & T
 
-type StyledComponent<
-  P extends Record<string, any>,
-  JSXProps extends Record<string, any> = NonNullable<unknown>,
-> = FunctionComponent<P & ExtraComponentProps & JSXProps>
+export type NexStyledComponent<JSXProps extends Record<string, any>> =
+  FunctionComponent<NexStyledComponentProps<JSXProps>>
 
-export type StyledElements = {
-  [Tag in HTMLElementTagName]: StyledComponent<JSX.IntrinsicElements[Tag]>
+export type NexStyledElements = {
+  [Tag in HTMLElementTagName]: NexStyledComponent<JSX.IntrinsicElements[Tag]>
 }
 
 export type CreateStyledComponent = {
-  <T extends ElementType>(tag: T): StyledComponent<ComponentProps<T>>
+  <T extends ElementType>(tag: T): NexStyledComponent<ComponentProps<T>>
 }
 
-export type NexStyled = StyledElements & CreateStyledComponent
+export type NexStyled = CreateStyledComponent & NexStyledElements

@@ -15,7 +15,6 @@ export {
 
 export type {
   CSSInterpolation,
-  CSSPropertiesOverrides,
   RawCSSProperties,
   StyleObject,
   SystemConfig,

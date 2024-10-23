@@ -8,8 +8,12 @@ import { nex } from '@nex-ui/styled'
 import type { MouseEvent } from 'react'
 import type { HTMLElementTagName } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
-import { useStyles, useDefaultProps, composeClasses } from '../utils'
-import { getButtonUtilityClass } from './buttonClasses'
+import {
+  useStyles,
+  useDefaultProps,
+  composeClasses,
+  getUtilityClass,
+} from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
 
 const useUtilityClasses = (ownerState: ButtonOwnerState) => {
@@ -52,7 +56,7 @@ const useUtilityClasses = (ownerState: ButtonOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
-    getButtonUtilityClass(btnRoot),
+    getUtilityClass(btnRoot),
     ownerState,
     classes,
   )
@@ -61,6 +65,8 @@ const useUtilityClasses = (ownerState: ButtonOwnerState) => {
 }
 
 export const useButton = (inProps: ButtonProps) => {
+  const { sys } = useNexContext()
+
   const props = useDefaultProps({
     name: 'Button',
     props: inProps,
@@ -69,6 +75,8 @@ export const useButton = (inProps: ButtonProps) => {
   const {
     href,
     sx,
+    as,
+    colorPalette,
     className,
     children,
     variant = 'solid',
@@ -111,8 +119,16 @@ export const useButton = (inProps: ButtonProps) => {
     name: 'Button',
   })
 
+  const mergedCss = useMemo(
+    () => ({
+      ...sys.css(styles.root, color),
+      ...(sx ? sys.css(sx, (colorPalette as string) ?? color) : {}),
+    }),
+    [color, sys, colorPalette, styles.root, sx],
+  )
+
   const htmlElement: HTMLElementTagName =
-    typeof href === 'string' && href ? 'a' : 'button'
+    as !== undefined ? as : typeof href === 'string' && href ? 'a' : 'button'
 
   const onClick = useEvent(
     (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
@@ -151,16 +167,12 @@ export const useButton = (inProps: ButtonProps) => {
     children,
     rootProps: {
       onClick,
-      colorPalette: color,
       className: classNames(classes.root, className),
-      sx: {
-        ...styles.root,
-        ...sx,
-      },
+      css: mergedCss,
+      as: htmlElement,
       ...(htmlElement === 'a'
         ? {
             href,
-            as: htmlElement,
             'data-disabled': disabled || loading || null,
           }
         : {

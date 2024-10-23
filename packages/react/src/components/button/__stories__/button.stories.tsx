@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { AppleOutlined } from '@nex-ui/icons'
 import { Button } from '../index'
+import { Flex } from '../../flex'
 
 const meta = {
   title: 'Components/Button',
@@ -33,7 +34,7 @@ const meta = {
   },
   render: (args) => {
     return (
-      <>
+      <Flex gap={10} direction={args.block ? 'column' : 'row'}>
         <Button {...args} />
         <Button {...args} color="purple" />
         <Button {...args} color="gray" />
@@ -43,7 +44,7 @@ const meta = {
         <Button {...args} color="yellow" />
         <Button {...args} color="green" />
         <Button {...args} color="orange" />
-      </>
+      </Flex>
     )
   },
 } satisfies Meta<typeof Button>

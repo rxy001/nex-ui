@@ -184,7 +184,7 @@ export async function generateCSSProperties(sys: any) {
     [K in keyof Breakpoints as \`_\${K}\`]: T
   }
 
-  type BreakpointArray= (string | number)[]
+  type BreakpointArray= (string | number)[] | readonly (string | number)[]
 
   
   type TransformColors<T> = T extends \`\${string}.\${infer U}\`
@@ -193,7 +193,7 @@ export async function generateCSSProperties(sys: any) {
 
   type VirtualColors = TransformColors<Tokens['colors']> | TransformColors<SemanticTokens['colors']> 
 
-  interface CSSProperties extends RawCSSProperties {
+  export interface NexCSSProperties extends RawCSSProperties {
     ${selectorKeys
       .map((key) => {
         return `_${key}?: CSSInterpolation`
@@ -227,7 +227,7 @@ export async function generateCSSProperties(sys: any) {
       | BreakpointObject<T[K]>
   }
 
-  export type CSSPropertiesOverrides = ExtraCSSPropertyValue<CSSProperties>
+  export type StyleObjectOverrides = ExtraCSSPropertyValue<NexCSSProperties>
 
   `
 

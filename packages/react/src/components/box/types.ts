@@ -1,9 +1,5 @@
-import type { ExtraComponentProps } from '@nex-ui/styled'
 import type { HTMLAttributes } from 'react'
-import type { ColorPalette } from '../../theme'
+import type { NexStyledComponentProps } from '../../theme'
 
 export interface BoxProps
-  extends HTMLAttributes<HTMLDivElement>,
-    ExtraComponentProps {
-  colorPalette?: ColorPalette
-}
+  extends NexStyledComponentProps<HTMLAttributes<HTMLElement>> {}

@@ -13,7 +13,7 @@ type BreakpointObject<T> = {
   [K in keyof Breakpoints as `_${K}`]: T
 }
 
-type BreakpointArray = (string | number)[]
+type BreakpointArray = (string | number)[] | readonly (string | number)[]
 
 type TransformColors<T> = T extends `${string}.${infer U}`
   ? `colorPalette.${U}`
@@ -23,7 +23,7 @@ type VirtualColors =
   | TransformColors<Tokens['colors']>
   | TransformColors<SemanticTokens['colors']>
 
-interface CSSProperties extends RawCSSProperties {
+export interface NexCSSProperties extends RawCSSProperties {
   _hover?: CSSInterpolation
   _active?: CSSInterpolation
   _disabled?: CSSInterpolation
@@ -49,6 +49,7 @@ interface CSSProperties extends RawCSSProperties {
   width?: RawCSSProperties['width'] | Tokens['sizes']
   height?: RawCSSProperties['height'] | Tokens['sizes']
   lineHeight?: RawCSSProperties['lineHeight'] | Tokens['lineHeights']
+  gap?: RawCSSProperties['gap'] | Tokens['spacing']
   padding?: RawCSSProperties['padding'] | Tokens['spacing']
   paddingTop?: RawCSSProperties['paddingTop'] | Tokens['spacing']
   paddingBottom?: RawCSSProperties['paddingBottom'] | Tokens['spacing']
@@ -106,4 +107,4 @@ type ExtraCSSPropertyValue<T> = {
     | BreakpointObject<T[K]>
 }
 
-export type CSSPropertiesOverrides = ExtraCSSPropertyValue<CSSProperties>
+export type StyleObjectOverrides = ExtraCSSPropertyValue<NexCSSProperties>
