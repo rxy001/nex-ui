@@ -1,8 +1,10 @@
-import type { ButtonStyles, IconStyles } from './styles'
+import type { ButtonStyles, FlexStyles, IconStyles } from './styles'
 import type {
   ButtonProps,
   ButtonOwnerState,
   IconOwnerState,
+  FlexOwnerState,
+  FlexProps,
 } from '../components'
 import type { InnerIconProps } from '../components/icon/types'
 import type { ComponentThemeFn, ExtractComponentStyles } from './utils.types'
@@ -19,6 +21,12 @@ export type ComponentsTheme = {
       | ExtractComponentStyles<IconStyles>
       | ComponentThemeFn<IconOwnerState, IconStyles>
     defaultProps?: InnerIconProps
+  }
+  Flex?: {
+    styleOverrides?:
+      | ExtractComponentStyles<FlexStyles>
+      | ComponentThemeFn<FlexOwnerState, FlexStyles>
+    defaultProps?: FlexProps
   }
 }
 
