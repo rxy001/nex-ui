@@ -1,23 +1,8 @@
 /* eslint-disable no-use-before-define */
 import type * as CSS from 'csstype'
 import type { Keyframes } from '@emotion/react'
-import type { ScalesDefinition } from './scales'
-import type { TokensDefinition, SemanticTokensDefinition } from './tokens'
-import type { AliasesDefinition } from './aliases'
-import type { SelectorsDefinition } from './selectors'
-import type { BreakpointsDefinition } from './breakpoints'
 
 export type Dictionary<T = any> = Record<string, T>
-
-export type SystemConfig = {
-  cssVarsPrefix?: string
-  scales?: ScalesDefinition
-  aliases?: AliasesDefinition
-  breakpoints?: BreakpointsDefinition
-  selectors?: SelectorsDefinition
-  tokens?: TokensDefinition
-  semanticTokens?: SemanticTokensDefinition
-}
 
 export type CSSInterpolation =
   | null

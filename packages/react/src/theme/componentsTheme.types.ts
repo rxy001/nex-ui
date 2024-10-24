@@ -6,7 +6,7 @@ import type {
   FlexOwnerState,
   FlexProps,
 } from '../components'
-import type { InnerIconProps } from '../components/icon/types'
+import type { InnerIconProps } from '../components/icon'
 import type { ComponentThemeFn, ExtractComponentStyles } from './utils.types'
 
 export type ComponentsTheme = {

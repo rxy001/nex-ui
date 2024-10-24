@@ -5,9 +5,9 @@ import type {
   BaseStylesDefinition,
   SlotStylesDefinition,
 } from '@nex-ui/system'
-import { styles } from '../../theme'
+import { styles } from '../../theme/styles'
 import { useNexContext } from '../provider/Context'
-import type { Styles } from '../../theme'
+import type { Styles } from '../../theme/styles'
 
 type UseStylesConfig<T, K> = {
   name: T

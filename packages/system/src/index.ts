@@ -3,6 +3,7 @@ export * from '@emotion/react'
 export * from './Provider'
 
 export { createSystem } from './system'
+export type { SystemConfig } from './system'
 
 export { defineBaseStyles, defineSlotStyles } from './styles'
 export type { BaseStylesDefinition, SlotStylesDefinition } from './styles'
@@ -13,12 +14,7 @@ export {
   defineSemanticTokens,
 } from './defineConfig'
 
-export type {
-  CSSInterpolation,
-  RawCSSProperties,
-  StyleObject,
-  SystemConfig,
-} from './types'
+export type { CSSInterpolation, RawCSSProperties, StyleObject } from './types'
 
 export type { CssFn } from './css'
 

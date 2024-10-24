@@ -1,9 +1,9 @@
 import type { SVGAttributes, ComponentType } from 'react'
 import type {
-  IconVariants,
   NexStyledComponentProps,
   NexCSSProperties,
-} from '../../theme'
+} from '../../theme/types'
+import type { IconVariants } from '../../theme/styles'
 import type { ComponentUtilityClasses } from '../type'
 
 export interface IconOwnerState

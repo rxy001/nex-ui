@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { SystemContext } from '@nex-ui/system'
-import type { ComponentsTheme, Theme } from '../../theme'
+import type { ComponentsTheme } from '../../theme/componentsTheme.types'
+import type { Theme } from '../../theme/defineTheme'
 
 export type InnerProviderProps = {
   components?: ComponentsTheme

@@ -1,9 +1,9 @@
 import type { HtmlHTMLAttributes, ReactNode } from 'react'
+import type { FlexVariants } from '../../theme/styles'
 import type {
-  FlexVariants,
   NexStyledComponentProps,
   NexCSSProperties,
-} from '../../theme'
+} from '../../theme/types'
 import type { ComponentUtilityClasses } from '../type'
 
 export interface FlexOwnerState

@@ -4,7 +4,7 @@ import { Global } from '@emotion/react'
 import type { Interpolation } from '@emotion/react'
 import { createSystem } from '../system'
 import { SystemProvider, useCSSSystem, DEFAULT_CONTEXT_VALUE } from './Context'
-import type { SystemConfig } from '../types'
+import type { SystemConfig } from '../system'
 import type { SystemContext } from './Context'
 
 export type CSSSystemProviderProps = {

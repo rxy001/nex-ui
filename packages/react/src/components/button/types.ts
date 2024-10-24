@@ -3,11 +3,8 @@ import type {
   ButtonHTMLAttributes,
   AnchorHTMLAttributes,
 } from 'react'
-import type {
-  ButtonVariants,
-  ComponentColor,
-  NexStyledComponentProps,
-} from '../../theme'
+import type { ComponentColor, NexStyledComponentProps } from '../../theme/types'
+import type { ButtonVariants } from '../../theme/styles'
 import type { ComponentUtilityClasses } from '../type'
 
 type MergedHTMLAttributes = ButtonHTMLAttributes<HTMLElement> &

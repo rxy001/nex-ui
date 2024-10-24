@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { merge } from '@nex-ui/utils'
 import { useNexContext } from '../provider/Context'
-import type { ComponentNames } from '../../theme'
+import type { ComponentNames } from '../../theme/componentsTheme.types'
 
 type Config<T> = {
   name: ComponentNames

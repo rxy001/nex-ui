@@ -1,5 +1,5 @@
 import type { SemanticTokensDefinition, TokensDefinition } from './tokens'
-import type { SystemConfig } from './types'
+import type { SystemConfig } from './system'
 
 export const defineConfig = (config: SystemConfig) => config
 defineConfig.selectors = (v: SystemConfig['selectors']) => v

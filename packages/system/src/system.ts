@@ -6,7 +6,21 @@ import { createBreakpoints } from './breakpoints'
 import { createCssFn } from './css'
 import { createNormalize } from './normalize'
 import { createSelectors } from './selectors'
-import type { SystemConfig } from './types'
+import type { ScalesDefinition } from './scales'
+import type { TokensDefinition, SemanticTokensDefinition } from './tokens'
+import type { AliasesDefinition } from './aliases'
+import type { SelectorsDefinition } from './selectors'
+import type { BreakpointsDefinition } from './breakpoints'
+
+export type SystemConfig = {
+  cssVarsPrefix?: string
+  scales?: ScalesDefinition
+  aliases?: AliasesDefinition
+  breakpoints?: BreakpointsDefinition
+  selectors?: SelectorsDefinition
+  tokens?: TokensDefinition
+  semanticTokens?: SemanticTokensDefinition
+}
 
 export const createSystem = (config: SystemConfig) => {
   const {
