@@ -1,16 +1,27 @@
 {
   "name": "@nex-ui/styled",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "author": "X1ng Yu",
+  "private": false,
+  "keywords": [
+    "react",
+    "react-component",
+    "nui",
+    "nex-ui",
+    "styled"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rxy001/nex-ui.git",
+    "directory": "packages/styled"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "tsx ../../scripts/build.ts --dts",
     "build:fast": "tsx ../../scripts/build.ts",
     "type-check": "tsc --noEmit"
   },
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",

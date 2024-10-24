@@ -2,15 +2,26 @@
   "name": "@nex-ui/icons",
   "version": "1.0.0",
   "author": "X1ng Yu",
+  "private": false,
+  "keywords": [
+    "react",
+    "react-component",
+    "nui",
+    "nex-ui",
+    "icons"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rxy001/nex-ui.git",
+    "directory": "packages/icons"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "tsx ../../scripts/build.ts --dts",
     "build:fast": "tsx ../../scripts/build.ts",
     "type-check": "tsc --noEmit"
   },
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",

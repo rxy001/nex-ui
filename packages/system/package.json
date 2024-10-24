@@ -1,16 +1,27 @@
 {
   "name": "@nex-ui/system",
-  "version": "1.0.2",
+  "version": "1.0.0",
+  "private": false,
   "author": "X1ng Yu",
   "scripts": {
     "build": "tsx ../../scripts/build.ts --dts",
     "build:fast": "tsx ../../scripts/build.ts",
     "type-check": "tsc --noEmit"
   },
-  "type": "module",
-  "files": [
-    "dist"
+  "keywords": [
+    "react",
+    "react-component",
+    "nui",
+    "nex-ui",
+    "system"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rxy001/nex-ui.git",
+    "directory": "packages/system"
+  },
+  "license": "MIT",
+  "type": "module",
   "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
