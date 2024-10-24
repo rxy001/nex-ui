@@ -3,20 +3,24 @@ import type { ReactNode } from 'react'
 import { Global } from '@emotion/react'
 import type { Interpolation } from '@emotion/react'
 import { createSystem } from '../system'
-import { SystemProvider, useCSSSystem, DEFAULT_CONTEXT_VALUE } from './Context'
+import {
+  InnerSystemProvider,
+  useSystem,
+  DEFAULT_CONTEXT_VALUE,
+} from './SystemContext'
 import type { SystemConfig } from '../system'
-import type { SystemContext } from './Context'
+import type { SystemContext } from './SystemContext'
 
-export type CSSSystemProviderProps = {
-  children: ReactNode
+export type SystemProviderProps = {
+  children?: ReactNode
   config?: SystemConfig
 }
 
-export const CSSSystemProvider = ({
+export const SystemProvider = ({
   config = {},
   children,
-}: CSSSystemProviderProps) => {
-  const outer = useCSSSystem()
+}: SystemProviderProps) => {
+  const outer = useSystem()
 
   const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE
 
@@ -34,9 +38,11 @@ export const CSSSystemProvider = ({
   const methods = useMemo(() => ({ cva, css, sva }), [cva, sva, css])
 
   return (
-    <SystemProvider value={methods}>
+    <InnerSystemProvider value={methods}>
       {isTopLevel && <Global styles={globalCssVars} />}
       {children}
-    </SystemProvider>
+    </InnerSystemProvider>
   )
 }
+
+SystemProvider.displayName = 'SystemProvider'

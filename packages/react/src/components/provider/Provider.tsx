@@ -1,7 +1,7 @@
 'use client'
 
 import { merge } from '@nex-ui/utils'
-import { CSSSystemProvider, useCSSSystem } from '@nex-ui/system'
+import { SystemProvider, useSystem } from '@nex-ui/system'
 import { useMemo } from 'react'
 import { __NEX_ICON_PROVIDER as NexIconsProvider } from '@nex-ui/icons'
 import { defaultConfig } from '../../theme/preset'
@@ -10,7 +10,7 @@ import { createIcon } from '../icon/createIcon'
 import type { NexProviderProps, InnerProviderProps } from './types'
 
 function InnerProvider({ components, prefix, children }: InnerProviderProps) {
-  const { cva, css, sva } = useCSSSystem()
+  const { cva, css, sva } = useSystem()
 
   const contextValue = useMemo(
     () => ({ components, prefix, sys: { cva, css, sva } }),
@@ -34,10 +34,10 @@ export function NexProvider(props: NexProviderProps) {
   )
 
   return (
-    <CSSSystemProvider config={mergedSysConfig}>
+    <SystemProvider config={mergedSysConfig}>
       <InnerProvider components={components} prefix={prefix}>
         <NexIconsProvider createIcon={createIcon}>{children}</NexIconsProvider>
       </InnerProvider>
-    </CSSSystemProvider>
+    </SystemProvider>
   )
 }

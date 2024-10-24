@@ -1,6 +1,6 @@
 export * from '@emotion/react'
 
-export * from './Provider'
+export * from './SystemProvider'
 
 export { createSystem } from './system'
 export type { SystemConfig } from './system'

@@ -4,7 +4,7 @@ import { render } from '@testing-library/react'
 import { NexProvider } from '../../packages/react/src'
 
 // eslint-disable-next-line import/no-relative-packages
-import { CSSSystemProvider } from '../../packages/system/src'
+import { SystemProvider } from '../../packages/system/src'
 
 export const renderWithNexProvider = (component: ReactNode) => {
   return render(component, {
@@ -14,6 +14,6 @@ export const renderWithNexProvider = (component: ReactNode) => {
 
 export const renderWithCSSProvider = (component: ReactNode) => {
   return render(component, {
-    wrapper: (props) => <CSSSystemProvider>{props.children}</CSSSystemProvider>,
+    wrapper: (props) => <SystemProvider>{props.children}</SystemProvider>,
   })
 }

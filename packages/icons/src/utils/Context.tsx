@@ -9,7 +9,7 @@ const DEFAULT_CONTEXT_VALUE = '__nex-icons-default-value'
 
 const [IconsProvider, useNexIcons] = createContext<IconsContext>({
   contextName: 'NexIconsContext',
-  providerName: '<IconsProvider />',
+  providerName: 'IconsProvider',
   hookName: 'useNexIcons',
   strict: false,
   defaultValue: DEFAULT_CONTEXT_VALUE as unknown as IconsContext,
