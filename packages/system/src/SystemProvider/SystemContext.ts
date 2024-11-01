@@ -6,12 +6,12 @@ const DEFAULT_CONTEXT_VALUE = '__css-system-default-context-value__'
 
 export type SystemContext = { cva: CvaFn; css: CssFn; sva: SvaFn }
 
-const [SystemProvider, useCSSSystem] = createContext<SystemContext>({
+const [InnerSystemProvider, useSystem] = createContext<SystemContext>({
   contextName: 'SystemContext',
-  providerName: '<SystemProvider />',
-  hookName: 'useCSSSystem',
+  providerName: 'InnerSystemProvider',
+  hookName: 'useSystem',
   strict: false,
   defaultValue: DEFAULT_CONTEXT_VALUE as unknown as SystemContext,
 })
 
-export { SystemProvider, useCSSSystem, DEFAULT_CONTEXT_VALUE }
+export { InnerSystemProvider, useSystem, DEFAULT_CONTEXT_VALUE }

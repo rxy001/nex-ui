@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from '../../button'
-import { Flex } from '../index'
+import { Flex } from '../Flex'
 
 const meta = {
   title: 'Components/Flex',
@@ -57,28 +57,10 @@ const meta = {
         type: 'select',
       },
     },
-    grow: {
-      options: [1, 3, 5],
-      control: {
-        type: 'select',
-      },
-    },
-    shrink: {
-      options: [1, 3, 5],
-      control: {
-        type: 'select',
-      },
-    },
-    basis: {
-      options: ['200px', '0', 'autp'],
-      control: {
-        type: 'select',
-      },
-    },
   },
   render: (args) => {
     return (
-      <Flex {...args}>
+      <Flex {...args} sx={{ height: 200 }}>
         <Button>Button</Button>
         <Button color="purple">Button</Button>
         <Button color="gray">Button</Button>
@@ -99,4 +81,11 @@ type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   args: {},
+}
+
+export const Column: Story = {
+  args: {
+    direction: 'column',
+    gap: '20px',
+  },
 }

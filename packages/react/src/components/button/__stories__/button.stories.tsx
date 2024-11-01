@@ -1,49 +1,86 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { AppleOutlined } from '@nex-ui/icons'
-import { Button } from '../index'
+import { Button } from '../Button'
 import { Flex } from '../../flex'
 
 const meta = {
   title: 'Components/Button',
   component: Button,
   argTypes: {
-    variant: {
-      options: ['solid', 'outline', 'text', 'link'],
-      control: {
-        type: 'select',
-      },
-    },
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: {
-        type: 'select',
-      },
-    },
-    radius: {
-      options: ['sm', 'md', 'lg', 'full'],
-      control: {
-        type: 'select',
-      },
-    },
-    href: {
-      type: 'string',
+    disabled: {
+      control: 'boolean',
     },
     iconOnly: {
-      type: 'boolean',
+      control: 'boolean',
     },
+    block: {
+      control: 'boolean',
+    },
+    variant: {
+      options: ['solid', 'outline', 'text', 'link'],
+      control: 'select',
+      description: 'The age of the person',
+    },
+    // size: {
+    //   options: ['sm', 'md', 'lg'],
+    //   control: 'select',
+    // },
+    radius: {
+      options: ['sm', 'md', 'lg', 'full'],
+      control: 'select',
+    },
+    href: {
+      control: 'text',
+    },
+    loading: {
+      control: 'boolean',
+    },
+  },
+  args: {
+    children: 'Button',
+    // size: 'lg',
+    variant: 'solid',
+    disabled: false,
+    block: false,
+    iconOnly: false,
+    loading: false,
   },
   render: (args) => {
     return (
-      <Flex gap={10} direction={args.block ? 'column' : 'row'}>
-        <Button {...args} />
-        <Button {...args} color="purple" />
-        <Button {...args} color="gray" />
-        <Button {...args} color="red" />
-        <Button {...args} color="cyan" />
-        <Button {...args} color="pink" />
-        <Button {...args} color="yellow" />
-        <Button {...args} color="green" />
-        <Button {...args} color="orange" />
+      <Flex gap={50} direction="column">
+        <Flex gap={10} direction={args.block ? 'column' : 'row'}>
+          <Button {...args} size="sm" />
+          <Button {...args} size="sm" color="purple" />
+          <Button {...args} size="sm" color="gray" />
+          <Button {...args} size="sm" color="red" />
+          <Button {...args} size="sm" color="cyan" />
+          <Button {...args} size="sm" color="pink" />
+          <Button {...args} size="sm" color="yellow" />
+          <Button {...args} size="sm" color="green" />
+          <Button {...args} size="sm" color="orange" />
+        </Flex>
+        <Flex gap={10} direction={args.block ? 'column' : 'row'}>
+          <Button {...args} size="md" />
+          <Button {...args} size="md" color="purple" />
+          <Button {...args} size="md" color="gray" />
+          <Button {...args} size="md" color="red" />
+          <Button {...args} size="md" color="cyan" />
+          <Button {...args} size="md" color="pink" />
+          <Button {...args} size="md" color="yellow" />
+          <Button {...args} size="md" color="green" />
+          <Button {...args} size="md" color="orange" />
+        </Flex>
+        <Flex gap={10} direction={args.block ? 'column' : 'row'}>
+          <Button {...args} size="lg" />
+          <Button {...args} size="lg" color="purple" />
+          <Button {...args} size="lg" color="gray" />
+          <Button {...args} size="lg" color="red" />
+          <Button {...args} size="lg" color="cyan" />
+          <Button {...args} size="lg" color="pink" />
+          <Button {...args} size="lg" color="yellow" />
+          <Button {...args} size="lg" color="green" />
+          <Button {...args} size="lg" color="orange" />
+        </Flex>
       </Flex>
     )
   },
@@ -53,37 +90,24 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const commonArgs: Story['args'] = {
-  children: 'Button',
-  disabled: false,
-  block: false,
-  size: 'lg',
-  variant: 'solid',
-}
-
 export const Basic: Story = {
-  args: {
-    ...commonArgs,
-  },
+  args: {},
 }
 
 export const Disabled: Story = {
   args: {
-    ...commonArgs,
     disabled: true,
   },
 }
 
 export const Block: Story = {
   args: {
-    ...commonArgs,
     block: true,
   },
 }
 
 export const LoadingButton: Story = {
   args: {
-    ...commonArgs,
     loading: true,
     onClick: () => {},
   },
@@ -91,7 +115,6 @@ export const LoadingButton: Story = {
 
 export const IconButton: Story = {
   args: {
-    ...commonArgs,
     iconOnly: true,
     children: <AppleOutlined />,
   },
@@ -99,7 +122,6 @@ export const IconButton: Story = {
 
 export const WithIcons: Story = {
   args: {
-    ...commonArgs,
     children: 'Button',
     startIcon: <AppleOutlined />,
     endIcon: <AppleOutlined />,

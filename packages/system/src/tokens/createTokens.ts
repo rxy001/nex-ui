@@ -15,7 +15,6 @@ import {
   isResponsiveColor,
 } from '../utils'
 import type { Token } from './createToken'
-import type { Dictionary } from '../types'
 
 function filterDefault(path: string[]) {
   if (path[0] === 'DEFAULT') return path
@@ -214,26 +213,29 @@ export function createTokens(config: CreateTokensConfig) {
 
   return {
     getToken: (key: string) => tokenMap.get(key),
-    getGlobalCssVars: () => {
-      const result: Dictionary = {}
-      const globalPrefix = ':root'
+    getGlobalCssVars: () => cssVarMap,
+    // getGlobalCssVars: ({ colorScheme, colorSchemeSelector }) => {
+    //   const result: Dictionary = {}
+    //   const globalPrefix = ':root'
 
-      cssVarMap.forEach((value, key) => {
-        const cssVar = Object.fromEntries(value.entries())
+    //   cssVarMap.forEach((value, key) => {
+    //     const cssVar = Object.fromEntries(value.entries())
 
-        if (Object.keys(cssVar).length === 0) {
-          return
-        }
+    //     if (Object.keys(cssVar).length === 0) {
+    //       return
+    //     }
 
-        if (key === 'base') {
-          result[globalPrefix] = cssVar
-        } else {
-          result[`.${key}${globalPrefix}`] = cssVar
-        }
-      })
+    //     if (key === 'base') {
+    //       result[globalPrefix] = cssVar
+    //     } else {
+    //       result[`.${key}${globalPrefix}`] = cssVar
+    //     }
+    //   })
 
-      return result
-    },
+    //   console.log(result)
+
+    //   return result
+    // },
   }
 }
 

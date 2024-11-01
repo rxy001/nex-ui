@@ -6,7 +6,7 @@ import {
   insertStyles,
 } from '@emotion/utils'
 import { forEach } from '@nex-ui/utils'
-import { useCSSSystem } from '@nex-ui/system'
+import { useSystem } from '@nex-ui/system'
 import { serializeStyles } from '@emotion/serialize'
 import type { SerializedStyles } from '@emotion/serialize'
 // @ts-ignore
@@ -72,7 +72,7 @@ const createStyledComponent = (tag: ElementType) => {
 
   return withEmotionCache(
     (props: Record<string, any>, cache: EmotionCache, ref: Ref<any>) => {
-      const { css } = useCSSSystem()
+      const { css } = useSystem()
 
       let cssProp = props.sx ? css(props.sx, props.colorPalette) : props.sx
       cssProp = props.css

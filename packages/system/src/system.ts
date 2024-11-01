@@ -66,12 +66,10 @@ export const createSystem = (config: SystemConfig) => {
 
   const sva = createSvaFn()
 
-  const globalCssVars = getGlobalCssVars()
-
   return {
     cva,
     css,
     sva,
-    globalCssVars,
+    getGlobalCssVars,
   }
 }
