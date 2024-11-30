@@ -1,7 +1,5 @@
 export { createTokens, type Tokens } from './createTokens'
 
-export type { Token } from './createToken'
-
 export type {
   ColorsDefinition,
   SpacingDefinition,
@@ -11,8 +9,17 @@ export type {
   FontWeightsDefinition,
   LineHeightsDefinition,
   TokenCategories,
-  TokensDefinition,
   BordersDefinition,
   RadiiDefinition,
+  TokensDefinition,
   SemanticTokensDefinition,
+  SemanticBordersDefinition,
+  SemanticColorDefinition,
+  SemanticFontFamiliesDefinition,
+  SemanticFontSizesDefinition,
+  SemanticFontWeightsDefinition,
+  SemanticLineHeightsDefinition,
+  SemanticRadiiDefinition,
+  SemanticSizesDefinition,
+  SemanticSpacingDefinition,
 } from './types'

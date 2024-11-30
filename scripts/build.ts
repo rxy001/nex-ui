@@ -104,11 +104,9 @@ async function generateTypes({ external, tsconfig, name }: SharedConfigs) {
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       dts({
         tsconfig,
-        respectExternal: true,
       }),
     ],
-    // output: { dir: './dist/types', format: 'es', preserveModules: true },
-    output: { dir: './dist/types', format: 'es' },
+    output: { dir: './dist/types', format: 'es', preserveModules: true },
   }
   await runRollup(config)
 

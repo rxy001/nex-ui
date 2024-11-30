@@ -3,6 +3,7 @@ export * from '@emotion/react'
 export * from './SystemProvider'
 
 export { createSystem } from './system'
+export type { SystemConfig } from './system'
 
 export { defineBaseStyles, defineSlotStyles } from './styles'
 export type { BaseStylesDefinition, SlotStylesDefinition } from './styles'
@@ -44,4 +45,14 @@ export type {
   SpacingDefinition,
   RadiiDefinition,
   SemanticTokensDefinition,
+  TokensDefinition,
+  SemanticBordersDefinition,
+  SemanticColorDefinition,
+  SemanticFontFamiliesDefinition,
+  SemanticFontSizesDefinition,
+  SemanticFontWeightsDefinition,
+  SemanticLineHeightsDefinition,
+  SemanticRadiiDefinition,
+  SemanticSizesDefinition,
+  SemanticSpacingDefinition,
 } from './tokens'

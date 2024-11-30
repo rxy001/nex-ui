@@ -69,41 +69,41 @@ type NestedColor =
       [key: string]: NestedColor // Nested colors, applying the mutually exclusive rule
     }) // Either `DEFAULT` or ResponsiveColor properties
 
-type SemanticColorDefinition = Dictionary<NestedColor>
-
 type SemanticTokenDefinition<T> =
   | T
   | ({
       DEFAULT?: T
     } & { [key: string]: SemanticTokenDefinition<T> })
 
-type SemanticSpacingDefinition = Dictionary<
+export type SemanticColorDefinition = Dictionary<NestedColor>
+
+export type SemanticSpacingDefinition = Dictionary<
   SemanticTokenDefinition<string | number>
 >
 
-type SemanticSizesDefinition = Dictionary<
+export type SemanticSizesDefinition = Dictionary<
   SemanticTokenDefinition<string | number>
 >
 
-type SemanticFontFamiliesDefinition = Dictionary<
+export type SemanticFontFamiliesDefinition = Dictionary<
   SemanticTokenDefinition<string>
 >
 
-type SemanticFontSizesDefinition = Dictionary<
+export type SemanticFontSizesDefinition = Dictionary<
   SemanticTokenDefinition<string | number>
 >
 
-type SemanticFontWeightsDefinition = Dictionary<
+export type SemanticFontWeightsDefinition = Dictionary<
   SemanticTokenDefinition<string | number>
 >
 
-type SemanticLineHeightsDefinition = Dictionary<
+export type SemanticLineHeightsDefinition = Dictionary<
   SemanticTokenDefinition<string | number>
 >
-type SemanticBordersDefinition = Dictionary<
+export type SemanticBordersDefinition = Dictionary<
   SemanticTokenDefinition<string | number>
 >
-type SemanticRadiiDefinition = Dictionary<
+export type SemanticRadiiDefinition = Dictionary<
   SemanticTokenDefinition<string | number>
 >
 
