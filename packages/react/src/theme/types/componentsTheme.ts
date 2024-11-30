@@ -1,13 +1,13 @@
-import type { ButtonStyles, FlexStyles, IconStyles } from './styles'
+import type { ButtonStyles, FlexStyles, IconStyles } from '../styles'
 import type {
   ButtonProps,
   ButtonOwnerState,
   IconOwnerState,
   FlexOwnerState,
   FlexProps,
-} from '../components'
-import type { InnerIconProps } from '../components/icon'
-import type { ComponentThemeFn, ExtractComponentStyles } from './utils.types'
+} from '../../components'
+import type { InnerIconProps } from '../../components/icon/types'
+import type { ComponentThemeFn, ExtractComponentStyles } from './utils'
 
 export type ComponentsTheme = {
   Button?: {

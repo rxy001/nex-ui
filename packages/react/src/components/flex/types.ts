@@ -1,21 +1,20 @@
 import type { HtmlHTMLAttributes, ReactNode } from 'react'
 import type { FlexVariants } from '../../theme/styles'
-import type {
-  NexStyledComponentProps,
-  NexCSSProperties,
-} from '../../theme/types'
-import type { ComponentUtilityClasses } from '../type'
+import type { NexCSSProperties } from '../../theme/types/generated/cssProperties'
+import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
 
-export interface FlexOwnerState
-  extends HtmlHTMLAttributes<HTMLDivElement>,
-    FlexVariants {
+export interface FlexProps
+  extends StyledComponentProps<
+    HtmlHTMLAttributes<HTMLDivElement> & FlexVariants
+  > {
   children?: ReactNode
   justify?: NexCSSProperties['justifyContent']
   align?: NexCSSProperties['alignItems']
   direction?: NexCSSProperties['flexDirection']
   wrap?: NexCSSProperties['flexWrap']
   gap?: NexCSSProperties['gap']
+  // eslint-disable-next-line no-use-before-define
   classes?: ComponentUtilityClasses<FlexOwnerState, 'root'>
 }
 
-export interface FlexProps extends NexStyledComponentProps<FlexOwnerState> {}
+export interface FlexOwnerState extends FlexProps {}

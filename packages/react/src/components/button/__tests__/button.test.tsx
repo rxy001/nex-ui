@@ -290,14 +290,20 @@ describe('Button', () => {
     const DefaultButton: React.FC = () => {
       const [loading, setLoading] = useState<ButtonProps['loading']>(false)
       return (
-        <Button loading={loading} onClick={() => setLoading(true)}>
+        <Button
+          loading={loading}
+          data-testid="button"
+          onClick={() => setLoading(true)}
+        >
           Button
         </Button>
       )
     }
-    const { container } = renderWithNexProvider(<DefaultButton />)
-    const button = container.firstElementChild!
+    const { getByTestId } = renderWithNexProvider(<DefaultButton />)
+
+    const button = getByTestId('button')
     fireEvent.click(button)
+
     expect(button).toHaveClass(buttonClasses.loading)
     expect(
       button.querySelector(`.${buttonClasses['icon-loading']}`),

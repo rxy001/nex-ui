@@ -1,2 +1,2 @@
 export * from './Icon'
-export type { IconProps, IconOwnerState, InnerIconProps } from './types'
+export type { IconProps, IconOwnerState } from './types'

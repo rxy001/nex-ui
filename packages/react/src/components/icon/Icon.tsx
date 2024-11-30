@@ -6,9 +6,7 @@ import type { IconProps } from './types'
 
 export const Icon = forwardRef<SVGElement, IconProps>((inProps, ref) => {
   const { component, ...props } = inProps
-
   const InnerIcon = createIcon(component)
-
   return <InnerIcon {...props} ref={ref} />
 })
 

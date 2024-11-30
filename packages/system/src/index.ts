@@ -16,7 +16,12 @@ export {
 export { useColorScheme } from './colorScheme'
 export type { ColorSchemeProviderProps } from './colorScheme'
 
-export type { CSSInterpolation, RawCSSProperties, StyleObject } from './types'
+export type {
+  CSSInterpolation,
+  RawCSSProperties,
+  StyleObject,
+  StyleObjectOverrides,
+} from './types'
 
 export type { CssFn } from './css'
 

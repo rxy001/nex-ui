@@ -28,7 +28,6 @@ async function build() {
   const external = [
     ...Object.keys(pkg.dependencies),
     ...Object.keys(pkg.peerDependencies),
-    'react',
     // 'csstype',
     'react/jsx-runtime',
     'react-dom/client',

@@ -214,28 +214,6 @@ export function createTokens(config: CreateTokensConfig) {
   return {
     getToken: (key: string) => tokenMap.get(key),
     getGlobalCssVars: () => cssVarMap,
-    // getGlobalCssVars: ({ colorScheme, colorSchemeSelector }) => {
-    //   const result: Dictionary = {}
-    //   const globalPrefix = ':root'
-
-    //   cssVarMap.forEach((value, key) => {
-    //     const cssVar = Object.fromEntries(value.entries())
-
-    //     if (Object.keys(cssVar).length === 0) {
-    //       return
-    //     }
-
-    //     if (key === 'base') {
-    //       result[globalPrefix] = cssVar
-    //     } else {
-    //       result[`.${key}${globalPrefix}`] = cssVar
-    //     }
-    //   })
-
-    //   console.log(result)
-
-    //   return result
-    // },
   }
 }
 

@@ -49,3 +49,5 @@ export function NexProvider(props: NexProviderProps) {
     </SystemProvider>
   )
 }
+
+NexProvider.displayName = 'NexProvider'

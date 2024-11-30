@@ -14,10 +14,10 @@ import type {
   SemanticTokensDefinition,
   SelectorsDefinition,
 } from '@nex-ui/system'
-import type { TokenDefinition, ReplaceValuesWithColor } from './utils.types'
-import type { Aliases } from './generated/aliases'
-import type { Scales } from './generated/scales'
-import type { Breakpoints } from './generated/breakpoints'
+import type { TokenDefinition, ReplaceValuesWithColor } from './types/utils'
+import type { Aliases } from './types/generated/aliases'
+import type { Scales } from './types/generated/scales'
+import type { Breakpoints } from './types/generated/breakpoints'
 import type {
   FontFamilies,
   Colors,
@@ -28,15 +28,17 @@ import type {
   Radii,
   Borders,
   LineHeights,
-} from './generated/tokens'
-import type { Selectors } from './generated/selectors'
-import type { ComponentsTheme } from './componentsTheme.types'
+} from './types/generated/tokens'
+import type { Selectors } from './types/generated/selectors'
+import type { ComponentsTheme } from './types/componentsTheme'
 
 export type Theme = {
   aliases?: AliasesDefinition & Aliases
   scales?: ScalesDefinition & Scales
   breakpoints?: TokenDefinition<Breakpoints, BreakpointsDefinition>
   selectors?: SelectorsDefinition & Selectors
+  components?: ComponentsTheme
+  semanticTokens?: SemanticTokensDefinition
   tokens?: {
     borders?: TokenDefinition<Borders, BordersDefinition>
     spacing?: TokenDefinition<Spacing, SpacingDefinition>
@@ -48,8 +50,6 @@ export type Theme = {
     lineHeights?: TokenDefinition<LineHeights, LineHeightsDefinition>
     radii?: TokenDefinition<Radii, RadiiDefinition>
   }
-  components?: ComponentsTheme
-  semanticTokens?: SemanticTokensDefinition
 }
 
 export function defineTheme(theme: Theme) {

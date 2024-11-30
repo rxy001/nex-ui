@@ -68,7 +68,9 @@ export async function generateTokens(sys: any) {
                 })
               }
             })
-
+            if (tokenCategory === 'spacing') {
+              types.push(...types.map((v) => `'-${v.replaceAll("'", '')}'`))
+            }
             return `${tokenCategory}: ${unionType(types)}`
           })
           .join('\n')}

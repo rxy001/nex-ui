@@ -1,11 +1,7 @@
 'use client'
 
-import { forwardRef } from 'react'
-import { nex } from '@nex-ui/styled'
-import type { BoxProps } from './types'
+import { styled } from '@nex-ui/styled'
 
-export const Box = forwardRef<any, BoxProps>((props: BoxProps, ref) => {
-  return <nex.div ref={ref} {...props} />
-})
+export const Box = styled.div()
 
 Box.displayName = 'Box'

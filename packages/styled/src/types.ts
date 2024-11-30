@@ -1,23 +1,48 @@
-import type { FunctionComponent, ElementType, ComponentProps } from 'react'
-import type { StyleObject, RawCSSProperties } from '@nex-ui/system'
+import type {
+  ComponentProps as ReactComponentProps,
+  ComponentType,
+  FunctionComponent,
+  JSX,
+} from 'react'
+import type { StyleObject } from '@nex-ui/system'
 
-export type HTMLElementTagName = keyof JSX.IntrinsicElements
+type HTMLElementTagName = keyof JSX.IntrinsicElements
 
-export type NexStyledComponentProps<T = NonNullable<unknown>> = {
+export interface StyledComponentProps {
   as?: HTMLElementTagName
-  sx?: StyleObject
-  colorPalette?: RawCSSProperties['color']
-} & T
-
-export type NexStyledComponent<JSXProps extends Record<string, any>> =
-  FunctionComponent<NexStyledComponentProps<JSXProps>>
-
-export type NexStyledElements = {
-  [Tag in HTMLElementTagName]: NexStyledComponent<JSX.IntrinsicElements[Tag]>
+  sx?: StyleObject | StyleObject[]
 }
 
-export type CreateStyledComponent = {
-  <T extends ElementType>(tag: T): NexStyledComponent<ComponentProps<T>>
+export interface CreateStyledComponent<
+  ComponentProps extends NonNullable<unknown>,
+  SpecificComponentProps extends NonNullable<unknown> = NonNullable<unknown>,
+> {
+  (
+    styles?: StyleObject | StyleObject[],
+  ): FunctionComponent<ComponentProps & SpecificComponentProps>
 }
 
-export type NexStyled = CreateStyledComponent & NexStyledElements
+export interface CreateStyled {
+  <Tag extends HTMLElementTagName>(
+    tag: Tag,
+  ): CreateStyledComponent<StyledComponentProps, JSX.IntrinsicElements[Tag]>
+
+  <C extends ComponentType<ReactComponentProps<C>>>(
+    component: C,
+  ): CreateStyledComponent<StyledComponentProps & ReactComponentProps<C>>
+}
+
+type StyledTags = {
+  [Tag in HTMLElementTagName]: CreateStyledComponent<
+    StyledComponentProps,
+    JSX.IntrinsicElements[Tag]
+  >
+}
+
+export type Nex = {
+  [Tag in HTMLElementTagName]: FunctionComponent<
+    StyledComponentProps & JSX.IntrinsicElements[Tag]
+  >
+}
+
+export interface Styled extends StyledTags, CreateStyled {}

@@ -5,7 +5,7 @@
   "author": "X1ng Yu",
   "scripts": {
     "build": "pnpm run build:sys-ts && turbo build",
-    "build:sys-ts": "tsx ./scripts/sysTs",
+    "build:sys-ts": "tsx ./scripts/buildSysTs",
     "build:icons": "tsx ./scripts/buildIcons",
     "build:fast": "turbo build:fast",
     "dev": "turbo dev",

@@ -1,5 +1,5 @@
 import { forEach, isString } from '@nex-ui/utils'
-import type { CSSObject } from '@emotion/serialize'
+import type { CSSObject } from '@emotion/react'
 import { pathToName } from './utils'
 import type { Tokens } from './tokens'
 import type { Scales } from './scales'

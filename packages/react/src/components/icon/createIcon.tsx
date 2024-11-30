@@ -2,7 +2,7 @@
 
 import classNames from 'classnames'
 import { forwardRef } from 'react'
-import { nex } from '@nex-ui/styled'
+import { styled } from '@nex-ui/styled'
 import type { ComponentType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
 import {
@@ -55,15 +55,13 @@ export const createIcon = (
     })
 
     const {
-      colorPalette,
-      sx,
-      as,
       color,
       className,
       spin = false,
       fontSize = 'md',
       width = '1em',
       height = '1em',
+      classes: _classse,
       ...remainingProps
     } = props
 
@@ -75,6 +73,7 @@ export const createIcon = (
       fontSize,
       width,
       height,
+      component: svgComponent,
     }
 
     const styles = useStyles({
@@ -84,24 +83,19 @@ export const createIcon = (
 
     const classes = useUtilityClasses(ownerState)
 
-    const Icon = nex(svgComponent)
+    const Icon = styled(svgComponent)({
+      color,
+      width,
+      height,
+      fs: fontSize,
+      ...styles,
+    })
 
     return (
       <Icon
-        sx={{
-          color,
-          width,
-          height,
-          fs: fontSize,
-          ...styles,
-          ...sx,
-        }}
-        colorPalette={colorPalette}
-        as={as}
         ref={ref}
         className={classNames(classes.root, defaultClassName, className)}
         {...remainingProps}
-        classes={null}
       />
     )
   })

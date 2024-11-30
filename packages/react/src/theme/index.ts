@@ -1,6 +1,5 @@
-export type { ComponentColor } from './types'
-export type { NexCSSProperties } from './generated/cssProperties'
+import './types/declare'
 
-export type { ComponentsTheme } from './componentsTheme.types'
+export type { ComponentsTheme } from './types/componentsTheme'
 
 export * from './defineTheme'

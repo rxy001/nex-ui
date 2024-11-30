@@ -1,3 +1,7 @@
 import type { SVGAttributes } from 'react'
 
-export interface IconProps extends SVGAttributes<SVGElement> {}
+export interface IconPropsOverrides {}
+
+export interface IconProps
+  extends Omit<SVGAttributes<SVGElement>, keyof IconPropsOverrides>,
+    IconPropsOverrides {}

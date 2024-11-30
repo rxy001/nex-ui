@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react'
-import type { NexStyledComponentProps } from '../../theme/types'
+import type { StyledComponentProps } from '../types'
 
 export interface BoxProps
-  extends NexStyledComponentProps<HTMLAttributes<HTMLElement>> {}
+  extends StyledComponentProps<HTMLAttributes<HTMLDivElement>> {}

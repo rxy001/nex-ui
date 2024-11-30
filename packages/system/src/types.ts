@@ -26,7 +26,10 @@ interface CSSOthersObject {
   [propertiesName: string]: CSSInterpolation | ArrayCSSInterpolation
 }
 
+export interface StyleObjectOverrides {}
+
 export interface StyleObject
-  extends RawCSSProperties,
+  extends Omit<RawCSSProperties, keyof StyleObjectOverrides>,
+    StyleObjectOverrides,
     CSSPseudos,
     CSSOthersObject {}

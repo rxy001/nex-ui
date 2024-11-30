@@ -172,6 +172,54 @@ export const buttonStyles = defineSlotStyles({
         },
       },
     },
+
+    color: {
+      blue: {
+        root: {
+          colorPalette: 'blue',
+        },
+      },
+      gray: {
+        root: {
+          colorPalette: 'gray',
+        },
+      },
+      pink: {
+        root: {
+          colorPalette: 'pink',
+        },
+      },
+      purple: {
+        root: {
+          colorPalette: 'purple',
+        },
+      },
+      cyan: {
+        root: {
+          colorPalette: 'cyan',
+        },
+      },
+      orange: {
+        root: {
+          colorPalette: 'orange',
+        },
+      },
+      yellow: {
+        root: {
+          colorPalette: 'yellow',
+        },
+      },
+      green: {
+        root: {
+          colorPalette: 'green',
+        },
+      },
+      red: {
+        root: {
+          colorPalette: 'red',
+        },
+      },
+    },
   },
   compoundVariants: [
     {

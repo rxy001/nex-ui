@@ -1,7 +1,7 @@
 import { buttonStyles } from './button'
 import { iconStyles } from './icon'
 import { flexStyles } from './flex'
-import type { StylesVariantProps } from '../utils.types'
+import type { StylesVariantProps } from '../types/utils'
 
 export * from './button'
 export * from './icon'

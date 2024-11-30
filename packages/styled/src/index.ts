@@ -1,9 +1,7 @@
 export * from './styled'
 
-export type {
-  HTMLElementTagName,
-  NexStyledComponent,
-  NexStyledElements,
-  NexStyledComponentProps,
-  NexStyled,
-} from './types'
+export * from './nex'
+
+export type { Styled, StyledComponentProps } from './types'
+
+export { composeSx } from './utils'

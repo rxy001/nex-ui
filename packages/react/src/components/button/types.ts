@@ -3,22 +3,23 @@ import type {
   ButtonHTMLAttributes,
   AnchorHTMLAttributes,
 } from 'react'
-import type { ComponentColor, NexStyledComponentProps } from '../../theme/types'
 import type { ButtonVariants } from '../../theme/styles'
-import type { ComponentUtilityClasses } from '../type'
 
-type MergedHTMLAttributes = ButtonHTMLAttributes<HTMLElement> &
-  AnchorHTMLAttributes<HTMLElement>
+import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
 
-export interface ButtonOwnerState extends MergedHTMLAttributes, ButtonVariants {
+export interface ButtonProps
+  extends StyledComponentProps<
+    ButtonHTMLAttributes<HTMLElement> &
+      AnchorHTMLAttributes<HTMLElement> &
+      ButtonVariants
+  > {
   startIcon?: ReactNode
   endIcon?: ReactNode
-  color?: ComponentColor
   classes?: ComponentUtilityClasses<
+    // eslint-disable-next-line no-use-before-define
     ButtonOwnerState,
     'root' | 'startIcon' | 'endIcon'
   >
 }
 
-export interface ButtonProps
-  extends NexStyledComponentProps<ButtonOwnerState> {}
+export interface ButtonOwnerState extends ButtonProps {}

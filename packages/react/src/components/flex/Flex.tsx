@@ -1,8 +1,8 @@
 'use client'
 
-import { forwardRef } from 'react'
-import { nex } from '@nex-ui/styled'
 import classNames from 'classnames'
+import { forwardRef } from 'react'
+import { nex, composeSx } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
 import type { FlexOwnerState, FlexProps } from './types'
 import {
@@ -42,12 +42,13 @@ const useUtilityClasses = (ownerState: FlexOwnerState) => {
 }
 
 export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
+  const props = useDefaultProps({ name: 'Flex', props: inProps })
+
   const {
     sx,
     as,
-    colorPalette,
-    children,
     gap,
+    children,
     className,
     justify,
     align,
@@ -55,40 +56,42 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
     wrap,
     inline = false,
     ...remainingProps
-  } = useDefaultProps({ name: 'Flex', props: inProps })
+  } = props
 
-  const ownerState = {
-    direction,
+  const ownerState: FlexOwnerState = {
+    ...props,
+    gap,
+    children,
+    className,
     justify,
     align,
+    direction,
     wrap,
-    gap,
-    sx,
-    as,
     inline,
-    className,
-    ...remainingProps,
   }
 
   const classes = useUtilityClasses(ownerState)
 
   const styles = useStyles({ name: 'Flex', ownerState })
 
+  const mergedSx = composeSx(
+    {
+      gap,
+      flexDirection: direction,
+      alignItems: align,
+      justifyContent: justify,
+      flexWrap: wrap,
+      ...styles,
+    },
+    sx,
+  )
+
   return (
     <nex.div
-      as={as}
+      sx={mergedSx}
       ref={ref}
-      colorPalette={colorPalette}
+      as={as}
       className={classNames(classes.root, className)}
-      sx={{
-        gap,
-        flexDirection: direction,
-        alignItems: align,
-        justifyContent: justify,
-        flexWrap: wrap,
-        ...styles,
-        ...sx,
-      }}
       {...remainingProps}
     >
       {children}
