@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "start": "next start",
-    "type-check": "tsc --noEmit"
+    "start": "next start"
   },
   "type": "module",
   "files": [

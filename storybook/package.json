@@ -4,8 +4,7 @@
   "author": "X1ng Yu",
   "private": true,
   "scripts": {
-    "dev": "storybook dev -p 6006",
-    "type-check": "tsc --noEmit"
+    "dev": "storybook dev -p 6006"
   },
   "dependencies": {
     "@emotion/react": "11.11.4",

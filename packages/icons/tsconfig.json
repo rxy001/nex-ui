@@ -3,7 +3,6 @@
   "include": ["./src", "./types.d.ts"],
   "compilerOptions": {
     "customConditions": ["source"],
-    "jsxImportSource": "@emotion/react",
-    "jsx": "react-jsx"
+    "baseUrl": "./"
   }
 }

@@ -9,7 +9,8 @@
 
 6. 目前 component theme 支持定义默认 props 和以函数方式返回样式，是否抽离 styles 通过 provider 传入以支持完全自定义主题 和 unstyled ？
 
-7. tsx 运行报错
+<!-- 7. tsx 运行报错 -->
+<!-- 查看编译过程信息时，发现 packages/react 由于 customConditions: source, tsc 会通过源码引入 icons 中的 svg 文件，但又没有 svg 的声明，导致报错. 通过 exclude 也没能过滤掉 svg ？ -->
 
 8. 写一个脚本，为 html 添加相应的 colorSchemeSelector ，在 ssr 入口引入解决闪烁
 

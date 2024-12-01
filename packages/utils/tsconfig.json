@@ -3,7 +3,6 @@
   "include": ["./src"],
   "compilerOptions": {
     "types": ["@testing-library/jest-dom/jest-globals"],
-    "baseUrl": ".",
-    "jsx": "react-jsx"
+    "baseUrl": "./"
   }
 }

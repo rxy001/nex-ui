@@ -2,10 +2,10 @@
   "extends": "../../tsconfig.json",
   "include": ["./src"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "~/*": ["../../*"]
     },
+    "baseUrl": "./",
     "customConditions": ["source"]
   }
 }
