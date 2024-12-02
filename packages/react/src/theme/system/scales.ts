@@ -11,7 +11,9 @@ export const scales = defineConfig.scales({
   width: 'sizes',
   height: 'sizes',
 
+  fontWeight: 'fontWeights',
   lineHeight: 'lineHeights',
+  fontFamily: 'fontFamilies',
 
   gap: 'spacing',
 
@@ -32,6 +34,4 @@ export const scales = defineConfig.scales({
   borderTopLeftRadius: 'radii',
   borderBottomRightRadius: 'radii',
   borderBottomLeftRadius: 'radii',
-
-  fontFamily: 'fontFamilies',
 })

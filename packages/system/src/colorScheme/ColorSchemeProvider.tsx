@@ -200,16 +200,15 @@ export const ColorSchemeProvider = ({
         }
       }
     }
-  }, [colorScheme, colorSchemeSelector, getColorSchemeSelector])
+  }, [colorScheme, colorSchemeSelector])
 
   const ctx = useMemo<ColorSchemeContext>(
     () => ({
       ...state,
       setMode,
-      __getColorSchemeSelector:
-        createGetColorSchemeSelector(colorSchemeSelector),
+      __getColorSchemeSelector: getColorSchemeSelector,
     }),
-    [state, setMode, colorSchemeSelector],
+    [state, setMode, getColorSchemeSelector],
   )
 
   return (

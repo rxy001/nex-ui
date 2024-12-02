@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
-import type { ReactNode } from 'react'
 import { Global } from '@emotion/react'
 import { merge } from '@nex-ui/utils'
+import type { ReactNode } from 'react'
+import type { Noop } from '@nex-ui/utils'
 import { createSystem } from '../system'
 import {
   InnerSystemProvider,
@@ -24,11 +25,21 @@ export const SystemProvider = withColorSchemeProvider(
     const outer = useSystem()
 
     const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE
+    const getColorSchemeSelector: Noop =
+      // @ts-ignore
+      useColorScheme().__getColorSchemeSelector
 
     let cva: SystemContext['cva']
     let sva: SystemContext['sva']
     let css: SystemContext['css']
     let getGlobalCssVars: Tokens['getGlobalCssVars'] | null = null
+
+    // eslint-disable-next-line no-param-reassign
+    config.selectors = {
+      dark: getColorSchemeSelector('dark'),
+      light: getColorSchemeSelector('light'),
+      ...config.selectors,
+    }
 
     if (isTopLevel) {
       ;({ cva, css, sva, getGlobalCssVars } = createSystem(config))
@@ -52,8 +63,7 @@ type GlobalStyleProps = {
 }
 
 function GlobalStyles({ getGlobalCssVars }: GlobalStyleProps) {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const getColorSchemeSelector: Function =
+  const getColorSchemeSelector: Noop =
     // @ts-ignore
     useColorScheme().__getColorSchemeSelector
 
