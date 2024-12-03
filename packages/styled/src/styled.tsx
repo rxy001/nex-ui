@@ -22,17 +22,15 @@ const createStyled: CreateStyled = (tag: any) => {
   const shouldUseAs = !defaultShouldForwardProp('as')
 
   return (sx: any) => {
-    let styles: any = []
-
-    styles = composeSx(styles, sx)
+    const styles = composeSx([], sx)
 
     const Styled = withEmotionCache(
       ({ sx: sxProp, ...props }: any, cache: any, ref: any) => {
         const sys = useSystem()
 
-        styles = composeSx(styles, sxProp)
+        const newStyles = composeSx(styles, sxProp)
 
-        const cssProp: any = styles.length > 0 ? sys.css(styles) : null
+        const cssProp: any = newStyles.length > 0 ? sys.css(newStyles) : null
 
         const FinalTag = (shouldUseAs && props.as) || tag
 

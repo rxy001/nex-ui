@@ -1,10 +1,11 @@
 {
   "name": "@nex-ui/docs",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "author": "X1ng Yu",
   "private": true,
   "scripts": {
     "dev": "next",
+    "build": "next build",
     "start": "next start"
   },
   "type": "module",
@@ -12,12 +13,12 @@
     "dist"
   ],
   "dependencies": {
-    "@emotion/react": "11.11.4",
+    "@emotion/react": "11.13.5",
     "@nex-ui/react": "workspace:*",
     "@svgr/webpack": "8.1.0",
-    "next": "14.2.3",
-    "nextra": "2.13.4",
-    "nextra-theme-docs": "2.13.4",
+    "next": "15.0.3",
+    "nextra": "3.2.4",
+    "nextra-theme-docs": "3.2.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }

@@ -1,13 +1,14 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { NexProvider } from '@nex-ui/react'
+import logo from './public/logo.png'
 
 export default {
-  logo: (
+  logo: () => (
     <div
       style={{ display: 'flex', alignItems: 'center', fontSize: 22, gap: 4 }}
     >
-      <Image src="/logo.png" height={45} width={45} />
+      <Image src={logo} height={45} width={45} />
       <span>Nex UI</span>
     </div>
   ),
@@ -40,7 +41,6 @@ export default {
       titleTemplate: 'Nex UI',
     }
   },
-
   docsRepositoryBase: 'https://github.com/rxy001/nex-ui/tree/main/docs',
   project: {
     link: 'https://github.com/rxy001/nex-ui',
@@ -71,6 +71,6 @@ export default {
     { locale: 'en', text: 'English' },
   ],
   main: ({ children }) => {
-    return <NexProvider>{children}</NexProvider>
+    return <NexProvider colorSchemeSelector="media">{children}</NexProvider>
   },
 }

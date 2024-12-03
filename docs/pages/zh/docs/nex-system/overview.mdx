@@ -1,0 +1,42 @@
+import { Box } from '@nex-ui/react'
+import Link from '@/components/Link'
+
+## 概览
+
+Nex System 是一套 CSS 工具集(已内置在 Nex React 中)，可以帮助您更快、更有效地构建自定义设计。
+
+Nex System 提供了一组灵活的、通用的包装组件，如 Box 可以使用 `sx` 属性快速定制。这个属性允许直接在组件内部定义样式，同时还可以直接访问主题的自定义 token，以确保风格的一致性。
+
+<Box
+  sx={{
+    h: 200,
+    bg: 'blue.200',
+    m: '20px auto',
+    _hover: {
+      bg: 'blue.400',
+    },
+    borderRadius: 'lg',
+  }}
+/>
+```tsx copy
+
+import { Box } from '@nex-ui/react'
+
+<Box
+  sx={{
+    h: 200,
+    bg: 'blue.200',
+    m: '20px auto',
+    _hover: {
+      bg: 'blue.400',
+    },
+    borderRadius: 'lg',
+  }}
+/>
+```
+
+在上述示例中，我们使用了 `Box` 组件 和 `sx` 属性。
+
+`Box` 组件是一个用于组成其他组件的通用容器。您可以将其视为一个具有额外内置功能的 `<div>`，如访问应用程序的主题和 `sx` 属性。在<Link href='box'>`Box` 组件页面</Link>了解更多信息。
+
+`sx` 属性允许您为元素添加任何有效的 CSS，以及内置的主题、自定义的属性和选择器。您可以将 `sx` 属性接受的 style 对象视为 CSS 的超集。 在<Link href='sx-prop'>`sx` 属性页面</Link>了解更多信息。
