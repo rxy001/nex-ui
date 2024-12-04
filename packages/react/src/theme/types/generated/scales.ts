@@ -6,7 +6,9 @@ export interface Scales {
   borderWidth?: 'borders'
   width?: 'sizes'
   height?: 'sizes'
+  fontWeight?: 'fontWeights'
   lineHeight?: 'lineHeights'
+  fontFamily?: 'fontFamilies'
   gap?: 'spacing'
   padding?: 'spacing'
   paddingTop?: 'spacing'
@@ -23,5 +25,4 @@ export interface Scales {
   borderTopLeftRadius?: 'radii'
   borderBottomRightRadius?: 'radii'
   borderBottomLeftRadius?: 'radii'
-  fontFamily?: 'fontFamilies'
 }

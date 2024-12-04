@@ -56,7 +56,7 @@ export const createCssFn = ({
         const transformed = normalize({
           propKey,
           propValue,
-          colorPalette: colorPalette as string,
+          colorPalette,
         })
 
         mergeByPath(result, selectors, transformed)

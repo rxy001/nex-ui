@@ -22,4 +22,5 @@ export type {
   SemanticRadiiDefinition,
   SemanticSizesDefinition,
   SemanticSpacingDefinition,
+  ConditionKey,
 } from './types'

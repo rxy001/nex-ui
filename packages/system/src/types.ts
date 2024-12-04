@@ -32,4 +32,6 @@ export interface StyleObject
   extends Omit<RawCSSProperties, keyof StyleObjectOverrides>,
     StyleObjectOverrides,
     CSSPseudos,
-    CSSOthersObject {}
+    CSSOthersObject {
+  colorPalette?: string
+}

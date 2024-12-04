@@ -28,9 +28,9 @@ const createStyled: CreateStyled = (tag: any) => {
       ({ sx: sxProp, ...props }: any, cache: any, ref: any) => {
         const sys = useSystem()
 
-        const newStyles = composeSx(styles, sxProp)
+        const composedSx = composeSx(styles, sxProp)
 
-        const cssProp: any = newStyles.length > 0 ? sys.css(newStyles) : null
+        const cssProp: any = composedSx.length > 0 ? sys.css(composedSx) : null
 
         const FinalTag = (shouldUseAs && props.as) || tag
 

@@ -139,4 +139,6 @@ export type CreateTokensConfig = {
 
 export type TokenMap = Map<string, Token>
 
-export type CssVarMap = Map<string, Map<string, string | number>>
+export type ConditionKey = 'base' | 'light' | 'dark'
+
+export type CssVarMap = Map<ConditionKey, Map<string, string | number>>

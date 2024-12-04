@@ -32,7 +32,8 @@ export const createNormalize = ({
 
       let newPropValue = propValue
 
-      if (category) {
+      // 只支持 string，避免使用 number 时也会映射到 token
+      if (category && isString(propValue)) {
         switch (category) {
           case 'colors':
             // eslint-disable-next-line no-case-declarations

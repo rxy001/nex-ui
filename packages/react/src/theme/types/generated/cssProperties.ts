@@ -27,8 +27,6 @@ export interface NexCSSProperties extends RawCSSProperties {
   _hover?: CSSInterpolation
   _active?: CSSInterpolation
   _disabled?: CSSInterpolation
-  _dark?: CSSInterpolation
-  _light?: CSSInterpolation
   color?:
     | RawCSSProperties['color']
     | Tokens['colors']
@@ -48,7 +46,9 @@ export interface NexCSSProperties extends RawCSSProperties {
   borderWidth?: RawCSSProperties['borderWidth'] | Tokens['borders']
   width?: RawCSSProperties['width'] | Tokens['sizes']
   height?: RawCSSProperties['height'] | Tokens['sizes']
+  fontWeight?: RawCSSProperties['fontWeight'] | Tokens['fontWeights']
   lineHeight?: RawCSSProperties['lineHeight'] | Tokens['lineHeights']
+  fontFamily?: RawCSSProperties['fontFamily'] | Tokens['fontFamilies']
   gap?: RawCSSProperties['gap'] | Tokens['spacing']
   padding?: RawCSSProperties['padding'] | Tokens['spacing']
   paddingTop?: RawCSSProperties['paddingTop'] | Tokens['spacing']
@@ -73,7 +73,6 @@ export interface NexCSSProperties extends RawCSSProperties {
   borderBottomLeftRadius?:
     | RawCSSProperties['borderBottomLeftRadius']
     | Tokens['radii']
-  fontFamily?: RawCSSProperties['fontFamily'] | Tokens['fontFamilies']
   bg?:
     | RawCSSProperties['backgroundColor']
     | Tokens['colors']

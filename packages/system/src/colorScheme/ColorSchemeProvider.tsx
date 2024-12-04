@@ -84,7 +84,7 @@ export const ColorSchemeProvider = ({
   children,
   modeStorageKey = 'color-scheme',
   defaultMode = 'system',
-  colorSchemeSelector = 'media',
+  colorSchemeSelector = 'data',
 }: ColorSchemeProviderProps) => {
   const [state, setState] = useState<State>(() => {
     const initialMode = initializeValue(modeStorageKey, defaultMode) as Mode
@@ -100,27 +100,25 @@ export const ColorSchemeProvider = ({
 
   const setMode = useCallback(
     (mode?: Mode) => {
-      if (isMultiSchemes) {
-        setState((currentState) => {
-          if (mode === currentState.mode) {
-            return currentState
-          }
-          const newMode = mode ?? defaultMode
+      setState((currentState) => {
+        if (mode === currentState.mode) {
+          return currentState
+        }
+        const newMode = mode ?? defaultMode
 
-          try {
-            localStorage.setItem(modeStorageKey, newMode)
-          } catch {
-            // Unsupported
-          }
+        try {
+          localStorage.setItem(modeStorageKey, newMode)
+        } catch {
+          // Unsupported
+        }
 
-          return {
-            mode: newMode,
-            systemColorScheme: getSystemColorScheme(newMode),
-          }
-        })
-      }
+        return {
+          mode: newMode,
+          systemColorScheme: getSystemColorScheme(newMode),
+        }
+      })
     },
-    [isMultiSchemes, defaultMode, modeStorageKey],
+    [defaultMode, modeStorageKey],
   )
 
   const handleMediaQuery = useEvent((event: MediaQueryListEvent) => {
@@ -135,11 +133,6 @@ export const ColorSchemeProvider = ({
       })
     }
   })
-
-  const getColorSchemeSelector = useMemo(
-    () => createGetColorSchemeSelector(colorSchemeSelector),
-    [colorSchemeSelector],
-  )
 
   useEffect(() => {
     if (
@@ -206,9 +199,8 @@ export const ColorSchemeProvider = ({
     () => ({
       ...state,
       setMode,
-      __getColorSchemeSelector: getColorSchemeSelector,
     }),
-    [state, setMode, getColorSchemeSelector],
+    [state, setMode],
   )
 
   return (

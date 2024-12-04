@@ -4,6 +4,7 @@ import type {
   TokenMap,
   CssVarMap,
   TokenCategories,
+  ConditionKey,
 } from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
@@ -79,7 +80,8 @@ export function createTokens(config: CreateTokensConfig) {
 
       forEach(
         conditions,
-        (value: string | number | undefined, condition: string) => {
+        // @ts-ignore
+        (value: string | number | undefined, condition: ConditionKey) => {
           if (!value) {
             return
           }

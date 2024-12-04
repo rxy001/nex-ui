@@ -13,5 +13,6 @@ export interface ColorSchemeProviderProps {
   children?: ReactNode
   defaultMode?: Mode
   modeStorageKey?: string
-  colorSchemeSelector?: 'data' | 'class' | 'media' | string
+  // colorSchemeSelector?: 'data' | 'class' | 'media' | string
+  colorSchemeSelector?: 'data' | 'class' | string
 }
