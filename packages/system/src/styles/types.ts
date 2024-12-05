@@ -54,6 +54,6 @@ export type PickVariant<T, K extends keyof any> = K extends keyof T
   : never
 
 export interface RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> {
-  (variants: VariantSelection<V>): R
+  (variants?: VariantSelection<V>): R
   splitVariantProps: <T extends Dictionary>(props: T) => PickVariant<T, keyof V>
 }

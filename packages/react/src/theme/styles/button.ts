@@ -172,7 +172,6 @@ export const buttonStyles = defineSlotStyles({
         },
       },
     },
-
     color: {
       blue: {
         root: {

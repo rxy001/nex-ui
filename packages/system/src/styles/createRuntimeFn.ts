@@ -10,13 +10,13 @@ import type {
   SlotVariantGroups,
 } from './types'
 
-export function createRuntimeFn(styles: any) {
+export function createRuntimeFn(styles?: any) {
   const {
     mainStyles,
     variants = {},
     compoundVariants = [],
     defaultVariants = {},
-  } = styles
+  } = styles ?? {}
 
   function shouldApplyCompound(compoundCheck: any, selections: any) {
     for (const key in compoundCheck) {
