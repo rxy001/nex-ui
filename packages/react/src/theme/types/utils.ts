@@ -1,6 +1,6 @@
 import type {
-  BaseStylesDefinition,
-  SlotStylesDefinition,
+  BaseRecipeDefinition,
+  SlotRecipeDefinition,
   StyleObject,
   RawCSSProperties,
 } from '@nex-ui/system'
@@ -22,10 +22,10 @@ export type DeepMerge<A, B> = {
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 
 type DefineComponentStyles<
-  T extends BaseStylesDefinition | SlotStylesDefinition,
+  T extends BaseRecipeDefinition | SlotRecipeDefinition,
   S,
   Q = Exclude<T['variants'], undefined>,
-> = (T extends SlotStylesDefinition ? { slots?: S } : { base?: S }) & {
+> = (T extends SlotRecipeDefinition ? { slots?: S } : { base?: S }) & {
   variants?: {
     [V in keyof Q]?: {
       [K in keyof Q[V]]?: S
@@ -46,9 +46,9 @@ type DefineComponentStyles<
   >
 }
 
-export type ExtractComponentStyles<T> = T extends BaseStylesDefinition
+export type ExtractComponentStyles<T> = T extends BaseRecipeDefinition
   ? DefineComponentStyles<T, StyleObject>
-  : T extends SlotStylesDefinition
+  : T extends SlotRecipeDefinition
     ? DefineComponentStyles<
         T,
         {
@@ -58,7 +58,7 @@ export type ExtractComponentStyles<T> = T extends BaseStylesDefinition
     : never
 
 export type StylesVariantProps<
-  T extends BaseStylesDefinition | SlotStylesDefinition,
+  T extends BaseRecipeDefinition | SlotRecipeDefinition,
   V = Exclude<T['variants'], undefined>,
 > = {
   [K in keyof V]?: BooleanMap<keyof V[K]>
@@ -66,11 +66,11 @@ export type StylesVariantProps<
 
 export type ComponentThemeFn<P, S> = (
   ownerState: P,
-) => S extends SlotStylesDefinition
+) => S extends SlotRecipeDefinition
   ? {
       [K in keyof S['slots']]?: StyleObject
     }
-  : S extends BaseStylesDefinition
+  : S extends BaseRecipeDefinition
     ? StyleObject
     : never
 

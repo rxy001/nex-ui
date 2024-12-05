@@ -5,8 +5,8 @@ export * from './SystemProvider'
 export { createSystem } from './system'
 export type { SystemConfig } from './system'
 
-export { defineBaseStyles, defineSlotStyles } from './styles'
-export type { BaseStylesDefinition, SlotStylesDefinition } from './styles'
+export { defineRecipe, defineSlotRecipe } from './styles'
+export type { BaseRecipeDefinition, SlotRecipeDefinition } from './styles'
 
 export {
   defineConfig,

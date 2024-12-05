@@ -24,16 +24,17 @@ export type VariantSelection<V extends BaseVariantGroups | SlotVariantGroups> =
     [K in keyof V]?: string extends K ? unknown : BooleanMap<keyof V[K]>
   }
 
-export type BaseStylesDefinition<
+export type BaseRecipeDefinition<
   V extends BaseVariantGroups = BaseVariantGroups,
 > = {
   base: StyleObject
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: Array<CompoundVariantsSelection<V> & { css?: StyleObject }>
+  extend?: BaseRecipeDefinition
 }
 
-export type SlotStylesDefinition<
+export type SlotRecipeDefinition<
   S extends SlotGroups = SlotGroups,
   V extends SlotVariantGroups<S> = SlotVariantGroups<S>,
 > = {
@@ -47,13 +48,10 @@ export type SlotStylesDefinition<
       }
     }
   >
+  extend?: SlotRecipeDefinition
 }
-
-export type PickVariant<T, K extends keyof any> = K extends keyof T
-  ? T[K]
-  : never
 
 export interface RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> {
   (variants?: VariantSelection<V>): R
-  splitVariantProps: <T extends Dictionary>(props: T) => PickVariant<T, keyof V>
+  variants: keyof V
 }

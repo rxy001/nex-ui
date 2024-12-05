@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import { isFunction, mergeWith, isArray } from '@nex-ui/utils'
 import type {
   StyleObject,
-  BaseStylesDefinition,
-  SlotStylesDefinition,
+  BaseRecipeDefinition,
+  SlotRecipeDefinition,
 } from '@nex-ui/system'
 import { styles } from '../../theme/styles'
 import { useNexContext } from '../provider/Context'
@@ -16,7 +16,7 @@ type UseStylesConfig<T, K> = {
 
 type UseStyles = <T extends keyof Styles, K extends Record<string, any>>(
   option: UseStylesConfig<T, K>,
-) => Styles[T] extends SlotStylesDefinition
+) => Styles[T] extends SlotRecipeDefinition
   ? Record<keyof Styles[T]['slots'], StyleObject>
   : StyleObject
 
@@ -34,7 +34,7 @@ export const useStyles: UseStyles = ({ name, ownerState }) => {
 
   return useMemo(() => {
     if (componentStyles.slots) {
-      const s = styles[name] as SlotStylesDefinition
+      const s = styles[name] as SlotRecipeDefinition
 
       if (isFunction(styleOverrides)) {
         const runtimeFn = sys.sva(s)
@@ -48,7 +48,7 @@ export const useStyles: UseStyles = ({ name, ownerState }) => {
       return runtimeFn(runtimeFn.splitVariantProps(ownerState))
     }
 
-    const s = styles[name] as BaseStylesDefinition
+    const s = styles[name] as BaseRecipeDefinition
 
     if (isFunction(styleOverrides)) {
       const runtimeFn = sys.cva(s)
