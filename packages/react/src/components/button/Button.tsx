@@ -116,6 +116,8 @@ export const Button = forwardRef<
     name: 'Button',
   })
 
+  console.log(styles)
+
   const mergedSx = composeSx(styles.root, sx)
 
   const onClick = useEvent(

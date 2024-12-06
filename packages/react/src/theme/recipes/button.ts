@@ -1,6 +1,6 @@
-import { defineSlotStyles } from '@nex-ui/system'
+import { defineSlotRecipe } from '@nex-ui/system'
 
-export const buttonStyles = defineSlotStyles({
+export const buttonRecipe = defineSlotRecipe({
   slots: {
     root: {
       outline: 'none',

@@ -1,4 +1,3 @@
-import { createCvaFn, createSvaFn } from './styles'
 import { createTokens } from './tokens'
 import { createScales } from './scales'
 import { createAliases } from './aliases'
@@ -61,15 +60,8 @@ export const createSystem = (config: SystemConfig) => {
     getCustomizedSelector,
   })
 
-  // Class Variance Authority
-  const cva = createCvaFn()
-
-  const sva = createSvaFn()
-
   return {
-    cva,
     css,
-    sva,
     getGlobalCssVars,
   }
 }

@@ -6,8 +6,7 @@ export type SlotGroups = Dictionary<StyleObject>
 
 export type BaseVariantGroups = Dictionary<Dictionary<StyleObject>>
 
-export type SlotVariantGroups<S extends SlotGroups = SlotGroups> = Record<
-  string,
+export type SlotVariantGroups<S extends SlotGroups = SlotGroups> = Dictionary<
   Dictionary<Partial<Record<keyof S, StyleObject>>>
 >
 
@@ -24,20 +23,20 @@ export type VariantSelection<V extends BaseVariantGroups | SlotVariantGroups> =
     [K in keyof V]?: string extends K ? unknown : BooleanMap<keyof V[K]>
   }
 
-export type BaseStylesDefinition<
-  V extends BaseVariantGroups = BaseVariantGroups,
-> = {
-  base: StyleObject
+export type RecipeConfig<V extends BaseVariantGroups = BaseVariantGroups> = {
+  base?: StyleObject
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: Array<CompoundVariantsSelection<V> & { css?: StyleObject }>
+  // eslint-disable-next-line no-use-before-define
+  extend?: RecipeRuntimeFn
 }
 
-export type SlotStylesDefinition<
+export type SlotRecipeConfig<
   S extends SlotGroups = SlotGroups,
   V extends SlotVariantGroups<S> = SlotVariantGroups<S>,
 > = {
-  slots: S
+  slots?: S
   variants?: V
   defaultVariants?: VariantSelection<V>
   compoundVariants?: Array<
@@ -47,13 +46,30 @@ export type SlotStylesDefinition<
       }
     }
   >
+  // eslint-disable-next-line no-use-before-define
+  extend?: SlotRecipeRuntimeFn
 }
 
-export type PickVariant<T, K extends keyof any> = K extends keyof T
-  ? T[K]
-  : never
-
-export interface RuntimeFn<V extends BaseVariantGroups | SlotVariantGroups, R> {
+export interface RuntimeFn<V extends Record<string, any>, R> {
   (variants?: VariantSelection<V>): R
-  splitVariantProps: <T extends Dictionary>(props: T) => PickVariant<T, keyof V>
+  variants: (keyof V)[]
 }
+
+export interface RecipeRuntimeFn<
+  V extends BaseVariantGroups = BaseVariantGroups,
+> extends RuntimeFn<V, StyleObject> {
+  __recipe?: boolean
+  __config?: RecipeConfig
+}
+
+export interface SlotRecipeRuntimeFn<
+  S extends SlotGroups = SlotGroups,
+  V extends SlotVariantGroups<S> = SlotVariantGroups<S>,
+> extends RuntimeFn<V, Record<keyof S, StyleObject>> {
+  __slotRecipe?: boolean
+  __config?: SlotRecipeConfig
+}
+
+export type RecipeVariants<
+  RecipeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn,
+> = Parameters<RecipeFn>[0]

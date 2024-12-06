@@ -1,6 +1,6 @@
 import type { SVGAttributes, ComponentType } from 'react'
 import type { NexCSSProperties } from '../../theme/types/generated/cssProperties'
-import type { IconVariants } from '../../theme/styles'
+import type { IconVariants } from '../../theme/recipes'
 import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
 
 export interface InnerIconProps

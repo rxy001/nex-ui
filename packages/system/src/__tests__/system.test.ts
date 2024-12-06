@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals'
-import { defineBaseStyles } from '../styles'
+import { defineRecipe } from '../recipes'
 import { createSystem } from '../system'
 import { defineConfig } from '../defineConfig'
 
@@ -123,7 +123,7 @@ describe('base styles', () => {
     },
   }
 
-  const baseStyles = defineBaseStyles({
+  const baseStyles = defineRecipe({
     base,
     variants,
     compoundVariants: [
