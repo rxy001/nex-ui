@@ -18,5 +18,5 @@ export interface NexProviderProps extends ColorSchemeProviderProps {
 export type NexContext = {
   prefix: string
   components?: InnerProviderProps['components']
-  sys: SystemContext
+  css: SystemContext['css']
 }

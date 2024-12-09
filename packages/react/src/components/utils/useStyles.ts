@@ -1,23 +1,20 @@
 import { useMemo } from 'react'
 import { isFunction, mergeWith, isArray } from '@nex-ui/utils'
-import type {
-  StyleObject,
-  BaseStylesDefinition,
-  SlotStylesDefinition,
-} from '@nex-ui/system'
-import { styles } from '../../theme/styles'
+import { defineSlotRecipe, defineRecipe } from '@nex-ui/system'
+import type { SlotRecipeRuntimeFn, StyleObject } from '@nex-ui/system'
+import { recipes } from '../../theme/recipes'
 import { useNexContext } from '../provider/Context'
-import type { Styles } from '../../theme/styles'
+import type { Recipes } from '../../theme/recipes'
 
 type UseStylesConfig<T, K> = {
   name: T
   ownerState: K
 }
 
-type UseStyles = <T extends keyof Styles, K extends Record<string, any>>(
+type UseStyles = <T extends keyof Recipes, K extends Record<string, any>>(
   option: UseStylesConfig<T, K>,
-) => Styles[T] extends SlotStylesDefinition
-  ? Record<keyof Styles[T]['slots'], StyleObject>
+) => Recipes[T] extends SlotRecipeRuntimeFn
+  ? Record<Recipes[T]['slots'][number], StyleObject>
   : StyleObject
 
 const mergeStyles = (...args: any[]) =>
@@ -28,37 +25,29 @@ const mergeStyles = (...args: any[]) =>
   })
 
 export const useStyles: UseStyles = ({ name, ownerState }) => {
-  const { sys, components } = useNexContext()
-  const componentStyles = styles[name] as any
-  const styleOverrides = components?.[name]?.styleOverrides
+  const { components } = useNexContext()
+  const recipe = recipes[name] as any
+  const styleOverrides = components?.[name]?.styleOverrides as any
 
   return useMemo(() => {
-    if (componentStyles.slots) {
-      const s = styles[name] as SlotStylesDefinition
-
-      if (isFunction(styleOverrides)) {
-        const runtimeFn = sys.sva(s)
-        return mergeStyles(
-          runtimeFn(runtimeFn.splitVariantProps(ownerState)),
-          styleOverrides(ownerState as any),
-        )
-      }
-
-      const runtimeFn = sys.sva(mergeStyles(s, styleOverrides))
-      return runtimeFn(runtimeFn.splitVariantProps(ownerState))
-    }
-
-    const s = styles[name] as BaseStylesDefinition
-
     if (isFunction(styleOverrides)) {
-      const runtimeFn = sys.cva(s)
-      return mergeStyles(
-        runtimeFn(runtimeFn.splitVariantProps(ownerState)),
-        styleOverrides(ownerState as any),
-      )
+      return mergeStyles(recipe(ownerState), styleOverrides(ownerState))
     }
 
-    const runtimeFn = sys.cva(mergeStyles(s, styleOverrides))
-    return runtimeFn(runtimeFn.splitVariantProps(ownerState))
-  }, [componentStyles.slots, name, styleOverrides, sys, ownerState])
+    if (recipe.__slotRecipe && styleOverrides) {
+      return defineSlotRecipe({
+        extend: recipe,
+        ...styleOverrides,
+      })(ownerState)
+    }
+
+    if (recipe.__recipe && styleOverrides) {
+      return defineRecipe({
+        extend: recipe,
+        ...styleOverrides,
+      })(ownerState)
+    }
+
+    return recipe(ownerState)
+  }, [recipe, styleOverrides, ownerState])
 }
