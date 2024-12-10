@@ -1,6 +1,6 @@
 export default {
   guide: '指南',
-  'nex-system': 'Nex System',
+  styling: 'Styling',
   customization: '定制化',
   components: '组件',
 }
