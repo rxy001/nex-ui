@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals'
-import { defineBaseStyles } from '../styles'
+import { defineRecipe } from '../recipes'
 import { createSystem } from '../system'
 import { defineConfig } from '../defineConfig'
 
@@ -123,7 +123,7 @@ describe('base styles', () => {
     },
   }
 
-  const baseStyles = defineBaseStyles({
+  const baseStyles = defineRecipe({
     base,
     variants,
     compoundVariants: [
@@ -137,13 +137,13 @@ describe('base styles', () => {
     ],
   })
 
-  const { css, cva } = createSystem(sysConfig)
+  const { css } = createSystem(sysConfig)
 
-  it('should cva work correctly', () => {
-    expect(cva(baseStyles)()).toEqual(base)
+  it('should defineRecipe work correctly', () => {
+    expect(baseStyles()).toEqual(base)
 
     expect(
-      cva(baseStyles)({
+      baseStyles({
         size: 'sm',
       }),
     ).toEqual({
@@ -152,7 +152,7 @@ describe('base styles', () => {
     })
 
     expect(
-      cva(baseStyles)({
+      baseStyles({
         size: 'sm',
         color: 'blue',
       }),
@@ -163,7 +163,7 @@ describe('base styles', () => {
     })
 
     expect(
-      cva(baseStyles)({
+      baseStyles({
         size: 'sm',
         color: 'red',
       }),
@@ -175,7 +175,7 @@ describe('base styles', () => {
     })
 
     expect(
-      cva(baseStyles)({
+      baseStyles({
         size: 'md',
         color: 'red',
       }),
@@ -223,10 +223,10 @@ describe('base styles', () => {
       },
     }
 
-    expect(css(cva(baseStyles)())).toEqual(transformedBase)
+    expect(css(baseStyles())).toEqual(transformedBase)
     expect(
       css(
-        cva(baseStyles)({
+        baseStyles({
           size: 'sm',
         }),
       ),
@@ -237,7 +237,7 @@ describe('base styles', () => {
 
     expect(
       css(
-        cva(baseStyles)({
+        baseStyles({
           size: 'sm',
           color: 'blue',
         }),
@@ -250,7 +250,7 @@ describe('base styles', () => {
 
     expect(
       css(
-        cva(baseStyles)({
+        baseStyles({
           size: 'sm',
           color: 'red',
         }),
@@ -264,7 +264,7 @@ describe('base styles', () => {
 
     expect(
       css(
-        cva(baseStyles)({
+        baseStyles({
           size: 'md',
           color: 'red',
         }),

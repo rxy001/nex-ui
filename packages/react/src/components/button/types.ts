@@ -3,7 +3,7 @@ import type {
   ButtonHTMLAttributes,
   AnchorHTMLAttributes,
 } from 'react'
-import type { ButtonVariants } from '../../theme/styles'
+import type { ButtonVariants } from '../../theme/recipes'
 
 import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
 

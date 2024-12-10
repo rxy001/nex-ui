@@ -1,4 +1,4 @@
-import type { ButtonStyles, FlexStyles, IconStyles } from '../styles'
+import type { ButtonRecipe, FlexRecipe, IconRecipe } from '../recipes'
 import type {
   ButtonProps,
   ButtonOwnerState,
@@ -7,25 +7,25 @@ import type {
   FlexProps,
 } from '../../components'
 import type { InnerIconProps } from '../../components/icon/types'
-import type { ComponentThemeFn, ExtractComponentStyles } from './utils'
+import type { ComponentThemeFn, ComponentThemeObject } from './utils'
 
 export type ComponentsTheme = {
   Button?: {
     styleOverrides?:
-      | ExtractComponentStyles<ButtonStyles>
-      | ComponentThemeFn<ButtonOwnerState, ButtonStyles>
+      | ComponentThemeObject<ButtonRecipe>
+      | ComponentThemeFn<ButtonOwnerState, ButtonRecipe>
     defaultProps?: ButtonProps
   }
   Icon?: {
     styleOverrides?:
-      | ExtractComponentStyles<IconStyles>
-      | ComponentThemeFn<IconOwnerState, IconStyles>
+      | ComponentThemeObject<IconRecipe>
+      | ComponentThemeFn<IconOwnerState, IconRecipe>
     defaultProps?: InnerIconProps
   }
   Flex?: {
     styleOverrides?:
-      | ExtractComponentStyles<FlexStyles>
-      | ComponentThemeFn<FlexOwnerState, FlexStyles>
+      | ComponentThemeObject<FlexRecipe>
+      | ComponentThemeFn<FlexOwnerState, FlexRecipe>
     defaultProps?: FlexProps
   }
 }

@@ -1,5 +1,5 @@
 import type { HtmlHTMLAttributes, ReactNode } from 'react'
-import type { FlexVariants } from '../../theme/styles'
+import type { FlexVariants } from '../../theme/recipes'
 import type { NexCSSProperties } from '../../theme/types/generated/cssProperties'
 import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
 

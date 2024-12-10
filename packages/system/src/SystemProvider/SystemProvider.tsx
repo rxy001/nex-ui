@@ -30,7 +30,7 @@ export const SystemProvider = ({
     ...config.selectors,
   }
 
-  const { cva, css, sva, getGlobalCssVars } = createSystem(config)
+  const { css, getGlobalCssVars } = createSystem(config)
 
   const globalStyles = useMemo(() => {
     if (!getGlobalCssVars) {
@@ -63,7 +63,7 @@ export const SystemProvider = ({
     return result
   }, [getColorSchemeSelector, getGlobalCssVars])
 
-  const methods = useMemo(() => ({ cva, css, sva }), [cva, sva, css])
+  const methods = useMemo(() => ({ css }), [css])
 
   return (
     <InnerSystemProvider value={methods}>

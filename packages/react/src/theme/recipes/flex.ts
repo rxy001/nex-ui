@@ -1,6 +1,6 @@
-import { defineBaseStyles } from '@nex-ui/system'
+import { defineRecipe } from '@nex-ui/system'
 
-export const flexStyles = defineBaseStyles({
+export const flexRecipe = defineRecipe({
   base: {
     display: 'flex',
   },

@@ -1,12 +1,19 @@
 export * from '@emotion/react'
 
-export * from './SystemProvider'
+export { SystemProvider, useSystem } from './SystemProvider'
+export type { SystemContext } from './SystemProvider'
 
 export { createSystem } from './system'
 export type { SystemConfig } from './system'
 
-export { defineBaseStyles, defineSlotStyles } from './styles'
-export type { BaseStylesDefinition, SlotStylesDefinition } from './styles'
+export { defineRecipe, defineSlotRecipe } from './recipes'
+export type {
+  RecipeRuntimeFn,
+  RecipeConfig,
+  SlotRecipeConfig,
+  SlotRecipeRuntimeFn,
+  RecipeVariants,
+} from './recipes'
 
 export {
   defineConfig,
