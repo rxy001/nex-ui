@@ -35,15 +35,13 @@ export const useStyles: UseStyles = ({ name, ownerState }) => {
     }
 
     if (recipe.__slotRecipe && styleOverrides) {
-      return defineSlotRecipe({
-        extend: recipe,
+      return defineSlotRecipe(recipe, {
         ...styleOverrides,
       })(ownerState)
     }
 
     if (recipe.__recipe && styleOverrides) {
-      return defineRecipe({
-        extend: recipe,
+      return defineRecipe(recipe, {
         ...styleOverrides,
       })(ownerState)
     }
