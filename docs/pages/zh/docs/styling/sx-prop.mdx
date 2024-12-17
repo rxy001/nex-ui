@@ -3,17 +3,16 @@ import Link from '@/components/Link'
 import Example from '@/components/Example'
 import { Box, NexProvider } from '@nex-ui/react'
 import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra-theme-docs'
 import logo from '../../../../public/logo.png'
 
-## sx 属性
+# sx 属性
 
-Nex System 的核心是 `sx` prop，它为您提供了一种快速有效的方法，直接将预设的 `token` 应用于 React 元素。
+`sx` 属性是一种用于定义可访问主题的自定义样式的快捷方式。
 
-这个属性提供了一个 CSS 的超集，除包含所有 CSS 属性和选择器之外，还有 Nex System 内置的自定义属性和选择器，
-而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，Nex System 还提供了扩展能力。在<Link href="">`Theming`页面</Link>了解更多信息。
+`sx` 属性可以使用 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 NexUI 内置的自定义属性和选择器，
+而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在<Link href="">`Theming`页面</Link>了解更多信息。
 
-## 基本使用
+## Basic Usage
 
 下面的例子演示了如何使用 `sx` 属性。注意，并不是所有的值都是有效的CSS属性，这是因为 `sx` 的键映射到了主题的特定属性。接下来将更详细地介绍这个概念。
 
@@ -91,7 +90,7 @@ export default function Example() {
 }
 ```
 
-## 主题感知属性
+## Theme-Aware Properties
 
 通过 `scales` 可以将 `token` 与 CSS 属性关联，使 CSS 属性值能够映射到 `token` 的值。
 
@@ -117,7 +116,7 @@ export default function Example() {
     <NexProvider theme={theme}>
       <Box
         sx={{
-          // 只有在 scales 中定义 color: 'colors', color 可以使用 token.colors.primary
+          // 只有在 scales 中定义 color: 'colors', color 才可以使用 token.colors.primary
           color: 'primary',
           // 此时 width 属性值会被编译为 token.sizes.width, 当值仅为 string 时才映射到 token
           width: '1',
@@ -228,12 +227,12 @@ export default function Example() {
 
 在<Link href=''>`Typography`页面</Link>了解更多的信息。
 
-## 响应式
+## Responsive Values
 
 与 `sx` 属性相关的所有 CSS 属性也都支持针对特定断点的响应式值。
 `sx` 属性简化了定义和实现响应式断点的过程，您可以通过两种不同的方式来定义一组断点：一个对象，或者一个数组。
 
-#### 对象类断点
+#### Object Values
 
 定义断点的第一种选择是将它们作为一个对象来定义，使用断点值作为键。
 
@@ -271,7 +270,7 @@ export default function Example() {
 </Box>
 ```
 
-#### 数组类断点
+#### Array Values
 
 第二种选择是将你的断点定义为一个数组，按照从小到大的顺序排列。如下所示：
 

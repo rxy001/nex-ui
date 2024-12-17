@@ -7,11 +7,16 @@
     "jsx": "preserve"
   },
   "include": [
-    "./theme.config.jsx",
+    "theme.config.tsx",
     "./pages",
     "./next-env.d.ts",
     "./middleware.ts",
-    "./components"
+    "./components",
+    "./codes",
+    "./examples",
+    "./theme.config.tsx",
+    "./utils",
+    "./hooks/**/*"
   ],
   "exclude": []
 }

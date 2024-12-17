@@ -1,0 +1,365 @@
+import { Callout } from 'nextra/components'
+
+# Recipes
+
+Recipes 可以为同一个组件定义多个版本的样式。
+
+Recipes 具有更优的性能、更好的开发者体验以及更强的可组合性的方法编写 CSS-in-JS。其关键特性之一，能通过具有类型安全的运行时 API 创建多种 Variants 样式。
+
+## Basic Usage
+
+您可以使用 `defineRecipe` API 可以定义一个 recipe。 `defineRecipe` API 可访问主题的自定义样式。
+
+```tsx {4-9,16-21}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+})
+
+buttonRecipe()
+/**
+ * Result:
+ *
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ * }
+ */
+```
+
+## Multiple Variants
+
+`variants` 属性可以为 Recipe 添加多个 Variants.
+
+```tsx {9-18, 28-31, 42-45}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    size: {
+      sm: { padding: '4', fontSize: '12px' },
+      lg: { padding: '8', fontSize: '16px' },
+    },
+  },
+})
+
+buttonRecipe({ color: 'primary', size: 'sm' })
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   padding: '4',
+ *   fontSize: '12px'
+ * }
+ */
+
+buttonRecipe({ color: 'secondary', size: 'lg' })
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   bg: 'red.500',
+ *   color: 'white',
+ *   padding: '8',
+ *   fontSize: '16px'
+ * }
+ */
+```
+
+## Boolean Variants
+
+另外还可以为 Recipe 创建布尔类型的 Variants。这在需要创建状态类型的 Variants (e.g. `disabled`) 非常有用。
+
+```tsx {15-21,39-41}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    disabled: {
+      true: {
+        'pointer-events': 'none',
+        cursor: 'not-allowed',
+        opacity: 0.6,
+      },
+    },
+  },
+})
+
+buttonRecipe({
+  color: 'primary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.6,
+ * }
+ */
+```
+
+## Compound Variants
+
+`compoundVariants` 属性用于定义一组基于其他 Variants 组合的 Variants。
+
+```tsx {23-31,46}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    disabled: {
+      true: {
+        'pointer-events': 'none',
+        cursor: 'not-allowed',
+        opacity: 0.6,
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      color: 'primary',
+      disabled: true,
+      css: {
+        bg: 'blue.300',
+      },
+    },
+  ],
+})
+
+buttonRecipe({
+  color: 'primary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'blue.300',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.6,
+ * }
+ */
+```
+
+<Callout type="warning">注意 compoundVariants 键是个数组。</Callout>
+
+也可以同时设置多个 Variants.
+
+```tsx {25,28,50,70}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    disabled: {
+      true: {
+        'pointer-events': 'none',
+        cursor: 'not-allowed',
+        opacity: 0.6,
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      color: ['primary', 'secondary'],
+      disabled: true,
+      css: {
+        opacity: 0.3,
+      },
+    },
+  ],
+})
+
+buttonRecipe({
+  color: 'primary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.3,
+ * }
+ */
+
+buttonRecipe({
+  color: 'secondary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'red.500',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.3,
+ * }
+ */
+```
+
+## Default Variants
+
+`defaultvariables` 属性为 Recipe 定义默认的 Variant 值。当希望默认应用某个 Variant 时，这很有用。
+
+```tsx {19-22,33-36}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    size: {
+      sm: { padding: '4', fontSize: '12px' },
+      lg: { padding: '8', fontSize: '16px' },
+    },
+  },
+  defaultVariants: {
+    color: 'primary',
+    size: 'sm',
+  },
+})
+
+buttonRecipe()
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   padding: '4',
+ *   fontSize: '12px'
+ * }
+ */
+```
+
+## Extends
+
+`defineRecipe` 能够继承 Recipe , 包括其 `base`、`variants`、`defaultVariants`、`compoundVariants`，它会自动合并相同键的值，并提供
+Typescript 提示。
+
+```tsx {25-34}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    size: {
+      sm: { padding: '4', fontSize: '12px' },
+      lg: { padding: '8', fontSize: '16px' },
+    },
+  },
+  defaultVariants: {
+    color: 'primary',
+    size: 'sm',
+  },
+})
+
+const extendedRecipe = defineRecipe(buttonRecipe, {
+  variants: {
+    color: {
+      tertiary: {
+        bg: 'yellow',
+        color: 'white',
+      },
+    },
+  },
+})
+```

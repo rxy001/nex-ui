@@ -76,7 +76,6 @@ export const Button = forwardRef<
   const {
     as,
     sx,
-    href,
     className,
     children,
     variant = 'solid',
@@ -94,7 +93,11 @@ export const Button = forwardRef<
   } = props
 
   const htmlElement: keyof JSX.IntrinsicElements =
-    as !== undefined ? as : typeof href === 'string' && href ? 'a' : 'button'
+    as !== undefined
+      ? as
+      : typeof remainingProps.href === 'string' && remainingProps.href
+        ? 'a'
+        : 'button'
 
   const ownerState: ButtonOwnerState = {
     ...props,

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a.link {
+  color: rgb(0, 107, 230);
+  text-decoration: underline;
+}
+
+/* .nextra-sidebar-footer {
+  display: none;
+}
+
+.nextra-sidebar-container .nextra-scrollbar {
+  --nextra-menu-height: 0px;
+} */

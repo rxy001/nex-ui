@@ -1,0 +1,212 @@
+import Link from '@/components/Link'
+
+# Slot Recipes
+
+Slot Recipes 可以将组件拆分为多个部分。在阅读该章节之前，建议了解<Link href=''> Recipes </Link>。
+
+## Basic Usage
+
+您可以使用 `defineSlotRecipe` API 定义一个 slot recipe。
+
+```tsx {4-8}
+import { defineSlotRecipe } from '@nex-ui/react'
+
+export const checkboxSlotRecipe = defineSlotRecipe({
+  slots: {
+    root: { display: 'flex', alignItems: 'center', gap: '2' },
+    control: { borderWidth: '1px', borderRadius: 'sm' },
+    label: { padding: '2' },
+  },
+})
+
+const { root, control, label } = checkboxSlotRecipe()
+
+/**
+ * Result:
+ * root: {
+ *   display: 'flex',
+ *   alignItems: 'center',
+ *   gap: '2'
+ * }
+ * control: {
+ *   borderWith: '1px',
+ *   borderRadius: 'sm'
+ * }
+ * label: {
+ *   padding: '2'
+ * }
+ */
+```
+
+## Slots With Variants
+
+您可以通过使用 `Variants` 来更改整个组件及其插槽。
+
+```tsx {9-20}
+import { defineSlotRecipe } from '@nex-ui/react'
+
+export const checkboxSlotRecipe = defineSlotRecipe({
+  slots: {
+    root: { display: 'flex', alignItems: 'center', gap: '2' },
+    control: { borderWidth: '1px', borderRadius: 'sm' },
+    label: { padding: '2' },
+  },
+  variants: {
+    size: {
+      sm: {
+        control: { width: '8', height: '8' },
+        label: { fontSize: 'sm' },
+      },
+      md: {
+        control: { width: '10', height: '10' },
+        label: { fontSize: 'md' },
+      },
+    },
+  },
+})
+
+const { root, control, label } = checkboxSlotRecipe({
+  size: 'sm',
+})
+
+/**
+ * Result:
+ * root: {
+ *   display: 'flex',
+ *   alignItems: 'center',
+ *   gap: '2'
+ * }
+ * control: {
+ *   borderWith: '1px',
+ *   borderRadius: 'sm'
+ *   width: '8'
+ *   height: '8'
+ * }
+ * label: {
+ *   padding: '2',
+ *   fontSize: 'sm'
+ * }
+ */
+
+const { root, control, label } = checkboxSlotRecipe({
+  size: 'md',
+})
+
+/**
+ * Result:
+ * root: {
+ *   display: 'flex',
+ *   alignItems: 'center',
+ *   gap: '2'
+ * }
+ * control: {
+ *   borderWith: '1px',
+ *   borderRadius: 'sm'
+ *   width: '10'
+ *   height: '10'
+ * }
+ * label: {
+ *   padding: '2',
+ *   fontSize: 'md'
+ * }
+ */
+```
+
+## Slots With Compound Variants
+
+与 `variants` 类似，在使用 `compoundVariants` 时，您也可以为每个插槽定义样式。
+
+```tsx {29-38}
+import { defineSlotRecipe } from '@nex-ui/react'
+
+export const checkboxSlotRecipe = defineSlotRecipe({
+  slots: {
+    root: { display: 'flex', alignItems: 'center', gap: '2' },
+    control: { borderWidth: '1px', borderRadius: 'sm' },
+    label: { padding: '2' },
+  },
+  variants: {
+    size: {
+      sm: {
+        control: { width: '8', height: '8' },
+        label: { fontSize: 'sm' },
+      },
+      md: {
+        control: { width: '10', height: '10' },
+        label: { fontSize: 'md' },
+      },
+    },
+    color: {
+      primary: {
+        label: { color: 'blue.500' },
+      },
+      secondary: {
+        label: { color: 'blue.500' },
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      size: ['sm', 'md'],
+      primary: 'primary',
+      css: {
+        label: { opacity: 0.7 },
+        control: { opacity: 0.5 },
+      },
+    },
+  ],
+})
+```
+
+## Slots With Extends
+
+`defineSlotRecipe` 能够继承 SlotRecipe , 包括其 `slots`、`variants`、`defaultVariants`、`compoundVariants`，
+它会自动合并相同键的值，并提供 TypeScript 提示。
+
+```tsx {41-45}
+import { defineSlotRecipe } from '@nex-ui/react'
+
+export const checkboxSlotRecipe = defineSlotRecipe({
+  slots: {
+    root: { display: 'flex', alignItems: 'center', gap: '2' },
+    control: { borderWidth: '1px', borderRadius: 'sm' },
+    label: { padding: '2' },
+  },
+  variants: {
+    size: {
+      sm: {
+        control: { width: '8', height: '8' },
+        label: { fontSize: 'sm' },
+      },
+      md: {
+        control: { width: '10', height: '10' },
+        label: { fontSize: 'md' },
+      },
+    },
+    color: {
+      primary: {
+        label: { color: 'blue.500' },
+      },
+      secondary: {
+        label: { color: 'blue.500' },
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      size: ['sm', 'md'],
+      primary: 'primary',
+      css: {
+        label: { opacity: 0.7 },
+        control: { opacity: 0.5 },
+      },
+    },
+  ],
+})
+
+const extendedSlotRecipe = defineSlotRecipe(checkboxSlotRecipe, {
+  slots: {},
+  variants: {},
+  compoundVariants: {},
+})
+```

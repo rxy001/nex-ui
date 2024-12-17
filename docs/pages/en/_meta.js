@@ -1,11 +1,11 @@
 export default {
   index: {
     type: 'page',
-    title: '首页',
+    title: 'Home',
     display: 'hidden',
   },
   docs: {
     type: 'page',
-    title: '文档',
+    title: 'Documents',
   },
 }
