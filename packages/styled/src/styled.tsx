@@ -26,16 +26,29 @@ const createStyled: CreateStyled = (tag: any) => {
 
     const Styled = withEmotionCache(
       ({ sx: sxProp, ...props }: any, cache: any, ref: any) => {
-        const sys = useSystem()
-
-        const composedSx = composeSx(styles, sxProp)
-
-        const cssProp: any = composedSx.length > 0 ? sys.css(composedSx) : null
-
         const FinalTag = (shouldUseAs && props.as) || tag
 
+        const sys = useSystem()
+        const composedSx = composeSx(styles, sxProp)
+
+        const finalShouldForwardProp = shouldUseAs
+          ? getDefaultShouldForwardProp(FinalTag)
+          : defaultShouldForwardProp
+
+        const newProps: any = ref ? { ref } : {}
+
+        forEach(props, (prop: any, key: string) => {
+          if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
+            newProps[key] = prop
+          }
+        })
+
+        if (composedSx.length === 0) {
+          return <FinalTag {...newProps} />
+        }
+
         let className = ''
-        const registeredStyles = cssProp ? [cssProp] : []
+        let registeredStyles: any[] = []
 
         if (typeof props.className === 'string') {
           className = getRegisteredStyles(
@@ -47,6 +60,9 @@ const createStyled: CreateStyled = (tag: any) => {
           className = `${props.className} `
         }
 
+        const cssProp = sys.css(composedSx)
+        registeredStyles = [...registeredStyles, cssProp]
+
         const serialized = serializeStyles(
           registeredStyles,
           cache.registered,
@@ -55,22 +71,7 @@ const createStyled: CreateStyled = (tag: any) => {
 
         className += `${cache.key}-${serialized.name}`
 
-        const finalShouldForwardProp = shouldUseAs
-          ? getDefaultShouldForwardProp(FinalTag)
-          : defaultShouldForwardProp
-
-        const newProps: any = {}
-
-        forEach(props, (prop: any, key: string) => {
-          if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
-            newProps[key] = prop
-          }
-        })
-
         newProps.className = className
-        if (ref) {
-          newProps.ref = ref
-        }
 
         return (
           <>

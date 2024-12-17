@@ -2,6 +2,7 @@ import { withEmotionCache } from '@emotion/react'
 import { forEach } from '@nex-ui/utils'
 import { useSystem } from '@nex-ui/system'
 import { serializeStyles } from '@emotion/serialize'
+import { getRegisteredStyles } from '@emotion/utils'
 import { getDefaultShouldForwardProp } from './utils'
 import { tags } from './tags'
 import { Insertion } from './Insertion'
@@ -21,35 +22,13 @@ const createNexImpl = (tag: any) => {
   const shouldUseAs = !defaultShouldForwardProp('as')
 
   return withEmotionCache(({ sx, ...props }: any, cache: any, ref: any) => {
-    const sys = useSystem()
-
-    const cssProp = sx ? sys.css(sx) : sx
-
     const FinalTag = (shouldUseAs && props.as) || tag
-
-    let { className } = props
-    const registeredStyles = cssProp ? [cssProp] : []
-
-    // 不将 css 融合到 sx 中，避免 sx 被 css 样式覆盖. 尽量不使用 css props
-    // if (typeof props.className === 'string') {
-    //   className = getRegisteredStyles(
-    //     cache.registered,
-    //     registeredStyles,
-    //     props.className,
-    //   )
-    // } else if (props.className != null) {
-    //   className = `${props.className} `
-    // }
-
-    const serialized = serializeStyles(registeredStyles, undefined, props)
-
-    className += ` ${cache.key}-${serialized.name}`
 
     const finalShouldForwardProp = shouldUseAs
       ? getDefaultShouldForwardProp(FinalTag)
       : defaultShouldForwardProp
 
-    const newProps: any = {}
+    const newProps: any = ref ? { ref } : {}
 
     forEach(props, (prop: any, key: string) => {
       if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
@@ -57,10 +36,33 @@ const createNexImpl = (tag: any) => {
       }
     })
 
-    newProps.className = className
-    if (ref) {
-      newProps.ref = ref
+    if (sx == null) {
+      return <FinalTag {...newProps} />
     }
+
+    let { className } = props
+    let registeredStyles: any[] = []
+
+    if (typeof props.className === 'string') {
+      className = getRegisteredStyles(
+        cache.registered,
+        registeredStyles,
+        props.className,
+      )
+    } else if (props.className != null) {
+      className = `${props.className} `
+    }
+
+    const sys = useSystem()
+
+    const cssProp = sys.css(sx)
+    registeredStyles = [...registeredStyles, cssProp]
+
+    const serialized = serializeStyles(registeredStyles, undefined, props)
+
+    className += `${cache.key}-${serialized.name}`
+
+    newProps.className = className
 
     return (
       <>

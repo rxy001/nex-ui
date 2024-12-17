@@ -119,8 +119,6 @@ export const Button = forwardRef<
     name: 'Button',
   })
 
-  const mergedSx = composeSx(styles.root, sx)
-
   const onClick = useEvent(
     (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
       if (loading || disabled) {
@@ -150,6 +148,8 @@ export const Button = forwardRef<
       )
     )
   }, [styles.endIcon, endIconProp, classes.endIcon])
+
+  const mergedSx = composeSx(styles.root, sx)
 
   const childNode = (
     <nex.button
