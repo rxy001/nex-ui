@@ -42,13 +42,36 @@ export interface NexCSSProperties extends RawCSSProperties {
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
-  fontSize?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
-  borderWidth?: RawCSSProperties['borderWidth'] | Tokens['borders']
+  borderBottomColor?:
+    | RawCSSProperties['borderBottomColor']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+    | VirtualColors
+  borderTopColor?:
+    | RawCSSProperties['borderTopColor']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+    | VirtualColors
+  borderLeftColor?:
+    | RawCSSProperties['borderLeftColor']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+    | VirtualColors
+  borderRightColor?:
+    | RawCSSProperties['borderRightColor']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+    | VirtualColors
   width?: RawCSSProperties['width'] | Tokens['sizes']
+  minWidth?: RawCSSProperties['minWidth'] | Tokens['sizes']
+  maxWidth?: RawCSSProperties['maxWidth'] | Tokens['sizes']
   height?: RawCSSProperties['height'] | Tokens['sizes']
+  minHeight?: RawCSSProperties['minHeight'] | Tokens['sizes']
+  maxHeight?: RawCSSProperties['maxHeight'] | Tokens['sizes']
   fontWeight?: RawCSSProperties['fontWeight'] | Tokens['fontWeights']
   lineHeight?: RawCSSProperties['lineHeight'] | Tokens['lineHeights']
   fontFamily?: RawCSSProperties['fontFamily'] | Tokens['fontFamilies']
+  fontSize?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
   gap?: RawCSSProperties['gap'] | Tokens['spacing']
   padding?: RawCSSProperties['padding'] | Tokens['spacing']
   paddingTop?: RawCSSProperties['paddingTop'] | Tokens['spacing']
@@ -60,6 +83,12 @@ export interface NexCSSProperties extends RawCSSProperties {
   marginLeft?: RawCSSProperties['marginLeft'] | Tokens['spacing']
   marginBottom?: RawCSSProperties['marginBottom'] | Tokens['spacing']
   margin?: RawCSSProperties['margin'] | Tokens['spacing']
+  top?: RawCSSProperties['top'] | Tokens['spacing']
+  left?: RawCSSProperties['left'] | Tokens['spacing']
+  right?: RawCSSProperties['right'] | Tokens['spacing']
+  bottom?: RawCSSProperties['bottom'] | Tokens['spacing']
+  rowGap?: RawCSSProperties['rowGap'] | Tokens['spacing']
+  columnGap?: RawCSSProperties['columnGap'] | Tokens['spacing']
   borderRadius?: RawCSSProperties['borderRadius'] | Tokens['radii']
   borderTopRightRadius?:
     | RawCSSProperties['borderTopRightRadius']
@@ -73,6 +102,11 @@ export interface NexCSSProperties extends RawCSSProperties {
   borderBottomLeftRadius?:
     | RawCSSProperties['borderBottomLeftRadius']
     | Tokens['radii']
+  borderTopWidth?: RawCSSProperties['borderTopWidth'] | Tokens['borders']
+  borderBottomWidth?: RawCSSProperties['borderBottomWidth'] | Tokens['borders']
+  borderLeftWidth?: RawCSSProperties['borderLeftWidth'] | Tokens['borders']
+  borderRightWidth?: RawCSSProperties['borderRightWidth'] | Tokens['borders']
+  borderWidth?: RawCSSProperties['borderWidth'] | Tokens['borders']
   bg?:
     | RawCSSProperties['backgroundColor']
     | Tokens['colors']
