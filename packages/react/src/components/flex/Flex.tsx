@@ -42,7 +42,13 @@ const useUtilityClasses = (ownerState: FlexOwnerState) => {
 }
 
 export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
-  const props = useDefaultProps({ name: 'Flex', props: inProps })
+  const props = useDefaultProps({
+    name: 'Flex',
+    props: inProps,
+    defaultProps: {
+      inline: false,
+    },
+  })
 
   const {
     sx,
@@ -54,20 +60,11 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
     align,
     direction,
     wrap,
-    inline = false,
     ...remainingProps
   } = props
 
   const ownerState: FlexOwnerState = {
     ...props,
-    gap,
-    children,
-    className,
-    justify,
-    align,
-    direction,
-    wrap,
-    inline,
   }
 
   const classes = useUtilityClasses(ownerState)
