@@ -2,7 +2,7 @@ import { defineSemanticTokens } from '@nex-ui/system'
 
 export const colors = defineSemanticTokens.colors({
   blue: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{blue.500}',
         _dark: '{blue.600}',
@@ -16,7 +16,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{blue.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{blue.500}',
         _dark: '{blue.600}',
@@ -61,7 +61,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   gray: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{gray.500}',
         _dark: '{gray.600}',
@@ -75,7 +75,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{gray.600}',
       },
     },
-    solid: {
+    filledd: {
       fg: {
         _DEFAULT: '{gray.500}',
         _dark: '{gray.600}',
@@ -120,7 +120,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   red: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{red.500}',
         _dark: '{red.600}',
@@ -134,7 +134,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{red.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{red.500}',
         _dark: '{red.600}',
@@ -179,7 +179,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   orange: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{orange.500}',
         _dark: '{orange.600}',
@@ -193,7 +193,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{orange.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{orange.500}',
         _dark: '{orange.600}',
@@ -238,7 +238,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   yellow: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{yellow.500}',
         _dark: '{yellow.600}',
@@ -252,7 +252,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{yellow.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{yellow.500}',
         _dark: '{yellow.600}',
@@ -297,7 +297,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   green: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{green.500}',
         _dark: '{green.600}',
@@ -311,7 +311,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{green.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{green.500}',
         _dark: '{green.600}',
@@ -356,7 +356,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   cyan: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{cyan.500}',
         _dark: '{cyan.600}',
@@ -370,7 +370,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{cyan.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{cyan.500}',
         _dark: '{cyan.600}',
@@ -415,7 +415,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   purple: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{purple.500}',
         _dark: '{purple.600}',
@@ -429,7 +429,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{purple.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{purple.500}',
         _dark: '{purple.600}',
@@ -474,7 +474,7 @@ export const colors = defineSemanticTokens.colors({
     },
   },
   pink: {
-    outline: {
+    outlined: {
       fg: {
         _DEFAULT: '{pink.500}',
         _dark: '{pink.600}',
@@ -488,7 +488,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{pink.600}',
       },
     },
-    solid: {
+    filled: {
       fg: {
         _DEFAULT: '{pink.500}',
         _dark: '{pink.600}',

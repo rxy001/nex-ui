@@ -13,11 +13,11 @@ const meta = {
     iconOnly: {
       control: 'boolean',
     },
-    block: {
+    fullWidth: {
       control: 'boolean',
     },
     variant: {
-      options: ['solid', 'outline', 'text', 'link'],
+      options: ['filled', 'outlined', 'text', 'link'],
       control: 'select',
       description: 'The age of the person',
     },
@@ -39,16 +39,16 @@ const meta = {
   args: {
     children: 'Button',
     // size: 'lg',
-    variant: 'solid',
+    variant: 'filled',
     disabled: false,
-    block: false,
+    fullWidth: false,
     iconOnly: false,
     loading: false,
   },
   render: (args) => {
     return (
       <Flex gap={50} direction="column">
-        <Flex gap={10} direction={args.block ? 'column' : 'row'}>
+        <Flex gap={10} direction={args.fullWidth ? 'column' : 'row'}>
           <Button {...args} size="sm" />
           <Button {...args} size="sm" color="purple" />
           <Button {...args} size="sm" color="gray" />
@@ -59,7 +59,7 @@ const meta = {
           <Button {...args} size="sm" color="green" />
           <Button {...args} size="sm" color="orange" />
         </Flex>
-        <Flex gap={10} direction={args.block ? 'column' : 'row'}>
+        <Flex gap={10} direction={args.fullWidth ? 'column' : 'row'}>
           <Button {...args} size="md" />
           <Button {...args} size="md" color="purple" />
           <Button {...args} size="md" color="gray" />
@@ -70,7 +70,7 @@ const meta = {
           <Button {...args} size="md" color="green" />
           <Button {...args} size="md" color="orange" />
         </Flex>
-        <Flex gap={10} direction={args.block ? 'column' : 'row'}>
+        <Flex gap={10} direction={args.fullWidth ? 'column' : 'row'}>
           <Button {...args} size="lg" />
           <Button {...args} size="lg" color="purple" />
           <Button {...args} size="lg" color="gray" />
@@ -102,7 +102,7 @@ export const Disabled: Story = {
 
 export const Block: Story = {
   args: {
-    block: true,
+    fullWidth: true,
   },
 }
 

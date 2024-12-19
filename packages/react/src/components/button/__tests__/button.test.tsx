@@ -21,13 +21,13 @@ describe('Button', () => {
     const button = container.firstElementChild
 
     expect(button).toHaveClass(buttonClasses.root)
-    expect(button).toHaveClass(buttonClasses['variant-solid'])
+    expect(button).toHaveClass(buttonClasses['variant-filled'])
     expect(button).toHaveClass(buttonClasses['size-md'])
     expect(button).toHaveClass(buttonClasses['radius-md'])
     expect(button).toHaveClass(buttonClasses['color-blue'])
 
     expect(button).not.toHaveClass(buttonClasses['variant-link'])
-    expect(button).not.toHaveClass(buttonClasses['variant-outline'])
+    expect(button).not.toHaveClass(buttonClasses['variant-outlined'])
     expect(button).not.toHaveClass(buttonClasses['variant-text'])
     expect(button).not.toHaveClass(buttonClasses['color-green'])
     expect(button).not.toHaveClass(buttonClasses['color-cyan'])
@@ -44,7 +44,7 @@ describe('Button', () => {
     expect(button).not.toHaveClass(buttonClasses['icon-only'])
     expect(button).not.toHaveClass(buttonClasses.loading)
     expect(button).not.toHaveClass(buttonClasses.disabled)
-    expect(button).not.toHaveClass(buttonClasses.block)
+    expect(button).not.toHaveClass(buttonClasses.fullWidth)
   })
 
   it('startIcon and endIcon should have icon class', () => {
@@ -116,13 +116,13 @@ describe('Button', () => {
   it('should add the appropriate variant class to root element based on variant prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Button variant="solid" data-testid="variant-solid">
+        <Button variant="filled" data-testid="variant-filled">
           Button
         </Button>
         <Button variant="link" data-testid="variant-link">
           Button
         </Button>
-        <Button variant="outline" data-testid="variant-outline">
+        <Button variant="outlined" data-testid="variant-outlined">
           Button
         </Button>
         <Button variant="text" data-testid="variant-text">
@@ -131,14 +131,14 @@ describe('Button', () => {
       </>,
     )
 
-    expect(getByTestId('variant-solid')).toHaveClass(
-      buttonClasses['variant-solid'],
+    expect(getByTestId('variant-filled')).toHaveClass(
+      buttonClasses['variant-filled'],
     )
     expect(getByTestId('variant-link')).toHaveClass(
       buttonClasses['variant-link'],
     )
-    expect(getByTestId('variant-outline')).toHaveClass(
-      buttonClasses['variant-outline'],
+    expect(getByTestId('variant-outlined')).toHaveClass(
+      buttonClasses['variant-outlined'],
     )
     expect(getByTestId('variant-text')).toHaveClass(
       buttonClasses['variant-text'],

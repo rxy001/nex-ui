@@ -4,11 +4,11 @@ import { generateUtilityClasses } from '../utils'
 export const buttonClasses = generateUtilityClasses('nui-btn', [
   // ---------root---------
   'root',
-  // "link" | "text" | "solid" | "outline"
+  // "link" | "text" | "filled" | "outlined"
   'variant-link',
   'variant-text',
-  'variant-solid',
-  'variant-outline',
+  'variant-filled',
+  'variant-outlined',
 
   // "sm" | "md" | "lg" | "full"
   'radius-sm',
@@ -35,7 +35,7 @@ export const buttonClasses = generateUtilityClasses('nui-btn', [
   'icon-only',
   'loading',
   'disabled',
-  'block',
+  'fullWidth',
   // ---------root---------
 
   'icon',

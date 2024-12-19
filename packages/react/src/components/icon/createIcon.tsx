@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { styled } from '@nex-ui/styled'
 import type { ComponentType, Ref } from 'react'
@@ -94,7 +94,7 @@ export const createIcon = (
     return (
       <Icon
         ref={ref}
-        className={classNames(classes.root, defaultClassName, className)}
+        className={clsx(classes.root, defaultClassName, className)}
         {...remainingProps}
       />
     )

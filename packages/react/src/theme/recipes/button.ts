@@ -6,7 +6,7 @@ export const buttonRecipe = defineSlotRecipe({
       outline: 'none',
       userSelect: 'none',
       borderWidth: 'sm',
-      borderStyle: 'solid',
+      borderStyle: 'filled',
       cursor: 'pointer',
       position: 'relative',
       transition: '.3s',
@@ -33,31 +33,31 @@ export const buttonRecipe = defineSlotRecipe({
   },
   variants: {
     variant: {
-      outline: {
+      outlined: {
         root: {
-          borderColor: 'colorPalette.outline.fg',
-          color: 'colorPalette.outline.fg',
+          borderColor: 'colorPalette.outlined.fg',
+          color: 'colorPalette.outlined.fg',
           _hover: {
-            borderColor: 'colorPalette.outline.hover',
-            color: 'colorPalette.outline.hover',
+            borderColor: 'colorPalette.outlined.hover',
+            color: 'colorPalette.outlined.hover',
           },
           _active: {
-            borderColor: 'colorPalette.outline.active',
-            color: 'colorPalette.outline.active',
+            borderColor: 'colorPalette.outlined.active',
+            color: 'colorPalette.outlined.active',
           },
         },
       },
-      solid: {
+      filled: {
         root: {
-          bg: 'colorPalette.solid.fg',
-          color: 'colorPalette.solid.contrastText',
+          bg: 'colorPalette.filled.fg',
+          color: 'colorPalette.filled.contrastText',
           _hover: {
-            bg: 'colorPalette.solid.hover',
-            color: 'colorPalette.solid.contrastText',
+            bg: 'colorPalette.filled.hover',
+            color: 'colorPalette.filled.contrastText',
           },
           _active: {
-            bg: 'colorPalette.solid.active',
-            color: 'colorPalette.solid.contrastText',
+            bg: 'colorPalette.filled.active',
+            color: 'colorPalette.filled.contrastText',
           },
         },
       },
@@ -145,7 +145,7 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    block: {
+    fullWidth: {
       true: {
         root: { w: '100%' },
       },
@@ -250,7 +250,7 @@ export const buttonRecipe = defineSlotRecipe({
     },
   ],
   defaultVariants: {
-    variant: 'solid',
+    variant: 'filled',
     size: 'md',
     radius: 'md',
   },

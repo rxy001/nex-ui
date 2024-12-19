@@ -1,11 +1,11 @@
 'use client'
 
 import { forwardRef, useMemo } from 'react'
-import type { Ref, MouseEvent } from 'react'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { LoadingOutlined } from '@nex-ui/icons'
 import { useEvent } from '@nex-ui/utils'
 import { nex, composeSx } from '@nex-ui/styled'
+import type { Ref, MouseEvent } from 'react'
 import { useNexContext } from '../provider'
 import {
   useStyles,
@@ -29,7 +29,7 @@ const useUtilityClasses = (ownerState: ButtonOwnerState) => {
     iconOnly,
     loading,
     disabled,
-    block,
+    fullWidth,
     classes,
   } = ownerState
 
@@ -43,7 +43,7 @@ const useUtilityClasses = (ownerState: ButtonOwnerState) => {
       iconOnly && `icon-only`,
       loading && `loading`,
       disabled && `disabled`,
-      block && `block`,
+      fullWidth && `fullWidth`,
     ],
     startIcon: [
       `icon`,
@@ -78,13 +78,13 @@ export const Button = forwardRef<
     sx,
     className,
     children,
-    variant = 'solid',
+    variant = 'filled',
     size = 'md',
     radius = size,
     iconOnly = false,
     loading = false,
     disabled = false,
-    block = false,
+    fullWidth = false,
     color = 'blue',
     startIcon: startIconProp,
     endIcon: endIconProp,
@@ -107,7 +107,7 @@ export const Button = forwardRef<
     iconOnly,
     loading,
     disabled,
-    block,
+    fullWidth,
     color,
     as: htmlElement,
   }
@@ -156,7 +156,7 @@ export const Button = forwardRef<
       sx={mergedSx}
       onClick={onClick}
       as={htmlElement}
-      className={classNames(classes.root, className)}
+      className={clsx(classes.root, className)}
       ref={ref as Ref<HTMLButtonElement>}
       disabled={disabled || loading}
       {...remainingProps}

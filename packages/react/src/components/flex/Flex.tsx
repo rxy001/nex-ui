@@ -1,6 +1,6 @@
 'use client'
 
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { nex, composeSx } from '@nex-ui/styled'
 import { useNexContext } from '../provider'
@@ -91,7 +91,7 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
       sx={mergedSx}
       ref={ref}
       as={as}
-      className={classNames(classes.root, className)}
+      className={clsx(classes.root, className)}
       {...remainingProps}
     >
       {children}
