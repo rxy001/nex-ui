@@ -71,6 +71,16 @@ export const Button = forwardRef<
   const props = useDefaultProps({
     name: 'Button',
     props: inProps,
+    defaultProps: {
+      variant: 'filled',
+      size: 'md',
+      radius: 'md',
+      iconOnly: false,
+      loading: false,
+      disabled: false,
+      fullWidth: false,
+      color: 'blue',
+    },
   })
 
   const {
@@ -78,14 +88,8 @@ export const Button = forwardRef<
     sx,
     className,
     children,
-    variant = 'filled',
-    size = 'md',
-    radius = size,
-    iconOnly = false,
-    loading = false,
-    disabled = false,
-    fullWidth = false,
-    color = 'blue',
+    loading,
+    disabled,
     startIcon: startIconProp,
     endIcon: endIconProp,
     onClick: onClickProp,
@@ -101,14 +105,6 @@ export const Button = forwardRef<
 
   const ownerState: ButtonOwnerState = {
     ...props,
-    variant,
-    size,
-    radius,
-    iconOnly,
-    loading,
-    disabled,
-    fullWidth,
-    color,
     as: htmlElement,
   }
 

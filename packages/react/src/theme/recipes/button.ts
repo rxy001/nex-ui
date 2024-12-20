@@ -1,4 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
+import { colorVariant, radiusVariant, toSlot } from './shared'
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
@@ -150,20 +151,7 @@ export const buttonRecipe = defineSlotRecipe({
         root: { w: '100%' },
       },
     },
-    radius: {
-      sm: {
-        root: { borderRadius: 'sm' },
-      },
-      md: {
-        root: { borderRadius: 'md' },
-      },
-      lg: {
-        root: { borderRadius: 'lg' },
-      },
-      full: {
-        root: { borderRadius: '9999px' },
-      },
-    },
+    radius: toSlot(radiusVariant, 'root'),
     iconOnly: {
       true: {
         root: {
@@ -172,53 +160,7 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    color: {
-      blue: {
-        root: {
-          colorPalette: 'blue',
-        },
-      },
-      gray: {
-        root: {
-          colorPalette: 'gray',
-        },
-      },
-      pink: {
-        root: {
-          colorPalette: 'pink',
-        },
-      },
-      purple: {
-        root: {
-          colorPalette: 'purple',
-        },
-      },
-      cyan: {
-        root: {
-          colorPalette: 'cyan',
-        },
-      },
-      orange: {
-        root: {
-          colorPalette: 'orange',
-        },
-      },
-      yellow: {
-        root: {
-          colorPalette: 'yellow',
-        },
-      },
-      green: {
-        root: {
-          colorPalette: 'green',
-        },
-      },
-      red: {
-        root: {
-          colorPalette: 'red',
-        },
-      },
-    },
+    color: toSlot(colorVariant, 'root'),
   },
   compoundVariants: [
     {

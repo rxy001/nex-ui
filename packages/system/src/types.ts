@@ -33,5 +33,5 @@ export interface StyleObject
     StyleObjectOverrides,
     CSSPseudos,
     CSSOthersObject {
-  colorPalette?: string
+  colorPalette?: StyleObject['color']
 }
