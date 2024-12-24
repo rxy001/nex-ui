@@ -10,9 +10,14 @@ export interface InputTextProps
     Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> &
       InputTextVariants
   > {
-  classes?: ComponentUtilityClasses<InputTextOwnerState, 'root' | 'input'>
+  classes?: ComponentUtilityClasses<
+    InputTextOwnerState,
+    'root' | 'input' | 'clearBtn'
+  >
   defaultValue?: string
   prefix?: ReactNode
   suffix?: ReactNode
   value?: string
+  clearable?: boolean
+  onClear?: () => void
 }

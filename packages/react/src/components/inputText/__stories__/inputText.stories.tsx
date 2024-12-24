@@ -42,6 +42,9 @@ const meta = {
       options: ['sm', 'md', 'lg', 'full'],
       control: 'select',
     },
+    clearable: {
+      control: 'boolean',
+    },
   },
   args: {
     variant: 'outlined',
@@ -50,9 +53,10 @@ const meta = {
     size: 'md',
     color: 'blue',
     error: false,
+    clearable: false,
   },
   render: (args) => {
-    return <InputText {...args} />
+    return <InputText placeholder="Input Text" {...args} />
   },
 } satisfies Meta<typeof InputText>
 

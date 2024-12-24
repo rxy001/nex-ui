@@ -1,7 +1,8 @@
 import clsx from 'clsx'
-import { forwardRef, useState } from 'react'
+import { forwardRef, useRef, useState } from 'react'
 import { nex, composeSx } from '@nex-ui/styled'
-import { useEvent } from '@nex-ui/utils'
+import { composeRef, useEvent } from '@nex-ui/utils'
+import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent } from 'react'
 import { useNexContext } from '../provider'
 import {
@@ -11,6 +12,7 @@ import {
   getUtilityClass,
 } from '../utils'
 import type { InputTextOwnerState, InputTextProps } from './types'
+import { Button } from '../button'
 
 const useUtilityClasses = (ownerState: InputTextOwnerState) => {
   const { prefix } = useNexContext()
@@ -32,6 +34,7 @@ const useUtilityClasses = (ownerState: InputTextOwnerState) => {
       error && 'error',
     ],
     input: ['input'],
+    clearBtn: ['clear-btn'],
   }
 
   const composedClasses = composeClasses(
@@ -57,6 +60,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       prefix,
       suffix,
       defaultValue,
+      onClear,
       onChange: onChangeProp,
       value: valueProp,
       color = 'blue',
@@ -66,6 +70,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       error = false,
       size = 'md',
       radius = size,
+      clearable = false,
       ...remainingProps
     } = props
 
@@ -80,9 +85,11 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       error,
     }
 
+    const inputRef = useRef<HTMLInputElement>(null)
+    const composedRef = composeRef<HTMLInputElement>(ref as any, inputRef)
     const [value, setValue] = useState(valueProp ?? defaultValue)
 
-    if (valueProp && valueProp !== value) {
+    if (valueProp !== undefined && valueProp !== value) {
       setValue(valueProp)
     }
 
@@ -100,11 +107,17 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       onChangeProp?.(e)
     })
 
+    const onClearValue = useEvent(() => {
+      setValue('')
+      onClear?.()
+      inputRef.current?.focus()
+    })
+
     return (
       <nex.span sx={composedSx} className={clsx(classes.root, className)}>
         {prefix}
         <nex.input
-          ref={ref}
+          ref={composedRef}
           type="text"
           value={value}
           sx={styles.input}
@@ -113,6 +126,17 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           className={classes.input}
           {...remainingProps}
         />
+        {clearable && value && (
+          <Button
+            iconOnly
+            sx={styles.clearBtn}
+            variant="link"
+            color="gray"
+            onClick={onClearValue}
+          >
+            <CloseCircleFilled className={classes.clearBtn} />
+          </Button>
+        )}
         {suffix}
       </nex.span>
     )

@@ -21,6 +21,12 @@ export const inputTextRecipe = defineSlotRecipe({
       height: '100%',
       flex: 1,
     },
+    clearBtn: {
+      padding: 0,
+      width: 'auto',
+      height: 'auto',
+      fontSize: 'inherit',
+    },
   },
   variants: {
     size: {
