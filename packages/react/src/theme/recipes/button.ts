@@ -151,7 +151,6 @@ export const buttonRecipe = defineSlotRecipe({
     iconOnly: {
       true: {
         root: {
-          borderRadius: '50%',
           p: '0.5',
         },
       },
