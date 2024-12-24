@@ -19,7 +19,6 @@ const meta = {
     variant: {
       options: ['filled', 'outlined', 'text', 'link'],
       control: 'select',
-      description: 'The age of the person',
     },
     // size: {
     //   options: ['sm', 'md', 'lg'],

@@ -55,12 +55,12 @@ export type RecipeConfig<
 > = {
   base?: StyleObject
   variants?: UniteVariants<V, E, StyleObject>
-  defaultVariants?: VariantSelection<CombineVariants<V, E>>
   compoundVariants?: Array<
     CompoundVariantsSelection<CombineVariants<V, E>> & {
       css?: StyleObject
     }
   >
+  defaultVariants?: VariantSelection<CombineVariants<V, E>>
 }
 
 export interface RecipeRuntimeFn<
@@ -88,7 +88,9 @@ type FilterIndexKey<T> = {
 export type CombineSlots<
   S,
   E extends SlotRecipeRuntimeFn | undefined,
-  Key = E extends SlotRecipeRuntimeFn ? E['__config']['slots'] : undefined,
+  Key = E extends SlotRecipeRuntimeFn
+    ? E['__config']['slots']
+    : NonNullable<unknown>,
 > = FilterIndexKey<
   S & {
     [K in keyof Key]: StyleObject
@@ -110,7 +112,6 @@ export type SlotRecipeConfig<
       [K in keyof CombineSlots<S, E>]?: StyleObject
     }
   >
-  defaultVariants?: VariantSelection<CombineVariants<V, E>>
   compoundVariants?: Array<
     CompoundVariantsSelection<CombineVariants<V, E>> & {
       css?: {
@@ -118,6 +119,7 @@ export type SlotRecipeConfig<
       }
     }
   >
+  defaultVariants?: VariantSelection<CombineVariants<V, E>>
 }
 
 export interface SlotRecipeRuntimeFn<

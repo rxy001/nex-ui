@@ -74,7 +74,7 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
 
   const styles = useStyles({ name: 'Flex', ownerState })
 
-  const mergedSx = composeSx(
+  const composedSx = composeSx(
     {
       gap,
       flexDirection: direction,
@@ -88,7 +88,7 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
 
   return (
     <nex.div
-      sx={mergedSx}
+      sx={composedSx}
       ref={ref}
       as={as}
       className={clsx(classes.root, className)}

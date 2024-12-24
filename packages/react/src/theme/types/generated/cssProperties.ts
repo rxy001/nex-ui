@@ -26,6 +26,8 @@ type VirtualColors =
 export interface NexCSSProperties extends RawCSSProperties {
   _hover?: CSSInterpolation
   _active?: CSSInterpolation
+  _focus?: CSSInterpolation
+  _focusWithin?: CSSInterpolation
   _disabled?: CSSInterpolation
   color?:
     | RawCSSProperties['color']

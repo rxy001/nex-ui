@@ -75,7 +75,7 @@ export const colors = defineSemanticTokens.colors({
         _dark: '{gray.600}',
       },
     },
-    filledd: {
+    filled: {
       fg: {
         _DEFAULT: '{gray.500}',
         _dark: '{gray.600}',

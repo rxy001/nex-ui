@@ -1,4 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
+import { colorVariant, radiusVariant, toSlot, fullWidth } from './shared'
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
@@ -6,7 +7,7 @@ export const buttonRecipe = defineSlotRecipe({
       outline: 'none',
       userSelect: 'none',
       borderWidth: 'sm',
-      borderStyle: 'filled',
+      borderStyle: 'solid',
       cursor: 'pointer',
       position: 'relative',
       transition: '.3s',
@@ -145,25 +146,8 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    fullWidth: {
-      true: {
-        root: { w: '100%' },
-      },
-    },
-    radius: {
-      sm: {
-        root: { borderRadius: 'sm' },
-      },
-      md: {
-        root: { borderRadius: 'md' },
-      },
-      lg: {
-        root: { borderRadius: 'lg' },
-      },
-      full: {
-        root: { borderRadius: '9999px' },
-      },
-    },
+    fullWidth: toSlot(fullWidth, 'root'),
+    radius: toSlot(radiusVariant, 'root'),
     iconOnly: {
       true: {
         root: {
@@ -172,53 +156,7 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    color: {
-      blue: {
-        root: {
-          colorPalette: 'blue',
-        },
-      },
-      gray: {
-        root: {
-          colorPalette: 'gray',
-        },
-      },
-      pink: {
-        root: {
-          colorPalette: 'pink',
-        },
-      },
-      purple: {
-        root: {
-          colorPalette: 'purple',
-        },
-      },
-      cyan: {
-        root: {
-          colorPalette: 'cyan',
-        },
-      },
-      orange: {
-        root: {
-          colorPalette: 'orange',
-        },
-      },
-      yellow: {
-        root: {
-          colorPalette: 'yellow',
-        },
-      },
-      green: {
-        root: {
-          colorPalette: 'green',
-        },
-      },
-      red: {
-        root: {
-          colorPalette: 'red',
-        },
-      },
-    },
+    color: toSlot(colorVariant, 'root'),
   },
   compoundVariants: [
     {

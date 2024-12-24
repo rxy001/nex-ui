@@ -12,7 +12,6 @@ import {
   useDefaultProps,
   composeClasses,
   getUtilityClass,
-  WaterWave,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
 
@@ -149,11 +148,11 @@ export const Button = forwardRef<
     )
   }, [styles.endIcon, endIconProp, classes.endIcon])
 
-  const mergedSx = composeSx(styles.root, sx)
+  const composedSx = composeSx(styles.root, sx)
 
-  const childNode = (
+  return (
     <nex.button
-      sx={mergedSx}
+      sx={composedSx}
       onClick={onClick}
       as={htmlElement}
       className={clsx(classes.root, className)}
@@ -166,8 +165,6 @@ export const Button = forwardRef<
       {endIcon}
     </nex.button>
   )
-
-  return <WaterWave disabled={loading || disabled}>{childNode}</WaterWave>
 })
 
 Button.displayName = 'Button'

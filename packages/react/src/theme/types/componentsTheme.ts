@@ -1,10 +1,17 @@
-import type { ButtonRecipe, FlexRecipe, IconRecipe } from '../recipes'
+import type {
+  ButtonRecipe,
+  FlexRecipe,
+  IconRecipe,
+  InputTextRecipe,
+} from '../recipes'
 import type {
   ButtonProps,
   ButtonOwnerState,
   IconOwnerState,
   FlexOwnerState,
   FlexProps,
+  InputTextOwnerState,
+  InputTextProps,
 } from '../../components'
 import type { InnerIconProps } from '../../components/icon/types'
 import type { ComponentThemeFn, ComponentThemeObject } from './utils'
@@ -27,6 +34,12 @@ export type ComponentsTheme = {
       | ComponentThemeObject<FlexRecipe>
       | ComponentThemeFn<FlexOwnerState, FlexRecipe>
     defaultProps?: FlexProps
+  }
+  InputText?: {
+    styleOverrides?:
+      | ComponentThemeObject<InputTextRecipe>
+      | ComponentThemeFn<InputTextOwnerState, InputTextRecipe>
+    defaultProps?: InputTextProps
   }
 }
 

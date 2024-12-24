@@ -40,7 +40,7 @@ const createNexImpl = (tag: any) => {
       return <FinalTag {...newProps} />
     }
 
-    let { className } = props
+    let { className = '' } = props
     let registeredStyles: any[] = []
 
     if (typeof props.className === 'string') {
