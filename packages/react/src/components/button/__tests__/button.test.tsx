@@ -7,15 +7,15 @@ import type { ButtonProps } from '../types'
 import { buttonClasses } from '../buttonClasses'
 
 describe('Button', () => {
-  mountTest(Button)
-  refTest(Button)
+  mountTest(<Button />)
+  refTest(<Button />)
 
   it('renders correctly', () => {
     const { container } = renderWithNexProvider(<Button>Button</Button>)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it('should render with the root, variantSolid, sizeMd, radiusMd, and colorBlue buttonClasses but no others', () => {
+  it('should render with the root, variant-filled, size-md, radius-md, and color-blue classes but no others', () => {
     const { container } = renderWithNexProvider(<Button>Button</Button>)
 
     const button = container.firstElementChild
@@ -44,7 +44,7 @@ describe('Button', () => {
     expect(button).not.toHaveClass(buttonClasses['icon-only'])
     expect(button).not.toHaveClass(buttonClasses.loading)
     expect(button).not.toHaveClass(buttonClasses.disabled)
-    expect(button).not.toHaveClass(buttonClasses.fullWidth)
+    expect(button).not.toHaveClass(buttonClasses['full-width'])
   })
 
   it('startIcon and endIcon should have icon class', () => {
@@ -224,6 +224,26 @@ describe('Button', () => {
     expect(getByTestId('radius-full')).toHaveClass(buttonClasses['radius-full'])
   })
 
+  it('should add the appropriate radius class to root element based on iconOnly prop', () => {
+    const { getByTestId } = renderWithNexProvider(
+      <Button iconOnly data-testid="icon-only">
+        Button
+      </Button>,
+    )
+
+    expect(getByTestId('icon-only')).toHaveClass(buttonClasses['icon-only'])
+  })
+
+  it('should add the appropriate radius class to root element based on fullWidth prop', () => {
+    const { getByTestId } = renderWithNexProvider(
+      <Button fullWidth data-testid="full-width">
+        Button
+      </Button>,
+    )
+
+    expect(getByTestId('full-width')).toHaveClass(buttonClasses['full-width'])
+  })
+
   it('should trigger onClick function', () => {
     const onClick = jest.fn()
     const { container } = renderWithNexProvider(<Button onClick={onClick} />)
@@ -262,7 +282,7 @@ describe('Button', () => {
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it('should renders with start icon', () => {
+  it('should render with start icon', () => {
     const { getByTestId } = renderWithNexProvider(
       <Button startIcon={<span data-testid="start-icon">Icon</span>}>
         Button
@@ -274,7 +294,7 @@ describe('Button', () => {
     expect(startIcon.parentElement).toHaveClass(buttonClasses['start-icon'])
   })
 
-  it('should renders with end icon', () => {
+  it('should render with end icon', () => {
     const { getByTestId } = renderWithNexProvider(
       <Button endIcon={<span data-testid="end-icon">Icon</span>}>
         Button

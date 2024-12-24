@@ -30,7 +30,7 @@ const useUtilityClasses = (ownerState: InputTextOwnerState) => {
       `size-${size}`,
       `color-${color}`,
       disabled && 'disabled',
-      fullWidth && 'fullWidth',
+      fullWidth && 'full-width',
       error && 'error',
     ],
     input: ['input'],
@@ -56,9 +56,9 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
 
     const {
       sx,
-      className,
       prefix,
       suffix,
+      className,
       defaultValue,
       onClear,
       onChange: onChangeProp,
@@ -126,15 +126,16 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           className={classes.input}
           {...remainingProps}
         />
-        {clearable && value && (
+        {clearable && value && !disabled && (
           <Button
             iconOnly
             sx={styles.clearBtn}
             variant="link"
             color="gray"
             onClick={onClearValue}
+            className={classes.clearBtn}
           >
-            <CloseCircleFilled className={classes.clearBtn} />
+            <CloseCircleFilled />
           </Button>
         )}
         {suffix}

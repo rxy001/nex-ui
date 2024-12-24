@@ -1,12 +1,12 @@
-import type { ComponentType } from 'react'
+import type { ReactNode } from 'react'
 import { it, expect } from '@jest/globals'
 import { renderWithNexProvider } from './renderWithProvider'
 
-export const mountTest = (Component: ComponentType) => {
+export const mountTest = (Component: ReactNode) => {
   it(`component could be updated and unmounted without errors`, () => {
-    const { unmount, rerender } = renderWithNexProvider(<Component />)
+    const { unmount, rerender } = renderWithNexProvider(Component)
     expect(() => {
-      rerender(<Component />)
+      rerender(Component)
       unmount()
     }).not.toThrow()
   })

@@ -1,12 +1,11 @@
 import { generateUtilityClasses } from '../utils'
 
 // 用于单元测试
-export const buttonClasses = generateUtilityClasses('nui-btn', [
+export const inputTextClasses = generateUtilityClasses('nui-input-text', [
   // ---------root---------
   'root',
-  // "link" | "text" | "filled" | "outlined"
-  'variant-link',
-  'variant-text',
+  // "borderless" | "filled" | "outlined"
+  'variant-borderless',
   'variant-filled',
   'variant-outlined',
 
@@ -32,19 +31,11 @@ export const buttonClasses = generateUtilityClasses('nui-btn', [
   'size-md',
   'size-lg',
 
-  'icon-only',
-  'loading',
   'disabled',
   'full-width',
+  'error',
   // ---------root---------
 
-  'icon',
-  'start-icon',
-  'end-icon',
-
-  'icon-size-sm',
-  'icon-size-md',
-  'icon-size-lg',
-
-  'icon-loading',
+  'input',
+  'clear-btn',
 ])

@@ -42,7 +42,7 @@ const useUtilityClasses = (ownerState: ButtonOwnerState) => {
       iconOnly && `icon-only`,
       loading && `loading`,
       disabled && `disabled`,
-      fullWidth && `fullWidth`,
+      fullWidth && `full-width`,
     ],
     startIcon: [
       `icon`,

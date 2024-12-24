@@ -1,12 +1,14 @@
 'use client'
 
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { createIcon } from './createIcon'
 import type { IconProps } from './types'
 
 export const Icon = forwardRef<SVGElement, IconProps>((inProps, ref) => {
   const { component, ...props } = inProps
-  const InnerIcon = createIcon(component)
+
+  const InnerIcon = useMemo(() => createIcon(component), [component])
+
   return <InnerIcon {...props} ref={ref} />
 })
 
