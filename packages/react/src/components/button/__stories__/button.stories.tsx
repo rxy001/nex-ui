@@ -51,7 +51,7 @@ const meta = {
           <Button {...args} size="sm" />
           <Button {...args} size="sm" color="purple" />
           <Button {...args} size="sm" color="gray" />
-          <Button {...args} size="sm" color="red" />
+          <Button {...args} size="sm" color="rose" />
           <Button {...args} size="sm" color="cyan" />
           <Button {...args} size="sm" color="pink" />
           <Button {...args} size="sm" color="yellow" />
@@ -62,7 +62,7 @@ const meta = {
           <Button {...args} size="md" />
           <Button {...args} size="md" color="purple" />
           <Button {...args} size="md" color="gray" />
-          <Button {...args} size="md" color="red" />
+          <Button {...args} size="md" color="rose" />
           <Button {...args} size="md" color="cyan" />
           <Button {...args} size="md" color="pink" />
           <Button {...args} size="md" color="yellow" />
@@ -73,7 +73,7 @@ const meta = {
           <Button {...args} size="lg" />
           <Button {...args} size="lg" color="purple" />
           <Button {...args} size="lg" color="gray" />
-          <Button {...args} size="lg" color="red" />
+          <Button {...args} size="lg" color="rose" />
           <Button {...args} size="lg" color="cyan" />
           <Button {...args} size="lg" color="pink" />
           <Button {...args} size="lg" color="yellow" />

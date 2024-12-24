@@ -64,7 +64,7 @@ const meta = {
         <Button>Button</Button>
         <Button color="purple">Button</Button>
         <Button color="gray">Button</Button>
-        <Button color="red">Button</Button>
+        <Button color="rose">Button</Button>
         <Button color="cyan">Button</Button>
         <Button color="pink">Button</Button>
         <Button color="yellow">Button</Button>

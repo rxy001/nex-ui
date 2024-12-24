@@ -26,7 +26,7 @@ const meta = {
         'orange',
         'cyan',
         'gray',
-        'red',
+        'rose',
         'green',
         'pink',
         'purple',

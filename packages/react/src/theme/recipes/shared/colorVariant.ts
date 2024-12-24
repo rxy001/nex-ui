@@ -23,7 +23,7 @@ export const colorVariant = {
   green: {
     colorPalette: 'green',
   },
-  red: {
-    colorPalette: 'red',
+  rose: {
+    colorPalette: 'rose',
   },
 }

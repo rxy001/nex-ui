@@ -103,6 +103,17 @@ export interface Tokens {
     | 'green.800'
     | 'green.900'
     | 'green.contrastText'
+    | 'rose.50'
+    | 'rose.100'
+    | 'rose.200'
+    | 'rose.300'
+    | 'rose.400'
+    | 'rose.500'
+    | 'rose.600'
+    | 'rose.700'
+    | 'rose.800'
+    | 'rose.900'
+    | 'rose.contrastText'
   sizes:
     | '1'
     | '2'
@@ -282,6 +293,19 @@ export interface Colors {
     700?: '#15803d'
     800?: '#166534'
     900?: '#14532d'
+    contrastText?: '#fff'
+  }
+  rose?: {
+    50?: '#fff1f2'
+    100?: '#ffe4e6'
+    200?: '#fecdd3'
+    300?: '#fda4af'
+    400?: '#fb7185'
+    500?: '#f43f5e'
+    600?: '#e11d48'
+    700?: '#be123c'
+    800?: '#9f1239'
+    900?: '#881337'
     contrastText?: '#fff'
   }
 }

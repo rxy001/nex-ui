@@ -119,62 +119,62 @@ export const colors = defineSemanticTokens.colors({
       },
     },
   },
-  red: {
+  rose: {
     outlined: {
       fg: {
-        _DEFAULT: '{red.500}',
-        _dark: '{red.600}',
+        _DEFAULT: '{rose.500}',
+        _dark: '{rose.600}',
       },
       hover: {
-        _DEFAULT: '{red.400}',
-        _dark: '{red.500}',
+        _DEFAULT: '{rose.400}',
+        _dark: '{rose.500}',
       },
       active: {
-        _DEFAULT: '{red.600}',
-        _dark: '{red.600}',
+        _DEFAULT: '{rose.600}',
+        _dark: '{rose.600}',
       },
     },
     filled: {
       fg: {
-        _DEFAULT: '{red.500}',
-        _dark: '{red.600}',
+        _DEFAULT: '{rose.500}',
+        _dark: '{rose.600}',
       },
       hover: {
-        _DEFAULT: '{red.400}',
-        _dark: '{red.500}',
+        _DEFAULT: '{rose.400}',
+        _dark: '{rose.500}',
       },
       active: {
-        _DEFAULT: '{red.600}',
-        _dark: '{red.600}',
+        _DEFAULT: '{rose.600}',
+        _dark: '{rose.600}',
       },
       contrastText: 'white',
     },
     text: {
       fg: {
-        _DEFAULT: '{red.500}',
-        _dark: '{red.600}',
+        _DEFAULT: '{rose.500}',
+        _dark: '{rose.600}',
       },
       hover: {
-        _DEFAULT: '{red.100}',
-        _dark: '{red.900}',
+        _DEFAULT: '{rose.100}',
+        _dark: '{rose.900}',
       },
       active: {
-        _DEFAULT: '{red.200}',
-        _dark: '{red.800}',
+        _DEFAULT: '{rose.200}',
+        _dark: '{rose.800}',
       },
     },
     link: {
       fg: {
-        _DEFAULT: '{red.500}',
-        _dark: '{red.600}',
+        _DEFAULT: '{rose.500}',
+        _dark: '{rose.600}',
       },
       hover: {
-        _DEFAULT: '{red.400}',
-        _dark: '{red.500}',
+        _DEFAULT: '{rose.400}',
+        _dark: '{rose.500}',
       },
       active: {
-        _DEFAULT: '{red.600}',
-        _dark: '{red.600}',
+        _DEFAULT: '{rose.600}',
+        _dark: '{rose.600}',
       },
     },
   },

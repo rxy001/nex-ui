@@ -16,10 +16,10 @@ export const buttonClasses = generateUtilityClasses('nui-btn', [
   'radius-lg',
   'radius-full',
 
-  // "blue" | "gray" | "pink" | "purple" | "cyan" | "yellow" | "orange" | "red" | "green"
+  // "blue" | "gray" | "pink" | "purple" | "cyan" | "yellow" | "orange" | "rose" | "green"
   'color-gray',
   'color-green',
-  'color-red',
+  'color-rose',
   'color-yellow',
   'color-blue',
   'color-pink',
