@@ -47,38 +47,38 @@ const meta = {
   render: (args) => {
     return (
       <Flex gap={50} direction="column">
-        <Flex gap={10} direction={args.fullWidth ? 'column' : 'row'}>
-          <Button {...args} size="sm" />
-          <Button {...args} size="sm" color="purple" />
-          <Button {...args} size="sm" color="gray" />
-          <Button {...args} size="sm" color="rose" />
-          <Button {...args} size="sm" color="cyan" />
-          <Button {...args} size="sm" color="pink" />
-          <Button {...args} size="sm" color="yellow" />
-          <Button {...args} size="sm" color="green" />
-          <Button {...args} size="sm" color="orange" />
+        <Flex key="sm" gap={10} direction={args.fullWidth ? 'column' : 'row'}>
+          <Button {...args} key="blue" size="sm" />
+          <Button {...args} key="purple" size="sm" color="purple" />
+          <Button {...args} key="gray" size="sm" color="gray" />
+          <Button {...args} key="rose" size="sm" color="rose" />
+          <Button {...args} key="cyan" size="sm" color="cyan" />
+          <Button {...args} key="pink" size="sm" color="pink" />
+          <Button {...args} key="yellow" size="sm" color="yellow" />
+          <Button {...args} key="green" size="sm" color="green" />
+          <Button {...args} key="orange" size="sm" color="orange" />
         </Flex>
-        <Flex gap={10} direction={args.fullWidth ? 'column' : 'row'}>
-          <Button {...args} size="md" />
-          <Button {...args} size="md" color="purple" />
-          <Button {...args} size="md" color="gray" />
-          <Button {...args} size="md" color="rose" />
-          <Button {...args} size="md" color="cyan" />
-          <Button {...args} size="md" color="pink" />
-          <Button {...args} size="md" color="yellow" />
-          <Button {...args} size="md" color="green" />
-          <Button {...args} size="md" color="orange" />
+        <Flex key="md" gap={10} direction={args.fullWidth ? 'column' : 'row'}>
+          <Button {...args} key="blue" size="md" />
+          <Button {...args} key="purple" size="md" color="purple" />
+          <Button {...args} key="gray" size="md" color="gray" />
+          <Button {...args} key="rose" size="md" color="rose" />
+          <Button {...args} key="cyan" size="md" color="cyan" />
+          <Button {...args} key="pink" size="md" color="pink" />
+          <Button {...args} key="yellow" size="md" color="yellow" />
+          <Button {...args} key="green" size="md" color="green" />
+          <Button {...args} key="orange" size="md" color="orange" />
         </Flex>
-        <Flex gap={10} direction={args.fullWidth ? 'column' : 'row'}>
-          <Button {...args} size="lg" />
-          <Button {...args} size="lg" color="purple" />
-          <Button {...args} size="lg" color="gray" />
-          <Button {...args} size="lg" color="rose" />
-          <Button {...args} size="lg" color="cyan" />
-          <Button {...args} size="lg" color="pink" />
-          <Button {...args} size="lg" color="yellow" />
-          <Button {...args} size="lg" color="green" />
-          <Button {...args} size="lg" color="orange" />
+        <Flex key="lg" gap={10} direction={args.fullWidth ? 'column' : 'row'}>
+          <Button {...args} key="blue" size="lg" />
+          <Button {...args} key="purple" size="lg" color="purple" />
+          <Button {...args} key="gray" size="lg" color="gray" />
+          <Button {...args} key="rose" size="lg" color="rose" />
+          <Button {...args} key="cyan" size="lg" color="cyan" />
+          <Button {...args} key="pink" size="lg" color="pink" />
+          <Button {...args} key="yellow" size="lg" color="yellow" />
+          <Button {...args} key="green" size="lg" color="green" />
+          <Button {...args} key="orange" size="lg" color="orange" />
         </Flex>
       </Flex>
     )

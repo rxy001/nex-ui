@@ -58,18 +58,37 @@ const meta = {
       },
     },
   },
+  args: {
+    gap: '20px',
+  },
   render: (args) => {
     return (
       <Flex {...args} sx={{ height: 200 }}>
-        <Button>Button</Button>
-        <Button color="purple">Button</Button>
-        <Button color="gray">Button</Button>
-        <Button color="rose">Button</Button>
-        <Button color="cyan">Button</Button>
-        <Button color="pink">Button</Button>
-        <Button color="yellow">Button</Button>
-        <Button color="green">Button</Button>
-        <Button color="orange">Button</Button>
+        <Button key="blue">Button</Button>
+        <Button key="purple" color="purple">
+          Button
+        </Button>
+        <Button key="gray" color="gray">
+          Button
+        </Button>
+        <Button key="rose" color="rose">
+          Button
+        </Button>
+        <Button key="cyan" color="cyan">
+          Button
+        </Button>
+        <Button key="pink" color="pink">
+          Button
+        </Button>
+        <Button key="yellow" color="yellow">
+          Button
+        </Button>
+        <Button key="green" color="green">
+          Button
+        </Button>
+        <Button key="orange" color="orange">
+          Button
+        </Button>
       </Flex>
     )
   },
@@ -86,6 +105,5 @@ export const Basic: Story = {
 export const Column: Story = {
   args: {
     direction: 'column',
-    gap: '20px',
   },
 }
