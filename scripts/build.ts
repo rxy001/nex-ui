@@ -62,7 +62,9 @@ async function generateModules({ external, tsconfig, name }: SharedConfigs) {
     external,
     input: './src/index.ts',
     plugins: [
-      svgr(),
+      svgr({
+        ref: true,
+      }),
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       typescript({
         tsconfig,

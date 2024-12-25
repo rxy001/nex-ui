@@ -3,9 +3,8 @@ import { describe, it, expect } from '@jest/globals'
 import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
 import { Icon } from '../Icon'
 
-const HeartSvg = forwardRef((props: any, ref: any) => (
+const HeartSvg = forwardRef<SVGSVGElement>((_, ref) => (
   <svg
-    {...props}
     ref={ref}
     width="1em"
     height="1em"

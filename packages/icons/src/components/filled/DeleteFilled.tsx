@@ -1,10 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Delete from '../../svg/filled/delete.svg'
 import type { IconProps } from '../../types'
 
-export const DeleteFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
-  const { createIcon } = useNexIcons()
-  const Icon = createIcon(Delete, { className: 'delete-filled' })
-  return <Icon {...props} ref={ref} />
-})
+export const DeleteFilled = forwardRef<SVGSVGElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = useMemo(
+      () => createIcon(Delete, { className: 'delete-filled' }),
+      [createIcon],
+    )
+    return <Icon {...props} ref={ref} />
+  },
+)

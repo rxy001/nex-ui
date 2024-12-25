@@ -1,14 +1,16 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import DeploymentUnit from '../../svg/outlined/deployment-unit.svg'
 import type { IconProps } from '../../types'
 
-export const DeploymentUnitOutlined = forwardRef<SVGAElement, IconProps>(
+export const DeploymentUnitOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(DeploymentUnit, {
-      className: 'deployment-unit-outlined',
-    })
+    const Icon = useMemo(
+      () =>
+        createIcon(DeploymentUnit, { className: 'deployment-unit-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

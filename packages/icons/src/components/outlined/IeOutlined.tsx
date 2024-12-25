@@ -1,10 +1,13 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Ie from '../../svg/outlined/ie.svg'
 import type { IconProps } from '../../types'
 
-export const IeOutlined = forwardRef<SVGAElement, IconProps>((props, ref) => {
+export const IeOutlined = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   const { createIcon } = useNexIcons()
-  const Icon = createIcon(Ie, { className: 'ie-outlined' })
+  const Icon = useMemo(
+    () => createIcon(Ie, { className: 'ie-outlined' }),
+    [createIcon],
+  )
   return <Icon {...props} ref={ref} />
 })

@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import LineHeight from '../../svg/outlined/line-height.svg'
 import type { IconProps } from '../../types'
 
-export const LineHeightOutlined = forwardRef<SVGAElement, IconProps>(
+export const LineHeightOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(LineHeight, { className: 'line-height-outlined' })
+    const Icon = useMemo(
+      () => createIcon(LineHeight, { className: 'line-height-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

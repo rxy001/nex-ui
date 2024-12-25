@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import { forwardRef } from 'react'
-import { styled } from '@nex-ui/styled'
+import { composeSx, styled } from '@nex-ui/styled'
 import type { ComponentType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
 import {
@@ -47,7 +47,8 @@ export const createIcon = (
     ...defaultProps
   }: InnerIconProps | undefined = {},
 ) => {
-  // @ts-ignore
+  const Icon = styled(svgComponent)()
+
   return forwardRef((inProps: InnerIconProps, ref: Ref<SVGElement>) => {
     const props = useDefaultProps({
       name: 'Icon',
@@ -55,21 +56,19 @@ export const createIcon = (
     })
 
     const {
+      sx,
       color,
       className,
       spin = false,
       fontSize = 'md',
       width = '1em',
       height = '1em',
-      classes: _classse,
       ...remainingProps
     } = props
 
     const ownerState: IconOwnerState = {
       ...props,
-      color,
       spin,
-      className,
       fontSize,
       width,
       height,
@@ -83,16 +82,20 @@ export const createIcon = (
 
     const classes = useUtilityClasses(ownerState)
 
-    const Icon = styled(svgComponent)({
-      color,
-      width,
-      height,
-      fs: fontSize,
-      ...styles,
-    })
+    const composed = composeSx(
+      {
+        color,
+        width,
+        height,
+        fs: fontSize,
+        ...styles,
+      },
+      sx,
+    )
 
     return (
       <Icon
+        sx={composed}
         ref={ref}
         className={clsx(classes.root, defaultClassName, className)}
         {...remainingProps}

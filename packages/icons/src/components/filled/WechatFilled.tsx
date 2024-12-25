@@ -1,10 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Wechat from '../../svg/filled/wechat.svg'
 import type { IconProps } from '../../types'
 
-export const WechatFilled = forwardRef<SVGAElement, IconProps>((props, ref) => {
-  const { createIcon } = useNexIcons()
-  const Icon = createIcon(Wechat, { className: 'wechat-filled' })
-  return <Icon {...props} ref={ref} />
-})
+export const WechatFilled = forwardRef<SVGSVGElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = useMemo(
+      () => createIcon(Wechat, { className: 'wechat-filled' }),
+      [createIcon],
+    )
+    return <Icon {...props} ref={ref} />
+  },
+)

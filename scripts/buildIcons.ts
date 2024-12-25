@@ -87,7 +87,7 @@ async function run() {
 
     if (!existsSync(tsxPath)) {
       const tsx =
-        "import { forwardRef } from 'react'" +
+        "import { forwardRef, useMemo } from 'react'" +
         '\n' +
         "import { useNexIcons } from '../../utils/Context'" +
         '\n' +
@@ -96,17 +96,17 @@ async function run() {
         "import type { IconProps } from '../../types'" +
         '\n' +
         '\n' +
-        `export const ${iconComponentName} = forwardRef<SVGAElement, IconProps>(` +
+        `export const ${iconComponentName} = forwardRef<SVGSVGElement, IconProps>(` +
         '\n' +
         '  (props, ref) => {' +
         '\n' +
         '    const { createIcon } = useNexIcons()' +
         '\n' +
-        `    const Icon = createIcon(${svgComponentName}${
+        `    const Icon = useMemo(() => createIcon(${svgComponentName}${
           options[iconComponentName]
             ? `,${JSON.stringify({ ...options[iconComponentName], ...defaultProps })}`
             : `,${JSON.stringify(defaultProps)}`
-        })` +
+        }), [createIcon])` +
         '\n' +
         '    return <Icon {...props} ref={ref} />' +
         '\n' +

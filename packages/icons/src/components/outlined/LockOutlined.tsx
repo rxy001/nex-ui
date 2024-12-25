@@ -1,10 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Lock from '../../svg/outlined/lock.svg'
 import type { IconProps } from '../../types'
 
-export const LockOutlined = forwardRef<SVGAElement, IconProps>((props, ref) => {
-  const { createIcon } = useNexIcons()
-  const Icon = createIcon(Lock, { className: 'lock-outlined' })
-  return <Icon {...props} ref={ref} />
-})
+export const LockOutlined = forwardRef<SVGSVGElement, IconProps>(
+  (props, ref) => {
+    const { createIcon } = useNexIcons()
+    const Icon = useMemo(
+      () => createIcon(Lock, { className: 'lock-outlined' }),
+      [createIcon],
+    )
+    return <Icon {...props} ref={ref} />
+  },
+)

@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Youtube from '../../svg/filled/youtube.svg'
 import type { IconProps } from '../../types'
 
-export const YoutubeFilled = forwardRef<SVGAElement, IconProps>(
+export const YoutubeFilled = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Youtube, { className: 'youtube-filled' })
+    const Icon = useMemo(
+      () => createIcon(Youtube, { className: 'youtube-filled' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

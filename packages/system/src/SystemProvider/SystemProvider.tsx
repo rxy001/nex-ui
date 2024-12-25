@@ -13,24 +13,46 @@ import type { SystemProviderProps } from './types'
 
 export const SystemProvider = ({
   children,
+  cssVarsPrefix,
+  aliases,
+  tokens,
+  semanticTokens,
+  scales,
+  breakpoints,
+  selectors,
   defaultMode = 'system',
   modeStorageKey = 'color-scheme',
   colorSchemeSelector = 'data',
-  ...config
 }: SystemProviderProps) => {
   const getColorSchemeSelector = useMemo(
     () => createGetColorSchemeSelector(colorSchemeSelector),
     [colorSchemeSelector],
   )
 
-  // eslint-disable-next-line no-param-reassign
-  config.selectors = {
-    dark: getColorSchemeSelector('dark'),
-    light: getColorSchemeSelector('light'),
-    ...config.selectors,
-  }
-
-  const { css, getGlobalCssVars } = createSystem(config)
+  const { css, getGlobalCssVars } = useMemo(() => {
+    return createSystem({
+      cssVarsPrefix,
+      aliases,
+      tokens,
+      semanticTokens,
+      scales,
+      breakpoints,
+      selectors: {
+        dark: getColorSchemeSelector('dark'),
+        light: getColorSchemeSelector('light'),
+        ...selectors,
+      },
+    })
+  }, [
+    aliases,
+    breakpoints,
+    cssVarsPrefix,
+    getColorSchemeSelector,
+    scales,
+    selectors,
+    semanticTokens,
+    tokens,
+  ])
 
   const globalStyles = useMemo(() => {
     if (!getGlobalCssVars) {

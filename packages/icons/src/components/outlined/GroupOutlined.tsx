@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Group from '../../svg/outlined/group.svg'
 import type { IconProps } from '../../types'
 
-export const GroupOutlined = forwardRef<SVGAElement, IconProps>(
+export const GroupOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Group, { className: 'group-outlined' })
+    const Icon = useMemo(
+      () => createIcon(Group, { className: 'group-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

@@ -28,7 +28,7 @@ function InnerProvider({ components, prefix, children }: InnerProviderProps) {
 function TopLevelProvider(props: NexProviderProps) {
   const {
     children,
-    theme: { components, ...config } = {},
+    theme = {},
     prefix = 'nui',
     defaultMode = 'system',
     modeStorageKey = 'nui-color-scheme',
@@ -36,8 +36,9 @@ function TopLevelProvider(props: NexProviderProps) {
   } = props
 
   const mergedSysConfig = useMemo(() => {
+    const { components: _components, ...config } = theme
     return merge({ cssVarsPrefix: prefix }, defaultConfig, config)
-  }, [prefix, config])
+  }, [prefix, theme])
 
   return (
     <SystemProvider
@@ -47,7 +48,7 @@ function TopLevelProvider(props: NexProviderProps) {
       {...mergedSysConfig}
     >
       <NexIconsProvider createIcon={createIcon}>
-        <InnerProvider components={components} prefix={prefix}>
+        <InnerProvider components={theme.components} prefix={prefix}>
           {children}
         </InnerProvider>
       </NexIconsProvider>

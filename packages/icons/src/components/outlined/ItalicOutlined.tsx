@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Italic from '../../svg/outlined/italic.svg'
 import type { IconProps } from '../../types'
 
-export const ItalicOutlined = forwardRef<SVGAElement, IconProps>(
+export const ItalicOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Italic, { className: 'italic-outlined' })
+    const Icon = useMemo(
+      () => createIcon(Italic, { className: 'italic-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

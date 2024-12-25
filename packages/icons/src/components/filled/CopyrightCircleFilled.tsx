@@ -1,14 +1,16 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import CopyrightCircle from '../../svg/filled/copyright-circle.svg'
 import type { IconProps } from '../../types'
 
-export const CopyrightCircleFilled = forwardRef<SVGAElement, IconProps>(
+export const CopyrightCircleFilled = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(CopyrightCircle, {
-      className: 'copyright-circle-filled',
-    })
+    const Icon = useMemo(
+      () =>
+        createIcon(CopyrightCircle, { className: 'copyright-circle-filled' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

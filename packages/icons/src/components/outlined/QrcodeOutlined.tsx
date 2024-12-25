@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Qrcode from '../../svg/outlined/qrcode.svg'
 import type { IconProps } from '../../types'
 
-export const QrcodeOutlined = forwardRef<SVGAElement, IconProps>(
+export const QrcodeOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Qrcode, { className: 'qrcode-outlined' })
+    const Icon = useMemo(
+      () => createIcon(Qrcode, { className: 'qrcode-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

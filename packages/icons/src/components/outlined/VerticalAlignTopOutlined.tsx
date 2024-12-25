@@ -1,14 +1,18 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import VerticalAlignTop from '../../svg/outlined/vertical-align-top.svg'
 import type { IconProps } from '../../types'
 
-export const VerticalAlignTopOutlined = forwardRef<SVGAElement, IconProps>(
+export const VerticalAlignTopOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(VerticalAlignTop, {
-      className: 'vertical-align-top-outlined',
-    })
+    const Icon = useMemo(
+      () =>
+        createIcon(VerticalAlignTop, {
+          className: 'vertical-align-top-outlined',
+        }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

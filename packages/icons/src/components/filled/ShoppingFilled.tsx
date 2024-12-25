@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Shopping from '../../svg/filled/shopping.svg'
 import type { IconProps } from '../../types'
 
-export const ShoppingFilled = forwardRef<SVGAElement, IconProps>(
+export const ShoppingFilled = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Shopping, { className: 'shopping-filled' })
+    const Icon = useMemo(
+      () => createIcon(Shopping, { className: 'shopping-filled' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

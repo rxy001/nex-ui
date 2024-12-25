@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import OpenAI from '../../svg/outlined/open-a-i.svg'
 import type { IconProps } from '../../types'
 
-export const OpenAIOutlined = forwardRef<SVGAElement, IconProps>(
+export const OpenAIOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(OpenAI, { className: 'open-a-i-outlined' })
+    const Icon = useMemo(
+      () => createIcon(OpenAI, { className: 'open-a-i-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

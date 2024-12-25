@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Number from '../../svg/outlined/number.svg'
 import type { IconProps } from '../../types'
 
-export const NumberOutlined = forwardRef<SVGAElement, IconProps>(
+export const NumberOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(Number, { className: 'number-outlined' })
+    const Icon = useMemo(
+      () => createIcon(Number, { className: 'number-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

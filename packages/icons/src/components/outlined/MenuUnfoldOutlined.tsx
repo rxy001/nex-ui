@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import MenuUnfold from '../../svg/outlined/menu-unfold.svg'
 import type { IconProps } from '../../types'
 
-export const MenuUnfoldOutlined = forwardRef<SVGAElement, IconProps>(
+export const MenuUnfoldOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(MenuUnfold, { className: 'menu-unfold-outlined' })
+    const Icon = useMemo(
+      () => createIcon(MenuUnfold, { className: 'menu-unfold-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

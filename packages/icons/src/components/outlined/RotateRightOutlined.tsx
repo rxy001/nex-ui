@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import RotateRight from '../../svg/outlined/rotate-right.svg'
 import type { IconProps } from '../../types'
 
-export const RotateRightOutlined = forwardRef<SVGAElement, IconProps>(
+export const RotateRightOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(RotateRight, { className: 'rotate-right-outlined' })
+    const Icon = useMemo(
+      () => createIcon(RotateRight, { className: 'rotate-right-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

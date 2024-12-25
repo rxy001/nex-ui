@@ -1,14 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import FastBackward from '../../svg/outlined/fast-backward.svg'
 import type { IconProps } from '../../types'
 
-export const FastBackwardOutlined = forwardRef<SVGAElement, IconProps>(
+export const FastBackwardOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(FastBackward, {
-      className: 'fast-backward-outlined',
-    })
+    const Icon = useMemo(
+      () => createIcon(FastBackward, { className: 'fast-backward-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )

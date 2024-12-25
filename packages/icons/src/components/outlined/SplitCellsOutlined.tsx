@@ -1,12 +1,15 @@
-import { forwardRef } from 'react'
+import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import SplitCells from '../../svg/outlined/split-cells.svg'
 import type { IconProps } from '../../types'
 
-export const SplitCellsOutlined = forwardRef<SVGAElement, IconProps>(
+export const SplitCellsOutlined = forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     const { createIcon } = useNexIcons()
-    const Icon = createIcon(SplitCells, { className: 'split-cells-outlined' })
+    const Icon = useMemo(
+      () => createIcon(SplitCells, { className: 'split-cells-outlined' }),
+      [createIcon],
+    )
     return <Icon {...props} ref={ref} />
   },
 )
