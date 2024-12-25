@@ -84,44 +84,50 @@ async function run() {
     }
 
     const tsxPath = resolve(categoryDirPath, tsxName)
+    const tsx =
+      "import { forwardRef, useMemo } from 'react'" +
+      '\n' +
+      "import { useNexIcons } from '../../utils/Context'" +
+      '\n' +
+      `import ${svgComponentName} from '../../svg/${category}/${svgFileName}.svg'` +
+      '\n' +
+      "import type { IconProps } from '../../types'" +
+      '\n' +
+      '\n' +
+      `export const ${iconComponentName} = forwardRef<SVGSVGElement, IconProps>(` +
+      '\n' +
+      '  (props, ref) => {' +
+      '\n' +
+      '    const { createIcon } = useNexIcons()' +
+      '\n' +
+      `    const Icon = useMemo(() => createIcon(${svgComponentName}${
+        options[iconComponentName]
+          ? `,${JSON.stringify({ ...options[iconComponentName], ...defaultProps })}`
+          : `,${JSON.stringify(defaultProps)}`
+      }), [createIcon])` +
+      '\n' +
+      '    return <Icon {...props} ref={ref} />' +
+      '\n' +
+      '  }' +
+      '\n' +
+      ')' +
+      '\n'
+    const prettiedTsx = await pretty(tsx)
 
-    if (!existsSync(tsxPath)) {
-      const tsx =
-        "import { forwardRef, useMemo } from 'react'" +
-        '\n' +
-        "import { useNexIcons } from '../../utils/Context'" +
-        '\n' +
-        `import ${svgComponentName} from '../../svg/${category}/${svgFileName}.svg'` +
-        '\n' +
-        "import type { IconProps } from '../../types'" +
-        '\n' +
-        '\n' +
-        `export const ${iconComponentName} = forwardRef<SVGSVGElement, IconProps>(` +
-        '\n' +
-        '  (props, ref) => {' +
-        '\n' +
-        '    const { createIcon } = useNexIcons()' +
-        '\n' +
-        `    const Icon = useMemo(() => createIcon(${svgComponentName}${
-          options[iconComponentName]
-            ? `,${JSON.stringify({ ...options[iconComponentName], ...defaultProps })}`
-            : `,${JSON.stringify(defaultProps)}`
-        }), [createIcon])` +
-        '\n' +
-        '    return <Icon {...props} ref={ref} />' +
-        '\n' +
-        '  }' +
-        '\n' +
-        ')' +
-        '\n'
-
-      writeFileSync(tsxPath, await pretty(tsx))
-
-      if (newTsxs[category]) {
-        newTsxs[category].push(iconComponentName)
-      } else {
-        newTsxs[category] = [iconComponentName]
+    if (existsSync(tsxPath)) {
+      const oldTsx = readFileSync(tsxPath, {
+        encoding: 'utf-8',
+      })
+      if (oldTsx !== prettiedTsx) {
+        writeFileSync(tsxPath, prettiedTsx)
       }
+      return
+    }
+    writeFileSync(tsxPath, prettiedTsx)
+    if (newTsxs[category]) {
+      newTsxs[category].push(iconComponentName)
+    } else {
+      newTsxs[category] = [iconComponentName]
     }
   }
 
