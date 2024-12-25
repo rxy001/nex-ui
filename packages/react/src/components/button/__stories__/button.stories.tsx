@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { AppleOutlined } from '@nex-ui/icons'
+import { AppleOutlined, HeartFilled, LikeFilled } from '@nex-ui/icons'
 import { Button } from '../Button'
 import { Flex } from '../../flex'
 
@@ -115,7 +115,7 @@ export const LoadingButton: Story = {
 export const IconButton: Story = {
   args: {
     iconOnly: true,
-    children: <AppleOutlined />,
+    children: <HeartFilled />,
   },
 }
 
@@ -123,6 +123,6 @@ export const WithIcons: Story = {
   args: {
     children: 'Button',
     startIcon: <AppleOutlined />,
-    endIcon: <AppleOutlined />,
+    endIcon: <LikeFilled />,
   },
 }

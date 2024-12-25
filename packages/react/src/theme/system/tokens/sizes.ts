@@ -15,4 +15,9 @@ export const sizes = defineTokens.sizes({
   8: '32px',
   9: '36px',
   10: '40px',
+  11: '44px',
+  12: '48px',
+  13: '52px',
+  14: '56px',
+  15: '60px',
 })

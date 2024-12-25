@@ -130,6 +130,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           <Button
             iconOnly
             sx={styles.clearBtn}
+            size="sm"
             variant="link"
             color="gray"
             onClick={onClearValue}

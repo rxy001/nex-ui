@@ -1,10 +1,16 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, fullWidth, radiusVariant, toSlot } from './shared'
+import {
+  colorVariant,
+  fullWidth,
+  radiusVariant,
+  toSlot,
+  sizeVariant,
+} from './shared'
 
 export const inputTextRecipe = defineSlotRecipe({
   slots: {
     root: {
-      borderWidth: 'sm',
+      borderWidth: 'md',
       borderStyle: 'solid',
       boxSizing: 'border-box',
       transition: 'all 0.3s',
@@ -29,29 +35,7 @@ export const inputTextRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    size: {
-      sm: {
-        root: {
-          px: '2',
-          fs: 'sm',
-          h: '6',
-        },
-      },
-      md: {
-        root: {
-          px: '3',
-          h: '8',
-          fs: 'md',
-        },
-      },
-      lg: {
-        root: {
-          px: '4',
-          h: '10',
-          fs: 'lg',
-        },
-      },
-    },
+    size: toSlot(sizeVariant, 'root'),
     radius: toSlot(radiusVariant, 'root'),
     color: toSlot(colorVariant, 'root'),
     variant: {

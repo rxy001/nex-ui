@@ -1,12 +1,18 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, radiusVariant, toSlot, fullWidth } from './shared'
+import {
+  colorVariant,
+  radiusVariant,
+  toSlot,
+  fullWidth,
+  sizeVariant,
+} from './shared'
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
     root: {
       outline: 'none',
       userSelect: 'none',
-      borderWidth: 'sm',
+      borderWidth: 'md',
       borderStyle: 'solid',
       cursor: 'pointer',
       position: 'relative',
@@ -20,6 +26,9 @@ export const buttonRecipe = defineSlotRecipe({
       borderColor: 'transparent',
       fontFamily: 'body',
       bg: 'transparent',
+      '& svg': {
+        fs: '1.3em',
+      },
     },
     startIcon: {
       display: 'inherit',
@@ -85,41 +94,7 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    size: {
-      sm: {
-        root: { px: '2', py: '0.5', fs: 'sm', h: '6' },
-        startIcon: {
-          ml: '-0.5',
-          mr: '1',
-        },
-        endIcon: {
-          mr: '-0.5',
-          ml: '1',
-        },
-      },
-      md: {
-        root: {
-          px: '3',
-          py: '1',
-          fs: 'md',
-          h: '8',
-          '& svg': {
-            fs: '1.3em',
-          },
-        },
-      },
-      lg: {
-        root: {
-          px: '4',
-          py: '1.5',
-          fs: 'lg',
-          h: '10',
-          '& svg': {
-            fs: '1.5em',
-          },
-        },
-      },
-    },
+    size: toSlot(sizeVariant, 'root'),
     disabled: {
       true: {
         root: {
@@ -151,7 +126,7 @@ export const buttonRecipe = defineSlotRecipe({
     iconOnly: {
       true: {
         root: {
-          p: '0.5',
+          px: '0.5',
         },
       },
     },
@@ -163,7 +138,10 @@ export const buttonRecipe = defineSlotRecipe({
       iconOnly: true,
       css: {
         root: {
-          w: '6',
+          w: '8',
+          '& svg': {
+            fs: '1.5em',
+          },
         },
       },
     },
@@ -172,7 +150,10 @@ export const buttonRecipe = defineSlotRecipe({
       iconOnly: true,
       css: {
         root: {
-          w: '8',
+          w: '10',
+          '& svg': {
+            fs: '1.6em',
+          },
         },
       },
     },
@@ -181,7 +162,10 @@ export const buttonRecipe = defineSlotRecipe({
       iconOnly: true,
       css: {
         root: {
-          w: '10',
+          w: '12',
+          '& svg': {
+            fs: '1.7em',
+          },
         },
       },
     },

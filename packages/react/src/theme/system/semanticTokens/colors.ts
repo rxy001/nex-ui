@@ -29,7 +29,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{blue.600}',
         _dark: '{blue.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{blue.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -88,7 +91,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{gray.600}',
         _dark: '{gray.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{gray.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -147,7 +153,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{rose.600}',
         _dark: '{rose.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{rose.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -206,7 +215,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{orange.600}',
         _dark: '{orange.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{orange.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -265,7 +277,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{yellow.600}',
         _dark: '{yellow.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{yellow.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -324,7 +339,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{green.600}',
         _dark: '{green.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{green.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -383,7 +401,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{cyan.600}',
         _dark: '{cyan.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{cyan.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -442,7 +463,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{purple.600}',
         _dark: '{purple.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{purple.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
@@ -501,7 +525,10 @@ export const colors = defineSemanticTokens.colors({
         _DEFAULT: '{pink.600}',
         _dark: '{pink.600}',
       },
-      contrastText: 'white',
+      contrastText: {
+        _DEFAULT: '{pink.contrastText}',
+        _dark: 'white',
+      },
     },
     text: {
       fg: {
