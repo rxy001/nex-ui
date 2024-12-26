@@ -1,10 +1,17 @@
 import { HomePage } from '@/components/HomePage'
 
 export const translations = {
-  subtitle: 'A React.js UI Library',
-  desc: 'Fast, Beautiful, Theme Customizable, Written In TypeScript',
+  title: (
+    <span>
+      Make{' '}
+      <span className="tracking-tight inline font-semibold from-[#FF1CF7] to-[#b249f8] text-6xl bg-clip-text text-transparent bg-gradient-to-b">
+        beautiful
+      </span>{' '}
+      websites with ease and efficiency
+    </span>
+  ),
+  desc: 'Beautiful, Fast, Theme Customizable, Written In TypeScript',
   getStarted: 'Get Started',
-
 }
 
 <HomePage translations={translations} />

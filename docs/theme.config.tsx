@@ -78,7 +78,7 @@ const theme: DocsThemeConfig = {
       const isHomePage = route === `/${locale}`
 
       return isHomePage ? (
-        <div className="py-2 px-4">
+        <div className="max-w-[90rem] mx-auto px-[1.5rem] mt-10">
           <LocaleSwitch />
           <ThemeSwitch />
         </div>

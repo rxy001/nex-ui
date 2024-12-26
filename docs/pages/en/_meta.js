@@ -3,6 +3,9 @@ export default {
     type: 'page',
     title: 'Home',
     display: 'hidden',
+    theme: {
+      layout: 'raw',
+    },
   },
   docs: {
     type: 'page',

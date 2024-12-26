@@ -7,10 +7,11 @@ a.link {
   text-decoration: underline;
 }
 
-/* .nextra-sidebar-footer {
-  display: none;
+.font-sans {
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-.nextra-sidebar-container .nextra-scrollbar {
-  --nextra-menu-height: 0px;
-} */
+:root {
+  color: #11181c;
+}

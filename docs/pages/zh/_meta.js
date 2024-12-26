@@ -3,6 +3,9 @@ export default {
     type: 'page',
     title: '首页',
     display: 'hidden',
+    theme: {
+      layout: 'raw',
+    },
   },
   docs: {
     type: 'page',
