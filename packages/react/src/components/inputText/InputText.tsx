@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 import { forwardRef, useRef, useState } from 'react'
 import { nex, composeSx } from '@nex-ui/styled'

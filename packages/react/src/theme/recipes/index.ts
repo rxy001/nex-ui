@@ -4,6 +4,7 @@ import { iconRecipe } from './icon'
 import { flexRecipe } from './flex'
 import { inputTextRecipe } from './inputText'
 import { dividerRecipe } from './divider'
+import { avatarRecipe } from './avatar'
 
 export * from './button'
 export * from './icon'
@@ -14,6 +15,7 @@ export const recipes = {
   Flex: flexRecipe,
   InputText: inputTextRecipe,
   Divider: dividerRecipe,
+  Avatar: avatarRecipe,
 }
 
 export type Recipes = typeof recipes
@@ -32,3 +34,6 @@ export type InputTextVariants = RecipeVariants<InputTextRecipe>
 
 export type DividerRecipe = typeof dividerRecipe
 export type DividerVariants = RecipeVariants<DividerRecipe>
+
+export type AvatarRecipe = typeof avatarRecipe
+export type AvatarVariants = RecipeVariants<AvatarRecipe>

@@ -1,0 +1,64 @@
+import { defineSlotRecipe } from '@nex-ui/system'
+import { toSlot, radiusVariant, colorVariant } from './shared'
+
+export const avatarRecipe = defineSlotRecipe({
+  slots: {
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: 'white',
+      bg: 'colorPalette.400',
+      overflow: 'hidden',
+      userSelect: 'none',
+    },
+    img: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+    },
+  },
+  variants: {
+    size: {
+      sm: {
+        root: {
+          root: {
+            w: '8',
+            h: '8',
+            fs: 'md',
+            '& svg': {
+              fs: '1.5em',
+            },
+          },
+        },
+      },
+      md: {
+        root: {
+          w: '10',
+          h: '10',
+          fs: 'lg',
+          '& svg': {
+            fs: '1.6em',
+          },
+        },
+      },
+      lg: {
+        root: {
+          w: '12',
+          h: '12',
+          fs: 'xl',
+          '& svg': {
+            fs: '1.7em',
+          },
+        },
+      },
+    },
+    radius: toSlot(radiusVariant, 'root'),
+    color: toSlot(colorVariant, 'root'),
+  },
+  defaultVariants: {
+    size: 'md',
+    radius: 'md',
+    color: 'gray',
+  },
+})

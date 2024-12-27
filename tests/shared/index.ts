@@ -4,3 +4,4 @@ export {
   renderWithCSSProvider,
   renderWithNexProvider,
 } from './renderWithProvider'
+export { mockGlobalImage, restoreGlobalImage } from './mockGlobalImage'

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar renders correctly 1`] = `
+<div
+  class="nui-avatar nui-avatar-radius-md nui-avatar-size-md nui-avatar-color-gray emotion-0"
+>
+  A
+</div>
+`;

@@ -1,12 +1,10 @@
-import type { HtmlHTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 import type { FlexVariants } from '../../theme/recipes'
 import type { NexCSSProperties } from '../../theme/types/generated/cssProperties'
 import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
 
 export interface FlexProps
-  extends StyledComponentProps<
-    HtmlHTMLAttributes<HTMLDivElement> & FlexVariants
-  > {
+  extends StyledComponentProps<HTMLAttributes<HTMLDivElement> & FlexVariants> {
   children?: ReactNode
   justify?: NexCSSProperties['justifyContent']
   align?: NexCSSProperties['alignItems']

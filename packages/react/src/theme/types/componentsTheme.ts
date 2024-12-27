@@ -1,4 +1,5 @@
 import type {
+  AvatarRecipe,
   ButtonRecipe,
   DividerRecipe,
   FlexRecipe,
@@ -15,6 +16,8 @@ import type {
   InputTextProps,
   DividerOwnerState,
   DividerProps,
+  AvatarProps,
+  AvatarOwnerState,
 } from '../../components'
 import type { InnerIconProps } from '../../components/icon/types'
 import type { ComponentThemeFn, ComponentThemeObject } from './utils'
@@ -49,6 +52,12 @@ export type ComponentsTheme = {
       | ComponentThemeObject<DividerRecipe>
       | ComponentThemeFn<DividerOwnerState, DividerRecipe>
     defaultProps?: DividerProps
+  }
+  Avatar?: {
+    styleOverrides?:
+      | ComponentThemeObject<AvatarRecipe>
+      | ComponentThemeFn<AvatarOwnerState, AvatarRecipe>
+    defaultProps?: AvatarProps
   }
 }
 
