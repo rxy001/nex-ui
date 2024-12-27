@@ -1,5 +1,6 @@
 import type {
   ButtonRecipe,
+  DividerRecipe,
   FlexRecipe,
   IconRecipe,
   InputTextRecipe,
@@ -12,6 +13,8 @@ import type {
   FlexProps,
   InputTextOwnerState,
   InputTextProps,
+  DividerOwnerState,
+  DividerProps,
 } from '../../components'
 import type { InnerIconProps } from '../../components/icon/types'
 import type { ComponentThemeFn, ComponentThemeObject } from './utils'
@@ -40,6 +43,12 @@ export type ComponentsTheme = {
       | ComponentThemeObject<InputTextRecipe>
       | ComponentThemeFn<InputTextOwnerState, InputTextRecipe>
     defaultProps?: InputTextProps
+  }
+  Divider?: {
+    styleOverrides?:
+      | ComponentThemeObject<DividerRecipe>
+      | ComponentThemeFn<DividerOwnerState, DividerRecipe>
+    defaultProps?: DividerProps
   }
 }
 
