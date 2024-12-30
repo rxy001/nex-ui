@@ -349,9 +349,9 @@ describe('Button', () => {
       </Button>,
     )
 
-    const button = container.firstElementChild!
-    const startIcon = button.querySelector(`.${buttonClasses['start-icon']}`)
-    const endIcon = button.querySelector(`.${buttonClasses['end-icon']}`)
+    const button = container.firstElementChild
+    const startIcon = button?.querySelector(`.${buttonClasses['start-icon']}`)
+    const endIcon = button?.querySelector(`.${buttonClasses['end-icon']}`)
 
     expect(button).toHaveClass(rootClassName)
     expect(startIcon).toHaveClass(startIconClassName)

@@ -52,21 +52,15 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
     className,
     justify,
     align,
-    direction,
     wrap,
+    direction = 'row',
     inline = false,
     ...remainingProps
   } = props
 
   const ownerState: FlexOwnerState = {
     ...props,
-    gap,
-    children,
-    className,
-    justify,
-    align,
     direction,
-    wrap,
     inline,
   }
 

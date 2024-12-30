@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from '@jest/globals'
+import { describe, it, expect, afterEach, afterAll } from '@jest/globals'
 import {
   mountTest,
   refTest,
@@ -6,8 +6,13 @@ import {
   mockGlobalImage,
   restoreGlobalImage,
 } from '~/tests/shared'
+import { UserOutlined } from '@nex-ui/icons'
 import { Avatar } from '../Avatar'
 import { avatarClasses } from '../avatarClasses'
+
+afterAll(() => {
+  restoreGlobalImage()
+})
 
 describe('Avatar', () => {
   mountTest(<Avatar />)
@@ -195,5 +200,39 @@ describe('Avatar', () => {
       expect(avatar?.tagName).toBe('DIV')
       expect(avatar?.firstChild?.textContent).toBe('O')
     })
+  })
+
+  describe('Icon Avatar', () => {
+    it('should render a div containing an svg icon', () => {
+      const { container } = renderWithNexProvider(
+        <Avatar>
+          <UserOutlined />
+        </Avatar>,
+      )
+      const avatar = container.firstElementChild
+      expect(avatar?.tagName).toBe('DIV')
+      const userIcon = avatar?.firstElementChild
+      expect(userIcon).toHaveClass('nui-icon')
+    })
+  })
+
+  it('should forward classes to Divider', () => {
+    mockGlobalImage('loaded')
+    const rootClassName = 'test-root-class'
+    const imgClassName = 'test-img-class'
+
+    const { container } = renderWithNexProvider(
+      <Avatar
+        src="/fake.png"
+        classes={{
+          root: rootClassName,
+          img: imgClassName,
+        }}
+      />,
+    )
+
+    const avatar = container.firstElementChild
+    expect(avatar).toHaveClass(rootClassName)
+    expect(avatar?.firstElementChild).toHaveClass(imgClassName)
   })
 })

@@ -2,8 +2,6 @@
 
 exports[`Flex renders correctly 1`] = `
 <div
-  class="nui-flex emotion-0"
->
-  Button
-</div>
+  class="nui-flex nui-flex-direction-row emotion-0"
+/>
 `;
