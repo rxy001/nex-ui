@@ -13,3 +13,5 @@ export const MediumSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MediumSquareFilled.displayName = 'MediumSquareFilled'

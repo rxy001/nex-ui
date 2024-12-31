@@ -16,3 +16,5 @@ export const CodeSandboxSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CodeSandboxSquareFilled.displayName = 'CodeSandboxSquareFilled'

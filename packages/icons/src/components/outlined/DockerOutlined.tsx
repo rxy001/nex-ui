@@ -13,3 +13,5 @@ export const DockerOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DockerOutlined.displayName = 'DockerOutlined'

@@ -13,3 +13,5 @@ export const PinterestOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PinterestOutlined.displayName = 'PinterestOutlined'

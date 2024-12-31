@@ -13,3 +13,5 @@ export const OpenAIFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+OpenAIFilled.displayName = 'OpenAIFilled'

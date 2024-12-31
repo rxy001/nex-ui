@@ -13,3 +13,5 @@ export const MacCommandFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MacCommandFilled.displayName = 'MacCommandFilled'

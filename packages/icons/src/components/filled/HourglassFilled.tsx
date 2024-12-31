@@ -13,3 +13,5 @@ export const HourglassFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HourglassFilled.displayName = 'HourglassFilled'

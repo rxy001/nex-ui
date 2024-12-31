@@ -13,3 +13,5 @@ export const SignatureOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SignatureOutlined.displayName = 'SignatureOutlined'

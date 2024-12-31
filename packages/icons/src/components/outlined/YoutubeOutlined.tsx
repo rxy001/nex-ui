@@ -13,3 +13,5 @@ export const YoutubeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+YoutubeOutlined.displayName = 'YoutubeOutlined'

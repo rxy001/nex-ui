@@ -13,3 +13,5 @@ export const DashOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DashOutlined.displayName = 'DashOutlined'

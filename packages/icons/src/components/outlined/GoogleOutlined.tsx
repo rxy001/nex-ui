@@ -13,3 +13,5 @@ export const GoogleOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GoogleOutlined.displayName = 'GoogleOutlined'

@@ -13,3 +13,5 @@ export const DislikeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DislikeOutlined.displayName = 'DislikeOutlined'

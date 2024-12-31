@@ -13,3 +13,5 @@ export const CloudServerOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CloudServerOutlined.displayName = 'CloudServerOutlined'

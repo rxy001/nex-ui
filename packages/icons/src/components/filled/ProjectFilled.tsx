@@ -13,3 +13,5 @@ export const ProjectFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ProjectFilled.displayName = 'ProjectFilled'

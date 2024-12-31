@@ -16,3 +16,5 @@ export const GooglePlusSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GooglePlusSquareFilled.displayName = 'GooglePlusSquareFilled'

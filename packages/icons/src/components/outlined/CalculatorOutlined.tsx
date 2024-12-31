@@ -13,3 +13,5 @@ export const CalculatorOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CalculatorOutlined.displayName = 'CalculatorOutlined'

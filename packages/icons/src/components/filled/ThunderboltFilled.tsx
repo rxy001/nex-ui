@@ -13,3 +13,5 @@ export const ThunderboltFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ThunderboltFilled.displayName = 'ThunderboltFilled'

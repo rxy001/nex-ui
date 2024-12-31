@@ -13,3 +13,5 @@ export const FileWordFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileWordFilled.displayName = 'FileWordFilled'

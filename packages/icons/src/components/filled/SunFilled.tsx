@@ -11,3 +11,5 @@ export const SunFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+SunFilled.displayName = 'SunFilled'

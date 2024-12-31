@@ -11,3 +11,5 @@ export const FireFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+FireFilled.displayName = 'FireFilled'

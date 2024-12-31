@@ -13,3 +13,5 @@ export const InteractionFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+InteractionFilled.displayName = 'InteractionFilled'

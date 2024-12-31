@@ -13,3 +13,5 @@ export const SisternodeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SisternodeOutlined.displayName = 'SisternodeOutlined'

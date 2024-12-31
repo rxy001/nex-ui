@@ -13,3 +13,5 @@ export const DiffOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DiffOutlined.displayName = 'DiffOutlined'

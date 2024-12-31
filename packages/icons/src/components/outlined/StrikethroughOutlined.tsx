@@ -13,3 +13,5 @@ export const StrikethroughOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+StrikethroughOutlined.displayName = 'StrikethroughOutlined'

@@ -13,3 +13,5 @@ export const MergeFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MergeFilled.displayName = 'MergeFilled'

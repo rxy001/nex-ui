@@ -13,3 +13,5 @@ export const FileImageOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileImageOutlined.displayName = 'FileImageOutlined'

@@ -13,3 +13,5 @@ export const UserDeleteOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+UserDeleteOutlined.displayName = 'UserDeleteOutlined'

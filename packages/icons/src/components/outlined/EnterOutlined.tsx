@@ -13,3 +13,5 @@ export const EnterOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+EnterOutlined.displayName = 'EnterOutlined'

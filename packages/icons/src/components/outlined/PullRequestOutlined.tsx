@@ -13,3 +13,5 @@ export const PullRequestOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PullRequestOutlined.displayName = 'PullRequestOutlined'

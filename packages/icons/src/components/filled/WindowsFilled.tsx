@@ -13,3 +13,5 @@ export const WindowsFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WindowsFilled.displayName = 'WindowsFilled'

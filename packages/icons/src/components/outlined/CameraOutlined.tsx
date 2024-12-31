@@ -13,3 +13,5 @@ export const CameraOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CameraOutlined.displayName = 'CameraOutlined'

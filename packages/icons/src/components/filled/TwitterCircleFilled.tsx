@@ -13,3 +13,5 @@ export const TwitterCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TwitterCircleFilled.displayName = 'TwitterCircleFilled'

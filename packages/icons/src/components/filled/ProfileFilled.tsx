@@ -13,3 +13,5 @@ export const ProfileFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ProfileFilled.displayName = 'ProfileFilled'

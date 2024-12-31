@@ -13,3 +13,5 @@ export const ExceptionOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ExceptionOutlined.displayName = 'ExceptionOutlined'

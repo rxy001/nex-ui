@@ -13,3 +13,5 @@ export const CodepenSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CodepenSquareFilled.displayName = 'CodepenSquareFilled'

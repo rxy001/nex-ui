@@ -13,3 +13,5 @@ export const FontSizeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FontSizeOutlined.displayName = 'FontSizeOutlined'

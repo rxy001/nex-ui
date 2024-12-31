@@ -13,3 +13,5 @@ export const FolderViewOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FolderViewOutlined.displayName = 'FolderViewOutlined'

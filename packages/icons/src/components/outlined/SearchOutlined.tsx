@@ -13,3 +13,5 @@ export const SearchOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SearchOutlined.displayName = 'SearchOutlined'

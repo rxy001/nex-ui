@@ -13,3 +13,5 @@ export const YahooOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+YahooOutlined.displayName = 'YahooOutlined'

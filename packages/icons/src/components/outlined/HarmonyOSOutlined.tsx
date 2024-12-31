@@ -13,3 +13,5 @@ export const HarmonyOSOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HarmonyOSOutlined.displayName = 'HarmonyOSOutlined'

@@ -13,3 +13,5 @@ export const BackwardOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BackwardOutlined.displayName = 'BackwardOutlined'

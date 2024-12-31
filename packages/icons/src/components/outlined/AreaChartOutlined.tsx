@@ -13,3 +13,5 @@ export const AreaChartOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AreaChartOutlined.displayName = 'AreaChartOutlined'

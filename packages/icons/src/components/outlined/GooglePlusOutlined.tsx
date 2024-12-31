@@ -13,3 +13,5 @@ export const GooglePlusOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GooglePlusOutlined.displayName = 'GooglePlusOutlined'

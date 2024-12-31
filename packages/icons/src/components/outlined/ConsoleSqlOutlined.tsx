@@ -13,3 +13,5 @@ export const ConsoleSqlOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ConsoleSqlOutlined.displayName = 'ConsoleSqlOutlined'

@@ -13,3 +13,5 @@ export const SecurityScanFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SecurityScanFilled.displayName = 'SecurityScanFilled'

@@ -13,3 +13,5 @@ export const RetweetOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RetweetOutlined.displayName = 'RetweetOutlined'

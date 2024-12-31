@@ -13,3 +13,5 @@ export const SlidersFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SlidersFilled.displayName = 'SlidersFilled'

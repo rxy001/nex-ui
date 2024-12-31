@@ -16,3 +16,5 @@ export const VerticalAlignBottomOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+VerticalAlignBottomOutlined.displayName = 'VerticalAlignBottomOutlined'

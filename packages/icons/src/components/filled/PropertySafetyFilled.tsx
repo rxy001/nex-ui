@@ -13,3 +13,5 @@ export const PropertySafetyFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PropertySafetyFilled.displayName = 'PropertySafetyFilled'

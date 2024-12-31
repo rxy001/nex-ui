@@ -13,3 +13,5 @@ export const AlipayOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AlipayOutlined.displayName = 'AlipayOutlined'

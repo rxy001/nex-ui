@@ -13,3 +13,5 @@ export const PinterestFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PinterestFilled.displayName = 'PinterestFilled'

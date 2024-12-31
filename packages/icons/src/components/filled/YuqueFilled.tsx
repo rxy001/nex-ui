@@ -13,3 +13,5 @@ export const YuqueFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+YuqueFilled.displayName = 'YuqueFilled'

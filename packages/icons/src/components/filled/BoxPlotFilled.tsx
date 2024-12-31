@@ -13,3 +13,5 @@ export const BoxPlotFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BoxPlotFilled.displayName = 'BoxPlotFilled'

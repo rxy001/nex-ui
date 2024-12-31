@@ -11,3 +11,5 @@ export const SkinFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+SkinFilled.displayName = 'SkinFilled'

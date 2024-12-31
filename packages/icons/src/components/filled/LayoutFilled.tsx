@@ -13,3 +13,5 @@ export const LayoutFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+LayoutFilled.displayName = 'LayoutFilled'

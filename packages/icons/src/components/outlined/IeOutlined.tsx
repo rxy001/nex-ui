@@ -11,3 +11,5 @@ export const IeOutlined = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+IeOutlined.displayName = 'IeOutlined'

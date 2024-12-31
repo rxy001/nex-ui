@@ -13,3 +13,5 @@ export const QuestionCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+QuestionCircleFilled.displayName = 'QuestionCircleFilled'

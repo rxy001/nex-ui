@@ -13,3 +13,5 @@ export const ForkOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ForkOutlined.displayName = 'ForkOutlined'

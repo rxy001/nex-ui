@@ -14,3 +14,5 @@ export const InsertRowRightOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+InsertRowRightOutlined.displayName = 'InsertRowRightOutlined'

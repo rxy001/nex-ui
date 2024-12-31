@@ -13,3 +13,5 @@ export const EnvironmentFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+EnvironmentFilled.displayName = 'EnvironmentFilled'

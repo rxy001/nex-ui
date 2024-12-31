@@ -13,3 +13,5 @@ export const ShareAltOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ShareAltOutlined.displayName = 'ShareAltOutlined'

@@ -13,3 +13,5 @@ export const AntDesignOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AntDesignOutlined.displayName = 'AntDesignOutlined'

@@ -13,3 +13,5 @@ export const BgColorsOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BgColorsOutlined.displayName = 'BgColorsOutlined'

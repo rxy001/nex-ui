@@ -13,3 +13,5 @@ export const BilibiliFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BilibiliFilled.displayName = 'BilibiliFilled'

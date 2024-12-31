@@ -13,3 +13,5 @@ export const ReconciliationFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ReconciliationFilled.displayName = 'ReconciliationFilled'

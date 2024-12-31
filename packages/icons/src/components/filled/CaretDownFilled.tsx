@@ -13,3 +13,5 @@ export const CaretDownFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CaretDownFilled.displayName = 'CaretDownFilled'

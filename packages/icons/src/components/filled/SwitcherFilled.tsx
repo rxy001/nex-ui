@@ -13,3 +13,5 @@ export const SwitcherFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SwitcherFilled.displayName = 'SwitcherFilled'

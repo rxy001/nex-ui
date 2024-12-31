@@ -16,3 +16,5 @@ export const ExclamationCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ExclamationCircleFilled.displayName = 'ExclamationCircleFilled'

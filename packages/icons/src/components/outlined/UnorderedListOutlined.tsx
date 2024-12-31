@@ -13,3 +13,5 @@ export const UnorderedListOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+UnorderedListOutlined.displayName = 'UnorderedListOutlined'

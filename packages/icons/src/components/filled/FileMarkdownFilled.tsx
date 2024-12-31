@@ -13,3 +13,5 @@ export const FileMarkdownFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileMarkdownFilled.displayName = 'FileMarkdownFilled'

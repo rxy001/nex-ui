@@ -13,3 +13,5 @@ export const BackwardFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BackwardFilled.displayName = 'BackwardFilled'

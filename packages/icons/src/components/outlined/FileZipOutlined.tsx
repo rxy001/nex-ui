@@ -13,3 +13,5 @@ export const FileZipOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileZipOutlined.displayName = 'FileZipOutlined'

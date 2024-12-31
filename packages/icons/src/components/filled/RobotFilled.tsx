@@ -13,3 +13,5 @@ export const RobotFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RobotFilled.displayName = 'RobotFilled'

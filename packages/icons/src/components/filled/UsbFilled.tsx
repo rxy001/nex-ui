@@ -11,3 +11,5 @@ export const UsbFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+UsbFilled.displayName = 'UsbFilled'

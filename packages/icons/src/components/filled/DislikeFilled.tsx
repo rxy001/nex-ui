@@ -13,3 +13,5 @@ export const DislikeFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DislikeFilled.displayName = 'DislikeFilled'

@@ -13,3 +13,5 @@ export const ScissorOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ScissorOutlined.displayName = 'ScissorOutlined'

@@ -13,3 +13,5 @@ export const SpotifyFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SpotifyFilled.displayName = 'SpotifyFilled'

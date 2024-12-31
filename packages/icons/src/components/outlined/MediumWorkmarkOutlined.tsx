@@ -14,3 +14,5 @@ export const MediumWorkmarkOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MediumWorkmarkOutlined.displayName = 'MediumWorkmarkOutlined'

@@ -111,7 +111,9 @@ async function run() {
       '  }' +
       '\n' +
       ')' +
-      '\n'
+      '\n' +
+      '\n' +
+      `${iconComponentName}.displayName='${iconComponentName}'`
     const prettiedTsx = await pretty(tsx)
 
     if (existsSync(tsxPath)) {

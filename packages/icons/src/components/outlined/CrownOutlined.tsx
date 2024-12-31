@@ -13,3 +13,5 @@ export const CrownOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CrownOutlined.displayName = 'CrownOutlined'

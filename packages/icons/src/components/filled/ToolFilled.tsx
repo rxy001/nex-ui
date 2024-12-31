@@ -11,3 +11,5 @@ export const ToolFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+ToolFilled.displayName = 'ToolFilled'

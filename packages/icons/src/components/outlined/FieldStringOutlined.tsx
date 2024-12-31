@@ -13,3 +13,5 @@ export const FieldStringOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FieldStringOutlined.displayName = 'FieldStringOutlined'

@@ -13,3 +13,5 @@ export const PythonOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PythonOutlined.displayName = 'PythonOutlined'

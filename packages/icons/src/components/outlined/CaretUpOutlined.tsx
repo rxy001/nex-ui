@@ -13,3 +13,5 @@ export const CaretUpOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CaretUpOutlined.displayName = 'CaretUpOutlined'

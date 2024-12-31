@@ -13,3 +13,5 @@ export const GoldenFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GoldenFilled.displayName = 'GoldenFilled'

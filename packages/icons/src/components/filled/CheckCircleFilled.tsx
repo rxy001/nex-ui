@@ -13,3 +13,5 @@ export const CheckCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CheckCircleFilled.displayName = 'CheckCircleFilled'

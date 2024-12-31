@@ -13,3 +13,5 @@ export const CloudDownloadOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CloudDownloadOutlined.displayName = 'CloudDownloadOutlined'

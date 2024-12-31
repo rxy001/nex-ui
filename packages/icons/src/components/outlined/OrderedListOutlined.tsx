@@ -13,3 +13,5 @@ export const OrderedListOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+OrderedListOutlined.displayName = 'OrderedListOutlined'

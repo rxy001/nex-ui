@@ -13,3 +13,5 @@ export const FileZipFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileZipFilled.displayName = 'FileZipFilled'

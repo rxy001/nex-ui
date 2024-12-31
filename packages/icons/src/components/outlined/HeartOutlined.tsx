@@ -13,3 +13,5 @@ export const HeartOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HeartOutlined.displayName = 'HeartOutlined'

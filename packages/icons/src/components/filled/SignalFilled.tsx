@@ -13,3 +13,5 @@ export const SignalFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SignalFilled.displayName = 'SignalFilled'

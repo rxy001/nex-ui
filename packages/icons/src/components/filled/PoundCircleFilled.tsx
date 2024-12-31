@@ -13,3 +13,5 @@ export const PoundCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PoundCircleFilled.displayName = 'PoundCircleFilled'

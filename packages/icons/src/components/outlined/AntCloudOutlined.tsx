@@ -13,3 +13,5 @@ export const AntCloudOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AntCloudOutlined.displayName = 'AntCloudOutlined'

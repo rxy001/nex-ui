@@ -13,3 +13,5 @@ export const StepBackwardOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+StepBackwardOutlined.displayName = 'StepBackwardOutlined'

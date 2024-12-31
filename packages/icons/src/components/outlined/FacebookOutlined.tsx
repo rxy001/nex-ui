@@ -13,3 +13,5 @@ export const FacebookOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FacebookOutlined.displayName = 'FacebookOutlined'

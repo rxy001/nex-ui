@@ -13,3 +13,5 @@ export const MacCommandOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MacCommandOutlined.displayName = 'MacCommandOutlined'

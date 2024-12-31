@@ -13,3 +13,5 @@ export const GroupOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GroupOutlined.displayName = 'GroupOutlined'

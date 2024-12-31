@@ -13,3 +13,5 @@ export const RollbackOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RollbackOutlined.displayName = 'RollbackOutlined'

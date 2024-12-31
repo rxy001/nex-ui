@@ -13,3 +13,5 @@ export const RedditOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RedditOutlined.displayName = 'RedditOutlined'

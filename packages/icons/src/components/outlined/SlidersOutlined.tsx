@@ -13,3 +13,5 @@ export const SlidersOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SlidersOutlined.displayName = 'SlidersOutlined'

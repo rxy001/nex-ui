@@ -13,3 +13,5 @@ export const FileSyncOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileSyncOutlined.displayName = 'FileSyncOutlined'

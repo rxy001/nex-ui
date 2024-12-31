@@ -13,3 +13,5 @@ export const StopOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+StopOutlined.displayName = 'StopOutlined'

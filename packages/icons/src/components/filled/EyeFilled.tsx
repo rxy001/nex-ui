@@ -11,3 +11,5 @@ export const EyeFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+EyeFilled.displayName = 'EyeFilled'

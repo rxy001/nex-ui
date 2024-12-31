@@ -14,3 +14,5 @@ export const FileExclamationFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileExclamationFilled.displayName = 'FileExclamationFilled'

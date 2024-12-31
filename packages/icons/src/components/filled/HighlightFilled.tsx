@@ -13,3 +13,5 @@ export const HighlightFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HighlightFilled.displayName = 'HighlightFilled'

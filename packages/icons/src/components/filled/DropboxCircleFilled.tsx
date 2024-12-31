@@ -13,3 +13,5 @@ export const DropboxCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DropboxCircleFilled.displayName = 'DropboxCircleFilled'

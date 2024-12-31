@@ -11,3 +11,5 @@ export const CopyFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+CopyFilled.displayName = 'CopyFilled'

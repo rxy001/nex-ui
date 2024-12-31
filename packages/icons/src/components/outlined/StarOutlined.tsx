@@ -13,3 +13,5 @@ export const StarOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+StarOutlined.displayName = 'StarOutlined'

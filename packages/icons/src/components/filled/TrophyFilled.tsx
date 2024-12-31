@@ -13,3 +13,5 @@ export const TrophyFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TrophyFilled.displayName = 'TrophyFilled'

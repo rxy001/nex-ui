@@ -13,3 +13,5 @@ export const BranchesOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BranchesOutlined.displayName = 'BranchesOutlined'

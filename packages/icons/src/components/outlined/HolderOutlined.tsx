@@ -13,3 +13,5 @@ export const HolderOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HolderOutlined.displayName = 'HolderOutlined'

@@ -13,3 +13,5 @@ export const JavaScriptOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+JavaScriptOutlined.displayName = 'JavaScriptOutlined'

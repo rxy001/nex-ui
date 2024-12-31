@@ -14,3 +14,5 @@ export const CustomerServiceOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CustomerServiceOutlined.displayName = 'CustomerServiceOutlined'

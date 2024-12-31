@@ -13,3 +13,5 @@ export const GatewayOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GatewayOutlined.displayName = 'GatewayOutlined'

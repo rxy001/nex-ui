@@ -13,3 +13,5 @@ export const BaiduOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BaiduOutlined.displayName = 'BaiduOutlined'

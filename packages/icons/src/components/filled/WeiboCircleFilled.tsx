@@ -13,3 +13,5 @@ export const WeiboCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WeiboCircleFilled.displayName = 'WeiboCircleFilled'

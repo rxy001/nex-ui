@@ -13,3 +13,5 @@ export const InsuranceFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+InsuranceFilled.displayName = 'InsuranceFilled'

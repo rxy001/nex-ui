@@ -13,3 +13,5 @@ export const AudioFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AudioFilled.displayName = 'AudioFilled'

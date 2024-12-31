@@ -17,3 +17,5 @@ export const FundProjectionScreenOutlined = forwardRef<
   )
   return <Icon {...props} ref={ref} />
 })
+
+FundProjectionScreenOutlined.displayName = 'FundProjectionScreenOutlined'

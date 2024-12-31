@@ -13,3 +13,5 @@ export const NotificationOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+NotificationOutlined.displayName = 'NotificationOutlined'

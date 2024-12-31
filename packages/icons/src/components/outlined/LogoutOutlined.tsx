@@ -13,3 +13,5 @@ export const LogoutOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+LogoutOutlined.displayName = 'LogoutOutlined'

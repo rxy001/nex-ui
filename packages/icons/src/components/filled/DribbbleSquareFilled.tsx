@@ -13,3 +13,5 @@ export const DribbbleSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DribbbleSquareFilled.displayName = 'DribbbleSquareFilled'

@@ -14,3 +14,5 @@ export const CopyrightCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CopyrightCircleFilled.displayName = 'CopyrightCircleFilled'

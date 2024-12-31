@@ -13,3 +13,5 @@ export const FilterOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FilterOutlined.displayName = 'FilterOutlined'

@@ -13,3 +13,5 @@ export const FullscreenOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FullscreenOutlined.displayName = 'FullscreenOutlined'

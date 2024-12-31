@@ -13,3 +13,5 @@ export const EyeInvisibleOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+EyeInvisibleOutlined.displayName = 'EyeInvisibleOutlined'

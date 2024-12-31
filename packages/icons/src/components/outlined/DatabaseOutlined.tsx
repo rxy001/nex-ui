@@ -13,3 +13,5 @@ export const DatabaseOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DatabaseOutlined.displayName = 'DatabaseOutlined'

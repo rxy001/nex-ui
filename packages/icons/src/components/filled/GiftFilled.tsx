@@ -11,3 +11,5 @@ export const GiftFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+GiftFilled.displayName = 'GiftFilled'

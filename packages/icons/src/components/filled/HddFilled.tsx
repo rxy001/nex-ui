@@ -11,3 +11,5 @@ export const HddFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+HddFilled.displayName = 'HddFilled'

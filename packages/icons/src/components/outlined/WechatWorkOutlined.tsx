@@ -13,3 +13,5 @@ export const WechatWorkOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WechatWorkOutlined.displayName = 'WechatWorkOutlined'

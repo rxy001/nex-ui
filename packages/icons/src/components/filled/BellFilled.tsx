@@ -11,3 +11,5 @@ export const BellFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+BellFilled.displayName = 'BellFilled'

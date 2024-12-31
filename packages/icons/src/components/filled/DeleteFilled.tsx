@@ -13,3 +13,5 @@ export const DeleteFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DeleteFilled.displayName = 'DeleteFilled'

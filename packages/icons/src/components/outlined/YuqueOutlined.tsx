@@ -13,3 +13,5 @@ export const YuqueOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+YuqueOutlined.displayName = 'YuqueOutlined'

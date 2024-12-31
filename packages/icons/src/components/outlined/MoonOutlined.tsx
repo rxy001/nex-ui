@@ -13,3 +13,5 @@ export const MoonOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MoonOutlined.displayName = 'MoonOutlined'

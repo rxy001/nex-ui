@@ -13,3 +13,5 @@ export const HeartFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HeartFilled.displayName = 'HeartFilled'

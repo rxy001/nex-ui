@@ -13,3 +13,5 @@ export const IeCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+IeCircleFilled.displayName = 'IeCircleFilled'

@@ -13,3 +13,5 @@ export const ClearOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ClearOutlined.displayName = 'ClearOutlined'

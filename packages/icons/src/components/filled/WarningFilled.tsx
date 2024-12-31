@@ -13,3 +13,5 @@ export const WarningFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WarningFilled.displayName = 'WarningFilled'

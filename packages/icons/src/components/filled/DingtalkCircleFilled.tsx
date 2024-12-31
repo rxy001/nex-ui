@@ -13,3 +13,5 @@ export const DingtalkCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DingtalkCircleFilled.displayName = 'DingtalkCircleFilled'

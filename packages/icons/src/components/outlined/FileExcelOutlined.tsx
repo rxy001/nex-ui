@@ -13,3 +13,5 @@ export const FileExcelOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileExcelOutlined.displayName = 'FileExcelOutlined'

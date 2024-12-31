@@ -13,3 +13,5 @@ export const SkypeFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SkypeFilled.displayName = 'SkypeFilled'

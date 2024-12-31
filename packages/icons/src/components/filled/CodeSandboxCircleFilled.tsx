@@ -16,3 +16,5 @@ export const CodeSandboxCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CodeSandboxCircleFilled.displayName = 'CodeSandboxCircleFilled'

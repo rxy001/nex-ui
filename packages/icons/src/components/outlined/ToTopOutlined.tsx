@@ -13,3 +13,5 @@ export const ToTopOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ToTopOutlined.displayName = 'ToTopOutlined'

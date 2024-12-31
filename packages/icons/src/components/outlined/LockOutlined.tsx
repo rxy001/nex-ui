@@ -13,3 +13,5 @@ export const LockOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+LockOutlined.displayName = 'LockOutlined'

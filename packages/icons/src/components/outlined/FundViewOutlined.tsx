@@ -13,3 +13,5 @@ export const FundViewOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FundViewOutlined.displayName = 'FundViewOutlined'

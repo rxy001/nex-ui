@@ -13,3 +13,5 @@ export const FieldBinaryOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FieldBinaryOutlined.displayName = 'FieldBinaryOutlined'

@@ -13,3 +13,5 @@ export const LeftSquareOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+LeftSquareOutlined.displayName = 'LeftSquareOutlined'

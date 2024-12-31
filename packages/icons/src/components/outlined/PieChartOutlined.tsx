@@ -13,3 +13,5 @@ export const PieChartOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PieChartOutlined.displayName = 'PieChartOutlined'

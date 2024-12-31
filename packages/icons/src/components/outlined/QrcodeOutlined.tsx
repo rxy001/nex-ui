@@ -13,3 +13,5 @@ export const QrcodeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+QrcodeOutlined.displayName = 'QrcodeOutlined'

@@ -13,3 +13,5 @@ export const YoutubeFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+YoutubeFilled.displayName = 'YoutubeFilled'

@@ -13,3 +13,5 @@ export const DingdingOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DingdingOutlined.displayName = 'DingdingOutlined'

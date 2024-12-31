@@ -13,3 +13,5 @@ export const LineChartOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+LineChartOutlined.displayName = 'LineChartOutlined'

@@ -17,3 +17,5 @@ export const Loading3QuartersOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+Loading3QuartersOutlined.displayName = 'Loading3QuartersOutlined'

@@ -13,3 +13,5 @@ export const ClusterOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ClusterOutlined.displayName = 'ClusterOutlined'

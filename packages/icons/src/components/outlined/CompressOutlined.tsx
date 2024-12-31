@@ -13,3 +13,5 @@ export const CompressOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CompressOutlined.displayName = 'CompressOutlined'

@@ -13,3 +13,5 @@ export const FacebookFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FacebookFilled.displayName = 'FacebookFilled'

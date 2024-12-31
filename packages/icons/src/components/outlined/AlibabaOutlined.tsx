@@ -13,3 +13,5 @@ export const AlibabaOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AlibabaOutlined.displayName = 'AlibabaOutlined'

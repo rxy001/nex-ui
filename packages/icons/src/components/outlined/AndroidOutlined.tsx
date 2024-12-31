@@ -13,3 +13,5 @@ export const AndroidOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AndroidOutlined.displayName = 'AndroidOutlined'

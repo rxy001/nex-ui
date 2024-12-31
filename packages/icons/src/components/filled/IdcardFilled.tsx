@@ -13,3 +13,5 @@ export const IdcardFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+IdcardFilled.displayName = 'IdcardFilled'

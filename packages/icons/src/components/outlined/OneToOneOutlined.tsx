@@ -13,3 +13,5 @@ export const OneToOneOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+OneToOneOutlined.displayName = 'OneToOneOutlined'

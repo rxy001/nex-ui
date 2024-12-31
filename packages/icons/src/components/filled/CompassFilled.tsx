@@ -13,3 +13,5 @@ export const CompassFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CompassFilled.displayName = 'CompassFilled'

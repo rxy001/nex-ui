@@ -13,3 +13,5 @@ export const SpotifyOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SpotifyOutlined.displayName = 'SpotifyOutlined'

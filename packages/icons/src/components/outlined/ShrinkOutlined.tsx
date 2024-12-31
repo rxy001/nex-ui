@@ -13,3 +13,5 @@ export const ShrinkOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ShrinkOutlined.displayName = 'ShrinkOutlined'

@@ -13,3 +13,5 @@ export const TwitchOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TwitchOutlined.displayName = 'TwitchOutlined'

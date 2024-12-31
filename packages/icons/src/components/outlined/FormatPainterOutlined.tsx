@@ -13,3 +13,5 @@ export const FormatPainterOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FormatPainterOutlined.displayName = 'FormatPainterOutlined'

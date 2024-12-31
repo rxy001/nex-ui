@@ -13,3 +13,5 @@ export const RotateRightOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RotateRightOutlined.displayName = 'RotateRightOutlined'

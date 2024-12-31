@@ -13,3 +13,5 @@ export const ZoomInOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ZoomInOutlined.displayName = 'ZoomInOutlined'

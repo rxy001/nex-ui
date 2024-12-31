@@ -13,3 +13,5 @@ export const DribbbleCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DribbbleCircleFilled.displayName = 'DribbbleCircleFilled'

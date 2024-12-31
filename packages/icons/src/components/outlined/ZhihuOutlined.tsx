@@ -13,3 +13,5 @@ export const ZhihuOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ZhihuOutlined.displayName = 'ZhihuOutlined'

@@ -13,3 +13,5 @@ export const DollarCircleOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DollarCircleOutlined.displayName = 'DollarCircleOutlined'

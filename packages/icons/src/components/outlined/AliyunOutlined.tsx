@@ -13,3 +13,5 @@ export const AliyunOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AliyunOutlined.displayName = 'AliyunOutlined'

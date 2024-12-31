@@ -13,3 +13,5 @@ export const BehanceSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BehanceSquareFilled.displayName = 'BehanceSquareFilled'

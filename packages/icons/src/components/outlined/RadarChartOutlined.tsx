@@ -13,3 +13,5 @@ export const RadarChartOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RadarChartOutlined.displayName = 'RadarChartOutlined'

@@ -13,3 +13,5 @@ export const NumberOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+NumberOutlined.displayName = 'NumberOutlined'

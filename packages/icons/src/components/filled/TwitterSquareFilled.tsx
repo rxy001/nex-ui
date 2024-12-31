@@ -13,3 +13,5 @@ export const TwitterSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TwitterSquareFilled.displayName = 'TwitterSquareFilled'

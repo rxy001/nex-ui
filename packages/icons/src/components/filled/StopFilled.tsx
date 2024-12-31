@@ -11,3 +11,5 @@ export const StopFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+StopFilled.displayName = 'StopFilled'

@@ -13,3 +13,5 @@ export const SlackCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SlackCircleFilled.displayName = 'SlackCircleFilled'

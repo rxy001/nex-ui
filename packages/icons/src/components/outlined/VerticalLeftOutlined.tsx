@@ -13,3 +13,5 @@ export const VerticalLeftOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+VerticalLeftOutlined.displayName = 'VerticalLeftOutlined'

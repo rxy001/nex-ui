@@ -13,3 +13,5 @@ export const ZhihuCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ZhihuCircleFilled.displayName = 'ZhihuCircleFilled'

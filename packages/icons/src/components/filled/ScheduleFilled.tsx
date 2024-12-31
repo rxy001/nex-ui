@@ -13,3 +13,5 @@ export const ScheduleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ScheduleFilled.displayName = 'ScheduleFilled'

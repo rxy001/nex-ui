@@ -13,3 +13,5 @@ export const PhoneFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PhoneFilled.displayName = 'PhoneFilled'

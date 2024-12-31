@@ -13,3 +13,5 @@ export const MergeCellsOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MergeCellsOutlined.displayName = 'MergeCellsOutlined'

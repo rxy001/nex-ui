@@ -13,3 +13,5 @@ export const HistoryOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HistoryOutlined.displayName = 'HistoryOutlined'

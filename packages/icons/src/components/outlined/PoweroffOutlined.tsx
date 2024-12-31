@@ -13,3 +13,5 @@ export const PoweroffOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PoweroffOutlined.displayName = 'PoweroffOutlined'

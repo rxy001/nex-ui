@@ -13,3 +13,5 @@ export const SettingFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SettingFilled.displayName = 'SettingFilled'

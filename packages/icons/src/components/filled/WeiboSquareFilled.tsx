@@ -13,3 +13,5 @@ export const WeiboSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WeiboSquareFilled.displayName = 'WeiboSquareFilled'

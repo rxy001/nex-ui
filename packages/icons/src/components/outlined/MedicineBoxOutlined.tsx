@@ -13,3 +13,5 @@ export const MedicineBoxOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MedicineBoxOutlined.displayName = 'MedicineBoxOutlined'

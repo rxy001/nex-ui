@@ -13,3 +13,5 @@ export const WhatsAppOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WhatsAppOutlined.displayName = 'WhatsAppOutlined'

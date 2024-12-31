@@ -14,3 +14,5 @@ export const TrademarkCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TrademarkCircleFilled.displayName = 'TrademarkCircleFilled'

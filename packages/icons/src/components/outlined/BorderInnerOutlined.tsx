@@ -13,3 +13,5 @@ export const BorderInnerOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BorderInnerOutlined.displayName = 'BorderInnerOutlined'

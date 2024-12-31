@@ -13,3 +13,5 @@ export const TabletOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TabletOutlined.displayName = 'TabletOutlined'

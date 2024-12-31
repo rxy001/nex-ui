@@ -13,3 +13,5 @@ export const DropboxOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DropboxOutlined.displayName = 'DropboxOutlined'

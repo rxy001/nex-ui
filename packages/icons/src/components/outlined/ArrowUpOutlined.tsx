@@ -13,3 +13,5 @@ export const ArrowUpOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ArrowUpOutlined.displayName = 'ArrowUpOutlined'

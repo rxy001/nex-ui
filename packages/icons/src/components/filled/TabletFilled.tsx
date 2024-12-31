@@ -13,3 +13,5 @@ export const TabletFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TabletFilled.displayName = 'TabletFilled'

@@ -13,3 +13,5 @@ export const LinuxOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+LinuxOutlined.displayName = 'LinuxOutlined'

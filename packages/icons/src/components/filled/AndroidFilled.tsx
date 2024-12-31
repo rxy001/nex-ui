@@ -13,3 +13,5 @@ export const AndroidFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AndroidFilled.displayName = 'AndroidFilled'

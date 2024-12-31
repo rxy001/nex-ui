@@ -13,3 +13,5 @@ export const MedicineBoxFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MedicineBoxFilled.displayName = 'MedicineBoxFilled'

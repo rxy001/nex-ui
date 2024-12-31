@@ -13,3 +13,5 @@ export const Html5Filled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+Html5Filled.displayName = 'Html5Filled'

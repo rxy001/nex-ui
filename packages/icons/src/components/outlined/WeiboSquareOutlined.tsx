@@ -13,3 +13,5 @@ export const WeiboSquareOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WeiboSquareOutlined.displayName = 'WeiboSquareOutlined'

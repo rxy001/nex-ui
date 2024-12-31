@@ -13,3 +13,5 @@ export const FunnelPlotFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FunnelPlotFilled.displayName = 'FunnelPlotFilled'

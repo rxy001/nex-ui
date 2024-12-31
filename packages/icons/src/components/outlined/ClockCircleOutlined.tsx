@@ -13,3 +13,5 @@ export const ClockCircleOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ClockCircleOutlined.displayName = 'ClockCircleOutlined'

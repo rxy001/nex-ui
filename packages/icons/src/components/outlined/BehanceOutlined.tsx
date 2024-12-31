@@ -13,3 +13,5 @@ export const BehanceOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BehanceOutlined.displayName = 'BehanceOutlined'

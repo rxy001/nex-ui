@@ -13,3 +13,5 @@ export const MenuOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MenuOutlined.displayName = 'MenuOutlined'

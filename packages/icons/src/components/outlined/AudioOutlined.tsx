@@ -13,3 +13,5 @@ export const AudioOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AudioOutlined.displayName = 'AudioOutlined'

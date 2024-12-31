@@ -13,3 +13,5 @@ export const DownOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DownOutlined.displayName = 'DownOutlined'

@@ -13,3 +13,5 @@ export const CalculatorFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CalculatorFilled.displayName = 'CalculatorFilled'

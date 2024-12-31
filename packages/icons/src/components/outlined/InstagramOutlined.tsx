@@ -13,3 +13,5 @@ export const InstagramOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+InstagramOutlined.displayName = 'InstagramOutlined'

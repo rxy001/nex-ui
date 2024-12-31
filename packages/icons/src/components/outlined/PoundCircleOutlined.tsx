@@ -13,3 +13,5 @@ export const PoundCircleOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PoundCircleOutlined.displayName = 'PoundCircleOutlined'

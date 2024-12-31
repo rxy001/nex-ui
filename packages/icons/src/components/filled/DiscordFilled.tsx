@@ -13,3 +13,5 @@ export const DiscordFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DiscordFilled.displayName = 'DiscordFilled'

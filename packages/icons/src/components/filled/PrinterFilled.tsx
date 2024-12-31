@@ -13,3 +13,5 @@ export const PrinterFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PrinterFilled.displayName = 'PrinterFilled'

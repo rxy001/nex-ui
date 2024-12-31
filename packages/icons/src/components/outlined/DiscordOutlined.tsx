@@ -13,3 +13,5 @@ export const DiscordOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DiscordOutlined.displayName = 'DiscordOutlined'

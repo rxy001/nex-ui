@@ -13,3 +13,5 @@ export const HeatMapOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+HeatMapOutlined.displayName = 'HeatMapOutlined'

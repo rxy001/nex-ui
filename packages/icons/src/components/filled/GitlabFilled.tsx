@@ -13,3 +13,5 @@ export const GitlabFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GitlabFilled.displayName = 'GitlabFilled'

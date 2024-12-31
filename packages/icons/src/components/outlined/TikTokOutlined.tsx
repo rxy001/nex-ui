@@ -13,3 +13,5 @@ export const TikTokOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TikTokOutlined.displayName = 'TikTokOutlined'

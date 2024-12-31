@@ -13,3 +13,5 @@ export const CompassOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CompassOutlined.displayName = 'CompassOutlined'

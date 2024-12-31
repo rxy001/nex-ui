@@ -13,3 +13,5 @@ export const TaobaoCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TaobaoCircleFilled.displayName = 'TaobaoCircleFilled'

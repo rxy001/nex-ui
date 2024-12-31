@@ -13,3 +13,5 @@ export const GithubOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GithubOutlined.displayName = 'GithubOutlined'

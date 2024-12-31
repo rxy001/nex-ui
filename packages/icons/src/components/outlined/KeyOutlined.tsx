@@ -13,3 +13,5 @@ export const KeyOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+KeyOutlined.displayName = 'KeyOutlined'

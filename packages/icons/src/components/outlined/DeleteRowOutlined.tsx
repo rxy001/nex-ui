@@ -13,3 +13,5 @@ export const DeleteRowOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DeleteRowOutlined.displayName = 'DeleteRowOutlined'

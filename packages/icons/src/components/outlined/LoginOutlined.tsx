@@ -13,3 +13,5 @@ export const LoginOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+LoginOutlined.displayName = 'LoginOutlined'

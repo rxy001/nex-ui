@@ -13,3 +13,5 @@ export const SelectOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SelectOutlined.displayName = 'SelectOutlined'

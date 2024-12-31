@@ -13,3 +13,5 @@ export const OpenAIOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+OpenAIOutlined.displayName = 'OpenAIOutlined'

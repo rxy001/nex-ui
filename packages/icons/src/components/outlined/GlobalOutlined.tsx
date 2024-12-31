@@ -13,3 +13,5 @@ export const GlobalOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GlobalOutlined.displayName = 'GlobalOutlined'

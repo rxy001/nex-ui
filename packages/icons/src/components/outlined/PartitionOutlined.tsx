@@ -13,3 +13,5 @@ export const PartitionOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PartitionOutlined.displayName = 'PartitionOutlined'

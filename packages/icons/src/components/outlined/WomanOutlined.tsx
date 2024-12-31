@@ -13,3 +13,5 @@ export const WomanOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WomanOutlined.displayName = 'WomanOutlined'

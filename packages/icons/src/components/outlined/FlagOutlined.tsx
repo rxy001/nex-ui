@@ -13,3 +13,5 @@ export const FlagOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FlagOutlined.displayName = 'FlagOutlined'

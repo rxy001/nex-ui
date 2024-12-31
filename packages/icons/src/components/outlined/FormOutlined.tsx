@@ -13,3 +13,5 @@ export const FormOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FormOutlined.displayName = 'FormOutlined'

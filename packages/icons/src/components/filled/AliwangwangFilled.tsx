@@ -13,3 +13,5 @@ export const AliwangwangFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AliwangwangFilled.displayName = 'AliwangwangFilled'

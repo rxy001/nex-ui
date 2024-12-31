@@ -13,3 +13,5 @@ export const MenuFoldOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MenuFoldOutlined.displayName = 'MenuFoldOutlined'

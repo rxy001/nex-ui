@@ -14,3 +14,5 @@ export const DeploymentUnitOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DeploymentUnitOutlined.displayName = 'DeploymentUnitOutlined'

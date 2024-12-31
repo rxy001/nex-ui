@@ -13,3 +13,5 @@ export const CalendarOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CalendarOutlined.displayName = 'CalendarOutlined'

@@ -13,3 +13,5 @@ export const AppstoreAddOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AppstoreAddOutlined.displayName = 'AppstoreAddOutlined'

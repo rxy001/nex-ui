@@ -13,3 +13,5 @@ export const DotNetOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DotNetOutlined.displayName = 'DotNetOutlined'

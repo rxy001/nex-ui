@@ -13,3 +13,5 @@ export const AppleOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AppleOutlined.displayName = 'AppleOutlined'

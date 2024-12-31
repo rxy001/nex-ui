@@ -16,3 +16,5 @@ export const GooglePlusCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+GooglePlusCircleFilled.displayName = 'GooglePlusCircleFilled'

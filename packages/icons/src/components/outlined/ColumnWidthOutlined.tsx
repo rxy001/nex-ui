@@ -13,3 +13,5 @@ export const ColumnWidthOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ColumnWidthOutlined.displayName = 'ColumnWidthOutlined'

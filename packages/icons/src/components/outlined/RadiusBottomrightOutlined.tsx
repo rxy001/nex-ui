@@ -16,3 +16,5 @@ export const RadiusBottomrightOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RadiusBottomrightOutlined.displayName = 'RadiusBottomrightOutlined'

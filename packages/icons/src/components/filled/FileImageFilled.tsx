@@ -13,3 +13,5 @@ export const FileImageFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileImageFilled.displayName = 'FileImageFilled'

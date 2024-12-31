@@ -13,3 +13,5 @@ export const FileProtectOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FileProtectOutlined.displayName = 'FileProtectOutlined'

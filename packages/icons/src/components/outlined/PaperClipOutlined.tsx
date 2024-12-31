@@ -13,3 +13,5 @@ export const PaperClipOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PaperClipOutlined.displayName = 'PaperClipOutlined'

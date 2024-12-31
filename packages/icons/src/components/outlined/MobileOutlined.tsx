@@ -13,3 +13,5 @@ export const MobileOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MobileOutlined.displayName = 'MobileOutlined'

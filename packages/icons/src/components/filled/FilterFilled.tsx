@@ -13,3 +13,5 @@ export const FilterFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FilterFilled.displayName = 'FilterFilled'

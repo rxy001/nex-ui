@@ -13,3 +13,5 @@ export const UsbOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+UsbOutlined.displayName = 'UsbOutlined'

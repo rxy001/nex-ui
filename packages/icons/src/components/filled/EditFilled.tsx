@@ -11,3 +11,5 @@ export const EditFilled = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
   )
   return <Icon {...props} ref={ref} />
 })
+
+EditFilled.displayName = 'EditFilled'

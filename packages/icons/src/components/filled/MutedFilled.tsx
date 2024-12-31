@@ -13,3 +13,5 @@ export const MutedFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MutedFilled.displayName = 'MutedFilled'

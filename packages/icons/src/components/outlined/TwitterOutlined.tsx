@@ -13,3 +13,5 @@ export const TwitterOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TwitterOutlined.displayName = 'TwitterOutlined'

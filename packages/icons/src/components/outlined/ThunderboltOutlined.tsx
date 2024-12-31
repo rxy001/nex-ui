@@ -13,3 +13,5 @@ export const ThunderboltOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ThunderboltOutlined.displayName = 'ThunderboltOutlined'

@@ -13,3 +13,5 @@ export const SortAscendingOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SortAscendingOutlined.displayName = 'SortAscendingOutlined'

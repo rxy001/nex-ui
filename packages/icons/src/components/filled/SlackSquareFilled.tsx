@@ -13,3 +13,5 @@ export const SlackSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SlackSquareFilled.displayName = 'SlackSquareFilled'

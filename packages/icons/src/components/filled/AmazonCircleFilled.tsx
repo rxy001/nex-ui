@@ -13,3 +13,5 @@ export const AmazonCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+AmazonCircleFilled.displayName = 'AmazonCircleFilled'

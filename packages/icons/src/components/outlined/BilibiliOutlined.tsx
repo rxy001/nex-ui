@@ -13,3 +13,5 @@ export const BilibiliOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BilibiliOutlined.displayName = 'BilibiliOutlined'

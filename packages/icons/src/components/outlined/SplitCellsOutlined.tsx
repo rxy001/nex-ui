@@ -13,3 +13,5 @@ export const SplitCellsOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SplitCellsOutlined.displayName = 'SplitCellsOutlined'

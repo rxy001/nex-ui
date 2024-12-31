@@ -13,3 +13,5 @@ export const PushpinFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+PushpinFilled.displayName = 'PushpinFilled'

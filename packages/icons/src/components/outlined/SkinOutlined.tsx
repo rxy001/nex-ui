@@ -13,3 +13,5 @@ export const SkinOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SkinOutlined.displayName = 'SkinOutlined'

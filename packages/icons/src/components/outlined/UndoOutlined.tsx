@@ -13,3 +13,5 @@ export const UndoOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+UndoOutlined.displayName = 'UndoOutlined'

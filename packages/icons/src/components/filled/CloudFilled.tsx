@@ -13,3 +13,5 @@ export const CloudFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CloudFilled.displayName = 'CloudFilled'

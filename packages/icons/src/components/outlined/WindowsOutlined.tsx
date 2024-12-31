@@ -13,3 +13,5 @@ export const WindowsOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+WindowsOutlined.displayName = 'WindowsOutlined'

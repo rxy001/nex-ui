@@ -13,3 +13,5 @@ export const DropboxSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DropboxSquareFilled.displayName = 'DropboxSquareFilled'

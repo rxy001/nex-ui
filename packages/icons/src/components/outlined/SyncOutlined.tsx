@@ -13,3 +13,5 @@ export const SyncOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SyncOutlined.displayName = 'SyncOutlined'

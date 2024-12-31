@@ -13,3 +13,5 @@ export const BarcodeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+BarcodeOutlined.displayName = 'BarcodeOutlined'

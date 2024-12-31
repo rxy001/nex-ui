@@ -16,3 +16,5 @@ export const SafetyCertificateOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+SafetyCertificateOutlined.displayName = 'SafetyCertificateOutlined'

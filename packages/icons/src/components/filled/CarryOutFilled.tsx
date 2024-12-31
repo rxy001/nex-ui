@@ -13,3 +13,5 @@ export const CarryOutFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CarryOutFilled.displayName = 'CarryOutFilled'

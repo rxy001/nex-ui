@@ -13,3 +13,5 @@ export const MailOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+MailOutlined.displayName = 'MailOutlined'

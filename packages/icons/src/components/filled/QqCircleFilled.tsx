@@ -13,3 +13,5 @@ export const QqCircleFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+QqCircleFilled.displayName = 'QqCircleFilled'

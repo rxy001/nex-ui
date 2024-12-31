@@ -13,3 +13,5 @@ export const ZhihuSquareFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ZhihuSquareFilled.displayName = 'ZhihuSquareFilled'

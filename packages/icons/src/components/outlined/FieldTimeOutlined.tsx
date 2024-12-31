@@ -13,3 +13,5 @@ export const FieldTimeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FieldTimeOutlined.displayName = 'FieldTimeOutlined'

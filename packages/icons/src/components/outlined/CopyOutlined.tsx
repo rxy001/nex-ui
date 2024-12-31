@@ -13,3 +13,5 @@ export const CopyOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CopyOutlined.displayName = 'CopyOutlined'

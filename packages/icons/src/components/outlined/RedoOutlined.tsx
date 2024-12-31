@@ -13,3 +13,5 @@ export const RedoOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RedoOutlined.displayName = 'RedoOutlined'

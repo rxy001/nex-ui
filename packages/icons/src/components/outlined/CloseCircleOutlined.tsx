@@ -13,3 +13,5 @@ export const CloseCircleOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CloseCircleOutlined.displayName = 'CloseCircleOutlined'

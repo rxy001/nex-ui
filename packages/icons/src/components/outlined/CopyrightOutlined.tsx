@@ -13,3 +13,5 @@ export const CopyrightOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+CopyrightOutlined.displayName = 'CopyrightOutlined'

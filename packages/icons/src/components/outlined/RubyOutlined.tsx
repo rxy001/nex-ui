@@ -13,3 +13,5 @@ export const RubyOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+RubyOutlined.displayName = 'RubyOutlined'

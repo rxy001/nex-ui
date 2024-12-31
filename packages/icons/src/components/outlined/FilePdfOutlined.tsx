@@ -13,3 +13,5 @@ export const FilePdfOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+FilePdfOutlined.displayName = 'FilePdfOutlined'

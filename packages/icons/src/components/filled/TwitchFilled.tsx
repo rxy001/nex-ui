@@ -13,3 +13,5 @@ export const TwitchFilled = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+TwitchFilled.displayName = 'TwitchFilled'

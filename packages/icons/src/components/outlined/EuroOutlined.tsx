@@ -13,3 +13,5 @@ export const EuroOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+EuroOutlined.displayName = 'EuroOutlined'

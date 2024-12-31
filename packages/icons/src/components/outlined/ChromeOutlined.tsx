@@ -13,3 +13,5 @@ export const ChromeOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+ChromeOutlined.displayName = 'ChromeOutlined'

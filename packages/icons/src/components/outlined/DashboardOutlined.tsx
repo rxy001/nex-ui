@@ -13,3 +13,5 @@ export const DashboardOutlined = forwardRef<SVGSVGElement, IconProps>(
     return <Icon {...props} ref={ref} />
   },
 )
+
+DashboardOutlined.displayName = 'DashboardOutlined'
