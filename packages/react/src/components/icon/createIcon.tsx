@@ -1,19 +1,21 @@
 /* eslint-disable react/prop-types */
 
 import clsx from 'clsx'
-import { forwardRef } from 'react'
 import { composeSx, styled } from '@nex-ui/styled'
-import type { ComponentType, Ref } from 'react'
+import type { ComponentType, ElementType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
+  forwardRef,
 } from '../utils'
 import type { IconOwnerState, InnerIconProps } from './types'
 
-const useUtilityClasses = (ownerState: IconOwnerState) => {
+const useUtilityClasses = <RootComponent extends ElementType = 'svg'>(
+  ownerState: IconOwnerState<RootComponent>,
+) => {
   const { prefix } = useNexContext()
 
   const iconRoot = `${prefix}-icon`
@@ -49,57 +51,62 @@ export const createIcon = (
 ) => {
   const Icon = styled(svgComponent)()
 
-  return forwardRef((inProps: InnerIconProps, ref: Ref<SVGElement>) => {
-    const props = useDefaultProps({
-      name: 'Icon',
-      props: { ...defaultProps, ...inProps },
-    })
+  return forwardRef(
+    <RootComponent extends ElementType = 'svg'>(
+      inProps: InnerIconProps<RootComponent>,
+      ref: Ref<SVGSVGElement>,
+    ) => {
+      const props = useDefaultProps({
+        name: 'Icon',
+        props: { ...defaultProps, ...inProps },
+      })
 
-    const {
-      sx,
-      color,
-      className,
-      spin = false,
-      fontSize = 'md',
-      width = '1em',
-      height = '1em',
-      ...remainingProps
-    } = props
-
-    const ownerState: IconOwnerState = {
-      ...props,
-      spin,
-      fontSize,
-      width,
-      height,
-      component: svgComponent,
-    }
-
-    const styles = useStyles({
-      ownerState,
-      name: 'Icon',
-    })
-
-    const classes = useUtilityClasses(ownerState)
-
-    const composed = composeSx(
-      {
+      const {
+        sx,
         color,
+        className,
+        spin = false,
+        fontSize = 'md',
+        width = '1em',
+        height = '1em',
+        ...remainingProps
+      } = props
+
+      const ownerState: IconOwnerState<RootComponent> = {
+        ...props,
+        spin,
+        fontSize,
         width,
         height,
-        fs: fontSize,
-        ...styles,
-      },
-      sx,
-    )
+        component: svgComponent,
+      }
 
-    return (
-      <Icon
-        sx={composed}
-        ref={ref}
-        className={clsx(classes.root, defaultClassName, className)}
-        {...remainingProps}
-      />
-    )
-  })
+      const styles = useStyles({
+        ownerState,
+        name: 'Icon',
+      })
+
+      const classes = useUtilityClasses(ownerState)
+
+      const composedSx = composeSx(
+        {
+          color,
+          width,
+          height,
+          fs: fontSize,
+          ...styles,
+        },
+        sx,
+      )
+
+      return (
+        <Icon
+          sx={composedSx}
+          ref={ref}
+          className={clsx(classes.root, defaultClassName, className)}
+          {...remainingProps}
+        />
+      )
+    },
+  )
 }

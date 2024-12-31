@@ -29,9 +29,12 @@ interface CSSOthersObject {
 export interface StyleObjectOverrides {}
 
 export interface StyleObject
-  extends Omit<RawCSSProperties, keyof StyleObjectOverrides>,
+  extends Omit<
+      RawCSSProperties & {
+        colorPalette?: StyleObject['color']
+      },
+      keyof StyleObjectOverrides
+    >,
     StyleObjectOverrides,
     CSSPseudos,
-    CSSOthersObject {
-  colorPalette?: StyleObject['color']
-}
+    CSSOthersObject {}

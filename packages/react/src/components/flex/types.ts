@@ -1,18 +1,22 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { ElementType, ReactNode } from 'react'
 import type { FlexVariants } from '../../theme/recipes'
 import type { NexCSSProperties } from '../../theme/types/generated/cssProperties'
-import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
+import type { ComponentUtilityClasses, OverrideProps } from '../types'
 
-export interface FlexProps
-  extends StyledComponentProps<HTMLAttributes<HTMLDivElement> & FlexVariants> {
+export interface FlexPropsOverrides {}
+
+type FlexOwnProps<RootComponent extends ElementType> = {
   children?: ReactNode
   justify?: NexCSSProperties['justifyContent']
   align?: NexCSSProperties['alignItems']
   direction?: NexCSSProperties['flexDirection']
   wrap?: NexCSSProperties['flexWrap']
   gap?: NexCSSProperties['gap']
-  // eslint-disable-next-line no-use-before-define
-  classes?: ComponentUtilityClasses<FlexOwnerState, 'root'>
-}
+  classes?: ComponentUtilityClasses<FlexOwnerState<RootComponent>, 'root'>
+} & FlexVariants
 
-export interface FlexOwnerState extends FlexProps {}
+export type FlexProps<RootComponent extends ElementType = 'div'> =
+  OverrideProps<RootComponent, FlexOwnProps<RootComponent>, FlexPropsOverrides>
+
+export type FlexOwnerState<RootComponent extends ElementType = 'div'> =
+  FlexProps<RootComponent>

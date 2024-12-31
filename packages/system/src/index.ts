@@ -13,6 +13,7 @@ export type {
   SlotRecipeConfig,
   SlotRecipeRuntimeFn,
   RecipeVariants,
+  RecipeSlots,
 } from './recipes'
 
 export {

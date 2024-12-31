@@ -1,19 +1,22 @@
 'use client'
 
 import clsx from 'clsx'
-import { forwardRef, useState, useEffect } from 'react'
-import type { ReactNode } from 'react'
+import { useState, useEffect } from 'react'
+import type { ElementType, ReactNode, Ref } from 'react'
 import { composeSx, nex } from '@nex-ui/styled'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
+  forwardRef,
 } from '../utils'
 import { useNexContext } from '../provider'
 import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
 
-const useUtilityClasses = (ownerState: AvatarOwnerState) => {
+const useUtilityClasses = <RootComponent extends ElementType>(
+  ownerState: AvatarOwnerState<RootComponent>,
+) => {
   const { prefix } = useNexContext()
 
   const avatarRoot = `${prefix}-avatar`
@@ -77,8 +80,11 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
   return loaded
 }
 
-export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  (inProps, ref) => {
+export const Avatar = forwardRef(
+  <RootComponent extends ElementType = 'div'>(
+    inProps: AvatarProps<RootComponent>,
+    ref: Ref<HTMLDivElement>,
+  ) => {
     const props = useDefaultProps({
       name: 'Avatar',
       props: inProps,
@@ -109,7 +115,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       ownerState,
     })
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useUtilityClasses<RootComponent>(ownerState)
 
     const loaded = useLoaded({ src, srcSet })
 
@@ -130,14 +136,15 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     } else if (!!childrenProp && children !== 0) {
       children = childrenProp
     } else if (hasImg && alt) {
-      ;[children] = alt
+      // eslint-disable-next-line prefer-destructuring
+      children = alt[0]
     }
 
     return (
       <nex.div
-        ref={ref}
         className={clsx(className, classes.root)}
         sx={composeSx(styles.root, sx)}
+        ref={ref}
         {...remainingProps}
       >
         {children}
@@ -145,3 +152,5 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     )
   },
 )
+
+Avatar.displayName = 'Avatar'

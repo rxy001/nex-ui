@@ -1,2 +1,2 @@
 export { Flex } from './Flex'
-export type { FlexProps, FlexOwnerState } from './types'
+export type { FlexProps, FlexOwnerState, FlexPropsOverrides } from './types'

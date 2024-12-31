@@ -7,4 +7,5 @@ export type {
   SlotRecipeConfig,
   SlotRecipeRuntimeFn,
   RecipeVariants,
+  RecipeSlots,
 } from './types'

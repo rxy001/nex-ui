@@ -1,18 +1,21 @@
 'use client'
 
 import clsx from 'clsx'
-import { forwardRef } from 'react'
 import { composeSx, nex } from '@nex-ui/styled'
+import type { Ref, ElementType } from 'react'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
+  forwardRef,
 } from '../utils'
-import type { DividerOwnerState, DividerProps } from './types'
 import { useNexContext } from '../provider'
+import type { DividerOwnerState, DividerProps } from './types'
 
-const useUtilityClasses = (ownerState: DividerOwnerState) => {
+const useUtilityClasses = <RootComponent extends ElementType = 'hr'>(
+  ownerState: DividerOwnerState<RootComponent>,
+) => {
   const { prefix } = useNexContext()
 
   const dividerRoot = `${prefix}-divider`
@@ -33,8 +36,11 @@ const useUtilityClasses = (ownerState: DividerOwnerState) => {
   return composedClasses
 }
 
-export const Divider = forwardRef<HTMLHRElement, DividerProps>(
-  (inProps, ref) => {
+export const Divider = forwardRef(
+  <RootComponent extends ElementType = 'hr'>(
+    inProps: DividerProps<RootComponent>,
+    ref: Ref<HTMLHRElement>,
+  ) => {
     const props = useDefaultProps({ name: 'Divider', props: inProps })
 
     const {
@@ -46,7 +52,7 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(
 
     const ownerState = { ...props, orientation }
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useUtilityClasses<RootComponent>(ownerState)
 
     const style = useStyles({ name: 'Divider', ownerState })
 
@@ -62,3 +68,5 @@ export const Divider = forwardRef<HTMLHRElement, DividerProps>(
     )
   },
 )
+
+Divider.displayName = 'Divider'

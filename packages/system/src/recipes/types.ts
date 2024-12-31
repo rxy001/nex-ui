@@ -141,3 +141,6 @@ export type RecipeVariants<
   } & NonNullable<unknown>,
   undefined
 >
+
+export type RecipeSlots<RecipeFn extends SlotRecipeRuntimeFn> =
+  RecipeFn['slots'][number]

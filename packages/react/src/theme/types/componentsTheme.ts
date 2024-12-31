@@ -18,11 +18,15 @@ import type {
   DividerProps,
   AvatarProps,
   AvatarOwnerState,
+  BoxProps,
 } from '../../components'
 import type { InnerIconProps } from '../../components/icon/types'
 import type { ComponentThemeFn, ComponentThemeObject } from './utils'
 
 export type ComponentsTheme = {
+  Box?: {
+    defaultProps?: BoxProps
+  }
   Button?: {
     styleOverrides?:
       | ComponentThemeObject<ButtonRecipe>

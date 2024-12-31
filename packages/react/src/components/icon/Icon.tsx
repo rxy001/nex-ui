@@ -1,15 +1,23 @@
 'use client'
 
-import { forwardRef, useMemo } from 'react'
+import { useMemo } from 'react'
+import type { ElementType, Ref } from 'react'
 import { createIcon } from './createIcon'
+import { forwardRef } from '../utils'
 import type { IconProps } from './types'
 
-export const Icon = forwardRef<SVGElement, IconProps>((inProps, ref) => {
-  const { component, ...props } = inProps
+export const Icon = forwardRef(
+  <RootComponent extends ElementType = 'svg'>(
+    inProps: IconProps<RootComponent>,
+    ref: Ref<SVGSVGElement>,
+  ) => {
+    const { component, ...props } = inProps
 
-  const InnerIcon = useMemo(() => createIcon(component), [component])
+    const InnerIcon = useMemo(() => createIcon(component), [component])
 
-  return <InnerIcon {...props} ref={ref} />
-})
+    // @ts-ignore
+    return <InnerIcon {...props} ref={ref} />
+  },
+)
 
 Icon.displayName = 'Icon'

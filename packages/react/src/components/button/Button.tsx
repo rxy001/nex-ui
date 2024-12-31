@@ -1,21 +1,24 @@
 'use client'
 
-import { forwardRef, useMemo } from 'react'
+import { useMemo } from 'react'
 import clsx from 'clsx'
 import { LoadingOutlined } from '@nex-ui/icons'
 import { useEvent } from '@nex-ui/utils'
 import { nex, composeSx } from '@nex-ui/styled'
-import type { Ref, MouseEvent } from 'react'
+import type { Ref, MouseEvent, ElementType } from 'react'
 import { useNexContext } from '../provider'
 import {
   useStyles,
   useDefaultProps,
   composeClasses,
   getUtilityClass,
+  forwardRef,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
 
-const useUtilityClasses = (ownerState: ButtonOwnerState) => {
+const useUtilityClasses = <T extends ElementType>(
+  ownerState: ButtonOwnerState<T>,
+) => {
   const { prefix } = useNexContext()
 
   const btnRoot = `${prefix}-btn`
@@ -63,108 +66,107 @@ const useUtilityClasses = (ownerState: ButtonOwnerState) => {
   return composedClasses
 }
 
-export const Button = forwardRef<
-  HTMLButtonElement | HTMLAnchorElement,
-  ButtonProps
->((inProps, ref) => {
-  const props = useDefaultProps({
-    name: 'Button',
-    props: inProps,
-  })
+export const Button = forwardRef(
+  <RootComponent extends ElementType = 'button'>(
+    inProps: ButtonProps<RootComponent>,
+    ref: Ref<HTMLButtonElement>,
+  ) => {
+    const props = useDefaultProps({
+      name: 'Button',
+      props: inProps,
+    })
 
-  const {
-    as,
-    sx,
-    className,
-    children,
-    variant = 'filled',
-    size = 'md',
-    radius = size,
-    iconOnly = false,
-    loading = false,
-    disabled = false,
-    fullWidth = false,
-    color = 'blue',
-    startIcon: startIconProp,
-    endIcon: endIconProp,
-    onClick: onClickProp,
-    ...remainingProps
-  } = props
+    const {
+      as,
+      sx,
+      className,
+      children,
+      variant = 'filled',
+      size = 'md',
+      radius = size,
+      iconOnly = false,
+      loading = false,
+      disabled = false,
+      fullWidth = false,
+      color = 'blue',
+      startIcon: startIconProp,
+      endIcon: endIconProp,
+      onClick: onClickProp,
+      ...remainingProps
+    } = props
 
-  const htmlElement: keyof JSX.IntrinsicElements =
-    as !== undefined
-      ? as
-      : typeof remainingProps.href === 'string' && remainingProps.href
-        ? 'a'
-        : 'button'
+    const htmlElement =
+      as !== undefined
+        ? as
+        : typeof remainingProps.href === 'string' && remainingProps.href
+          ? 'a'
+          : 'button'
 
-  const ownerState: ButtonOwnerState = {
-    ...props,
-    variant,
-    size,
-    radius,
-    iconOnly,
-    loading,
-    disabled,
-    fullWidth,
-    color,
-    as: htmlElement,
-  }
+    const ownerState: ButtonOwnerState<RootComponent> = {
+      ...props,
+      variant,
+      size,
+      radius,
+      iconOnly,
+      loading,
+      disabled,
+      fullWidth,
+      color,
+    }
 
-  const classes = useUtilityClasses(ownerState)
+    const classes = useUtilityClasses<RootComponent>(ownerState)
 
-  const styles = useStyles({
-    ownerState,
-    name: 'Button',
-  })
+    const styles = useStyles({
+      ownerState,
+      name: 'Button',
+    })
 
-  const onClick = useEvent(
-    (event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    const onClick = useEvent((event: MouseEvent) => {
       if (loading || disabled) {
         event.preventDefault()
         return
       }
-      ;(onClickProp as ButtonProps['onClick'])?.(event)
-    },
-  )
+      onClickProp?.(event)
+    })
 
-  const startIcon = useMemo(() => {
-    return (
-      (loading || startIconProp) && (
-        <nex.span sx={styles.startIcon} className={classes.startIcon}>
-          {loading ? <LoadingOutlined /> : startIconProp}
-        </nex.span>
+    const startIcon = useMemo(() => {
+      return (
+        (loading || startIconProp) && (
+          <nex.span sx={styles.startIcon} className={classes.startIcon}>
+            {loading ? <LoadingOutlined /> : startIconProp}
+          </nex.span>
+        )
       )
-    )
-  }, [styles.startIcon, loading, startIconProp, classes.startIcon])
+    }, [styles.startIcon, loading, startIconProp, classes.startIcon])
 
-  const endIcon = useMemo(() => {
-    return (
-      endIconProp && (
-        <nex.span sx={styles.endIcon} className={classes.endIcon}>
-          {endIconProp}
-        </nex.span>
+    const endIcon = useMemo(() => {
+      return (
+        endIconProp && (
+          <nex.span sx={styles.endIcon} className={classes.endIcon}>
+            {endIconProp}
+          </nex.span>
+        )
       )
+    }, [styles.endIcon, endIconProp, classes.endIcon])
+
+    const composedSx = composeSx(styles.root, sx)
+
+    return (
+      <nex.button
+        sx={composedSx}
+        onClick={onClick}
+        as={htmlElement}
+        className={clsx(classes.root, className)}
+        ref={ref as Ref<HTMLButtonElement>}
+        disabled={disabled || loading}
+        {...remainingProps}
+      >
+        {startIcon}
+        {children}
+        {endIcon}
+      </nex.button>
     )
-  }, [styles.endIcon, endIconProp, classes.endIcon])
-
-  const composedSx = composeSx(styles.root, sx)
-
-  return (
-    <nex.button
-      sx={composedSx}
-      onClick={onClick}
-      as={htmlElement}
-      className={clsx(classes.root, className)}
-      ref={ref as Ref<HTMLButtonElement>}
-      disabled={disabled || loading}
-      {...remainingProps}
-    >
-      {startIcon}
-      {children}
-      {endIcon}
-    </nex.button>
-  )
-})
+  },
+)
 
 Button.displayName = 'Button'

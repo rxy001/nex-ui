@@ -3,13 +3,12 @@ import type {
   ComponentType,
   FunctionComponent,
   JSX,
+  ElementType,
 } from 'react'
 import type { StyleObject } from '@nex-ui/system'
 
-type HTMLElementTagName = keyof JSX.IntrinsicElements
-
 export interface StyledComponentProps {
-  as?: HTMLElementTagName
+  as?: ElementType
   sx?: StyleObject | StyleObject[]
 }
 
@@ -21,6 +20,8 @@ export interface CreateStyledComponent<
     styles?: StyleObject | StyleObject[],
   ): FunctionComponent<ComponentProps & SpecificComponentProps>
 }
+
+type HTMLElementTagName = keyof JSX.IntrinsicElements
 
 export interface CreateStyled {
   <Tag extends HTMLElementTagName>(

@@ -49,16 +49,20 @@
   },
   "rules": {
     "no-console": ["warn", { "allow": ["error"] }],
-    "no-use-before-define": [
-      "error",
-      {
-        "functions": false
-      }
-    ],
+
     "no-sparse-arrays": "off",
     "no-nested-ternary": "off",
     "no-underscore-dangle": "off",
-
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true
+      }
+    ],
+    "no-use-before-define": "off",
+    "react/prop-types": "off",
     "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",

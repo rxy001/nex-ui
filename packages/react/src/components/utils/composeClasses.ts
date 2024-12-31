@@ -11,13 +11,13 @@ export function composeClasses<ClassKey extends string>(
 
   // @ts-expect-error
   forEach(slots, (value: string[], slot: ClassKey) => {
-    let className = (classes?.[slot] ?? []) as string[]
+    let className = classes?.[slot] ?? []
 
     if (isFunction(className)) {
       className = className(ownerState)
     }
 
-    className = isString(className) ? [className] : className
+    className = (isString(className) ? [className] : className) as string[]
 
     const result = reduce(
       value,

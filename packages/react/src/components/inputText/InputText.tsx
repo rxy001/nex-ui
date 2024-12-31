@@ -1,22 +1,25 @@
 'use client'
 
 import clsx from 'clsx'
-import { forwardRef, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { nex, composeSx } from '@nex-ui/styled'
 import { composeRef, useEvent } from '@nex-ui/utils'
 import { CloseCircleFilled } from '@nex-ui/icons'
-import type { ChangeEvent } from 'react'
+import type { ChangeEvent, ElementType, Ref } from 'react'
 import { useNexContext } from '../provider'
 import {
   useStyles,
   useDefaultProps,
   composeClasses,
   getUtilityClass,
+  forwardRef,
 } from '../utils'
 import type { InputTextOwnerState, InputTextProps } from './types'
 import { Button } from '../button'
 
-const useUtilityClasses = (ownerState: InputTextOwnerState) => {
+const useUtilityClasses = <InputComponent extends ElementType = 'input'>(
+  ownerState: InputTextOwnerState<InputComponent>,
+) => {
   const { prefix } = useNexContext()
 
   const inputTextRoot = `${prefix}-input-text`
@@ -49,8 +52,11 @@ const useUtilityClasses = (ownerState: InputTextOwnerState) => {
   return composedClasses
 }
 
-export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
-  (inProps, ref) => {
+export const InputText = forwardRef(
+  <InputComponent extends ElementType = 'input'>(
+    inProps: InputTextProps<InputComponent>,
+    ref: Ref<HTMLInputElement>,
+  ) => {
     const props = useDefaultProps({
       name: 'InputText',
       props: inProps,
@@ -58,14 +64,22 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
 
     const {
       sx,
+      as,
+      id,
       prefix,
       suffix,
       className,
       defaultValue,
       onClear,
+      onBlur,
+      onFocus,
+      onKeyUp,
+      onKeyDown,
+      placeholder,
       onChange: onChangeProp,
       value: valueProp,
       color = 'blue',
+      type = 'text',
       disabled = false,
       variant = 'outlined',
       fullWidth = false,
@@ -73,10 +87,9 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       size = 'md',
       radius = size,
       clearable = false,
-      ...remainingProps
     } = props
 
-    const ownerState: InputTextOwnerState = {
+    const ownerState: InputTextOwnerState<InputComponent> = {
       ...props,
       color,
       disabled,
@@ -88,7 +101,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
     }
 
     const inputRef = useRef<HTMLInputElement>(null)
-    const composedRef = composeRef<HTMLInputElement>(ref as any, inputRef)
+    const composedRef = composeRef<HTMLInputElement>(ref, inputRef)
     const [value, setValue] = useState(valueProp ?? defaultValue)
 
     if (valueProp !== undefined && valueProp !== value) {
@@ -100,7 +113,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       name: 'InputText',
     })
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useUtilityClasses<InputComponent>(ownerState)
 
     const composedSx = composeSx(styles.root, sx)
 
@@ -119,14 +132,20 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       <nex.span sx={composedSx} className={clsx(classes.root, className)}>
         {prefix}
         <nex.input
+          as={as}
           ref={composedRef}
-          type="text"
           value={value}
           sx={styles.input}
           onChange={onChange}
           disabled={disabled}
           className={classes.input}
-          {...remainingProps}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          onKeyUp={onKeyUp}
+          onKeyDown={onKeyDown}
+          placeholder={placeholder}
+          type={type}
+          id={id}
         />
         {clearable && value && !disabled && (
           <Button
@@ -146,3 +165,5 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
     )
   },
 )
+
+InputText.displayName = 'InputText'

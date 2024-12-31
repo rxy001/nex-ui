@@ -1,23 +1,46 @@
-import type { InputHTMLAttributes, ReactNode } from 'react'
-import type { InputTextVariants } from '../../theme/recipes'
-import type { ComponentUtilityClasses, StyledComponentProps } from '../types'
+import type {
+  ReactNode,
+  ElementType,
+  ComponentPropsWithRef,
+  InputHTMLAttributes,
+} from 'react'
+import type { InputTextVariants, InputTextSlots } from '../../theme/recipes'
+import type { ComponentUtilityClasses, Overwrite, CommonProps } from '../types'
 
-// eslint-disable-next-line no-use-before-define
-export interface InputTextOwnerState extends InputTextProps {}
+export interface InputTextPropsOverrides {}
 
-export interface InputTextProps
-  extends StyledComponentProps<
-    Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> &
-      InputTextVariants
-  > {
-  classes?: ComponentUtilityClasses<
-    InputTextOwnerState,
-    'root' | 'input' | 'clearBtn'
-  >
-  defaultValue?: string
-  prefix?: ReactNode
-  suffix?: ReactNode
-  value?: string
-  clearable?: boolean
-  onClear?: () => void
-}
+type InputTextOwnProps<
+  InputComponent extends ElementType,
+  InputComponentProps extends ComponentPropsWithRef<InputComponent>,
+> = Overwrite<
+  {
+    defaultValue?: string
+    prefix?: ReactNode
+    suffix?: ReactNode
+    value?: string
+    clearable?: boolean
+    onClear?: () => void
+    ref?: InputComponentProps['ref']
+    onChange?: InputComponentProps['onChange']
+    onBlur?: InputComponentProps['onBlur']
+    onFocus?: InputComponentProps['onFocus']
+    onKeyUp?: InputComponentProps['onKeyUp']
+    onKeyDown?: InputComponentProps['onKeyDown']
+    placeholder?: string
+    type?: InputHTMLAttributes<InputComponent>['type']
+    id?: string
+    className?: string
+    classes?: ComponentUtilityClasses<
+      InputTextOwnerState<InputComponent>,
+      InputTextSlots
+    >
+  } & InputTextVariants &
+    CommonProps<InputComponent>,
+  InputTextPropsOverrides
+>
+
+export type InputTextProps<InputComponent extends ElementType = 'input'> =
+  InputTextOwnProps<InputComponent, ComponentPropsWithRef<InputComponent>>
+
+export type InputTextOwnerState<InputComponent extends ElementType = 'input'> =
+  InputTextProps<InputComponent>

@@ -1,8 +1,8 @@
 'use client'
 
 import clsx from 'clsx'
-import { forwardRef } from 'react'
 import { nex, composeSx } from '@nex-ui/styled'
+import type { Ref, ElementType } from 'react'
 import { useNexContext } from '../provider'
 import type { FlexOwnerState, FlexProps } from './types'
 import {
@@ -10,9 +10,12 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
+  forwardRef,
 } from '../utils'
 
-const useUtilityClasses = (ownerState: FlexOwnerState) => {
+const useUtilityClasses = <RootComponent extends ElementType = 'div'>(
+  ownerState: FlexOwnerState<RootComponent>,
+) => {
   const { prefix } = useNexContext()
 
   const flexRoot = `${prefix}-flex`
@@ -41,56 +44,61 @@ const useUtilityClasses = (ownerState: FlexOwnerState) => {
   return composedClasses
 }
 
-export const Flex = forwardRef<HTMLDivElement, FlexProps>((inProps, ref) => {
-  const props = useDefaultProps({ name: 'Flex', props: inProps })
+export const Flex = forwardRef(
+  <RootComponent extends ElementType = 'div'>(
+    inProps: FlexProps<RootComponent>,
+    ref: Ref<HTMLDivElement>,
+  ) => {
+    const props = useDefaultProps({ name: 'Flex', props: inProps })
 
-  const {
-    sx,
-    as,
-    gap,
-    children,
-    className,
-    justify,
-    align,
-    wrap,
-    direction = 'row',
-    inline = false,
-    ...remainingProps
-  } = props
-
-  const ownerState: FlexOwnerState = {
-    ...props,
-    direction,
-    inline,
-  }
-
-  const classes = useUtilityClasses(ownerState)
-
-  const styles = useStyles({ name: 'Flex', ownerState })
-
-  const composedSx = composeSx(
-    {
+    const {
+      sx,
+      as,
       gap,
-      flexDirection: direction,
-      alignItems: align,
-      justifyContent: justify,
-      flexWrap: wrap,
-      ...styles,
-    },
-    sx,
-  )
+      children,
+      className,
+      justify,
+      align,
+      wrap,
+      direction = 'row',
+      inline = false,
+      ...remainingProps
+    } = props
 
-  return (
-    <nex.div
-      sx={composedSx}
-      ref={ref}
-      as={as}
-      className={clsx(classes.root, className)}
-      {...remainingProps}
-    >
-      {children}
-    </nex.div>
-  )
-})
+    const ownerState = {
+      ...props,
+      direction,
+      inline,
+    }
+
+    const classes = useUtilityClasses(ownerState)
+
+    const styles = useStyles({ name: 'Flex', ownerState })
+
+    const composedSx = composeSx(
+      {
+        gap,
+        flexDirection: direction,
+        alignItems: align,
+        justifyContent: justify,
+        flexWrap: wrap,
+        ...styles,
+      },
+      sx,
+    )
+
+    return (
+      <nex.div
+        sx={composedSx}
+        ref={ref}
+        as={as}
+        className={clsx(classes.root, className)}
+        {...remainingProps}
+      >
+        {children}
+      </nex.div>
+    )
+  },
+)
 
 Flex.displayName = 'Flex'
