@@ -1,13 +1,20 @@
+import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
+import type { StyledComponentProps } from '@nex-ui/styled'
+import type { InputTextVariants } from '../../theme/recipes'
 import type {
-  ReactNode,
-  ElementType,
-  ComponentPropsWithRef,
-  InputHTMLAttributes,
-} from 'react'
-import type { InputTextVariants, InputTextSlots } from '../../theme/recipes'
-import type { ComponentUtilityClasses, Overwrite, CommonProps } from '../types'
+  ComponentUtilityClasses,
+  Overwrite,
+  CreateSlotProps,
+} from '../types'
+import type { ButtonProps } from '../button'
 
 export interface InputTextPropsOverrides {}
+
+type InputTextSlotProps<InputComponentProps> = CreateSlotProps<{
+  root?: ComponentPropsWithRef<'span'>
+  input?: InputComponentProps
+  clearBtn?: ButtonProps
+}>
 
 type InputTextOwnProps<
   InputComponent extends ElementType,
@@ -20,22 +27,26 @@ type InputTextOwnProps<
     value?: string
     clearable?: boolean
     onClear?: () => void
-    ref?: InputComponentProps['ref']
-    onChange?: InputComponentProps['onChange']
-    onBlur?: InputComponentProps['onBlur']
-    onFocus?: InputComponentProps['onFocus']
-    onKeyUp?: InputComponentProps['onKeyUp']
-    onKeyDown?: InputComponentProps['onKeyDown']
-    placeholder?: string
-    type?: InputHTMLAttributes<InputComponent>['type']
-    id?: string
-    className?: string
     classes?: ComponentUtilityClasses<
       InputTextOwnerState<InputComponent>,
-      InputTextSlots
+      'root' | 'input' | 'clearBtn'
     >
-  } & InputTextVariants &
-    CommonProps<InputComponent>,
+    slotProps?: InputTextSlotProps<InputComponentProps>
+  } & Pick<
+    InputComponentProps,
+    | 'ref'
+    | 'onChange'
+    | 'onBlur'
+    | 'onFocus'
+    | 'onKeyUp'
+    | 'onKeyDown'
+    | 'placeholder'
+    | 'type'
+    | 'id'
+    | 'className'
+  > &
+    InputTextVariants &
+    Pick<StyledComponentProps<InputComponent>, 'sx' | 'as'>,
   InputTextPropsOverrides
 >
 

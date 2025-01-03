@@ -91,7 +91,7 @@ export const Flex = forwardRef(
       <nex.div
         sx={composedSx}
         ref={ref}
-        as={as}
+        as={as as ElementType}
         className={clsx(classes.root, className)}
         {...remainingProps}
       >

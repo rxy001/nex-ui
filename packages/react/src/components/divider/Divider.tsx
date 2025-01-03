@@ -45,6 +45,7 @@ export const Divider = forwardRef(
 
     const {
       sx,
+      as,
       className,
       orientation = 'horizontal',
       ...remainingProps
@@ -56,12 +57,11 @@ export const Divider = forwardRef(
 
     const style = useStyles({ name: 'Divider', ownerState })
 
-    const composedSx = composeSx(style, sx)
-
     return (
       <nex.hr
+        as={as as ElementType}
         ref={ref}
-        sx={composedSx}
+        sx={composeSx(style, sx)}
         className={clsx(classes.root, className)}
         {...remainingProps}
       />

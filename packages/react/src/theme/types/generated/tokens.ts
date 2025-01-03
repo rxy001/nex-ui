@@ -125,6 +125,11 @@ export interface Tokens {
     | '8'
     | '9'
     | '10'
+    | '11'
+    | '12'
+    | '13'
+    | '14'
+    | '15'
     | 'max'
     | 'min'
     | 'full'
@@ -157,7 +162,7 @@ export interface Tokens {
     | '-2.5'
     | '-3.5'
   fontFamilies: 'heading' | 'body' | 'mono'
-  fontSizes: 'sm' | 'md' | 'lg'
+  fontSizes: 'sm' | 'md' | 'lg' | 'xl'
   fontWeights:
     | 'hairline'
     | 'thin'
@@ -179,15 +184,15 @@ export interface Colors {
   white?: '#fff'
   black?: '#000'
   blue?: {
-    50?: '#e6f4ff'
-    100?: '#dbeafe'
-    200?: '#bfdbfe'
-    300?: '#a3cfff'
-    400?: '#60a5fa'
-    500?: '#3b82f6'
-    600?: '#2563eb'
-    700?: '#173da6'
-    800?: '#1a3478'
+    50?: '#E6F1FE'
+    100?: '#CCE3FD'
+    200?: '#99C7FB'
+    300?: '#66AAF9'
+    400?: '#338EF7'
+    500?: '#006FEE'
+    600?: '#005BC4'
+    700?: '#004493'
+    800?: '#002E62'
     900?: '#14204a'
     contrastText?: '#fff'
   }
@@ -218,15 +223,15 @@ export interface Colors {
     contrastText?: '#fff'
   }
   purple?: {
-    50?: '#faf5ff'
-    100?: '#f3e8ff'
-    200?: '#e9d5ff'
-    300?: '#d8b4fe'
-    400?: '#c084fc'
-    500?: '#a855f7'
-    600?: '#9333ea'
-    700?: '#641ba3'
-    800?: '#4a1772'
+    50?: '#F2EAFA'
+    100?: '#E4D4F4'
+    200?: '#C9A9E9'
+    300?: '#AE7EDE'
+    400?: '#9353D3'
+    500?: '#7828C8'
+    600?: '#6020A0'
+    700?: '#481878'
+    800?: '#301050'
     900?: '#2f0553'
     contrastText?: '#fff'
   }
@@ -244,17 +249,17 @@ export interface Colors {
     contrastText?: '#fff'
   }
   yellow?: {
-    50?: '#fefce8'
-    100?: '#fef9c3'
-    200?: '#fef08a'
-    300?: '#fde047'
-    400?: '#facc15'
-    500?: '#eab308'
-    600?: '#ca8a04'
-    700?: '#a16207'
-    800?: '#854d0e'
+    50?: '#FEFCE8'
+    100?: '#FDEDD3'
+    200?: '#FBDBA7'
+    300?: '#F9C97C'
+    400?: '#F7B750'
+    500?: '#F5A524'
+    600?: '#C4841D'
+    700?: '#936316'
+    800?: '#62420E'
     900?: '#713f12'
-    contrastText?: '#fff'
+    contrastText?: '#000'
   }
   orange?: {
     50?: '#fff7ed'
@@ -283,17 +288,17 @@ export interface Colors {
     contrastText?: '#fff'
   }
   green?: {
-    50?: '#f0fdf4'
-    100?: '#dcfce7'
-    200?: '#bbf7d0'
-    300?: '#86efac'
-    400?: '#4ade80'
-    500?: '#22c55e'
-    600?: '#16a34a'
-    700?: '#15803d'
-    800?: '#166534'
-    900?: '#14532d'
-    contrastText?: '#fff'
+    50?: '#E8FAF0'
+    100?: '#D1F4E0'
+    200?: '#A2E9C1'
+    300?: '#74DFA2'
+    400?: '#45D483'
+    500?: '#17C964'
+    600?: '#12A150'
+    700?: '#0E793C'
+    800?: '#095028'
+    900?: '#052814'
+    contrastText?: '#000'
   }
   rose?: {
     50?: '#fff1f2'
@@ -321,6 +326,11 @@ export interface Sizes {
   8?: '32px'
   9?: '36px'
   10?: '40px'
+  11?: '44px'
+  12?: '48px'
+  13?: '52px'
+  14?: '56px'
+  15?: '60px'
   max?: 'max-content'
   min?: 'min-content'
   full?: '100%'
@@ -353,6 +363,7 @@ export interface FontSizes {
   sm?: '12px'
   md?: '14px'
   lg?: '16px'
+  xl?: '18px'
 }
 
 export interface FontWeights {
@@ -376,9 +387,9 @@ export interface Borders {
 }
 
 export interface Radii {
-  sm?: '4px'
-  md?: '6px'
-  lg?: '8px'
+  sm?: '6px'
+  md?: '9px'
+  lg?: '12px'
 }
 
 export interface LineHeights {

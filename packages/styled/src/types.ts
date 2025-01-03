@@ -1,49 +1,48 @@
 import type {
   ComponentProps as ReactComponentProps,
   ComponentType,
-  FunctionComponent,
   JSX,
   ElementType,
+  ReactNode,
+  ComponentPropsWithRef,
 } from 'react'
 import type { StyleObject } from '@nex-ui/system'
 
-export interface StyledComponentProps {
-  as?: ElementType
+type CommonProps<E extends ElementType = ElementType> = {
+  as?: E
   sx?: StyleObject | StyleObject[]
 }
 
-export interface CreateStyledComponent<
-  ComponentProps extends NonNullable<unknown>,
-  SpecificComponentProps extends NonNullable<unknown> = NonNullable<unknown>,
-> {
+type Overwrite<K, T> = Omit<K, keyof T> & T
+
+export type StyledComponentProps<
+  E extends ElementType = ElementType,
+  Props = NonNullable<unknown>,
+> = Overwrite<ComponentPropsWithRef<E>, Overwrite<CommonProps<E>, Props>>
+
+export interface CreateStyledComponent<Tag extends ElementType> {
   (
     styles?: StyleObject | StyleObject[],
-  ): FunctionComponent<ComponentProps & SpecificComponentProps>
+  ): <E extends ElementType = Tag>(props: StyledComponentProps<E>) => ReactNode
 }
 
 type HTMLElementTagName = keyof JSX.IntrinsicElements
 
 export interface CreateStyled {
-  <Tag extends HTMLElementTagName>(
-    tag: Tag,
-  ): CreateStyledComponent<StyledComponentProps, JSX.IntrinsicElements[Tag]>
-
+  <Tag extends HTMLElementTagName>(tag: Tag): CreateStyledComponent<Tag>
   <C extends ComponentType<ReactComponentProps<C>>>(
     component: C,
-  ): CreateStyledComponent<StyledComponentProps & ReactComponentProps<C>>
+  ): CreateStyledComponent<C>
 }
 
 type StyledTags = {
-  [Tag in HTMLElementTagName]: CreateStyledComponent<
-    StyledComponentProps,
-    JSX.IntrinsicElements[Tag]
-  >
+  [Tag in HTMLElementTagName]: CreateStyledComponent<Tag>
 }
 
-export type Nex = {
-  [Tag in HTMLElementTagName]: FunctionComponent<
-    StyledComponentProps & JSX.IntrinsicElements[Tag]
-  >
+export type NexFactory = {
+  [Tag in HTMLElementTagName]: <E extends ElementType = Tag>(
+    props: StyledComponentProps<E>,
+  ) => ReactNode
 }
 
 export interface Styled extends StyledTags, CreateStyled {}

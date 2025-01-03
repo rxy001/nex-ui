@@ -81,6 +81,7 @@ export const Button = forwardRef(
       sx,
       className,
       children,
+      slotProps,
       variant = 'filled',
       size = 'md',
       radius = size,
@@ -95,7 +96,7 @@ export const Button = forwardRef(
       ...remainingProps
     } = props
 
-    const htmlElement =
+    const rootElement: ElementType =
       as !== undefined
         ? as
         : typeof remainingProps.href === 'string' && remainingProps.href
@@ -132,33 +133,45 @@ export const Button = forwardRef(
     const startIcon = useMemo(() => {
       return (
         (loading || startIconProp) && (
-          <nex.span sx={styles.startIcon} className={classes.startIcon}>
+          <nex.span
+            {...slotProps?.startIcon}
+            sx={composeSx(styles.startIcon, slotProps?.startIcon?.sx)}
+            className={clsx(classes.startIcon, slotProps?.startIcon?.className)}
+          >
             {loading ? <LoadingOutlined /> : startIconProp}
           </nex.span>
         )
       )
-    }, [styles.startIcon, loading, startIconProp, classes.startIcon])
+    }, [
+      loading,
+      startIconProp,
+      styles.startIcon,
+      classes.startIcon,
+      slotProps?.startIcon,
+    ])
 
     const endIcon = useMemo(() => {
       return (
         endIconProp && (
-          <nex.span sx={styles.endIcon} className={classes.endIcon}>
+          <nex.span
+            {...slotProps?.endIcon}
+            sx={composeSx(styles.endIcon, slotProps?.endIcon?.sx)}
+            className={clsx(classes.endIcon, slotProps?.endIcon?.className)}
+          >
             {endIconProp}
           </nex.span>
         )
       )
-    }, [styles.endIcon, endIconProp, classes.endIcon])
-
-    const composedSx = composeSx(styles.root, sx)
+    }, [endIconProp, slotProps?.endIcon, styles.endIcon, classes.endIcon])
 
     return (
       <nex.button
-        sx={composedSx}
+        ref={ref}
+        as={rootElement}
         onClick={onClick}
-        as={htmlElement}
-        className={clsx(classes.root, className)}
-        ref={ref as Ref<HTMLButtonElement>}
         disabled={disabled || loading}
+        sx={composeSx(styles.root, sx)}
+        className={clsx(classes.root, className)}
         {...remainingProps}
       >
         {startIcon}

@@ -65,17 +65,12 @@ export const InputText = forwardRef(
     const {
       sx,
       as,
-      id,
       prefix,
       suffix,
       className,
       defaultValue,
       onClear,
-      onBlur,
-      onFocus,
-      onKeyUp,
-      onKeyDown,
-      placeholder,
+      slotProps,
       onChange: onChangeProp,
       value: valueProp,
       color = 'blue',
@@ -87,6 +82,7 @@ export const InputText = forwardRef(
       size = 'md',
       radius = size,
       clearable = false,
+      ...remainingProps
     } = props
 
     const ownerState: InputTextOwnerState<InputComponent> = {
@@ -102,7 +98,7 @@ export const InputText = forwardRef(
 
     const inputRef = useRef<HTMLInputElement>(null)
     const composedRef = composeRef<HTMLInputElement>(ref, inputRef)
-    const [value, setValue] = useState(valueProp ?? defaultValue)
+    const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
 
     if (valueProp !== undefined && valueProp !== value) {
       setValue(valueProp)
@@ -115,10 +111,9 @@ export const InputText = forwardRef(
 
     const classes = useUtilityClasses<InputComponent>(ownerState)
 
-    const composedSx = composeSx(styles.root, sx)
-
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value)
+
       onChangeProp?.(e)
     })
 
@@ -129,33 +124,34 @@ export const InputText = forwardRef(
     })
 
     return (
-      <nex.span sx={composedSx} className={clsx(classes.root, className)}>
+      <nex.span
+        {...slotProps?.root}
+        sx={composeSx(styles.root, sx)}
+        className={clsx(classes.root, className)}
+      >
         {prefix}
         <nex.input
-          as={as}
-          ref={composedRef}
+          {...slotProps?.input}
+          {...remainingProps}
+          as={as as ElementType}
           value={value}
-          sx={styles.input}
           onChange={onChange}
           disabled={disabled}
-          className={classes.input}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          onKeyUp={onKeyUp}
-          onKeyDown={onKeyDown}
-          placeholder={placeholder}
           type={type}
-          id={id}
+          ref={composedRef}
+          sx={composeSx(styles.input, slotProps?.input?.sx)}
+          className={clsx(classes.input, slotProps?.input?.className)}
         />
         {clearable && value && !disabled && (
           <Button
             iconOnly
-            sx={styles.clearBtn}
             size="sm"
             variant="link"
             color="gray"
             onClick={onClearValue}
-            className={classes.clearBtn}
+            {...slotProps?.clearBtn}
+            sx={composeSx(styles.clearBtn, slotProps?.clearBtn?.sx)}
+            className={clsx(classes.clearBtn, slotProps?.clearBtn?.className)}
           >
             <CloseCircleFilled />
           </Button>

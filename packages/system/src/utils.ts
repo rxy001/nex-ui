@@ -56,14 +56,19 @@ export function checkTokenCategory(category: string): boolean {
 }
 
 export function memoizeFn<T extends Noop>(fn: T): T {
-  return memoize(fn, (...args) =>
-    JSON.stringify(args, (_key, value) => {
-      if (value && (value.$$typeof || typeof value === 'function')) {
+  return memoize(fn, (...args) => {
+    return JSON.stringify(args, (key, value) => {
+      if (
+        value &&
+        (value.$$typeof ||
+          typeof value === 'function' ||
+          key.startsWith('__react'))
+      ) {
         return undefined
       }
       return value
-    }),
-  )
+    })
+  })
 }
 
 export function isResponsiveColor(value: any) {

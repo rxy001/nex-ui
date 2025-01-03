@@ -6,7 +6,7 @@ import { getRegisteredStyles } from '@emotion/utils'
 import { getDefaultShouldForwardProp } from './utils'
 import { tags } from './tags'
 import { Insertion } from './Insertion'
-import type { Nex } from './types'
+import type { NexFactory } from './types'
 
 const createNexImpl = (tag: any) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -80,7 +80,7 @@ const createNexImpl = (tag: any) => {
 // @ts-ignore
 const createNex = createNexImpl.bind()
 
-const nex = {} as Nex
+const nex = {} as NexFactory
 tags.forEach((tag) => {
   // @ts-ignore
   nex[tag] = createNex(tag)

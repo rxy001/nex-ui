@@ -66,7 +66,7 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
       setLoaded('error')
     }
 
-    // @ts-ignore
+    // @ts-expect-error
     image.src = src
     if (srcSet) {
       image.srcset = srcSet
@@ -93,9 +93,11 @@ export const Avatar = forwardRef(
     const {
       sx,
       src,
-      srcSet,
+      as,
       alt,
+      srcSet,
       className,
+      slotProps,
       children: childrenProp,
       size = 'md',
       radius = size,
@@ -103,7 +105,7 @@ export const Avatar = forwardRef(
       ...remainingProps
     } = props
 
-    const ownerState = {
+    const ownerState: AvatarOwnerState<RootComponent> = {
       ...props,
       size,
       radius,
@@ -126,11 +128,12 @@ export const Avatar = forwardRef(
     if (hasImg && loaded === 'loaded') {
       children = (
         <nex.img
+          {...slotProps?.img}
           src={src}
           alt={alt}
-          sx={styles.img}
           srcSet={srcSet}
-          className={classes.img}
+          sx={composeSx(styles.img, slotProps?.img?.sx)}
+          className={clsx(classes.img, slotProps?.img?.className)}
         />
       )
     } else if (!!childrenProp && children !== 0) {
@@ -142,10 +145,11 @@ export const Avatar = forwardRef(
 
     return (
       <nex.div
-        className={clsx(className, classes.root)}
-        sx={composeSx(styles.root, sx)}
-        ref={ref}
         {...remainingProps}
+        ref={ref}
+        as={as as ElementType}
+        className={clsx(classes.root, className)}
+        sx={composeSx(styles.root, sx)}
       >
         {children}
       </nex.div>
