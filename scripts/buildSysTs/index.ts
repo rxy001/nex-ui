@@ -20,10 +20,7 @@ const log = (message: any) => {
 
 const cwd = c()
 
-const outDirPath = path.resolve(
-  cwd,
-  './packages/react/src/theme/types/generated',
-)
+const outDirPath = path.resolve(cwd, './packages/react/src/types/generated')
 
 const entry = path.resolve(cwd, './packages/react/src/theme/preset.ts')
 

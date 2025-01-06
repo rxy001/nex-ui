@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useNexContext } from '../provider/Context'
-import type { ComponentNames } from '../../theme/types/componentsTheme'
+import type { ComponentNames } from '../../types/componentsTheme'
 
 type Config<T> = {
   name: ComponentNames

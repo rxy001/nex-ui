@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { SearchOutlined } from '@nex-ui/icons'
 import { InputText } from '../InputText'
 import { Flex } from '../../flex'
+import type { InputTextProps } from '../types'
 
 const meta = {
   title: 'Components/InputText',
@@ -54,15 +55,16 @@ const meta = {
     color: 'blue',
     error: false,
     clearable: false,
+    placeholder: 'Input Text',
   },
   render: (args) => {
-    return <InputText placeholder="Input Text" {...args} />
+    return <InputText {...args} />
   },
 } satisfies Meta<typeof InputText>
 
 export default meta
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<InputTextProps>
 
 export const Basic: Story = {}
 

@@ -1,7 +1,7 @@
 import type { ElementType, ReactNode } from 'react'
 import type { FlexVariants } from '../../theme/recipes'
-import type { NexCSSProperties } from '../../theme/types/generated/cssProperties'
-import type { ComponentUtilityClasses, OverrideProps } from '../types'
+import type { NexCSSProperties } from '../../types/generated/cssProperties'
+import type { ComponentUtilityClasses, OverrideProps } from '../../types/utils'
 
 export interface FlexPropsOverrides {}
 

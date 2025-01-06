@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react'
-import type { SystemContext, ColorSchemeProviderProps } from '@nex-ui/system'
-import type { ComponentsTheme } from '../../theme/types/componentsTheme'
-import type { Theme } from '../../theme/defineTheme'
+import type { CssFn, ColorSchemeProviderProps } from '@nex-ui/system'
+import type { ComponentsTheme } from '../../types/componentsTheme'
+import type { Theme } from '../../types/theme'
 
 export type InnerProviderProps = {
-  components?: ComponentsTheme
   prefix: string
   children?: ReactNode
+  components?: ComponentsTheme
 }
 
 export interface NexProviderProps extends ColorSchemeProviderProps {
@@ -16,7 +16,7 @@ export interface NexProviderProps extends ColorSchemeProviderProps {
 }
 
 export type NexContext = {
+  css: CssFn
   prefix: string
-  components?: InnerProviderProps['components']
-  css: SystemContext['css']
+  components?: ComponentsTheme
 }

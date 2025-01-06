@@ -8,6 +8,9 @@
     "build:fast": "tsx ../../scripts/build.ts",
     "type-check": "tsc --noEmit"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "react",
     "react-component",

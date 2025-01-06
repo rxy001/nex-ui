@@ -5,7 +5,7 @@ import type {
   ComponentUtilityClasses,
   Overwrite,
   CreateSlotProps,
-} from '../types'
+} from '../../types/utils'
 import type { ButtonProps } from '../button'
 
 export interface InputTextPropsOverrides {}

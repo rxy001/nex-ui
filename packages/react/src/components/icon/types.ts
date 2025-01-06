@@ -1,7 +1,7 @@
 import type { ComponentType, ElementType } from 'react'
-import type { NexCSSProperties } from '../../theme/types/generated/cssProperties'
+import type { NexCSSProperties } from '../../types/generated/cssProperties'
 import type { IconVariants } from '../../theme/recipes'
-import type { ComponentUtilityClasses, OverrideProps } from '../types'
+import type { ComponentUtilityClasses, OverrideProps } from '../../types/utils'
 
 export interface IconPropsOverrides {}
 

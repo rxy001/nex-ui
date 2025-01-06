@@ -5,7 +5,7 @@ import type {
   FlexRecipe,
   IconRecipe,
   InputTextRecipe,
-} from '../recipes'
+} from '../theme/recipes'
 import type {
   ButtonProps,
   ButtonOwnerState,
@@ -19,8 +19,8 @@ import type {
   AvatarProps,
   AvatarOwnerState,
   BoxProps,
-} from '../../components'
-import type { InnerIconProps } from '../../components/icon/types'
+} from '../components'
+import type { InnerIconProps } from '../components/icon/types'
 import type { ComponentThemeFn, ComponentThemeObject } from './utils'
 
 export type ComponentsTheme = {

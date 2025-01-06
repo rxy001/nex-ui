@@ -1,5 +1,1 @@
-import './types/declare'
-
-export type { ComponentsTheme } from './types/componentsTheme'
-
-export * from './defineTheme'
+export { defineTheme } from './defineTheme'

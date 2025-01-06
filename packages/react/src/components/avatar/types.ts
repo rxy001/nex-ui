@@ -4,7 +4,7 @@ import type {
   ComponentUtilityClasses,
   CreateSlotProps,
   OverrideProps,
-} from '../types'
+} from '../../types/utils'
 
 export interface AvatarPropsOverrides {}
 

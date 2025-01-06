@@ -1,5 +1,5 @@
 import type { ElementType } from 'react'
-import type { OverrideProps } from '../types'
+import type { OverrideProps } from '../../types/utils'
 
 export interface BoxPropsOverrides {}
 

@@ -1,5 +1,5 @@
 import type { ElementType } from 'react'
-import type { OverrideProps, ComponentUtilityClasses } from '../types'
+import type { OverrideProps, ComponentUtilityClasses } from '../../types/utils'
 import type { DividerVariants } from '../../theme/recipes'
 
 export interface DividerPropsOverrides {}
