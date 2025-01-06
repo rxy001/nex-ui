@@ -86,7 +86,7 @@ const createStyled: CreateStyled = (tag: any) => {
       },
     )
 
-    Styled.displayName = 'Styled'
+    Styled.displayName = 'NexStyledComponent'
 
     return Styled
   }

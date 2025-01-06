@@ -63,6 +63,7 @@ export const createIcon = (
 
       const {
         sx,
+        as,
         color,
         className,
         spin = false,
@@ -101,6 +102,7 @@ export const createIcon = (
 
       return (
         <Icon
+          as={as as ElementType}
           sx={composedSx}
           ref={ref}
           className={clsx(classes.root, defaultClassName, className)}

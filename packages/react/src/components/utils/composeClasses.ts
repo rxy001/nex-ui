@@ -9,7 +9,7 @@ export function composeClasses<ClassKey extends string>(
 ) {
   const output: Record<ClassKey, string> = {} as any
 
-  // @ts-expect-error
+  // @ts-ignore
   forEach(slots, (value: string[], slot: ClassKey) => {
     let className = classes?.[slot] ?? []
 

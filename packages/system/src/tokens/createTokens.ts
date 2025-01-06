@@ -76,8 +76,7 @@ export function createTokens(config: CreateTokensConfig) {
     if (workInProgress) {
       const { conditions, cssVar } = workInProgress
 
-      const variableName = cssVar?.var as string
-
+      const variableName = cssVar!.var
       forEach(
         conditions,
         // @ts-ignore
@@ -99,7 +98,9 @@ export function createTokens(config: CreateTokensConfig) {
   function handleToken() {
     if (workInProgress) {
       createCssVar()
+
       buildCssVars()
+
       addToTokenMap()
 
       const { category, value } = workInProgress

@@ -14,6 +14,8 @@ import type {
   SemanticTokensDefinition,
   SelectorsDefinition,
 } from '@nex-ui/system'
+import { merge } from '@nex-ui/utils'
+import { defaultConfig } from './preset'
 import type { TokenDefinition, ReplaceValuesWithColor } from './types/utils'
 import type { Aliases } from './types/generated/aliases'
 import type { Scales } from './types/generated/scales'
@@ -53,5 +55,5 @@ export type Theme = {
 }
 
 export function defineTheme(theme: Theme) {
-  return theme
+  return theme ? merge({}, defaultConfig as Theme, theme) : theme
 }

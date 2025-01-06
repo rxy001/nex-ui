@@ -66,7 +66,7 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
       setLoaded('error')
     }
 
-    // @ts-expect-error
+    // @ts-ignore
     image.src = src
     if (srcSet) {
       image.srcset = srcSet

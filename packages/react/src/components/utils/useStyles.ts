@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { isFunction, mergeWith, isArray } from '@nex-ui/utils'
+import { isFunction } from '@nex-ui/utils'
 import { defineSlotRecipe, defineRecipe } from '@nex-ui/system'
 import type { SlotRecipeRuntimeFn, StyleObject } from '@nex-ui/system'
 import { recipes } from '../../theme/recipes'
@@ -17,35 +17,32 @@ type UseStyles = <T extends keyof Recipes, K extends Record<string, any>>(
   ? Record<Recipes[T]['slots'][number], StyleObject>
   : StyleObject
 
-const mergeStyles = (...args: any[]) =>
-  mergeWith({}, ...args, (objValue: any, srcValue: any) => {
-    if (isArray(objValue)) {
-      return objValue.concat(srcValue)
-    }
-  })
-
 export const useStyles: UseStyles = ({ name, ownerState }) => {
   const { components } = useNexContext()
-  const recipe = recipes[name] as any
   const styleOverrides = components?.[name]?.styleOverrides as any
 
-  return useMemo(() => {
-    if (isFunction(styleOverrides)) {
-      return mergeStyles(recipe(ownerState), styleOverrides(ownerState))
+  const runtimeFn = useMemo(() => {
+    const recipe = recipes[name] as any
+
+    if (!styleOverrides || isFunction(styleOverrides)) {
+      return recipe
     }
 
-    if (recipe.__slotRecipe && styleOverrides) {
-      return defineSlotRecipe(recipe, {
-        ...styleOverrides,
-      })(ownerState)
+    if (recipe.__slotRecipe) {
+      return defineSlotRecipe(recipe, styleOverrides)
     }
 
-    if (recipe.__recipe && styleOverrides) {
-      return defineRecipe(recipe, {
-        ...styleOverrides,
-      })(ownerState)
+    if (recipe.__recipe) {
+      return defineRecipe(recipe, styleOverrides)
     }
+  }, [name, styleOverrides])
 
-    return recipe(ownerState)
-  }, [recipe, styleOverrides, ownerState])
+  if (isFunction(styleOverrides)) {
+    return {
+      ...runtimeFn(ownerState),
+      ...styleOverrides(ownerState),
+    }
+  }
+
+  return runtimeFn(ownerState)
 }
