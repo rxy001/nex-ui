@@ -14,9 +14,7 @@ import {
 import { useNexContext } from '../provider'
 import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
 
-const useUtilityClasses = <RootComponent extends ElementType>(
-  ownerState: AvatarOwnerState<RootComponent>,
-) => {
+const useUtilityClasses = (ownerState: AvatarOwnerState) => {
   const { prefix } = useNexContext()
 
   const avatarRoot = `${prefix}-avatar`
@@ -85,7 +83,7 @@ export const Avatar = forwardRef(
     inProps: AvatarProps<RootComponent>,
     ref: Ref<HTMLDivElement>,
   ) => {
-    const props = useDefaultProps({
+    const props = useDefaultProps<AvatarProps>({
       name: 'Avatar',
       props: inProps,
     })
@@ -93,7 +91,6 @@ export const Avatar = forwardRef(
     const {
       sx,
       src,
-      as,
       alt,
       srcSet,
       className,
@@ -105,7 +102,7 @@ export const Avatar = forwardRef(
       ...remainingProps
     } = props
 
-    const ownerState: AvatarOwnerState<RootComponent> = {
+    const ownerState = {
       ...props,
       size,
       radius,
@@ -117,7 +114,7 @@ export const Avatar = forwardRef(
       ownerState,
     })
 
-    const classes = useUtilityClasses<RootComponent>(ownerState)
+    const classes = useUtilityClasses(ownerState)
 
     const loaded = useLoaded({ src, srcSet })
 
@@ -147,9 +144,8 @@ export const Avatar = forwardRef(
       <nex.div
         {...remainingProps}
         ref={ref}
-        as={as as ElementType}
-        className={clsx(classes.root, className)}
         sx={composeSx(styles.root, sx)}
+        className={clsx(classes.root, className)}
       >
         {children}
       </nex.div>

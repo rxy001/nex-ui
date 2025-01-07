@@ -17,9 +17,7 @@ import {
 import type { InputTextOwnerState, InputTextProps } from './types'
 import { Button } from '../button'
 
-const useUtilityClasses = <InputComponent extends ElementType = 'input'>(
-  ownerState: InputTextOwnerState<InputComponent>,
-) => {
+const useUtilityClasses = (ownerState: InputTextOwnerState) => {
   const { prefix } = useNexContext()
 
   const inputTextRoot = `${prefix}-input-text`
@@ -57,14 +55,13 @@ export const InputText = forwardRef(
     inProps: InputTextProps<InputComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
-    const props = useDefaultProps({
+    const props = useDefaultProps<InputTextProps>({
       name: 'InputText',
       props: inProps,
     })
 
     const {
       sx,
-      as,
       prefix,
       suffix,
       className,
@@ -85,7 +82,15 @@ export const InputText = forwardRef(
       ...remainingProps
     } = props
 
-    const ownerState: InputTextOwnerState<InputComponent> = {
+    const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
+    const inputRef = useRef<HTMLInputElement>(null)
+    const composedRef = composeRef<HTMLInputElement>(ref, inputRef)
+
+    if (valueProp !== undefined && valueProp !== value) {
+      setValue(valueProp)
+    }
+
+    const ownerState = {
       ...props,
       color,
       disabled,
@@ -96,20 +101,12 @@ export const InputText = forwardRef(
       error,
     }
 
-    const inputRef = useRef<HTMLInputElement>(null)
-    const composedRef = composeRef<HTMLInputElement>(ref, inputRef)
-    const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
-
-    if (valueProp !== undefined && valueProp !== value) {
-      setValue(valueProp)
-    }
-
     const styles = useStyles({
       ownerState,
       name: 'InputText',
     })
 
-    const classes = useUtilityClasses<InputComponent>(ownerState)
+    const classes = useUtilityClasses(ownerState)
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value)
@@ -133,7 +130,6 @@ export const InputText = forwardRef(
         <nex.input
           {...slotProps?.input}
           {...remainingProps}
-          as={as as ElementType}
           value={value}
           onChange={onChange}
           disabled={disabled}

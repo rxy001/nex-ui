@@ -10,7 +10,7 @@ export const Box = forwardRef(
     inProps: BoxProps<RootComponent>,
     ref: Ref<HTMLDivElement>,
   ) => {
-    const props = useDefaultProps({
+    const props = useDefaultProps<BoxProps>({
       name: 'Box',
       props: inProps,
     })

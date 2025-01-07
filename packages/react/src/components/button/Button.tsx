@@ -16,9 +16,7 @@ import {
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
 
-const useUtilityClasses = <T extends ElementType>(
-  ownerState: ButtonOwnerState<T>,
-) => {
+const useUtilityClasses = (ownerState: ButtonOwnerState) => {
   const { prefix } = useNexContext()
 
   const btnRoot = `${prefix}-btn`
@@ -71,7 +69,7 @@ export const Button = forwardRef(
     inProps: ButtonProps<RootComponent>,
     ref: Ref<HTMLButtonElement>,
   ) => {
-    const props = useDefaultProps({
+    const props = useDefaultProps<ButtonProps>({
       name: 'Button',
       props: inProps,
     })
@@ -103,7 +101,7 @@ export const Button = forwardRef(
           ? 'a'
           : 'button'
 
-    const ownerState: ButtonOwnerState<RootComponent> = {
+    const ownerState = {
       ...props,
       variant,
       size,
@@ -115,14 +113,14 @@ export const Button = forwardRef(
       color,
     }
 
-    const classes = useUtilityClasses<RootComponent>(ownerState)
+    const classes = useUtilityClasses(ownerState)
 
     const styles = useStyles({
       ownerState,
       name: 'Button',
     })
 
-    const onClick = useEvent((event: MouseEvent) => {
+    const onClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
       if (loading || disabled) {
         event.preventDefault()
         return
@@ -166,13 +164,16 @@ export const Button = forwardRef(
 
     return (
       <nex.button
-        ref={ref}
-        as={rootElement}
-        onClick={onClick}
-        disabled={disabled || loading}
-        sx={composeSx(styles.root, sx)}
-        className={clsx(classes.root, className)}
         {...remainingProps}
+        as={rootElement}
+        sx={composeSx(styles.root, sx)}
+        ref={ref}
+        onClick={onClick}
+        className={clsx(classes.root, className)}
+        {...{
+          [rootElement === 'button' ? 'disabled' : 'data-disabled']:
+            disabled || loading,
+        }}
       >
         {startIcon}
         {children}

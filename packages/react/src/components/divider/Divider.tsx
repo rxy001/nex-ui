@@ -13,9 +13,7 @@ import {
 import { useNexContext } from '../provider'
 import type { DividerOwnerState, DividerProps } from './types'
 
-const useUtilityClasses = <RootComponent extends ElementType = 'hr'>(
-  ownerState: DividerOwnerState<RootComponent>,
-) => {
+const useUtilityClasses = (ownerState: DividerOwnerState) => {
   const { prefix } = useNexContext()
 
   const dividerRoot = `${prefix}-divider`
@@ -41,11 +39,13 @@ export const Divider = forwardRef(
     inProps: DividerProps<RootComponent>,
     ref: Ref<HTMLHRElement>,
   ) => {
-    const props = useDefaultProps({ name: 'Divider', props: inProps })
+    const props = useDefaultProps<DividerProps>({
+      name: 'Divider',
+      props: inProps,
+    })
 
     const {
       sx,
-      as,
       className,
       orientation = 'horizontal',
       ...remainingProps
@@ -53,17 +53,16 @@ export const Divider = forwardRef(
 
     const ownerState = { ...props, orientation }
 
-    const classes = useUtilityClasses<RootComponent>(ownerState)
+    const classes = useUtilityClasses(ownerState)
 
     const style = useStyles({ name: 'Divider', ownerState })
 
     return (
       <nex.hr
-        as={as as ElementType}
+        {...remainingProps}
         ref={ref}
         sx={composeSx(style, sx)}
         className={clsx(classes.root, className)}
-        {...remainingProps}
       />
     )
   },

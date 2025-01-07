@@ -13,9 +13,7 @@ import {
 } from '../utils'
 import type { IconOwnerState, InnerIconProps } from './types'
 
-const useUtilityClasses = <RootComponent extends ElementType = 'svg'>(
-  ownerState: IconOwnerState<RootComponent>,
-) => {
+const useUtilityClasses = (ownerState: IconOwnerState) => {
   const { prefix } = useNexContext()
 
   const iconRoot = `${prefix}-icon`
@@ -56,14 +54,13 @@ export const createIcon = (
       inProps: InnerIconProps<RootComponent>,
       ref: Ref<SVGSVGElement>,
     ) => {
-      const props = useDefaultProps({
+      const props = useDefaultProps<InnerIconProps>({
         name: 'Icon',
         props: { ...defaultProps, ...inProps },
       })
 
       const {
         sx,
-        as,
         color,
         className,
         spin = false,
@@ -73,7 +70,7 @@ export const createIcon = (
         ...remainingProps
       } = props
 
-      const ownerState: IconOwnerState<RootComponent> = {
+      const ownerState = {
         ...props,
         spin,
         fontSize,
@@ -102,11 +99,10 @@ export const createIcon = (
 
       return (
         <Icon
-          as={as as ElementType}
+          {...remainingProps}
           sx={composedSx}
           ref={ref}
           className={clsx(classes.root, defaultClassName, className)}
-          {...remainingProps}
         />
       )
     },

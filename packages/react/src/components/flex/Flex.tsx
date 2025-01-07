@@ -13,9 +13,7 @@ import {
   forwardRef,
 } from '../utils'
 
-const useUtilityClasses = <RootComponent extends ElementType = 'div'>(
-  ownerState: FlexOwnerState<RootComponent>,
-) => {
+const useUtilityClasses = (ownerState: FlexOwnerState) => {
   const { prefix } = useNexContext()
 
   const flexRoot = `${prefix}-flex`
@@ -49,11 +47,10 @@ export const Flex = forwardRef(
     inProps: FlexProps<RootComponent>,
     ref: Ref<HTMLDivElement>,
   ) => {
-    const props = useDefaultProps({ name: 'Flex', props: inProps })
+    const props = useDefaultProps<FlexProps>({ name: 'Flex', props: inProps })
 
     const {
       sx,
-      as,
       gap,
       children,
       className,
@@ -89,11 +86,10 @@ export const Flex = forwardRef(
 
     return (
       <nex.div
+        {...remainingProps}
         sx={composedSx}
         ref={ref}
-        as={as as ElementType}
         className={clsx(classes.root, className)}
-        {...remainingProps}
       >
         {children}
       </nex.div>

@@ -32,20 +32,17 @@ type InputTextOwnProps<
       'root' | 'input' | 'clearBtn'
     >
     slotProps?: InputTextSlotProps<InputComponentProps>
-  } & Pick<
-    InputComponentProps,
-    | 'ref'
-    | 'onChange'
-    | 'onBlur'
-    | 'onFocus'
-    | 'onKeyUp'
-    | 'onKeyDown'
-    | 'placeholder'
-    | 'type'
-    | 'id'
-    | 'className'
-  > &
-    InputTextVariants &
+    className?: string
+    id?: string
+    ref?: InputComponentProps['ref']
+    type?: InputComponentProps['type']
+    onBlur?: InputComponentProps['onBlur']
+    onFocus?: InputComponentProps['onFocus']
+    onKeyUp?: InputComponentProps['onKeyUp']
+    onChange?: InputComponentProps['onChange']
+    onKeyDown?: InputComponentProps['onKeyDown']
+    placeholder?: InputComponentProps['placeholder']
+  } & InputTextVariants &
     Pick<StyledComponentProps<InputComponent>, 'sx' | 'as'>,
   InputTextPropsOverrides
 >
