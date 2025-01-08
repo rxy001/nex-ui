@@ -23,7 +23,7 @@ const HeartSvg = (props: any) => (
   </svg>
 )
 
-export const Basic: Story = {
+export const BasicIcon: Story = {
   args: {
     component: HeartSvg,
     color: '#1677ff',

@@ -98,11 +98,13 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {
-  args: {},
+export const FlexRow: Story = {
+  args: {
+    direction: 'row',
+  },
 }
 
-export const Column: Story = {
+export const FlexColumn: Story = {
   args: {
     direction: 'column',
   },

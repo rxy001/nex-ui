@@ -20,10 +20,10 @@ const meta = {
       options: ['filled', 'outlined', 'text', 'link'],
       control: 'select',
     },
-    // size: {
-    //   options: ['sm', 'md', 'lg'],
-    //   control: 'select',
-    // },
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: 'select',
+    },
     radius: {
       options: ['sm', 'md', 'lg', 'full'],
       control: 'select',
@@ -37,7 +37,7 @@ const meta = {
   },
   args: {
     children: 'Button',
-    // size: 'lg',
+    size: 'md',
     variant: 'filled',
     disabled: false,
     fullWidth: false,
@@ -46,40 +46,16 @@ const meta = {
   },
   render: (args) => {
     return (
-      <Flex gap={50} direction="column">
-        <Flex key="sm" gap={10} direction={args.fullWidth ? 'column' : 'row'}>
-          <Button {...args} key="blue" size="sm" />
-          <Button {...args} key="purple" size="sm" color="purple" />
-          <Button {...args} key="gray" size="sm" color="gray" />
-          <Button {...args} key="rose" size="sm" color="rose" />
-          <Button {...args} key="cyan" size="sm" color="cyan" />
-          <Button {...args} key="pink" size="sm" color="pink" />
-          <Button {...args} key="yellow" size="sm" color="yellow" />
-          <Button {...args} key="green" size="sm" color="green" />
-          <Button {...args} key="orange" size="sm" color="orange" />
-        </Flex>
-        <Flex key="md" gap={10} direction={args.fullWidth ? 'column' : 'row'}>
-          <Button {...args} key="blue" size="md" />
-          <Button {...args} key="purple" size="md" color="purple" />
-          <Button {...args} key="gray" size="md" color="gray" />
-          <Button {...args} key="rose" size="md" color="rose" />
-          <Button {...args} key="cyan" size="md" color="cyan" />
-          <Button {...args} key="pink" size="md" color="pink" />
-          <Button {...args} key="yellow" size="md" color="yellow" />
-          <Button {...args} key="green" size="md" color="green" />
-          <Button {...args} key="orange" size="md" color="orange" />
-        </Flex>
-        <Flex key="lg" gap={10} direction={args.fullWidth ? 'column' : 'row'}>
-          <Button {...args} key="blue" size="lg" />
-          <Button {...args} key="purple" size="lg" color="purple" />
-          <Button {...args} key="gray" size="lg" color="gray" />
-          <Button {...args} key="rose" size="lg" color="rose" />
-          <Button {...args} key="cyan" size="lg" color="cyan" />
-          <Button {...args} key="pink" size="lg" color="pink" />
-          <Button {...args} key="yellow" size="lg" color="yellow" />
-          <Button {...args} key="green" size="lg" color="green" />
-          <Button {...args} key="orange" size="lg" color="orange" />
-        </Flex>
+      <Flex gap={30} wrap="wrap">
+        <Button {...args} key="blue" />
+        <Button {...args} key="purple" color="purple" />
+        <Button {...args} key="gray" color="gray" />
+        <Button {...args} key="rose" color="rose" />
+        <Button {...args} key="cyan" color="cyan" />
+        <Button {...args} key="pink" color="pink" />
+        <Button {...args} key="yellow" color="yellow" />
+        <Button {...args} key="green" color="green" />
+        <Button {...args} key="orange" color="orange" />
       </Flex>
     )
   },
@@ -89,17 +65,11 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {
+export const BasicButton: Story = {
   args: {},
 }
 
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-  },
-}
-
-export const Block: Story = {
+export const FullWidthButton: Story = {
   args: {
     fullWidth: true,
   },
@@ -119,7 +89,7 @@ export const IconButton: Story = {
   },
 }
 
-export const WithIcons: Story = {
+export const ButtonWithIcons: Story = {
   args: {
     children: 'Button',
     startIcon: <AppleOutlined />,

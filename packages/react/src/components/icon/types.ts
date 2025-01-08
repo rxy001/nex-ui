@@ -5,7 +5,10 @@ import type { ComponentUtilityClasses, OverrideProps } from '../../types/utils'
 
 export interface IconPropsOverrides {}
 
-export type IconOwnProsp<RootComponent extends ElementType> = IconVariants & {
+export type IconOwnProsp<RootComponent extends ElementType> = Omit<
+  IconVariants,
+  'fontSize'
+> & {
   width?: NexCSSProperties['width']
   height?: NexCSSProperties['height']
   color?: NexCSSProperties['color']
