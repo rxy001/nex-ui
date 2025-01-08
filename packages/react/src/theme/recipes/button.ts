@@ -16,7 +16,7 @@ export const buttonRecipe = defineSlotRecipe({
       borderStyle: 'solid',
       cursor: 'pointer',
       position: 'relative',
-      transition: '.3s',
+      transition: 'all .3s',
       textDecoration: 'none',
       display: 'inline-flex',
       alignItems: 'center',

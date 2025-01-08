@@ -5,6 +5,7 @@ import type {
   FlexRecipe,
   IconRecipe,
   InputTextRecipe,
+  CheckboxRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -19,6 +20,8 @@ import type {
   AvatarProps,
   AvatarOwnerState,
   BoxProps,
+  CheckboxProps,
+  CheckboxOwnerState,
 } from '../components'
 import type { InnerIconProps } from '../components/icon/types'
 import type { ComponentThemeFn, ComponentThemeObject } from './utils'
@@ -62,6 +65,13 @@ export type ComponentsTheme = {
       | ComponentThemeObject<AvatarRecipe>
       | ComponentThemeFn<AvatarOwnerState, AvatarRecipe>
     defaultProps?: AvatarProps
+  }
+
+  Checkbox?: {
+    styleOverrides?:
+      | ComponentThemeObject<CheckboxRecipe>
+      | ComponentThemeFn<CheckboxOwnerState, CheckboxRecipe>
+    defaultProps?: CheckboxProps
   }
 }
 

@@ -1,21 +1,24 @@
-type Result<T, K extends string> = {
+type Result<T, K extends string[]> = {
   [P in keyof T]: {
-    [L in K]: T[P]
+    [L in K[number]]: T[P]
   }
 }
 
-export function toSlot<T extends Record<string, any>, K extends string>(
+export function toSlot<T extends Record<string, any>, K extends string[]>(
   object: T,
-  keyName: K,
+  ...slotNames: K
 ) {
   const result = {} as Result<T, K>
 
+  // eslint-disable-next-line guard-for-in
   for (const key in object) {
+    // @ts-ignore
+    result[key] = {}
     if (Object.prototype.hasOwnProperty.call(object, key)) {
-      // @ts-ignore
-      result[key] = {
-        [keyName]: object[key],
-      }
+      slotNames.forEach((slot) => {
+        // @ts-ignore
+        result[key][slot] = object[key]
+      })
     }
   }
   return result

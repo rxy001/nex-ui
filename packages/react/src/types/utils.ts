@@ -9,6 +9,8 @@ import type { StyledComponentProps } from '@nex-ui/styled'
 
 export type ClassNames = string | string[]
 
+export type SxProp = StyleObject | StyleObject[]
+
 export type ComponentUtilityClasses<OwnerState, T extends string> = Partial<
   Record<T, ClassNames | ((ownerState: OwnerState) => ClassNames)>
 >
@@ -22,7 +24,7 @@ export type OverrideProps<
 > = StyledComponentProps<Component, Overwrite<Props, Overrides>>
 
 export type CreateSlotProps<T> = {
-  [K in keyof T]: T[K] & Pick<StyledComponentProps, 'sx'>
+  [K in keyof T]: T[K] & { sx?: SxProp }
 }
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T

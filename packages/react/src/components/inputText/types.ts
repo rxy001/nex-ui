@@ -1,10 +1,10 @@
 import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
-import type { StyledComponentProps } from '@nex-ui/styled'
 import type { InputTextVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   Overwrite,
   CreateSlotProps,
+  SxProp,
 } from '../../types/utils'
 import type { ButtonProps } from '../button'
 
@@ -33,6 +33,8 @@ type InputTextOwnProps<
     >
     slotProps?: InputTextSlotProps<InputComponentProps>
     className?: string
+    as?: InputComponent
+    sx?: SxProp
     id?: string
     ref?: InputComponentProps['ref']
     type?: InputComponentProps['type']
@@ -42,8 +44,7 @@ type InputTextOwnProps<
     onChange?: InputComponentProps['onChange']
     onKeyDown?: InputComponentProps['onKeyDown']
     placeholder?: InputComponentProps['placeholder']
-  } & InputTextVariants &
-    Pick<StyledComponentProps<InputComponent>, 'sx' | 'as'>,
+  } & InputTextVariants,
   InputTextPropsOverrides
 >
 
