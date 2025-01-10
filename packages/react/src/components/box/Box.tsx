@@ -2,7 +2,7 @@
 
 import { nex } from '@nex-ui/styled'
 import type { Ref, ElementType } from 'react'
-import { forwardRef, useDefaultProps } from '../utils'
+import { forwardRef, resolveSxProps, useDefaultProps } from '../utils'
 import type { BoxProps } from './types'
 
 export const Box = forwardRef(
@@ -15,7 +15,9 @@ export const Box = forwardRef(
       props: inProps,
     })
 
-    return <nex.div {...props} ref={ref} />
+    const { sx } = props
+
+    return <nex.div {...props} sx={resolveSxProps(sx)} ref={ref} />
   },
 )
 

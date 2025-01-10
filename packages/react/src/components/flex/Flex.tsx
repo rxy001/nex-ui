@@ -1,7 +1,6 @@
 'use client'
 
-import clsx from 'clsx'
-import { nex, composeSx } from '@nex-ui/styled'
+import { nex } from '@nex-ui/styled'
 import type { Ref, ElementType } from 'react'
 import { useNexContext } from '../provider'
 import type { FlexOwnerState, FlexProps } from './types'
@@ -11,9 +10,12 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
+  resovleClasses,
+  useSlotProps,
+  resolveSxProps,
 } from '../utils'
 
-const useUtilityClasses = (ownerState: FlexOwnerState) => {
+const useSlotClasses = (ownerState: FlexOwnerState) => {
   const { prefix } = useNexContext()
 
   const flexRoot = `${prefix}-flex`
@@ -34,9 +36,8 @@ const useUtilityClasses = (ownerState: FlexOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
+    resovleClasses(classes, ownerState),
     getUtilityClass(flexRoot),
-    ownerState,
-    classes,
   )
 
   return composedClasses
@@ -53,7 +54,6 @@ export const Flex = forwardRef(
       sx,
       gap,
       children,
-      className,
       justify,
       align,
       wrap,
@@ -68,32 +68,27 @@ export const Flex = forwardRef(
       inline,
     }
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useSlotClasses(ownerState)
 
-    const styles = useStyles({ name: 'Flex', ownerState })
+    const style = useStyles({ name: 'Flex', ownerState })
 
-    const composedSx = composeSx(
-      {
-        gap,
-        flexDirection: direction,
-        alignItems: align,
-        justifyContent: justify,
-        flexWrap: wrap,
-        ...styles,
-      },
-      sx,
-    )
+    const composedSx = {
+      gap,
+      flexDirection: direction,
+      alignItems: align,
+      justifyContent: justify,
+      flexWrap: wrap,
+      ...style,
+    }
 
-    return (
-      <nex.div
-        {...remainingProps}
-        sx={composedSx}
-        ref={ref}
-        className={clsx(classes.root, className)}
-      >
-        {children}
-      </nex.div>
-    )
+    const rootProps = useSlotProps({
+      externalSlotProps: remainingProps,
+      externalForwardedProps: { ref },
+      sx: [composedSx, resolveSxProps(sx, ownerState)],
+      classNames: classes.root,
+    })
+
+    return <nex.div {...rootProps}>{children}</nex.div>
   },
 )
 

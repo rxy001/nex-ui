@@ -212,7 +212,7 @@ describe('Avatar', () => {
       const avatar = container.firstElementChild
       expect(avatar?.tagName).toBe('DIV')
       const userIcon = avatar?.firstElementChild
-      expect(userIcon).toHaveClass('nui-icon')
+      expect(userIcon).toHaveClass('nui-icon-root')
     })
   })
 

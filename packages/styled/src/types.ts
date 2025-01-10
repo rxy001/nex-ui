@@ -17,8 +17,8 @@ type Overwrite<K, T> = Omit<K, keyof T> & T
 
 export type StyledComponentProps<
   E extends ElementType = ElementType,
-  Props = NonNullable<unknown>,
-> = Overwrite<ComponentPropsWithRef<E>, Overwrite<CommonProps<E>, Props>>
+  Props = object,
+> = Overwrite<ComponentPropsWithRef<E>, Overwrite<Props, CommonProps<E>>>
 
 export interface CreateStyledComponent<Tag extends ElementType> {
   (

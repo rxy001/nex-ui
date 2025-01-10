@@ -25,11 +25,11 @@ const createStyled: CreateStyled = (tag: any) => {
     const styles = composeSx([], sx)
 
     const Styled = withEmotionCache(
-      ({ sx: sxProp, ...props }: any, cache: any, ref: any) => {
+      ({ sx: SxProps, ...props }: any, cache: any, ref: any) => {
         const FinalTag = (shouldUseAs && props.as) || tag
 
         const sys = useSystem()
-        const composedSx = composeSx(styles, sxProp)
+        const composedSx = composeSx(styles, SxProps)
 
         const finalShouldForwardProp = shouldUseAs
           ? getDefaultShouldForwardProp(FinalTag)

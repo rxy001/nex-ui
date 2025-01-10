@@ -7,18 +7,20 @@ import type {
 import type { ButtonVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
-  CreateSlotProps,
   OverrideProps,
+  SxProps,
 } from '../../types/utils'
 
 export interface ButtonPropsOverrides {}
 
-type ButtonSlotProps = CreateSlotProps<{
+type ButtonSlotProps = {
   startIcon?: ComponentPropsWithRef<'span'>
   endIcon?: ComponentPropsWithRef<'span'>
-}>
+}
 
 type ButtonOwnProps<RootComponent extends ElementType> = {
+  as?: RootComponent
+  sx?: SxProps<ButtonOwnerState<RootComponent>>
   startIcon?: ReactNode
   endIcon?: ReactNode
   href?: string

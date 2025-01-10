@@ -1,7 +1,6 @@
 'use client'
 
-import clsx from 'clsx'
-import { composeSx, nex } from '@nex-ui/styled'
+import { nex } from '@nex-ui/styled'
 import type { Ref, ElementType } from 'react'
 import {
   useDefaultProps,
@@ -9,11 +8,14 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
+  resovleClasses,
+  useSlotProps,
+  resolveSxProps,
 } from '../utils'
 import { useNexContext } from '../provider'
 import type { DividerOwnerState, DividerProps } from './types'
 
-const useUtilityClasses = (ownerState: DividerOwnerState) => {
+const useSlotClasses = (ownerState: DividerOwnerState) => {
   const { prefix } = useNexContext()
 
   const dividerRoot = `${prefix}-divider`
@@ -26,9 +28,8 @@ const useUtilityClasses = (ownerState: DividerOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
+    resovleClasses(classes, ownerState),
     getUtilityClass(dividerRoot),
-    ownerState,
-    classes,
   )
 
   return composedClasses
@@ -44,27 +45,22 @@ export const Divider = forwardRef(
       props: inProps,
     })
 
-    const {
-      sx,
-      className,
-      orientation = 'horizontal',
-      ...remainingProps
-    } = props
+    const { orientation = 'horizontal', sx, ...remainingProps } = props
 
     const ownerState = { ...props, orientation }
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useSlotClasses(ownerState)
 
     const style = useStyles({ name: 'Divider', ownerState })
 
-    return (
-      <nex.hr
-        {...remainingProps}
-        ref={ref}
-        sx={composeSx(style, sx)}
-        className={clsx(classes.root, className)}
-      />
-    )
+    const rootProps = useSlotProps({
+      externalSlotProps: remainingProps,
+      externalForwardedProps: { ref },
+      sx: [style, resolveSxProps(sx, ownerState)],
+      classNames: classes.root,
+    })
+
+    return <nex.hr {...rootProps} />
   },
 )
 

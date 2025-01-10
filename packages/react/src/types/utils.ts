@@ -4,28 +4,31 @@ import type {
   RecipeRuntimeFn,
   SlotRecipeRuntimeFn,
 } from '@nex-ui/system'
-import type { ElementType } from 'react'
-import type { StyledComponentProps } from '@nex-ui/styled'
+import type { ElementType, ComponentPropsWithRef } from 'react'
 
-export type ClassNames = string | string[]
+export type ClassName = string | string[]
 
-export type SxProp = StyleObject | StyleObject[]
+export type SxProps<OwnerState extends object | void = void> =
+  | StyleObject
+  | StyleObject[]
+  | (OwnerState extends void
+      ? () => StyleObject | StyleObject[]
+      : (ownerState: OwnerState) => StyleObject | StyleObject[])
 
 export type ComponentUtilityClasses<OwnerState, T extends string> = Partial<
-  Record<T, ClassNames | ((ownerState: OwnerState) => ClassNames)>
+  Record<T, ClassName | ((ownerState: OwnerState) => ClassName)>
 >
 
 export type Overwrite<K, T> = Omit<K, keyof T> & T
 
 export type OverrideProps<
   Component extends ElementType,
-  Props = NonNullable<unknown>,
-  Overrides = NonNullable<unknown>,
-> = StyledComponentProps<Component, Overwrite<Props, Overrides>>
-
-export type CreateSlotProps<T> = {
-  [K in keyof T]: T[K] & { sx?: SxProp }
-}
+  OwnProps = object,
+  OverridesProps = object,
+> = Overwrite<
+  ComponentPropsWithRef<Component>,
+  Overwrite<OwnProps, OverridesProps>
+>
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 

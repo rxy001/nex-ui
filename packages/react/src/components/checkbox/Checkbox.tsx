@@ -1,5 +1,6 @@
-import clsx from 'clsx'
-import { composeSx, nex } from '@nex-ui/styled'
+'use client'
+
+import { nex } from '@nex-ui/styled'
 import { useState } from 'react'
 import { CheckOutlined } from '@nex-ui/icons'
 import { useEvent } from '@nex-ui/utils'
@@ -11,15 +12,18 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
+  resovleClasses,
+  useSlotProps,
+  resolveSxProps,
 } from '../utils'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
 
-const useUtilityClasses = (ownerState: CheckboxOwnerState) => {
+const useSlotClasses = (ownerState: CheckboxOwnerState) => {
   const { prefix } = useNexContext()
 
   const checkboxRoot = `${prefix}-checkbox`
 
-  const { classes, radius, size, color, disabled, checked } = ownerState
+  const { radius, size, color, disabled, checked, classes } = ownerState
 
   const slots = {
     root: [
@@ -38,9 +42,8 @@ const useUtilityClasses = (ownerState: CheckboxOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
+    resovleClasses(classes, ownerState),
     getUtilityClass(checkboxRoot),
-    ownerState,
-    classes,
   )
 
   return composedClasses
@@ -61,7 +64,6 @@ export const Checkbox = forwardRef(
       children,
       className,
       slotProps,
-      classes: _classes,
       defaultChecked,
       onChange: onChangeProp,
       type = 'checkbox',
@@ -90,7 +92,7 @@ export const Checkbox = forwardRef(
       radius,
     }
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useSlotClasses(ownerState)
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
       setChecked(e.target.checked)
@@ -102,43 +104,54 @@ export const Checkbox = forwardRef(
       ownerState,
     })
 
+    const rootProps = useSlotProps({
+      externalSlotProps: slotProps?.root,
+      externalForwardedProps: {
+        className,
+      },
+      sx: [styles.root, resolveSxProps(sx, ownerState)],
+      classNames: classes.root,
+    })
+
+    const inputProps = useSlotProps({
+      externalSlotProps: slotProps?.input,
+      externalForwardedProps: {
+        ...remainingProps,
+        ref,
+        type,
+        checked,
+        disabled,
+        onChange,
+      },
+      classNames: classes.input,
+      sx: styles.input,
+    })
+
+    const iconContainerProps = useSlotProps({
+      externalSlotProps: slotProps?.iconContainer,
+      sx: styles.iconContainer,
+      classNames: classes.iconContainer,
+    })
+
+    const iconProps = useSlotProps({
+      externalSlotProps: slotProps?.icon,
+      sx: styles.icon,
+      classNames: classes.icon,
+    })
+
+    const labelProps = useSlotProps({
+      externalSlotProps: slotProps?.label,
+      sx: styles.label,
+      classNames: classes.label,
+    })
+
     return (
-      <nex.label
-        {...slotProps?.root}
-        sx={composeSx(styles.root, sx)}
-        className={clsx(classes.root, className)}
-      >
-        <nex.input
-          {...slotProps?.input}
-          {...remainingProps}
-          type={type}
-          ref={ref}
-          disabled={disabled}
-          checked={checked}
-          onChange={onChange}
-          sx={composeSx(styles.input, slotProps?.input?.sx)}
-          className={clsx(classes.input, slotProps?.input?.className)}
-        />
-        <nex.span
-          {...slotProps?.iconContainer}
-          sx={composeSx(styles.iconContainer, slotProps?.iconContainer?.sx)}
-          className={clsx(
-            classes.iconContainer,
-            slotProps?.iconContainer?.className,
-          )}
-        >
-          <CheckOutlined
-            {...slotProps?.icon}
-            sx={composeSx(styles.icon, slotProps?.icon?.sx)}
-            className={clsx(classes.icon, slotProps?.icon?.className)}
-          />
+      <nex.label {...rootProps}>
+        <nex.input {...inputProps} />
+        <nex.span {...iconContainerProps}>
+          <CheckOutlined {...iconProps} />
         </nex.span>
-        <nex.span
-          sx={composeSx(styles.label, slotProps?.label?.sx)}
-          className={clsx(classes.label, slotProps?.label?.className)}
-        >
-          {children}
-        </nex.span>
+        <nex.span {...labelProps}>{children}</nex.span>
       </nex.label>
     )
   },

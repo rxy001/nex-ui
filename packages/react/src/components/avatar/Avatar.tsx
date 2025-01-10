@@ -1,20 +1,22 @@
 'use client'
 
-import clsx from 'clsx'
 import { useState, useEffect } from 'react'
+import { nex } from '@nex-ui/styled'
 import type { ElementType, ReactNode, Ref } from 'react'
-import { composeSx, nex } from '@nex-ui/styled'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
   forwardRef,
+  resovleClasses,
+  useSlotProps,
+  resolveSxProps,
 } from '../utils'
 import { useNexContext } from '../provider'
 import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
 
-const useUtilityClasses = (ownerState: AvatarOwnerState) => {
+const useSlotClasses = (ownerState: AvatarOwnerState) => {
   const { prefix } = useNexContext()
 
   const avatarRoot = `${prefix}-avatar`
@@ -28,9 +30,8 @@ const useUtilityClasses = (ownerState: AvatarOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
+    resovleClasses(classes, ownerState),
     getUtilityClass(avatarRoot),
-    ownerState,
-    classes,
   )
 
   return composedClasses
@@ -93,7 +94,6 @@ export const Avatar = forwardRef(
       src,
       alt,
       srcSet,
-      className,
       slotProps,
       children: childrenProp,
       size = 'md',
@@ -114,25 +114,36 @@ export const Avatar = forwardRef(
       ownerState,
     })
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useSlotClasses(ownerState)
 
     const loaded = useLoaded({ src, srcSet })
 
     const hasImg = src || srcSet
 
+    const rootProps = useSlotProps({
+      externalSlotProps: remainingProps,
+      externalForwardedProps: {
+        ref,
+      },
+      classNames: classes.root,
+      sx: [styles.root, resolveSxProps(sx, ownerState)],
+    })
+
+    const imgProps = useSlotProps({
+      externalSlotProps: slotProps?.img,
+      externalForwardedProps: {
+        src,
+        alt,
+        srcSet,
+      },
+      classNames: classes.img,
+      sx: styles.img,
+    })
+
     let children: ReactNode = null
 
     if (hasImg && loaded === 'loaded') {
-      children = (
-        <nex.img
-          {...slotProps?.img}
-          src={src}
-          alt={alt}
-          srcSet={srcSet}
-          sx={composeSx(styles.img, slotProps?.img?.sx)}
-          className={clsx(classes.img, slotProps?.img?.className)}
-        />
-      )
+      children = <nex.img {...imgProps} />
     } else if (!!childrenProp && children !== 0) {
       children = childrenProp
     } else if (hasImg && alt) {
@@ -140,16 +151,7 @@ export const Avatar = forwardRef(
       children = alt[0]
     }
 
-    return (
-      <nex.div
-        {...remainingProps}
-        ref={ref}
-        sx={composeSx(styles.root, sx)}
-        className={clsx(classes.root, className)}
-      >
-        {children}
-      </nex.div>
-    )
+    return <nex.div {...rootProps}>{children}</nex.div>
   },
 )
 

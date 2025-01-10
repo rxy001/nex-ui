@@ -2,7 +2,7 @@
 
 exports[`Avatar renders correctly 1`] = `
 <div
-  class="nui-avatar nui-avatar-radius-md nui-avatar-size-md nui-avatar-color-gray emotion-0"
+  class="nui-avatar-root nui-avatar-radius-md nui-avatar-size-md nui-avatar-color-gray emotion-0"
 >
   A
 </div>

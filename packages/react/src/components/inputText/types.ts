@@ -3,18 +3,17 @@ import type { InputTextVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   Overwrite,
-  CreateSlotProps,
-  SxProp,
+  SxProps,
 } from '../../types/utils'
 import type { ButtonProps } from '../button'
 
 export interface InputTextPropsOverrides {}
 
-type InputTextSlotProps<InputComponentProps> = CreateSlotProps<{
+type InputTextSlotProps<InputComponentProps> = {
   root?: ComponentPropsWithRef<'span'>
   input?: InputComponentProps
   clearBtn?: ButtonProps
-}>
+}
 
 type InputTextOwnProps<
   InputComponent extends ElementType,
@@ -34,7 +33,7 @@ type InputTextOwnProps<
     slotProps?: InputTextSlotProps<InputComponentProps>
     className?: string
     as?: InputComponent
-    sx?: SxProp
+    sx?: SxProps<InputTextOwnerState<InputComponent>>
     id?: string
     ref?: InputComponentProps['ref']
     type?: InputComponentProps['type']

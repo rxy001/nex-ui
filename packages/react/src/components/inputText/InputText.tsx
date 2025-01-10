@@ -1,8 +1,7 @@
 'use client'
 
-import clsx from 'clsx'
 import { useRef, useState } from 'react'
-import { nex, composeSx } from '@nex-ui/styled'
+import { nex } from '@nex-ui/styled'
 import { composeRef, useEvent } from '@nex-ui/utils'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
@@ -13,16 +12,19 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
+  resovleClasses,
+  useSlotProps,
+  resolveSxProps,
 } from '../utils'
 import type { InputTextOwnerState, InputTextProps } from './types'
 import { Button } from '../button'
 
-const useUtilityClasses = (ownerState: InputTextOwnerState) => {
+const useSlotClasses = (ownerState: InputTextOwnerState) => {
   const { prefix } = useNexContext()
 
   const inputTextRoot = `${prefix}-input-text`
 
-  const { classes, variant, radius, size, color, disabled, fullWidth, error } =
+  const { variant, radius, size, color, disabled, fullWidth, error, classes } =
     ownerState
 
   const slots = {
@@ -42,9 +44,8 @@ const useUtilityClasses = (ownerState: InputTextOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
+    resovleClasses(classes, ownerState),
     getUtilityClass(inputTextRoot),
-    ownerState,
-    classes,
   )
 
   return composedClasses
@@ -62,9 +63,9 @@ export const InputText = forwardRef(
 
     const {
       sx,
+      className,
       prefix,
       suffix,
-      className,
       defaultValue,
       onClear,
       slotProps,
@@ -106,7 +107,7 @@ export const InputText = forwardRef(
       name: 'InputText',
     })
 
-    const classes = useUtilityClasses(ownerState)
+    const classes = useSlotClasses(ownerState)
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value)
@@ -120,34 +121,49 @@ export const InputText = forwardRef(
       inputRef.current?.focus()
     })
 
+    const rootProps = useSlotProps({
+      externalSlotProps: slotProps?.root,
+      externalForwardedProps: {
+        className,
+      },
+      sx: [styles.root, resolveSxProps(sx)],
+      classNames: classes.root,
+    })
+
+    const inputProps = useSlotProps({
+      externalSlotProps: slotProps?.input,
+      externalForwardedProps: {
+        ...remainingProps,
+        value,
+        onChange,
+        disabled,
+        type,
+        ref: composedRef,
+      },
+      sx: styles.input,
+      classNames: classes.input,
+    })
+
+    const clearBtnProps = useSlotProps({
+      externalSlotProps: slotProps?.clearBtn,
+      externalForwardedProps: {
+        onClick: onClearValue,
+      },
+      sx: styles.clearBtn,
+      classNames: classes.clearBtn,
+    })
+
     return (
-      <nex.span
-        {...slotProps?.root}
-        sx={composeSx(styles.root, sx)}
-        className={clsx(classes.root, className)}
-      >
+      <nex.span {...rootProps}>
         {prefix}
-        <nex.input
-          {...slotProps?.input}
-          {...remainingProps}
-          value={value}
-          onChange={onChange}
-          disabled={disabled}
-          type={type}
-          ref={composedRef}
-          sx={composeSx(styles.input, slotProps?.input?.sx)}
-          className={clsx(classes.input, slotProps?.input?.className)}
-        />
+        <nex.input {...inputProps} />
         {clearable && value && !disabled && (
           <Button
             iconOnly
             size="sm"
             variant="link"
             color="gray"
-            onClick={onClearValue}
-            {...slotProps?.clearBtn}
-            sx={composeSx(styles.clearBtn, slotProps?.clearBtn?.sx)}
-            className={clsx(classes.clearBtn, slotProps?.clearBtn?.className)}
+            {...clearBtnProps}
           >
             <CloseCircleFilled />
           </Button>

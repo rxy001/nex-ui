@@ -2,6 +2,6 @@
 
 exports[`Flex renders correctly 1`] = `
 <div
-  class="nui-flex nui-flex-direction-row emotion-0"
+  class="nui-flex-root nui-flex-direction-row emotion-0"
 />
 `;

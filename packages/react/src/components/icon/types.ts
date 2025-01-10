@@ -1,7 +1,11 @@
 import type { ComponentType, ElementType } from 'react'
 import type { NexCSSProperties } from '../../types/generated/cssProperties'
 import type { IconVariants } from '../../theme/recipes'
-import type { ComponentUtilityClasses, OverrideProps } from '../../types/utils'
+import type {
+  ComponentUtilityClasses,
+  OverrideProps,
+  SxProps,
+} from '../../types/utils'
 
 export interface IconPropsOverrides {}
 
@@ -14,6 +18,8 @@ export type IconOwnProsp<RootComponent extends ElementType> = Omit<
   color?: NexCSSProperties['color']
   fontSize?: IconVariants['fontSize'] | number | (string & NonNullable<unknown>)
   classes?: ComponentUtilityClasses<IconOwnerState<RootComponent>, 'root'>
+  as?: RootComponent
+  sx?: SxProps<IconOwnerState<RootComponent>>
 }
 
 export type InnerIconProps<RootComponent extends ElementType = 'svg'> =

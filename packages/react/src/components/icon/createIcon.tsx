@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import clsx from 'clsx'
-import { composeSx, styled } from '@nex-ui/styled'
+import { styled } from '@nex-ui/styled'
 import type { ComponentType, ElementType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
 import {
@@ -10,10 +10,13 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
+  resovleClasses,
+  useSlotProps,
+  resolveSxProps,
 } from '../utils'
 import type { IconOwnerState, InnerIconProps } from './types'
 
-const useUtilityClasses = (ownerState: IconOwnerState) => {
+const useSlotClasses = (ownerState: IconOwnerState) => {
   const { prefix } = useNexContext()
 
   const iconRoot = `${prefix}-icon`
@@ -32,9 +35,8 @@ const useUtilityClasses = (ownerState: IconOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
+    resovleClasses(classes, ownerState),
     getUtilityClass(iconRoot),
-    ownerState,
-    classes,
   )
 
   return composedClasses
@@ -62,7 +64,6 @@ export const createIcon = (
       const {
         sx,
         color,
-        className,
         spin = false,
         fontSize = 'md',
         width = '1em',
@@ -79,32 +80,29 @@ export const createIcon = (
         component: svgComponent,
       }
 
-      const styles = useStyles({
+      const style = useStyles({
         ownerState,
         name: 'Icon',
       })
 
-      const classes = useUtilityClasses(ownerState)
+      const classes = useSlotClasses(ownerState)
 
-      const composedSx = composeSx(
-        {
-          color,
-          width,
-          height,
-          fs: fontSize,
-          ...styles,
-        },
-        sx,
-      )
+      const composedSx = {
+        color,
+        width,
+        height,
+        fs: fontSize,
+        ...style,
+      }
 
-      return (
-        <Icon
-          {...remainingProps}
-          sx={composedSx}
-          ref={ref}
-          className={clsx(classes.root, defaultClassName, className)}
-        />
-      )
+      const rootIcon = useSlotProps({
+        externalSlotProps: remainingProps,
+        externalForwardedProps: { ref },
+        sx: [composedSx, resolveSxProps(sx, ownerState)],
+        classNames: clsx(classes.root, defaultClassName),
+      })
+
+      return <Icon {...rootIcon} />
     },
   )
 }

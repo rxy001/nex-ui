@@ -6,22 +6,21 @@ import { recipes } from '../../theme/recipes'
 import { useNexContext } from '../provider/Context'
 import type { Recipes } from '../../theme/recipes'
 
-type UseStylesConfig<T, K> = {
+type UseStylesConfig<T> = {
   name: T
-  ownerState: K
+  ownerState: object
 }
 
-type UseStyles = <T extends keyof Recipes, K extends Record<string, any>>(
-  option: UseStylesConfig<T, K>,
-) => Recipes[T] extends SlotRecipeRuntimeFn
+export const useStyles = <T extends keyof Recipes>({
+  name,
+  ownerState,
+}: UseStylesConfig<T>): Recipes[T] extends SlotRecipeRuntimeFn
   ? Record<Recipes[T]['slots'][number], StyleObject>
-  : StyleObject
-
-export const useStyles: UseStyles = ({ name, ownerState }) => {
+  : StyleObject => {
   const { components } = useNexContext()
   const styleOverrides = components?.[name]?.styleOverrides as any
 
-  const runtimeFn = useMemo(() => {
+  const extendedRecipe = useMemo(() => {
     const recipe = recipes[name] as any
 
     if (!styleOverrides || isFunction(styleOverrides)) {
@@ -39,10 +38,10 @@ export const useStyles: UseStyles = ({ name, ownerState }) => {
 
   if (isFunction(styleOverrides)) {
     return {
-      ...runtimeFn(ownerState),
+      ...extendedRecipe(ownerState),
       ...styleOverrides(ownerState),
     }
   }
 
-  return runtimeFn(ownerState)
+  return extendedRecipe(ownerState)
 }

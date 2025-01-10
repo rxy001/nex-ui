@@ -1,39 +1,32 @@
-import { forEach, reduce, isFunction, isString } from '@nex-ui/utils'
-import type { Noop } from '@nex-ui/utils'
+import clsx from 'clsx'
+import { forEach, reduce } from '@nex-ui/utils'
 
 export function composeClasses<ClassKey extends string>(
   slots: Record<ClassKey, ReadonlyArray<string | false | undefined | null>>,
-  getUtilityClass: (slot: string) => string,
-  ownerState: Record<string, any>,
-  classes: Record<string, string | string[] | Noop> | undefined = undefined,
+  classes: Partial<Record<ClassKey, string[]>>,
+  getUtilityClass: (slotClass: string) => string,
 ) {
-  const output: Record<ClassKey, string> = {} as any
+  const output = {} as Record<ClassKey, string>
 
   // @ts-ignore
-  forEach(slots, (value: string[], slot: ClassKey) => {
-    let className = classes?.[slot] ?? []
+  forEach(slots, (slotClasses: string[], slot: ClassKey) => {
+    const className = classes?.[slot]
 
-    if (isFunction(className)) {
-      className = className(ownerState)
-    }
-
-    className = (isString(className) ? [className] : className) as string[]
-
-    const result = reduce(
-      value,
-      (acc, key) => {
-        if (key) {
-          const utilityClass = getUtilityClass(key)
+    const result = reduce<string, string[]>(
+      slotClasses,
+      (acc, slotClass: string) => {
+        if (slotClass) {
+          const utilityClass = getUtilityClass(slotClass)
           if (utilityClass !== '') {
             acc.push(utilityClass)
           }
         }
         return acc
       },
-      [] as string[],
+      [],
     )
 
-    output[slot] = [...className, ...result].join(' ')
+    output[slot] = clsx(className, result)
   })
 
   return output

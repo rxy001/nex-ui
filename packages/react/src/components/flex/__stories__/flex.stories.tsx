@@ -63,7 +63,7 @@ const meta = {
   },
   render: (args) => {
     return (
-      <Flex {...args} sx={{ height: 200 }}>
+      <Flex {...args}>
         <Button key="blue">Button</Button>
         <Button key="purple" color="purple">
           Button
