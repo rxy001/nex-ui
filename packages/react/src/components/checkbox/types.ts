@@ -19,32 +19,29 @@ type CheckboxSlotProps<CheckboxComponentProps> = {
 
 type CheckboxOwnProps<
   CheckboxComponent extends ElementType,
-  CheckboxComponentProps extends ComponentPropsWithRef<CheckboxComponent>,
-> = Overwrite<
-  {
-    sx?: SxProps<CheckboxOwnerState<CheckboxComponent>>
-    as?: CheckboxComponent
-    children?: ReactNode
-    className?: string
-    slotProps?: CheckboxSlotProps<CheckboxComponentProps>
-    classes?: ComponentUtilityClasses<
-      CheckboxOwnerState<CheckboxComponent>,
-      'root' | 'input' | 'icon' | 'label' | 'iconContainer'
-    >
-    defaultChecked?: boolean
-    ref?: CheckboxComponentProps['ref']
-    id?: CheckboxComponentProps['id']
-    type?: CheckboxComponentProps['type']
-    onBlur?: CheckboxComponentProps['onBlur']
-    onFocus?: CheckboxComponentProps['onFocus']
-    onChange?: CheckboxComponentProps['onChange']
-    onClick?: CheckboxComponentProps['onClick']
-  } & CheckboxVariants,
-  CheckboxPropsOverrides
->
+  CheckboxComponentProps extends
+    ComponentPropsWithRef<CheckboxComponent> = ComponentPropsWithRef<CheckboxComponent>,
+> = {
+  sx?: SxProps<CheckboxOwnerState<CheckboxComponent>>
+  as?: CheckboxComponent
+  children?: ReactNode
+  className?: string
+  slotProps?: CheckboxSlotProps<CheckboxComponentProps>
+  classes?: ComponentUtilityClasses<
+    CheckboxOwnerState<CheckboxComponent>,
+    'root' | 'input' | 'icon' | 'label' | 'iconContainer'
+  >
+  defaultChecked?: boolean
+  ref?: CheckboxComponentProps['ref']
+  id?: CheckboxComponentProps['id']
+  type?: CheckboxComponentProps['type']
+  onBlur?: CheckboxComponentProps['onBlur']
+  onFocus?: CheckboxComponentProps['onFocus']
+  onChange?: CheckboxComponentProps['onChange']
+} & CheckboxVariants
 
 export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
-  CheckboxOwnProps<CheckboxComponent, ComponentPropsWithRef<CheckboxComponent>>
+  Overwrite<CheckboxOwnProps<CheckboxComponent>, CheckboxPropsOverrides>
 
 export type CheckboxOwnerState<
   CheckboxComponent extends ElementType = 'input',

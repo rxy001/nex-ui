@@ -4,4 +4,5 @@ export const radii = defineTokens.radii({
   sm: '6px',
   md: '9px',
   lg: '12px',
+  full: '9999px',
 })

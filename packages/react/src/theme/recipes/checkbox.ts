@@ -17,6 +17,8 @@ export const checkboxRecipe = defineSlotRecipe({
       inset: 0,
       opacity: 0,
       margin: 0,
+      zIndex: 2,
+      cursor: 'inherit',
     },
     label: {
       fs: 'inherit',
@@ -123,10 +125,10 @@ export const checkboxRecipe = defineSlotRecipe({
       full: {
         iconContainer: {
           '&::before': {
-            borderRadius: '999px',
+            borderRadius: 'full',
           },
           '&::after': {
-            borderRadius: '999px',
+            borderRadius: 'full',
           },
         },
       },
@@ -134,9 +136,7 @@ export const checkboxRecipe = defineSlotRecipe({
     disabled: {
       true: {
         root: {
-          opacity: 0.5,
-        },
-        input: {
+          opacity: 0.6,
           cursor: 'not-allowed',
         },
       },

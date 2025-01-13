@@ -154,7 +154,7 @@ export const InputText = forwardRef(
     })
 
     return (
-      <nex.span {...rootProps}>
+      <nex.label {...rootProps}>
         {prefix}
         <nex.input {...inputProps} />
         {clearable && value && !disabled && (
@@ -169,7 +169,7 @@ export const InputText = forwardRef(
           </Button>
         )}
         {suffix}
-      </nex.span>
+      </nex.label>
     )
   },
 )

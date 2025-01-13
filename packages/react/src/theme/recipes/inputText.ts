@@ -17,6 +17,7 @@ export const inputTextRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       gap: '0.5',
+      cursor: 'text',
     },
     input: {
       outline: 'none',
@@ -26,6 +27,7 @@ export const inputTextRecipe = defineSlotRecipe({
       color: 'inherit',
       height: '100%',
       flex: 1,
+      cursor: 'inherit',
     },
     clearBtn: {
       padding: 0,
@@ -62,9 +64,6 @@ export const inputTextRecipe = defineSlotRecipe({
         root: {
           cursor: 'not-allowed',
           opacity: 0.6,
-        },
-        input: {
-          cursor: 'not-allowed',
         },
       },
     },

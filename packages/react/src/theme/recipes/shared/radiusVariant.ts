@@ -9,6 +9,6 @@ export const radiusVariant = {
     borderRadius: 'lg',
   },
   full: {
-    borderRadius: '9999px',
+    borderRadius: 'full',
   },
 }

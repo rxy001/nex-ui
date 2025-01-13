@@ -6,9 +6,7 @@ import { inputTextRecipe } from './inputText'
 import { dividerRecipe } from './divider'
 import { avatarRecipe } from './avatar'
 import { checkboxRecipe } from './checkbox'
-
-export * from './button'
-export * from './icon'
+import { switchRecipe } from './switch'
 
 export const recipes = {
   Button: buttonRecipe,
@@ -18,6 +16,7 @@ export const recipes = {
   Divider: dividerRecipe,
   Avatar: avatarRecipe,
   Checkbox: checkboxRecipe,
+  Switch: switchRecipe,
 }
 
 export type Recipes = typeof recipes
@@ -42,3 +41,6 @@ export type AvatarVariants = RecipeVariants<AvatarRecipe>
 
 export type CheckboxRecipe = typeof checkboxRecipe
 export type CheckboxVariants = RecipeVariants<CheckboxRecipe>
+
+export type SwitchRecipe = typeof switchRecipe
+export type SwitchVariants = RecipeVariants<SwitchRecipe>

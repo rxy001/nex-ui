@@ -9,9 +9,9 @@ import type { DividerVariants } from '../../theme/recipes'
 export interface DividerPropsOverrides {}
 
 type AvatarOwnProps<RootComponent extends ElementType> = {
-  classes?: ComponentUtilityClasses<DividerOwnerState<RootComponent>, 'root'>
   as?: RootComponent
   sx?: SxProps<AvatarOwnProps<RootComponent>>
+  classes?: ComponentUtilityClasses<DividerOwnerState<RootComponent>, 'root'>
 } & DividerVariants
 
 export type DividerProps<RootComponent extends ElementType = 'hr'> =
