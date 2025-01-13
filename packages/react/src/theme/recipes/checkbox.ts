@@ -29,10 +29,13 @@ export const checkboxRecipe = defineSlotRecipe({
       position: 'relative',
       zIndex: 1,
       color: 'colorPalette.contrastText',
+      fs: '1.1em',
     },
     iconContainer: {
       display: 'inline-flex',
       position: 'relative',
+      justifyContent: 'center',
+      alignItems: 'center',
       '&::before': {
         content: '""',
         position: 'absolute',
@@ -69,24 +72,27 @@ export const checkboxRecipe = defineSlotRecipe({
         root: {
           fs: '14px',
         },
-        icon: {
-          fs: '1.143em',
+        iconContainer: {
+          w: '4',
+          h: '4',
         },
       },
       md: {
         root: {
           fs: '16px',
         },
-        icon: {
-          fs: '1.25em',
+        iconContainer: {
+          w: '5',
+          h: '5',
         },
       },
       lg: {
         root: {
           fs: '18px',
         },
-        icon: {
-          fs: '1.33334em',
+        iconContainer: {
+          w: '6',
+          h: '6',
         },
       },
     },

@@ -3,9 +3,10 @@
 import { nex } from '@nex-ui/styled'
 import { useState } from 'react'
 import { CheckOutlined } from '@nex-ui/icons'
-import { useEvent } from '@nex-ui/utils'
+import { isFunction, useEvent } from '@nex-ui/utils'
 import type { Ref, ElementType, ChangeEvent } from 'react'
 import { useNexContext } from '../provider'
+import { useCheckboxGroupContext } from './CheckboxGroupContext'
 import {
   forwardRef,
   useDefaultProps,
@@ -59,33 +60,47 @@ export const Checkbox = forwardRef(
       props: inProps,
     })
 
+    const groupCtx = useCheckboxGroupContext()
+
+    const inGroup = !!groupCtx
+
     const {
       sx,
+      icon,
+      value,
       children,
       className,
       slotProps,
       defaultChecked,
       onChange: onChangeProp,
+      name = groupCtx?.name,
       type = 'checkbox',
-      color = 'blue',
-      disabled = false,
-      size = 'md',
-      radius = size,
-      checked: checkedProps,
+      color = groupCtx?.color ?? 'blue',
+      disabled = groupCtx?.disabled ?? false,
+      size = groupCtx?.size ?? 'md',
+      radius = groupCtx?.radius ?? groupCtx?.size ?? size,
+      checked: checkedProp,
       ...remainingProps
     } = props
 
-    const [checked, setChecked] = useState(
-      checkedProps ?? defaultChecked ?? false,
+    const [rawChecked, setRawChecked] = useState(
+      () => checkedProp ?? defaultChecked ?? false,
     )
 
-    if (checkedProps !== undefined && checkedProps !== checked) {
-      setChecked(checkedProps)
+    if (
+      !inGroup &&
+      typeof checkedProp === 'boolean' &&
+      checkedProp !== rawChecked
+    ) {
+      setRawChecked(checkedProp)
     }
+
+    const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
 
     const ownerState = {
       ...props,
       type,
+      disabled,
       color,
       checked,
       size,
@@ -95,7 +110,19 @@ export const Checkbox = forwardRef(
     const classes = useSlotClasses(ownerState)
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-      setChecked(e.target.checked)
+      if (disabled) {
+        return
+      }
+
+      if (inGroup && value) {
+        // eslint-disable-next-line no-unused-expressions
+        groupCtx.toggleValue(value)
+      }
+
+      if (!inGroup && typeof checkedProp !== 'boolean') {
+        setRawChecked(e.target.checked)
+      }
+
       onChangeProp?.(e)
     })
 
@@ -117,6 +144,8 @@ export const Checkbox = forwardRef(
       externalSlotProps: slotProps?.input,
       externalForwardedProps: {
         ...remainingProps,
+        value,
+        name,
         ref,
         type,
         checked,
@@ -145,12 +174,20 @@ export const Checkbox = forwardRef(
       classNames: classes.label,
     })
 
+    const checkIcon = icon ? (
+      isFunction(icon) ? (
+        icon(ownerState)
+      ) : (
+        icon
+      )
+    ) : (
+      <CheckOutlined {...iconProps} />
+    )
+
     return (
       <nex.label {...rootProps}>
         <nex.input {...inputProps} />
-        <nex.span {...iconContainerProps}>
-          <CheckOutlined {...iconProps} />
-        </nex.span>
+        <nex.span {...iconContainerProps}>{checkIcon}</nex.span>
         <nex.span {...labelProps}>{children}</nex.span>
       </nex.label>
     )

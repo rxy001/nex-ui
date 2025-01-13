@@ -4,3 +4,5 @@ export type {
   CheckboxProps,
   CheckboxOwnerState,
 } from './types'
+
+export { CheckboxGroup } from './CheckboxGroup'

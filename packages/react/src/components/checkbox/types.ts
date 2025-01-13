@@ -26,18 +26,22 @@ type CheckboxOwnProps<
   as?: CheckboxComponent
   children?: ReactNode
   className?: string
+  icon?:
+    | ReactNode
+    | ((ownerState: CheckboxOwnerState<CheckboxComponent>) => ReactNode)
   slotProps?: CheckboxSlotProps<CheckboxComponentProps>
   classes?: ComponentUtilityClasses<
     CheckboxOwnerState<CheckboxComponent>,
     'root' | 'input' | 'icon' | 'label' | 'iconContainer'
   >
   defaultChecked?: boolean
+  name?: string
   ref?: CheckboxComponentProps['ref']
-  id?: CheckboxComponentProps['id']
   type?: CheckboxComponentProps['type']
   onBlur?: CheckboxComponentProps['onBlur']
   onFocus?: CheckboxComponentProps['onFocus']
   onChange?: CheckboxComponentProps['onChange']
+  value?: string | number
 } & CheckboxVariants
 
 export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
@@ -46,3 +50,26 @@ export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
 export type CheckboxOwnerState<
   CheckboxComponent extends ElementType = 'input',
 > = CheckboxProps<CheckboxComponent>
+
+type CheckboxGroupVariants = Pick<
+  CheckboxVariants,
+  'size' | 'color' | 'disabled' | 'radius'
+>
+
+export type CheckboxGroupValueType = number | string
+
+export type CheckboxGroupProps<T> = {
+  value?: T[]
+  name?: string
+  children?: ReactNode
+  defaultValue?: T[]
+  onChange?: (value: T[]) => void
+} & CheckboxGroupVariants
+
+export type CheckboxGroupContext<
+  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+> = {
+  toggleValue: (value: T) => void
+  isChecked: (value?: T) => boolean
+  name?: string
+} & CheckboxGroupVariants
