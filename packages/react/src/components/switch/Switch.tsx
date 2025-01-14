@@ -58,6 +58,7 @@ export const Switch = forwardRef(
 
     const {
       sx,
+      name,
       slotProps,
       className,
       startIcon,
@@ -77,7 +78,9 @@ export const Switch = forwardRef(
       checkdeProp ?? defaultChecked ?? false,
     )
 
-    if (checkdeProp !== undefined && checkdeProp !== checked) {
+    const checkedInProps = checkdeProp !== undefined
+
+    if (checkedInProps && checkdeProp !== checked) {
       setChecked(checkdeProp)
     }
 
@@ -97,7 +100,14 @@ export const Switch = forwardRef(
     })
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-      setChecked(e.target.checked)
+      if (disabled) {
+        return
+      }
+
+      if (!checkedInProps) {
+        setChecked(e.target.checked)
+      }
+
       onChangeProp?.(e)
     })
 
@@ -114,6 +124,8 @@ export const Switch = forwardRef(
         ...remainingProps,
         type,
         ref,
+        name,
+        checked,
         disabled,
         onChange,
       },

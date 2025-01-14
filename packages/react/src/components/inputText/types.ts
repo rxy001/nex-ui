@@ -32,9 +32,9 @@ type InputTextOwnProps<
   >
   slotProps?: InputTextSlotProps<InputComponentProps>
   className?: string
+  name?: string
   as?: InputComponent
   sx?: SxProps<InputTextOwnerState<InputComponent>>
-  id?: string
   ref?: InputComponentProps['ref']
   type?: InputComponentProps['type']
   onBlur?: InputComponentProps['onBlur']

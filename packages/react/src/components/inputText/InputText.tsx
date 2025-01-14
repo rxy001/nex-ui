@@ -63,6 +63,7 @@ export const InputText = forwardRef(
 
     const {
       sx,
+      name,
       className,
       prefix,
       suffix,
@@ -87,7 +88,9 @@ export const InputText = forwardRef(
     const inputRef = useRef<HTMLInputElement>(null)
     const composedRef = composeRef<HTMLInputElement>(ref, inputRef)
 
-    if (valueProp !== undefined && valueProp !== value) {
+    const valueInProps = valueProp !== undefined
+
+    if (valueInProps && valueProp !== value) {
       setValue(valueProp)
     }
 
@@ -110,7 +113,13 @@ export const InputText = forwardRef(
     const classes = useSlotClasses(ownerState)
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value)
+      if (disabled) {
+        return
+      }
+
+      if (!valueInProps) {
+        setValue(e.target.value)
+      }
 
       onChangeProp?.(e)
     })
@@ -135,6 +144,7 @@ export const InputText = forwardRef(
       externalForwardedProps: {
         ...remainingProps,
         value,
+        name,
         onChange,
         disabled,
         type,

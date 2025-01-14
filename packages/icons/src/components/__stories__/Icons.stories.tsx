@@ -22,8 +22,8 @@ const meta = {
   render: (args) => {
     return (
       <>
-        {map(Icon, (C) => (
-          <C {...args} />
+        {map(Icon, (Component, index) => (
+          <Component key={index} {...args} />
         ))}
       </>
     )

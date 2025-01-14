@@ -87,11 +87,9 @@ export const Checkbox = forwardRef(
       () => checkedProp ?? defaultChecked ?? false,
     )
 
-    if (
-      !inGroup &&
-      typeof checkedProp === 'boolean' &&
-      checkedProp !== rawChecked
-    ) {
+    const checkedInProps = checkedProp !== undefined
+
+    if (!inGroup && checkedInProps && checkedProp !== rawChecked) {
       setRawChecked(checkedProp)
     }
 
@@ -119,7 +117,7 @@ export const Checkbox = forwardRef(
         groupCtx.toggleValue(value)
       }
 
-      if (!inGroup && typeof checkedProp !== 'boolean') {
+      if (!inGroup && !checkedInProps) {
         setRawChecked(e.target.checked)
       }
 

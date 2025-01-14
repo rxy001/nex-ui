@@ -121,7 +121,7 @@ export const switchRecipe = defineSlotRecipe({
         },
         startIcon: {
           opacity: 1,
-          scale: 1,
+          scale: '1',
         },
         endIcon: {
           opacity: 0,
