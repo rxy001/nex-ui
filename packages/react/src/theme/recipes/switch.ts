@@ -16,7 +16,10 @@ export const switchRecipe = defineSlotRecipe({
       m: 0,
     },
     track: {
-      bg: 'gray.200',
+      bg: {
+        _DEFAULT: 'gray.200',
+        _dark: 'gray.500',
+      },
       display: 'inline-flex',
       borderRadius: 'full',
       alignItems: 'center',
@@ -117,7 +120,7 @@ export const switchRecipe = defineSlotRecipe({
           ml: '50%',
         },
         track: {
-          bg: 'colorPalette.500',
+          bg: 'colorPalette.filled.fg',
         },
         startIcon: {
           opacity: 1,

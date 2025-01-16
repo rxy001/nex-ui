@@ -71,7 +71,10 @@ export const inputTextRecipe = defineSlotRecipe({
     error: {
       true: {
         root: {
-          color: 'red.500',
+          color: {
+            _DEFAULT: 'red.500',
+            _dark: 'red.600',
+          },
         },
       },
     },
@@ -114,7 +117,10 @@ export const inputTextRecipe = defineSlotRecipe({
       variant: 'outlined',
       css: {
         root: {
-          borderColor: 'red.500',
+          borderColor: {
+            _DEFAULT: 'red.500',
+            _dark: 'red.600',
+          },
         },
       },
     },
@@ -124,8 +130,12 @@ export const inputTextRecipe = defineSlotRecipe({
       css: {
         root: {
           bg: 'red.100',
+          borderColor: 'red.100',
           '&:focus-within': {
-            borderColor: 'red.500',
+            borderColor: {
+              _DEFAULT: 'red.500',
+              _dark: 'red.600',
+            },
             bg: 'transparent',
           },
         },
