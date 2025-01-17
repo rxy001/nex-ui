@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import NextLink from 'next/link'
 import type { LinkProps } from 'next/link'
 
-export default function MyLink(props: LinkProps) {
-  return <Link className="text-[#006be6]" {...props} />
+export function Link(props: LinkProps) {
+  return <NextLink className="text-[#006be6]" {...props} />
 }

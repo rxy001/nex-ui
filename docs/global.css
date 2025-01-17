@@ -15,3 +15,35 @@ a.link {
 :root {
   color: #11181c;
 }
+
+@keyframes levitate {
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+
+  70% {
+    transform: translateY(-15px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.nextra-code > pre {
+  background-color: rgb(45 45 45);
+  box-shadow: none;
+  max-height: 400px;
+}
+
+.nextra-code button[title='Copy code'] {
+  color: white;
+}

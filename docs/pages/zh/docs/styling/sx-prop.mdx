@@ -1,6 +1,5 @@
 import Image from 'next/image'
-import Link from '@/components/Link'
-import Example from '@/components/Example'
+import { Link, Example } from '@/components'
 import { Box, NexProvider } from '@nex-ui/react'
 import { Callout } from 'nextra/components'
 import logo from '../../../../public/logo.png'
@@ -9,44 +8,50 @@ import logo from '../../../../public/logo.png'
 
 `sx` 属性是一种用于定义可访问主题的自定义样式的快捷方式。
 
-`sx` 属性可以使用 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 NexUI 内置的自定义属性和选择器，
+`sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 NexUI 内置的自定义属性和选择器，
 而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在<Link href="">`Theming`页面</Link>了解更多信息。
 
 ## Basic Usage
 
 下面的例子演示了如何使用 `sx` 属性。注意，并不是所有的值都是有效的CSS属性，这是因为 `sx` 的键映射到了主题的特定属性。接下来将更详细地介绍这个概念。
 
-<Example justify="center" sx={{ mt: 20 }}>
+<Example justify="center">
   <Box
     sx={{
-      w: 300,
-      h: 160,
+      'max-width': 390,
       borderRadius: 'lg',
-      borderWidth: 'sm',
-      borderColor: 'gray.200',
-      borderStyle: 'solid',
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'column',
-      gap: '10px',
-      justifyContent: 'center',
+      boxShadow:
+        '0 0 #0000,  0 0 #0000, 0px 0px 15px 0px rgba(0,0,0,.03),0px 2px 30px 0px rgba(0,0,0,.08),0px 0px 1px 0px rgba(0,0,0,.3)',
     }}
   >
-    <Image src={logo} width={50} height={50} />
-    <Box
-      sx={{
-        fontWeight: 'bold',
-        fs: '30px',
-      }}
-    >
-      Nex UI
+    <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
+      <Box as="img" src={logo.src} width={50} height={50} />
+      <Box>
+        <Box>NexUI</Box>
+        <Box
+          sx={{
+            fs: 'md',
+            color: 'rgb(113, 113, 122)',
+          }}
+        >
+          nexui.dev
+        </Box>
+      </Box>
     </Box>
+    <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
+    <Box sx={{ p: '3' }}>Make beautiful websites with ease and efficiency.</Box>
+    <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
     <Box
       sx={{
-        color: 'gray.700',
+        p: '3',
+        display: 'inline-block',
+        textDecoration: 'none',
+        color: 'blue.600',
       }}
+      as="a"
+      href="github.com"
     >
-      🎉 A React.js UI Library
+      Visit source code on GitHub.
     </Box>
   </Box>
 </Example>
@@ -56,34 +61,42 @@ export default function Example() {
   return (
     <Box
       sx={{
-        w: 300,
-        h: 160,
+        'max-width': 390,
         borderRadius: 'lg',
-        borderWidth: 'sm',
-        borderColor: 'gray.200',
-        borderStyle: 'solid',
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: '10px',
-        justifyContent: 'center',
+        boxShadow:
+          '0 0 #0000,  0 0 #0000, 0px 0px 15px 0px rgba(0,0,0,.03),0px 2px 30px 0px rgba(0,0,0,.08),0px 0px 1px 0px rgba(0,0,0,.3)',
       }}
     >
-      <Image src={logo} width={50} height={50} />
-      <Box
-        sx={{
-          fontWeight: 'bold',
-          fs: '30px',
-        }}
-      >
-        Nex UI
+      <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
+        <Box as="img" src={logo.src} width={50} height={50} />
+        <Box>
+          <Box>NexUI</Box>
+          <Box
+            sx={{
+              fs: 'md',
+              color: 'rgb(113, 113, 122)',
+            }}
+          >
+            nexui.dev
+          </Box>
+        </Box>
       </Box>
+      <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
+      <Box sx={{ p: '3' }}>
+        Make beautiful websites with ease and efficiency.
+      </Box>
+      <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
       <Box
         sx={{
-          color: 'gray.700',
+          p: '3',
+          display: 'inline-block',
+          textDecoration: 'none',
+          color: 'blue.600',
         }}
+        as="a"
+        href="github.com"
       >
-        🎉 A React.js UI Library
+        Visit source code on GitHub.
       </Box>
     </Box>
   )
@@ -238,7 +251,15 @@ export default function Example() {
 
 下面的例子演示了如何使用对象语法定义一组断点：
 
-<Example align="center" justify="center" sx={{ mt: 20, bg: '#fff' }}>
+<Example
+  align="center"
+  justify="center"
+  sx={{
+    backgroundImage: 'linear-gradient(to top right, #f77062 0%, #fe5196 100%)',
+    py: 10,
+    borderRadius: 'sm',
+  }}
+>
   <Box
     sx={{
       width: {
@@ -248,6 +269,12 @@ export default function Example() {
         _lg: 400, // token.breakpoints.lg
         _xl: 500, // token.breakpoints.xl
       },
+      backdropFilter: 'blur(12px)',
+      bg: '#fff9',
+      borderRadius: 'sm',
+      py: 2,
+      px: 7,
+      color: 'black',
     }}
   >
     This box has a responsive width.
@@ -274,8 +301,28 @@ export default function Example() {
 
 第二种选择是将你的断点定义为一个数组，按照从小到大的顺序排列。如下所示：
 
-<Example align="center" justify="center" sx={{ mt: 20, bg: '#fff' }}>
-  <Box sx={{ width: [100, 200, 300] }}>This box has a responsive width.</Box>
+<Example
+  align="center"
+  justify="center"
+  sx={{
+    backgroundImage: 'linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%)',
+    py: 10,
+    borderRadius: 'sm',
+    color: 'black',
+  }}
+>
+  <Box
+    sx={{
+      width: [100, 200, 300],
+      backdropFilter: 'blur(12px)',
+      bg: '#fff9',
+      borderRadius: 'sm',
+      py: 2,
+      px: 7,
+    }}
+  >
+    This box has a responsive width.
+  </Box>
 </Example>
 
 ```tsx
@@ -299,21 +346,23 @@ export default function Example() {
 <Example>
   <Box
     sx={{
+      width: '100%',
+      borderRadius: 'sm',
+      p: '3',
       bg: {
         _dark: 'white',
-        _light: '#27272a',
-        _DEFAULT: '#27272a',
+        _light: '#4c4c54',
+        _DEFAULT: '#4c4c54',
       },
       color: {
-        _dark: '#27272a',
+        _dark: '#4c4c54',
         _light: 'white',
         _DEFAULT: 'white',
       },
-      width: 300,
       textAlign: 'center',
     }}
   >
-    深色模式
+    Color Mode
   </Box>
 </Example>
 

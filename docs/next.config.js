@@ -8,6 +8,14 @@ const withNextra = nextra({
   theme: 'nextra-theme-docs',
   themeConfig: './theme.config.tsx',
   defaultShowCopyCode: true,
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      theme: {
+        dark: 'github-dark',
+        light: 'github-dark',
+      },
+    },
+  },
 })
 
 export default {
@@ -20,6 +28,7 @@ export default {
       const fileLoaderRule = config.module.rules.find((rule) =>
         rule.test?.test?.('.svg'),
       )
+
       config.module.rules.push(
         // Reapply the existing rule, but only for svg imports ending in ?url
         {

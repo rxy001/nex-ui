@@ -1,9 +1,12 @@
 import Image from 'next/image'
-import { useConfig, LocaleSwitch } from 'nextra-theme-docs'
+import { useConfig } from 'nextra-theme-docs'
 import { useRouter } from 'nextra/hooks'
 import type { DocsThemeConfig } from 'nextra-theme-docs'
 import logo from './public/logo.png'
-import { ThemeSwitch } from './components/ThemeSwitch'
+import { ThemeSwitch, LocaleSwitch } from './components'
+
+const pageTitle =
+  'Nex UI - Beautiful, modern and high-quality React UI library.'
 
 const theme: DocsThemeConfig = {
   logo: () => (
@@ -18,7 +21,8 @@ const theme: DocsThemeConfig = {
     const config = useConfig()
     const { route, locale } = useRouter()
 
-    const title = route === `/${locale}` ? 'Nex UI' : `${config.title} - Nex UI`
+    const title =
+      route === `/${locale}` ? pageTitle : `${config.title} - ${pageTitle}`
 
     return (
       <>
@@ -63,26 +67,20 @@ const theme: DocsThemeConfig = {
   feedback: {
     content: null,
   },
-  i18n: [
-    { locale: 'zh', name: '中文' },
-    { locale: 'en', name: 'English' },
-  ],
-
   themeSwitch: {
-    component: ThemeSwitch,
+    component: null,
+  },
+  navbar: {
+    extraContent: (
+      <>
+        <LocaleSwitch />
+        <ThemeSwitch />
+      </>
+    ),
   },
   footer: {
     component: function Footer() {
-      const { route, locale } = useRouter()
-
-      const isHomePage = route === `/${locale}`
-
-      return isHomePage ? (
-        <div className="max-w-[90rem] mx-auto px-[1.5rem] mt-10">
-          <LocaleSwitch />
-          <ThemeSwitch />
-        </div>
-      ) : null
+      return null
     },
   },
 }
