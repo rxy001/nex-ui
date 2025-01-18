@@ -51,6 +51,8 @@ export const Switch = forwardRef(
     inProps: SwitchProps<SwitchComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
+    const { primaryColor } = useNexContext()
+
     const props = useDefaultProps<SwitchProps>({
       name: 'Switch',
       props: inProps,
@@ -70,7 +72,7 @@ export const Switch = forwardRef(
       size = 'md',
       type = 'checkbox',
       onChange: onChangeProp,
-      color = 'blue',
+      color = primaryColor,
       ...remainingProps
     } = props
 

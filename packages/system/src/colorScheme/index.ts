@@ -4,4 +4,9 @@ export {
   createGetColorSchemeSelector,
 } from './ColorSchemeProvider'
 
-export type { ColorSchemeProviderProps } from './types'
+export { InitColorSchemeScript } from './InitColorSchemeScript'
+
+export type {
+  ColorSchemeProviderProps,
+  InitColorSchemeScriptProps,
+} from './types'

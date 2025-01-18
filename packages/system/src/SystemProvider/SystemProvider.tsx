@@ -20,6 +20,7 @@ export const SystemProvider = ({
   scales,
   breakpoints,
   selectors,
+  colorSchemeNode,
   defaultMode = 'system',
   modeStorageKey = 'color-scheme',
   colorSchemeSelector = 'data',
@@ -93,6 +94,7 @@ export const SystemProvider = ({
         defaultMode={defaultMode}
         modeStorageKey={modeStorageKey}
         colorSchemeSelector={colorSchemeSelector}
+        colorSchemeNode={colorSchemeNode}
       >
         <Global styles={globalStyles} />
         {children}

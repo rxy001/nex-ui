@@ -13,12 +13,17 @@ import {
 import { createIcon } from '../icon/createIcon'
 import type { NexProviderProps, InnerProviderProps } from './types'
 
-function InnerProvider({ components, prefix, children }: InnerProviderProps) {
+function InnerProvider({
+  components,
+  prefix,
+  children,
+  primaryColor,
+}: InnerProviderProps) {
   const { css } = useSystem()
 
   const contextValue = useMemo(
-    () => ({ components, prefix, css }),
-    [components, css, prefix],
+    () => ({ components, prefix, css, primaryColor }),
+    [components, css, prefix, primaryColor],
   )
   return (
     <NexContextProvider value={contextValue}>{children}</NexContextProvider>
@@ -29,10 +34,12 @@ function TopLevelProvider(props: NexProviderProps) {
   const {
     theme,
     children,
+    colorSchemeNode,
+    primaryColor = 'blue',
     prefix = 'nui',
     defaultMode = 'system',
-    modeStorageKey = 'nui-color-scheme',
-    colorSchemeSelector = 'data-nui-color-scheme',
+    modeStorageKey = `${prefix}-color-scheme`,
+    colorSchemeSelector = `data-${prefix}-color-scheme`,
   } = props
 
   const mergedSysConfig = useMemo(() => {
@@ -44,13 +51,18 @@ function TopLevelProvider(props: NexProviderProps) {
 
   return (
     <SystemProvider
+      colorSchemeNode={colorSchemeNode}
       modeStorageKey={modeStorageKey}
       colorSchemeSelector={colorSchemeSelector}
       defaultMode={defaultMode}
       {...mergedSysConfig}
     >
       <NexIconsProvider createIcon={createIcon}>
-        <InnerProvider components={theme?.components} prefix={prefix}>
+        <InnerProvider
+          components={theme?.components}
+          primaryColor={primaryColor}
+          prefix={prefix}
+        >
           {children}
         </InnerProvider>
       </NexIconsProvider>
@@ -59,7 +71,7 @@ function TopLevelProvider(props: NexProviderProps) {
 }
 
 function NestedProvider(props: NexProviderProps) {
-  const { theme: { components } = {}, children } = props
+  const { theme: { components } = {}, children, primaryColor } = props
 
   const ctx = useNexContext()
 
@@ -68,7 +80,11 @@ function NestedProvider(props: NexProviderProps) {
   }, [components, ctx.components])
 
   return (
-    <InnerProvider components={mergedComponents} prefix={ctx.prefix}>
+    <InnerProvider
+      components={mergedComponents}
+      prefix={ctx.prefix}
+      primaryColor={primaryColor ?? ctx.primaryColor}
+    >
       {children}
     </InnerProvider>
   )

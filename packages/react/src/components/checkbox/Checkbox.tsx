@@ -55,6 +55,8 @@ export const Checkbox = forwardRef(
     inProps: CheckboxProps<CheckboxComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
+    const { primaryColor } = useNexContext()
+
     const props = useDefaultProps<CheckboxProps>({
       name: 'Checkbox',
       props: inProps,
@@ -75,7 +77,7 @@ export const Checkbox = forwardRef(
       onChange: onChangeProp,
       name = groupCtx?.name,
       type = 'checkbox',
-      color = groupCtx?.color ?? 'blue',
+      color = groupCtx?.color ?? primaryColor,
       disabled = groupCtx?.disabled ?? false,
       size = groupCtx?.size ?? 'md',
       radius = groupCtx?.radius ?? groupCtx?.size ?? size,

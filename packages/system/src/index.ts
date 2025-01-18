@@ -22,8 +22,11 @@ export {
   defineSemanticTokens,
 } from './defineConfig'
 
-export { useColorScheme } from './colorScheme'
-export type { ColorSchemeProviderProps } from './colorScheme'
+export { useColorScheme, InitColorSchemeScript } from './colorScheme'
+export type {
+  ColorSchemeProviderProps,
+  InitColorSchemeScriptProps,
+} from './colorScheme'
 
 export type {
   CSSInterpolation,

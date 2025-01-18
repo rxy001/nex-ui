@@ -1,11 +1,5 @@
 import { createContext } from '@nex-ui/utils'
-import type { SystemColorScheme, Mode } from './types'
-
-export type ColorSchemeContext = {
-  mode?: Mode
-  setMode: (mode?: Mode) => void
-  systemColorScheme?: SystemColorScheme
-}
+import type { ColorSchemeContext } from './types'
 
 const [InnerColorSchemeProvider, useColorScheme] =
   createContext<ColorSchemeContext>({

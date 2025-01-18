@@ -69,6 +69,7 @@ export const Button = forwardRef(
     inProps: ButtonProps<RootComponent>,
     ref: Ref<HTMLButtonElement>,
   ) => {
+    const { primaryColor } = useNexContext()
     const props = useDefaultProps<ButtonProps>({
       name: 'Button',
       props: inProps,
@@ -86,7 +87,7 @@ export const Button = forwardRef(
       loading = false,
       disabled = false,
       fullWidth = false,
-      color = 'blue',
+      color = primaryColor,
       startIcon: startIconProp,
       endIcon: endIconProp,
       onClick: onClickProp,

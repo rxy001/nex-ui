@@ -56,6 +56,8 @@ export const InputText = forwardRef(
     inProps: InputTextProps<InputComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
+    const { primaryColor } = useNexContext()
+
     const props = useDefaultProps<InputTextProps>({
       name: 'InputText',
       props: inProps,
@@ -72,7 +74,7 @@ export const InputText = forwardRef(
       slotProps,
       onChange: onChangeProp,
       value: valueProp,
-      color = 'blue',
+      color = primaryColor,
       type = 'text',
       disabled = false,
       variant = 'outlined',

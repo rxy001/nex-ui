@@ -13,6 +13,19 @@ export interface ColorSchemeProviderProps {
   children?: ReactNode
   defaultMode?: Mode
   modeStorageKey?: string
-  // colorSchemeSelector?: 'data' | 'class' | 'media' | string
-  colorSchemeSelector?: 'data' | 'class' | string
+  colorSchemeSelector?: 'data' | 'class' | (string & NonNullable<unknown>)
+  colorSchemeNode?: Element
+}
+
+export type ColorSchemeContext = {
+  mode?: Mode
+  setMode: (mode?: Mode) => void
+  systemColorScheme?: SystemColorScheme
+}
+
+export type InitColorSchemeScriptProps = Pick<
+  ColorSchemeProviderProps,
+  'modeStorageKey' | 'colorSchemeSelector' | 'defaultMode'
+> & {
+  colorSchemeNode?: string
 }

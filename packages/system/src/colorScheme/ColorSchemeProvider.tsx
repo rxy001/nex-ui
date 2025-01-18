@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useEvent } from '@nex-ui/utils'
 import { InnerColorSchemeProvider } from './ColorSchemeContex'
-import type { ColorSchemeContext } from './ColorSchemeContex'
 import type {
   State,
   Mode,
   SystemColorScheme,
   ColorSchemeProviderProps,
+  ColorSchemeContext,
 } from './types'
 
 function initializeValue(key: string, defaultValue: string) {
@@ -82,6 +82,7 @@ export function createGetColorSchemeSelector(
 
 export const ColorSchemeProvider = ({
   children,
+  colorSchemeNode,
   modeStorageKey = 'color-scheme',
   defaultMode = 'system',
   colorSchemeSelector = 'data',
@@ -167,33 +168,34 @@ export const ColorSchemeProvider = ({
         // 'data-nui-color-scheme' -> '[data-nui-color-scheme="%s"]'
         rule = `[${selector}="%s"]`
       }
-      const doc = document.documentElement
 
       const supportedColorSchemes = ['light', 'dark']
 
+      const node = colorSchemeNode ?? document.documentElement
+
       if (rule.startsWith('.')) {
-        doc.classList.remove(
+        node.classList.remove(
           ...supportedColorSchemes.map((scheme) =>
             rule.substring(1).replace('%s', scheme),
           ),
         )
-        doc.classList.add(rule.substring(1).replace('%s', colorScheme))
+        node.classList.add(rule.substring(1).replace('%s', colorScheme))
       } else {
         const matches = rule.replace('%s', colorScheme).match(/\[([^\]]+)\]/)
         if (matches) {
           const [attr, value] = matches[1].split('=')
           if (!value) {
             supportedColorSchemes.forEach((scheme) => {
-              doc.removeAttribute(attr.replace(colorScheme, scheme))
+              node.removeAttribute(attr.replace(colorScheme, scheme))
             })
           }
-          doc.setAttribute(attr, value ? value.replace(/"|'/g, '') : '')
+          node.setAttribute(attr, value ? value.replace(/"|'/g, '') : '')
         } else {
-          doc.setAttribute(rule, colorScheme)
+          node.setAttribute(rule, colorScheme)
         }
       }
     }
-  }, [colorScheme, colorSchemeSelector])
+  }, [colorScheme, colorSchemeNode, colorSchemeSelector])
 
   const ctx = useMemo<ColorSchemeContext>(
     () => ({
