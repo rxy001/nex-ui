@@ -1,5 +1,5 @@
 import { walkObject, filter } from 'packages/utils/src'
-import { isResponsiveColor } from 'packages/system/src/utils'
+import { isResponsiveColor } from 'packages/system/src/tokens/createTokens'
 import { pretty } from '../utils'
 
 function capitalize(str: string) {
@@ -85,7 +85,7 @@ export async function generateTokens(sys: any) {
           ${Object.keys(token)
             .map(
               (key) =>
-                `${key}?: ${
+                `'${key}'?: ${
                   typeof token[key] === 'object'
                     ? `{${Object.keys(token[key])
                         .map((k) => `${k}?: '${token[key][k]}'`)
@@ -163,7 +163,9 @@ export async function generateCSSProperties(sys: any) {
     return filter(
       [
         `Tokens['${category}']`,
-        semanticTokens[category] ? `SemanticTokens['${category}']` : '',
+        semanticTokens[category] && Object.keys(semanticTokens[category]).length
+          ? `SemanticTokens['${category}']`
+          : '',
         category === 'colors' ? 'VirtualColors' : '',
       ],
       Boolean,
@@ -243,7 +245,7 @@ export async function generateBreakpoints(sys: any) {
       export interface Breakpoints {
         ${keys
           .map((key) => {
-            return `${key}?: '${sys.breakpoints[key]}'`
+            return `'${key}'?: '${sys.breakpoints[key]}'`
           })
           .join('\n')}
       }

@@ -3,6 +3,14 @@ import type { Token } from './createToken'
 
 export type TokenValue = string | number
 
+export type ResponsiveColor = {
+  _DEFAULT?: string
+  _light?: string
+  _dark?: string
+}
+
+export type SemanticTokenValue = TokenValue | ResponsiveColor
+
 export type TokenCategories =
   | 'fontFamilies'
   | 'fontSizes'
@@ -47,11 +55,6 @@ export type BordersDefinition = Dictionary<string | number>
 
 export type FontFamiliesDefinition = Dictionary<string>
 
-type ResponsiveColor = {
-  _DEFAULT?: RawCSSProperties['color']
-  _light?: RawCSSProperties['color']
-  _dark?: RawCSSProperties['color']
-}
 type ExclusiveColor =
   | {
       DEFAULT?: RawCSSProperties['color'] | ResponsiveColor

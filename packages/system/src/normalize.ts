@@ -13,7 +13,7 @@ interface CreateNormalizeConfig {
 
 interface NormalizeConfig {
   propKey: string
-  propValue: any
+  propValue: string | number
   colorPalette?: string
 }
 
@@ -33,13 +33,12 @@ export const createNormalize = ({
       let newPropValue = propValue
 
       // 只支持 string，避免使用 number 时也会映射到 token
-      if (category && isString(propValue)) {
+      if (category && isString(newPropValue)) {
+        const regExp = /^colorPalette(?=\.?)/
+
         switch (category) {
           case 'colors':
-            // eslint-disable-next-line no-case-declarations
-            const regExp = /^colorPalette(?=\.?)/
-
-            if (isString(newPropValue) && regExp.test(newPropValue)) {
+            if (regExp.test(newPropValue)) {
               if (!colorPalette) {
                 console.error('nex-system: The color palette was not provided.')
               }

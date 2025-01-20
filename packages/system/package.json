@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsx ../../scripts/build.ts --dts",
     "build:fast": "tsx ../../scripts/build.ts",
-    "type-check": "tsc --noEmit"
+    "check-type": "tsc --noEmit"
   },
   "files": [
     "dist"

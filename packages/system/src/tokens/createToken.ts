@@ -1,13 +1,13 @@
-import type { TokenValue, TokenCategories } from './types'
+import type { TokenValue, TokenCategories, SemanticTokenValue } from './types'
 
 export class Token {
   path: string[]
 
-  value: TokenValue
+  value: string
 
   name: string
 
-  originalValue: TokenValue
+  originalValue: TokenValue | SemanticTokenValue
 
   category: TokenCategories
 
@@ -17,9 +17,9 @@ export class Token {
   }
 
   conditions?: {
-    base?: string | number
-    light?: string | number
-    dark?: string | number
+    base?: TokenValue
+    light?: TokenValue
+    dark?: TokenValue
   }
 
   constructor({

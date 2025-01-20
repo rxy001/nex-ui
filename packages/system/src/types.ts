@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 import type * as CSS from 'csstype'
 import type { Keyframes } from '@emotion/react'
+import type { CSSProperties } from 'react'
 
 export type Dictionary<T = any> = Record<string, T>
 
@@ -38,3 +39,5 @@ export interface StyleObject
     StyleObjectOverrides,
     CSSPseudos,
     CSSOthersObject {}
+
+export type CSSPropertyKey = keyof CSSProperties

@@ -41,6 +41,7 @@ a.link {
 .nextra-code > pre {
   box-shadow: none;
   max-height: 400px;
+  background-color: #24292e;
 }
 
 .nextra-code button[title='Copy code'] {

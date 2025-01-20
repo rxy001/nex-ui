@@ -50,7 +50,7 @@ export const createCssFn = ({
           })
       }
 
-      walkObject(style, (propValue: any, paths: string[]) => {
+      walkObject(style, (propValue: string | number, paths: string[]) => {
         const [propKey, ...selectors] = handlePaths(paths)
 
         const transformed = normalize({
@@ -74,7 +74,7 @@ function mergeByPath(target: any, paths: string[], value: any) {
 
   forEach(paths, (path: string) => {
     if (!path) return
-    if (!acc[path]) acc[path] = Object.create(null)
+    if (!acc[path]) acc[path] = {}
     acc = acc[path]
   })
 

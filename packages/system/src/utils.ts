@@ -1,5 +1,6 @@
-import { isNumber, isString, memoize, isPlainObject } from '@nex-ui/utils'
+import { isNumber, isString, memoize } from '@nex-ui/utils'
 import type { Noop } from '@nex-ui/utils'
+import type { TokenValue } from './tokens/types'
 
 export function pathToName(path: string[]) {
   return path.join('.')
@@ -26,7 +27,10 @@ export function createCssVarName(prefix: string, path: string[]) {
     .join('-')}`
 }
 
-export function checkTokenValue(value: any, path: string[]) {
+export function checkTokenValue(
+  value: any,
+  path: string[],
+): value is TokenValue {
   if (!isString(value) && !isNumber(value)) {
     console.error(
       `nex-system: The token value must be either a string or a number. but currently received is ${typeof value} (${path.join('.')})`,
@@ -69,8 +73,4 @@ export function memoizeFn<T extends Noop>(fn: T): T {
       return value
     })
   })
-}
-
-export function isResponsiveColor(value: any) {
-  return isPlainObject(value) && (value._light || value._dark || value._DEFAULT)
 }

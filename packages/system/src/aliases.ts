@@ -1,7 +1,8 @@
 import { forEach, isString, isArray } from '@nex-ui/utils'
+import type { CSSPropertyKey } from './types'
 
 export type AliasesDefinition = {
-  [alias: string]: string | string[]
+  [alias: string]: CSSPropertyKey | CSSPropertyKey[]
 }
 
 export function createAliases(aliases: AliasesDefinition) {

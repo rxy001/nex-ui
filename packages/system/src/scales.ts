@@ -1,29 +1,28 @@
 import { forEach, isString } from '@nex-ui/utils'
-import type { CSSProperties } from 'react'
-
 import { checkTokenCategory } from './utils'
 import type { TokenCategories } from './tokens'
-
-export type CSSProperty = keyof CSSProperties
+import type { CSSPropertyKey } from './types'
 
 export type ScalesDefinition = {
-  [property in CSSProperty]?: TokenCategories
+  [property in CSSPropertyKey]?: TokenCategories
 }
 
 export function createScales(scales: ScalesDefinition) {
-  const scaleMap = new Map<CSSProperty, TokenCategories>()
+  const scaleMap = new Map<string, TokenCategories>()
 
-  forEach(scales, (category: TokenCategories | undefined, p: string) => {
-    const property = p as CSSProperty
-    if (isString(category) && checkTokenCategory(category)) {
-      scaleMap.set(property, category)
-    } else {
-      console.error(`nex-system: Unknown token category '${category}'`)
-    }
-  })
+  forEach<ScalesDefinition>(
+    scales,
+    (category: TokenCategories | undefined, property: string) => {
+      if (isString(category) && checkTokenCategory(category)) {
+        scaleMap.set(property, category)
+      } else {
+        console.error(`nex-system: Unknown token category '${category}'`)
+      }
+    },
+  )
 
   return {
-    getCategoryByProperty: (key: string) => scaleMap.get(key as CSSProperty),
+    getCategoryByProperty: (key: string) => scaleMap.get(key),
   }
 }
 

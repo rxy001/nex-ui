@@ -1,10 +1,13 @@
-import { forEach, isString, walkObject } from '@nex-ui/utils'
+import { forEach, isString, walkObject, isPlainObject } from '@nex-ui/utils'
 import type {
   CreateTokensConfig,
   TokenMap,
   CssVarMap,
   TokenCategories,
   ConditionKey,
+  SemanticTokenValue,
+  TokenValue,
+  ResponsiveColor,
 } from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
@@ -13,14 +16,8 @@ import {
   pathToName,
   checkTokenValue,
   checkTokenCategory,
-  isResponsiveColor,
 } from '../utils'
 import type { Token } from './createToken'
-
-function filterDefault(path: string[]) {
-  if (path[0] === 'DEFAULT') return path
-  return path.filter((item) => item !== 'DEFAULT')
-}
 
 export function createTokens(config: CreateTokensConfig) {
   const { tokens, semanticTokens, prefix } = config
@@ -103,11 +100,11 @@ export function createTokens(config: CreateTokensConfig) {
 
       addToTokenMap()
 
-      const { category, value } = workInProgress
+      const { category, originalValue } = workInProgress
 
       switch (category) {
         case 'spacing':
-          if (value === '0rem' || value === 0) {
+          if (originalValue === '0rem' || originalValue === 0) {
             return
           }
           addNegativeToken()
@@ -121,7 +118,7 @@ export function createTokens(config: CreateTokensConfig) {
   }
 
   function getTokenValueByCategory(category: TokenCategories) {
-    return (value: string) => {
+    return (value?: string): TokenValue | undefined => {
       if (isString(value)) {
         const regex = /\{(.*?)\}/
         const match = value.match(regex)
@@ -139,7 +136,7 @@ export function createTokens(config: CreateTokensConfig) {
   function workloop() {
     walkObject(
       tokens,
-      (value: string | number, path: string[]) => {
+      (value: TokenValue, path: string[]) => {
         if (!checkTokenValue(value, path)) return
 
         const category = path[0]
@@ -150,7 +147,7 @@ export function createTokens(config: CreateTokensConfig) {
 
         workInProgress = createToken({
           path,
-          value,
+          value: '',
           category: category as TokenCategories,
           name: pathToName(path),
           originalValue: value,
@@ -162,7 +159,7 @@ export function createTokens(config: CreateTokensConfig) {
         handleToken()
       },
       {
-        predicate: (_: any, path: string[]) => {
+        predicate: (_, path: string[]) => {
           const category = path[0]
           switch (category) {
             case 'colors':
@@ -176,7 +173,7 @@ export function createTokens(config: CreateTokensConfig) {
 
     walkObject(
       semanticTokens,
-      (value: any, path: string[]) => {
+      (value: SemanticTokenValue, path: string[]) => {
         if (!checkTokenCategory(path[0])) {
           return
         }
@@ -193,10 +190,10 @@ export function createTokens(config: CreateTokensConfig) {
               dark: t(value._dark),
               light: t(value._light),
             }
-          : { base: t(value) }
+          : { base: isString(value) ? t(value) : value }
 
         workInProgress = createToken({
-          value,
+          value: '',
           category,
           conditions,
           path: newPath,
@@ -221,3 +218,12 @@ export function createTokens(config: CreateTokensConfig) {
 }
 
 export type Tokens = ReturnType<typeof createTokens>
+
+function filterDefault(path: string[]) {
+  if (path[0] === 'DEFAULT') return path
+  return path.filter((item) => item !== 'DEFAULT')
+}
+
+export function isResponsiveColor(value: any): value is ResponsiveColor {
+  return isPlainObject(value) && (value._light || value._dark || value._DEFAULT)
+}
