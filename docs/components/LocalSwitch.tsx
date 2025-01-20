@@ -7,17 +7,12 @@ import { Select } from './Select'
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
 interface LocaleSwitchProps {
-  lite?: boolean
+  options: { name: string; locale: string }[]
   className?: string
 }
 
-const options = [
-  { locale: 'zh', name: '中文' },
-  { locale: 'en', name: 'English' },
-]
-
 export function LocaleSwitch({
-  lite,
+  options,
   className,
 }: LocaleSwitchProps): ReactElement | null {
   const { locale, asPath } = useRouter()
@@ -25,10 +20,11 @@ export function LocaleSwitch({
   if (!options.length) return null
 
   const selected = options.find((l) => locale === l.locale)
+
   return (
     <Select
-      title="Change language"
       className={className}
+      title="Change language"
       onChange={(option) => {
         const date = new Date(Date.now() + ONE_YEAR)
         document.cookie = `NEXT_LOCALE=${
@@ -42,7 +38,7 @@ export function LocaleSwitch({
         name: (
           <span className="_flex _items-center _gap-2">
             <GlobeIcon />
-            <span className={lite ? '_hidden' : ''}>{selected?.name}</span>
+            <span>{selected?.name}</span>
           </span>
         ),
       }}

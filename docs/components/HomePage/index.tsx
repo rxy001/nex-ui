@@ -1,12 +1,14 @@
 import { Avatar, Button, InputText, Switch } from '@nex-ui/react'
 import { type ReactNode } from 'react'
-import MoonIcon from '../../assets/moon-filled.svg'
-import SunIcon from '../../assets/sun-filled.svg'
+import MoonIcon from '../../icons/moon-filled.svg'
+import SunIcon from '../../icons/sun-filled.svg'
 import { Card } from './Card'
-import ThemeableIcon from '../../assets/customize-outlined.svg'
-import LightingIcon from '../../assets/lighting-outlined.svg'
-import DarkIcon from '../../assets/moon-outlined.svg'
-import TsIcon from '../../assets/typescript-filled.svg'
+import ThemeableIcon from '../../icons/customize-outlined.svg'
+import LightingIcon from '../../icons/lighting-outlined.svg'
+import DarkIcon from '../../icons/moon-outlined.svg'
+import TsIcon from '../../icons/typescript-filled.svg'
+import { Playlist, playlistCodeSnippet } from './Playlist'
+import { CodeBlock } from './CodeBlock'
 
 type Content = { title?: ReactNode; desc?: ReactNode }
 
@@ -28,7 +30,7 @@ type HomePageProps = {
 export function HomePage({ translations }: HomePageProps) {
   const renderHighlight = (value?: Content) => {
     return (
-      <div className="w-1/2">
+      <div className="md:w-1/2">
         <h1 className="font-semibold text-4xl lg:text-6xl lg:leading-[1.1]">
           {value?.title}
         </h1>
@@ -40,7 +42,7 @@ export function HomePage({ translations }: HomePageProps) {
   }
 
   return (
-    <main className="py-36 max-w-[85rem] mx-auto px-[1.5rem]">
+    <main className="py-36 max-w-[85rem] mx-auto px-[1.5rem] flex flex-col gap-[200px]">
       <section className="flex">
         <section className="w-3/6">
           <h1 className="font-semibold text-6xl whitespace-pre-wrap">
@@ -97,7 +99,7 @@ export function HomePage({ translations }: HomePageProps) {
           </Avatar>
         </section>
       </section>
-      <section className="flex gap-[15px] mt-[200px]">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card icon={<ThemeableIcon />} title={translations?.themeable?.title}>
           {translations?.themeable?.desc}
         </Card>
@@ -111,15 +113,21 @@ export function HomePage({ translations }: HomePageProps) {
           {translations?.ts?.desc}
         </Card>
       </section>
-      <section className="mt-[200px]">
+      <section className="flex flex-col gap-[150px]">
         <div className="flex flex-col">
+          {renderHighlight(translations?.customization)}
+        </div>
+        <div className="flex flex-col gap-5">
           {renderHighlight(translations?.styling)}
+          <div className="flex gap-12 flex-col lg:flex-row">
+            <Playlist />
+            <CodeBlock lang="tsx" file="Playlist.tsx">
+              {playlistCodeSnippet}
+            </CodeBlock>
+          </div>
         </div>
         <div className="flex flex-col">
           {renderHighlight(translations?.darkMode)}
-        </div>
-        <div className="flex flex-col">
-          {renderHighlight(translations?.customization)}
         </div>
       </section>
     </main>

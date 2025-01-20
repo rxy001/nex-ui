@@ -12,7 +12,7 @@
 <!-- 7. tsx 运行报错 -->
 <!-- 查看编译过程信息时，发现 packages/react 由于 customConditions: source, tsc 会通过源码引入 icons 中的 svg 文件，但又没有 svg 的声明，导致报错. 通过 exclude 也没能过滤掉 svg ？ -->
 
-8. 写一个脚本，为 html 添加相应的 colorSchemeSelector ，在 ssr 入口引入解决闪烁
+<!-- 8. 写一个脚本，为 html 添加相应的 colorSchemeSelector ，在 ssr 入口引入解决闪烁 -->
 
 <!-- 9. build 输出 ts 保持目录结构 -->
 
@@ -31,3 +31,5 @@
     目前的方案是只执行 props.onChange，忽略 slotProps.input.onChange -->
 
 <!-- 15. 修改 useStyles 和 useUtilityClasses 以适配 slotProps -->
+
+16. docs 使用 alias eslint 报错

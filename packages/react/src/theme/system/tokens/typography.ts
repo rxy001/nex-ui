@@ -11,6 +11,7 @@ export const fontSizes = defineTokens.fontSizes({
   md: '14px',
   lg: '16px',
   xl: '18px',
+  '2xl': '20px',
 })
 
 export const fontWeights = defineTokens.fontWeights({

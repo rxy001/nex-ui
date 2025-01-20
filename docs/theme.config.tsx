@@ -2,11 +2,28 @@ import Image from 'next/image'
 import { useConfig } from 'nextra-theme-docs'
 import { useRouter } from 'nextra/hooks'
 import type { DocsThemeConfig } from 'nextra-theme-docs'
-import logo from './public/logo.png'
+import logo from './public/images/logo.png'
 import { ThemeSwitch, LocaleSwitch } from './components'
 
 const pageTitle =
   'Nex UI - Beautiful, modern and high-quality React UI library.'
+
+const locales = [
+  {
+    locale: 'en',
+    name: 'English',
+  },
+  {
+    locale: 'zh',
+    name: '中文',
+  },
+]
+
+const themes = [
+  { key: 'light', name: 'Light' },
+  { key: 'dark', name: 'Dark' },
+  { key: 'system', name: 'System' },
+]
 
 const theme: DocsThemeConfig = {
   logo: () => (
@@ -41,7 +58,7 @@ const theme: DocsThemeConfig = {
           name="keywords"
           content="React,Next.js,Emotion,NexUI,React,Server Components,React Components,UI Components,UI Kit,UI Library,UI Framework,UI Design System"
         />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href={logo.src} />
       </>
     )
   },
@@ -67,14 +84,15 @@ const theme: DocsThemeConfig = {
   feedback: {
     content: null,
   },
+  i18n: locales,
   themeSwitch: {
-    component: null,
+    component: () => <ThemeSwitch options={themes} />,
   },
   navbar: {
     extraContent: (
       <>
-        <LocaleSwitch />
-        <ThemeSwitch />
+        <LocaleSwitch options={locales} className="hidden md:block" />
+        <ThemeSwitch options={themes} className="hidden md:block" />
       </>
     ),
   },

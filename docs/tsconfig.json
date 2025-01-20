@@ -5,7 +5,11 @@
     "noEmit": true,
     "incremental": true,
     "jsx": "preserve",
-    "customConditions": ["source"]
+    "customConditions": ["source"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "theme.config.tsx",

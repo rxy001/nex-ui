@@ -5,7 +5,15 @@ import { MoonIcon, SunIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'
 import { Select } from './Select'
 
-export function ThemeSwitch(): ReactElement {
+type ThemeSwitchProps = {
+  options: { key: string; name: string }[]
+  className?: string
+}
+
+export function ThemeSwitch({
+  options,
+  className,
+}: ThemeSwitchProps): ReactElement {
   const { mode, setMode } = useColorScheme()
   const { setTheme } = useTheme()
   const mounted = useMounted()
@@ -15,11 +23,8 @@ export function ThemeSwitch(): ReactElement {
   return (
     <Select
       title="Change theme"
-      options={[
-        { key: 'light', name: 'Light' },
-        { key: 'dark', name: 'Dark' },
-        { key: 'system', name: 'System' },
-      ]}
+      className={className}
+      options={options}
       onChange={(option) => {
         setMode(option.key as any)
         setTheme(option.key)
