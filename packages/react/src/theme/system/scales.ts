@@ -8,6 +8,8 @@ export const scales = defineConfig.scales({
   borderTopColor: 'colors',
   borderLeftColor: 'colors',
   borderRightColor: 'colors',
+  fill: 'colors',
+  stroke: 'colors',
 
   width: 'sizes',
   minWidth: 'sizes',
@@ -38,6 +40,9 @@ export const scales = defineConfig.scales({
   bottom: 'spacing',
   rowGap: 'spacing',
   columnGap: 'spacing',
+  gridGap: 'spacing',
+  gridColumnGap: 'spacing',
+  gridRow: 'spacing',
 
   borderRadius: 'radii',
   borderTopRightRadius: 'radii',
@@ -45,9 +50,21 @@ export const scales = defineConfig.scales({
   borderBottomRightRadius: 'radii',
   borderBottomLeftRadius: 'radii',
 
-  borderTopWidth: 'borders',
-  borderBottomWidth: 'borders',
-  borderLeftWidth: 'borders',
-  borderRightWidth: 'borders',
-  borderWidth: 'borders',
+  borderTopWidth: 'borderWidths',
+  borderBottomWidth: 'borderWidths',
+  borderLeftWidth: 'borderWidths',
+  borderRightWidth: 'borderWidths',
+  borderWidth: 'borderWidths',
+
+  border: 'borders',
+  borderTop: 'borders',
+  borderBottom: 'borders',
+  borderRight: 'borders',
+  borderLeft: 'borders',
+
+  boxShadow: 'shadows',
+
+  transition: 'transitions',
+
+  zIndex: 'zIndexes',
 })

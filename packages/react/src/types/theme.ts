@@ -13,21 +13,28 @@ import type {
   BreakpointsDefinition,
   SemanticTokensDefinition,
   SelectorsDefinition,
+  ShadowsDefinition,
+  ZIndexesDefinition,
+  BorderWidthsDefinition,
+  TransitionsDefinition,
 } from '@nex-ui/system'
-import type { TokenDefinition, ReplaceValuesWithColor } from './utils'
 import type { Aliases } from './generated/aliases'
 import type { Scales } from './generated/scales'
 import type { Breakpoints } from './generated/breakpoints'
 import type {
-  FontFamilies,
-  Colors,
-  FontSizes,
-  FontWeights,
-  Sizes,
-  Spacing,
-  Radii,
-  Borders,
-  LineHeights,
+  FontFamiliesToken,
+  ColorsToken,
+  FontSizesToken,
+  FontWeightsToken,
+  SizesToken,
+  SpacingToken,
+  RadiiToken,
+  BordersToken,
+  LineHeightsToken,
+  ShadowsToken,
+  ZIndexesToken,
+  BorderWidthsToken,
+  TransitionsToken,
 } from './generated/tokens'
 import type { Selectors } from './generated/selectors'
 import type { ComponentsTheme } from './componentsTheme'
@@ -35,19 +42,23 @@ import type { ComponentsTheme } from './componentsTheme'
 export type Theme = {
   aliases?: AliasesDefinition & Aliases
   scales?: ScalesDefinition & Scales
-  breakpoints?: TokenDefinition<Breakpoints, BreakpointsDefinition>
+  breakpoints?: BreakpointsDefinition & Breakpoints
   selectors?: SelectorsDefinition & Selectors
   components?: ComponentsTheme
   semanticTokens?: SemanticTokensDefinition
   tokens?: {
-    borders?: TokenDefinition<Borders, BordersDefinition>
-    spacing?: TokenDefinition<Spacing, SpacingDefinition>
-    colors?: ColorsDefinition & ReplaceValuesWithColor<Colors>
-    sizes?: TokenDefinition<Sizes, SizesDefinition>
-    fontFamilies?: TokenDefinition<FontFamilies, FontFamiliesDefinition>
-    fontSizes?: TokenDefinition<FontSizes, FontSizesDefinition>
-    fontWeights?: TokenDefinition<FontWeights, FontWeightsDefinition>
-    lineHeights?: TokenDefinition<LineHeights, LineHeightsDefinition>
-    radii?: TokenDefinition<Radii, RadiiDefinition>
+    borders?: BordersDefinition & BordersToken
+    spacing?: SpacingDefinition & SpacingToken
+    colors?: ColorsDefinition & ColorsToken
+    sizes?: SizesDefinition & SizesToken
+    fontFamilies?: FontFamiliesDefinition & FontFamiliesToken
+    fontSizes?: FontSizesDefinition & FontSizesToken
+    fontWeights?: FontWeightsDefinition & FontWeightsToken
+    lineHeights?: LineHeightsDefinition & LineHeightsToken
+    radii?: RadiiDefinition & RadiiToken
+    shadows?: ShadowsDefinition & ShadowsToken
+    zIndexes?: ZIndexesDefinition & ZIndexesToken
+    borderWidths?: BorderWidthsDefinition & BorderWidthsToken
+    transitions?: TransitionsDefinition & TransitionsToken
   }
 }

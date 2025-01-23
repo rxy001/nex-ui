@@ -17,6 +17,10 @@ defineTokens.fontWeights = (v: TokensDefinition['fontWeights']) => v
 defineTokens.sizes = (v: TokensDefinition['sizes']) => v
 defineTokens.spaceing = (v: TokensDefinition['spacing']) => v
 defineTokens.radii = (v: TokensDefinition['radii']) => v
+defineTokens.shadows = (v: TokensDefinition['shadows']) => v
+defineTokens.transitions = (v: TokensDefinition['transitions']) => v
+defineTokens.borderWidths = (v: TokensDefinition['borderWidths']) => v
+defineTokens.zIndexes = (v: TokensDefinition['zIndexes']) => v
 
 export const defineSemanticTokens = (v: SemanticTokensDefinition) => v
 defineSemanticTokens.colors = (v: SemanticTokensDefinition['colors']) => v
@@ -34,3 +38,11 @@ defineSemanticTokens.fontWeights = (
 defineSemanticTokens.sizes = (v: SemanticTokensDefinition['sizes']) => v
 defineSemanticTokens.spaceing = (v: SemanticTokensDefinition['spacing']) => v
 defineSemanticTokens.radii = (v: SemanticTokensDefinition['radii']) => v
+defineSemanticTokens.shadows = (v: SemanticTokensDefinition['shadows']) => v
+defineSemanticTokens.transitions = (
+  v: SemanticTokensDefinition['transitions'],
+) => v
+defineSemanticTokens.borderWidths = (
+  v: SemanticTokensDefinition['borderWidths'],
+) => v
+defineSemanticTokens.zIndexes = (v: SemanticTokensDefinition['zIndexes']) => v

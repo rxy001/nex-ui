@@ -1,4 +1,4 @@
-import type { RawCSSProperties, CSSInterpolation } from '@nex-ui/system'
+import type { CSSInterpolation, CSSProperties } from '@nex-ui/system'
 import type { Tokens } from './tokens'
 import type { SemanticTokens } from './semanticTokens'
 import type { Breakpoints } from './breakpoints'
@@ -23,115 +23,134 @@ type VirtualColors =
   | TransformColors<Tokens['colors']>
   | TransformColors<SemanticTokens['colors']>
 
-export interface NexCSSProperties extends RawCSSProperties {
+export interface NexCSSProperties extends CSSProperties {
   _hover?: CSSInterpolation
   _active?: CSSInterpolation
   _focus?: CSSInterpolation
   _focusWithin?: CSSInterpolation
   _disabled?: CSSInterpolation
   color?:
-    | RawCSSProperties['color']
+    | CSSProperties['color']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
   borderColor?:
-    | RawCSSProperties['borderColor']
+    | CSSProperties['borderColor']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
   backgroundColor?:
-    | RawCSSProperties['backgroundColor']
+    | CSSProperties['backgroundColor']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
   borderBottomColor?:
-    | RawCSSProperties['borderBottomColor']
+    | CSSProperties['borderBottomColor']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
   borderTopColor?:
-    | RawCSSProperties['borderTopColor']
+    | CSSProperties['borderTopColor']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
   borderLeftColor?:
-    | RawCSSProperties['borderLeftColor']
+    | CSSProperties['borderLeftColor']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
   borderRightColor?:
-    | RawCSSProperties['borderRightColor']
+    | CSSProperties['borderRightColor']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
-  width?: RawCSSProperties['width'] | Tokens['sizes']
-  minWidth?: RawCSSProperties['minWidth'] | Tokens['sizes']
-  maxWidth?: RawCSSProperties['maxWidth'] | Tokens['sizes']
-  height?: RawCSSProperties['height'] | Tokens['sizes']
-  minHeight?: RawCSSProperties['minHeight'] | Tokens['sizes']
-  maxHeight?: RawCSSProperties['maxHeight'] | Tokens['sizes']
-  fontWeight?: RawCSSProperties['fontWeight'] | Tokens['fontWeights']
-  lineHeight?: RawCSSProperties['lineHeight'] | Tokens['lineHeights']
-  fontFamily?: RawCSSProperties['fontFamily'] | Tokens['fontFamilies']
-  fontSize?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
-  gap?: RawCSSProperties['gap'] | Tokens['spacing']
-  padding?: RawCSSProperties['padding'] | Tokens['spacing']
-  paddingTop?: RawCSSProperties['paddingTop'] | Tokens['spacing']
-  paddingBottom?: RawCSSProperties['paddingBottom'] | Tokens['spacing']
-  paddingLeft?: RawCSSProperties['paddingLeft'] | Tokens['spacing']
-  paddingRight?: RawCSSProperties['paddingRight'] | Tokens['spacing']
-  marginRight?: RawCSSProperties['marginRight'] | Tokens['spacing']
-  marginTop?: RawCSSProperties['marginTop'] | Tokens['spacing']
-  marginLeft?: RawCSSProperties['marginLeft'] | Tokens['spacing']
-  marginBottom?: RawCSSProperties['marginBottom'] | Tokens['spacing']
-  margin?: RawCSSProperties['margin'] | Tokens['spacing']
-  top?: RawCSSProperties['top'] | Tokens['spacing']
-  left?: RawCSSProperties['left'] | Tokens['spacing']
-  right?: RawCSSProperties['right'] | Tokens['spacing']
-  bottom?: RawCSSProperties['bottom'] | Tokens['spacing']
-  rowGap?: RawCSSProperties['rowGap'] | Tokens['spacing']
-  columnGap?: RawCSSProperties['columnGap'] | Tokens['spacing']
-  borderRadius?: RawCSSProperties['borderRadius'] | Tokens['radii']
-  borderTopRightRadius?:
-    | RawCSSProperties['borderTopRightRadius']
-    | Tokens['radii']
-  borderTopLeftRadius?:
-    | RawCSSProperties['borderTopLeftRadius']
-    | Tokens['radii']
+  fill?:
+    | CSSProperties['fill']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+    | VirtualColors
+  stroke?:
+    | CSSProperties['stroke']
+    | Tokens['colors']
+    | SemanticTokens['colors']
+    | VirtualColors
+  width?: CSSProperties['width'] | Tokens['sizes']
+  minWidth?: CSSProperties['minWidth'] | Tokens['sizes']
+  maxWidth?: CSSProperties['maxWidth'] | Tokens['sizes']
+  height?: CSSProperties['height'] | Tokens['sizes']
+  minHeight?: CSSProperties['minHeight'] | Tokens['sizes']
+  maxHeight?: CSSProperties['maxHeight'] | Tokens['sizes']
+  fontWeight?: CSSProperties['fontWeight'] | Tokens['fontWeights']
+  lineHeight?: CSSProperties['lineHeight'] | Tokens['lineHeights']
+  fontFamily?: CSSProperties['fontFamily'] | Tokens['fontFamilies']
+  fontSize?: CSSProperties['fontSize'] | Tokens['fontSizes']
+  gap?: CSSProperties['gap'] | Tokens['spacing']
+  padding?: CSSProperties['padding'] | Tokens['spacing']
+  paddingTop?: CSSProperties['paddingTop'] | Tokens['spacing']
+  paddingBottom?: CSSProperties['paddingBottom'] | Tokens['spacing']
+  paddingLeft?: CSSProperties['paddingLeft'] | Tokens['spacing']
+  paddingRight?: CSSProperties['paddingRight'] | Tokens['spacing']
+  marginRight?: CSSProperties['marginRight'] | Tokens['spacing']
+  marginTop?: CSSProperties['marginTop'] | Tokens['spacing']
+  marginLeft?: CSSProperties['marginLeft'] | Tokens['spacing']
+  marginBottom?: CSSProperties['marginBottom'] | Tokens['spacing']
+  margin?: CSSProperties['margin'] | Tokens['spacing']
+  top?: CSSProperties['top'] | Tokens['spacing']
+  left?: CSSProperties['left'] | Tokens['spacing']
+  right?: CSSProperties['right'] | Tokens['spacing']
+  bottom?: CSSProperties['bottom'] | Tokens['spacing']
+  rowGap?: CSSProperties['rowGap'] | Tokens['spacing']
+  columnGap?: CSSProperties['columnGap'] | Tokens['spacing']
+  gridGap?: CSSProperties['gridGap'] | Tokens['spacing']
+  gridColumnGap?: CSSProperties['gridColumnGap'] | Tokens['spacing']
+  gridRow?: CSSProperties['gridRow'] | Tokens['spacing']
+  borderRadius?: CSSProperties['borderRadius'] | Tokens['radii']
+  borderTopRightRadius?: CSSProperties['borderTopRightRadius'] | Tokens['radii']
+  borderTopLeftRadius?: CSSProperties['borderTopLeftRadius'] | Tokens['radii']
   borderBottomRightRadius?:
-    | RawCSSProperties['borderBottomRightRadius']
+    | CSSProperties['borderBottomRightRadius']
     | Tokens['radii']
   borderBottomLeftRadius?:
-    | RawCSSProperties['borderBottomLeftRadius']
+    | CSSProperties['borderBottomLeftRadius']
     | Tokens['radii']
-  borderTopWidth?: RawCSSProperties['borderTopWidth'] | Tokens['borders']
-  borderBottomWidth?: RawCSSProperties['borderBottomWidth'] | Tokens['borders']
-  borderLeftWidth?: RawCSSProperties['borderLeftWidth'] | Tokens['borders']
-  borderRightWidth?: RawCSSProperties['borderRightWidth'] | Tokens['borders']
-  borderWidth?: RawCSSProperties['borderWidth'] | Tokens['borders']
+  borderTopWidth?: CSSProperties['borderTopWidth'] | Tokens['borderWidths']
+  borderBottomWidth?:
+    | CSSProperties['borderBottomWidth']
+    | Tokens['borderWidths']
+  borderLeftWidth?: CSSProperties['borderLeftWidth'] | Tokens['borderWidths']
+  borderRightWidth?: CSSProperties['borderRightWidth'] | Tokens['borderWidths']
+  borderWidth?: CSSProperties['borderWidth'] | Tokens['borderWidths']
+  border?: CSSProperties['border'] | Tokens['borders']
+  borderTop?: CSSProperties['borderTop'] | Tokens['borders']
+  borderBottom?: CSSProperties['borderBottom'] | Tokens['borders']
+  borderRight?: CSSProperties['borderRight'] | Tokens['borders']
+  borderLeft?: CSSProperties['borderLeft'] | Tokens['borders']
+  boxShadow?: CSSProperties['boxShadow']
+  transition?: CSSProperties['transition'] | Tokens['transitions']
+  zIndex?: CSSProperties['zIndex']
   bg?:
-    | RawCSSProperties['backgroundColor']
+    | CSSProperties['backgroundColor']
     | Tokens['colors']
     | SemanticTokens['colors']
     | VirtualColors
-  fs?: RawCSSProperties['fontSize'] | Tokens['fontSizes']
-  lh?: RawCSSProperties['lineHeight'] | Tokens['lineHeights']
-  w?: RawCSSProperties['width'] | Tokens['sizes']
-  h?: RawCSSProperties['height'] | Tokens['sizes']
-  py?: RawCSSProperties['paddingTop'] | Tokens['spacing']
-  px?: RawCSSProperties['paddingLeft'] | Tokens['spacing']
-  pt?: RawCSSProperties['paddingTop'] | Tokens['spacing']
-  pb?: RawCSSProperties['paddingBottom'] | Tokens['spacing']
-  pl?: RawCSSProperties['paddingLeft'] | Tokens['spacing']
-  pr?: RawCSSProperties['paddingRight'] | Tokens['spacing']
-  p?: RawCSSProperties['padding'] | Tokens['spacing']
-  mt?: RawCSSProperties['marginTop'] | Tokens['spacing']
-  mb?: RawCSSProperties['marginBottom'] | Tokens['spacing']
-  ml?: RawCSSProperties['marginLeft'] | Tokens['spacing']
-  mr?: RawCSSProperties['marginRight'] | Tokens['spacing']
-  m?: RawCSSProperties['margin'] | Tokens['spacing']
-  mx?: RawCSSProperties['marginLeft'] | Tokens['spacing']
-  my?: RawCSSProperties['marginTop'] | Tokens['spacing']
+  fs?: CSSProperties['fontSize'] | Tokens['fontSizes']
+  lh?: CSSProperties['lineHeight'] | Tokens['lineHeights']
+  w?: CSSProperties['width'] | Tokens['sizes']
+  h?: CSSProperties['height'] | Tokens['sizes']
+  py?: CSSProperties['paddingTop'] | Tokens['spacing']
+  px?: CSSProperties['paddingLeft'] | Tokens['spacing']
+  pt?: CSSProperties['paddingTop'] | Tokens['spacing']
+  pb?: CSSProperties['paddingBottom'] | Tokens['spacing']
+  pl?: CSSProperties['paddingLeft'] | Tokens['spacing']
+  pr?: CSSProperties['paddingRight'] | Tokens['spacing']
+  p?: CSSProperties['padding'] | Tokens['spacing']
+  mt?: CSSProperties['marginTop'] | Tokens['spacing']
+  mb?: CSSProperties['marginBottom'] | Tokens['spacing']
+  ml?: CSSProperties['marginLeft'] | Tokens['spacing']
+  mr?: CSSProperties['marginRight'] | Tokens['spacing']
+  m?: CSSProperties['margin'] | Tokens['spacing']
+  mx?: CSSProperties['marginLeft'] | Tokens['spacing']
+  my?: CSSProperties['marginTop'] | Tokens['spacing']
 }
 
 type ExtraCSSPropertyValue<T> = {

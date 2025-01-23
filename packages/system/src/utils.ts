@@ -52,9 +52,13 @@ export function checkTokenCategory(category: string): boolean {
     case 'borders':
     case 'radii':
     case 'breakpoints':
+    case 'shadows':
+    case 'transitions':
+    case 'borderWidths':
+    case 'zIndexes':
       return true
     default:
-      console.error(`nex-system: Unknown token category: '${category}'`)
+      console.error(`nex-system: Unknown token category: '${category}'.`)
       return false
   }
 }

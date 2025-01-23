@@ -12,9 +12,9 @@ import type {
 import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
-  createCssVarName,
   pathToName,
   checkTokenValue,
+  createCssVarName,
   checkTokenCategory,
 } from '../utils'
 import type { Token } from './createToken'

@@ -30,9 +30,9 @@ export type {
 
 export type {
   CSSInterpolation,
-  RawCSSProperties,
   StyleObject,
   StyleObjectOverrides,
+  CSSProperties,
 } from './types'
 
 export type { CssFn } from './css'
@@ -57,6 +57,11 @@ export type {
   RadiiDefinition,
   SemanticTokensDefinition,
   TokensDefinition,
+  TransitionsDefinition,
+  ShadowsDefinition,
+  ZIndexesDefinition,
+  BorderWidthsDefinition,
+  SemanticShadowsDefinition,
   SemanticBordersDefinition,
   SemanticColorDefinition,
   SemanticFontFamiliesDefinition,
@@ -66,4 +71,7 @@ export type {
   SemanticRadiiDefinition,
   SemanticSizesDefinition,
   SemanticSpacingDefinition,
+  SemanticBorderWidthsDefinition,
+  SemanticTransitionsDefinition,
+  SemanticZIndexesDefinition,
 } from './tokens'

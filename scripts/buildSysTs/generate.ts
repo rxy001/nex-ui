@@ -16,11 +16,11 @@ function filterDefault(path: string[]) {
 }
 
 export async function generateSemanticTokens(sys: any) {
-  const keys = Object.keys(sys.semanticTokens)
+  const tokenCategories = Object.keys(sys.semanticTokens)
 
   const result = `
       export interface SemanticTokens {
-       ${keys
+       ${tokenCategories
          .map((tokenCategory) => {
            const token = sys.semanticTokens[tokenCategory]
            const types: string[] = []
@@ -44,53 +44,80 @@ export async function generateSemanticTokens(sys: any) {
 }
 
 export async function generateTokens(sys: any) {
-  const keys = Object.keys(sys.tokens)
+  const tokenCategories = Object.keys(sys.tokens)
 
   let result = `
+      import type { CSSProperties } from '@nex-ui/system'
+
       export interface Tokens {
-        ${keys
+        ${tokenCategories
           .map((tokenCategory) => {
             const token = sys.tokens[tokenCategory]
 
             const types: string[] = []
 
-            Object.keys(token).forEach((k) => {
-              if (
-                typeof token[k] === 'string' ||
-                typeof token[k] === 'number'
-              ) {
-                types.push(`'${k}'`)
+            Object.keys(token).forEach((key) => {
+              const value = token[key]
+              const valueType = typeof value
+              if (valueType === 'string' || valueType === 'number') {
+                types.push(`'${key}'`)
               }
 
-              if (typeof token[k] === 'object') {
-                Object.keys(token[k]).forEach((j) => {
-                  types.push(`'${k}.${j}'`)
+              if (valueType === 'object') {
+                Object.keys(value).forEach((sub) => {
+                  types.push(`'${key}.${sub}'`)
                 })
               }
             })
+
             if (tokenCategory === 'spacing') {
               types.push(...types.map((v) => `'-${v.replaceAll("'", '')}'`))
             }
+
+            if (!types.length) {
+              return ''
+            }
+
             return `${tokenCategory}: ${unionType(types)}`
           })
           .join('\n')}
       }
       `
-  result += keys
+
+  const typeMap: Record<string, string> = {
+    borders: 'string | number',
+    spacing: 'string | number',
+    colors: "CSSProperties['color']",
+    sizes: 'string | number',
+    fontFamilies: 'string',
+    fontSizes: 'string | number',
+    fontWeights: 'string | number',
+    lineHeights: 'string | number',
+    radii: 'string | number',
+    borderWidths: 'string | number',
+    transitions: 'string',
+    shadows: 'string',
+    zIndexes: 'string | number',
+  }
+
+  result += tokenCategories
     .map((tokenCategory) => {
       const token = sys.tokens[tokenCategory]
 
+      const keys = Object.keys(token)
+
       return `
-        export interface ${capitalize(tokenCategory)} {
-          ${Object.keys(token)
+
+        export interface ${capitalize(tokenCategory)}Token {
+          ${keys
             .map(
               (key) =>
                 `'${key}'?: ${
                   typeof token[key] === 'object'
                     ? `{${Object.keys(token[key])
-                        .map((k) => `${k}?: '${token[key][k]}'`)
+                        .map((sub) => `${sub}?: ${typeMap[tokenCategory]}`)
                         .join('\n')} }`
-                    : `'${token[key]}'`
+                    : typeMap[tokenCategory]
                 }`,
             )
             .join('\n')}
@@ -154,15 +181,17 @@ export async function generateSelectors(sys: any) {
 }
 
 export async function generateCSSProperties(sys: any) {
-  const scaleKeys = Object.keys(sys.scales)
-  const selectorKeys = Object.keys(sys.selectors)
-  const aliasKeys = Object.keys(sys.aliases)
-  const { semanticTokens } = sys
+  const { semanticTokens, tokens, scales, selectors, aliases } = sys
+  const scaleKeys = Object.keys(scales)
+  const selectorKeys = Object.keys(selectors)
+  const aliasKeys = Object.keys(aliases)
 
   function extraType(category: string) {
     return filter(
       [
-        `Tokens['${category}']`,
+        tokens[category] && Object.keys(tokens[category]).length
+          ? `Tokens['${category}']`
+          : '',
         semanticTokens[category] && Object.keys(semanticTokens[category]).length
           ? `SemanticTokens['${category}']`
           : '',
@@ -173,7 +202,7 @@ export async function generateCSSProperties(sys: any) {
   }
 
   const result = `
-  import type { RawCSSProperties, CSSInterpolation } from '@nex-ui/system'
+  import type { CSSInterpolation, CSSProperties } from '@nex-ui/system'
   import type { Tokens } from './tokens'
   import type { SemanticTokens } from './semanticTokens'
   import type { Breakpoints } from './breakpoints'
@@ -197,7 +226,7 @@ export async function generateCSSProperties(sys: any) {
 
   type VirtualColors = TransformColors<Tokens['colors']> | TransformColors<SemanticTokens['colors']> 
 
-  export interface NexCSSProperties extends RawCSSProperties {
+  export interface NexCSSProperties extends CSSProperties {
     ${selectorKeys
       .map((key) => {
         return `_${key}?: CSSInterpolation`
@@ -206,7 +235,7 @@ export async function generateCSSProperties(sys: any) {
     ${scaleKeys
       .map((key) => {
         const category = sys.scales[key]
-        return `${key}?: ${unionType([`RawCSSProperties['${key}']`, ...extraType(category)])}`
+        return `${key}?: ${unionType([`CSSProperties['${key}']`, ...extraType(category)])}`
       })
       .join('\n')}
     ${aliasKeys
@@ -216,9 +245,9 @@ export async function generateCSSProperties(sys: any) {
 
         const category = sys.scales[value]
         if (category) {
-          return `${key}?: ${unionType([`RawCSSProperties['${value}']`, ...extraType(category)])}`
+          return `${key}?: ${unionType([`CSSProperties['${value}']`, ...extraType(category)])}`
         }
-        return `${key}?: RawCSSProperties['${value}']}`
+        return `${key}?: CSSProperties['${value}']}`
       })
       .join('\n')}
     }
@@ -245,7 +274,7 @@ export async function generateBreakpoints(sys: any) {
       export interface Breakpoints {
         ${keys
           .map((key) => {
-            return `'${key}'?: '${sys.breakpoints[key]}'`
+            return `'${key}'?: string`
           })
           .join('\n')}
       }

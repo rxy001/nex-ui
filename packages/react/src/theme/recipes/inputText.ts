@@ -10,10 +10,9 @@ import {
 export const inputTextRecipe = defineSlotRecipe({
   slots: {
     root: {
-      borderWidth: 'md',
-      borderStyle: 'solid',
+      border: 'md',
       boxSizing: 'border-box',
-      transition: 'all 0.3s',
+      transition: 'colors',
       display: 'inline-flex',
       alignItems: 'center',
       gap: '0.5',

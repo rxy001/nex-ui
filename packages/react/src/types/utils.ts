@@ -1,6 +1,5 @@
 import type {
   StyleObject,
-  RawCSSProperties,
   RecipeRuntimeFn,
   SlotRecipeRuntimeFn,
 } from '@nex-ui/system'
@@ -77,13 +76,3 @@ export type ComponentThemeFn<P, S> = (
   : S extends RecipeRuntimeFn
     ? StyleObject
     : never
-
-export type TokenDefinition<T, K> = {
-  [V in keyof T]: K extends { [key: string]: infer A } ? A : never
-} & K
-
-export type ReplaceValuesWithColor<T> = {
-  [K in keyof T]: Exclude<T[K], undefined> extends object
-    ? ReplaceValuesWithColor<T[K]>
-    : RawCSSProperties['color']
-}

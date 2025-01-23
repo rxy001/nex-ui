@@ -12,11 +12,10 @@ export const buttonRecipe = defineSlotRecipe({
     root: {
       outline: 'none',
       userSelect: 'none',
-      borderWidth: 'md',
-      borderStyle: 'solid',
+      border: 'md',
       cursor: 'pointer',
       position: 'relative',
-      transition: 'all .3s',
+      transition: 'colors',
       textDecoration: 'none',
       display: 'inline-flex',
       alignItems: 'center',

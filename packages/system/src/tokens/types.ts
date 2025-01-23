@@ -1,12 +1,12 @@
-import type { RawCSSProperties, Dictionary } from '../types'
+import type { Dictionary, CSSProperties } from '../types'
 import type { Token } from './createToken'
 
 export type TokenValue = string | number
 
 export type ResponsiveColor = {
-  _DEFAULT?: string
-  _light?: string
-  _dark?: string
+  _DEFAULT?: CSSProperties['color']
+  _light?: CSSProperties['color']
+  _dark?: CSSProperties['color']
 }
 
 export type SemanticTokenValue = TokenValue | ResponsiveColor
@@ -21,22 +21,26 @@ export type TokenCategories =
   | 'sizes'
   | 'borders'
   | 'radii'
+  | 'borderWidths'
+  | 'shadows'
+  | 'zIndexes'
+  | 'transitions'
 
 export type ColorsDefinition = Dictionary<
   | {
-      50?: RawCSSProperties['color']
-      100?: RawCSSProperties['color']
-      200?: RawCSSProperties['color']
-      300?: RawCSSProperties['color']
-      400?: RawCSSProperties['color']
-      500?: RawCSSProperties['color']
-      600?: RawCSSProperties['color']
-      700?: RawCSSProperties['color']
-      800?: RawCSSProperties['color']
-      900?: RawCSSProperties['color']
-      contrastText?: RawCSSProperties['color']
+      50?: CSSProperties['color']
+      100?: CSSProperties['color']
+      200?: CSSProperties['color']
+      300?: CSSProperties['color']
+      400?: CSSProperties['color']
+      500?: CSSProperties['color']
+      600?: CSSProperties['color']
+      700?: CSSProperties['color']
+      800?: CSSProperties['color']
+      900?: CSSProperties['color']
+      contrastText?: CSSProperties['color']
     }
-  | RawCSSProperties['color']
+  | CSSProperties['color']
 >
 
 export type RadiiDefinition = Dictionary<string | number>
@@ -55,60 +59,77 @@ export type BordersDefinition = Dictionary<string | number>
 
 export type FontFamiliesDefinition = Dictionary<string>
 
-type ExclusiveColor =
-  | {
-      DEFAULT?: RawCSSProperties['color'] | ResponsiveColor
+export type TransitionsDefinition = Dictionary<string>
+
+export type ShadowsDefinition = Dictionary<string>
+
+export type BorderWidthsDefinition = Dictionary<string | number>
+
+export type ZIndexesDefinition = Dictionary<number>
+
+type NestedColor =
+  | CSSProperties['color']
+  | ResponsiveColor
+  | ({
+      DEFAULT?: CSSProperties['color'] | ResponsiveColor
       _DEFAULT?: never
       _light?: never
       _dark?: never
-    }
-  | ({
-      DEFAULT?: never
-    } & ResponsiveColor)
-
-type NestedColor =
-  | RawCSSProperties['color'] // Directly a color value
-  | (ExclusiveColor & {
-      [key: string]: NestedColor // Nested colors, applying the mutually exclusive rule
-    }) // Either `DEFAULT` or ResponsiveColor properties
-
-type SemanticTokenDefinition<T> =
-  | T
-  | ({
-      DEFAULT?: T
-    } & { [key: string]: SemanticTokenDefinition<T> })
+    } & {
+      [key: string]: NestedColor
+    })
 
 export type SemanticColorDefinition = Dictionary<NestedColor>
 
-export type SemanticSpacingDefinition = Dictionary<
-  SemanticTokenDefinition<string | number>
->
+// 将其改为泛性就会出现无法深层嵌套 ？？？
+type StringAndNumberForNestedSemanticTokenValue =
+  | string
+  | number
+  | ({
+      DEFAULT?: string | number
+    } & { [key: string]: StringAndNumberForNestedSemanticTokenValue })
 
-export type SemanticSizesDefinition = Dictionary<
-  SemanticTokenDefinition<string | number>
->
+type StringForNestedSemanticTokenValue =
+  | string
+  | ({
+      DEFAULT?: string
+    } & { [key: string]: StringForNestedSemanticTokenValue })
 
-export type SemanticFontFamiliesDefinition = Dictionary<
-  SemanticTokenDefinition<string>
->
+export type SemanticSpacingDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
 
-export type SemanticFontSizesDefinition = Dictionary<
-  SemanticTokenDefinition<string | number>
->
+export type SemanticSizesDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
 
-export type SemanticFontWeightsDefinition = Dictionary<
-  SemanticTokenDefinition<string | number>
->
+export type SemanticFontFamiliesDefinition =
+  Dictionary<StringForNestedSemanticTokenValue>
 
-export type SemanticLineHeightsDefinition = Dictionary<
-  SemanticTokenDefinition<string | number>
->
-export type SemanticBordersDefinition = Dictionary<
-  SemanticTokenDefinition<string | number>
->
-export type SemanticRadiiDefinition = Dictionary<
-  SemanticTokenDefinition<string | number>
->
+export type SemanticFontSizesDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
+
+export type SemanticFontWeightsDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
+
+export type SemanticLineHeightsDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
+
+export type SemanticBordersDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
+
+export type SemanticRadiiDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
+
+export type SemanticTransitionsDefinition =
+  Dictionary<StringForNestedSemanticTokenValue>
+
+export type SemanticBorderWidthsDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
+
+export type SemanticZIndexesDefinition =
+  Dictionary<StringAndNumberForNestedSemanticTokenValue>
+
+export type SemanticShadowsDefinition =
+  Dictionary<StringForNestedSemanticTokenValue>
 
 export type SemanticTokensDefinition = {
   colors?: SemanticColorDefinition
@@ -120,6 +141,10 @@ export type SemanticTokensDefinition = {
   lineHeights?: SemanticLineHeightsDefinition
   borders?: SemanticBordersDefinition
   radii?: SemanticRadiiDefinition
+  transitions?: SemanticTransitionsDefinition
+  shadows?: SemanticShadowsDefinition
+  borderWidths?: SemanticBorderWidthsDefinition
+  zIndexes?: SemanticZIndexesDefinition
 }
 
 export type TokensDefinition = {
@@ -132,6 +157,10 @@ export type TokensDefinition = {
   lineHeights?: LineHeightsDefinition
   borders?: BordersDefinition
   radii?: RadiiDefinition
+  shadows?: ShadowsDefinition
+  transitions?: TransitionsDefinition
+  borderWidths?: BorderWidthsDefinition
+  zIndexes?: ZIndexesDefinition
 }
 
 export type CreateTokensConfig = {

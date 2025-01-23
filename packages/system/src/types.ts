@@ -1,7 +1,5 @@
-/* eslint-disable no-use-before-define */
 import type * as CSS from 'csstype'
 import type { Keyframes } from '@emotion/react'
-import type { CSSProperties } from 'react'
 
 export type Dictionary<T = any> = Record<string, T>
 
@@ -14,12 +12,12 @@ export type CSSInterpolation =
   | StyleObject
   | Keyframes
 
-export interface ArrayCSSInterpolation
-  extends ReadonlyArray<CSSInterpolation> {}
-
-export type RawCSSProperties = CSS.PropertiesFallback<
+export type CSSProperties = CSS.Properties<
   number | (string & NonNullable<unknown>)
 >
+
+export interface ArrayCSSInterpolation
+  extends ReadonlyArray<CSSInterpolation> {}
 
 type CSSPseudos = { [K in CSS.Pseudos]?: StyleObject }
 
@@ -31,7 +29,7 @@ export interface StyleObjectOverrides {}
 
 export interface StyleObject
   extends Omit<
-      RawCSSProperties & {
+      CSSProperties & {
         colorPalette?: StyleObject['color']
       },
       keyof StyleObjectOverrides
