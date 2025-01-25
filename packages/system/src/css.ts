@@ -26,14 +26,14 @@ export const createCssFn = ({
     forEach(styles, (styleProps: StyleObject) => {
       const { colorPalette, ...style } = styleProps
 
-      const handlePaths = (paths: string[]) => {
-        return paths
+      const handlePath = (path: string[]) => {
+        return path
           .filter((v) => v !== '_DEFAULT')
           .sort((a) => 96 - a.charCodeAt(0))
           .map((p) => {
             // 0 - 9
             if (p.charCodeAt(0) > 47 && p.charCodeAt(0) < 58) {
-              const part = paths.slice(0, paths.length - 1)
+              const part = path.slice(0, path.length - 1)
               const prevValue = get(style, part)
               const index = Number(p)
 
@@ -50,16 +50,16 @@ export const createCssFn = ({
           })
       }
 
-      walkObject(style, (propValue: string | number, paths: string[]) => {
-        const [propKey, ...selectors] = handlePaths(paths)
+      walkObject(style, (propValue: string | number, path: string[]) => {
+        const [propKey, ...selectors] = handlePath(path)
 
-        const transformed = normalize({
+        const normalized = normalize({
           propKey,
           propValue,
-          colorPalette: colorPalette as string,
+          colorPalette,
         })
 
-        mergeByPath(result, selectors, transformed)
+        mergeByPath(result, selectors, normalized)
       })
     })
 
@@ -69,13 +69,13 @@ export const createCssFn = ({
   return memoizeFn(css)
 }
 
-function mergeByPath(target: any, paths: string[], value: any) {
+function mergeByPath(target: Record<string, any>, path: string[], value: any) {
   let acc = target
 
-  forEach(paths, (path: string) => {
-    if (!path) return
-    if (!acc[path]) acc[path] = {}
-    acc = acc[path]
+  forEach(path, (k: string) => {
+    if (!k) return
+    if (!acc[k]) acc[k] = {}
+    acc = acc[k]
   })
 
   merge(acc, value)

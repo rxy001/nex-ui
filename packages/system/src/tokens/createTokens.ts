@@ -1,4 +1,10 @@
-import { forEach, isString, walkObject, isPlainObject } from '@nex-ui/utils'
+import {
+  forEach,
+  isString,
+  walkObject,
+  isPlainObject,
+  reduce,
+} from '@nex-ui/utils'
 import type {
   CreateTokensConfig,
   TokenMap,
@@ -12,10 +18,11 @@ import type {
 import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
-  pathToName,
+  pathToTokenName,
   checkTokenValue,
   createCssVarName,
   checkTokenCategory,
+  extractTokenPlaceholders,
 } from '../utils'
 import type { Token } from './createToken'
 
@@ -61,7 +68,7 @@ export function createTokens(config: CreateTokensConfig) {
         category,
         originalValue,
         path: newPath,
-        name: pathToName(newPath),
+        name: pathToTokenName(newPath),
         value: negate(cssVar?.ref ?? value),
       })
 
@@ -117,42 +124,46 @@ export function createTokens(config: CreateTokensConfig) {
     }
   }
 
-  function getTokenValueByCategory(category: TokenCategories) {
-    return (value?: string): TokenValue | undefined => {
-      if (isString(value)) {
-        const regex = /\{(.*?)\}/
-        const match = value.match(regex)
-        if (match && match[1]) {
-          const token = tokenMap.get(`${category}.${match[1]}`)
+  function replaceTokenPlaceholders(value?: TokenValue) {
+    if (isString(value)) {
+      const matches = extractTokenPlaceholders(value)
+      return reduce(
+        matches,
+        (acc, match) => {
+          const [placeholder, tokenName] = match
 
-          return token?.value ?? value
-        }
-      }
+          const token = tokenMap.get(tokenName)
 
-      return value
+          if (token) {
+            return acc.replace(placeholder, token.value)
+          }
+          console.error(`nex-system: Unknown token ${tokenName}`)
+          return acc.replace(placeholder, tokenName)
+        },
+        value,
+      )
     }
+
+    return value
   }
 
   function workloop() {
     walkObject(
       tokens,
       (value: TokenValue, path: string[]) => {
-        if (!checkTokenValue(value, path)) return
-
-        const category = path[0]
-
-        if (!checkTokenCategory(category)) {
+        if (!checkTokenCategory(path[0]) || !checkTokenValue(value, path))
           return
-        }
+
+        const category = path[0] as TokenCategories
 
         workInProgress = createToken({
           path,
+          category,
           value: '',
-          category: category as TokenCategories,
-          name: pathToName(path),
+          name: pathToTokenName(path),
           originalValue: value,
           conditions: {
-            base: value,
+            base: replaceTokenPlaceholders(value),
           },
         })
 
@@ -182,22 +193,20 @@ export function createTokens(config: CreateTokensConfig) {
 
         const newPath = filterDefault(path)
 
-        const t = getTokenValueByCategory(category)
-
         const conditions = isResponsiveColor(value)
           ? {
-              base: t(value._DEFAULT),
-              dark: t(value._dark),
-              light: t(value._light),
+              base: replaceTokenPlaceholders(value._DEFAULT),
+              dark: replaceTokenPlaceholders(value._dark),
+              light: replaceTokenPlaceholders(value._light),
             }
-          : { base: isString(value) ? t(value) : value }
+          : { base: replaceTokenPlaceholders(value) }
 
         workInProgress = createToken({
           value: '',
           category,
           conditions,
           path: newPath,
-          name: pathToName(newPath),
+          name: pathToTokenName(newPath),
           originalValue: value,
         })
 

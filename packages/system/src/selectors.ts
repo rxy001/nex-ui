@@ -18,7 +18,7 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
       selectorMap.set(`_${key}`, value)
     } else {
       console.error(
-        `system: The value of this selector must be a string. ${key}: ${value}`,
+        `nex-system: The selector value must be a string. ${key}: ${value}`,
       )
     }
   })

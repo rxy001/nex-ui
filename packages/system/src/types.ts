@@ -30,7 +30,7 @@ export interface StyleObjectOverrides {}
 export interface StyleObject
   extends Omit<
       CSSProperties & {
-        colorPalette?: StyleObject['color']
+        colorPalette?: CSSProperties['color']
       },
       keyof StyleObjectOverrides
     >,

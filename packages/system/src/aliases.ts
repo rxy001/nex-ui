@@ -9,11 +9,14 @@ export function createAliases(aliases: AliasesDefinition) {
   const aliasMap: Map<string, string[]> = new Map()
 
   forEach(aliases, (value: string | string[], key: string) => {
-    const array = isString(value) ? [value] : value
-
-    if (isArray(array)) {
-      aliasMap.set(key, array)
+    if (!isString(value) && !isArray(value)) {
+      console.error(
+        `The alias value must be either a string or a number. ${key}: ${value}`,
+      )
+      return
     }
+
+    aliasMap.set(key, isString(value) ? [value] : value)
   })
 
   return {

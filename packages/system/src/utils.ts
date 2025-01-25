@@ -2,7 +2,7 @@ import { isNumber, isString, memoize } from '@nex-ui/utils'
 import type { Noop } from '@nex-ui/utils'
 import type { TokenValue } from './tokens/types'
 
-export function pathToName(path: string[]) {
+export function pathToTokenName(path: string[]) {
   return path.join('.')
 }
 
@@ -33,7 +33,7 @@ export function checkTokenValue(
 ): value is TokenValue {
   if (!isString(value) && !isNumber(value)) {
     console.error(
-      `nex-system: The token value must be either a string or a number. but currently received is ${typeof value} (${path.join('.')})`,
+      `nex-system: The token value must be either a string or a string[]. but currently received is ${typeof value} (${path.join('.')})`,
     )
     return false
   }
@@ -77,4 +77,10 @@ export function memoizeFn<T extends Noop>(fn: T): T {
       return value
     })
   })
+}
+
+export function extractTokenPlaceholders(value: string) {
+  const regex = /\{(.*?)\}/g
+  const matches = value.matchAll(regex)
+  return [...matches]
 }

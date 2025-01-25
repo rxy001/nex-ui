@@ -15,8 +15,6 @@ export function createScales(scales: ScalesDefinition) {
     (category: TokenCategories | undefined, property: string) => {
       if (isString(category) && checkTokenCategory(category)) {
         scaleMap.set(property, category)
-      } else {
-        console.error(`nex-system: Unknown token category '${category}'`)
       }
     },
   )
