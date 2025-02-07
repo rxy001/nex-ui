@@ -26,6 +26,7 @@ export { useColorScheme, InitColorSchemeScript } from './colorScheme'
 export type {
   ColorSchemeProviderProps,
   InitColorSchemeScriptProps,
+  Mode,
 } from './colorScheme'
 
 export type {

@@ -1,0 +1,45 @@
+@import 'tailwindcss' source(none) prefix(x);
+@import './nextraTheme/style.css';
+
+@source './components/**/*.{ts,tsx,md,mdx}';
+@source './app/**/*.{ts,tsx,md,mdx}';
+@source './content/**/*.{ts,tsx,md,mdx}';
+@source './nextraTheme/**/*.{ts,tsx,md,mdx}';
+@source './node_modules/nextra/dist/**/*.js';
+
+:root {
+  color: #11181c;
+}
+
+@keyframes levitate {
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+
+  70% {
+    transform: translateY(-15px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.nextra-code > pre {
+  box-shadow: none;
+  max-height: 400px;
+  background-color: #24292e !important;
+  scrollbar-color: #e3e3e3 #24292e;
+}
+
+.nextra-code button[title='Copy code'] {
+  color: white;
+}

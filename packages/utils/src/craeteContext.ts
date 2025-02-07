@@ -1,3 +1,5 @@
+'use client'
+
 import {
   createContext as createReactContenxt,
   useContext as useReactContext,

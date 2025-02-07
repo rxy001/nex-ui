@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Pre, Code } from 'nextra/components'
-import { Fragment, useState, useLayoutEffect } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { codeToHast } from 'shiki'
 import type { BundledLanguage } from 'shiki'
@@ -18,21 +18,24 @@ interface CodeBlockProps {
 export function CodeBlock(props: CodeBlockProps) {
   const [nodes, setNodes] = useState<JSX.Element | null>(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     codeToHast(props.children, {
       lang: props.lang,
       theme: 'github-dark',
     }).then((out) => {
       setNodes(
         <div
-          className={clsx('bg-[#24292e] rounded-md lg:w-1/2', props.className)}
+          className={clsx(
+            'x:bg-[#24292e] x:rounded-md x:lg:w-1/2',
+            props.className,
+          )}
         >
-          <div className="text-[#e1e4e8] text-center py-2 font-mono text-xs relative">
+          <div className="x:text-[#e1e4e8] x:text-center x:py-2 x:font-mono x:text-xs x:relative">
             {props.file}
-            <div className="absolute top-2 left-4 flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <div className="w-3 h-3 rounded-full bg-green-500" />
+            <div className="x:absolute x:top-2 x:left-4 x:flex x:items-center x:gap-2">
+              <div className="x:w-3 x:h-3 x:rounded-full x:bg-red-500" />
+              <div className="x:w-3 x:h-3 x:rounded-full x:bg-yellow-500" />
+              <div className="x:w-3 x:h-3 x:rounded-full x:bg-green-500" />
             </div>
           </div>
           <div>
@@ -42,7 +45,7 @@ export function CodeBlock(props: CodeBlockProps) {
               jsxs,
               components: {
                 // your custom `pre` element
-                pre: (p: any) => (
+                pre: ({ style: _style, ...p }: any) => (
                   <Pre {...p} className={clsx(p.className, 'pt-2')} />
                 ),
                 code: (p: any) => <Code {...p} />,

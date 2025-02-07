@@ -1,6 +1,3 @@
 export * from './Example'
 export * from './HomePage'
 export * from './Link'
-export * from './ThemeSwitch'
-export * from './Select'
-export * from './LocalSwitch'

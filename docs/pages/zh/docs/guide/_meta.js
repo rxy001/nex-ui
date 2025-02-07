@@ -1,4 +1,0 @@
-export default {
-  introduction: '介绍',
-  installation: '快速上手',
-}

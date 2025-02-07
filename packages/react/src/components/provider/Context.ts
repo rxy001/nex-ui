@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext } from '@nex-ui/utils'
 import type { NexContext } from './types'
 

@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useRef } from 'react'
 import type { Noop } from './types'
 

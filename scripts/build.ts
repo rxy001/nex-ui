@@ -9,6 +9,7 @@ import svgr from '@svgr/rollup'
 import { rollup } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import type { RollupOptions, RollupBuild } from 'rollup'
+import { preserveDirectives } from 'rollup-plugin-preserve-directives'
 
 type SharedConfigs = { external: string[]; tsconfig: string; name: string }
 
@@ -69,6 +70,7 @@ async function generateModules({ external, tsconfig, name }: SharedConfigs) {
       typescript({
         tsconfig,
       }),
+      preserveDirectives(),
     ],
     output: [
       {

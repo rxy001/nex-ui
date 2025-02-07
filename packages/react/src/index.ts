@@ -19,4 +19,5 @@ export type {
   RecipeSlots,
   ColorSchemeProviderProps,
   StyleObject,
+  Mode,
 } from '@nex-ui/system'

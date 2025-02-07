@@ -105,6 +105,7 @@ export const Playlist = () => {
           overflow: 'auto',
           justifyContent: 'space-between',
           gap: '5',
+          pb: 15,
         }}
       >
         {playlist.map((music) => {
@@ -215,6 +216,7 @@ export const Playlist = () => {
           overflow: 'auto',
           justifyContent: 'space-between',
           gap: '5',
+          pb: 15,
         }}
       >
         {playlist.map((music) => {

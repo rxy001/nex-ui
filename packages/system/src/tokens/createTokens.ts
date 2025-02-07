@@ -129,7 +129,7 @@ export function createTokens(config: CreateTokensConfig) {
       const matches = extractTokenPlaceholders(value)
       return reduce(
         matches,
-        (acc, match) => {
+        (acc: string, match: RegExpExecArray) => {
           const [placeholder, tokenName] = match
 
           const token = tokenMap.get(tokenName)

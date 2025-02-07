@@ -9,4 +9,5 @@ export { InitColorSchemeScript } from './InitColorSchemeScript'
 export type {
   ColorSchemeProviderProps,
   InitColorSchemeScriptProps,
+  Mode,
 } from './types'

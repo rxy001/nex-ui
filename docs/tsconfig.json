@@ -9,19 +9,23 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "theme.config.tsx",
-    "./pages",
-    "./next-env.d.ts",
-    "./middleware.ts",
+    "./app",
     "./components",
-    "./codes",
-    "./examples",
-    "./theme.config.tsx",
-    "./utils",
-    "./hooks/**/*"
+    "./mdx-components.ts",
+    "./middleware.ts",
+    "./next-env.d.ts",
+    ".next/types/**/*.ts",
+    "./next.config.ts",
+    "./content",
+    "./nextraTheme"
   ],
   "exclude": []
 }

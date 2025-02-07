@@ -51,7 +51,7 @@ export const createNormalize = ({
     if (matches.length) {
       return reduce(
         matches,
-        (acc, match) => {
+        (acc: string, match: RegExpExecArray) => {
           const placeholder = match[0]
           let tokenName = match[1]
 
