@@ -13,11 +13,12 @@
     "dist"
   ],
   "dependencies": {
+    "@codesandbox/sandpack-react": "2.19.11",
     "@emotion/react": "11.13.5",
     "@headlessui/react": "2.2.0",
     "@nex-ui/icons": "workspace:*",
     "@nex-ui/react": "workspace:*",
-    "@svgr/webpack": "8.1.0",
+    "@nex-ui/utils": "workspace:*",
     "clsx": "2.1.1",
     "hast-util-to-jsx-runtime": "2.3.2",
     "next": "15.1.6",
@@ -31,12 +32,14 @@
     "zustand": "5.0.3"
   },
   "devDependencies": {
+    "@svgr/webpack": "8.1.0",
     "@tailwindcss/postcss": "4.0.3",
     "autoprefixer": "10.4.20",
     "postcss": "8.5.1",
+    "raw-loader": "4.0.2",
     "tailwindcss": "4.0.3"
   },
   "overrides": {
-    "clsx": "^2.1.1"
+    "shiki": "2.3.1"
   }
 }

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { NexProvider } from '../Provider'
+import { NexUIProvider } from '../Provider'
 
 const meta = {
-  title: 'Components/NexProvider',
-  component: NexProvider,
+  title: 'Components/NexUIProvider',
+  component: NexUIProvider,
   argTypes: {},
-} satisfies Meta<typeof NexProvider>
+} satisfies Meta<typeof NexUIProvider>
 
 export default meta
 

@@ -90,7 +90,7 @@ function NestedProvider(props: NexProviderProps) {
   )
 }
 
-export function NexProvider(props: NexProviderProps) {
+export function NexUIProvider(props: NexProviderProps) {
   const outer = useNexContext()
 
   const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE
@@ -102,4 +102,4 @@ export function NexProvider(props: NexProviderProps) {
   )
 }
 
-NexProvider.displayName = 'NexProvider'
+NexUIProvider.displayName = 'NexUIProvider'

@@ -1,21 +1,21 @@
 import Image from 'next/image'
-import { Link, Example } from '@/components'
-import { Box, NexProvider } from '@nex-ui/react'
+import { FlexCenter } from '@/components'
+import { Box, NexUIProvider } from '@nex-ui/react'
 import { Callout } from 'nextra/components'
-import logo from '../../../../public/images/logo.png'
+import logo from '@/public/images/logo.png'
 
 # sx 属性
 
 `sx` 属性是一种用于定义可访问主题的自定义样式的快捷方式。
 
 `sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 NexUI 内置的自定义属性和选择器，
-而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在<Link href="">`Theming`页面</Link>了解更多信息。
+而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在[`Theming`页面](/b)了解更多信息。
 
 ## Basic Usage
 
 下面的例子演示了如何使用 `sx` 属性。注意，并不是所有的值都是有效的CSS属性，这是因为 `sx` 的键映射到了主题的特定属性。接下来将更详细地介绍这个概念。
 
-<Example justify="center">
+<FlexCenter justify="center">
   <Box
     sx={{
       maxWidth: 390,
@@ -54,7 +54,7 @@ import logo from '../../../../public/images/logo.png'
       Visit source code on GitHub.
     </Box>
   </Box>
-</Example>
+</FlexCenter>
 
 ```tsx copy
 export default function Example() {
@@ -126,7 +126,7 @@ const theme = defineTheme({
 
 export default function Example() {
   return (
-    <NexProvider theme={theme}>
+    <NexUIProvider theme={theme}>
       <Box
         sx={{
           // 只有在 scales 中定义 color: 'colors', color 才可以使用 token.colors.primary
@@ -137,12 +137,12 @@ export default function Example() {
           height: 1,
         }}
       />
-    </NexProvider>
+    </NexUIProvider>
   )
 }
 ```
 
-在<Link href=''>`Scales`页面</Link>了解更多的信息。
+在[`Scales`页面](/b)了解更多的信息。
 
 #### Colors
 
@@ -158,7 +158,7 @@ export default function Example() {
 <Box sx={{ bg: 'blue.400' }} />
 ```
 
-在<Link href=''>`Colors`页面</Link>了解更多的信息。
+在[`Colors`页面](/c)了解更多的信息。
 
 #### Borders
 
@@ -168,7 +168,7 @@ export default function Example() {
 <Box sx={{ borderWidth: 'sm' }} />
 ```
 
-在<Link href=''>`Borders`页面</Link>了解更多的信息。
+在[`Borders`页面](/c)了解更多的信息。
 
 #### Sizes
 
@@ -184,7 +184,7 @@ export default function Example() {
 <Box sx={{ w: '2', h: '1' }} />
 ```
 
-在<Link href=''>`Sizes`页面</Link>了解更多的信息。
+在[`Sizes`页面](/a)了解更多的信息。
 
 #### Spacing
 
@@ -200,7 +200,7 @@ export default function Example() {
 <Box sx={{ p: '1', m: '1' }} />
 ```
 
-在<Link href=''>`Spacing`页面</Link>了解更多的信息。
+在[`Spacing`页面](/c)了解更多的信息。
 
 #### Radii
 
@@ -210,7 +210,7 @@ export default function Example() {
 <Box sx={{ borderRadius: 'sm' }} />
 ```
 
-在<Link href=''>`Radii`页面</Link>了解更多的信息。
+在[`Radii`页面](/a)了解更多的信息。
 
 #### Typography
 
@@ -238,7 +238,7 @@ export default function Example() {
 <Box sx={{ lineHeight: 'base' }} />
 ```
 
-在<Link href=''>`Typography`页面</Link>了解更多的信息。
+在[`Typography`页面](/a)了解更多的信息。
 
 ## Responsive Values
 
@@ -251,7 +251,7 @@ export default function Example() {
 
 下面的例子演示了如何使用对象语法定义一组断点：
 
-<Example
+<FlexCenter
   align="center"
   justify="center"
   sx={{
@@ -279,7 +279,7 @@ export default function Example() {
   >
     This box has a responsive width.
   </Box>
-</Example>
+</FlexCenter>
 
 ```tsx
 <Box
@@ -301,7 +301,7 @@ export default function Example() {
 
 第二种选择是将你的断点定义为一个数组，按照从小到大的顺序排列。如下所示：
 
-<Example
+<FlexCenter
   align="center"
   justify="center"
   sx={{
@@ -323,7 +323,7 @@ export default function Example() {
   >
     This box has a responsive width.
   </Box>
-</Example>
+</FlexCenter>
 
 ```tsx
 <Box sx={{ width: [100, 200, 300] }}>This box has a responsive width.</Box>
@@ -343,7 +343,7 @@ export default function Example() {
 
 下面的例子演示了如何对不同模式下的组件设置相应的样式：
 
-<Example>
+<FlexCenter>
   <Box
     sx={{
       width: '100%',
@@ -364,7 +364,7 @@ export default function Example() {
   >
     Color Mode
   </Box>
-</Example>
+</FlexCenter>
 
 ```tsx
 <Box
@@ -394,7 +394,7 @@ export default function Example() {
 
 这会让你更容易创建和使用 `colorPalette`。假设我们需要从头开始创建一个可应用主题样式的外框按钮。
 
-<Example>
+<FlexCenter>
   <Box
     sx={{
       colorPalette: 'blue',
@@ -411,7 +411,7 @@ export default function Example() {
   >
     Hello World
   </Box>
-</Example>
+</FlexCenter>
 
 ```tsx
 <Box

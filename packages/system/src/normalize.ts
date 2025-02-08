@@ -1,6 +1,6 @@
 import { forEach, isString, reduce } from '@nex-ui/utils'
 import type { CSSObject } from '@emotion/react'
-import { extractTokenPlaceholders, pathToTokenName } from './utils'
+import { extractTokenPlaceholders, memoizeFn, pathToTokenName } from './utils'
 import type { TokenCategories, Tokens } from './tokens'
 import type { Scales } from './scales'
 import type { Aliases } from './aliases'
@@ -80,7 +80,7 @@ export const createNormalize = ({
     return token?.value ?? originalTokenName
   }
 
-  return ({ propKey, propValue, colorPalette }: NormalizeConfig) => {
+  function normalze({ propKey, propValue, colorPalette }: NormalizeConfig) {
     const result: CSSObject = {}
 
     const properties = getPropertiesByAlias(propKey) ?? [propKey]
@@ -104,6 +104,8 @@ export const createNormalize = ({
 
     return result
   }
+
+  return memoizeFn(normalze)
 }
 
 export type NormailizeFn = ReturnType<typeof createNormalize>

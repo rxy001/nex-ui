@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
+import { InitColorSchemeScript } from '@nex-ui/react'
 import type { Metadata } from 'next'
-import logo from '../../public/images/logo.png'
+import logo from '@/public/images/logo.png'
 import {
   LastUpdated,
   Layout,
@@ -10,9 +11,9 @@ import {
   Navbar,
   ThemeSwitch,
   Footer,
-} from '../../nextraTheme'
+} from '@/nextraTheme'
 import { getDictionary } from '../_dictionaries/getDictionary'
-import '../../globals.css'
+import '@/globals.css'
 
 export const metadata: Metadata = {
   description:
@@ -21,7 +22,6 @@ export const metadata: Metadata = {
   appleWebApp: {
     title: 'NexUI',
   },
-  icons: logo.src,
   keywords:
     'React,Next.js,Emotion,NexUI,React,Server Components,React Components,UI Components,UI Kit,UI Library,UI Framework,UI Design System',
 }
@@ -57,7 +57,10 @@ export default async function RootLayout({ children, params }: any) {
 
   return (
     <html lang={lang} dir="ltr" suppressHydrationWarning>
-      <Head />
+      <Head>
+        <link rel="shortcut icon" href={logo.src} />
+        <InitColorSchemeScript colorSchemeSelector="class" />
+      </Head>
       <body>
         <Layout
           navbar={navbar}

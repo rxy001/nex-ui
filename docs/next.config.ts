@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-// import { resolve } from 'node:path'
+import { resolve } from 'node:path'
 import nextra from 'nextra'
 
 const withNextra = nextra({
@@ -28,7 +28,7 @@ export default withNextra({
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports ending in ?url
       {
-        test: /\.svg$/,
+        test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
         resourceQuery: {
           not: [...fileLoaderRule.resourceQuery.not, /url/],
@@ -36,8 +36,16 @@ export default withNextra({
         use: ['@svgr/webpack'],
       },
     )
+
+    config.module.rules.push({
+      test: /\.raw.tsx$/i,
+      use: ['raw-loader'],
+    })
+
+    // eslint-disable-next-line no-param-reassign
+    config.resolve.alias['@'] = resolve('.')
+
     // 不使用 conditionNames, 因为 node_modules 中 某些 package 有 export.source
-    // config.resolve.alias['@'] = resolve('.')
     // config.resolve.alias['@nex-ui/react'] = resolve('../packages/react/src')
     // config.resolve.alias['@nex-ui/utils'] = resolve('../packages/utils/src')
     // config.resolve.alias['@nex-ui/system'] = resolve('../packages/system/src')
@@ -54,13 +62,6 @@ export default withNextra({
   compiler: {
     emotion: true,
   },
-  transpilePackages: [
-    '@nex-ui/react',
-    '@nex-ui/system',
-    '@nex-ui/styled',
-    '@nex-ui/utils',
-    '@nex-ui/icons',
-  ],
   experimental: {
     turbo: {
       rules: {
@@ -68,8 +69,13 @@ export default withNextra({
           loaders: ['@svgr/webpack'],
           as: '*.js',
         },
+        './content/**/*.raw.tsx': {
+          loaders: ['raw-loader'],
+        },
       },
-      resolveAlias: {},
+      resolveAlias: {
+        '@': './',
+      },
     },
   },
 })

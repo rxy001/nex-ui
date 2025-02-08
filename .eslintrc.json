@@ -33,6 +33,7 @@
         "project": [
           "./tsconfig.json",
           "./storybook/tsconfig.json",
+          "./docs/tsconfig.json",
           "./packages/**/tsconfig.json"
         ],
         "conditionNames": [
@@ -49,7 +50,6 @@
   },
   "rules": {
     "no-console": ["warn", { "allow": ["error"] }],
-
     "no-sparse-arrays": "off",
     "no-nested-ternary": "off",
     "no-underscore-dangle": "off",

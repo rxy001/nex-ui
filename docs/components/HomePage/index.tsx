@@ -1,13 +1,14 @@
 import { Button } from '@nex-ui/react'
+import { CopyIcon } from 'nextra/icons'
 import { type ReactNode } from 'react'
-import { Card } from './Card'
-import ThemeableIcon from '../../icons/customize-outlined.svg'
-import LightingIcon from '../../icons/lighting-outlined.svg'
-import DarkIcon from '../../icons/moon-outlined.svg'
-import TsIcon from '../../icons/typescript-filled.svg'
+import ThemeableIcon from '@/icons/customize-outlined.svg'
+import LightingIcon from '@/icons/lighting-outlined.svg'
+import DarkIcon from '@/icons/moon-outlined.svg'
+import TsIcon from '@/icons/typescript-filled.svg'
 import { Playlist, playlistCodeSnippet } from './Playlist'
-import { CodeBlock } from './CodeBlock'
-import { ClientGallery } from './Gallery.client'
+import { Card } from './Card'
+import { CodeWindow } from './CodeWindow'
+import { Gallery } from './Gallery'
 
 type Content = { title?: ReactNode; desc?: ReactNode }
 
@@ -27,8 +28,6 @@ type HomePageProps = {
 }
 
 export function HomePage({ translations }: HomePageProps) {
-  // const { mode, setMode } = useColorScheme()
-
   const renderHighlight = (value?: Content) => {
     return (
       <div className="x:md:w-1/2">
@@ -45,7 +44,7 @@ export function HomePage({ translations }: HomePageProps) {
   return (
     <main className="x:py-36 x:max-w-[85rem] x:mx-auto x:px-[1.5rem] x:flex x:flex-col x:gap-[200px]">
       <section className="x:flex">
-        <section className="x:w-3/6">
+        <section className="x:min-[900px]:w-1/2">
           <h1 className="x:font-semibold x:text-6xl x:whitespace-pre-wrap">
             {translations?.title}
           </h1>
@@ -61,12 +60,13 @@ export function HomePage({ translations }: HomePageProps) {
             >
               {translations?.getStarted}
             </Button>
-            <div className="x:bg-[#d4d4d866] x:px-5 x:rounded-full x:h-[48px] x:flex x:items-center">
+            <div className="x:bg-[#d4d4d866] x:px-5 x:rounded-full x:h-[48px] x:flex x:items-center x:gap-4">
               <pre className="x:bg-transparent">~ npm i @nex-ui/react</pre>
+              <CopyIcon width={16} height={16} />
             </div>
           </div>
         </section>
-        <ClientGallery />
+        <Gallery />
       </section>
       <section className="x:grid x:grid-cols-1 x:md:grid-cols-2 x:lg:grid-cols-4 x:gap-4">
         <Card icon={<ThemeableIcon />} title={translations?.themeable?.title}>
@@ -90,9 +90,9 @@ export function HomePage({ translations }: HomePageProps) {
           {renderHighlight(translations?.styling)}
           <div className="x:flex x:gap-12 x:flex-col x:lg:flex-row">
             <Playlist />
-            <CodeBlock lang="tsx" file="Playlist.tsx">
+            <CodeWindow lang="tsx" file="Playlist.tsx">
               {playlistCodeSnippet}
-            </CodeBlock>
+            </CodeWindow>
           </div>
         </div>
         <div className="x:flex x:flex-col">

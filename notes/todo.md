@@ -32,6 +32,8 @@
 
 <!-- 15. 修改 useStyles 和 useUtilityClasses 以适配 slotProps -->
 
-16. docs 使用 alias eslint 报错
+<!-- 16. docs 使用 alias eslint 报错 -->
 
 17. docs 偶尔会报错水合失败
+
+18. icons 无法在服务器组件使用

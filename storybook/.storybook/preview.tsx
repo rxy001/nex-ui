@@ -1,4 +1,4 @@
-import { NexProvider } from '@nex-ui/react'
+import { NexUIProvider } from '@nex-ui/react'
 import type { ReactRenderer, Preview } from '@storybook/react'
 // eslint-disable-next-line import/no-relative-packages
 import { themes } from '../node_modules/@storybook/theming'
@@ -26,9 +26,9 @@ const preview: Preview = {
       },
     }),
     (Story: any) => (
-      <NexProvider>
+      <NexUIProvider>
         <Story />
-      </NexProvider>
+      </NexUIProvider>
     ),
   ],
 }

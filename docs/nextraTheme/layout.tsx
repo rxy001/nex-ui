@@ -1,5 +1,5 @@
 import { Search, SkipNavLink } from 'nextra/components'
-import { NexProvider } from '@nex-ui/react'
+import { NexUIProvider } from '@nex-ui/react'
 import { element, stringOrElement } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
@@ -84,7 +84,7 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   const { navbar, pageMap, banner, ...rest } = data
 
   return (
-    <NexProvider colorSchemeSelector="class">
+    <NexUIProvider colorSchemeSelector="class">
       <ThemeConfigProvider value={rest}>
         <SkipNavLink />
         {banner}
@@ -97,6 +97,6 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
           {children}
         </ConfigProvider>
       </ThemeConfigProvider>
-    </NexProvider>
+    </NexUIProvider>
   )
 }

@@ -5,7 +5,6 @@
     "noEmit": true,
     "incremental": true,
     "jsx": "preserve",
-    "customConditions": ["source"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["./*"]
@@ -18,14 +17,14 @@
   },
   "include": [
     "./app",
-    "./components",
-    "./mdx-components.ts",
+    "./mdx-components.tsx",
     "./middleware.ts",
     "./next-env.d.ts",
     ".next/types/**/*.ts",
     "./next.config.ts",
     "./content",
-    "./nextraTheme"
+    "./nextraTheme",
+    "./components"
   ],
   "exclude": []
 }
