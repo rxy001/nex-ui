@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/docs",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "X1ng Yu",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
     "@codesandbox/sandpack-react": "2.19.11",
     "@emotion/react": "11.13.5",
     "@headlessui/react": "2.2.0",
+    "@nex-ui/hooks": "workspace:*",
     "@nex-ui/icons": "workspace:*",
     "@nex-ui/react": "workspace:*",
     "@nex-ui/utils": "workspace:*",

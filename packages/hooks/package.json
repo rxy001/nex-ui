@@ -1,14 +1,14 @@
 {
-  "name": "@nex-ui/icons",
+  "name": "@nex-ui/hooks",
   "version": "0.0.0",
-  "author": "X1ng Yu",
   "private": false,
+  "author": "X1ng Yu",
   "keywords": [
     "react",
     "react-component",
     "nui",
     "nex-ui",
-    "icons"
+    "hooks"
   ],
   "files": [
     "dist"
@@ -16,7 +16,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rxy001/nex-ui.git",
-    "directory": "packages/icons"
+    "directory": "packages/hooks"
   },
   "license": "MIT",
   "scripts": {
@@ -42,16 +42,11 @@
     },
     "./package.json": "./package.json"
   },
+  "dependencies": {},
+  "devDependencies": {},
   "peerDependencies": {
-    "@emotion/react": ">=11",
     "react": ">=18",
     "react-dom": ">=18"
   },
-  "sideEffects": false,
-  "devDependencies": {
-    "@storybook/react": "8.0.10"
-  },
-  "dependencies": {
-    "@nex-ui/utils": "workspace:*"
-  }
+  "sideEffects": false
 }

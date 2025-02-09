@@ -1,4 +1,4 @@
-import { useEvent } from '@nex-ui/utils'
+import { useEvent } from '@nex-ui/hooks'
 import { BugOutlined } from '@nex-ui/icons'
 import { IconButton } from './IconButton'
 

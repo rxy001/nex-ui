@@ -13,7 +13,7 @@ export interface ColorSchemeProviderProps {
   children?: ReactNode
   defaultMode?: Mode
   modeStorageKey?: string
-  colorSchemeSelector?: 'data' | 'class' | (string & NonNullable<unknown>)
+  colorSchemeSelector?: 'data' | 'class' | (string & {})
   colorSchemeNode?: Element
 }
 

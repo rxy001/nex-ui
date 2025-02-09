@@ -4,15 +4,11 @@ export * from './supportRef'
 
 export * from './addEventListener'
 
-export * from './useEvent'
-
 export * from './is'
 
 export * from './craeteContext'
 
 export * from './walkObject'
-
-export type { Noop } from './types'
 
 export { default as map } from 'lodash.map'
 

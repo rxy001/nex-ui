@@ -1,10 +1,9 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { Noop } from '@nex-ui/utils'
 
 export interface IconsContext {
-  createIcon: Noop
+  createIcon: Function
 }
 
 const DEFAULT_CONTEXT_VALUE = '__nex-icons-default-value'

@@ -1,14 +1,14 @@
 import { Button } from '@nex-ui/react'
-import { CopyIcon } from 'nextra/icons'
 import { type ReactNode } from 'react'
 import ThemeableIcon from '@/icons/customize-outlined.svg'
 import LightingIcon from '@/icons/lighting-outlined.svg'
-import DarkIcon from '@/icons/moon-outlined.svg'
 import TsIcon from '@/icons/typescript-filled.svg'
+import { MoonOutlined } from '@nex-ui/icons'
 import { Playlist, playlistCodeSnippet } from './Playlist'
 import { Card } from './Card'
 import { CodeWindow } from './CodeWindow'
 import { Gallery } from './Gallery'
+import { CopyButton } from './CopyButton'
 
 type Content = { title?: ReactNode; desc?: ReactNode }
 
@@ -60,9 +60,9 @@ export function HomePage({ translations }: HomePageProps) {
             >
               {translations?.getStarted}
             </Button>
-            <div className="x:bg-[#d4d4d866] x:px-5 x:rounded-full x:h-[48px] x:flex x:items-center x:gap-4">
+            <div className="x:bg-[#d4d4d866] x:px-5 x:rounded-full x:h-[48px] x:flex x:items-center x:gap-2">
               <pre className="x:bg-transparent">~ npm i @nex-ui/react</pre>
-              <CopyIcon width={16} height={16} />
+              <CopyButton value="npm i @nex-ui/react" />
             </div>
           </div>
         </section>
@@ -72,7 +72,7 @@ export function HomePage({ translations }: HomePageProps) {
         <Card icon={<ThemeableIcon />} title={translations?.themeable?.title}>
           {translations?.themeable?.desc}
         </Card>
-        <Card icon={<DarkIcon />} title={translations?.colorMode?.title}>
+        <Card icon={<MoonOutlined />} title={translations?.colorMode?.title}>
           {translations?.colorMode?.desc}
         </Card>
         <Card icon={<LightingIcon />} title={translations?.dx?.title}>

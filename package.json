@@ -1,7 +1,7 @@
 {
   "name": "@nex-ui/monorepo",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "X1ng Yu",
   "scripts": {
     "build": "turbo build && pnpm run build:sys-ts ",

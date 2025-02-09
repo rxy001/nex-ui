@@ -1,5 +1,4 @@
 import { isNumber, isString, memoize } from '@nex-ui/utils'
-import type { Noop } from '@nex-ui/utils'
 import type { TokenValue } from './tokens/types'
 
 export function pathToTokenName(path: string[]) {
@@ -63,7 +62,7 @@ export function checkTokenCategory(category: string): boolean {
   }
 }
 
-export function memoizeFn<T extends Noop>(fn: T): T {
+export function memoizeFn<T extends (...args: any[]) => any>(fn: T): T {
   return memoize(fn, (...args) => {
     return JSON.stringify(args, (key, value) => {
       if (

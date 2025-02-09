@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/system",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": false,
   "author": "X1ng Yu",
   "scripts": {
@@ -44,6 +44,7 @@
   },
   "sideEffects": false,
   "dependencies": {
+    "@nex-ui/hooks": "workspace:*",
     "@nex-ui/utils": "workspace:*"
   },
   "peerDependencies": {

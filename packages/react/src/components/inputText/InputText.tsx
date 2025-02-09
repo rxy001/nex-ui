@@ -2,7 +2,8 @@
 
 import { useRef, useState } from 'react'
 import { nex } from '@nex-ui/styled'
-import { composeRef, useEvent } from '@nex-ui/utils'
+import { composeRef } from '@nex-ui/utils'
+import { useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
 import { useNexContext } from '../provider'
