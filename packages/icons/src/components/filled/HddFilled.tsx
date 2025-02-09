@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Hdd from '../../svg/filled/hdd.svg'

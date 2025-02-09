@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import RadiusBottomleft from '../../svg/outlined/radius-bottomleft.svg'

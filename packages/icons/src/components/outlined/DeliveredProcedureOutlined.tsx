@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import DeliveredProcedure from '../../svg/outlined/delivered-procedure.svg'

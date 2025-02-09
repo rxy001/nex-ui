@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import DribbbleCircle from '../../svg/filled/dribbble-circle.svg'

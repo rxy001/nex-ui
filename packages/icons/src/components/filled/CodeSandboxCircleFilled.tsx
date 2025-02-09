@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import CodeSandboxCircle from '../../svg/filled/code-sandbox-circle.svg'

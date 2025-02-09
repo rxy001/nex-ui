@@ -85,6 +85,9 @@ async function run() {
 
     const tsxPath = resolve(categoryDirPath, tsxName)
     const tsx =
+      "'use client'" +
+      '\n' +
+      '\n' +
       "import { forwardRef, useMemo } from 'react'" +
       '\n' +
       "import { useNexIcons } from '../../utils/Context'" +

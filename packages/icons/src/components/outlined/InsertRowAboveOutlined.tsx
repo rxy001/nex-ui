@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import InsertRowAbove from '../../svg/outlined/insert-row-above.svg'

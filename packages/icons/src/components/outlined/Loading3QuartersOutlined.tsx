@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import Loading3Quarters from '../../svg/outlined/loading-3-quarters.svg'

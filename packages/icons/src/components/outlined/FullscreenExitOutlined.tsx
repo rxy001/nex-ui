@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import FullscreenExit from '../../svg/outlined/fullscreen-exit.svg'

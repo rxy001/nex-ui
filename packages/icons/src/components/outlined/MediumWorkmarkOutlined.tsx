@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import MediumWorkmark from '../../svg/outlined/medium-workmark.svg'

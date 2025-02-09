@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import VerticalAlignMiddle from '../../svg/outlined/vertical-align-middle.svg'

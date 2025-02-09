@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, useMemo } from 'react'
 import { useNexIcons } from '../../utils/Context'
 import GooglePlusCircle from '../../svg/filled/google-plus-circle.svg'
