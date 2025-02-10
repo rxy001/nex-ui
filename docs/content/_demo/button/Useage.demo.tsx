@@ -1,5 +1,5 @@
 import { Button } from '@nex-ui/react'
 
-export const Demo = () => {
+export const UseageDemo = () => {
   return <Button>Button</Button>
 }

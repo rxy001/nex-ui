@@ -9,4 +9,7 @@ export default {
   },
   editPage: '在 Github 编辑此页',
   tocTitle: '在此页面',
+  feedback: {
+    content: '有问题吗？反馈给我们',
+  },
 }

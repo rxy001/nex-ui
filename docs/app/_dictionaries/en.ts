@@ -9,4 +9,7 @@ export default {
   },
   editPage: 'Edit this page on GitHub',
   tocTitle: 'On This Page',
+  feedback: {
+    content: 'Question? Give us feedback',
+  },
 }

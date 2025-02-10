@@ -87,6 +87,9 @@ export default async function RootLayout({ children, params }: any) {
             light: dictionary.light,
             system: dictionary.system,
           }}
+          feedback={{
+            content: dictionary.feedback.content,
+          }}
         >
           {children}
         </Layout>

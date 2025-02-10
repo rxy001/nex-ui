@@ -1,1 +1,77 @@
+import { Button } from '@nex-ui/react'
+import { Example, ComponentLinks, PropsTable } from '@/components'
+import { button } from '@/content/_demo'
+import { Table } from 'nextra/components'
+
 # Button
+
+按钮使用户能够通过一次点击执行操作并做出选择。
+
+<ComponentLinks component="button" />
+
+---
+
+## 使用
+
+<Example {...button.useage} />
+
+### Disabled
+
+<Example {...button.disabled} />
+
+### Sizes
+
+<Example {...button.sizes} />
+
+### FullWidth
+
+<Example {...button.fullWidth} />
+
+### Radius
+
+<Example {...button.radius} />
+
+### Colors
+
+<Example {...button.colors} />
+
+### Variants
+
+<Example {...button.variants} />
+
+### Loading
+
+添加 `loading` 属性，可在按钮内部显示一个加载指示器组件。
+
+<Example {...button.loading} />
+
+### With Icons
+
+通过设置 `startIcon` 或 `endIcon` 属性，向按钮添加图标。
+
+<Example {...button.withIcons} />
+
+### Icon Only
+
+添加 `IconOnly` 属性，可显示一个仅图标而无文本的按钮。
+
+<Example {...button.iconOnly} />
+
+## API
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'node',
+      default: '',
+      description: '按钮的内容',
+    },
+    {
+      prop: 'color',
+      type: 'blue | orange | yellow | ryan | rose | green | pick | purple | gray',
+      default: 'blue',
+      description: '按钮的颜色，支持自定义主题的颜色',
+    },
+  ]}
+/>
