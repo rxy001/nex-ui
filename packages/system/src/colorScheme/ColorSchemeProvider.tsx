@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useEvent } from '@nex-ui/utils'
+import { useEvent } from '@nex-ui/hooks'
 import { InnerColorSchemeProvider } from './ColorSchemeContex'
 import type {
   State,

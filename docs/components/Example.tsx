@@ -28,8 +28,13 @@ export const Example = ({
 
   return (
     <Tabs items={['Preview', 'Code']}>
-      <Tabs.Tab key="preview">{demo}</Tabs.Tab>
-      <Tabs.Tab key="code">
+      <Tabs.Tab
+        key="preview"
+        className="x:rounded-md x:border-1 x:py-6 x:px-4 x:border-gray-300"
+      >
+        {demo}
+      </Tabs.Tab>
+      <Tabs.Tab key="code" className="x:rounded-md">
         <Sandpack
           files={files}
           showReportBug={showReportBug}

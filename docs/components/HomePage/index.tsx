@@ -1,14 +1,14 @@
 import { Button } from '@nex-ui/react'
-import { CopyIcon } from 'nextra/icons'
 import { type ReactNode } from 'react'
 import ThemeableIcon from '@/icons/customize-outlined.svg'
 import LightingIcon from '@/icons/lighting-outlined.svg'
-import DarkIcon from '@/icons/moon-outlined.svg'
 import TsIcon from '@/icons/typescript-filled.svg'
-import { Playlist, playlistCodeSnippet } from './Playlist'
+import { MoonOutlined } from '@nex-ui/icons'
+import { Theme, Layout } from './features'
+import type { ThemeProps } from './features'
 import { Card } from './Card'
-import { CodeWindow } from './CodeWindow'
 import { Gallery } from './Gallery'
+import { CopyButton } from './CopyButton'
 
 type Content = { title?: ReactNode; desc?: ReactNode }
 
@@ -24,7 +24,8 @@ type HomePageProps = {
     styling?: Content
     darkMode?: Content
     customization?: Content
-  }
+    learnMore?: string
+  } & ThemeProps['translations']
 }
 
 export function HomePage({ translations }: HomePageProps) {
@@ -44,7 +45,7 @@ export function HomePage({ translations }: HomePageProps) {
   return (
     <main className="x:py-36 x:max-w-[85rem] x:mx-auto x:px-[1.5rem] x:flex x:flex-col x:gap-[200px]">
       <section className="x:flex">
-        <section className="x:min-[900px]:w-1/2">
+        <section className="x:min-[970px]:w-1/2">
           <h1 className="x:font-semibold x:text-6xl x:whitespace-pre-wrap">
             {translations?.title}
           </h1>
@@ -56,13 +57,13 @@ export function HomePage({ translations }: HomePageProps) {
               size="lg"
               href="/docs/getting-started/introduction"
               radius="full"
-              className="x:px-5"
+              className="x:px-5 x:max-sm:w-full"
             >
               {translations?.getStarted}
             </Button>
-            <div className="x:bg-[#d4d4d866] x:px-5 x:rounded-full x:h-[48px] x:flex x:items-center x:gap-4">
+            <div className="x:bg-[#d4d4d866] x:px-5 x:rounded-full x:h-[48px] x:flex x:items-center x:gap-2 x:max-sm:hidden">
               <pre className="x:bg-transparent">~ npm i @nex-ui/react</pre>
-              <CopyIcon width={16} height={16} />
+              <CopyButton value="npm i @nex-ui/react" />
             </div>
           </div>
         </section>
@@ -72,7 +73,7 @@ export function HomePage({ translations }: HomePageProps) {
         <Card icon={<ThemeableIcon />} title={translations?.themeable?.title}>
           {translations?.themeable?.desc}
         </Card>
-        <Card icon={<DarkIcon />} title={translations?.colorMode?.title}>
+        <Card icon={<MoonOutlined />} title={translations?.colorMode?.title}>
           {translations?.colorMode?.desc}
         </Card>
         <Card icon={<LightingIcon />} title={translations?.dx?.title}>
@@ -83,17 +84,19 @@ export function HomePage({ translations }: HomePageProps) {
         </Card>
       </section>
       <section className="x:flex x:flex-col x:gap-[150px]">
-        <div className="x:flex x:flex-col">
+        <div className="x:flex x:flex-col x:gap-5">
           {renderHighlight(translations?.customization)}
+          <Theme translations={translations} />
+          <Button radius="full" size="sm" className="x:w-[110px]" color="blue">
+            {translations?.learnMore}
+          </Button>
         </div>
         <div className="x:flex x:flex-col x:gap-5">
           {renderHighlight(translations?.styling)}
-          <div className="x:flex x:gap-12 x:flex-col x:lg:flex-row">
-            <Playlist />
-            <CodeWindow lang="tsx" file="Playlist.tsx">
-              {playlistCodeSnippet}
-            </CodeWindow>
-          </div>
+          <Layout />
+          <Button radius="full" size="sm" className="x:w-[110px]" color="blue">
+            {translations?.learnMore}
+          </Button>
         </div>
         <div className="x:flex x:flex-col">
           {renderHighlight(translations?.darkMode)}

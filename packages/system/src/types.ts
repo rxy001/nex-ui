@@ -12,9 +12,7 @@ export type CSSInterpolation =
   | StyleObject
   | Keyframes
 
-export type CSSProperties = CSS.Properties<
-  number | (string & NonNullable<unknown>)
->
+export type CSSProperties = CSS.Properties<number | (string & {})>
 
 export interface ArrayCSSInterpolation
   extends ReadonlyArray<CSSInterpolation> {}

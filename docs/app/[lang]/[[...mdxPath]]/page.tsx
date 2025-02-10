@@ -7,6 +7,13 @@ export const generateStaticParams = generateStaticParamsFor('mdxPath')
 
 const title = 'Nex UI - Beautiful, modern and high-quality React UI library'
 
+type PageProps = Readonly<{
+  params: Promise<{
+    mdxPath: string[]
+    lang: string
+  }>
+}>
+
 export async function generateMetadata(props: PageProps) {
   const params = await props.params
 
@@ -17,13 +24,6 @@ export async function generateMetadata(props: PageProps) {
     title: metadata.title === 'Index' ? title : `${metadata.title} - ${title}.`,
   }
 }
-
-type PageProps = Readonly<{
-  params: Promise<{
-    mdxPath: string[]
-    lang: string
-  }>
-}>
 
 const Wrapper = useMDXComponents().wrapper
 

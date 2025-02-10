@@ -7,7 +7,7 @@ import {
   Switch,
   useColorScheme,
 } from '@nex-ui/react'
-import { useEvent } from '@nex-ui/utils'
+import { useEvent } from '@nex-ui/hooks'
 import type { ChangeEvent } from 'react'
 import MoonIcon from '../../icons/moon-filled.svg'
 import SunIcon from '../../icons/sun-filled.svg'
@@ -18,17 +18,13 @@ export const ClientGallery = () => {
   const toggleMode = useEvent((e: ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target
 
-    if (checked) {
-      setMode('dark')
-    } else {
-      setMode('light')
-    }
+    setMode(checked ? 'dark' : 'light')
   })
 
   const resolvedColorScheme = systemColorScheme ?? mode
 
   return (
-    <section className="x:w-1/2 x:relative x:max-[900px]:hidden">
+    <section className="x:w-1/2 x:relative x:max-[970px]:hidden">
       <Button className="x:absolute x:top-[200px] x:left-[200px] x:animate-[levitate_14s_ease_infinite_0.5s]">
         Button
       </Button>

@@ -18,7 +18,7 @@ export function CodeWindow({
   children,
 }: CodeBlockProps) {
   return (
-    <div className={clsx('x:bg-[#24292e] x:rounded-md x:lg:w-1/2', className)}>
+    <div className={clsx('x:bg-[#24292e] x:rounded-md x:w-full', className)}>
       <div className="x:text-[#e1e4e8] x:text-center x:py-2 x:font-mono x:text-xs x:relative x:-mb-6">
         {file}
         <div className="x:absolute x:top-2 x:left-4 x:flex x:items-center x:gap-2">

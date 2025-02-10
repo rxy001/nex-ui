@@ -1,3 +1,5 @@
+'use client'
+
 import { Box } from '@nex-ui/react'
 import { playlist } from './playlist.data'
 
@@ -111,7 +113,7 @@ export const Playlist = () => {
 }
 
 export const playlistCodeSnippet = `import { Box } from '@nex-ui/react'
-import { playlist } from './playlist.ts'
+import { playlist } from './playlist.data'
 
 export const Playlist = () => {
   return (

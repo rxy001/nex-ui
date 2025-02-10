@@ -92,6 +92,7 @@ export const ClientNavbar: FC<{
   children: ReactNode
 }> = ({ children }) => {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
+
   const themeConfig = useThemeConfig()
 
   const pathname = useFSRoute()
@@ -129,7 +130,7 @@ export const ClientNavbar: FC<{
               key={href}
               className={cn(
                 classes.link,
-                'x:aria-[current]:font-medium x:aria-[current]:subpixel-antialiased x:aria-[current]:text-current',
+                'x:aria-[current]:font-medium x:aria-[current]:subpixel-antialiased',
               )}
               aria-current={isCurrentPage}
             >

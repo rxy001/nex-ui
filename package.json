@@ -1,13 +1,14 @@
 {
   "name": "@nex-ui/monorepo",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "X1ng Yu",
   "scripts": {
-    "build": "turbo build && pnpm run build:sys-ts ",
+    "build": "turbo build -F !@nex-ui/docs -F !@nex-ui/storybook && pnpm run build:sys-ts",
     "build:sys-ts": "tsx ./scripts/buildSysTs",
     "build:icons": "tsx ./scripts/buildIcons",
-    "build:fast": "turbo build:fast",
+    "build:fast": "turbo build:fast -F !@nex-ui/docs -F !@nex-ui/storybook && pnpm run build:sys-ts",
+    "build:docs": "turbo build -F @nex-ui/docs",
     "dev": "turbo dev",
     "dev:docs": "turbo dev -F @nex-ui/docs",
     "dev:sb": "turbo dev -F @nex-ui/storybook",

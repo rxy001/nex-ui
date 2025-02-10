@@ -1,7 +1,7 @@
 'use client'
 
 import { LoadingOutlined } from '@nex-ui/icons'
-import { useEvent } from '@nex-ui/utils'
+import { useEvent } from '@nex-ui/hooks'
 import { nex } from '@nex-ui/styled'
 import type { Ref, MouseEvent, ElementType } from 'react'
 import { useNexContext } from '../provider'

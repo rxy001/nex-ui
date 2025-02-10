@@ -7,10 +7,6 @@
 @source './nextraTheme/**/*.{ts,tsx,md,mdx}';
 @source './node_modules/nextra/dist/**/*.js';
 
-:root {
-  color: #11181c;
-}
-
 @keyframes levitate {
   0% {
     transform: translateY(0);

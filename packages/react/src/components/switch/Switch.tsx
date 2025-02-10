@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { ChangeEvent, ElementType, Ref } from 'react'
-import { isFunction, useEvent } from '@nex-ui/utils'
+import { isFunction } from '@nex-ui/utils'
+import { useEvent } from '@nex-ui/hooks'
 import { useNexContext } from '../provider'
 import {
   forwardRef,

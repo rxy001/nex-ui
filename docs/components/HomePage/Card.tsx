@@ -8,7 +8,7 @@ type CardProps = {
 
 export const Card = ({ children, icon, title }: CardProps) => {
   return (
-    <div className="x:w-full x:rounded-2xl x:p-3 x:shadow-medium x:bg-white/5 x:dark:bg-default-400/10 x:backdrop-blur-lg x:backdrop-saturate-[1.8]">
+    <div className="x:w-full x:rounded-2xl x:p-3 x:inset-shadow-sm x:shadow-xl x:bg-white/5 x:dark:bg-default-400/10 x:backdrop-blur-lg x:backdrop-saturate-[1.8]">
       <div className="x:flex x:items-center x:gap-3">
         <div className="x:flex x:justify-center x:p-2 x:rounded-full x:items-center x:text-blue-500 x:bg-[#0f64ff40]">
           {icon}
