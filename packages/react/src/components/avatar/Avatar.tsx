@@ -9,7 +9,6 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
-  resovleClasses,
   useSlotProps,
   resolveSxProps,
 } from '../utils'
@@ -30,8 +29,8 @@ const useSlotClasses = (ownerState: AvatarOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
-    resovleClasses(classes, ownerState),
     getUtilityClass(avatarRoot),
+    classes,
   )
 
   return composedClasses
@@ -95,6 +94,7 @@ export const Avatar = forwardRef(
       alt,
       srcSet,
       slotProps,
+      className,
       children: childrenProp,
       size = 'md',
       radius = size,
@@ -124,6 +124,7 @@ export const Avatar = forwardRef(
       externalSlotProps: remainingProps,
       externalForwardedProps: {
         ref,
+        className,
       },
       classNames: classes.root,
       sx: [styles.root, resolveSxProps(sx, ownerState)],

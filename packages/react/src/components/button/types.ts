@@ -23,15 +23,14 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   sx?: SxProps<ButtonOwnerState<RootComponent>>
   startIcon?: ReactNode
   endIcon?: ReactNode
+  spinner?: ReactNode
+  spinnerPlacement?: 'start' | 'end'
   href?: string
   children?: ReactNode
   className?: string
   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target']
   slotProps?: ButtonSlotProps
-  classes?: ComponentUtilityClasses<
-    ButtonOwnerState<RootComponent>,
-    'root' | 'startIcon' | 'endIcon'
-  >
+  classes?: ComponentUtilityClasses<'startIcon' | 'endIcon'>
 } & ButtonVariants
 
 export type ButtonProps<RootComponent extends ElementType = 'button'> =

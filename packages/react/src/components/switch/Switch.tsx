@@ -13,7 +13,6 @@ import {
   useSlotProps,
   useStyles,
   composeClasses,
-  resovleClasses,
   getUtilityClass,
 } from '../utils'
 import type { SwitchOwnerState, SwitchProps } from './types'
@@ -42,8 +41,8 @@ const useSlotClasses = (ownerState: SwitchOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
-    resovleClasses(classes, ownerState),
     getUtilityClass(switchRoot),
+    classes,
   )
 
   return composedClasses

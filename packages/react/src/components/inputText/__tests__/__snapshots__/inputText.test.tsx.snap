@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`InputText renders correctly 1`] = `
-<span
+<label
   class="nui-input-text-root nui-input-text-variant-outlined nui-input-text-radius-md nui-input-text-size-md nui-input-text-color-blue emotion-0"
 >
   <input
@@ -9,5 +9,5 @@ exports[`InputText renders correctly 1`] = `
     type="text"
     value=""
   />
-</span>
+</label>
 `;

@@ -224,7 +224,7 @@ describe('Button', () => {
     expect(getByTestId('radius-full')).toHaveClass(buttonClasses['radius-full'])
   })
 
-  it('should add the appropriate radius class to root element based on iconOnly prop', () => {
+  it('should add the appropriate iconOnly class to root element based on iconOnly prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <Button iconOnly data-testid="icon-only">
         Button
@@ -234,7 +234,7 @@ describe('Button', () => {
     expect(getByTestId('icon-only')).toHaveClass(buttonClasses['icon-only'])
   })
 
-  it('should add the appropriate radius class to root element based on fullWidth prop', () => {
+  it('should add the appropriate fullWidth class to root element based on fullWidth prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <Button fullWidth data-testid="full-width">
         Button
@@ -331,14 +331,12 @@ describe('Button', () => {
   })
 
   it('should forward classes to Button', () => {
-    const rootClassName = 'test-root-class'
     const startIconClassName = 'test-start-icon-class'
     const endIconClassName = 'test-end-icon-class'
 
     const { container } = renderWithNexProvider(
       <Button
         classes={{
-          root: rootClassName,
           startIcon: startIconClassName,
           endIcon: endIconClassName,
         }}
@@ -353,7 +351,6 @@ describe('Button', () => {
     const startIcon = button?.querySelector(`.${buttonClasses['start-icon']}`)
     const endIcon = button?.querySelector(`.${buttonClasses['end-icon']}`)
 
-    expect(button).toHaveClass(rootClassName)
     expect(startIcon).toHaveClass(startIconClassName)
     expect(endIcon).toHaveClass(endIconClassName)
   })

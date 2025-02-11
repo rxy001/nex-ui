@@ -31,7 +31,6 @@ type CheckboxOwnProps<
     | ((ownerState: CheckboxOwnerState<CheckboxComponent>) => ReactNode)
   slotProps?: CheckboxSlotProps<CheckboxComponentProps>
   classes?: ComponentUtilityClasses<
-    CheckboxOwnerState<CheckboxComponent>,
     'root' | 'input' | 'icon' | 'label' | 'iconContainer'
   >
   defaultChecked?: boolean

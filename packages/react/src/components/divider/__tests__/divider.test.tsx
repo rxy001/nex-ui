@@ -39,19 +39,4 @@ describe('Divider', () => {
       dividerClasses['orientation-vertical'],
     )
   })
-
-  it('should forward classes to Divider', () => {
-    const rootClassName = 'test-root-class'
-
-    const { container } = renderWithNexProvider(
-      <Divider
-        classes={{
-          root: rootClassName,
-        }}
-      />,
-    )
-
-    const divider = container.firstElementChild
-    expect(divider).toHaveClass(rootClassName)
-  })
 })

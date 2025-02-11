@@ -14,7 +14,6 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
-  resovleClasses,
   useSlotProps,
   resolveSxProps,
 } from '../utils'
@@ -44,8 +43,8 @@ const useSlotClasses = (ownerState: CheckboxOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
-    resovleClasses(classes, ownerState),
     getUtilityClass(checkboxRoot),
+    classes,
   )
 
   return composedClasses

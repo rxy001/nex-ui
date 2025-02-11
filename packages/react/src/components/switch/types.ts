@@ -32,7 +32,6 @@ export type SwitchOwnProps<
   endIcon?: ReactNode
   slotProps?: SwitchSlotProps<SwitchComponentProps>
   classes?: ComponentUtilityClasses<
-    SwitchOwnerState<SwitchComponent>,
     'root' | 'input' | 'track' | 'startIcon' | 'endIcon' | 'thumb'
   >
   thumbIcon?:

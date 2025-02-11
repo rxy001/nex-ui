@@ -1,9 +1,5 @@
 import type { ElementType } from 'react'
-import type {
-  OverrideProps,
-  ComponentUtilityClasses,
-  SxProps,
-} from '../../types/utils'
+import type { OverrideProps, SxProps } from '../../types/utils'
 import type { DividerVariants } from '../../theme/recipes'
 
 export interface DividerPropsOverrides {}
@@ -11,7 +7,7 @@ export interface DividerPropsOverrides {}
 type AvatarOwnProps<RootComponent extends ElementType> = {
   as?: RootComponent
   sx?: SxProps<AvatarOwnProps<RootComponent>>
-  classes?: ComponentUtilityClasses<DividerOwnerState<RootComponent>, 'root'>
+  className?: string
 } & DividerVariants
 
 export type DividerProps<RootComponent extends ElementType = 'hr'> =

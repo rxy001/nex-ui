@@ -218,19 +218,4 @@ describe('Flex', () => {
 
     expect(getByTestId('inline')).toHaveClass(flexClasses.inline)
   })
-
-  it('should forward classes to Flex', () => {
-    const rootClassName = 'test-root-class'
-
-    const { container } = renderWithNexProvider(
-      <Flex
-        classes={{
-          root: rootClassName,
-        }}
-      />,
-    )
-
-    const flex = container.firstElementChild
-    expect(flex).toHaveClass(rootClassName)
-  })
 })

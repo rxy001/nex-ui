@@ -26,10 +26,7 @@ type InputTextOwnProps<
   value?: string
   clearable?: boolean
   onClear?: () => void
-  classes?: ComponentUtilityClasses<
-    InputTextOwnerState<InputComponent>,
-    'root' | 'input' | 'clearBtn'
-  >
+  classes?: ComponentUtilityClasses<'root' | 'input' | 'clearBtn'>
   slotProps?: InputTextSlotProps<InputComponentProps>
   className?: string
   name?: string

@@ -5,7 +5,7 @@ export const resovleClasses = <
   ClassKey extends string,
   OwnerState extends object | void = void,
 >(
-  classes: ComponentUtilityClasses<OwnerState, ClassKey> | undefined,
+  classes: ComponentUtilityClasses<ClassKey> | undefined,
   ownerState: OwnerState,
 ) => {
   const output = {} as Record<ClassKey, string[]>

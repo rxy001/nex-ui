@@ -218,21 +218,18 @@ describe('Avatar', () => {
 
   it('should forward classes to Divider', () => {
     mockGlobalImage('loaded')
-    const rootClassName = 'test-root-class'
     const imgClassName = 'test-img-class'
 
     const { container } = renderWithNexProvider(
       <Avatar
         src="/fake.png"
         classes={{
-          root: rootClassName,
           img: imgClassName,
         }}
       />,
     )
 
     const avatar = container.firstElementChild
-    expect(avatar).toHaveClass(rootClassName)
     expect(avatar?.firstElementChild).toHaveClass(imgClassName)
   })
 })

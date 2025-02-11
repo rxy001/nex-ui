@@ -10,7 +10,6 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
-  resovleClasses,
   useSlotProps,
   resolveSxProps,
 } from '../utils'
@@ -21,7 +20,7 @@ const useSlotClasses = (ownerState: IconOwnerState) => {
 
   const iconRoot = `${prefix}-icon`
 
-  const { spin, fontSize, width, height, classes } = ownerState
+  const { spin, fontSize, width, height } = ownerState
 
   const slots = {
     root: [
@@ -33,11 +32,7 @@ const useSlotClasses = (ownerState: IconOwnerState) => {
     ],
   }
 
-  const composedClasses = composeClasses(
-    slots,
-    resovleClasses(classes, ownerState),
-    getUtilityClass(iconRoot),
-  )
+  const composedClasses = composeClasses(slots, getUtilityClass(iconRoot))
 
   return composedClasses
 }
@@ -64,6 +59,7 @@ export const createIcon = (
       const {
         sx,
         color,
+        className,
         spin = false,
         fontSize = 'md',
         width = '1em',
@@ -97,7 +93,7 @@ export const createIcon = (
 
       const rootIcon = useSlotProps({
         externalSlotProps: remainingProps,
-        externalForwardedProps: { ref },
+        externalForwardedProps: { ref, className },
         sx: [composedSx, resolveSxProps(sx, ownerState)],
         classNames: clsx(classes.root, defaultClassName),
       })

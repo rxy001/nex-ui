@@ -8,7 +8,6 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
-  resovleClasses,
   useSlotProps,
   resolveSxProps,
 } from '../utils'
@@ -20,17 +19,13 @@ const useSlotClasses = (ownerState: DividerOwnerState) => {
 
   const dividerRoot = `${prefix}-divider`
 
-  const { orientation, classes } = ownerState
+  const { orientation } = ownerState
 
   const slots = {
     root: ['root', orientation && `orientation-${orientation}`],
   }
 
-  const composedClasses = composeClasses(
-    slots,
-    resovleClasses(classes, ownerState),
-    getUtilityClass(dividerRoot),
-  )
+  const composedClasses = composeClasses(slots, getUtilityClass(dividerRoot))
 
   return composedClasses
 }
@@ -45,7 +40,12 @@ export const Divider = forwardRef(
       props: inProps,
     })
 
-    const { orientation = 'horizontal', sx, ...remainingProps } = props
+    const {
+      sx,
+      className,
+      orientation = 'horizontal',
+      ...remainingProps
+    } = props
 
     const ownerState = { ...props, orientation }
 
@@ -55,7 +55,7 @@ export const Divider = forwardRef(
 
     const rootProps = useSlotProps({
       externalSlotProps: remainingProps,
-      externalForwardedProps: { ref },
+      externalForwardedProps: { ref, className },
       sx: [style, resolveSxProps(sx, ownerState)],
       classNames: classes.root,
     })

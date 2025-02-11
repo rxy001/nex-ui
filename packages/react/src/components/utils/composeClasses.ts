@@ -3,8 +3,8 @@ import { forEach, reduce } from '@nex-ui/utils'
 
 export function composeClasses<ClassKey extends string>(
   slots: Record<ClassKey, ReadonlyArray<string | false | undefined | null>>,
-  classes: Partial<Record<ClassKey, string[]>>,
   getUtilityClass: (slotClass: string) => string,
+  classes?: Partial<Record<string, string[] | string>>,
 ) {
   const output = {} as Record<ClassKey, string>
 

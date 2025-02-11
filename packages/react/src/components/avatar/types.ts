@@ -18,12 +18,10 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   alt?: string
   src?: string
   srcSet?: string
+  className?: string
   children?: ReactNode
   slotProps?: AvatarSlotProps
-  classes?: ComponentUtilityClasses<
-    AvatarOwnerState<RootComponent>,
-    'root' | 'img'
-  >
+  classes?: ComponentUtilityClasses<'img'>
 } & AvatarVariants
 
 export type AvatarProps<RootComponent extends ElementType = 'div'> =

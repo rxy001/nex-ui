@@ -3,6 +3,7 @@ import { defineRecipe } from '@nex-ui/system'
 
 const circle = keyframes({
   '0%': { transform: 'rotate(0deg)' },
+  '60%': { transform: 'rotate(300deg)' },
   '100%': { transform: 'rotate(360deg)' },
 })
 
@@ -15,7 +16,7 @@ export const iconRecipe = defineRecipe({
   variants: {
     spin: {
       true: {
-        animation: `${circle} 2s linear infinite`,
+        animation: `${circle} 1s linear infinite`,
       },
     },
     fontSize: {

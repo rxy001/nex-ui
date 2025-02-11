@@ -14,8 +14,8 @@ export type SxProps<OwnerState extends object | void = void> =
       ? () => StyleObject | StyleObject[]
       : (ownerState: OwnerState) => StyleObject | StyleObject[])
 
-export type ComponentUtilityClasses<OwnerState, T extends string> = Partial<
-  Record<T, ClassName | ((ownerState: OwnerState) => ClassName)>
+export type ComponentUtilityClasses<T extends string> = Partial<
+  Record<T, ClassName>
 >
 
 export type Overwrite<K, T> = Omit<K, keyof T> & T

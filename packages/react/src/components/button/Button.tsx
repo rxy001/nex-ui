@@ -11,7 +11,6 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
-  resovleClasses,
   useSlotProps,
   resolveSxProps,
 } from '../utils'
@@ -57,8 +56,8 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
-    resovleClasses(classes, ownerState),
     getUtilityClass(btnRoot),
+    classes,
   )
 
   return composedClasses
@@ -80,6 +79,10 @@ export const Button = forwardRef(
       sx,
       children,
       slotProps,
+      className,
+      spinner,
+      href,
+      spinnerPlacement = 'start',
       variant = 'filled',
       size = 'md',
       radius = size,
@@ -95,11 +98,7 @@ export const Button = forwardRef(
     } = props
 
     const rootElement: ElementType =
-      as !== undefined
-        ? as
-        : typeof remainingProps.href === 'string' && remainingProps.href
-          ? 'a'
-          : 'button'
+      as !== undefined ? as : typeof href === 'string' && href ? 'a' : 'button'
 
     const ownerState = {
       ...props,
@@ -133,6 +132,8 @@ export const Button = forwardRef(
       externalForwardedProps: {
         ref,
         onClick,
+        className,
+        href: rootElement === 'a' ? href : null,
         as: rootElement,
         [rootElement === 'button' ? 'disabled' : 'data-disabled']:
           disabled || loading,
@@ -153,14 +154,18 @@ export const Button = forwardRef(
       sx: styles.endIcon,
     })
 
-    const startIcon = (loading || startIconProp) && (
+    const startIcon = ((spinnerPlacement === 'start' && loading) ||
+      startIconProp) && (
       <nex.span {...startIconProps}>
-        {loading ? <LoadingOutlined /> : startIconProp}
+        {loading ? (spinner ?? <LoadingOutlined />) : startIconProp}
       </nex.span>
     )
 
-    const endIcon = endIconProp && (
-      <nex.span {...endIconProps}>{endIconProp}</nex.span>
+    const endIcon = ((spinnerPlacement === 'end' && loading) ||
+      endIconProp) && (
+      <nex.span {...endIconProps}>
+        {loading ? (spinner ?? <LoadingOutlined />) : endIconProp}
+      </nex.span>
     )
 
     return (

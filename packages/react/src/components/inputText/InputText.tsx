@@ -13,7 +13,6 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
-  resovleClasses,
   useSlotProps,
   resolveSxProps,
 } from '../utils'
@@ -45,8 +44,8 @@ const useSlotClasses = (ownerState: InputTextOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
-    resovleClasses(classes, ownerState),
     getUtilityClass(inputTextRoot),
+    classes,
   )
 
   return composedClasses

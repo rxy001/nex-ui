@@ -10,7 +10,6 @@ import {
   composeClasses,
   getUtilityClass,
   forwardRef,
-  resovleClasses,
   useSlotProps,
   resolveSxProps,
 } from '../utils'
@@ -20,7 +19,7 @@ const useSlotClasses = (ownerState: FlexOwnerState) => {
 
   const flexRoot = `${prefix}-flex`
 
-  const { inline, justify, align, direction, wrap, gap, classes } = ownerState
+  const { inline, justify, align, direction, wrap, gap } = ownerState
 
   const slots = {
     root: [
@@ -34,11 +33,7 @@ const useSlotClasses = (ownerState: FlexOwnerState) => {
     ],
   }
 
-  const composedClasses = composeClasses(
-    slots,
-    resovleClasses(classes, ownerState),
-    getUtilityClass(flexRoot),
-  )
+  const composedClasses = composeClasses(slots, getUtilityClass(flexRoot))
 
   return composedClasses
 }
@@ -54,6 +49,7 @@ export const Flex = forwardRef(
       sx,
       gap,
       children,
+      className,
       justify,
       align,
       wrap,
@@ -83,7 +79,7 @@ export const Flex = forwardRef(
 
     const rootProps = useSlotProps({
       externalSlotProps: remainingProps,
-      externalForwardedProps: { ref },
+      externalForwardedProps: { ref, className },
       sx: [composedSx, resolveSxProps(sx, ownerState)],
       classNames: classes.root,
     })
