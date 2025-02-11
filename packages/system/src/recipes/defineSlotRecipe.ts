@@ -1,6 +1,6 @@
-import { merge } from '@nex-ui/utils'
+import { isPlainObject } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
-import { memoizeFn } from '../utils'
+import { memoizeFn, mergeRecipe } from '../utils'
 import type {
   SlotGroups,
   SlotRecipeConfig,
@@ -34,9 +34,10 @@ function defineSlotRecipeImpl<
 
   if (
     (extendOrConfig as E)?.__slotRecipe === true &&
-    (extendOrConfig as E)?.__config
+    (extendOrConfig as E)?.__config &&
+    isPlainObject(maybeConfig)
   ) {
-    config = merge({}, (extendOrConfig as E).__config, config)
+    config = mergeRecipe((extendOrConfig as E).__config, config)
   }
 
   const { slots, ...other } = config

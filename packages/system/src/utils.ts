@@ -1,4 +1,4 @@
-import { isNumber, isString, memoize } from '@nex-ui/utils'
+import { isArray, isNumber, isString, memoize, mergeWith } from '@nex-ui/utils'
 import type { TokenValue } from './tokens/types'
 
 export function pathToTokenName(path: string[]) {
@@ -82,4 +82,26 @@ export function extractTokenPlaceholders(value: string) {
   const regex = /\{(.*?)\}/g
   const matches = value.matchAll(regex)
   return [...matches]
+}
+
+export function mergeRecipe<Recipe, Source>(recipe: Recipe, source: Source) {
+  return mergeWith(
+    {},
+    recipe,
+    source,
+    (recipeValue: any, srcValue: any, key: string) => {
+      if (key === 'compoundVariants') {
+        if (recipeValue === undefined) {
+          return srcValue
+        }
+        if (isArray(recipeValue) && isArray(srcValue)) {
+          return [...recipeValue, ...srcValue]
+        }
+        return recipeValue
+      }
+      if (isArray(recipeValue)) {
+        return srcValue
+      }
+    },
+  )
 }

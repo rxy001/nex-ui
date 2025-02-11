@@ -1,6 +1,6 @@
-import { merge } from '@nex-ui/utils'
+import { isPlainObject } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
-import { memoizeFn } from '../utils'
+import { memoizeFn, mergeRecipe } from '../utils'
 import type {
   RecipeConfig,
   BaseVariantGroups,
@@ -23,9 +23,10 @@ function defineRecipeImpl<
 
   if (
     (extendOrConfig as E)?.__recipe === true &&
-    (extendOrConfig as E)?.__config
+    (extendOrConfig as E)?.__config &&
+    isPlainObject(maybeConfig)
   ) {
-    config = merge({}, (extendOrConfig as E).__config, config)
+    config = mergeRecipe((extendOrConfig as E).__config, config)
   }
 
   const { base, ...other } = config

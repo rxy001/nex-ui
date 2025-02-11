@@ -1,6 +1,25 @@
 import { forEach, merge, isArray } from '@nex-ui/utils'
 import { memoizeFn } from '../utils'
 
+function shouldApplyCompound(compoundCheck: any, selections: any) {
+  for (const key in compoundCheck) {
+    if (Object.prototype.hasOwnProperty.call(compoundCheck, key)) {
+      const variantValue = selections[key]
+      if (
+        !(
+          (isArray(compoundCheck[key]) &&
+            compoundCheck[key]?.includes(variantValue)) ||
+          compoundCheck[key] === variantValue
+        )
+      ) {
+        return false
+      }
+    }
+  }
+
+  return true
+}
+
 export function createRuntimeFn(options?: any) {
   const {
     mainStyles,
@@ -8,25 +27,6 @@ export function createRuntimeFn(options?: any) {
     compoundVariants = [],
     defaultVariants = {},
   } = options ?? {}
-
-  function shouldApplyCompound(compoundCheck: any, selections: any) {
-    for (const key in compoundCheck) {
-      if (Object.prototype.hasOwnProperty.call(compoundCheck, key)) {
-        const variantValue = selections[key] ?? defaultVariants?.[key]
-        if (
-          !(
-            (isArray(compoundCheck[key]) &&
-              compoundCheck[key]?.includes(variantValue)) ||
-            compoundCheck[key] === variantValue
-          )
-        ) {
-          return false
-        }
-      }
-    }
-
-    return true
-  }
 
   function splitVariantProps(props: any) {
     const variantKeys = Object.keys(variants)
