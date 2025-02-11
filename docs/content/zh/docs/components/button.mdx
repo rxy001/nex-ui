@@ -1,1 +1,190 @@
+import { Button } from '@nex-ui/react'
+import { button } from '@/content/_demo'
+
 # Button
+
+按钮使用户能够通过一次点击执行操作并做出选择。
+
+<ComponentLinks component="button" />
+
+---
+
+## 使用
+
+<Example {...button.useage} />
+
+### Disabled
+
+<Example {...button.disabled} />
+
+### Sizes
+
+<Example {...button.sizes} />
+
+### FullWidth
+
+<Example {...button.fullWidth} />
+
+### Radius
+
+<Example {...button.radius} />
+
+### Colors
+
+<Example {...button.colors} />
+
+### Variants
+
+<Example {...button.variants} />
+
+### Loading
+
+添加 `loading` 属性，可在按钮内部显示一个加载指示器组件。
+
+<Example {...button.loading} />
+
+### With Icons
+
+通过设置 `startIcon` 或 `endIcon` 属性，向按钮添加图标。
+
+<Example {...button.withIcons} />
+
+### Icon Only
+
+添加 `IconOnly` 属性，可显示一个仅图标而无文本的按钮。
+
+<Example {...button.iconOnly} />
+
+## API
+
+### ButtonProps
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '',
+      description: '按钮的内容',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'rose'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: '按钮的颜色，支持自定义主题的颜色',
+    },
+    {
+      prop: 'variants',
+      type: ["'filled", "'outlined'", "'text'", "'link'"],
+      default: "'filled'",
+      description: '按钮外观样式',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: '按钮的大小',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'full'"],
+      default: 'size',
+      description: '按钮的 BorderRadius',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: '按钮是否禁用',
+    },
+    {
+      prop: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description: '按钮是否处于加载状态',
+    },
+    {
+      prop: 'fullWidth',
+      type: 'boolean',
+      default: 'false',
+      description: '按钮是否应占据其父元素的全部宽度',
+    },
+    {
+      prop: 'iconOnly',
+      type: 'boolean',
+      default: 'false',
+      description: '按钮是否应具有相同的宽度和高度',
+    },
+    {
+      prop: 'startIcon',
+      type: 'node',
+      default: null,
+      description: '放置在子元素之前的元素',
+    },
+    {
+      prop: 'endIcon',
+      type: 'node',
+      default: null,
+      description: '放置在子元素之后的元素',
+    },
+    {
+      prop: 'href',
+      type: 'string',
+      default: null,
+      description: '点击跳转的地址，指定此属性 button 的行为和 a 链接一致',
+    },
+    {
+      prop: 'target',
+      type: 'string',
+      default: null,
+      description: '相当于 a 链接的 target 属性，href 存在时生效',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: null,
+      description:
+        '用于根节点的组件。可以是表示 HTML 元素的字符串，也可以是一个组件',
+    },
+    {
+      prop: 'sx',
+      type: [
+        'StyleObject',
+        'StyleObject[]',
+        '(ownerState: OwnerState) => StyleObject | StyleObject[])',
+      ],
+    },
+    {
+      prop: 'classes',
+      type: 'Record<Slots, ClassName | ((ownerState: OwnerState) => ClassName)>',
+      description: '组件 slots 的 class',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Record<Slots, ComponentPropsWithRef>',
+      description: '组件 slots 的 class',
+    },
+  ]}
+/>
+
+### Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'root',
+      class: '.nui-btn-root',
+      component: "'button'",
+    },
+  ]}
+/>
