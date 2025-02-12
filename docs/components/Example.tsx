@@ -30,7 +30,7 @@ export const Example = ({
     <Tabs items={['Preview', 'Code']} className="x:border-none!">
       <Tabs.Tab
         key="preview"
-        className="x:rounded-md x:border-1 x:py-6 x:px-4 x:border-gray-200"
+        className="x:rounded-md x:border-1 x:py-6 x:px-4 x:border-gray-200 x:dark:border-gray-800 x:overflow-auto"
       >
         {demo}
       </Tabs.Tab>

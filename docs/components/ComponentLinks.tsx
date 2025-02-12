@@ -9,13 +9,24 @@ type ComponentLinksProps = {
   component: string
 }
 const sx = {
-  bg: '#f4f4f5',
-  color: 'gray.800',
+  transition: 'opacity,1s',
+  bg: {
+    _DEFAULT: '#f4f4f5',
+    _dark: '#18181b',
+  },
+  color: {
+    _DEFAULT: 'gray.800',
+    _dark: '#fff',
+  },
   '& svg': {
     fontSize: 20,
   },
   _hover: {
-    bg: '#f0f0f0',
+    bg: {
+      _DEFAULT: '#f0f0f0',
+      _dark: '#18181b',
+    },
+    opacity: '.8',
   },
 }
 
@@ -43,7 +54,7 @@ export const ComponentLinks = ({
   rscCompatible = false,
 }: ComponentLinksProps) => {
   return (
-    <div className="x:mt-6 x:flex x:flex-row x:gap-7">
+    <div className="x:mt-6 x:flex x:flex-row x:gap-4 x:flex-wrap x:md:gap-7">
       <ButtonLink startIcon={<StorybookIcon color="#ff4785" />}>
         Storybook
       </ButtonLink>

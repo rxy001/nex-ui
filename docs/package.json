@@ -14,6 +14,7 @@
   ],
   "dependencies": {
     "@codesandbox/sandpack-react": "2.19.11",
+    "@emotion/cache": "11.13.1",
     "@emotion/react": "11.13.5",
     "@headlessui/react": "2.2.0",
     "@nex-ui/hooks": "workspace:*",

@@ -1,4 +1,4 @@
-import { Search, SkipNavLink } from 'nextra/components'
+import { Search } from 'nextra/components'
 import { NexUIProvider } from '@nex-ui/react'
 import { element, stringOrElement } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
@@ -86,7 +86,6 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   return (
     <NexUIProvider colorSchemeSelector="class">
       <ThemeConfigProvider value={rest}>
-        <SkipNavLink />
         {banner}
         <ConfigProvider pageMap={pageMap} navbar={navbar}>
           {/*

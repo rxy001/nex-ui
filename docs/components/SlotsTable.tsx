@@ -33,7 +33,7 @@ export const SlotsTable = ({ dataSource = [] }: SlotsTableProps) => {
       <Tbody>
         {dataSource.map((data) => (
           <Tr key={data.slot}>
-            <Td className="x:text-blue-600 x:font-bold x:w-[20%]">
+            <Td className="x:text-blue-600 x:font-bold x:w-[15%] x:dark:text-blue-400">
               {data.slot}
             </Td>
             <Td>

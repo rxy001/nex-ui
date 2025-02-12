@@ -127,15 +127,27 @@ import { button } from '@/content/_demo'
     },
     {
       prop: 'startIcon',
-      type: 'node',
+      type: 'ReactNode',
       default: null,
       description: '放置在子元素之前的元素',
     },
     {
       prop: 'endIcon',
-      type: 'node',
+      type: 'ReactNode',
       default: null,
       description: '放置在子元素之后的元素',
+    },
+    {
+      prop: 'spinner',
+      type: 'ReactNode',
+      default: null,
+      description: '加载状态时的加载指示器',
+    },
+    {
+      prop: 'spinnerPlacement',
+      type: ["'start'", "'end'"],
+      default: "'start'",
+      description: '加载指示器的位置',
     },
     {
       prop: 'href',
@@ -166,13 +178,13 @@ import { button } from '@/content/_demo'
     },
     {
       prop: 'classes',
-      type: 'Record<Slots, ClassName | ((ownerState: OwnerState) => ClassName)>',
-      description: '组件 slots 的 class',
+      type: 'Record<Slots, string | string[]>',
+      description: '按钮 slots 的 class',
     },
     {
       prop: 'slotProps',
       type: 'Record<Slots, ComponentPropsWithRef>',
-      description: '组件 slots 的 class',
+      description: '按钮 slots 的 props',
     },
   ]}
 />
@@ -182,9 +194,16 @@ import { button } from '@/content/_demo'
 <SlotsTable
   dataSource={[
     {
-      slot: 'root',
-      class: '.nui-btn-root',
-      component: "'button'",
+      slot: 'startIcon',
+      class: '.nui-btn-start-icon',
+      component: "'span'",
+      description: '按钮子元素之前图标的容器',
+    },
+    {
+      slot: 'endIcon',
+      class: '.nui-btn-end-icon',
+      component: "'span'",
+      description: '按钮子元素之后图标的容器',
     },
   ]}
 />

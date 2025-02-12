@@ -34,7 +34,7 @@ export const PropsTable = ({ dataSource = [] }: PropsTableProps) => {
       <Tbody>
         {dataSource.map((data) => (
           <Tr key={data.prop}>
-            <Td className="x:text-blue-600 x:font-bold x:w-[15%]">
+            <Td className="x:text-blue-600 x:dark:text-blue-400 x:font-bold x:w-[15%]">
               {data.prop}
             </Td>
             <Td>

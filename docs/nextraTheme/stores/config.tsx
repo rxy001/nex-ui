@@ -33,7 +33,9 @@ export const ConfigProvider: FC<{
     list: pageMap,
     route: pathname,
   })
+
   const { activeThemeContext } = normalizedPages
+
   return (
     <ConfigContext.Provider value={normalizedPages}>
       {activeThemeContext.navbar && navbar}
