@@ -14,4 +14,4 @@ export const sizeVariant = {
     fs: 'xl',
     h: '12',
   },
-}
+} as const

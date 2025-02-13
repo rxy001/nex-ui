@@ -1,5 +1,4 @@
 import type * as CSS from 'csstype'
-import type { Keyframes } from '@emotion/react'
 
 export type Dictionary<T = any> = Record<string, T>
 
@@ -10,7 +9,6 @@ export type CSSInterpolation =
   | number
   | string
   | StyleObject
-  | Keyframes
 
 export type CSSProperties = CSS.Properties<number | (string & {})>
 

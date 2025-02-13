@@ -1,4 +1,4 @@
-import type { CSSInterpolation, CSSProperties } from '@nex-ui/system'
+import type { StyleObject, CSSProperties } from '@nex-ui/system'
 import type { Tokens } from './tokens'
 import type { SemanticTokens } from './semanticTokens'
 import type { Breakpoints } from './breakpoints'
@@ -24,11 +24,6 @@ type VirtualColors =
   | TransformColors<SemanticTokens['colors']>
 
 export interface NexCSSProperties extends CSSProperties {
-  _hover?: CSSInterpolation
-  _active?: CSSInterpolation
-  _focus?: CSSInterpolation
-  _focusWithin?: CSSInterpolation
-  _disabled?: CSSInterpolation
   color?:
     | CSSProperties['color']
     | Tokens['colors']
@@ -161,4 +156,13 @@ type ExtraCSSPropertyValue<T> = {
     | BreakpointObject<T[K]>
 }
 
-export type StyleObjectOverrides = ExtraCSSPropertyValue<NexCSSProperties>
+type Selectors = {
+  _hover?: StyleObject
+  _active?: StyleObject
+  _focus?: StyleObject
+  _focusWithin?: StyleObject
+  _disabled?: StyleObject
+}
+
+export type StyleObjectOverrides = ExtraCSSPropertyValue<NexCSSProperties> &
+  Selectors

@@ -26,4 +26,4 @@ export const colorVariant = {
   rose: {
     colorPalette: 'rose',
   },
-}
+} as const

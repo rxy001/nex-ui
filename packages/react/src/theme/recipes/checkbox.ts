@@ -12,7 +12,7 @@ export const checkboxRecipe = defineSlotRecipe({
       h: '10',
       p: '2',
       cursor: 'pointer',
-      '&:hover span:first-of-type::before': {
+      ':hover span:first-of-type::before': {
         borderColor: 'colorPalette.filled.hover',
       },
     },
@@ -39,7 +39,7 @@ export const checkboxRecipe = defineSlotRecipe({
       position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
-      '&::before': {
+      '::before': {
         content: '""',
         position: 'absolute',
         inset: 0,
@@ -47,7 +47,7 @@ export const checkboxRecipe = defineSlotRecipe({
         borderColor: 'gray.200',
         transition: 'colors',
       },
-      '&::after': {
+      '::after': {
         content: '""',
         position: 'absolute',
         inset: 0,
@@ -64,7 +64,7 @@ export const checkboxRecipe = defineSlotRecipe({
           opacity: 1,
         },
         iconContainer: {
-          '&::after': {
+          '::after': {
             opacity: 1,
           },
         },
@@ -103,40 +103,40 @@ export const checkboxRecipe = defineSlotRecipe({
       none: {},
       sm: {
         iconContainer: {
-          '&::before': {
+          '::before': {
             borderRadius: '4px',
           },
-          '&::after': {
+          '::after': {
             borderRadius: '4px',
           },
         },
       },
       md: {
         iconContainer: {
-          '&::before': {
+          '::before': {
             borderRadius: '6px',
           },
-          '&::after': {
+          '::after': {
             borderRadius: '6px',
           },
         },
       },
       lg: {
         iconContainer: {
-          '&::before': {
+          '::before': {
             borderRadius: '8px',
           },
-          '&::after': {
+          '::after': {
             borderRadius: '8px',
           },
         },
       },
       full: {
         iconContainer: {
-          '&::before': {
+          '::before': {
             borderRadius: 'full',
           },
-          '&::after': {
+          '::after': {
             borderRadius: 'full',
           },
         },

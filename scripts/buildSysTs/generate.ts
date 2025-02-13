@@ -202,7 +202,7 @@ export async function generateCSSProperties(sys: any) {
   }
 
   const result = `
-  import type { CSSInterpolation, CSSProperties } from '@nex-ui/system'
+  import type { StyleObject, CSSProperties } from '@nex-ui/system'
   import type { Tokens } from './tokens'
   import type { SemanticTokens } from './semanticTokens'
   import type { Breakpoints } from './breakpoints'
@@ -227,11 +227,6 @@ export async function generateCSSProperties(sys: any) {
   type VirtualColors = TransformColors<Tokens['colors']> | TransformColors<SemanticTokens['colors']> 
 
   export interface NexCSSProperties extends CSSProperties {
-    ${selectorKeys
-      .map((key) => {
-        return `_${key}?: CSSInterpolation`
-      })
-      .join('\n')}
     ${scaleKeys
       .map((key) => {
         const category = sys.scales[key]
@@ -260,7 +255,15 @@ export async function generateCSSProperties(sys: any) {
       | BreakpointObject<T[K]>
   }
 
-  export type StyleObjectOverrides = ExtraCSSPropertyValue<NexCSSProperties>
+  type Selectors = {
+    ${selectorKeys
+      .map((key) => {
+        return `_${key}?: StyleObject`
+      })
+      .join('\n')}
+  }
+
+  export type StyleObjectOverrides = ExtraCSSPropertyValue<NexCSSProperties> & Selectors
 
   `
 
