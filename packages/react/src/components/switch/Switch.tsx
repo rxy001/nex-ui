@@ -11,7 +11,7 @@ import {
   resolveSxProps,
   useDefaultProps,
   useSlotProps,
-  useStyles,
+  useSlotStyles,
   composeClasses,
   getUtilityClass,
 } from '../utils'
@@ -98,7 +98,7 @@ export const Switch = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const styles = useStyles({
+    const styles = useSlotStyles({
       name: 'Switch',
       ownerState,
     })

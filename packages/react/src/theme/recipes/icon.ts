@@ -1,5 +1,6 @@
 import { keyframes } from '@emotion/react'
 import { defineRecipe } from '@nex-ui/system'
+import type { RecipeVariants } from '@nex-ui/system'
 
 const circle = keyframes({
   '0%': { transform: 'rotate(0deg)' },
@@ -32,3 +33,6 @@ export const iconRecipe = defineRecipe({
     },
   },
 })
+
+export type IconRecipe = typeof iconRecipe
+export type IconVariants = RecipeVariants<IconRecipe>

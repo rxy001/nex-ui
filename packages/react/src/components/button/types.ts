@@ -4,7 +4,7 @@ import type {
   AnchorHTMLAttributes,
   ComponentPropsWithRef,
 } from 'react'
-import type { ButtonVariants } from '../../theme/recipes'
+import type { ButtonVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,

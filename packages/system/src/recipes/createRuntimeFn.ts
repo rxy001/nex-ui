@@ -46,7 +46,7 @@ export function createRuntimeFn(options?: any) {
 
     const selections = {
       ...defaultVariants,
-      ...splitVariantProps(variantsProps),
+      ...variantsProps,
     }
 
     forEach(selections, (variantSelection: any, variantName: any) => {
@@ -75,5 +75,9 @@ export function createRuntimeFn(options?: any) {
     return mergedStyles
   }
 
-  return memoizeFn(runtimeFn)
+  const memoized = memoizeFn(runtimeFn)
+
+  // @ts-ignore
+  memoized.splitVariantProps = splitVariantProps
+  return memoized
 }

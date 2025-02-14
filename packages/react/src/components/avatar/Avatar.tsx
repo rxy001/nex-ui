@@ -5,7 +5,7 @@ import { nex } from '@nex-ui/styled'
 import type { ElementType, ReactNode, Ref } from 'react'
 import {
   useDefaultProps,
-  useStyles,
+  useSlotStyles,
   composeClasses,
   getUtilityClass,
   forwardRef,
@@ -15,7 +15,9 @@ import {
 import { useNexContext } from '../provider'
 import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
 
-const useSlotClasses = (ownerState: AvatarOwnerState) => {
+const useSlotClasses = <RootComponent extends ElementType = 'div'>(
+  ownerState: AvatarOwnerState<RootComponent>,
+) => {
   const { prefix } = useNexContext()
 
   const avatarRoot = `${prefix}-avatar`
@@ -109,7 +111,7 @@ export const Avatar = forwardRef(
       color,
     }
 
-    const styles = useStyles({
+    const styles = useSlotStyles({
       name: 'Avatar',
       ownerState,
     })

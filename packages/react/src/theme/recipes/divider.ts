@@ -1,4 +1,5 @@
 import { defineRecipe } from '@nex-ui/system'
+import type { RecipeVariants } from '@nex-ui/system'
 
 export const dividerRecipe = defineRecipe({
   base: {
@@ -23,3 +24,6 @@ export const dividerRecipe = defineRecipe({
     orientation: 'horizontal',
   },
 })
+
+export type DividerRecipe = typeof dividerRecipe
+export type DividerVariants = RecipeVariants<DividerRecipe>

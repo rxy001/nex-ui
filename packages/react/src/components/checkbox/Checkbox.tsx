@@ -11,7 +11,7 @@ import { useCheckboxGroupContext } from './CheckboxGroupContext'
 import {
   forwardRef,
   useDefaultProps,
-  useStyles,
+  useSlotStyles,
   composeClasses,
   getUtilityClass,
   useSlotProps,
@@ -126,7 +126,7 @@ export const Checkbox = forwardRef(
       onChangeProp?.(e)
     })
 
-    const styles = useStyles({
+    const styles = useSlotStyles({
       name: 'Checkbox',
       ownerState,
     })

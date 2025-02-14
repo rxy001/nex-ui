@@ -1,13 +1,11 @@
+import type { DividerRecipe, FlexRecipe, IconRecipe } from '../theme/recipes'
 import type {
   AvatarRecipe,
   ButtonRecipe,
-  DividerRecipe,
-  FlexRecipe,
-  IconRecipe,
   InputTextRecipe,
   CheckboxRecipe,
   SwitchRecipe,
-} from '../theme/recipes'
+} from '../theme/slotRecipes'
 import type {
   ButtonProps,
   ButtonOwnerState,
@@ -27,9 +25,9 @@ import type {
   SwitchOwnerState,
 } from '../components'
 import type { InnerIconProps } from '../components/icon/types'
-import type { ComponentThemeFn, ComponentThemeObject } from './utils'
+import type { ComponentThemeObject, ComponentThemeFn } from './utils'
 
-export type ComponentsTheme = {
+export type ComponentThemes = {
   Box?: {
     defaultProps?: BoxProps
   }
@@ -83,4 +81,4 @@ export type ComponentsTheme = {
   }
 }
 
-export type ComponentNames = keyof ComponentsTheme
+export type ComponentNames = keyof ComponentThemes

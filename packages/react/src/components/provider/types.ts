@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import type { CssFn, ColorSchemeProviderProps } from '@nex-ui/system'
-import type { ComponentsTheme } from '../../types/componentsTheme'
+import type { ComponentThemes } from '../../types/componentThemes'
 import type { Theme } from '../../types/theme'
-import type { colorVariant } from '../../theme/recipes/shared/colorVariant'
+import type { colorVariant } from '../../theme/shared/colorVariant'
 
 type Colors = keyof typeof colorVariant
 
@@ -10,7 +10,7 @@ export type InnerProviderProps = {
   prefix: string
   primaryColor: Colors
   children?: ReactNode
-  components?: ComponentsTheme
+  components?: ComponentThemes
 }
 
 export interface NexProviderProps extends ColorSchemeProviderProps {
@@ -24,5 +24,5 @@ export type NexContext = {
   css: CssFn
   prefix: string
   primaryColor: Colors
-  components?: ComponentsTheme
+  components?: ComponentThemes
 }

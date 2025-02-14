@@ -25,6 +25,7 @@ type VariantSelection<V extends BaseVariantGroups | SlotVariantGroups> = {
 
 interface RuntimeFn<V extends Record<string, any>, R> {
   (variants?: VariantSelection<V>): R
+  splitVariantProps: (props: Record<string, any>) => VariantSelection<V>
 }
 
 export type CombineVariants<

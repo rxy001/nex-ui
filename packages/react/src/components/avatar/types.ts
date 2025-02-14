@@ -1,5 +1,5 @@
 import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react'
-import type { AvatarVariants } from '../../theme/recipes'
+import type { AvatarVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,

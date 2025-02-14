@@ -66,7 +66,7 @@ export const Flex = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const style = useStyles({ name: 'Flex', ownerState })
+    const styles = useStyles({ name: 'Flex', ownerState })
 
     const composedSx = {
       gap,
@@ -74,7 +74,7 @@ export const Flex = forwardRef(
       alignItems: align,
       justifyContent: justify,
       flexWrap: wrap,
-      ...style,
+      ...styles,
     }
 
     const rootProps = useSlotProps({

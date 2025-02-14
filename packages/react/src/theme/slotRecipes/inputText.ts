@@ -1,11 +1,12 @@
 import { defineSlotRecipe } from '@nex-ui/system'
+import type { RecipeVariants } from '@nex-ui/system'
 import {
   colorVariant,
   fullWidth,
   radiusVariant,
   toSlot,
   sizeVariant,
-} from './shared'
+} from '../shared'
 
 export const inputTextRecipe = defineSlotRecipe({
   slots: {
@@ -146,3 +147,6 @@ export const inputTextRecipe = defineSlotRecipe({
     fullWidth: false,
   },
 })
+
+export type InputTextRecipe = typeof inputTextRecipe
+export type InputTextVariants = RecipeVariants<InputTextRecipe>

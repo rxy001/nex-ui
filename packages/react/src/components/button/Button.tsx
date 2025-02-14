@@ -6,17 +6,19 @@ import { nex } from '@nex-ui/styled'
 import type { Ref, MouseEvent, ElementType } from 'react'
 import { useNexContext } from '../provider'
 import {
-  useStyles,
   useDefaultProps,
   composeClasses,
   getUtilityClass,
   forwardRef,
   useSlotProps,
+  useSlotStyles,
   resolveSxProps,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
 
-const useSlotClasses = (ownerState: ButtonOwnerState) => {
+const useSlotClasses = <RootComponent extends ElementType = 'button'>(
+  ownerState: ButtonOwnerState<RootComponent>,
+) => {
   const { prefix } = useNexContext()
 
   const btnRoot = `${prefix}-btn`
@@ -69,6 +71,7 @@ export const Button = forwardRef(
     ref: Ref<HTMLButtonElement>,
   ) => {
     const { primaryColor } = useNexContext()
+
     const props = useDefaultProps<ButtonProps>({
       name: 'Button',
       props: inProps,
@@ -82,6 +85,7 @@ export const Button = forwardRef(
       className,
       spinner,
       href,
+      color = primaryColor,
       spinnerPlacement = 'start',
       variant = 'filled',
       size = 'md',
@@ -90,7 +94,6 @@ export const Button = forwardRef(
       loading = false,
       disabled = false,
       fullWidth = false,
-      color = primaryColor,
       startIcon: startIconProp,
       endIcon: endIconProp,
       onClick: onClickProp,
@@ -114,7 +117,7 @@ export const Button = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const styles = useStyles({
+    const styles = useSlotStyles({
       ownerState,
       name: 'Button',
     })

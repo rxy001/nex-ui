@@ -8,12 +8,12 @@ import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
 import { useNexContext } from '../provider'
 import {
-  useStyles,
   useDefaultProps,
   composeClasses,
   getUtilityClass,
   forwardRef,
   useSlotProps,
+  useSlotStyles,
   resolveSxProps,
 } from '../utils'
 import type { InputTextOwnerState, InputTextProps } from './types'
@@ -107,7 +107,7 @@ export const InputText = forwardRef(
       error,
     }
 
-    const styles = useStyles({
+    const styles = useSlotStyles({
       ownerState,
       name: 'InputText',
     })
@@ -137,7 +137,7 @@ export const InputText = forwardRef(
       externalForwardedProps: {
         className,
       },
-      sx: [styles.root, resolveSxProps(sx)],
+      sx: [styles.root, resolveSxProps(sx, ownerState)],
       classNames: classes.root,
     })
 

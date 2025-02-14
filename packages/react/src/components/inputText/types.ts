@@ -1,5 +1,5 @@
 import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
-import type { InputTextVariants } from '../../theme/recipes'
+import type { InputTextVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
   Overwrite,

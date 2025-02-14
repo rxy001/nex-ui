@@ -1,6 +1,6 @@
 import { isPlainObject } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
-import { memoizeFn, mergeRecipe } from '../utils'
+import { mergeRecipe } from '../utils'
 import type {
   SlotGroups,
   SlotRecipeConfig,
@@ -10,11 +10,11 @@ import type {
   CombineSlots,
 } from './types'
 
-function defineSlotRecipeImpl<
+export function defineSlotRecipe<
   S extends SlotGroups,
   V extends SlotVariantGroups<S>,
 >(config: SlotRecipeConfig<S, undefined, V>): SlotRecipeRuntimeFn<S, V>
-function defineSlotRecipeImpl<
+export function defineSlotRecipe<
   S extends SlotGroups,
   E extends SlotRecipeRuntimeFn,
   V extends SlotVariantGroups<CombineSlots<S, E>>,
@@ -22,7 +22,7 @@ function defineSlotRecipeImpl<
   extend: E,
   config: SlotRecipeConfig<S, E, V>,
 ): SlotRecipeRuntimeFn<CombineSlots<S, E>, CombineVariants<V, E>>
-function defineSlotRecipeImpl<
+export function defineSlotRecipe<
   S extends SlotGroups,
   E extends SlotRecipeRuntimeFn,
   V extends SlotVariantGroups<CombineSlots<S, E>>,
@@ -54,5 +54,3 @@ function defineSlotRecipeImpl<
 
   return runtimeFn
 }
-
-export const defineSlotRecipe = memoizeFn(defineSlotRecipeImpl)

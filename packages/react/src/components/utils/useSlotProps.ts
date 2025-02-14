@@ -11,7 +11,7 @@ type UseSlotPropsArgs<SlotProps, ForwardedProps> = {
 
 type UseSlotPropsResult<SlotProps, ForwardedProps> = Omit<
   SlotProps & ForwardedProps,
-  'sx' | 'className'
+  'sx'
 > & {
   className?: string
   sx?: StyleObject | StyleObject[]

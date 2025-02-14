@@ -4,7 +4,7 @@ export * from './components'
 export * from './theme'
 
 export type { Theme } from './types/theme'
-export type { ComponentsTheme } from './types/componentsTheme'
+export type { ComponentThemes } from './types/componentThemes'
 
 export * from '@nex-ui/styled'
 

@@ -1,5 +1,6 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, toSlot } from './shared'
+import type { RecipeVariants } from '@nex-ui/system'
+import { colorVariant, toSlot } from '../shared'
 
 export const checkboxRecipe = defineSlotRecipe({
   slots: {
@@ -158,3 +159,6 @@ export const checkboxRecipe = defineSlotRecipe({
     radius: 'md',
   },
 })
+
+export type CheckboxRecipe = typeof checkboxRecipe
+export type CheckboxVariants = RecipeVariants<CheckboxRecipe>

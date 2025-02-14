@@ -1,5 +1,5 @@
 import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
-import type { CheckboxVariants } from '../../theme/recipes'
+import type { CheckboxVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
   Overwrite,

@@ -51,12 +51,15 @@ export const Divider = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const style = useStyles({ name: 'Divider', ownerState })
+    const styles = useStyles({
+      name: 'Divider',
+      ownerState,
+    })
 
     const rootProps = useSlotProps({
       externalSlotProps: remainingProps,
       externalForwardedProps: { ref, className },
-      sx: [style, resolveSxProps(sx, ownerState)],
+      sx: [styles, resolveSxProps(sx, ownerState)],
       classNames: classes.root,
     })
 

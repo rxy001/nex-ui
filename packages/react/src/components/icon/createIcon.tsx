@@ -76,7 +76,7 @@ export const createIcon = (
         component: svgComponent,
       }
 
-      const style = useStyles({
+      const styles = useStyles({
         ownerState,
         name: 'Icon',
       })
@@ -88,7 +88,7 @@ export const createIcon = (
         width,
         height,
         fs: fontSize,
-        ...style,
+        ...styles,
       }
 
       const rootIcon = useSlotProps({

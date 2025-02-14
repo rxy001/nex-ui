@@ -1,5 +1,6 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { toSlot, radiusVariant, colorVariant } from './shared'
+import type { RecipeVariants } from '@nex-ui/system'
+import { toSlot, radiusVariant, colorVariant } from '../shared'
 
 export const avatarRecipe = defineSlotRecipe({
   slots: {
@@ -62,3 +63,6 @@ export const avatarRecipe = defineSlotRecipe({
     color: 'gray',
   },
 })
+
+export type AvatarRecipe = typeof avatarRecipe
+export type AvatarVariants = RecipeVariants<AvatarRecipe>

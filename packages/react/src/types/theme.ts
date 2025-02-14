@@ -37,14 +37,14 @@ import type {
   TransitionsToken,
 } from './generated/tokens'
 import type { Selectors } from './generated/selectors'
-import type { ComponentsTheme } from './componentsTheme'
+import type { ComponentThemes } from './componentThemes'
 
 export type Theme = {
   aliases?: AliasesDefinition & Aliases
   scales?: ScalesDefinition & Scales
   breakpoints?: BreakpointsDefinition & Breakpoints
   selectors?: SelectorsDefinition & Selectors
-  components?: ComponentsTheme
+  components?: ComponentThemes
   semanticTokens?: SemanticTokensDefinition
   tokens?: {
     borders?: BordersDefinition & BordersToken

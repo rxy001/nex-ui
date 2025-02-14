@@ -1,6 +1,6 @@
 import { isPlainObject } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
-import { memoizeFn, mergeRecipe } from '../utils'
+import { mergeRecipe } from '../utils'
 import type {
   RecipeConfig,
   BaseVariantGroups,
@@ -8,14 +8,14 @@ import type {
   CombineVariants,
 } from './types'
 
-function defineRecipeImpl<V extends BaseVariantGroups>(
+export function defineRecipe<V extends BaseVariantGroups>(
   config: RecipeConfig<V>,
 ): RecipeRuntimeFn<V>
-function defineRecipeImpl<
+export function defineRecipe<
   V extends BaseVariantGroups,
   E extends RecipeRuntimeFn,
 >(extend: E, config: RecipeConfig<V, E>): RecipeRuntimeFn<CombineVariants<V, E>>
-function defineRecipeImpl<
+export function defineRecipe<
   V extends BaseVariantGroups,
   E extends RecipeRuntimeFn,
 >(extendOrConfig: E | RecipeConfig<V>, maybeConfig?: RecipeConfig<V, E>) {
@@ -41,5 +41,3 @@ function defineRecipeImpl<
 
   return runtimeFn
 }
-
-export const defineRecipe = memoizeFn(defineRecipeImpl)

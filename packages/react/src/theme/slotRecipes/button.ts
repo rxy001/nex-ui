@@ -1,11 +1,12 @@
 import { defineSlotRecipe } from '@nex-ui/system'
+import type { RecipeVariants } from '@nex-ui/system'
 import {
   colorVariant,
   radiusVariant,
   toSlot,
   fullWidth,
   sizeVariant,
-} from './shared'
+} from '../shared'
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
@@ -175,3 +176,6 @@ export const buttonRecipe = defineSlotRecipe({
     radius: 'md',
   },
 })
+
+export type ButtonRecipe = typeof buttonRecipe
+export type ButtonVariants = RecipeVariants<ButtonRecipe>

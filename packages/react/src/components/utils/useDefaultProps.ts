@@ -1,13 +1,13 @@
 import { useMemo } from 'react'
 import { useNexContext } from '../provider/Context'
-import type { ComponentNames } from '../../types/componentsTheme'
+import type { ComponentNames } from '../../types/componentThemes'
 
-type Config = {
+type useDefaultPropsArgs = {
   name: ComponentNames
   props: Record<string, any>
 }
 
-export const useDefaultProps = <T>({ name, props }: Config): T => {
+export const useDefaultProps = <T>({ name, props }: useDefaultPropsArgs): T => {
   const { components = {} } = useNexContext()
 
   return useMemo(
