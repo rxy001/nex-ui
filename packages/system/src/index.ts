@@ -1,5 +1,3 @@
-export * from '@emotion/react'
-
 export { SystemProvider, useSystem } from './SystemProvider'
 export type { SystemContext } from './SystemProvider'
 
@@ -75,4 +73,5 @@ export type {
   SemanticBorderWidthsDefinition,
   SemanticTransitionsDefinition,
   SemanticZIndexesDefinition,
+  TokenCategories,
 } from './tokens'

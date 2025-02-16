@@ -1,4 +1,4 @@
-import { walkObject, filter } from 'packages/utils/src'
+import { walkObject } from 'packages/utils/src'
 import { isResponsiveColor } from 'packages/system/src/tokens/createTokens'
 import { pretty } from '../utils'
 
@@ -19,7 +19,16 @@ export async function generateSemanticTokens(sys: any) {
   const tokenCategories = Object.keys(sys.semanticTokens)
 
   const result = `
-      export interface SemanticTokens {
+      import type { UniteTokens } from '../utils'
+
+      export interface SemanticTokensOverrides {}
+
+      export type SemanticTokens = UniteTokens<
+        DefaultSemanticTokens,
+        SemanticTokensOverrides
+      >
+
+      export interface DefaultSemanticTokens {
        ${tokenCategories
          .map((tokenCategory) => {
            const token = sys.semanticTokens[tokenCategory]
@@ -48,8 +57,13 @@ export async function generateTokens(sys: any) {
 
   let result = `
       import type { CSSProperties } from '@nex-ui/system'
+      import type { UniteTokens } from '../utils'
 
-      export interface Tokens {
+      export interface TokensOverrides {}
+
+      export type Tokens = UniteTokens<DefaultTokens, TokensOverrides>
+
+      export interface DefaultTokens {
         ${tokenCategories
           .map((tokenCategory) => {
             const token = sys.tokens[tokenCategory]
@@ -133,7 +147,13 @@ export async function generateAliases(sys: any) {
   const keys = Object.keys(sys.aliases)
 
   const result = `
-      export interface Aliases {
+      import type { Overwrite } from '../utils'
+      
+      export interface AliasesOverrides {}
+      
+      export type Aliases = Overwrite<DefaultAliases, AliasesOverrides>
+
+      export interface DefaultAliases {
         ${keys
           .map((key) => {
             const value = sys.aliases[key]
@@ -150,7 +170,13 @@ export async function generateScales(sys: any) {
   const keys = Object.keys(sys.scales)
 
   const result = `
-      export interface Scales {
+      import type { Overwrite } from '../utils'
+      
+      export interface ScalesOverrides {}
+      
+      export type Scales = Overwrite<DefaultScales, ScalesOverrides>
+
+      export interface DefaultScales {
         ${keys
           .map((key) => {
             const value = sys.scales[key]
@@ -167,7 +193,13 @@ export async function generateSelectors(sys: any) {
   const keys = Object.keys(sys.selectors)
 
   const result = `
-      export interface Selectors {
+      import type { Overwrite } from '../utils'
+      
+      export interface SelectorsOverrides {}
+      
+      export type Selectors = Overwrite<DefaultSelectors, SelectorsOverrides>
+
+      export interface DefaultSelectors {
         ${keys
           .map((key) => {
             const value = sys.selectors[key]
@@ -180,101 +212,17 @@ export async function generateSelectors(sys: any) {
   return pretty(result)
 }
 
-export async function generateCSSProperties(sys: any) {
-  const { semanticTokens, tokens, scales, selectors, aliases } = sys
-  const scaleKeys = Object.keys(scales)
-  const selectorKeys = Object.keys(selectors)
-  const aliasKeys = Object.keys(aliases)
-
-  function extraType(category: string) {
-    return filter(
-      [
-        tokens[category] && Object.keys(tokens[category]).length
-          ? `Tokens['${category}']`
-          : '',
-        semanticTokens[category] && Object.keys(semanticTokens[category]).length
-          ? `SemanticTokens['${category}']`
-          : '',
-        category === 'colors' ? 'VirtualColors' : '',
-      ],
-      Boolean,
-    )
-  }
-
-  const result = `
-  import type { StyleObject, CSSProperties } from '@nex-ui/system'
-  import type { Tokens } from './tokens'
-  import type { SemanticTokens } from './semanticTokens'
-  import type { Breakpoints } from './breakpoints'
-
-  type ResponsiveColor<T> = {
-    _DEFAULT?: T
-    _dark?: T
-    _light?: T
-  }
-
-  type BreakpointObject<T> = {
-    [K in keyof Breakpoints as \`_\${K}\`]: T
-  }
-
-  type BreakpointArray= (string | number)[] | readonly (string | number)[]
-
-  
-  type TransformColors<T> = T extends \`\${string}.\${infer U}\`
-    ? \`colorPalette.\${U}\`
-    : 'colorPalette'
-
-  type VirtualColors = TransformColors<Tokens['colors']> | TransformColors<SemanticTokens['colors']> 
-
-  export interface NexCSSProperties extends CSSProperties {
-    ${scaleKeys
-      .map((key) => {
-        const category = sys.scales[key]
-        return `${key}?: ${unionType([`CSSProperties['${key}']`, ...extraType(category)])}`
-      })
-      .join('\n')}
-    ${aliasKeys
-      .map((key) => {
-        let value = sys.aliases[key]
-        value = Array.isArray(value) ? value[0] : value
-
-        const category = sys.scales[value]
-        if (category) {
-          return `${key}?: ${unionType([`CSSProperties['${value}']`, ...extraType(category)])}`
-        }
-        return `${key}?: CSSProperties['${value}']}`
-      })
-      .join('\n')}
-    }
-
-  type ExtraCSSPropertyValue<T> = {
-    [K in keyof T]?:
-      | T[K]
-      | BreakpointArray
-      | ResponsiveColor<T[K]>
-      | BreakpointObject<T[K]>
-  }
-
-  type Selectors = {
-    ${selectorKeys
-      .map((key) => {
-        return `_${key}?: StyleObject`
-      })
-      .join('\n')}
-  }
-
-  export type StyleObjectOverrides = ExtraCSSPropertyValue<NexCSSProperties> & Selectors
-
-  `
-
-  return pretty(result)
-}
-
 export async function generateBreakpoints(sys: any) {
   const keys = Object.keys(sys.breakpoints)
 
   const result = `
-      export interface Breakpoints {
+      import type { Overwrite } from '../utils'
+      
+      export interface BreakpointsOverrides {}
+      
+      export type Breakpoints = Overwrite<DefaultBreakpoints, BreakpointsOverrides>
+
+      export interface DefaultBreakpoints {
         ${keys
           .map((key) => {
             return `'${key}'?: string`

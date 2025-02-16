@@ -11,7 +11,7 @@ import {
   DEFAULT_CONTEXT_VALUE,
 } from './Context'
 import { createIcon } from '../icon/createIcon'
-import type { NexProviderProps, InnerProviderProps } from './types'
+import type { NexUIProviderProps, InnerProviderProps } from './types'
 
 function InnerProvider({
   components,
@@ -30,7 +30,7 @@ function InnerProvider({
   )
 }
 
-function TopLevelProvider(props: NexProviderProps) {
+function TopLevelProvider(props: NexUIProviderProps) {
   const {
     theme,
     children,
@@ -70,7 +70,7 @@ function TopLevelProvider(props: NexProviderProps) {
   )
 }
 
-function NestedProvider(props: NexProviderProps) {
+function NestedProvider(props: NexUIProviderProps) {
   const { theme: { components } = {}, children, primaryColor } = props
 
   const ctx = useNexContext()
@@ -90,7 +90,7 @@ function NestedProvider(props: NexProviderProps) {
   )
 }
 
-export function NexUIProvider(props: NexProviderProps) {
+export function NexUIProvider(props: NexUIProviderProps) {
   const outer = useNexContext()
 
   const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE

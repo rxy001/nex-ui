@@ -1,7 +1,7 @@
 import type { CSSProperties } from '@nex-ui/system'
 import type { Tokens } from './generated/tokens'
 import type { SemanticTokens } from './generated/semanticTokens'
-import type { StyleObjectOverrides as NexStyleObjectOverrides } from './generated/cssProperties'
+import type { StyleObjectOverrides as NexStyleObjectOverrides } from './styleObjectOverrides'
 import type { InnerIconProps } from '../components/icon/types'
 
 type ColorPalette =

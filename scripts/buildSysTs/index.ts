@@ -8,7 +8,6 @@ import {
   generateScales,
   generateTokens,
   generateSelectors,
-  generateCSSProperties,
   generateBreakpoints,
   generateSemanticTokens,
 } from './generate'
@@ -146,12 +145,6 @@ async function builder(sys: any) {
       title: 'semanticTokens',
       task: async () => {
         writeFile('semanticTokens', await generateSemanticTokens(sys))
-      },
-    },
-    {
-      title: 'cssProperties',
-      task: async () => {
-        writeFile('cssProperties', await generateCSSProperties(sys))
       },
     },
   ])

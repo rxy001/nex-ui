@@ -1,4 +1,10 @@
-export interface Aliases {
+import type { Overwrite } from '../utils'
+
+export interface AliasesOverrides {}
+
+export type Aliases = Overwrite<DefaultAliases, AliasesOverrides>
+
+export interface DefaultAliases {
   bg?: 'backgroundColor'
   fs?: 'fontSize'
   lh?: 'lineHeight'

@@ -13,7 +13,7 @@ export type InnerProviderProps = {
   components?: ComponentThemes
 }
 
-export interface NexProviderProps extends ColorSchemeProviderProps {
+export interface NexUIProviderProps extends ColorSchemeProviderProps {
   theme?: Theme
   children?: ReactNode
   prefix?: string

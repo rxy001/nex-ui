@@ -7,6 +7,10 @@ import type { ElementType, ComponentPropsWithRef } from 'react'
 
 export type ClassName = string | string[]
 
+export type UniteTokens<T extends {}, U extends {}> = {
+  [K in keyof T]: K extends keyof U ? T[K] | U[K] : T[K]
+}
+
 export type SxProps<OwnerState extends object | void = void> =
   | StyleObject
   | StyleObject[]

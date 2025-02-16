@@ -11,16 +11,16 @@ import type {
   AliasesDefinition,
   ScalesDefinition,
   BreakpointsDefinition,
-  SemanticTokensDefinition,
   SelectorsDefinition,
   ShadowsDefinition,
   ZIndexesDefinition,
   BorderWidthsDefinition,
   TransitionsDefinition,
+  SemanticTokensDefinition,
 } from '@nex-ui/system'
-import type { Aliases } from './generated/aliases'
-import type { Scales } from './generated/scales'
-import type { Breakpoints } from './generated/breakpoints'
+import type { DefaultAliases } from './generated/aliases'
+import type { DefaultScales } from './generated/scales'
+import type { DefaultBreakpoints } from './generated/breakpoints'
 import type {
   FontFamiliesToken,
   ColorsToken,
@@ -36,16 +36,16 @@ import type {
   BorderWidthsToken,
   TransitionsToken,
 } from './generated/tokens'
-import type { Selectors } from './generated/selectors'
+import type { DefaultSelectors } from './generated/selectors'
 import type { ComponentThemes } from './componentThemes'
 
 export type Theme = {
-  aliases?: AliasesDefinition & Aliases
-  scales?: ScalesDefinition & Scales
-  breakpoints?: BreakpointsDefinition & Breakpoints
-  selectors?: SelectorsDefinition & Selectors
-  components?: ComponentThemes
+  aliases?: AliasesDefinition & DefaultAliases
+  scales?: ScalesDefinition & DefaultScales
+  breakpoints?: BreakpointsDefinition & DefaultBreakpoints
+  selectors?: SelectorsDefinition & DefaultSelectors
   semanticTokens?: SemanticTokensDefinition
+  components?: ComponentThemes
   tokens?: {
     borders?: BordersDefinition & BordersToken
     spacing?: SpacingDefinition & SpacingToken

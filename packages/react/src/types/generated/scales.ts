@@ -1,4 +1,10 @@
-export interface Scales {
+import type { Overwrite } from '../utils'
+
+export interface ScalesOverrides {}
+
+export type Scales = Overwrite<DefaultScales, ScalesOverrides>
+
+export interface DefaultScales {
   color?: 'colors'
   borderColor?: 'colors'
   backgroundColor?: 'colors'

@@ -5,7 +5,13 @@ export * from './theme'
 
 export type { Theme } from './types/theme'
 export type { ComponentThemes } from './types/componentThemes'
-
+export type { TokensOverrides } from './types/generated/tokens'
+export type { SemanticTokensOverrides } from './types/generated/semanticTokens'
+export type { AliasesOverrides } from './types/generated/aliases'
+export type { BreakpointsOverrides } from './types/generated/breakpoints'
+export type { SelectorsOverrides } from './types/generated/selectors'
+export type { ScalesOverrides } from './types/generated/scales'
+export type { NexUICSSProperties } from './types/cssProperties'
 export * from '@nex-ui/styled'
 
 export { useColorScheme, defineRecipe, defineSlotRecipe } from '@nex-ui/system'

@@ -1,5 +1,5 @@
 import type { ComponentType, ElementType } from 'react'
-import type { NexCSSProperties } from '../../types/generated/cssProperties'
+import type { NexUICSSProperties } from '../../types/cssProperties'
 import type { IconVariants } from '../../theme/recipes'
 import type { OverrideProps, SxProps } from '../../types/utils'
 
@@ -10,9 +10,9 @@ export type IconOwnProsp<RootComponent extends ElementType> = Omit<
   'fontSize'
 > & {
   className?: string
-  width?: NexCSSProperties['width']
-  height?: NexCSSProperties['height']
-  color?: NexCSSProperties['color']
+  width?: NexUICSSProperties['width']
+  height?: NexUICSSProperties['height']
+  color?: NexUICSSProperties['color']
   fontSize?: IconVariants['fontSize'] | number | (string & {})
   as?: RootComponent
   sx?: SxProps<IconOwnerState<RootComponent>>

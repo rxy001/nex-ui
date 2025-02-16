@@ -1,6 +1,6 @@
 import type { ElementType, ReactNode } from 'react'
 import type { FlexVariants } from '../../theme/recipes'
-import type { NexCSSProperties } from '../../types/generated/cssProperties'
+import type { NexUICSSProperties } from '../../types/cssProperties'
 import type { OverrideProps, SxProps } from '../../types/utils'
 
 export interface FlexPropsOverrides {}
@@ -8,11 +8,11 @@ export interface FlexPropsOverrides {}
 type FlexOwnProps<RootComponent extends ElementType> = {
   children?: ReactNode
   className?: string
-  justify?: NexCSSProperties['justifyContent']
-  align?: NexCSSProperties['alignItems']
-  direction?: NexCSSProperties['flexDirection']
-  wrap?: NexCSSProperties['flexWrap']
-  gap?: NexCSSProperties['gap']
+  justify?: NexUICSSProperties['justifyContent']
+  align?: NexUICSSProperties['alignItems']
+  direction?: NexUICSSProperties['flexDirection']
+  wrap?: NexUICSSProperties['flexWrap']
+  gap?: NexUICSSProperties['gap']
   as?: RootComponent
   sx?: SxProps<FlexOwnerState<RootComponent>>
 } & FlexVariants

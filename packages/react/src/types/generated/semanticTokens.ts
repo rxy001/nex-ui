@@ -1,4 +1,13 @@
-export interface SemanticTokens {
+import type { UniteTokens } from '../utils'
+
+export interface SemanticTokensOverrides {}
+
+export type SemanticTokens = UniteTokens<
+  DefaultSemanticTokens,
+  SemanticTokensOverrides
+>
+
+export interface DefaultSemanticTokens {
   colors:
     | 'blue.outlined.fg'
     | 'blue.outlined.hover'

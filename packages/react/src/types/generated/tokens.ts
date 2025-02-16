@@ -1,6 +1,11 @@
 import type { CSSProperties } from '@nex-ui/system'
+import type { UniteTokens } from '../utils'
 
-export interface Tokens {
+export interface TokensOverrides {}
+
+export type Tokens = UniteTokens<DefaultTokens, TokensOverrides>
+
+export interface DefaultTokens {
   colors:
     | 'transparent'
     | 'current'
