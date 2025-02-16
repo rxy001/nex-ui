@@ -7,6 +7,7 @@ import { useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
 import { useNexContext } from '../provider'
+import { inputTextRecipe } from '../../theme/slotRecipes'
 import {
   useDefaultProps,
   composeClasses,
@@ -110,6 +111,7 @@ export const InputText = forwardRef(
     const styles = useSlotStyles({
       ownerState,
       name: 'InputText',
+      slotRecipe: inputTextRecipe,
     })
 
     const classes = useSlotClasses(ownerState)

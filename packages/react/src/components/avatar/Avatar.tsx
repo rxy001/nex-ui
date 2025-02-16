@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { ElementType, ReactNode, Ref } from 'react'
+import { avatarRecipe } from '../../theme/slotRecipes'
 import {
   useDefaultProps,
   useSlotStyles,
@@ -114,6 +115,7 @@ export const Avatar = forwardRef(
     const styles = useSlotStyles({
       name: 'Avatar',
       ownerState,
+      slotRecipe: avatarRecipe,
     })
 
     const classes = useSlotClasses(ownerState)

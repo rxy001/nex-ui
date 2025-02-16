@@ -1,20 +1,12 @@
-import { buttonRecipe } from './button'
-import { inputTextRecipe } from './inputText'
-import { avatarRecipe } from './avatar'
-import { checkboxRecipe } from './checkbox'
-import { switchRecipe } from './switch'
+export * from './button'
+export * from './inputText'
+export * from './avatar'
+export * from './checkbox'
+export * from './switch'
 
-export const slotRecipes = {
-  Button: buttonRecipe,
-  InputText: inputTextRecipe,
-  Avatar: avatarRecipe,
-  Checkbox: checkboxRecipe,
-  Switch: switchRecipe,
-}
-
-export type * from './button'
-export type * from './inputText'
-export type * from './avatar'
-export type * from './checkbox'
-export type * from './switch'
-export type SlotRecipes = typeof slotRecipes
+export type SlotRecipeComponentNames =
+  | 'Button'
+  | 'InputText'
+  | 'Avatar'
+  | 'Checkbox'
+  | 'Switch'

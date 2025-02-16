@@ -5,6 +5,7 @@ import { useEvent } from '@nex-ui/hooks'
 import { nex } from '@nex-ui/styled'
 import type { Ref, MouseEvent, ElementType } from 'react'
 import { useNexContext } from '../provider'
+import { buttonRecipe } from '../../theme/slotRecipes'
 import {
   useDefaultProps,
   composeClasses,
@@ -120,6 +121,7 @@ export const Button = forwardRef(
     const styles = useSlotStyles({
       ownerState,
       name: 'Button',
+      slotRecipe: buttonRecipe,
     })
 
     const onClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {

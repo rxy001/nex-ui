@@ -12,6 +12,7 @@ import {
   resolveSxProps,
 } from '../utils'
 import { useNexContext } from '../provider'
+import { dividerRecipe } from '../../theme/recipes'
 import type { DividerOwnerState, DividerProps } from './types'
 
 const useSlotClasses = (ownerState: DividerOwnerState) => {
@@ -54,6 +55,7 @@ export const Divider = forwardRef(
     const styles = useStyles({
       name: 'Divider',
       ownerState,
+      recipe: dividerRecipe,
     })
 
     const rootProps = useSlotProps({

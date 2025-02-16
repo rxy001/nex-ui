@@ -9,7 +9,7 @@
     "noEmit": true,
     "strict": true,
     "incremental": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"

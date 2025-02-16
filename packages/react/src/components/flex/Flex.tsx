@@ -3,6 +3,7 @@
 import { nex } from '@nex-ui/styled'
 import type { Ref, ElementType } from 'react'
 import { useNexContext } from '../provider'
+import { flexRecipe } from '../../theme/recipes'
 import type { FlexOwnerState, FlexProps } from './types'
 import {
   useDefaultProps,
@@ -66,7 +67,7 @@ export const Flex = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const styles = useStyles({ name: 'Flex', ownerState })
+    const styles = useStyles({ name: 'Flex', ownerState, recipe: flexRecipe })
 
     const composedSx = {
       gap,

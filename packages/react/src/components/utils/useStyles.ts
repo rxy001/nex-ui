@@ -1,33 +1,32 @@
 import { useMemo } from 'react'
 import { isFunction, isPlainObject } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
-import type { StyleObject } from '@nex-ui/system'
-import { recipes } from '../../theme/recipes'
+import type { RecipeRuntimeFn, StyleObject } from '@nex-ui/system'
 import { useNexContext } from '../provider/Context'
-import type { Recipes } from '../../theme/recipes'
+import type { RecipeComponentNames } from '../../theme/recipes'
 
-type UseStylesProps<T> = {
-  name: T
+type UseStylesProps<S extends RecipeRuntimeFn> = {
+  name: RecipeComponentNames
   ownerState: {}
+  recipe: S
 }
 
-export const useStyles = <T extends keyof Recipes>({
+export const useStyles = <Recipe extends RecipeRuntimeFn>({
   name,
   ownerState,
-}: UseStylesProps<T>): StyleObject => {
+  recipe,
+}: UseStylesProps<Recipe>): StyleObject => {
   const { components } = useNexContext()
   const styleOverrides = components?.[name]?.styleOverrides
 
   const extendedRecipe = useMemo(() => {
-    const recipe = recipes[name]
-
     if (isPlainObject(styleOverrides)) {
       // @ts-ignore
       return defineRecipe(recipe, styleOverrides)
     }
 
     return recipe
-  }, [name, styleOverrides])
+  }, [recipe, styleOverrides])
 
   if (isFunction(styleOverrides)) {
     return {

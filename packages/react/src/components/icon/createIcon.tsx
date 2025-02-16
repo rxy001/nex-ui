@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { styled } from '@nex-ui/styled'
 import type { ComponentType, ElementType, Ref } from 'react'
 import { useNexContext } from '../provider/Context'
+import { iconRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
   useStyles,
@@ -79,6 +80,7 @@ export const createIcon = (
       const styles = useStyles({
         ownerState,
         name: 'Icon',
+        recipe: iconRecipe,
       })
 
       const classes = useSlotClasses(ownerState)

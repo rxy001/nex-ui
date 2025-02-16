@@ -1,36 +1,35 @@
 import { useMemo } from 'react'
 import { isFunction, isPlainObject } from '@nex-ui/utils'
 import { defineSlotRecipe } from '@nex-ui/system'
-import type { StyleObject } from '@nex-ui/system'
-import { slotRecipes } from '../../theme/slotRecipes'
+import type { SlotRecipeRuntimeFn, StyleObject } from '@nex-ui/system'
 import { useNexContext } from '../provider/Context'
-import type { SlotRecipes } from '../../theme/slotRecipes'
+import type { SlotRecipeComponentNames } from '../../theme/slotRecipes'
 
-type UseSlotStylesProps<T> = {
-  name: T
+type UseSlotStylesProps<S extends SlotRecipeRuntimeFn> = {
+  name: SlotRecipeComponentNames
   ownerState: {}
+  slotRecipe: S
 }
 
-export const useSlotStyles = <T extends keyof SlotRecipes>({
+export const useSlotStyles = <SlotRecipe extends SlotRecipeRuntimeFn>({
   name,
   ownerState,
-}: UseSlotStylesProps<T>): Record<
-  SlotRecipes[T]['slots'][number],
+  slotRecipe,
+}: UseSlotStylesProps<SlotRecipe>): Record<
+  SlotRecipe['slots'][number],
   StyleObject
 > => {
   const { components } = useNexContext()
-  const styleOverrides = components?.[name]?.styleOverrides
+  const { styleOverrides } = components?.[name] ?? {}
 
   const extendedRecipe = useMemo(() => {
-    const slotRecipe = slotRecipes[name]
-
     if (isPlainObject(styleOverrides)) {
       // @ts-ignore
       return defineSlotRecipe(slotRecipe, styleOverrides)
     }
 
     return slotRecipe
-  }, [name, styleOverrides])
+  }, [slotRecipe, styleOverrides])
 
   if (isFunction(styleOverrides)) {
     // @ts-ignore

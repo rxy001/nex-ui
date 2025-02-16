@@ -6,6 +6,7 @@ import { CheckOutlined } from '@nex-ui/icons'
 import { isFunction } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import type { Ref, ElementType, ChangeEvent } from 'react'
+import { checkboxRecipe } from '../../theme/slotRecipes'
 import { useNexContext } from '../provider'
 import { useCheckboxGroupContext } from './CheckboxGroupContext'
 import {
@@ -129,6 +130,7 @@ export const Checkbox = forwardRef(
     const styles = useSlotStyles({
       name: 'Checkbox',
       ownerState,
+      slotRecipe: checkboxRecipe,
     })
 
     const rootProps = useSlotProps({
@@ -193,3 +195,5 @@ export const Checkbox = forwardRef(
     )
   },
 )
+
+Checkbox.displayName = 'Checkbox'

@@ -6,6 +6,7 @@ import type { ChangeEvent, ElementType, Ref } from 'react'
 import { isFunction } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import { useNexContext } from '../provider'
+import { switchRecipe } from '../../theme/slotRecipes'
 import {
   forwardRef,
   resolveSxProps,
@@ -101,6 +102,7 @@ export const Switch = forwardRef(
     const styles = useSlotStyles({
       name: 'Switch',
       ownerState,
+      slotRecipe: switchRecipe,
     })
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
@@ -177,3 +179,5 @@ export const Switch = forwardRef(
     )
   },
 )
+
+Switch.displayName = 'Switch'
