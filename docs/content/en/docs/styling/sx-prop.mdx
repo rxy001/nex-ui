@@ -8,8 +8,8 @@ import logo from '@/public/images/logo.png'
 
 `sx` 属性是一种用于定义可访问主题的自定义样式的快捷方式。
 
-`sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 NexUI 内置的自定义属性和选择器，
-而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在[`Theming`页面](/b)了解更多信息。
+`sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 Nex UI 内置的自定义属性和选择器，
+而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，Nex UI 还提供了扩展能力。在[`Theming`页面](/b)了解更多信息。
 
 ## Basic Usage
 
@@ -27,7 +27,7 @@ import logo from '@/public/images/logo.png'
     <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
       <Box as="img" src={logo.src} width={50} height={50} />
       <Box>
-        <Box>NexUI</Box>
+        <Box>Nex UI</Box>
         <Box
           sx={{
             fs: 'md',
@@ -70,7 +70,7 @@ export default function Example() {
       <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
         <Box as="img" src={logo.src} width={50} height={50} />
         <Box>
-          <Box>NexUI</Box>
+          <Box>Nex UI</Box>
           <Box
             sx={{
               fs: 'md',
@@ -146,13 +146,13 @@ export default function Example() {
 
 #### Colors
 
-`color` 和 `backgroundColor` 等属性可以接收 `token.colors` 和 `semanticToken.colors` 中的路径：
+`color` 和 `backgroundColor` 等属性可以接收 `token.colors` 和 `semanticToken.colors` 中的路径:
 
 ```tsx
 <Box sx={{ color: 'blue.400' }} />
 ```
 
-`backgroundColor` 属性还可以通过别名 `bg` 访问
+`backgroundColor` 属性还可以通过别名 `bg` 访问:
 
 ```tsx
 <Box sx={{ bg: 'blue.400' }} />
@@ -339,7 +339,7 @@ export default function Example() {
 
 ## Color Mode
 
-与 `sx` 属性相关的所有 CSS 属性也都支持深色模式。`sx` 属性搭配 NexUI 提供的 Color Mode 系统，只需使用 `_dark` 即可为组件设置深色模式的样式，`_light` 为组件设置浅色模式的样式。`_DEFAULT`为组件的默认样式。
+与 `sx` 属性相关的所有 CSS 属性也都支持深色模式。`sx` 属性搭配 Nex UI 提供的 Color Mode 系统，只需使用 `_dark` 即可为组件设置深色模式的样式，`_light` 为组件设置浅色模式的样式。`_DEFAULT`为组件的默认样式。
 
 下面的例子演示了如何对不同模式下的组件设置相应的样式：
 

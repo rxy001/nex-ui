@@ -1,6 +1,6 @@
 'use client'
 
-import { merge } from '@nex-ui/utils'
+import { isArray, mergeWith } from '@nex-ui/utils'
 import { useSystem, SystemProvider } from '@nex-ui/system'
 import { useMemo } from 'react'
 import { __NEX_ICON_PROVIDER as NexIconsProvider } from '@nex-ui/icons'
@@ -71,18 +71,36 @@ function TopLevelProvider(props: NexUIProviderProps) {
 }
 
 function NestedProvider(props: NexUIProviderProps) {
-  const { theme: { components } = {}, children, primaryColor } = props
+  const { theme, children, primaryColor } = props
 
   const ctx = useNexContext()
 
   const mergedComponents = useMemo(() => {
-    return merge({}, ctx.components, components)
-  }, [components, ctx.components])
+    return mergeWith(
+      {},
+      ctx.components,
+      theme?.components,
+      (value: any, srcValue: any, key: string) => {
+        if (key === 'compoundVariants') {
+          if (value === undefined) {
+            return srcValue
+          }
+          if (isArray(value) && isArray(srcValue)) {
+            return [...value, ...srcValue]
+          }
+          return value
+        }
+        if (isArray(value)) {
+          return srcValue
+        }
+      },
+    )
+  }, [theme?.components, ctx.components])
 
   return (
     <InnerProvider
-      components={mergedComponents}
       prefix={ctx.prefix}
+      components={mergedComponents}
       primaryColor={primaryColor ?? ctx.primaryColor}
     >
       {children}

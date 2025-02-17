@@ -8,7 +8,7 @@ import logo from '@/public/images/logo.png'
 
 `sx` 属性是一种用于定义可访问主题的自定义样式的快捷方式。
 
-`sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 NexUI 内置的自定义属性和选择器，
+`sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 Nex UI 内置的自定义属性和选择器，
 而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在[`Theming`页面](/b)了解更多信息。
 
 ## Basic Usage
@@ -27,7 +27,7 @@ import logo from '@/public/images/logo.png'
     <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
       <Box as="img" src={logo.src} width={50} height={50} />
       <Box>
-        <Box>NexUI</Box>
+        <Box>Nex UI</Box>
         <Box
           sx={{
             fs: 'md',
@@ -70,7 +70,7 @@ export default function Example() {
       <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
         <Box as="img" src={logo.src} width={50} height={50} />
         <Box>
-          <Box>NexUI</Box>
+          <Box>Nex UI</Box>
           <Box
             sx={{
               fs: 'md',
@@ -105,11 +105,11 @@ export default function Example() {
 
 ## Theme-Aware Properties
 
-通过 `scales` 可以将 `token` 与 CSS 属性关联，使 CSS 属性值能够映射到 `token` 的值。
+通过 `scales` 可以将 `tokens` 与 CSS 属性关联，使 CSS 属性值能够映射到相应的 Tokens。
 
 ```tsx {11,12,13}
 const theme = defineTheme({
-  token: {
+  tokens: {
     colors: {
       primary: 'blue',
     },
@@ -144,7 +144,7 @@ export default function Example() {
 
 在[`Scales`页面](/b)了解更多的信息。
 
-#### Colors
+### Colors
 
 `color` 和 `backgroundColor` 等属性可以接收 `token.colors` 和 `semanticToken.colors` 中的路径：
 
@@ -152,7 +152,7 @@ export default function Example() {
 <Box sx={{ color: 'blue.400' }} />
 ```
 
-`backgroundColor` 属性还可以通过别名 `bg` 访问
+`backgroundColor` 属性还可以通过别名 `bg` 访问：
 
 ```tsx
 <Box sx={{ bg: 'blue.400' }} />
@@ -160,17 +160,17 @@ export default function Example() {
 
 在[`Colors`页面](/c)了解更多的信息。
 
-#### Borders
+### Borders
 
 `borderWidth` 属性可以接收 `token.borders` 和 `semanticToken.borders` 中的路径：
 
 ```tsx
-<Box sx={{ borderWidth: 'sm' }} />
+<Box sx={{ border: 'sm', borderColor: 'blue.500' }} />
 ```
 
 在[`Borders`页面](/c)了解更多的信息。
 
-#### Sizes
+### Sizes
 
 `width` 和 `height` 等属性可以接收 `token.sizes` 和 `semanticToken.sizes` 中的路径：
 
@@ -186,7 +186,7 @@ export default function Example() {
 
 在[`Sizes`页面](/a)了解更多的信息。
 
-#### Spacing
+### Spacing
 
 `padding` 和 `margin` 等属于可以接收 `token.spacing` 和 `semanticToken.spacing` 中的路径：
 
@@ -202,7 +202,7 @@ export default function Example() {
 
 在[`Spacing`页面](/c)了解更多的信息。
 
-#### Radii
+### Radii
 
 `borderRadius` 属于可以接收 `token.radii` 和 `semanticToken.radii` 中的路径：
 
@@ -212,7 +212,7 @@ export default function Example() {
 
 在[`Radii`页面](/a)了解更多的信息。
 
-#### Typography
+### Typography
 
 `fontWeight` 属于可以接收 `token.fontWeights` 和 `semanticToken.fontWeights` 中的路径：
 
@@ -245,7 +245,7 @@ export default function Example() {
 与 `sx` 属性相关的所有 CSS 属性也都支持针对特定断点的响应式值。
 `sx` 属性简化了定义和实现响应式断点的过程，您可以通过两种不同的方式来定义一组断点：一个对象，或者一个数组。
 
-#### Object Values
+### Object Values
 
 定义断点的第一种选择是将它们作为一个对象来定义，使用断点值作为键。
 
@@ -297,7 +297,7 @@ export default function Example() {
 </Box>
 ```
 
-#### Array Values
+### Array Values
 
 第二种选择是将你的断点定义为一个数组，按照从小到大的顺序排列。如下所示：
 
@@ -339,7 +339,7 @@ export default function Example() {
 
 ## Color Mode
 
-与 `sx` 属性相关的所有 CSS 属性也都支持深色模式。`sx` 属性搭配 NexUI 提供的 Color Mode 系统，只需使用 `_dark` 即可为组件设置深色模式的样式，`_light` 为组件设置浅色模式的样式。`_DEFAULT`为组件的默认样式。
+与 `sx` 属性相关的所有 CSS 属性也都支持深色模式。`sx` 属性搭配 Nex UI 提供的 Color Mode 系统，只需使用 `_dark` 即可为组件设置深色模式的样式，`_light` 为组件设置浅色模式的样式。`_DEFAULT`为组件的默认样式。
 
 下面的例子演示了如何对不同模式下的组件设置相应的样式：
 
@@ -429,5 +429,56 @@ export default function Example() {
   }}
 >
   Hello World
+</Box>
+```
+
+## Token Reference Syntax
+
+通常情况下，只有在 `scales` 中定义 CSS 属性与 `tokens` 之间的映射关系才可以在定义 Style 时引用相应的 Tokens。Nex UI 默认设置 `Scales`：
+
+```tsx
+{
+  color: 'colors',
+  backgroundColor: 'colors',
+  ...
+}
+```
+
+因此在 `sx` 属性中可使用：
+
+```tsx
+<Box
+  sx={{
+    color: 'blue.contrastText',
+    bg: 'blue.500',
+  }}
+>
+  Box
+</Box>
+```
+
+然而，在诸如 `border`、`padding` 这类特殊的简写 CSS 属性中，无法通过上述方式引用 Tokens。为此 Nex UI 提供了 Token 引用语法，
+使得您可以在简写属性中引用 Tokens：
+
+```tsx
+<Box
+  sx={{
+    border: '{borderWidths.sm} solid {colors.blue.500}',
+  }}
+>
+  Box
+</Box>
+```
+
+不仅如此，您还可以在 Token 引用语法使用 `colorPalette` ：
+
+```tsx
+<Box
+  sx={{
+    border: '{borderWidths.sm} solid {colors.colorPalette.500}',
+    colorPalette: 'blue',
+  }}
+>
+  Box
 </Box>
 ```

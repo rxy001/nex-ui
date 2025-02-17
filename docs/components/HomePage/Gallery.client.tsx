@@ -39,7 +39,7 @@ export const ClientGallery = () => {
       />
       <InputText
         className="x:absolute x:animate-[levitate_10s_ease_infinite] x:top-[130px] x:-right-[40px]"
-        defaultValue="NexUI"
+        defaultValue="Nex UI"
       />
       <Avatar
         src="https://avatars.githubusercontent.com/u/25546323?v=4"

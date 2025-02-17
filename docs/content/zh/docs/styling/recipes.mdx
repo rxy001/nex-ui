@@ -4,11 +4,13 @@ import { Callout } from 'nextra/components'
 
 Recipes 可以为同一个组件定义多个版本的样式。
 
-Recipes 具有更优的性能、更好的开发者体验以及更强的可组合性的方法编写 CSS-in-JS。其关键特性之一，能通过具有类型安全的运行时 API 创建多种 Variants 样式。
+Recipes 具有更优的性能、更好的开发者体验以及更强的可组合性的方式编写 CSS-in-JS。其关键特性之一，能通过具有类型安全的运行时 API 创建多种 Variants 样式。
+
+**`sx` 属性支持的特性， Recipes 同样支持。**
 
 ## Basic Usage
 
-您可以使用 `defineRecipe` API 可以定义一个 recipe。 `defineRecipe` API 可访问主题的自定义样式。
+您可以使用 `defineRecipe` API 可以定义一个 Recipe。 `defineRecipe` API 可访问主题的自定义样式。
 
 ```tsx {4-9,16-21}
 import { defineRecipe } from '@nex-ui/react'
