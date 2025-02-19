@@ -43,7 +43,7 @@ export interface DefaultScales {
   columnGap?: 'spacing'
   gridGap?: 'spacing'
   gridColumnGap?: 'spacing'
-  gridRow?: 'spacing'
+  gridRowGap?: 'spacing'
   borderRadius?: 'radii'
   borderTopRightRadius?: 'radii'
   borderTopLeftRadius?: 'radii'

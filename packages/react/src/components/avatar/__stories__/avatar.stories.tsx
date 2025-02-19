@@ -52,10 +52,10 @@ export const ImageAvatar: Story = {
     alt: 'XY',
   },
   render: (args) => (
-    <Flex gap="5">
+    <Flex gap='5'>
       <Avatar {...args} key={0} />
-      <Avatar {...args} src="/avatar.png" key={2} />
-      <Avatar {...args} src="/avatar.png" key={3}>
+      <Avatar {...args} src='/avatar.png' key={2} />
+      <Avatar {...args} src='/avatar.png' key={3}>
         <UserOutlined />
       </Avatar>
     </Flex>

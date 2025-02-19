@@ -4,11 +4,15 @@ import { Callout } from 'nextra/components'
 
 Recipes 可以为同一个组件定义多个版本的样式。
 
-Recipes 具有更优的性能、更好的开发者体验以及更强的可组合性的方法编写 CSS-in-JS。其关键特性之一，能通过具有类型安全的运行时 API 创建多种 Variants 样式。
+Recipes 具有更优的性能、更好的开发者体验以及更强的可组合性的方式编写 CSS-in-JS。其关键特性之一，能通过具有类型安全的运行时 API 创建多种 Variants 样式。
+
+在阅读该章节之前，建议先了解 `sx` 属性。
+
+**`sx` 属性支持的特性， Recipes 同样支持。**
 
 ## Basic Usage
 
-您可以使用 `defineRecipe` API 可以定义一个 recipe。 `defineRecipe` API 可访问主题的自定义样式。
+您可以使用 `defineRecipe` API 可以定义一个 Recipe。
 
 ```tsx {4-9,16-21}
 import { defineRecipe } from '@nex-ui/react'
@@ -198,7 +202,7 @@ buttonRecipe({
  */
 ```
 
-<Callout type="warning">注意 compoundVariants 键是个数组。</Callout>
+<Callout type='warning'>注意 compoundVariants 键是个数组。</Callout>
 
 也可以同时设置多个 Variants.
 

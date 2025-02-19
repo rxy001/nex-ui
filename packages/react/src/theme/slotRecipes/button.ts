@@ -24,7 +24,6 @@ export const buttonRecipe = defineSlotRecipe({
       boxSizing: 'border-box',
       lineHeight: 'base',
       borderColor: 'transparent',
-      fontFamily: 'body',
       bg: 'transparent',
       '& svg': {
         fs: '1.3em',

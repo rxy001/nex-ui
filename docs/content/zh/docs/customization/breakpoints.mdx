@@ -1,0 +1,120 @@
+import { Table, Tbody, Td, Th, Thead, Tr } from '@/components/Table'
+
+# Breakpoints
+
+Breakpoints 支持在多种场景下使用断点。
+
+## 自定义 Breakpoints
+
+Breakpoints 可在您的主题配置 `theme.breakpoints` 部分定义：
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  breakpoints: {
+    xs: 0,
+    sm: 600,
+    md: 900,
+    lg: 1200,
+    xl: 1536,
+  },
+})
+```
+
+Breakpoint 值的类型为 `string | number`。
+
+### TypeScript
+
+之后，如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
+扩展新定义的 Breakpoints。
+
+```tsx
+declare module '@nex-ui/react' {
+  interface BreakpointsOverrides {
+    xs: 0
+    sm: 600
+    md: 900
+    lg: 1200
+    xl: 1536
+  }
+}
+```
+
+## 使用 Breakpoints
+
+在定义过后，您可以通过 [`sx`](/a) 属性、 [`defineRecipe`](/a) 或者 [`defineSlotRecipe`](/a) 使用新定义的 Breakpoints。
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        w: {
+          _sm: '10',
+          _md: '13',
+          _lg: '15',
+        },
+      }}
+    >
+      Box
+    </Box>
+  )
+}
+```
+
+## 默认可用的 Breakpoints
+
+export function BreakpointsTable() {
+  const dataSource = [
+    {
+      breakpoint: 'xs',
+      width: '0px',
+    },
+    {
+      breakpoint: 'sm',
+      width: '640px',
+    },
+    {
+      breakpoint: 'md',
+      width: '768px',
+    },
+    {
+      breakpoint: 'lg',
+      width: '1024px',
+    },
+    {
+      breakpoint: 'xl',
+      width: '1280px',
+    },
+    {
+      breakpoint: '2xl',
+      width: '1536px',
+    },
+  ]
+
+return (
+
+<Table>
+  <Thead>
+    <Tr>
+      <Th className='x:w-[50%]'>Breakpoint</Th>
+      <Th>Screen Width</Th>
+    </Tr>
+  </Thead>
+  <Tbody>
+    {dataSource.map(({ breakpoint, width }) => (
+      <Tr key={breakpoint}>
+        <Td className='x:text-blue-600 x:font-bold x:dark:text-blue-400'>
+          {breakpoint}
+        </Td>
+        <Td>{width}</Td>
+      </Tr>
+    ))}
+  </Tbody>
+</Table>
+) }
+
+<BreakpointsTable />

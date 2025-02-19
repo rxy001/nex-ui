@@ -1,0 +1,156 @@
+import { Callout } from 'nextra/components'
+
+# Semantic Tokens
+
+Semantic Tokens 是专为特定上下文使用而设计的 Tokens。与 Tokens 不同，其更侧重于传达内容的语义信息。
+
+## 自定义 Semantic Tokens
+
+Semantic Tokens 可在您的主题配置 `theme.semanticTokens` 部分定义：
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  semanticTokens: {
+    colors: {
+      primary: '#006fee',
+      secondary: '#06b6d4',
+      danger: '#dc2626',
+    },
+  },
+})
+```
+
+<Callout>
+  若 `semanticTokens` 与 `tokens`
+  中存在名称重复的情况，`semanticTokens`的定义将会覆盖 `tokens` 里同名的定义。
+</Callout>
+
+在大多数情况下，Semantic Tokens 的值可以直接引用现有的 Tokens。
+
+> 要在 Semantic Tokens 中引用一个 Token ，请使用 \{} 语法。
+>
+> 若引用了 Semantic Token，该定义必须在所引用 Semantic Token 定义之后。 如下述 demo 中 borders.button.sm 必须定义在 colors 之下。
+>
+> 在 Nex UI 系统中 Tokens 执行于 Semantic Tokens 之前，因此可正常引用。
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    colors: {
+      blue: '#006fee',
+      red: {
+        500: '#dc2626',
+      },
+    },
+  },
+  semanticTokens: {
+    colors: {
+      primary: '{colors.blue}',
+      danger: '{colors.red.500}',
+    },
+    borders: {
+      button: {
+        // borders.button.sm 必须定义在 colors 之后。
+        sm: '1px solid {colors.danger}',
+      },
+    },
+  },
+})
+```
+
+### TypeScript
+
+之后，如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
+扩展新定义的 SemanticTokens。
+
+```tsx
+declare module '@nex-ui/react' {
+  interface SemanticTokensOverrides {
+    colors: 'primary' | 'danger'
+    borders: 'button.sm'
+  }
+}
+```
+
+## 使用 Semantic Tokens
+
+使用方式同 [Tokens]() 一致。
+
+## 深色模式
+
+Semantic Tokens 也可以根据浅色或深色模式等条件进行变化。 Nex UI 组件的深色主题就是基于此方式实现。
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  semanticTokens: {
+    colors: {
+      primary: {
+        _DEFAULT: '{colors.blue.500}',
+        _light: '{colors.blue.500}',
+        _dark: '{colors.blue.700}',
+      },
+    },
+  },
+})
+```
+
+## 嵌套的 Semantic Tokens
+
+Semantic Tokens 可以嵌套，以创建层次结构。这在将 Semantic Tokens 组合在一起时，非常有用。
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  semanticTokens: {
+    colors: {
+      bg: {
+        DEFAULT: '{colors.gray.100}',
+        primary: '{colors.cyan.100}',
+        secondary: '{colors.yellow.100}',
+      },
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  使用 `DEFAULT` 键定义嵌套 Semantic Token 的默认值。
+</Callout>
+
+这允许您使用 `bg` Semantic Token：
+
+```tsx
+<Box
+  sx={{
+    bg: 'bg',
+  }}
+>
+  <Box
+    sx={{
+      bg: 'bg.primary',
+    }}
+  >
+    Hello NexUI
+  </Box>
+  <Box
+    sx={{
+      bg: 'bg.secondary',
+    }}
+  >
+    Hello NexUI
+  </Box>
+</Box>
+```
+
+**当然，在嵌套结构中使用 `_dark` 等条件也是可以的。**
+
+## Semantic Tokens 类型
+
+类型同 [Tokens]() 一致。

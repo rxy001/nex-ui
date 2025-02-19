@@ -11,7 +11,7 @@ import { Anchor, Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem } from 'nextra/normalize-pages'
-import type { FC, ReactNode } from 'react'
+import { type FC, type ReactNode } from 'react'
 import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 
 const classes = {
@@ -42,8 +42,8 @@ const NavbarMenu: FC<{
       >
         {children}
         <ArrowRightIcon
-          height="14"
-          className="x:*:origin-center x:*:transition-transform x:*:rotate-90"
+          height='14'
+          className='x:*:origin-center x:*:transition-transform x:*:rotate-90'
         />
       </MenuButton>
       <MenuItems
@@ -100,7 +100,7 @@ export const ClientNavbar: FC<{
 
   return (
     <>
-      <div className="x:flex x:gap-4 x:overflow-x-auto nextra-scrollbar x:py-1.5 x:max-md:hidden">
+      <div className='nextra-scrollbar x:flex x:gap-4 x:overflow-x-auto x:py-1.5 x:max-md:hidden'>
         {items.map((page) => {
           if ('display' in page && page.display === 'hidden') return
           if (isMenu(page)) {
@@ -121,7 +121,7 @@ export const ClientNavbar: FC<{
 
           const isCurrentPage =
             page.route === pathname ||
-            pathname.startsWith(`${page.route}/`) ||
+            pathname.startsWith(`${href.split('/').slice(0, 3).join('/')}`) ||
             undefined
 
           return (
@@ -130,7 +130,7 @@ export const ClientNavbar: FC<{
               key={href}
               className={cn(
                 classes.link,
-                'x:aria-[current]:font-medium x:aria-[current]:text-blue-600 x:dark:aria-[current]:text-blue-400 x:aria-[current]:subpixel-antialiased',
+                'x:aria-[current="true"]:last-of-type:font-medium x:aria-[current="true"]:text-blue-600 x:dark:aria-[current="true"]:last-of-type:text-blue-400 x:aria-[current="true"]:subpixel-antialiased',
               )}
               aria-current={isCurrentPage}
             >
@@ -140,19 +140,19 @@ export const ClientNavbar: FC<{
         })}
       </div>
       {themeConfig.search && (
-        <div className="x:max-md:hidden">{themeConfig.search}</div>
+        <div className='x:max-md:hidden'>{themeConfig.search}</div>
       )}
 
       {children}
 
       <Button
-        aria-label="Menu"
+        aria-label='Menu'
         className={({ active }) =>
           cn('nextra-hamburger x:md:hidden', active && 'x:bg-gray-400/20')
         }
         onClick={() => setMenu((prev) => !prev)}
       >
-        <MenuIcon height="24" className={cn({ open: menu })} />
+        <MenuIcon height='24' className={cn({ open: menu })} />
       </Button>
     </>
   )

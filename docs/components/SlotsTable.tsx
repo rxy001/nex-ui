@@ -24,25 +24,25 @@ export const SlotsTable = ({ dataSource = [] }: SlotsTableProps) => {
     <Table>
       <Thead>
         <Tr>
-          <Th>Slot Name</Th>
+          <Th className='x:w-[15%]'>Slot Name</Th>
           <Th>Class Name</Th>
-          <Th>Default Component</Th>
-          <Th>Description</Th>
+          <Th className='x:w-[25%]'>Default Component</Th>
+          <Th className='x:min-w-2xs'>Description</Th>
         </Tr>
       </Thead>
       <Tbody>
         {dataSource.map((data) => (
           <Tr key={data.slot}>
-            <Td className="x:text-blue-600 x:font-bold x:w-[15%] x:dark:text-blue-400">
+            <Td className='x:text-blue-600 x:font-bold x:dark:text-blue-400'>
               {data.slot}
             </Td>
             <Td>
               <HighlightItem>{data.class}</HighlightItem>
             </Td>
-            <Td className="x:w-[25%]">
+            <Td>
               <DefaultItem>{data.component}</DefaultItem>
             </Td>
-            <Td className="x:min-w-2xs">{data.description ?? '-'}</Td>
+            <Td>{data.description ?? '-'}</Td>
           </Tr>
         ))}
       </Tbody>

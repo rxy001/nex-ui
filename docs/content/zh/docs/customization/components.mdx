@@ -1,0 +1,170 @@
+# Components
+
+您可以通过在 `theme` 中使用 `components` 键来定制组件的样式、默认属性等，这有助于在整个应用程序中实现样式一致性。
+
+## 默认组件属性
+
+每个 Nex UI 组件的每个属性都有默认值。若要更改这些默认值，使用 `components` 中的 `defaultProps` 键：
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      defaultProps: {
+        color: 'yellow',
+      },
+    },
+  },
+})
+```
+
+## 自定义组件样式
+
+通过 `components` 中的 `styleOverrides` 键可以更改任何 Nex UI 组件的任何默认样式。
+
+`styleOverrides` 支持两种不同方式覆盖组件的样式：函数或者对象（[Recipes]()、[SlotRecipes]()）。
+
+### 函数
+
+使用回调函数来访问组件的 `ownerState`，返回 [`sx`]()。
+
+```tsx
+import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      defaultProps: {
+        color: 'yellow',
+      },
+      styleOverrides: (ownerState: ButtonOwnerState) => {
+        if (color === 'yellow') {
+          return {
+            bg: 'yellow.500',
+            color: 'white',
+          }
+        }
+      },
+    },
+  },
+})
+```
+
+### 对象
+
+使用 [Recipes]() 或者 [SlotRecipes]() （由不同的组件决定）不仅可以覆盖组件的默认样式，还包括各种不同 `variants` 以及组合式 `variants`的样式。
+
+举例来说，当您想要覆盖 `Button` 组件 `variants` 属性值为 `outlined` 的样式时：
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      defaultProps: {
+        color: 'yellow',
+      },
+      styleOverrides: {
+        variants: {
+          outlined: {
+            root: {
+              borderWidth: 3,
+            },
+          },
+        },
+      },
+    },
+  },
+})
+```
+
+或者 `disabled` 属性值为 `true` 且 `color` 属性值为 `yellow` 时：
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      styleOverrides: {
+        compoundVariants: [
+          {
+            color: 'yellow',
+            disabled: true,
+            css: {
+              root: {
+                opacity: 0.5,
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+})
+```
+
+## 扩展组件 API
+
+`styleOverrides` 不仅可以覆盖组件样式，还能在原有基础上进一步拓展，为组件赋予更丰富的样式。
+
+例如，`Button` 的 `size` 属性目前仅支持 `sm`、`md`、`lg`，但我们还可以扩展其支持 `xl`：
+
+```tsx
+import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      styleOverrides: ({ size }: ButtonOwnerState) => {
+        if (size === 'xl') {
+          return {
+            // 60px
+            h: '14',
+          }
+        }
+      },
+    },
+  },
+})
+```
+
+或者
+
+```tsx
+const theme = defineTheme({
+  components: {
+    Button: {
+      styleOverrides: {
+        variants: {
+          size: {
+            xl: {
+              root: {
+                // 60px
+                h: '14',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+})
+```
+
+甚至，您可以通过上述两种方式扩展尚未支持的 API 的样式。
+
+### TypeScript
+
+如果你正在使用 TypeScript，需要指定新的 `size` 类型 。
+
+```tsx
+declare module '@nex-ui/react' {
+  interface ButtonPropsOverrides {
+    size?: 'sm' | 'md' | 'lg' | 'xl'
+  }
+}
+```

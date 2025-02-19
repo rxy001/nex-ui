@@ -3,7 +3,7 @@
 <!-- 3. system 支持 深色模式 响应式 -->
 <!-- 4. .test.ts 需使用 `"types": ["@testing-library/jest-dom/jest-globals", "node", "react"],` -->
 
-4. 提供 webpack 、vite 插件动态生成 sys-ts
+<!-- 4. 提供 webpack 、vite 插件动态生成 sys-ts -->
 
 <!-- 5. components 添加 sx api -->
 
@@ -41,3 +41,7 @@
 <!--
 19. defineTheme 打包后类型不对
     defineTheme 运行时的类型和编译后的类型不同，有些疑惑。 -->
+
+20. [Tokens Format](https://tr.designtokens.org/format/)
+
+21. StyleObject 每个属性应该支持 {[selector in keyof selectors]: string}

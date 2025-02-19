@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { FlexCenter } from '@/components'
 import { Box, NexUIProvider } from '@nex-ui/react'
 import { Callout } from 'nextra/components'
 import logo from '@/public/images/logo.png'
@@ -8,14 +7,14 @@ import logo from '@/public/images/logo.png'
 
 `sx` 属性是一种用于定义可访问主题的自定义样式的快捷方式。
 
-`sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 NexUI 内置的自定义属性和选择器，
-而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在[`Theming`页面](/b)了解更多信息。
+`sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 Nex UI 内置的自定义属性和选择器，
+而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，Nex UI 还提供了扩展能力。在[`Theming`页面](/b)了解更多信息。
 
 ## Basic Usage
 
 下面的例子演示了如何使用 `sx` 属性。注意，并不是所有的值都是有效的CSS属性，这是因为 `sx` 的键映射到了主题的特定属性。接下来将更详细地介绍这个概念。
 
-<FlexCenter justify="center">
+<FlexCenter justify='center'>
   <Box
     sx={{
       maxWidth: 390,
@@ -25,9 +24,9 @@ import logo from '@/public/images/logo.png'
     }}
   >
     <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
-      <Box as="img" src={logo.src} width={50} height={50} />
+      <Box as='img' src={logo.src} width={50} height={50} />
       <Box>
-        <Box>NexUI</Box>
+        <Box>Nex UI</Box>
         <Box
           sx={{
             fs: 'md',
@@ -38,9 +37,9 @@ import logo from '@/public/images/logo.png'
         </Box>
       </Box>
     </Box>
-    <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
+    <Box as='hr' sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
     <Box sx={{ p: '3' }}>Make beautiful websites with ease and efficiency.</Box>
-    <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
+    <Box as='hr' sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
     <Box
       sx={{
         p: '3',
@@ -48,15 +47,15 @@ import logo from '@/public/images/logo.png'
         textDecoration: 'none',
         color: 'blue.600',
       }}
-      as="a"
-      href="github.com"
+      as='a'
+      href='github.com'
     >
       Visit source code on GitHub.
     </Box>
   </Box>
 </FlexCenter>
 
-```tsx copy
+```tsx
 export default function Example() {
   return (
     <Box
@@ -68,9 +67,9 @@ export default function Example() {
       }}
     >
       <Box sx={{ display: 'flex', gap: '3', alignItems: 'center', p: '3' }}>
-        <Box as="img" src={logo.src} width={50} height={50} />
+        <Box as='img' src={logo.src} width={50} height={50} />
         <Box>
-          <Box>NexUI</Box>
+          <Box>Nex UI</Box>
           <Box
             sx={{
               fs: 'md',
@@ -81,11 +80,11 @@ export default function Example() {
           </Box>
         </Box>
       </Box>
-      <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
+      <Box as='hr' sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
       <Box sx={{ p: '3' }}>
         Make beautiful websites with ease and efficiency.
       </Box>
-      <Box as="hr" sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
+      <Box as='hr' sx={{ m: 0, border: 'none', bg: 'gray.200', height: 1 }} />
       <Box
         sx={{
           p: '3',
@@ -93,8 +92,8 @@ export default function Example() {
           textDecoration: 'none',
           color: 'blue.600',
         }}
-        as="a"
-        href="github.com"
+        as='a'
+        href='github.com'
       >
         Visit source code on GitHub.
       </Box>
@@ -146,13 +145,13 @@ export default function Example() {
 
 #### Colors
 
-`color` 和 `backgroundColor` 等属性可以接收 `token.colors` 和 `semanticToken.colors` 中的路径：
+`color` 和 `backgroundColor` 等属性可以接收 `token.colors` 和 `semanticToken.colors` 中的路径:
 
 ```tsx
 <Box sx={{ color: 'blue.400' }} />
 ```
 
-`backgroundColor` 属性还可以通过别名 `bg` 访问
+`backgroundColor` 属性还可以通过别名 `bg` 访问:
 
 ```tsx
 <Box sx={{ bg: 'blue.400' }} />
@@ -252,8 +251,8 @@ export default function Example() {
 下面的例子演示了如何使用对象语法定义一组断点：
 
 <FlexCenter
-  align="center"
-  justify="center"
+  align='center'
+  justify='center'
   sx={{
     backgroundImage: 'linear-gradient(to top right, #f77062 0%, #fe5196 100%)',
     py: 10,
@@ -302,8 +301,8 @@ export default function Example() {
 第二种选择是将你的断点定义为一个数组，按照从小到大的顺序排列。如下所示：
 
 <FlexCenter
-  align="center"
-  justify="center"
+  align='center'
+  justify='center'
   sx={{
     backgroundImage: 'linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%)',
     py: 10,
@@ -331,7 +330,7 @@ export default function Example() {
 // [100, 200, 300] 分别对应为 [breakpoints.xs, breakpoints.sm, breakpoint.md]
 ```
 
-<Callout type="info">
+<Callout type='info'>
   如果您需要定义不止几个断点，我们建议使用对象 API。
 </Callout>
 当然，不论是数组还是对象，`width` 的属性值都可以修改为 `token.sizes` 和
@@ -339,7 +338,7 @@ export default function Example() {
 
 ## Color Mode
 
-与 `sx` 属性相关的所有 CSS 属性也都支持深色模式。`sx` 属性搭配 NexUI 提供的 Color Mode 系统，只需使用 `_dark` 即可为组件设置深色模式的样式，`_light` 为组件设置浅色模式的样式。`_DEFAULT`为组件的默认样式。
+与 `sx` 属性相关的所有 CSS 属性也都支持深色模式。`sx` 属性搭配 Nex UI 提供的 Color Mode 系统，只需使用 `_dark` 即可为组件设置深色模式的样式，`_light` 为组件设置浅色模式的样式。`_DEFAULT`为组件的默认样式。
 
 下面的例子演示了如何对不同模式下的组件设置相应的样式：
 
@@ -390,7 +389,7 @@ export default function Example() {
 ## Color Palette
 
 `colorPalette` 属性可以创建一个颜色占位符，以便更好地进行主题设置和自定义。
-使用 `colorPalette` 的基本要求是，使用的颜色必须有一致的命名规范。默认情况下，NexUI 会为每种颜色提供 50 到 950 的颜色值。
+使用 `colorPalette` 的基本要求是，使用的颜色必须有一致的命名规范。默认情况下，NexUI 会为每种颜色提供 50 到 900 的颜色值。
 
 这会让你更容易创建和使用 `colorPalette`。假设我们需要从头开始创建一个可应用主题样式的外框按钮。
 

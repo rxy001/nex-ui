@@ -25,16 +25,16 @@ export const PropsTable = ({ dataSource = [] }: PropsTableProps) => {
     <Table>
       <Thead>
         <Tr>
-          <Th>Prop</Th>
+          <Th className='x:w-[15%]'>Prop</Th>
           <Th>Type</Th>
-          <Th>Default</Th>
-          <Th>Description</Th>
+          <Th className='x:w-[15%]'>Default</Th>
+          <Th className='x:min-w-3xs'>Description</Th>
         </Tr>
       </Thead>
       <Tbody>
         {dataSource.map((data) => (
           <Tr key={data.prop}>
-            <Td className="x:text-blue-600 x:dark:text-blue-400 x:font-bold x:w-[15%]">
+            <Td className='x:text-blue-600 x:dark:text-blue-400 x:font-bold'>
               {data.prop}
             </Td>
             <Td>
@@ -45,7 +45,7 @@ export const PropsTable = ({ dataSource = [] }: PropsTableProps) => {
                       <Fragment key={t}>
                         <HighlightItem>{t}</HighlightItem>
                         {i === data.type.length - 1 ? null : (
-                          <span className="x:px-2">|</span>
+                          <span className='x:px-2'>|</span>
                         )}
                       </Fragment>
                     )
@@ -57,10 +57,10 @@ export const PropsTable = ({ dataSource = [] }: PropsTableProps) => {
                 '-'
               )}
             </Td>
-            <Td className="x:w-[15%]">
+            <Td>
               {data.default ? <DefaultItem>{data.default}</DefaultItem> : '-'}
             </Td>
-            <Td className="x:min-w-3xs">{data.description ?? '-'}</Td>
+            <Td>{data.description ?? '-'}</Td>
           </Tr>
         ))}
       </Tbody>

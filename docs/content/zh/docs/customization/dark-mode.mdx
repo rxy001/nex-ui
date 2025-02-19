@@ -1,0 +1,168 @@
+# 深色模式
+
+Nex UI 支持 `light` 和 `dark` 两种主题，默认为 `light`。
+
+## 仅用深色模式
+
+您可以向 `NexUIProvider` 添加 `defaultMode: 'dark'` 属性使应用程序默认使用深色主题，而不用考虑用户的偏好。
+
+```tsx
+import { NexUIProvider } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <NexUIProvider defaultMode='dark'>
+      <main>This app is using the dark mode</main>
+    </NexUIProvider>
+  )
+}
+```
+
+### 覆盖深色模式下的颜色
+
+如果您想要变更深色模式下的预设颜色，可以通过 `semanticTokens` 设置。查看 [`semanticTokens`](/as)了解更多信息。
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+defineTheme({
+  semanticTokens: {
+    colors: {
+      blue: {
+        outlined: {
+          _dark: '#fff',
+        },
+      },
+    },
+  },
+})
+```
+
+## 系统偏好
+
+一些用户可能会通过操作系统，在系统层面设置对浅色或深色模式的偏好。NexUI 内置支持该特性，设置 `defualtMode: 'system'` 即可。
+
+```tsx
+import { NexUIProvider } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <NexUIProvider defaultMode='system'>
+      <main>...</main>
+    </NexUIProvider>
+  )
+}
+```
+
+### 访问用户偏好
+
+另外，您可以通过 `useColorScheme` 钩子访问用户的系统偏好。
+
+```tsx
+import { NexUIProvider, useColorScheme } from '@nex-ui/react'
+
+export default function App() {
+  const { systemColorScheme } = useColorScheme()
+
+  return (
+    <NexUIProvider defaultMode='system'>
+      <main>System preference: {systemColorScheme}</main>
+    </NexUIProvider>
+  )
+}
+```
+
+## 切换主题模式
+
+可使用 `useColorScheme` 钩子来读取和更新主题模式。
+
+```tsx
+import { NexUIProvider, useColorScheme, Button } from '@nex-ui/react'
+
+export default function App() {
+  const { mode, setMode } = useColorScheme()
+
+  return (
+    <NexUIProvider defaultMode='system'>
+      <Button onClick={() => setMode('light')}>Light</Button>
+      <Button onClick={() => setMode('dark')}>Dark</Button>
+      <Button onClick={() => setMode('system')}>System</Button>
+    </NexUIProvider>
+  )
+}
+```
+
+## 防止 SSR 闪烁
+
+为了防止深色模式在服务器渲染初次加载时出现闪烁，您可以添加 `InitColorSchemeScript` 组件，并且必须保证 `defaultMode`、`modeStorageKey`、`colorSchemeSelector`、`colorSchemeNode` 属性设置与传递给 `NexUIProvider` 组件相同的值。
+
+```tsx
+import { InitColorSchemeScript } from '@nex-ui/react'
+
+<InitColorSchemeScript defaultMode="dark">
+```
+
+## 深色模式下的样式设计
+
+在 `sx` 属性中使用 `_dark` 为深色模式下的组件设计样式。
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        color: {
+          _DEFAULT: 'black',
+          _dark: 'white',
+        },
+      }}
+    >
+      Box
+    </Box>
+  )
+}
+```
+
+## API
+
+### InitColorSchemeScriptProps
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'defaultMode',
+      type: ["'light'", "'dark'", "'system'"],
+      default: "'system'",
+      description: '默认的主题模式。',
+    },
+    {
+      prop: 'modeStorageKey',
+      type: 'string',
+      default: "'nui-color-scheme'",
+      description: '用于在 localStorage 中存储主题模式的键。',
+    },
+    {
+      prop: 'colorSchemeSelector',
+      type: ["'data'", "'class'", 'string'],
+      default: "'data-nui-color-scheme'",
+      description:
+        '应用 CSS 主题变量和组件样式的方法。支持传入 `data-*` 字符串。',
+    },
+    {
+      prop: 'colorSchemeNode',
+      type: 'Element',
+      default: 'document.documentElement',
+      description: '用于附加 color-scheme 属性的节点。',
+    },
+  ]}
+/>
+
+### useColorScheme
+
+`useColorScheme() => ColorSchemeContext`
+
+- `mode: string` 用户选择的主题模式。
+- `setMode: (mode?: Mode) => void` - 用于设置主题模式的函数。该主题模式会保存到内部状态和 `localStorage` 中，如果 `mode` 为 null ，将重置为默认主题模式。
+- `systemColorScheme` - 当 `mode: system` 时，返回系统用户偏好。

@@ -1,0 +1,346 @@
+import { Callout } from 'nextra/components'
+import { Table, Tbody, Td, Th, Thead, Tr } from '@/components/Table'
+
+# Scales
+
+Scales 可将 `tokens`、`semanticTokens` 与 CSS 属性关联，使得 CSS 属性能够映射到相应的 Token 类型，进而允许 CSS 属性能够使用相应类型的 Tokens 作为值。
+
+## 自定义 Scales
+
+Scales 可在您的主题配置 `theme.scales` 部分定义：
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    colors: {
+      blue: {
+        500: '#006fee',
+      },
+      gray: '#fafafa',
+    },
+    sizes: {
+      10: '40px',
+    },
+    spacing: {
+      5: '20px',
+    },
+  },
+  semanticTokens: {
+    colors: {
+      primary: '#06b6d4',
+    },
+  },
+  scales: {
+    color: 'colors',
+    backgroundColor: 'colors',
+    borderColor: 'colors',
+    width: 'sizes',
+    padding: 'spacing',
+  },
+})
+```
+
+Scale 的 `key` 为 `CSSProperty` 类型， `value` 为 `TokenCategories` 类型。
+
+<Callout>此处 Alias 无需再关联 CSS 属性。</Callout>
+
+通过上述定义之后，在 `sx` 属性、 `defineRecipe` 和 `defineSlotRecipe` 等方法使用中，`color`、`borderColor` 和 `backgroundColor`
+可直接引用 Colors 类型的 Tokens， `width` 引用 Sizes 类型的 Tokens， `padding` 引用 Spacing 类型的 Tokens。
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        color: 'gray',
+        backgroundColor: 'primary',
+        border: '1px solid',
+        borderColor: 'blue.500',
+        width: '10',
+        padding: '5',
+      }}
+    >
+      Box
+    </Box>
+  )
+}
+```
+
+### TypeScript
+
+如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
+扩展新定义的 Scales。
+
+```tsx
+declare module '@nex-ui/react' {
+  interface ScalesOverrides {
+    color: 'colors'
+    backgroundColor: 'colors'
+    borderColor: 'colors'
+    width: 'sizes'
+    padding: 'spacing'
+  }
+}
+```
+
+## 默认可用的 Scales
+
+export function ScalesTable() {
+  const dataSource = [
+    {
+      prop: 'color',
+      token: 'colors',
+    },
+    {
+      prop: 'borderColor',
+      token: 'colors',
+    },
+    {
+      prop: 'backgroundColor、bg',
+      token: 'colors',
+    },
+    {
+      prop: 'borderBottomColor',
+      token: 'colors',
+    },
+    {
+      prop: 'borderTopColor',
+      token: 'colors',
+    },
+    {
+      prop: 'borderLeftColor',
+      token: 'colors',
+    },
+    {
+      prop: 'borderRightColor',
+      token: 'colors',
+    },
+    {
+      prop: 'fill',
+      token: 'colors',
+    },
+    {
+      prop: 'stroke',
+      token: 'colors',
+    },
+    {
+      prop: 'width、w',
+      token: 'sizes',
+    },
+    {
+      prop: 'minWidth',
+      token: 'sizes',
+    },
+    {
+      prop: 'maxWidth',
+      token: 'sizes',
+    },
+    {
+      prop: 'height、h',
+      token: 'sizes',
+    },
+    {
+      prop: 'minHeight',
+      token: 'sizes',
+    },
+    {
+      prop: 'maxHeight',
+      token: 'sizes',
+    },
+    {
+      prop: 'padding、p',
+      token: 'spacing',
+    },
+    {
+      prop: 'paddingTop、pt',
+      token: 'spacing',
+    },
+    {
+      prop: 'paddingRight、pr',
+      token: 'spacing',
+    },
+    {
+      prop: 'paddingBottom、pb',
+      token: 'spacing',
+    },
+    {
+      prop: 'paddingLeft、pl',
+      token: 'spacing',
+    },
+    {
+      prop: 'margin、m',
+      token: 'spacing',
+    },
+    {
+      prop: 'marginTop、mt',
+      token: 'spacing',
+    },
+    {
+      prop: 'marginRight、mr',
+      token: 'spacing',
+    },
+    {
+      prop: 'marginBottom、mb',
+      token: 'spacing',
+    },
+    {
+      prop: 'marginLeft、ml',
+      token: 'spacing',
+    },
+    {
+      prop: 'top',
+      token: 'spacing',
+    },
+    {
+      prop: 'right',
+      token: 'spacing',
+    },
+    {
+      prop: 'bottom',
+      token: 'spacing',
+    },
+    {
+      prop: 'left',
+      token: 'spacing',
+    },
+    {
+      prop: 'gap',
+      token: 'spacing',
+    },
+    {
+      prop: 'rowGap',
+      token: 'spacing',
+    },
+    {
+      prop: 'columnGap',
+      token: 'spacing',
+    },
+    {
+      prop: 'gridGap',
+      token: 'spacing',
+    },
+    {
+      prop: 'gridRowGap',
+      token: 'spacing',
+    },
+    {
+      prop: 'gridColumnGap',
+      token: 'spacing',
+    },
+    {
+      prop: 'borderRadius',
+      token: 'radii',
+    },
+    {
+      prop: 'borderTopRightRadius',
+      token: 'radii',
+    },
+    {
+      prop: 'borderTopLeftRadius',
+      token: 'radii',
+    },
+    {
+      prop: 'borderBottomRightRadius',
+      token: 'radii',
+    },
+    {
+      prop: 'borderBottomLeftRadius',
+      token: 'radii',
+    },
+    {
+      prop: 'borderTopWidth',
+      token: 'borderWidths',
+    },
+    {
+      prop: 'borderBottomWidth',
+      token: 'borderWidths',
+    },
+    {
+      prop: 'borderLeftWidth',
+      token: 'borderWidths',
+    },
+    {
+      prop: 'borderRightWidth',
+      token: 'borderWidths',
+    },
+    {
+      prop: 'borderWidth',
+      token: 'borderWidths',
+    },
+    {
+      prop: 'border',
+      token: 'borders',
+    },
+    {
+      prop: 'borderTop',
+      token: 'borders',
+    },
+    {
+      prop: 'borderBottom',
+      token: 'borders',
+    },
+    {
+      prop: 'borderRight',
+      token: 'borders',
+    },
+    {
+      prop: 'borderLeft',
+      token: 'borders',
+    },
+    {
+      prop: 'boxShadow',
+      token: 'shadows',
+    },
+    {
+      prop: 'transition',
+      token: 'transitions',
+    },
+    {
+      prop: 'zIndex',
+      token: 'zIndexes',
+    },
+    {
+      prop: 'fontWeight',
+      token: 'fontWeights',
+    },
+    {
+      prop: 'lineHeight、lh',
+      token: 'lineHeights',
+    },
+    {
+      prop: 'fontFamily',
+      token: 'fontFamilies',
+    },
+    {
+      prop: 'fontSize、fs',
+      token: 'fontSizes',
+    },
+  ]
+
+return (
+
+<Table>
+  <Thead>
+    <Tr>
+      <Th className='x:w-[50%]'>CSS Property</Th>
+      <Th>Token Category</Th>
+    </Tr>
+  </Thead>
+  <Tbody>
+    {dataSource.map(({ token, prop }) => (
+      <Tr key={prop}>
+        <Td className='x:text-blue-600 x:font-bold x:dark:text-blue-400'>
+          {prop}
+        </Td>
+        <Td>{token}</Td>
+      </Tr>
+    ))}
+  </Tbody>
+</Table>
+)}
+
+<ScalesTable />

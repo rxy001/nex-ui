@@ -55,7 +55,7 @@ export type FontWeightsDefinition = Dictionary<string | number>
 
 export type LineHeightsDefinition = Dictionary<string | number>
 
-export type BordersDefinition = Dictionary<string | number>
+export type BordersDefinition = Dictionary<string>
 
 export type FontFamiliesDefinition = Dictionary<string>
 

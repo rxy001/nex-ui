@@ -1,6 +1,12 @@
 import { Pre, withIcons } from 'nextra/components'
 import { GitHubIcon } from 'nextra/icons'
-import { Example, ComponentLinks, PropsTable, SlotsTable } from '@/components'
+import {
+  Example,
+  ComponentLinks,
+  PropsTable,
+  SlotsTable,
+  FlexCenter,
+} from '@/components'
 import { useMDXComponents as getDocsMDXComponents } from './nextraTheme'
 
 const docsComponents = getDocsMDXComponents({
@@ -9,6 +15,7 @@ const docsComponents = getDocsMDXComponents({
   ComponentLinks,
   PropsTable,
   SlotsTable,
+  FlexCenter,
 })
 
 export const useMDXComponents: typeof getDocsMDXComponents = (components) => {
