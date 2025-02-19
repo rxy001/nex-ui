@@ -13,5 +13,5 @@ const sx = {
 }
 
 export const IconButton = <T extends ElementType>(props: ButtonProps<T>) => (
-  <Button iconOnly size="sm" sx={sx} variant="text" {...props} />
+  <Button iconOnly size='sm' sx={sx} variant='text' {...props} />
 )

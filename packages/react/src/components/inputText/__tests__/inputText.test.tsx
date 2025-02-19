@@ -47,7 +47,7 @@ describe('InputText', () => {
 
   it('input should have proper class', () => {
     const { getByTestId } = renderWithNexProvider(
-      <InputText data-testid="test-input" />,
+      <InputText data-testid='test-input' />,
     )
 
     expect(getByTestId('test-input')).toHaveClass(inputTextClasses.input)
@@ -56,15 +56,15 @@ describe('InputText', () => {
   it('should add the appropriate color class to root element based on color prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <InputText color="rose" data-testid="color-rose" />
-        <InputText color="blue" data-testid="color-blue" />
-        <InputText color="cyan" data-testid="color-cyan" />
-        <InputText color="orange" data-testid="color-orange" />
-        <InputText color="pink" data-testid="color-pink" />
-        <InputText color="purple" data-testid="color-purple" />
-        <InputText color="gray" data-testid="color-gray" />
-        <InputText color="yellow" data-testid="color-yellow" />
-        <InputText color="green" data-testid="color-green" />
+        <InputText color='rose' data-testid='color-rose' />
+        <InputText color='blue' data-testid='color-blue' />
+        <InputText color='cyan' data-testid='color-cyan' />
+        <InputText color='orange' data-testid='color-orange' />
+        <InputText color='pink' data-testid='color-pink' />
+        <InputText color='purple' data-testid='color-purple' />
+        <InputText color='gray' data-testid='color-gray' />
+        <InputText color='yellow' data-testid='color-yellow' />
+        <InputText color='green' data-testid='color-green' />
       </>,
     )
 
@@ -100,9 +100,9 @@ describe('InputText', () => {
   it('should add the appropriate variant class to root element based on variant prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <InputText variant="filled" data-testid="variant-filled" />
-        <InputText variant="borderless" data-testid="variant-borderless" />
-        <InputText variant="outlined" data-testid="variant-outlined" />
+        <InputText variant='filled' data-testid='variant-filled' />
+        <InputText variant='borderless' data-testid='variant-borderless' />
+        <InputText variant='outlined' data-testid='variant-outlined' />
       </>,
     )
 
@@ -120,10 +120,10 @@ describe('InputText', () => {
   it('should add the appropriate size class to root element based on size prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <InputText size="sm" data-testid="size-sm" />
+        <InputText size='sm' data-testid='size-sm' />
 
-        <InputText size="md" data-testid="size-md" />
-        <InputText size="lg" data-testid="size-lg" />
+        <InputText size='md' data-testid='size-md' />
+        <InputText size='lg' data-testid='size-lg' />
       </>,
     )
     expect(getByTestId('size-sm').parentElement).toHaveClass(
@@ -140,10 +140,10 @@ describe('InputText', () => {
   it('should add the appropriate radius class to root element based on radius prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <InputText radius="sm" data-testid="radius-sm" />
-        <InputText radius="md" data-testid="radius-md" />
-        <InputText radius="lg" data-testid="radius-lg" />
-        <InputText radius="full" data-testid="radius-full" />
+        <InputText radius='sm' data-testid='radius-sm' />
+        <InputText radius='md' data-testid='radius-md' />
+        <InputText radius='lg' data-testid='radius-lg' />
+        <InputText radius='full' data-testid='radius-full' />
       </>,
     )
 
@@ -163,7 +163,7 @@ describe('InputText', () => {
 
   it('should add the appropriate radius class to root element based on error prop', () => {
     const { getByTestId } = renderWithNexProvider(
-      <InputText error data-testid="error" />,
+      <InputText error data-testid='error' />,
     )
 
     expect(getByTestId('error').parentElement).toHaveClass(
@@ -173,7 +173,7 @@ describe('InputText', () => {
 
   it('should add the appropriate radius class to root element based on disabled prop', () => {
     const { getByTestId } = renderWithNexProvider(
-      <InputText disabled data-testid="disabled" />,
+      <InputText disabled data-testid='disabled' />,
     )
 
     expect(getByTestId('disabled').parentElement).toHaveClass(
@@ -183,7 +183,7 @@ describe('InputText', () => {
 
   it('should add the appropriate radius class to root element based on fullWidth prop', () => {
     const { getByTestId } = renderWithNexProvider(
-      <InputText fullWidth data-testid="full-width" />,
+      <InputText fullWidth data-testid='full-width' />,
     )
 
     expect(getByTestId('full-width').parentElement).toHaveClass(
@@ -206,7 +206,7 @@ describe('InputText', () => {
       return (
         <InputText
           clearable
-          data-testid="clearable-input"
+          data-testid='clearable-input'
           value={value}
           onChange={(e) => {
             setValue(e.target.value)
@@ -246,7 +246,7 @@ describe('InputText', () => {
 
   it(`should not allow clear value when disabled`, () => {
     const { container } = renderWithNexProvider(
-      <InputText clearable defaultValue="test" disabled />,
+      <InputText clearable defaultValue='test' disabled />,
     )
     expect(
       container.querySelector('.ant-input-clear-icon-hidden'),
@@ -266,7 +266,7 @@ describe('InputText', () => {
           clearBtn: clearBtnClassName,
         }}
         clearable
-        defaultValue="default"
+        defaultValue='default'
       />,
     )
 

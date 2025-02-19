@@ -66,31 +66,31 @@ describe('Button', () => {
   it('should add the appropriate color class to root element based on color prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Button color="rose" data-testid="color-rose">
+        <Button color='rose' data-testid='color-rose'>
           Button
         </Button>
-        <Button color="blue" data-testid="color-blue">
+        <Button color='blue' data-testid='color-blue'>
           Button
         </Button>
-        <Button color="cyan" data-testid="color-cyan">
+        <Button color='cyan' data-testid='color-cyan'>
           Button
         </Button>
-        <Button color="orange" data-testid="color-orange">
+        <Button color='orange' data-testid='color-orange'>
           Button
         </Button>
-        <Button color="pink" data-testid="color-pink">
+        <Button color='pink' data-testid='color-pink'>
           Button
         </Button>
-        <Button color="purple" data-testid="color-purple">
+        <Button color='purple' data-testid='color-purple'>
           Button
         </Button>
-        <Button color="gray" data-testid="color-gray">
+        <Button color='gray' data-testid='color-gray'>
           Button
         </Button>
-        <Button color="yellow" data-testid="color-yellow">
+        <Button color='yellow' data-testid='color-yellow'>
           Button
         </Button>
-        <Button color="green" data-testid="color-green">
+        <Button color='green' data-testid='color-green'>
           Button
         </Button>
       </>,
@@ -116,16 +116,16 @@ describe('Button', () => {
   it('should add the appropriate variant class to root element based on variant prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Button variant="filled" data-testid="variant-filled">
+        <Button variant='filled' data-testid='variant-filled'>
           Button
         </Button>
-        <Button variant="link" data-testid="variant-link">
+        <Button variant='link' data-testid='variant-link'>
           Button
         </Button>
-        <Button variant="outlined" data-testid="variant-outlined">
+        <Button variant='outlined' data-testid='variant-outlined'>
           Button
         </Button>
-        <Button variant="text" data-testid="variant-text">
+        <Button variant='text' data-testid='variant-text'>
           Button
         </Button>
       </>,
@@ -149,24 +149,24 @@ describe('Button', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
         <Button
-          size="sm"
-          data-testid="size-sm"
+          size='sm'
+          data-testid='size-sm'
           startIcon={<span>start icon</span>}
           endIcon={<span>end icon</span>}
         >
           Button
         </Button>
         <Button
-          size="md"
-          data-testid="size-md"
+          size='md'
+          data-testid='size-md'
           startIcon={<span>start icon</span>}
           endIcon={<span>end icon</span>}
         >
           Button
         </Button>
         <Button
-          size="lg"
-          data-testid="size-lg"
+          size='lg'
+          data-testid='size-lg'
           startIcon={<span>start icon</span>}
           endIcon={<span>end icon</span>}
         >
@@ -203,16 +203,16 @@ describe('Button', () => {
   it('should add the appropriate radius class to root element based on radius prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Button radius="sm" data-testid="radius-sm">
+        <Button radius='sm' data-testid='radius-sm'>
           Button
         </Button>
-        <Button radius="md" data-testid="radius-md">
+        <Button radius='md' data-testid='radius-md'>
           Button
         </Button>
-        <Button radius="lg" data-testid="radius-lg">
+        <Button radius='lg' data-testid='radius-lg'>
           Button
         </Button>
-        <Button radius="full" data-testid="radius-full">
+        <Button radius='full' data-testid='radius-full'>
           Button
         </Button>
       </>,
@@ -226,7 +226,7 @@ describe('Button', () => {
 
   it('should add the appropriate iconOnly class to root element based on iconOnly prop', () => {
     const { getByTestId } = renderWithNexProvider(
-      <Button iconOnly data-testid="icon-only">
+      <Button iconOnly data-testid='icon-only'>
         Button
       </Button>,
     )
@@ -236,7 +236,7 @@ describe('Button', () => {
 
   it('should add the appropriate fullWidth class to root element based on fullWidth prop', () => {
     const { getByTestId } = renderWithNexProvider(
-      <Button fullWidth data-testid="full-width">
+      <Button fullWidth data-testid='full-width'>
         Button
       </Button>,
     )
@@ -258,7 +258,7 @@ describe('Button', () => {
         <Button disabled onClick={onClick}>
           Btn Tag
         </Button>
-        <Button disabled onClick={onClick} href="#">
+        <Button disabled onClick={onClick} href='#'>
           A Tag
         </Button>
       </>,
@@ -275,7 +275,7 @@ describe('Button', () => {
 
   it('should support link button', () => {
     const { container } = renderWithNexProvider(
-      <Button target="_blank" href="https://">
+      <Button target='_blank' href='https://'>
         Link Button
       </Button>,
     )
@@ -284,7 +284,7 @@ describe('Button', () => {
 
   it('should render with start icon', () => {
     const { getByTestId } = renderWithNexProvider(
-      <Button startIcon={<span data-testid="start-icon">Icon</span>}>
+      <Button startIcon={<span data-testid='start-icon'>Icon</span>}>
         Button
       </Button>,
     )
@@ -296,7 +296,7 @@ describe('Button', () => {
 
   it('should render with end icon', () => {
     const { getByTestId } = renderWithNexProvider(
-      <Button endIcon={<span data-testid="end-icon">Icon</span>}>
+      <Button endIcon={<span data-testid='end-icon'>Icon</span>}>
         Button
       </Button>,
     )
@@ -312,7 +312,7 @@ describe('Button', () => {
       return (
         <Button
           loading={loading}
-          data-testid="button"
+          data-testid='button'
           onClick={() => setLoading(true)}
         >
           Button

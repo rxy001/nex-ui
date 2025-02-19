@@ -151,7 +151,7 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
       >
         {item.title}
         <ArrowRightIcon
-          height="18"
+          height='18'
           className={cn(
             'x:shrink-0',
             'x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5',
@@ -196,7 +196,7 @@ const Separator: FC<{ title: string }> = ({ title }) => {
       )}
     >
       {title || (
-        <hr className="x:mx-2 x:border-t x:border-gray-200 x:dark:border-primary-100/10" />
+        <hr className='x:mx-2 x:border-t x:border-gray-200 x:dark:border-primary-100/10' />
       )}
     </li>
   )
@@ -336,7 +336,7 @@ export const MobileNav: FC = () => {
       )}
     >
       {themeConfig.search && (
-        <div className="x:px-4 x:pt-4">{themeConfig.search}</div>
+        <div className='x:px-4 x:pt-4'>{themeConfig.search}</div>
       )}
       <Menu
         ref={sidebarRef}
@@ -350,8 +350,8 @@ export const MobileNav: FC = () => {
 
       {hasMenu && (
         <div className={cn(classes.footer, 'x:mt-auto')}>
-          <ThemeSwitch className="x:grow" />
-          <LocaleSwitch className="x:grow x:justify-end" />
+          <ThemeSwitch className='x:grow' />
+          <LocaleSwitch className='x:grow x:justify-end' />
         </div>
       )}
     </aside>
@@ -389,7 +389,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
   return (
     <>
       {includePlaceholder && hideSidebar && (
-        <div className="x:max-xl:hidden x:h-0 x:w-64 x:shrink-0" />
+        <div className='x:max-xl:hidden x:h-0 x:w-64 x:shrink-0' />
       )}
       <aside
         id={sidebarControlsId}

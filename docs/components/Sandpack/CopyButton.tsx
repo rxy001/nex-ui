@@ -15,7 +15,7 @@ export const CopyButton = () => {
   })
 
   return (
-    <IconButton title="Copy Code" onClick={copyHandler}>
+    <IconButton title='Copy Code' onClick={copyHandler}>
       <CopyIcon height={17} width={17} />
     </IconButton>
   )

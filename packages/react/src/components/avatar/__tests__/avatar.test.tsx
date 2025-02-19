@@ -51,31 +51,31 @@ describe('Avatar', () => {
   it('should add the appropriate color class to root element based on color prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Avatar color="rose" data-testid="color-rose">
+        <Avatar color='rose' data-testid='color-rose'>
           Avatar
         </Avatar>
-        <Avatar color="blue" data-testid="color-blue">
+        <Avatar color='blue' data-testid='color-blue'>
           Avatar
         </Avatar>
-        <Avatar color="cyan" data-testid="color-cyan">
+        <Avatar color='cyan' data-testid='color-cyan'>
           Avatar
         </Avatar>
-        <Avatar color="orange" data-testid="color-orange">
+        <Avatar color='orange' data-testid='color-orange'>
           Avatar
         </Avatar>
-        <Avatar color="pink" data-testid="color-pink">
+        <Avatar color='pink' data-testid='color-pink'>
           Avatar
         </Avatar>
-        <Avatar color="purple" data-testid="color-purple">
+        <Avatar color='purple' data-testid='color-purple'>
           Avatar
         </Avatar>
-        <Avatar color="gray" data-testid="color-gray">
+        <Avatar color='gray' data-testid='color-gray'>
           Avatar
         </Avatar>
-        <Avatar color="yellow" data-testid="color-yellow">
+        <Avatar color='yellow' data-testid='color-yellow'>
           Avatar
         </Avatar>
-        <Avatar color="green" data-testid="color-green">
+        <Avatar color='green' data-testid='color-green'>
           Avatar
         </Avatar>
       </>,
@@ -101,13 +101,13 @@ describe('Avatar', () => {
   it('should add the appropriate size class to root element based on size prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Avatar size="sm" data-testid="size-sm">
+        <Avatar size='sm' data-testid='size-sm'>
           Avatar
         </Avatar>
-        <Avatar size="md" data-testid="size-md">
+        <Avatar size='md' data-testid='size-md'>
           Avatar
         </Avatar>
-        <Avatar size="lg" data-testid="size-lg">
+        <Avatar size='lg' data-testid='size-lg'>
           Avatar
         </Avatar>
       </>,
@@ -121,16 +121,16 @@ describe('Avatar', () => {
   it('should add the appropriate radius class to root element based on radius prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Avatar radius="sm" data-testid="radius-sm">
+        <Avatar radius='sm' data-testid='radius-sm'>
           Avatar
         </Avatar>
-        <Avatar radius="md" data-testid="radius-md">
+        <Avatar radius='md' data-testid='radius-md'>
           Avatar
         </Avatar>
-        <Avatar radius="lg" data-testid="radius-lg">
+        <Avatar radius='lg' data-testid='radius-lg'>
           Avatar
         </Avatar>
-        <Avatar radius="full" data-testid="radius-full">
+        <Avatar radius='full' data-testid='radius-full'>
           Avatar
         </Avatar>
       </>,
@@ -151,7 +151,7 @@ describe('Avatar', () => {
       mockGlobalImage('loaded')
 
       const { container } = renderWithNexProvider(
-        <Avatar src="/fake.png" alt="Avatar" />,
+        <Avatar src='/fake.png' alt='Avatar' />,
       )
 
       const avatar = container.firstElementChild
@@ -169,7 +169,7 @@ describe('Avatar', () => {
       mockGlobalImage('error')
 
       const { container } = renderWithNexProvider(
-        <Avatar src="/fake.png" alt="Avatar" data-testid="avatar-children">
+        <Avatar src='/fake.png' alt='Avatar' data-testid='avatar-children'>
           B
         </Avatar>,
       )
@@ -183,7 +183,7 @@ describe('Avatar', () => {
       mockGlobalImage('error')
 
       const { container } = renderWithNexProvider(
-        <Avatar src="/fake.png" alt="Avatar" data-testid="avatar-text" />,
+        <Avatar src='/fake.png' alt='Avatar' data-testid='avatar-text' />,
       )
 
       const avatar = container.firstElementChild
@@ -222,7 +222,7 @@ describe('Avatar', () => {
 
     const { container } = renderWithNexProvider(
       <Avatar
-        src="/fake.png"
+        src='/fake.png'
         classes={{
           img: imgClassName,
         }}

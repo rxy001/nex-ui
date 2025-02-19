@@ -63,7 +63,7 @@ describe('createContext', () => {
     }
 
     const { getByText } = render(
-      <Provider value="provided value">
+      <Provider value='provided value'>
         <TestComponent />
       </Provider>,
     )

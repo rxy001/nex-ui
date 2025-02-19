@@ -17,7 +17,11 @@
     "version": "changeset version",
     "publish": "changeset publish",
     "test": "jest --config ./jest.config.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prettier": "prettier --write . --config .prettierrc.json  --ignore-path .eslintignore",
+    "lint": "pnpm lint:pkg && pnpm lint:docs",
+    "lint:pkg": "eslint -c .eslintrc.json ./packages/**/*.{ts,tsx}",
+    "lint:docs": "eslint -c .eslintrc.json ./docs/**/*.{ts,tsx,md,mdx}"
   },
   "type": "module",
   "devDependencies": {

@@ -174,9 +174,9 @@ export const InputText = forwardRef(
         {clearable && value && !disabled && (
           <Button
             iconOnly
-            size="sm"
-            variant="link"
-            color="gray"
+            size='sm'
+            variant='link'
+            color='gray'
             {...clearBtnProps}
           >
             <CloseCircleFilled />

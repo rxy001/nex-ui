@@ -24,10 +24,10 @@ describe('Divider', () => {
   it('should add the appropriate orientation class to root element based on orientation prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Divider orientation="vertical" data-testid="orientation-vertical" />
+        <Divider orientation='vertical' data-testid='orientation-vertical' />
         <Divider
-          orientation="horizontal"
-          data-testid="orientation-horizontal"
+          orientation='horizontal'
+          data-testid='orientation-horizontal'
         />
       </>,
     )

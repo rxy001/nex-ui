@@ -46,16 +46,16 @@ const meta = {
   },
   render: (args) => {
     return (
-      <Flex gap={30} wrap="wrap">
-        <Button {...args} key="blue" />
-        <Button {...args} key="purple" color="purple" />
-        <Button {...args} key="gray" color="gray" />
-        <Button {...args} key="rose" color="rose" />
-        <Button {...args} key="cyan" color="cyan" />
-        <Button {...args} key="pink" color="pink" />
-        <Button {...args} key="yellow" color="yellow" />
-        <Button {...args} key="green" color="green" />
-        <Button {...args} key="orange" color="orange" />
+      <Flex gap={30} wrap='wrap'>
+        <Button {...args} key='blue' />
+        <Button {...args} key='purple' color='purple' />
+        <Button {...args} key='gray' color='gray' />
+        <Button {...args} key='rose' color='rose' />
+        <Button {...args} key='cyan' color='cyan' />
+        <Button {...args} key='pink' color='pink' />
+        <Button {...args} key='yellow' color='yellow' />
+        <Button {...args} key='green' color='green' />
+        <Button {...args} key='orange' color='orange' />
       </Flex>
     )
   },

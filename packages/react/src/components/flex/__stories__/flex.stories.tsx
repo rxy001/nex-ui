@@ -64,29 +64,29 @@ const meta = {
   render: (args) => {
     return (
       <Flex {...args}>
-        <Button key="blue">Button</Button>
-        <Button key="purple" color="purple">
+        <Button key='blue'>Button</Button>
+        <Button key='purple' color='purple'>
           Button
         </Button>
-        <Button key="gray" color="gray">
+        <Button key='gray' color='gray'>
           Button
         </Button>
-        <Button key="rose" color="rose">
+        <Button key='rose' color='rose'>
           Button
         </Button>
-        <Button key="cyan" color="cyan">
+        <Button key='cyan' color='cyan'>
           Button
         </Button>
-        <Button key="pink" color="pink">
+        <Button key='pink' color='pink'>
           Button
         </Button>
-        <Button key="yellow" color="yellow">
+        <Button key='yellow' color='yellow'>
           Button
         </Button>
-        <Button key="green" color="green">
+        <Button key='green' color='green'>
           Button
         </Button>
-        <Button key="orange" color="orange">
+        <Button key='orange' color='orange'>
           Button
         </Button>
       </Flex>

@@ -42,14 +42,14 @@ export const Sandpack = ({
       files={files}
       customSetup={customSetup}
       template={sandpackTemplate}
-      theme="dark"
+      theme='dark'
     >
-      <SandpackLayout className="x:border-none! x:bg-transparent!">
-        <div className="x:flex x:w-full x:flex-col">
+      <SandpackLayout className='x:border-none! x:bg-transparent!'>
+        <div className='x:flex x:w-full x:flex-col'>
           <div>{showPreview ? <SandpackPreview /> : children}</div>
-          <div className="x:group x:h-auto x:relative">
+          <div className='x:group x:h-auto x:relative'>
             {showEditor && <SandpackCodeViewer />}
-            <div className="x:hidden x:md:flex x:z-20 x:opacity-0 x:group-hover:opacity-100 x:transition-opacity x:absolute x:gap-1 x:right-2 x:top-2 x:items-center x:justify-center x:bg-code-background">
+            <div className='x:hidden x:md:flex x:z-20 x:opacity-0 x:group-hover:opacity-100 x:transition-opacity x:absolute x:gap-1 x:right-2 x:top-2 x:items-center x:justify-center x:bg-code-background'>
               {showCopyCode && <CopyButton />}
               {showOpenInCodeSandbox && <CodeSandboxButton />}
               {showReportBug && <BugReportButton />}

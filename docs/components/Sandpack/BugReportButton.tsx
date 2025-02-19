@@ -8,7 +8,7 @@ export const BugReportButton = () => {
   })
 
   return (
-    <IconButton title="Report a bug" onClick={handlePress}>
+    <IconButton title='Report a bug' onClick={handlePress}>
       <BugOutlined height={18} width={18} />
     </IconButton>
   )

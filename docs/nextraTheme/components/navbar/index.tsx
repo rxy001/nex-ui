@@ -13,9 +13,9 @@ const propsSchema = z.strictObject({
   logoLink: z.union([z.string(), z.boolean()]).default(true),
   logo: element,
   projectLink: z.string().optional(),
-  projectIcon: element.default(<GitHubIcon height="24" />),
+  projectIcon: element.default(<GitHubIcon height='24' />),
   chatLink: z.string().optional(),
-  chatIcon: element.default(<DiscordIcon width="24" />),
+  chatIcon: element.default(<DiscordIcon width='24' />),
 })
 
 type NavbarProps = z.input<typeof propsSchema>
@@ -51,21 +51,21 @@ export const Navbar: FC<NavbarProps> = (props) => {
       />
       <nav
         style={{ height: 'var(--nextra-navbar-height)' }}
-        className="x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center x:justify-end x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]"
+        className='x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center x:justify-end x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]'
       >
         {logoLink ? (
           <NextLink
             href={typeof logoLink === 'string' ? logoLink : '/'}
-            className="x:transition-opacity x:focus-visible:nextra-focus x:flex x:items-center x:hover:opacity-75 x:me-auto"
+            className='x:transition-opacity x:focus-visible:nextra-focus x:flex x:items-center x:hover:opacity-75 x:me-auto'
           >
             {logo}
           </NextLink>
         ) : (
-          <div className="x:flex x:items-center x:me-auto">{logo}</div>
+          <div className='x:flex x:items-center x:me-auto'>{logo}</div>
         )}
         <ClientNavbar>
           {projectLink && (
-            <Anchor className="x:dark:text-[#f7f7f7]" href={projectLink}>
+            <Anchor className='x:dark:text-[#f7f7f7]' href={projectLink}>
               {projectIcon}
             </Anchor>
           )}

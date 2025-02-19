@@ -70,7 +70,7 @@ export const BasicInputText: Story = {}
 export const InputTextWithIcons: Story = {
   render: (args) => {
     return (
-      <Flex gap="4">
+      <Flex gap='4'>
         <InputText {...args} suffix={<SearchOutlined />} />
         <InputText {...args} prefix={<SearchOutlined />} />
       </Flex>

@@ -53,15 +53,15 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   h4: H4,
   h5: H5,
   h6: H6,
-  hr: (props) => <hr className="x:my-8 nextra-border" {...props} />,
-  li: (props) => <li className="x:my-2" {...props} />,
+  hr: (props) => <hr className='x:my-8 nextra-border' {...props} />,
+  li: (props) => <li className='x:my-2' {...props} />,
   ol: (props) => (
     <ol
-      className="x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-decimal x:ms-6"
+      className='x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-decimal x:ms-6'
       {...props}
     />
   ),
-  p: (props) => <p className="x:not-first:mt-4 x:leading-7" {...props} />,
+  p: (props) => <p className='x:not-first:mt-4 x:leading-7' {...props} />,
   pre: withIcons(Pre),
   summary: Summary,
   table: ({ className, ...props }) => (
@@ -75,7 +75,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   tr: Table.Tr,
   ul: (props) => (
     <ul
-      className="x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-disc x:ms-6"
+      className='x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-disc x:ms-6'
       {...props}
     />
   ),
@@ -89,7 +89,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
 
     return (
       <div
-        className="x:mx-auto x:flex x:max-w-(--nextra-content-width)"
+        className='x:mx-auto x:flex x:max-w-(--nextra-content-width)'
         // Attach user-defined props to wrapper container, e.g. `data-pagefind-filter`
         {...props}
       >

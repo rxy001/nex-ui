@@ -39,11 +39,11 @@ const RECIPE_PATH =
 const ButtonLink = (props: ButtonProps) => {
   return (
     <Button
-      size="sm"
-      color="gray"
+      size='sm'
+      color='gray'
       sx={sx}
-      variant="text"
-      target="_blank"
+      variant='text'
+      target='_blank'
       {...props}
     />
   )
@@ -54,8 +54,8 @@ export const ComponentLinks = ({
   rscCompatible = false,
 }: ComponentLinksProps) => {
   return (
-    <div className="x:mt-6 x:flex x:flex-row x:gap-4 x:flex-wrap x:md:gap-7">
-      <ButtonLink startIcon={<StorybookIcon color="#ff4785" />}>
+    <div className='x:mt-6 x:flex x:flex-row x:gap-4 x:flex-wrap x:md:gap-7'>
+      <ButtonLink startIcon={<StorybookIcon color='#ff4785' />}>
         Storybook
       </ButtonLink>
       {rscCompatible && (

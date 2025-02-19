@@ -56,9 +56,9 @@ export const CheckboxGroup: Story = {
       size={size}
       disabled={disabled}
     >
-      <Checkbox value="apple">Apple</Checkbox>
-      <Checkbox value="pear">Pear</Checkbox>
-      <Checkbox value="orange">Orange</Checkbox>
+      <Checkbox value='apple'>Apple</Checkbox>
+      <Checkbox value='pear'>Pear</Checkbox>
+      <Checkbox value='orange'>Orange</Checkbox>
     </CheckboxGroupComponent>
   ),
 }

@@ -39,8 +39,8 @@ export const BackToTop: FC<{
     >
       {children}
       <ArrowRightIcon
-        height="1.1em"
-        className="x:-rotate-90 x:border x:rounded-full x:border-current"
+        height='1.1em'
+        className='x:-rotate-90 x:border x:rounded-full x:border-current'
       />
     </Button>
   )

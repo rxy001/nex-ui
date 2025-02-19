@@ -18,8 +18,8 @@ export const SandpackCodeViewer = () => {
   )
 
   return (
-    <SandpackStack className="x:bg-transparent!">
-      <div className="sp-code-viewer max-h-[600px] overflow-y-scroll">
+    <SandpackStack className='x:bg-transparent!'>
+      <div className='sp-code-viewer max-h-[600px] overflow-y-scroll'>
         <CodeBlock lang={lang}>{code}</CodeBlock>
       </div>
     </SandpackStack>

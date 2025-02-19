@@ -40,8 +40,8 @@ export const HeadingAnchor: FC<{ id: string }> = ({ id }) => {
   return (
     <a
       href={`#${id}`}
-      className="x:focus-visible:nextra-focus subheading-anchor"
-      aria-label="Permalink for this section"
+      className='x:focus-visible:nextra-focus subheading-anchor'
+      aria-label='Permalink for this section'
       ref={anchorRef}
     />
   )

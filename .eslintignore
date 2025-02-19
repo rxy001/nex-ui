@@ -1,6 +1,13 @@
-.next/*
+*/.next/*
 *.css
 dist
 public/*
 !.storybook
-*.css
+node_modules
+assets
+notes
+coverage
+.husky
+*.yaml
+build
+.turbo

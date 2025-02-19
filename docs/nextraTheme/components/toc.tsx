@@ -63,7 +63,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
     >
       {hasHeadings && (
         <>
-          <p className="x:pt-6 x:px-4 x:font-semibold x:tracking-tight">
+          <p className='x:pt-6 x:px-4 x:font-semibold x:tracking-tight'>
             {themeConfig.toc.title}
           </p>
           <ul
@@ -74,7 +74,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
             )}
           >
             {anchors.map(({ id, value, depth }) => (
-              <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
+              <li className='x:my-2 x:scroll-my-6 x:scroll-py-6' key={id}>
                 <a
                   href={`#${id}`}
                   className={cn(

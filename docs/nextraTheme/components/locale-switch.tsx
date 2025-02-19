@@ -23,7 +23,7 @@ export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
   const [, locale] = pathname.split('/', 2)
   return (
     <Select
-      title="Change language"
+      title='Change language'
       className={cn('x:flex x:items-center x:gap-2', className)}
       onChange={(lang) => {
         const date = new Date(Date.now() + ONE_YEAR)
@@ -35,7 +35,7 @@ export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
       value={locale!}
       selectedOption={
         <>
-          <GlobeIcon height="12" />
+          <GlobeIcon height='12' />
           {!lite && i18n.find((l: any) => locale === l.locale)?.name}
         </>
       }

@@ -15,7 +15,7 @@ export const Playlist = () => {
     >
       <Box>
         <Box
-          as="h2"
+          as='h2'
           sx={{
             fs: 24,
             fontWeight: 'semibold',
@@ -25,7 +25,7 @@ export const Playlist = () => {
           Listen Now
         </Box>
         <Box
-          as="p"
+          as='p'
           sx={{
             fs: 'md',
             color: 'gray.400',
@@ -69,11 +69,11 @@ export const Playlist = () => {
                 }}
               >
                 <Box
-                  as="img"
+                  as='img'
                   srcSet={music.cover}
-                  width="100%"
-                  height="50%"
-                  loading="lazy"
+                  width='100%'
+                  height='50%'
+                  loading='lazy'
                   sx={{
                     height: '100%',
                     transition: 'transform 0.2s',
@@ -84,7 +84,7 @@ export const Playlist = () => {
                 />
               </Box>
               <Box
-                as="h3"
+                as='h3'
                 sx={{
                   fontWeight: 'medium',
                   m: 0,
@@ -95,7 +95,7 @@ export const Playlist = () => {
                 {music.name}
               </Box>
               <Box
-                as="p"
+                as='p'
                 sx={{
                   m: 0,
                   fs: 'sm',

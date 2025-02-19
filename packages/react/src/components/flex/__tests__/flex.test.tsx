@@ -51,20 +51,20 @@ describe('Flex', () => {
   it('should add the appropriate justify class to root element based on justify prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Flex justify="center" data-testid="justify-center" />
-        <Flex justify="end" data-testid="justify-end" />
-        <Flex justify="flex-end" data-testid="justify-flex-end" />
-        <Flex justify="flex-start" data-testid="justify-flex-start" />
-        <Flex justify="left" data-testid="justify-left" />
-        <Flex justify="revert" data-testid="justify-revert" />
-        <Flex justify="right" data-testid="justify-right" />
-        <Flex justify="space-around" data-testid="justify-space-around" />
-        <Flex justify="space-between" data-testid="justify-space-between" />
-        <Flex justify="space-evenly" data-testid="justify-space-evenly" />
-        <Flex justify="start" data-testid="justify-start" />
-        <Flex justify="stretch" data-testid="justify-stretch" />
-        <Flex justify="normal" data-testid="justify-normal" />
-        <Flex justify="revert-layer" data-testid="justify-revert-layer" />
+        <Flex justify='center' data-testid='justify-center' />
+        <Flex justify='end' data-testid='justify-end' />
+        <Flex justify='flex-end' data-testid='justify-flex-end' />
+        <Flex justify='flex-start' data-testid='justify-flex-start' />
+        <Flex justify='left' data-testid='justify-left' />
+        <Flex justify='revert' data-testid='justify-revert' />
+        <Flex justify='right' data-testid='justify-right' />
+        <Flex justify='space-around' data-testid='justify-space-around' />
+        <Flex justify='space-between' data-testid='justify-space-between' />
+        <Flex justify='space-evenly' data-testid='justify-space-evenly' />
+        <Flex justify='start' data-testid='justify-start' />
+        <Flex justify='stretch' data-testid='justify-stretch' />
+        <Flex justify='normal' data-testid='justify-normal' />
+        <Flex justify='revert-layer' data-testid='justify-revert-layer' />
       </>,
     )
 
@@ -111,18 +111,18 @@ describe('Flex', () => {
   it('should add the appropriate align class to root element based on align prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Flex align="baseline" data-testid="align-baseline" />
-        <Flex align="end" data-testid="align-end" />
-        <Flex align="center" data-testid="align-center" />
-        <Flex align="revert" data-testid="align-revert" />
-        <Flex align="self-end" data-testid="align-self-end" />
-        <Flex align="self-start" data-testid="align-self-start" />
-        <Flex align="start" data-testid="align-start" />
-        <Flex align="stretch" data-testid="align-stretch" />
-        <Flex align="normal" data-testid="align-normal" />
-        <Flex align="revert-layer" data-testid="align-revert-layer" />
-        <Flex align="flex-end" data-testid="align-flex-end" />
-        <Flex align="flex-start" data-testid="align-flex-start" />
+        <Flex align='baseline' data-testid='align-baseline' />
+        <Flex align='end' data-testid='align-end' />
+        <Flex align='center' data-testid='align-center' />
+        <Flex align='revert' data-testid='align-revert' />
+        <Flex align='self-end' data-testid='align-self-end' />
+        <Flex align='self-start' data-testid='align-self-start' />
+        <Flex align='start' data-testid='align-start' />
+        <Flex align='stretch' data-testid='align-stretch' />
+        <Flex align='normal' data-testid='align-normal' />
+        <Flex align='revert-layer' data-testid='align-revert-layer' />
+        <Flex align='flex-end' data-testid='align-flex-end' />
+        <Flex align='flex-start' data-testid='align-flex-start' />
       </>,
     )
 
@@ -157,15 +157,15 @@ describe('Flex', () => {
   it('should add the appropriate direction class to root element based on direction prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Flex direction="column" data-testid="direction-column" />
+        <Flex direction='column' data-testid='direction-column' />
         <Flex
-          direction="column-reverse"
-          data-testid="direction-column-reverse"
+          direction='column-reverse'
+          data-testid='direction-column-reverse'
         />
-        <Flex direction="row" data-testid="direction-row" />
-        <Flex direction="row-reverse" data-testid="direction-row-reverse" />
-        <Flex direction="revert" data-testid="direction-revert" />
-        <Flex direction="revert-layer" data-testid="direction-revert-layer" />
+        <Flex direction='row' data-testid='direction-row' />
+        <Flex direction='row-reverse' data-testid='direction-row-reverse' />
+        <Flex direction='revert' data-testid='direction-revert' />
+        <Flex direction='revert-layer' data-testid='direction-revert-layer' />
       </>,
     )
 
@@ -192,11 +192,11 @@ describe('Flex', () => {
   it('should add the appropriate wrap class to root element based on wrap prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Flex wrap="nowrap" data-testid="wrap-nowrap" />
-        <Flex wrap="revert" data-testid="wrap-revert" />
-        <Flex wrap="revert-layer" data-testid="wrap-revert-layer" />
-        <Flex wrap="wrap" data-testid="wrap-wrap" />
-        <Flex wrap="wrap-reverse" data-testid="wrap-wrap-reverse" />
+        <Flex wrap='nowrap' data-testid='wrap-nowrap' />
+        <Flex wrap='revert' data-testid='wrap-revert' />
+        <Flex wrap='revert-layer' data-testid='wrap-revert-layer' />
+        <Flex wrap='wrap' data-testid='wrap-wrap' />
+        <Flex wrap='wrap-reverse' data-testid='wrap-wrap-reverse' />
       </>,
     )
 
@@ -213,7 +213,7 @@ describe('Flex', () => {
 
   it('should add the appropriate inline class to root element based on inline prop', () => {
     const { getByTestId } = renderWithNexProvider(
-      <Flex inline data-testid="inline" />,
+      <Flex inline data-testid='inline' />,
     )
 
     expect(getByTestId('inline')).toHaveClass(flexClasses.inline)

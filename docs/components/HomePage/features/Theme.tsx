@@ -190,8 +190,8 @@ export function Theme({ translations }: ThemeProps) {
   ]
 
   return (
-    <div className="x:gap-12 x:flex x:flex-col x:lg:flex-row">
-      <div className="x:lg:w-1/2 x:flex x:flex-col x:gap-2 x:min-lg:min-h-[435px]">
+    <div className='x:gap-12 x:flex x:flex-col x:lg:flex-row'>
+      <div className='x:lg:w-1/2 x:flex x:flex-col x:gap-2 x:min-lg:min-h-[435px]'>
         {contents.map(({ title, description }, i) => (
           <div
             key={title}
@@ -203,12 +203,12 @@ export function Theme({ translations }: ThemeProps) {
             )}
             onClick={() => setIndex(i)}
           >
-            <h4 className="x:font-bold">{title}</h4>
-            <p className="x:mt-2">{description}</p>
+            <h4 className='x:font-bold'>{title}</h4>
+            <p className='x:mt-2'>{description}</p>
           </div>
         ))}
       </div>
-      <CodeWindow lang="ts" file="Theme.ts" className="x:lg:flex-1">
+      <CodeWindow lang='ts' file='Theme.ts' className='x:lg:flex-1'>
         {snippets[index]}
       </CodeWindow>
     </div>

@@ -31,8 +31,8 @@ export const ClientWrapper: MDXWrapper = ({
     <>
       {(themeContext.layout === 'default' || themeContext.toc) && (
         <nav
-          className="nextra-toc x:order-last x:max-xl:hidden x:w-64 x:shrink-0 x:print:hidden"
-          aria-label="table of contents"
+          className='nextra-toc x:order-last x:max-xl:hidden x:w-64 x:shrink-0 x:print:hidden'
+          aria-label='table of contents'
         >
           {themeContext.toc && (
             <TOC
@@ -56,7 +56,7 @@ export const ClientWrapper: MDXWrapper = ({
         )}
         {children}
         {date ? (
-          <div className="x:mt-12 x:mb-8 x:text-xs x:text-gray-500 x:text-end x:dark:text-gray-400">
+          <div className='x:mt-12 x:mb-8 x:text-xs x:text-gray-500 x:text-end x:dark:text-gray-400'>
             {cloneElement(themeConfig.lastUpdated, { date: new Date(date) })}
           </div>
         ) : null}

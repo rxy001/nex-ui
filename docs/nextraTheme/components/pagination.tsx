@@ -41,7 +41,7 @@ export const Pagination: FC = () => {
           className={cn(classes.link, 'x:pe-4')}
         >
           <ArrowRightIcon
-            height="20"
+            height='20'
             className={cn(classes.icon, 'x:ltr:rotate-180')}
           />
           {prev.title}
@@ -55,7 +55,7 @@ export const Pagination: FC = () => {
         >
           {next.title}
           <ArrowRightIcon
-            height="20"
+            height='20'
             className={cn(classes.icon, 'x:rtl:rotate-180')}
           />
         </NextLink>
