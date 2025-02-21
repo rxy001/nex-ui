@@ -1,7 +1,14 @@
-import { forEach, merge, walkObject, get, isArray } from '@nex-ui/utils'
-import type { CSSObject } from '@emotion/react'
+import {
+  forEach,
+  merge,
+  walkObject,
+  get,
+  isArray,
+  __DEV__,
+} from '@nex-ui/utils'
+import type { CSSObject as EmotionCSSObject } from '@emotion/react'
 import { memoizeFn } from './utils'
-import type { StyleObject } from './types'
+import type { CSSObject } from './types'
 import type { NormailizeFn } from './normalize'
 import type { Selectors } from './selectors'
 
@@ -11,7 +18,11 @@ interface CreateCssFnConfig {
 }
 
 export interface CssFn {
-  (styles: StyleObject | StyleObject[]): CSSObject
+  (styles: CSSObject | CSSObject[]): EmotionCSSObject
+}
+
+const isCustomSelector = (key: string) => {
+  return key.startsWith('_')
 }
 
 export const createCssFn = ({
@@ -21,9 +32,9 @@ export const createCssFn = ({
   const css: CssFn = (stylesProps) => {
     const styles = Array.isArray(stylesProps) ? stylesProps : [stylesProps]
 
-    const result: CSSObject = {}
+    const result: EmotionCSSObject = {}
 
-    forEach(styles, (styleProps: StyleObject) => {
+    forEach(styles, (styleProps: CSSObject) => {
       const { colorPalette, ...style } = styleProps
 
       const handlePath = (path: string[]) => {
@@ -42,7 +53,7 @@ export const createCssFn = ({
                 return getCustomizedSelector(`_${index}`) ?? p
               }
             }
-            if (p.startsWith('_')) {
+            if (isCustomSelector(p)) {
               // 处理自定义的 selectors 和 对象 breakpoints
               return getCustomizedSelector(p) ?? p
             }

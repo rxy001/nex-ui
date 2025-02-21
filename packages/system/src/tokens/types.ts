@@ -11,7 +11,7 @@ export type ResponsiveColor = {
 
 export type SemanticTokenValue = TokenValue | ResponsiveColor
 
-export type TokenCategories =
+export type TokenCategory =
   | 'fontFamilies'
   | 'fontSizes'
   | 'fontWeights'

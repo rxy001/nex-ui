@@ -1,27 +1,37 @@
-import type { StyleObject } from '@nex-ui/system'
+import type { CSSInterpolation } from '@nex-ui/system'
 import type { Breakpoints } from './generated/breakpoints'
 import type { Selectors } from './generated/selectors'
 import type { Aliases } from './generated/aliases'
 import type { NexUICSSProperties } from './cssProperties'
 
-type ResponsiveColor<T> = {
-  _DEFAULT?: T
+type BreakpointObject<T> = {
+  [K in keyof Breakpoints as `_${K}`]?: T
+}
+
+type ExtraSelecotrs<T> = {
+  [K in keyof Selectors as `_${K}`]?: T
+}
+
+type Conditions<T> = {
   _dark?: T
   _light?: T
-}
-
-type BreakpointObject<T> = {
-  [K in keyof Breakpoints as `_${K}`]: T
-}
+} & ExtraSelecotrs<T> &
+  BreakpointObject<T>
 
 type BreakpointArray = (string | number)[] | readonly (string | number)[]
+
+type NestedConditions<T> =
+  | {
+      _DEFAULT?: T
+    }
+  | Conditions<T>
+  | { [K in keyof Conditions<T>]: NestedConditions<T> }
 
 type ExtraCSSPropertyValue<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]?:
     | T[K]
     | BreakpointArray
-    | ResponsiveColor<T[K]>
-    | BreakpointObject<T[K]>
+    | NestedConditions<T[K]>
 }
 
 type ExtraCSSProperties = {
@@ -38,10 +48,6 @@ type ExtraCSSProperties = {
     : never
 }
 
-type ExtraSelecotrs = {
-  [K in keyof Selectors as `_${K}`]?: StyleObject
-}
-
-export type StyleObjectOverrides = ExtraCSSPropertyValue<NexUICSSProperties> &
+export type CSSObjectOverrides = ExtraCSSPropertyValue<NexUICSSProperties> &
   ExtraCSSPropertyValue<ExtraCSSProperties> &
-  ExtraSelecotrs
+  Conditions<CSSInterpolation>

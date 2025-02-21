@@ -1,11 +1,11 @@
 import { isFunction, reduce } from '@nex-ui/utils'
-import type { StyleObject } from '@nex-ui/system'
+import type { CSSObject } from '@nex-ui/system'
 import type { SxProps } from '../../types/utils'
 
 export const resolveSxProps = <T extends object>(
   sx: SxProps<T> | undefined,
   ownerState: T,
-): StyleObject | undefined => {
+): CSSObject | undefined => {
   if (sx === undefined) {
     return sx
   }

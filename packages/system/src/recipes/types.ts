@@ -1,14 +1,14 @@
 /* eslint-disable no-use-before-define */
-import type { StyleObject, Dictionary } from '../types'
+import type { CSSObject, Dictionary } from '../types'
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 
-export type SlotGroups = Dictionary<StyleObject>
+export type SlotGroups = Dictionary<CSSObject>
 
-export type BaseVariantGroups = Dictionary<Dictionary<StyleObject>>
+export type BaseVariantGroups = Dictionary<Dictionary<CSSObject>>
 
 export type SlotVariantGroups<S extends SlotGroups = SlotGroups> = Dictionary<
-  Dictionary<Partial<Record<keyof S, StyleObject>>>
+  Dictionary<Partial<Record<keyof S, CSSObject>>>
 >
 
 type CompoundVariantsSelection<
@@ -54,11 +54,11 @@ export type RecipeConfig<
   V extends BaseVariantGroups = BaseVariantGroups,
   E extends RecipeRuntimeFn | undefined = undefined,
 > = {
-  base?: StyleObject
-  variants?: UniteVariants<V, E, StyleObject>
+  base?: CSSObject
+  variants?: UniteVariants<V, E, CSSObject>
   compoundVariants?: Array<
     CompoundVariantsSelection<CombineVariants<V, E>> & {
-      css?: StyleObject
+      css?: CSSObject
     }
   >
   defaultVariants?: VariantSelection<CombineVariants<V, E>>
@@ -66,7 +66,7 @@ export type RecipeConfig<
 
 export interface RecipeRuntimeFn<
   V extends BaseVariantGroups = BaseVariantGroups,
-> extends RuntimeFn<V, StyleObject> {
+> extends RuntimeFn<V, CSSObject> {
   __recipe: true
   __config: RecipeConfig<V>
   variants: (keyof V)[]
@@ -79,7 +79,7 @@ export type UniteSlots<
 > =
   | V
   | {
-      [K in keyof Key]: StyleObject
+      [K in keyof Key]: CSSObject
     }
 
 type FilterIndexKey<T> = {
@@ -94,7 +94,7 @@ export type CombineSlots<
     : NonNullable<unknown>,
 > = FilterIndexKey<
   S & {
-    [K in keyof Key]: StyleObject
+    [K in keyof Key]: CSSObject
   }
 >
 
@@ -110,13 +110,13 @@ export type SlotRecipeConfig<
     V,
     E,
     {
-      [K in keyof CombineSlots<S, E>]?: StyleObject
+      [K in keyof CombineSlots<S, E>]?: CSSObject
     }
   >
   compoundVariants?: Array<
     CompoundVariantsSelection<CombineVariants<V, E>> & {
       css?: {
-        [K in keyof CombineSlots<S, E>]?: StyleObject
+        [K in keyof CombineSlots<S, E>]?: CSSObject
       }
     }
   >
@@ -126,7 +126,7 @@ export type SlotRecipeConfig<
 export interface SlotRecipeRuntimeFn<
   S extends SlotGroups = SlotGroups,
   V extends SlotVariantGroups<S> = SlotVariantGroups<S>,
-> extends RuntimeFn<V, Record<keyof S, StyleObject>> {
+> extends RuntimeFn<V, Record<keyof S, CSSObject>> {
   __slotRecipe: true
   __config: SlotRecipeConfig<S, undefined, V>
   variants: (keyof V)[]

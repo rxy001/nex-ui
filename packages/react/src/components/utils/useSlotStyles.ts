@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { isFunction, isPlainObject } from '@nex-ui/utils'
 import { defineSlotRecipe } from '@nex-ui/system'
-import type { SlotRecipeRuntimeFn, StyleObject } from '@nex-ui/system'
+import type { SlotRecipeRuntimeFn, CSSObject } from '@nex-ui/system'
 import { useNexContext } from '../provider/Context'
 import type { SlotRecipeComponentNames } from '../../theme/slotRecipes'
 
@@ -17,7 +17,7 @@ export const useSlotStyles = <SlotRecipe extends SlotRecipeRuntimeFn>({
   slotRecipe,
 }: UseSlotStylesProps<SlotRecipe>): Record<
   SlotRecipe['slots'][number],
-  StyleObject
+  CSSObject
 > => {
   const { components } = useNexContext()
   const { styleOverrides } = components?.[name] ?? {}

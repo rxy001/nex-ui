@@ -1,7 +1,7 @@
 import { forEach, isString, reduce } from '@nex-ui/utils'
 import type { CSSObject } from '@emotion/react'
 import { extractTokenPlaceholders, memoizeFn, pathToTokenName } from './utils'
-import type { TokenCategories, Tokens } from './tokens'
+import type { TokenCategory, Tokens } from './tokens'
 import type { Scales } from './scales'
 import type { Aliases } from './aliases'
 
@@ -25,7 +25,7 @@ function includeColorPalette(value: string) {
 
 function replaceColorPalette(colorPalette: string | undefined, value: string) {
   if (!colorPalette) {
-    console.error('nex-system: The color palette was not provided.')
+    console.error('[Nex UI] colorPalette: The color palette was not provided.')
     return value
   }
   return value.replace('colorPalette', colorPalette)
@@ -42,12 +42,12 @@ export const createNormalize = ({
     colorPalette,
   }: {
     tokenName: string
-    category: TokenCategories
+    category: TokenCategory
     colorPalette?: string
   }) {
     const matches = extractTokenPlaceholders(originalTokenName)
 
-    // 替换 token placeholders syntax
+    // 替换 token reference syntax
     if (matches.length) {
       return reduce(
         matches,
@@ -62,7 +62,10 @@ export const createNormalize = ({
           if (token) {
             return acc.replace(placeholder, token.value)
           }
-          console.error(`nex-system: Unknown token ${tokenName}`)
+          console.error(
+            '[Nex UI] token reference syntax: An unknown token %s exists in the token reference syntax.',
+            tokenName,
+          )
           return acc.replace(placeholder, tokenName)
         },
         originalTokenName,
@@ -101,7 +104,6 @@ export const createNormalize = ({
 
       result[property] = newPropValue
     })
-
     return result
   }
 

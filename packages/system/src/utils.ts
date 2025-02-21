@@ -1,5 +1,19 @@
-import { isArray, isNumber, isString, memoize, mergeWith } from '@nex-ui/utils'
-import type { TokenValue } from './tokens/types'
+import {
+  __DEV__,
+  isArray,
+  isNumber,
+  isString,
+  memoize,
+  mergeWith,
+  isPlainObject,
+  every,
+} from '@nex-ui/utils'
+import type {
+  SemanticTokenValue,
+  TokenValue,
+  ResponsiveColor,
+  TokenCategory,
+} from './tokens/types'
 
 export function pathToTokenName(path: string[]) {
   return path.join('.')
@@ -26,20 +40,31 @@ export function createCssVarName(prefix: string, path: string[]) {
     .join('-')}`
 }
 
-export function checkTokenValue(
-  value: any,
-  path: string[],
-): value is TokenValue {
+export function isResponsiveColor(value: any): value is ResponsiveColor {
+  return isPlainObject(value) && (value._light || value._dark || value._DEFAULT)
+}
+
+export function isValidTokenValue(value: any): value is TokenValue {
   if (!isString(value) && !isNumber(value)) {
-    console.error(
-      `nex-system: The token value must be either a string or a string[]. but currently received is ${typeof value} (${path.join('.')})`,
-    )
     return false
   }
   return true
 }
 
-export function checkTokenCategory(category: string): boolean {
+export function isValidSemanticTokenValue(
+  value: any,
+): value is SemanticTokenValue {
+  if (!isString(value) && !isNumber(value) && !isResponsiveColor(value)) {
+    return false
+  }
+  return true
+}
+
+export function isValidTokenCategory(category: any): category is TokenCategory {
+  if (!isString(category)) {
+    return false
+  }
+
   switch (category) {
     case 'colors':
     case 'fontFamilies':
@@ -57,9 +82,23 @@ export function checkTokenCategory(category: string): boolean {
     case 'zIndexes':
       return true
     default:
-      console.error(`nex-system: Unknown token category: '${category}'.`)
       return false
   }
+}
+
+export function isValidAliasValue(value: any) {
+  if (isString(value) || (isArray(value) && every(value, isString))) {
+    return true
+  }
+  return false
+}
+
+export function isValidBreakpointValue(value: any) {
+  if (isString(value) && parseInt(value, 10) >= 0) {
+    return true
+  }
+
+  return false
 }
 
 export function memoizeFn<T extends (...args: any[]) => any>(fn: T): T {

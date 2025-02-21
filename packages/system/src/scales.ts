@@ -1,21 +1,25 @@
-import { forEach, isString } from '@nex-ui/utils'
-import { checkTokenCategory } from './utils'
-import type { TokenCategories } from './tokens'
+import { __DEV__, forEach } from '@nex-ui/utils'
+import { isValidTokenCategory } from './utils'
+import type { TokenCategory } from './tokens'
 import type { CSSPropertyKey } from './types'
 
 export type ScalesDefinition = {
-  [property in CSSPropertyKey]?: TokenCategories
+  [property in CSSPropertyKey]?: TokenCategory
 }
 
 export function createScales(scales: ScalesDefinition) {
-  const scaleMap = new Map<string, TokenCategories>()
+  const scaleMap = new Map<string, TokenCategory>()
 
   forEach<ScalesDefinition>(
     scales,
-    (category: TokenCategories | undefined, property: string) => {
-      if (isString(category) && checkTokenCategory(category)) {
-        scaleMap.set(property, category)
+    (category: TokenCategory | undefined, property: string) => {
+      if (__DEV__ && !isValidTokenCategory(category)) {
+        console.error('[Nex-UI] sacles: Unknown token category: %s.', category)
+
+        return
       }
+
+      scaleMap.set(property, category!)
     },
   )
 

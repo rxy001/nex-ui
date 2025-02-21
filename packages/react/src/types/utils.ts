@@ -1,5 +1,5 @@
 import type {
-  StyleObject,
+  CSSObject,
   RecipeRuntimeFn,
   SlotRecipeRuntimeFn,
 } from '@nex-ui/system'
@@ -12,11 +12,11 @@ export type UniteTokens<T extends {}, U extends {}> = {
 }
 
 export type SxProps<OwnerState extends object | void = void> =
-  | StyleObject
-  | StyleObject[]
+  | CSSObject
+  | CSSObject[]
   | (OwnerState extends void
-      ? () => StyleObject | StyleObject[]
-      : (ownerState: OwnerState) => StyleObject | StyleObject[])
+      ? () => CSSObject | CSSObject[]
+      : (ownerState: OwnerState) => CSSObject | CSSObject[])
 
 export type ComponentUtilityClasses<T extends string> = Partial<
   Record<T, ClassName>
@@ -61,12 +61,12 @@ type DefineComponentRecipe<
 }
 
 export type ComponentThemeObject<T> = T extends RecipeRuntimeFn
-  ? DefineComponentRecipe<T, StyleObject>
+  ? DefineComponentRecipe<T, CSSObject>
   : T extends SlotRecipeRuntimeFn
     ? DefineComponentRecipe<
         T,
         {
-          [K in T['slots'][number]]?: StyleObject
+          [K in T['slots'][number]]?: CSSObject
         }
       >
     : never
@@ -75,8 +75,8 @@ export type ComponentThemeFn<P, S> = (
   ownerState: P,
 ) => S extends SlotRecipeRuntimeFn
   ? {
-      [K in S['slots'][number]]?: StyleObject
+      [K in S['slots'][number]]?: CSSObject
     }
   : S extends RecipeRuntimeFn
-    ? StyleObject
+    ? CSSObject
     : never

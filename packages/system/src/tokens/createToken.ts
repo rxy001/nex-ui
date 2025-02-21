@@ -1,4 +1,4 @@
-import type { TokenValue, TokenCategories, SemanticTokenValue } from './types'
+import type { TokenValue, TokenCategory, SemanticTokenValue } from './types'
 
 export class Token {
   path: string[]
@@ -9,7 +9,7 @@ export class Token {
 
   originalValue: TokenValue | SemanticTokenValue
 
-  category: TokenCategories
+  category: TokenCategory
 
   cssVar?: {
     var: string

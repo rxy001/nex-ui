@@ -1,5 +1,5 @@
 import { walkObject } from 'packages/utils/src'
-import { isResponsiveColor } from 'packages/system/src/tokens/createTokens'
+import { isResponsiveColor } from 'packages/system/src/utils'
 import { pretty } from '../utils'
 
 function capitalize(str: string) {

@@ -1,9 +1,8 @@
 import { forEach, isString } from '@nex-ui/utils'
 import type { Breakpoints } from './breakpoints'
+import type { Dictionary } from './types'
 
-export type SelectorsDefinition = {
-  [selector: string]: string
-}
+export type SelectorsDefinition = Dictionary<string>
 
 type Config = {
   selectors: SelectorsDefinition
@@ -14,13 +13,14 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
   const selectorMap: Map<string, string> = new Map()
 
   forEach(selectors, (value: string, key: string) => {
-    if (isString(value)) {
-      selectorMap.set(`_${key}`, value)
-    } else {
+    if (!isString(value)) {
       console.error(
-        `nex-system: The selector value must be a string. ${key}: ${value}`,
+        `[Nex UI] selectors: Expect the selector value to be a string, but what is currently received is %o.`,
+        value,
       )
+      return
     }
+    selectorMap.set(`_${key}`, value)
   })
 
   const mediaSelectors = getMediaSelectors()
@@ -29,7 +29,11 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
     const k = `_${key}`
 
     if (selectorMap.get(k)) {
-      throw new Error('')
+      console.error(
+        '[Nex UI] selectors: The selector %s has already been defined in the breakpoint.',
+        selector,
+      )
+      return
     }
 
     selectorMap.set(k, selector)

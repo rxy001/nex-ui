@@ -49,7 +49,7 @@
     }
   },
   "rules": {
-    "no-console": ["warn", { "allow": ["error"] }],
+    "no-console": ["warn", { "allow": ["error", "warn"] }],
     "no-sparse-arrays": "off",
     "no-nested-ternary": "off",
     "no-underscore-dangle": "off",

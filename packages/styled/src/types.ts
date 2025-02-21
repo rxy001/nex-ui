@@ -6,11 +6,11 @@ import type {
   ReactNode,
   ComponentPropsWithRef,
 } from 'react'
-import type { StyleObject } from '@nex-ui/system'
+import type { CSSObject } from '@nex-ui/system'
 
 type CommonProps<E extends ElementType = ElementType> = {
   as?: E
-  sx?: StyleObject | StyleObject[]
+  sx?: CSSObject | CSSObject[]
 }
 
 type Overwrite<K, T> = Omit<K, keyof T> & T
@@ -22,7 +22,7 @@ export type StyledComponentProps<
 
 export interface CreateStyledComponent<Tag extends ElementType> {
   (
-    styles?: StyleObject | StyleObject[],
+    styles?: CSSObject | CSSObject[],
   ): <E extends ElementType = Tag>(props: StyledComponentProps<E>) => ReactNode
 }
 

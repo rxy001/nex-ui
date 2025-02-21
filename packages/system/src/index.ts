@@ -29,8 +29,8 @@ export type {
 
 export type {
   CSSInterpolation,
-  StyleObject,
-  StyleObjectOverrides,
+  CSSObject,
+  CSSObjectOverrides,
   CSSProperties,
 } from './types'
 
@@ -73,5 +73,5 @@ export type {
   SemanticBorderWidthsDefinition,
   SemanticTransitionsDefinition,
   SemanticZIndexesDefinition,
-  TokenCategories,
+  TokenCategory,
 } from './tokens'

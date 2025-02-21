@@ -3,7 +3,7 @@
 import { nex } from '@nex-ui/styled'
 import { useState } from 'react'
 import { CheckOutlined } from '@nex-ui/icons'
-import { isFunction } from '@nex-ui/utils'
+import { isFunction, __DEV__ } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import type { Ref, ElementType, ChangeEvent } from 'react'
 import { checkboxRecipe } from '../../theme/slotRecipes'
@@ -66,6 +66,19 @@ export const Checkbox = forwardRef(
     const groupCtx = useCheckboxGroupContext()
 
     const inGroup = !!groupCtx
+
+    if (__DEV__ && inGroup) {
+      if (props.checked) {
+        console.warn(
+          '[Nex UI] Checkbox: The Checkbox.Group is being used, `checked` will be ignored. Use the `value` of the Checkbox.Group instead.',
+        )
+      }
+      if (props.defaultChecked) {
+        console.warn(
+          '[Nex UI] Checkbox: The Checkbox.Group is being used, `defaultChecked` will be ignored. Use the `defaultValue` of the Checkbox.Group instead.',
+        )
+      }
+    }
 
     const {
       sx,

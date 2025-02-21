@@ -1,17 +1,17 @@
-import { forEach, isString, isArray } from '@nex-ui/utils'
-import type { CSSPropertyKey } from './types'
+import { forEach, isString, __DEV__ } from '@nex-ui/utils'
+import { isValidAliasValue } from './utils'
+import type { CSSPropertyKey, Dictionary } from './types'
 
-export type AliasesDefinition = {
-  [alias: string]: CSSPropertyKey | CSSPropertyKey[]
-}
+export type AliasesDefinition = Dictionary<CSSPropertyKey | CSSPropertyKey[]>
 
 export function createAliases(aliases: AliasesDefinition) {
   const aliasMap: Map<string, string[]> = new Map()
 
   forEach(aliases, (value: string | string[], key: string) => {
-    if (!isString(value) && !isArray(value)) {
+    if (__DEV__ && !isValidAliasValue(value)) {
       console.error(
-        `The alias value must be either a string or a number. ${key}: ${value}`,
+        '[Nex UI] aliases: Expect the alias value to be a CSSProperty or CSSProperty[], but what is currently received is %o.',
+        value,
       )
       return
     }

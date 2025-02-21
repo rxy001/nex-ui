@@ -1,4 +1,5 @@
-import { forEach, isString } from '@nex-ui/utils'
+import { __DEV__, forEach } from '@nex-ui/utils'
+import { isValidBreakpointValue } from './utils'
 import type { Dictionary } from './types'
 
 export type BreakpointsDefinition = Dictionary<string>
@@ -10,10 +11,12 @@ export const createBreakpoints = (breakpoints: BreakpointsDefinition) => {
   const selectorMap = new Map<string | number, string>()
 
   let index = 0
+
   forEach(breakpoints, (value: string, key: string) => {
-    if (!isString(value)) {
+    if (__DEV__ && !isValidBreakpointValue(value)) {
       console.error(
-        `nex-system: The breakpoint value must be a string. ${key}: ${value}`,
+        `[Nex UI] breakpoints: Expect the breakpoints value to be a string, but what is currently received is %o.`,
+        value,
       )
       return
     }

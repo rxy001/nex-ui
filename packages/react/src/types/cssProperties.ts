@@ -1,4 +1,4 @@
-import type { CSSProperties, TokenCategories } from '@nex-ui/system'
+import type { CSSProperties, TokenCategory } from '@nex-ui/system'
 import type { Tokens } from './generated/tokens'
 import type { SemanticTokens } from './generated/semanticTokens'
 import type { Scales } from './generated/scales'
@@ -15,7 +15,7 @@ type VirtualColors =
 type TypeValueByKey<T, K> = K extends keyof T ? T[K] : never
 
 type ExtendedCSSProperties = {
-  [K in keyof Scales]: Exclude<Scales[K], undefined> extends TokenCategories
+  [K in keyof Scales]: Exclude<Scales[K], undefined> extends TokenCategory
     ?
         | CSSProperties[K]
         | TypeValueByKey<Tokens, Scales[K]>

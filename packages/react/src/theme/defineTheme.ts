@@ -22,7 +22,7 @@ export function defineTheme({
       ...(defaultConfig.scales as Scales),
     },
     breakpoints: {
-      ...defaultConfig.scales,
+      ...defaultConfig.breakpoints,
       ...breakpoints,
     },
     selectors: {

@@ -39,9 +39,9 @@ export const SystemProvider = ({
       scales,
       breakpoints,
       selectors: {
+        ...selectors,
         dark: getColorSchemeSelector('dark'),
         light: getColorSchemeSelector('light'),
-        ...selectors,
       },
     })
   }, [

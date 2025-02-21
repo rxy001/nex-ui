@@ -203,7 +203,7 @@ export interface DefaultTokens {
     | '-7.5'
     | '-8.5'
     | '-9.5'
-  fontFamilies: 'heading' | 'body' | 'mono'
+  fontFamilies: 'sans' | 'serif' | 'mono'
   fontSizes: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   fontWeights:
     | 'hairline'
@@ -428,8 +428,8 @@ export interface SpacingToken {
 }
 
 export interface FontFamiliesToken {
-  heading?: string
-  body?: string
+  sans?: string
+  serif?: string
   mono?: string
 }
 

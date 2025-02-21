@@ -1,3 +1,8 @@
+import type {
+  Keyframes,
+  SerializedStyles,
+  ComponentSelector,
+} from '@emotion/react'
 import type * as CSS from 'csstype'
 
 export type Dictionary<T = any> = Record<string, T>
@@ -8,29 +13,29 @@ export type CSSInterpolation =
   | boolean
   | number
   | string
-  | StyleObject
+  | CSSObject
+  | Keyframes
+  | SerializedStyles
+  | ComponentSelector
 
 export type CSSProperties = CSS.Properties<number | (string & {})>
 
-export interface ArrayCSSInterpolation
-  extends ReadonlyArray<CSSInterpolation> {}
+type CSSPseudos = { [K in CSS.Pseudos]?: CSSObject }
 
-type CSSPseudos = { [K in CSS.Pseudos]?: StyleObject }
+export interface CSSObjectOverrides {}
 
-interface CSSOthersObject {
-  [propertiesName: string]: CSSInterpolation | ArrayCSSInterpolation
+type CSSOthersObject = {
+  [propertiesName: string]: CSSInterpolation | unknown
 }
 
-export interface StyleObjectOverrides {}
+type CSSPropertiesWithOverrides = Omit<
+  CSSProperties & { colorPalette?: CSSProperties['color'] },
+  keyof CSSObjectOverrides
+> &
+  CSSObjectOverrides
 
-export interface StyleObject
-  extends Omit<
-      CSSProperties & {
-        colorPalette?: CSSProperties['color']
-      },
-      keyof StyleObjectOverrides
-    >,
-    StyleObjectOverrides,
+export interface CSSObject
+  extends CSSPropertiesWithOverrides,
     CSSPseudos,
     CSSOthersObject {}
 

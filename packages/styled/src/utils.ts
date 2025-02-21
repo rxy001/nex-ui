@@ -1,6 +1,6 @@
-import isPropValid from '@emotion/is-prop-valid'
 import { isPlainObject } from '@nex-ui/utils'
-import type { StyleObject } from '@nex-ui/system'
+import isPropValid from '@emotion/is-prop-valid'
+import type { CSSObject } from '@nex-ui/system'
 import type { ElementType } from 'react'
 
 export const getDefaultShouldForwardProp = (tag: ElementType) =>
@@ -16,7 +16,9 @@ export const isSerializedStyles = (object: any) =>
   object.styles !== undefined
 
 export const composeSx = (
-  ...args: (StyleObject | undefined | StyleObject[])[]
-): StyleObject[] => {
-  return args.filter(Boolean).flat(1) as StyleObject[]
+  ...args: (CSSObject | undefined | CSSObject[])[]
+): CSSObject[] => {
+  return args.filter(Boolean).flat(1) as CSSObject[]
 }
+
+export { isPropValid }

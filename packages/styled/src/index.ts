@@ -4,4 +4,4 @@ export * from './nex'
 
 export type { Styled, StyledComponentProps } from './types'
 
-export { composeSx } from './utils'
+export { composeSx, isPropValid } from './utils'

@@ -1,28 +1,23 @@
-import {
-  forEach,
-  isString,
-  walkObject,
-  isPlainObject,
-  reduce,
-} from '@nex-ui/utils'
+import { forEach, isString, walkObject, reduce, __DEV__ } from '@nex-ui/utils'
 import type {
   CreateTokensConfig,
   TokenMap,
   CssVarMap,
-  TokenCategories,
+  TokenCategory,
   ConditionKey,
   SemanticTokenValue,
   TokenValue,
-  ResponsiveColor,
 } from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
   pathToTokenName,
-  checkTokenValue,
   createCssVarName,
-  checkTokenCategory,
   extractTokenPlaceholders,
+  isValidTokenCategory,
+  isValidTokenValue,
+  isValidSemanticTokenValue,
+  isResponsiveColor,
 } from '../utils'
 import type { Token } from './createToken'
 
@@ -127,6 +122,7 @@ export function createTokens(config: CreateTokensConfig) {
   function replaceTokenPlaceholders(value?: TokenValue) {
     if (isString(value)) {
       const matches = extractTokenPlaceholders(value)
+
       return reduce(
         matches,
         (acc: string, match: RegExpExecArray) => {
@@ -137,7 +133,10 @@ export function createTokens(config: CreateTokensConfig) {
           if (token) {
             return acc.replace(placeholder, token.value)
           }
-          console.error(`nex-system: Unknown token ${tokenName}`)
+          console.error(
+            '[Nex UI] token reference syntax: An unknown token %s exists in the token reference syntax.',
+            tokenName,
+          )
           return acc.replace(placeholder, tokenName)
         },
         value,
@@ -151,10 +150,20 @@ export function createTokens(config: CreateTokensConfig) {
     walkObject(
       tokens,
       (value: TokenValue, path: string[]) => {
-        if (!checkTokenCategory(path[0]) || !checkTokenValue(value, path))
+        if (__DEV__ && !isValidTokenCategory(path[0])) {
+          console.error('[Nex-UI] tokens: Unknown token category: %s.', path[0])
           return
+        }
 
-        const category = path[0] as TokenCategories
+        if (__DEV__ && !isValidTokenValue(value)) {
+          console.error(
+            '[Nex-UI] tokens: Expect the token value to be a string or a number. but what is currently received is %o.',
+            value,
+          )
+          return
+        }
+
+        const category = path[0] as TokenCategory
 
         workInProgress = createToken({
           path,
@@ -185,11 +194,22 @@ export function createTokens(config: CreateTokensConfig) {
     walkObject(
       semanticTokens,
       (value: SemanticTokenValue, path: string[]) => {
-        if (!checkTokenCategory(path[0])) {
+        if (__DEV__ && !isValidTokenCategory(path[0])) {
+          console.error(
+            '[Nex-UI] semanticTokens: Unknown token category: %s.',
+            path[0],
+          )
+          return
+        }
+        if (__DEV__ && !isValidSemanticTokenValue(value)) {
+          console.error(
+            '[Nex-UI] semanticTokens: Expect the semanticToken value to be a string, a number, or a responsive color. but what is currently received is %o.',
+            value,
+          )
           return
         }
 
-        const category = path[0] as TokenCategories
+        const category = path[0] as TokenCategory
 
         const newPath = filterDefault(path)
 
@@ -231,8 +251,4 @@ export type Tokens = ReturnType<typeof createTokens>
 function filterDefault(path: string[]) {
   if (path[0] === 'DEFAULT') return path
   return path.filter((item) => item !== 'DEFAULT')
-}
-
-export function isResponsiveColor(value: any): value is ResponsiveColor {
-  return isPlainObject(value) && (value._light || value._dark || value._DEFAULT)
 }

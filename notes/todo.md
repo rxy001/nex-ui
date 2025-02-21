@@ -44,4 +44,4 @@
 
 20. [Tokens Format](https://tr.designtokens.org/format/)
 
-21. StyleObject 每个属性应该支持 {[selector in keyof selectors]: string}
+21. CSSObject 每个属性应该支持 {[selector in keyof selectors]: string}
