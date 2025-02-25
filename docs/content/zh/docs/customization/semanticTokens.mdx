@@ -2,7 +2,7 @@ import { Callout } from 'nextra/components'
 
 # Semantic Tokens
 
-Semantic Tokens 是专为特定上下文使用而设计的 Tokens。与 Tokens 不同，其更侧重于传达内容的语义信息。
+Semantic Tokens 专为特定上下文使用而设计的 Tokens。与 Tokens 不同，其更侧重于传达内容的语义信息。
 
 ## 自定义 Semantic Tokens
 
@@ -65,7 +65,7 @@ const theme = defineTheme({
 ### TypeScript
 
 之后，如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
-扩展新定义的 SemanticTokens。
+扩展自定义的 SemanticTokens。
 
 ```tsx
 declare module '@nex-ui/react' {
@@ -78,7 +78,7 @@ declare module '@nex-ui/react' {
 
 ## 使用 Semantic Tokens
 
-使用方式同 [Tokens]() 一致。
+使用方式同 [Tokens](/docs/customization/tokens) 一致。
 
 ## 深色模式
 
@@ -102,7 +102,7 @@ const theme = defineTheme({
 
 ## 嵌套的 Semantic Tokens
 
-Semantic Tokens 可以嵌套，以创建层次结构。这在将 Semantic Tokens 组合在一起时，非常有用。
+Semantic Tokens 可以嵌套以创建层次结构。这在将 Semantic Tokens 组合在一起时，非常有用。
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -124,33 +124,62 @@ const theme = defineTheme({
   使用 `DEFAULT` 键定义嵌套 Semantic Token 的默认值。
 </Callout>
 
-这允许您使用 `bg` Semantic Token：
+由于使用 `DEFAULT` 键定义了 `bg` 的默认值，这允许您使用 `bg` Semantic Token：
 
 ```tsx
-<Box
-  sx={{
-    bg: 'bg',
-  }}
->
-  <Box
-    sx={{
-      bg: 'bg.primary',
-    }}
-  >
-    Hello NexUI
-  </Box>
-  <Box
-    sx={{
-      bg: 'bg.secondary',
-    }}
-  >
-    Hello NexUI
-  </Box>
-</Box>
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        bg: 'bg',
+      }}
+    >
+      <Box
+        sx={{
+          bg: 'bg.primary',
+        }}
+      >
+        Hello NexUI
+      </Box>
+      <Box
+        sx={{
+          bg: 'bg.secondary',
+        }}
+      >
+        Hello NexUI
+      </Box>
+    </Box>
+  )
+}
 ```
 
 **当然，在嵌套结构中使用 `_dark` 等条件也是可以的。**
 
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  semanticTokens: {
+    colors: {
+      blue: {
+        outlined: {
+          fg: {
+            _DEFAULT: '{colors.blue.500}',
+            _dark: '{colors.blue.600}',
+          },
+          hover: {
+            _DEFAULT: '{colors.blue.400}',
+            _dark: '{colors.blue.500}',
+          },
+        },
+      },
+    },
+  },
+})
+```
+
 ## Semantic Tokens 类型
 
-类型同 [Tokens]() 一致。
+类型同 [Tokens](/docs/customization/tokens) 一致。

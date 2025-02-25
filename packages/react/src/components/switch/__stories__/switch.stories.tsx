@@ -11,7 +11,7 @@ const meta = {
         'orange',
         'cyan',
         'gray',
-        'rose',
+        'red',
         'green',
         'pink',
         'purple',

@@ -18,4 +18,9 @@ export default {
     href: '/docs/components/button',
     title: '组件',
   },
+  theming: {
+    type: 'page',
+    href: '/docs/customization/theming',
+    title: '定制',
+  },
 }

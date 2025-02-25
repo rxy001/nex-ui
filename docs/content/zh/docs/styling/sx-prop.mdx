@@ -8,11 +8,11 @@ import logo from '@/public/images/logo.png'
 `sx` 属性是一种用于定义可访问主题的自定义样式的快捷方式。
 
 `sx` 属性提供一个 CSS 超集，除包含所有 CSS 属性和选择器之外，还有 Nex UI 内置的自定义属性和选择器，
-而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，NexUI 还提供了扩展能力。在[`Theming`页面](/b)了解更多信息。
+而 CSS 属性值可以直接使用预定义的主题。如果您不满足于已有的 CSS 自定义属性和选择器以及主题，Nex UI 还提供了扩展能力，在[定制主题页面](/docs/customization/theming)了解更多信息。
 
-## Basic Usage
+## 使用 `sx` 属性
 
-下面的例子演示了如何使用 `sx` 属性。注意，并不是所有的值都是有效的CSS属性，这是因为 `sx` 的键映射到了特定的 Token 类型。接下来将更详细地介绍这个概念。
+下面的例子演示了如何使用 `sx` 属性。注意，并不是所有的值都是有效的 CSS 属性，这是因为 `sx` 的键映射到了特定的 Token 类型。接下来将更详细地介绍这个概念。
 
 <FlexCenter justify='center'>
   <Box
@@ -48,7 +48,8 @@ import logo from '@/public/images/logo.png'
         color: 'blue.600',
       }}
       as='a'
-      href='github.com'
+      href='https://github.com/rxy001/nex-ui'
+      target='_blank'
     >
       Visit source code on GitHub.
     </Box>
@@ -102,7 +103,7 @@ export default function Example() {
 }
 ```
 
-## Theme-Aware Properties
+## 具备主题感知能力的属性
 
 通过 `scales` 可将 `tokens`、`semanticTokens` 与 CSS 属性关联，使得 CSS 属性能够映射到相应的 Token 类型，进而允许 CSS 属性能够使用相应类型的 Token 作为值。
 
@@ -140,7 +141,7 @@ export default function Example() {
 }
 ```
 
-在[`Scales`页面](/b)了解更多的信息。
+在[`Scales`页面](/docs/customization/scales)了解更多的信息。
 
 ### Colors
 
@@ -156,7 +157,7 @@ export default function Example() {
 <Box sx={{ bg: 'blue.400' }} />
 ```
 
-在[`Colors`页面](/c)了解更多的信息。
+在[`Colors`页面](/docs/customization/colors)了解更多的信息。
 
 ### Borders
 
@@ -186,7 +187,7 @@ export default function Example() {
 
 ### Spacing
 
-`padding` 和 `margin` 等属于可以接收 `token.spacing` 和 `semanticToken.spacing` 中的路径：
+`padding` 和 `margin` 等属性可以接收 `token.spacing` 和 `semanticToken.spacing` 中的路径：
 
 ```tsx
 <Box sx={{ padding: '1', margin: '1' }} />
@@ -202,7 +203,7 @@ export default function Example() {
 
 ### Radii
 
-`borderRadius` 属于可以接收 `token.radii` 和 `semanticToken.radii` 中的路径：
+`borderRadius` 属性可以接收 `token.radii` 和 `semanticToken.radii` 中的路径：
 
 ```tsx
 <Box sx={{ borderRadius: 'sm' }} />
@@ -212,25 +213,25 @@ export default function Example() {
 
 ### Typography
 
-`fontWeight` 属于可以接收 `token.fontWeights` 和 `semanticToken.fontWeights` 中的路径：
+`fontWeight` 属性可以接收 `token.fontWeights` 和 `semanticToken.fontWeights` 中的路径：
 
 ```tsx
 <Box sx={{ fontWeight: 'medium' }} />
 ```
 
-`fontSize` 属于可以接收 `token.fontSizes` 和 `semanticToken.fontSizes` 中的路径：
+`fontSize` 属性可以接收 `token.fontSizes` 和 `semanticToken.fontSizes` 中的路径：
 
 ```tsx
 <Box sx={{ fontSize: 'lg' }} />
 ```
 
-`fontFamily` 属于可以接收 `token.fontFamilies` 和 `semanticToken.fontFamilies` 中的路径：
+`fontFamily` 属性可以接收 `token.fontFamilies` 和 `semanticToken.fontFamilies` 中的路径：
 
 ```tsx
 <Box sx={{ fontFamily: 'heading' }} />
 ```
 
-`lineHeight` 属于可以接收 `token.lineHeights` 和 `semanticToken.lineHeights` 中的路径：
+`lineHeight` 属性可以接收 `token.lineHeights` 和 `semanticToken.lineHeights` 中的路径：
 
 ```tsx
 <Box sx={{ lineHeight: 'base' }} />
@@ -238,12 +239,52 @@ export default function Example() {
 
 在[`Typography`页面](/a)了解更多的信息。
 
-## Responsive Values
+### BorderWidths
+
+`borderWidth` 属性可以接收 `token.borderWidths` 和 `semanticToken.borderWidths` 中的路径：
+
+```tsx
+<Box sx={{ borderWidth: 'sm' }} />
+```
+
+在[`BorderWidths`页面](/a)了解更多的信息。
+
+### Shadows
+
+`box-shadow` 属性可以接收 `token.shadows` 和 `semanticToken.shadows` 中的路径：
+
+```tsx
+<Box sx={{ boxShadow: 'sm' }} />
+```
+
+在[`Shadows`页面](/a)了解更多的信息。
+
+### Transitions
+
+`transition` 属性可以接收 `token.transitions` 和 `semanticToken.transitions` 中的路径：
+
+```tsx
+<Box sx={{ transition: 'all' }} />
+```
+
+在[`Transitions`页面](/a)了解更多的信息。
+
+### Z-Indexes
+
+`zIndex` 属性可以接收 `token.zIndexes` 和 `semanticToken.zIndexes` 中的路径：
+
+```tsx
+<Box sx={{ zIndex: 'min' }} />
+```
+
+在[`Z-Indexes`页面](/a)了解更多的信息。
+
+## 响应式值
 
 与 `sx` 属性相关的所有 CSS 属性也都支持针对特定断点的响应式值。
 `sx` 属性简化了定义和实现响应式断点的过程，您可以通过两种不同的方式来定义一组断点：一个对象，或者一个数组。
 
-### Object Values
+### 对象类型
 
 定义断点的第一种选择是将它们作为一个对象来定义，使用断点值作为键。
 
@@ -295,7 +336,7 @@ export default function Example() {
 </Box>
 ```
 
-### Array Values
+### 数组类型
 
 第二种选择是将你的断点定义为一个数组，按照从小到大的顺序排列。如下所示：
 
@@ -335,7 +376,7 @@ export default function Example() {
 当然，不论是数组还是对象，`width` 的属性值都可以修改为 `token.sizes` 和
 `semanticToken.sizes`。这也意味着，其他的 CSS 属性同样支持相对应的 `token`。
 
-## Color Mode
+## 深色模式
 
 与 `sx` 属性相关的所有 CSS 属性也都支持深色模式。`sx` 属性搭配 Nex UI 提供的 Color Mode 系统，只需使用 `_dark` 即可为组件设置深色模式的样式，`_light` 为组件设置浅色模式的样式。`_DEFAULT`为组件的默认样式。
 
@@ -385,7 +426,7 @@ export default function Example() {
 </Box>
 ```
 
-## Color Palette
+## `colorPalette` 属性
 
 `colorPalette` 属性可以创建一个颜色占位符，以便更好地进行主题设置和自定义。
 使用 `colorPalette` 的基本要求是，使用的颜色必须有一致的命名规范。默认情况下，NexUI 会为每种颜色提供 50 到 900 的颜色值。
@@ -430,9 +471,9 @@ export default function Example() {
 </Box>
 ```
 
-## Token Reference Syntax
+## Token 引用语法
 
-通常情况下，只有在 `scales` 中定义 CSS 属性与 `tokens` 之间的映射关系才可以在定义 Style 时引用相应的 Tokens。Nex UI 默认设置 `Scales`：
+通常情况下，只有在 `scales` 中定义 CSS 属性与 Token 类型之间的映射关系才可以在定义 `CSS` 时引用相应类型的 Tokens。Nex UI 默认设置 `Scales`：
 
 ```tsx
 {
@@ -447,7 +488,7 @@ export default function Example() {
 ```tsx
 <Box
   sx={{
-    color: 'blue.contrastText',
+    color: 'gray.100',
     bg: 'blue.500',
   }}
 >
@@ -480,3 +521,34 @@ export default function Example() {
   Box
 </Box>
 ```
+
+此时，`border` 将应用`borderWidths.sm` 和 `colors.colorPalette.500` 对应的值 。
+
+## 数组类型
+
+当您想部分覆盖前一个索引中的某些样式时，数组类型会很有用。
+
+```tsx
+<Box
+  sx={[
+    {
+      '&:hover': {
+        color: 'red',
+        backgroundColor: 'white',
+      },
+    },
+    foo && {
+      '&:hover': { backgroundColor: 'grey' },
+    },
+    bar && {
+      '&:hover': { backgroundColor: 'yellow' },
+    },
+  ]}
+/>
+```
+
+当你悬浮到元素时，`color:red; backgroundColor: white` 将被应用。
+
+如果 `foo: true` ，那么 `color: red; backgroundColor: grey;` 将在悬浮状态应用。
+
+如果 `bar: true` ，那么 `color: red; backgroundColor: yellow;` 将在悬浮状态应用，无需关心 `foo` 的值，因为在数组中更高的索引具有更高的优先级。

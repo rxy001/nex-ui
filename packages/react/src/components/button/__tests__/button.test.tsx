@@ -35,7 +35,7 @@ describe('Button', () => {
     expect(button).not.toHaveClass(buttonClasses['color-pink'])
     expect(button).not.toHaveClass(buttonClasses['color-purple'])
     expect(button).not.toHaveClass(buttonClasses['color-yellow'])
-    expect(button).not.toHaveClass(buttonClasses['color-rose'])
+    expect(button).not.toHaveClass(buttonClasses['color-red'])
     expect(button).not.toHaveClass(buttonClasses['color-gray'])
     expect(button).not.toHaveClass(buttonClasses['size-sm'])
     expect(button).not.toHaveClass(buttonClasses['size-lg'])
@@ -66,7 +66,7 @@ describe('Button', () => {
   it('should add the appropriate color class to root element based on color prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Button color='rose' data-testid='color-rose'>
+        <Button color='red' data-testid='color-red'>
           Button
         </Button>
         <Button color='blue' data-testid='color-blue'>
@@ -96,7 +96,7 @@ describe('Button', () => {
       </>,
     )
 
-    expect(getByTestId('color-rose')).toHaveClass(buttonClasses['color-rose'])
+    expect(getByTestId('color-red')).toHaveClass(buttonClasses['color-red'])
     expect(getByTestId('color-blue')).toHaveClass(buttonClasses['color-blue'])
     expect(getByTestId('color-cyan')).toHaveClass(buttonClasses['color-cyan'])
     expect(getByTestId('color-orange')).toHaveClass(

@@ -39,7 +39,7 @@ describe('Avatar', () => {
     expect(avatar).not.toHaveClass(avatarClasses['color-pink'])
     expect(avatar).not.toHaveClass(avatarClasses['color-purple'])
     expect(avatar).not.toHaveClass(avatarClasses['color-yellow'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-rose'])
+    expect(avatar).not.toHaveClass(avatarClasses['color-red'])
     expect(avatar).not.toHaveClass(avatarClasses['color-blue'])
     expect(avatar).not.toHaveClass(avatarClasses['size-sm'])
     expect(avatar).not.toHaveClass(avatarClasses['size-lg'])
@@ -51,7 +51,7 @@ describe('Avatar', () => {
   it('should add the appropriate color class to root element based on color prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Avatar color='rose' data-testid='color-rose'>
+        <Avatar color='red' data-testid='color-red'>
           Avatar
         </Avatar>
         <Avatar color='blue' data-testid='color-blue'>
@@ -81,7 +81,7 @@ describe('Avatar', () => {
       </>,
     )
 
-    expect(getByTestId('color-rose')).toHaveClass(avatarClasses['color-rose'])
+    expect(getByTestId('color-red')).toHaveClass(avatarClasses['color-red'])
     expect(getByTestId('color-blue')).toHaveClass(avatarClasses['color-blue'])
     expect(getByTestId('color-cyan')).toHaveClass(avatarClasses['color-cyan'])
     expect(getByTestId('color-orange')).toHaveClass(

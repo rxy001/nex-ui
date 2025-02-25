@@ -71,7 +71,7 @@ const meta = {
         <Button key='gray' color='gray'>
           Button
         </Button>
-        <Button key='rose' color='rose'>
+        <Button key='red' color='red'>
           Button
         </Button>
         <Button key='cyan' color='cyan'>

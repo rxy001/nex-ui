@@ -34,7 +34,7 @@ export const HeartIcon = ({
 
 export const IconOnlyDemo = () => {
   return (
-    <Button iconOnly color='rose'>
+    <Button iconOnly color='red'>
       <HeartIcon />
     </Button>
   )

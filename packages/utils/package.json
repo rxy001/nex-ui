@@ -43,7 +43,6 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "lodash.capitalize": "4.2.1",
     "lodash.every": "4.6.0",
     "lodash.filter": "4.6.0",
     "lodash.foreach": "4.5.0",
@@ -57,7 +56,6 @@
     "lodash.some": "4.6.0"
   },
   "devDependencies": {
-    "@types/lodash.capitalize": "4.2.9",
     "@types/lodash.every": "4.6.9",
     "@types/lodash.filter": "4.6.9",
     "@types/lodash.foreach": "4.5.9",

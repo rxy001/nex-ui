@@ -40,7 +40,6 @@ export const theme = defineTheme({
         700: '#004493',
         800: '#002E62',
         900: '#14204a',
-        contrastText: '#fff',
       }
     },
     borders: {

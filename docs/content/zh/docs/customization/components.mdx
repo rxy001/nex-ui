@@ -24,11 +24,11 @@ const theme = defineTheme({
 
 通过 `components` 中的 `styleOverrides` 键可以更改任何 Nex UI 组件的任何默认样式。
 
-`styleOverrides` 支持两种不同方式覆盖组件的样式：函数或者对象（[Recipes]()、[SlotRecipes]()）。
+`styleOverrides` 支持两种不同方式覆盖组件的样式：函数或者对象（[Recipes](/docs/styling/recipes)、[SlotRecipes](/docs/styling/slot-recipes)）。
 
 ### 函数
 
-使用回调函数来访问组件的 `ownerState`，返回 [`sx`]()。
+使用回调函数来访问组件的 `ownerState`，返回 [`sx`](/docs/styling/sx-prop)。
 
 ```tsx
 import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
@@ -54,7 +54,7 @@ const theme = defineTheme({
 
 ### 对象
 
-使用 [Recipes]() 或者 [SlotRecipes]() （由不同的组件决定）不仅可以覆盖组件的默认样式，还包括各种不同 `variants` 以及组合式 `variants`的样式。
+使用 [Recipes](/docs/styling/recipes) 或者 [SlotRecipes](/docs/styling/slot-recipes) （由不同的组件决定）不仅可以覆盖组件的默认样式，还包括各种不同 `variants` 以及组合式 `variants`的样式。
 
 举例来说，当您想要覆盖 `Button` 组件 `variants` 属性值为 `outlined` 的样式时：
 

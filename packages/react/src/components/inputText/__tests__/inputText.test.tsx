@@ -34,7 +34,7 @@ describe('InputText', () => {
     expect(root).not.toHaveClass(inputTextClasses['radius-sm'])
     expect(root).not.toHaveClass(inputTextClasses['color-yellow'])
     expect(root).not.toHaveClass(inputTextClasses['color-cyan'])
-    expect(root).not.toHaveClass(inputTextClasses['color-rose'])
+    expect(root).not.toHaveClass(inputTextClasses['color-red'])
     expect(root).not.toHaveClass(inputTextClasses['color-gray'])
     expect(root).not.toHaveClass(inputTextClasses['color-green'])
     expect(root).not.toHaveClass(inputTextClasses['color-orange'])
@@ -56,7 +56,7 @@ describe('InputText', () => {
   it('should add the appropriate color class to root element based on color prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <InputText color='rose' data-testid='color-rose' />
+        <InputText color='red' data-testid='color-red' />
         <InputText color='blue' data-testid='color-blue' />
         <InputText color='cyan' data-testid='color-cyan' />
         <InputText color='orange' data-testid='color-orange' />
@@ -68,8 +68,8 @@ describe('InputText', () => {
       </>,
     )
 
-    expect(getByTestId('color-rose').parentElement).toHaveClass(
-      inputTextClasses['color-rose'],
+    expect(getByTestId('color-red').parentElement).toHaveClass(
+      inputTextClasses['color-red'],
     )
     expect(getByTestId('color-blue').parentElement).toHaveClass(
       inputTextClasses['color-blue'],

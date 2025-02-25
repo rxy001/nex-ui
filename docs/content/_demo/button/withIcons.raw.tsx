@@ -74,7 +74,7 @@ export default function App() {
       <Button endIcon={<CameraIcon />} color='green'>
         Take a photo
       </Button>
-      <Button startIcon={<UserIcon />} color='rose' variant='outlined'>
+      <Button startIcon={<UserIcon />} color='red' variant='outlined'>
         Delete user
       </Button>
     </Flex>

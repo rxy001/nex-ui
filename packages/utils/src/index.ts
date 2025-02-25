@@ -30,8 +30,6 @@ export { default as reduce } from 'lodash.reduce'
 
 export { default as mergeWith } from 'lodash.mergewith'
 
-export { default as capitalize } from 'lodash.capitalize'
-
 export { default as get } from 'lodash.get'
 
 export * from './env'

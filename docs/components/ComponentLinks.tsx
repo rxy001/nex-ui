@@ -6,6 +6,7 @@ import NextIcon from '@/icons/nextjs.svg'
 
 type ComponentLinksProps = {
   rscCompatible?: boolean
+  slotRecipe?: boolean
   component: string
 }
 const sx = {
@@ -36,6 +37,9 @@ const COMPONENT_PATH =
 const RECIPE_PATH =
   'https://github.com/rxy001/nex-ui/blob/main/packages/react/src/theme/recipes/'
 
+const SLOT_RECIPE_PATH =
+  'https://github.com/rxy001/nex-ui/blob/main/packages/react/src/theme/slotRecipes/'
+
 const ButtonLink = (props: ButtonProps) => {
   return (
     <Button
@@ -52,6 +56,7 @@ const ButtonLink = (props: ButtonProps) => {
 export const ComponentLinks = ({
   component,
   rscCompatible = false,
+  slotRecipe = false,
 }: ComponentLinksProps) => {
   return (
     <div className='x:mt-6 x:flex x:flex-row x:gap-4 x:flex-wrap x:md:gap-7'>
@@ -67,12 +72,21 @@ export const ComponentLinks = ({
       >
         Source
       </ButtonLink>
-      <ButtonLink
-        startIcon={<GithubFilled />}
-        href={`${RECIPE_PATH}${component}.ts`}
-      >
-        Recipe Source
-      </ButtonLink>
+      {slotRecipe ? (
+        <ButtonLink
+          startIcon={<GithubFilled />}
+          href={`${SLOT_RECIPE_PATH}${component}.ts`}
+        >
+          Slot Recipe Source
+        </ButtonLink>
+      ) : (
+        <ButtonLink
+          startIcon={<GithubFilled />}
+          href={`${RECIPE_PATH}${component}.ts`}
+        >
+          Recipe Source
+        </ButtonLink>
+      )}
     </div>
   )
 }

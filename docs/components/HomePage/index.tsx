@@ -87,14 +87,26 @@ export function HomePage({ translations }: HomePageProps) {
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.customization)}
           <Theme translations={translations} />
-          <Button radius='full' size='sm' className='x:w-[110px]' color='blue'>
+          <Button
+            radius='full'
+            size='sm'
+            className='x:w-[90px]'
+            color='blue'
+            href='/docs/customization/theming'
+          >
             {translations?.learnMore}
           </Button>
         </div>
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.styling)}
           <Layout />
-          <Button radius='full' size='sm' className='x:w-[110px]' color='blue'>
+          <Button
+            radius='full'
+            size='sm'
+            className='x:w-[90px]'
+            color='blue'
+            href='/docs/styling/sx-prop'
+          >
             {translations?.learnMore}
           </Button>
         </div>

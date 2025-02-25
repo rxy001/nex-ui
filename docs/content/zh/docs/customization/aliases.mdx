@@ -1,9 +1,9 @@
 import { Callout } from 'nextra/components'
-import { Table, Tbody, Td, Th, Thead, Tr } from '@/components/Table'
+import { AliasTable } from './_components'
 
 # Aliases
 
-Aliases 是用于定义 CSS 属性的别名。
+Aliases 用于定义 CSS 属性的别名，从而简化 CSS 属性名并支持组合 CSS 属性。
 
 ## 自定义 Aliases
 
@@ -26,7 +26,7 @@ Alias 值的类型为 `CSSProperty | CSSProperty[]`。
 ### TypeScript
 
 之后，如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
-扩展新定义的 Aliases。
+扩展自定义的 Aliases。
 
 ```tsx
 declare module '@nex-ui/react' {
@@ -40,7 +40,7 @@ declare module '@nex-ui/react' {
 
 ## 使用 Aliases
 
-在定义过后，您可以通过 [`sx`](/a) 属性、 [`defineRecipe`](/a) 或者 [`defineSlotRecipe`](/a) 使用新定义的 Aliases。
+在定义过后，您可以通过 [`sx`](/docs/styling/sx-prop) 属性、 [`defineRecipe`](/docs/styling/recipes) 或者 [`defineSlotRecipe`](/docs/styling/slot-recipes) 使用自定义的 Aliases。
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -63,111 +63,10 @@ export default function App() {
 <Callout>
   Nex UI 已关联 `width`、`height` 与 `sizes`，`paddingLeft`、`paddingRight` 与
   `spacing` 之间的映射关系，Aliases 会在内部转化为相应的 CSS
-  Property，因此可以直接使用。在 [`Scales`页面]()了解更多信息。
+  Property，因此可以直接使用。在
+  [`Scales`页面](/docs/customization/scales)了解更多信息。
 </Callout>
 
 ## 默认可用的 Aliases
 
-export function AliasesTable() {
-  const dataSource = [
-    {
-      alias: 'w',
-      prop: 'width',
-    },
-    {
-      alias: 'h',
-      prop: 'height',
-    },
-    {
-      alias: 'bg',
-      prop: 'backgroundColor',
-    },
-    {
-      alias: 'fs',
-      prop: 'fontSize',
-    },
-    {
-      alias: 'lh',
-      prop: 'lineHeight',
-    },
-    {
-      alias: 'p',
-      prop: 'padding',
-    },
-    {
-      alias: 'py',
-      prop: 'paddingTop、paddingBottom',
-    },
-    {
-      alias: 'px',
-      prop: 'paddingLeft、paddingRight',
-    },
-    {
-      alias: 'pt',
-      prop: 'paddingTop',
-    },
-    {
-      alias: 'pr',
-      prop: 'paddingRight',
-    },
-    {
-      alias: 'pb',
-      prop: 'paddingBottom',
-    },
-    {
-      alias: 'pl',
-      prop: 'paddingLeft',
-    },
-    {
-      alias: 'm',
-      prop: 'margin',
-    },
-    {
-      alias: 'mx',
-      prop: 'marginLeft、marginRight',
-    },
-    {
-      alias: 'my',
-      prop: 'marginTop、marginBottom',
-    },
-    {
-      alias: 'mt',
-      prop: 'marginTop',
-    },
-    {
-      alias: 'mr',
-      prop: 'marginRight',
-    },
-    {
-      alias: 'mb',
-      prop: 'marginBottom',
-    },
-    {
-      alias: 'ml',
-      prop: 'marginLeft',
-    },
-  ]
-
-return (
-
-<Table>
-  <Thead>
-    <Tr>
-      <Th className='x:w-[50%]'>Alias</Th>
-      <Th>CSS Property</Th>
-    </Tr>
-  </Thead>
-  <Tbody>
-    {dataSource.map(({ alias, prop }) => (
-      <Tr key={alias}>
-        <Td className='x:text-blue-600 x:font-bold x:dark:text-blue-400'>
-          {alias}
-        </Td>
-        <Td>{prop}</Td>
-      </Tr>
-    ))}
-  </Tbody>
-</Table>
-) }
-
-<AliasesTable />
+<AliasTable />

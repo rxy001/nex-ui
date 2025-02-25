@@ -43,13 +43,13 @@ export const inputTextRecipe = defineSlotRecipe({
     variant: {
       outlined: {
         root: {
-          borderColor: 'gray.300',
+          borderColor: 'gray.highlight',
         },
       },
       filled: {
         root: {
-          bg: 'gray.100',
-          borderColor: 'gray.100',
+          bg: 'gray.muted',
+          borderColor: 'gray.muted',
         },
       },
       borderless: {
@@ -71,10 +71,7 @@ export const inputTextRecipe = defineSlotRecipe({
     error: {
       true: {
         root: {
-          color: {
-            _DEFAULT: 'red.500',
-            _dark: 'red.600',
-          },
+          color: 'red.primary',
         },
       },
     },
@@ -87,10 +84,10 @@ export const inputTextRecipe = defineSlotRecipe({
       css: {
         root: {
           '&:hover': {
-            borderColor: 'colorPalette.outlined.hover',
+            borderColor: 'colorPalette.secondary',
           },
           '&:focus-within': {
-            borderColor: 'colorPalette.outlined.active',
+            borderColor: 'colorPalette.accent',
           },
         },
       },
@@ -102,11 +99,11 @@ export const inputTextRecipe = defineSlotRecipe({
       css: {
         root: {
           '&:hover': {
-            bg: 'gray.200',
-            borderColor: 'gray.200',
+            bg: 'gray.tertiary',
+            borderColor: 'gray.tertiary',
           },
           '&:focus-within': {
-            borderColor: 'colorPalette.filled.active',
+            borderColor: 'colorPalette.accent',
             bg: 'transparent',
           },
         },
@@ -117,10 +114,7 @@ export const inputTextRecipe = defineSlotRecipe({
       variant: 'outlined',
       css: {
         root: {
-          borderColor: {
-            _DEFAULT: 'red.500',
-            _dark: 'red.600',
-          },
+          borderColor: 'red.primary',
         },
       },
     },
@@ -129,13 +123,10 @@ export const inputTextRecipe = defineSlotRecipe({
       variant: 'filled',
       css: {
         root: {
-          bg: 'red.100',
-          borderColor: 'red.100',
+          bg: 'red.muted',
+          borderColor: 'red.muted',
           '&:focus-within': {
-            borderColor: {
-              _DEFAULT: 'red.500',
-              _dark: 'red.600',
-            },
+            borderColor: 'red.primary',
             bg: 'transparent',
           },
         },

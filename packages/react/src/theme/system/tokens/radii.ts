@@ -1,10 +1,10 @@
 import { defineTokens } from '@nex-ui/system'
 
 export const radii = defineTokens.radii({
-  xs: '3px',
+  xs: '4px',
   sm: '6px',
-  md: '9px',
+  md: '8px',
   lg: '12px',
-  xl: '15px',
+  xl: '16px',
   full: '9999px',
 })

@@ -1,8 +1,9 @@
 import { Callout } from 'nextra/components'
+import { AvailableProps } from './_components'
 
 # Tokens
 
-Design Tokens 是用于管理应用程序的设计决策。它是一组属性的集合，用于描述任何基本的 / 原子级的视觉风格。
+Design Tokens 用于管理应用程序的设计决策。它是一组属性的集合，用于描述任何基本的 / 原子级的视觉风格。
 
 ## 自定义 Tokens
 
@@ -26,7 +27,6 @@ const theme = defineTheme({
         700: '#004493',
         800: '#002E62',
         900: '#14204a',
-        contrastText: '#fff',
       },
     },
     spacing: { 16: '64px', 17: '68px', 18: '72px' },
@@ -43,7 +43,7 @@ Token 是与一个直观易读的名称相关联的信息，一般表现为 name
 ### TypeScript
 
 之后，如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
-扩展新定义的 Tokens。
+扩展自定义的 Tokens。
 
 ```ts
 declare module '@nex-ui/react' {
@@ -60,7 +60,6 @@ declare module '@nex-ui/react' {
       | 'sky.700'
       | 'sky.800'
       | 'sky.900'
-      | 'sky.contrastText'
     spacing: '16' | '17' | '18'
   }
 }
@@ -68,7 +67,7 @@ declare module '@nex-ui/react' {
 
 ## 使用 Tokens
 
-在定义过后，您可以通过 [`sx`](/a) 属性、 [`defineRecipe`](/a) 或者 [`defineSlotRecipe`](/a) 使用新定义的 Tokens。
+在定义过后，您可以通过 [`sx`](/docs/styling/sx-prop) 属性、 [`defineRecipe`](/docs/styling/recipes) 或者 [`defineSlotRecipe`](/docs/styling/slot-recipes) 使用自定义的 Tokens。
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -90,7 +89,8 @@ export default function App() {
 <Callout>
   Nex UI 已关联 `backgroundColor` 和 `colors`、`padding` 和 `spacing`
   之间的映射关系，因此可以直接使用。如果将 `backgroundCOlor: 'sky.500'` 改为
-  `outlineColor: 'sky.500'`，则无法正常工作。在 [`Scales`页面]()了解更多信息。
+  `outlineColor: 'sky.500'`，则无法正常工作。在
+  [`Scales`页面](/docs/customization/scales)了解更多信息。
 </Callout>
 
 ## Tokens 类型
@@ -114,12 +114,12 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  默认可用于 `color`、`borderColor`、`backgroundColor`、`borderRightColor`
-  、`borderBottomColor`、`borderTopColor`、`borderLeftColor` 、`stroke` 、`fill`
-  属性。
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.Colors />
+  <span>&nbsp;属性。</span>
 </Callout>
 
-### Sizes Tokens
+### Sizes
 
 Sizes 类型的 Tokens 代表元素的高度和宽度。其值类型为 `string | number` 。
 
@@ -136,8 +136,9 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  默认可用于 `width`、`height`、`minWidth`、`minHeight`、`maxWidth`、`maxHeight`
-  属性。
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.Sizes />
+  <span>&nbsp;属性。</span>
 </Callout>
 
 ### Spacing
@@ -157,11 +158,9 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  默认可用于
-  `padding`、`paddingTop`、`paddingRight`、`paddingBottom`、`paddingLeft`
-  `margin`、`marginTop`、`marginRight`、`marginBottom`、`marginLeft`、`top`、`left`、
-  `right`、`bottom`、`gap`、`rowGap`、`columnGap`、`gridGap`、`gridRowGap`、`gridColumnGap`
-  属性。
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.Spacing />
+  <span>&nbsp;属性。</span>
 </Callout>
 
 ### FontSizes
@@ -180,7 +179,11 @@ const theme = defineTheme({
 })
 ```
 
-<Callout type='info'>默认可用于 `fontSize` 属性。</Callout>
+<Callout type='info'>
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.FontSizes />
+  <span>&nbsp;属性。</span>
+</Callout>
 
 ### FontFamilies
 
@@ -198,7 +201,11 @@ const theme = defineTheme({
 })
 ```
 
-<Callout type='info'>默认可用于 `fontFamily` 属性。</Callout>
+<Callout type='info'>
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.FontFamilies />
+  <span>&nbsp;属性。</span>
+</Callout>
 
 ### FontWeights
 
@@ -216,7 +223,11 @@ const theme = defineTheme({
 })
 ```
 
-<Callout type='info'>默认可用于 `fontWeight` 属性。</Callout>
+<Callout type='info'>
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.FontWeights />
+  <span>&nbsp;属性。</span>
+</Callout>
 
 ### LineHeights
 
@@ -234,7 +245,11 @@ const theme = defineTheme({
 })
 ```
 
-<Callout type='info'>默认可用于 `lineHeight` 属性。</Callout>
+<Callout type='info'>
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.LineHeights />
+  <span>&nbsp;属性。</span>
+</Callout>
 
 ### Borders
 
@@ -253,8 +268,9 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  默认可用于 `border`、`borderTop`、`borderRight`、`borderBottom`、`borderLeft`
-  属性。
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.Borders />
+  <span>&nbsp;属性。</span>
 </Callout>
 
 ### BorderWidths
@@ -274,9 +290,9 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  默认可用于
-  `borderWidth`、`borderTopWidth`、`borderRightWidth`、`borderBottomWidth`、
-  `borderLeftWidth` 属性。
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.BorderWidths />
+  <span>&nbsp;属性。</span>
 </Callout>
 
 ### Radii
@@ -296,8 +312,9 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  默认可用于 `borderRadius`、`borderTopRightRadius`、`borderBottomRightRadius`、
-  `borderBottomLeftRadius`、`borderTopLeftRadius` 属性。
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.Radii />
+  <span>&nbsp;属性。</span>
 </Callout>
 
 ### Shadows
@@ -316,7 +333,11 @@ const theme = defineTheme({
 })
 ```
 
-<Callout type='info'>默认可用于 `boxShadow` 属性。</Callout>
+<Callout type='info'>
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.Shadows />
+  <span>&nbsp;属性。</span>
+</Callout>
 
 ### Transitions
 
@@ -334,22 +355,30 @@ const theme = defineTheme({
 })
 ```
 
-<Callout type='info'>默认可用于 `transition` 属性。</Callout>
+<Callout type='info'>
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.Transitions />
+  <span>&nbsp;属性。</span>
+</Callout>
 
-### Z-Index
+### Z-Indexes
 
-Z-Index 类型的 Tokens 代表元素及其后代元素的 Z 轴顺序。其值类型为 `number` 。
+Z-Indexes 类型的 Tokens 代表元素及其后代元素的 Z 轴顺序。其值类型为 `number` 。
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
 
 const theme = defineTheme({
   tokens: {
-    zIndex: {
+    zIndexes: {
       min: 0,
     },
   },
 })
 ```
 
-<Callout type='info'>默认可用于 `zIndex` 属性。</Callout>
+<Callout type='info'>
+  <span className='x:float-left'>默认可用于&nbsp;</span>
+  <AvailableProps.ZIndexes />
+  <span>&nbsp;属性。</span>
+</Callout>

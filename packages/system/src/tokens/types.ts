@@ -38,7 +38,6 @@ export type ColorsDefinition = Dictionary<
       700?: CSSProperties['color']
       800?: CSSProperties['color']
       900?: CSSProperties['color']
-      contrastText?: CSSProperties['color']
     }
   | CSSProperties['color']
 >

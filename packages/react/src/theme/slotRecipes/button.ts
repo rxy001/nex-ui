@@ -44,51 +44,43 @@ export const buttonRecipe = defineSlotRecipe({
     variant: {
       outlined: {
         root: {
-          borderColor: 'colorPalette.outlined.fg',
-          color: 'colorPalette.outlined.fg',
-          _hover: {
-            borderColor: 'colorPalette.outlined.hover',
-            color: 'colorPalette.outlined.hover',
+          borderColor: {
+            _DEFAULT: 'colorPalette.primary',
+            _hover: 'colorPalette.secondary',
+            _active: 'colorPalette.accent',
           },
-          _active: {
-            borderColor: 'colorPalette.outlined.active',
-            color: 'colorPalette.outlined.active',
+          color: {
+            _DEFAULT: 'colorPalette.primary',
+            _hover: 'colorPalette.secondary',
+            _active: 'colorPalette.accent',
           },
         },
       },
       filled: {
         root: {
-          bg: 'colorPalette.filled.fg',
-          color: 'colorPalette.filled.contrastText',
-          _hover: {
-            bg: 'colorPalette.filled.hover',
-            color: 'colorPalette.filled.contrastText',
+          bg: {
+            _DEFAULT: 'colorPalette.primary',
+            _hover: 'colorPalette.secondary',
+            _active: 'colorPalette.accent',
           },
-          _active: {
-            bg: 'colorPalette.filled.active',
-            color: 'colorPalette.filled.contrastText',
-          },
+          color: 'colorPalette.contrastText',
         },
       },
       text: {
         root: {
-          color: 'colorPalette.text.fg',
-          _hover: {
-            bg: 'colorPalette.text.hover',
-          },
-          _active: {
-            bg: 'colorPalette.text.active',
+          color: 'colorPalette.primary',
+          bg: {
+            _hover: 'colorPalette.muted',
+            _active: 'colorPalette.tertiary',
           },
         },
       },
       link: {
         root: {
-          color: 'colorPalette.link.fg',
-          _hover: {
-            color: 'colorPalette.link.hover',
-          },
-          _active: {
-            color: 'colorPalette.link.active',
+          color: {
+            _DEFAULT: 'colorPalette.primary',
+            _hover: 'colorPalette.secondary',
+            _active: 'colorPalette.accent',
           },
         },
       },

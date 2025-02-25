@@ -2,561 +2,246 @@ import { defineSemanticTokens } from '@nex-ui/system'
 
 export const colors = defineSemanticTokens.colors({
   blue: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.blue.500}',
-        _dark: '{colors.blue.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.blue.400}',
-        _dark: '{colors.blue.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.blue.600}',
-        _dark: '{colors.blue.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.blue.500}',
+      _dark: '{colors.blue.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.blue.500}',
-        _dark: '{colors.blue.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.blue.400}',
-        _dark: '{colors.blue.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.blue.600}',
-        _dark: '{colors.blue.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.blue.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.blue.400}',
+      _dark: '{colors.blue.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.blue.500}',
-        _dark: '{colors.blue.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.blue.100}',
-        _dark: '{colors.blue.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.blue.200}',
-        _dark: '{colors.blue.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.blue.200}',
+      _dark: '{colors.blue.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.blue.500}',
-        _dark: '{colors.blue.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.blue.400}',
-        _dark: '{colors.blue.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.blue.600}',
-        _dark: '{colors.blue.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.blue.600}',
+      _dark: '{colors.blue.700}',
+    },
+    muted: { _DEFAULT: '{colors.blue.100}', _dark: '{colors.blue.900}' },
+    highlight: {
+      _DEFAULT: '{colors.blue.300}',
+      _dark: '{colors.blue.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.white}',
+      _dark: '{colors.white}',
     },
   },
   gray: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.gray.500}',
-        _dark: '{colors.gray.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.gray.400}',
-        _dark: '{colors.gray.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.gray.600}',
-        _dark: '{colors.gray.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.gray.500}',
+      _dark: '{colors.gray.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.gray.500}',
-        _dark: '{colors.gray.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.gray.400}',
-        _dark: '{colors.gray.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.gray.600}',
-        _dark: '{colors.gray.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.gray.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.gray.400}',
+      _dark: '{colors.gray.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.gray.500}',
-        _dark: '{colors.gray.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.gray.100}',
-        _dark: '{colors.gray.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.gray.200}',
-        _dark: '{colors.gray.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.gray.200}',
+      _dark: '{colors.gray.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.gray.500}',
-        _dark: '{colors.gray.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.gray.400}',
-        _dark: '{colors.gray.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.gray.600}',
-        _dark: '{colors.gray.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.gray.600}',
+      _dark: '{colors.gray.700}',
+    },
+    muted: { _DEFAULT: '{colors.gray.100}', _dark: '{colors.gray.900}' },
+    highlight: {
+      _DEFAULT: '{colors.gray.300}',
+      _dark: '{colors.gray.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.white}',
+      _dark: '{colors.white}',
     },
   },
-  rose: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.rose.500}',
-        _dark: '{colors.rose.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.rose.400}',
-        _dark: '{colors.rose.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.rose.600}',
-        _dark: '{colors.rose.600}',
-      },
+  red: {
+    primary: {
+      _DEFAULT: '{colors.red.500}',
+      _dark: '{colors.red.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.rose.500}',
-        _dark: '{colors.rose.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.rose.400}',
-        _dark: '{colors.rose.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.rose.600}',
-        _dark: '{colors.rose.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.rose.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.red.400}',
+      _dark: '{colors.red.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.rose.500}',
-        _dark: '{colors.rose.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.rose.100}',
-        _dark: '{colors.rose.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.rose.200}',
-        _dark: '{colors.rose.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.red.200}',
+      _dark: '{colors.red.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.rose.500}',
-        _dark: '{colors.rose.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.rose.400}',
-        _dark: '{colors.rose.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.rose.600}',
-        _dark: '{colors.rose.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.red.600}',
+      _dark: '{colors.red.700}',
+    },
+    muted: { _DEFAULT: '{colors.red.100}', _dark: '{colors.red.900}' },
+    highlight: {
+      _DEFAULT: '{colors.red.300}',
+      _dark: '{colors.red.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.white}',
+      _dark: '{colors.white}',
     },
   },
   orange: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.orange.500}',
-        _dark: '{colors.orange.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.orange.400}',
-        _dark: '{colors.orange.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.orange.600}',
-        _dark: '{colors.orange.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.orange.500}',
+      _dark: '{colors.orange.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.orange.500}',
-        _dark: '{colors.orange.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.orange.400}',
-        _dark: '{colors.orange.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.orange.600}',
-        _dark: '{colors.orange.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.orange.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.orange.400}',
+      _dark: '{colors.orange.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.orange.500}',
-        _dark: '{colors.orange.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.orange.100}',
-        _dark: '{colors.orange.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.orange.200}',
-        _dark: '{colors.orange.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.orange.200}',
+      _dark: '{colors.orange.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.orange.500}',
-        _dark: '{colors.orange.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.orange.400}',
-        _dark: '{colors.orange.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.orange.600}',
-        _dark: '{colors.orange.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.orange.600}',
+      _dark: '{colors.orange.700}',
+    },
+    muted: { _DEFAULT: '{colors.orange.100}', _dark: '{colors.orange.900}' },
+    highlight: {
+      _DEFAULT: '{colors.orange.300}',
+      _dark: '{colors.orange.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.black}',
+      _dark: '{colors.black}',
     },
   },
   yellow: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.yellow.500}',
-        _dark: '{colors.yellow.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.yellow.400}',
-        _dark: '{colors.yellow.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.yellow.600}',
-        _dark: '{colors.yellow.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.yellow.500}',
+      _dark: '{colors.yellow.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.yellow.500}',
-        _dark: '{colors.yellow.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.yellow.400}',
-        _dark: '{colors.yellow.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.yellow.600}',
-        _dark: '{colors.yellow.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.yellow.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.yellow.400}',
+      _dark: '{colors.yellow.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.yellow.500}',
-        _dark: '{colors.yellow.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.yellow.100}',
-        _dark: '{colors.yellow.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.yellow.200}',
-        _dark: '{colors.yellow.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.yellow.200}',
+      _dark: '{colors.yellow.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.yellow.500}',
-        _dark: '{colors.yellow.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.yellow.400}',
-        _dark: '{colors.yellow.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.yellow.600}',
-        _dark: '{colors.yellow.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.yellow.600}',
+      _dark: '{colors.yellow.700}',
+    },
+    muted: { _DEFAULT: '{colors.yellow.100}', _dark: '{colors.yellow.900}' },
+    highlight: {
+      _DEFAULT: '{colors.yellow.300}',
+      _dark: '{colors.yellow.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.black}',
+      _dark: '{colors.black}',
     },
   },
   green: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.green.500}',
-        _dark: '{colors.green.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.green.400}',
-        _dark: '{colors.green.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.green.600}',
-        _dark: '{colors.green.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.green.500}',
+      _dark: '{colors.green.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.green.500}',
-        _dark: '{colors.green.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.green.400}',
-        _dark: '{colors.green.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.green.600}',
-        _dark: '{colors.green.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.green.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.green.400}',
+      _dark: '{colors.green.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.green.500}',
-        _dark: '{colors.green.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.green.100}',
-        _dark: '{colors.green.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.green.200}',
-        _dark: '{colors.green.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.green.200}',
+      _dark: '{colors.green.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.green.500}',
-        _dark: '{colors.green.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.green.400}',
-        _dark: '{colors.green.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.green.600}',
-        _dark: '{colors.green.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.green.600}',
+      _dark: '{colors.green.700}',
+    },
+    muted: { _DEFAULT: '{colors.green.100}', _dark: '{colors.green.900}' },
+    highlight: {
+      _DEFAULT: '{colors.green.300}',
+      _dark: '{colors.green.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.black}',
+      _dark: '{colors.black}',
     },
   },
   cyan: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.cyan.500}',
-        _dark: '{colors.cyan.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.cyan.400}',
-        _dark: '{colors.cyan.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.cyan.600}',
-        _dark: '{colors.cyan.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.cyan.500}',
+      _dark: '{colors.cyan.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.cyan.500}',
-        _dark: '{colors.cyan.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.cyan.400}',
-        _dark: '{colors.cyan.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.cyan.600}',
-        _dark: '{colors.cyan.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.cyan.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.cyan.400}',
+      _dark: '{colors.cyan.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.cyan.500}',
-        _dark: '{colors.cyan.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.cyan.100}',
-        _dark: '{colors.cyan.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.cyan.200}',
-        _dark: '{colors.cyan.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.cyan.200}',
+      _dark: '{colors.cyan.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.cyan.500}',
-        _dark: '{colors.cyan.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.cyan.400}',
-        _dark: '{colors.cyan.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.cyan.600}',
-        _dark: '{colors.cyan.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.cyan.600}',
+      _dark: '{colors.cyan.700}',
+    },
+    muted: { _DEFAULT: '{colors.cyan.100}', _dark: '{colors.cyan.900}' },
+    highlight: {
+      _DEFAULT: '{colors.cyan.300}',
+      _dark: '{colors.cyan.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.white}',
+      _dark: '{colors.white}',
     },
   },
   purple: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.purple.500}',
-        _dark: '{colors.purple.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.purple.400}',
-        _dark: '{colors.purple.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.purple.600}',
-        _dark: '{colors.purple.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.purple.500}',
+      _dark: '{colors.purple.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.purple.500}',
-        _dark: '{colors.purple.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.purple.400}',
-        _dark: '{colors.purple.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.purple.600}',
-        _dark: '{colors.purple.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.purple.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.purple.400}',
+      _dark: '{colors.purple.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.purple.500}',
-        _dark: '{colors.purple.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.purple.100}',
-        _dark: '{colors.purple.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.purple.200}',
-        _dark: '{colors.purple.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.purple.200}',
+      _dark: '{colors.purple.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.purple.500}',
-        _dark: '{colors.purple.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.purple.400}',
-        _dark: '{colors.purple.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.purple.600}',
-        _dark: '{colors.purple.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.purple.600}',
+      _dark: '{colors.purple.700}',
+    },
+    muted: { _DEFAULT: '{colors.purple.100}', _dark: '{colors.purple.900}' },
+    highlight: {
+      _DEFAULT: '{colors.purple.300}',
+      _dark: '{colors.purple.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.white}',
+      _dark: '{colors.white}',
     },
   },
   pink: {
-    outlined: {
-      fg: {
-        _DEFAULT: '{colors.pink.500}',
-        _dark: '{colors.pink.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.pink.400}',
-        _dark: '{colors.pink.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.pink.600}',
-        _dark: '{colors.pink.600}',
-      },
+    primary: {
+      _DEFAULT: '{colors.pink.500}',
+      _dark: '{colors.pink.600}',
     },
-    filled: {
-      fg: {
-        _DEFAULT: '{colors.pink.500}',
-        _dark: '{colors.pink.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.pink.400}',
-        _dark: '{colors.pink.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.pink.600}',
-        _dark: '{colors.pink.600}',
-      },
-      contrastText: {
-        _DEFAULT: '{colors.pink.contrastText}',
-        _dark: 'white',
-      },
+    secondary: {
+      _DEFAULT: '{colors.pink.400}',
+      _dark: '{colors.pink.500}',
     },
-    text: {
-      fg: {
-        _DEFAULT: '{colors.pink.500}',
-        _dark: '{colors.pink.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.pink.100}',
-        _dark: '{colors.pink.900}',
-      },
-      active: {
-        _DEFAULT: '{colors.pink.200}',
-        _dark: '{colors.pink.800}',
-      },
+    tertiary: {
+      _DEFAULT: '{colors.pink.200}',
+      _dark: '{colors.pink.800}',
     },
-    link: {
-      fg: {
-        _DEFAULT: '{colors.pink.500}',
-        _dark: '{colors.pink.600}',
-      },
-      hover: {
-        _DEFAULT: '{colors.pink.400}',
-        _dark: '{colors.pink.500}',
-      },
-      active: {
-        _DEFAULT: '{colors.pink.600}',
-        _dark: '{colors.pink.600}',
-      },
+    accent: {
+      _DEFAULT: '{colors.pink.600}',
+      _dark: '{colors.pink.700}',
+    },
+    muted: { _DEFAULT: '{colors.pink.100}', _dark: '{colors.pink.900}' },
+    highlight: {
+      _DEFAULT: '{colors.pink.300}',
+      _dark: '{colors.pink.700}',
+    },
+    contrastText: {
+      _DEFAULT: '{colors.white}',
+      _dark: '{colors.white}',
     },
   },
 })

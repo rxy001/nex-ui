@@ -18,7 +18,9 @@ type Conditions<T> = {
 } & ExtraSelecotrs<T> &
   BreakpointObject<T>
 
-type BreakpointArray = (string | number)[] | readonly (string | number)[]
+type BreakpointArray =
+  | (string | number | null | undefined)[]
+  | readonly (string | number | null | undefined)[]
 
 type NestedConditions<T> =
   | {

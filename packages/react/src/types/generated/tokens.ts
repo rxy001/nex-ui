@@ -7,8 +7,6 @@ export type Tokens = UniteTokens<DefaultTokens, TokensOverrides>
 
 export interface DefaultTokens {
   colors:
-    | 'transparent'
-    | 'current'
     | 'white'
     | 'black'
     | 'blue.50'
@@ -21,7 +19,6 @@ export interface DefaultTokens {
     | 'blue.700'
     | 'blue.800'
     | 'blue.900'
-    | 'blue.contrastText'
     | 'gray.50'
     | 'gray.100'
     | 'gray.200'
@@ -32,7 +29,6 @@ export interface DefaultTokens {
     | 'gray.700'
     | 'gray.800'
     | 'gray.900'
-    | 'gray.contrastText'
     | 'pink.50'
     | 'pink.100'
     | 'pink.200'
@@ -43,7 +39,6 @@ export interface DefaultTokens {
     | 'pink.700'
     | 'pink.800'
     | 'pink.900'
-    | 'pink.contrastText'
     | 'purple.50'
     | 'purple.100'
     | 'purple.200'
@@ -54,7 +49,6 @@ export interface DefaultTokens {
     | 'purple.700'
     | 'purple.800'
     | 'purple.900'
-    | 'purple.contrastText'
     | 'cyan.50'
     | 'cyan.100'
     | 'cyan.200'
@@ -65,7 +59,6 @@ export interface DefaultTokens {
     | 'cyan.700'
     | 'cyan.800'
     | 'cyan.900'
-    | 'cyan.contrastText'
     | 'yellow.50'
     | 'yellow.100'
     | 'yellow.200'
@@ -76,7 +69,6 @@ export interface DefaultTokens {
     | 'yellow.700'
     | 'yellow.800'
     | 'yellow.900'
-    | 'yellow.contrastText'
     | 'orange.50'
     | 'orange.100'
     | 'orange.200'
@@ -87,7 +79,6 @@ export interface DefaultTokens {
     | 'orange.700'
     | 'orange.800'
     | 'orange.900'
-    | 'orange.contrastText'
     | 'red.50'
     | 'red.100'
     | 'red.200'
@@ -98,7 +89,6 @@ export interface DefaultTokens {
     | 'red.700'
     | 'red.800'
     | 'red.900'
-    | 'red.contrastText'
     | 'green.50'
     | 'green.100'
     | 'green.200'
@@ -109,18 +99,6 @@ export interface DefaultTokens {
     | 'green.700'
     | 'green.800'
     | 'green.900'
-    | 'green.contrastText'
-    | 'rose.50'
-    | 'rose.100'
-    | 'rose.200'
-    | 'rose.300'
-    | 'rose.400'
-    | 'rose.500'
-    | 'rose.600'
-    | 'rose.700'
-    | 'rose.800'
-    | 'rose.900'
-    | 'rose.contrastText'
   sizes:
     | '1'
     | '2'
@@ -231,8 +209,6 @@ export interface DefaultTokens {
 }
 
 export interface ColorsToken {
-  transparent?: CSSProperties['color']
-  current?: CSSProperties['color']
   white?: CSSProperties['color']
   black?: CSSProperties['color']
   blue?: {
@@ -246,7 +222,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   gray?: {
     50?: CSSProperties['color']
@@ -259,7 +234,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   pink?: {
     50?: CSSProperties['color']
@@ -272,7 +246,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   purple?: {
     50?: CSSProperties['color']
@@ -285,7 +258,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   cyan?: {
     50?: CSSProperties['color']
@@ -298,7 +270,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   yellow?: {
     50?: CSSProperties['color']
@@ -311,7 +282,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   orange?: {
     50?: CSSProperties['color']
@@ -324,7 +294,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   red?: {
     50?: CSSProperties['color']
@@ -337,7 +306,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
   green?: {
     50?: CSSProperties['color']
@@ -350,20 +318,6 @@ export interface ColorsToken {
     700?: CSSProperties['color']
     800?: CSSProperties['color']
     900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
-  }
-  rose?: {
-    50?: CSSProperties['color']
-    100?: CSSProperties['color']
-    200?: CSSProperties['color']
-    300?: CSSProperties['color']
-    400?: CSSProperties['color']
-    500?: CSSProperties['color']
-    600?: CSSProperties['color']
-    700?: CSSProperties['color']
-    800?: CSSProperties['color']
-    900?: CSSProperties['color']
-    contrastText?: CSSProperties['color']
   }
 }
 

@@ -14,7 +14,7 @@ export const checkboxRecipe = defineSlotRecipe({
       p: '2',
       cursor: 'pointer',
       ':hover span:first-of-type::before': {
-        borderColor: 'colorPalette.filled.hover',
+        borderColor: 'colorPalette.secondary',
       },
     },
     input: {
@@ -32,7 +32,7 @@ export const checkboxRecipe = defineSlotRecipe({
       transition: 'opacity',
       position: 'relative',
       zIndex: 1,
-      color: 'colorPalette.filled.contrastText',
+      color: 'colorPalette.contrastText',
       fs: '1.1em',
     },
     iconContainer: {
@@ -45,14 +45,14 @@ export const checkboxRecipe = defineSlotRecipe({
         position: 'absolute',
         inset: 0,
         border: 'md',
-        borderColor: 'gray.200',
+        borderColor: 'gray.highlight',
         transition: 'colors',
       },
       '::after': {
         content: '""',
         position: 'absolute',
         inset: 0,
-        bg: 'colorPalette.filled.fg',
+        bg: 'colorPalette.primary',
         transition: 'opacity',
         opacity: 0,
       },
@@ -74,7 +74,7 @@ export const checkboxRecipe = defineSlotRecipe({
     size: {
       sm: {
         root: {
-          fs: '14px',
+          fs: 'md',
         },
         iconContainer: {
           w: '4',
@@ -83,7 +83,7 @@ export const checkboxRecipe = defineSlotRecipe({
       },
       md: {
         root: {
-          fs: '16px',
+          fs: 'lg',
         },
         iconContainer: {
           w: '5',
@@ -92,7 +92,7 @@ export const checkboxRecipe = defineSlotRecipe({
       },
       lg: {
         root: {
-          fs: '18px',
+          fs: 'xl',
         },
         iconContainer: {
           w: '6',
@@ -105,30 +105,30 @@ export const checkboxRecipe = defineSlotRecipe({
       sm: {
         iconContainer: {
           '::before': {
-            borderRadius: '4px',
+            borderRadius: 'xs',
           },
           '::after': {
-            borderRadius: '4px',
+            borderRadius: 'xs',
           },
         },
       },
       md: {
         iconContainer: {
           '::before': {
-            borderRadius: '6px',
+            borderRadius: 'sm',
           },
           '::after': {
-            borderRadius: '6px',
+            borderRadius: 'sm',
           },
         },
       },
       lg: {
         iconContainer: {
           '::before': {
-            borderRadius: '8px',
+            borderRadius: 'md',
           },
           '::after': {
-            borderRadius: '8px',
+            borderRadius: 'md',
           },
         },
       },

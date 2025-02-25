@@ -122,7 +122,7 @@ export const switchRecipe = defineSlotRecipe({
           ml: '50%',
         },
         track: {
-          bg: 'colorPalette.filled.fg',
+          bg: 'colorPalette.primary',
         },
         startIcon: {
           opacity: 1,

@@ -1,1 +1,151 @@
+import { Box } from '@nex-ui/react'
+import { Callout } from 'nextra/components'
+import { SelectorTable } from './_components'
+
 # Selectors
+
+Selectors 专为组合多个 CSS 选择器而设计，旨在更高效、灵活地对页面元素应用样式规则。
+
+## 自定义 Selectors
+
+Selectors 可在您的主题配置 `theme.selectors` 部分定义：
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  selectors: {
+    hover: '&:not(:disabled):not([data-disabled=true]):hover',
+    active: '&:not(:disabled):not([data-disabled=true]):active',
+  },
+})
+```
+
+Selector 值的类型为 `string`。
+
+### TypeScript
+
+之后，如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
+扩展自定义的 Aliases。
+
+```tsx
+declare module '@nex-ui/react' {
+  interface SelectorsOverrides {
+    hover: '&:not(:disabled):not([data-disabled=true]):hover'
+    active: '&:not(:disabled):not([data-disabled=true]):active'
+  }
+}
+```
+
+## 使用 Selectors
+
+在定义过后，您可以通过 [`sx`](/docs/styling/sx-prop) 属性、 [`defineRecipe`](/docs/styling/recipes) 或者 [`defineSlotRecipe`](/docs/styling/slot-recipes) 使用自定义的 Selectors。
+
+> Breakpoints 对象形式默认可作为 Selectors 使用。
+
+<FlexCenter gap='10'>
+  <Box
+    as='button'
+    sx={{
+      color: 'purple.500',
+      _hover: {
+        color: 'blue.500',
+      },
+      _active: {
+        color: 'green.500',
+      },
+    }}
+  >
+    Clickable
+  </Box>
+  <Box
+    as='button'
+    disabled
+    sx={{
+      color: 'purple.500',
+      _hover: {
+        color: 'blue.500',
+      },
+      _active: {
+        color: 'green.500',
+      },
+    }}
+  >
+    Disabled
+  </Box>
+</FlexCenter>
+
+```tsx
+import { Box, Flex } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Flex gap='10'>
+      <Box
+        as='button'
+        sx={{
+          color: 'purple.500',
+          _hover: {
+            color: 'blue.500',
+          },
+          _active: {
+            color: 'green.500',
+          },
+        }}
+      >
+        Clickable
+      </Box>
+      <Box
+        as='button'
+        disabled
+        sx={{
+          color: 'purple.500',
+          _hover: {
+            color: 'blue.500',
+          },
+          _active: {
+            color: 'green.500',
+          },
+        }}
+      >
+        Disabled
+      </Box>
+    </Flex>
+  )
+}
+```
+
+在上述示例中，`color` 属性分别在三种不同交互状态（常规状态、悬停状态、激活状态）中进行了单独定义，更符合传统 CSS 的结构。然而，您也可以以另外一种形式简化这个定义过程：
+
+```tsx
+import { Box, Flex } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      as='button'
+      sx={{
+        color: {
+          _DEFAULT: 'purple.500',
+          _hover: 'blue.500',
+          _active: 'green.500',
+        },
+      }}
+    >
+      Clickable
+    </Box>
+  )
+}
+```
+
+在上述示例中，将 `color` 在不同状态的样式封装成一个对象，构成**状态映射**，通过不同的键来区分不同状态下的样式，可在视觉上清晰地看到样式变动的逻辑。
+在单一样式场景下，该方式更具灵活性。
+
+<Callout>
+  在复杂样式场景下，更推荐使用第一种符合 CSS
+  标准的形式，其扩展性更强。随着样式的复杂度增加，它可以通过相同的状态轻松添加更多的样式，易于理解和维护。
+</Callout>
+
+## 默认可用的 Selectors
+
+<SelectorTable />

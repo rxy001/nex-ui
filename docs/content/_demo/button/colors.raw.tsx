@@ -7,7 +7,7 @@ export default function App() {
       <Button color='cyan'>Cyan</Button>
       <Button color='gray'>Gray</Button>
       <Button color='orange'>Orange</Button>
-      <Button color='rose'>Rose</Button>
+      <Button color='red'>Red</Button>
       <Button color='green'>Green</Button>
       <Button color='pink'>Pink</Button>
       <Button color='purple'>Purple</Button>

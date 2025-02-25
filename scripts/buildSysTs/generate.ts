@@ -2,7 +2,7 @@ import { walkObject } from 'packages/utils/src'
 import { isResponsiveColor } from 'packages/system/src/utils'
 import { pretty } from '../utils'
 
-function capitalize(str: string) {
+function upperFirst(str: string) {
   return str.replace(/^\w/, (c) => c.toUpperCase())
 }
 
@@ -122,7 +122,7 @@ export async function generateTokens(sys: any) {
 
       return `
 
-        export interface ${capitalize(tokenCategory)}Token {
+        export interface ${upperFirst(tokenCategory)}Token {
           ${keys
             .map(
               (key) =>

@@ -29,7 +29,6 @@ const theme = defineTheme({
       700: '#0069a8',
       800: '#00598a',
       900: '#024a71',
-      contrastText: '#fff',
     },
   },
 })
@@ -47,13 +46,13 @@ export default function App() {
 
 更改主题配置属性是使 Nex UI 满足需求的最有效方法。下列涵盖了所有的主题属性：
 
-- [`breakpoints`](/a)
-- [`aliases`](/a)
-- [`scales`](/a)
-- [`selectors`](/a)
-- [`tokens`](/a)
-- [`semanticTokens`](/a)
-- [`components`](/a)
+- [`scales`](/docs/customization/scales)
+- [`tokens`](/docs/customization/tokens)
+- [`semanticTokens`](/docs/customization/semanticTokens)
+- [`breakpoints`](/docs/customization/breakpoints)
+- [`aliases`](/docs/customization/aliases)
+- [`selectors`](/docs/customization/selectors)
+- [`components`](/docs/customization/components)
 
 向主题中添加额外属性，这样您就能在其他各处使用这些属性了。通过上述链接可查看更多信息。
 
@@ -86,18 +85,18 @@ const theme = defineTheme({
 您可以嵌套使用 `NexUIProvider` 实现局部组件主题的更换。
 
 <FlexCenter>
-  <Checkbox defaultChecked color='rose' />
+  <Checkbox defaultChecked color='red' />
   <Checkbox defaultChecked color='green' />
 </FlexCenter>
 
 ```tsx
-import { NexUIProvider } from '@nex-ui/react'
+import { NexUIProvider, defineTheme } from '@nex-ui/react'
 
 const outerTheme = defineTheme({
   components: {
     Checkbox: {
       defaultProps: {
-        color: 'rose',
+        color: 'red',
       },
     },
   },
@@ -146,7 +145,7 @@ export default function App() {
         "'orange'",
         "'yellow'",
         "'ryan'",
-        "'rose'",
+        "'red'",
         "'green'",
         "'pick'",
         "'purple'",

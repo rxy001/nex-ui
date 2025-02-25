@@ -34,7 +34,7 @@ export const HeartIcon = ({
 
 export default function App() {
   return (
-    <Button iconOnly color='rose'>
+    <Button iconOnly color='red'>
       <HeartIcon />
     </Button>
   )

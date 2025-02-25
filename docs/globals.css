@@ -45,3 +45,7 @@
 .nextra-code button[title='Copy code'] {
   color: white;
 }
+
+.nextra-code button[title='Toggle word wrap'] {
+  color: white;
+}

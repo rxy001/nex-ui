@@ -24,7 +24,6 @@ const sysConfig = defineConfig({
         100: '#dbeafe',
         200: '#bfdbfe',
         300: '#a3cfff',
-        contrastText: '#fff',
       },
     },
     borders: { xs: '0.5px', sm: '1px' },

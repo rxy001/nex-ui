@@ -44,4 +44,6 @@
 
 20. [Tokens Format](https://tr.designtokens.org/format/)
 
-21. CSSObject 每个属性应该支持 {[selector in keyof selectors]: string}
+<!-- 21. CSSObject 每个属性应该支持 {[selector in keyof selectors]: string} -->
+
+<!-- 22. 重命名语义化颜色 -->

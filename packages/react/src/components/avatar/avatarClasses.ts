@@ -8,10 +8,10 @@ export const avatarClasses = generateUtilityClasses('nui-avatar', [
   'radius-lg',
   'radius-full',
 
-  // "blue" | "gray" | "pink" | "purple" | "cyan" | "yellow" | "orange" | "rose" | "green"
+  // "blue" | "gray" | "pink" | "purple" | "cyan" | "yellow" | "orange" | "red" | "green"
   'color-gray',
   'color-green',
-  'color-rose',
+  'color-red',
   'color-yellow',
   'color-blue',
   'color-pink',

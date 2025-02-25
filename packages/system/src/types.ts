@@ -25,7 +25,11 @@ type CSSPseudos = { [K in CSS.Pseudos]?: CSSObject }
 export interface CSSObjectOverrides {}
 
 type CSSOthersObject = {
-  [propertiesName: string]: CSSInterpolation | unknown
+  [propertiesName: string]:
+    | CSSInterpolation
+    | CSSInterpolation[]
+    | readonly CSSInterpolation[]
+  // [propertiesName: string]: CSSInterpolation | unknown
 }
 
 type CSSPropertiesWithOverrides = Omit<

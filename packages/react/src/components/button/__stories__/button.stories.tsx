@@ -50,7 +50,7 @@ const meta = {
         <Button {...args} key='blue' />
         <Button {...args} key='purple' color='purple' />
         <Button {...args} key='gray' color='gray' />
-        <Button {...args} key='rose' color='rose' />
+        <Button {...args} key='red' color='red' />
         <Button {...args} key='cyan' color='cyan' />
         <Button {...args} key='pink' color='pink' />
         <Button {...args} key='yellow' color='yellow' />
