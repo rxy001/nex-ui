@@ -1,6 +1,6 @@
 import { defineTokens } from '@nex-ui/system'
 import { colors } from './colors'
-import { spacing } from './spacing'
+import { spaces } from './spaces'
 import { fontFamilies, fontSizes, fontWeights, lineHeights } from './typography'
 import { sizes } from './sizes'
 import { borders } from './borders'
@@ -13,7 +13,7 @@ import { zIndexes } from './zIndexes'
 export const tokens = defineTokens({
   colors,
   sizes,
-  spacing,
+  spaces,
   fontFamilies,
   fontSizes,
   fontWeights,

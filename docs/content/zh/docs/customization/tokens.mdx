@@ -29,7 +29,7 @@ const theme = defineTheme({
         900: '#14204a',
       },
     },
-    spacing: { 16: '64px', 17: '68px', 18: '72px' },
+    spaces: { 16: '64px', 17: '68px', 18: '72px' },
   },
 })
 ```
@@ -60,7 +60,7 @@ declare module '@nex-ui/react' {
       | 'sky.700'
       | 'sky.800'
       | 'sky.900'
-    spacing: '16' | '17' | '18'
+    spaces: '16' | '17' | '18'
   }
 }
 ```
@@ -87,7 +87,7 @@ export default function App() {
 ```
 
 <Callout>
-  Nex UI 已关联 `backgroundColor` 和 `colors`、`padding` 和 `spacing`
+  Nex UI 已关联 `backgroundColor` 和 `colors`、`padding` 和 `spaces`
   之间的映射关系，因此可以直接使用。如果将 `backgroundCOlor: 'sky.500'` 改为
   `outlineColor: 'sky.500'`，则无法正常工作。在
   [`Scales`页面](/docs/customization/scales)了解更多信息。
@@ -141,16 +141,16 @@ const theme = defineTheme({
   <span>&nbsp;属性。</span>
 </Callout>
 
-### Spacing
+### Spaces
 
-Spacing 类型的 Tokens 代表元素之间的间距。其值类型为 `string | number` 。
+Spaces 类型的 Tokens 代表元素之间的间距。其值类型为 `string | number` 。
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
 
 const theme = defineTheme({
   tokens: {
-    spacing: {
+    spaces: {
       1: '4px',
     },
   },
@@ -159,7 +159,7 @@ const theme = defineTheme({
 
 <Callout type='info'>
   <span className='x:float-left'>默认可用于&nbsp;</span>
-  <AvailableProps.Spacing />
+  <AvailableProps.Spaces />
   <span>&nbsp;属性。</span>
 </Callout>
 

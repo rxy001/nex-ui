@@ -71,7 +71,7 @@ export function isValidTokenCategory(category: any): category is TokenCategory {
     case 'fontSizes':
     case 'fontWeights':
     case 'sizes':
-    case 'spacing':
+    case 'spaces':
     case 'lineHeights':
     case 'borders':
     case 'radii':

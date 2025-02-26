@@ -128,7 +128,7 @@ export interface DefaultTokens {
     | '7.5'
     | '8.5'
     | '9.5'
-  spacing:
+  spaces:
     | '1'
     | '2'
     | '3'
@@ -352,7 +352,7 @@ export interface SizesToken {
   '9.5'?: string | number
 }
 
-export interface SpacingToken {
+export interface SpacesToken {
   '1'?: string | number
   '2'?: string | number
   '3'?: string | number

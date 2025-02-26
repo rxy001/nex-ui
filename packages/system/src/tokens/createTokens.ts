@@ -105,7 +105,7 @@ export function createTokens(config: CreateTokensConfig) {
       const { category, originalValue } = workInProgress
 
       switch (category) {
-        case 'spacing':
+        case 'spaces':
           if (originalValue === '0rem' || originalValue === 0) {
             return
           }

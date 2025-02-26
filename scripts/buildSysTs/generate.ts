@@ -84,7 +84,7 @@ export async function generateTokens(sys: any) {
               }
             })
 
-            if (tokenCategory === 'spacing') {
+            if (tokenCategory === 'spaces') {
               types.push(...types.map((v) => `'-${v.replaceAll("'", '')}'`))
             }
 
@@ -100,7 +100,7 @@ export async function generateTokens(sys: any) {
 
   const typeMap: Record<string, string> = {
     borders: 'string | number',
-    spacing: 'string | number',
+    spaces: 'string | number',
     colors: "CSSProperties['color']",
     sizes: 'string | number',
     fontFamilies: 'string',

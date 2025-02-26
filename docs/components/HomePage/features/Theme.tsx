@@ -52,7 +52,7 @@ export const theme = defineTheme({
       sm: '6px',
       md: '9px',
     },
-    spacing: {
+    spaces: {
       1: '4px',
       1.5: '6px',
       2: '8px',
@@ -108,8 +108,8 @@ export const theme = defineTheme({
     lineHeight: 'lineHeights',
     fontFamily: 'fontFamilies',
     fontSize: 'fontSizes',
-    padding: 'spacing',
-    margin: 'spacing',
+    padding: 'spaces',
+    margin: 'spaces',
     borderRadius: 'radii',
     ...
   }

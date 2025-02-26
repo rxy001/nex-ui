@@ -1,6 +1,6 @@
 import type {
   ColorsDefinition,
-  SpacingDefinition,
+  SpacesDefinition,
   SizesDefinition,
   FontFamiliesDefinition,
   FontSizesDefinition,
@@ -27,7 +27,7 @@ import type {
   FontSizesToken,
   FontWeightsToken,
   SizesToken,
-  SpacingToken,
+  SpacesToken,
   RadiiToken,
   BordersToken,
   LineHeightsToken,
@@ -48,7 +48,7 @@ export type Theme = {
   components?: ComponentThemes
   tokens?: {
     borders?: BordersDefinition & BordersToken
-    spacing?: SpacingDefinition & SpacingToken
+    spaces?: SpacesDefinition & SpacesToken
     colors?: ColorsDefinition & ColorsToken
     sizes?: SizesDefinition & SizesToken
     fontFamilies?: FontFamiliesDefinition & FontFamiliesToken

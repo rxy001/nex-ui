@@ -17,7 +17,7 @@ export type TokenCategory =
   | 'fontWeights'
   | 'lineHeights'
   | 'colors'
-  | 'spacing'
+  | 'spaces'
   | 'sizes'
   | 'borders'
   | 'radii'
@@ -44,7 +44,7 @@ export type ColorsDefinition = Dictionary<
 
 export type RadiiDefinition = Dictionary<string | number>
 
-export type SpacingDefinition = Dictionary<string | number>
+export type SpacesDefinition = Dictionary<string | number>
 
 export type SizesDefinition = Dictionary<string | number>
 
@@ -94,7 +94,7 @@ type StringForNestedSemanticTokenValue =
       DEFAULT?: string
     } & { [key: string]: StringForNestedSemanticTokenValue })
 
-export type SemanticSpacingDefinition =
+export type SemanticSpacesDefinition =
   Dictionary<StringAndNumberForNestedSemanticTokenValue>
 
 export type SemanticSizesDefinition =
@@ -132,7 +132,7 @@ export type SemanticShadowsDefinition =
 
 export type SemanticTokensDefinition = {
   colors?: SemanticColorDefinition
-  spacing?: SemanticSpacingDefinition
+  spaces?: SemanticSpacesDefinition
   sizes?: SemanticSizesDefinition
   fontFamilies?: SemanticFontFamiliesDefinition
   fontSizes?: SemanticFontSizesDefinition
@@ -148,7 +148,7 @@ export type SemanticTokensDefinition = {
 
 export type TokensDefinition = {
   colors?: ColorsDefinition
-  spacing?: SpacingDefinition
+  spaces?: SpacesDefinition
   sizes?: SizesDefinition
   fontFamilies?: FontFamiliesDefinition
   fontSizes?: FontSizesDefinition

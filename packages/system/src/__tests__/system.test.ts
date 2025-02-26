@@ -33,7 +33,7 @@ const sysConfig = defineConfig({
       2: '40px',
       3: '48px',
     },
-    spacing: {
+    spaces: {
       1: '4px',
       2: '8px',
       3: '12px',
@@ -69,19 +69,19 @@ const sysConfig = defineConfig({
     lineHeight: 'lineHeights',
     fontFamily: 'fontFamilies',
 
-    gap: 'spacing',
+    gap: 'spaces',
 
-    padding: 'spacing',
-    paddingTop: 'spacing',
-    paddingBottom: 'spacing',
-    paddingLeft: 'spacing',
-    paddingRight: 'spacing',
+    padding: 'spaces',
+    paddingTop: 'spaces',
+    paddingBottom: 'spaces',
+    paddingLeft: 'spaces',
+    paddingRight: 'spaces',
 
-    marginRight: 'spacing',
-    marginTop: 'spacing',
-    marginLeft: 'spacing',
-    marginBottom: 'spacing',
-    margin: 'spacing',
+    marginRight: 'spaces',
+    marginTop: 'spaces',
+    marginLeft: 'spaces',
+    marginBottom: 'spaces',
+    margin: 'spaces',
 
     borderRadius: 'radii',
     borderTopRightRadius: 'radii',
@@ -190,8 +190,8 @@ describe('base styles', () => {
     const toCssVariable = (v: string) => `var(--${CSS_VARS_PREFIX}-${v})`
 
     const transformedBase = {
-      paddingLeft: toCssVariable('spacing-1'),
-      paddingRight: toCssVariable('spacing-1'),
+      paddingLeft: toCssVariable('spaces-1'),
+      paddingRight: toCssVariable('spaces-1'),
       color: toCssVariable('colors-white'),
       backgroundColor: toCssVariable('colors-blue-100'),
       borderWidth: toCssVariable('borders-sm'),

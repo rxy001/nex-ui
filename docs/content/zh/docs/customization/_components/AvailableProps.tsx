@@ -23,7 +23,7 @@ function getAvailablePropsByTokenCategory(tokenCategory: string) {
 const tokenCategories: TokenCategory[] = [
   'colors',
   'sizes',
-  'spacing',
+  'spaces',
   'borders',
   'borderWidths',
   'fontSizes',

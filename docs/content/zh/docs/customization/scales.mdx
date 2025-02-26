@@ -23,7 +23,7 @@ const theme = defineTheme({
     sizes: {
       10: '40px',
     },
-    spacing: {
+    spaces: {
       5: '20px',
     },
   },
@@ -37,7 +37,7 @@ const theme = defineTheme({
     backgroundColor: 'colors',
     borderColor: 'colors',
     width: 'sizes',
-    padding: 'spacing',
+    padding: 'spaces',
   },
 })
 ```
@@ -47,7 +47,7 @@ Scale 的 `key` 为 `CSSProperty` 类型， `value` 为 `TokenCategory` 类型�
 <Callout>此处 Alias 无需再关联 CSS 属性。</Callout>
 
 通过上述定义之后，在 `sx` 属性、 `defineRecipe` 和 `defineSlotRecipe` 等方法使用中，`color`、`borderColor` 和 `backgroundColor`
-可直接引用 Colors 类型的 Tokens， `width` 引用 Sizes 类型的 Tokens， `padding` 引用 Spacing 类型的 Tokens。
+可直接引用 Colors 类型的 Tokens， `width` 引用 Sizes 类型的 Tokens， `padding` 引用 Spaces 类型的 Tokens。
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -82,7 +82,7 @@ declare module '@nex-ui/react' {
     backgroundColor: 'colors'
     borderColor: 'colors'
     width: 'sizes'
-    padding: 'spacing'
+    padding: 'spaces'
   }
 }
 ```

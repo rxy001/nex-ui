@@ -15,7 +15,7 @@ defineTokens.fontFamilies = (v: TokensDefinition['fontFamilies']) => v
 defineTokens.fontSizes = (v: TokensDefinition['fontSizes']) => v
 defineTokens.fontWeights = (v: TokensDefinition['fontWeights']) => v
 defineTokens.sizes = (v: TokensDefinition['sizes']) => v
-defineTokens.spaceing = (v: TokensDefinition['spacing']) => v
+defineTokens.spaces = (v: TokensDefinition['spaces']) => v
 defineTokens.radii = (v: TokensDefinition['radii']) => v
 defineTokens.shadows = (v: TokensDefinition['shadows']) => v
 defineTokens.transitions = (v: TokensDefinition['transitions']) => v
@@ -36,7 +36,7 @@ defineSemanticTokens.fontWeights = (
   v: SemanticTokensDefinition['fontWeights'],
 ) => v
 defineSemanticTokens.sizes = (v: SemanticTokensDefinition['sizes']) => v
-defineSemanticTokens.spaceing = (v: SemanticTokensDefinition['spacing']) => v
+defineSemanticTokens.spaces = (v: SemanticTokensDefinition['spaces']) => v
 defineSemanticTokens.radii = (v: SemanticTokensDefinition['radii']) => v
 defineSemanticTokens.shadows = (v: SemanticTokensDefinition['shadows']) => v
 defineSemanticTokens.transitions = (

@@ -17,4 +17,5 @@ export default {
     title: 'DESIGN TOKENS',
   },
   colors: 'Colors',
+  sizes: 'Sizes',
 }
