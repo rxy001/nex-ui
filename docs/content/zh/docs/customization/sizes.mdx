@@ -1,0 +1,25 @@
+import { Callout } from 'nextra/components'
+import { AvailableProps, TokenTable } from './_components'
+import { map } from '@nex-ui/utils'
+import { defaultConfig } from '@nex-ui/react'
+
+# Sizes
+
+Sizes Tokens 是一组标准化的尺寸值，统一管理 UI 元素的宽度、高度、最大/最小尺寸等属性。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，Sizes 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.Sizes />
+  <span>。</span>
+</Callout>
+
+Nex UI 开箱即支持以下 Tokens。
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.sizes, (value, key) => ({
+    token: `sizes.${key}`,
+    value,
+  }))}
+/>

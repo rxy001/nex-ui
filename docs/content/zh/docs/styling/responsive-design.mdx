@@ -1,0 +1,162 @@
+import { Box } from '@nex-ui/react'
+import { Callout } from 'nextra/components'
+
+# 响应式设计
+
+响应式设计是现代前端开发的一个基本概念，它使网站和应用能够无缝适应不同的屏幕尺寸和设备。
+
+> Nex UI 使用一种以移动端优先的断点系统，并且当你编写响应式样式时，它会利用最小宽度媒体查询 `@media (min-width)`。
+
+Nex UI 默认提供 5 个断点：
+
+```ts
+const breakoptions = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+}
+```
+
+## 使用 Breakpoint
+
+您可以在 [`sx` 属性](/docs/styling/sx-prop)、 [`defineRecipe`](/docs/styling/recipes) 或者 [`defineSlotRecipe`](/docs/styling/slot-recipes) 使用上述 Breakpoints。
+在这些方法中，所有 CSS 属性都支持针对特定断点的响应式值。
+
+有两种使用方式能够定义一组断点：一个对象，或者一个数组。
+
+### 对象类型
+
+下面的例子演示了如何使用对象语法定义一组断点：
+
+<FlexCenter
+  align='center'
+  justify='center'
+  sx={{
+    backgroundImage: 'linear-gradient(to top right, #f77062 0%, #fe5196 100%)',
+    py: 10,
+    borderRadius: 'sm',
+  }}
+>
+  <Box
+    sx={{
+      width: {
+        _sm: 200,
+        _md: 300,
+        _lg: 400,
+        _xl: 500,
+        _2xl: 600,
+      },
+      backdropFilter: 'blur(12px)',
+      bg: '#fff9',
+      borderRadius: 'sm',
+      py: 2,
+      px: 7,
+      color: 'black',
+    }}
+  >
+    This box has a responsive width.
+  </Box>
+</FlexCenter>
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        width: {
+          _sm: 200, // @media (min-width: 640px) { width: 200px }
+          _md: 300, // @media (min-width: 768px) { width: 300px }
+          _lg: 400, // @media (min-width: 1024px) { width: 400px }
+          _xl: 500, // @media (min-width: 1280px) { width: 500px }
+          _2xl: 600, // @media (min-width: 1536px) { width: 600px }
+        },
+      }}
+    >
+      This box has a responsive width.
+    </Box>
+  )
+}
+```
+
+### 数组类型
+
+第二种选择是将你的断点定义为一个数组，按照从小到大的顺序排列。如下所示：
+
+<FlexCenter
+  align='center'
+  justify='center'
+  sx={{
+    backgroundImage: 'linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%)',
+    py: 10,
+    borderRadius: 'sm',
+    color: 'black',
+  }}
+>
+  <Box
+    sx={{
+      width: [200, 300, 400],
+      backdropFilter: 'blur(12px)',
+      bg: '#fff9',
+      borderRadius: 'sm',
+      py: 2,
+      px: 7,
+    }}
+  >
+    This box has a responsive width.
+  </Box>
+</FlexCenter>
+
+```tsx
+<Box sx={{ width: [200, 300, 400] }}>This box has a responsive width.</Box>
+
+// [200, 300, 400] 分别对应为 [breakpoints.sm, breakpoints.md, breakpoints.lg]
+```
+
+<Callout type='info'>
+只有当主题的断点数量有限时，才应该考虑这个选项，例如只有三个断点的情况。
+
+如果您需要定义不止几个断点，我们建议使用对象 API。
+
+</Callout>
+
+您可以通过 `null | undefined` 跳过相应的断点：
+
+```tsx
+<Box sx={{ width: [200, null, 400] }}>This box has a responsive width.</Box>
+```
+
+当然，不论是数组还是对象，`width` 的属性值都可以修改为 [Sizes Tokens](/docs/customization/sizes) 和
+[Sizes SemanticTokens](/docs/customization/sizes)。这也意味着，其他的 CSS 属性同样支持关联类型的 Tokens。
+
+## Breakpoints 选择器
+
+通过上述两种方式，大幅简化了对单个 CSS 属性定义和实现响应式断点的过程。若是想要对一组 CSS 属性实现响应式，那您可以将断点作为选择器使用：
+
+```tsx
+<Box
+  sx={{
+    _md: {
+      width: 300,
+      height: 300,
+    },
+    _lg: {
+      width: 400,
+      height: 400,
+    },
+  }}
+>
+  This box has a responsive size.
+</Box>
+```
+
+这种方式在复杂 CSS 样式场景下，更利于理解和维护。
+
+## 自定义 Breakpoints
+
+您还能够定义自定义断点，并在定义断点对象时将它们用作键。
+
+在 [Breakpoints](/docs/customization/breakpoints) 了解如何自定义断点。

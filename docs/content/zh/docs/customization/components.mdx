@@ -122,7 +122,6 @@ const theme = defineTheme({
       styleOverrides: ({ size }: ButtonOwnerState) => {
         if (size === 'xl') {
           return {
-            // 60px
             h: '14',
           }
         }
@@ -132,7 +131,7 @@ const theme = defineTheme({
 })
 ```
 
-或者
+或者使用 [Recipes](/docs/styling/recipes) \ [SlotRecipes](/docs/styling/slot-recipes) （由想要扩展的组件决定）
 
 ```tsx
 const theme = defineTheme({
@@ -143,7 +142,6 @@ const theme = defineTheme({
           size: {
             xl: {
               root: {
-                // 60px
                 h: '14',
               },
             },

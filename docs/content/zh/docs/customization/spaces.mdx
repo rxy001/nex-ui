@@ -1,0 +1,25 @@
+import { Callout } from 'nextra/components'
+import { AvailableProps, TokenTable } from './_components'
+import { map } from '@nex-ui/utils'
+import { defaultConfig } from '@nex-ui/react'
+
+# Spaces
+
+Spaces Tokens 是一组预设的间距值，确保 UI 元素（如外边距、内边距、间隙等）的视觉一致性。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，Spaces 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.Spaces />
+  <span>。</span>
+</Callout>
+
+Nex UI 开箱即支持以下 Tokens。
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.spaces, (value, key) => ({
+    token: `spaces.${key}`,
+    value,
+  }))}
+/>

@@ -23,7 +23,6 @@ export const scales = defineConfig.scales({
   fontFamily: 'fontFamilies',
   fontSize: 'fontSizes',
 
-  gap: 'spaces',
   padding: 'spaces',
   paddingTop: 'spaces',
   paddingBottom: 'spaces',
@@ -38,6 +37,7 @@ export const scales = defineConfig.scales({
   left: 'spaces',
   right: 'spaces',
   bottom: 'spaces',
+  gap: 'spaces',
   rowGap: 'spaces',
   columnGap: 'spaces',
   gridGap: 'spaces',

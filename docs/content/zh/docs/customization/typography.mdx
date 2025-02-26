@@ -1,0 +1,84 @@
+import { Callout } from 'nextra/components'
+import { AvailableProps, TokenTable } from './_components'
+import { map } from '@nex-ui/utils'
+import { defaultConfig } from '@nex-ui/react'
+
+# Typography
+
+Typography Tokens 管理和规范排版样式，包括[`FontSizes`](#fontsizes)、[`FontFamilies`](#fontfamilies)、[`FontWeights`](#fontweights)、[`LineHeights`](#lineheights)等。确保文本在整个应用中具有统一的视觉风格和层次感。
+
+## FontSizes
+
+FontSizes Tokens 是一组预设的字体大小。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，FontSizes 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.FontSizes />
+  <span>。</span>
+</Callout>
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.fontSizes, (value, key) => ({
+    token: `fontSizes.${key}`,
+    value,
+  }))}
+/>
+
+## FontFamilies
+
+FontFamilies Tokens 是一组预设的字体。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，FontFamilies 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.FontFamilies />
+  <span>。</span>
+</Callout>
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.fontFamilies, (value, key) => ({
+    token: `fontFamilies.${key}`,
+    value,
+  }))}
+/>
+
+## FontWeights
+
+FontWeights Tokens 是一组预设的字重。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，FontWeights 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.FontWeights />
+  <span>。</span>
+</Callout>
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.fontWeights, (value, key) => ({
+    token: `fontWeights.${key}`,
+    value,
+  }))}
+/>
+
+## LineHeights
+
+LineHeights Tokens 是一组预设的行高。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，LineHeights 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.LineHeights />
+  <span>。</span>
+</Callout>
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.lineHeights, (value, key) => ({
+    token: `lineHeights.${key}`,
+    value,
+  }))}
+/>

@@ -1,0 +1,25 @@
+import { Callout } from 'nextra/components'
+import { AvailableProps, TokenTable } from './_components'
+import { map } from '@nex-ui/utils'
+import { defaultConfig } from '@nex-ui/react'
+
+# Radii
+
+Radii Tokens 是一组预设的圆角半径值，确保 UI 元素（如按钮、卡片、输入框等）拥有一致的圆角效果。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，Radii 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.Radii />
+  <span>。</span>
+</Callout>
+
+Nex UI 开箱即支持以下 Tokens。
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.radii, (value, key) => ({
+    token: `radii.${key}`,
+    value,
+  }))}
+/>

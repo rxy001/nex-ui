@@ -194,10 +194,10 @@ export interface DefaultTokens {
     | 'extrabold'
     | 'black'
   borders: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  radii: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  radii: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
   lineHeights: 'normal' | 'none' | 'shorter' | 'short' | 'base' | 'tall'
   borderWidths: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-
+  shadows: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   transitions:
     | 'all'
     | 'colors'
@@ -421,6 +421,7 @@ export interface RadiiToken {
   md?: string | number
   lg?: string | number
   xl?: string | number
+  '2xl'?: string | number
   full?: string | number
 }
 
@@ -441,7 +442,13 @@ export interface BorderWidthsToken {
   xl?: string | number
 }
 
-export interface ShadowsToken {}
+export interface ShadowsToken {
+  xs?: string
+  sm?: string
+  md?: string
+  lg?: string
+  xl?: string
+}
 
 export interface TransitionsToken {
   all?: string

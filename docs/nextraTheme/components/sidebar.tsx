@@ -101,6 +101,7 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
     const isClickOnIcon =
       el /* will be always <a> or <button> */ !==
       event.target /* can be <svg> or <path> */
+
     if (isClickOnIcon) {
       event.preventDefault()
     }
@@ -413,7 +414,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
           {(!hideSidebar || !isExpanded) && (
-            <Collapse isOpen={isExpanded} horizontal>
+            <Collapse isOpen={isExpanded} horizontal className='x:pb-24'>
               <Menu
                 // The sidebar menu, shows only the docs directories.
                 directories={docsDirectories}

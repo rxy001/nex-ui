@@ -1,0 +1,25 @@
+import { Callout } from 'nextra/components'
+import { AvailableProps, TokenTable } from './_components'
+import { map } from '@nex-ui/utils'
+import { defaultConfig } from '@nex-ui/react'
+
+# Transitions
+
+Transitions Tokens 是预设的过渡效果的集合，确保 UI 元素不同状态变化之间的过渡效果平滑、一致。
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    默认情况下，Transitions 类型的 Tokens 可直接应用于以下属性&nbsp;
+  </span>
+  <AvailableProps.Transitions />
+  <span>。</span>
+</Callout>
+
+Nex UI 开箱即支持以下 Tokens。
+
+<TokenTable
+  dataSource={map(defaultConfig.tokens.transitions, (value, key) => ({
+    token: `transitions.${key}`,
+    value,
+  }))}
+/>

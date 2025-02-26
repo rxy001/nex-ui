@@ -20,7 +20,7 @@ export default function App() {
 
 ### 覆盖深色模式下的颜色
 
-如果您想要变更深色模式下的预设颜色，可以通过 `semanticTokens` 设置。查看 [`semanticTokens`](/as)了解更多信息。
+如果您想要变更深色模式下的预设颜色，可以通过 `semanticTokens` 设置。查看 [`semanticTokens`](/docs/customization/semantic-tokens)了解更多信息。
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -104,7 +104,7 @@ import { InitColorSchemeScript } from '@nex-ui/react'
 
 ## 深色模式下的样式设计
 
-在 `sx` 属性中使用 `_dark` 为深色模式下的组件设计样式。
+在 `sx` 属性中使用 `_dark` 为组件设置深色模式下的样式，`_light` 为组件设置浅色模式的样式，`_DEFAULT` 为组件的默认样式。
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -115,6 +115,7 @@ export default function App() {
       sx={{
         color: {
           _DEFAULT: 'black',
+          _light: 'black',
           _dark: 'white',
         },
       }}
@@ -124,6 +125,27 @@ export default function App() {
   )
 }
 ```
+
+或者以 `_dark`、`_light` 为 CSS 选择器，设置一组 CSS 属性：
+
+```tsx
+<Box
+  sx={{
+    _light: {
+      color: 'black',
+      bg: 'green.500',
+    },
+    _dark: {
+      color: 'white',
+      bg: 'green.600',
+    },
+  }}
+>
+  Box
+</Box>
+```
+
+上述两种方式意味着可以把 `_light` 和 `_dark` 当作 [Selectors](/docs/customization/selectors) 去使用。
 
 ## API
 
