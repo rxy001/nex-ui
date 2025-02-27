@@ -4,6 +4,7 @@ import type {
   AnchorHTMLAttributes,
   ComponentPropsWithRef,
 } from 'react'
+import type { ClassValue } from 'clsx'
 import type { ButtonVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
@@ -27,7 +28,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   spinnerPlacement?: 'start' | 'end'
   href?: string
   children?: ReactNode
-  className?: string
+  className?: ClassValue
   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target']
   slotProps?: ButtonSlotProps
   classes?: ComponentUtilityClasses<'startIcon' | 'endIcon'>

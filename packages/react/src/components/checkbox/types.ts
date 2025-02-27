@@ -1,4 +1,5 @@
 import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
+import type { ClassValue } from 'clsx'
 import type { CheckboxVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
@@ -25,7 +26,7 @@ type CheckboxOwnProps<
   sx?: SxProps<CheckboxOwnerState<CheckboxComponent>>
   as?: CheckboxComponent
   children?: ReactNode
-  className?: string
+  className?: ClassValue
   icon?:
     | ReactNode
     | ((ownerState: CheckboxOwnerState<CheckboxComponent>) => ReactNode)

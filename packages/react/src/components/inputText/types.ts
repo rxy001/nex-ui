@@ -1,4 +1,5 @@
 import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
+import type { ClassValue } from 'clsx'
 import type { InputTextVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
@@ -28,7 +29,7 @@ type InputTextOwnProps<
   onClear?: () => void
   classes?: ComponentUtilityClasses<'root' | 'input' | 'clearBtn'>
   slotProps?: InputTextSlotProps<InputComponentProps>
-  className?: string
+  className?: ClassValue
   name?: string
   as?: InputComponent
   sx?: SxProps<InputTextOwnerState<InputComponent>>

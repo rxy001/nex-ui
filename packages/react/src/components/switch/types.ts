@@ -1,4 +1,5 @@
 import type { ElementType, ComponentPropsWithRef, ReactNode } from 'react'
+import type { ClassValue } from 'clsx'
 import type {
   ComponentUtilityClasses,
   Overwrite,
@@ -27,7 +28,7 @@ export type SwitchOwnProps<
   name?: string
   checked?: boolean
   defaultChecked?: boolean
-  className?: string
+  className?: ClassValue
   startIcon?: ReactNode
   endIcon?: ReactNode
   slotProps?: SwitchSlotProps<SwitchComponentProps>

@@ -23,13 +23,11 @@ export const avatarRecipe = defineSlotRecipe({
     size: {
       sm: {
         root: {
-          root: {
-            w: '8',
-            h: '8',
-            fs: 'md',
-            '& svg': {
-              fs: '1.5em',
-            },
+          w: '8',
+          h: '8',
+          fs: 'md',
+          '& svg': {
+            fs: '1.5em',
           },
         },
       },

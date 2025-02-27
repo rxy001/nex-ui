@@ -1,4 +1,5 @@
 import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react'
+import type { ClassValue } from 'clsx'
 import type { AvatarVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
@@ -18,7 +19,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   alt?: string
   src?: string
   srcSet?: string
-  className?: string
+  className?: ClassValue
   children?: ReactNode
   slotProps?: AvatarSlotProps
   classes?: ComponentUtilityClasses<'img'>
