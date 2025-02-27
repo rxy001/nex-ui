@@ -19,6 +19,7 @@ const classes = {
     'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
     'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-100 x:dark:hover:text-gray-300',
     'x:ring-inset x:transition-colors',
+    'x:font-medium',
   ),
 }
 

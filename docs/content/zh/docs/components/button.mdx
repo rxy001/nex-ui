@@ -57,7 +57,9 @@ import { button } from '@/content/_demo'
 
 ## API
 
-### ButtonProps
+### Button Props
+
+Button 组件默认继承 `as` 的 Props，其 `as` 默认值为 HTML `button` 元素 。
 
 <PropsTable
   dataSource={[
@@ -65,7 +67,7 @@ import { button } from '@/content/_demo'
       prop: 'children',
       type: 'ReactNode',
       default: '',
-      description: '按钮的内容',
+      description: '按钮的内容。',
     },
     {
       prop: 'color',
@@ -81,92 +83,92 @@ import { button } from '@/content/_demo'
         "'gray'",
       ],
       default: "'blue'",
-      description: '按钮的颜色，支持自定义主题的颜色',
+      description: '按钮的颜色。',
     },
     {
       prop: 'variants',
       type: ["'filled", "'outlined'", "'text'", "'link'"],
       default: "'filled'",
-      description: '按钮外观样式',
+      description: '按钮外观样式。',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: '按钮的大小',
+      description: '按钮的大小。',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'"],
       default: 'size',
-      description: '按钮的 BorderRadius',
+      description: '按钮的 BorderRadius。',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否禁用',
+      description: '按钮是否禁用。',
     },
     {
       prop: 'loading',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否处于加载状态',
+      description: '按钮是否处于加载状态。',
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否应占据其父元素的全部宽度',
+      description: '按钮是否应占据其父元素的全部宽度。',
     },
     {
       prop: 'iconOnly',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否应具有相同的宽度和高度',
+      description: '按钮是否应具有相同的宽度和高度。',
     },
     {
       prop: 'startIcon',
       type: 'ReactNode',
-      default: null,
-      description: '放置在子元素之前的元素',
+      description: '放置在子元素之前的元素。',
     },
     {
       prop: 'endIcon',
       type: 'ReactNode',
-      default: null,
-      description: '放置在子元素之后的元素',
+      description: '放置在子元素之后的元素。',
     },
     {
       prop: 'spinner',
       type: 'ReactNode',
-      default: null,
-      description: '加载状态时的加载指示器',
+      description: '加载状态时的加载指示器。',
     },
     {
       prop: 'spinnerPlacement',
       type: ["'start'", "'end'"],
       default: "'start'",
-      description: '加载指示器的位置',
+      description: '加载指示器的位置。',
     },
     {
       prop: 'href',
       type: 'string',
-      default: null,
-      description: '点击跳转的地址，指定此属性 button 的行为和 a 链接一致',
+      description: '点击跳转的地址，指定此属性 button 的行为和 a 链接一致。',
     },
     {
       prop: 'target',
       type: 'string',
-      default: null,
-      description: '相当于 a 链接的 target 属性，href 存在时生效',
+      description: '相当于 a 链接的 target 属性，href 存在时生效。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根节点的 className。',
     },
     {
       prop: 'as',
       type: 'ElementType',
-      default: null,
+      default: "'button'",
       description:
-        '用于根节点的组件。可以是表示 HTML 元素的字符串，也可以是一个组件',
+        '用于根节点的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
     },
     {
       prop: 'sx',
@@ -175,21 +177,22 @@ import { button } from '@/content/_demo'
         'CSSObject[]',
         '(ownerState: OwnerState) => CSSObject | CSSObject[])',
       ],
+      description: '用于根节点的 sx 属性。',
     },
     {
       prop: 'classes',
-      type: 'Record<Slots, string | string[]>',
-      description: '按钮 slots 的 class',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: '按钮 slots 的 className。',
     },
     {
       prop: 'slotProps',
-      type: 'Record<Slots, ComponentPropsWithRef>',
-      description: '按钮 slots 的 props',
+      type: 'Partial<Record<Slots, ComponentPropsWithRef>>',
+      description: '按钮 slots 的 props。',
     },
   ]}
 />
 
-### Slots
+### Button Slots
 
 <SlotsTable
   dataSource={[

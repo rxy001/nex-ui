@@ -1,0 +1,141 @@
+import { Avatar } from '@nex-ui/react'
+import { avatar } from '@/content/_demo'
+
+# Avatar
+
+头像组件用于代表用户，并显示用户的个人资料照片、姓名首字母或备用图标。
+
+<ComponentLinks component='avatar' slotRecipe />
+
+---
+
+## 使用
+
+<Example {...avatar.useage} />
+
+### Sizes
+
+<Example {...avatar.sizes} />
+
+### Radius
+
+<Example {...avatar.radius} />
+
+### Colors
+
+<Example {...avatar.colors} />
+
+### Fallback
+
+如果加载头像图片时出现错误，该组件将按以下顺序回退到备用选项：
+
+- `children` 属性
+
+- `alt` 第一个字母
+
+<Example {...avatar.fallback} />
+
+## API
+
+### Avatar Props
+
+Avatar 组件默认继承 `as` 的 Props，其 `as` 默认值为 HTML `div` 元素 。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '',
+      description: '如果 src 未提供，可在组件内渲染图标或者文本。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: '头像的大小。',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'gray'",
+      description: '头像的颜色。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'full'"],
+      default: 'size',
+      description: '头像的 BorderRadius。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根节点的 className。',
+    },
+    {
+      prop: 'src',
+      type: 'string',
+      description: '显示图片的 URL。',
+    },
+    {
+      prop: 'srcSet',
+      type: 'string',
+      description: 'HTML img 元素的 srcSet。',
+    },
+    {
+      prop: 'alt',
+      type: 'string',
+      description:
+        '与 src 或 srcSet 结合使用，为渲染的 img 元素提供一个 alt 属性。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: null,
+      description:
+        '用于根节点的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: [
+        'CSSObject',
+        'CSSObject[]',
+        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
+      ],
+      description: '用于根节点的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: '头像 slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentPropsWithRef>>',
+      description: '头像 slots 的 props。',
+    },
+  ]}
+/>
+
+### Avatar Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'img',
+      class: '.nui-avatar-img',
+      component: "'img'",
+      description: 'HTML img 元素',
+    },
+  ]}
+/>
