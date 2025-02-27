@@ -1,5 +1,5 @@
 import { Button } from '@nex-ui/react'
 
-export const LoadingDemo = () => {
+export default function App() {
   return <Button loading>Loading</Button>
 }

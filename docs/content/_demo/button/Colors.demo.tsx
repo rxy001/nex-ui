@@ -1,6 +1,6 @@
 import { Button, Flex } from '@nex-ui/react'
 
-export const ColorsDemo = () => {
+export default function App() {
   return (
     <Flex gap='5' wrap='wrap'>
       <Button color='blue'>Blue</Button>

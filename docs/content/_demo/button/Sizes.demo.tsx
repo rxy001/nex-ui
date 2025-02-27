@@ -1,6 +1,6 @@
 import { Button, Flex } from '@nex-ui/react'
 
-export const SizesDemo = () => {
+export default function App() {
   return (
     <Flex gap='5' align='center'>
       <Button size='sm'>Small</Button>

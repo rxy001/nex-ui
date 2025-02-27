@@ -1,6 +1,7 @@
 {
   "extends": ["../.eslintrc.json"],
   "rules": {
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "import/no-duplicates": ["error", { "considerQueryString": true }]
   }
 }

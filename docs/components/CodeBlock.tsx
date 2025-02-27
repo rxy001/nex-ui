@@ -5,7 +5,7 @@ import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Pre, Code } from 'nextra/components'
 import { Fragment, useState, useEffect } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { codeToHast } from 'shiki'
+import { codeToHast } from 'shiki/bundle-web.mjs'
 import type { BundledLanguage } from 'shiki'
 
 interface CodeBlockProps {

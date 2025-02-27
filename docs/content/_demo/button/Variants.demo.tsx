@@ -1,6 +1,6 @@
 import { Button, Flex } from '@nex-ui/react'
 
-export const VariantsDemo = () => {
+export default function App() {
   return (
     <Flex gap='5'>
       <Button variant='filled'>Filled</Button>

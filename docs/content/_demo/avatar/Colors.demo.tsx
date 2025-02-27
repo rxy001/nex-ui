@@ -1,6 +1,6 @@
 import { Avatar, Flex } from '@nex-ui/react'
 
-export const ColorsDemo = () => {
+export default function App() {
   return (
     <Flex gap='5'>
       <Avatar color='gray' size='lg' radius='full' />

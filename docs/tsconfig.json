@@ -17,6 +17,7 @@
     ]
   },
   "include": [
+    "./types.d.ts",
     "./app",
     "./mdx-components.tsx",
     "./middleware.ts",

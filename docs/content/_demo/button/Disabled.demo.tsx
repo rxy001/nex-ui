@@ -1,5 +1,5 @@
 import { Button } from '@nex-ui/react'
 
-export const DisabledDemo = () => {
+export default function App() {
   return <Button disabled>Button</Button>
 }

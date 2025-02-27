@@ -1,8 +1,8 @@
 import { Button, Flex } from '@nex-ui/react'
 
-export const RadiusDemo = () => {
+export default function App() {
   return (
-    <Flex gap='5' wrap='wrap'>
+    <Flex gap='5'>
       <Button radius='sm'>Small</Button>
       <Button radius='md'>Medium</Button>
       <Button radius='lg'>Large</Button>

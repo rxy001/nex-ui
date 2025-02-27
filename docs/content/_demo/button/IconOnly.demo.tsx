@@ -32,7 +32,7 @@ export const HeartIcon = ({
   )
 }
 
-export const IconOnlyDemo = () => {
+export default function App() {
   return (
     <Button iconOnly color='red'>
       <HeartIcon />

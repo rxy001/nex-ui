@@ -14,6 +14,7 @@ export const UserIcon = ({
 }: IconProps) => {
   return (
     <svg
+      data-name='Iconly/Curved/Profile'
       height={size || height || 24}
       viewBox='0 0 24 24'
       width={size || width || 24}
@@ -67,7 +68,7 @@ export const CameraIcon = ({
   )
 }
 
-export const WithIconsDemo = () => {
+export default function App() {
   return (
     <Flex gap='5'>
       <Button endIcon={<CameraIcon />} color='green'>

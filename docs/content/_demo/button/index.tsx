@@ -1,23 +1,23 @@
-import useageCode from './useage.raw'
-import disabledCode from './disabled.raw'
-import radiusCode from './radius.raw'
-import sizesCode from './sizes.raw'
-import colorsCode from './colors.raw'
-import variantsCode from './variants.raw'
-import loadingCode from './loading.raw'
-import withIconsCode from './withIcons.raw'
-import iconOnlyCode from './iconOnly.raw'
-import FullWidthCode from './fullWidth.raw'
-import { UseageDemo } from './Useage.demo'
-import { DisabledDemo } from './Disabled.demo'
-import { RadiusDemo } from './Radius.demo'
-import { SizesDemo } from './Sizes.demo'
-import { ColorsDemo } from './Colors.demo'
-import { VariantsDemo } from './Variants.demo'
-import { LoadingDemo } from './Loading.demo'
-import { WithIconsDemo } from './WithIcons.demo'
-import { IconOnlyDemo } from './IconOnly.demo'
-import { FullWidthDemo } from './FullWidth.demo'
+import useageCode from './Useage.demo?raw'
+import disabledCode from './Disabled.demo?raw'
+import radiusCode from './Radius.demo?raw'
+import sizesCode from './Sizes.demo?raw'
+import colorsCode from './Colors.demo?raw'
+import variantsCode from './Variants.demo?raw'
+import loadingCode from './Loading.demo?raw'
+import withIconsCode from './WithIcons.demo?raw'
+import iconOnlyCode from './IconOnly.demo?raw'
+import fullWidthCode from './FullWidth.demo?raw'
+import UseageDemo from './Useage.demo'
+import DisabledDemo from './Disabled.demo'
+import RadiusDemo from './Radius.demo'
+import SizesDemo from './Sizes.demo'
+import ColorsDemo from './Colors.demo'
+import VariantsDemo from './Variants.demo'
+import LoadingDemo from './Loading.demo'
+import WithIconsDemo from './WithIcons.demo'
+import IconOnlyDemo from './IconOnly.demo'
+import FullWidthDemo from './FullWidth.demo'
 
 export const button = {
   useage: {
@@ -57,7 +57,7 @@ export const button = {
     demo: <IconOnlyDemo />,
   },
   fullWidth: {
-    code: FullWidthCode,
+    code: fullWidthCode,
     demo: <FullWidthDemo />,
   },
 }

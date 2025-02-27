@@ -1,8 +1,8 @@
 import { Avatar, Flex } from '@nex-ui/react'
 
-export const SizesDemo = () => {
+export default function App() {
   return (
-    <Flex gap='5' align='center'>
+    <Flex gap='5'>
       <Avatar size='sm' />
       <Avatar size='md' />
       <Avatar size='lg' />

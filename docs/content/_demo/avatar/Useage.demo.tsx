@@ -1,7 +1,7 @@
 import { Avatar, Flex } from '@nex-ui/react'
 import { UserOutlined } from '@nex-ui/icons'
 
-export const UseageDemo = () => {
+export default function App() {
   return (
     <Flex gap='5'>
       <Avatar

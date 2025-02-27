@@ -2,10 +2,11 @@
   "name": "@nex-ui/docs",
   "version": "0.0.0",
   "author": "X1ng Yu",
-  "private": true,
+  "private": false,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "start": "next start"
   },
   "type": "module",
@@ -22,6 +23,7 @@
     "@nex-ui/react": "workspace:*",
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
+    "@next/bundle-analyzer": "15.2.0",
     "clsx": "2.1.1",
     "color2k": "2.0.3",
     "hast-util-to-jsx-runtime": "2.3.2",

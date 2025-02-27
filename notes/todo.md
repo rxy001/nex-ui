@@ -34,7 +34,9 @@
 
 <!-- 16. docs 使用 alias eslint 报错 -->
 
-17. docs 偶尔会报错水合失败
+<!-- 17. docs 会报错水合失败
+
+使用 webpack 代替 turbopack 就没有在出错了， why? -->
 
 <!-- 18. icons 无法在服务器组件使用 -->
 
