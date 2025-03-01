@@ -13,8 +13,10 @@ export const checkboxRecipe = defineSlotRecipe({
       h: '10',
       p: '2',
       cursor: 'pointer',
-      ':hover span:first-of-type::before': {
-        borderColor: 'colorPalette.secondary',
+      _hover: {
+        '& span:first-of-type::before': {
+          borderColor: 'colorPalette.secondary',
+        },
       },
     },
     input: {
@@ -29,11 +31,12 @@ export const checkboxRecipe = defineSlotRecipe({
     },
     icon: {
       opacity: 0,
-      transition: 'opacity',
+      transition: 'all 0.2s linear',
       position: 'relative',
       zIndex: 1,
       color: 'colorPalette.contrastText',
-      fs: '1.1em',
+      fs: '1em',
+      transform: 'scale(0)',
     },
     iconContainer: {
       display: 'inline-flex',
@@ -53,7 +56,8 @@ export const checkboxRecipe = defineSlotRecipe({
         position: 'absolute',
         inset: 0,
         bg: 'colorPalette.primary',
-        transition: 'opacity',
+        transition: 'all 0.2s linear',
+        transform: 'scale(0)',
         opacity: 0,
       },
     },
@@ -63,10 +67,12 @@ export const checkboxRecipe = defineSlotRecipe({
       true: {
         icon: {
           opacity: 1,
+          transform: 'scale(1)',
         },
         iconContainer: {
           '::after': {
             opacity: 1,
+            transform: 'scale(1)',
           },
         },
       },
@@ -101,7 +107,6 @@ export const checkboxRecipe = defineSlotRecipe({
       },
     },
     radius: {
-      none: {},
       sm: {
         iconContainer: {
           '::before': {

@@ -1,8 +1,10 @@
 'use client'
 
+import clsx from 'clsx'
 import { nex } from '@nex-ui/styled'
-import { useState } from 'react'
+import { cloneElement, useState, isValidElement } from 'react'
 import { CheckOutlined } from '@nex-ui/icons'
+import { ClassNames } from '@emotion/react'
 import { isFunction, __DEV__ } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import type { Ref, ElementType, ChangeEvent } from 'react'
@@ -56,7 +58,7 @@ export const Checkbox = forwardRef(
     inProps: CheckboxProps<CheckboxComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
-    const { primaryColor } = useNexContext()
+    const { primaryColor, css } = useNexContext()
 
     const props = useDefaultProps<CheckboxProps>({
       name: 'Checkbox',
@@ -189,11 +191,27 @@ export const Checkbox = forwardRef(
       classNames: classes.label,
     })
 
-    const checkIcon = icon ? (
-      isFunction(icon) ? (
-        icon(ownerState)
+    const customIcon = icon
+      ? isFunction(icon)
+        ? icon(ownerState)
+        : icon
+      : null
+
+    const checkIcon = customIcon ? (
+      isValidElement(customIcon) ? (
+        <ClassNames>
+          {({ css: ec }) =>
+            cloneElement(customIcon, {
+              ...customIcon.props,
+              className: clsx(
+                customIcon.props.className,
+                ec(css(iconProps.sx!)),
+              ),
+            })
+          }
+        </ClassNames>
       ) : (
-        icon
+        customIcon
       )
     ) : (
       <CheckOutlined {...iconProps} />
