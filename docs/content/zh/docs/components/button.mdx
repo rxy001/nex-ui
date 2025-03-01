@@ -43,6 +43,8 @@ import { button } from '@/content/_demo'
 
 <Example {...button.loading} />
 
+您还可以通过 `spinner` 属性自定义加载指示器组件。
+
 ### With Icons
 
 通过设置 `startIcon` 或 `endIcon` 属性，向按钮添加图标。
@@ -59,7 +61,7 @@ import { button } from '@/content/_demo'
 
 ### Button Props
 
-Button 组件默认继承 `as` 的 Props，其 `as` 默认值为 HTML `button` 元素 。
+按钮组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `button` 标签。
 
 <PropsTable
   dataSource={[
@@ -162,6 +164,11 @@ Button 组件默认继承 `as` 的 Props，其 `as` 默认值为 HTML `button` �
       prop: 'className',
       type: 'ClassValue',
       description: '用于根节点的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素。',
     },
     {
       prop: 'as',

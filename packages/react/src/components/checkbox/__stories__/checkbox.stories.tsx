@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Checkbox } from '../Checkbox'
 import { CheckboxGroup as CheckboxGroupComponent } from '../CheckboxGroup'
@@ -76,16 +77,26 @@ export const CustomCheckIcon: Story = {
 }
 
 export const CheckboxGroup: Story = {
-  render: ({ color, size, disabled, radius }) => (
-    <CheckboxGroupComponent
-      radius={radius}
-      color={color}
-      size={size}
-      disabled={disabled}
-    >
-      <Checkbox value='apple'>Apple</Checkbox>
-      <Checkbox value='pear'>Pear</Checkbox>
-      <Checkbox value='orange'>Orange</Checkbox>
-    </CheckboxGroupComponent>
-  ),
+  render: ({ color, size, disabled, radius }) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [value, setValue] = useState(['pear'])
+
+    return (
+      <div>
+        <CheckboxGroupComponent
+          radius={radius}
+          color={color}
+          size={size}
+          disabled={disabled}
+          value={value}
+          onChange={(v) => setValue(v)}
+        >
+          <Checkbox value='apple'>Apple</Checkbox>
+          <Checkbox value='pear'>Pear</Checkbox>
+          <Checkbox value='orange'>Orange</Checkbox>
+        </CheckboxGroupComponent>
+        <p>Selected: {value.join(', ')}</p>
+      </div>
+    )
+  },
 }

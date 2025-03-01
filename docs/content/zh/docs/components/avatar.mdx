@@ -25,7 +25,7 @@ import { avatar } from '@/content/_demo'
 
 <Example {...avatar.colors} />
 
-### Fallback
+### Fallbacks
 
 如果加载头像图片时出现错误，该组件将按以下顺序回退到备用选项：
 
@@ -39,7 +39,7 @@ import { avatar } from '@/content/_demo'
 
 ### Avatar Props
 
-Avatar 组件默认继承 `as` 的 Props，其 `as` 默认值为 HTML `div` 元素 。
+头像组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
 
 <PropsTable
   dataSource={[
@@ -99,9 +99,14 @@ Avatar 组件默认继承 `as` 的 Props，其 `as` 默认值为 HTML `div` 元�
         '与 src 或 srcSet 结合使用，为渲染的 img 元素提供一个 alt 属性。',
     },
     {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素。',
+    },
+    {
       prop: 'as',
       type: 'ElementType',
-      default: null,
+      default: "'div'",
       description:
         '用于根节点的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
     },

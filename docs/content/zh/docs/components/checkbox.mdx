@@ -1,0 +1,260 @@
+import { checkbox } from '@/content/_demo'
+
+# Checkbox
+
+复选框允许用户从一个集合中选择一个或多个项目。
+
+<ComponentLinks component='checkbox' slotRecipe />
+
+## 使用
+
+<Example {...checkbox.useage} />
+
+### Disabled
+
+<Example {...checkbox.disabled} />
+
+### Sizes
+
+<Example {...checkbox.sizes} />
+
+### Colors
+
+<Example {...checkbox.colors} />
+
+### Icon
+
+<Example {...checkbox.icon} />
+
+### Controlled
+
+<Example {...checkbox.controlled} />
+
+## Checkbox Group
+
+<Example {...checkbox.groupUseage} />
+
+### Vertical
+
+<Example {...checkbox.groupVertical} />
+
+### Disabled
+
+<Example {...checkbox.groupDisabled} />
+
+## API
+
+### Checkbox Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '',
+      description: '复选框的标签。',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: '复选框的颜色。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: '复选框的大小。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'full'"],
+      default: 'size',
+      description: '复选框的 BorderRadius。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: '复选框是否禁用。',
+    },
+    {
+      prop: 'checked',
+      type: 'boolean',
+      description: '复选框是否选中。',
+    },
+    {
+      prop: 'defaultChecked',
+      type: 'boolean',
+      description: '复选框是否默认选中（非受控）。',
+    },
+    {
+      prop: 'icon',
+      type: 'ReactNode | (ownerState) => ReactNode',
+      description: '复选框选中时的图标。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根节点的 className。',
+    },
+    {
+      prop: 'name',
+      type: 'string',
+      description: '复选框的 name。',
+    },
+    {
+      prop: 'value',
+      type: 'string',
+      description: '复选框的 value。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发复选框内的 input。',
+    },
+    {
+      prop: 'onChange',
+      type: 'function',
+      description: '当复选框状态发生变化时会触发该回调函数。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于复选框内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: [
+        'CSSObject',
+        'CSSObject[]',
+        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
+      ],
+      description: '用于根节点的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: '复选框 slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentPropsWithRef>>',
+      description: '复选框 slots 的 props。',
+    },
+  ]}
+/>
+
+### Checkbox Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'root',
+      class: '.nui-checkbox-root',
+      component: "'label'",
+      description: '复选框的根元素。',
+    },
+    {
+      slot: 'input',
+      class: '.nui-checkbox-input',
+      component: "'input'",
+      description: '复选框内的 input。',
+    },
+    {
+      slot: 'icon',
+      class: '.nui-checkbox-input',
+      component: "'svg'",
+      description: '复选框内的 icon。',
+    },
+    {
+      slot: 'iconContainer',
+      class: '.nui-checkbox-input',
+      component: "'span'",
+      description: '复选框内的 icon 容器。',
+    },
+    {
+      slot: 'label',
+      class: '.nui-checkbox-label',
+      component: "'span'",
+      description: '复选框的标签。',
+    },
+  ]}
+/>
+
+### Checkbox Group Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'CheckboxGroup 的子元素。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'CheckboxGroup 是否禁用。',
+    },
+    {
+      prop: 'name',
+      type: ['string', 'number'],
+      description: 'CheckboxGroup 的 name。',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'CheckboxGroup 的颜色。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'CheckboxGroup 的大小。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'full'"],
+      default: 'size',
+      description: 'CheckboxGroup 的 BorderRadius。',
+    },
+    {
+      prop: 'value',
+      type: ['T extends (string | number)[]'],
+      description: 'CheckboxGroup 指定选中的值。',
+    },
+    {
+      prop: 'defaultValue',
+      type: ['T extends (string | number)[]'],
+      description: 'CheckboxGroup 默认选中的值。',
+    },
+    {
+      prop: 'onChange',
+      type: '(value: T[]) => void',
+      description: '当 CheckboxGroup 的值发生变化时触发回调函数。',
+    },
+  ]}
+/>

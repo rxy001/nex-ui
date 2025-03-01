@@ -92,7 +92,6 @@ export const Checkbox = forwardRef(
       defaultChecked,
       onChange: onChangeProp,
       name = groupCtx?.name,
-      type = 'checkbox',
       color = groupCtx?.color ?? primaryColor,
       disabled = groupCtx?.disabled ?? false,
       size = groupCtx?.size ?? 'md',
@@ -115,7 +114,7 @@ export const Checkbox = forwardRef(
 
     const ownerState = {
       ...props,
-      type,
+      name,
       disabled,
       color,
       checked,
@@ -152,6 +151,7 @@ export const Checkbox = forwardRef(
       externalSlotProps: slotProps?.root,
       externalForwardedProps: {
         className,
+        'data-disabled': disabled,
       },
       sx: [styles.root, resolveSxProps(sx, ownerState)],
       classNames: classes.root,
@@ -161,10 +161,10 @@ export const Checkbox = forwardRef(
       externalSlotProps: slotProps?.input,
       externalForwardedProps: {
         ...remainingProps,
+        type: 'checkbox',
         value,
         name,
         ref,
-        type,
         checked,
         disabled,
         onChange,

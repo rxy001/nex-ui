@@ -36,7 +36,7 @@ export const checkboxRecipe = defineSlotRecipe({
       zIndex: 1,
       color: 'colorPalette.contrastText',
       fs: '1em',
-      transform: 'scale(0)',
+      transform: 'scale(0.4)',
     },
     iconContainer: {
       display: 'inline-flex',
@@ -57,7 +57,7 @@ export const checkboxRecipe = defineSlotRecipe({
         inset: 0,
         bg: 'colorPalette.primary',
         transition: 'all 0.2s linear',
-        transform: 'scale(0)',
+        transform: 'scale(0.4)',
         opacity: 0,
       },
     },

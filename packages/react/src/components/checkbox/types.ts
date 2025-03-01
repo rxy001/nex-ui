@@ -37,9 +37,6 @@ type CheckboxOwnProps<
   defaultChecked?: boolean
   name?: string
   ref?: CheckboxComponentProps['ref']
-  type?: CheckboxComponentProps['type']
-  onBlur?: CheckboxComponentProps['onBlur']
-  onFocus?: CheckboxComponentProps['onFocus']
   onChange?: CheckboxComponentProps['onChange']
   value?: string | number
 } & CheckboxVariants
@@ -58,7 +55,9 @@ type CheckboxGroupVariants = Pick<
 
 export type CheckboxGroupValueType = number | string
 
-export type CheckboxGroupProps<T> = {
+export type CheckboxGroupProps<
+  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+> = {
   value?: T[]
   name?: string
   children?: ReactNode
