@@ -1,0 +1,102 @@
+import { flex } from '@/content/_demo'
+
+# Flex
+
+Flex 是用于在垂直或水平方向排列元素的弹性容器组件。
+
+<ComponentLinks component='flex' />
+
+## 使用
+
+<Example {...flex.useage} />
+
+### Direction
+
+<Example {...flex.direction} />
+
+### Gap
+
+`gap` 属性用于设置子元素之间的间距，可使用 Spaces Tokens 和 Semantic Tokens。
+
+<Example {...flex.gap} />
+
+### Justify
+
+`align` 属性用于控制子元素在主轴上的对齐方式。
+
+<Example {...flex.justify} />
+
+### Align
+
+`align` 属性用于控制子元素在交叉轴上的对齐方式。
+
+<Example {...flex.align} />
+
+## API
+
+### Flex Props
+
+Flex 组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'Flex 的子元素。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'inline',
+      type: 'boolean',
+      default: 'false',
+      description: '设置容器是否为 inline-display。',
+    },
+    {
+      prop: 'justify',
+      type: "CSSProperties['justifyContent']",
+      description: '设置子元素在主轴上的对齐方式。',
+    },
+    {
+      prop: 'align',
+      type: "CSSProperties['alignItems']",
+      description: '设置子元素在交叉轴上的对齐方式。',
+    },
+    {
+      prop: 'wrap',
+      type: "CSSProperties['wrap']",
+      description: '设置子元素单行显示还是多行显示。',
+    },
+    {
+      prop: 'direction',
+      type: "CSSProperties['flexDirection']",
+      description: '设置容器主轴的方向。',
+    },
+    {
+      prop: 'gap',
+      type: "NexUICSSProperties['gap']",
+      description: '设置子元素之间的间距。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: [
+        'CSSObject',
+        'CSSObject[]',
+        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
+      ],
+      description: '用于根元素的 sx 属性。',
+    },
+
+]}
+/>

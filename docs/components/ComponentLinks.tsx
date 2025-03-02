@@ -10,7 +10,7 @@ type ComponentLinksProps = {
   component: string
 }
 const sx = {
-  transition: 'opacity,1s',
+  transition: 'opacity',
   bg: {
     _DEFAULT: '#f4f4f5',
     _dark: '#18181b',
