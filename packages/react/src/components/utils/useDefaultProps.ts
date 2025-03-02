@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useNexContext } from '../provider/Context'
+import { useNexUI } from '../provider/Context'
 import type { ComponentNames } from '../../types/componentThemes'
 
 type useDefaultPropsArgs = {
@@ -8,7 +8,7 @@ type useDefaultPropsArgs = {
 }
 
 export const useDefaultProps = <T>({ name, props }: useDefaultPropsArgs): T => {
-  const { components = {} } = useNexContext()
+  const { components = {} } = useNexUI()
 
   return useMemo(
     () =>

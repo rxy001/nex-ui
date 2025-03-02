@@ -20,7 +20,7 @@ export interface NexUIProviderProps extends ColorSchemeProviderProps {
   primaryColor?: Colors
 }
 
-export type NexContext = {
+export type NexContextValue = {
   css: CssFn
   prefix: string
   primaryColor: Colors

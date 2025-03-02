@@ -1,17 +1,17 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { NexContext } from './types'
+import type { NexContextValue } from './types'
 
 const DEFAULT_CONTEXT_VALUE = '__nex-react-default-context-value__'
 
 // https://www.gatsbyjs.com/docs/reference/local-development/fast-refresh/#how-it-works
-const [NexContextProvider, useNexContext] = createContext<NexContext>({
-  contextName: 'NexContext',
+const [NexContextProvider, useNexUI] = createContext<NexContextValue>({
+  contextName: 'NexContextValue',
   providerName: 'NexContextProvider',
-  hookName: 'useNexContext',
+  hookName: 'useNexUI',
   strict: false,
-  defaultValue: DEFAULT_CONTEXT_VALUE as unknown as NexContext,
+  defaultValue: DEFAULT_CONTEXT_VALUE as unknown as NexContextValue,
 })
 
-export { NexContextProvider, useNexContext, DEFAULT_CONTEXT_VALUE }
+export { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE }

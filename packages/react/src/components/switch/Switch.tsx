@@ -5,7 +5,7 @@ import { nex } from '@nex-ui/styled'
 import type { ChangeEvent, ElementType, Ref } from 'react'
 import { isFunction } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
-import { useNexContext } from '../provider'
+import { useNexUI } from '../provider'
 import { switchRecipe } from '../../theme/slotRecipes'
 import {
   forwardRef,
@@ -19,7 +19,7 @@ import {
 import type { SwitchOwnerState, SwitchProps } from './types'
 
 const useSlotClasses = (ownerState: SwitchOwnerState) => {
-  const { prefix } = useNexContext()
+  const { prefix } = useNexUI()
 
   const switchRoot = `${prefix}-switch`
 
@@ -54,7 +54,7 @@ export const Switch = forwardRef(
     inProps: SwitchProps<SwitchComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
-    const { primaryColor } = useNexContext()
+    const { primaryColor } = useNexUI()
 
     const props = useDefaultProps<SwitchProps>({
       name: 'Switch',

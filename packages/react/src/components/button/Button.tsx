@@ -4,7 +4,7 @@ import { LoadingOutlined } from '@nex-ui/icons'
 import { useEvent } from '@nex-ui/hooks'
 import { nex } from '@nex-ui/styled'
 import type { Ref, MouseEvent, ElementType } from 'react'
-import { useNexContext } from '../provider'
+import { useNexUI } from '../provider'
 import { buttonRecipe } from '../../theme/slotRecipes'
 import {
   useDefaultProps,
@@ -20,7 +20,7 @@ import type { ButtonProps, ButtonOwnerState } from './types'
 const useSlotClasses = <RootComponent extends ElementType = 'button'>(
   ownerState: ButtonOwnerState<RootComponent>,
 ) => {
-  const { prefix } = useNexContext()
+  const { prefix } = useNexUI()
 
   const btnRoot = `${prefix}-btn`
 
@@ -71,7 +71,7 @@ export const Button = forwardRef(
     inProps: ButtonProps<RootComponent>,
     ref: Ref<HTMLButtonElement>,
   ) => {
-    const { primaryColor } = useNexContext()
+    const { primaryColor } = useNexUI()
 
     const props = useDefaultProps<ButtonProps>({
       name: 'Button',

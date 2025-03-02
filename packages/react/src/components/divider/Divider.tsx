@@ -11,12 +11,12 @@ import {
   useSlotProps,
   resolveSxProps,
 } from '../utils'
-import { useNexContext } from '../provider'
+import { useNexUI } from '../provider'
 import { dividerRecipe } from '../../theme/recipes'
 import type { DividerOwnerState, DividerProps } from './types'
 
 const useSlotClasses = (ownerState: DividerOwnerState) => {
-  const { prefix } = useNexContext()
+  const { prefix } = useNexUI()
 
   const dividerRoot = `${prefix}-divider`
 

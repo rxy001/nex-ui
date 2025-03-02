@@ -1,5 +1,5 @@
 import { Callout } from 'nextra/components'
-import { AvailableProps, TokenTable } from './_components'
+import { AvailableProps, TokensTable } from './_components'
 import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
@@ -19,7 +19,7 @@ FontSizes Tokens 是一组预设的字体大小。
   <span>。</span>
 </Callout>
 
-<TokenTable
+<TokensTable
   dataSource={map(defaultConfig.tokens.fontSizes, (value, key) => ({
     token: `fontSizes.${key}`,
     value,
@@ -38,7 +38,7 @@ FontFamilies Tokens 是一组预设的字体。
   <span>。</span>
 </Callout>
 
-<TokenTable
+<TokensTable
   dataSource={map(defaultConfig.tokens.fontFamilies, (value, key) => ({
     token: `fontFamilies.${key}`,
     value,
@@ -57,7 +57,7 @@ FontWeights Tokens 是一组预设的字重。
   <span>。</span>
 </Callout>
 
-<TokenTable
+<TokensTable
   dataSource={map(defaultConfig.tokens.fontWeights, (value, key) => ({
     token: `fontWeights.${key}`,
     value,
@@ -76,7 +76,7 @@ LineHeights Tokens 是一组预设的行高。
   <span>。</span>
 </Callout>
 
-<TokenTable
+<TokensTable
   dataSource={map(defaultConfig.tokens.lineHeights, (value, key) => ({
     token: `lineHeights.${key}`,
     value,

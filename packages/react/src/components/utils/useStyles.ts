@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { isFunction, isPlainObject } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import type { RecipeRuntimeFn, CSSObject } from '@nex-ui/system'
-import { useNexContext } from '../provider/Context'
+import { useNexUI } from '../provider/Context'
 import type { RecipeComponentNames } from '../../theme/recipes'
 
 type UseStylesProps<S extends RecipeRuntimeFn> = {
@@ -16,7 +16,7 @@ export const useStyles = <Recipe extends RecipeRuntimeFn>({
   ownerState,
   recipe,
 }: UseStylesProps<Recipe>): CSSObject => {
-  const { components } = useNexContext()
+  const { components } = useNexUI()
   const styleOverrides = components?.[name]?.styleOverrides
 
   const extendedRecipe = useMemo(() => {

@@ -6,7 +6,7 @@ import { composeRef } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
-import { useNexContext } from '../provider'
+import { useNexUI } from '../provider'
 import { inputTextRecipe } from '../../theme/slotRecipes'
 import {
   useDefaultProps,
@@ -21,7 +21,7 @@ import type { InputTextOwnerState, InputTextProps } from './types'
 import { Button } from '../button'
 
 const useSlotClasses = (ownerState: InputTextOwnerState) => {
-  const { prefix } = useNexContext()
+  const { prefix } = useNexUI()
 
   const inputTextRoot = `${prefix}-input-text`
 
@@ -57,7 +57,7 @@ export const InputText = forwardRef(
     inProps: InputTextProps<InputComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
-    const { primaryColor } = useNexContext()
+    const { primaryColor } = useNexUI()
 
     const props = useDefaultProps<InputTextProps>({
       name: 'InputText',

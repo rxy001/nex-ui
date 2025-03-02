@@ -13,13 +13,13 @@ import {
   useSlotProps,
   resolveSxProps,
 } from '../utils'
-import { useNexContext } from '../provider'
+import { useNexUI } from '../provider'
 import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
 
 const useSlotClasses = <RootComponent extends ElementType = 'div'>(
   ownerState: AvatarOwnerState<RootComponent>,
 ) => {
-  const { prefix } = useNexContext()
+  const { prefix } = useNexUI()
 
   const avatarRoot = `${prefix}-avatar`
 

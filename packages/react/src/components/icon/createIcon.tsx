@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { styled } from '@nex-ui/styled'
 import type { ComponentType, ElementType, Ref } from 'react'
-import { useNexContext } from '../provider/Context'
+import { useNexUI } from '../provider/Context'
 import { iconRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
@@ -17,7 +17,7 @@ import {
 import type { IconOwnerState, InnerIconProps } from './types'
 
 const useSlotClasses = (ownerState: IconOwnerState) => {
-  const { prefix } = useNexContext()
+  const { prefix } = useNexUI()
 
   const iconRoot = `${prefix}-icon`
 

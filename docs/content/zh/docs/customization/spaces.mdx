@@ -1,6 +1,5 @@
 import { Callout } from 'nextra/components'
-import { AvailableProps, TokenTable } from './_components'
-import { map } from '@nex-ui/utils'
+import { AvailableProps, TokensTable } from './_components'
 import { defaultConfig } from '@nex-ui/react'
 
 # Spaces
@@ -17,9 +16,15 @@ Spaces Tokens 是一组预设的间距值，确保 UI 元素（如外边距、�
 
 Nex UI 开箱即支持以下 Tokens。
 
-<TokenTable
-  dataSource={map(defaultConfig.tokens.spaces, (value, key) => ({
-    token: `spaces.${key}`,
-    value,
-  }))}
-/>
+export const dataSource = (() => {
+  return Object.entries(defaultConfig.tokens.spaces)
+    .map(([key, value]) => {
+      const numValue = parseFloat(value);
+      return { token:key, value: value, numValue };
+    })
+    .sort((a, b) => a.numValue - b.numValue) // 按像素值排序
+    .map(({ numValue, ...rest }) => rest); // 移除临时属性
+
+})()
+
+<TokensTable dataSource={dataSource} />

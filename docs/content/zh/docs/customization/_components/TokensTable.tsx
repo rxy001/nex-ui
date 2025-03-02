@@ -8,10 +8,10 @@ const columns = [
   { title: 'Value', dataIndex: 'value' },
 ] as const
 
-type TokenTableProps = {
+type TokensTableProps = {
   dataSource: { token: string; value: string }[]
 }
 
-export function TokenTable({ dataSource }: TokenTableProps) {
+export function TokensTable({ dataSource }: TokensTableProps) {
   return <TwoColumnTable columns={columns} dataSource={dataSource} />
 }

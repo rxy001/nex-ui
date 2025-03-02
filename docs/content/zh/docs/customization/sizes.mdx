@@ -1,6 +1,5 @@
 import { Callout } from 'nextra/components'
-import { AvailableProps, TokenTable } from './_components'
-import { map } from '@nex-ui/utils'
+import { AvailableProps, TokensTable } from './_components'
 import { defaultConfig } from '@nex-ui/react'
 
 # Sizes
@@ -17,9 +16,15 @@ Sizes Tokens 是一组标准化的尺寸值，统一管理 UI 元素的宽度、
 
 Nex UI 开箱即支持以下 Tokens。
 
-<TokenTable
-  dataSource={map(defaultConfig.tokens.sizes, (value, key) => ({
-    token: `sizes.${key}`,
-    value,
-  }))}
-/>
+export const dataSource = (() => {
+  return Object.entries(defaultConfig.tokens.sizes)
+    .map(([key, value]) => {
+      const numValue = parseFloat(value);
+      return { token:key, value: value, numValue };
+    })
+    .sort((a, b) => a.numValue - b.numValue) // 按像素值排序
+    .map(({ numValue, ...rest }) => rest); // 移除临时属性
+
+})()
+
+<TokensTable dataSource={dataSource} />

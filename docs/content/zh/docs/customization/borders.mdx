@@ -1,5 +1,5 @@
 import { Callout } from 'nextra/components'
-import { AvailableProps, TokenTable } from './_components'
+import { AvailableProps, TokensTable } from './_components'
 import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
@@ -17,7 +17,7 @@ Borders Tokens 是预设的边框样式的集合，统一管理 UI 元素的边�
 
 Nex UI 开箱即支持以下 Tokens。
 
-<TokenTable
+<TokensTable
   dataSource={map(defaultConfig.tokens.borders, (value, key) => ({
     token: `borders.${key}`,
     value,

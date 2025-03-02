@@ -9,7 +9,7 @@ import { isFunction, __DEV__ } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import type { Ref, ElementType, ChangeEvent } from 'react'
 import { checkboxRecipe } from '../../theme/slotRecipes'
-import { useNexContext } from '../provider'
+import { useNexUI } from '../provider'
 import { useCheckboxGroupContext } from './CheckboxGroupContext'
 import {
   forwardRef,
@@ -23,7 +23,7 @@ import {
 import type { CheckboxOwnerState, CheckboxProps } from './types'
 
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
-  const { prefix } = useNexContext()
+  const { prefix } = useNexUI()
 
   const checkboxRoot = `${prefix}-checkbox`
 
@@ -58,7 +58,7 @@ export const Checkbox = forwardRef(
     inProps: CheckboxProps<CheckboxComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
-    const { primaryColor, css } = useNexContext()
+    const { primaryColor, css } = useNexUI()
 
     const props = useDefaultProps<CheckboxProps>({
       name: 'Checkbox',

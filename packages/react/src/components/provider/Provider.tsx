@@ -5,11 +5,7 @@ import { useSystem, SystemProvider } from '@nex-ui/system'
 import { useMemo } from 'react'
 import { __NEX_ICON_PROVIDER as NexIconsProvider } from '@nex-ui/icons'
 import { defaultConfig } from '../../theme/preset'
-import {
-  NexContextProvider,
-  useNexContext,
-  DEFAULT_CONTEXT_VALUE,
-} from './Context'
+import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
 import { createIcon } from '../icon/createIcon'
 import type { NexUIProviderProps, InnerProviderProps } from './types'
 
@@ -73,7 +69,7 @@ function TopLevelProvider(props: NexUIProviderProps) {
 function NestedProvider(props: NexUIProviderProps) {
   const { theme, children, primaryColor } = props
 
-  const ctx = useNexContext()
+  const ctx = useNexUI()
 
   const mergedComponents = useMemo(() => {
     return mergeWith(
@@ -109,7 +105,7 @@ function NestedProvider(props: NexUIProviderProps) {
 }
 
 export function NexUIProvider(props: NexUIProviderProps) {
-  const outer = useNexContext()
+  const outer = useNexUI()
 
   const isTopLevel = (outer as unknown as string) === DEFAULT_CONTEXT_VALUE
 

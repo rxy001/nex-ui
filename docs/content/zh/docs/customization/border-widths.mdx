@@ -1,5 +1,5 @@
 import { Callout } from 'nextra/components'
-import { AvailableProps, TokenTable } from './_components'
+import { AvailableProps, TokensTable } from './_components'
 import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
@@ -17,7 +17,7 @@ BorderWidths Tokens 是一组预设的边框宽度。
 
 Nex UI 开箱即支持以下 Tokens。
 
-<TokenTable
+<TokensTable
   dataSource={map(defaultConfig.tokens.borderWidths, (value, key) => ({
     token: `borderWidths.${key}`,
     value,

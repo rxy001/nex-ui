@@ -1,5 +1,5 @@
 import { Callout } from 'nextra/components'
-import { AvailableProps, TokenTable } from './_components'
+import { AvailableProps, TokensTable } from './_components'
 import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
@@ -17,7 +17,7 @@ Z-Indexes 是预设的层级数值集合，确保全局层叠顺序可控且一�
 
 Nex UI 开箱即支持以下 Tokens。
 
-<TokenTable
+<TokensTable
   dataSource={map(defaultConfig.tokens.zIndexes, (value, key) => ({
     token: `zIndexes.${key}`,
     value,
