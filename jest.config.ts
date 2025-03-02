@@ -27,6 +27,7 @@ const jestConfig: JestConfigWithTsJest = {
       'jest-transform-stub',
     '^.+\\.svg$': 'jest-transformer-svg',
   },
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
   extensionsToTreatAsEsm: ['.ts'],
   // collectCoverage: true,
   collectCoverageFrom: ['packages/**/*.{ts,tsx}'],

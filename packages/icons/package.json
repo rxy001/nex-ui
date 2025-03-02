@@ -22,7 +22,7 @@
   "scripts": {
     "build": "tsx ../../scripts/build.ts --dts",
     "build:fast": "tsx ../../scripts/build.ts",
-    "check-type": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "type": "module",
   "main": "dist/cjs/index.cjs",

@@ -17,9 +17,9 @@
     "test": {
       "outputs": []
     },
-    "check-type": {
+    "typecheck": {
       "cache": false,
-      "dependsOn": ["^check-type"]
+      "dependsOn": ["^typecheck"]
     }
   }
 }

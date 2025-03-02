@@ -9,7 +9,8 @@
       "@nex-ui/utils": ["./packages/utils/src"],
       "@nex-ui/system": ["./packages/system/src"],
       "@nex-ui/icons": ["./packages/icons/src"],
-      "@nex-ui/react": ["./packages/react/src"]
+      "@nex-ui/react": ["./packages/react/src"],
+      "@nex-ui/hooks": ["./packages/hooks/src"]
     }
   }
 }

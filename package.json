@@ -12,16 +12,17 @@
     "dev": "turbo dev",
     "dev:docs": "turbo dev -F @nex-ui/docs",
     "dev:sb": "turbo dev -F @nex-ui/storybook",
-    "check-type": "turbo check-type",
+    "typecheck": "turbo typecheck",
     "changeset": "changeset",
     "version": "changeset version",
     "publish": "changeset publish",
     "test": "jest --config ./jest.config.ts",
-    "prepare": "husky",
-    "prettier": "prettier --write . --config .prettierrc.json  --ignore-path .eslintignore",
+    "prettier:check": "prettier --check packages/**/src --cache",
+    "prettier:write": "prettier --write packages/**/src --cache",
     "lint": "pnpm lint:pkg && pnpm lint:docs",
     "lint:pkg": "eslint -c .eslintrc.json ./packages/**/*.{ts,tsx}",
-    "lint:docs": "eslint -c .eslintrc.json ./docs/**/*.{ts,tsx,md,mdx}"
+    "lint:docs": "eslint -c .eslintrc.json ./docs/**/*.{ts,tsx}",
+    "prepare": "husky"
   },
   "type": "module",
   "devDependencies": {
