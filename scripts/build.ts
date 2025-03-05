@@ -3,7 +3,7 @@
 import argsParse from 'yargs-parser'
 import path from 'node:path'
 import dts from 'rollup-plugin-dts'
-import typescript from '@rollup/plugin-typescript'
+import swc from '@rollup/plugin-swc'
 import fs from 'node:fs'
 import svgr from '@svgr/rollup'
 import { rollup } from 'rollup'
@@ -11,7 +11,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import type { RollupOptions, RollupBuild } from 'rollup'
 import { preserveDirectives } from 'rollup-plugin-preserve-directives'
 
-type SharedConfigs = { external: string[]; tsconfig: string; name: string }
+type SharedConfigs = { external: string[]; name: string }
 
 build()
 
@@ -36,14 +36,6 @@ async function build() {
     '@emotion/serialize',
   ]
 
-  let tsconfig = path.resolve(cwd, 'tsconfig.build.json')
-
-  try {
-    fs.accessSync(tsconfig)
-  } catch (err) {
-    tsconfig = path.resolve(cwd, 'tsconfig.json')
-  }
-
   console.log(`[${name}] Building...`)
 
   if (args.clean) {
@@ -51,14 +43,14 @@ async function build() {
     fs.rmSync(distDir, { recursive: true, force: true })
   }
 
-  await generateModules({ tsconfig, external, name })
+  await generateModules({ external, name })
 
   if (args.dts) {
-    await generateTypes({ tsconfig, external, name })
+    await generateTypes({ external, name })
   }
 }
 
-async function generateModules({ external, tsconfig, name }: SharedConfigs) {
+async function generateModules({ external, name }: SharedConfigs) {
   const config: RollupOptions = {
     external,
     input: './src/index.ts',
@@ -67,9 +59,21 @@ async function generateModules({ external, tsconfig, name }: SharedConfigs) {
         ref: true,
       }),
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
-      typescript({
-        tsconfig,
+      swc({
+        swc: {
+          jsc: {
+            parser: { tsx: true, syntax: 'typescript' },
+            transform: {
+              react: {
+                runtime: 'automatic',
+              },
+            },
+          },
+        },
       }),
+      // typescript({
+      //   tsconfig,
+      // }),
       preserveDirectives(),
     ],
     output: [
@@ -100,14 +104,18 @@ async function generateModules({ external, tsconfig, name }: SharedConfigs) {
   console.log(`[${name}] [JS] Generated CJS and ESM files ✅`)
 }
 
-async function generateTypes({ external, tsconfig, name }: SharedConfigs) {
+async function generateTypes({ external, name }: SharedConfigs) {
+  const cwd = process.cwd()
+
+  console.log(path.resolve(cwd, '../../tsconfig.json'))
+
   const config: RollupOptions = {
     external,
     input: './src/index.ts',
     plugins: [
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       dts({
-        tsconfig,
+        tsconfig: path.resolve(cwd, './tsconfig.json'),
       }),
     ],
     output: { dir: './dist/types', format: 'es', preserveModules: true },

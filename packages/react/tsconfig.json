@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.json",
   "include": ["./src", "../icons/types.d.ts"],
   "compilerOptions": {
-    "types": ["@testing-library/jest-dom/jest-globals"],
     "customConditions": ["source"],
     "baseUrl": "./",
     "paths": {
