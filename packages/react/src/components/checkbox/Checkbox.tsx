@@ -20,6 +20,7 @@ import {
   useSlotProps,
   resolveSxProps,
 } from '../utils'
+import { Icon } from '../icon'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
 
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
@@ -214,7 +215,7 @@ export const Checkbox = forwardRef(
         customIcon
       )
     ) : (
-      <CheckOutlined {...iconProps} />
+      <Icon component={CheckOutlined} {...iconProps} />
     )
 
     return (

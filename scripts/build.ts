@@ -71,9 +71,6 @@ async function generateModules({ external, name }: SharedConfigs) {
           },
         },
       }),
-      // typescript({
-      //   tsconfig,
-      // }),
       preserveDirectives(),
     ],
     output: [
@@ -106,8 +103,6 @@ async function generateModules({ external, name }: SharedConfigs) {
 
 async function generateTypes({ external, name }: SharedConfigs) {
   const cwd = process.cwd()
-
-  console.log(path.resolve(cwd, '../../tsconfig.json'))
 
   const config: RollupOptions = {
     external,

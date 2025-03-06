@@ -6,18 +6,14 @@ import type { OverrideProps, SxProps } from '../../types/utils'
 
 export interface IconPropsOverrides {}
 
-export type IconOwnProsp<RootComponent extends ElementType> = Omit<
-  IconVariants,
-  'fontSize'
-> & {
+export type IconOwnProsp<RootComponent extends ElementType> = {
   className?: ClassValue
   width?: NexUICSSProperties['width']
   height?: NexUICSSProperties['height']
   color?: NexUICSSProperties['color']
-  fontSize?: IconVariants['fontSize'] | number | (string & {})
   as?: RootComponent
   sx?: SxProps<IconOwnerState<RootComponent>>
-}
+} & IconVariants
 
 export type InnerIconProps<RootComponent extends ElementType = 'svg'> =
   OverrideProps<RootComponent, IconOwnProsp<RootComponent>, IconPropsOverrides>

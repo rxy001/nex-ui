@@ -62,7 +62,7 @@ export const createIcon = (
         color,
         className,
         spin = false,
-        fontSize = 'md',
+        size = 'md',
         width = '1em',
         height = '1em',
         ...remainingProps
@@ -71,7 +71,7 @@ export const createIcon = (
       const ownerState = {
         ...props,
         spin,
-        fontSize,
+        size,
         width,
         height,
         component: svgComponent,
@@ -89,7 +89,7 @@ export const createIcon = (
         color,
         width,
         height,
-        fs: fontSize,
+        fs: size,
         ...styles,
       }
 

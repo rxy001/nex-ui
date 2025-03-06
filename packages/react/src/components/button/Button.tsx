@@ -16,6 +16,7 @@ import {
   resolveSxProps,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
+import { Icon } from '../icon'
 
 const useSlotClasses = <RootComponent extends ElementType = 'button'>(
   ownerState: ButtonOwnerState<RootComponent>,
@@ -159,17 +160,21 @@ export const Button = forwardRef(
       sx: styles.endIcon,
     })
 
+    const loadingIcon = loading
+      ? (spinner ?? <Icon spin component={LoadingOutlined} />)
+      : null
+
     const startIcon = ((spinnerPlacement === 'start' && loading) ||
       startIconProp) && (
       <nex.span {...startIconProps}>
-        {loading ? (spinner ?? <LoadingOutlined />) : startIconProp}
+        {loading ? loadingIcon : startIconProp}
       </nex.span>
     )
 
     const endIcon = ((spinnerPlacement === 'end' && loading) ||
       endIconProp) && (
       <nex.span {...endIconProps}>
-        {loading ? (spinner ?? <LoadingOutlined />) : endIconProp}
+        {loading ? loadingIcon : endIconProp}
       </nex.span>
     )
 

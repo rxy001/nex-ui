@@ -21,7 +21,7 @@ export const iconRecipe = defineRecipe({
         animation: `${circle} 1s linear infinite`,
       },
     },
-    fontSize: {
+    size: {
       sm: {
         fs: '1.25em',
       },

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { SearchOutlined } from '@nex-ui/icons'
 import { InputText } from '../InputText'
 import { Flex } from '../../flex'
+import { Icon } from '../../icon'
 
 const meta = {
   title: 'Components/InputText',
@@ -71,8 +72,8 @@ export const InputTextWithIcons: Story = {
   render: (args) => {
     return (
       <Flex gap='4'>
-        <InputText {...args} suffix={<SearchOutlined />} />
-        <InputText {...args} prefix={<SearchOutlined />} />
+        <InputText {...args} suffix={<Icon component={SearchOutlined} />} />
+        <InputText {...args} prefix={<Icon component={SearchOutlined} />} />
       </Flex>
     )
   },

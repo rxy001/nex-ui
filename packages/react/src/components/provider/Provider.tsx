@@ -3,10 +3,8 @@
 import { isArray, mergeWith } from '@nex-ui/utils'
 import { useSystem, SystemProvider } from '@nex-ui/system'
 import { useMemo } from 'react'
-import { __NEX_ICON_PROVIDER as NexIconsProvider } from '@nex-ui/icons'
 import { defaultConfig } from '../../theme/preset'
 import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
-import { createIcon } from '../icon/createIcon'
 import type { NexUIProviderProps, InnerProviderProps } from './types'
 
 function InnerProvider({
@@ -53,15 +51,13 @@ function TopLevelProvider(props: NexUIProviderProps) {
       defaultMode={defaultMode}
       {...mergedSysConfig}
     >
-      <NexIconsProvider createIcon={createIcon}>
-        <InnerProvider
-          components={theme?.components}
-          primaryColor={primaryColor}
-          prefix={prefix}
-        >
-          {children}
-        </InnerProvider>
-      </NexIconsProvider>
+      <InnerProvider
+        components={theme?.components}
+        primaryColor={primaryColor}
+        prefix={prefix}
+      >
+        {children}
+      </InnerProvider>
     </SystemProvider>
   )
 }

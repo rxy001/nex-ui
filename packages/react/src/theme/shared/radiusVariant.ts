@@ -1,12 +1,12 @@
 export const radiusVariant = {
   sm: {
-    borderRadius: 'sm',
-  },
-  md: {
     borderRadius: 'md',
   },
-  lg: {
+  md: {
     borderRadius: 'lg',
+  },
+  lg: {
+    borderRadius: 'xl',
   },
   full: {
     borderRadius: 'full',

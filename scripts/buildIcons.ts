@@ -6,20 +6,12 @@ import {
   existsSync,
   readFileSync,
   mkdirSync,
+  unlinkSync,
 } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve, basename } from 'node:path'
 import { forEach, map } from 'packages/utils/src'
 import { pretty } from './utils'
-
-const options: Record<string, any> = {
-  LoadingOutlined: {
-    spin: true,
-  },
-  Loading3QuartersOutlined: {
-    spin: true,
-  },
-}
 
 function upperFirst(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
@@ -32,11 +24,16 @@ async function run() {
 
   const componentsDirPath = resolve(cwd, '../packages/icons/src/components')
 
-  const newTsxs: Record<string, string[]> = {}
+  const tsxFiles: Record<string, string[]> = {}
 
   console.log(`[build-icons] Building...`)
 
   await recursive(svgDirPath, generateTsx)
+
+  await recursive(componentsDirPath, removeInvalidTsx, {
+    skipDirs: ['__stories__'],
+    skipFiles: ['index.tsx'],
+  })
 
   await writeImports()
 
@@ -45,7 +42,10 @@ async function run() {
   async function recursive(
     dirPath: string,
     cb: (filePath: string, parentDir: string) => Promise<void>,
+    options?: { skipDirs?: string[]; skipFiles?: string[] },
   ) {
+    const { skipDirs, skipFiles } = options ?? {}
+
     const files = readdirSync(dirPath)
     const parentDir = basename(dirPath)
 
@@ -53,8 +53,14 @@ async function run() {
       map(files, async (file: string) => {
         const filePath = resolve(dirPath, file)
         if (statSync(filePath).isDirectory()) {
-          await recursive(filePath, cb)
+          if (skipDirs?.includes(file)) {
+            return
+          }
+          await recursive(filePath, cb, options)
         } else {
+          if (skipFiles?.includes(file)) {
+            return
+          }
           await cb(filePath, parentDir)
         }
       }),
@@ -75,78 +81,44 @@ async function run() {
 
     const categoryDirPath = resolve(componentsDirPath, category)
 
-    const defaultProps = {
-      className: `${svgFileName}-${category}`,
-    }
-
     if (!existsSync(categoryDirPath)) {
       mkdirSync(categoryDirPath)
     }
 
     const tsxPath = resolve(categoryDirPath, tsxName)
     const tsx =
-      "'use client'" +
-      '\n' +
-      '\n' +
-      "import { forwardRef, useMemo } from 'react'" +
-      '\n' +
-      "import { useNexIcons } from '../../utils/Context'" +
-      '\n' +
       `import ${svgComponentName} from '../../svg/${category}/${svgFileName}.svg'` +
       '\n' +
-      "import type { IconProps } from '../../types'" +
       '\n' +
-      '\n' +
-      `export const ${iconComponentName} = forwardRef<SVGSVGElement, IconProps>(` +
-      '\n' +
-      '  (props, ref) => {' +
-      '\n' +
-      '    const { createIcon } = useNexIcons()' +
-      '\n' +
-      `    const Icon = useMemo(() => createIcon(${svgComponentName}${
-        options[iconComponentName]
-          ? `,${JSON.stringify({ ...options[iconComponentName], ...defaultProps })}`
-          : `,${JSON.stringify(defaultProps)}`
-      }), [createIcon])` +
-      '\n' +
-      '    return <Icon {...props} ref={ref} />' +
-      '\n' +
-      '  }' +
-      '\n' +
-      ')' +
+      `export const ${iconComponentName} = ${svgComponentName}` +
       '\n' +
       '\n' +
       `${iconComponentName}.displayName='${iconComponentName}'`
     const prettiedTsx = await pretty(tsx)
 
+    if (tsxFiles[category]) {
+      tsxFiles[category].push(iconComponentName)
+    } else {
+      tsxFiles[category] = [iconComponentName]
+    }
+
     if (existsSync(tsxPath)) {
       const oldTsx = readFileSync(tsxPath, {
         encoding: 'utf-8',
       })
-      if (oldTsx !== prettiedTsx) {
-        writeFileSync(tsxPath, prettiedTsx)
+      if (oldTsx === prettiedTsx) {
+        return
       }
-      return
     }
     writeFileSync(tsxPath, prettiedTsx)
-    if (newTsxs[category]) {
-      newTsxs[category].push(iconComponentName)
-    } else {
-      newTsxs[category] = [iconComponentName]
-    }
   }
 
   async function writeImports() {
     const indexPath = resolve(componentsDirPath, './index.tsx')
 
     let tsx = ''
-    if (existsSync(indexPath)) {
-      tsx = readFileSync(indexPath, {
-        encoding: 'utf-8',
-      })
-    }
 
-    forEach(newTsxs, (tsxs: string[], category: string) => {
+    forEach(tsxFiles, (tsxs: string[], category: string) => {
       tsx =
         // eslint-disable-next-line prefer-template
         tsx +
@@ -158,6 +130,15 @@ async function run() {
     })
 
     writeFileSync(indexPath, await pretty(tsx))
+  }
+
+  async function removeInvalidTsx(tsxFilePath: string, category: string) {
+    const tsxFileName = basename(tsxFilePath, '.tsx')
+
+    const tsxs = tsxFiles[category]
+    if (!tsxs.includes(tsxFileName)) {
+      unlinkSync(tsxFilePath)
+    }
   }
 }
 
