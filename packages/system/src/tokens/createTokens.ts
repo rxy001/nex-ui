@@ -22,7 +22,7 @@ import {
 import type { Token } from './createToken'
 
 export function createTokens(config: CreateTokensConfig) {
-  const { tokens, semanticTokens, prefix } = config
+  const { tokens, semanticTokens = {}, prefix } = config
 
   const tokenMap: TokenMap = new Map()
 
@@ -249,6 +249,5 @@ export function createTokens(config: CreateTokensConfig) {
 export type Tokens = ReturnType<typeof createTokens>
 
 function filterDefault(path: string[]) {
-  if (path[0] === 'DEFAULT') return path
   return path.filter((item) => item !== 'DEFAULT')
 }

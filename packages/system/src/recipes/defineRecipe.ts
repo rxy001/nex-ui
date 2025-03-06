@@ -1,4 +1,4 @@
-import { isPlainObject } from '@nex-ui/utils'
+import { isPlainObject, isArray, __DEV__ } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
 import { mergeRecipe } from '../utils'
 import type {
@@ -19,7 +19,15 @@ export function defineRecipe<
   V extends BaseVariantGroups,
   E extends RecipeRuntimeFn,
 >(extendOrConfig: E | RecipeConfig<V>, maybeConfig?: RecipeConfig<V, E>) {
-  let config: RecipeConfig<any> = maybeConfig || extendOrConfig
+  let config = maybeConfig || extendOrConfig
+
+  // @ts-ignore
+  if (__DEV__ && config.compoundVariants && !isArray(config.compoundVariants)) {
+    throw new TypeError(
+      // @ts-ignore
+      `[Nex UI] defineRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
+    )
+  }
 
   if (
     (extendOrConfig as E)?.__recipe === true &&
@@ -29,6 +37,7 @@ export function defineRecipe<
     config = mergeRecipe((extendOrConfig as E).__config, config)
   }
 
+  // @ts-ignore
   const { base, ...other } = config
   const runtimeFn = createRuntimeFn({
     mainStyles: base,

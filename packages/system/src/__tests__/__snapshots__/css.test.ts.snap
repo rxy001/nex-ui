@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`css should convert tokens into corresponding CSS variables 1`] = `
+{
+  "backgroundColor": "var(--test-colors-primary)",
+  "borderColor": "var(--test-colors-blue-100)",
+  "borderRadius": "var(--test-radii-sm)",
+  "borderWidth": "var(--test-border-widths-sm)",
+  "boxShadow": "var(--test-shadows-sm)",
+  "color": "var(--test-colors-white)",
+  "fontFamily": "var(--test-font-families-body)",
+  "fontSize": "var(--test-font-sizes-sm)",
+  "fontWeight": "var(--test-font-weights-medium)",
+  "height": "var(--test-sizes-2)",
+  "lineHeight": "var(--test-line-heights-base)",
+  "margin": "var(--test-spaces-1)",
+  "padding": "var(--test-spaces-1)",
+  "transition": "var(--test-transitions-all)",
+  "width": "var(--test-sizes-1)",
+  "zIndex": "var(--test-z-indexes-min)",
+}
+`;
+
+exports[`css should convert tokens into corresponding CSS variables 2`] = `
+Map {
+  "base" => Map {
+    "--test-colors-white" => "#f1f1f1",
+    "--test-colors-blue-100" => "#dbeafe",
+    "--test-colors-blue-200" => "#bfdbfe",
+    "--test-colors-blue-300" => "#a3cfff",
+    "--test-borders-sm" => "1px solid",
+    "--test-radii-sm" => "4px",
+    "--test-radii-md" => "6px",
+    "--test-radii-lg" => "8px",
+    "--test-sizes-1" => "32px",
+    "--test-sizes-2" => "40px",
+    "--test-sizes-3" => "48px",
+    "--test-spaces-1" => "4px",
+    "--test-spaces-2" => "8px",
+    "--test-spaces-3" => "12px",
+    "--test-font-sizes-sm" => "12px",
+    "--test-font-sizes-md" => "14px",
+    "--test-font-sizes-lg" => "16px",
+    "--test-font-weights-normal" => 400,
+    "--test-font-weights-medium" => 500,
+    "--test-font-weights-semibold" => 600,
+    "--test-line-heights-short" => 1.375,
+    "--test-line-heights-base" => 1.5,
+    "--test-line-heights-tall" => 1.625,
+    "--test-font-families-body" => "system",
+    "--test-z-indexes-min" => 1,
+    "--test-transitions-all" => "all 0.2s",
+    "--test-shadows-sm" => "shadow",
+    "--test-border-widths-sm" => "1px",
+    "--test-colors-primary" => "var(--test-colors-blue-100)",
+    "--test-colors-secondary" => "var(--test-colors-blue-200)",
+  },
+}
+`;

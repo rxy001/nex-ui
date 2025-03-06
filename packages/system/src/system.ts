@@ -62,6 +62,7 @@ export const createSystem = (config: SystemConfig) => {
 
   return {
     css,
+    getToken,
     getGlobalCssVars,
   }
 }

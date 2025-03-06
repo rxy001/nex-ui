@@ -3,7 +3,7 @@ import { createElement, forwardRef, memo } from 'react'
 import { supportRef } from '../supportRef'
 
 describe('supportRef', () => {
-  it('works correctly', () => {
+  it('should work correctly', () => {
     const div = createElement('div')
     const simple = createElement(() => 'test')
     const memoized = createElement(memo(() => 'test'))

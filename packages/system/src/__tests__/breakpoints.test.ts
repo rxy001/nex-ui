@@ -1,8 +1,25 @@
-import { describe, expect, it } from '@jest/globals'
+import {
+  describe,
+  expect,
+  it,
+  beforeEach,
+  afterEach,
+  jest,
+} from '@jest/globals'
 import { createBreakpoints, toMediaKey } from '../breakpoints'
 
 describe('createBreakpoint', () => {
-  it('works correctly', () => {
+  let consoleSpy: jest.SpiedFunction<() => void>
+
+  beforeEach(() => {
+    consoleSpy = jest.spyOn(console, 'error')
+  })
+
+  afterEach(() => {
+    consoleSpy.mockRestore()
+  })
+
+  it('should work correctly', () => {
     const { getMediaSelectors } = createBreakpoints({
       sm: '500px',
       md: '700px',
@@ -17,5 +34,23 @@ describe('createBreakpoint', () => {
       md: toMediaKey('700px'),
       lg: toMediaKey('900px'),
     })
+
+    expect(consoleSpy).not.toBeCalled()
+  })
+
+  it('should throw an error if the breakpoint is invalid', () => {
+    createBreakpoints({
+      // @ts-expect-error
+      sm: {},
+      // @ts-expect-error
+      md: [],
+      // @ts-expect-error
+      lg: 1,
+      // @ts-expect-error
+      xl: () => {},
+    })
+
+    expect(consoleSpy).toHaveBeenCalled()
+    expect(consoleSpy).toBeCalledTimes(4)
   })
 })

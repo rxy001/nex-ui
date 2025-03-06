@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createTokens should support light and dark conditions 1`] = `
+Token {
+  "category": "colors",
+  "conditions": {
+    "base": "yellow",
+    "dark": "var(--test-colors-yellow-100)",
+    "light": "var(--test-colors-yellow-200)",
+  },
+  "cssVar": {
+    "ref": "var(--test-colors-primary)",
+    "var": "--test-colors-primary",
+  },
+  "name": "colors.primary",
+  "originalValue": {
+    "_DEFAULT": "yellow",
+    "_dark": "{colors.yellow.100}",
+    "_light": "{colors.yellow.200}",
+  },
+  "path": [
+    "colors",
+    "primary",
+  ],
+  "value": "var(--test-colors-primary)",
+}
+`;
+
+exports[`createTokens should support light and dark conditions 2`] = `
+Token {
+  "category": "colors",
+  "conditions": {
+    "base": "yellow",
+    "dark": "var(--test-colors-yellow-100)",
+    "light": "var(--test-colors-yellow-200)",
+  },
+  "cssVar": {
+    "ref": "var(--test-colors-primary-hover)",
+    "var": "--test-colors-primary-hover",
+  },
+  "name": "colors.primary.hover",
+  "originalValue": {
+    "_DEFAULT": "yellow",
+    "_dark": "{colors.yellow.100}",
+    "_light": "{colors.yellow.200}",
+  },
+  "path": [
+    "colors",
+    "primary",
+    "hover",
+  ],
+  "value": "var(--test-colors-primary-hover)",
+}
+`;
+
+exports[`createTokens should support light and dark conditions 3`] = `
+Map {
+  "base" => Map {
+    "--test-colors-yellow-100" => "yellowgreen",
+    "--test-colors-yellow-200" => "whitesmoke",
+    "--test-colors-primary" => "yellow",
+    "--test-colors-primary-hover" => "yellow",
+  },
+  "dark" => Map {
+    "--test-colors-primary" => "var(--test-colors-yellow-100)",
+    "--test-colors-primary-hover" => "var(--test-colors-yellow-100)",
+  },
+  "light" => Map {
+    "--test-colors-primary" => "var(--test-colors-yellow-200)",
+    "--test-colors-primary-hover" => "var(--test-colors-yellow-200)",
+  },
+}
+`;
+
+exports[`createTokens should support token reference syntax 1`] = `
+Token {
+  "category": "colors",
+  "conditions": {
+    "base": "var(--test-colors-blue-100)",
+  },
+  "cssVar": {
+    "ref": "var(--test-colors-primary)",
+    "var": "--test-colors-primary",
+  },
+  "name": "colors.primary",
+  "originalValue": "{colors.blue.100}",
+  "path": [
+    "colors",
+    "primary",
+  ],
+  "value": "var(--test-colors-primary)",
+}
+`;
+
+exports[`createTokens should support token reference syntax 2`] = `
+Map {
+  "base" => Map {
+    "--test-colors-blue-100" => "blue",
+    "--test-colors-primary" => "var(--test-colors-blue-100)",
+    "--test-borders-sm" => "1px solid var(--test-colors-blue-100)",
+  },
+}
+`;
+
+exports[`createTokens should work correctly 1`] = `
+Token {
+  "category": "colors",
+  "conditions": {
+    "base": "#fff",
+  },
+  "cssVar": {
+    "ref": "var(--test-colors-white)",
+    "var": "--test-colors-white",
+  },
+  "name": "colors.white",
+  "originalValue": "#fff",
+  "path": [
+    "colors",
+    "white",
+  ],
+  "value": "var(--test-colors-white)",
+}
+`;
+
+exports[`createTokens should work correctly 2`] = `
+Token {
+  "category": "colors",
+  "conditions": {
+    "base": "#cce3fd",
+  },
+  "cssVar": {
+    "ref": "var(--test-colors-blue-100)",
+    "var": "--test-colors-blue-100",
+  },
+  "name": "colors.blue.100",
+  "originalValue": "#cce3fd",
+  "path": [
+    "colors",
+    "blue",
+    "100",
+  ],
+  "value": "var(--test-colors-blue-100)",
+}
+`;
+
+exports[`createTokens should work correctly 3`] = `
+Map {
+  "base" => Map {
+    "--test-colors-white" => "#fff",
+    "--test-colors-blue-100" => "#cce3fd",
+    "--test-colors-blue-200" => "#99c7fb",
+    "--test-border-widths-sm" => "1px",
+    "--test-borders-sm" => "1px solid",
+    "--test-font-families-body" => "system",
+    "--test-font-sizes-sm" => "12px",
+    "--test-font-weights-blod" => "600",
+    "--test-line-heights-base" => "1.4",
+    "--test-radii-sm" => "4px",
+    "--test-shadows-sm" => "shadow",
+    "--test-sizes-sm" => "4px",
+    "--test-spaces-sm" => "4px",
+    "--test-transitions-all" => "all 0.2s",
+    "--test-colors-primary" => "pink",
+  },
+  "dark" => Map {
+    "--test-colors-primary" => "green",
+  },
+  "light" => Map {
+    "--test-colors-primary" => "yellow",
+  },
+}
+`;

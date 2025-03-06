@@ -1,4 +1,4 @@
-import { isPlainObject } from '@nex-ui/utils'
+import { isPlainObject, isArray, __DEV__ } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
 import { mergeRecipe } from '../utils'
 import type {
@@ -31,6 +31,14 @@ export function defineSlotRecipe<
   maybeConfig?: SlotRecipeConfig<S, E, V>,
 ) {
   let config = maybeConfig || extendOrConfig
+
+  // @ts-ignore
+  if (__DEV__ && config.compoundVariants && !isArray(config.compoundVariants)) {
+    throw new TypeError(
+      // @ts-ignore
+      `[Nex UI] defineSlotRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
+    )
+  }
 
   if (
     (extendOrConfig as E)?.__slotRecipe === true &&
