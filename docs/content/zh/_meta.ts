@@ -1,3 +1,5 @@
+import meta from './docs/components/_meta'
+
 export default {
   index: {
     type: 'page',
@@ -15,7 +17,7 @@ export default {
   },
   components: {
     type: 'page',
-    href: '/docs/components/button',
+    href: `/docs/components/${Object.keys(meta).sort().shift()}`,
     title: '组件',
   },
   theming: {

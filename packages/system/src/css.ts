@@ -18,7 +18,9 @@ interface CreateCssFnConfig {
 }
 
 export interface CssFn {
-  (styles: CSSObject | CSSObject[]): EmotionCSSObject
+  (
+    styles: CSSObject | (CSSObject | undefined | false | null)[],
+  ): EmotionCSSObject
 }
 
 const isCustomSelector = (key: string) => {
@@ -34,7 +36,11 @@ export const createCssFn = ({
 
     const result: EmotionCSSObject = {}
 
-    forEach(styles, (styleProps: CSSObject) => {
+    forEach(styles, (styleProps) => {
+      if (!styleProps) {
+        return
+      }
+
       const { colorPalette, ...style } = styleProps
 
       const handlePath = (path: string[]) => {

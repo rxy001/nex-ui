@@ -1,5 +1,5 @@
 import { Pre, withIcons } from 'nextra/components'
-import { GitHubIcon } from 'nextra/icons'
+import { GithubOutlined } from '@nex-ui/icons'
 import {
   Example,
   ComponentLinks,
@@ -10,7 +10,8 @@ import {
 import { useMDXComponents as getDocsMDXComponents } from './nextraTheme'
 
 const docsComponents = getDocsMDXComponents({
-  pre: withIcons(Pre, { js: GitHubIcon }),
+  // @ts-expect-error
+  pre: withIcons(Pre, { js: GithubOutlined }),
   Example,
   ComponentLinks,
   PropsTable,

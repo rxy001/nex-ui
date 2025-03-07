@@ -143,7 +143,7 @@ export const buttonRecipe = defineSlotRecipe({
         root: {
           w: '10',
           '& svg': {
-            fs: '1.6em',
+            fs: '1.7em',
           },
         },
       },
@@ -155,7 +155,7 @@ export const buttonRecipe = defineSlotRecipe({
         root: {
           w: '12',
           '& svg': {
-            fs: '1.7em',
+            fs: '1.9em',
           },
         },
       },

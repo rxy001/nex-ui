@@ -1,9 +1,9 @@
 import clsx from 'clsx'
 import { filter } from '@nex-ui/utils'
-import type { CSSObject } from '@nex-ui/system'
+import type { CSSObject, CssFn } from '@nex-ui/system'
 
 type UseSlotPropsArgs<SlotProps, ForwardedProps> = {
-  sx?: CSSObject | (CSSObject | undefined)[]
+  sx?: Parameters<CssFn>[number]
   classNames?: string
   externalSlotProps?: SlotProps
   externalForwardedProps?: ForwardedProps

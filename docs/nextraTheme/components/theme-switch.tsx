@@ -5,7 +5,7 @@ import { Select } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { useColorScheme } from '@nex-ui/react'
 import type { Mode } from '@nex-ui/react'
-import { MoonIcon, SunIcon } from 'nextra/icons'
+import { MoonFilled, SunFilled } from '@nex-ui/icons'
 import type { FC } from 'react'
 import { useThemeConfig } from '../stores'
 
@@ -25,7 +25,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
 
   const resolvedColorScheme = systemColorScheme ?? mode
   const IconToUse =
-    mounted && resolvedColorScheme === 'dark' ? MoonIcon : SunIcon
+    mounted && resolvedColorScheme === 'dark' ? MoonFilled : SunFilled
   const id = mounted ? mode! : 'light'
 
   const onChange = (v: string) => setMode(v as Mode)

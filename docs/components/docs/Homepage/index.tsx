@@ -1,10 +1,8 @@
 import { Button } from '@nex-ui/react'
 import { type ReactNode } from 'react'
-import ThemeableIcon from '@/icons/customize-outlined.svg'
-import LightingIcon from '@/icons/lighting-outlined.svg'
-import TsIcon from '@/icons/typescript-filled.svg'
-import { MoonOutlined } from '@nex-ui/icons'
-import { Theme, Layout } from './features'
+import TsIcon from '@/icons/typescript.svg'
+import { BoltOutlined, MoonOutlined, MagicOutlined } from '@nex-ui/icons'
+import { Theme, Style, DarkMode } from './features'
 import type { ThemeProps } from './features'
 import { Card } from './Card'
 import { Gallery } from './Gallery'
@@ -70,13 +68,13 @@ export function HomePage({ translations }: HomePageProps) {
         <Gallery />
       </section>
       <section className='x:grid x:grid-cols-1 x:md:grid-cols-2 x:lg:grid-cols-4 x:gap-4'>
-        <Card icon={<ThemeableIcon />} title={translations?.themeable?.title}>
+        <Card icon={<MagicOutlined />} title={translations?.themeable?.title}>
           {translations?.themeable?.desc}
         </Card>
         <Card icon={<MoonOutlined />} title={translations?.colorMode?.title}>
           {translations?.colorMode?.desc}
         </Card>
-        <Card icon={<LightingIcon />} title={translations?.dx?.title}>
+        <Card icon={<BoltOutlined />} title={translations?.dx?.title}>
           {translations?.dx?.desc}
         </Card>
         <Card icon={<TsIcon />} title={translations?.ts?.title}>
@@ -99,7 +97,7 @@ export function HomePage({ translations }: HomePageProps) {
         </div>
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.styling)}
-          <Layout />
+          <Style />
           <Button
             radius='full'
             size='sm'
@@ -110,8 +108,18 @@ export function HomePage({ translations }: HomePageProps) {
             {translations?.learnMore}
           </Button>
         </div>
-        <div className='x:flex x:flex-col'>
+        <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.darkMode)}
+          <DarkMode />
+          <Button
+            radius='full'
+            size='sm'
+            className='x:w-[90px]'
+            color='blue'
+            href='/docs/customization/dark-mode'
+          >
+            {translations?.learnMore}
+          </Button>
         </div>
       </section>
     </main>

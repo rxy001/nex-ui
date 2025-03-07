@@ -1,7 +1,7 @@
 'use client'
 
 import { useSandpack } from '@codesandbox/sandpack-react'
-import { CopyIcon } from 'nextra/icons'
+import { CopyOutlined } from '@nex-ui/icons'
 import { useClipboard, useEvent } from '@nex-ui/hooks'
 import { IconButton } from './IconButton'
 
@@ -18,7 +18,7 @@ export const CopyButton = () => {
 
   return (
     <IconButton title='Copy Code' onClick={copyHandler} data-copied={copied}>
-      <CopyIcon height={17} width={17} />
+      <CopyOutlined height={17} width={17} />
     </IconButton>
   )
 }

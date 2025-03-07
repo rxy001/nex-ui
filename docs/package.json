@@ -24,6 +24,7 @@
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
     "@next/bundle-analyzer": "15.2.0",
+    "canvas-confetti": "1.9.3",
     "clsx": "2.1.1",
     "color2k": "2.0.3",
     "hast-util-to-jsx-runtime": "2.3.2",

@@ -8,9 +8,8 @@ import {
   useColorScheme,
 } from '@nex-ui/react'
 import { useEvent } from '@nex-ui/hooks'
+import { MoonFilled, SunFilled } from '@nex-ui/icons'
 import type { ChangeEvent } from 'react'
-import MoonIcon from '../../icons/moon-filled.svg'
-import SunIcon from '../../icons/sun-filled.svg'
 
 export const ClientGallery = () => {
   const { mode, systemColorScheme, setMode } = useColorScheme()
@@ -32,8 +31,8 @@ export const ClientGallery = () => {
         className='x:absolute! x:-top-[30px] x:-right-[20px] x:animate-[levitate_13s_ease_infinite_1s_reverse]'
         key='switch'
         size='lg'
-        startIcon={<SunIcon />}
-        endIcon={<MoonIcon />}
+        startIcon={<SunFilled />}
+        endIcon={<MoonFilled />}
         checked={resolvedColorScheme === 'dark'}
         onChange={toggleMode}
       />

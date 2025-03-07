@@ -1,5 +1,5 @@
 export * from './FlexCenter'
-export * from './HomePage'
+export * from './docs'
 export * from './Example'
 export * from './CodeBlock'
 export * from './Sandpack'

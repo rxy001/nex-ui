@@ -1,6 +1,6 @@
 import { Button } from '@nex-ui/react'
 import type { ButtonProps } from '@nex-ui/react'
-import { GithubFilled } from '@nex-ui/icons'
+import { GithubOutlined } from '@nex-ui/icons'
 import StorybookIcon from '@/icons/storybook.svg'
 import NextIcon from '@/icons/nextjs.svg'
 
@@ -67,21 +67,21 @@ export const ComponentLinks = ({
         <ButtonLink startIcon={<NextIcon />}>Server Component</ButtonLink>
       )}
       <ButtonLink
-        startIcon={<GithubFilled />}
+        startIcon={<GithubOutlined />}
         href={`${COMPONENT_PATH}${component}`}
       >
         Source
       </ButtonLink>
       {slotRecipe ? (
         <ButtonLink
-          startIcon={<GithubFilled />}
+          startIcon={<GithubOutlined />}
           href={`${SLOT_RECIPE_PATH}${component}.ts`}
         >
           Slot Recipe Source
         </ButtonLink>
       ) : (
         <ButtonLink
-          startIcon={<GithubFilled />}
+          startIcon={<GithubOutlined />}
           href={`${RECIPE_PATH}${component}.ts`}
         >
           Recipe Source

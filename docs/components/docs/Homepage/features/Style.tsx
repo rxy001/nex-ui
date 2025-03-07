@@ -1,12 +1,12 @@
 import { CodeWindow } from '../CodeWindow'
-import { Playlist, playlistCodeSnippet } from './demos'
+import { Playlist, playlistCode } from './demos'
 
-export const Layout = () => {
+export const Style = () => {
   return (
     <div className='x:flex x:gap-12 x:flex-col x:lg:flex-row'>
       <Playlist />
       <CodeWindow lang='tsx' file='Playlist.tsx' className='x:lg:flex-1'>
-        {playlistCodeSnippet}
+        {playlistCode}
       </CodeWindow>
     </div>
   )

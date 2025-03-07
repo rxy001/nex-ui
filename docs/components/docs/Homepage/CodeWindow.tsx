@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import type { BundledLanguage } from 'shiki'
-import { CodeBlock } from '../CodeBlock'
+import { CodeBlock } from '../../CodeBlock'
 
 interface CodeBlockProps {
   children: string
