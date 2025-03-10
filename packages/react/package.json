@@ -50,7 +50,8 @@
     "@nex-ui/styled": "workspace:*",
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
-    "clsx": "2.1.1"
+    "clsx": "2.1.1",
+    "motion": "12.4.10"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

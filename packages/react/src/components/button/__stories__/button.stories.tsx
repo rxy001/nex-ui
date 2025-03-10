@@ -34,6 +34,9 @@ const meta = {
     loading: {
       control: 'boolean',
     },
+    disableRipple: {
+      control: 'boolean',
+    },
   },
   args: {
     children: 'Button',

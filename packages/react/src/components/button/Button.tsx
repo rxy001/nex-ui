@@ -14,6 +14,7 @@ import {
   useSlotProps,
   useSlotStyles,
   resolveSxProps,
+  Ripple,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
 import { Icon } from '../icon'
@@ -35,6 +36,7 @@ const useSlotClasses = <RootComponent extends ElementType = 'button'>(
     disabled,
     fullWidth,
     classes,
+    disableRipple,
   } = ownerState
 
   const slots = {
@@ -48,6 +50,7 @@ const useSlotClasses = <RootComponent extends ElementType = 'button'>(
       loading && `loading`,
       disabled && `disabled`,
       fullWidth && `full-width`,
+      disableRipple && 'disable-ripple',
     ],
     startIcon: [
       `icon`,
@@ -99,6 +102,7 @@ export const Button = forwardRef(
       startIcon: startIconProp,
       endIcon: endIconProp,
       onClick: onClickProp,
+      disableRipple = variant === 'link',
       ...remainingProps
     } = props
 
@@ -115,6 +119,7 @@ export const Button = forwardRef(
       disabled,
       fullWidth,
       color,
+      disableRipple,
     }
 
     const classes = useSlotClasses(ownerState)
@@ -179,11 +184,13 @@ export const Button = forwardRef(
     )
 
     return (
-      <nex.button {...rootProps}>
-        {startIcon}
-        {children}
-        {endIcon}
-      </nex.button>
+      <Ripple disabled={disableRipple}>
+        <nex.button {...rootProps}>
+          {startIcon}
+          {children}
+          {endIcon}
+        </nex.button>
+      </Ripple>
     )
   },
 )

@@ -32,4 +32,6 @@ export { default as mergeWith } from 'lodash.mergewith'
 
 export { default as get } from 'lodash.get'
 
+export { default as clamp } from 'lodash.clamp'
+
 export * from './env'

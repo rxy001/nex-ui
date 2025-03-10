@@ -11,7 +11,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import type { RollupOptions, RollupBuild } from 'rollup'
 import { preserveDirectives } from 'rollup-plugin-preserve-directives'
 
-type SharedConfigs = { external: string[]; name: string }
+type SharedConfigs = { external: (string | RegExp)[]; name: string }
 
 build()
 
@@ -29,11 +29,7 @@ async function build() {
   const external = [
     ...Object.keys(pkg.dependencies),
     ...Object.keys(pkg.peerDependencies),
-    // 'csstype',
-    'react/jsx-runtime',
-    'react-dom/client',
-    '@emotion/cache',
-    '@emotion/serialize',
+    /node_modules/,
   ]
 
   console.log(`[${name}] Building...`)

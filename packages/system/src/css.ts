@@ -36,7 +36,7 @@ export const createCssFn = ({
 
     const result: EmotionCSSObject = {}
 
-    forEach(styles, (styleProps) => {
+    forEach(styles, (styleProps: false | CSSObject | null | undefined) => {
       if (!styleProps) {
         return
       }

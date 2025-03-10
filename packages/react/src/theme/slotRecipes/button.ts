@@ -13,7 +13,7 @@ export const buttonRecipe = defineSlotRecipe({
     root: {
       outline: 'none',
       userSelect: 'none',
-      border: 'md',
+      border: 'none',
       cursor: 'pointer',
       position: 'relative',
       transition: 'colors',
@@ -23,8 +23,7 @@ export const buttonRecipe = defineSlotRecipe({
       justifyContent: 'center',
       boxSizing: 'border-box',
       lineHeight: 'base',
-      borderColor: 'transparent',
-      bg: 'transparent',
+      overflow: 'hidden',
       '& svg': {
         fs: '1.3em',
       },
@@ -44,15 +43,15 @@ export const buttonRecipe = defineSlotRecipe({
     variant: {
       outlined: {
         root: {
+          bg: 'transparent',
+          border: '{borders.md} {colors.colorPalette.primary}',
           borderColor: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
-            _active: 'colorPalette.accent',
           },
           color: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
-            _active: 'colorPalette.accent',
           },
         },
       },
@@ -61,7 +60,6 @@ export const buttonRecipe = defineSlotRecipe({
           bg: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
-            _active: 'colorPalette.accent',
           },
           color: 'colorPalette.contrastText',
         },
@@ -70,17 +68,17 @@ export const buttonRecipe = defineSlotRecipe({
         root: {
           color: 'colorPalette.primary',
           bg: {
-            _hover: 'colorPalette.muted',
-            _active: 'colorPalette.tertiary',
+            _DEFAULT: 'transparent',
+            _hover: 'colorPalette.subtle',
           },
         },
       },
       link: {
         root: {
+          bg: 'transparent',
           color: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
-            _active: 'colorPalette.accent',
           },
         },
       },
@@ -122,6 +120,9 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     color: toSlot(colorVariant, 'root'),
+    disableRipple: {
+      true: {},
+    },
   },
   compoundVariants: [
     {
@@ -156,6 +157,51 @@ export const buttonRecipe = defineSlotRecipe({
           w: '12',
           '& svg': {
             fs: '1.9em',
+          },
+        },
+      },
+    },
+    {
+      disableRipple: true,
+      variant: 'filled',
+      css: {
+        root: {
+          _active: {
+            bg: 'colorPalette.tertiary',
+          },
+        },
+      },
+    },
+    {
+      disableRipple: true,
+      variant: 'outlined',
+      css: {
+        root: {
+          _active: {
+            borderColor: 'colorPalette.tertiary',
+            color: 'colorPalette.tertiary',
+          },
+        },
+      },
+    },
+    {
+      disableRipple: true,
+      variant: 'text',
+      css: {
+        root: {
+          _active: {
+            bg: 'colorPalette.muted',
+          },
+        },
+      },
+    },
+    {
+      disableRipple: true,
+      variant: 'link',
+      css: {
+        root: {
+          _active: {
+            color: 'colorPalette.tertiary',
           },
         },
       },

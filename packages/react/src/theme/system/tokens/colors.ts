@@ -17,8 +17,8 @@ const cyan = {
   50: '#ecfeff',
   100: '#cffafe',
   200: '#a5f3fc',
-  300: '#67e8f9',
-  400: '#00c9e8',
+  300: '#53eafd',
+  400: '#00d3f3',
   500: '#00b8db',
   600: '#00a2c8',
   700: '#0c5c72',
@@ -39,12 +39,13 @@ const purple = {
   900: '#180828',
 }
 
+// tailwind
 const pink = {
   50: '#fdf2f8',
   100: '#fce7f3',
   200: '#fccee8',
   300: '#fda5d6',
-  400: '#f45baa',
+  400: '#fb64b6',
   500: '#f6339a',
   600: '#e60076',
   700: '#bb0053',
@@ -52,6 +53,7 @@ const pink = {
   900: '#510424',
 }
 
+// tailwind
 const gray = {
   50: '#f6f6f6',
   100: '#f2f2f2',
@@ -65,6 +67,7 @@ const gray = {
   900: '#171717',
 }
 
+// hero
 const red = {
   50: '#fee7ef',
   100: '#fdd0df',
@@ -103,6 +106,7 @@ const yellow = {
   800: '#62420e',
   900: '#312107',
 }
+
 const green = {
   50: '#e8faf0',
   100: '#d1f4e0',

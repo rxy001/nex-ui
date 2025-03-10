@@ -36,6 +36,7 @@ export const buttonClasses = generateUtilityClasses('nui-btn', [
   'loading',
   'disabled',
   'full-width',
+  'disable-ripple',
   // ---------root---------
 
   'icon',

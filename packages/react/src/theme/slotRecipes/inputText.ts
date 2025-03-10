@@ -48,8 +48,8 @@ export const inputTextRecipe = defineSlotRecipe({
       },
       filled: {
         root: {
-          bg: 'gray.muted',
-          borderColor: 'gray.muted',
+          bg: 'gray.subtle',
+          borderColor: 'gray.subtle',
         },
       },
       borderless: {
@@ -87,7 +87,7 @@ export const inputTextRecipe = defineSlotRecipe({
             borderColor: 'colorPalette.secondary',
           },
           '&:focus-within': {
-            borderColor: 'colorPalette.accent',
+            borderColor: 'colorPalette.tertiary',
           },
         },
       },
@@ -99,11 +99,11 @@ export const inputTextRecipe = defineSlotRecipe({
       css: {
         root: {
           '&:hover': {
-            bg: 'gray.tertiary',
-            borderColor: 'gray.tertiary',
+            bg: 'gray.muted',
+            borderColor: 'gray.muted',
           },
           '&:focus-within': {
-            borderColor: 'colorPalette.accent',
+            borderColor: 'colorPalette.tertiary',
             bg: 'transparent',
           },
         },
@@ -123,8 +123,8 @@ export const inputTextRecipe = defineSlotRecipe({
       variant: 'filled',
       css: {
         root: {
-          bg: 'red.muted',
-          borderColor: 'red.muted',
+          bg: 'red.subtle',
+          borderColor: 'red.subtle',
           '&:focus-within': {
             borderColor: 'red.primary',
             bg: 'transparent',

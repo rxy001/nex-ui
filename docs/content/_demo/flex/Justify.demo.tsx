@@ -7,7 +7,7 @@ function Item({ children }: { children: ReactNode }) {
       sx={{
         px: '4',
         py: '2',
-        bg: 'gray.tertiary',
+        bg: 'gray.muted',
         borderRadius: 'md',
       }}
       as='div'
