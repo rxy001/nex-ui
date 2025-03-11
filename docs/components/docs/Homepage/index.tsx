@@ -1,5 +1,7 @@
 import { Button } from '@nex-ui/react'
-import { type ReactNode } from 'react'
+import Link from 'next/link'
+import type { ElementType, ReactNode } from 'react'
+import type { ButtonProps } from '@nex-ui/react'
 import TsIcon from '@/icons/typescript.svg'
 import { BoltOutlined, MoonOutlined, MagicOutlined } from '@nex-ui/icons'
 import { Theme, Style, DarkMode } from './features'
@@ -24,6 +26,20 @@ type HomePageProps = {
     customization?: Content
     learnMore?: string
   } & ThemeProps['translations']
+}
+
+function LinkButton(props: ButtonProps<ElementType>) {
+  return (
+    <Button
+      as={Link}
+      radius='full'
+      size='sm'
+      className='x:w-[90px]'
+      color='blue'
+      href='123123'
+      {...props}
+    />
+  )
 }
 
 export function HomePage({ translations }: HomePageProps) {
@@ -85,41 +101,23 @@ export function HomePage({ translations }: HomePageProps) {
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.customization)}
           <Theme translations={translations} />
-          <Button
-            radius='full'
-            size='sm'
-            className='x:w-[90px]'
-            color='blue'
-            href='/docs/customization/theming'
-          >
+          <LinkButton href='/docs/customization/theming'>
             {translations?.learnMore}
-          </Button>
+          </LinkButton>
         </div>
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.styling)}
           <Style />
-          <Button
-            radius='full'
-            size='sm'
-            className='x:w-[90px]'
-            color='blue'
-            href='/docs/styling/sx-prop'
-          >
+          <LinkButton href='/docs/styling/sx-prop'>
             {translations?.learnMore}
-          </Button>
+          </LinkButton>
         </div>
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.darkMode)}
           <DarkMode />
-          <Button
-            radius='full'
-            size='sm'
-            className='x:w-[90px]'
-            color='blue'
-            href='/docs/customization/dark-mode'
-          >
+          <LinkButton href='/docs/customization/dark-mode'>
             {translations?.learnMore}
-          </Button>
+          </LinkButton>
         </div>
       </section>
     </main>

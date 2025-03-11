@@ -2,7 +2,7 @@
 
 exports[`Icon renders correctly 1`] = `
 <svg
-  class="nui-icon-root nui-icon-font-size-md nui-icon-width-1em nui-icon-height-1em emotion-0"
+  class="nui-icon-root nui-icon-width-1em nui-icon-height-1em emotion-0"
   fill="currentColor"
   height="1em"
   viewBox="0 0 1024 1024"

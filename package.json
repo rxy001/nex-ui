@@ -12,7 +12,7 @@
     "dev": "turbo dev",
     "dev:docs": "turbo dev -F @nex-ui/docs",
     "dev:sb": "turbo dev -F @nex-ui/storybook",
-    "typecheck": "turbo typecheck",
+    "typecheck": "turbo typecheck -F !@nex-ui/docs",
     "changeset": "changeset",
     "version": "changeset version",
     "publish": "changeset publish",

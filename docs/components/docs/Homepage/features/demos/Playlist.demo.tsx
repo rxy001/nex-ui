@@ -1,6 +1,7 @@
 'use client'
 
 import { Box } from '@nex-ui/react'
+import Image from 'next/image'
 import { playlist } from './playlist.data'
 
 export default function Playlist() {
@@ -69,10 +70,11 @@ export default function Playlist() {
                 }}
               >
                 <Box
-                  as='img'
-                  srcSet={music.cover}
-                  width='100%'
-                  height='50%'
+                  as={Image}
+                  src={music.cover}
+                  alt={music.name}
+                  width={140}
+                  height={210}
                   loading='lazy'
                   sx={{
                     height: '100%',

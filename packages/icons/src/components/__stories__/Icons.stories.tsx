@@ -7,11 +7,17 @@ const meta = {
   argTypes: {},
   render: () => {
     return (
-      <>
+      <div
+        style={{
+          display: 'flex',
+          fontSize: '30px',
+          gap: '10px',
+        }}
+      >
         {map(Icon, (Component, index) => (
           <Component key={index} />
         ))}
-      </>
+      </div>
     )
   },
 }

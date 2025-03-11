@@ -144,7 +144,7 @@ export const Button = forwardRef(
         ref,
         onClick,
         className,
-        href: rootElement === 'a' ? href : null,
+        href,
         as: rootElement,
         [rootElement === 'button' ? 'disabled' : 'data-disabled']:
           disabled || loading,

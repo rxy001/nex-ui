@@ -10,38 +10,31 @@ import {
   MoonOutlined,
   SunOutlined,
 } from '@nex-ui/icons'
-import { Box, defineRecipe, useColorScheme } from '@nex-ui/react'
-import type { CSSObject, RecipeVariants } from '@nex-ui/react'
-import type { ReactNode } from 'react'
+import { Box, Button as NexBtn, useColorScheme } from '@nex-ui/react'
+import type { ButtonProps, CSSObject } from '@nex-ui/react'
 
-const recipe = defineRecipe({
-  base: {
-    borderRadius: 'full',
-  },
-  variants: {
-    size: {
-      md: {
-        fontSize: '1.5em',
-        p: '2',
-      },
-      lg: {
-        fontSize: '2.5em',
-        p: '1',
-      },
-    },
-  },
-})
-
-type ButtonProps = {
-  children?: ReactNode
-  sx?: CSSObject
-} & RecipeVariants<typeof recipe>
-
-function Button({ children, sx, size = 'md' }: ButtonProps) {
+function Button({ children, ...props }: ButtonProps) {
   return (
-    <Box as='button' sx={[recipe({ size }), sx]}>
+    <NexBtn
+      variant='text'
+      iconOnly
+      radius='full'
+      {...props}
+      sx={[
+        {
+          color: {
+            _DEFAULT: 'black',
+            _dark: 'white',
+          },
+          bg: {
+            _hover: '#ecedee1a',
+          },
+        },
+        props.sx as CSSObject,
+      ]}
+    >
       {children}
-    </Box>
+    </NexBtn>
   )
 }
 
@@ -71,6 +64,7 @@ export default function MusicPlayer() {
           position: 'absolute',
           right: '4',
           top: '2',
+          color: 'rgb(251 251 251 / 80%)',
         }}
       >
         {resolvedColorScheme === 'dark' ? (
@@ -189,7 +183,14 @@ export default function MusicPlayer() {
             <Button>
               <SkipBackwardFilled />
             </Button>
-            <Button size='lg'>
+            <Button
+              size='lg'
+              sx={{
+                '& svg': {
+                  fs: '2.3em',
+                },
+              }}
+            >
               <PauseCircleFilled />
             </Button>
             <Button>

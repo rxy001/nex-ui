@@ -1,5 +1,6 @@
 'use client'
 
+import { isFunction } from '@nex-ui/utils'
 import { nex } from '@nex-ui/styled'
 import type { Ref, ElementType } from 'react'
 import { forwardRef, useDefaultProps } from '../utils'
@@ -15,7 +16,7 @@ export const Box = forwardRef(
       props: inProps,
     })
 
-    const { sx } = props
+    const sx = isFunction(props.sx) ? props.sx() : props.sx
 
     return <nex.div {...props} sx={sx} ref={ref} />
   },

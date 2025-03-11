@@ -206,13 +206,13 @@ describe('Avatar', () => {
     it('should render a div containing an svg icon', () => {
       const { container } = renderWithNexProvider(
         <Avatar>
-          <UserOutlined />
+          <UserOutlined className='nui-icon' />
         </Avatar>,
       )
       const avatar = container.firstElementChild
       expect(avatar?.tagName).toBe('DIV')
       const userIcon = avatar?.firstElementChild
-      expect(userIcon).toHaveClass('nui-icon-root')
+      expect(userIcon).toHaveClass('nui-icon')
     })
   })
 
