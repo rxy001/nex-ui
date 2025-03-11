@@ -9,6 +9,7 @@
     "build:icons": "tsx ./scripts/buildIcons",
     "build:fast": "turbo build:fast -F !@nex-ui/docs -F !@nex-ui/storybook",
     "build:docs": "turbo build -F @nex-ui/docs",
+    "build:sb": "turbo build -F @nex-ui/sb",
     "dev": "turbo dev",
     "dev:docs": "turbo dev -F @nex-ui/docs",
     "dev:sb": "turbo dev -F @nex-ui/storybook",
