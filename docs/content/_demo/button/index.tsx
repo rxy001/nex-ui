@@ -1,4 +1,4 @@
-import useageCode from './Useage.demo?raw'
+import usageCode from './Usage.demo?raw'
 import disabledCode from './Disabled.demo?raw'
 import radiusCode from './Radius.demo?raw'
 import sizesCode from './Sizes.demo?raw'
@@ -7,8 +7,7 @@ import variantsCode from './Variants.demo?raw'
 import loadingCode from './Loading.demo?raw'
 import withIconsCode from './WithIcons.demo?raw'
 import iconOnlyCode from './IconOnly.demo?raw'
-import fullWidthCode from './FullWidth.demo?raw'
-import UseageDemo from './Useage.demo'
+import UsageDemo from './Usage.demo'
 import DisabledDemo from './Disabled.demo'
 import RadiusDemo from './Radius.demo'
 import SizesDemo from './Sizes.demo'
@@ -17,12 +16,11 @@ import VariantsDemo from './Variants.demo'
 import LoadingDemo from './Loading.demo'
 import WithIconsDemo from './WithIcons.demo'
 import IconOnlyDemo from './IconOnly.demo'
-import FullWidthDemo from './FullWidth.demo'
 
 export const button = {
-  useage: {
-    code: useageCode,
-    demo: <UseageDemo />,
+  usage: {
+    code: usageCode,
+    demo: <UsageDemo />,
   },
   disabled: {
     code: disabledCode,
@@ -55,9 +53,5 @@ export const button = {
   iconOnly: {
     code: iconOnlyCode,
     demo: <IconOnlyDemo />,
-  },
-  fullWidth: {
-    code: fullWidthCode,
-    demo: <FullWidthDemo />,
   },
 }

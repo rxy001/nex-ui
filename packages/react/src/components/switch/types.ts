@@ -26,7 +26,6 @@ export type SwitchOwnProps<
   as?: SwitchComponent
   sx?: SxProps<SwitchOwnerState<SwitchComponent>>
   name?: string
-  checked?: boolean
   defaultChecked?: boolean
   className?: ClassValue
   startIcon?: ReactNode
@@ -39,10 +38,6 @@ export type SwitchOwnProps<
     | ReactNode
     | ((ownerState: SwitchOwnerState<SwitchComponent>) => ReactNode)
   ref?: SwitchComponentProps['ref']
-  type?: SwitchComponentProps['type']
-  onBlur?: SwitchComponentProps['onBlur']
-  onFocus?: SwitchComponentProps['onFocus']
-  onClick?: SwitchComponentProps['onClick']
   onChange?: SwitchComponentProps['onChange']
 } & SwitchVariants
 

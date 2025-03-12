@@ -1,0 +1,194 @@
+---
+title: Switch
+description: Switch 用于在选中和未选中状态之间进行切换。
+---
+
+import { $switch } from '@/content/_demo'
+
+# Switch
+
+Switch 用于在选中和未选中状态之间进行切换。
+
+<ComponentLinks component='switch' />
+
+## 使用
+
+<Example {...$switch.usage} />
+
+### Disabled
+
+<Example {...$switch.disabled} />
+
+### Sizes
+
+<Example {...$switch.sizes} />
+
+### Colors
+
+<Example {...$switch.colors} />
+
+### With Thumb Icons
+
+<Example {...$switch.withThumbIcon} />
+
+### With Icons
+
+您还可以通过使用 `startIcon` 和 `endIcon` 属性，在 Switch 的开头和结尾添加图标。
+
+<Example {...$switch.withIcons} />
+
+### Controlled
+
+<Example {...$switch.controlled} />
+
+## API
+
+### Switch Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'Switch 的颜色。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'Switch 的大小。',
+    },
+    {
+      prop: 'checked',
+      type: 'boolean',
+      description: 'Switch 是否选中。',
+    },
+    {
+      prop: 'defaultChecked',
+      type: 'boolean',
+      description: 'Switch 是否默认选中（非受控）。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'Switch 是否禁用。',
+    },
+    {
+      prop: 'name',
+      type: 'string',
+      description: 'Switch 的 name。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'startIcon',
+      type: 'ReactNode',
+      description: 'Switch 开头的图标。',
+    },
+    {
+      prop: 'endIcon',
+      type: 'ReactNode',
+      description: 'Switch 结尾的图标。',
+    },
+    {
+      prop: 'thumbIcon',
+      type: ['ReactNode', '(state: SwitchOwnerState) => ReactNode'],
+      description: '滑块内部的图标。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Switch 内的 input',
+    },
+    {
+      prop: 'onChange',
+      type: 'function',
+      description: '当 Switch 状态发生变化时会触发该回调函数。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于 Switch 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: [
+        'CSSObject',
+        'CSSObject[]',
+        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
+      ],
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Switch Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentPropsWithRef>>',
+      description: 'Switch Slots 的 props。',
+    },
+  ]}
+/>
+
+### Switch Slots
+
+{/* 'root' | 'input' | 'track' | 'startIcon' | 'endIcon' | 'thumb' */}
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'root',
+      class: '.nui-switch-root',
+      component: "'label'",
+      description: 'Switch 的根元素。',
+    },
+    {
+      slot: 'input',
+      class: '.nui-switch-input',
+      component: "'input'",
+      description: 'Switch 内的 input。',
+    },
+    {
+      slot: 'track',
+      class: '.nui-switch-track',
+      component: "'span'",
+      description: 'startIcon、endIcon 和 thumb 的容器。',
+    },
+    {
+      slot: 'startIcon',
+      class: '.nui-switch-start-icon',
+      component: "'span'",
+      description: 'Switch 内开头图标的容器。',
+    },
+    {
+      slot: 'endIcon',
+      class: '.nui-switch-end-icon',
+      component: "'span'",
+      description: 'Switch 内结尾图标的容器。',
+    },
+    {
+      slot: 'thumb',
+      class: '.nui-switch-thumb',
+      component: "'span'",
+      description: 'Switch 内的滑块。',
+    },
+  ]}
+/>

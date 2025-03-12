@@ -1,26 +1,31 @@
+---
+title: Divider
+description: Divider 是一种用于分隔页面中内容的组件。
+---
+
 import { divider } from '@/content/_demo'
 
 # Divider
 
-分隔线是一种用于分隔页面中内容的组件。
+Divider 是一种用于分隔页面中内容的组件。
 
 <ComponentLinks component='divider' />
 
-## Usage
+## 使用
 
-<Example {...divider} />
+<Example {...divider.usage} />
 
 ## API
 
 ### Divider Props
 
-分割线组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
+Divider Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
 
 <PropsTable
   dataSource={[
     {
       prop: 'orientation',
-      description: '分隔线方向。',
+      description: 'Divider 的方向。',
       type: ["'horizontal'", "'vertical'"],
       default: "'horizontal'",
     },
@@ -28,6 +33,11 @@ import { divider } from '@/content/_demo'
       prop: 'className',
       description: '用于根元素的 className。',
       type: 'ClassValue',
+    },
+    {
+      prop: 'ref',
+      description: '用于转发根元素。',
+      type: 'Ref',
     },
     {
       prop: 'sx',

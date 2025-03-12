@@ -1,5 +1,5 @@
-import useageCode from './Useage.demo?raw'
-import UseageDemo from './Useage.demo'
+import usageCode from './Usage.demo?raw'
+import UsageDemo from './Usage.demo'
 import disabledCode from './Disabled.demo?raw'
 import DisabledDemo from './Disabled.demo'
 import sizesCode from './Sizes.demo?raw'
@@ -18,9 +18,9 @@ import groupDisabledCode from './GroupDisabled.demo?raw'
 import GroupDisabledDemo from './GroupDisabled.demo'
 
 export const checkbox = {
-  useage: {
-    code: useageCode,
-    demo: <UseageDemo />,
+  usage: {
+    code: usageCode,
+    demo: <UsageDemo />,
   },
   disabled: {
     code: disabledCode,

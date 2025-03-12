@@ -21,7 +21,8 @@ export async function generateMetadata(props: PageProps) {
 
   return {
     ...metadata,
-    title: metadata.title === 'Index' ? title : `${metadata.title} - ${title}.`,
+    title:
+      metadata.title === 'Homepage' ? title : `${metadata.title} - ${title}.`,
   }
 }
 

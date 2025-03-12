@@ -1,5 +1,5 @@
-import useageCode from './Useage.demo?raw'
-import UseageDemo from './Useage.demo'
+import usageCode from './Usage.demo?raw'
+import UsageDemo from './Usage.demo'
 import directionCode from './Direction.demo?raw'
 import DirectionDemo from './Direction.demo'
 import gapCode from './Gap.demo?raw'
@@ -10,9 +10,9 @@ import alignCode from './Align.demo?raw'
 import AlignDemo from './Align.demo'
 
 export const flex = {
-  useage: {
-    code: useageCode,
-    demo: <UseageDemo />,
+  usage: {
+    code: usageCode,
+    demo: <UsageDemo />,
   },
   direction: {
     code: directionCode,

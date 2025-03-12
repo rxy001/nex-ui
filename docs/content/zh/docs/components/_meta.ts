@@ -4,4 +4,5 @@ export default {
   checkbox: 'Checkbox',
   divider: 'Divider',
   flex: 'Flex',
+  switch: 'Switch',
 }

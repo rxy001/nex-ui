@@ -7,7 +7,7 @@ import logo from '@/public/images/logo.png'
 import {
   LastUpdated,
   Layout,
-  LocaleSwitch,
+  // LocaleSwitch,
   Navbar,
   ThemeSwitch,
   Footer,
@@ -16,9 +16,6 @@ import { getDictionary } from '../_dictionaries/getDictionary'
 import '@/globals.css'
 
 export const metadata: Metadata = {
-  description:
-    'Nex UI is a UI library for React that helps you build beautiful user interfaces.',
-  title: 'Nex UI - Beautiful, modern and high-quality React UI library.',
   appleWebApp: {
     title: 'Nex UI',
   },
@@ -48,7 +45,7 @@ export default async function RootLayout({ children, params }: any) {
       projectLink='https://github.com/rxy001/nex-ui'
     >
       <>
-        <LocaleSwitch className='x:hidden x:md:flex' />
+        {/* <LocaleSwitch className='x:hidden x:md:flex' /> */}
         <ThemeSwitch className='x:hidden x:md:flex' />
       </>
     </Navbar>

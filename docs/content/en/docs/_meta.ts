@@ -1,5 +1,5 @@
 export default {
-  guide: 'Guide',
+  'getting-started': 'Getting-Started',
   styling: 'Styling',
   customization: 'Customization',
   components: 'Components',

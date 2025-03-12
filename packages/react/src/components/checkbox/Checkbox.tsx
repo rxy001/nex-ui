@@ -161,8 +161,8 @@ export const Checkbox = forwardRef(
     const inputProps = useSlotProps({
       externalSlotProps: slotProps?.input,
       externalForwardedProps: {
-        ...remainingProps,
         type: 'checkbox',
+        ...remainingProps,
         value,
         name,
         ref,

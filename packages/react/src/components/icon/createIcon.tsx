@@ -21,12 +21,13 @@ const useSlotClasses = (ownerState: IconOwnerState) => {
 
   const iconRoot = `${prefix}-icon`
 
-  const { spin, width, height } = ownerState
+  const { spin, width, height, size } = ownerState
 
   const slots = {
     root: [
       'root',
       spin && `spin-${spin}`,
+      size && `size-${size}`,
       `width-${width}`,
       `height-${height}`,
     ],

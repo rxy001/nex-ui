@@ -18,34 +18,15 @@ export const translations = {
   },
   colorMode: {
     title: 'Light & Dark UI',
-    desc: 'Automatic dark mode recognition, Nex UI automatically changes the theme when detects HTML theme prop changes.',
+    desc: 'Nex UI comes with two themes right out of the box, a light one and a dark one. And it offers an easy way to quickly set up the dark mode for your apps.',
   },
   dx: {
     title: 'Unique DX',
-    desc: 'Nex UI provides a style design system to help you build custom designs more efficiently. It makes it possible to rapidly lay out custom designs',
+    desc: 'Nex UI provides a style design system to help you build custom designs  more quickly and efficiently, and expand your own components that conform to the unified theme style.',
   },
   ts: {
     title: 'TypeScript',
     desc: 'Written in TypeScript, it offers top-notch support for TypeScript.',
-  },
-  styling: {
-    title: (
-      <span>
-        Styling made
-        <br />
-        <span>easy</span>
-      </span>
-    ),
-    desc: ' which gives you a quick and efficient way to apply the correct design tokens directly to a React element.',
-  },
-  darkMode: {
-    title: (
-      <span>
-        Dark mode is
-        <br />
-        <span>effortless</span>
-      </span>
-    ),
   },
   customization: {
     title: (
@@ -55,6 +36,36 @@ export const translations = {
         <span>flexibly</span>
       </span>
     ),
+    desc: 'Nex UI provides token and theming solutions based on CSS variables. You can deeply customize the default theme or create a completely unique theme of your own.',
+  },
+  tokensDesc:
+    'Tokens are platform-independent and are used to manage design decisions in applications.',
+  semanticTokensDesc:
+    'Semantic Tokens are Tokens designed specifically for use in specific contextual environments.',
+  scalesDesc:
+    'Scales can associate Tokens and SemanticTokens with CSS properties, enabling CSS properties to be mapped to the corresponding Token types. As a result, CSS properties can use Tokens of the corresponding types as values.',
+  componentsDesc:
+    'You can fully customize all the styles and default props of the components.',
+  learnMore: 'Learn More',
+  styling: {
+    title: (
+      <span>
+        Styling made
+        <br />
+        <span>easy</span>
+      </span>
+    ),
+    desc: 'Nex UI supports the sx prop, which provides you with a convenient and efficient way to map and retrieve values from the theme based on the CSS properties you use, and then apply the correct Tokens to React elements. Meanwhile, by referencing the predefined breakpoints in the theme, using the sx prop also greatly simplifies the process of defining responsive values.',
+  },
+  darkMode: {
+    title: (
+      <span>
+        Dark mode is
+        <br />
+        <span>effortless</span>
+      </span>
+    ),
+    desc: 'Nex UI not only comes with a beautifully designed dark theme out of the box, and also provides you with a convenient solution to quickly implement the dark mode for your applications.',
   },
 }
 

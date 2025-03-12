@@ -1,14 +1,19 @@
+---
+title: Checkbox
+description: Checkbox 允许用户从一个集合中选择一个或多个项目。
+---
+
 import { checkbox } from '@/content/_demo'
 
 # Checkbox
 
-复选框允许用户从一个集合中选择一个或多个项目。
+Checkbox 允许用户从一个集合中选择一个或多个项目。
 
 <ComponentLinks component='checkbox' slotRecipe />
 
 ## 使用
 
-<Example {...checkbox.useage} />
+<Example {...checkbox.usage} />
 
 ### Disabled
 
@@ -52,7 +57,7 @@ import { checkbox } from '@/content/_demo'
       prop: 'children',
       type: 'ReactNode',
       default: '',
-      description: '复选框的标签。',
+      description: 'Checkbox 的标签。',
     },
     {
       prop: 'color',
@@ -68,40 +73,40 @@ import { checkbox } from '@/content/_demo'
         "'gray'",
       ],
       default: "'blue'",
-      description: '复选框的颜色。',
+      description: 'Checkbox 的颜色。',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: '复选框的大小。',
+      description: 'Checkbox 的大小。',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'"],
       default: 'size',
-      description: '复选框的 borderRadius。',
+      description: 'Checkbox 的 borderRadius。',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: '复选框是否禁用。',
+      description: 'Checkbox 是否禁用。',
     },
     {
       prop: 'checked',
       type: 'boolean',
-      description: '复选框是否选中。',
+      description: 'Checkbox 是否选中。',
     },
     {
       prop: 'defaultChecked',
       type: 'boolean',
-      description: '复选框是否默认选中（非受控）。',
+      description: 'Checkbox 是否默认选中（非受控）。',
     },
     {
       prop: 'icon',
       type: 'ReactNode | (ownerState) => ReactNode',
-      description: '复选框选中时的图标。',
+      description: 'Checkbox 选中时的图标。',
     },
     {
       prop: 'className',
@@ -111,29 +116,29 @@ import { checkbox } from '@/content/_demo'
     {
       prop: 'name',
       type: 'string',
-      description: '复选框的 name。',
+      description: 'Checkbox 的 name。',
     },
     {
       prop: 'value',
       type: 'string',
-      description: '复选框的 value。',
+      description: 'Checkbox 的 value。',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: '用于转发复选框内的 input。',
+      description: '用于转发 Checkbox 内的 input。',
     },
     {
       prop: 'onChange',
       type: 'function',
-      description: '当复选框状态发生变化时会触发该回调函数。',
+      description: '当 Checkbox 状态发生变化时会触发该回调函数。',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'input'",
       description:
-        '用于复选框内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+        '用于 Checkbox 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
     },
     {
       prop: 'sx',
@@ -147,12 +152,12 @@ import { checkbox } from '@/content/_demo'
     {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
-      description: '复选框 slots 的 className。',
+      description: 'Checkbox Slots 的 className。',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentPropsWithRef>>',
-      description: '复选框 slots 的 props。',
+      description: 'Checkbox Slots 的 props。',
     },
   ]}
 />
@@ -165,31 +170,31 @@ import { checkbox } from '@/content/_demo'
       slot: 'root',
       class: '.nui-checkbox-root',
       component: "'label'",
-      description: '复选框的根元素。',
+      description: 'Checkbox 的根元素。',
     },
     {
       slot: 'input',
       class: '.nui-checkbox-input',
       component: "'input'",
-      description: '复选框内的 input。',
+      description: 'Checkbox 内的 input。',
     },
     {
       slot: 'icon',
-      class: '.nui-checkbox-input',
+      class: '.nui-checkbox-icon',
       component: "'svg'",
-      description: '复选框内的 icon。',
+      description: 'Checkbox 内的 icon。',
     },
     {
       slot: 'iconContainer',
-      class: '.nui-checkbox-input',
+      class: '.nui-checkbox-icon-container',
       component: "'span'",
-      description: '复选框内的 icon 容器。',
+      description: 'Checkbox 内的 icon 容器。',
     },
     {
       slot: 'label',
       class: '.nui-checkbox-label',
       component: "'span'",
-      description: '复选框的标签。',
+      description: 'Checkbox 的标签。',
     },
   ]}
 />

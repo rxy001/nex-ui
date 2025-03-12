@@ -1,9 +1,14 @@
+---
+title: Button
+description: Button 使用户能够通过一次点击执行操作并做出选择。
+---
+
 import { Button } from '@nex-ui/react'
 import { button } from '@/content/_demo'
 
 # Button
 
-按钮使用户能够通过一次点击执行操作并做出选择。
+Button 使用户能够通过一次点击执行操作并做出选择。
 
 <ComponentLinks component='button' slotRecipe />
 
@@ -11,7 +16,7 @@ import { button } from '@/content/_demo'
 
 ## 使用
 
-<Example {...button.useage} />
+<Example {...button.usage} />
 
 ### Disabled
 
@@ -20,10 +25,6 @@ import { button } from '@/content/_demo'
 ### Sizes
 
 <Example {...button.sizes} />
-
-### FullWidth
-
-<Example {...button.fullWidth} />
 
 ### Radius
 
@@ -39,7 +40,7 @@ import { button } from '@/content/_demo'
 
 ### Loading
 
-添加 `loading` 属性，可在按钮内部显示一个加载指示器组件。
+添加 `loading` 属性，可在 Button 内部显示一个加载指示器组件。
 
 <Example {...button.loading} />
 
@@ -47,13 +48,13 @@ import { button } from '@/content/_demo'
 
 ### With Icons
 
-通过设置 `startIcon` 或 `endIcon` 属性，向按钮添加图标。
+通过设置 `startIcon` 或 `endIcon` 属性，向 Button 添加图标。
 
 <Example {...button.withIcons} />
 
 ### Icon Only
 
-添加 `IconOnly` 属性，可显示一个仅图标而无文本的按钮。
+添加 `IconOnly` 属性，可显示一个仅图标而无文本的 Button。
 
 <Example {...button.iconOnly} />
 
@@ -61,7 +62,7 @@ import { button } from '@/content/_demo'
 
 ### Button Props
 
-按钮组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `button` 标签。
+Button Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `button` 标签。
 
 <PropsTable
   dataSource={[
@@ -69,7 +70,7 @@ import { button } from '@/content/_demo'
       prop: 'children',
       type: 'ReactNode',
       default: '',
-      description: '按钮的内容。',
+      description: 'Button 的内容。',
     },
     {
       prop: 'color',
@@ -85,49 +86,49 @@ import { button } from '@/content/_demo'
         "'gray'",
       ],
       default: "'blue'",
-      description: '按钮的颜色。',
+      description: 'Button 的颜色。',
     },
     {
       prop: 'variants',
       type: ["'filled", "'outlined'", "'text'", "'link'"],
       default: "'filled'",
-      description: '按钮外观样式。',
+      description: 'Button 的外观样式。',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: '按钮的大小。',
+      description: 'Button 的大小。',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'"],
       default: 'size',
-      description: '按钮的 BorderRadius。',
+      description: 'Button 的 BorderRadius。',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否禁用。',
+      description: 'Button 是否禁用。',
     },
     {
       prop: 'loading',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否处于加载状态。',
+      description: 'Button 是否处于加载状态。',
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否应占据其父元素的全部宽度。',
+      description: 'Button 是否应占据其父元素的全部宽度。',
     },
     {
       prop: 'iconOnly',
       type: 'boolean',
       default: 'false',
-      description: '按钮是否应具有相同的宽度和高度。',
+      description: 'Button 是否应具有相同的宽度和高度。',
     },
     {
       prop: 'startIcon',
@@ -149,6 +150,11 @@ import { button } from '@/content/_demo'
       type: ["'start'", "'end'"],
       default: "'start'",
       description: '加载指示器的位置。',
+    },
+    {
+      prop: 'disableRipple',
+      type: 'boolean',
+      description: '是否禁用 Button 点击后的 Ripple 效果。',
     },
     {
       prop: 'href',
@@ -189,12 +195,12 @@ import { button } from '@/content/_demo'
     {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
-      description: '按钮 slots 的 className。',
+      description: 'Button Slots 的 className。',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentPropsWithRef>>',
-      description: '按钮 slots 的 props。',
+      description: 'Button Slots 的 props。',
     },
   ]}
 />
@@ -207,13 +213,13 @@ import { button } from '@/content/_demo'
       slot: 'startIcon',
       class: '.nui-btn-start-icon',
       component: "'span'",
-      description: '按钮子元素之前图标的容器',
+      description: 'Button 子元素之前图标的容器。',
     },
     {
       slot: 'endIcon',
       class: '.nui-btn-end-icon',
       component: "'span'",
-      description: '按钮子元素之后图标的容器',
+      description: 'Button 子元素之后图标的容器。',
     },
   ]}
 />

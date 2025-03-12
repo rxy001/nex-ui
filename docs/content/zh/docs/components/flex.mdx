@@ -1,3 +1,8 @@
+---
+title: Flex
+description: Flex 是用于在垂直或水平方向排列元素的弹性容器组件。
+---
+
 import { flex } from '@/content/_demo'
 
 # Flex
@@ -8,7 +13,7 @@ Flex 是用于在垂直或水平方向排列元素的弹性容器组件。
 
 ## 使用
 
-<Example {...flex.useage} />
+<Example {...flex.usage} />
 
 ### Direction
 
@@ -36,7 +41,7 @@ Flex 是用于在垂直或水平方向排列元素的弹性容器组件。
 
 ### Flex Props
 
-Flex 组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
+Flex Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
 
 <PropsTable
   dataSource={[
@@ -80,6 +85,11 @@ Flex 组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
       prop: 'gap',
       type: "NexUICSSProperties['gap']",
       description: '设置子元素之间的间距。',
+    },
+    {
+      prop: 'ref',
+      description: '用于转发根元素。',
+      type: 'Ref',
     },
     {
       prop: 'as',

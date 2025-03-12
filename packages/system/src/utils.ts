@@ -102,19 +102,7 @@ export function isValidBreakpointValue(value: any) {
 }
 
 export function memoizeFn<T extends (...args: any[]) => any>(fn: T): T {
-  return memoize(fn, (...args) => {
-    return JSON.stringify(args, (key, value) => {
-      if (
-        value &&
-        (value.$$typeof ||
-          typeof value === 'function' ||
-          key.startsWith('__react'))
-      ) {
-        return undefined
-      }
-      return value
-    })
-  })
+  return memoize(fn, (...args) => JSON.stringify(args))
 }
 
 export function extractTokenPlaceholders(value: string) {

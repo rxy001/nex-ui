@@ -36,8 +36,8 @@ const useSlotClasses = (ownerState: SwitchOwnerState) => {
     input: ['input'],
     track: ['track'],
     thumb: ['thumb'],
-    startIcon: ['startIcon'],
-    endIcon: ['endIcon'],
+    startIcon: ['start-icon'],
+    endIcon: ['end-icon'],
   }
 
   const composedClasses = composeClasses(
@@ -73,7 +73,6 @@ export const Switch = forwardRef(
       checked: checkdeProp,
       disabled = false,
       size = 'md',
-      type = 'checkbox',
       onChange: onChangeProp,
       color = primaryColor,
       ...remainingProps
@@ -127,8 +126,8 @@ export const Switch = forwardRef(
     const inputProps = useSlotProps({
       externalSlotProps: slotProps?.input,
       externalForwardedProps: {
+        type: 'checkbox',
         ...remainingProps,
-        type,
         ref,
         name,
         checked,

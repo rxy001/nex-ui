@@ -1,9 +1,14 @@
+---
+title: Avatar
+description: Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字母或备用图标。
+---
+
 import { Avatar } from '@nex-ui/react'
 import { avatar } from '@/content/_demo'
 
 # Avatar
 
-头像组件用于代表用户，并显示用户的个人资料照片、姓名首字母或备用图标。
+Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字母或备用图标。
 
 <ComponentLinks component='avatar' slotRecipe />
 
@@ -11,7 +16,7 @@ import { avatar } from '@/content/_demo'
 
 ## 使用
 
-<Example {...avatar.useage} />
+<Example {...avatar.usage} />
 
 ### Sizes
 
@@ -27,7 +32,7 @@ import { avatar } from '@/content/_demo'
 
 ### Fallbacks
 
-如果加载头像图片时出现错误，该组件将按以下顺序回退到备用选项：
+Avatar 如果加载图片时出现错误，将按以下顺序回退到备用选项：
 
 - `children` 属性
 
@@ -39,7 +44,7 @@ import { avatar } from '@/content/_demo'
 
 ### Avatar Props
 
-头像组件默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
+Avatar Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签。
 
 <PropsTable
   dataSource={[
@@ -53,7 +58,7 @@ import { avatar } from '@/content/_demo'
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: '头像的大小。',
+      description: 'Avatar 的大小。',
     },
     {
       prop: 'color',
@@ -69,13 +74,13 @@ import { avatar } from '@/content/_demo'
         "'gray'",
       ],
       default: "'gray'",
-      description: '头像的颜色。',
+      description: 'Avatar 的颜色。',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'"],
       default: 'size',
-      description: '头像的 borderRadius。',
+      description: 'Avatar 的 borderRadius。',
     },
     {
       prop: 'className',
@@ -122,12 +127,12 @@ import { avatar } from '@/content/_demo'
     {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
-      description: '头像 slots 的 className。',
+      description: 'Avatar Slots 的 className。',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentPropsWithRef>>',
-      description: '头像 slots 的 props。',
+      description: 'Avatar Slots 的 props。',
     },
   ]}
 />
@@ -140,7 +145,7 @@ import { avatar } from '@/content/_demo'
       slot: 'img',
       class: '.nui-avatar-img',
       component: "'img'",
-      description: 'HTML img 元素',
+      description: 'HTML img 元素。',
     },
   ]}
 />

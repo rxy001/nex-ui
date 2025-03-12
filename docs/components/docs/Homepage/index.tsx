@@ -34,9 +34,8 @@ function LinkButton(props: ButtonProps<ElementType>) {
       as={Link}
       radius='full'
       size='sm'
-      className='x:w-[90px]'
+      className='x:w-[110px]'
       color='blue'
-      href='123123'
       {...props}
     />
   )

@@ -1,3 +1,8 @@
+---
+title: sx 属性
+description: sx 属性是一种用于定义可访问主题的自定义样式的快捷方式。
+---
+
 import Image from 'next/image'
 import { Box, NexUIProvider } from '@nex-ui/react'
 import { Callout } from 'nextra/components'
@@ -470,3 +475,17 @@ export default function Example() {
 如果 `foo: true` ，那么 `color: red; backgroundColor: grey;` 将在悬浮状态应用。
 
 如果 `bar: true` ，那么 `color: red; backgroundColor: yellow;` 将在悬浮状态应用，无需关心 `foo` 的值，因为在数组中更高的索引具有更高的优先级。
+
+## Aliases
+
+您可以通过 [Aliases](/docs/customization/aliases) 定义 CSS 属性的别名，从而简化 CSS 属性名并支持组合 CSS 属性。
+
+```tsx
+<Box sx={{ bg: 'blue.400', px: '2' }} />
+```
+
+## Selector
+
+当您想组合 CSS 选择器，例如 `'&:not(:disabled):not([data-disabled=true]):hover'`, 您可以通过 Selectors 自定义更多的选择器，并解锁额外的使用方式。
+
+在 [Selectors](/docs/customization/selectors) 了解更多信息。
