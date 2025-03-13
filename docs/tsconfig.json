@@ -14,7 +14,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "customConditions": ["source"]
   },
   "include": [
     "./types.d.ts",
