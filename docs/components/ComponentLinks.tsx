@@ -40,6 +40,9 @@ const RECIPE_PATH =
 const SLOT_RECIPE_PATH =
   'https://github.com/rxy001/nex-ui/blob/main/packages/react/src/theme/slotRecipes/'
 
+const STORYBOOK_PATH =
+  'https://nex-ui-storybook.vercel.app/?path=/story/components-'
+
 const ButtonLink = (props: ButtonProps) => {
   return (
     <Button
@@ -60,7 +63,10 @@ export const ComponentLinks = ({
 }: ComponentLinksProps) => {
   return (
     <div className='x:mt-6 x:flex x:flex-row x:gap-4 x:flex-wrap x:md:gap-7'>
-      <ButtonLink startIcon={<StorybookIcon color='#ff4785' />}>
+      <ButtonLink
+        startIcon={<StorybookIcon color='#ff4785' />}
+        href={`${STORYBOOK_PATH}${component}`}
+      >
         Storybook
       </ButtonLink>
       {rscCompatible && (

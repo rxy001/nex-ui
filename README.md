@@ -6,3 +6,15 @@
   <p align="center">🎉 A beautiful, modern, and reliable React component library.</p>
   <p align="center"><b>Theme Customizable, Light & Dark UI, Unique DX, Written In TypeScript</b></p>
 </div>
+
+## Documentation
+
+Visit https://nex-ui-docs.vercel.app to view the full documentation.
+
+## Getting Started
+
+Visit https://nex-ui-docs.vercel.app/docs/getting-started to get started with NexUI.
+
+## Storybook
+
+Visit https://nex-ui-storybook.vercel.app to view the storybook for all components.

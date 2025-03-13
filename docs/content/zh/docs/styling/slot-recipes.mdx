@@ -164,7 +164,7 @@ export const checkboxSlotRecipe = defineSlotRecipe({
 ## Slots With Extends
 
 `defineSlotRecipe` 能够继承 SlotRecipe , 包括其 `slots`、`variants`、`defaultVariants`、`compoundVariants`，
-它会自动合并相同键的值，并提供 TypeScript 提示。
+它会自动合并相同键的值，并提供相应的 TypeScript 类型支持。
 
 ```tsx {41-45}
 import { defineSlotRecipe } from '@nex-ui/react'

@@ -49,11 +49,35 @@ export default withAnalyzer(
 
       // eslint-disable-next-line no-param-reassign
       config.resolve.alias['@'] = resolve('.')
+      config.resolve.alias['@nex-ui/react'] = resolve('../packages/react/src')
+      config.resolve.alias['@nex-ui/hooks'] = resolve('../packages/hooks/src')
+      config.resolve.alias['@nex-ui/styled'] = resolve('../packages/styled/src')
+      config.resolve.alias['@nex-ui/icons'] = resolve('../packages/icons/src')
+      config.resolve.alias['@nex-ui/system'] = resolve('../packages/system/src')
+      config.resolve.alias['@nex-ui/utils'] = resolve('../packages/utils/src')
 
       return config
     },
     compiler: {
       emotion: true,
+    },
+    transpilePackages: [
+      '@nex-ui/react',
+      '@nex-ui/hooks',
+      '@nex-ui/styled',
+      '@nex-ui/icons',
+      '@nex-ui/system',
+      '@nex-ui/utils',
+    ],
+    async redirects() {
+      return [
+        {
+          source: '/docs/getting-started',
+          destination: '/docs/getting-started/introduction',
+          permanent: true,
+          locale: false,
+        },
+      ]
     },
     experimental: {
       // 使用 webpack 代替 turbopack 以支持 resourceQuery
