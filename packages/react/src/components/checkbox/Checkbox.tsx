@@ -1,10 +1,7 @@
 'use client'
 
-import clsx from 'clsx'
 import { nex } from '@nex-ui/styled'
-import { cloneElement, useState, isValidElement } from 'react'
-import { CheckOutlined } from '@nex-ui/icons'
-import { ClassNames } from '@emotion/react'
+import { useState, isValidElement } from 'react'
 import { isFunction, __DEV__ } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import type { Ref, ElementType, ChangeEvent } from 'react'
@@ -20,8 +17,9 @@ import {
   useSlotProps,
   resolveSxProps,
 } from '../utils'
-import { Icon } from '../icon'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
+import { CheckedIcon } from './CheckedIcon'
+import { Box } from '../box'
 
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
   const { prefix } = useNexUI()
@@ -42,7 +40,6 @@ const useSlotClasses = (ownerState: CheckboxOwnerState) => {
     input: ['input'],
     label: ['label'],
     icon: ['icon'],
-    iconContainer: ['icon-container'],
   }
 
   const composedClasses = composeClasses(
@@ -59,7 +56,7 @@ export const Checkbox = forwardRef(
     inProps: CheckboxProps<CheckboxComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
-    const { primaryColor, css } = useNexUI()
+    const { primaryColor } = useNexUI()
 
     const props = useDefaultProps<CheckboxProps>({
       name: 'Checkbox',
@@ -174,12 +171,6 @@ export const Checkbox = forwardRef(
       sx: styles.input,
     })
 
-    const iconContainerProps = useSlotProps({
-      externalSlotProps: slotProps?.iconContainer,
-      sx: styles.iconContainer,
-      classNames: classes.iconContainer,
-    })
-
     const iconProps = useSlotProps({
       externalSlotProps: slotProps?.icon,
       sx: styles.icon,
@@ -198,30 +189,25 @@ export const Checkbox = forwardRef(
         : icon
       : null
 
-    const checkIcon = customIcon ? (
+    const checkedIcon = customIcon ? (
       isValidElement(customIcon) ? (
-        <ClassNames>
-          {({ css: ec }) =>
-            cloneElement(customIcon, {
-              ...customIcon.props,
-              className: clsx(
-                customIcon.props.className,
-                ec(css(iconProps.sx!)),
-              ),
-            })
-          }
-        </ClassNames>
+        <Box
+          as={customIcon.type}
+          sx={styles.checkedIcon}
+          key={customIcon.key}
+          {...customIcon.props}
+        />
       ) : (
         customIcon
       )
     ) : (
-      <Icon component={CheckOutlined} {...iconProps} />
+      <CheckedIcon checked={checked} />
     )
 
     return (
       <nex.label {...rootProps}>
         <nex.input {...inputProps} />
-        <nex.span {...iconContainerProps}>{checkIcon}</nex.span>
+        <nex.span {...iconProps}>{checkedIcon}</nex.span>
         <nex.span {...labelProps}>{children}</nex.span>
       </nex.label>
     )

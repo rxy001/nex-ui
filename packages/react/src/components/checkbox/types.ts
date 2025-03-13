@@ -6,7 +6,6 @@ import type {
   Overwrite,
   SxProps,
 } from '../../types/utils'
-import type { InnerIconProps } from '../icon/types'
 
 export interface CheckboxPropsOverrides {}
 
@@ -14,8 +13,7 @@ type CheckboxSlotProps<CheckboxComponentProps> = {
   root?: ComponentPropsWithRef<'label'>
   input?: CheckboxComponentProps
   label?: ComponentPropsWithRef<'span'>
-  icon?: InnerIconProps
-  iconContainer?: ComponentPropsWithRef<'span'>
+  icon?: ComponentPropsWithRef<'span'>
 }
 
 type CheckboxOwnProps<
@@ -31,9 +29,7 @@ type CheckboxOwnProps<
     | ReactNode
     | ((ownerState: CheckboxOwnerState<CheckboxComponent>) => ReactNode)
   slotProps?: CheckboxSlotProps<CheckboxComponentProps>
-  classes?: ComponentUtilityClasses<
-    'root' | 'input' | 'icon' | 'label' | 'iconContainer'
-  >
+  classes?: ComponentUtilityClasses<'root' | 'input' | 'label' | 'icon'>
   defaultChecked?: boolean
   name?: string
   ref?: CheckboxComponentProps['ref']

@@ -29,19 +29,17 @@ export const checkboxRecipe = defineSlotRecipe({
     label: {
       fs: 'inherit',
     },
-    icon: {
+    checkedIcon: {
       opacity: 0,
       transition: 'all 0.2s linear',
-      position: 'relative',
-      zIndex: 1,
-      color: 'colorPalette.contrastText',
       transform: 'scale(0.4)',
     },
-    iconContainer: {
+    icon: {
       display: 'inline-flex',
       position: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
+      color: 'colorPalette.contrastText',
       '::before': {
         content: '""',
         position: 'absolute',
@@ -49,6 +47,8 @@ export const checkboxRecipe = defineSlotRecipe({
         border: 'md',
         borderColor: 'gray.highlight',
         transition: 'colors',
+        background: 'transparent',
+        zIndex: -2,
       },
       '::after': {
         content: '""',
@@ -58,17 +58,18 @@ export const checkboxRecipe = defineSlotRecipe({
         transition: 'all 0.2s linear',
         transform: 'scale(0.4)',
         opacity: 0,
+        zIndex: -1,
       },
     },
   },
   variants: {
     checked: {
       true: {
-        icon: {
+        checkedIcon: {
           opacity: 1,
           transform: 'scale(1)',
         },
-        iconContainer: {
+        icon: {
           '::after': {
             opacity: 1,
             transform: 'scale(1)',
@@ -81,42 +82,33 @@ export const checkboxRecipe = defineSlotRecipe({
         root: {
           fs: 'md',
         },
-        iconContainer: {
+        icon: {
           w: '4',
           h: '4',
-        },
-        icon: {
-          fs: '1.15em',
         },
       },
       md: {
         root: {
           fs: 'lg',
         },
-        iconContainer: {
+        icon: {
           w: '5',
           h: '5',
-        },
-        icon: {
-          fs: '1.25em',
         },
       },
       lg: {
         root: {
           fs: 'xl',
         },
-        iconContainer: {
+        icon: {
           w: '6',
           h: '6',
-        },
-        icon: {
-          fs: '1.35em',
         },
       },
     },
     radius: {
       sm: {
-        iconContainer: {
+        icon: {
           '::before': {
             borderRadius: 'calc({radii.lg} * .5)',
           },
@@ -126,7 +118,7 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
       md: {
-        iconContainer: {
+        icon: {
           '::before': {
             borderRadius: 'calc({radii.lg} * .6)',
           },
@@ -136,7 +128,7 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
       lg: {
-        iconContainer: {
+        icon: {
           '::before': {
             borderRadius: 'calc({radii.lg} * .7)',
           },
@@ -146,7 +138,7 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
       full: {
-        iconContainer: {
+        icon: {
           '::before': {
             borderRadius: 'full',
           },
@@ -164,7 +156,7 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
     },
-    color: toSlot(colorVariant, 'root', 'iconContainer', 'icon'),
+    color: toSlot(colorVariant, 'root', 'icon'),
   },
   defaultVariants: {
     color: 'blue',

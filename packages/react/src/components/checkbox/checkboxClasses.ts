@@ -35,5 +35,4 @@ export const checkboxClasses = generateUtilityClasses('nui-checkbox', [
   'input',
   'label',
   'icon',
-  'iconContainer',
 ])
