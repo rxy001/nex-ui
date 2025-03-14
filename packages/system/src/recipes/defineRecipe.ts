@@ -1,6 +1,6 @@
 import { isPlainObject, isArray, __DEV__ } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
-import { mergeRecipe } from '../utils'
+import { mergeRecipeConfigs } from '../utils'
 import type {
   RecipeConfig,
   BaseVariantGroups,
@@ -19,25 +19,30 @@ export function defineRecipe<
   V extends BaseVariantGroups,
   E extends RecipeRuntimeFn,
 >(extendOrConfig: E | RecipeConfig<V>, maybeConfig?: RecipeConfig<V, E>) {
-  let config = maybeConfig || extendOrConfig
+  const arg = maybeConfig || extendOrConfig
 
-  // @ts-ignore
-  if (__DEV__ && config.compoundVariants && !isArray(config.compoundVariants)) {
-    throw new TypeError(
-      // @ts-ignore
-      `[Nex UI] defineRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
+  if (__DEV__ && isPlainObject(arg)) {
+    const config = arg as RecipeConfig<V>
+    if (config.compoundVariants && !isArray(config.compoundVariants)) {
+      throw new TypeError(
+        `[Nex UI] defineRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
+      )
+    }
+  }
+
+  let config = extendOrConfig as RecipeConfig<V> | RecipeConfig<V, E>
+
+  if (
+    (extendOrConfig as RecipeRuntimeFn)?.__recipe === true &&
+    (extendOrConfig as RecipeRuntimeFn)?.__config &&
+    isPlainObject(maybeConfig)
+  ) {
+    config = mergeRecipeConfigs(
+      (extendOrConfig as RecipeRuntimeFn).__config,
+      maybeConfig,
     )
   }
 
-  if (
-    (extendOrConfig as E)?.__recipe === true &&
-    (extendOrConfig as E)?.__config &&
-    isPlainObject(maybeConfig)
-  ) {
-    config = mergeRecipe((extendOrConfig as E).__config, config)
-  }
-
-  // @ts-ignore
   const { base, ...other } = config
   const runtimeFn = createRuntimeFn({
     mainStyles: base,

@@ -1,6 +1,6 @@
-import type { Ref } from 'react'
+import type { MutableRefObject, Ref } from 'react'
 
-export function composeRef<T>(...refs: Ref<T>[]) {
+export function mergeRefs<T>(...refs: Ref<T>[]) {
   const list = refs.filter((ref) => ref)
 
   if (list.length === 1) {
@@ -12,9 +12,8 @@ export function composeRef<T>(...refs: Ref<T>[]) {
       if (typeof ref === 'function') {
         ref(node)
       } else if (ref && typeof ref === 'object' && 'current' in ref) {
-        // @ts-ignore
         // eslint-disable-next-line no-param-reassign
-        ref.current = node
+        ;(ref as MutableRefObject<T>).current = node
       }
     })
   }

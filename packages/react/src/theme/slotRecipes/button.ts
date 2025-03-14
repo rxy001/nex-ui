@@ -24,6 +24,7 @@ export const buttonRecipe = defineSlotRecipe({
       boxSizing: 'border-box',
       lineHeight: 'base',
       overflow: 'hidden',
+      '-webkit-tap-highlight-color': 'transparent',
       '& svg': {
         fs: '1.3em',
       },

@@ -102,7 +102,7 @@ export function isValidBreakpointValue(value: any) {
 }
 
 export function memoizeFn<T extends (...args: any[]) => any>(fn: T): T {
-  return memoize(fn, (...args) => JSON.stringify(args))
+  return memoize(fn, (...args: any[]) => JSON.stringify(args))
 }
 
 export function extractTokenPlaceholders(value: string) {
@@ -111,23 +111,19 @@ export function extractTokenPlaceholders(value: string) {
   return [...matches]
 }
 
-export function mergeRecipe<Recipe, Source>(recipe: Recipe, source: Source) {
+export function mergeRecipeConfigs(...args: any[]) {
   return mergeWith(
     {},
-    recipe,
-    source,
-    (recipeValue: any, srcValue: any, key: string) => {
+    ...args,
+    (targetValue: any, srcValue: any, key: string) => {
       if (key === 'compoundVariants') {
-        if (recipeValue === undefined) {
+        if (targetValue === undefined) {
           return srcValue
         }
-        if (isArray(recipeValue) && isArray(srcValue)) {
-          return [...recipeValue, ...srcValue]
+        if (isArray(targetValue) && isArray(srcValue)) {
+          return [...targetValue, ...srcValue]
         }
-        return recipeValue
-      }
-      if (isArray(recipeValue)) {
-        return srcValue
+        return targetValue
       }
     },
   )

@@ -196,8 +196,8 @@ describe('css', () => {
     })
 
     expect(
+      // @ts-ignore
       css({
-        // @ts-ignore
         color: {
           _hover: 'white',
         },
@@ -211,9 +211,9 @@ describe('css', () => {
 
   it('should support color placeholder', () => {
     expect(
+      // @ts-ignore
       css({
         colorPalette: 'blue',
-        // @ts-ignore
         backgroundColor: {
           _DEFAULT: 'colorPalette.100',
           _hover: 'colorPalette.200',
@@ -239,8 +239,8 @@ describe('css', () => {
 
   it('should support responsive value (object)', () => {
     expect(
+      // @ts-ignore
       css({
-        // @ts-ignore
         width: {
           _sm: '1',
           _md: '2',
@@ -258,8 +258,8 @@ describe('css', () => {
 
   it('should support responsive value (array)', () => {
     expect(
+      // @ts-ignore
       css({
-        // @ts-ignore
         width: ['1', '2'],
       }),
     ).toEqual({

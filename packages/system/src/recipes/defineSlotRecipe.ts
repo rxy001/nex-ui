@@ -1,6 +1,6 @@
 import { isPlainObject, isArray, __DEV__ } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
-import { mergeRecipe } from '../utils'
+import { mergeRecipeConfigs } from '../utils'
 import type {
   SlotGroups,
   SlotRecipeConfig,
@@ -30,22 +30,30 @@ export function defineSlotRecipe<
   extendOrConfig: E | SlotRecipeConfig<S, undefined, V>,
   maybeConfig?: SlotRecipeConfig<S, E, V>,
 ) {
-  let config = maybeConfig || extendOrConfig
+  const arg = maybeConfig || extendOrConfig
 
-  // @ts-ignore
-  if (__DEV__ && config.compoundVariants && !isArray(config.compoundVariants)) {
-    throw new TypeError(
-      // @ts-ignore
-      `[Nex UI] defineSlotRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
-    )
+  if (__DEV__ && isPlainObject(arg)) {
+    const config = arg as SlotRecipeConfig<S, undefined, V>
+    if (config.compoundVariants && !isArray(config.compoundVariants)) {
+      throw new TypeError(
+        `[Nex UI] defineSlotRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
+      )
+    }
   }
 
+  let config = extendOrConfig as
+    | SlotRecipeConfig<S, undefined, V>
+    | SlotRecipeConfig<S, E, V>
+
   if (
-    (extendOrConfig as E)?.__slotRecipe === true &&
-    (extendOrConfig as E)?.__config &&
+    (extendOrConfig as SlotRecipeRuntimeFn)?.__slotRecipe === true &&
+    (extendOrConfig as SlotRecipeRuntimeFn)?.__config &&
     isPlainObject(maybeConfig)
   ) {
-    config = mergeRecipe((extendOrConfig as E).__config, config)
+    config = mergeRecipeConfigs(
+      (extendOrConfig as SlotRecipeRuntimeFn).__config,
+      maybeConfig,
+    )
   }
 
   const { slots, ...other } = config

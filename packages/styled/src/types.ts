@@ -6,11 +6,11 @@ import type {
   ReactNode,
   ComponentPropsWithRef,
 } from 'react'
-import type { CssFn } from '@nex-ui/system'
+import type { CssFnParams } from '@nex-ui/system'
 
 type CommonProps<E extends ElementType = ElementType> = {
   as?: E
-  sx?: Parameters<CssFn>[number]
+  sx?: CssFnParams
 }
 
 type Overwrite<K, T> = Omit<K, keyof T> & T
@@ -22,7 +22,7 @@ export type StyledComponentProps<
 
 export interface CreateStyledComponent<Tag extends ElementType> {
   (
-    styles?: Parameters<CssFn>[number],
+    styles?: CssFnParams,
   ): <E extends ElementType = Tag>(props: StyledComponentProps<E>) => ReactNode
 }
 
