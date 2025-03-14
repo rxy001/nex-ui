@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { nex } from '@nex-ui/styled'
-import { composeRef } from '@nex-ui/utils'
+import { mergeRefs } from '@nex-ui/utils'
 import { useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
@@ -89,7 +89,7 @@ export const InputText = forwardRef(
 
     const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
     const inputRef = useRef<HTMLInputElement>(null)
-    const composedRef = composeRef<HTMLInputElement>(ref, inputRef)
+    const composedRef = mergeRefs<HTMLInputElement>(ref, inputRef)
 
     const valueInProps = valueProp !== undefined
 

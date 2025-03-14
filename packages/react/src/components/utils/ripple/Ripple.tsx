@@ -1,4 +1,4 @@
-import { composeRef, supportRef, addEventListener } from '@nex-ui/utils'
+import { mergeRefs, supportRef, addEventListener } from '@nex-ui/utils'
 import type { ReactElement } from 'react'
 import { cloneElement, isValidElement, useEffect, useRef } from 'react'
 import { useRippleMotion } from './useRippleMotion'
@@ -32,8 +32,10 @@ export const Ripple = ({
     return children
   }
 
-  // @ts-expect-error
-  const composedRef = supportRef(children) ? composeRef(children.ref, ref) : ref
+  const composedRef = supportRef(children)
+    ? // @ts-expect-error
+      mergeRefs(children.ref, ref)
+    : ref
 
   // @ts-expect-error
   return cloneElement(children, { ref: composedRef })

@@ -34,7 +34,7 @@ export type {
   CSSProperties,
 } from './types'
 
-export type { CssFn } from './css'
+export type { CssFn, CssFnParams } from './css'
 
 export type { BreakpointsDefinition } from './breakpoints'
 
@@ -75,3 +75,5 @@ export type {
   SemanticZIndexesDefinition,
   TokenCategory,
 } from './tokens'
+
+export { mergeRecipeConfigs } from './utils'

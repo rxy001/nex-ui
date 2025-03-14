@@ -1,8 +1,8 @@
 'use client'
 
-import { isArray, mergeWith } from '@nex-ui/utils'
-import { useSystem, SystemProvider } from '@nex-ui/system'
+import { useSystem, SystemProvider, mergeRecipeConfigs } from '@nex-ui/system'
 import { useMemo } from 'react'
+import { mergeWith } from '@nex-ui/utils'
 import { defaultConfig } from '../../theme/preset'
 import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { NexUIProviderProps, InnerProviderProps } from './types'
@@ -72,18 +72,15 @@ function NestedProvider(props: NexUIProviderProps) {
       {},
       ctx.components,
       theme?.components,
-      (value: any, srcValue: any, key: string) => {
-        if (key === 'compoundVariants') {
-          if (value === undefined) {
-            return srcValue
-          }
-          if (isArray(value) && isArray(srcValue)) {
-            return [...value, ...srcValue]
-          }
-          return value
+      (target: any, source: any, key: string) => {
+        if (key === 'styleOverrides') {
+          return mergeRecipeConfigs(target, source)
         }
-        if (isArray(value)) {
-          return srcValue
+        if (key === 'defaultProps') {
+          return {
+            ...target,
+            ...source,
+          }
         }
       },
     )

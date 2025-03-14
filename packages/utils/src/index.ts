@@ -1,4 +1,4 @@
-export * from './composeRef'
+export * from './mergeRefs'
 
 export * from './supportRef'
 

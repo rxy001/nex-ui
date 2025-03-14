@@ -2,12 +2,12 @@ import { createRef } from 'react'
 import type { RefCallback } from 'react'
 import { describe, it, expect, jest } from '@jest/globals'
 import { render } from '@testing-library/react'
-import { composeRef } from '../composeRef'
+import { mergeRefs } from '../mergeRefs'
 
-describe('composeRef', () => {
+describe('mergeRefs', () => {
   it('should return the single ref if only one ref is provided', () => {
     const ref1 = createRef()
-    const composedRef = composeRef(ref1)
+    const composedRef = mergeRefs(ref1)
     expect(composedRef).toBe(ref1)
   })
 
@@ -17,7 +17,7 @@ describe('composeRef', () => {
     const ref3: React.MutableRefObject<string | null> = { current: null }
     const ref4 = jest.fn<RefCallback<string>>()
 
-    const composedRef = composeRef<string | null>(
+    const composedRef = mergeRefs<string | null>(
       ref1,
       ref2,
       ref3,
@@ -32,12 +32,12 @@ describe('composeRef', () => {
     expect(ref4).toHaveBeenCalledWith('testValue')
   })
 
-  it('should compose multiple ref', () => {
+  it('should merge multiple ref', () => {
     const ref1 = createRef<HTMLDivElement>()
     const ref2 = createRef<HTMLDivElement>()
     const ref3 = createRef<HTMLDivElement>()
     const Component = () => {
-      const composedRef = composeRef<HTMLDivElement>(ref1, ref2, ref3)
+      const composedRef = mergeRefs<HTMLDivElement>(ref1, ref2, ref3)
       return <div ref={composedRef}>123</div>
     }
     render(Component())

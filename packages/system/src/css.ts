@@ -17,10 +17,12 @@ interface CreateCssFnConfig {
   normalize: NormailizeFn
 }
 
+type ValidStyleType = CSSObject | undefined | false | null
+
+export type CssFnParams = ValidStyleType | ValidStyleType[]
+
 export interface CssFn {
-  (
-    styles: CSSObject | (CSSObject | undefined | false | null)[],
-  ): EmotionCSSObject
+  (styles: CssFnParams): EmotionCSSObject
 }
 
 const isCustomSelector = (key: string) => {
@@ -31,17 +33,17 @@ export const createCssFn = ({
   normalize,
   getCustomizedSelector,
 }: CreateCssFnConfig) => {
-  const css: CssFn = (stylesProps) => {
-    const styles = Array.isArray(stylesProps) ? stylesProps : [stylesProps]
+  const css: CssFn = (stylesProp) => {
+    const styles = Array.isArray(stylesProp) ? stylesProp : [stylesProp]
 
     const result: EmotionCSSObject = {}
 
-    forEach(styles, (styleProps: false | CSSObject | null | undefined) => {
-      if (!styleProps) {
+    forEach(styles, (styleProp: ValidStyleType) => {
+      if (!styleProp) {
         return
       }
 
-      const { colorPalette, ...style } = styleProps
+      const { colorPalette, ...style } = styleProp
 
       const handlePath = (path: string[]) => {
         return path

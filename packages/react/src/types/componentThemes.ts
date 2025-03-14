@@ -27,57 +27,59 @@ import type {
 import type { InnerIconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
 
+type WithoutSx<T> = Omit<T, 'sx'>
+
 export type ComponentThemes = {
   Box?: {
-    defaultProps?: BoxProps
+    defaultProps?: WithoutSx<BoxProps>
   }
   Button?: {
     styleOverrides?:
       | ComponentThemeObject<ButtonRecipe>
       | ComponentThemeFn<ButtonOwnerState, ButtonRecipe>
-    defaultProps?: ButtonProps
+    defaultProps?: WithoutSx<ButtonProps>
   }
   Icon?: {
     styleOverrides?:
       | ComponentThemeObject<IconRecipe>
       | ComponentThemeFn<IconOwnerState, IconRecipe>
-    defaultProps?: InnerIconProps
+    defaultProps?: WithoutSx<InnerIconProps>
   }
   Flex?: {
     styleOverrides?:
       | ComponentThemeObject<FlexRecipe>
       | ComponentThemeFn<FlexOwnerState, FlexRecipe>
-    defaultProps?: FlexProps
+    defaultProps?: WithoutSx<FlexProps>
   }
   InputText?: {
     styleOverrides?:
       | ComponentThemeObject<InputTextRecipe>
       | ComponentThemeFn<InputTextOwnerState, InputTextRecipe>
-    defaultProps?: InputTextProps
+    defaultProps?: WithoutSx<InputTextProps>
   }
   Divider?: {
     styleOverrides?:
       | ComponentThemeObject<DividerRecipe>
       | ComponentThemeFn<DividerOwnerState, DividerRecipe>
-    defaultProps?: DividerProps
+    defaultProps?: WithoutSx<DividerProps>
   }
   Avatar?: {
     styleOverrides?:
       | ComponentThemeObject<AvatarRecipe>
       | ComponentThemeFn<AvatarOwnerState, AvatarRecipe>
-    defaultProps?: AvatarProps
+    defaultProps?: WithoutSx<AvatarProps>
   }
   Checkbox?: {
     styleOverrides?:
       | ComponentThemeObject<CheckboxRecipe>
       | ComponentThemeFn<CheckboxOwnerState, CheckboxRecipe>
-    defaultProps?: CheckboxProps
+    defaultProps?: WithoutSx<CheckboxProps>
   }
   Switch?: {
     styleOverrides?:
       | ComponentThemeObject<SwitchRecipe>
       | ComponentThemeFn<SwitchOwnerState, SwitchRecipe>
-    defaultProps?: SwitchProps
+    defaultProps?: WithoutSx<SwitchProps>
   }
 }
 

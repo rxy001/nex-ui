@@ -2,7 +2,7 @@ import type {
   CSSObject,
   RecipeRuntimeFn,
   SlotRecipeRuntimeFn,
-  CssFn,
+  CssFnParams,
 } from '@nex-ui/system'
 import type { ElementType, ComponentPropsWithRef } from 'react'
 import type { ClassValue } from 'clsx'
@@ -12,10 +12,10 @@ export type UniteTokens<T extends {}, U extends {}> = {
 }
 
 export type SxProps<OwnerState extends object | void = void> =
-  | Parameters<CssFn>[number]
+  | CssFnParams
   | (OwnerState extends void
-      ? () => Parameters<CssFn>[number]
-      : (ownerState: OwnerState) => Parameters<CssFn>[number])
+      ? () => CssFnParams
+      : (ownerState: OwnerState) => CssFnParams)
 
 export type ComponentUtilityClasses<T extends string> = Partial<
   Record<T, ClassValue>
