@@ -17,12 +17,12 @@ export const mergeProps = <T extends Record<string, any>>(...args: T[]) => {
     }
 
     if (key === 'classes') {
-      return mergeWith({}, obj, src, clsx)
+      return mergeWith({}, obj, src, (classObj, classSrc) =>
+        clsx(classObj, classSrc),
+      )
     }
 
-    if (key === 'sx') {
-      return src
-    }
+    return src
   })
 
   return result

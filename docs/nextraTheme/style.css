@@ -22,6 +22,7 @@ html {
     'calt' 1,
     'ss01' 1;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   &:not(:has(*:focus)) {
     /* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
