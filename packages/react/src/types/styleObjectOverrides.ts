@@ -1,4 +1,4 @@
-import type { CSSInterpolation } from '@nex-ui/system'
+import type { InterpolationPrimitive } from '@nex-ui/system'
 import type { Breakpoints } from './generated/breakpoints'
 import type { Selectors } from './generated/selectors'
 import type { Aliases } from './generated/aliases'
@@ -52,4 +52,4 @@ type ExtraCSSProperties = {
 
 export type CSSObjectOverrides = ExtraCSSPropertyValue<NexUICSSProperties> &
   ExtraCSSPropertyValue<ExtraCSSProperties> &
-  Conditions<CSSInterpolation>
+  Conditions<InterpolationPrimitive>

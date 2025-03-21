@@ -1,9 +1,8 @@
 'use client'
 
-import { isFunction } from '@nex-ui/utils'
 import { nex } from '@nex-ui/styled'
 import type { Ref, ElementType } from 'react'
-import { forwardRef, useDefaultProps } from '../utils'
+import { forwardRef, useDefaultProps, useSlotProps } from '../utils'
 import type { BoxProps } from './types'
 
 export const Box = forwardRef(
@@ -16,9 +15,14 @@ export const Box = forwardRef(
       props: inProps,
     })
 
-    const sx = isFunction(props.sx) ? props.sx() : props.sx
+    const rootProps = useSlotProps({
+      externalForwardedProps: props,
+      additionalProps: {
+        ref,
+      },
+    })
 
-    return <nex.div {...props} sx={sx} ref={ref} />
+    return <nex.div {...rootProps} />
   },
 )
 

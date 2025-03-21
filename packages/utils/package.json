@@ -43,6 +43,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
+    "clsx": "2.1.1",
     "lodash.clamp": "4.0.3",
     "lodash.every": "4.6.0",
     "lodash.filter": "4.6.0",

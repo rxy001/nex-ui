@@ -13,7 +13,6 @@ import {
   forwardRef,
   useSlotProps,
   useSlotStyles,
-  resolveSxProps,
   Ripple,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
@@ -84,10 +83,8 @@ export const Button = forwardRef(
 
     const {
       as,
-      sx,
       children,
       slotProps,
-      className,
       spinner,
       href,
       color = primaryColor,
@@ -97,14 +94,17 @@ export const Button = forwardRef(
       radius = size,
       iconOnly = false,
       loading = false,
-      disabled = false,
+      disabled: disabledProp = false,
       fullWidth = false,
+      type = 'button',
       startIcon: startIconProp,
       endIcon: endIconProp,
       onClick: onClickProp,
-      disableRipple = variant === 'link',
+      disableRipple,
       ...remainingProps
     } = props
+
+    const disabled = loading || disabledProp
 
     const rootElement: ElementType =
       as !== undefined ? as : typeof href === 'string' && href ? 'a' : 'button'
@@ -116,10 +116,10 @@ export const Button = forwardRef(
       radius,
       iconOnly,
       loading,
-      disabled,
       fullWidth,
       color,
       disableRipple,
+      disabled: disabledProp,
     }
 
     const classes = useSlotClasses(ownerState)
@@ -131,7 +131,7 @@ export const Button = forwardRef(
     })
 
     const onClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
-      if (loading || disabled) {
+      if (disabled) {
         event.preventDefault()
         return
       }
@@ -139,27 +139,30 @@ export const Button = forwardRef(
     })
 
     const rootProps = useSlotProps({
-      externalSlotProps: remainingProps,
-      externalForwardedProps: {
+      ownerState,
+      externalSlotProps: slotProps?.root,
+      externalForwardedProps: remainingProps,
+      classNames: classes.root,
+      sx: styles.root,
+      additionalProps: {
         ref,
+        type,
         onClick,
-        className,
         href,
         as: rootElement,
-        [rootElement === 'button' ? 'disabled' : 'data-disabled']:
-          disabled || loading,
+        // [rootElement === 'button' ? 'disabled' : 'data-disabled']: disabled,
       },
-      classNames: classes.root,
-      sx: [styles.root, resolveSxProps(sx, ownerState)],
     })
 
     const startIconProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.startIcon,
       classNames: classes.startIcon,
       sx: styles.startIcon,
     })
 
     const endIconProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.endIcon,
       classNames: classes.endIcon,
       sx: styles.endIcon,

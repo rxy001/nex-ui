@@ -9,7 +9,6 @@ import { useNexUI } from '../provider'
 import { switchRecipe } from '../../theme/slotRecipes'
 import {
   forwardRef,
-  resolveSxProps,
   useDefaultProps,
   useSlotProps,
   useSlotStyles,
@@ -117,46 +116,52 @@ export const Switch = forwardRef(
     })
 
     const rootProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.root,
-      externalForwardedProps: { className },
-      sx: [styles.root, resolveSxProps(sx, ownerState)],
+      externalForwardedProps: { className, sx },
+      sx: styles.root,
       classNames: classes.root,
     })
 
     const inputProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.input,
-      externalForwardedProps: {
-        type: 'checkbox',
-        ...remainingProps,
+      externalForwardedProps: remainingProps,
+      sx: styles.input,
+      classNames: classes.input,
+      additionalProps: {
         ref,
         name,
         checked,
         disabled,
         onChange,
+        type: 'checkbox',
       },
-      sx: styles.input,
-      classNames: classes.input,
     })
 
     const trackProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.track,
       sx: styles.track,
       classNames: classes.track,
     })
 
     const thumbProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.thumb,
       sx: styles.thumb,
       classNames: classes.thumb,
     })
 
     const startIconProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.startIcon,
       sx: styles.startIcon,
       classNames: classes.startIcon,
     })
 
     const endIconProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.endIcon,
       sx: styles.endIcon,
       classNames: classes.endIcon,

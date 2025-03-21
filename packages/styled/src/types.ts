@@ -3,46 +3,59 @@ import type {
   ComponentType,
   JSX,
   ElementType,
-  ReactNode,
-  ComponentPropsWithRef,
 } from 'react'
-import type { CssFnParams } from '@nex-ui/system'
-
-type CommonProps<E extends ElementType = ElementType> = {
-  as?: E
-  sx?: CssFnParams
-}
+import type { Interpolation } from '@nex-ui/system'
 
 type Overwrite<K, T> = Omit<K, keyof T> & T
 
-export type StyledComponentProps<
-  E extends ElementType = ElementType,
-  Props = object,
-> = Overwrite<ComponentPropsWithRef<E>, Overwrite<Props, CommonProps<E>>>
+export type GenericStyledComponentProps<E extends ElementType = ElementType> =
+  Overwrite<
+    ReactComponentProps<E>,
+    {
+      as?: E
+      sx?: Interpolation<ReactComponentProps<E>>
+    }
+  >
 
-export interface CreateStyledComponent<Tag extends ElementType> {
+export interface CreateGenericStyledComponent<C extends ElementType> {
   (
-    styles?: CssFnParams,
-  ): <E extends ElementType = Tag>(props: StyledComponentProps<E>) => ReactNode
+    interpolation?: Interpolation<ReactComponentProps<C>>,
+  ): <E extends ElementType = C>(
+    props: GenericStyledComponentProps<E>,
+  ) => JSX.Element
+}
+
+export interface CreateStyledComponent<C extends ElementType> {
+  (interpolation?: Interpolation<ReactComponentProps<C>>): (
+    props: ReactComponentProps<C> & {
+      sx: Interpolation<ReactComponentProps<C>>
+    },
+  ) => JSX.Element
 }
 
 type HTMLElementTagName = keyof JSX.IntrinsicElements
 
 export interface CreateStyled {
-  <Tag extends HTMLElementTagName>(tag: Tag): CreateStyledComponent<Tag>
+  <Tag extends HTMLElementTagName>(tag: Tag): CreateGenericStyledComponent<Tag>
   <C extends ComponentType<ReactComponentProps<C>>>(
     component: C,
   ): CreateStyledComponent<C>
 }
 
 type StyledTags = {
-  [Tag in HTMLElementTagName]: CreateStyledComponent<Tag>
+  [Tag in HTMLElementTagName]: CreateGenericStyledComponent<Tag>
 }
 
-export type NexFactory = {
+export type NexUIFactory = {
   [Tag in HTMLElementTagName]: <E extends ElementType = Tag>(
-    props: StyledComponentProps<E>,
-  ) => ReactNode
+    props: Overwrite<
+      ReactComponentProps<E>,
+      {
+        as?: E
+        sx?: Interpolation
+      }
+    >,
+  ) => JSX.Element
 }
 
 export interface Styled extends StyledTags, CreateStyled {}

@@ -15,7 +15,6 @@ import {
   composeClasses,
   getUtilityClass,
   useSlotProps,
-  resolveSxProps,
 } from '../utils'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
 import { CheckedIcon } from './CheckedIcon'
@@ -82,10 +81,10 @@ export const Checkbox = forwardRef(
 
     const {
       sx,
+      className,
       icon,
       value,
       children,
-      className,
       slotProps,
       defaultChecked,
       onChange: onChangeProp,
@@ -146,20 +145,27 @@ export const Checkbox = forwardRef(
     })
 
     const rootProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.root,
       externalForwardedProps: {
+        sx,
         className,
+      },
+      sx: styles.root,
+      classNames: classes.root,
+      additionalProps: {
         'data-disabled': disabled,
       },
-      sx: [styles.root, resolveSxProps(sx, ownerState)],
-      classNames: classes.root,
     })
 
     const inputProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.input,
-      externalForwardedProps: {
+      externalForwardedProps: remainingProps,
+      classNames: classes.input,
+      sx: styles.input,
+      additionalProps: {
         type: 'checkbox',
-        ...remainingProps,
         value,
         name,
         ref,
@@ -167,17 +173,17 @@ export const Checkbox = forwardRef(
         disabled,
         onChange,
       },
-      classNames: classes.input,
-      sx: styles.input,
     })
 
     const iconProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.icon,
       sx: styles.icon,
       classNames: classes.icon,
     })
 
     const labelProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.label,
       sx: styles.label,
       classNames: classes.label,

@@ -28,6 +28,10 @@ export const buttonRecipe = defineSlotRecipe({
       '& svg': {
         fs: '1.3em',
       },
+      _focusVisible: {
+        outline: '2px solid #006fee',
+        outlineOffset: '2px',
+      },
     },
     startIcon: {
       display: 'inherit',
@@ -71,15 +75,6 @@ export const buttonRecipe = defineSlotRecipe({
           bg: {
             _DEFAULT: 'transparent',
             _hover: 'colorPalette.subtle',
-          },
-        },
-      },
-      link: {
-        root: {
-          bg: 'transparent',
-          color: {
-            _DEFAULT: 'colorPalette.primary',
-            _hover: 'colorPalette.secondary',
           },
         },
       },
@@ -192,17 +187,6 @@ export const buttonRecipe = defineSlotRecipe({
         root: {
           _active: {
             bg: 'colorPalette.muted',
-          },
-        },
-      },
-    },
-    {
-      disableRipple: true,
-      variant: 'link',
-      css: {
-        root: {
-          _active: {
-            color: 'colorPalette.tertiary',
           },
         },
       },

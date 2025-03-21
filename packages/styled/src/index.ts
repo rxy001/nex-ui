@@ -2,6 +2,6 @@ export * from './styled'
 
 export * from './nex'
 
-export type { Styled, StyledComponentProps } from './types'
+export type { Styled } from './types'
 
-export { composeSx, isPropValid } from './utils'
+export { isPropValid } from './utils'

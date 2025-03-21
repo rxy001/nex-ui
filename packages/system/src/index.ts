@@ -28,13 +28,17 @@ export type {
 } from './colorScheme'
 
 export type {
-  CSSInterpolation,
+  InterpolationPrimitive,
   CSSObject,
   CSSObjectOverrides,
   CSSProperties,
+  CSSInterpolation,
+  ArrayCSSInterpolation,
+  ArrayInterpolation,
+  Interpolation,
 } from './types'
 
-export type { CssFn, CssFnParams } from './css'
+export type { CssFn } from './css'
 
 export type { BreakpointsDefinition } from './breakpoints'
 

@@ -9,7 +9,6 @@ import {
   getUtilityClass,
   forwardRef,
   useSlotProps,
-  resolveSxProps,
 } from '../utils'
 import { useNexUI } from '../provider'
 import { dividerRecipe } from '../../theme/recipes'
@@ -41,12 +40,7 @@ export const Divider = forwardRef(
       props: inProps,
     })
 
-    const {
-      sx,
-      className,
-      orientation = 'horizontal',
-      ...remainingProps
-    } = props
+    const { orientation = 'horizontal', ...remainingProps } = props
 
     const ownerState = { ...props, orientation }
 
@@ -59,10 +53,13 @@ export const Divider = forwardRef(
     })
 
     const rootProps = useSlotProps({
-      externalSlotProps: remainingProps,
-      externalForwardedProps: { ref, className },
-      sx: [styles, resolveSxProps(sx, ownerState)],
+      ownerState,
+      externalForwardedProps: remainingProps,
+      sx: styles,
       classNames: classes.root,
+      additionalProps: {
+        ref,
+      },
     })
 
     return <nex.hr {...rootProps} />

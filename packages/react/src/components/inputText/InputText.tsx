@@ -15,7 +15,6 @@ import {
   forwardRef,
   useSlotProps,
   useSlotStyles,
-  resolveSxProps,
 } from '../utils'
 import type { InputTextOwnerState, InputTextProps } from './types'
 import { Button } from '../button'
@@ -66,7 +65,6 @@ export const InputText = forwardRef(
 
     const {
       sx,
-      name,
       className,
       prefix,
       suffix,
@@ -89,7 +87,7 @@ export const InputText = forwardRef(
 
     const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
     const inputRef = useRef<HTMLInputElement>(null)
-    const composedRef = mergeRefs<HTMLInputElement>(ref, inputRef)
+    const mergedRefs = mergeRefs<HTMLInputElement>(ref, inputRef)
 
     const valueInProps = valueProp !== undefined
 
@@ -135,36 +133,39 @@ export const InputText = forwardRef(
     })
 
     const rootProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.root,
       externalForwardedProps: {
         className,
+        sx,
       },
-      sx: [styles.root, resolveSxProps(sx, ownerState)],
+      sx: styles.root,
       classNames: classes.root,
     })
 
     const inputProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.input,
-      externalForwardedProps: {
-        ...remainingProps,
+      externalForwardedProps: remainingProps,
+      sx: styles.input,
+      classNames: classes.input,
+      additionalProps: {
         value,
-        name,
         onChange,
         disabled,
         type,
-        ref: composedRef,
+        ref: mergedRefs,
       },
-      sx: styles.input,
-      classNames: classes.input,
     })
 
     const clearBtnProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.clearBtn,
-      externalForwardedProps: {
-        onClick: onClearValue,
-      },
       sx: styles.clearBtn,
       classNames: classes.clearBtn,
+      additionalProps: {
+        onClick: onClearValue,
+      },
     })
 
     return (
@@ -174,8 +175,8 @@ export const InputText = forwardRef(
         {clearable && value && !disabled && (
           <Button
             iconOnly
+            radius='full'
             size='sm'
-            variant='link'
             color='gray'
             {...clearBtnProps}
           >

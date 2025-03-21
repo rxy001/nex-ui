@@ -11,7 +11,6 @@ import {
   getUtilityClass,
   forwardRef,
   useSlotProps,
-  resolveSxProps,
 } from '../utils'
 import { useNexUI } from '../provider'
 import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
@@ -92,12 +91,10 @@ export const Avatar = forwardRef(
     })
 
     const {
-      sx,
       src,
       alt,
       srcSet,
       slotProps,
-      className,
       children: childrenProp,
       size = 'md',
       radius = size,
@@ -125,16 +122,18 @@ export const Avatar = forwardRef(
     const hasImg = src || srcSet
 
     const rootProps = useSlotProps({
-      externalSlotProps: remainingProps,
-      externalForwardedProps: {
-        ref,
-        className,
-      },
+      ownerState,
+      externalSlotProps: slotProps?.root,
+      externalForwardedProps: remainingProps,
       classNames: classes.root,
-      sx: [styles.root, resolveSxProps(sx, ownerState)],
+      sx: styles.root,
+      additionalProps: {
+        ref,
+      },
     })
 
     const imgProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.img,
       externalForwardedProps: {
         src,

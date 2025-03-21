@@ -26,7 +26,6 @@ describe('Button', () => {
     expect(button).toHaveClass(buttonClasses['radius-md'])
     expect(button).toHaveClass(buttonClasses['color-blue'])
 
-    expect(button).not.toHaveClass(buttonClasses['variant-link'])
     expect(button).not.toHaveClass(buttonClasses['variant-outlined'])
     expect(button).not.toHaveClass(buttonClasses['variant-text'])
     expect(button).not.toHaveClass(buttonClasses['color-green'])
@@ -119,9 +118,6 @@ describe('Button', () => {
         <Button variant='filled' data-testid='variant-filled'>
           Button
         </Button>
-        <Button variant='link' data-testid='variant-link'>
-          Button
-        </Button>
         <Button variant='outlined' data-testid='variant-outlined'>
           Button
         </Button>
@@ -133,9 +129,6 @@ describe('Button', () => {
 
     expect(getByTestId('variant-filled')).toHaveClass(
       buttonClasses['variant-filled'],
-    )
-    expect(getByTestId('variant-link')).toHaveClass(
-      buttonClasses['variant-link'],
     )
     expect(getByTestId('variant-outlined')).toHaveClass(
       buttonClasses['variant-outlined'],

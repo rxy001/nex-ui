@@ -1,25 +1,38 @@
-import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
+import type { ReactNode, ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CheckboxVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
   Overwrite,
   SxProps,
+  ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
 export interface CheckboxPropsOverrides {}
 
-type CheckboxSlotProps<CheckboxComponentProps> = {
-  root?: ComponentPropsWithRef<'label'>
-  input?: CheckboxComponentProps
-  label?: ComponentPropsWithRef<'span'>
-  icon?: ComponentPropsWithRef<'span'>
+type CheckboxSlotProps<CheckboxComponent extends ElementType> = {
+  root?: ComponentPropsWithCommonProps<
+    'label',
+    CheckboxOwnerState<CheckboxComponent>
+  >
+  input?: ComponentPropsWithCommonProps<
+    CheckboxComponent,
+    CheckboxOwnerState<CheckboxComponent>
+  >
+  label?: ComponentPropsWithCommonProps<
+    'span',
+    CheckboxOwnerState<CheckboxComponent>
+  >
+  icon?: ComponentPropsWithCommonProps<
+    'span',
+    CheckboxOwnerState<CheckboxComponent>
+  >
 }
 
 type CheckboxOwnProps<
   CheckboxComponent extends ElementType,
   CheckboxComponentProps extends
-    ComponentPropsWithRef<CheckboxComponent> = ComponentPropsWithRef<CheckboxComponent>,
+    ComponentProps<CheckboxComponent> = ComponentProps<CheckboxComponent>,
 > = {
   sx?: SxProps<CheckboxOwnerState<CheckboxComponent>>
   as?: CheckboxComponent
@@ -28,7 +41,7 @@ type CheckboxOwnProps<
   icon?:
     | ReactNode
     | ((ownerState: CheckboxOwnerState<CheckboxComponent>) => ReactNode)
-  slotProps?: CheckboxSlotProps<CheckboxComponentProps>
+  slotProps?: CheckboxSlotProps<CheckboxComponent>
   classes?: ComponentUtilityClasses<'root' | 'input' | 'label' | 'icon'>
   defaultChecked?: boolean
   name?: string

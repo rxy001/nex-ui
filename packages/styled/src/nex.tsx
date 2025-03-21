@@ -1,20 +1,18 @@
 import { withEmotionCache } from '@emotion/react'
-import { forEach } from '@nex-ui/utils'
+import { __DEV__, forEach } from '@nex-ui/utils'
 import { useSystem } from '@nex-ui/system'
 import { serializeStyles } from '@emotion/serialize'
 import { getRegisteredStyles } from '@emotion/utils'
 import { getDefaultShouldForwardProp } from './utils'
 import { tags } from './tags'
 import { Insertion } from './Insertion'
-import type { NexFactory } from './types'
+import type { NexUIFactory } from './types'
 
 const createNexImpl = (tag: any) => {
-  if (process.env.NODE_ENV !== 'production') {
-    if (tag === undefined) {
-      throw new Error(
-        'You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',
-      )
-    }
+  if (__DEV__ && tag === undefined) {
+    throw new Error(
+      '[Nex UI] nex: You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',
+    )
   }
 
   const defaultShouldForwardProp = getDefaultShouldForwardProp(tag)
@@ -41,8 +39,12 @@ const createNexImpl = (tag: any) => {
         return <FinalTag {...newProps} />
       }
 
+      const sys = useSystem()
+
+      const cssProp = sys.css(sx)
+
       let { className = '' } = props
-      let registeredStyles: any[] = []
+      const registeredStyles: any[] = [cssProp]
 
       if (typeof props.className === 'string') {
         className = getRegisteredStyles(
@@ -53,12 +55,6 @@ const createNexImpl = (tag: any) => {
       } else if (props.className != null) {
         className = `${props.className} `
       }
-
-      const sys = useSystem()
-
-      const cssProp = sys.css(sx)
-
-      registeredStyles = [...registeredStyles, cssProp]
 
       const serialized = serializeStyles(registeredStyles, undefined, props)
 
@@ -79,7 +75,7 @@ const createNexImpl = (tag: any) => {
     },
   )
 
-  Styled.displayName = 'NexStyledComponent'
+  Styled.displayName = 'NexUIStyledComponent'
 
   return Styled
 }
@@ -87,7 +83,7 @@ const createNexImpl = (tag: any) => {
 // @ts-ignore
 const createNex = createNexImpl.bind()
 
-const nex = {} as NexFactory
+const nex = {} as NexUIFactory
 tags.forEach((tag) => {
   // @ts-ignore
   nex[tag] = createNex(tag)

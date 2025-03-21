@@ -12,7 +12,6 @@ import {
   getUtilityClass,
   forwardRef,
   useSlotProps,
-  resolveSxProps,
 } from '../utils'
 
 const useSlotClasses = (ownerState: FlexOwnerState) => {
@@ -47,10 +46,8 @@ export const Flex = forwardRef(
     const props = useDefaultProps<FlexProps>({ name: 'Flex', props: inProps })
 
     const {
-      sx,
       gap,
       children,
-      className,
       justify,
       align,
       wrap,
@@ -69,20 +66,21 @@ export const Flex = forwardRef(
 
     const styles = useStyles({ name: 'Flex', ownerState, recipe: flexRecipe })
 
-    const composedSx = {
-      gap,
-      flexDirection: direction,
-      alignItems: align,
-      justifyContent: justify,
-      flexWrap: wrap,
-      ...styles,
-    }
-
     const rootProps = useSlotProps({
-      externalSlotProps: remainingProps,
-      externalForwardedProps: { ref, className },
-      sx: [composedSx, resolveSxProps(sx, ownerState)],
+      ownerState,
+      externalForwardedProps: remainingProps,
+      sx: styles,
       classNames: classes.root,
+      additionalProps: {
+        ref,
+        sx: {
+          gap,
+          flexDirection: direction,
+          alignItems: align,
+          justifyContent: justify,
+          flexWrap: wrap,
+        },
+      },
     })
 
     return <nex.div {...rootProps}>{children}</nex.div>

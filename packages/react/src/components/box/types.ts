@@ -5,7 +5,7 @@ export interface BoxPropsOverrides {}
 
 type BoxOwnProps<RootComponent extends ElementType> = {
   as?: RootComponent
-  sx?: SxProps
+  sx?: SxProps<undefined>
 }
 
 export type BoxProps<RootComponent extends ElementType = 'div'> = OverrideProps<

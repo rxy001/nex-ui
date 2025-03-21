@@ -10,6 +10,10 @@ export * from './craeteContext'
 
 export * from './walkObject'
 
+export * from './mergeProps'
+
+export * from './chain'
+
 export { default as map } from 'lodash.map'
 
 export { default as forEach } from 'lodash.foreach'

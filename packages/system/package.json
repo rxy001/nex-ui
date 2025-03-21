@@ -45,7 +45,8 @@
   "sideEffects": false,
   "dependencies": {
     "@nex-ui/hooks": "workspace:*",
-    "@nex-ui/utils": "workspace:*"
+    "@nex-ui/utils": "workspace:*",
+    "serialize-javascript": "6.0.2"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
@@ -53,6 +54,7 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
+    "@types/serialize-javascript": "5.0.4",
     "csstype": "3.1.3"
   }
 }

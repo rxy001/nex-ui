@@ -2,20 +2,24 @@ import type {
   CSSObject,
   RecipeRuntimeFn,
   SlotRecipeRuntimeFn,
-  CssFnParams,
+  Interpolation,
 } from '@nex-ui/system'
-import type { ElementType, ComponentPropsWithRef } from 'react'
+import type { ElementType, ComponentProps, JSXElementConstructor } from 'react'
 import type { ClassValue } from 'clsx'
 
 export type UniteTokens<T extends {}, U extends {}> = {
   [K in keyof T]: K extends keyof U ? T[K] | U[K] : T[K]
 }
 
-export type SxProps<OwnerState extends object | void = void> =
-  | CssFnParams
-  | (OwnerState extends void
-      ? () => CssFnParams
-      : (ownerState: OwnerState) => CssFnParams)
+export type ComponentPropsWithCommonProps<
+  T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>,
+  OwnerState,
+> = ComponentProps<T> & {
+  sx?: SxProps<OwnerState>
+  as?: ElementType
+}
+
+export type SxProps<OwnerState> = Interpolation<OwnerState>
 
 export type ComponentUtilityClasses<T extends string> = Partial<
   Record<T, ClassValue>
@@ -27,10 +31,7 @@ export type OverrideProps<
   Component extends ElementType,
   OwnProps = object,
   OverridesProps = object,
-> = Overwrite<
-  ComponentPropsWithRef<Component>,
-  Overwrite<OwnProps, OverridesProps>
->
+> = Overwrite<ComponentProps<Component>, Overwrite<OwnProps, OverridesProps>>
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 

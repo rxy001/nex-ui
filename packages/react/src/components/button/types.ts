@@ -1,22 +1,28 @@
-import type {
-  ReactNode,
-  ElementType,
-  AnchorHTMLAttributes,
-  ComponentPropsWithRef,
-} from 'react'
+import type { ReactNode, ElementType, AnchorHTMLAttributes } from 'react'
 import type { ClassValue } from 'clsx'
 import type { ButtonVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
   SxProps,
+  ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
 export interface ButtonPropsOverrides {}
 
-type ButtonSlotProps = {
-  startIcon?: ComponentPropsWithRef<'span'>
-  endIcon?: ComponentPropsWithRef<'span'>
+type ButtonSlotProps<RootComponent extends ElementType> = {
+  startIcon?: ComponentPropsWithCommonProps<
+    'span',
+    ButtonOwnerState<RootComponent>
+  >
+  endIcon?: ComponentPropsWithCommonProps<
+    'span',
+    ButtonOwnerState<RootComponent>
+  >
+  root?: ComponentPropsWithCommonProps<
+    RootComponent,
+    ButtonOwnerState<RootComponent>
+  >
 }
 
 type ButtonOwnProps<RootComponent extends ElementType> = {
@@ -28,10 +34,11 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   spinnerPlacement?: 'start' | 'end'
   href?: string
   children?: ReactNode
+  disableRipple?: boolean
   className?: ClassValue
   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target']
-  slotProps?: ButtonSlotProps
-  classes?: ComponentUtilityClasses<'startIcon' | 'endIcon'>
+  slotProps?: ButtonSlotProps<RootComponent>
+  classes?: ComponentUtilityClasses<'root' | 'startIcon' | 'endIcon'>
 } & ButtonVariants
 
 export type ButtonProps<RootComponent extends ElementType = 'button'> =

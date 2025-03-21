@@ -1,36 +1,32 @@
 import { withEmotionCache } from '@emotion/react'
 import { getRegisteredStyles } from '@emotion/utils'
-import { forEach } from '@nex-ui/utils'
+import { __DEV__, forEach, map, isFunction, isArray } from '@nex-ui/utils'
 import { useSystem } from '@nex-ui/system'
 import { serializeStyles } from '@emotion/serialize'
-import { getDefaultShouldForwardProp, composeSx } from './utils'
+import { getDefaultShouldForwardProp } from './utils'
 import { tags } from './tags'
-import type { CreateStyled, Styled as NexStyled } from './types'
+import type { CreateStyled, Styled as NexUIStyled } from './types'
 import { Insertion } from './Insertion'
 
-const createStyled: CreateStyled = (tag: any) => {
-  if (process.env.NODE_ENV !== 'production') {
-    if (tag === undefined) {
-      throw new Error(
-        'You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',
-      )
-    }
+const createStyled: CreateStyled = (tag: any): any => {
+  if (__DEV__ && tag === undefined) {
+    throw new Error(
+      '[Nex UI] styled: You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',
+    )
   }
 
   const defaultShouldForwardProp = getDefaultShouldForwardProp(tag)
 
   const shouldUseAs = !defaultShouldForwardProp('as')
 
-  return (sx: any) => {
-    const styles = composeSx([], sx)
+  return (...args: any[]) => {
+    const styles = args.slice()
 
     const Styled = withEmotionCache(
-      ({ sx: SxProps, ...props }: any, cache: any, ref: any) => {
+      ({ sx, ...props }: any, cache: any, ref: any) => {
         const FinalTag = (shouldUseAs && props.as) || tag
-
         const sys = useSystem()
-        const composedSx = composeSx(styles, SxProps)
-
+        const mergedSx = sx ? [...styles, sx] : [...styles]
         const finalShouldForwardProp = shouldUseAs
           ? getDefaultShouldForwardProp(FinalTag)
           : defaultShouldForwardProp
@@ -43,7 +39,7 @@ const createStyled: CreateStyled = (tag: any) => {
           }
         })
 
-        if (composedSx.length === 0) {
+        if (mergedSx.length === 0) {
           return <FinalTag {...newProps} />
         }
 
@@ -60,9 +56,21 @@ const createStyled: CreateStyled = (tag: any) => {
           className = `${props.className} `
         }
 
-        const cssProp = sys.css(composedSx)
-        registeredStyles = [...registeredStyles, cssProp]
+        const resolveSx = (arg: any): any => {
+          return map(arg, (v) => {
+            if (isFunction(v)) {
+              return v(props)
+            }
+            if (isArray(v)) {
+              return resolveSx(v)
+            }
+            return v
+          })
+        }
 
+        const cssProp = sys.css(resolveSx(mergedSx))
+
+        registeredStyles = [...registeredStyles, cssProp]
         const serialized = serializeStyles(
           registeredStyles,
           cache.registered,
@@ -86,14 +94,14 @@ const createStyled: CreateStyled = (tag: any) => {
       },
     )
 
-    Styled.displayName = 'NexStyledComponent'
+    Styled.displayName = 'NexUIStyledComponent'
 
     return Styled
   }
 }
 
 // @ts-ignore
-const styled = createStyled.bind() as NexStyled
+const styled = createStyled.bind() as NexUIStyled
 
 tags.forEach((tag) => {
   // @ts-ignore

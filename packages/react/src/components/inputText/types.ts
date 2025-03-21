@@ -1,7 +1,8 @@
-import type { ReactNode, ElementType, ComponentPropsWithRef } from 'react'
+import type { ReactNode, ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
 import type { InputTextVariants } from '../../theme/slotRecipes'
 import type {
+  ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
   Overwrite,
   SxProps,
@@ -10,16 +11,22 @@ import type { ButtonProps } from '../button'
 
 export interface InputTextPropsOverrides {}
 
-type InputTextSlotProps<InputComponentProps> = {
-  root?: ComponentPropsWithRef<'label'>
-  input?: InputComponentProps
+type InputTextSlotProps<InputComponent extends ElementType> = {
+  root?: ComponentPropsWithCommonProps<
+    'label',
+    InputTextOwnerState<InputComponent>
+  >
+  input?: ComponentPropsWithCommonProps<
+    InputComponent,
+    InputTextOwnerState<InputComponent>
+  >
   clearBtn?: ButtonProps
 }
 
 type InputTextOwnProps<
   InputComponent extends ElementType,
   InputComponentProps extends
-    ComponentPropsWithRef<InputComponent> = ComponentPropsWithRef<InputComponent>,
+    ComponentProps<InputComponent> = ComponentProps<InputComponent>,
 > = {
   defaultValue?: string
   prefix?: ReactNode
@@ -28,7 +35,7 @@ type InputTextOwnProps<
   clearable?: boolean
   onClear?: () => void
   classes?: ComponentUtilityClasses<'root' | 'input' | 'clearBtn'>
-  slotProps?: InputTextSlotProps<InputComponentProps>
+  slotProps?: InputTextSlotProps<InputComponent>
   className?: ClassValue
   name?: string
   as?: InputComponent

@@ -37,11 +37,22 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
     const { width, height, top, left } = trigger.getBoundingClientRect()
     const rippleSize = Math.max(width, height)
 
+    let x
+    let y
+
+    if (event.clientX !== 0 && event.clientY !== 0) {
+      x = event.clientX - left
+      y = event.clientY - top
+    } else {
+      x = width / 2
+      y = height / 2
+    }
+
     ripples.current.push({
       key: `${Math.random()}`,
       size: rippleSize,
-      x: event.clientX - left - rippleSize / 2,
-      y: event.clientY - top - rippleSize / 2,
+      x: x - rippleSize / 2,
+      y: y - rippleSize / 2,
     })
 
     rootRef.current.render(

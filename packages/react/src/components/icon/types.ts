@@ -13,15 +13,11 @@ export type IconOwnProsp<RootComponent extends ElementType> = {
   color?: NexUICSSProperties['color']
   as?: RootComponent
   sx?: SxProps<IconOwnerState<RootComponent>>
+  component?: ComponentType<any>
 } & IconVariants
 
-export type InnerIconProps<RootComponent extends ElementType = 'svg'> =
-  OverrideProps<RootComponent, IconOwnProsp<RootComponent>, IconPropsOverrides>
-
 export type IconProps<RootComponent extends ElementType = 'svg'> =
-  InnerIconProps<RootComponent> & {
-    component: ComponentType<any>
-  }
+  OverrideProps<RootComponent, IconOwnProsp<RootComponent>, IconPropsOverrides>
 
 export type IconOwnerState<RootComponent extends ElementType = 'svg'> =
   IconProps<RootComponent>

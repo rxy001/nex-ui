@@ -1,40 +1,94 @@
 import clsx from 'clsx'
-import type { CssFnParams } from '@nex-ui/system'
+import { mergeProps, map, isFunction, isArray } from '@nex-ui/utils'
+import type { ClassValue } from 'clsx'
+import type { ArrayInterpolation, Interpolation } from '@nex-ui/system'
+import type { SxProps } from '../../types/utils'
 
-type UseSlotPropsArgs<SlotProps, ForwardedProps> = {
-  sx?: CssFnParams[] | CssFnParams
-  classNames?: string
+type UseSlotPropsArgs<
+  SlotProps extends {},
+  ForwardedProps extends {},
+  AdditionalProps extends {},
+  OwnerState extends {},
+> = {
+  ownerState?: OwnerState
+  /**
+   * The style of the slot.
+   */
+  sx?: Interpolation<OwnerState>
+
+  /**
+   * Extra class name(s) to be placed on the slot.
+   */
+  classNames?: ClassValue
+
+  /**
+   * The properties of the component SlotProps.*
+   */
   externalSlotProps?: SlotProps
+
+  /**
+   * Extra props placed on the component that should be forwarded to the slot.
+   * This should usually be used only for the root slot.
+   */
   externalForwardedProps?: ForwardedProps
+
+  /**
+   * Additional props to be placed on the slot.
+   */
+  additionalProps?: AdditionalProps
 }
 
-type UseSlotPropsResult<SlotProps, ForwardedProps> = Omit<
-  SlotProps & ForwardedProps,
-  'sx'
+type UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps> = Omit<
+  SlotProps & ForwardedProps & AdditionalProps,
+  'className' | 'sx'
 > & {
-  className?: string
-  sx?: CssFnParams
+  className: string
+  sx: SxProps<unknown>
 }
 
-export const useSlotProps = <SlotProps, ForwardedProps>({
+export const useSlotProps = <
+  SlotProps extends {},
+  ForwardedProps extends {},
+  AdditionalProps extends {},
+  OwnerState extends {},
+>({
+  ownerState,
   sx,
-  classNames: classNamesProp,
   externalSlotProps,
   externalForwardedProps,
-}: UseSlotPropsArgs<SlotProps, ForwardedProps>): UseSlotPropsResult<
+  additionalProps,
+  classNames: classNamesProp,
+}: UseSlotPropsArgs<
   SlotProps,
-  ForwardedProps
-> => {
-  const combinedProps = {
-    ...externalSlotProps,
-    ...externalForwardedProps,
-  } as UseSlotPropsResult<SlotProps, ForwardedProps>
+  ForwardedProps,
+  AdditionalProps,
+  OwnerState
+>): UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps> => {
+  const props = mergeProps(
+    additionalProps,
+    externalForwardedProps,
+    externalSlotProps,
+  )
 
-  const className = clsx(combinedProps.className, classNamesProp)
+  const className = clsx(classNamesProp, props?.className)
+
+  const resolveSx = (
+    arg: ArrayInterpolation<OwnerState>,
+  ): ArrayInterpolation<OwnerState> => {
+    return map(arg, (v) => {
+      if (isFunction(v)) {
+        return v(ownerState!)
+      }
+      if (isArray(v)) {
+        return resolveSx(v)
+      }
+      return v
+    })
+  }
 
   return {
-    ...combinedProps,
+    ...props,
     className,
-    sx: Array.isArray(sx) ? sx.flat() : sx,
-  }
+    sx: resolveSx([sx, props.sx]),
+  } as unknown as UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps>
 }

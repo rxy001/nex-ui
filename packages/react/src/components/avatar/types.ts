@@ -1,16 +1,21 @@
-import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react'
+import type { ElementType, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
 import type { AvatarVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
   SxProps,
+  ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
 export interface AvatarPropsOverrides {}
 
-type AvatarSlotProps = {
-  img?: ComponentPropsWithRef<'img'>
+type AvatarSlotProps<RootComponent extends ElementType> = {
+  img?: ComponentPropsWithCommonProps<'img', AvatarOwnerState<RootComponent>>
+  root?: ComponentPropsWithCommonProps<
+    RootComponent,
+    AvatarOwnerState<RootComponent>
+  >
 }
 
 type AvatarOwnProps<RootComponent extends ElementType> = {
@@ -21,8 +26,8 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   srcSet?: string
   className?: ClassValue
   children?: ReactNode
-  slotProps?: AvatarSlotProps
-  classes?: ComponentUtilityClasses<'img'>
+  slotProps?: AvatarSlotProps<RootComponent>
+  classes?: ComponentUtilityClasses<'root' | 'img'>
 } & AvatarVariants
 
 export type AvatarProps<RootComponent extends ElementType = 'div'> =

@@ -17,7 +17,7 @@ const meta = {
       control: 'boolean',
     },
     variant: {
-      options: ['filled', 'outlined', 'text', 'link'],
+      options: ['filled', 'outlined', 'text'],
       control: 'select',
     },
     size: {

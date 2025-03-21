@@ -1,6 +1,4 @@
 declare module '*.svg' {
-  const content: React.ForwardRefExoticComponent<
-    React.ComponentPropsWithRef<'svg'>
-  >
+  const content: React.ForwardRefExoticComponent<React.ComponentProps<'svg'>>
   export default content
 }

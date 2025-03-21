@@ -5,24 +5,34 @@ import {
   get,
   isArray,
   __DEV__,
+  map,
+  isPlainObject,
+  isFunction,
 } from '@nex-ui/utils'
-import type { CSSObject as EmotionCSSObject } from '@emotion/react'
-import { memoizeFn } from './utils'
-import type { CSSObject } from './types'
+import type {
+  ComponentSelector,
+  Keyframes,
+  SerializedStyles,
+  CSSObject as EmotionCSSObject,
+  Interpolation as EmotionInterpolation,
+} from '@emotion/react'
 import type { NormailizeFn } from './normalize'
 import type { Selectors } from './selectors'
+import type {
+  Interpolation,
+  CSSObject,
+  ArrayInterpolation,
+  FunctionInterpolation,
+} from './types'
+import { memoizeFn } from './utils'
 
 interface CreateCssFnConfig {
   getCustomizedSelector: Selectors['getCustomizedSelector']
   normalize: NormailizeFn
 }
 
-type ValidStyleType = CSSObject | undefined | false | null
-
-export type CssFnParams = ValidStyleType | ValidStyleType[]
-
 export interface CssFn {
-  (styles: CssFnParams): EmotionCSSObject
+  (interpolation: Interpolation): EmotionInterpolation
 }
 
 const isCustomSelector = (key: string) => {
@@ -33,17 +43,42 @@ export const createCssFn = ({
   normalize,
   getCustomizedSelector,
 }: CreateCssFnConfig) => {
-  const css: CssFn = (stylesProp) => {
-    const styles = Array.isArray(stylesProp) ? stylesProp : [stylesProp]
+  const css: CssFn = (interpolation) => {
+    if (!interpolation) {
+      return ''
+    }
 
-    const result: EmotionCSSObject = {}
+    const componentSelector = interpolation as ComponentSelector
+    if (componentSelector.__emotion_styles !== undefined) {
+      return componentSelector
+    }
 
-    forEach(styles, (styleProp: ValidStyleType) => {
-      if (!styleProp) {
-        return
+    if (isFunction(interpolation)) {
+      const functionInterpolation = interpolation as FunctionInterpolation
+
+      return css(functionInterpolation(undefined))
+    }
+
+    if (isArray(interpolation)) {
+      const arrayInterpolation = interpolation as ArrayInterpolation
+      return map(arrayInterpolation, (v: Interpolation) => css(v))
+    }
+
+    if (isPlainObject(interpolation)) {
+      const keyframes = interpolation as Keyframes
+
+      if (keyframes.anim === 1) {
+        return keyframes
       }
 
-      const { colorPalette, ...style } = styleProp
+      const serializedStyles = interpolation as SerializedStyles
+
+      if (serializedStyles.styles !== undefined) {
+        return serializedStyles
+      }
+
+      const cssOjbect = interpolation as CSSObject
+      const { colorPalette, ...style } = cssOjbect
 
       const handlePath = (path: string[]) => {
         return path
@@ -69,6 +104,8 @@ export const createCssFn = ({
           })
       }
 
+      const result: EmotionCSSObject = {}
+
       walkObject(style, (propValue: string | number, path: string[]) => {
         const [propKey, ...selectors] = handlePath(path)
 
@@ -80,9 +117,11 @@ export const createCssFn = ({
 
         mergeByPath(result, selectors, normalized)
       })
-    })
 
-    return result
+      return result
+    }
+
+    return interpolation as EmotionInterpolation
   }
 
   return memoizeFn(css)

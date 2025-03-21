@@ -8,6 +8,7 @@ import {
   isPlainObject,
   every,
 } from '@nex-ui/utils'
+import serialize from 'serialize-javascript'
 import type {
   SemanticTokenValue,
   TokenValue,
@@ -102,7 +103,7 @@ export function isValidBreakpointValue(value: any) {
 }
 
 export function memoizeFn<T extends (...args: any[]) => any>(fn: T): T {
-  return memoize(fn, (...args: any[]) => JSON.stringify(args))
+  return memoize(fn, (...args: any[]) => serialize(args))
 }
 
 export function extractTokenPlaceholders(value: string) {
