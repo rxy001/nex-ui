@@ -18,3 +18,11 @@ Visit https://nex-ui-docs.vercel.app/docs/getting-started to get started with Ne
 ## Storybook
 
 Visit https://nex-ui-storybook.vercel.app to view the storybook for all components.
+
+## Contributing
+
+Contributions are always welcome!
+
+See [CONTRIBUTING.md](/CONTRIBUTING.md) for ways to get started.
+
+Please adhere to this project's [CODE_OF_CONDUCT](/CODE_OF_CONDUCT.md).
