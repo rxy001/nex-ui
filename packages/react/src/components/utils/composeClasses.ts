@@ -4,7 +4,7 @@ import type { ClassArray, ClassValue } from 'clsx'
 export function composeClasses<ClassKey extends string>(
   slots: Record<ClassKey, ClassArray>,
   getUtilityClass: (slotClass: string) => string,
-  classes?: Partial<Record<ClassKey, ClassValue>>,
+  classes?: Partial<Record<string, ClassValue>>,
 ) {
   const output = {} as Record<ClassKey, ClassArray>
 

@@ -1,11 +1,10 @@
-import { mergeRefs, supportRef, addEventListener } from '@nex-ui/utils'
-import type { ReactElement } from 'react'
-import { cloneElement, isValidElement, useEffect, useRef } from 'react'
+import type { MouseEvent, ReactElement, Ref } from 'react'
+import { cloneElement, isValidElement } from 'react'
 import { useRippleMotion } from './useRippleMotion'
 import type { UseRippleMotionProps } from './useRippleMotion'
 
 export type RippleProps = {
-  children?: ReactElement
+  children?: ReactElement & { ref?: Ref<any> }
   disabled?: boolean
 } & UseRippleMotionProps
 
@@ -15,28 +14,18 @@ export const Ripple = ({
   motionProps,
   motionStyle,
 }: RippleProps) => {
-  const ref = useRef<HTMLElement>(null)
-
   const showEffect = useRippleMotion({ motionProps, motionStyle })
-
-  useEffect(() => {
-    const node = ref.current
-    if (!node || disabled) {
-      return
-    }
-
-    return addEventListener(node, 'click', showEffect)
-  }, [showEffect, disabled])
 
   if (!isValidElement(children)) {
     return children
   }
 
-  const composedRef = supportRef(children)
-    ? // @ts-expect-error
-      mergeRefs(children.ref, ref)
-    : ref
-
-  // @ts-expect-error
-  return cloneElement(children, { ref: composedRef })
+  return cloneElement(children, {
+    onClick: (e: MouseEvent) => {
+      children.props.onClick?.(e)
+      if (!disabled) {
+        showEffect(e)
+      }
+    },
+  })
 }

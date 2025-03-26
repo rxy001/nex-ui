@@ -17,7 +17,7 @@ const meta = {
       control: 'boolean',
     },
     variant: {
-      options: ['filled', 'outlined', 'text'],
+      options: ['solid', 'outlined', 'text'],
       control: 'select',
     },
     size: {
@@ -41,7 +41,7 @@ const meta = {
   args: {
     children: 'Button',
     size: 'md',
-    variant: 'filled',
+    variant: 'solid',
     disabled: false,
     fullWidth: false,
     iconOnly: false,
@@ -89,6 +89,7 @@ export const IconButton: Story = {
   args: {
     iconOnly: true,
     children: <HeartFilled />,
+    'aria-label': 'Like',
   },
 }
 

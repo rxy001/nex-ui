@@ -90,8 +90,8 @@ Button Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `button` 标�
     },
     {
       prop: 'variants',
-      type: ["'filled", "'outlined'", "'text'", "'link'"],
-      default: "'filled'",
+      type: ["'solid", "'outlined'", "'text'"],
+      default: "'solid'",
       description: 'Button 的外观样式。',
     },
     {
@@ -185,11 +185,7 @@ Button Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `button` 标�
     },
     {
       prop: 'sx',
-      type: [
-        'CSSObject',
-        'CSSObject[]',
-        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
-      ],
+      type: 'SxProps<ButtonOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
     {

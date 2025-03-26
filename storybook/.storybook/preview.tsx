@@ -15,6 +15,16 @@ const preview: Preview = {
     docs: {
       theme: themes.dark,
     },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: false,
+          },
+        ],
+      },
+    },
   },
 
   decorators: [

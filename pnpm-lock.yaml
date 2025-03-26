@@ -480,6 +480,9 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@storybook/addon-a11y':
+        specifier: 8.3.5
+        version: 8.3.5(storybook@8.3.5)
       '@storybook/addon-essentials':
         specifier: 8.3.5
         version: 8.3.5(storybook@8.3.5)
@@ -2673,6 +2676,11 @@ packages:
 
   '@stitches/core@1.2.8':
     resolution: {integrity: sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==}
+
+  '@storybook/addon-a11y@8.3.5':
+    resolution: {integrity: sha512-/19UO8IXbyfcYK5K8ejSYF+hC+EK79c0bBPHMNeYSFOHSqQM3KoMo+TLIcLsuhuRClmlM+4Zs+VSIYDwc+d3ig==}
+    peerDependencies:
+      storybook: ^8.3.5
 
   '@storybook/addon-actions@8.3.5':
     resolution: {integrity: sha512-t8D5oo+4XfD+F8091wLa2y/CDd/W2lExCeol5Vm1tp5saO+u6f2/d7iykLhTowWV84Uohi3D073uFeyTAlGebg==}
@@ -11216,6 +11224,12 @@ snapshots:
       '@sinonjs/commons': 3.0.1
 
   '@stitches/core@1.2.8': {}
+
+  '@storybook/addon-a11y@8.3.5(storybook@8.3.5)':
+    dependencies:
+      '@storybook/addon-highlight': 8.3.5(storybook@8.3.5)
+      axe-core: 4.10.2
+      storybook: 8.3.5
 
   '@storybook/addon-actions@8.3.5(storybook@8.3.5)':
     dependencies:

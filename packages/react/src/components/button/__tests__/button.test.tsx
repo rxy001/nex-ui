@@ -15,13 +15,13 @@ describe('Button', () => {
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it('should render with the root, variant-filled, size-md, radius-md, and color-blue classes but no others', () => {
+  it('should render with the root, variant-solid, size-md, radius-md, and color-blue classes but no others', () => {
     const { container } = renderWithNexProvider(<Button>Button</Button>)
 
     const button = container.firstElementChild
 
     expect(button).toHaveClass(buttonClasses.root)
-    expect(button).toHaveClass(buttonClasses['variant-filled'])
+    expect(button).toHaveClass(buttonClasses['variant-solid'])
     expect(button).toHaveClass(buttonClasses['size-md'])
     expect(button).toHaveClass(buttonClasses['radius-md'])
     expect(button).toHaveClass(buttonClasses['color-blue'])
@@ -115,7 +115,7 @@ describe('Button', () => {
   it('should add the appropriate variant class to root element based on variant prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Button variant='filled' data-testid='variant-filled'>
+        <Button variant='solid' data-testid='variant-solid'>
           Button
         </Button>
         <Button variant='outlined' data-testid='variant-outlined'>
@@ -127,8 +127,8 @@ describe('Button', () => {
       </>,
     )
 
-    expect(getByTestId('variant-filled')).toHaveClass(
-      buttonClasses['variant-filled'],
+    expect(getByTestId('variant-solid')).toHaveClass(
+      buttonClasses['variant-solid'],
     )
     expect(getByTestId('variant-outlined')).toHaveClass(
       buttonClasses['variant-outlined'],

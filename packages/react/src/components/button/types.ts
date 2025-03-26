@@ -19,10 +19,6 @@ type ButtonSlotProps<RootComponent extends ElementType> = {
     'span',
     ButtonOwnerState<RootComponent>
   >
-  root?: ComponentPropsWithCommonProps<
-    RootComponent,
-    ButtonOwnerState<RootComponent>
-  >
 }
 
 type ButtonOwnProps<RootComponent extends ElementType> = {
@@ -33,12 +29,13 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   spinner?: ReactNode
   spinnerPlacement?: 'start' | 'end'
   href?: string
+  loading?: boolean
   children?: ReactNode
   disableRipple?: boolean
   className?: ClassValue
   target?: AnchorHTMLAttributes<HTMLAnchorElement>['target']
   slotProps?: ButtonSlotProps<RootComponent>
-  classes?: ComponentUtilityClasses<'root' | 'startIcon' | 'endIcon'>
+  classes?: ComponentUtilityClasses<'startIcon' | 'endIcon'>
 } & ButtonVariants
 
 export type ButtonProps<RootComponent extends ElementType = 'button'> =

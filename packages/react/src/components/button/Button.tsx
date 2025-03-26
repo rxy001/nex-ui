@@ -1,9 +1,17 @@
 'use client'
 
 import { LoadingOutlined } from '@nex-ui/icons'
-import { useEvent } from '@nex-ui/hooks'
+import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { nex } from '@nex-ui/styled'
-import type { Ref, MouseEvent, ElementType } from 'react'
+import { useRef } from 'react'
+import type {
+  Ref,
+  MouseEvent,
+  ElementType,
+  HTMLAttributes,
+  KeyboardEvent,
+} from 'react'
+import { isFunction, mergeRefs } from '@nex-ui/utils'
 import { useNexUI } from '../provider'
 import { buttonRecipe } from '../../theme/slotRecipes'
 import {
@@ -18,9 +26,7 @@ import {
 import type { ButtonProps, ButtonOwnerState } from './types'
 import { Icon } from '../icon'
 
-const useSlotClasses = <RootComponent extends ElementType = 'button'>(
-  ownerState: ButtonOwnerState<RootComponent>,
-) => {
+const useSlotClasses = (ownerState: ButtonOwnerState<ElementType>) => {
   const { prefix } = useNexUI()
 
   const btnRoot = `${prefix}-btn`
@@ -69,6 +75,43 @@ const useSlotClasses = <RootComponent extends ElementType = 'button'>(
   return composedClasses
 }
 
+const useAriaProps = (
+  ownerState: ButtonOwnerState<ElementType>,
+): HTMLAttributes<HTMLElement> => {
+  const {
+    as,
+    disabled: disabledProps,
+    role,
+    loading,
+    tabIndex = 0,
+  } = ownerState
+  const disabled = disabledProps || loading
+
+  let ariaProps = {}
+
+  if (as === 'button') {
+    ariaProps = {
+      disabled,
+      tabIndex: disabled ? -1 : tabIndex,
+    }
+  } else if (isFunction(as)) {
+    ariaProps = {
+      loading,
+      tabIndex,
+      disabled: disabledProps,
+    }
+  } else {
+    ariaProps = {
+      role: role ?? 'button',
+      'data-disabled': disabled || undefined,
+      'aria-disabled': disabled || undefined,
+      tabIndex: disabled ? -1 : tabIndex,
+    }
+  }
+
+  return ariaProps
+}
+
 export const Button = forwardRef(
   <RootComponent extends ElementType = 'button'>(
     inProps: ButtonProps<RootComponent>,
@@ -76,7 +119,7 @@ export const Button = forwardRef(
   ) => {
     const { primaryColor } = useNexUI()
 
-    const props = useDefaultProps<ButtonProps>({
+    const props = useDefaultProps<ButtonProps<ElementType>>({
       name: 'Button',
       props: inProps,
     })
@@ -87,22 +130,27 @@ export const Button = forwardRef(
       slotProps,
       spinner,
       href,
+      tabIndex: _tabIndex,
       color = primaryColor,
       spinnerPlacement = 'start',
-      variant = 'filled',
+      variant = 'solid',
       size = 'md',
       radius = size,
       iconOnly = false,
       loading = false,
       disabled: disabledProp = false,
       fullWidth = false,
-      type = 'button',
       startIcon: startIconProp,
       endIcon: endIconProp,
       onClick: onClickProp,
+      onKeyUp: onKeyUpProps,
       disableRipple,
       ...remainingProps
     } = props
+
+    const btnRef = useRef<HTMLButtonElement>(null)
+
+    const mergedRefs = mergeRefs(btnRef, ref)
 
     const disabled = loading || disabledProp
 
@@ -120,12 +168,18 @@ export const Button = forwardRef(
       color,
       disableRipple,
       disabled: disabledProp,
+      as: rootElement,
     }
+
+    const [focusVisible] = useFocusVisible({ ref: btnRef })
 
     const classes = useSlotClasses(ownerState)
 
     const styles = useSlotStyles({
-      ownerState,
+      ownerState: {
+        ...ownerState,
+        disabled,
+      },
       name: 'Button',
       slotRecipe: buttonRecipe,
     })
@@ -135,22 +189,38 @@ export const Button = forwardRef(
         event.preventDefault()
         return
       }
+
       onClickProp?.(event)
     })
 
+    const onKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
+      // Keyboard accessibility for non interactive elements
+      if (
+        focusVisible &&
+        !disabled &&
+        rootElement !== 'button' &&
+        (event.code === 'Space' || event.code === 'Enter')
+      ) {
+        btnRef.current?.click()
+      }
+
+      onKeyUpProps?.(event)
+    })
+
+    const ariaProps = useAriaProps(ownerState)
+
     const rootProps = useSlotProps({
       ownerState,
-      externalSlotProps: slotProps?.root,
       externalForwardedProps: remainingProps,
       classNames: classes.root,
       sx: styles.root,
       additionalProps: {
-        ref,
-        type,
         onClick,
+        onKeyUp,
         href,
+        ref: mergedRefs,
         as: rootElement,
-        // [rootElement === 'button' ? 'disabled' : 'data-disabled']: disabled,
+        ...ariaProps,
       },
     })
 
@@ -187,7 +257,7 @@ export const Button = forwardRef(
     )
 
     return (
-      <Ripple disabled={disableRipple}>
+      <Ripple disabled={disableRipple ?? disabled}>
         <nex.button {...rootProps}>
           {startIcon}
           {children}

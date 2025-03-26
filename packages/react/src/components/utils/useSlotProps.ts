@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import { mergeProps, map, isFunction, isArray } from '@nex-ui/utils'
 import type { ClassValue } from 'clsx'
 import type { ArrayInterpolation, Interpolation } from '@nex-ui/system'
-import type { SxProps } from '../../types/utils'
 
 type UseSlotPropsArgs<
   SlotProps extends {},
@@ -43,7 +42,7 @@ type UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps> = Omit<
   'className' | 'sx'
 > & {
   className: string
-  sx: SxProps<unknown>
+  sx: ArrayInterpolation
 }
 
 export const useSlotProps = <

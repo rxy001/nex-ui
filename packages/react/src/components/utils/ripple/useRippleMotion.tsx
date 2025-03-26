@@ -3,7 +3,7 @@ import { clamp } from '@nex-ui/utils'
 import type { MotionProps } from 'motion/react'
 import { LazyMotion, AnimatePresence, domAnimation } from 'motion/react'
 import * as m from 'motion/react-m'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, MouseEvent } from 'react'
 import { useRef } from 'react'
 import type { Root } from 'react-dom/client'
 import { createRoot } from 'react-dom/client'
@@ -20,13 +20,16 @@ export type UseRippleMotionProps = {
 export const useRippleMotion = (props?: UseRippleMotionProps) => {
   const { motionProps, motionStyle } = props ?? {}
   const rootRef = useRef<Root | null>(null)
-  const ripples = useRef<Ripples[]>([])
+  const ripplesRef = useRef<Ripples[]>([])
 
   return useEvent((event: MouseEvent) => {
     const trigger = event.currentTarget as HTMLDivElement
 
     if (!rootRef.current) {
       const div = document.createElement('div')
+      div.style.position = 'absolute'
+      div.style.left = '0'
+      div.style.top = '0'
       const root = createRoot(div)
       trigger.insertBefore(div, trigger.firstChild)
       // @ts-expect-error
@@ -48,7 +51,7 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
       y = height / 2
     }
 
-    ripples.current.push({
+    ripplesRef.current.push({
       key: `${Math.random()}`,
       size: rippleSize,
       x: x - rippleSize / 2,
@@ -57,7 +60,7 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
 
     rootRef.current.render(
       <LazyMotion features={domAnimation}>
-        {ripples.current.map((ripple) => {
+        {ripplesRef.current.map((ripple) => {
           const duration = clamp(
             0.01 * ripple.size,
             0.2,
@@ -100,11 +103,11 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
                 }}
                 transition={{ duration }}
                 onAnimationComplete={() => {
-                  ripples.current = ripples.current.filter(
+                  ripplesRef.current = ripplesRef.current.filter(
                     ({ key }) => ripple.key !== key,
                   )
 
-                  if (!ripples.current.length) {
+                  if (!ripplesRef.current.length) {
                     rootRef.current?.unmount()
                     // @ts-expect-error
                     trigger.removeChild(rootRef.current.stateNode)

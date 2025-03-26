@@ -60,7 +60,7 @@ export const buttonRecipe = defineSlotRecipe({
           },
         },
       },
-      filled: {
+      solid: {
         root: {
           bg: {
             _DEFAULT: 'colorPalette.primary',
@@ -81,19 +81,6 @@ export const buttonRecipe = defineSlotRecipe({
     },
     size: toSlot(sizeVariant, 'root'),
     disabled: {
-      true: {
-        root: {
-          _disabled: {
-            cursor: 'not-allowed',
-            opacity: 0.6,
-            '& a': {
-              pointerEvents: 'none',
-            },
-          },
-        },
-      },
-    },
-    loading: {
       true: {
         root: {
           _disabled: {
@@ -157,43 +144,9 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    {
-      disableRipple: true,
-      variant: 'filled',
-      css: {
-        root: {
-          _active: {
-            bg: 'colorPalette.tertiary',
-          },
-        },
-      },
-    },
-    {
-      disableRipple: true,
-      variant: 'outlined',
-      css: {
-        root: {
-          _active: {
-            borderColor: 'colorPalette.tertiary',
-            color: 'colorPalette.tertiary',
-          },
-        },
-      },
-    },
-    {
-      disableRipple: true,
-      variant: 'text',
-      css: {
-        root: {
-          _active: {
-            bg: 'colorPalette.muted',
-          },
-        },
-      },
-    },
   ],
   defaultVariants: {
-    variant: 'filled',
+    variant: 'solid',
     size: 'md',
     radius: 'md',
   },

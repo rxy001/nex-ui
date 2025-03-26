@@ -1,6 +1,6 @@
 import type { MutableRefObject, Ref } from 'react'
 
-export function mergeRefs<T>(...refs: Ref<T>[]) {
+export function mergeRefs<T>(...refs: (Ref<T> | undefined | null)[]) {
   const list = refs.filter((ref) => ref)
 
   if (list.length === 1) {
