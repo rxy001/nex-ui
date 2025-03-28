@@ -1,10 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import { nex } from '@nex-ui/styled'
-import type { ChangeEvent, ElementType, Ref } from 'react'
-import { isFunction } from '@nex-ui/utils'
-import { useEvent } from '@nex-ui/hooks'
+import type {
+  ChangeEvent,
+  ElementType,
+  Ref,
+  HTMLAttributes,
+  MouseEvent,
+  KeyboardEvent,
+} from 'react'
+import { isFunction, isString, mergeRefs } from '@nex-ui/utils'
+import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
 import { switchRecipe } from '../../theme/slotRecipes'
 import {
@@ -37,6 +44,7 @@ const useSlotClasses = (ownerState: SwitchOwnerState) => {
     thumb: ['thumb'],
     startIcon: ['start-icon'],
     endIcon: ['end-icon'],
+    label: ['label'],
   }
 
   const composedClasses = composeClasses(
@@ -48,12 +56,61 @@ const useSlotClasses = (ownerState: SwitchOwnerState) => {
   return composedClasses
 }
 
+const useAriaProps = (
+  ownerState: SwitchOwnerState,
+): Record<'input' | 'track' | 'label', HTMLAttributes<HTMLElement>> => {
+  const { checked, disabled, as, tabIndex, type, children } = ownerState
+
+  const childrenString = isString(children)
+
+  const id = useId()
+
+  let input = {}
+
+  if (as === 'input') {
+    input = {
+      checked,
+      disabled,
+      type,
+      role: 'switch',
+      tabIndex: disabled ? -1 : tabIndex,
+      'aria-labelledby': childrenString ? id : undefined,
+      'aria-label': childrenString ? children : undefined,
+    }
+  } else if (isFunction(as)) {
+    input = { checked, disabled, type, tabIndex }
+  } else {
+    input = {
+      role: 'switch',
+      tabIndex: disabled ? -1 : tabIndex,
+      'aria-checked': checked,
+      'aria-disabled': disabled || undefined,
+      'aria-labelledby': childrenString ? id : undefined,
+      'aria-label': childrenString ? children : undefined,
+      'data-disabled': disabled || undefined,
+    }
+  }
+
+  const track = {
+    'aria-hidden': true,
+    focusable: false,
+  }
+
+  const label = {
+    id: childrenString ? id : undefined,
+  }
+
+  return { input, track, label }
+}
+
 export const Switch = forwardRef(
   <SwitchComponent extends ElementType = 'input'>(
     inProps: SwitchProps<SwitchComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
     const { primaryColor } = useNexUI()
+
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const props = useDefaultProps<SwitchProps>({
       name: 'Switch',
@@ -62,20 +119,28 @@ export const Switch = forwardRef(
 
     const {
       sx,
-      name,
+      children,
       slotProps,
       className,
       startIcon,
       endIcon,
       defaultChecked,
+      onCheckedChange,
       thumbIcon: thumbIconProp,
       checked: checkdeProp,
       disabled = false,
       size = 'md',
+      type = 'checkbox',
+      tabIndex = 0,
+      as = 'input',
+      onKeyDown: onKeyUpProp,
       onChange: onChangeProp,
+      onClick: onClickProp,
       color = primaryColor,
       ...remainingProps
     } = props
+
+    const [focusVisible] = useFocusVisible({ ref: inputRef })
 
     const [checked, setChecked] = useState(
       checkdeProp ?? defaultChecked ?? false,
@@ -89,10 +154,13 @@ export const Switch = forwardRef(
 
     const ownerState = {
       ...props,
+      as,
       color,
       checked,
       disabled,
       size,
+      type,
+      tabIndex,
     }
 
     const classes = useSlotClasses(ownerState)
@@ -111,9 +179,48 @@ export const Switch = forwardRef(
       if (!checkedInProps) {
         setChecked(e.target.checked)
       }
-
+      onCheckedChange?.(e.target.checked)
       onChangeProp?.(e)
     })
+
+    const onClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
+      // Compatible with non interactive elements
+      if (disabled) {
+        event.preventDefault()
+        return
+      }
+
+      if (isString(as) && as !== 'input') {
+        if (!checkedInProps) {
+          setChecked((c) => !c)
+        }
+        onCheckedChange?.(!checked)
+      }
+
+      onClickProp?.(event)
+    })
+
+    const onKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
+      // Keyboard accessibility for non interactive elements
+      if (
+        focusVisible &&
+        !disabled &&
+        as !== 'input' &&
+        event.code === 'Space'
+      ) {
+        inputRef.current?.click()
+      }
+
+      onKeyUpProp?.(event)
+    })
+
+    const {
+      input: inputAriaProps,
+      track: trackAriaProps,
+      label: labelAriaProps,
+    } = useAriaProps(ownerState)
+
+    const mergedRefs = mergeRefs(ref, inputRef)
 
     const rootProps = useSlotProps({
       ownerState,
@@ -130,12 +237,12 @@ export const Switch = forwardRef(
       sx: styles.input,
       classNames: classes.input,
       additionalProps: {
-        ref,
-        name,
-        checked,
-        disabled,
+        as,
         onChange,
-        type: 'checkbox',
+        onClick,
+        onKeyUp,
+        ref: mergedRefs,
+        ...inputAriaProps,
       },
     })
 
@@ -144,6 +251,7 @@ export const Switch = forwardRef(
       externalSlotProps: slotProps?.track,
       sx: styles.track,
       classNames: classes.track,
+      additionalProps: trackAriaProps,
     })
 
     const thumbProps = useSlotProps({
@@ -167,6 +275,14 @@ export const Switch = forwardRef(
       classNames: classes.endIcon,
     })
 
+    const labelProps = useSlotProps({
+      ownerState,
+      externalSlotProps: slotProps?.label,
+      sx: styles.label,
+      classNames: classes.label,
+      additionalProps: labelAriaProps,
+    })
+
     const thumbIcon = isFunction(thumbIconProp)
       ? thumbIconProp(ownerState)
       : thumbIconProp
@@ -179,6 +295,7 @@ export const Switch = forwardRef(
           <nex.span {...thumbProps}>{thumbIcon}</nex.span>
           {endIcon && <nex.span {...endIconProps}>{endIcon}</nex.span>}
         </nex.span>
+        {children && <nex.span {...labelProps}>{children}</nex.span>}
       </nex.label>
     )
   },

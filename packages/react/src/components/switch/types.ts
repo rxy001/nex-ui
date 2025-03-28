@@ -1,9 +1,9 @@
-import type { ElementType, ComponentProps, ReactNode } from 'react'
+import type { ElementType, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
 import type {
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
-  Overwrite,
+  OverrideProps,
   SxProps,
 } from '../../types/utils'
 import type { SwitchVariants } from '../../theme/slotRecipes'
@@ -16,7 +16,7 @@ type SwitchSlotProps<SwitchComponent extends ElementType> = {
     SwitchOwnerState<SwitchComponent>
   >
   input?: ComponentPropsWithCommonProps<
-    SwitchComponent,
+    'input',
     SwitchOwnerState<SwitchComponent>
   >
   track?: ComponentPropsWithCommonProps<
@@ -35,33 +35,35 @@ type SwitchSlotProps<SwitchComponent extends ElementType> = {
     'span',
     SwitchOwnerState<SwitchComponent>
   >
+  label?: ComponentPropsWithCommonProps<
+    'span',
+    SwitchOwnerState<SwitchComponent>
+  >
 }
 
-export type SwitchOwnProps<
-  SwitchComponent extends ElementType,
-  SwitchComponentProps extends
-    ComponentProps<SwitchComponent> = ComponentProps<SwitchComponent>,
-> = {
+export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   as?: SwitchComponent
   sx?: SxProps<SwitchOwnerState<SwitchComponent>>
-  name?: string
-  defaultChecked?: boolean
+  children?: ReactNode
   className?: ClassValue
   startIcon?: ReactNode
   endIcon?: ReactNode
   slotProps?: SwitchSlotProps<SwitchComponent>
   classes?: ComponentUtilityClasses<
-    'root' | 'input' | 'track' | 'startIcon' | 'endIcon' | 'thumb'
+    'root' | 'input' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label'
   >
   thumbIcon?:
     | ReactNode
     | ((ownerState: SwitchOwnerState<SwitchComponent>) => ReactNode)
-  ref?: SwitchComponentProps['ref']
-  onChange?: SwitchComponentProps['onChange']
+  onCheckedChange?: (checked: boolean) => void
 } & SwitchVariants
 
 export type SwitchProps<SwitchComponent extends ElementType = 'input'> =
-  Overwrite<SwitchOwnProps<SwitchComponent>, SwitchPropsOverrides>
+  OverrideProps<
+    SwitchComponent,
+    SwitchOwnProps<SwitchComponent>,
+    SwitchPropsOverrides
+  >
 
 export type SwitchOwnerState<SwitchComponent extends ElementType = 'input'> =
   SwitchProps<SwitchComponent>

@@ -105,9 +105,9 @@ const useAriaProps = (
   } else {
     root = {
       role: role ?? 'button',
-      'data-disabled': disabled || undefined,
-      'aria-disabled': disabled || undefined,
       tabIndex: disabled ? -1 : tabIndex,
+      'aria-disabled': disabled || undefined,
+      'data-disabled': disabled || undefined,
     }
   }
 
@@ -241,9 +241,7 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.startIcon,
       classNames: classes.startIcon,
       sx: styles.startIcon,
-      additionalProps: {
-        ...iconAriaProps,
-      },
+      additionalProps: iconAriaProps,
     })
 
     const endIconProps = useSlotProps({
@@ -251,9 +249,7 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.endIcon,
       classNames: classes.endIcon,
       sx: styles.endIcon,
-      additionalProps: {
-        ...iconAriaProps,
-      },
+      additionalProps: iconAriaProps,
     })
 
     const loadingIcon = loading

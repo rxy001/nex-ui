@@ -16,6 +16,13 @@ export const switchRecipe = defineSlotRecipe({
       inset: 0,
       opacity: 0,
       m: 0,
+      zIndex: 1,
+      _focusVisible: {
+        '& + span': {
+          outline: 'focusVisibleOutline',
+          outlineOffset: '0.5',
+        },
+      },
     },
     track: {
       bg: {
@@ -57,6 +64,9 @@ export const switchRecipe = defineSlotRecipe({
       transition: 'transform',
       right: '1',
     },
+    label: {
+      marginLeft: '2',
+    },
   },
   variants: {
     color: toSlot(colorVariant, 'track'),
@@ -65,6 +75,7 @@ export const switchRecipe = defineSlotRecipe({
         track: {
           w: '10',
           h: '6',
+          fs: 'sm',
         },
         thumb: {
           w: '4',
@@ -77,12 +88,16 @@ export const switchRecipe = defineSlotRecipe({
         endIcon: {
           w: '4',
           h: '4',
+        },
+        label: {
+          fs: 'md',
         },
       },
       md: {
         track: {
           w: '12',
           h: '7',
+          fs: 'lg',
         },
         thumb: {
           w: '5',
@@ -95,12 +110,16 @@ export const switchRecipe = defineSlotRecipe({
         endIcon: {
           w: '5',
           h: '5',
+        },
+        label: {
+          fs: 'lg',
         },
       },
       lg: {
         track: {
           w: '14',
           h: '8',
+          fs: 'xl',
         },
         thumb: {
           w: '6',
@@ -113,6 +132,9 @@ export const switchRecipe = defineSlotRecipe({
         endIcon: {
           w: '6',
           h: '6',
+        },
+        label: {
+          fs: 'xl',
         },
       },
     },

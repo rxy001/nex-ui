@@ -41,7 +41,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   classes?: ComponentUtilityClasses<'root' | 'input' | 'label' | 'icon'>
   defaultChecked?: boolean
   value?: string | number
-  onValueChange?: (checked: boolean) => void
+  onCheckedChange?: (checked: boolean) => void
 } & CheckboxVariants
 
 export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =

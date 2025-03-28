@@ -7,9 +7,9 @@ const HeartIcon = (props: any) => {
   return (
     <svg
       fill='currentColor'
-      height={14}
+      height='1em'
       viewBox='0 0 24 24'
-      width={14}
+      width='1em'
       xmlns='http://www.w3.org/2000/svg'
       {...props}
     >

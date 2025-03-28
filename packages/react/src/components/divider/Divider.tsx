@@ -59,6 +59,7 @@ export const Divider = forwardRef(
       classNames: classes.root,
       additionalProps: {
         ref,
+        role: 'separator',
       },
     })
 

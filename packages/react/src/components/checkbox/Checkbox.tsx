@@ -63,7 +63,7 @@ const useAriaProps = (
   const id = useId()
   const { as, disabled, tabIndex, type, value, checked, children } = ownerState
 
-  const stringLabel = isString(children)
+  const childrenString = isString(children)
 
   let input = {}
 
@@ -74,8 +74,8 @@ const useAriaProps = (
       type,
       value,
       tabIndex: disabled ? -1 : tabIndex,
-      'aria-labelledby': stringLabel ? id : undefined,
-      'aria-label': stringLabel ? children : undefined,
+      'aria-labelledby': childrenString ? id : undefined,
+      'aria-label': childrenString ? children : undefined,
     }
   } else if (isFunction(as)) {
     input = {
@@ -90,10 +90,10 @@ const useAriaProps = (
       role: 'checkbox',
       tabIndex: disabled ? -1 : tabIndex,
       'aria-checked': checked,
-      'aria-labelledby': stringLabel ? id : undefined,
-      'aria-disabled': disabled,
-      'aria-label': stringLabel ? children : undefined,
-      'data-disabled': disabled,
+      'aria-disabled': disabled || undefined,
+      'aria-labelledby': childrenString ? id : undefined,
+      'aria-label': childrenString ? children : undefined,
+      'data-disabled': disabled || undefined,
     }
   }
 
@@ -102,11 +102,9 @@ const useAriaProps = (
     focusable: false,
   }
 
-  const label = stringLabel
-    ? {
-        id,
-      }
-    : {}
+  const label = {
+    id: childrenString ? id : undefined,
+  }
 
   return { input, icon, label }
 }
@@ -149,7 +147,7 @@ export const Checkbox = forwardRef(
       children,
       slotProps,
       defaultChecked,
-      onValueChange,
+      onCheckedChange,
       type = 'checkbox',
       onClick: onClickProp,
       onChange: onChangeProp,
@@ -207,7 +205,7 @@ export const Checkbox = forwardRef(
         setRawChecked(event.target.checked)
       }
 
-      onValueChange?.(event.target.checked)
+      onCheckedChange?.(event.target.checked)
       onChangeProp?.(event)
     })
 
@@ -227,7 +225,7 @@ export const Checkbox = forwardRef(
           setRawChecked((c) => !c)
         }
 
-        onValueChange?.(!checked)
+        onCheckedChange?.(!checked)
       }
 
       onClickProp?.(event)
@@ -294,9 +292,7 @@ export const Checkbox = forwardRef(
       externalSlotProps: slotProps?.icon,
       sx: styles.icon,
       classNames: classes.icon,
-      additionalProps: {
-        ...iconAriaProps,
-      },
+      additionalProps: iconAriaProps,
     })
 
     const labelProps = useSlotProps({
@@ -304,9 +300,7 @@ export const Checkbox = forwardRef(
       externalSlotProps: slotProps?.label,
       sx: styles.label,
       classNames: classes.label,
-      additionalProps: {
-        ...labelAriaProps,
-      },
+      additionalProps: labelAriaProps,
     })
 
     const customIcon = icon
@@ -334,7 +328,7 @@ export const Checkbox = forwardRef(
       <nex.label {...rootProps}>
         <nex.input {...inputProps} />
         <nex.span {...iconProps}>{checkedIcon}</nex.span>
-        <nex.span {...labelProps}>{children}</nex.span>
+        {children && <nex.span {...labelProps}>{children}</nex.span>}
       </nex.label>
     )
   },

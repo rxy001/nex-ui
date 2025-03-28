@@ -9,7 +9,6 @@ export const checkboxRecipe = defineSlotRecipe({
       position: 'relative',
       alignItems: 'center',
       boxSizing: 'border-box',
-      gap: '2',
       h: '10',
       p: '2',
       cursor: 'pointer',
@@ -35,7 +34,7 @@ export const checkboxRecipe = defineSlotRecipe({
       },
     },
     label: {
-      fs: 'inherit',
+      marginLeft: '2',
     },
     checkedIcon: {
       opacity: 0,
@@ -87,30 +86,33 @@ export const checkboxRecipe = defineSlotRecipe({
     },
     size: {
       sm: {
-        root: {
-          fs: 'md',
-        },
         icon: {
           w: '4',
           h: '4',
+          fs: 'sm',
+        },
+        label: {
+          fs: 'md',
         },
       },
       md: {
-        root: {
-          fs: 'lg',
-        },
         icon: {
           w: '5',
           h: '5',
+          fs: 'md',
+        },
+        label: {
+          fs: 'md',
         },
       },
       lg: {
-        root: {
-          fs: 'xl',
-        },
         icon: {
           w: '6',
           h: '6',
+          fs: 'xl',
+        },
+        label: {
+          fs: 'xl',
         },
       },
     },
