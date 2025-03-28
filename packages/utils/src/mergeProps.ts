@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import mergeWith from 'lodash.mergewith'
+import type { ClassValue } from 'clsx'
 import { chain } from './chain'
 
 interface Props {
@@ -36,8 +37,12 @@ export function mergeProps<T extends PropsArg[]>(...args: T) {
           ...b,
         }
       } else if (key === 'classes') {
-        result[key] = mergeWith({}, a, b, (classObj, classSrc) =>
-          clsx(classObj, classSrc),
+        result[key] = mergeWith(
+          {},
+          a,
+          b,
+          (classObj: ClassValue, classSrc: ClassValue) =>
+            clsx(classObj, classSrc),
         )
       } else if (key === 'sx' && a && b) {
         result[key] = [a, b]

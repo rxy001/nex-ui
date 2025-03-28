@@ -27,7 +27,6 @@ type UseSlotPropsArgs<
 
   /**
    * Extra props placed on the component that should be forwarded to the slot.
-   * This should usually be used only for the root slot.
    */
   externalForwardedProps?: ForwardedProps
 

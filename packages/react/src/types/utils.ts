@@ -4,7 +4,7 @@ import type {
   SlotRecipeRuntimeFn,
   Interpolation,
 } from '@nex-ui/system'
-import type { ElementType, ComponentProps, JSXElementConstructor } from 'react'
+import type { ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
 
 export type UniteTokens<T extends {}, U extends {}> = {
@@ -12,7 +12,7 @@ export type UniteTokens<T extends {}, U extends {}> = {
 }
 
 export type ComponentPropsWithCommonProps<
-  T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>,
+  T extends ElementType,
   OwnerState,
 > = ComponentProps<T> & {
   sx?: SxProps<OwnerState>

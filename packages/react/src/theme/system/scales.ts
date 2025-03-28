@@ -43,6 +43,7 @@ export const scales = defineConfig.scales({
   gridGap: 'spaces',
   gridColumnGap: 'spaces',
   gridRowGap: 'spaces',
+  outlineOffset: 'spaces',
 
   borderRadius: 'radii',
   borderTopRightRadius: 'radii',
@@ -61,6 +62,7 @@ export const scales = defineConfig.scales({
   borderBottom: 'borders',
   borderRight: 'borders',
   borderLeft: 'borders',
+  outline: 'borders',
 
   boxShadow: 'shadows',
 

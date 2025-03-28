@@ -15,9 +15,7 @@ import {
 import { useNexUI } from '../provider'
 import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
 
-const useSlotClasses = <RootComponent extends ElementType = 'div'>(
-  ownerState: AvatarOwnerState<RootComponent>,
-) => {
+const useSlotClasses = (ownerState: AvatarOwnerState) => {
   const { prefix } = useNexUI()
 
   const avatarRoot = `${prefix}-avatar`
@@ -123,7 +121,6 @@ export const Avatar = forwardRef(
 
     const rootProps = useSlotProps({
       ownerState,
-      externalSlotProps: slotProps?.root,
       externalForwardedProps: remainingProps,
       classNames: classes.root,
       sx: styles.root,

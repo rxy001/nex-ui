@@ -57,7 +57,7 @@ const createStyled: CreateStyled = (tag: any): any => {
         }
 
         const resolveSx = (arg: any): any => {
-          return map(arg, (v) => {
+          return map(arg, (v: any) => {
             if (isFunction(v)) {
               return v(props)
             }

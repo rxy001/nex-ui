@@ -29,8 +29,8 @@ export const buttonRecipe = defineSlotRecipe({
         fs: '1.3em',
       },
       _focusVisible: {
-        outline: '2px solid #006fee',
-        outlineOffset: '2px',
+        outline: 'focusVisibleOutline',
+        outlineOffset: '0.5',
       },
     },
     startIcon: {

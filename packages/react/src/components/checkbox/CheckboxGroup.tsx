@@ -16,7 +16,7 @@ export const CheckboxGroup = <
   const {
     name,
     defaultValue,
-    onChange,
+    onValueChange,
     children,
     disabled,
     size,
@@ -53,7 +53,7 @@ export const CheckboxGroup = <
         setValues(newValues)
       }
 
-      onChange?.(newValues)
+      onValueChange?.(newValues)
     },
     isChecked: (value?: T) => {
       return value ? values.includes(value) : false

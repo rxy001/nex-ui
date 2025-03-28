@@ -89,7 +89,7 @@ export const CheckboxGroup: Story = {
           size={size}
           disabled={disabled}
           value={value}
-          onChange={(v) => setValue(v)}
+          onValueChange={setValue}
         >
           <Checkbox value='apple'>Apple</Checkbox>
           <Checkbox value='pear'>Pear</Checkbox>

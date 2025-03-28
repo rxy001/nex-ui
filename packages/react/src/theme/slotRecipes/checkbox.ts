@@ -13,11 +13,7 @@ export const checkboxRecipe = defineSlotRecipe({
       h: '10',
       p: '2',
       cursor: 'pointer',
-      _hover: {
-        '& span:first-of-type::before': {
-          borderColor: 'colorPalette.secondary',
-        },
-      },
+      WebkitTapHighlightColor: 'transparent',
     },
     input: {
       position: 'absolute',
@@ -25,6 +21,18 @@ export const checkboxRecipe = defineSlotRecipe({
       opacity: 0,
       margin: 0,
       cursor: 'inherit',
+      zIndex: 1,
+      _focusVisible: {
+        '& + span::before': {
+          outline: 'focusVisibleOutline',
+          outlineOffset: '0.5',
+        },
+      },
+      _hover: {
+        '& + span::before': {
+          borderColor: 'colorPalette.secondary',
+        },
+      },
     },
     label: {
       fs: 'inherit',
@@ -156,7 +164,7 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
     },
-    color: toSlot(colorVariant, 'root', 'icon'),
+    color: toSlot(colorVariant, 'input', 'icon'),
   },
   defaultVariants: {
     color: 'blue',

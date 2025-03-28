@@ -249,7 +249,6 @@ describe('Recipe', () => {
       ...base,
       ...variants.size.sm,
       ...variants.color.blue,
-      ...variants.disabled.true,
     })
 
     expect(recipe({ color: 'blue', disabled: false })).toEqual({

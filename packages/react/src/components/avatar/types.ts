@@ -12,10 +12,6 @@ export interface AvatarPropsOverrides {}
 
 type AvatarSlotProps<RootComponent extends ElementType> = {
   img?: ComponentPropsWithCommonProps<'img', AvatarOwnerState<RootComponent>>
-  root?: ComponentPropsWithCommonProps<
-    RootComponent,
-    AvatarOwnerState<RootComponent>
-  >
 }
 
 type AvatarOwnProps<RootComponent extends ElementType> = {
@@ -27,7 +23,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   className?: ClassValue
   children?: ReactNode
   slotProps?: AvatarSlotProps<RootComponent>
-  classes?: ComponentUtilityClasses<'root' | 'img'>
+  classes?: ComponentUtilityClasses<'img'>
 } & AvatarVariants
 
 export type AvatarProps<RootComponent extends ElementType = 'div'> =

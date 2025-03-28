@@ -56,6 +56,7 @@ export function createRuntimeFn(options?: any) {
         if (typeof selection === 'boolean') {
           selection = selection === true ? 'true' : 'false'
         }
+
         mergedStyles = merge(
           {},
           mergedStyles,

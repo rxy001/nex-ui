@@ -1,9 +1,9 @@
-import type { ReactNode, ElementType, ComponentProps } from 'react'
+import type { ReactNode, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CheckboxVariants } from '../../theme/slotRecipes'
 import type {
   ComponentUtilityClasses,
-  Overwrite,
+  OverrideProps,
   SxProps,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
@@ -16,7 +16,7 @@ type CheckboxSlotProps<CheckboxComponent extends ElementType> = {
     CheckboxOwnerState<CheckboxComponent>
   >
   input?: ComponentPropsWithCommonProps<
-    CheckboxComponent,
+    'input',
     CheckboxOwnerState<CheckboxComponent>
   >
   label?: ComponentPropsWithCommonProps<
@@ -29,11 +29,7 @@ type CheckboxSlotProps<CheckboxComponent extends ElementType> = {
   >
 }
 
-type CheckboxOwnProps<
-  CheckboxComponent extends ElementType,
-  CheckboxComponentProps extends
-    ComponentProps<CheckboxComponent> = ComponentProps<CheckboxComponent>,
-> = {
+type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   sx?: SxProps<CheckboxOwnerState<CheckboxComponent>>
   as?: CheckboxComponent
   children?: ReactNode
@@ -44,15 +40,16 @@ type CheckboxOwnProps<
   slotProps?: CheckboxSlotProps<CheckboxComponent>
   classes?: ComponentUtilityClasses<'root' | 'input' | 'label' | 'icon'>
   defaultChecked?: boolean
-  name?: string
-  ref?: CheckboxComponentProps['ref']
-  onChange?: CheckboxComponentProps['onChange']
   value?: string | number
+  onValueChange?: (checked: boolean) => void
 } & CheckboxVariants
 
 export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
-  Overwrite<CheckboxOwnProps<CheckboxComponent>, CheckboxPropsOverrides>
-
+  OverrideProps<
+    CheckboxComponent,
+    CheckboxOwnProps<CheckboxComponent>,
+    CheckboxPropsOverrides
+  >
 export type CheckboxOwnerState<
   CheckboxComponent extends ElementType = 'input',
 > = CheckboxProps<CheckboxComponent>
@@ -71,7 +68,7 @@ export type CheckboxGroupProps<
   name?: string
   children?: ReactNode
   defaultValue?: T[]
-  onChange?: (value: T[]) => void
+  onValueChange?: (value: T[]) => void
 } & CheckboxGroupVariants
 
 export type CheckboxGroupContext<

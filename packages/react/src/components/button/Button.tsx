@@ -26,7 +26,7 @@ import {
 import type { ButtonProps, ButtonOwnerState } from './types'
 import { Icon } from '../icon'
 
-const useSlotClasses = (ownerState: ButtonOwnerState<ElementType>) => {
+const useSlotClasses = (ownerState: ButtonOwnerState) => {
   const { prefix } = useNexUI()
 
   const btnRoot = `${prefix}-btn`
@@ -76,32 +76,34 @@ const useSlotClasses = (ownerState: ButtonOwnerState<ElementType>) => {
 }
 
 const useAriaProps = (
-  ownerState: ButtonOwnerState<ElementType>,
-): HTMLAttributes<HTMLElement> => {
+  ownerState: ButtonOwnerState,
+): Record<'root' | 'icon', HTMLAttributes<HTMLElement>> => {
   const {
     as,
     disabled: disabledProps,
+    type,
     role,
     loading,
-    tabIndex = 0,
+    tabIndex,
   } = ownerState
   const disabled = disabledProps || loading
 
-  let ariaProps = {}
+  let root = {}
 
   if (as === 'button') {
-    ariaProps = {
+    root = {
       disabled,
+      type,
       tabIndex: disabled ? -1 : tabIndex,
     }
   } else if (isFunction(as)) {
-    ariaProps = {
+    root = {
       loading,
       tabIndex,
       disabled: disabledProps,
     }
   } else {
-    ariaProps = {
+    root = {
       role: role ?? 'button',
       'data-disabled': disabled || undefined,
       'aria-disabled': disabled || undefined,
@@ -109,7 +111,12 @@ const useAriaProps = (
     }
   }
 
-  return ariaProps
+  const icon = {
+    'aria-hidden': true,
+    focusable: false,
+  }
+
+  return { root, icon }
 }
 
 export const Button = forwardRef(
@@ -119,7 +126,7 @@ export const Button = forwardRef(
   ) => {
     const { primaryColor } = useNexUI()
 
-    const props = useDefaultProps<ButtonProps<ElementType>>({
+    const props = useDefaultProps<ButtonProps>({
       name: 'Button',
       props: inProps,
     })
@@ -130,7 +137,8 @@ export const Button = forwardRef(
       slotProps,
       spinner,
       href,
-      tabIndex: _tabIndex,
+      type = 'button',
+      tabIndex = 0,
       color = primaryColor,
       spinnerPlacement = 'start',
       variant = 'solid',
@@ -143,7 +151,7 @@ export const Button = forwardRef(
       startIcon: startIconProp,
       endIcon: endIconProp,
       onClick: onClickProp,
-      onKeyUp: onKeyUpProps,
+      onKeyUp: onKeyUpProp,
       disableRipple,
       ...remainingProps
     } = props
@@ -154,11 +162,14 @@ export const Button = forwardRef(
 
     const disabled = loading || disabledProp
 
-    const rootElement: ElementType =
+    const rootElement = (
       as !== undefined ? as : typeof href === 'string' && href ? 'a' : 'button'
+    ) as 'button'
 
     const ownerState = {
       ...props,
+      type,
+      tabIndex,
       variant,
       size,
       radius,
@@ -204,10 +215,11 @@ export const Button = forwardRef(
         btnRef.current?.click()
       }
 
-      onKeyUpProps?.(event)
+      onKeyUpProp?.(event)
     })
 
-    const ariaProps = useAriaProps(ownerState)
+    const { root: rootAriaProps, icon: iconAriaProps } =
+      useAriaProps(ownerState)
 
     const rootProps = useSlotProps({
       ownerState,
@@ -220,7 +232,7 @@ export const Button = forwardRef(
         href,
         ref: mergedRefs,
         as: rootElement,
-        ...ariaProps,
+        ...rootAriaProps,
       },
     })
 
@@ -229,6 +241,9 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.startIcon,
       classNames: classes.startIcon,
       sx: styles.startIcon,
+      additionalProps: {
+        ...iconAriaProps,
+      },
     })
 
     const endIconProps = useSlotProps({
@@ -236,6 +251,9 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.endIcon,
       classNames: classes.endIcon,
       sx: styles.endIcon,
+      additionalProps: {
+        ...iconAriaProps,
+      },
     })
 
     const loadingIcon = loading
