@@ -3,5 +3,6 @@
 exports[`Divider renders correctly 1`] = `
 <hr
   class="nui-divider-root nui-divider-orientation-horizontal emotion-0"
+  role="separator"
 />
 `;
