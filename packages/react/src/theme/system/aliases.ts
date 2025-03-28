@@ -13,8 +13,8 @@ export const aliases = defineConfig.aliases({
   pb: 'paddingBottom',
   pl: 'paddingLeft',
   pr: 'paddingRight',
-  px: ['paddingLeft', 'paddingRight'],
-  py: ['paddingTop', 'paddingBottom'],
+  px: 'paddingInline',
+  py: 'paddingBlock',
 
   // margin
   m: 'margin',
@@ -22,6 +22,6 @@ export const aliases = defineConfig.aliases({
   mb: 'marginBottom',
   ml: 'marginLeft',
   mr: 'marginRight',
-  mx: ['marginLeft', 'marginRight'],
-  my: ['marginTop', 'marginBottom'],
+  mx: 'marginInline',
+  my: 'marginBlock',
 })

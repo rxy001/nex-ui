@@ -35,13 +35,13 @@ export const buttonRecipe = defineSlotRecipe({
     },
     startIcon: {
       display: 'inherit',
-      mr: '2',
-      ml: '-1',
+      marginInlineStart: '-1',
+      marginInlineEnd: '2',
     },
     endIcon: {
       display: 'inherit',
-      ml: '2',
-      mr: '-1',
+      marginInlineStart: '2',
+      marginInlineEnd: '-1',
     },
   },
   variants: {

@@ -78,7 +78,7 @@ export default function Playlist() {
                   loading='lazy'
                   sx={{
                     height: '100%',
-                    transition: 'transform 0.2s',
+                    transition: 'all',
                     _hover: {
                       transform: 'scale(1.1)',
                     },
