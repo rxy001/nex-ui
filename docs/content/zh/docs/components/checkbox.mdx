@@ -4,6 +4,7 @@ description: Checkbox 允许用户从一个集合中选择一个或多个项目�
 ---
 
 import { checkbox } from '@/content/_demo'
+import { type } from 'os'
 
 # Checkbox
 
@@ -50,6 +51,8 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 ## API
 
 ### Checkbox Props
+
+Checkbox Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `input` 标签。
 
 <PropsTable
   dataSource={[
@@ -130,7 +133,12 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
     },
     {
       prop: 'onChange',
-      type: 'function',
+      type: '(event: ChangeEvent<HTMLInputElement>) => void',
+      description: '当 Checkbox 状态发生变化时会触发该回调函数。',
+    },
+    {
+      prop: 'onCheckedChange',
+      type: '(checked: boolean) => void',
       description: '当 Checkbox 状态发生变化时会触发该回调函数。',
     },
     {
@@ -142,11 +150,7 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
     },
     {
       prop: 'sx',
-      type: [
-        'CSSObject',
-        'CSSObject[]',
-        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
-      ],
+      type: 'SxProps<CheckboxOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
     {
@@ -252,7 +256,7 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
       description: 'CheckboxGroup 默认选中的值。',
     },
     {
-      prop: 'onChange',
+      prop: 'onValueChange',
       type: '(value: T[]) => void',
       description: '当 CheckboxGroup 的值发生变化时触发回调函数。',
     },

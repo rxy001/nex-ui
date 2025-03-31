@@ -7,7 +7,7 @@ import { useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
 import { useNexUI } from '../provider'
-import { inputTextRecipe } from '../../theme/slotRecipes'
+import { inputRecipe } from '../../theme/slotRecipes'
 import {
   useDefaultProps,
   composeClasses,
@@ -16,13 +16,13 @@ import {
   useSlotProps,
   useSlotStyles,
 } from '../utils'
-import type { InputTextOwnerState, InputTextProps } from './types'
+import type { InputOwnerState, InputProps } from './types'
 import { Button } from '../button'
 
-const useSlotClasses = (ownerState: InputTextOwnerState) => {
+const useSlotClasses = (ownerState: InputOwnerState) => {
   const { prefix } = useNexUI()
 
-  const inputTextRoot = `${prefix}-input-text`
+  const inputRoot = `${prefix}-input`
 
   const { variant, radius, size, color, disabled, fullWidth, error, classes } =
     ownerState
@@ -44,22 +44,22 @@ const useSlotClasses = (ownerState: InputTextOwnerState) => {
 
   const composedClasses = composeClasses(
     slots,
-    getUtilityClass(inputTextRoot),
+    getUtilityClass(inputRoot),
     classes,
   )
 
   return composedClasses
 }
 
-export const InputText = forwardRef(
+export const Input = forwardRef(
   <InputComponent extends ElementType = 'input'>(
-    inProps: InputTextProps<InputComponent>,
+    inProps: InputProps<InputComponent>,
     ref: Ref<HTMLInputElement>,
   ) => {
     const { primaryColor } = useNexUI()
 
-    const props = useDefaultProps<InputTextProps>({
-      name: 'InputText',
+    const props = useDefaultProps<InputProps>({
+      name: 'Input',
       props: inProps,
     })
 
@@ -71,8 +71,8 @@ export const InputText = forwardRef(
       defaultValue,
       onClear,
       slotProps,
-      onChange: onChangeProp,
       value: valueProp,
+      onChange: onChangeProp,
       color = primaryColor,
       type = 'text',
       disabled = false,
@@ -108,8 +108,8 @@ export const InputText = forwardRef(
 
     const styles = useSlotStyles({
       ownerState,
-      name: 'InputText',
-      slotRecipe: inputTextRecipe,
+      name: 'Input',
+      slotRecipe: inputRecipe,
     })
 
     const classes = useSlotClasses(ownerState)
@@ -178,6 +178,7 @@ export const InputText = forwardRef(
             radius='full'
             size='sm'
             color='gray'
+            variant='text'
             {...clearBtnProps}
           >
             <CloseCircleFilled />
@@ -189,4 +190,4 @@ export const InputText = forwardRef(
   },
 )
 
-InputText.displayName = 'InputText'
+Input.displayName = 'Input'

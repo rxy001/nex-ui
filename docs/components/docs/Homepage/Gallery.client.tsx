@@ -1,12 +1,6 @@
 'use client'
 
-import {
-  Avatar,
-  Button,
-  InputText,
-  Switch,
-  useColorScheme,
-} from '@nex-ui/react'
+import { Avatar, Button, Input, Switch, useColorScheme } from '@nex-ui/react'
 import { useEvent } from '@nex-ui/hooks'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
 import type { ChangeEvent } from 'react'
@@ -36,7 +30,7 @@ export const ClientGallery = () => {
         checked={resolvedColorScheme === 'dark'}
         onChange={toggleMode}
       />
-      <InputText
+      <Input
         className='x:absolute x:animate-[levitate_10s_ease_infinite] x:top-[130px] x:-right-[40px]'
         defaultValue='Nex UI'
       />

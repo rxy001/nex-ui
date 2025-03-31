@@ -8,7 +8,7 @@ import {
   sizeVariant,
 } from '../shared'
 
-export const inputTextRecipe = defineSlotRecipe({
+export const inputRecipe = defineSlotRecipe({
   slots: {
     root: {
       border: 'md',
@@ -72,6 +72,13 @@ export const inputTextRecipe = defineSlotRecipe({
       true: {
         root: {
           color: 'red.primary',
+        },
+      },
+    },
+    clearable: {
+      true: {
+        input: {
+          // paddingInlineStart: '',
         },
       },
     },
@@ -139,5 +146,5 @@ export const inputTextRecipe = defineSlotRecipe({
   },
 })
 
-export type InputTextRecipe = typeof inputTextRecipe
-export type InputTextVariants = RecipeVariants<InputTextRecipe>
+export type InputRecipe = typeof inputRecipe
+export type InputVariants = RecipeVariants<InputRecipe>

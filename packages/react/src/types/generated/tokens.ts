@@ -194,7 +194,7 @@ export interface DefaultTokens {
     | 'extrabold'
     | 'black'
   borders: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  radii: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
+  radii: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   lineHeights: 'normal' | 'none' | 'shorter' | 'short' | 'base' | 'tall'
   borderWidths: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   shadows: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -422,6 +422,7 @@ export interface RadiiToken {
   lg?: string | number
   xl?: string | number
   '2xl'?: string | number
+  '3xl'?: string | number
   full?: string | number
 }
 

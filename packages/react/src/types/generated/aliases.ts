@@ -15,13 +15,13 @@ export interface DefaultAliases {
   pb?: 'paddingBottom'
   pl?: 'paddingLeft'
   pr?: 'paddingRight'
-  px?: ['paddingLeft', 'paddingRight']
-  py?: ['paddingTop', 'paddingBottom']
+  px?: 'paddingInline'
+  py?: 'paddingBlock'
   m?: 'margin'
   mt?: 'marginTop'
   mb?: 'marginBottom'
   ml?: 'marginLeft'
   mr?: 'marginRight'
-  mx?: ['marginLeft', 'marginRight']
-  my?: ['marginTop', 'marginBottom']
+  mx?: 'marginInline'
+  my?: 'marginBlock'
 }

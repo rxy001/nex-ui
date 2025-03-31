@@ -45,8 +45,16 @@ Switch 用于在选中和未选中状态之间进行切换。
 
 ### Switch Props
 
+Switch Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `input` 标签。
+
 <PropsTable
   dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '',
+      description: 'Checkbox 的标签。',
+    },
     {
       prop: 'color',
       type: [
@@ -120,6 +128,11 @@ Switch 用于在选中和未选中状态之间进行切换。
       description: '当 Switch 状态发生变化时会触发该回调函数。',
     },
     {
+      prop: 'onCheckedChange',
+      type: '(checked: boolean) => void',
+      description: '当 Switch 状态发生变化时会触发该回调函数。',
+    },
+    {
       prop: 'as',
       type: 'ElementType',
       default: "'input'",
@@ -128,11 +141,7 @@ Switch 用于在选中和未选中状态之间进行切换。
     },
     {
       prop: 'sx',
-      type: [
-        'CSSObject',
-        'CSSObject[]',
-        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
-      ],
+      type: 'SxProps<SwitchOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
     {
@@ -149,8 +158,6 @@ Switch 用于在选中和未选中状态之间进行切换。
 />
 
 ### Switch Slots
-
-{/* 'root' | 'input' | 'track' | 'startIcon' | 'endIcon' | 'thumb' */}
 
 <SlotsTable
   dataSource={[
@@ -189,6 +196,12 @@ Switch 用于在选中和未选中状态之间进行切换。
       class: '.nui-switch-thumb',
       component: "'span'",
       description: 'Switch 内的滑块。',
+    },
+    {
+      slot: 'label',
+      class: '.nui-switch-label',
+      component: "'span'",
+      description: 'Switch 的标签。',
     },
   ]}
 />

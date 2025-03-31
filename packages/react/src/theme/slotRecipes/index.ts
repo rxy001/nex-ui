@@ -1,12 +1,12 @@
 export * from './button'
-export * from './inputText'
+export * from './input'
 export * from './avatar'
 export * from './checkbox'
 export * from './switch'
 
 export type SlotRecipeComponentNames =
   | 'Button'
-  | 'InputText'
+  | 'Input'
   | 'Avatar'
   | 'Checkbox'
   | 'Switch'

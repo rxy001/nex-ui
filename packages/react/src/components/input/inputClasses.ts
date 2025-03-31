@@ -1,7 +1,7 @@
 import { generateUtilityClasses } from '../utils'
 
 // 用于单元测试
-export const inputTextClasses = generateUtilityClasses('nui-input-text', [
+export const inputClasses = generateUtilityClasses('nui-input', [
   // ---------root---------
   'root',
   // "borderless" | "filled" | "outlined"

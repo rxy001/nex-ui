@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input renders correctly 1`] = `
+<label
+  class="nui-input-root nui-input-variant-outlined nui-input-radius-md nui-input-size-md nui-input-color-blue emotion-0"
+>
+  <input
+    class="nui-input-input emotion-1"
+    type="text"
+    value=""
+  />
+</label>
+`;

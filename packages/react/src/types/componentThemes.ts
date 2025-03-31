@@ -3,7 +3,7 @@ import type { DividerRecipe, FlexRecipe, IconRecipe } from '../theme/recipes'
 import type {
   AvatarRecipe,
   ButtonRecipe,
-  InputTextRecipe,
+  InputRecipe,
   CheckboxRecipe,
   SwitchRecipe,
 } from '../theme/slotRecipes'
@@ -13,8 +13,8 @@ import type {
   IconOwnerState,
   FlexOwnerState,
   FlexProps,
-  InputTextOwnerState,
-  InputTextProps,
+  InputOwnerState,
+  InputProps,
   DividerOwnerState,
   DividerProps,
   AvatarProps,
@@ -50,11 +50,11 @@ export type ComponentThemes = {
       | ComponentThemeFn<FlexOwnerState, FlexRecipe>
     defaultProps?: FlexProps<ElementType>
   }
-  InputText?: {
+  Input?: {
     styleOverrides?:
-      | ComponentThemeObject<InputTextRecipe>
-      | ComponentThemeFn<InputTextOwnerState, InputTextRecipe>
-    defaultProps?: InputTextProps<ElementType>
+      | ComponentThemeObject<InputRecipe>
+      | ComponentThemeFn<InputOwnerState, InputRecipe>
+    defaultProps?: InputProps<ElementType>
   }
   Divider?: {
     styleOverrides?:

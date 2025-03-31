@@ -41,11 +41,7 @@ Divider Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签
     },
     {
       prop: 'sx',
-      type: [
-        'CSSObject',
-        'CSSObject[]',
-        '(ownerState: OwnerState) => CSSObject | CSSObject[])',
-      ],
+      type: 'SxProps<DividerOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
     {

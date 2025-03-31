@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { SearchOutlined } from '@nex-ui/icons'
-import { InputText } from '../InputText'
+import { Input } from '../Input'
 import { Flex } from '../../flex'
 import { Icon } from '../../icon'
 
 const meta = {
-  title: 'Components/InputText',
-  component: InputText,
+  title: 'Components/Input',
+  component: Input,
   argTypes: {
     variant: {
       options: ['filled', 'outlined', 'borderless'],
@@ -58,22 +58,22 @@ const meta = {
     placeholder: 'Input Text',
   },
   render: (args) => {
-    return <InputText {...args} />
+    return <Input {...args} />
   },
-} satisfies Meta<typeof InputText>
+} satisfies Meta<typeof Input>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BasicInputText: Story = {}
+export const BasicInput: Story = {}
 
-export const InputTextWithIcons: Story = {
+export const InputWithIcons: Story = {
   render: (args) => {
     return (
       <Flex gap='4'>
-        <InputText {...args} suffix={<Icon component={SearchOutlined} />} />
-        <InputText {...args} prefix={<Icon component={SearchOutlined} />} />
+        <Input {...args} suffix={<Icon component={SearchOutlined} />} />
+        <Input {...args} prefix={<Icon component={SearchOutlined} />} />
       </Flex>
     )
   },
