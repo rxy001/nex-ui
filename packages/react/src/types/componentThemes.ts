@@ -1,5 +1,10 @@
 import { type ElementType } from 'react'
-import type { DividerRecipe, FlexRecipe, IconRecipe } from '../theme/recipes'
+import type {
+  DividerRecipe,
+  FlexRecipe,
+  IconRecipe,
+  AccordionRecipe,
+} from '../theme/recipes'
 import type {
   AvatarRecipe,
   ButtonRecipe,
@@ -24,6 +29,8 @@ import type {
   CheckboxOwnerState,
   SwitchProps,
   SwitchOwnerState,
+  AccordionProps,
+  AccordionOwnerState,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -79,6 +86,12 @@ export type ComponentThemes = {
       | ComponentThemeObject<SwitchRecipe>
       | ComponentThemeFn<SwitchOwnerState, SwitchRecipe>
     defaultProps?: SwitchProps<ElementType>
+  }
+  Accordion?: {
+    styleOverrides?:
+      | ComponentThemeObject<AccordionRecipe>
+      | ComponentThemeFn<AccordionOwnerState, AccordionRecipe>
+    defaultProps?: AccordionProps<ElementType>
   }
 }
 
