@@ -196,9 +196,9 @@ describe('css', () => {
     })
 
     expect(
-      // @ts-ignore
       css({
         color: {
+          // @ts-ignore
           _hover: 'white',
         },
       }),
@@ -211,11 +211,11 @@ describe('css', () => {
 
   it('should support color placeholder', () => {
     expect(
-      // @ts-ignore
       css({
         colorPalette: 'blue',
         backgroundColor: {
           _DEFAULT: 'colorPalette.100',
+          // @ts-ignore
           _hover: 'colorPalette.200',
         },
         color: 'colorPalette.100',
@@ -242,6 +242,7 @@ describe('css', () => {
       // @ts-ignore
       css({
         width: {
+          // @ts-ignore
           _sm: '1',
           _md: '2',
         },

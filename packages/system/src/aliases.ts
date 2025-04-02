@@ -1,8 +1,10 @@
 import { forEach, isString, __DEV__ } from '@nex-ui/utils'
 import { isValidAliasValue } from './utils'
-import type { CSSPropertyKey, Dictionary } from './types'
+import type { CSSProperties, Dictionary } from './types'
 
-export type AliasesDefinition = Dictionary<CSSPropertyKey | CSSPropertyKey[]>
+export type AliasesDefinition = Dictionary<
+  keyof CSSProperties | (keyof CSSProperties)[]
+>
 
 export function createAliases(aliases: AliasesDefinition) {
   const aliasMap: Map<string, string[]> = new Map()

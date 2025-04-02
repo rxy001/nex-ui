@@ -30,12 +30,16 @@ export type {
 export type {
   InterpolationPrimitive,
   CSSObject,
-  CSSObjectOverrides,
   CSSProperties,
   CSSInterpolation,
-  ArrayCSSInterpolation,
   ArrayInterpolation,
   Interpolation,
+  Tokens,
+  SemanticTokens,
+  Selectors,
+  Aliases,
+  Breakpoints,
+  Scales,
 } from './types'
 
 export type { CssFn } from './css'

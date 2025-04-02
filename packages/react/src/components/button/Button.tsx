@@ -152,6 +152,7 @@ export const Button = forwardRef(
       endIcon: endIconProp,
       onClick: onClickProp,
       onKeyUp: onKeyUpProp,
+      onKeyDown: onKeyDownProp,
       disableRipple,
       ...remainingProps
     } = props
@@ -204,12 +205,25 @@ export const Button = forwardRef(
       onClickProp?.(event)
     })
 
+    const onKeyDown = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
+      // Limit the repeated triggering of the click event when the Enter key is pressed.
+      if (
+        focusVisible &&
+        !disabled &&
+        rootElement === 'button' &&
+        event.code === 'Enter'
+      ) {
+        event.preventDefault()
+      }
+
+      onKeyDownProp?.(event)
+    })
+
     const onKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
       // Keyboard accessibility for non interactive elements
       if (
         focusVisible &&
         !disabled &&
-        rootElement !== 'button' &&
         (event.code === 'Space' || event.code === 'Enter')
       ) {
         btnRef.current?.click()
@@ -229,6 +243,7 @@ export const Button = forwardRef(
       additionalProps: {
         onClick,
         onKeyUp,
+        onKeyDown,
         href,
         ref: mergedRefs,
         as: rootElement,

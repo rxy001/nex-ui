@@ -1,10 +1,10 @@
 import { __DEV__, forEach } from '@nex-ui/utils'
 import { isValidTokenCategory } from './utils'
 import type { TokenCategory } from './tokens'
-import type { CSSPropertyKey } from './types'
+import type { CSSProperties } from './types'
 
 export type ScalesDefinition = {
-  [property in CSSPropertyKey]?: TokenCategory
+  [property in keyof CSSProperties]?: TokenCategory
 }
 
 export function createScales(scales: ScalesDefinition) {

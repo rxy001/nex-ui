@@ -1,20 +1,15 @@
-import type { CSSProperties } from '@nex-ui/system'
-import type { Tokens } from './generated/tokens'
-import type { SemanticTokens } from './generated/semanticTokens'
-import type { CSSObjectOverrides as NexCSSObjectOverrides } from './styleObjectOverrides'
-
-type ColorPalette =
-  | CSSProperties['color']
-  | Tokens['colors']
-  | SemanticTokens['colors']
-
-// 避免 tsc 编译时优化删除掉 NexCSSObjectOverrides
-type NexCSSObjectOverridesAlias = NexCSSObjectOverrides
+import type { Tokens as TokensOverrides } from './generated/tokens'
+import type { SemanticTokens as SemanticTokensOverrides } from './generated/semanticTokens'
+import type { Scales as ScalesOverrides } from './generated/scales'
+import type { Breakpoints as BreakpointsOverrides } from './generated/breakpoints'
+import type { Selectors as SelectorsOverrides } from './generated/selectors'
+import type { Aliases as AliasesOverrides } from './generated/aliases'
 
 declare module '@nex-ui/system' {
-  interface CSSObjectOverrides extends NexCSSObjectOverridesAlias {
-    colorPalette?: ColorPalette
-  }
+  interface Aliases extends AliasesOverrides {}
+  interface Selectors extends SelectorsOverrides {}
+  interface Breakpoints extends BreakpointsOverrides {}
+  interface Scales extends ScalesOverrides {}
+  interface SemanticTokens extends SemanticTokensOverrides {}
+  interface Tokens extends TokensOverrides {}
 }
-
-export {}
