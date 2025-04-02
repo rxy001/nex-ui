@@ -2,11 +2,13 @@ import { Button } from '@nex-ui/react'
 import type { ButtonProps } from '@nex-ui/react'
 import { GithubOutlined } from '@nex-ui/icons'
 import StorybookIcon from '@/icons/storybook.svg'
+import W3cIcon from '@/icons/w3c.svg'
 import NextIcon from '@/icons/nextjs.svg'
 
 type ComponentLinksProps = {
   rscCompatible?: boolean
   slotRecipe?: boolean
+  ariaCompatible?: boolean
   component: string
 }
 const sx = {
@@ -43,6 +45,8 @@ const SLOT_RECIPE_PATH =
 const STORYBOOK_PATH =
   'https://nex-ui-storybook.vercel.app/?path=/story/components-'
 
+const WAI_ARIA_PATH = 'https://www.w3.org/WAI/ARIA/apg/patterns/'
+
 const ButtonLink = (props: ButtonProps) => {
   return (
     <Button
@@ -59,6 +63,7 @@ const ButtonLink = (props: ButtonProps) => {
 export const ComponentLinks = ({
   component,
   rscCompatible = false,
+  ariaCompatible = false,
   slotRecipe = false,
 }: ComponentLinksProps) => {
   return (
@@ -69,6 +74,14 @@ export const ComponentLinks = ({
       >
         Storybook
       </ButtonLink>
+      {ariaCompatible && (
+        <ButtonLink
+          startIcon={<W3cIcon />}
+          href={`${WAI_ARIA_PATH}${component}`}
+        >
+          WAI-ARIA
+        </ButtonLink>
+      )}
       {rscCompatible && (
         <ButtonLink startIcon={<NextIcon />}>Server Component</ButtonLink>
       )}
@@ -93,6 +106,7 @@ export const ComponentLinks = ({
           Recipe Source
         </ButtonLink>
       )}
+      {}
     </div>
   )
 }

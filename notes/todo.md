@@ -54,6 +54,6 @@
 
 <!-- 24. 调整 react pkg 的 ts 模块声明 -->
 
-25. createTokens 延迟生成含有 token 引用的 token，以突破定义顺序的限制
+25. createTokens 延迟生成含有 token 引用语法的 token，以规避 token 定义顺序的限制
 
 26. color token 支持 opacity 修饰符
