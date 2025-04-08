@@ -1,6 +1,6 @@
 import type { ReactNode, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { CheckboxVariants } from '../../theme/slotRecipes'
+import type { CheckboxVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,

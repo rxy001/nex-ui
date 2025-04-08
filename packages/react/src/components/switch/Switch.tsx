@@ -13,12 +13,12 @@ import type {
 import { isFunction, isString, mergeRefs } from '@nex-ui/utils'
 import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
-import { switchRecipe } from '../../theme/slotRecipes'
+import { switchRecipe } from '../../theme/recipes'
 import {
   forwardRef,
   useDefaultProps,
   useSlotProps,
-  useSlotStyles,
+  useStyles,
   composeClasses,
   getUtilityClass,
 } from '../utils'
@@ -165,10 +165,10 @@ export const Switch = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const styles = useSlotStyles({
+    const styles = useStyles({
       name: 'Switch',
       ownerState,
-      slotRecipe: switchRecipe,
+      recipe: switchRecipe,
     })
 
     const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
@@ -192,7 +192,7 @@ export const Switch = forwardRef(
 
       if (isString(as) && as !== 'input') {
         if (!checkedInProps) {
-          setChecked((c) => !c)
+          setChecked((c: boolean) => !c)
         }
         onCheckedChange?.(!checked)
       }

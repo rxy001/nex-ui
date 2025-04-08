@@ -6,7 +6,7 @@ import type {
   OverrideProps,
   SxProps,
 } from '../../types/utils'
-import type { SwitchVariants } from '../../theme/slotRecipes'
+import type { SwitchVariants } from '../../theme/recipes'
 
 export interface SwitchPropsOverrides {}
 

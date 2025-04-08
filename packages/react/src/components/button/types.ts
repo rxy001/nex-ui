@@ -1,6 +1,6 @@
 import type { ReactNode, ElementType, AnchorHTMLAttributes } from 'react'
 import type { ClassValue } from 'clsx'
-import type { ButtonVariants } from '../../theme/slotRecipes'
+import type { ButtonVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,

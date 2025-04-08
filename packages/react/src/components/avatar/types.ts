@@ -1,6 +1,6 @@
 import type { ElementType, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
-import type { AvatarVariants } from '../../theme/slotRecipes'
+import type { AvatarVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,

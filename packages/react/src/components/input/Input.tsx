@@ -7,14 +7,14 @@ import { useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import type { ChangeEvent, ElementType, Ref } from 'react'
 import { useNexUI } from '../provider'
-import { inputRecipe } from '../../theme/slotRecipes'
+import { inputRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
   composeClasses,
   getUtilityClass,
   forwardRef,
   useSlotProps,
-  useSlotStyles,
+  useStyles,
 } from '../utils'
 import type { InputOwnerState, InputProps } from './types'
 import { Button } from '../button'
@@ -106,10 +106,10 @@ export const Input = forwardRef(
       error,
     }
 
-    const styles = useSlotStyles({
+    const styles = useStyles({
       ownerState,
       name: 'Input',
-      slotRecipe: inputRecipe,
+      recipe: inputRecipe,
     })
 
     const classes = useSlotClasses(ownerState)

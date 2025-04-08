@@ -1,12 +1,13 @@
-import { type ElementType } from 'react'
-import type { DividerRecipe, FlexRecipe, IconRecipe } from '../theme/recipes'
 import type {
+  DividerRecipe,
+  FlexRecipe,
+  IconRecipe,
   AvatarRecipe,
   ButtonRecipe,
   InputRecipe,
   CheckboxRecipe,
   SwitchRecipe,
-} from '../theme/slotRecipes'
+} from '../theme/recipes'
 import type {
   ButtonProps,
   ButtonOwnerState,
@@ -19,7 +20,6 @@ import type {
   DividerProps,
   AvatarProps,
   AvatarOwnerState,
-  BoxProps,
   CheckboxProps,
   CheckboxOwnerState,
   SwitchProps,
@@ -29,56 +29,53 @@ import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
 
 export type ComponentThemes = {
-  Box?: {
-    defaultProps?: BoxProps
-  }
   Button?: {
     styleOverrides?:
       | ComponentThemeObject<ButtonRecipe>
       | ComponentThemeFn<ButtonOwnerState, ButtonRecipe>
-    defaultProps?: ButtonProps<ElementType>
+    defaultProps?: ButtonProps
   }
   Icon?: {
     styleOverrides?:
       | ComponentThemeObject<IconRecipe>
       | ComponentThemeFn<IconOwnerState, IconRecipe>
-    defaultProps?: IconProps<ElementType>
+    defaultProps?: IconProps
   }
   Flex?: {
     styleOverrides?:
       | ComponentThemeObject<FlexRecipe>
       | ComponentThemeFn<FlexOwnerState, FlexRecipe>
-    defaultProps?: FlexProps<ElementType>
+    defaultProps?: FlexProps
   }
   Input?: {
     styleOverrides?:
       | ComponentThemeObject<InputRecipe>
       | ComponentThemeFn<InputOwnerState, InputRecipe>
-    defaultProps?: InputProps<ElementType>
+    defaultProps?: InputProps
   }
   Divider?: {
     styleOverrides?:
       | ComponentThemeObject<DividerRecipe>
       | ComponentThemeFn<DividerOwnerState, DividerRecipe>
-    defaultProps?: DividerProps<ElementType>
+    defaultProps?: DividerProps
   }
   Avatar?: {
     styleOverrides?:
       | ComponentThemeObject<AvatarRecipe>
       | ComponentThemeFn<AvatarOwnerState, AvatarRecipe>
-    defaultProps?: AvatarProps<ElementType>
+    defaultProps?: AvatarProps
   }
   Checkbox?: {
     styleOverrides?:
       | ComponentThemeObject<CheckboxRecipe>
       | ComponentThemeFn<CheckboxOwnerState, CheckboxRecipe>
-    defaultProps?: CheckboxProps<ElementType>
+    defaultProps?: CheckboxProps
   }
   Switch?: {
     styleOverrides?:
       | ComponentThemeObject<SwitchRecipe>
       | ComponentThemeFn<SwitchOwnerState, SwitchRecipe>
-    defaultProps?: SwitchProps<ElementType>
+    defaultProps?: SwitchProps
   }
 }
 

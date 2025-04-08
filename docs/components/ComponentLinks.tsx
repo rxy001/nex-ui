@@ -7,7 +7,6 @@ import NextIcon from '@/icons/nextjs.svg'
 
 type ComponentLinksProps = {
   rscCompatible?: boolean
-  slotRecipe?: boolean
   ariaCompatible?: boolean
   component: string
 }
@@ -39,9 +38,6 @@ const COMPONENT_PATH =
 const RECIPE_PATH =
   'https://github.com/rxy001/nex-ui/blob/main/packages/react/src/theme/recipes/'
 
-const SLOT_RECIPE_PATH =
-  'https://github.com/rxy001/nex-ui/blob/main/packages/react/src/theme/slotRecipes/'
-
 const STORYBOOK_PATH =
   'https://nex-ui-storybook.vercel.app/?path=/story/components-'
 
@@ -64,7 +60,6 @@ export const ComponentLinks = ({
   component,
   rscCompatible = false,
   ariaCompatible = false,
-  slotRecipe = false,
 }: ComponentLinksProps) => {
   return (
     <div className='x:mt-6 x:flex x:flex-row x:gap-4 x:flex-wrap x:md:gap-7'>
@@ -91,21 +86,12 @@ export const ComponentLinks = ({
       >
         Source
       </ButtonLink>
-      {slotRecipe ? (
-        <ButtonLink
-          startIcon={<GithubOutlined />}
-          href={`${SLOT_RECIPE_PATH}${component}.ts`}
-        >
-          Slot Recipe Source
-        </ButtonLink>
-      ) : (
-        <ButtonLink
-          startIcon={<GithubOutlined />}
-          href={`${RECIPE_PATH}${component}.ts`}
-        >
-          Recipe Source
-        </ButtonLink>
-      )}
+      <ButtonLink
+        startIcon={<GithubOutlined />}
+        href={`${RECIPE_PATH}${component}.ts`}
+      >
+        Recipe Source
+      </ButtonLink>
       {}
     </div>
   )

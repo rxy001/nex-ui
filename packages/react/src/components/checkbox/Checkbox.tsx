@@ -12,13 +12,13 @@ import type {
   MouseEvent,
   KeyboardEvent,
 } from 'react'
-import { checkboxRecipe } from '../../theme/slotRecipes'
+import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { useCheckboxGroupContext } from './CheckboxGroupContext'
 import {
   forwardRef,
   useDefaultProps,
-  useSlotStyles,
+  useStyles,
   composeClasses,
   getUtilityClass,
   useSlotProps,
@@ -245,10 +245,10 @@ export const Checkbox = forwardRef(
       onKeyUpProp?.(event)
     })
 
-    const styles = useSlotStyles({
+    const styles = useStyles({
       name: 'Checkbox',
       ownerState,
-      slotRecipe: checkboxRecipe,
+      recipe: checkboxRecipe,
     })
 
     const {

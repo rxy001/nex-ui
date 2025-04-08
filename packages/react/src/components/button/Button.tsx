@@ -13,15 +13,15 @@ import type {
 } from 'react'
 import { isFunction, mergeRefs } from '@nex-ui/utils'
 import { useNexUI } from '../provider'
-import { buttonRecipe } from '../../theme/slotRecipes'
+import { buttonRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
   composeClasses,
   getUtilityClass,
   forwardRef,
   useSlotProps,
-  useSlotStyles,
   Ripple,
+  useStyles,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
 import { Icon } from '../icon'
@@ -187,13 +187,13 @@ export const Button = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const styles = useSlotStyles({
+    const styles = useStyles({
       ownerState: {
         ...ownerState,
         disabled,
       },
       name: 'Button',
-      slotRecipe: buttonRecipe,
+      recipe: buttonRecipe,
     })
 
     const onClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {

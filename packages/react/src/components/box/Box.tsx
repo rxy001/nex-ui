@@ -2,7 +2,7 @@
 
 import { nex } from '@nex-ui/styled'
 import type { Ref, ElementType } from 'react'
-import { forwardRef, useDefaultProps, useSlotProps } from '../utils'
+import { forwardRef, useSlotProps } from '../utils'
 import type { BoxProps } from './types'
 
 export const Box = forwardRef(
@@ -10,13 +10,8 @@ export const Box = forwardRef(
     inProps: BoxProps<RootComponent>,
     ref: Ref<HTMLDivElement>,
   ) => {
-    const props = useDefaultProps<BoxProps>({
-      name: 'Box',
-      props: inProps,
-    })
-
     const rootProps = useSlotProps({
-      externalForwardedProps: props,
+      externalForwardedProps: inProps as BoxProps,
       additionalProps: {
         ref,
       },

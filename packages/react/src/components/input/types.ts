@@ -1,6 +1,6 @@
 import type { ReactNode, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { InputVariants } from '../../theme/slotRecipes'
+import type { InputVariants } from '../../theme/recipes'
 import type {
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
