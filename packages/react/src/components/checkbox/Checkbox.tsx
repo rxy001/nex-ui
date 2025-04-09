@@ -1,9 +1,9 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useState, isValidElement, useId, useRef } from 'react'
+import { isValidElement, useId, useRef } from 'react'
 import { isFunction, __DEV__, isString, mergeRefs } from '@nex-ui/utils'
-import { useEvent, useFocusVisible } from '@nex-ui/hooks'
+import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
 import type {
   Ref,
   ElementType,
@@ -146,12 +146,13 @@ export const Checkbox = forwardRef(
       className,
       children,
       slotProps,
-      defaultChecked,
       onCheckedChange,
-      type = 'checkbox',
       onClick: onClickProp,
       onChange: onChangeProp,
       onKeyUp: onKeyUpProp,
+      checked: checkedProp,
+      type = 'checkbox',
+      defaultChecked = false,
       as = 'input',
       tabIndex = 0,
       name = groupCtx?.name,
@@ -159,21 +160,16 @@ export const Checkbox = forwardRef(
       disabled = groupCtx?.disabled ?? false,
       size = groupCtx?.size ?? 'md',
       radius = groupCtx?.radius ?? groupCtx?.size ?? size,
-      checked: checkedProp,
       ...remainingProps
     } = props
 
-    const [rawChecked, setRawChecked] = useState(
-      () => checkedProp ?? defaultChecked ?? false,
+    const [rawChecked, setRawChecked] = useControlledState(
+      checkedProp,
+      defaultChecked,
+      onCheckedChange,
     )
 
     const [focusVisible] = useFocusVisible({ ref: inputRef })
-
-    const checkedInProps = checkedProp !== undefined
-
-    if (!inGroup && checkedInProps && checkedProp !== rawChecked) {
-      setRawChecked(checkedProp)
-    }
 
     const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
 
@@ -201,11 +197,9 @@ export const Checkbox = forwardRef(
         groupCtx.toggleValue(value)
       }
 
-      if (!inGroup && !checkedInProps) {
+      if (!inGroup) {
         setRawChecked(event.target.checked)
       }
-
-      onCheckedChange?.(event.target.checked)
       onChangeProp?.(event)
     })
 
@@ -221,11 +215,9 @@ export const Checkbox = forwardRef(
           groupCtx.toggleValue(value)
         }
 
-        if (!inGroup && !checkedInProps) {
-          setRawChecked((c) => !c)
+        if (!inGroup) {
+          setRawChecked(!checked)
         }
-
-        onCheckedChange?.(!checked)
       }
 
       onClickProp?.(event)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useRef, useState } from 'react'
+import { useId, useRef } from 'react'
 import { nex } from '@nex-ui/styled'
 import type {
   ChangeEvent,
@@ -11,7 +11,7 @@ import type {
   KeyboardEvent,
 } from 'react'
 import { isFunction, isString, mergeRefs } from '@nex-ui/utils'
-import { useEvent, useFocusVisible } from '@nex-ui/hooks'
+import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
 import { switchRecipe } from '../../theme/recipes'
 import {
@@ -124,7 +124,6 @@ export const Switch = forwardRef(
       className,
       startIcon,
       endIcon,
-      defaultChecked,
       onCheckedChange,
       thumbIcon: thumbIconProp,
       checked: checkdeProp,
@@ -133,24 +132,21 @@ export const Switch = forwardRef(
       type = 'checkbox',
       tabIndex = 0,
       as = 'input',
+      defaultChecked = false,
+      color = primaryColor,
       onKeyDown: onKeyUpProp,
       onChange: onChangeProp,
       onClick: onClickProp,
-      color = primaryColor,
       ...remainingProps
     } = props
 
     const [focusVisible] = useFocusVisible({ ref: inputRef })
 
-    const [checked, setChecked] = useState(
-      checkdeProp ?? defaultChecked ?? false,
+    const [checked, setChecked] = useControlledState(
+      checkdeProp,
+      defaultChecked,
+      onCheckedChange,
     )
-
-    const checkedInProps = checkdeProp !== undefined
-
-    if (checkedInProps && checkdeProp !== checked) {
-      setChecked(checkdeProp)
-    }
 
     const ownerState = {
       ...props,
@@ -176,10 +172,7 @@ export const Switch = forwardRef(
         return
       }
 
-      if (!checkedInProps) {
-        setChecked(e.target.checked)
-      }
-      onCheckedChange?.(e.target.checked)
+      setChecked(e.target.checked)
       onChangeProp?.(e)
     })
 
@@ -191,10 +184,7 @@ export const Switch = forwardRef(
       }
 
       if (isString(as) && as !== 'input') {
-        if (!checkedInProps) {
-          setChecked((c: boolean) => !c)
-        }
-        onCheckedChange?.(!checked)
+        setChecked(!checked)
       }
 
       onClickProp?.(event)

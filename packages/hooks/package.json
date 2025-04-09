@@ -42,8 +42,9 @@
     },
     "./package.json": "./package.json"
   },
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "@nex-ui/utils": "workspace:*"
+  },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
