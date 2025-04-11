@@ -7,6 +7,8 @@ import type {
   InputRecipe,
   CheckboxRecipe,
   SwitchRecipe,
+  AccordionRecipe,
+  AccordionItemRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -24,6 +26,9 @@ import type {
   CheckboxOwnerState,
   SwitchProps,
   SwitchOwnerState,
+  AccordionProps,
+  AccordionOwnerState,
+  AccordionItemProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -76,6 +81,18 @@ export type ComponentThemes = {
       | ComponentThemeObject<SwitchRecipe>
       | ComponentThemeFn<SwitchOwnerState, SwitchRecipe>
     defaultProps?: SwitchProps
+  }
+  Accordion?: {
+    styleOverrides?:
+      | ComponentThemeObject<AccordionRecipe>
+      | ComponentThemeFn<AccordionOwnerState, AccordionRecipe>
+    defaultProps?: AccordionProps
+  }
+  AccordionItem?: {
+    styleOverrides?:
+      | ComponentThemeObject<AccordionItemRecipe>
+      | ComponentThemeFn<AccordionOwnerState, AccordionItemRecipe>
+    defaultProps?: AccordionItemProps
   }
 }
 

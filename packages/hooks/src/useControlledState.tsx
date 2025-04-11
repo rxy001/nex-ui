@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react'
 import { __DEV__, isFunction } from '@nex-ui/utils'
 import { useEvent } from './useEvent'

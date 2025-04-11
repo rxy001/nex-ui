@@ -1,3 +1,5 @@
+'use client'
+
 import { useEvent } from '@nex-ui/hooks'
 import { clamp } from '@nex-ui/utils'
 import type { MotionProps } from 'motion/react'
