@@ -1,15 +1,10 @@
-import {
-  describe,
-  expect,
-  it,
-  beforeEach,
-  jest,
-  afterEach,
-} from '@jest/globals'
 import { createAliases } from '../aliases'
 
 describe('createAliases', () => {
-  let consoleSpy: jest.SpiedFunction<() => void>
+  let consoleSpy: jest.SpyInstance<
+    void,
+    [message?: any, ...optionalParams: any[]]
+  >
 
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, 'error')

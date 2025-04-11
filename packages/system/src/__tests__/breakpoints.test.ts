@@ -1,15 +1,10 @@
-import {
-  describe,
-  expect,
-  it,
-  beforeEach,
-  afterEach,
-  jest,
-} from '@jest/globals'
 import { createBreakpoints, toMediaKey } from '../breakpoints'
 
 describe('createBreakpoint', () => {
-  let consoleSpy: jest.SpiedFunction<() => void>
+  let consoleSpy: jest.SpyInstance<
+    void,
+    [message?: any, ...optionalParams: any[]]
+  >
 
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, 'error')

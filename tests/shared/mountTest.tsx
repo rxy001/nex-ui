@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { it, expect } from '@jest/globals'
 import { renderWithNexProvider } from './renderWithProvider'
 
 export const mountTest = (Component: ReactNode) => {

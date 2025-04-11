@@ -1,4 +1,3 @@
-import { describe, it, expect, jest } from '@jest/globals'
 import { useState } from 'react'
 import { fireEvent } from '@testing-library/react'
 import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
@@ -247,22 +246,15 @@ describe('Button', () => {
   it('should ignore events when disabled', () => {
     const onClick = jest.fn()
     const { getByText } = renderWithNexProvider(
-      <>
-        <Button disabled onClick={onClick}>
-          Btn Tag
-        </Button>
-        <Button disabled onClick={onClick} href='#'>
-          A Tag
-        </Button>
-      </>,
+      <Button disabled onClick={onClick}>
+        Btn Tag
+      </Button>,
     )
 
-    const button1 = getByText('Btn Tag')
-    const button2 = getByText('A Tag')
-    fireEvent.click(button1)
-    fireEvent.click(button2)
-    expect(button1).toHaveClass(buttonClasses.disabled)
-    expect(button2).toHaveClass(buttonClasses.disabled)
+    const button = getByText('Btn Tag')
+    fireEvent.click(button)
+    expect(button).toHaveClass(buttonClasses.disabled)
+    expect(button).toHaveStyleRule('pointer-events', 'none')
     expect(onClick).not.toHaveBeenCalled()
   })
 

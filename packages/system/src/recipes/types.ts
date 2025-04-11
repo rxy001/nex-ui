@@ -138,7 +138,7 @@ export type RecipeVariants<
   V = Parameters<RecipeFn>[0],
 > = Exclude<
   {
-    [Key in keyof V]: V[Key]
+    [Key in keyof V]-?: V[Key]
   } & NonNullable<unknown>,
   undefined
 >

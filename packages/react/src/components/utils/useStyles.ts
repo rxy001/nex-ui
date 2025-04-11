@@ -44,6 +44,7 @@ export const useStyles = <
     // @ts-ignore
     return {
       ...extendedRecipe(extendedRecipe.splitVariantProps(ownerState)),
+      // @ts-ignore
       ...styleOverrides(ownerState),
     }
   }

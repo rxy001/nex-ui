@@ -4,13 +4,7 @@ import { LoadingOutlined } from '@nex-ui/icons'
 import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { nex } from '@nex-ui/styled'
 import { useRef } from 'react'
-import type {
-  Ref,
-  MouseEvent,
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-} from 'react'
+import type { Ref, ElementType, HTMLAttributes, KeyboardEvent } from 'react'
 import { isFunction, mergeRefs } from '@nex-ui/utils'
 import { useNexUI } from '../provider'
 import { buttonRecipe } from '../../theme/recipes'
@@ -75,7 +69,7 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
   return composedClasses
 }
 
-const useAriaProps = (
+const useSlotAriaProps = (
   ownerState: ButtonOwnerState,
 ): Record<'root' | 'icon', HTMLAttributes<HTMLElement>> => {
   const {
@@ -107,7 +101,6 @@ const useAriaProps = (
       role: role ?? 'button',
       tabIndex: disabled ? -1 : tabIndex,
       'aria-disabled': disabled || undefined,
-      'data-disabled': disabled || undefined,
     }
   }
 
@@ -148,12 +141,9 @@ export const Button = forwardRef(
       loading = false,
       disabled: disabledProp = false,
       fullWidth = false,
+      disableRipple = false,
       startIcon: startIconProp,
       endIcon: endIconProp,
-      onClick: onClickProp,
-      onKeyUp: onKeyUpProp,
-      onKeyDown: onKeyDownProp,
-      disableRipple,
       ...remainingProps
     } = props
 
@@ -167,7 +157,7 @@ export const Button = forwardRef(
       as !== undefined ? as : typeof href === 'string' && href ? 'a' : 'button'
     ) as 'button'
 
-    const ownerState = {
+    const ownerState: ButtonOwnerState = {
       ...props,
       type,
       tabIndex,
@@ -196,44 +186,31 @@ export const Button = forwardRef(
       recipe: buttonRecipe,
     })
 
-    const onClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
-      if (disabled) {
-        event.preventDefault()
-        return
-      }
+    const handleKeyDown = useEvent(
+      (event: KeyboardEvent<HTMLButtonElement>) => {
+        // Limit the repeated triggering of the click event when the Enter key is pressed.
+        if (
+          focusVisible &&
+          rootElement === 'button' &&
+          event.code === 'Enter'
+        ) {
+          event.preventDefault()
+        }
+      },
+    )
 
-      onClickProp?.(event)
-    })
-
-    const onKeyDown = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
-      // Limit the repeated triggering of the click event when the Enter key is pressed.
-      if (
-        focusVisible &&
-        !disabled &&
-        rootElement === 'button' &&
-        event.code === 'Enter'
-      ) {
-        event.preventDefault()
-      }
-
-      onKeyDownProp?.(event)
-    })
-
-    const onKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
+    const handleKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
       // Keyboard accessibility for non interactive elements
       if (
         focusVisible &&
-        !disabled &&
+        as !== 'button' &&
         (event.code === 'Space' || event.code === 'Enter')
       ) {
-        btnRef.current?.click()
+        event.currentTarget.click()
       }
-
-      onKeyUpProp?.(event)
     })
 
-    const { root: rootAriaProps, icon: iconAriaProps } =
-      useAriaProps(ownerState)
+    const slotAriaProps = useSlotAriaProps(ownerState)
 
     const rootProps = useSlotProps({
       ownerState,
@@ -241,13 +218,12 @@ export const Button = forwardRef(
       classNames: classes.root,
       sx: styles.root,
       additionalProps: {
-        onClick,
-        onKeyUp,
-        onKeyDown,
         href,
+        onKeyUp: handleKeyUp,
+        onKeyDown: handleKeyDown,
         ref: mergedRefs,
         as: rootElement,
-        ...rootAriaProps,
+        ...slotAriaProps.root,
       },
     })
 
@@ -256,7 +232,7 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.startIcon,
       classNames: classes.startIcon,
       sx: styles.startIcon,
-      additionalProps: iconAriaProps,
+      additionalProps: slotAriaProps.icon,
     })
 
     const endIconProps = useSlotProps({
@@ -264,11 +240,11 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.endIcon,
       classNames: classes.endIcon,
       sx: styles.endIcon,
-      additionalProps: iconAriaProps,
+      additionalProps: slotAriaProps.icon,
     })
 
     const loadingIcon = loading
-      ? (spinner ?? <Icon spin component={LoadingOutlined} />)
+      ? (spinner ?? <Icon spin as={LoadingOutlined} />)
       : null
 
     const startIcon = ((spinnerPlacement === 'start' && loading) ||

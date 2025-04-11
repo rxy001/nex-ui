@@ -1,6 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Avatar renders correctly 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: var(--nui-colors-gray-contrast-text);
+  background-color: var(--nui-colors-gray-primary);
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: var(--nui-sizes-10);
+  height: var(--nui-sizes-10);
+  font-size: var(--nui-font-sizes-lg);
+  border-radius: var(--nui-radii-lg);
+}
+
+.emotion-0 svg {
+  font-size: 1.6em;
+}
+
 <div
   class="nui-avatar-root nui-avatar-radius-md nui-avatar-size-md nui-avatar-color-gray emotion-0"
 >

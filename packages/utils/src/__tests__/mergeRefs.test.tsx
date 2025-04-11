@@ -1,6 +1,4 @@
 import { createRef } from 'react'
-import type { RefCallback } from 'react'
-import { describe, it, expect, jest } from '@jest/globals'
 import { render } from '@testing-library/react'
 import { mergeRefs } from '../mergeRefs'
 
@@ -13,9 +11,9 @@ describe('mergeRefs', () => {
 
   it('should call all function refs and set current for object refs when node is provided', () => {
     const ref1: React.MutableRefObject<string | null> = { current: null }
-    const ref2 = jest.fn<RefCallback<string>>()
+    const ref2 = jest.fn()
     const ref3: React.MutableRefObject<string | null> = { current: null }
-    const ref4 = jest.fn<RefCallback<string>>()
+    const ref4 = jest.fn()
 
     const composedRef = mergeRefs<string | null>(
       ref1,

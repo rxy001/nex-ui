@@ -1,4 +1,3 @@
-import { describe, it, expect } from '@jest/globals'
 import { createElement, forwardRef, memo } from 'react'
 import { supportRef } from '../supportRef'
 

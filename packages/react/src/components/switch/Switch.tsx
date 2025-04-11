@@ -7,8 +7,8 @@ import type {
   ElementType,
   Ref,
   HTMLAttributes,
-  MouseEvent,
   KeyboardEvent,
+  InputHTMLAttributes,
 } from 'react'
 import { isFunction, isString, mergeRefs } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
@@ -56,7 +56,7 @@ const useSlotClasses = (ownerState: SwitchOwnerState) => {
   return composedClasses
 }
 
-const useAriaProps = (
+const useSlotAriaProps = (
   ownerState: SwitchOwnerState,
 ): Record<'input' | 'track' | 'label', HTMLAttributes<HTMLElement>> => {
   const { checked, disabled, as, tabIndex, type, children } = ownerState
@@ -65,29 +65,33 @@ const useAriaProps = (
 
   const id = useId()
 
-  let input = {}
+  let input: InputHTMLAttributes<HTMLInputElement> = {
+    checked,
+    disabled,
+    type,
+    tabIndex: disabled ? -1 : tabIndex,
+  }
 
   if (as === 'input') {
     input = {
-      checked,
-      disabled,
-      type,
+      ...input,
       role: 'switch',
-      tabIndex: disabled ? -1 : tabIndex,
       'aria-labelledby': childrenString ? id : undefined,
       'aria-label': childrenString ? children : undefined,
     }
   } else if (isFunction(as)) {
-    input = { checked, disabled, type, tabIndex }
+    input = {
+      ...input,
+      tabIndex,
+    }
   } else {
     input = {
+      ...input,
       role: 'switch',
-      tabIndex: disabled ? -1 : tabIndex,
       'aria-checked': checked,
-      'aria-disabled': disabled || undefined,
       'aria-labelledby': childrenString ? id : undefined,
       'aria-label': childrenString ? children : undefined,
-      'data-disabled': disabled || undefined,
+      'aria-disabled': disabled || undefined,
     }
   }
 
@@ -134,9 +138,6 @@ export const Switch = forwardRef(
       as = 'input',
       defaultChecked = false,
       color = primaryColor,
-      onKeyDown: onKeyUpProp,
-      onChange: onChangeProp,
-      onClick: onClickProp,
       ...remainingProps
     } = props
 
@@ -148,7 +149,7 @@ export const Switch = forwardRef(
       onCheckedChange,
     )
 
-    const ownerState = {
+    const ownerState: SwitchOwnerState = {
       ...props,
       as,
       color,
@@ -157,7 +158,26 @@ export const Switch = forwardRef(
       size,
       type,
       tabIndex,
+      defaultChecked,
     }
+
+    const handleChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
+      setChecked(e.target.checked)
+    })
+
+    const handleClick = useEvent(() => {
+      // Compatible with non interactive elements
+      if (isString(as) && as !== 'input') {
+        setChecked(!checked)
+      }
+    })
+
+    const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
+      // Keyboard accessibility for non interactive elements
+      if (focusVisible && as !== 'input' && event.code === 'Space') {
+        event.currentTarget.click()
+      }
+    })
 
     const classes = useSlotClasses(ownerState)
 
@@ -167,48 +187,7 @@ export const Switch = forwardRef(
       recipe: switchRecipe,
     })
 
-    const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-      if (disabled) {
-        return
-      }
-
-      setChecked(e.target.checked)
-      onChangeProp?.(e)
-    })
-
-    const onClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
-      // Compatible with non interactive elements
-      if (disabled) {
-        event.preventDefault()
-        return
-      }
-
-      if (isString(as) && as !== 'input') {
-        setChecked(!checked)
-      }
-
-      onClickProp?.(event)
-    })
-
-    const onKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
-      // Keyboard accessibility for non interactive elements
-      if (
-        focusVisible &&
-        !disabled &&
-        as !== 'input' &&
-        event.code === 'Space'
-      ) {
-        inputRef.current?.click()
-      }
-
-      onKeyUpProp?.(event)
-    })
-
-    const {
-      input: inputAriaProps,
-      track: trackAriaProps,
-      label: labelAriaProps,
-    } = useAriaProps(ownerState)
+    const slotAriaProps = useSlotAriaProps(ownerState)
 
     const mergedRefs = mergeRefs(ref, inputRef)
 
@@ -228,11 +207,11 @@ export const Switch = forwardRef(
       classNames: classes.input,
       additionalProps: {
         as,
-        onChange,
-        onClick,
-        onKeyUp,
+        onChange: handleChange,
+        onClick: handleClick,
+        onKeyUp: handleKeyUp,
         ref: mergedRefs,
-        ...inputAriaProps,
+        ...slotAriaProps.input,
       },
     })
 
@@ -241,7 +220,7 @@ export const Switch = forwardRef(
       externalSlotProps: slotProps?.track,
       sx: styles.track,
       classNames: classes.track,
-      additionalProps: trackAriaProps,
+      additionalProps: slotAriaProps.track,
     })
 
     const thumbProps = useSlotProps({
@@ -270,7 +249,7 @@ export const Switch = forwardRef(
       externalSlotProps: slotProps?.label,
       sx: styles.label,
       classNames: classes.label,
-      additionalProps: labelAriaProps,
+      additionalProps: slotAriaProps.label,
     })
 
     const thumbIcon = isFunction(thumbIconProp)

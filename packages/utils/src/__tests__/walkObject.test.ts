@@ -1,4 +1,3 @@
-import { describe, it, expect, jest } from '@jest/globals'
 import { walkObject } from '../walkObject'
 
 describe('walkObject', () => {

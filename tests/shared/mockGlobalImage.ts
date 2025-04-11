@@ -1,5 +1,3 @@
-import { jest } from '@jest/globals'
-
 export const mockGlobalImage = (status: 'loaded' | 'error') => {
   global.Image = jest.fn(() => {
     const imageMock: Partial<HTMLImageElement> = {}

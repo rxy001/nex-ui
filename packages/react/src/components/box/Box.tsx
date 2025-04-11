@@ -7,13 +7,14 @@ import type { BoxProps } from './types'
 
 export const Box = forwardRef(
   <RootComponent extends ElementType = 'div'>(
-    inProps: BoxProps<RootComponent>,
+    props: BoxProps<RootComponent>,
     ref: Ref<HTMLDivElement>,
   ) => {
     const rootProps = useSlotProps({
-      externalForwardedProps: inProps as BoxProps,
+      externalForwardedProps: props as BoxProps,
       additionalProps: {
         ref,
+        as: props.as || 'div',
       },
     })
 

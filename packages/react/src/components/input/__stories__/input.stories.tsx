@@ -72,8 +72,8 @@ export const InputWithIcons: Story = {
   render: (args) => {
     return (
       <Flex gap='4'>
-        <Input {...args} suffix={<Icon component={SearchOutlined} />} />
-        <Input {...args} prefix={<Icon component={SearchOutlined} />} />
+        <Input {...args} suffix={<Icon as={SearchOutlined} />} />
+        <Input {...args} prefix={<Icon as={SearchOutlined} />} />
       </Flex>
     )
   },

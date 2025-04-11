@@ -1,4 +1,3 @@
-import { describe, it, expect } from '@jest/globals'
 import { defineSlotRecipe } from '../recipes'
 
 describe('SlotRecieps', () => {

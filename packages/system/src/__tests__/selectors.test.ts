@@ -1,15 +1,10 @@
-import {
-  describe,
-  expect,
-  it,
-  beforeEach,
-  afterEach,
-  jest,
-} from '@jest/globals'
 import { createSelectors } from '../selectors'
 
 describe('createSelectors', () => {
-  let consoleSpy: jest.SpiedFunction<() => void>
+  let consoleSpy: jest.SpyInstance<
+    void,
+    [message?: any, ...optionalParams: any[]]
+  >
 
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, 'error')

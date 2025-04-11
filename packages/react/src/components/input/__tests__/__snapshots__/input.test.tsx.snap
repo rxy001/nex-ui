@@ -1,6 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input renders correctly 1`] = `
+.emotion-0 {
+  border: var(--nui-borders-md);
+  box-sizing: border-box;
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: var(--nui-spaces-0-5);
+  cursor: text;
+  padding-inline: var(--nui-spaces-4);
+  font-size: var(--nui-font-sizes-lg);
+  height: var(--nui-sizes-10);
+  border-radius: var(--nui-radii-lg);
+  border-color: var(--nui-colors-gray-highlight);
+}
+
+.emotion-0:hover {
+  border-color: var(--nui-colors-blue-secondary);
+}
+
+.emotion-0:focus-within {
+  border-color: var(--nui-colors-blue-tertiary);
+}
+
+.emotion-1 {
+  outline: none;
+  border: none;
+  font-size: inherit;
+  background-color: transparent;
+  color: inherit;
+  height: 100%;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  cursor: inherit;
+}
+
 <label
   class="nui-input-root nui-input-variant-outlined nui-input-radius-md nui-input-size-md nui-input-color-blue emotion-0"
 >

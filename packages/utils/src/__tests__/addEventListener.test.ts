@@ -1,4 +1,3 @@
-import { describe, it, jest, expect } from '@jest/globals'
 import { fireEvent } from '@testing-library/dom'
 import { addEventListener } from '../addEventListener'
 
