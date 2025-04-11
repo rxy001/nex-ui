@@ -94,17 +94,19 @@ export const Avatar = forwardRef(
       srcSet,
       slotProps,
       children: childrenProp,
+      as = 'div',
       size = 'md',
       radius = size,
       color = 'gray',
       ...remainingProps
     } = props
 
-    const ownerState = {
+    const ownerState: AvatarOwnerState = {
       ...props,
       size,
       radius,
       color,
+      as,
     }
 
     const styles = useStyles({
@@ -126,6 +128,7 @@ export const Avatar = forwardRef(
       sx: styles.root,
       additionalProps: {
         ref,
+        as,
       },
     })
 

@@ -83,13 +83,8 @@ export const buttonRecipe = defineSlotRecipe({
     disabled: {
       true: {
         root: {
-          _disabled: {
-            cursor: 'not-allowed',
-            opacity: 0.6,
-            '& a': {
-              pointerEvents: 'none',
-            },
-          },
+          opacity: 0.6,
+          pointerEvents: 'none',
         },
       },
     },

@@ -48,8 +48,8 @@ export const Icon = forwardRef(
     })
 
     const {
+      as,
       color,
-      component,
       spin = false,
       size = 'md',
       width = '1em',
@@ -57,12 +57,14 @@ export const Icon = forwardRef(
       ...remainingProps
     } = props
 
-    if (__DEV__ && !component) {
-      console.warn('[Nex UI] Icon: Please pass the "component" property.')
+    if (__DEV__ && !as) {
+      console.warn('[Nex UI] Icon: Please pass the "as" property.')
     }
 
-    const ownerState = {
+    const ownerState: IconOwnerState = {
       ...props,
+      color,
+      as,
       spin,
       size,
       width,
@@ -84,6 +86,7 @@ export const Icon = forwardRef(
       classNames: classes.root,
       additionalProps: {
         ref,
+        as,
         sx: {
           color,
           width,
@@ -92,7 +95,7 @@ export const Icon = forwardRef(
       },
     })
 
-    return <nex.span as={component} {...rootIcon} />
+    return <nex.span {...rootIcon} />
   },
 )
 

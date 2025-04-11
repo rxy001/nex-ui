@@ -1,6 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Icon renders correctly 1`] = `
+.emotion-0 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  font-size: 1.5em;
+  width: 1em;
+  height: 1em;
+}
+
 <svg
   class="nui-icon-root nui-icon-size-md nui-icon-width-1em nui-icon-height-1em emotion-0"
   fill="currentColor"

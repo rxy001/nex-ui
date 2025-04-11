@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Divider renders correctly 1`] = `
+.emotion-0 {
+  margin: 0;
+  border: none;
+  background-color: var(--nui-colors-gray-muted);
+  height: var(--nui-sizes-px);
+  margin-block: var(--nui-spaces-6);
+}
+
 <hr
   class="nui-divider-root nui-divider-orientation-horizontal emotion-0"
   role="separator"

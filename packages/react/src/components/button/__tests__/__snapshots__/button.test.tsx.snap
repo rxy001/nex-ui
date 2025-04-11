@@ -1,6 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button renders correctly 1`] = `
+.emotion-0 {
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: var(--nui-line-heights-base);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--nui-colors-blue-primary);
+  color: var(--nui-colors-blue-contrast-text);
+  padding-inline: var(--nui-spaces-4);
+  font-size: var(--nui-font-sizes-lg);
+  height: var(--nui-sizes-10);
+  border-radius: var(--nui-radii-lg);
+}
+
+.emotion-0 svg {
+  font-size: 1.3em;
+}
+
+.emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
+  outline: var(--nui-borders-focus-visible-outline);
+  outline-offset: var(--nui-spaces-0-5);
+}
+
+.emotion-0:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
+  background-color: var(--nui-colors-blue-secondary);
+}
+
 <button
   class="nui-btn-root nui-btn-variant-solid nui-btn-radius-md nui-btn-size-md nui-btn-color-blue emotion-0"
   tabindex="0"
@@ -11,6 +61,56 @@ exports[`Button renders correctly 1`] = `
 `;
 
 exports[`Button should support link button 1`] = `
+.emotion-0 {
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: var(--nui-line-heights-base);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--nui-colors-blue-primary);
+  color: var(--nui-colors-blue-contrast-text);
+  padding-inline: var(--nui-spaces-4);
+  font-size: var(--nui-font-sizes-lg);
+  height: var(--nui-sizes-10);
+  border-radius: var(--nui-radii-lg);
+}
+
+.emotion-0 svg {
+  font-size: 1.3em;
+}
+
+.emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
+  outline: var(--nui-borders-focus-visible-outline);
+  outline-offset: var(--nui-spaces-0-5);
+}
+
+.emotion-0:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
+  background-color: var(--nui-colors-blue-secondary);
+}
+
 <a
   class="nui-btn-root nui-btn-variant-solid nui-btn-radius-md nui-btn-size-md nui-btn-color-blue emotion-0"
   href="https://"

@@ -51,15 +51,17 @@ export const Flex = forwardRef(
       justify,
       align,
       wrap,
+      as = 'div',
       direction = 'row',
       inline = false,
       ...remainingProps
     } = props
 
-    const ownerState = {
+    const ownerState: FlexOwnerState = {
       ...props,
       direction,
       inline,
+      as,
     }
 
     const classes = useSlotClasses(ownerState)

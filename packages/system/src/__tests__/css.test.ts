@@ -1,4 +1,3 @@
-import { describe, it, expect, jest } from '@jest/globals'
 import { createSystem } from '../system'
 import { defineConfig } from '../defineConfig'
 import { toMediaKey } from '../breakpoints'

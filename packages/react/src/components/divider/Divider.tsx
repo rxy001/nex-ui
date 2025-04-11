@@ -40,9 +40,9 @@ export const Divider = forwardRef(
       props: inProps,
     })
 
-    const { orientation = 'horizontal', ...remainingProps } = props
+    const { orientation = 'horizontal', as = 'hr', ...remainingProps } = props
 
-    const ownerState = { ...props, orientation }
+    const ownerState: DividerOwnerState = { ...props, orientation, as }
 
     const classes = useSlotClasses(ownerState)
 

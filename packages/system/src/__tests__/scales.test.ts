@@ -1,15 +1,10 @@
-import {
-  describe,
-  expect,
-  it,
-  beforeEach,
-  jest,
-  afterEach,
-} from '@jest/globals'
 import { createScales } from '../scales'
 
 describe('createScales', () => {
-  let consoleSpy: jest.SpiedFunction<() => void>
+  let consoleSpy: jest.SpyInstance<
+    void,
+    [message?: any, ...optionalParams: any[]]
+  >
 
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, 'error')

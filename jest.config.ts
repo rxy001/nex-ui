@@ -45,7 +45,6 @@ const jestConfig = {
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
   watchman: true,
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  injectGlobals: false,
 }
 
 export default jestConfig

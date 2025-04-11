@@ -1,5 +1,4 @@
 import { forwardRef } from 'react'
-import { describe, it, expect } from '@jest/globals'
 import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
 import { Icon } from '../Icon'
 
@@ -18,11 +17,11 @@ const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
 ))
 
 describe('Icon', () => {
-  mountTest(<Icon component={HeartSvg} />)
-  refTest(<Icon component={HeartSvg} />)
+  mountTest(<Icon as={HeartSvg} />)
+  refTest(<Icon as={HeartSvg} />)
 
   it('renders correctly', () => {
-    const { container } = renderWithNexProvider(<Icon component={HeartSvg} />)
+    const { container } = renderWithNexProvider(<Icon as={HeartSvg} />)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 })

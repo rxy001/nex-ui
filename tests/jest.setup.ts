@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom/jest-globals'
-import { createSerializer } from '@emotion/jest'
-import { expect } from '@jest/globals'
+import '@testing-library/jest-dom'
+import { createSerializer, matchers } from '@emotion/jest'
 
-expect.addSnapshotSerializer(createSerializer({ includeStyles: false }))
+expect.addSnapshotSerializer(createSerializer({ includeStyles: true }))
+expect.extend(matchers)

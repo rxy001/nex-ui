@@ -160,7 +160,7 @@ export const switchRecipe = defineSlotRecipe({
       true: {
         root: {
           opacity: 0.6,
-          cursor: 'not-allowed',
+          pointerEvents: 'none',
         },
       },
     },

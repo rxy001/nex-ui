@@ -23,14 +23,21 @@ type InputSlotProps<InputComponent extends ElementType> = {
 type InputOwnProps<InputComponent extends ElementType> = {
   prefix?: ReactNode
   suffix?: ReactNode
-  clearable?: boolean
   onClear?: () => void
   classes?: ComponentUtilityClasses<'root' | 'input' | 'clearBtn'>
   slotProps?: InputSlotProps<InputComponent>
   className?: ClassValue
   as?: InputComponent
   sx?: SxProps<InputOwnerState<InputComponent>>
-} & InputVariants
+  disabled?: boolean
+  fullWidth?: boolean
+  error?: boolean
+  clearable?: boolean
+  size?: InputVariants['size']
+  variant?: InputVariants['variant']
+  color?: InputVariants['color']
+  radius?: InputVariants['radius']
+}
 
 export type InputProps<InputComponent extends ElementType = 'input'> =
   OverrideProps<
