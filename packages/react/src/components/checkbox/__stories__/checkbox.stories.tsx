@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Checkbox } from '../Checkbox'
-import { CheckboxGroup as CheckboxGroupComponent } from '../CheckboxGroup'
+import type { CheckboxProps } from '../types'
 
 const HeartIcon = (props: any) => {
   return (
@@ -26,7 +26,7 @@ const HeartIcon = (props: any) => {
 
 const meta = {
   title: 'Components/Checkbox',
-  component: Checkbox,
+  component: Checkbox<'input'>,
   argTypes: {
     color: {
       options: [
@@ -53,21 +53,37 @@ const meta = {
     disabled: {
       control: 'boolean',
     },
+    defaultChecked: {
+      control: 'boolean',
+    },
   },
   args: {
     color: 'blue',
     size: 'md',
     disabled: false,
     children: 'Checkbox',
+    defaultChecked: false,
   },
-} satisfies Meta<typeof Checkbox>
+} satisfies Meta<typeof Checkbox<'input'>>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BasicCheckbox: Story = {
+export const Default: Story = {
   args: {},
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+}
+
+export const DefaultChecked: Story = {
+  args: {
+    defaultChecked: true,
+  },
 }
 
 export const CustomCheckIcon: Story = {
@@ -76,27 +92,19 @@ export const CustomCheckIcon: Story = {
   },
 }
 
-export const CheckboxGroup: Story = {
-  render: ({ color, size, disabled, radius }) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = useState(['pear'])
+function ControlledTemplate(props: CheckboxProps) {
+  const [checked, setChecked] = useState(false)
 
-    return (
-      <div>
-        <CheckboxGroupComponent
-          radius={radius}
-          color={color}
-          size={size}
-          disabled={disabled}
-          value={value}
-          onValueChange={setValue}
-        >
-          <Checkbox value='apple'>Apple</Checkbox>
-          <Checkbox value='pear'>Pear</Checkbox>
-          <Checkbox value='orange'>Orange</Checkbox>
-        </CheckboxGroupComponent>
-        <p>Selected: {value.join(', ')}</p>
-      </div>
-    )
-  },
+  return (
+    <div>
+      <Checkbox {...props} checked={checked} onCheckedChange={setChecked}>
+        Controlled Checkbox
+      </Checkbox>
+      <p>checked: {checked ? 'true' : 'false'}</p>
+    </div>
+  )
+}
+
+export const Controlled: Story = {
+  render: ControlledTemplate,
 }

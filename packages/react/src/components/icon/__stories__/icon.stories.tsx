@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Icon } from '../Icon'
+import { Icon as IconComponent } from '../Icon'
 
 const meta = {
   title: 'Components/Icon',
-  component: Icon,
-} satisfies Meta<typeof Icon>
+  component: IconComponent,
+} satisfies Meta<typeof IconComponent>
 
 export default meta
 
@@ -23,7 +23,7 @@ const HeartSvg = (props: any) => (
   </svg>
 )
 
-export const BasicIcon: Story = {
+export const CustomIcon: Story = {
   args: {
     as: HeartSvg,
     color: '#1677ff',

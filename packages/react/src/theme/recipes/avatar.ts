@@ -54,6 +54,14 @@ export const avatarRecipe = defineSlotRecipe({
     },
     radius: toSlot(radiusVariant, 'root'),
     color: toSlot(colorVariant, 'root'),
+    outlined: {
+      true: {
+        root: {
+          outline: '2px solid {colors.colorPalette.primary}',
+          outlineOffset: '0.5',
+        },
+      },
+    },
   },
   defaultVariants: {
     size: 'md',

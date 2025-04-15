@@ -98,6 +98,7 @@ export const Avatar = forwardRef(
       size = 'md',
       radius = size,
       color = 'gray',
+      outlined = false,
       ...remainingProps
     } = props
 
@@ -107,6 +108,7 @@ export const Avatar = forwardRef(
       radius,
       color,
       as,
+      outlined,
     }
 
     const styles = useStyles({

@@ -19,7 +19,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BasicDivider: Story = {
+export const Default: Story = {
   render: (args) => (
     <div style={{ height: 400 }}>
       <Divider {...args} />

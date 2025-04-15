@@ -57,7 +57,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BasicAccordion: Story = {}
+export const Default: Story = {}
 
 export const Multiple: Story = {
   args: {
@@ -65,7 +65,7 @@ export const Multiple: Story = {
   },
 }
 
-export const KeepContentMounted: Story = {
+export const KeepMounted: Story = {
   args: {
     keepMounted: true,
   },
