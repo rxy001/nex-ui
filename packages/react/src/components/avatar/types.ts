@@ -32,6 +32,12 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   alt?: string
 
   /**
+   * If true, adds an outline around the avatar.
+   * @default false
+   */
+  outlined?: boolean
+
+  /**
    * The src attribute for the img element.
    */
   src?: string

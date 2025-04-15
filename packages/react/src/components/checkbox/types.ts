@@ -133,9 +133,7 @@ export type CheckboxOwnerState<
 
 export type CheckboxGroupValueType = number | string
 
-export type CheckboxGroupProps<
-  T extends CheckboxGroupValueType = CheckboxGroupValueType,
-> = {
+export type CheckboxGroupProps<T extends CheckboxGroupValueType = string> = {
   /**
    * The current selected values. (controlled)
    */
@@ -186,9 +184,7 @@ export type CheckboxGroupProps<
   radius?: CheckboxVariants['radius']
 }
 
-export type CheckboxGroupContext<
-  T extends CheckboxGroupValueType = CheckboxGroupValueType,
-> = {
+export type CheckboxGroupContext<T extends CheckboxGroupValueType = string> = {
   toggleValue: (value: T) => void
   isChecked: (value?: T) => boolean
   name?: string

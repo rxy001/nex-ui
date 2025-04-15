@@ -68,7 +68,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BasicButton: Story = {
+export const Default: Story = {
   args: {},
 }
 
@@ -93,10 +93,16 @@ export const IconButton: Story = {
   },
 }
 
-export const ButtonWithIcons: Story = {
+export const WithIcons: Story = {
   args: {
     children: 'Button',
     startIcon: <LikeFilled />,
     endIcon: <DislikeFilled />,
+  },
+}
+
+export const DisableRipple: Story = {
+  args: {
+    disableRipple: true,
   },
 }

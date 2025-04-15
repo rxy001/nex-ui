@@ -39,13 +39,13 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BasicSwitch: Story = {
+export const Default: Story = {
   args: {
     children: 'Switch',
   },
 }
 
-export const SwitchWithIcons: Story = {
+export const WithIcons: Story = {
   args: {
     startIcon: <SunFilled />,
     endIcon: <MoonFilled />,
@@ -56,7 +56,7 @@ export const SwitchWithIcons: Story = {
   },
 }
 
-export const SwitchWithThumbIcon: Story = {
+export const WithThumbIcon: Story = {
   args: {
     thumbIcon: (e) => (e.checked ? <SunFilled /> : <MoonFilled />),
     size: 'lg',

@@ -66,9 +66,9 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BasicInput: Story = {}
+export const Default: Story = {}
 
-export const InputWithIcons: Story = {
+export const WithIcons: Story = {
   render: (args) => {
     return (
       <Flex gap='4'>
