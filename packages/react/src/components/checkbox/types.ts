@@ -31,7 +31,7 @@ type CheckboxSlotProps<CheckboxComponent extends ElementType> = {
 
 type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
-   * The component or element to render as the root.
+   * The component used for the input element.
    * @default 'input'
    */
   as?: CheckboxComponent

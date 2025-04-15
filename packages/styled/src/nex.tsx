@@ -1,3 +1,5 @@
+'use client'
+
 import { withEmotionCache } from '@emotion/react'
 import { __DEV__, forEach } from '@nex-ui/utils'
 import { useSystem } from '@nex-ui/system'

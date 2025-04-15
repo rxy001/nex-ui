@@ -1,3 +1,5 @@
+'use client'
+
 import { useEvent } from '@nex-ui/hooks'
 import { clamp } from '@nex-ui/utils'
 import type { MotionProps } from 'motion/react'
@@ -69,35 +71,24 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
 
           return (
             <AnimatePresence mode='popLayout' key={ripple.key}>
+              {/* @ts-ignore */}
               <m.span
                 animate={{ transform: 'scale(2)', opacity: 0 }}
                 className='heroui-ripple'
                 exit={{ opacity: 0 }}
                 initial={{ transform: 'scale(0)', opacity: 0.35 }}
                 style={{
-                  // @ts-ignore
                   position: 'absolute',
-                  // @ts-ignore
                   backgroundColor: 'currentcolor',
-                  // @ts-ignore
                   borderRadius: '100%',
-                  // @ts-ignore
                   transformOrigin: 'center',
-                  // @ts-ignore
                   pointerEvents: 'none',
-                  // @ts-ignore
                   overflow: 'hidden',
-                  // @ts-ignore
                   inset: 0,
-                  // @ts-ignore
                   zIndex: 0,
-                  // @ts-ignore
                   top: ripple.y,
-                  // @ts-ignore
                   left: ripple.x,
-                  // @ts-ignore
                   width: `${ripple.size}px`,
-                  // @ts-ignore
                   height: `${ripple.size}px`,
                   ...motionStyle,
                 }}

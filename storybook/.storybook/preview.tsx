@@ -25,6 +25,11 @@ const preview: Preview = {
         ],
       },
     },
+    options: {
+      storySort: {
+        method: 'alphabetical',
+      },
+    },
   },
 
   decorators: [
@@ -41,6 +46,8 @@ const preview: Preview = {
       </NexUIProvider>
     ),
   ],
+
+  // tags: ['autodocs'],
 }
 
 export default preview

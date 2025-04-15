@@ -25,7 +25,7 @@ const HeartSvg = (props: any) => (
 
 export const BasicIcon: Story = {
   args: {
-    component: HeartSvg,
+    as: HeartSvg,
     color: '#1677ff',
     fontSize: 'lg',
   },

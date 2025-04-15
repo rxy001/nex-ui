@@ -1,7 +1,7 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { Ref, ElementType } from 'react'
+import { type Ref, type ElementType } from 'react'
 import { forwardRef, useSlotProps } from '../utils'
 import type { BoxProps } from './types'
 

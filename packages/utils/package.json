@@ -55,7 +55,8 @@
     "lodash.mergewith": "4.6.2",
     "lodash.pickby": "4.6.0",
     "lodash.reduce": "4.6.0",
-    "lodash.some": "4.6.0"
+    "lodash.some": "4.6.0",
+    "react-is": "18.3.1"
   },
   "devDependencies": {
     "@types/lodash.clamp": "4.0.9",
@@ -74,8 +75,7 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18",
-    "react-is": ">=18"
+    "react-dom": ">=18"
   },
   "sideEffects": false
 }

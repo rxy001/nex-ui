@@ -57,3 +57,5 @@
 25. createTokens 延迟生成含有 token 引用语法的 token，以规避 token 定义顺序的限制
 
 26. color token 支持 opacity 修饰符
+
+27. 优化 useSlotProps 属性优先级，例如 accordionItems.trigger 的 tabIndex

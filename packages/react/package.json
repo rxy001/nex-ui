@@ -42,7 +42,8 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "@storybook/react": "8.0.10"
+    "@storybook/react": "8.0.10",
+    "framer-motion": "12.7.2"
   },
   "dependencies": {
     "@nex-ui/hooks": "workspace:*",
@@ -51,7 +52,7 @@
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
     "clsx": "2.1.1",
-    "motion": "12.4.10"
+    "motion": "12.7.2"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

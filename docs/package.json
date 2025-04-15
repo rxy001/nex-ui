@@ -17,12 +17,12 @@
   ],
   "dependencies": {
     "@codesandbox/sandpack-react": "2.19.11",
-    "@emotion/cache": "11.13.1",
-    "@emotion/react": "11.13.5",
+    "@emotion/react": "11.11.4",
     "@headlessui/react": "2.2.0",
     "@nex-ui/hooks": "workspace:*",
     "@nex-ui/icons": "workspace:*",
     "@nex-ui/react": "workspace:*",
+    "@nex-ui/styled": "workspace:*",
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
     "@next/bundle-analyzer": "15.2.0",
@@ -32,8 +32,8 @@
     "hast-util-to-jsx-runtime": "2.3.2",
     "next": "15.1.6",
     "nextra": "4.2.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "scroll-into-view-if-needed": "3.1.0",
     "shiki": "2.3.1",
     "zod": "3.24.1",
@@ -42,12 +42,12 @@
   },
   "devDependencies": {
     "@svgr/webpack": "8.1.0",
-    "@tailwindcss/postcss": "4.0.3",
+    "@tailwindcss/postcss": "4.1.4",
     "autoprefixer": "10.4.20",
     "pagefind": "1.3.0",
     "postcss": "8.5.1",
     "raw-loader": "4.0.2",
-    "tailwindcss": "4.0.3"
+    "tailwindcss": "4.1.4"
   },
   "overrides": {
     "shiki": "2.3.1"

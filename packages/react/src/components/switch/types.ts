@@ -43,7 +43,7 @@ type SwitchSlotProps<SwitchComponent extends ElementType> = {
 
 export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   /**
-   * The component used for the root node.
+   * The component used for the input element.
    * @default 'input'
    */
   as?: SwitchComponent

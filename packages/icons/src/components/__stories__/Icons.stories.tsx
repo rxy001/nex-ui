@@ -12,6 +12,7 @@ const meta = {
           display: 'flex',
           fontSize: '30px',
           gap: '10px',
+          flexWrap: 'wrap',
         }}
       >
         {map(Icon, (Component, index) => (
