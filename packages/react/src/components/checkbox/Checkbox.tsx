@@ -14,7 +14,7 @@ import type {
 } from 'react'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
-import { useCheckboxGroupContext } from './CheckboxGroupContext'
+import { useCheckboxGroup } from './CheckboxGroupContext'
 import {
   forwardRef,
   useDefaultProps,
@@ -121,7 +121,7 @@ export const Checkbox = forwardRef(
       props: inProps,
     })
 
-    const groupCtx = useCheckboxGroupContext()
+    const groupCtx = useCheckboxGroup()
 
     const inGroup = !!groupCtx
 

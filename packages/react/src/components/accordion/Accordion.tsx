@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { filter } from '@nex-ui/utils'
 import type { ElementType, Ref, Key } from 'react'
-import { AccordionProvider } from './Context'
+import { AccordionGroupProvider } from './AccordionContext'
 import { useNexUI } from '../provider'
 import {
   useDefaultProps,
@@ -147,9 +147,9 @@ export const Accordion = forwardRef(
     )
 
     return (
-      <AccordionProvider value={ctx}>
+      <AccordionGroupProvider value={ctx}>
         <nex.div {...rootProps}>{children}</nex.div>
-      </AccordionProvider>
+      </AccordionGroupProvider>
     )
   },
 )

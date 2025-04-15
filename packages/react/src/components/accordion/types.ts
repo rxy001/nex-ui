@@ -211,3 +211,15 @@ export type AccordionItemOwnerState<RootComponent extends ElementType = 'div'> =
     disabled: boolean
     variant: AccordionItemVariants['variant']
   }
+
+export type AccordionGroupContextValue = {
+  expandedKeys: Key[]
+  toggleExpandedKey: (key: Key) => void
+  keepMounted: boolean
+  hideIndicator: boolean
+  disabledExpandedKeys: Key[]
+  disabled: boolean
+  indicator?: ComponentType<any>
+  motionProps?: MotionProps
+  variant: AccordionItemVariants['variant']
+}

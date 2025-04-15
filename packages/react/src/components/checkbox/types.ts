@@ -186,7 +186,7 @@ export type CheckboxGroupProps<
   radius?: CheckboxVariants['radius']
 }
 
-export type CheckboxGroupContext<
+export type CheckboxGroupContextValue<
   T extends CheckboxGroupValueType = CheckboxGroupValueType,
 > = {
   toggleValue: (value: T) => void

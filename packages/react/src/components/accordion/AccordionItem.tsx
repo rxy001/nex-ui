@@ -25,7 +25,7 @@ import {
   composeClasses,
   getUtilityClass,
 } from '../utils'
-import { useAccordion } from './Context'
+import { useAccordionGroup } from './AccordionContext'
 import { Icon } from '../icon'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
 
@@ -163,7 +163,7 @@ export const AccordionItem = forwardRef(
       motionProps: defaultMotionProps,
       keepMounted: defaultKeepMounted,
       hideIndicator: defaultHideIndicator,
-    } = useAccordion()
+    } = useAccordionGroup()
 
     const {
       children,

@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { CheckboxGroupProvider } from './CheckboxGroupContext'
 import type {
-  CheckboxGroupContext,
+  CheckboxGroupContextValue,
   CheckboxGroupProps,
   CheckboxGroupValueType,
 } from './types'
@@ -32,7 +32,7 @@ export const CheckboxGroup = <
     onValueChange,
   )
 
-  const ctx: CheckboxGroupContext<T> = useMemo(
+  const ctx: CheckboxGroupContextValue<T> = useMemo(
     () => ({
       disabled,
       name,

@@ -1,12 +1,12 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { CheckboxGroupContext } from './types'
+import type { CheckboxGroupContextValue } from './types'
 
-export const [CheckboxGroupProvider, useCheckboxGroupContext] =
-  createContext<CheckboxGroupContext>({
+export const [CheckboxGroupProvider, useCheckboxGroup] =
+  createContext<CheckboxGroupContextValue>({
     contextName: 'CheckboxGroupContext',
     providerName: 'CheckboxGroupProvider',
-    hookName: 'useCheckboxGroupContext',
+    hookName: 'useCheckboxGroup',
     strict: false,
   })
