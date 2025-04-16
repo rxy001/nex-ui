@@ -39,7 +39,7 @@ export const accordionItemRecipe = defineSlotRecipe({
       px: '4',
       cursor: 'pointer',
       alignItems: 'center',
-      fontSize: 'inherit',
+      fs: 'inherit',
       justifyContent: 'space-between',
       boxSizing: 'border-box',
       fontWeight: 'inherit',
@@ -53,7 +53,8 @@ export const accordionItemRecipe = defineSlotRecipe({
       fs: 16,
     },
     indicator: {
-      display: 'block',
+      fs: '1.25rem',
+      display: 'flex',
     },
   },
   variants: {

@@ -264,6 +264,9 @@ importers:
       '@emotion/react':
         specifier: '>=11'
         version: 11.11.4(@types/react@18.3.8)(react@18.3.1)
+      '@nex-ui/styled':
+        specifier: workspace:*
+        version: link:../styled
       '@nex-ui/utils':
         specifier: workspace:*
         version: link:../utils
@@ -274,6 +277,9 @@ importers:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@nex-ui/system':
+        specifier: workspace:*
+        version: link:../system
       '@storybook/react':
         specifier: 8.0.10
         version: 8.0.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.3)

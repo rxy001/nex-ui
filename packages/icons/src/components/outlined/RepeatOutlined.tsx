@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Repeat from '../../svg/outlined/repeat.svg'
 
-export const RepeatOutlined = Repeat
-
-RepeatOutlined.displayName = 'RepeatOutlined'
+export const RepeatOutlined = createIcon(Repeat, 'RepeatOutlined')

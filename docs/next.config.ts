@@ -96,7 +96,7 @@ export default withAnalyzer(
       //   },
       // },
       // 未设置改配置时，webpack 全量导入 icons, why?
-      optimizePackageImports: ['@nex-ui/icons'],
+      // optimizePackageImports: ['@nex-ui/icons'],
     },
   }),
 )

@@ -37,6 +37,8 @@ export const CheckedIcon = ({ checked }: CheckedIconProps) => {
         strokeWidth='1.5'
         stroke='currentColor'
         initial={false}
+        aria-hidden
+        focusable={false}
         animate={checked ? 'checked' : 'unchecked'}
       >
         <m.path

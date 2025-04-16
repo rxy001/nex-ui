@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Like from '../../svg/outlined/like.svg'
 
-export const LikeOutlined = Like
-
-LikeOutlined.displayName = 'LikeOutlined'
+export const LikeOutlined = createIcon(Like, 'LikeOutlined')

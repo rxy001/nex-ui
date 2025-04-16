@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Search from '../../svg/outlined/search.svg'
 
-export const SearchOutlined = Search
-
-SearchOutlined.displayName = 'SearchOutlined'
+export const SearchOutlined = createIcon(Search, 'SearchOutlined')

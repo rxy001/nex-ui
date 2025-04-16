@@ -59,7 +59,7 @@ const useSlotClasses = (ownerState: CheckboxOwnerState) => {
 
 const useSlotAriaProps = (
   ownerState: CheckboxOwnerState,
-): Record<'input' | 'icon' | 'label', HTMLAttributes<HTMLElement>> => {
+): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
   const id = useId()
   const { as, disabled, tabIndex, type, checked, children, value } = ownerState
 
@@ -96,16 +96,11 @@ const useSlotAriaProps = (
     }
   }
 
-  const icon = {
-    'aria-hidden': true,
-    focusable: false,
-  }
-
   const label = {
     id: childrenString ? id : undefined,
   }
 
-  return { input, icon, label }
+  return { input, label }
 }
 
 export const Checkbox = forwardRef(
@@ -258,7 +253,6 @@ export const Checkbox = forwardRef(
       externalSlotProps: slotProps?.icon,
       sx: styles.icon,
       classNames: classes.icon,
-      additionalProps: slotAriaProps.icon,
     })
 
     const labelProps = useSlotProps({

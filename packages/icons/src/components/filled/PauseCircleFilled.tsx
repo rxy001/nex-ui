@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import PauseCircle from '../../svg/filled/pause-circle.svg'
 
-export const PauseCircleFilled = PauseCircle
-
-PauseCircleFilled.displayName = 'PauseCircleFilled'
+export const PauseCircleFilled = createIcon(PauseCircle, 'PauseCircleFilled')

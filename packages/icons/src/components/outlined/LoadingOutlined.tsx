@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Loading from '../../svg/outlined/loading.svg'
 
-export const LoadingOutlined = Loading
-
-LoadingOutlined.displayName = 'LoadingOutlined'
+export const LoadingOutlined = createIcon(Loading, 'LoadingOutlined')

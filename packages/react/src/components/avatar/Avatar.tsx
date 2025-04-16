@@ -102,7 +102,7 @@ const useSlotAriaProps = (
         role: 'img',
         'aria-label': children,
       }
-    } else {
+    } else if (typeof alt === 'string') {
       root = {
         role: 'img',
         'aria-label': alt,

@@ -4,6 +4,29 @@ import { Icon as IconComponent } from '../Icon'
 const meta = {
   title: 'Components/Icon',
   component: IconComponent,
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+    },
+    width: {
+      control: 'text',
+    },
+    height: {
+      control: 'text',
+    },
+    color: {
+      control: 'color',
+    },
+    spin: {
+      control: 'boolean',
+    },
+  },
+  args: {
+    width: '1em',
+    height: '1em',
+    spin: false,
+  },
 } satisfies Meta<typeof IconComponent>
 
 export default meta
@@ -27,6 +50,6 @@ export const CustomIcon: Story = {
   args: {
     as: HeartSvg,
     color: '#1677ff',
-    fontSize: 'lg',
+    size: 'lg',
   },
 }

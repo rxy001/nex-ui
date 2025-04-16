@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Moon from '../../svg/filled/moon.svg'
 
-export const MoonFilled = Moon
-
-MoonFilled.displayName = 'MoonFilled'
+export const MoonFilled = createIcon(Moon, 'MoonFilled')

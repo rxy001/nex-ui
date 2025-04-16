@@ -31,7 +31,7 @@ async function run() {
   await recursive(svgDirPath, generateTsx)
 
   await recursive(componentsDirPath, removeInvalidTsx, {
-    skipDirs: ['__stories__'],
+    skipDirs: ['__stories__', 'utils'],
     skipFiles: ['index.tsx'],
   })
 
@@ -87,13 +87,16 @@ async function run() {
 
     const tsxPath = resolve(categoryDirPath, tsxName)
     const tsx =
+      "'use client'" +
+      '\n' +
+      '\n' +
+      `import { createIcon } from '../utils'` +
+      '\n' +
       `import ${svgComponentName} from '../../svg/${category}/${svgFileName}.svg'` +
       '\n' +
       '\n' +
-      `export const ${iconComponentName} = ${svgComponentName}` +
-      '\n' +
-      '\n' +
-      `${iconComponentName}.displayName='${iconComponentName}'`
+      `export const ${iconComponentName} = createIcon(${svgComponentName}, '${iconComponentName}')` +
+      '\n'
     const prettiedTsx = await pretty(tsx)
 
     if (tsxFiles[category]) {

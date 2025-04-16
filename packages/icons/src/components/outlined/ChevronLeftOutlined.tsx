@@ -1,5 +1,9 @@
+'use client'
+
+import { createIcon } from '../utils'
 import ChevronLeft from '../../svg/outlined/chevron-left.svg'
 
-export const ChevronLeftOutlined = ChevronLeft
-
-ChevronLeftOutlined.displayName = 'ChevronLeftOutlined'
+export const ChevronLeftOutlined = createIcon(
+  ChevronLeft,
+  'ChevronLeftOutlined',
+)

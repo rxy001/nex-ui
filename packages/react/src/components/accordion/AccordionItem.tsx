@@ -26,7 +26,6 @@ import {
   getUtilityClass,
 } from '../utils'
 import { useAccordionGroup } from './AccordionContext'
-import { Icon } from '../icon'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
 
 const contentMotionVariants: Variants = {
@@ -97,7 +96,7 @@ const useSlotClasses = (ownerState: AccordionItemOwnerState) => {
 
 const useSlotAriaProps = (
   ownerState: AccordionItemOwnerState,
-): Record<'trigger' | 'content' | 'indicator', HTMLAttributes<HTMLElement>> => {
+): Record<'trigger' | 'content', HTMLAttributes<HTMLElement>> => {
   const { itemKey, disabled, expanded, slotProps } = ownerState
   const triggerProps = slotProps?.trigger || {}
   const triggerId = useId()
@@ -129,11 +128,6 @@ const useSlotAriaProps = (
       'aria-labelledby': triggerId,
       id: contentId,
     },
-    indicator: {
-      'aria-hidden': true,
-      // @ts-ignore
-      focusable: false,
-    },
   }
 }
 
@@ -159,7 +153,7 @@ export const AccordionItem = forwardRef(
       expandedKeys,
       disabledExpandedKeys,
       disabled: defaultDisabled,
-      indicator: defaultIndicator = ChevronDownOutlined,
+      indicator: defaultIndicator,
       motionProps: defaultMotionProps,
       keepMounted: defaultKeepMounted,
       hideIndicator: defaultHideIndicator,
@@ -221,6 +215,21 @@ export const AccordionItem = forwardRef(
 
     const slotAriaProps = useSlotAriaProps(ownerState)
 
+    const animate = expanded ? 'expanded' : 'unexpanded'
+
+    const contentMotionProps = keepMounted
+      ? {
+          animate,
+          initial: firstRender.current && animate,
+          variants: contentMotionVariants,
+        }
+      : {
+          variants: contentMotionVariants,
+          initial: firstRender.current && animate,
+          animate: 'expanded',
+          exit: 'unexpanded',
+        }
+
     const rootProps = useSlotProps({
       ownerState,
       externalForwardedProps: remainingProps,
@@ -243,10 +252,7 @@ export const AccordionItem = forwardRef(
       ownerState,
       externalSlotProps: {
         ...slotProps?.trigger,
-        ref: mergeRefs(
-          triggerRef,
-          slotProps?.trigger?.ref as Ref<HTMLButtonElement>,
-        ),
+        ref: mergeRefs(triggerRef, slotProps?.trigger?.ref),
       },
       sx: styles.trigger,
       classNames: classes.trigger,
@@ -271,25 +277,9 @@ export const AccordionItem = forwardRef(
       sx: styles.indicator,
       classNames: classes.indicator,
       additionalProps: {
-        as: indicator,
-        ...slotAriaProps.indicator,
+        size: 'sm',
       },
     })
-
-    const animate = expanded ? 'expanded' : 'unexpanded'
-
-    const contentMotionProps = keepMounted
-      ? {
-          animate,
-          initial: firstRender.current && animate,
-          variants: contentMotionVariants,
-        }
-      : {
-          variants: contentMotionVariants,
-          initial: firstRender.current && animate,
-          animate: 'expanded',
-          exit: 'unexpanded',
-        }
 
     useEffect(() => {
       if (firstRender.current) {
@@ -304,15 +294,20 @@ export const AccordionItem = forwardRef(
             <nex.button {...triggerProps}>
               <span>{title}</span>
               {!hideIndicator && (
-                <m.span variants={indicatorMotionVariants} animate={animate}>
-                  <Icon {...indicatorProps} />
-                </m.span>
+                <nex.span
+                  as={m.span}
+                  variants={indicatorMotionVariants}
+                  animate={animate}
+                  {...indicatorProps}
+                >
+                  {indicator ?? <ChevronDownOutlined />}
+                </nex.span>
               )}
             </nex.button>
           </nex.h3>
           <AnimatePresence>
             {(keepMounted || expanded) && (
-              // @ts-ignore MotionProps is not compatible with MotionComponent?
+              // @ts-ignore
               <m.div {...contentMotionProps} {...motionProps}>
                 <nex.div {...contentProps}>{children}</nex.div>
               </m.div>

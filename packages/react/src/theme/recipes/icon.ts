@@ -4,16 +4,12 @@ import type { RecipeVariants } from '@nex-ui/system'
 
 const circle = keyframes({
   '0%': { transform: 'rotate(0deg)' },
-  '45%': { transform: 'rotate(240deg)' },
-  '90%': { transform: 'rotate(320deg)' },
   '100%': { transform: 'rotate(360deg)' },
 })
 
 export const iconRecipe = defineRecipe({
   base: {
     userSelect: 'none',
-    display: 'inline-block',
-    flexShrink: 0,
   },
   variants: {
     spin: {

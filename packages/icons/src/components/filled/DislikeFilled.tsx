@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Dislike from '../../svg/filled/dislike.svg'
 
-export const DislikeFilled = Dislike
-
-DislikeFilled.displayName = 'DislikeFilled'
+export const DislikeFilled = createIcon(Dislike, 'DislikeFilled')

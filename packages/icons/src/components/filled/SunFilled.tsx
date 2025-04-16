@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Sun from '../../svg/filled/sun.svg'
 
-export const SunFilled = Sun
-
-SunFilled.displayName = 'SunFilled'
+export const SunFilled = createIcon(Sun, 'SunFilled')

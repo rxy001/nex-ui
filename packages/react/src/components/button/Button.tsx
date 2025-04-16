@@ -18,7 +18,6 @@ import {
   useStyles,
 } from '../utils'
 import type { ButtonProps, ButtonOwnerState } from './types'
-import { Icon } from '../icon'
 
 const useSlotClasses = (ownerState: ButtonOwnerState) => {
   const { prefix } = useNexUI()
@@ -71,7 +70,7 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
 
 const useSlotAriaProps = (
   ownerState: ButtonOwnerState,
-): Record<'root' | 'icon', HTMLAttributes<HTMLElement>> => {
+): Record<'root', HTMLAttributes<HTMLElement>> => {
   const {
     as,
     disabled: disabledProps,
@@ -104,12 +103,7 @@ const useSlotAriaProps = (
     }
   }
 
-  const icon = {
-    'aria-hidden': true,
-    focusable: false,
-  }
-
-  return { root, icon }
+  return { root }
 }
 
 export const Button = forwardRef(
@@ -232,7 +226,6 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.startIcon,
       classNames: classes.startIcon,
       sx: styles.startIcon,
-      additionalProps: slotAriaProps.icon,
     })
 
     const endIconProps = useSlotProps({
@@ -240,12 +233,9 @@ export const Button = forwardRef(
       externalSlotProps: slotProps?.endIcon,
       classNames: classes.endIcon,
       sx: styles.endIcon,
-      additionalProps: slotAriaProps.icon,
     })
 
-    const loadingIcon = loading
-      ? (spinner ?? <Icon spin as={LoadingOutlined} />)
-      : null
+    const loadingIcon = spinner ?? <LoadingOutlined sx={styles.loadingIcon} />
 
     const startIcon = ((spinnerPlacement === 'start' && loading) ||
       startIconProp) && (

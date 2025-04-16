@@ -1,5 +1,6 @@
+'use client'
+
+import { createIcon } from '../utils'
 import Heart from '../../svg/outlined/heart.svg'
 
-export const HeartOutlined = Heart
-
-HeartOutlined.displayName = 'HeartOutlined'
+export const HeartOutlined = createIcon(Heart, 'HeartOutlined')

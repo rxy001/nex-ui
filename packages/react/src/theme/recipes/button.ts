@@ -1,4 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
+import { keyframes } from '@emotion/react'
 import type { RecipeVariants } from '@nex-ui/system'
 import {
   colorVariant,
@@ -7,6 +8,13 @@ import {
   fullWidth,
   sizeVariant,
 } from '../shared'
+
+const circle = keyframes({
+  '0%': { transform: 'rotate(0deg)' },
+  '45%': { transform: 'rotate(240deg)' },
+  '90%': { transform: 'rotate(320deg)' },
+  '100%': { transform: 'rotate(360deg)' },
+})
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
@@ -25,9 +33,6 @@ export const buttonRecipe = defineSlotRecipe({
       lineHeight: 'base',
       overflow: 'hidden',
       WebkitTapHighlightColor: 'transparent',
-      '& svg': {
-        fs: '1.3em',
-      },
       _focusVisible: {
         outline: 'focusVisibleOutline',
         outlineOffset: '0.5',
@@ -37,11 +42,16 @@ export const buttonRecipe = defineSlotRecipe({
       display: 'inherit',
       marginInlineStart: '-1',
       marginInlineEnd: '2',
+      fs: '1.25em',
     },
     endIcon: {
       display: 'inherit',
       marginInlineStart: '2',
       marginInlineEnd: '-1',
+      fs: '1.25em',
+    },
+    loadingIcon: {
+      animation: `${circle} 1s linear infinite`,
     },
   },
   variants: {
@@ -116,9 +126,7 @@ export const buttonRecipe = defineSlotRecipe({
       css: {
         root: {
           w: '8',
-          '& svg': {
-            fs: '1.5em',
-          },
+          fs: '1.5em',
         },
       },
     },
@@ -128,9 +136,7 @@ export const buttonRecipe = defineSlotRecipe({
       css: {
         root: {
           w: '10',
-          '& svg': {
-            fs: '1.7em',
-          },
+          fs: '1.7em',
         },
       },
     },
@@ -140,9 +146,7 @@ export const buttonRecipe = defineSlotRecipe({
       css: {
         root: {
           w: '12',
-          '& svg': {
-            fs: '1.9em',
-          },
+          fs: '1.9em',
         },
       },
     },

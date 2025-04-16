@@ -1,5 +1,5 @@
-import type { ComponentType, ElementType, Key, ReactNode } from 'react'
-import type { MotionProps } from 'motion/react'
+import type { ElementType, Key, ReactNode } from 'react'
+import type { HTMLMotionProps, DOMMotionComponents } from 'motion/react'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
@@ -7,7 +7,6 @@ import type {
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 import type { AccordionItemVariants } from '../../theme/recipes'
-import type { Icon } from '../icon'
 
 // Accordion
 export interface AccordionPropsOverrides {}
@@ -65,12 +64,12 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The accordion item expanded indicator, usually an arrow icon.
    */
-  indicator?: ComponentType<any>
+  indicator?: ReactNode
 
   /**
    * The motion properties of the Accordion.
    */
-  motionProps?: MotionProps
+  motionProps?: HTMLMotionProps<'div'>
 
   /**
    * The item keys that are disabled.
@@ -118,7 +117,7 @@ export interface AccordionItemSlotProps<RootComponent extends ElementType> {
     AccordionItemOwnerState<RootComponent>
   >
   indicator?: ComponentPropsWithCommonProps<
-    typeof Icon,
+    DOMMotionComponents['span'],
     AccordionItemOwnerState<RootComponent>
   >
   content?: ComponentPropsWithCommonProps<
@@ -161,7 +160,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The props to modify the framer motion animation. Use the variants API to create your own animation.
    */
-  motionProps?: MotionProps
+  motionProps?: HTMLMotionProps<'div'>
 
   /**
    * If true, the accordion item is disabled.
@@ -181,7 +180,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The accordion item expanded indicator.
    */
-  indicator?: ComponentType<any>
+  indicator?: ReactNode
 
   /**
    * The props used for each slot.
@@ -219,7 +218,7 @@ export type AccordionGroupContextValue = {
   hideIndicator: boolean
   disabledExpandedKeys: Key[]
   disabled: boolean
-  indicator?: ComponentType<any>
-  motionProps?: MotionProps
+  indicator?: ReactNode
+  motionProps?: HTMLMotionProps<'div'>
   variant: AccordionItemVariants['variant']
 }

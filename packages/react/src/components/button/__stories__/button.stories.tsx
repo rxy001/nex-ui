@@ -37,6 +37,10 @@ const meta = {
     disableRipple: {
       control: 'boolean',
     },
+    spinnerPlacement: {
+      options: ['start', 'end'],
+      control: 'select',
+    },
   },
   args: {
     children: 'Button',
@@ -46,6 +50,7 @@ const meta = {
     fullWidth: false,
     iconOnly: false,
     loading: false,
+    spinnerPlacement: 'start',
   },
   render: (args) => {
     return (

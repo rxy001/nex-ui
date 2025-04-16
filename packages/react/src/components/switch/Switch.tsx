@@ -58,7 +58,7 @@ const useSlotClasses = (ownerState: SwitchOwnerState) => {
 
 const useSlotAriaProps = (
   ownerState: SwitchOwnerState,
-): Record<'input' | 'track' | 'label', HTMLAttributes<HTMLElement>> => {
+): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
   const { checked, disabled, as, tabIndex, type, children } = ownerState
 
   const childrenString = isString(children)
@@ -95,16 +95,11 @@ const useSlotAriaProps = (
     }
   }
 
-  const track = {
-    'aria-hidden': true,
-    focusable: false,
-  }
-
   const label = {
     id: childrenString ? id : undefined,
   }
 
-  return { input, track, label }
+  return { input, label }
 }
 
 export const Switch = forwardRef(
@@ -220,7 +215,6 @@ export const Switch = forwardRef(
       externalSlotProps: slotProps?.track,
       sx: styles.track,
       classNames: classes.track,
-      additionalProps: slotAriaProps.track,
     })
 
     const thumbProps = useSlotProps({

@@ -1,7 +1,7 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { ElementType, Ref } from 'react'
+import type { ElementType, Ref, SVGProps } from 'react'
 import { __DEV__ } from '@nex-ui/utils'
 import { useNexUI } from '../provider/Context'
 import { iconRecipe } from '../../theme/recipes'
@@ -20,21 +20,22 @@ const useSlotClasses = (ownerState: IconOwnerState) => {
 
   const iconRoot = `${prefix}-icon`
 
-  const { spin, width, height, size } = ownerState
+  const { spin, size } = ownerState
 
   const slots = {
-    root: [
-      'root',
-      spin && `spin-${spin}`,
-      size && `size-${size}`,
-      `width-${width}`,
-      `height-${height}`,
-    ],
+    root: ['root', spin && `spin`, size && `size-${size}`],
   }
 
   const composedClasses = composeClasses(slots, getUtilityClass(iconRoot))
 
   return composedClasses
+}
+
+const useAriaProps = (): SVGProps<SVGSVGElement> => {
+  return {
+    'aria-hidden': true,
+    focusable: false,
+  }
 }
 
 export const Icon = forwardRef(
@@ -71,6 +72,8 @@ export const Icon = forwardRef(
       height,
     }
 
+    const ariaProps = useAriaProps()
+
     const styles = useStyles({
       ownerState,
       name: 'Icon',
@@ -87,6 +90,7 @@ export const Icon = forwardRef(
       additionalProps: {
         ref,
         as,
+        ...ariaProps,
         sx: {
           color,
           width,
