@@ -96,6 +96,7 @@ export const Accordion = forwardRef(
     })
 
     const rootProps = useSlotProps({
+      ownerState,
       externalForwardedProps: remainingProps,
       sx: styles,
       classNames: classes.root,

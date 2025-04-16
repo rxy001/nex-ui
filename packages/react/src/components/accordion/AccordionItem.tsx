@@ -222,6 +222,7 @@ export const AccordionItem = forwardRef(
     const slotAriaProps = useSlotAriaProps(ownerState)
 
     const rootProps = useSlotProps({
+      ownerState,
       externalForwardedProps: remainingProps,
       sx: styles.root,
       classNames: classes.root,
@@ -232,12 +233,14 @@ export const AccordionItem = forwardRef(
     })
 
     const headingProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.heading,
       sx: styles.heading,
       classNames: classes.heading,
     })
 
     const triggerProps = useSlotProps({
+      ownerState,
       externalSlotProps: {
         ...slotProps?.trigger,
         ref: mergeRefs(
@@ -255,6 +258,7 @@ export const AccordionItem = forwardRef(
     })
 
     const contentProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.content,
       sx: styles.content,
       classNames: classes.content,
@@ -262,6 +266,7 @@ export const AccordionItem = forwardRef(
     })
 
     const indicatorProps = useSlotProps({
+      ownerState,
       externalSlotProps: slotProps?.indicator,
       sx: styles.indicator,
       classNames: classes.indicator,

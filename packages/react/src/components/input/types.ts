@@ -7,7 +7,7 @@ import type {
   OverrideProps,
   SxProps,
 } from '../../types/utils'
-import type { ButtonProps } from '../button'
+import type { Button } from '../button'
 
 export interface InputPropsOverrides {}
 
@@ -17,7 +17,10 @@ type InputSlotProps<InputComponent extends ElementType> = {
     'input',
     InputOwnerState<InputComponent>
   >
-  clearBtn?: ButtonProps
+  clearBtn?: ComponentPropsWithCommonProps<
+    typeof Button,
+    InputOwnerState<InputComponent>
+  >
 }
 
 type InputOwnProps<InputComponent extends ElementType> = {

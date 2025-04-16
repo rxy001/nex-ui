@@ -24,5 +24,7 @@ export const avatarClasses = generateUtilityClasses('nui-avatar', [
   'size-md',
   'size-lg',
 
+  'outlined',
+
   'img',
 ])

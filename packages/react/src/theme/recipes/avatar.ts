@@ -1,4 +1,4 @@
-import { defineSlotRecipe } from '@nex-ui/system'
+import { defineSlotRecipe, defineRecipe } from '@nex-ui/system'
 import type { RecipeVariants } from '@nex-ui/system'
 import { toSlot, radiusVariant, colorVariant } from '../shared'
 
@@ -51,18 +51,78 @@ export const avatarRecipe = defineSlotRecipe({
           },
         },
       },
+      xl: {
+        root: {
+          w: '14',
+          h: '14',
+          fs: '2xl',
+          '& svg': {
+            fs: '1.8em',
+          },
+        },
+      },
     },
-    radius: toSlot(radiusVariant, 'root'),
+    radius: {
+      ...toSlot(radiusVariant, 'root'),
+      xl: {
+        root: {
+          borderRadius: '2xl',
+        },
+      },
+    },
     color: toSlot(colorVariant, 'root'),
     outlined: {
       true: {
         root: {
-          outline: '2px solid {colors.colorPalette.primary}',
-          outlineOffset: '0.5',
+          boxShadow: '0 0 0 2px #fff,0 0 0 4px {colors.colorPalette.primary}',
+        },
+      },
+    },
+    inGroup: {
+      true: {
+        root: {
+          ':not(:first-of-type)': {
+            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-2})',
+          },
         },
       },
     },
   },
+  compoundVariants: [
+    {
+      size: 'sm',
+      inGroup: true,
+      css: {
+        root: {
+          ':not(:first-of-type)': {
+            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-1})',
+          },
+        },
+      },
+    },
+    {
+      size: 'lg',
+      inGroup: true,
+      css: {
+        root: {
+          ':not(:first-of-type)': {
+            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-3})',
+          },
+        },
+      },
+    },
+    {
+      size: 'xl',
+      inGroup: true,
+      css: {
+        root: {
+          ':not(:first-of-type)': {
+            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-4})',
+          },
+        },
+      },
+    },
+  ],
   defaultVariants: {
     size: 'md',
     radius: 'md',
@@ -70,5 +130,14 @@ export const avatarRecipe = defineSlotRecipe({
   },
 })
 
+export const avatarGroupRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+})
+
 export type AvatarRecipe = typeof avatarRecipe
 export type AvatarVariants = RecipeVariants<AvatarRecipe>
+
+export type AvatarGroupRecipe = typeof avatarGroupRecipe

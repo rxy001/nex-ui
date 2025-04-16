@@ -14,10 +14,13 @@ export type UniteTokens<T extends {}, U extends {}> = {
 export type ComponentPropsWithCommonProps<
   T extends ElementType,
   OwnerState,
-> = ComponentProps<T> & {
-  sx?: SxProps<OwnerState>
-  as?: ElementType
-}
+> = Overwrite<
+  ComponentProps<T>,
+  {
+    sx?: SxProps<OwnerState>
+    as?: ElementType
+  }
+>
 
 export type SxProps<OwnerState> = Interpolation<OwnerState>
 

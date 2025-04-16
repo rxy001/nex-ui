@@ -60,6 +60,9 @@ export const CheckboxGroup = <
     [color, disabled, name, radius, setValues, size, values],
   )
 
-  // @ts-ignore
-  return <CheckboxGroupProvider value={ctx}>{children}</CheckboxGroupProvider>
+  return (
+    <CheckboxGroupProvider value={ctx as CheckboxGroupContextValue}>
+      {children}
+    </CheckboxGroupProvider>
+  )
 }

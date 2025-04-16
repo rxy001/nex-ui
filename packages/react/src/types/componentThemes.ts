@@ -3,6 +3,7 @@ import type {
   FlexRecipe,
   IconRecipe,
   AvatarRecipe,
+  AvatarGroupRecipe,
   ButtonRecipe,
   InputRecipe,
   CheckboxRecipe,
@@ -29,6 +30,7 @@ import type {
   AccordionProps,
   AccordionOwnerState,
   AccordionItemProps,
+  AvatarGroupProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -69,6 +71,12 @@ export type ComponentThemes = {
       | ComponentThemeObject<AvatarRecipe>
       | ComponentThemeFn<AvatarOwnerState, AvatarRecipe>
     defaultProps?: AvatarProps
+  }
+  AvatarGroup?: {
+    styleOverrides?:
+      | ComponentThemeObject<AvatarGroupRecipe>
+      | ComponentThemeFn<AvatarOwnerState, AvatarGroupRecipe>
+    defaultProps?: AvatarGroupProps
   }
   Checkbox?: {
     styleOverrides?:

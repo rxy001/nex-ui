@@ -181,6 +181,7 @@ export const Checkbox = forwardRef(
       size,
       radius,
       as,
+      inGroup,
     }
 
     const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {

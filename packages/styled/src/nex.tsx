@@ -47,7 +47,6 @@ const createNexImpl = (tag: any) => {
 
       let { className = '' } = props
       const registeredStyles: any[] = [cssProp]
-
       if (typeof props.className === 'string') {
         className = getRegisteredStyles(
           cache.registered,
@@ -62,7 +61,7 @@ const createNexImpl = (tag: any) => {
 
       className += `${cache.key}-${serialized.name}`
 
-      newProps.className = className
+      newProps.className = className.trim()
 
       return (
         <>

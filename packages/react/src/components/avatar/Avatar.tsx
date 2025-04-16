@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { nex } from '@nex-ui/styled'
-import type { ElementType, ReactNode, Ref } from 'react'
+import type { ElementType, HTMLAttributes, ReactNode, Ref } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
@@ -13,17 +13,29 @@ import {
   useSlotProps,
 } from '../utils'
 import { useNexUI } from '../provider'
-import type { AvatarOwnerState, AvatarProps, UseLoadedOptions } from './types'
+import { useAvatarGroup } from './AvatarGroupContext'
+import type {
+  AvatarOwnerState,
+  AvatarProps,
+  UseLoadedOptions,
+  LoadedState,
+} from './types'
 
 const useSlotClasses = (ownerState: AvatarOwnerState) => {
   const { prefix } = useNexUI()
 
   const avatarRoot = `${prefix}-avatar`
 
-  const { color, size, radius, classes } = ownerState
+  const { color, size, radius, classes, outlined } = ownerState
 
   const slots = {
-    root: ['root', `radius-${radius}`, `size-${size}`, `color-${color}`],
+    root: [
+      'root',
+      `radius-${radius}`,
+      `size-${size}`,
+      `color-${color}`,
+      outlined && 'outlined',
+    ],
     img: [`img`],
   }
 
@@ -37,7 +49,7 @@ const useSlotClasses = (ownerState: AvatarOwnerState) => {
 }
 
 const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
-  const [loaded, setLoaded] = useState<false | 'error' | 'loaded'>(false)
+  const [loaded, setLoaded] = useState<LoadedState>(false)
 
   useEffect(() => {
     if (!src && !srcSet) {
@@ -64,8 +76,7 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
       setLoaded('error')
     }
 
-    // @ts-ignore
-    image.src = src
+    image.src = src!
     if (srcSet) {
       image.srcset = srcSet
     }
@@ -78,6 +89,31 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
   return loaded
 }
 
+const useSlotAriaProps = (
+  ownerState: AvatarOwnerState,
+): Record<'root', HTMLAttributes<HTMLElement>> => {
+  const { alt, children, loaded } = ownerState
+
+  let root = {}
+
+  if (loaded === false || loaded === 'error') {
+    if (typeof children === 'string') {
+      root = {
+        role: 'img',
+        'aria-label': children,
+      }
+    } else {
+      root = {
+        role: 'img',
+        'aria-label': alt,
+      }
+    }
+  }
+  return {
+    root,
+  }
+}
+
 export const Avatar = forwardRef(
   <RootComponent extends ElementType = 'div'>(
     inProps: AvatarProps<RootComponent>,
@@ -88,6 +124,10 @@ export const Avatar = forwardRef(
       props: inProps,
     })
 
+    const groupCtx = useAvatarGroup()
+
+    const inGroup = !!groupCtx
+
     const {
       src,
       alt,
@@ -95,12 +135,14 @@ export const Avatar = forwardRef(
       slotProps,
       children: childrenProp,
       as = 'div',
-      size = 'md',
-      radius = size,
-      color = 'gray',
-      outlined = false,
+      size = groupCtx?.size ?? 'md',
+      radius = groupCtx?.radius ?? size,
+      color = groupCtx?.color ?? 'gray',
+      outlined = groupCtx?.outlined ?? false,
       ...remainingProps
     } = props
+
+    const loaded = useLoaded({ src, srcSet })
 
     const ownerState: AvatarOwnerState = {
       ...props,
@@ -109,6 +151,8 @@ export const Avatar = forwardRef(
       color,
       as,
       outlined,
+      inGroup,
+      loaded,
     }
 
     const styles = useStyles({
@@ -119,9 +163,9 @@ export const Avatar = forwardRef(
 
     const classes = useSlotClasses(ownerState)
 
-    const loaded = useLoaded({ src, srcSet })
-
     const hasImg = src || srcSet
+
+    const slotAriaProps = useSlotAriaProps(ownerState)
 
     const rootProps = useSlotProps({
       ownerState,
@@ -131,6 +175,7 @@ export const Avatar = forwardRef(
       additionalProps: {
         ref,
         as,
+        ...slotAriaProps.root,
       },
     })
 
@@ -150,7 +195,7 @@ export const Avatar = forwardRef(
 
     if (hasImg && loaded === 'loaded') {
       children = <nex.img {...imgProps} />
-    } else if (!!childrenProp && children !== 0) {
+    } else if (childrenProp) {
       children = childrenProp
     } else if (hasImg && alt) {
       // eslint-disable-next-line prefer-destructuring

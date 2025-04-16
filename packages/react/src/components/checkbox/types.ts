@@ -6,6 +6,7 @@ import type {
   OverrideProps,
   SxProps,
   ComponentPropsWithCommonProps,
+  Overwrite,
 } from '../../types/utils'
 
 export interface CheckboxPropsOverrides {}
@@ -129,62 +130,68 @@ export type CheckboxOwnerState<
   size: CheckboxVariants['size']
   radius: CheckboxVariants['radius']
   defaultChecked: boolean
+  inGroup: boolean
 }
 
 export type CheckboxGroupValueType = number | string
 
+export interface CheckboxGroupPropsOverrides {}
+
 export type CheckboxGroupProps<
   T extends CheckboxGroupValueType = CheckboxGroupValueType,
-> = {
-  /**
-   * The current selected values. (controlled)
-   */
-  value?: T[]
+> = Overwrite<
+  {
+    /**
+     * The current selected values. (controlled)
+     */
+    value?: T[]
 
-  /**
-   * The name of the CheckboxGroup, used when submitting an HTML form.
-   */
-  name?: string
+    /**
+     * The name of the CheckboxGroup, used when submitting an HTML form.
+     */
+    name?: string
 
-  /**
-   * The checkboxes items.
-   */
-  children?: ReactNode
+    /**
+     * The checkboxes items.
+     */
+    children?: ReactNode
 
-  /**
-   * The default checked values. (uncontrolled)
-   */
-  defaultValue?: T[]
+    /**
+     * The default checked values. (uncontrolled)
+     */
+    defaultValue?: T[]
 
-  /**
-   * Handler that is called when the value changes.
-   */
-  onValueChange?: (value: T[]) => void
+    /**
+     * Handler that is called when the value changes.
+     */
+    onValueChange?: (value: T[]) => void
 
-  /**
-   * If true, the checkboxes are disabled.
-   * @default false
-   */
-  disabled?: boolean
+    /**
+     * If true, the checkboxes are disabled.
+     * @default false
+     */
+    disabled?: boolean
 
-  /**
-   * The color of the checkboxes.
-   * @default primaryColor
-   */
-  color?: CheckboxVariants['color']
+    /**
+     * The color of the checkboxes.
+     * @default primaryColor
+     */
+    color?: CheckboxVariants['color']
 
-  /**
-   * The size of the checkboxes.
-   * @default 'md'
-   */
-  size?: CheckboxVariants['size']
+    /**
+     * The size of the checkboxes.
+     * @default 'md'
+     */
+    size?: CheckboxVariants['size']
 
-  /**
-   * The border radius of the checkboxes.
-   * @default size
-   */
-  radius?: CheckboxVariants['radius']
-}
+    /**
+     * The border radius of the checkboxes.
+     * @default size
+     */
+    radius?: CheckboxVariants['radius']
+  },
+  CheckboxGroupPropsOverrides
+>
 
 export type CheckboxGroupContextValue<
   T extends CheckboxGroupValueType = CheckboxGroupValueType,
