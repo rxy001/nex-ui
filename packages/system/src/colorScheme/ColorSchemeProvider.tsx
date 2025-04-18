@@ -157,7 +157,6 @@ export const ColorSchemeProvider = ({
 
   useEffect(() => {
     if (colorScheme && colorSchemeSelector && colorSchemeSelector !== 'media') {
-      // eslint-disable-next-line prefer-destructuring
       const selector = colorSchemeSelector
       let rule = ''
       if (selector === 'class') {

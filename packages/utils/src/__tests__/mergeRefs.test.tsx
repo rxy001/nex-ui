@@ -20,7 +20,6 @@ describe('mergeRefs', () => {
       ref2,
       ref3,
       ref4,
-      // eslint-disable-next-line @typescript-eslint/ban-types
     ) as Function
     composedRef('testValue')
 

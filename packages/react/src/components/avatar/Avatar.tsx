@@ -198,7 +198,6 @@ export const Avatar = forwardRef(
     } else if (childrenProp) {
       children = childrenProp
     } else if (hasImg && alt) {
-      // eslint-disable-next-line prefer-destructuring
       children = alt[0]
     }
 

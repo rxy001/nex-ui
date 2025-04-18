@@ -16,6 +16,8 @@ const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
   </svg>
 ))
 
+HeartSvg.displayName = 'HeartSvg'
+
 describe('Icon', () => {
   mountTest(<Icon as={HeartSvg} />)
   refTest(<Icon as={HeartSvg} />)

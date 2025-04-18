@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "types": ["@testing-library/jest-dom", "@emotion/jest", "node"],
     "target": "ESNext",
