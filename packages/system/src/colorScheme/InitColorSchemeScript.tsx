@@ -45,7 +45,6 @@ export const InitColorSchemeScript = ({
 
   return (
     <script
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{
         __html: `
 try {
