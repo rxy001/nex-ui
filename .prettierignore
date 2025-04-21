@@ -1,7 +1,6 @@
 */.next/*
 dist
 public/*
-!.storybook
 node_modules
 assets
 notes

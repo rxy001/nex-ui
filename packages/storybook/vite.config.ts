@@ -1,16 +1,9 @@
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import svgr from 'vite-plugin-svgr'
-import { resolve } from 'node:path'
+import { defineConfig } from 'vite'
 
 export default defineConfig(() => {
   return {
-    plugins: [
-      svgr({
-        include: '**/*.svg',
-      }),
-      react(),
-    ],
+    plugins: [react()],
     resolve: {
       extensions: [
         '.mjs',
@@ -23,9 +16,6 @@ export default defineConfig(() => {
         '.css',
       ],
       conditions: ['source', 'import', 'module', 'browser'],
-      alias: {
-        '@emotion/react': resolve(__dirname, 'node_modules/@emotion/react'),
-      },
     },
   }
 })

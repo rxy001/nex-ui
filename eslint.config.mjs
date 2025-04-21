@@ -15,7 +15,6 @@ export default tseslint.config(
     '**/*.css',
     '**/dist',
     'public/*',
-    '!**/.storybook',
     '**/node_modules',
     '**/assets',
     '**/notes',
@@ -67,7 +66,6 @@ export default tseslint.config(
           alwaysTryTypes: true,
           project: [
             './tsconfig.json',
-            './storybook/tsconfig.json',
             './docs/tsconfig.json',
             './packages/**/tsconfig.json',
           ],
