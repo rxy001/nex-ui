@@ -5,30 +5,12 @@ import path from 'node:path'
 import dts from 'rollup-plugin-dts'
 import swc from '@rollup/plugin-swc'
 import fs from 'node:fs'
-import svgr from '@svgr/rollup'
 import { rollup } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { preserveDirectives } from 'rollup-plugin-preserve-directives'
 import type { RollupOptions, RollupBuild } from 'rollup'
-import type { Options } from '@svgr/rollup'
 
 type SharedConfigs = { external: (string | RegExp)[]; name: string }
-
-const defaultTemplate: Options['template'] = (variables, { tpl }) => {
-  return tpl`
-'use client'
-  
-${variables.imports};
-
-${variables.interfaces};
-
-const ${variables.componentName} = (${variables.props}) => (
-  ${variables.jsx}
-);
- 
-${variables.exports};
-`
-}
 
 build()
 
@@ -68,10 +50,6 @@ async function generateModules({ external, name }: SharedConfigs) {
     external,
     input: './src/index.ts',
     plugins: [
-      svgr({
-        ref: true,
-        template: defaultTemplate,
-      }),
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       swc({
         swc: {

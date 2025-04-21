@@ -235,7 +235,7 @@ export const Button = forwardRef(
       sx: styles.endIcon,
     })
 
-    const loadingIcon = spinner ?? <LoadingOutlined sx={styles.loadingIcon} />
+    const loadingIcon = spinner ?? <LoadingOutlined />
 
     const startIcon = ((spinnerPlacement === 'start' && loading) ||
       startIconProp) && (

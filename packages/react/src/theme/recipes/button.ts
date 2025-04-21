@@ -1,5 +1,4 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { keyframes } from '@emotion/react'
 import type { RecipeVariants } from '@nex-ui/system'
 import {
   colorVariant,
@@ -8,13 +7,6 @@ import {
   fullWidth,
   sizeVariant,
 } from '../shared'
-
-const circle = keyframes({
-  '0%': { transform: 'rotate(0deg)' },
-  '45%': { transform: 'rotate(240deg)' },
-  '90%': { transform: 'rotate(320deg)' },
-  '100%': { transform: 'rotate(360deg)' },
-})
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
@@ -49,9 +41,6 @@ export const buttonRecipe = defineSlotRecipe({
       marginInlineStart: '2',
       marginInlineEnd: '-1',
       fs: '1.25em',
-    },
-    loadingIcon: {
-      animation: `${circle} 1s linear infinite`,
     },
   },
   variants: {

@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { optimize } from 'svgo'
 import {
   readdirSync,
   statSync,
@@ -15,6 +16,18 @@ import { pretty } from './utils'
 
 function upperFirst(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+function hyphenToCamelCase(string: string) {
+  return string
+    .split('-')
+    .map((word, index) => {
+      if (index === 0) {
+        return word
+      }
+      return upperFirst(word)
+    })
+    .join('')
 }
 
 async function run() {
@@ -67,8 +80,78 @@ async function run() {
     )
   }
 
+  async function readSvgPaths(svgFilePath: string) {
+    const data = readFileSync(svgFilePath, { encoding: 'utf-8' })
+
+    let childrenAsArray = false
+
+    const result = optimize(data, {
+      multipass: true,
+      plugins: ['removeStyleElement', 'removeScriptElement'],
+    })
+
+    const paths = optimize(result.data, {
+      plugins: [
+        {
+          name: 'svgAsReactFragment',
+          fn: () => {
+            return {
+              root: {
+                enter(root) {
+                  const [svg, ...rootChildren] = root.children
+                  if (rootChildren.length > 0) {
+                    throw new Error('Expected a single child of the root')
+                  }
+                  if (svg.type !== 'element' || svg.name !== 'svg') {
+                    // console.log(svgFileName, svg)
+                    throw new Error('Expected an svg element as the root child')
+                  }
+                  if (svg.children.length > 1) {
+                    childrenAsArray = true
+                  }
+                  root.children = svg.children
+                },
+              },
+              element: {
+                enter: (node, parentNode) => {
+                  if (
+                    parentNode.type === 'root' &&
+                    parentNode.children.length > 1
+                  ) {
+                    const index = parentNode.children.findIndex(
+                      (child) => child === node,
+                    )
+                    node.attributes.key = `${index}`
+                  }
+
+                  const attributes: Record<string, string> = {}
+                  for (const key in node.attributes) {
+                    if (
+                      Object.prototype.hasOwnProperty.call(node.attributes, key)
+                    ) {
+                      attributes[hyphenToCamelCase(key)] = node.attributes[key]
+                    }
+                  }
+                  node.attributes = attributes
+                },
+              },
+            }
+          },
+        },
+      ],
+    }).data
+
+    if (childrenAsArray) {
+      return `[${paths.replace(/key="\d+"\/>/g, '$&,')}]`
+    }
+
+    return paths
+  }
+
   async function generateTsx(svgFilePath: string, category: string) {
     const svgFileName = basename(svgFilePath, '.svg')
+
+    const paths = await readSvgPaths(svgFilePath)
 
     const svgComponentName = svgFileName
       .split('-')
@@ -92,10 +175,8 @@ async function run() {
       '\n' +
       `import { createIcon } from '../utils'` +
       '\n' +
-      `import ${svgComponentName} from '../../svg/${category}/${svgFileName}.svg'` +
       '\n' +
-      '\n' +
-      `export const ${iconComponentName} = createIcon(${svgComponentName}, '${iconComponentName}')` +
+      `export const ${iconComponentName} = createIcon(${paths}, '${iconComponentName}')` +
       '\n'
     const prettiedTsx = await pretty(tsx)
 
@@ -123,7 +204,6 @@ async function run() {
 
     forEach(tsxFiles, (tsxs: string[], category: string) => {
       tsx =
-        // eslint-disable-next-line prefer-template
         tsx +
         '\n' +
         map(
