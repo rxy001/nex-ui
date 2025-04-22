@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/** @type {import('next').NextConfig} */
-
 import { resolve } from 'node:path'
 import nextra from 'nextra'
 import analyzer from '@next/bundle-analyzer'
@@ -47,7 +44,6 @@ export default withAnalyzer(
         resourceQuery: /raw/,
       })
 
-      // eslint-disable-next-line no-param-reassign
       config.resolve.alias['@'] = resolve('.')
       config.resolve.alias['@nex-ui/react'] = resolve('../packages/react/src')
       config.resolve.alias['@nex-ui/hooks'] = resolve('../packages/hooks/src')
@@ -79,24 +75,24 @@ export default withAnalyzer(
         },
       ]
     },
-    experimental: {
-      // 使用 webpack 代替 turbopack 以支持 resourceQuery
-      // turbo: {
-      //   rules: {
-      //     './icons/*.svg': {
-      //       loaders: ['@svgr/webpack'],
-      //       as: '*.js',
-      //     },
-      //     './content/**/*.raw.tsx': {
-      //       loaders: ['raw-loader'],
-      //     },
-      //   },
-      //   resolveAlias: {
-      //     '@': './',
-      //   },
-      // },
-      // 未设置改配置时，webpack 全量导入 icons, why?
-      // optimizePackageImports: ['@nex-ui/icons'],
-    },
+    // experimental: {
+    //   // 使用 webpack 代替 turbopack 以支持 resourceQuery
+    //   turbo: {
+    //     rules: {
+    //       './icons/*.svg': {
+    //         loaders: ['@svgr/webpack'],
+    //         as: '*.js',
+    //       },
+    //       './content/**/*.raw.tsx': {
+    //         loaders: ['raw-loader'],
+    //       },
+    //     },
+    //     resolveAlias: {
+    //       '@': './',
+    //     },
+    //   },
+    //   // 未设置改配置时，webpack 全量导入 icons, why?
+    //   optimizePackageImports: ['@nex-ui/icons'],
+    // },
   }),
 )

@@ -13,12 +13,10 @@ import type {
   ElementType,
   HTMLAttributes,
   KeyboardEvent,
-  Ref,
 } from 'react'
 import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
 import {
-  forwardRef,
   useDefaultProps,
   useSlotProps,
   useStyles,
@@ -131,190 +129,188 @@ const useSlotAriaProps = (
   }
 }
 
-export const AccordionItem = forwardRef(
-  <RootComponent extends ElementType = 'div'>(
-    inProps: AccordionItemProps<RootComponent>,
-    ref: Ref<HTMLDivElement>,
-  ) => {
-    const defaultKey = useId()
+export const AccordionItem = <RootComponent extends ElementType = 'div'>(
+  inProps: AccordionItemProps<RootComponent>,
+) => {
+  const defaultKey = useId()
 
-    const firstRender = useRef(true)
+  const firstRender = useRef(true)
 
-    const triggerRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
 
-    const props = useDefaultProps<AccordionItemProps>({
-      name: 'AccordionItem',
-      props: inProps,
-    })
+  const props = useDefaultProps<AccordionItemProps>({
+    name: 'AccordionItem',
+    props: inProps,
+  })
 
-    const {
-      variant,
-      toggleExpandedKey,
-      expandedKeys,
-      disabledExpandedKeys,
-      disabled: defaultDisabled,
-      indicator: defaultIndicator,
-      motionProps: defaultMotionProps,
-      keepMounted: defaultKeepMounted,
-      hideIndicator: defaultHideIndicator,
-    } = useAccordionGroup()
+  const {
+    variant,
+    toggleExpandedKey,
+    expandedKeys,
+    disabledExpandedKeys,
+    disabled: defaultDisabled,
+    indicator: defaultIndicator,
+    motionProps: defaultMotionProps,
+    keepMounted: defaultKeepMounted,
+    hideIndicator: defaultHideIndicator,
+  } = useAccordionGroup()
 
-    const {
-      children,
-      title,
-      slotProps,
-      as = 'div',
-      motionProps = defaultMotionProps,
-      hideIndicator = defaultHideIndicator,
-      keepMounted = defaultKeepMounted,
-      indicator = defaultIndicator,
-      itemKey = defaultKey,
-      disabled = disabledExpandedKeys.includes(itemKey) || defaultDisabled,
-      ...remainingProps
-    } = props
+  const {
+    ref,
+    children,
+    title,
+    slotProps,
+    as = 'div',
+    motionProps = defaultMotionProps,
+    hideIndicator = defaultHideIndicator,
+    keepMounted = defaultKeepMounted,
+    indicator = defaultIndicator,
+    itemKey = defaultKey,
+    disabled = disabledExpandedKeys.includes(itemKey) || defaultDisabled,
+    ...remainingProps
+  } = props
 
-    const expanded = expandedKeys.includes(itemKey)
+  const expanded = expandedKeys.includes(itemKey)
 
-    const [focusVisible] = useFocusVisible({ ref: triggerRef })
+  const [focusVisible] = useFocusVisible({ ref: triggerRef })
 
-    const ownerState: AccordionItemOwnerState = {
-      ...props,
-      variant,
-      itemKey,
-      expanded,
-      indicator,
-      keepMounted,
-      hideIndicator,
-      disabled,
-      motionProps,
+  const ownerState: AccordionItemOwnerState = {
+    ...props,
+    variant,
+    itemKey,
+    expanded,
+    indicator,
+    keepMounted,
+    hideIndicator,
+    disabled,
+    motionProps,
+  }
+
+  const styles = useStyles({
+    name: 'AccordionItem',
+    ownerState,
+    recipe: accordionItemRecipe,
+  })
+
+  const onClick = useEvent(() => {
+    toggleExpandedKey(itemKey)
+  })
+
+  const onKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
+    // Keyboard accessibility for non interactive elements
+    if (
+      focusVisible &&
+      slotProps?.trigger?.as &&
+      slotProps?.trigger?.as !== 'button' &&
+      (event.code === 'Space' || event.code === 'Enter')
+    ) {
+      event.currentTarget.click()
     }
+  })
 
-    const styles = useStyles({
-      name: 'AccordionItem',
-      ownerState,
-      recipe: accordionItemRecipe,
-    })
+  const classes = useSlotClasses(ownerState)
 
-    const onClick = useEvent(() => {
-      toggleExpandedKey(itemKey)
-    })
+  const slotAriaProps = useSlotAriaProps(ownerState)
 
-    const onKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
-      // Keyboard accessibility for non interactive elements
-      if (
-        focusVisible &&
-        slotProps?.trigger?.as &&
-        slotProps?.trigger?.as !== 'button' &&
-        (event.code === 'Space' || event.code === 'Enter')
-      ) {
-        event.currentTarget.click()
+  const animate = expanded ? 'expanded' : 'unexpanded'
+
+  const contentMotionProps = keepMounted
+    ? {
+        animate,
+        initial: firstRender.current && animate,
+        variants: contentMotionVariants,
       }
-    })
-
-    const classes = useSlotClasses(ownerState)
-
-    const slotAriaProps = useSlotAriaProps(ownerState)
-
-    const animate = expanded ? 'expanded' : 'unexpanded'
-
-    const contentMotionProps = keepMounted
-      ? {
-          animate,
-          initial: firstRender.current && animate,
-          variants: contentMotionVariants,
-        }
-      : {
-          variants: contentMotionVariants,
-          initial: firstRender.current && animate,
-          animate: 'expanded',
-          exit: 'unexpanded',
-        }
-
-    const rootProps = useSlotProps({
-      ownerState,
-      externalForwardedProps: remainingProps,
-      sx: styles.root,
-      classNames: classes.root,
-      additionalProps: {
-        ref,
-        as,
-      },
-    })
-
-    const headingProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.heading,
-      sx: styles.heading,
-      classNames: classes.heading,
-    })
-
-    const triggerProps = useSlotProps({
-      ownerState,
-      externalSlotProps: {
-        ...slotProps?.trigger,
-        ref: mergeRefs(triggerRef, slotProps?.trigger?.ref),
-      },
-      sx: styles.trigger,
-      classNames: classes.trigger,
-      additionalProps: {
-        onClick,
-        onKeyUp,
-        ...slotAriaProps.trigger,
-      },
-    })
-
-    const contentProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.content,
-      sx: styles.content,
-      classNames: classes.content,
-      additionalProps: slotAriaProps.content,
-    })
-
-    const indicatorProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.indicator,
-      sx: styles.indicator,
-      classNames: classes.indicator,
-      additionalProps: {
-        size: 'sm',
-      },
-    })
-
-    useEffect(() => {
-      if (firstRender.current) {
-        firstRender.current = false
+    : {
+        variants: contentMotionVariants,
+        initial: firstRender.current && animate,
+        animate: 'expanded',
+        exit: 'unexpanded',
       }
-    }, [])
 
-    return (
-      <LazyMotion features={domAnimation}>
-        <nex.div {...rootProps}>
-          <nex.h3 {...headingProps}>
-            <nex.button {...triggerProps}>
-              <span>{title}</span>
-              {!hideIndicator && (
-                <nex.span
-                  as={m.span}
-                  variants={indicatorMotionVariants}
-                  animate={animate}
-                  {...indicatorProps}
-                >
-                  {indicator ?? <ChevronDownOutlined />}
-                </nex.span>
-              )}
-            </nex.button>
-          </nex.h3>
-          <AnimatePresence>
-            {(keepMounted || expanded) && (
-              // @ts-ignore
-              <m.div {...contentMotionProps} {...motionProps}>
-                <nex.div {...contentProps}>{children}</nex.div>
-              </m.div>
+  const rootProps = useSlotProps({
+    ownerState,
+    externalForwardedProps: remainingProps,
+    sx: styles.root,
+    classNames: classes.root,
+    additionalProps: {
+      ref,
+      as,
+    },
+  })
+
+  const headingProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.heading,
+    sx: styles.heading,
+    classNames: classes.heading,
+  })
+
+  const triggerProps = useSlotProps({
+    ownerState,
+    externalSlotProps: {
+      ...slotProps?.trigger,
+      ref: mergeRefs(triggerRef, slotProps?.trigger?.ref),
+    },
+    sx: styles.trigger,
+    classNames: classes.trigger,
+    additionalProps: {
+      onClick,
+      onKeyUp,
+      ...slotAriaProps.trigger,
+    },
+  })
+
+  const contentProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.content,
+    sx: styles.content,
+    classNames: classes.content,
+    additionalProps: slotAriaProps.content,
+  })
+
+  const indicatorProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.indicator,
+    sx: styles.indicator,
+    classNames: classes.indicator,
+    additionalProps: {
+      size: 'sm',
+    },
+  })
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+    }
+  }, [])
+
+  return (
+    <LazyMotion features={domAnimation}>
+      <nex.div {...rootProps}>
+        <nex.h3 {...headingProps}>
+          <nex.button {...triggerProps}>
+            <span>{title}</span>
+            {!hideIndicator && (
+              <nex.span
+                as={m.span}
+                variants={indicatorMotionVariants}
+                animate={animate}
+                {...indicatorProps}
+              >
+                {indicator ?? <ChevronDownOutlined />}
+              </nex.span>
             )}
-          </AnimatePresence>
-        </nex.div>
-      </LazyMotion>
-    )
-  },
-)
+          </nex.button>
+        </nex.h3>
+        <AnimatePresence>
+          {(keepMounted || expanded) && (
+            // @ts-ignore
+            <m.div {...contentMotionProps} {...motionProps}>
+              <nex.div {...contentProps}>{children}</nex.div>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </nex.div>
+    </LazyMotion>
+  )
+}

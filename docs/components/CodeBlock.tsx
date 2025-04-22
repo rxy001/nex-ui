@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Pre, Code } from 'nextra/components'
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, JSX } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { codeToHast } from 'shiki/bundle-web.mjs'
 import type { BundledLanguage } from 'shiki'

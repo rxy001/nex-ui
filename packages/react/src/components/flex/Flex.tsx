@@ -1,7 +1,7 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { Ref, ElementType } from 'react'
+import type { ElementType } from 'react'
 import { useNexUI } from '../provider'
 import { flexRecipe } from '../../theme/recipes'
 import type { FlexOwnerState, FlexProps } from './types'
@@ -10,7 +10,6 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
-  forwardRef,
   useSlotProps,
 } from '../utils'
 
@@ -38,55 +37,53 @@ const useSlotClasses = (ownerState: FlexOwnerState) => {
   return composedClasses
 }
 
-export const Flex = forwardRef(
-  <RootComponent extends ElementType = 'div'>(
-    inProps: FlexProps<RootComponent>,
-    ref: Ref<HTMLDivElement>,
-  ) => {
-    const props = useDefaultProps<FlexProps>({ name: 'Flex', props: inProps })
+export const Flex = <RootComponent extends ElementType = 'div'>(
+  inProps: FlexProps<RootComponent>,
+) => {
+  const props = useDefaultProps<FlexProps>({ name: 'Flex', props: inProps })
 
-    const {
-      gap,
-      children,
-      justify,
-      align,
-      wrap,
-      as = 'div',
-      direction = 'row',
-      inline = false,
-      ...remainingProps
-    } = props
+  const {
+    gap,
+    ref,
+    children,
+    justify,
+    align,
+    wrap,
+    as = 'div',
+    direction = 'row',
+    inline = false,
+    ...remainingProps
+  } = props
 
-    const ownerState: FlexOwnerState = {
-      ...props,
-      direction,
-      inline,
-      as,
-    }
+  const ownerState: FlexOwnerState = {
+    ...props,
+    direction,
+    inline,
+    as,
+  }
 
-    const classes = useSlotClasses(ownerState)
+  const classes = useSlotClasses(ownerState)
 
-    const styles = useStyles({ name: 'Flex', ownerState, recipe: flexRecipe })
+  const styles = useStyles({ name: 'Flex', ownerState, recipe: flexRecipe })
 
-    const rootProps = useSlotProps({
-      ownerState,
-      externalForwardedProps: remainingProps,
-      sx: styles,
-      classNames: classes.root,
-      additionalProps: {
-        ref,
-        sx: {
-          gap,
-          flexDirection: direction,
-          alignItems: align,
-          justifyContent: justify,
-          flexWrap: wrap,
-        },
+  const rootProps = useSlotProps({
+    ownerState,
+    externalForwardedProps: remainingProps,
+    sx: styles,
+    classNames: classes.root,
+    additionalProps: {
+      ref,
+      sx: {
+        gap,
+        flexDirection: direction,
+        alignItems: align,
+        justifyContent: justify,
+        flexWrap: wrap,
       },
-    })
+    },
+  })
 
-    return <nex.div {...rootProps}>{children}</nex.div>
-  },
-)
+  return <nex.div {...rootProps}>{children}</nex.div>
+}
 
 Flex.displayName = 'Flex'

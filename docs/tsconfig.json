@@ -5,7 +5,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "allowJs": false,
+    "allowJs": true,
     "noEmit": true,
     "strict": true,
     "incremental": true,
@@ -27,7 +27,9 @@
     "./next.config.ts",
     "./content",
     "./nextraTheme",
-    "./components"
+    "./components",
+    "./postcss.config.mjs",
+    "./eslint.config.mjs"
   ],
   "exclude": []
 }

@@ -25,7 +25,6 @@ export default tseslint.config(
     '**/.turbo',
   ]),
   eslint.configs.recommended,
-  // jsxA11y.flatConfigs.recommended,
   tseslint.configs.recommended,
   react.configs.flat.recommended,
   react.configs.flat['jsx-runtime'],
@@ -51,9 +50,6 @@ export default tseslint.config(
       ecmaVersion: 'latest',
       sourceType: 'module',
       parserOptions: {
-        projectService: {
-          allowDefaultProject: ['eslint.config.mjs'],
-        },
         tsconfigRootDir: import.meta.dirname,
         ecmaFeatures: {
           jsx: true,
@@ -113,6 +109,7 @@ export default tseslint.config(
           extensions: ['.tsx', '.jsx'],
         },
       ],
+      'react/prop-types': 'off',
 
       'import/extensions': 'off',
       'import/no-extraneous-dependencies': 'off',

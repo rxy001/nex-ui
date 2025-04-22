@@ -10,6 +10,7 @@ import {
 import { useMDXComponents as getDocsMDXComponents } from './nextraTheme'
 
 const docsComponents = getDocsMDXComponents({
+  // @ts-ignore
   pre: withIcons(Pre, { js: GithubOutlined }),
   Example,
   ComponentLinks,

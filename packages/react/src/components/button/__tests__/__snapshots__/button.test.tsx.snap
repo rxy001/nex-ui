@@ -38,10 +38,6 @@ exports[`Button renders correctly 1`] = `
   border-radius: var(--nui-radii-lg);
 }
 
-.emotion-0 svg {
-  font-size: 1.3em;
-}
-
 .emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
   outline: var(--nui-borders-focus-visible-outline);
   outline-offset: var(--nui-spaces-0-5);
@@ -96,10 +92,6 @@ exports[`Button should support link button 1`] = `
   font-size: var(--nui-font-sizes-lg);
   height: var(--nui-sizes-10);
   border-radius: var(--nui-radii-lg);
-}
-
-.emotion-0 svg {
-  font-size: 1.3em;
 }
 
 .emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {

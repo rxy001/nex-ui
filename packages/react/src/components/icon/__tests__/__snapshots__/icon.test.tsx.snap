@@ -6,18 +6,16 @@ exports[`Icon renders correctly 1`] = `
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  display: inline-block;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
   font-size: 1.5em;
   width: 1em;
   height: 1em;
 }
 
 <svg
-  class="nui-icon-root nui-icon-size-md nui-icon-width-1em nui-icon-height-1em emotion-0"
+  aria-hidden="true"
+  class="nui-icon-root nui-icon-size-md emotion-0"
   fill="currentColor"
+  focusable="false"
   height="1em"
   viewBox="0 0 1024 1024"
   width="1em"

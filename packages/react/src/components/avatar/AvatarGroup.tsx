@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
 import { isArray } from '@nex-ui/utils'
 import { nex } from '@nex-ui/styled'
-import type { ElementType, Ref } from 'react'
+import type { ElementType } from 'react'
 import {
-  forwardRef,
   useDefaultProps,
   useSlotProps,
   useStyles,
@@ -43,105 +42,103 @@ const useSlotClasses = (ownerState: AvatarGroupOwnerState) => {
   return composedClasses
 }
 
-export const AvatarGroup = forwardRef(
-  <RootElement extends ElementType = 'div'>(
-    inProps: AvatarGroupProps<RootElement>,
-    ref: Ref<HTMLDivElement>,
-  ) => {
-    const props = useDefaultProps<AvatarGroupProps>({
-      name: 'AvatarGroup',
-      props: inProps,
-    })
+export const AvatarGroup = <RootElement extends ElementType = 'div'>(
+  inProps: AvatarGroupProps<RootElement>,
+) => {
+  const props = useDefaultProps<AvatarGroupProps>({
+    name: 'AvatarGroup',
+    props: inProps,
+  })
 
-    const {
-      children,
-      total,
-      slotProps,
-      spacing,
-      renderSurplus,
-      as = 'div',
-      size = 'md',
-      color = 'gray',
-      outlined = false,
-      radius = size,
-      max: maxProp = 5,
-      ...remainingProps
-    } = props
+  const {
+    children,
+    total,
+    slotProps,
+    spacing,
+    ref,
+    renderSurplus,
+    as = 'div',
+    size = 'md',
+    color = 'gray',
+    outlined = false,
+    radius = size,
+    max: maxProp = 5,
+    ...remainingProps
+  } = props
 
-    const max = Math.max(1, maxProp)
+  const max = Math.max(1, maxProp)
 
-    const ownerState: AvatarGroupOwnerState = {
-      ...props,
+  const ownerState: AvatarGroupOwnerState = {
+    ...props,
+    size,
+    color,
+    outlined,
+    radius,
+    as,
+    max,
+  }
+
+  const classes = useSlotClasses(ownerState)
+
+  const styles = useStyles({
+    name: 'AvatarGroup',
+    ownerState,
+    recipe: avatarGroupRecipe,
+  })
+
+  const rootProps = useSlotProps({
+    ownerState,
+    externalForwardedProps: remainingProps,
+    sx: styles,
+    classNames: classes.root,
+    additionalProps: {
+      ref,
+      as,
+      style: {
+        [`--avatar-group-spacing`]:
+          spacing !== undefined ? `${spacing}px` : undefined,
+      },
+    },
+  })
+
+  const surplusProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.surplus,
+    classNames: classes.surplus,
+  })
+
+  const ctx = useMemo(
+    () => ({
       size,
       color,
       outlined,
       radius,
-      as,
-      max,
-    }
+    }),
+    [color, outlined, radius, size],
+  )
 
-    const classes = useSlotClasses(ownerState)
+  if (!isArray(children)) {
+    return children
+  }
 
-    const styles = useStyles({
-      name: 'AvatarGroup',
-      ownerState,
-      recipe: avatarGroupRecipe,
-    })
+  const lastAvatar = Math.min(children.length, max)
 
-    const rootProps = useSlotProps({
-      ownerState,
-      externalForwardedProps: remainingProps,
-      sx: styles,
-      classNames: classes.root,
-      additionalProps: {
-        ref,
-        as,
-        style: {
-          [`--avatar-group-spacing`]:
-            spacing !== undefined ? `${spacing}px` : undefined,
-        },
-      },
-    })
+  const totalAvatars = total ?? children.length
 
-    const surplusProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.surplus,
-      classNames: classes.surplus,
-    })
+  const extraAvatars = Math.max(0, totalAvatars - lastAvatar)
 
-    const ctx = useMemo(
-      () => ({
-        size,
-        color,
-        outlined,
-        radius,
-      }),
-      [color, outlined, radius, size],
-    )
+  const extraElement = renderSurplus ? (
+    renderSurplus(extraAvatars)
+  ) : (
+    <Avatar {...surplusProps}>+{extraAvatars}</Avatar>
+  )
 
-    if (!isArray(children)) {
-      return children
-    }
-
-    const lastAvatar = Math.min(children.length, max)
-
-    const totalAvatars = total ?? children.length
-
-    const extraAvatars = Math.max(0, totalAvatars - lastAvatar)
-
-    const extraElement = renderSurplus ? (
-      renderSurplus(extraAvatars)
-    ) : (
-      <Avatar {...surplusProps}>+{extraAvatars}</Avatar>
-    )
-
-    return (
-      <nex.div {...rootProps}>
-        <AvatarGroupProvider value={ctx}>
-          {children.slice(0, lastAvatar)}
-          {!!extraAvatars && extraElement}
-        </AvatarGroupProvider>
-      </nex.div>
-    )
-  },
-)
+  return (
+    <nex.div {...rootProps}>
+      <AvatarGroupProvider value={ctx}>
+        {children.slice(0, lastAvatar)}
+        {!!extraAvatars && extraElement}
+      </AvatarGroupProvider>
+    </nex.div>
+  )
+}

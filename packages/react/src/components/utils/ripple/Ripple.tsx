@@ -1,10 +1,10 @@
-import type { MouseEvent, ReactElement, Ref } from 'react'
+import type { MouseEvent, ReactElement } from 'react'
 import { cloneElement, isValidElement } from 'react'
 import { useRippleMotion } from './useRippleMotion'
 import type { UseRippleMotionProps } from './useRippleMotion'
 
 export type RippleProps = {
-  children?: ReactElement & { ref?: Ref<any> }
+  children?: ReactElement<{ onClick?: (e: MouseEvent) => void }>
   disabled?: boolean
 } & UseRippleMotionProps
 

@@ -1,13 +1,12 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { Ref, ElementType } from 'react'
+import type { ElementType } from 'react'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
-  forwardRef,
   useSlotProps,
 } from '../utils'
 import { useNexUI } from '../provider'
@@ -30,41 +29,43 @@ const useSlotClasses = (ownerState: DividerOwnerState) => {
   return composedClasses
 }
 
-export const Divider = forwardRef(
-  <RootComponent extends ElementType = 'hr'>(
-    inProps: DividerProps<RootComponent>,
-    ref: Ref<HTMLHRElement>,
-  ) => {
-    const props = useDefaultProps<DividerProps>({
-      name: 'Divider',
-      props: inProps,
-    })
+export const Divider = <RootComponent extends ElementType = 'hr'>(
+  inProps: DividerProps<RootComponent>,
+) => {
+  const props = useDefaultProps<DividerProps>({
+    name: 'Divider',
+    props: inProps,
+  })
 
-    const { orientation = 'horizontal', as = 'hr', ...remainingProps } = props
+  const {
+    ref,
+    as = 'hr',
+    orientation = 'horizontal',
+    ...remainingProps
+  } = props
 
-    const ownerState: DividerOwnerState = { ...props, orientation, as }
+  const ownerState: DividerOwnerState = { ...props, orientation, as }
 
-    const classes = useSlotClasses(ownerState)
+  const classes = useSlotClasses(ownerState)
 
-    const styles = useStyles({
-      name: 'Divider',
-      ownerState,
-      recipe: dividerRecipe,
-    })
+  const styles = useStyles({
+    name: 'Divider',
+    ownerState,
+    recipe: dividerRecipe,
+  })
 
-    const rootProps = useSlotProps({
-      ownerState,
-      externalForwardedProps: remainingProps,
-      sx: styles,
-      classNames: classes.root,
-      additionalProps: {
-        ref,
-        role: 'separator',
-      },
-    })
+  const rootProps = useSlotProps({
+    ownerState,
+    externalForwardedProps: remainingProps,
+    sx: styles,
+    classNames: classes.root,
+    additionalProps: {
+      ref,
+      role: 'separator',
+    },
+  })
 
-    return <nex.hr {...rootProps} />
-  },
-)
+  return <nex.hr {...rootProps} />
+}
 
 Divider.displayName = 'Divider'

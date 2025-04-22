@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
+    "@nex-ui/hooks": "workspace:*",
+    "@nex-ui/icons": "workspace:*",
     "@nex-ui/react": "workspace:*",
+    "@nex-ui/styled": "workspace:*",
     "@nex-ui/system": "workspace:*",
+    "@nex-ui/utils": "workspace:*",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

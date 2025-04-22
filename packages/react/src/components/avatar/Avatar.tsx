@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { nex } from '@nex-ui/styled'
-import type { ElementType, HTMLAttributes, ReactNode, Ref } from 'react'
+import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
-  forwardRef,
   useSlotProps,
 } from '../utils'
 import { useNexUI } from '../provider'
@@ -114,95 +113,93 @@ const useSlotAriaProps = (
   }
 }
 
-export const Avatar = forwardRef(
-  <RootComponent extends ElementType = 'div'>(
-    inProps: AvatarProps<RootComponent>,
-    ref: Ref<HTMLDivElement>,
-  ) => {
-    const props = useDefaultProps<AvatarProps>({
-      name: 'Avatar',
-      props: inProps,
-    })
+export const Avatar = <RootComponent extends ElementType = 'div'>(
+  inProps: AvatarProps<RootComponent>,
+) => {
+  const props = useDefaultProps<AvatarProps>({
+    name: 'Avatar',
+    props: inProps,
+  })
 
-    const groupCtx = useAvatarGroup()
+  const groupCtx = useAvatarGroup()
 
-    const inGroup = !!groupCtx
+  const inGroup = !!groupCtx
 
-    const {
+  const {
+    src,
+    alt,
+    ref,
+    srcSet,
+    slotProps,
+    children: childrenProp,
+    as = 'div',
+    size = groupCtx?.size ?? 'md',
+    radius = groupCtx?.radius ?? size,
+    color = groupCtx?.color ?? 'gray',
+    outlined = groupCtx?.outlined ?? false,
+    ...remainingProps
+  } = props
+
+  const loaded = useLoaded({ src, srcSet })
+
+  const ownerState: AvatarOwnerState = {
+    ...props,
+    size,
+    radius,
+    color,
+    as,
+    outlined,
+    inGroup,
+    loaded,
+  }
+
+  const styles = useStyles({
+    name: 'Avatar',
+    ownerState,
+    recipe: avatarRecipe,
+  })
+
+  const classes = useSlotClasses(ownerState)
+
+  const hasImg = src || srcSet
+
+  const slotAriaProps = useSlotAriaProps(ownerState)
+
+  const rootProps = useSlotProps({
+    ownerState,
+    externalForwardedProps: remainingProps,
+    classNames: classes.root,
+    sx: styles.root,
+    additionalProps: {
+      ref,
+      as,
+      ...slotAriaProps.root,
+    },
+  })
+
+  const imgProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.img,
+    externalForwardedProps: {
       src,
       alt,
       srcSet,
-      slotProps,
-      children: childrenProp,
-      as = 'div',
-      size = groupCtx?.size ?? 'md',
-      radius = groupCtx?.radius ?? size,
-      color = groupCtx?.color ?? 'gray',
-      outlined = groupCtx?.outlined ?? false,
-      ...remainingProps
-    } = props
+    },
+    classNames: classes.img,
+    sx: styles.img,
+  })
 
-    const loaded = useLoaded({ src, srcSet })
+  let children: ReactNode = null
 
-    const ownerState: AvatarOwnerState = {
-      ...props,
-      size,
-      radius,
-      color,
-      as,
-      outlined,
-      inGroup,
-      loaded,
-    }
+  if (hasImg && loaded === 'loaded') {
+    children = <nex.img {...imgProps} />
+  } else if (childrenProp) {
+    children = childrenProp
+  } else if (hasImg && alt) {
+    children = alt[0]
+  }
 
-    const styles = useStyles({
-      name: 'Avatar',
-      ownerState,
-      recipe: avatarRecipe,
-    })
-
-    const classes = useSlotClasses(ownerState)
-
-    const hasImg = src || srcSet
-
-    const slotAriaProps = useSlotAriaProps(ownerState)
-
-    const rootProps = useSlotProps({
-      ownerState,
-      externalForwardedProps: remainingProps,
-      classNames: classes.root,
-      sx: styles.root,
-      additionalProps: {
-        ref,
-        as,
-        ...slotAriaProps.root,
-      },
-    })
-
-    const imgProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.img,
-      externalForwardedProps: {
-        src,
-        alt,
-        srcSet,
-      },
-      classNames: classes.img,
-      sx: styles.img,
-    })
-
-    let children: ReactNode = null
-
-    if (hasImg && loaded === 'loaded') {
-      children = <nex.img {...imgProps} />
-    } else if (childrenProp) {
-      children = childrenProp
-    } else if (hasImg && alt) {
-      children = alt[0]
-    }
-
-    return <nex.div {...rootProps}>{children}</nex.div>
-  },
-)
+  return <nex.div {...rootProps}>{children}</nex.div>
+}
 
 Avatar.displayName = 'Avatar'

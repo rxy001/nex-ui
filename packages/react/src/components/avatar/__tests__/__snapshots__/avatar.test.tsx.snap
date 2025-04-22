@@ -32,7 +32,9 @@ exports[`Avatar renders correctly 1`] = `
 }
 
 <div
+  aria-label="A"
   class="nui-avatar-root nui-avatar-radius-md nui-avatar-size-md nui-avatar-color-gray emotion-0"
+  role="img"
 >
   A
 </div>

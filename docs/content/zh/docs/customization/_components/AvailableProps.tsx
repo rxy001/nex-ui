@@ -1,7 +1,8 @@
 import { Code } from 'nextra/components'
 import { defaultConfig } from '@nex-ui/react'
-import type { TokenCategory } from '@nex-ui/system'
 import { reduce } from '@nex-ui/utils'
+import type { JSX } from 'react'
+import type { TokenCategory } from '@nex-ui/system'
 
 function upperFirst(str: string) {
   return str.replace(/^\w/, (c) => c.toUpperCase())

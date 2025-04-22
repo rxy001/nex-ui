@@ -5,7 +5,6 @@ import { nex } from '@nex-ui/styled'
 import type {
   ChangeEvent,
   ElementType,
-  Ref,
   HTMLAttributes,
   KeyboardEvent,
   InputHTMLAttributes,
@@ -15,7 +14,6 @@ import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
 import { switchRecipe } from '../../theme/recipes'
 import {
-  forwardRef,
   useDefaultProps,
   useSlotProps,
   useStyles,
@@ -102,166 +100,164 @@ const useSlotAriaProps = (
   return { input, label }
 }
 
-export const Switch = forwardRef(
-  <SwitchComponent extends ElementType = 'input'>(
-    inProps: SwitchProps<SwitchComponent>,
-    ref: Ref<HTMLInputElement>,
-  ) => {
-    const { primaryColor } = useNexUI()
+export const Switch = <SwitchComponent extends ElementType = 'input'>(
+  inProps: SwitchProps<SwitchComponent>,
+) => {
+  const { primaryColor } = useNexUI()
 
-    const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-    const props = useDefaultProps<SwitchProps>({
-      name: 'Switch',
-      props: inProps,
-    })
+  const props = useDefaultProps<SwitchProps>({
+    name: 'Switch',
+    props: inProps,
+  })
 
-    const {
-      sx,
-      children,
-      slotProps,
-      className,
-      startIcon,
-      endIcon,
-      onCheckedChange,
-      thumbIcon: thumbIconProp,
-      checked: checkdeProp,
-      disabled = false,
-      size = 'md',
-      type = 'checkbox',
-      tabIndex = 0,
-      as = 'input',
-      defaultChecked = false,
-      color = primaryColor,
-      ...remainingProps
-    } = props
+  const {
+    sx,
+    ref,
+    children,
+    slotProps,
+    className,
+    startIcon,
+    endIcon,
+    onCheckedChange,
+    thumbIcon: thumbIconProp,
+    checked: checkdeProp,
+    disabled = false,
+    size = 'md',
+    type = 'checkbox',
+    tabIndex = 0,
+    as = 'input',
+    defaultChecked = false,
+    color = primaryColor,
+    ...remainingProps
+  } = props
 
-    const [focusVisible] = useFocusVisible({ ref: inputRef })
+  const [focusVisible] = useFocusVisible({ ref: inputRef })
 
-    const [checked, setChecked] = useControlledState(
-      checkdeProp,
-      defaultChecked,
-      onCheckedChange,
-    )
+  const [checked, setChecked] = useControlledState(
+    checkdeProp,
+    defaultChecked,
+    onCheckedChange,
+  )
 
-    const ownerState: SwitchOwnerState = {
-      ...props,
-      as,
-      color,
-      checked,
-      disabled,
-      size,
-      type,
-      tabIndex,
-      defaultChecked,
+  const ownerState: SwitchOwnerState = {
+    ...props,
+    as,
+    color,
+    checked,
+    disabled,
+    size,
+    type,
+    tabIndex,
+    defaultChecked,
+  }
+
+  const handleChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked)
+  })
+
+  const handleClick = useEvent(() => {
+    // Compatible with non interactive elements
+    if (isString(as) && as !== 'input') {
+      setChecked(!checked)
     }
+  })
 
-    const handleChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-      setChecked(e.target.checked)
-    })
+  const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
+    // Keyboard accessibility for non interactive elements
+    if (focusVisible && as !== 'input' && event.code === 'Space') {
+      event.currentTarget.click()
+    }
+  })
 
-    const handleClick = useEvent(() => {
-      // Compatible with non interactive elements
-      if (isString(as) && as !== 'input') {
-        setChecked(!checked)
-      }
-    })
+  const classes = useSlotClasses(ownerState)
 
-    const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
-      // Keyboard accessibility for non interactive elements
-      if (focusVisible && as !== 'input' && event.code === 'Space') {
-        event.currentTarget.click()
-      }
-    })
+  const styles = useStyles({
+    name: 'Switch',
+    ownerState,
+    recipe: switchRecipe,
+  })
 
-    const classes = useSlotClasses(ownerState)
+  const slotAriaProps = useSlotAriaProps(ownerState)
 
-    const styles = useStyles({
-      name: 'Switch',
-      ownerState,
-      recipe: switchRecipe,
-    })
+  const mergedRefs = mergeRefs(ref, inputRef)
 
-    const slotAriaProps = useSlotAriaProps(ownerState)
+  const rootProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.root,
+    externalForwardedProps: { className, sx },
+    sx: styles.root,
+    classNames: classes.root,
+  })
 
-    const mergedRefs = mergeRefs(ref, inputRef)
+  const inputProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.input,
+    externalForwardedProps: remainingProps,
+    sx: styles.input,
+    classNames: classes.input,
+    additionalProps: {
+      as,
+      onChange: handleChange,
+      onClick: handleClick,
+      onKeyUp: handleKeyUp,
+      ref: mergedRefs,
+      ...slotAriaProps.input,
+    },
+  })
 
-    const rootProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.root,
-      externalForwardedProps: { className, sx },
-      sx: styles.root,
-      classNames: classes.root,
-    })
+  const trackProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.track,
+    sx: styles.track,
+    classNames: classes.track,
+  })
 
-    const inputProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.input,
-      externalForwardedProps: remainingProps,
-      sx: styles.input,
-      classNames: classes.input,
-      additionalProps: {
-        as,
-        onChange: handleChange,
-        onClick: handleClick,
-        onKeyUp: handleKeyUp,
-        ref: mergedRefs,
-        ...slotAriaProps.input,
-      },
-    })
+  const thumbProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.thumb,
+    sx: styles.thumb,
+    classNames: classes.thumb,
+  })
 
-    const trackProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.track,
-      sx: styles.track,
-      classNames: classes.track,
-    })
+  const startIconProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.startIcon,
+    sx: styles.startIcon,
+    classNames: classes.startIcon,
+  })
 
-    const thumbProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.thumb,
-      sx: styles.thumb,
-      classNames: classes.thumb,
-    })
+  const endIconProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.endIcon,
+    sx: styles.endIcon,
+    classNames: classes.endIcon,
+  })
 
-    const startIconProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.startIcon,
-      sx: styles.startIcon,
-      classNames: classes.startIcon,
-    })
+  const labelProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.label,
+    sx: styles.label,
+    classNames: classes.label,
+    additionalProps: slotAriaProps.label,
+  })
 
-    const endIconProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.endIcon,
-      sx: styles.endIcon,
-      classNames: classes.endIcon,
-    })
+  const thumbIcon = isFunction(thumbIconProp)
+    ? thumbIconProp(ownerState)
+    : thumbIconProp
 
-    const labelProps = useSlotProps({
-      ownerState,
-      externalSlotProps: slotProps?.label,
-      sx: styles.label,
-      classNames: classes.label,
-      additionalProps: slotAriaProps.label,
-    })
-
-    const thumbIcon = isFunction(thumbIconProp)
-      ? thumbIconProp(ownerState)
-      : thumbIconProp
-
-    return (
-      <nex.label {...rootProps}>
-        <nex.input {...inputProps} />
-        <nex.span {...trackProps}>
-          {startIcon && <nex.span {...startIconProps}>{startIcon}</nex.span>}
-          <nex.span {...thumbProps}>{thumbIcon}</nex.span>
-          {endIcon && <nex.span {...endIconProps}>{endIcon}</nex.span>}
-        </nex.span>
-        {children && <nex.span {...labelProps}>{children}</nex.span>}
-      </nex.label>
-    )
-  },
-)
+  return (
+    <nex.label {...rootProps}>
+      <nex.input {...inputProps} />
+      <nex.span {...trackProps}>
+        {startIcon && <nex.span {...startIconProps}>{startIcon}</nex.span>}
+        <nex.span {...thumbProps}>{thumbIcon}</nex.span>
+        {endIcon && <nex.span {...endIconProps}>{endIcon}</nex.span>}
+      </nex.span>
+      {children && <nex.span {...labelProps}>{children}</nex.span>}
+    </nex.label>
+  )
+}
 
 Switch.displayName = 'Switch'
