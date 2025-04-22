@@ -114,7 +114,6 @@ export const useSandpack = ({
         const importRegex = /import .* from ["'](.*)["']/g
         let match: RegExpExecArray | null
 
-        // eslint-disable-next-line no-cond-assign
         while ((match = importRegex.exec(fileContent)) !== null) {
           const dependencyName = match[1]
 

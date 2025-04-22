@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import type { CSSObject, Dictionary } from '../types'
 
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T

@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src", "../icons/types.d.ts"],
+  "include": ["./src"],
   "compilerOptions": {
     "customConditions": ["source"],
     "baseUrl": "./",

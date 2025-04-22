@@ -5,4 +5,11 @@ export default defineConfig([
   {
     extends: [config],
   },
+  {
+    files: ['**/*.{ts,tsx}'],
+    rules: {
+      'react/require-default-props': 'off',
+      'import/no-duplicates': ['error', { considerQueryString: true }],
+    },
+  },
 ])

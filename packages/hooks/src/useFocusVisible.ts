@@ -6,7 +6,7 @@ import { useEffect, useId, useState } from 'react'
 function isFocusVisible(element: Element): boolean {
   try {
     return element.matches(':focus-visible')
-  } catch (error) {
+  } catch {
     // Do not warn on jsdom tests, otherwise all tests that rely on focus have to be skipped
     // Tests that rely on `:focus-visible` will still have to be skipped in jsdom
     if (

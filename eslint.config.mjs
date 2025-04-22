@@ -1,29 +1,30 @@
 import eslint from '@eslint/js'
 import globals from 'globals'
-import tseslint from 'typescript-eslint'
 import jest from 'eslint-plugin-jest'
 import importPlugin from 'eslint-plugin-import'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import { globalIgnores } from 'eslint/config'
+import * as reactHooks from 'eslint-plugin-react-hooks'
+import * as tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  globalIgnores([
-    '*/.next/*',
-    '**/*.css',
-    '**/dist',
-    'public/*',
-    '**/node_modules',
-    '**/assets',
-    '**/notes',
-    '**/coverage',
-    '**/.husky',
-    '**/*.yaml',
-    '**/build',
-    '**/.turbo',
-  ]),
+  {
+    ignores: [
+      '**/.next',
+      '**/*.css',
+      '**/dist',
+      '**/public',
+      '**/node_modules',
+      '**/assets',
+      '**/notes',
+      'coverage/*',
+      '.husky/*',
+      '**/*.yaml',
+      '**/build',
+      '**/.turbo',
+    ],
+  },
   eslint.configs.recommended,
   tseslint.configs.recommended,
   react.configs.flat.recommended,
@@ -39,35 +40,38 @@ export default tseslint.config(
     ],
   },
   {
-    ...jsxA11y.flatConfigs.recommended,
     languageOptions: {
-      ...jsxA11y.flatConfigs.recommended.languageOptions,
       globals: {
         ...globals.node,
         ...globals.serviceworker,
         ...globals.browser,
       },
+      parser: tseslint.parser,
       ecmaVersion: 'latest',
       sourceType: 'module',
       parserOptions: {
-        tsconfigRootDir: import.meta.dirname,
+        project: true,
         ecmaFeatures: {
           jsx: true,
         },
       },
     },
     settings: {
+      react: {
+        version: 'detect',
+      },
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
           project: [
-            './tsconfig.json',
-            './docs/tsconfig.json',
-            './packages/**/tsconfig.json',
+            'tsconfig.json',
+            'docs/tsconfig.json',
+            'sb/tsconfig.json',
+            'packages/*/tsconfig.json',
           ],
           conditionNames: [
-            'types',
             'source',
+            'types',
             'import',
             'require',
             'node',
@@ -77,13 +81,6 @@ export default tseslint.config(
           noWarnOnMultipleProjects: true,
         },
       },
-      react: {
-        version: 'detect',
-      },
-    },
-    rules: {
-      // ... any rules you want
-      'jsx-a11y/alt-text': 'error',
     },
   },
   {
@@ -92,6 +89,7 @@ export default tseslint.config(
     languageOptions: {
       globals: jest.environments.globals.globals,
     },
+    ...jest.configs['flat/recommended'],
   },
   {
     files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
@@ -102,7 +100,6 @@ export default tseslint.config(
           allow: ['error', 'warn'],
         },
       ],
-
       'react/jsx-filename-extension': [
         'error',
         {
@@ -110,11 +107,6 @@ export default tseslint.config(
         },
       ],
       'react/prop-types': 'off',
-
-      'import/extensions': 'off',
-      'import/no-extraneous-dependencies': 'off',
-      'import/prefer-default-export': 'off',
-      'import/no-named-as-default': 'off',
 
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-use-before-define': [
@@ -136,6 +128,8 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-unsafe-function-type': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
+
+      'jsx-a11y/alt-text': 'error',
     },
   },
 )

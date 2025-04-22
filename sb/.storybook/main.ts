@@ -5,7 +5,7 @@ export default {
     name: '@storybook/react-vite',
     options: {},
   },
-  stories: ['../../**/__stories__/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../../packages/**/__stories__/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-themes',

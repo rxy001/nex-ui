@@ -1,7 +1,7 @@
 import { NexUIProvider } from '@nex-ui/react'
 import type { ReactRenderer, Preview } from '@storybook/react'
 
-import { themes } from '../node_modules/@storybook/theming'
+import { themes } from '@storybook/theming'
 import { withTheme } from './withTheme.decorator'
 
 const preview: Preview = {

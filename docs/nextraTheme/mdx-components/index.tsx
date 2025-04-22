@@ -81,7 +81,6 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   ),
   wrapper({ toc, children, metadata, bottomContent, ...props }) {
     // @ts-expect-error fixme
-    // eslint-disable-next-line no-param-reassign
     toc = toc.map((item) => ({
       ...item,
       value: removeLinks(item.value),

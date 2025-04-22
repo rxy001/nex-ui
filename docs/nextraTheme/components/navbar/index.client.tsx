@@ -61,11 +61,9 @@ const NavbarMenu: FC<{
         anchor={{ to: 'bottom', gap: 10, padding: 16 }}
       >
         {Object.entries(
-          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
           (menu.items as Record<string, { title: string; href?: string }>) ||
             {},
         ).map(([key, item]) => (
-          // eslint-disable-next-line react/jsx-pascal-case
           <_MenuItem
             key={key}
             as={Anchor}

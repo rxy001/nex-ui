@@ -21,7 +21,6 @@ export function TwoColumnTable({ columns, dataSource }: TwoColumnTableProps) {
       </Thead>
       <Tbody>
         {dataSource.map((data, index) => (
-          // eslint-disable-next-line react/no-array-index-key
           <Tr key={index}>
             {columns.map((column, i) => {
               return (

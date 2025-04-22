@@ -10,7 +10,6 @@ export function toSlot<T extends Record<string, any>, K extends string[]>(
 ) {
   const result = {} as Result<T, K>
 
-  // eslint-disable-next-line guard-for-in
   for (const key in object) {
     // @ts-ignore
     result[key] = {}

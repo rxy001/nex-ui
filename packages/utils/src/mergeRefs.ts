@@ -12,7 +12,6 @@ export function mergeRefs<T>(...refs: (LegacyRef<T> | undefined | null)[]) {
       if (typeof ref === 'function') {
         ref(node)
       } else if (ref && typeof ref === 'object' && 'current' in ref) {
-        // eslint-disable-next-line no-param-reassign
         ;(ref as MutableRefObject<T>).current = node
       }
     })

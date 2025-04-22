@@ -192,10 +192,10 @@ export function Theme({ translations }: ThemeProps) {
     <div className='x:gap-12 x:flex x:flex-col x:lg:flex-row'>
       <div className='x:lg:w-1/2 x:flex x:flex-col x:gap-2 x:min-lg:min-h-[435px]'>
         {contents.map(({ title, description }, i) => (
-          <div
+          <button
             key={title}
             className={clsx(
-              'x:p-4 x:hover:shadow-lg x:hover:transform-[translateY(-2px)] x:transition-transform x:dark:hover:bg-[#202425]',
+              'x:p-4 x:text-left x:hover:shadow-lg x:hover:transform-[translateY(-2px)] x:transition-transform x:dark:hover:bg-[#202425]',
               i === index
                 ? 'x:shadow-lg x:transform-[translateY(-2px)] x:rounded-md x:dark:bg-[#202425] '
                 : '',
@@ -204,7 +204,7 @@ export function Theme({ translations }: ThemeProps) {
           >
             <h4 className='x:font-bold'>{title}</h4>
             <p className='x:mt-2'>{description}</p>
-          </div>
+          </button>
         ))}
       </div>
       <CodeWindow lang='ts' file='Theme.ts' className='x:lg:flex-1'>

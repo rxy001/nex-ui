@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents isn't react hooks */
-
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { useMDXComponents } from '@/mdx-components'
 
@@ -26,10 +24,10 @@ export async function generateMetadata(props: PageProps) {
   }
 }
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
 const Wrapper = useMDXComponents().wrapper
 
 export default async function Page(props: PageProps) {
-  // eslint-disable-next-line react/destructuring-assignment
   const params = await props.params
   const result = await importPage(params.mdxPath, params.lang)
   const { default: MDXContent, toc, metadata } = result
