@@ -193,7 +193,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
 
   const inputProps = useSlotProps({
     ownerState,
-    externalSlotProps: slotProps?.input,
     externalForwardedProps: remainingProps,
     sx: styles.input,
     classNames: classes.input,

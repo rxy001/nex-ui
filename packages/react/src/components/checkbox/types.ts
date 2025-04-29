@@ -16,10 +16,6 @@ type CheckboxSlotProps<CheckboxComponent extends ElementType> = {
     'label',
     CheckboxOwnerState<CheckboxComponent>
   >
-  input?: ComponentPropsWithCommonProps<
-    'input',
-    CheckboxOwnerState<CheckboxComponent>
-  >
   label?: ComponentPropsWithCommonProps<
     'span',
     CheckboxOwnerState<CheckboxComponent>
@@ -67,7 +63,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'input' | 'label' | 'icon'>
+  classes?: ComponentUtilityClasses<'root' | 'label' | 'icon'>
 
   /**
    * The default checked state.(uncontrolled)

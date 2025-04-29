@@ -230,7 +230,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
 
   const inputProps = useSlotProps({
     ownerState,
-    externalSlotProps: slotProps?.input,
     externalForwardedProps: remainingProps,
     classNames: classes.input,
     sx: styles.input,

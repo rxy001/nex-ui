@@ -15,10 +15,6 @@ type SwitchSlotProps<SwitchComponent extends ElementType> = {
     'label',
     SwitchOwnerState<SwitchComponent>
   >
-  input?: ComponentPropsWithCommonProps<
-    'input',
-    SwitchOwnerState<SwitchComponent>
-  >
   track?: ComponentPropsWithCommonProps<
     'span',
     SwitchOwnerState<SwitchComponent>
@@ -82,7 +78,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'root' | 'input' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label'
+    'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label'
   >
 
   /**
