@@ -68,27 +68,20 @@ const useSlotAriaProps = (
     disabled,
     type,
     tabIndex: disabled ? -1 : tabIndex,
+    'aria-labelledby': childrenString ? id : undefined,
+    'aria-label': childrenString ? children : undefined,
   }
 
   if (as === 'input') {
     input = {
       ...input,
       role: 'switch',
-      'aria-labelledby': childrenString ? id : undefined,
-      'aria-label': childrenString ? children : undefined,
-    }
-  } else if (isFunction(as)) {
-    input = {
-      ...input,
-      tabIndex,
     }
   } else {
     input = {
       ...input,
       role: 'switch',
       'aria-checked': checked,
-      'aria-labelledby': childrenString ? id : undefined,
-      'aria-label': childrenString ? children : undefined,
       'aria-disabled': disabled || undefined,
     }
   }

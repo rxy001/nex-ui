@@ -77,12 +77,6 @@ const useSlotAriaProps = (
       'aria-labelledby': childrenString ? id : undefined,
       'aria-label': childrenString ? children : undefined,
     }
-  } else if (isFunction(as)) {
-    input = {
-      ...input,
-      value,
-      tabIndex,
-    }
   } else {
     input = {
       role: 'checkbox',

@@ -22,13 +22,13 @@ export const checkboxRecipe = defineSlotRecipe({
       cursor: 'inherit',
       zIndex: 1,
       _focusVisible: {
-        '& + span::before': {
+        '& + *::before': {
           outline: 'focusVisibleOutline',
           outlineOffset: '0.5',
         },
       },
       _hover: {
-        '& + span::before': {
+        '& + *::before': {
           borderColor: 'colorPalette.secondary',
         },
       },

@@ -4,8 +4,13 @@ import { LoadingOutlined } from '@nex-ui/icons'
 import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { nex } from '@nex-ui/styled'
 import { useRef } from 'react'
-import type { ElementType, HTMLAttributes, KeyboardEvent } from 'react'
-import { isFunction, mergeRefs } from '@nex-ui/utils'
+import type {
+  ButtonHTMLAttributes,
+  ElementType,
+  HTMLAttributes,
+  KeyboardEvent,
+} from 'react'
+import { mergeRefs } from '@nex-ui/utils'
 import { useNexUI } from '../provider'
 import { buttonRecipe } from '../../theme/recipes'
 import {
@@ -73,22 +78,19 @@ const useSlotAriaProps = (
   const { as, disabled: disabledProps, role, loading, tabIndex } = ownerState
   const disabled = disabledProps || loading
 
-  let root = {}
+  let root: ButtonHTMLAttributes<HTMLButtonElement> = {
+    tabIndex: disabled ? -1 : tabIndex,
+  }
 
   if (as === 'button') {
     root = {
-      disabled,
-      tabIndex: disabled ? -1 : tabIndex,
-    }
-  } else if (isFunction(as)) {
-    root = {
-      tabIndex,
+      ...root,
       disabled,
     }
   } else {
     root = {
+      ...root,
       role: role ?? 'button',
-      tabIndex: disabled ? -1 : tabIndex,
       'aria-disabled': disabled || undefined,
     }
   }

@@ -62,7 +62,7 @@
 
 28. 将 storybook 改为 sb，是因为 storybook cli 会将其识别为 storybook 包，导致服务启动失败。
 
-29. 修改 recipes 中标签选择器
+<!-- 29. 修改 recipes 中标签选择器 -->
 
 30. 样式系统 system 遇到的问题
     1. 条件式的样式与常规样式的合并。 例如在不同 variant 分别存在 color: red 和 color:{_dark: white}, 当这

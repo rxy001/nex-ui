@@ -5,7 +5,7 @@ import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { LazyMotion, AnimatePresence, domAnimation } from 'motion/react'
 import { nex } from '@nex-ui/styled'
-import { isFunction, mergeRefs } from '@nex-ui/utils'
+import { mergeRefs } from '@nex-ui/utils'
 import { useEffect, useId, useRef } from 'react'
 import type { Variants } from 'motion/react'
 import type {
@@ -110,16 +110,10 @@ const useSlotAriaProps = (
     'aria-disabled': disabled || undefined,
   }
 
-  if (isFunction(triggerProps.as)) {
-    trigger = { disabled }
-  } else if (triggerProps.as !== 'button') {
+  if (triggerProps.as !== 'button') {
     trigger = {
+      ...trigger,
       role: 'button',
-      id: triggerId,
-      tabIndex: disabled ? -1 : 0,
-      'aria-expanded': expanded,
-      'aria-controls': contentId,
-      'aria-disabled': disabled || undefined,
     }
   }
 

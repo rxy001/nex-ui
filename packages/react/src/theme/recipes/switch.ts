@@ -18,7 +18,7 @@ export const switchRecipe = defineSlotRecipe({
       m: 0,
       zIndex: 1,
       _focusVisible: {
-        '& + span': {
+        '& + *': {
           outline: 'focusVisibleOutline',
           outlineOffset: '0.5',
         },
