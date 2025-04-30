@@ -65,7 +65,7 @@ export const switchRecipe = defineSlotRecipe({
       right: '1',
     },
     label: {
-      marginInlineStart: '2',
+      ml: '2',
     },
   },
   variants: {
@@ -141,7 +141,7 @@ export const switchRecipe = defineSlotRecipe({
     checked: {
       true: {
         thumb: {
-          marginInlineStart: '50%',
+          ml: '50%',
         },
         track: {
           bg: 'colorPalette.primary',

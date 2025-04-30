@@ -29,7 +29,7 @@ export const inputRecipe = defineSlotRecipe({
       '::placeholder': {
         color: 'inherit',
       },
-      '::-webkit-search-cancel-button': {
+      '::WebkitSearchCancelButton': {
         WebkitAppearance: 'none',
         appearance: 'none',
       },
@@ -185,7 +185,7 @@ export const inputRecipe = defineSlotRecipe({
           },
         },
         input: {
-          paddingBlockEnd: 0,
+          pb: 0,
         },
       },
       inside: {
@@ -194,7 +194,7 @@ export const inputRecipe = defineSlotRecipe({
           transform: 'translateY(-90%) scale(0.8)',
         },
         input: {
-          paddingBlockEnd: 0,
+          pb: 0,
         },
       },
     },
@@ -216,7 +216,7 @@ export const inputRecipe = defineSlotRecipe({
       labelPlacement: ['float-outside', 'outside'],
       css: {
         root: {
-          marginBlockStart: '1.5em',
+          mt: '1.5em',
         },
       },
     },
@@ -257,16 +257,16 @@ export const inputRecipe = defineSlotRecipe({
           h: '10',
         },
         input: {
-          paddingBlockStart: '0.9em',
+          pt: '0.9em',
         },
         prefix: {
-          paddingBlockStart: '0.9em',
+          pt: '0.9em',
         },
         suffix: {
-          paddingBlockStart: '0.9em',
+          pt: '0.9em',
         },
         clearBtn: {
-          marginBlockStart: '0.9em',
+          mt: '0.9em',
         },
       },
     },
@@ -278,16 +278,16 @@ export const inputRecipe = defineSlotRecipe({
           h: '12',
         },
         input: {
-          paddingBlockStart: '1em',
+          pt: '1em',
         },
         prefix: {
-          paddingBlockStart: '1em',
+          pt: '1em',
         },
         suffix: {
-          paddingBlockStart: '1em',
+          pt: '1em',
         },
         clearBtn: {
-          marginBlockStart: '1em',
+          mt: '1em',
         },
       },
     },
@@ -299,16 +299,16 @@ export const inputRecipe = defineSlotRecipe({
           h: '14',
         },
         input: {
-          paddingBlockStart: '1.2em',
+          pt: '1.2em',
         },
         prefix: {
-          paddingBlockStart: '1.2em',
+          pt: '1.2em',
         },
         suffix: {
-          paddingBlockStart: '1.2em',
+          pt: '1.2em',
         },
         clearBtn: {
-          marginBlockStart: '1.2em',
+          mt: '1.2em',
         },
       },
     },

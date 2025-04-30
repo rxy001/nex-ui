@@ -16,7 +16,10 @@ exports[`Input renders correctly 1`] = `
   gap: var(--nui-spaces-1);
   cursor: text;
   position: relative;
-  padding-inline: var(--nui-spaces-3);
+  -webkit-padding-start: var(--nui-spaces-3);
+  padding-inline-start: var(--nui-spaces-3);
+  -webkit-padding-end: var(--nui-spaces-3);
+  padding-inline-end: var(--nui-spaces-3);
   font-size: var(--nui-font-sizes-lg);
   height: var(--nui-sizes-10);
   border-radius: var(--nui-radii-lg);
@@ -44,7 +47,8 @@ exports[`Input renders correctly 1`] = `
   cursor: inherit;
   width: var(--nui-sizes-full);
   padding: 0;
-  padding-block: var(--nui-spaces-2-5);
+  padding-block-start: var(--nui-spaces-2-5);
+  padding-block-end: var(--nui-spaces-2-5);
 }
 
 .emotion-1::-webkit-input-placeholder {
@@ -67,7 +71,7 @@ exports[`Input renders correctly 1`] = `
   ::-webkit-search-cancel-button: none;
 }
 
-.emotion-1::-webkit-search-cancel-button {
+.emotion-1::WebkitSearchCancelButton {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;

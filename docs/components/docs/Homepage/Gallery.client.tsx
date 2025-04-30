@@ -31,8 +31,8 @@ export const ClientGallery = () => {
         onChange={toggleMode}
       />
       <Input
-        className='x:absolute x:animate-[levitate_10s_ease_infinite] x:top-[130px] x:-right-[40px]'
-        defaultValue='Nex UI'
+        className='x:absolute! x:animate-[levitate_10s_ease_infinite] x:top-[130px] x:-right-[40px]'
+        label='Nex UI'
       />
       <Avatar
         src='https://avatars.githubusercontent.com/u/25546323?v=4'

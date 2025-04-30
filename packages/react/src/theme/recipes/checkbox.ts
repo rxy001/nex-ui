@@ -34,7 +34,7 @@ export const checkboxRecipe = defineSlotRecipe({
       },
     },
     label: {
-      marginInlineStart: '2',
+      ml: '2',
     },
     checkedIcon: {
       opacity: 0,

@@ -82,7 +82,7 @@ export const avatarRecipe = defineSlotRecipe({
       true: {
         root: {
           ':not(:first-of-type)': {
-            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-2})',
+            ml: 'var(--avatar-group-spacing, {spaces.-2})',
           },
         },
       },
@@ -95,7 +95,7 @@ export const avatarRecipe = defineSlotRecipe({
       css: {
         root: {
           ':not(:first-of-type)': {
-            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-1})',
+            ml: 'var(--avatar-group-spacing, {spaces.-1})',
           },
         },
       },
@@ -106,7 +106,7 @@ export const avatarRecipe = defineSlotRecipe({
       css: {
         root: {
           ':not(:first-of-type)': {
-            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-3})',
+            ml: 'var(--avatar-group-spacing, {spaces.-3})',
           },
         },
       },
@@ -117,7 +117,7 @@ export const avatarRecipe = defineSlotRecipe({
       css: {
         root: {
           ':not(:first-of-type)': {
-            marginInlineStart: 'var(--avatar-group-spacing, {spaces.-4})',
+            ml: 'var(--avatar-group-spacing, {spaces.-4})',
           },
         },
       },

@@ -32,7 +32,10 @@ exports[`Button renders correctly 1`] = `
   -webkit-tap-highlight-color: transparent;
   background-color: var(--nui-colors-blue-primary);
   color: var(--nui-colors-blue-contrast-text);
-  padding-inline: var(--nui-spaces-4);
+  -webkit-padding-start: var(--nui-spaces-4);
+  padding-inline-start: var(--nui-spaces-4);
+  -webkit-padding-end: var(--nui-spaces-4);
+  padding-inline-end: var(--nui-spaces-4);
   font-size: var(--nui-font-sizes-lg);
   height: var(--nui-sizes-10);
   border-radius: var(--nui-radii-lg);
@@ -88,7 +91,10 @@ exports[`Button should support link button 1`] = `
   -webkit-tap-highlight-color: transparent;
   background-color: var(--nui-colors-blue-primary);
   color: var(--nui-colors-blue-contrast-text);
-  padding-inline: var(--nui-spaces-4);
+  -webkit-padding-start: var(--nui-spaces-4);
+  padding-inline-start: var(--nui-spaces-4);
+  -webkit-padding-end: var(--nui-spaces-4);
+  padding-inline-end: var(--nui-spaces-4);
   font-size: var(--nui-font-sizes-lg);
   height: var(--nui-sizes-10);
   border-radius: var(--nui-radii-lg);
