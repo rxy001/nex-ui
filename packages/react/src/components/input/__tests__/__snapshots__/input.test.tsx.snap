@@ -2,7 +2,6 @@
 
 exports[`Input renders correctly 1`] = `
 .emotion-0 {
-  border: var(--nui-borders-md);
   box-sizing: border-box;
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
@@ -14,21 +13,23 @@ exports[`Input renders correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: var(--nui-spaces-0-5);
+  gap: var(--nui-spaces-1);
   cursor: text;
-  padding-inline: var(--nui-spaces-4);
+  position: relative;
+  padding-inline: var(--nui-spaces-3);
   font-size: var(--nui-font-sizes-lg);
   height: var(--nui-sizes-10);
   border-radius: var(--nui-radii-lg);
+  border: var(--nui-borders-md);
   border-color: var(--nui-colors-gray-highlight);
 }
 
 .emotion-0:hover {
-  border-color: var(--nui-colors-blue-secondary);
+  border-color: var(--nui-colors-gray-secondary);
 }
 
-.emotion-0:focus-within {
-  border-color: var(--nui-colors-blue-tertiary);
+.emotion-0:is(:focus-within, [data-focus-within=true]) {
+  border-color: var(--nui-colors-blue-primary);
 }
 
 .emotion-1 {
@@ -37,20 +38,51 @@ exports[`Input renders correctly 1`] = `
   font-size: inherit;
   background-color: transparent;
   color: inherit;
-  height: 100%;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   cursor: inherit;
+  width: var(--nui-sizes-full);
+  padding: 0;
+  padding-block: var(--nui-spaces-2-5);
 }
 
-<label
+.emotion-1::-webkit-input-placeholder {
+  color: inherit;
+}
+
+.emotion-1::-moz-placeholder {
+  color: inherit;
+}
+
+.emotion-1:-ms-input-placeholder {
+  color: inherit;
+}
+
+.emotion-1::placeholder {
+  color: inherit;
+}
+
+.emotion-1 WebkitAppearance {
+  ::-webkit-search-cancel-button: none;
+}
+
+.emotion-1::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+}
+
+<div
   class="nui-input-root nui-input-variant-outlined nui-input-radius-md nui-input-size-md nui-input-color-blue emotion-0"
 >
   <input
+    aria-invalid="false"
     class="nui-input-input emotion-1"
+    tabindex="0"
     type="text"
     value=""
   />
-</label>
+</div>
 `;

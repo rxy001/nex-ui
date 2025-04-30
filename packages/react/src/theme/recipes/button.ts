@@ -3,7 +3,7 @@ import type { RecipeVariants } from '@nex-ui/system'
 import {
   colorVariant,
   radiusVariant,
-  toSlot,
+  toSlots,
   fullWidth,
   sizeVariant,
 } from '../shared'
@@ -78,7 +78,7 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    size: toSlot(sizeVariant, 'root'),
+    size: toSlots(sizeVariant, 'root'),
     disabled: {
       true: {
         root: {
@@ -87,8 +87,8 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    fullWidth: toSlot(fullWidth, 'root'),
-    radius: toSlot(radiusVariant, 'root'),
+    fullWidth: toSlots(fullWidth, 'root'),
+    radius: toSlots(radiusVariant, 'root'),
     iconOnly: {
       true: {
         root: {
@@ -96,7 +96,7 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    color: toSlot(colorVariant, 'root'),
+    color: toSlots(colorVariant, 'root'),
     disableRipple: {
       true: {
         root: {

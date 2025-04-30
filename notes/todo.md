@@ -61,3 +61,25 @@
 27. 优化 useSlotProps 属性优先级，例如 accordionItems.trigger 的 tabIndex
 
 28. 将 storybook 改为 sb，是因为 storybook cli 会将其识别为 storybook 包，导致服务启动失败。
+
+29. 修改 recipes 中标签选择器
+
+30. 样式系统 system 遇到的问题
+    1. 条件式的样式与常规样式的合并。 例如在不同 variant 分别存在 color: red 和 color:{_dark: white}, 当这
+    两个 variant 同时生效时，只会生成其中一种样式，这是因为样式合并过程仅为对象的合并。
+
+    2. 复杂选择器的样式优先级。如下，这将导致元素在 focus 时，被 hover 的样式覆盖。colorPalette.primary 在 token 定义时也是使用条件式样式 {_DEFAULT: '{colors.blue.500}',_dark: '{colors.blue.600}'}，直观来看预期效果应该为深色模式下 borderColor 在 focus 时为 colorPalette.primary. 差异源自于定义 token 和样式中的 _dark 采用了两种不同的方式
+    导致。
+    ```
+        ':hover': {
+            borderColor: {
+             // 权重为 3
+              _dark: 'gray.400',
+            },
+        },
+        _focusWithin: {
+          // 权重为 2
+          borderColor: 'colorPalette.primary',
+        },
+    ```
+    

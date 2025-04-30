@@ -56,6 +56,13 @@ export const scales = defineConfig.scales({
   gridColumnGap: 'spaces',
   gridRowGap: 'spaces',
   outlineOffset: 'spaces',
+  inset: 'spaces',
+  insetBlock: 'spaces',
+  insetBlockStart: 'spaces',
+  insetBlockEnd: 'spaces',
+  insetInline: 'spaces',
+  insetInlineStart: 'spaces',
+  insetInlineEnd: 'spaces',
 
   borderRadius: 'radii',
   borderTopRightRadius: 'radii',

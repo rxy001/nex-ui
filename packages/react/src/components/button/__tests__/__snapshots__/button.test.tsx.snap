@@ -109,6 +109,7 @@ exports[`Button should support link button 1`] = `
   role="button"
   tabindex="0"
   target="_blank"
+  type="button"
 >
   Link Button
 </a>

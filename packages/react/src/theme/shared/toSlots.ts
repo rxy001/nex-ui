@@ -4,7 +4,7 @@ type Result<T, K extends string[]> = {
   }
 }
 
-export function toSlot<T extends Record<string, any>, K extends string[]>(
+export function toSlots<T extends Record<string, any>, K extends string[]>(
   object: T,
   ...slotNames: K
 ) {

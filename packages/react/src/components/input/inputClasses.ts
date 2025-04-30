@@ -4,9 +4,7 @@ import { generateUtilityClasses } from '../utils'
 export const inputClasses = generateUtilityClasses('nui-input', [
   // ---------root---------
   'root',
-  // "borderless" | "filled" | "outlined"
-  'variant-borderless',
-  'variant-filled',
+
   'variant-outlined',
 
   // "sm" | "md" | "lg" | "full"
@@ -33,7 +31,7 @@ export const inputClasses = generateUtilityClasses('nui-input', [
 
   'disabled',
   'full-width',
-  'error',
+  'invaild',
   // ---------root---------
 
   'input',

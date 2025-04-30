@@ -5,7 +5,7 @@ import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { LazyMotion, AnimatePresence, domAnimation } from 'motion/react'
 import { nex } from '@nex-ui/styled'
-import { mergeRefs } from '@nex-ui/utils'
+import { isFunction, mergeRefs } from '@nex-ui/utils'
 import { useEffect, useId, useRef } from 'react'
 import type { Variants } from 'motion/react'
 import type {
@@ -100,32 +100,38 @@ const useSlotAriaProps = (
   const triggerId = useId()
   const contentId = `panel-${itemKey}-content`
 
-  let triggerAriaProps: ButtonHTMLAttributes<HTMLButtonElement> = {
+  let trigger: ButtonHTMLAttributes<HTMLButtonElement> = {
+    type: 'button',
+    disabled,
+    id: triggerId,
+    tabIndex: disabled ? -1 : 0,
     'aria-expanded': expanded,
     'aria-controls': contentId,
-    type: 'button',
-    tabIndex: disabled ? -1 : (slotProps?.trigger?.tabIndex ?? 0),
     'aria-disabled': disabled || undefined,
-    id: triggerId,
-    disabled,
   }
 
-  if (triggerProps.as && triggerProps.as !== 'button') {
-    triggerAriaProps = {
-      ...triggerAriaProps,
+  if (isFunction(triggerProps.as)) {
+    trigger = { disabled }
+  } else if (triggerProps.as !== 'button') {
+    trigger = {
       role: 'button',
-      type: undefined,
-      disabled: undefined,
+      id: triggerId,
+      tabIndex: disabled ? -1 : 0,
+      'aria-expanded': expanded,
+      'aria-controls': contentId,
+      'aria-disabled': disabled || undefined,
     }
   }
 
+  const content = {
+    role: 'region',
+    'aria-labelledby': triggerId,
+    id: contentId,
+  }
+
   return {
-    trigger: triggerAriaProps,
-    content: {
-      role: 'region',
-      'aria-labelledby': triggerId,
-      id: contentId,
-    },
+    trigger,
+    content,
   }
 }
 

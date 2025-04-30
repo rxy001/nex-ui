@@ -1,23 +1,20 @@
 import { defineSlotRecipe } from '@nex-ui/system'
 import type { RecipeVariants } from '@nex-ui/system'
-import {
-  colorVariant,
-  fullWidth,
-  radiusVariant,
-  toSlot,
-  sizeVariant,
-} from '../shared'
+import { colorVariant, fullWidth, radiusVariant, toSlots } from '../shared'
+
+const WITHIN_SELECTOR = '&:has(+ *:is(:focus-within, [data-focus-within=true]))'
 
 export const inputRecipe = defineSlotRecipe({
   slots: {
     root: {
-      border: 'md',
       boxSizing: 'border-box',
       transition: 'colors',
       display: 'inline-flex',
       alignItems: 'center',
-      gap: '0.5',
+      gap: '1',
       cursor: 'text',
+      position: 'relative',
+      px: '3',
     },
     input: {
       outline: 'none',
@@ -25,125 +22,399 @@ export const inputRecipe = defineSlotRecipe({
       fs: 'inherit',
       bg: 'transparent',
       color: 'inherit',
-      height: '100%',
       flex: 1,
       cursor: 'inherit',
+      w: 'full',
+      p: 0,
+      '::placeholder': {
+        color: 'inherit',
+      },
+      '::-webkit-search-cancel-button': {
+        WebkitAppearance: 'none',
+        appearance: 'none',
+      },
     },
     clearBtn: {
       padding: 0,
-      width: 'auto',
-      height: 'auto',
-      fontSize: 'inherit',
+      w: 'auto',
+      h: 'auto',
+      fs: 'inherit',
+    },
+    label: {
+      position: 'absolute',
+      transformOrigin: 'top left',
+      pointerEvents: 'none',
+      transition: 'colors',
+    },
+    prefix: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    suffix: {
+      display: 'flex',
+      alignItems: 'center',
     },
   },
   variants: {
-    size: toSlot(sizeVariant, 'root'),
-    radius: toSlot(radiusVariant, 'root'),
-    color: toSlot(colorVariant, 'root'),
+    size: {
+      sm: {
+        root: {
+          fs: 'md',
+          h: '8',
+        },
+        input: {
+          py: '2',
+        },
+      },
+      md: {
+        root: {
+          fs: 'lg',
+          h: '10',
+        },
+        input: {
+          py: '2.5',
+        },
+      },
+      lg: {
+        root: {
+          fs: 'xl',
+          h: '12',
+        },
+        input: {
+          py: '3',
+        },
+      },
+    },
+    fullWidth: toSlots(fullWidth, 'root'),
+    radius: toSlots(radiusVariant, 'root'),
+    color: toSlots(colorVariant, 'root', 'label', 'input'),
     variant: {
       outlined: {
         root: {
+          border: 'md',
           borderColor: 'gray.highlight',
+          ':hover': {
+            borderColor: 'gray.secondary',
+          },
+          _focusWithin: {
+            borderColor: 'colorPalette.primary',
+          },
         },
       },
       filled: {
         root: {
-          bg: 'gray.subtle',
-          borderColor: 'gray.subtle',
+          bg: 'colorPalette.muted',
+          ':hover': {
+            bg: 'colorPalette.subtle',
+          },
+          _focusWithin: {
+            bg: 'colorPalette.subtle',
+          },
+        },
+        label: {
+          color: 'colorPalette.primary',
+        },
+        input: {
+          color: 'colorPalette.primary',
+          transition: 'colors',
         },
       },
-      borderless: {
+      underlined: {
         root: {
-          bg: 'transparent',
-          borderColor: 'transparent',
+          px: '1.5',
+          '::before': {
+            content: '""',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            w: '100%',
+            h: '1px',
+            bg: 'gray.highlight',
+          },
+          '::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: -1,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: 0,
+            h: '2px',
+            bg: 'colorPalette.primary',
+            transition: 'width 0.2s ease',
+          },
+          _focusWithin: {
+            '::after': {
+              width: '100%',
+            },
+          },
         },
       },
     },
     disabled: {
       true: {
         root: {
-          cursor: 'not-allowed',
+          pointerEvents: 'none',
           opacity: 0.6,
         },
       },
     },
-    fullWidth: toSlot(fullWidth, 'root'),
-    error: {
-      true: {
-        root: {
-          color: 'red.primary',
+    invaild: {
+      true: {},
+    },
+    labelPlacement: {
+      'float-outside': {
+        label: {
+          [WITHIN_SELECTOR]: {
+            insetInlineStart: '0',
+            insetBlockStart: '-1em',
+          },
         },
       },
-    },
-    clearable: {
-      true: {
+      outside: {
+        label: {
+          insetInlineStart: '0',
+          insetBlockStart: '-1em',
+          transform: 'translateY(-50%)',
+        },
+      },
+      'float-inside': {
+        label: {
+          [WITHIN_SELECTOR]: {
+            transform: 'translateY(-90%) scale(0.8)',
+            colorPalette: 'red',
+          },
+        },
         input: {
-          // paddingInlineStart: '',
+          paddingBlockEnd: 0,
+        },
+      },
+      inside: {
+        label: {
+          insetBlockStart: '50%',
+          transform: 'translateY(-90%) scale(0.8)',
+        },
+        input: {
+          paddingBlockEnd: 0,
         },
       },
     },
   },
   compoundVariants: [
     {
-      disabled: false,
-      variant: 'outlined',
-      error: false,
+      labelPlacement: ['float-outside', 'float-inside'],
+      css: {
+        label: {
+          transitionProperty: 'top, left, font-size, transform',
+          transform: 'translateY(-50%) scale(1)',
+          insetBlockStart: '50%',
+          transitionDuration: '0.2s',
+          insetInlineStart: '3',
+        },
+      },
+    },
+    {
+      labelPlacement: ['float-outside', 'outside'],
       css: {
         root: {
-          '&:hover': {
-            borderColor: 'colorPalette.secondary',
-          },
-          '&:focus-within': {
-            borderColor: 'colorPalette.tertiary',
+          marginBlockStart: '1.5em',
+        },
+      },
+    },
+    {
+      labelPlacement: ['float-outside', 'float-inside'],
+      variant: ['underlined'],
+      css: {
+        label: {
+          insetInlineStart: '1.5',
+        },
+      },
+    },
+    {
+      labelPlacement: 'float-outside',
+      variant: 'underlined',
+      css: {
+        label: {
+          [WITHIN_SELECTOR]: {
+            insetBlockStart: '-0.7em',
           },
         },
       },
     },
     {
-      disabled: false,
-      error: false,
+      labelPlacement: 'outside',
+      variant: 'underlined',
+      css: {
+        label: {
+          insetBlockStart: '-0.7em',
+        },
+      },
+    },
+    {
+      size: 'sm',
+      labelPlacement: ['float-inside', 'inside'],
+      css: {
+        root: {
+          h: '10',
+        },
+        input: {
+          paddingBlockStart: '0.9em',
+        },
+        prefix: {
+          paddingBlockStart: '0.9em',
+        },
+        suffix: {
+          paddingBlockStart: '0.9em',
+        },
+        clearBtn: {
+          marginBlockStart: '0.9em',
+        },
+      },
+    },
+    {
+      size: 'md',
+      labelPlacement: ['float-inside', 'inside'],
+      css: {
+        root: {
+          h: '12',
+        },
+        input: {
+          paddingBlockStart: '1em',
+        },
+        prefix: {
+          paddingBlockStart: '1em',
+        },
+        suffix: {
+          paddingBlockStart: '1em',
+        },
+        clearBtn: {
+          marginBlockStart: '1em',
+        },
+      },
+    },
+    {
+      size: 'lg',
+      labelPlacement: ['float-inside', 'inside'],
+      css: {
+        root: {
+          h: '14',
+        },
+        input: {
+          paddingBlockStart: '1.2em',
+        },
+        prefix: {
+          paddingBlockStart: '1.2em',
+        },
+        suffix: {
+          paddingBlockStart: '1.2em',
+        },
+        clearBtn: {
+          marginBlockStart: '1.2em',
+        },
+      },
+    },
+    {
+      radius: 'full',
+      variant: ['filled', 'outlined'],
+      labelPlacement: ['float-inside', 'inside'],
+      css: {
+        root: {
+          px: '4',
+        },
+        label: {
+          insetInlineStart: '4',
+        },
+      },
+    },
+    {
+      radius: 'full',
+      labelPlacement: ['float-inside', 'inside'],
+      variant: ['filled', 'outlined'],
+      size: 'lg',
+      css: {
+        root: {
+          px: '5',
+        },
+        label: {
+          insetInlineStart: '5',
+        },
+      },
+    },
+    {
+      invaild: false,
+      variant: ['outlined', 'underlined'],
+      css: {
+        label: {
+          [WITHIN_SELECTOR]: {
+            color: 'colorPalette.primary',
+          },
+        },
+      },
+    },
+    {
+      invaild: true,
+      variant: ['outlined', 'underlined'],
+      css: {
+        label: {
+          color: 'red.primary',
+          [WITHIN_SELECTOR]: {
+            color: 'red.primary',
+          },
+        },
+      },
+    },
+    {
+      invaild: true,
       variant: 'filled',
       css: {
         root: {
-          '&:hover': {
-            bg: 'gray.muted',
-            borderColor: 'gray.muted',
-          },
-          '&:focus-within': {
-            borderColor: 'colorPalette.tertiary',
-            bg: 'transparent',
-          },
+          colorPalette: 'red',
+        },
+        input: {
+          colorPalette: 'red',
+        },
+        label: {
+          colorPalette: 'red',
         },
       },
     },
     {
-      error: true,
+      invaild: true,
       variant: 'outlined',
       css: {
         root: {
           borderColor: 'red.primary',
+          ':hover': {
+            borderColor: 'red.primary',
+          },
+          _focusWithin: {
+            borderColor: 'red.primary',
+          },
+        },
+        input: {
+          color: 'red.primary',
         },
       },
     },
     {
-      error: true,
-      variant: 'filled',
+      invaild: true,
+      variant: 'underlined',
       css: {
         root: {
-          bg: 'red.subtle',
-          borderColor: 'red.subtle',
-          '&:focus-within': {
-            borderColor: 'red.primary',
-            bg: 'transparent',
+          '::after': {
+            bg: 'red.primary',
           },
+          _focusWithin: {
+            '::after': {
+              bg: 'red.primary',
+            },
+          },
+        },
+        input: {
+          color: 'red.primary',
         },
       },
     },
   ],
-  defaultVariants: {
-    disabled: false,
-    fullWidth: false,
-  },
 })
 
 export type InputRecipe = typeof inputRecipe

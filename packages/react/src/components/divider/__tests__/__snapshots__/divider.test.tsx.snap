@@ -6,7 +6,8 @@ exports[`Divider renders correctly 1`] = `
   border: none;
   background-color: var(--nui-colors-gray-muted);
   height: var(--nui-sizes-px);
-  margin-block: var(--nui-spaces-6);
+  margin-block-start: var(--nui-spaces-6);
+  margin-block-end: var(--nui-spaces-6);
 }
 
 <hr

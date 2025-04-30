@@ -43,7 +43,7 @@ export const accordionItemRecipe = defineSlotRecipe({
       justifyContent: 'space-between',
       boxSizing: 'border-box',
       fontWeight: 'inherit',
-      ':focus-visible': {
+      _focusVisible: {
         outline: 'focusVisibleOutline',
       },
     },

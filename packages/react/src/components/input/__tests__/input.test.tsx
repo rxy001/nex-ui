@@ -24,8 +24,6 @@ describe('Input', () => {
     expect(root).toHaveClass(inputClasses['radius-md'])
     expect(root).toHaveClass(inputClasses['color-blue'])
 
-    expect(root).not.toHaveClass(inputClasses['variant-borderless'])
-    expect(root).not.toHaveClass(inputClasses['variant-filled'])
     expect(root).not.toHaveClass(inputClasses['size-lg'])
     expect(root).not.toHaveClass(inputClasses['size-sm'])
     expect(root).not.toHaveClass(inputClasses['radius-full'])
@@ -39,7 +37,7 @@ describe('Input', () => {
     expect(root).not.toHaveClass(inputClasses['color-orange'])
     expect(root).not.toHaveClass(inputClasses['color-purple'])
     expect(root).not.toHaveClass(inputClasses['color-pink'])
-    expect(root).not.toHaveClass(inputClasses.error)
+    expect(root).not.toHaveClass(inputClasses.invaild)
     expect(root).not.toHaveClass(inputClasses.disabled)
     expect(root).not.toHaveClass(inputClasses['full-width'])
   })
@@ -99,18 +97,10 @@ describe('Input', () => {
   it('should add the appropriate variant class to root element based on variant prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
-        <Input variant='filled' data-testid='variant-filled' />
-        <Input variant='borderless' data-testid='variant-borderless' />
         <Input variant='outlined' data-testid='variant-outlined' />
       </>,
     )
 
-    expect(getByTestId('variant-filled').parentElement).toHaveClass(
-      inputClasses['variant-filled'],
-    )
-    expect(getByTestId('variant-borderless').parentElement).toHaveClass(
-      inputClasses['variant-borderless'],
-    )
     expect(getByTestId('variant-outlined').parentElement).toHaveClass(
       inputClasses['variant-outlined'],
     )
@@ -160,12 +150,14 @@ describe('Input', () => {
     )
   })
 
-  it('should add the appropriate radius class to root element based on error prop', () => {
+  it('should add the appropriate radius class to root element based on invaild prop', () => {
     const { getByTestId } = renderWithNexProvider(
-      <Input error data-testid='error' />,
+      <Input invaild data-testid='invaild' />,
     )
 
-    expect(getByTestId('error').parentElement).toHaveClass(inputClasses.error)
+    expect(getByTestId('invaild').parentElement).toHaveClass(
+      inputClasses.invaild,
+    )
   })
 
   it('should add the appropriate radius class to root element based on disabled prop', () => {
@@ -233,9 +225,6 @@ describe('Input', () => {
 
     fireEvent.click(container.querySelector(`.${inputClasses['clear-btn']}`)!)
     expect(input.getAttribute('value')).toBe('')
-    expect(
-      container.querySelector(`.${inputClasses['clear-btn']}`),
-    ).not.toBeInTheDocument()
     expect(document.activeElement).toBe(input)
   })
 
@@ -250,14 +239,12 @@ describe('Input', () => {
 
   it('should forward classes to Input', () => {
     const rootClassName = 'test-root-class'
-    const inputClassName = 'test-input-class'
     const clearBtnClassName = 'test-clear-btn-class'
 
     const { container } = renderWithNexProvider(
       <Input
         classes={{
           root: rootClassName,
-          input: inputClassName,
           clearBtn: clearBtnClassName,
         }}
         clearable
@@ -266,11 +253,9 @@ describe('Input', () => {
     )
 
     const root = container.firstChild
-    const input = container.querySelector(`.${inputClasses.input}`)
     const clearBtn = container.querySelector(`.${inputClasses['clear-btn']}`)
 
     expect(root).toHaveClass(rootClassName)
-    expect(input).toHaveClass(inputClassName)
     expect(clearBtn).toHaveClass(clearBtnClassName)
   })
 })

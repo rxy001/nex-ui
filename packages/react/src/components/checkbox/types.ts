@@ -72,7 +72,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   defaultChecked?: boolean
 
   /**
-   * The value of the checkbox
+   * The value of the checkbox.(controlled)
    */
   value?: string | number
 

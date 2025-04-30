@@ -1,11 +1,11 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useId, useRef } from 'react'
 import { nex } from '@nex-ui/styled'
-import { mergeRefs } from '@nex-ui/utils'
-import { useEvent } from '@nex-ui/hooks'
+import { isString, mergeRefs } from '@nex-ui/utils'
+import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
-import type { ChangeEvent, ElementType } from 'react'
+import type { ElementType, ChangeEvent, MouseEvent } from 'react'
 import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
 import {
@@ -15,16 +15,26 @@ import {
   useSlotProps,
   useStyles,
 } from '../utils'
-import type { InputOwnerState, InputProps } from './types'
 import { Button } from '../button'
+import type { InputOwnerState, InputProps } from './types'
 
 const useSlotClasses = (ownerState: InputOwnerState) => {
   const { prefix } = useNexUI()
 
   const inputRoot = `${prefix}-input`
 
-  const { variant, radius, size, color, disabled, fullWidth, error, classes } =
-    ownerState
+  const {
+    variant,
+    clearable,
+    radius,
+    size,
+    color,
+    disabled,
+    fullWidth,
+    invaild,
+    classes,
+    labelPlacement,
+  } = ownerState
 
   const slots = {
     root: [
@@ -35,10 +45,15 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
       `color-${color}`,
       disabled && 'disabled',
       fullWidth && 'full-width',
-      error && 'error',
+      invaild && 'invaild',
+      clearable && 'clearable',
+      labelPlacement && `label-placement-${labelPlacement}`,
     ],
     input: ['input'],
     clearBtn: ['clear-btn'],
+    prefix: ['prefix'],
+    suffix: ['suffix'],
+    label: ['label'],
   }
 
   const composedClasses = composeClasses(
@@ -48,6 +63,38 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
   )
 
   return composedClasses
+}
+
+const useSlotAriaProps = (ownerState: InputOwnerState) => {
+  const { tabIndex, disabled, invaild, label } = ownerState
+  const labelString = isString(label)
+  const id = useId()
+  const inputId = `input-${id}`
+  const labelId = `label-${id}`
+
+  const inputProps = {
+    tabIndex: disabled ? -1 : tabIndex,
+    'aria-invalid': invaild,
+    id: labelString ? inputId : undefined,
+    'aria-labelledby': labelString ? labelId : undefined,
+    'aria-label': labelString ? label : undefined,
+  }
+
+  const labelProps = {
+    id: labelString ? labelId : undefined,
+    htmlFor: labelString ? inputId : undefined,
+  }
+
+  const clearBtnProps = {
+    'aria-label': 'Clear input',
+    tabIndex: -1,
+  }
+
+  return {
+    input: inputProps,
+    label: labelProps,
+    clearBtn: clearBtnProps,
+  }
 }
 
 export const Input = <InputComponent extends ElementType = 'input'>(
@@ -63,45 +110,83 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   const {
     sx,
     ref,
+    label,
     className,
     prefix,
     suffix,
-    defaultValue,
     onClear,
     slotProps,
+    onValueChange,
+    placeholder,
+    tabIndex = 0,
+    as = 'input',
+    defaultValue = '',
     value: valueProp,
-    onChange: onChangeProp,
     color = primaryColor,
     type = 'text',
     disabled = false,
     variant = 'outlined',
     fullWidth = false,
-    error = false,
+    invaild = false,
     size = 'md',
     radius = size,
     clearable = false,
+    labelPlacement: labelPlacementProp = 'float-outside',
     ...remainingProps
   } = props
 
-  const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
+  const [value, setValue] = useControlledState(
+    valueProp,
+    defaultValue,
+    onValueChange,
+  )
   const inputRef = useRef<HTMLInputElement>(null)
   const mergedRefs = mergeRefs<HTMLInputElement>(ref, inputRef)
+  const hasLabel = !!label
+  const hasValue = !!value
+  const hasPlaceholder = !!placeholder
+  const hasPrefix = !!prefix
 
-  const valueInProps = valueProp !== undefined
+  let labelPlacement: InputProps['labelPlacement'] = labelPlacementProp
+  const floatLabel =
+    labelPlacement === 'float-outside' || labelPlacement === 'float-inside'
+  const hasDefaultPlaceholder = [
+    'date',
+    'datetime-local',
+    'time',
+    'week',
+    'month',
+    'range',
+  ].includes(type)
 
-  if (valueInProps && valueProp !== value) {
-    setValue(valueProp)
+  if (!hasLabel) {
+    labelPlacement = undefined
+  } else if (
+    floatLabel &&
+    (hasPlaceholder || hasValue || hasDefaultPlaceholder || hasPrefix)
+  ) {
+    if (labelPlacementProp === 'float-outside') {
+      labelPlacement = 'outside'
+    } else if (labelPlacementProp === 'float-inside') {
+      labelPlacement = 'inside'
+    }
   }
 
-  const ownerState = {
+  const ownerState: InputOwnerState = {
     ...props,
+    as,
+    tabIndex,
     color,
     disabled,
     variant,
     fullWidth,
     size,
     radius,
-    error,
+    invaild,
+    type,
+    clearable,
+    value,
+    labelPlacement,
   }
 
   const styles = useStyles({
@@ -112,22 +197,16 @@ export const Input = <InputComponent extends ElementType = 'input'>(
 
   const classes = useSlotClasses(ownerState)
 
-  const onChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-    if (disabled) {
-      return
-    }
-
-    if (!valueInProps) {
-      setValue(e.target.value)
-    }
-
-    onChangeProp?.(e)
-  })
+  const slotAriaProps = useSlotAriaProps(ownerState)
 
   const onClearValue = useEvent(() => {
     setValue('')
     onClear?.()
     inputRef.current?.focus()
+  })
+
+  const handleChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
   })
 
   const rootProps = useSlotProps({
@@ -139,20 +218,37 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     },
     sx: styles.root,
     classNames: classes.root,
+    additionalProps: {
+      onClick: (e: MouseEvent<HTMLDivElement>) => {
+        if (inputRef.current && e.target === e.currentTarget) {
+          inputRef.current.focus()
+        }
+      },
+    },
+  })
+
+  const labelProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.label,
+    sx: styles.label,
+    classNames: classes.label,
+    additionalProps: slotAriaProps.label,
   })
 
   const inputProps = useSlotProps({
     ownerState,
-    externalSlotProps: slotProps?.input,
     externalForwardedProps: remainingProps,
     sx: styles.input,
     classNames: classes.input,
     additionalProps: {
-      value,
-      onChange,
-      disabled,
+      as,
       type,
+      value,
+      disabled,
+      placeholder,
       ref: mergedRefs,
+      onChange: handleChange,
+      ...slotAriaProps.input,
     },
   })
 
@@ -163,27 +259,45 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     classNames: classes.clearBtn,
     additionalProps: {
       onClick: onClearValue,
+      iconOnly: true,
+      disableRipple: true,
+      size: 'sm',
+      color: variant === 'filled' ? color : 'gray',
+      variant: 'text',
+      disabled: disabled,
+      sx: {
+        visibility: value ? 'visible' : 'hidden',
+      },
+      ...slotAriaProps.clearBtn,
     },
   })
 
+  const prefixProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.prefix,
+    sx: styles.prefix,
+    classNames: classes.prefix,
+  })
+
+  const suffixProps = useSlotProps({
+    ownerState,
+    externalSlotProps: slotProps?.suffix,
+    sx: styles.suffix,
+    classNames: classes.suffix,
+  })
+
   return (
-    <nex.label {...rootProps}>
-      {prefix}
+    <nex.div {...rootProps}>
+      {prefix && <nex.span {...prefixProps}>{prefix}</nex.span>}
+      {label && <nex.label {...labelProps}>{label}</nex.label>}
       <nex.input {...inputProps} />
-      {clearable && value && !disabled && (
-        <Button
-          iconOnly
-          radius='full'
-          size='sm'
-          color='gray'
-          variant='text'
-          {...clearBtnProps}
-        >
+      {clearable && (
+        <Button {...clearBtnProps}>
           <CloseCircleFilled />
         </Button>
       )}
-      {suffix}
-    </nex.label>
+      {suffix && <nex.span {...suffixProps}>{suffix}</nex.span>}
+    </nex.div>
   )
 }
 

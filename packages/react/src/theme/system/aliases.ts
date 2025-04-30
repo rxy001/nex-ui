@@ -22,6 +22,6 @@ export const aliases = defineConfig.aliases({
   mb: 'marginBottom',
   ml: 'marginLeft',
   mr: 'marginRight',
-  mx: 'marginInline',
-  my: 'marginBlock',
+  mx: ['marginInlineStart', 'marginInlineEnd'],
+  my: ['marginBlockStart', 'marginBlockEnd'],
 })

@@ -11,4 +11,7 @@ export const radiusVariant = {
   full: {
     borderRadius: 'full',
   },
+  none: {
+    borderRadius: 'none',
+  },
 } as const

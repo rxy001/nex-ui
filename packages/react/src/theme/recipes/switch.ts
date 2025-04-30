@@ -1,6 +1,6 @@
 import { defineSlotRecipe } from '@nex-ui/system'
 import type { RecipeVariants } from '@nex-ui/system'
-import { colorVariant, toSlot } from '../shared'
+import { colorVariant, toSlots } from '../shared'
 
 export const switchRecipe = defineSlotRecipe({
   slots: {
@@ -69,7 +69,7 @@ export const switchRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    color: toSlot(colorVariant, 'track'),
+    color: toSlots(colorVariant, 'track'),
     size: {
       sm: {
         track: {

@@ -70,14 +70,7 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
 const useSlotAriaProps = (
   ownerState: ButtonOwnerState,
 ): Record<'root', HTMLAttributes<HTMLElement>> => {
-  const {
-    as,
-    disabled: disabledProps,
-    type,
-    role,
-    loading,
-    tabIndex,
-  } = ownerState
+  const { as, disabled: disabledProps, role, loading, tabIndex } = ownerState
   const disabled = disabledProps || loading
 
   let root = {}
@@ -85,14 +78,12 @@ const useSlotAriaProps = (
   if (as === 'button') {
     root = {
       disabled,
-      type,
       tabIndex: disabled ? -1 : tabIndex,
     }
   } else if (isFunction(as)) {
     root = {
-      loading,
       tabIndex,
-      disabled: disabledProps,
+      disabled,
     }
   } else {
     root = {
@@ -205,6 +196,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     sx: styles.root,
     additionalProps: {
       href,
+      type,
       onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
       ref: mergedRefs,

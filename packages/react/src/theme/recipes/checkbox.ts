@@ -1,6 +1,6 @@
 import { defineSlotRecipe } from '@nex-ui/system'
 import type { RecipeVariants } from '@nex-ui/system'
-import { colorVariant, toSlot } from '../shared'
+import { colorVariant, toSlots } from '../shared'
 
 export const checkboxRecipe = defineSlotRecipe({
   slots: {
@@ -166,7 +166,7 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
     },
-    color: toSlot(colorVariant, 'input', 'icon'),
+    color: toSlots(colorVariant, 'input', 'icon'),
   },
   defaultVariants: {
     color: 'blue',
