@@ -72,6 +72,11 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   motionProps?: HTMLMotionProps<'div'>
 
   /**
+   * The motion properties of the Accordion indicator.
+   */
+  indicatorMotionProps?: HTMLMotionProps<'span'>
+
+  /**
    * The item keys that are disabled.
    */
   disabledExpandedKeys?: Key[]
@@ -158,7 +163,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   title?: ReactNode
 
   /**
-   * The props to modify the framer motion animation. Use the variants API to create your own animation.
+   * The props to modify the framer-motion animation. Use the variants API to create your own animation.
    */
   motionProps?: HTMLMotionProps<'div'>
 
@@ -183,6 +188,11 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   indicator?: ReactNode
 
   /**
+   * The props to modify the framer-motion animation. Use the variants API to create your own animation.
+   */
+  indicatorMotionProps?: HTMLMotionProps<'span'>
+
+  /**
    * The props used for each slot.
    */
   slotProps?: AccordionItemSlotProps<RootComponent>
@@ -191,7 +201,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'heading' | 'indicator' | 'panel' | 'trigger'
+    'heading' | 'indicator' | 'content' | 'trigger'
   >
 }
 
@@ -221,4 +231,5 @@ export type AccordionGroupContextValue = {
   indicator?: ReactNode
   motionProps?: HTMLMotionProps<'div'>
   variant: AccordionItemVariants['variant']
+  indicatorMotionProps?: HTMLMotionProps<'span'>
 }

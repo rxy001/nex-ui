@@ -26,6 +26,10 @@ Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字�
 
 <Example {...avatar.radius} />
 
+### Outlined
+
+<Example {...avatar.outlined} />
+
 ### Colors
 
 <Example {...avatar.colors} />
@@ -107,6 +111,12 @@ Avatar Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标签�
       prop: 'ref',
       type: 'Ref',
       description: '用于转发根元素。',
+    },
+    {
+      prop: 'outlined',
+      type: 'boolean',
+      default: 'false',
+      description: '是否显示边框。',
     },
     {
       prop: 'as',

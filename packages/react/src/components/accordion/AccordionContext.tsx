@@ -17,6 +17,7 @@ export const [AccordionGroupProvider, useAccordionGroup] =
       disabledExpandedKeys: [],
       disabled: false,
       variant: 'underlined',
+      indicatorMotionProps: {},
     },
     strict: true,
   })

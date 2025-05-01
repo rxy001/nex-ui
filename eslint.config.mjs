@@ -38,6 +38,9 @@ export default tseslint.config(
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
     ],
+    rules: {
+      'import/no-duplicates': ['error', { considerQueryString: true }],
+    },
   },
   {
     languageOptions: {

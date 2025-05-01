@@ -110,7 +110,7 @@ const useSlotAriaProps = (
     'aria-disabled': disabled || undefined,
   }
 
-  if (triggerProps.as !== 'button') {
+  if (triggerProps.as && triggerProps.as !== 'button') {
     trigger = {
       ...trigger,
       role: 'button',
@@ -153,6 +153,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     motionProps: defaultMotionProps,
     keepMounted: defaultKeepMounted,
     hideIndicator: defaultHideIndicator,
+    indicatorMotionProps: defaultIndicatorMotionProps,
   } = useAccordionGroup()
 
   const {
@@ -161,6 +162,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     title,
     slotProps,
     as = 'div',
+    indicatorMotionProps = defaultIndicatorMotionProps,
     motionProps = defaultMotionProps,
     hideIndicator = defaultHideIndicator,
     keepMounted = defaultKeepMounted,
@@ -275,6 +277,10 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     classNames: classes.indicator,
     additionalProps: {
       size: 'sm',
+      as: m.span,
+      animate,
+      variants: indicatorMotionVariants,
+      ...indicatorMotionProps,
     },
   })
 
@@ -291,12 +297,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
           <nex.button {...triggerProps}>
             <span>{title}</span>
             {!hideIndicator && (
-              <nex.span
-                as={m.span}
-                variants={indicatorMotionVariants}
-                animate={animate}
-                {...indicatorProps}
-              >
+              <nex.span {...indicatorProps}>
                 {indicator ?? <ChevronDownOutlined />}
               </nex.span>
             )}

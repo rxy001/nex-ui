@@ -3,7 +3,7 @@ import { useMDXComponents } from '@/mdx-components'
 
 export const generateStaticParams = generateStaticParamsFor('mdxPath')
 
-const title = 'Nex UI - Beautiful, modern and high-quality React UI library'
+const title = 'Nex UI - Beautiful, modern and reliable React UI library'
 
 type PageProps = Readonly<{
   params: Promise<{

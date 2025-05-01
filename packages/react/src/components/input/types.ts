@@ -172,4 +172,15 @@ export type InputProps<InputComponent extends ElementType = 'input'> =
   >
 
 export type InputOwnerState<InputComponent extends ElementType = 'input'> =
-  InputProps<InputComponent>
+  InputProps<InputComponent> & {
+    color: InputVariants['color']
+    disabled: boolean
+    variant: InputVariants['variant']
+    fullWidth: boolean
+    size: InputVariants['size']
+    radius: InputVariants['radius']
+    invaild: boolean
+    type: InputProps['type']
+    clearable: boolean
+    value: string
+  }
