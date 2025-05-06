@@ -98,7 +98,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
 
   /**
    * The color of the input.
-   * @default primaryColor
+   * @default primaryThemeColor
    */
   color?: InputVariants['color']
 

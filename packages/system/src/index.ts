@@ -1,5 +1,5 @@
 export { SystemProvider, useSystem } from './SystemProvider'
-export type { SystemContext } from './SystemProvider'
+export type { SystemContext, SystemProviderProps } from './SystemProvider'
 
 export { createSystem } from './system'
 export type { SystemConfig } from './system'

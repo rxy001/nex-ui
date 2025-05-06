@@ -100,7 +100,7 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
 export const Input = <InputComponent extends ElementType = 'input'>(
   inProps: InputProps<InputComponent>,
 ) => {
-  const { primaryColor } = useNexUI()
+  const { primaryThemeColor } = useNexUI()
 
   const props = useDefaultProps<InputProps>({
     name: 'Input',
@@ -122,7 +122,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     as = 'input',
     defaultValue = '',
     value: valueProp,
-    color = primaryColor,
+    color = primaryThemeColor,
     type = 'text',
     disabled = false,
     variant = 'outlined',

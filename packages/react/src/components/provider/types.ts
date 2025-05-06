@@ -1,28 +1,26 @@
 import type { ReactNode } from 'react'
 import type { CssFn, ColorSchemeProviderProps } from '@nex-ui/system'
-import type { ComponentThemes } from '../../types/componentThemes'
 import type { Theme } from '../../types/theme'
-import type { colorVariant } from '../../theme/shared/colorVariant'
 
-type Colors = keyof typeof colorVariant
+type PrimaryThemeColor = Exclude<Theme['primaryThemeColor'], undefined>
 
 export type InnerProviderProps = {
   prefix: string
-  primaryColor: Colors
+  primaryThemeColor?: PrimaryThemeColor
   children?: ReactNode
-  components?: ComponentThemes
+  components?: Theme['components']
 }
 
-export interface NexUIProviderProps extends ColorSchemeProviderProps {
+export interface NexUIProviderProps {
   theme?: Theme
+  colorScheme?: Omit<ColorSchemeProviderProps, 'children'>
   children?: ReactNode
   prefix?: string
-  primaryColor?: Colors
 }
 
 export type NexContextValue = {
   css: CssFn
   prefix: string
-  primaryColor: Colors
-  components?: ComponentThemes
+  primaryThemeColor: PrimaryThemeColor
+  components?: Theme['components']
 }

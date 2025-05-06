@@ -112,7 +112,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
 
   /**
    * The color of the switch.
-   * @default primaryColor
+   * @default primaryThemeColor
    */
   color?: SwitchVariants['color']
 

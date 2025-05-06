@@ -6,18 +6,19 @@ import { mergeWith } from '@nex-ui/utils'
 import { defaultConfig } from '../../theme/preset'
 import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { NexUIProviderProps, InnerProviderProps } from './types'
+import type { SystemProviderProps } from '@nex-ui/system'
 
 function InnerProvider({
   components,
   prefix,
   children,
-  primaryColor,
+  primaryThemeColor = 'blue',
 }: InnerProviderProps) {
   const { css } = useSystem()
 
   const contextValue = useMemo(
-    () => ({ components, prefix, css, primaryColor }),
-    [components, css, prefix, primaryColor],
+    () => ({ components, prefix, css, primaryThemeColor }),
+    [components, css, prefix, primaryThemeColor],
   )
   return (
     <NexContextProvider value={contextValue}>{children}</NexContextProvider>
@@ -25,35 +26,42 @@ function InnerProvider({
 }
 
 function TopLevelProvider(props: NexUIProviderProps) {
-  const {
-    theme,
-    children,
-    colorSchemeNode,
-    primaryColor = 'blue',
-    prefix = 'nui',
-    defaultMode = 'system',
-    modeStorageKey = `${prefix}-color-scheme`,
-    colorSchemeSelector = `data-${prefix}-color-scheme`,
-  } = props
+  const { theme, children, colorScheme, prefix = 'nui' } = props
 
-  const mergedSysConfig = useMemo(() => {
+  const systemProviderProps = useMemo<SystemProviderProps>(() => {
     return {
       cssVarsPrefix: prefix,
-      ...(theme || defaultConfig),
+      scales: theme?.scales ?? defaultConfig.scales,
+      selectors: theme?.selectors ?? defaultConfig.selectors,
+      aliases: theme?.aliases ?? defaultConfig.aliases,
+      tokens: theme?.tokens ?? defaultConfig.tokens,
+      semanticTokens: theme?.semanticTokens ?? defaultConfig.semanticTokens,
+      breakpoints: theme?.breakpoints ?? defaultConfig.breakpoints,
+      colorSchemeNode: colorScheme?.colorSchemeNode,
+      modeStorageKey: colorScheme?.modeStorageKey ?? `${prefix}-color-scheme`,
+      colorSchemeSelector:
+        colorScheme?.colorSchemeSelector ?? `data-${prefix}-color-scheme`,
+      defaultMode: colorScheme?.defaultMode ?? 'system',
     }
-  }, [prefix, theme])
+  }, [
+    prefix,
+    theme?.aliases,
+    theme?.breakpoints,
+    theme?.scales,
+    theme?.selectors,
+    theme?.semanticTokens,
+    theme?.tokens,
+    colorScheme?.colorSchemeNode,
+    colorScheme?.colorSchemeSelector,
+    colorScheme?.defaultMode,
+    colorScheme?.modeStorageKey,
+  ])
 
   return (
-    <SystemProvider
-      colorSchemeNode={colorSchemeNode}
-      modeStorageKey={modeStorageKey}
-      colorSchemeSelector={colorSchemeSelector}
-      defaultMode={defaultMode}
-      {...mergedSysConfig}
-    >
+    <SystemProvider {...systemProviderProps}>
       <InnerProvider
         components={theme?.components}
-        primaryColor={primaryColor}
+        primaryThemeColor={theme?.primaryThemeColor}
         prefix={prefix}
       >
         {children}
@@ -63,7 +71,7 @@ function TopLevelProvider(props: NexUIProviderProps) {
 }
 
 function NestedProvider(props: NexUIProviderProps) {
-  const { theme, children, primaryColor } = props
+  const { theme, children } = props
 
   const ctx = useNexUI()
 
@@ -90,7 +98,7 @@ function NestedProvider(props: NexUIProviderProps) {
     <InnerProvider
       prefix={ctx.prefix}
       components={mergedComponents}
-      primaryColor={primaryColor ?? ctx.primaryColor}
+      primaryThemeColor={theme?.primaryThemeColor ?? ctx.primaryThemeColor}
     >
       {children}
     </InnerProvider>

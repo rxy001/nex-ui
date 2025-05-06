@@ -98,7 +98,7 @@ const useSlotAriaProps = (
 export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   inProps: CheckboxProps<CheckboxComponent>,
 ) => {
-  const { primaryColor } = useNexUI()
+  const { primaryThemeColor } = useNexUI()
   const inputRef = useRef<HTMLInputElement>(null)
 
   const props = useDefaultProps<CheckboxProps>({
@@ -138,7 +138,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     as = 'input',
     tabIndex = 0,
     name = groupCtx?.name,
-    color = groupCtx?.color ?? primaryColor,
+    color = groupCtx?.color ?? primaryThemeColor,
     disabled = groupCtx?.disabled ?? false,
     size = groupCtx?.size ?? 'md',
     radius = groupCtx?.radius ?? groupCtx?.size ?? size,

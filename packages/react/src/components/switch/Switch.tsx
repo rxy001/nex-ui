@@ -96,7 +96,7 @@ const useSlotAriaProps = (
 export const Switch = <SwitchComponent extends ElementType = 'input'>(
   inProps: SwitchProps<SwitchComponent>,
 ) => {
-  const { primaryColor } = useNexUI()
+  const { primaryThemeColor } = useNexUI()
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -122,7 +122,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     tabIndex = 0,
     as = 'input',
     defaultChecked = false,
-    color = primaryColor,
+    color = primaryThemeColor,
     ...remainingProps
   } = props
 

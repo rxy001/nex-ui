@@ -22,7 +22,7 @@
 
 <!-- 11. sx 的属性值映射到 token , 改为只支持 string 的属性值 -->
 
-12. colorSchemeSelector = media ，手动设置 mode 为 dark 或 light 时并不会生效. 目前 getColorSchemeSelector 会生成一个媒体查询，而 js 又无法手动设置 prefers-color-scheme，因此只能跟随系统设置进行切换。无论是 CSS 变量还是 \_dark 都会出现 bug. 先禁用 media.
+<!-- 12. colorSchemeSelector = media ，手动设置 mode 为 dark 或 light 时并不会生效. 目前 getColorSchemeSelector 会生成一个媒体查询，而 js 又无法手动设置 prefers-color-scheme，因此只能跟随系统设置进行切换。无论是 CSS 变量还是 \_dark 都会出现 bug. 先禁用 media. -->
 
 <!-- 13. 删除组件 red color -->
 

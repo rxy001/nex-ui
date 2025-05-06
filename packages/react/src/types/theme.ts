@@ -38,6 +38,7 @@ import type {
 } from './generated/tokens'
 import type { DefaultSelectors } from './generated/selectors'
 import type { ComponentThemes } from './componentThemes'
+import type { colorVariant } from '../theme/shared/colorVariant'
 
 export type Theme = {
   aliases?: AliasesDefinition & DefaultAliases
@@ -46,6 +47,7 @@ export type Theme = {
   selectors?: SelectorsDefinition & DefaultSelectors
   semanticTokens?: SemanticTokensDefinition
   components?: ComponentThemes
+  primaryThemeColor?: keyof typeof colorVariant
   tokens?: {
     borders?: BordersDefinition & BordersToken
     spaces?: SpacesDefinition & SpacesToken

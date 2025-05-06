@@ -104,7 +104,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
 
   /**
    * The color of the button.
-   * @default primaryColor
+   * @default primaryThemeColor
    */
   color?: ButtonVariants['color']
 

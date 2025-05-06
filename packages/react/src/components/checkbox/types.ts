@@ -94,7 +94,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
 
   /**
    * The color of the checkbox.
-   * @default primaryColor
+   * @default primaryThemeColor
    */
   color?: CheckboxVariants['color']
 
@@ -170,7 +170,7 @@ export type CheckboxGroupProps<
 
     /**
      * The color of the checkboxes.
-     * @default primaryColor
+     * @default primaryThemeColor
      */
     color?: CheckboxVariants['color']
 

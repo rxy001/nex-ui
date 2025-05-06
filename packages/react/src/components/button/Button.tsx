@@ -101,7 +101,7 @@ const useSlotAriaProps = (
 export const Button = <RootComponent extends ElementType = 'button'>(
   inProps: ButtonProps<RootComponent>,
 ) => {
-  const { primaryColor } = useNexUI()
+  const { primaryThemeColor } = useNexUI()
 
   const props = useDefaultProps<ButtonProps>({
     name: 'Button',
@@ -117,7 +117,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     href,
     type = 'button',
     tabIndex = 0,
-    color = primaryColor,
+    color = primaryThemeColor,
     spinnerPlacement = 'start',
     variant = 'solid',
     size = 'md',
