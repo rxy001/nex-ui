@@ -21,6 +21,7 @@ export const SystemProvider = ({
   breakpoints,
   selectors,
   colorSchemeNode,
+  forcedMode,
   defaultMode = 'system',
   modeStorageKey = 'color-scheme',
   colorSchemeSelector = 'data',
@@ -91,6 +92,7 @@ export const SystemProvider = ({
   return (
     <InnerSystemProvider value={methods}>
       <ColorSchemeProvider
+        forcedMode={forcedMode}
         defaultMode={defaultMode}
         modeStorageKey={modeStorageKey}
         colorSchemeSelector={colorSchemeSelector}

@@ -42,19 +42,17 @@ function TopLevelProvider(props: NexUIProviderProps) {
       colorSchemeSelector:
         colorScheme?.colorSchemeSelector ?? `data-${prefix}-color-scheme`,
       defaultMode: colorScheme?.defaultMode ?? 'system',
+      forcedMode: colorScheme?.forcedMode,
     }
   }, [
     prefix,
-    theme?.aliases,
-    theme?.breakpoints,
     theme?.scales,
     theme?.selectors,
-    theme?.semanticTokens,
+    theme?.aliases,
     theme?.tokens,
-    colorScheme?.colorSchemeNode,
-    colorScheme?.colorSchemeSelector,
-    colorScheme?.defaultMode,
-    colorScheme?.modeStorageKey,
+    theme?.semanticTokens,
+    theme?.breakpoints,
+    colorScheme,
   ])
 
   return (

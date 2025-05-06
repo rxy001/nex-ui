@@ -2,6 +2,7 @@ import type { InitColorSchemeScriptProps } from './types'
 
 export const InitColorSchemeScript = ({
   modeStorageKey,
+  forcedMode,
   defaultMode = 'system',
   colorSchemeSelector = 'data',
   colorSchemeNode = 'document.documentElement',
@@ -51,7 +52,7 @@ try {
 
   let colorScheme = ''
 
-  const mode = localStorage.getItem('${modeStorageKey}') || ${defaultMode}
+  const mode = ${forcedMode} ?? (localStorage.getItem('${modeStorageKey}') || ${defaultMode})
 
   if (mode === 'system') {
     const mql = window.matchMedia('(prefers-color-scheme: dark)');

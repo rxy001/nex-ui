@@ -11,6 +11,7 @@ export type State = {
 
 export interface ColorSchemeProviderProps {
   children?: ReactNode
+  forcedMode?: Mode
   defaultMode?: Mode
   modeStorageKey?: string
   colorSchemeSelector?: 'data' | 'class' | (string & {})
@@ -25,7 +26,7 @@ export type ColorSchemeContext = {
 
 export type InitColorSchemeScriptProps = Pick<
   ColorSchemeProviderProps,
-  'modeStorageKey' | 'colorSchemeSelector' | 'defaultMode'
+  'modeStorageKey' | 'colorSchemeSelector' | 'defaultMode' | 'forcedMode'
 > & {
   colorSchemeNode?: string
 }

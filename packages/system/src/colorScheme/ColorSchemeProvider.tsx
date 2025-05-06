@@ -84,13 +84,15 @@ export function createGetColorSchemeSelector(
 
 export const ColorSchemeProvider = ({
   children,
+  forcedMode,
   colorSchemeNode,
   modeStorageKey = 'color-scheme',
   defaultMode = 'system',
   colorSchemeSelector = 'data',
 }: ColorSchemeProviderProps) => {
   const [state, setState] = useState<State>(() => {
-    const initialMode = initializeValue(modeStorageKey, defaultMode) as Mode
+    const initialMode =
+      forcedMode ?? (initializeValue(modeStorageKey, defaultMode) as Mode)
     const systemColorScheme = getSystemColorScheme(initialMode)
 
     return {
@@ -103,6 +105,9 @@ export const ColorSchemeProvider = ({
 
   const setMode = useCallback(
     (mode?: Mode) => {
+      if (forcedMode) {
+        return
+      }
       setState((currentState) => {
         if (mode === currentState.mode) {
           return currentState
@@ -121,7 +126,7 @@ export const ColorSchemeProvider = ({
         }
       })
     },
-    [defaultMode, modeStorageKey],
+    [defaultMode, forcedMode, modeStorageKey],
   )
 
   const handleMediaQuery = useEvent((event: MediaQueryListEvent) => {
@@ -153,7 +158,7 @@ export const ColorSchemeProvider = ({
     return () => media.removeEventListener('change', handleMediaQuery)
   }, [handleMediaQuery, isMultiSchemes])
 
-  const colorScheme = getColorScheme(state)
+  const colorScheme = useMemo(() => getColorScheme(state), [state])
 
   useEffect(() => {
     if (colorScheme && colorSchemeSelector && colorSchemeSelector !== 'media') {
@@ -202,8 +207,9 @@ export const ColorSchemeProvider = ({
     () => ({
       ...state,
       setMode,
+      resolvedColorScheme: colorScheme,
     }),
-    [state, setMode],
+    [state, setMode, colorScheme],
   )
 
   return (
