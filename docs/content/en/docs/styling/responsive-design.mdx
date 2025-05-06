@@ -1,0 +1,167 @@
+---
+title: Responsive Design
+description: Learn how to use responsive design in Nex UI.
+---
+
+import { Box } from '@nex-ui/react'
+import { Callout } from 'nextra/components'
+
+# Responsive Design
+
+Responsive design is a fundamental concept in modern front-end development. It enables websites and applications to seamlessly adapt to different screen sizes and devices.
+
+> Nex UI uses a mobile-first breakpoint system, and when you write responsive styles, it utilizes the minimum width media query `@media (min-width)`.
+
+Nex UI provides 5 default breakpoints:
+
+```ts
+const breakoptions = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+}
+```
+
+## Using Breakpoints
+
+You can use the above breakpoints in [the `sx` prop](/docs/styling/sx-prop), [`defineRecipe`](/docs/styling/recipes), or [`defineSlotRecipe`](/docs/styling/slot-recipes).
+In these methods, all CSS properties support responsive values for specific breakpoints.
+
+There are two ways to define a set of breakpoints: as an object or as an array.
+
+### Object Values
+
+The following example demonstrates how to define a set of breakpoints using the object syntax:
+
+<FlexCenter
+  align='center'
+  justify='center'
+  sx={{
+    backgroundImage: 'linear-gradient(to top right, #f77062 0%, #fe5196 100%)',
+    py: 10,
+    borderRadius: 'sm',
+  }}
+>
+  <Box
+    sx={{
+      width: {
+        _sm: 200,
+        _md: 300,
+        _lg: 400,
+        _xl: 500,
+        _2xl: 600,
+      },
+      backdropFilter: 'blur(12px)',
+      bg: '#fff9',
+      borderRadius: 'sm',
+      py: 2,
+      px: 7,
+      color: 'black',
+    }}
+  >
+    This box has a responsive width.
+  </Box>
+</FlexCenter>
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        width: {
+          _sm: 200, // @media (min-width: 640px) { width: 200px }
+          _md: 300, // @media (min-width: 768px) { width: 300px }
+          _lg: 400, // @media (min-width: 1024px) { width: 400px }
+          _xl: 500, // @media (min-width: 1280px) { width: 500px }
+          _2xl: 600, // @media (min-width: 1536px) { width: 600px }
+        },
+      }}
+    >
+      This box has a responsive width.
+    </Box>
+  )
+}
+```
+
+### Array Values
+
+The second way is to define your breakpoints as an array, arranged in ascending order. As shown below:
+
+<FlexCenter
+  align='center'
+  justify='center'
+  sx={{
+    backgroundImage: 'linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%)',
+    py: 10,
+    borderRadius: 'sm',
+    color: 'black',
+  }}
+>
+  <Box
+    sx={{
+      width: [200, 300, 400],
+      backdropFilter: 'blur(12px)',
+      bg: '#fff9',
+      borderRadius: 'sm',
+      py: 2,
+      px: 7,
+    }}
+  >
+    This box has a responsive width.
+  </Box>
+</FlexCenter>
+
+```tsx
+<Box sx={{ width: [200, 300, 400] }}>This box has a responsive width.</Box>
+
+// [200, 300, 400] 分别对应为 [breakpoints.sm, breakpoints.md, breakpoints.lg]
+```
+
+<Callout type='info'>
+This way should only be considered when the number of breakpoints in the theme is limited, such as in the case of only three breakpoints.
+
+If you need to define more than just a few breakpoints, we recommend using the object API.
+
+</Callout>
+
+You can skip the corresponding breakpoint by using `null | undefined`:
+
+```tsx
+<Box sx={{ width: [200, null, 400] }}>This box has a responsive width.</Box>
+```
+
+Of course, whether it is an array or an object, the property value of `width` can be modified to [Sizes Tokens](/docs/customization/sizes) and
+[Sizes SemanticTokens](/docs/customization/sizes). This also means that other CSS properties also support associated types of Tokens.
+
+## Breakpoints Selector
+
+Through the above two methods, the process of defining and implementing responsive breakpoints for a single CSS property is greatly simplified. If you want to achieve responsiveness for a group of CSS properties, you can use breakpoints as selectors:
+
+```tsx
+<Box
+  sx={{
+    _md: {
+      width: 300,
+      height: 300,
+    },
+    _lg: {
+      width: 400,
+      height: 400,
+    },
+  }}
+>
+  This box has a responsive size.
+</Box>
+```
+
+This approach is more conducive to understanding and maintenance in complex CSS styling scenarios.
+
+## Customizing Breakpoints
+
+You can also define custom breakpoints and use them as keys when defining the breakpoint object.
+
+Learn how to customize breakpoints in [Breakpoints](/docs/customization/breakpoints).

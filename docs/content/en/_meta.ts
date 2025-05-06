@@ -1,3 +1,5 @@
+import meta from './docs/components/_meta'
+
 export default {
   index: {
     type: 'page',
@@ -12,5 +14,15 @@ export default {
   docs: {
     type: 'page',
     title: 'Documents',
+  },
+  components: {
+    type: 'page',
+    href: `/docs/components/${Object.keys(meta).sort().shift()}`,
+    title: 'Components',
+  },
+  theming: {
+    type: 'page',
+    href: '/docs/customization/theming',
+    title: 'Customization',
   },
 }

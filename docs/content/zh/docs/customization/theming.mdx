@@ -3,19 +3,21 @@ title: 定制主题
 description: 掌握在 Nex UI 中如何自定义主题。
 ---
 
-import { Checkbox } from '@nex-ui/react'
+import { Checkbox, Button, Switch } from '@nex-ui/react'
 
 # 定制主题
 
-主题可以让整个应用程序保持一致的外观和感觉。它可以自定义项目的所有外观设计以满足特定需求。
+使用主题自定义 Nex UI，您可以改变颜色，排版等更多。
 
-为提升应用程序之间的一致性，浅色和深色主题类型可供选择。默认情况下，组件使用浅色主题。
+主题可以让整个应用程序保持一致的外观和感觉，您可以定制组件的所有设计元素，以满足您的业务或品牌的特定需求。
 
-## 主题 Provider
+为了使各个应用之间的风格更加一致，可以选择浅色主题类型和深色主题类型。默认情况下，组件使用浅色主题类型。
+
+## NexUI Provider
 
 Nex UI 内置了默认的主题，通过 `NexUIProvider` 的 `theme` 属性可将自定义主题应用到您的应用程序中。
 
-`defineTheme` 函数可根据配置生成主题，将其作为属性传递给 `NexUIProvider.theme`。
+也可以通过 `defineTheme` 函数生成主题，将其返回值作为属性传递给 `NexUIProvider.theme`。
 
 ```tsx
 import { defineTheme, NexUIProvider } from '@nex-ui/react'
@@ -120,18 +122,53 @@ const innerTheme = defineTheme({
 export default function App() {
   return (
     <NexUIProvider theme={outerTheme}>
-      <Button>button</Button>
+      <Checkbox defaultChecked />
       <NexUIProvider theme={innerTheme}>
-        <Button>button</Button>
+        <Checkbox defaultChecked />
       </NexUIProvider>
     </NexUIProvider>
   )
 }
 ```
 
-嵌套 `NexUIProvider` 唯有 `theme.components` 和 `primaryThemeColor` 属性有效，其他属性仅在顶层 `NexUIProvider` 有效。
+嵌套 `NexUIProvider` 唯有 `theme.components` 和 `theme.primaryThemeColor` 属性有效，其他属性仅在顶层 `NexUIProvider` 有效。
+
+## 组件主题色
+
+组件的主题色可以通过 `theme.primaryThemeColor` 属性进行配置。
+
+<FlexCenter gap='5'>
+  <Checkbox defaultChecked color='orange' />
+  <Switch defaultChecked color='orange' />
+  <Button color='orange'>Button</Button>
+</FlexCenter>
+
+```tsx
+import { NexUIProvider, defineTheme } from '@nex-ui/react'
+import { Button } from '@nex-ui/react'
+
+const theme = defineTheme({
+  primaryThemeColor: 'orange',
+})
+
+export default function App() {
+  return (
+    <NexUIProvider theme={theme}>
+      <Checkbox defaultChecked />
+      <Switch defaultChecked />
+      <Button>Button</Button>
+    </NexUIProvider>
+  )
+}
+```
 
 ## API
+
+### defineTheme
+
+`defineTheme(options) => theme`
+
+根据选项生成一个主题。然后，将其作为属性传递给主题提供器。
 
 ### NexUIProviderProps
 
@@ -140,24 +177,7 @@ export default function App() {
     {
       prop: 'children',
       type: 'ReactNode',
-      default: '',
-      description: '组件的内容。',
-    },
-    {
-      prop: 'primaryThemeColor',
-      type: [
-        "'blue'",
-        "'orange'",
-        "'yellow'",
-        "'ryan'",
-        "'red'",
-        "'green'",
-        "'pick'",
-        "'purple'",
-        "'gray'",
-      ],
-      default: "'blue'",
-      description: '内部组件默认的颜色。',
+      description: '组件树。',
     },
     {
       prop: 'prefix',
@@ -169,32 +189,12 @@ export default function App() {
       prop: 'theme',
       type: 'Theme',
       default: null,
-      description: '自定义主题，通过使用 `defineTheme()` 的值。',
+      description: '自定义主题，通常为 `defineTheme` 的返回值。',
     },
     {
-      prop: 'defaultMode',
-      type: ["'light'", "'dark'", "'system'"],
-      default: "'system'",
-      description: '默认的主题模式。',
-    },
-    {
-      prop: 'modeStorageKey',
-      type: 'string',
-      default: "'nui-color-scheme'",
-      description: '用于在 localStorage 中存储主题模式的键。',
-    },
-    {
-      prop: 'colorSchemeSelector',
-      type: ["'data'", "'class'", 'string'],
-      default: "'data-nui-color-scheme'",
-      description:
-        '应用 CSS 主题变量和组件样式的方法。支持传入 `data-*` 字符串。',
-    },
-    {
-      prop: 'colorSchemeNode',
-      type: 'Element',
-      default: 'document.documentElement',
-      description: '用于附加 color-scheme 属性的节点。',
+      prop: 'colorScheme',
+      type: "Omit<ColorSchemeProviderProps, 'children'>",
+      description: '颜色方案。',
     },
   ]}
 />

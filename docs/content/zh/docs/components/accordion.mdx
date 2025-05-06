@@ -88,18 +88,6 @@ Accordion Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标�
       description: '用于转发根元素。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'SxProps<AccordionOwnerState>',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
       prop: 'multiple',
       type: 'boolean',
       default: 'false',
@@ -169,7 +157,20 @@ Accordion Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标�
       default: 'true',
       description: '是否在折叠时保留子元素的挂载状态。',
     },
-  ]}
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProps<AccordionOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+
+]}
 />
 
 ### AccordionItem Props
@@ -190,18 +191,6 @@ Accordion Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标�
       prop: 'ref',
       type: 'Ref',
       description: '用于转发根元素。',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'SxProps<AccordionItemOwnerState>',
-      description: '用于根元素的 sx 属性。',
     },
     {
       prop: 'indicator',
@@ -246,6 +235,18 @@ Accordion Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标�
       description: 'AccordionItem 的标题。',
     },
     {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProps<AccordionItemOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
       description: 'AccordionItem Slots 的 className。',
@@ -255,7 +256,8 @@ Accordion Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `div` 标�
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'AccordionItem Slots 的 props。',
     },
-  ]}
+
+]}
 />
 
 ### AccordionItem Slots

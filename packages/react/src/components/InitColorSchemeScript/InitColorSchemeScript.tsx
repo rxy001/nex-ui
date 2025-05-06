@@ -6,12 +6,14 @@ export const InitColorSchemeScript = ({
   colorSchemeSelector = 'data-nui-color-scheme',
   colorSchemeNode = 'document.documentElement',
   defaultMode = 'system',
+  ...props
 }: InitColorSchemeScriptProps) => (
   <Script
     modeStorageKey={modeStorageKey}
     colorSchemeNode={colorSchemeNode}
     colorSchemeSelector={colorSchemeSelector}
     defaultMode={defaultMode}
+    {...props}
   />
 )
 

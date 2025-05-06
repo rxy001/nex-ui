@@ -1,7 +1,7 @@
 import { Code } from 'nextra/components'
 import { defaultConfig } from '@nex-ui/react'
 import { reduce } from '@nex-ui/utils'
-import type { JSX } from 'react'
+import { Fragment, type JSX } from 'react'
 import type { TokenCategory } from '@nex-ui/system'
 
 function upperFirst(str: string) {
@@ -40,10 +40,10 @@ const tokenCategories: TokenCategory[] = [
 function factory(props: string[]) {
   return () => {
     return props.map((prop, index, array) => (
-      <>
+      <Fragment key={prop}>
         <Code>{prop}</Code>
         {index === array.length - 1 ? null : '、'}
-      </>
+      </Fragment>
     ))
   }
 }

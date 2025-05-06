@@ -1,10 +1,15 @@
+---
+title: Slot Recipes
+description: Slot Recipes can split a component into multiple parts.
+---
+
 # Slot Recipes
 
-Slot Recipes 可以将组件拆分为多个部分。在阅读该章节之前，建议了解 [Recipes]('/a')。
+Slot Recipes can split a component into multiple parts. Before reading this section, it is recommended to learn about [Recipes](/docs/styling/recipes).
 
 ## Basic Usage
 
-您可以使用 `defineSlotRecipe` API 定义一个 slot recipe。
+You can use the `defineSlotRecipe` API to define a slot recipe.
 
 ```tsx {4-8}
 import { defineSlotRecipe } from '@nex-ui/react'
@@ -38,7 +43,7 @@ const { root, control, label } = checkboxSlotRecipe()
 
 ## Slots With Variants
 
-您可以通过使用 `Variants` 来更改整个组件及其插槽。
+You can change the entire component and its slots by using `Variants`.
 
 ```tsx {9-20}
 import { defineSlotRecipe } from '@nex-ui/react'
@@ -112,7 +117,7 @@ const { root, control, label } = checkboxSlotRecipe({
 
 ## Slots With Compound Variants
 
-与 `variants` 类似，在使用 `compoundVariants` 时，您也可以为每个插槽定义样式。
+Similar to `variants`, when using `compoundVariants`, you can also define styles for each slot.
 
 ```tsx {29-38}
 import { defineSlotRecipe } from '@nex-ui/react'
@@ -158,8 +163,8 @@ export const checkboxSlotRecipe = defineSlotRecipe({
 
 ## Slots With Extends
 
-`defineSlotRecipe` 能够继承 SlotRecipe , 包括其 `slots`、`variants`、`defaultVariants`、`compoundVariants`，
-它会自动合并相同键的值，并提供 TypeScript 提示。
+`defineSlotRecipe` can inherit from a SlotRecipe, including its `slots`、`variants`、`defaultVariants`、`compoundVariants`.
+It will automatically merge the values of the same keys and provide TypeScript hints.
 
 ```tsx {41-45}
 import { defineSlotRecipe } from '@nex-ui/react'

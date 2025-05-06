@@ -41,8 +41,8 @@ function TopLevelProvider(props: NexUIProviderProps) {
       modeStorageKey: colorScheme?.modeStorageKey ?? `${prefix}-color-scheme`,
       colorSchemeSelector:
         colorScheme?.colorSchemeSelector ?? `data-${prefix}-color-scheme`,
-      defaultMode: colorScheme?.defaultMode ?? 'system',
       forcedMode: colorScheme?.forcedMode,
+      defaultMode: colorScheme?.defaultMode ?? 'light',
     }
   }, [
     prefix,

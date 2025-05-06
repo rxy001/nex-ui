@@ -7,7 +7,7 @@ export function App({ children }) {
   const { mode, setMode, systemColorScheme } = useColorScheme()
 
   return (
-    <NexUIProvider defaultMode='dark'>
+    <NexUIProvider colorScheme={{ defaultMode: 'dark' }}>
       {children}
     </NexUIProvider>
   )

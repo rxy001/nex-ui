@@ -1,5 +1,375 @@
-## Recipes
+---
+title: Recipes
+description: Recipes can define multiple versions of styles for the same component.
+---
 
-Recipes allows you to create multiple versions of the same component.
+import { Callout } from 'nextra/components'
 
-Recipes provides a way to write CSS-in-JS with better performance, developer experience, and composability. One of its key features is the ability to create multi-variant styles with a type-safe runtime API.
+# Recipes
+
+Recipes can define multiple versions of styles for the same component.
+
+Recipes offer a way to write CSS-in-JS with better performance, a superior developer experience, and enhanced composability. One of its key features is the ability to create various Variants styles through a type-safe runtime API.
+
+Before reading this section, it is recommended to have an understanding of [the sx property](/docs/styling/sx-prop).
+
+**Recipes support the same features as the sx property.**
+
+## Basic Usage
+
+You can use the `defineRecipe` API to define a Recipe.
+
+```tsx {4-9,16-21}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+})
+
+buttonRecipe()
+/**
+ * Result:
+ *
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ * }
+ */
+```
+
+## Multiple Variants
+
+The `variants` property can add multiple Variants to a Recipe.
+
+```tsx {9-18, 28-31, 42-45}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    size: {
+      sm: { padding: '4', fontSize: '12px' },
+      lg: { padding: '8', fontSize: '16px' },
+    },
+  },
+})
+
+buttonRecipe({ color: 'primary', size: 'sm' })
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   padding: '4',
+ *   fontSize: '12px'
+ * }
+ */
+
+buttonRecipe({ color: 'secondary', size: 'lg' })
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   bg: 'red.500',
+ *   color: 'white',
+ *   padding: '8',
+ *   fontSize: '16px'
+ * }
+ */
+```
+
+## Boolean Variants
+
+In addition, you can create boolean-type Variants for a Recipe. This is very useful when you need to create state-type Variants (e.g. `disabled`).
+
+```tsx {15-21,39-41}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    disabled: {
+      true: {
+        'pointer-events': 'none',
+        cursor: 'not-allowed',
+        opacity: 0.6,
+      },
+    },
+  },
+})
+
+buttonRecipe({
+  color: 'primary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.6,
+ * }
+ */
+```
+
+## Compound Variants
+
+The `compoundVariants` property is used to define a set of Variants that are based on combinations of other Variants.
+
+```tsx {23-31,46}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    disabled: {
+      true: {
+        'pointer-events': 'none',
+        cursor: 'not-allowed',
+        opacity: 0.6,
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      color: 'primary',
+      disabled: true,
+      css: {
+        bg: 'blue.300',
+      },
+    },
+  ],
+})
+
+buttonRecipe({
+  color: 'primary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'blue.300',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.6,
+ * }
+ */
+```
+
+<Callout type='warning'>
+  Note that the compoundVariants key is an array.
+</Callout>
+
+You can also set multiple Variants at the same time.
+
+```tsx {25,28,50,70}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 10px',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    disabled: {
+      true: {
+        'pointer-events': 'none',
+        cursor: 'not-allowed',
+        opacity: 0.6,
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      color: ['primary', 'secondary'],
+      disabled: true,
+      css: {
+        opacity: 0.3,
+      },
+    },
+  ],
+})
+
+buttonRecipe({
+  color: 'primary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.3,
+ * }
+ */
+
+buttonRecipe({
+  color: 'secondary',
+  disabled: true,
+})
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   padding: '5px 10px',
+ *   bg: 'red.500',
+ *   color: 'white',
+ *   pointer-events: 'none',
+ *   cursor: 'not-allowed',
+ *   opacity: 0.3,
+ * }
+ */
+```
+
+## Default Variants
+
+The `defaultVariants` property defines the default Variant values for a Recipe. This is useful when you want a certain Variant to be applied by default.
+
+```tsx {19-22,33-36}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    size: {
+      sm: { padding: '4', fontSize: '12px' },
+      lg: { padding: '8', fontSize: '16px' },
+    },
+  },
+  defaultVariants: {
+    color: 'primary',
+    size: 'sm',
+  },
+})
+
+buttonRecipe()
+
+/**
+ * Result:
+ * {
+ *   display: 'flex',
+ *   justifyContent: 'center',
+ *   alignItems: 'center',
+ *   bg: 'blue.500',
+ *   color: 'white',
+ *   padding: '4',
+ *   fontSize: '12px'
+ * }
+ */
+```
+
+## Extends
+
+`defineRecipe` can inherit from a Recipe, including its `base`、`variants`、`defaultVariants`、`compoundVariants`. It will automatically merge the values of the same keys and provide corresponding TypeScript type support.
+
+```tsx {25-34}
+import { defineRecipe } from '@nex-ui/react'
+
+const buttonRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  variants: {
+    color: {
+      primary: { bg: 'blue.500', color: 'white' },
+      secondary: { bg: 'red.500', color: 'white' },
+    },
+    size: {
+      sm: { padding: '4', fontSize: '12px' },
+      lg: { padding: '8', fontSize: '16px' },
+    },
+  },
+  defaultVariants: {
+    color: 'primary',
+    size: 'sm',
+  },
+})
+
+const extendedRecipe = defineRecipe(buttonRecipe, {
+  variants: {
+    color: {
+      muted: {
+        bg: 'yellow',
+        color: 'white',
+      },
+    },
+  },
+})
+```
