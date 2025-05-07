@@ -10,7 +10,7 @@ export const LoadingOutlined = createIcon(
       r='9.5'
       fill='none'
       strokeLinecap='round'
-      strokeWidth='3'
+      strokeWidth='2'
     >
       <animate
         attributeName='stroke-dasharray'

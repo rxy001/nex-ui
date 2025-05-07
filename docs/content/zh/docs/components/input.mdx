@@ -1,0 +1,271 @@
+---
+title: Input
+description: Input 是一个允许用户输入文本的组件。
+---
+
+import { input } from '@/content/_demo'
+
+# Input
+
+Input 是一个允许用户输入文本的组件。
+
+<ComponentLinks component='input' />
+
+## 使用
+
+<Example {...input.usage} />
+
+### Disabled
+
+<Example {...input.disabled} />
+
+### ReadOnly
+
+<Example {...input.readOnly} />
+
+### Variants
+
+<Example {...input.variants} />
+
+### Sizes
+
+<Example {...input.sizes} />
+
+### Colors
+
+<Example {...input.colors} />
+
+### Label Placements
+
+可以设置 `labelPlacement` 属性为 `inside`、`outside`、`float-outside` 或 `float-inside` 来改变 label 的位置。
+
+<Example {...input.labelPlacements} />
+
+### Clear Button
+
+如果传递了 `clearable` 属性，将在输入的末尾有一个 clear 按钮，仅在有值时是可见的。
+
+<Example {...input.clearable} />
+
+### Prefix & Suffix
+
+可以设置 `prefix` 和 `suffix` 属性来添加前缀和后缀。
+
+<Example {...input.icons} />
+
+### Invalid
+
+<Example {...input.invalid} />
+
+## API
+
+### Input Props
+
+Input Props 默认继承 `as` 的 Props，其 `as` 默认为 HTML `input` 标签。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'Input 的颜色。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'Input 的大小。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
+      default: 'size',
+      description: 'Input 的 BorderRadius。',
+    },
+    {
+      prop: 'variant',
+      type: ["'filled'", "'outlined'", "'underlined'"],
+      default: "'outlined'",
+      description: 'Input 的外观样式。',
+    },
+    {
+      prop: 'placeholder',
+      type: 'string',
+      description: 'Input 的占位符。',
+    },
+    {
+      prop: 'type',
+      type: [
+        "'text'",
+        "'email'",
+        "'password'",
+        "'number'",
+        "'search'",
+        "'tel'",
+        "'url'",
+        "'date'",
+        "'datetime-local'",
+        "'month'",
+        "'week'",
+        "'time'",
+      ],
+      default: "'text'",
+      description: 'Input 的类型。',
+    },
+    {
+      prop: 'value',
+      type: 'string',
+      description: 'Input 的值。',
+    },
+    {
+      prop: 'defaultValue',
+      type: 'string',
+      description: 'Input 的默认值。（非受控）',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Input 是否禁用。',
+    },
+    {
+      prop: 'name',
+      type: 'string',
+      description: 'Input 的 name。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'prefix',
+      type: 'ReactNode',
+      description: 'Input 的前缀。',
+    },
+    {
+      prop: 'suffix',
+      type: 'ReactNode',
+      description: 'Input 的后缀。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Input 内的 input',
+    },
+    {
+      prop: 'fullWidth',
+      type: 'boolean',
+      default: 'false',
+      description: '是否占满父元素的宽度。',
+    },
+    {
+      prop: 'label',
+      type: 'ReactNode',
+      description: 'Input 的 label。',
+    },
+    {
+      prop: 'labelPlacement',
+      type: ["'inside'", "'outside'", "'float-outside'", "'float-inside'"],
+      default: "'float-outside'",
+      description: 'Input 的 label 的位置。',
+    },
+    {
+      prop: 'invaild',
+      type: 'boolean',
+      default: 'false',
+      description: 'Input 是否无效。',
+    },
+    {
+      prop: 'clearable',
+      type: 'boolean',
+      default: 'false',
+      description: '是否显示清除按钮。',
+    },
+    {
+      prop: 'onChange',
+      type: 'function',
+      description: '当 Input 的值发生变化时会触发该回调函数。',
+    },
+    {
+      prop: 'onValueChange',
+      type: '(value: string) => void',
+      description: '当 Input 的值发生变化时会触发该回调函数。',
+    },
+    {
+      prop: 'onClear',
+      type: 'function',
+      description: '当 Cleat 按钮被点击时触发该回调函数。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于 Input 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProps<SwitchOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Input Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Input Slots 的 props。',
+    },
+  ]}
+/>
+
+### Input Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'root',
+      class: '.nui-input-root',
+      component: "'div'",
+      description: 'Input 的根元素。',
+    },
+    {
+      slot: 'label',
+      class: '.nui-input-label',
+      component: "'label'",
+      description: 'Input 的 label。',
+    },
+    {
+      slot: 'clearBtn',
+      class: '.nui-input-clear-btn',
+      component: 'Button',
+      description: 'Input 的清除按钮。',
+    },
+    {
+      slot: 'prefix',
+      class: '.nui-input-prefix',
+      component: "'span'",
+      description: 'Input 的前缀。',
+    },
+    {
+      slot: 'suffix',
+      class: '.nui-input-suffix',
+      component: "'span'",
+      description: 'Input 的后缀。',
+    },
+  ]}
+/>

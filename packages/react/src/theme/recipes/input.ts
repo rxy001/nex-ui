@@ -49,10 +49,12 @@ export const inputRecipe = defineSlotRecipe({
     prefix: {
       display: 'flex',
       alignItems: 'center',
+      pointerEvents: 'none',
     },
     suffix: {
       display: 'flex',
       alignItems: 'center',
+      pointerEvents: 'none',
     },
   },
   variants: {
@@ -77,7 +79,7 @@ export const inputRecipe = defineSlotRecipe({
       },
       lg: {
         root: {
-          fs: 'xl',
+          fs: 'lg',
           h: '12',
         },
         input: {

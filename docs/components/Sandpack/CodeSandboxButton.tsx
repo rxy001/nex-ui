@@ -6,7 +6,7 @@ export const CodeSandboxButton = () => {
   return (
     <IconButton title='Open in CodeSandbox' as='span'>
       <UnstyledOpenInCodeSandboxButton className='x:size-full x:flex x:justify-center x:items-center x:bg-none x:border-none x:p-0 x:m-0 x:outline-0 x:cursor-pointer'>
-        <CodeSandboxOutlined height={20} width={20} />
+        <CodeSandboxOutlined />
       </UnstyledOpenInCodeSandboxButton>
     </IconButton>
   )

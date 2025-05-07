@@ -3,7 +3,7 @@
 import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
-import { filter } from '@nex-ui/utils'
+import { __DEV__, filter } from '@nex-ui/utils'
 import type { ElementType, Key } from 'react'
 import { AccordionGroupProvider } from './AccordionContext'
 import { useNexUI } from '../provider'
@@ -73,6 +73,12 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     onExpandedKeysChange,
   )
 
+  if (__DEV__ && !multiple && expandedKeys.length > 1) {
+    console.warn(
+      '[Nex UI] Accordion: The multiple prop of the Accordion is set to false, but the number of currently expanded items exceeds 1. Please check and set the appropriate props.',
+    )
+  }
+
   const ownerState: AccordionOwnerState = {
     ...props,
     hideIndicator,
@@ -107,11 +113,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
 
   const toggleExpandedKey = useEvent((key: Key) => {
     if (expandedKeys.includes(key)) {
-      if (multiple) {
-        setExpandedKeys(filter(expandedKeys, (k: Key) => k !== key))
-        return
-      }
-      setExpandedKeys([])
+      setExpandedKeys(filter(expandedKeys, (k: Key) => k !== key))
     } else {
       if (multiple) {
         setExpandedKeys([...expandedKeys, key])

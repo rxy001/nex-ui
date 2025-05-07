@@ -82,11 +82,13 @@ type InputOwnProps<InputComponent extends ElementType> = {
 
   /**
    * If true, the input is invalid.
+   * @default false
    */
   invaild?: boolean
 
   /**
-   * If true, the input is invalid.
+   * If true, the input is clearable.
+   * @default false
    */
   clearable?: boolean
 

@@ -5,5 +5,6 @@ export default {
   checkbox: 'Checkbox',
   divider: 'Divider',
   flex: 'Flex',
+  input: 'Input',
   switch: 'Switch',
 }
