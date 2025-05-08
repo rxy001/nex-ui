@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Nex UI',
   },
   keywords:
-    'React,Next.js,Emotion,NexUI,React,Server Components,React Components,UI Components,UI Kit,UI Library,UI Framework,UI Design System',
+    'React,Next.js,Emotion,Nex UI,React,Server Components,React Components,UI Components,UI Kit,UI Library,UI Framework,UI Design System',
 }
 
 export default async function RootLayout({ children, params }: any) {

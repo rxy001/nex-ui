@@ -1,0 +1,173 @@
+---
+title: Components
+description: Learn how to customize the styles and default properties of components in Nex UI.
+---
+
+# Components
+
+You can customize the styles, default properties, etc., of components by using the `components` key in `theme`, which helps achieve style consistency throughout the application.
+
+## Default Component Properties
+
+Each property of every Nex UI component has a default value. To change these default values, use the `defaultProps` key in `components`:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      defaultProps: {
+        color: 'yellow',
+      },
+    },
+  },
+})
+```
+
+## Customizing Component Styles
+
+You can change the default styles of any Nex UI component by using the `styleOverrides` key in `components`.
+
+`styleOverrides` supports two different ways to override component styles: functions or objects ([Recipes](/docs/styling/recipes), [SlotRecipes](/docs/styling/slot-recipes)).
+
+### Functions
+
+Use a callback function to access the `ownerState` of the component and return [`sx`](/docs/styling/sx-prop).
+
+```tsx
+import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      defaultProps: {
+        color: 'yellow',
+      },
+      styleOverrides: (ownerState: ButtonOwnerState) => {
+        if (color === 'yellow') {
+          return {
+            bg: 'yellow.500',
+            color: 'white',
+          }
+        }
+      },
+    },
+  },
+})
+```
+
+### Objects
+
+Using [Recipes](/docs/styling/recipes) or [SlotRecipes](/docs/styling/slot-recipes) (determined by different components) can not only override the default styles of components but also the styles of various `variants` and combined `variants`.
+
+For example, when you want to override the style of the `Button` component with the `variants` property value of `outlined`:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      defaultProps: {
+        color: 'yellow',
+      },
+      styleOverrides: {
+        variants: {
+          outlined: {
+            root: {
+              borderWidth: 3,
+            },
+          },
+        },
+      },
+    },
+  },
+})
+```
+
+Or when the `disabled` property value is `true` and the `color` property value is `yellow`:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      styleOverrides: {
+        compoundVariants: [
+          {
+            color: 'yellow',
+            disabled: true,
+            css: {
+              root: {
+                opacity: 0.5,
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+})
+```
+
+## Extending Component API
+
+`styleOverrides` can not only override component styles but also further expand on the original styles to give components richer styles.
+
+For example, the `size` property of the `Button` originally only supports `sm`, `md`, `lg`, but we can extend it to support `xl`:
+
+```tsx
+import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
+
+const theme = defineTheme({
+  components: {
+    Button: {
+      styleOverrides: ({ size }: ButtonOwnerState) => {
+        if (size === 'xl') {
+          return {
+            h: '14',
+          }
+        }
+      },
+    },
+  },
+})
+```
+
+Or use [Recipes](/docs/styling/recipes) \ [SlotRecipes](/docs/styling/slot-recipes) (determined by the component you want to extend)
+
+```tsx
+const theme = defineTheme({
+  components: {
+    Button: {
+      styleOverrides: {
+        variants: {
+          size: {
+            xl: {
+              root: {
+                h: '14',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+})
+```
+
+Even better, you can use the above two methods to extend the styles of APIs that are not yet supported.
+
+### TypeScript
+
+If you are using TypeScript, you need to specify the new `size` type.
+
+```tsx
+declare module '@nex-ui/react' {
+  interface ButtonPropsOverrides {
+    size?: 'sm' | 'md' | 'lg' | 'xl'
+  }
+}
+```

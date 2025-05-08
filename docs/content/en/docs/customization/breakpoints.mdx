@@ -1,0 +1,52 @@
+---
+title: Breakpoints
+description: Breakpoints support the use of breakpoints in multiple scenarios.
+---
+
+import { BreakpointTable } from '../../../_components'
+
+# Breakpoints
+
+Breakpoints support the use of breakpoints in multiple scenarios.
+
+## Customizing Breakpoints
+
+Breakpoints can be defined in the `theme.breakpoints` section of your theme configuration:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  breakpoints: {
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+  },
+})
+```
+
+The type of the Breakpoint value is `string`.
+
+### TypeScript
+
+Later, if you are using TypeScript, you can extend the custom breakpoints through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+
+```tsx
+declare module '@nex-ui/react' {
+  interface BreakpointsOverrides {
+    sm: '640px'
+    md: '768px'
+    lg: '1024px'
+    xl: '1280px'
+  }
+}
+```
+
+## Using Breakpoints
+
+Learn how to use breakpoints in [Responsive Design](/docs/styling/responsive-design).
+
+## Available Default Breakpoints
+
+<BreakpointTable />

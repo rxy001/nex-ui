@@ -1,6 +1,6 @@
 ---
 title: Accordion
-description: Accordion 能够在页面上展开和折叠相关的内容部分。
+description: The accordion component allows expanding and collapsing content sections on the page.
 ---
 
 import { Accordion } from '@nex-ui/react'
@@ -8,13 +8,13 @@ import { accordion } from '@/content/_demo'
 
 # Accordion
 
-Accordion 能够在页面上展开和折叠相关的内容部分。
+The accordion component enables expanding and collapsing related content sections on the page.
 
 <ComponentLinks component='accordion' ariaCompatible />
 
 ---
 
-## 使用
+## Usage
 
 <Example {...accordion.usage} />
 
@@ -24,19 +24,19 @@ Accordion 能够在页面上展开和折叠相关的内容部分。
 
 ### Expand Multiple Items
 
-将 `multiple` 属性设置为 `true`，Accordion 允许同时展开多个 items。
+Set the `multiple` prop to `true` to allow expanding multiple items simultaneously.
 
 <Example {...accordion.expandMultiple} />
 
 ### Default Expanded Keys
 
-通过 `defaultExpandedKeys` 属性，您可以设置默认展开的 items。
+Use the `defaultExpandedKeys` prop to set initially expanded items by default.
 
 <Example {...accordion.defaultExpandedKeys} />
 
 ### Variants
 
-Accordion 组件提供了多种变体，您可以通过 `variant` 属性来设置。
+The accordion component provides multiple visual variants through the `variant` prop.
 
 #### Outlined
 
@@ -48,19 +48,19 @@ Accordion 组件提供了多种变体，您可以通过 `variant` 属性来设�
 
 ### Disabled Keys
 
-通过 `disabledKeys` 属性，您可以设置禁用的 items。
+Control disabled items using the `disabledKeys` prop.
 
 <Example {...accordion.disabledKeys} />
 
 ### Custom Indicator
 
-通过 `indicator` 属性，您可以设置自定义的指示器。也可以通过 `hideIndicator` 属性来隐藏指示器。
+Customize the expand/collapse indicator using the `indicator` prop. Use `hideIndicator` to completely hide the indicator.
 
 <Example {...accordion.indicator} />
 
 ### Controlled
 
-Accordion 组件支持受控模式，您可以通过 `expandedKeys` 属性来控制展开的 items。
+The accordion supports controlled mode through the `expandedKeys` prop.
 
 <Example {...accordion.controlled} />
 
@@ -68,103 +68,108 @@ Accordion 组件支持受控模式，您可以通过 `expandedKeys` 属性来控
 
 ### Accordion Props
 
-Accordion Props 继承 `as` (默认为 `div` 标签) 的 Props。
+The accordion props inherit the props of `as` (by default, it is the `div` tag).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '通常是 AccordionItem 的集合。',
+      description:
+        'The contents of the collection. Usually the array of AccordionItem.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: '用于根元素的 className。',
+      description: 'Class name for the root element.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: '用于转发根元素。',
+      description: 'Ref for forwarding to the root element.',
     },
     {
       prop: 'multiple',
       type: 'boolean',
       default: 'false',
-      description: '是否允许同时展开多个 items。',
+      description:
+        'If true, the accordion items can be expanded at the same time.',
     },
     {
       prop: 'defaultExpandedKeys',
       type: 'Key[]',
-      description: '默认展开的 items 的 keys。(非受控)',
+      description:
+        'The default expanded keys in the collection (uncontrolled).',
     },
     {
       prop: 'expandedKeys',
       type: 'Key[]',
-      description: '展开的 items 的 keys。',
+      description:
+        'The currently expanded keys in the collection (controlled).',
     },
     {
       prop: 'onExpandedKeysChange',
       type: '(keys: Key[]) => void',
-      description: '当展开的 items 发生变化时调用的回调函数。',
+      description: 'Handler that is called when the expanded keys change.',
     },
     {
       prop: 'disabledKeys',
       type: 'Key[]',
-      description: '禁用的 items 的 keys。',
+      description: 'The item keys that are disabled.',
     },
     {
       prop: 'MotionProps',
       type: 'HTMLMotionProps',
-      description: 'Accordion 的动画属性。',
+      description: 'The motion properties of the accordion.',
     },
     {
       prop: 'indicator',
       type: 'ReactNode',
-      description: '自定义指示器。',
+      description:
+        'The accordion item expanded indicator, usually an arrow icon.',
     },
     {
       prop: 'hideIndicator',
       type: 'boolean',
-      description: '是否隐藏指示器。',
+      description: 'If true, the accordion items indicator is hidden.',
     },
     {
       prop: 'indicatorMotionProps',
       type: 'HTMLMotionProps',
-      description: '指示器的动画属性。',
+      description: 'The motion properties of the accordion indicator.',
     },
     {
       prop: 'variant',
       type: ["'outlined'", "'underlined'"],
       default: "'underlined'",
-      description: 'Accordion 的外观样式。',
+      description: 'The accordion appearance style.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: '是否禁用 Accordion。',
+      description: 'If true, the accordion items are disabled',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'true',
-      description: '是否在折叠时保留子元素的挂载状态。',
+      description:
+        'If true, the accordion item content should always be mounted.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'sx',
       type: 'SxProps<AccordionOwnerState>',
-      description: '用于根元素的 sx 属性。',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
-
-]}
+  ]}
 />
 
 ### AccordionItem Props
@@ -174,81 +179,81 @@ Accordion Props 继承 `as` (默认为 `div` 标签) 的 Props。
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'AccordionItem 的内容。',
+      description: 'The content of the component.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: '用于根元素的 className。',
+      description: 'Additional class names to apply to the root element.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: '用于转发根元素。',
+      description: 'Ref for forwarding to the root element.',
     },
     {
       prop: 'indicator',
       type: 'ReactNode',
-      description: '自定义指示器。',
+      description: 'The accordion item expanded indicator.',
     },
     {
       prop: 'hideIndicator',
       type: 'boolean',
-      description: '是否隐藏指示器。',
+      description: 'If true, the accordion item indicator is hidden.',
     },
     {
       prop: 'indicatorMotionProps',
       type: 'HTMLMotionProps',
-      description: '指示器的动画属性。',
+      description: 'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: '是否禁用 AccordionItem。',
+      description: ' If true, the accordion item is disabled.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'true',
-      description: '是否在折叠时保留子元素的挂载状态。',
+      description: 'If true, the accordion item content should always be mounted.',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: 'AccordionItem 的动画属性。',
+      description: 'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
     },
     {
       prop: 'itemKey',
       type: 'Key',
-      description: 'AccordionItem 的唯一标识符。',
+      description: 'The accordion item key.',
     },
     {
       prop: 'title',
       type: 'ReactNode',
-      description: 'AccordionItem 的标题。',
+      description: 'The accordion item title.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
       description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+        'The component or element to render as the root.',
     },
     {
       prop: 'sx',
       type: 'SxProps<AccordionItemOwnerState>',
-      description: '用于根元素的 sx 属性。',
+      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'AccordionItem Slots 的 className。',
+      description: 'The className used for each slot.',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'AccordionItem Slots 的 props。',
+      description: 'The props used for each slot.',
     },
 
 ]}
@@ -256,7 +261,7 @@ Accordion Props 继承 `as` (默认为 `div` 标签) 的 Props。
 
 ### AccordionItem Slots
 
-AccordionItem Props 继承 `as` (默认为 `div` 标签) 的 Props。
+The accordionItem props inherit the props of `as` (by default, it is the `div` tag).
 
 <SlotsTable
   dataSource={[
@@ -264,25 +269,25 @@ AccordionItem Props 继承 `as` (默认为 `div` 标签) 的 Props。
       slot: 'heading',
       class: '.nui-accordion-item-heading',
       component: "'h3'",
-      description: 'accordion item 的标题。',
+      description: 'Heading element for the item.',
     },
     {
       slot: 'content',
       class: '.nui-accordion-item-panel',
       component: "'span'",
-      description: 'accordion item 的内容。',
+      description: 'Content panel element.',
     },
     {
       slot: 'indicator',
       class: '.nui-accordion-item-indicator',
       component: "'m.span'",
-      description: 'indicator 的容器。',
+      description: 'Indicator container element.',
     },
     {
       slot: 'trigger',
       class: '.nui-accordion-item-trigger',
       component: "'button'",
-      description: '控制 accordion item 折叠的按钮。',
+      description: 'Toggle button element.',
     },
   ]}
 />

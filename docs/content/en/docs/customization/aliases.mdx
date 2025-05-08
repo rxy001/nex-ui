@@ -1,0 +1,76 @@
+---
+title: Aliases
+description: Aliases are used to define aliases for CSS properties, which simplifies CSS property names and supports combining CSS properties.
+---
+
+import { Callout } from 'nextra/components'
+import { AliasTable } from '../../../_components'
+
+# Aliases
+
+Aliases are used to define aliases for CSS properties, which simplifies CSS property names and supports combining CSS properties.
+
+## Customizing Aliases
+
+Aliases can be defined in the `theme.aliases` section of your theme configuration:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  aliases: {
+    w: 'width',
+    h: 'height',
+    px: ['paddingLeft', 'paddingRight'],
+  },
+})
+```
+
+The type of the alias value is `CSSProperty | CSSProperty[]`.
+
+### TypeScript
+
+Later, if you are using TypeScript, you can extend the custom aliases through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+
+```tsx
+declare module '@nex-ui/react' {
+  interface AliasesOverrides {
+    w: 'width'
+    h: 'height'
+    px: ['paddingLeft', 'paddingRight']
+  }
+}
+```
+
+## Using Aliases
+
+After being defined, you can use the custom aliases through the [`sx`](/docs/styling/sx-prop) property, [`defineRecipe`](/docs/styling/recipes) or [`defineSlotRecipe`](/docs/styling/slot-recipes).
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        w: '16',
+        h: '16',
+        px: '16',
+      }}
+    >
+      Box
+    </Box>
+  )
+}
+```
+
+<Callout>
+  Nex UI has associated `width`, `height` with `sizes`, and `paddingLeft`,
+  `paddingRight` with `spaces`. Aliases will be internally converted into
+  corresponding CSS Properties, so they can be used directly. Learn more in
+  [Scales](/docs/customization/scales).
+</Callout>
+
+## Available Default Aliases
+
+<AliasTable />

@@ -1,0 +1,95 @@
+---
+title: Scales
+description: Scales can associate `tokens` and `semanticTokens` with CSS properties, allowing CSS properties to map to corresponding Token types, and enabling CSS properties to use Tokens of the corresponding types as values.
+---
+
+import { Callout } from 'nextra/components'
+import { ScaleTable } from '../../../_components'
+
+# Scales
+
+Scales can associate `tokens` and `semanticTokens` with CSS properties, allowing CSS properties to map to corresponding Token types, and enabling CSS properties to use Tokens of the corresponding types as values.
+
+## Customizing Scales
+
+Scales can be defined in the `theme.scales` section of your theme configuration:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    colors: {
+      blue: {
+        500: '#006fee',
+      },
+      gray: '#fafafa',
+    },
+    sizes: {
+      10: '40px',
+    },
+    spaces: {
+      5: '20px',
+    },
+  },
+  semanticTokens: {
+    colors: {
+      primary: '#06b6d4',
+    },
+  },
+  scales: {
+    color: 'colors',
+    backgroundColor: 'colors',
+    borderColor: 'colors',
+    width: 'sizes',
+    padding: 'spaces',
+  },
+})
+```
+
+The `key` of the Scale is of the `CSSProperty` type, and the `value` is of the `TokenCategory` type.
+
+<Callout>There is no need to associate CSS properties with Alias here.</Callout>
+
+After the above definition, in the usage of methods such as the `sx` property, `defineRecipe`, and `defineSlotRecipe`, `color`, `borderColor`, and `backgroundColor` can directly reference Tokens of the Colors type, `width` references Tokens of the Sizes type, and `padding` references Tokens of the Spaces type.
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        color: 'gray',
+        backgroundColor: 'primary',
+        border: '1px solid',
+        borderColor: 'blue.500',
+        width: '10',
+        padding: '5',
+      }}
+    >
+      Box
+    </Box>
+  )
+}
+```
+
+### TypeScript
+
+If you are using TypeScript, you can extend the custom Scales through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+
+```tsx
+declare module '@nex-ui/react' {
+  interface ScalesOverrides {
+    color: 'colors'
+    backgroundColor: 'colors'
+    borderColor: 'colors'
+    width: 'sizes'
+    padding: 'spaces'
+  }
+}
+```
+
+## Available Default Scales
+
+<ScaleTable />

@@ -94,12 +94,12 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   onCheckedChange?: (checked: boolean) => void
 
   /**
-   * If true, the checkbox is checked.(controlled)
+   * If true, the switch is checked.(controlled)
    */
   checked?: boolean
 
   /**
-   * If true, the checkbox is disabled.
+   * If true, the switch is disabled.
    * @default false
    */
   disabled?: boolean

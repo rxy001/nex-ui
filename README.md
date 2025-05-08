@@ -13,7 +13,7 @@ Visit https://nex-ui-docs.vercel.app to view the full documentation.
 
 ## Getting Started
 
-Visit https://nex-ui-docs.vercel.app/docs/getting-started to get started with NexUI.
+Visit https://nex-ui-docs.vercel.app/docs/getting-started to get started with Nex UI.
 
 ## Storybook
 

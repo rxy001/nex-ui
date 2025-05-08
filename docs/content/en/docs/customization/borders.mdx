@@ -1,6 +1,6 @@
 ---
 title: Borders
-description: Border Tokens 是预设的边框样式的集合，统一管理 UI 元素的边框宽度、颜色和样式。
+description: Border tokens are a collection of preset border styles, which uniformly manage the border width, color, and style of UI elements.
 ---
 
 import { Callout } from 'nextra/components'
@@ -10,17 +10,18 @@ import { defaultConfig } from '@nex-ui/react'
 
 # Borders
 
-Border Tokens 是预设的边框样式的集合，统一管理 UI 元素的边框宽度、颜色和样式。
+Border tokens are a collection of preset border styles, which uniformly manage the border width, color, and style of UI elements.
 
 <Callout type='info'>
   <span className='x:float-left'>
-    默认情况下，Border Tokens 可直接应用于以下属性&nbsp;
+    By default, border tokens can be directly applied to the following
+    properties&nbsp;
   </span>
   <AvailableProps.Borders />
-  <span>。</span>
+  <span>.</span>
 </Callout>
 
-Nex UI 开箱即支持以下 Tokens。
+Nex UI supports the following tokens out of the box.
 
 <TokensTable
   dataSource={map(defaultConfig.tokens.borders, (value, key) => ({

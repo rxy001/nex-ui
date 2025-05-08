@@ -1,0 +1,389 @@
+---
+title: Tokens
+description: Design tokens are used to manage design decisions for an application. It is a collection of properties used to describe any basic/atomic visual styles.
+---
+
+import { Callout } from 'nextra/components'
+import { AvailableProps } from '../../../_components'
+
+# Tokens
+
+Design tokens are used to manage design decisions for an application. It is a collection of properties used to describe any basic/atomic visual styles.
+
+## Customizing Tokens
+
+Tokens can be defined in the `theme.tokens` section of your theme configuration:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    colors: {
+      black: '#000',
+      sky: {
+        50: '#E6F1FE',
+        100: '#CCE3FD',
+        200: '#99C7FB',
+        300: '#66AAF9',
+        400: '#338EF7',
+        500: '#006FEE',
+        600: '#005BC4',
+        700: '#004493',
+        800: '#002E62',
+        900: '#14204a',
+      },
+    },
+    spaces: { 16: '64px', 17: '68px', 18: '72px' },
+  },
+})
+```
+
+Tokens are pieces of information associated with an intuitive and readable name, generally in the form of name/value pairs. Except for tokens of the `Colors` type, they also support the above object format.
+
+<Callout>
+  It is recommended that you define some objective tokens in `tokens` that have
+  no connection with business scenarios and brand concepts.
+</Callout>
+
+### TypeScript
+
+Later, if you are using TypeScript, you can extend the custom tokens through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+
+```ts
+declare module '@nex-ui/react' {
+  interface TokensOverrides {
+    colors:
+      | 'black'
+      | 'sky.50'
+      | 'sky.100'
+      | 'sky.200'
+      | 'sky.300'
+      | 'sky.400'
+      | 'sky.500'
+      | 'sky.600'
+      | 'sky.700'
+      | 'sky.800'
+      | 'sky.900'
+    spaces: '16' | '17' | '18'
+  }
+}
+```
+
+## Using Tokens
+
+After being defined, you can use the custom tokens through the [`sx`](/docs/styling/sx-prop) property, [`defineRecipe`](/docs/styling/recipes) or [`defineSlotRecipe`](/docs/styling/slot-recipes).
+
+```tsx
+import { Box } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      sx={{
+        backgroundColor: 'sky.500',
+        padding: '16',
+      }}
+    >
+      Box
+    </Box>
+  )
+}
+```
+
+<Callout>
+  Nex UI has associated the mapping between `backgroundColor` and `colors`,
+  `padding` and `spaces`. Therefore, they can be used directly. If you change
+  `backgroundColor: 'sky.500'` to `outlineColor: 'sky.500'`, it will not work
+  properly. Learn more in [Scales](/docs/customization/scales).
+</Callout>
+
+## Types of Tokens
+
+### Colors
+
+Tokens of the `Colors` type represent the visually presented colors of elements. Their value type is `string | object`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    colors: {
+      red: {
+        100: '#fff1f0',
+      },
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.Colors />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### Sizes
+
+Tokens of the `Sizes` type represent the height and width of elements. Their value type is `string | number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    sizes: {
+      sm: '12px',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.Sizes />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### Spaces
+
+Tokens of the `Spaces` type represent the spacing between elements. Their value type is `string | number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    spaces: {
+      1: '4px',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.Spaces />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### FontSizes
+
+Tokens of the `FontSizes` type represent the font size of text elements. Their value type is `string | number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    fontSizes: {
+      sm: '14px',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.FontSizes />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### FontFamilies
+
+Tokens of the `FontFamilies` type represent the font of text elements. Their value type is `string`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    fontFamilies: {
+      sans: "ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.FontFamilies />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### FontWeights
+
+Tokens of the `FontWeights` type represent the font weight of text elements. Their value type is `string | number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    fontWeights: {
+      thin: 200,
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.FontWeights />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### LineHeights
+
+Tokens of the `LineHeights` type represent the amount of space for multi-line elements, such as the spacing of multi-line text. Their value type is `string | number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    lineHeights: {
+      base: 1.5,
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.LineHeights />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### Borders
+
+Tokens of the `Borders` type represent the borders of elements. Their value type is `string`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    borders: {
+      sm: '1px solid',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.Borders />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### BorderWidths
+
+Tokens of the `BorderWidths` type represent the border width of elements. Their value type is `string | number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    borderWidths: {
+      sm: '1px',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.BorderWidths />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### Radii
+
+Tokens of the `Radii` type represent the outer border radius of elements. Their value type is `string | number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    radii: {
+      sm: '6px',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.Radii />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### Shadows
+
+Tokens of the `Shadows` type represent the shadow effect of elements. Their value type is `string`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    shadows: {
+      sm: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.Shadows />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### Transitions
+
+Tokens of the `Transitions` type represent different transition effects when elements switch between different states. Their value type is `string`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    transitions: {
+      all: 'all 0.2s',
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.Transitions />
+  <span>&nbsp;property by default.</span>
+</Callout>
+
+### Z-Indexes
+
+Tokens of the `Z-Indexes` type represent the z-axis order of elements and their descendant elements. Their value type is `number`.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    zIndexes: {
+      min: 0,
+    },
+  },
+})
+```
+
+<Callout type='info'>
+  <span className='x:float-left'>Can be used for the </span>
+  <AvailableProps.ZIndexes />
+  <span>&nbsp;property by default.</span>
+</Callout>

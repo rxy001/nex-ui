@@ -1,6 +1,6 @@
 ---
 title: Shadows
-description: Shadow Tokens 是预设的阴影样式集合，统一管理 UI 元素的阴影效果。
+description: Shadow tokens are a collection of preset shadow styles, which uniformly manage the shadow effects of UI elements.
 ---
 
 import { Box } from '@nex-ui/react'
@@ -11,14 +11,15 @@ import { defaultConfig } from '@nex-ui/react'
 
 # Shadows
 
-Shadow Tokens 是预设的阴影样式集合，统一管理 UI 元素的阴影效果。
+Shadow tokens are a collection of preset shadow styles, which uniformly manage the shadow effects of UI elements.
 
 <Callout type='info'>
   <span className='x:float-left'>
-    默认情况下，Shadow Tokens 可直接应用于以下属性&nbsp;
+    By default, shadow tokens can be directly applied to the following
+    properties&nbsp;
   </span>
   <AvailableProps.Shadows />
-  <span>。</span>
+  <span>.</span>
 </Callout>
 
 <FlexCenter gap='8' sx={{ bg: 'rgb(250, 250, 250)', p: '8', color: 'black' }}>
@@ -40,7 +41,7 @@ Shadow Tokens 是预设的阴影样式集合，统一管理 UI 元素的阴影�
   ))}
 </FlexCenter>
 
-Nex UI 开箱即支持以下 Tokens。
+Nex UI supports the following tokens out of the box.
 
 <TokensTable
   dataSource={map(defaultConfig.tokens.shadows, (value, key) => ({

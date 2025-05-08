@@ -143,7 +143,7 @@ export type CheckboxGroupProps<
     value?: T[]
 
     /**
-     * The name of the CheckboxGroup, used when submitting an HTML form.
+     * The name of the checkbox group, used when submitting an HTML form.
      */
     name?: string
 

@@ -1,0 +1,31 @@
+---
+title: Transitions
+description: Transition tokens are a collection of preset transition effects, ensuring smooth and consistent transition effects between different states of UI elements.
+---
+
+import { Callout } from 'nextra/components'
+import { AvailableProps, TokensTable } from '../../../_components'
+import { map } from '@nex-ui/utils'
+import { defaultConfig } from '@nex-ui/react'
+
+# Transitions
+
+Transition tokens are a collection of preset transition effects, ensuring smooth and consistent transition effects between different states of UI elements.
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    By default, transition tokens can be directly applied to the following
+    properties&nbsp;
+  </span>
+  <AvailableProps.Transitions />
+  <span>.</span>
+</Callout>
+
+Nex UI supports the following tokens out of the box.
+
+<TokensTable
+  dataSource={map(defaultConfig.tokens.transitions, (value, key) => ({
+    token: `transitions.${key}`,
+    value,
+  }))}
+/>

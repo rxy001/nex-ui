@@ -54,7 +54,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   className?: ClassValue
 
   /**
-   * Used to render icon or text elements inside the Avatar if src is not set. This can be an element, or just a string.
+   * Used to render icon or text elements inside the avatar if src is not set. This can be an element, or just a string.
    */
   children?: ReactNode
 
@@ -69,19 +69,19 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   classes?: ComponentUtilityClasses<'img'>
 
   /**
-   * The size of the Avatar.
+   * The size of the avatar.
    * @default 'md'
    */
   size?: AvatarVariants['size']
 
   /**
-   * The border radius of the Avatar.
+   * The border radius of the avatar.
    * @default size
    */
   radius?: AvatarVariants['radius']
 
   /**
-   * The color of the Avatar.
+   * The color of the avatar.
    * @default 'gray'
    */
   color?: AvatarVariants['color']

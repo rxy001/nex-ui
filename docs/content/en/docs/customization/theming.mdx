@@ -1,0 +1,202 @@
+---
+title: Theming
+description: Learn how to customize the theme in Nex UI。
+---
+
+import { Checkbox, Button, Switch } from '@nex-ui/react'
+
+# Theming
+
+Customize Nex UI with your theme, you can change colors, typography, and more.
+
+Themes let you apply a consistent tone to your app. It allows you to customize all design aspects of your project in order to meet the specific needs of your business or brand.
+
+To promote greater consistency between apps, light and dark theme types are available to choose from. By default, components use the light theme type.
+
+## Nex UI Provider
+
+Nex UI components adhere to the library's default theme out of the box. You can apply a custom theme to your application through the `theme` property of the `NexUIProvider`.
+
+You can also generate a theme using the `defineTheme` function and pass its return value as a property to `NexUIProvider.theme`.
+
+```tsx
+import { defineTheme, NexUIProvider } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    black: '#000',
+    sky: {
+      50: '#f0f9ff',
+      100: '#dff2fe',
+      200: '#b8e6fe',
+      300: '#74d4ff',
+      400: '#00bcff',
+      500: '#00a6f4',
+      600: '#00a6f4',
+      700: '#0069a8',
+      800: '#00598a',
+      900: '#024a71',
+    },
+  },
+})
+
+export default function App() {
+  return (
+    <NexUIProvider theme={theme}>
+      <Button>button</Button>
+    </NexUIProvider>
+  )
+}
+```
+
+## Configurable Theme Properties
+
+Changing the theme configuration properties is the most effective way to make Nex UI meet your requirements.
+The following covers all the theme properties:
+
+- [`scales`](/docs/customization/scales)
+- [`tokens`](/docs/customization/tokens)
+- [`semanticTokens`](/docs/customization/semantic-tokens)
+- [`breakpoints`](/docs/customization/breakpoints)
+- [`aliases`](/docs/customization/aliases)
+- [`selectors`](/docs/customization/selectors)
+- [`components`](/docs/customization/components)
+
+You can add additional properties to the theme, which can then be used elsewhere. Check the above links for more information.
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  tokens: {
+    colors: {
+      black: '#1a1e23',
+      blue: {
+        500: '#006FEE',
+      },
+    },
+  },
+  semanticTokens: {
+    colors: {
+      primary: '#338EF7',
+      text: {
+        heading: '#0f172b',
+        body: '#314158',
+      },
+    },
+  },
+})
+```
+
+## Nested Themes
+
+You can use `NexUIProvider` nestedly to change the theme of local components.
+
+<FlexCenter>
+  <Checkbox defaultChecked color='red' />
+  <Checkbox defaultChecked color='green' />
+</FlexCenter>
+
+```tsx
+import { NexUIProvider, defineTheme } from '@nex-ui/react'
+
+const outerTheme = defineTheme({
+  components: {
+    Checkbox: {
+      defaultProps: {
+        color: 'red',
+      },
+    },
+  },
+})
+
+const innerTheme = defineTheme({
+  components: {
+    Checkbox: {
+      defaultProps: {
+        color: 'green',
+      },
+    },
+  },
+})
+
+export default function App() {
+  return (
+    <NexUIProvider theme={outerTheme}>
+      <Checkbox defaultChecked />
+      <NexUIProvider theme={innerTheme}>
+        <Checkbox defaultChecked />
+      </NexUIProvider>
+    </NexUIProvider>
+  )
+}
+```
+
+Only the `theme.components` and `theme.primaryThemeColor` properties are effective for nested `NexUIProvider`,
+and other properties are only effective in the top-level `NexUIProvider`.
+
+## Theme Color
+
+The theme color of the components can be configured through the `theme.primaryThemeColor` property.
+
+<FlexCenter gap='5'>
+  <Checkbox defaultChecked color='orange' />
+  <Switch defaultChecked color='orange' />
+  <Button color='orange'>Button</Button>
+</FlexCenter>
+
+```tsx
+import { NexUIProvider, defineTheme } from '@nex-ui/react'
+import { Button } from '@nex-ui/react'
+
+const theme = defineTheme({
+  primaryThemeColor: 'orange',
+})
+
+export default function App() {
+  return (
+    <NexUIProvider theme={theme}>
+      <Checkbox defaultChecked />
+      <Switch defaultChecked />
+      <Button>Button</Button>
+    </NexUIProvider>
+  )
+}
+```
+
+## API
+
+### defineTheme
+
+`defineTheme(options) => theme`
+
+Generates a theme based on the options. Then, pass it as a property to the theme provider.
+
+### NexUIProviderProps
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The component tree.',
+    },
+    {
+      prop: 'prefix',
+      default: "'nex-ui'",
+      type: 'string',
+      description: 'The prefix for CSS variables and component class names.',
+    },
+    {
+      prop: 'theme',
+      type: 'Theme',
+      default: null,
+      description: 'A custom theme, usually the return value of defineTheme.',
+    },
+    {
+      prop: 'colorScheme',
+      type: "Omit<ColorSchemeProviderProps, 'children'>",
+      description: 'The color scheme.',
+    },
+  ]}
+/>

@@ -83,9 +83,9 @@ export const DefaultExpanded: Story = {
   },
 }
 
-export const DsiabledExpandedKeys: Story = {
+export const DisabledKeys: Story = {
   args: {
-    disabledExpandedKeys: ['1'],
+    disabledKeys: ['1'],
   },
 }
 

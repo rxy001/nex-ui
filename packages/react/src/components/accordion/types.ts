@@ -7,6 +7,7 @@ import type {
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 import type { AccordionItemVariants } from '../../theme/recipes'
+import { ClassValue } from 'clsx'
 
 // Accordion
 export interface AccordionPropsOverrides {}
@@ -50,13 +51,13 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   chidlren?: ReactNode
 
   /**
-   * If true, the Accordion items content should always be mounted.
+   * If true, the accordion items content should always be mounted.
    * @default true
    */
   keepMounted?: boolean
 
   /**
-   * If true, the Accordion items indicator is hidden.
+   * If true, the accordion items indicator is hidden.
    * @default false
    */
   hideIndicator?: boolean
@@ -67,22 +68,27 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   indicator?: ReactNode
 
   /**
-   * The motion properties of the Accordion.
+   * The motion properties of the accordion.
    */
   motionProps?: HTMLMotionProps<'div'>
 
   /**
-   * The motion properties of the Accordion indicator.
+   * The motion properties of the accordion indicator.
    */
   indicatorMotionProps?: HTMLMotionProps<'span'>
 
   /**
    * The item keys that are disabled.
    */
-  disabledExpandedKeys?: Key[]
+  disabledKeys?: Key[]
 
   /**
-   * If true, the Accordion items are disabled
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
+
+  /**
+   * If true, the accordion items are disabled
    * @default false
    */
   disabled?: boolean
@@ -107,7 +113,7 @@ export type AccordionOwnerState<RootComponent extends ElementType = 'div'> =
     multiple: boolean
     disabled: boolean
     keepMounted: boolean
-    disabledExpandedKeys: Key[]
+    disabledKeys: Key[]
     defaultExpandedKeys: Key[]
     expandedKeys: Key[]
     variant: AccordionItemVariants['variant']
@@ -158,6 +164,11 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   itemKey?: Key
 
   /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
+
+  /**
    * The accordion item title.
    */
   title?: ReactNode
@@ -173,12 +184,12 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   disabled?: boolean
 
   /**
-   * If true, the Accordion item content should always be mounted.
+   * If true, the accordion item content should always be mounted.
    */
   keepMounted?: boolean
 
   /**
-   * If true, the Accordion item indicator is hidden.
+   * If true, the accordion item indicator is hidden.
    */
   hideIndicator?: boolean
 
@@ -226,7 +237,7 @@ export type AccordionGroupContextValue = {
   toggleExpandedKey: (key: Key) => void
   keepMounted: boolean
   hideIndicator: boolean
-  disabledExpandedKeys: Key[]
+  disabledKeys: Key[]
   disabled: boolean
   indicator?: ReactNode
   motionProps?: HTMLMotionProps<'div'>

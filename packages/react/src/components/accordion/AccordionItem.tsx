@@ -147,7 +147,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     variant,
     toggleExpandedKey,
     expandedKeys,
-    disabledExpandedKeys,
+    disabledKeys,
     disabled: defaultDisabled,
     indicator: defaultIndicator,
     motionProps: defaultMotionProps,
@@ -168,7 +168,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     keepMounted = defaultKeepMounted,
     indicator = defaultIndicator,
     itemKey = defaultKey,
-    disabled = disabledExpandedKeys.includes(itemKey) || defaultDisabled,
+    disabled = disabledKeys.includes(itemKey) || defaultDisabled,
     ...remainingProps
   } = props
 

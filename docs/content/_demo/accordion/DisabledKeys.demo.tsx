@@ -2,7 +2,7 @@ import { Accordion, AccordionItem } from '@nex-ui/react'
 
 export default function App() {
   return (
-    <Accordion disabledExpandedKeys={['2']}>
+    <Accordion disabledKeys={['2']}>
       <AccordionItem itemKey='1' title='Accordion 1'>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
         malesuada lacus ex, sit amet blandit leo lobortis eget.

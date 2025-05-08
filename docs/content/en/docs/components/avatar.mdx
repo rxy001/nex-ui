@@ -1,6 +1,6 @@
 ---
 title: Avatar
-description: Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字母或备用图标。
+description: The avatar component represents users by displaying profile photos, initials, or fallback icons.
 ---
 
 import { Avatar } from '@nex-ui/react'
@@ -8,13 +8,13 @@ import { avatar } from '@/content/_demo'
 
 # Avatar
 
-Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字母或备用图标。
+The avatar component displays user representations through profile images, initials, or alternative icons.
 
 <ComponentLinks component='avatar' />
 
 ---
 
-## 使用
+## Usage
 
 <Example {...avatar.usage} />
 
@@ -36,11 +36,10 @@ Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字�
 
 ### Fallbacks
 
-Avatar 如果加载图片时出现错误，将按以下顺序回退到备用选项：
+The avatar component provides fallback mechanisms in this order when image loading fails:
 
-- `children` 属性
-
-- `alt` 第一个字母
+- `children` prop content
+- First letter of `alt` text
 
 <Example {...avatar.fallback} />
 
@@ -48,7 +47,7 @@ Avatar 如果加载图片时出现错误，将按以下顺序回退到备用选�
 
 ### Avatar Props
 
-Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
+The avatar props inherit the props of `as` (by default, it is the `div` tag).
 
 <PropsTable
   dataSource={[
@@ -56,13 +55,14 @@ Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
       prop: 'children',
       type: 'ReactNode',
       default: '',
-      description: '如果 src 未提供，可在组件内渲染图标或者文本。',
+      description:
+        'Used to render icon or text elements inside the avatar if src is not set. This can be an element, or just a string.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'Avatar 的大小。',
+      description: 'The size of the avatar.',
     },
     {
       prop: 'color',
@@ -78,67 +78,67 @@ Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
         "'gray'",
       ],
       default: "'gray'",
-      description: 'Avatar 的颜色。',
+      description: 'The color of the avatar.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
       default: 'size',
-      description: 'Avatar 的 borderRadius。',
+      description: 'The border radius of the avatar.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: '用于根元素的 className。',
+      description: 'Additional class names to apply to the root element.',
     },
     {
       prop: 'src',
       type: 'string',
-      description: '显示图片的 URL。',
+      description: 'The src attribute for the img element.',
     },
     {
       prop: 'srcSet',
       type: 'string',
-      description: 'HTML img 元素的 srcSet。',
+      description: 'The srcSet attribute for the img element.',
     },
     {
       prop: 'alt',
       type: 'string',
       description:
-        '与 src 或 srcSet 结合使用，为渲染的 img 元素提供一个 alt 属性。',
+        'Used in combination with src or srcSet to provide an alt attribute for the rendered img element.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: '用于转发根元素。',
+      description: 'Ref for forwarding to the root element.',
     },
     {
       prop: 'outlined',
       type: 'boolean',
       default: 'false',
-      description: '是否显示边框。',
+      description: 'If true, adds an outline around the avatar.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'sx',
       type: 'SxProps<AvatarOwnerState>',
-      description: '用于根元素的 sx 属性。',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Avatar Slots 的 className。',
+      description: 'The className used for each slot.',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Avatar Slots 的 props。',
+      description: 'The props used for each slot.',
     },
   ]}
 />
@@ -151,7 +151,7 @@ Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
       slot: 'img',
       class: '.nui-avatar-img',
       component: "'img'",
-      description: 'HTML img 元素。',
+      description: 'Image element slot.',
     },
   ]}
 />

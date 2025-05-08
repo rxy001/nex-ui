@@ -1,0 +1,156 @@
+---
+title: Selectors
+description: Selectors are designed to combine multiple CSS selectors, aiming to apply style rules to page elements more efficiently and flexibly.
+---
+
+import { Box } from '@nex-ui/react'
+import { Callout } from 'nextra/components'
+import { SelectorTable } from '../../../_components'
+
+# Selectors
+
+Selectors are designed to combine multiple CSS selectors, aiming to apply style rules to page elements more efficiently and flexibly.
+
+## Customizing Selectors
+
+Selectors can be defined in the `theme.selectors` section of your theme configuration:
+
+```tsx
+import { defineTheme } from '@nex-ui/react'
+
+const theme = defineTheme({
+  selectors: {
+    hover: '&:not(:disabled):not([data-disabled=true]):hover',
+    active: '&:not(:disabled):not([data-disabled=true]):active',
+  },
+})
+```
+
+The type of the Selector value is `string`.
+
+### TypeScript
+
+Later, if you are using TypeScript, you can extend the custom Aliases through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+
+```tsx
+declare module '@nex-ui/react' {
+  interface SelectorsOverrides {
+    hover: '&:not(:disabled):not([data-disabled=true]):hover'
+    active: '&:not(:disabled):not([data-disabled=true]):active'
+  }
+}
+```
+
+## Using Selectors
+
+After being defined, you can use the custom Selectors through the [`sx`](/docs/styling/sx-prop) property, [`defineRecipe`](/docs/styling/recipes) or [`defineSlotRecipe`](/docs/styling/slot-recipes).
+
+> The Breakpoints object can be used as Selectors by default.
+
+<FlexCenter gap='10'>
+  <Box
+    as='button'
+    sx={{
+      color: 'purple.500',
+      _hover: {
+        color: 'blue.500',
+      },
+      _active: {
+        color: 'green.500',
+      },
+    }}
+  >
+    Clickable
+  </Box>
+  <Box
+    as='button'
+    disabled
+    sx={{
+      color: 'purple.500',
+      _hover: {
+        color: 'blue.500',
+      },
+      _active: {
+        color: 'green.500',
+      },
+    }}
+  >
+    Disabled
+  </Box>
+</FlexCenter>
+
+```tsx
+import { Box, Flex } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Flex gap='10'>
+      <Box
+        as='button'
+        sx={{
+          color: 'purple.500',
+          _hover: {
+            color: 'blue.500',
+          },
+          _active: {
+            color: 'green.500',
+          },
+        }}
+      >
+        Clickable
+      </Box>
+      <Box
+        as='button'
+        disabled
+        sx={{
+          color: 'purple.500',
+          _hover: {
+            color: 'blue.500',
+          },
+          _active: {
+            color: 'green.500',
+          },
+        }}
+      >
+        Disabled
+      </Box>
+    </Flex>
+  )
+}
+```
+
+In the above example, the `color` property is separately defined in three different interaction states (normal state, hover state, active state), which is more in line with the structure of traditional CSS. However, you can also simplify the definition process in another form:
+
+```tsx
+import { Box, Flex } from '@nex-ui/react'
+
+export default function App() {
+  return (
+    <Box
+      as='button'
+      sx={{
+        color: {
+          _DEFAULT: 'purple.500',
+          _hover: 'blue.500',
+          _active: 'green.500',
+        },
+      }}
+    >
+      Clickable
+    </Box>
+  )
+}
+```
+
+In the above example, the styles of `color` in different states are encapsulated into an object to form a **state mapping**, and the styles in different states are distinguished by different keys, which can clearly show the logic of style changes visually. In the scenario of a single style, this method is more flexible.
+
+<Callout>
+  In complex style scenarios, it is more recommended to use the first form that
+  conforms to CSS standards, which is more scalable. As the complexity of the
+  style increases, more styles can be easily added through the same state,
+  making it easy to understand and maintain.
+</Callout>
+
+## Available Default Selectors
+
+<SelectorTable />

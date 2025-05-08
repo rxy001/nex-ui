@@ -1,6 +1,6 @@
 ---
 title: Z-Indexes
-description: Z-Indexes Tokens 是预设的层级数值集合，确保全局层叠顺序可控且一致。
+description: Z-Indexes tokens are a collection of preset layer numerical values, ensuring that the global stacking order is controllable and consistent.
 ---
 
 import { Callout } from 'nextra/components'
@@ -10,17 +10,18 @@ import { defaultConfig } from '@nex-ui/react'
 
 # Z-Indexes
 
-Z-Index Tokens 是预设的层级数值集合，确保全局层叠顺序可控且一致。
+Z-Index tokens are a collection of preset layer numerical values, ensuring that the global stacking order is controllable and consistent.
 
 <Callout type='info'>
   <span className='x:float-left'>
-    默认情况下，Z-Index Tokens 可直接应用于以下属性&nbsp;
+    By default, zIndex tokens can be directly applied to the following
+    properties&nbsp;
   </span>
   <AvailableProps.ZIndexes />
-  <span>。</span>
+  <span>.</span>
 </Callout>
 
-Nex UI 开箱即支持以下 Tokens。
+Nex UI supports the following tokens out of the box.
 
 <TokensTable
   dataSource={map(defaultConfig.tokens.zIndexes, (value, key) => ({

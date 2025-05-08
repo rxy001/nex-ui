@@ -1,42 +1,203 @@
 ---
 title: Switch
-description: The Switch component is used as an alternative between checked and not checked states.
+description: The switch is used to toggle between the selected and unselected states.
 ---
 
 import { $switch } from '@/content/_demo'
 
 # Switch
 
-The Switch component is used as an alternative between checked and not checked states.
+The switch is used to toggle between the selected and unselected states.
 
-<ComponentLinks component='switch' />
+<ComponentLinks component='switch' ariaCompatible />
 
 ## Usage
 
 <Example {...$switch.usage} />
 
-## Disabled
+### Disabled
 
 <Example {...$switch.disabled} />
 
-## Sizes
+### Sizes
 
 <Example {...$switch.sizes} />
 
-## Colors
+### Colors
 
 <Example {...$switch.colors} />
 
-## With Thumb Icons
+### With Thumb Icons
 
 <Example {...$switch.withThumbIcon} />
 
-## With Icons
+### With Icons
 
-You can also add icons to start and end of the switch by using `startIcon` and `endIcon` props.
+You can also add icons at the start and end of the switch by using the `startIcon` and `endIcon` properties.
 
 <Example {...$switch.withIcons} />
 
-## Controlled
+### Controlled
 
 <Example {...$switch.controlled} />
+
+## API
+
+### Switch Props
+
+The switch props inherit the props of `as` (by default, it is the `input` tag).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '',
+      description: 'The label of the switch.',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'The color of the switch.',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'The size of the switch.',
+    },
+    {
+      prop: 'checked',
+      type: 'boolean',
+      description: 'If true, the switch is checked.(controlled)',
+    },
+    {
+      prop: 'defaultChecked',
+      type: 'boolean',
+      description: 'The default checked state.(uncontrolled)',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'If true, the switch is disabled.',
+    },
+    {
+      prop: 'name',
+      type: 'string',
+      description: 'The name of the switch.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
+      prop: 'startIcon',
+      type: 'ReactNode',
+      description: 'The element is placed before the children.',
+    },
+    {
+      prop: 'endIcon',
+      type: 'ReactNode',
+      description: 'The element is placed after the children.',
+    },
+    {
+      prop: 'thumbIcon',
+      type: ['ReactNode', '(state: SwitchOwnerState) => ReactNode'],
+      description: 'The icon to be displayed when the switch is checked.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root element.',
+    },
+    {
+      prop: 'onChange',
+      type: 'function',
+      description:
+        "Handler that is called when the element's checked state changes.",
+    },
+    {
+      prop: 'onCheckedChange',
+      type: '(checked: boolean) => void',
+      description:
+        "Handler that is called when the element's checked state changes.",
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description: 'The component used for the input element.',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProps<SwitchOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### Switch Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'root',
+      class: '.nui-switch-root',
+      component: "'label'",
+      description: 'The root element of the switch.',
+    },
+    {
+      slot: 'track',
+      class: '.nui-switch-track',
+      component: "'span'",
+      description: 'The container for the startIcon, endIcon and thumb.',
+    },
+    {
+      slot: 'startIcon',
+      class: '.nui-switch-start-icon',
+      component: "'span'",
+      description: 'The container for the start icon inside the switch.',
+    },
+    {
+      slot: 'endIcon',
+      class: '.nui-switch-end-icon',
+      component: "'span'",
+      description: 'The container for the end icon inside the switch.',
+    },
+    {
+      slot: 'thumb',
+      class: '.nui-switch-thumb',
+      component: "'span'",
+      description: 'The slider inside the switch.',
+    },
+    {
+      slot: 'label',
+      class: '.nui-switch-label',
+      component: "'span'",
+      description: 'The label of the switch.',
+    },
+  ]}
+/>

@@ -1,6 +1,6 @@
 ---
 title: Checkbox
-description: Checkbox 允许用户从一个集合中选择一个或多个项目。
+description: The checkbox allows users to select one or more items from a collection.
 ---
 
 import { checkbox } from '@/content/_demo'
@@ -8,11 +8,11 @@ import { type } from 'os'
 
 # Checkbox
 
-Checkbox 允许用户从一个集合中选择一个或多个项目。
+The checkbox allows users to select one or more items from a collection.
 
 <ComponentLinks component='checkbox' ariaCompatible />
 
-## 使用
+## Usage
 
 <Example {...checkbox.usage} />
 
@@ -52,14 +52,14 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 
 ### Checkbox Props
 
-Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
+The checkbox props inherit the props of `as` (by default, it is the `input` tag).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'Checkbox 的标签。',
+      description: 'The label of the checkbox.',
     },
     {
       prop: 'color',
@@ -75,92 +75,95 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
         "'gray'",
       ],
       default: "'blue'",
-      description: 'Checkbox 的颜色。',
+      description: 'The color of the checkbox.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'Checkbox 的大小。',
+      description: 'The size of the checkbox.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'"],
       default: 'size',
-      description: 'Checkbox 的 borderRadius。',
+      description: 'The border radius of the checkbox.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'Checkbox 是否禁用。',
+      description: 'If true, the checkbox is disabled.',
     },
     {
       prop: 'checked',
       type: 'boolean',
-      description: 'Checkbox 是否选中。',
+      description: 'If true, the checkbox is checked.(controlled)',
     },
     {
       prop: 'defaultChecked',
       type: 'boolean',
-      description: 'Checkbox 是否默认选中。（非受控）',
+      description: 'The default checked state.(uncontrolled)',
     },
     {
       prop: 'icon',
       type: 'ReactNode | (ownerState) => ReactNode',
-      description: 'Checkbox 选中时的图标。',
+      description: 'The icon to be displayed when the checkbox is checked.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: '用于根元素的 className。',
+      description: 'Additional class names to apply to the root element.',
     },
     {
       prop: 'name',
       type: 'string',
-      description: 'Checkbox 的 name。',
+      description:
+        'The name of the CheckboxGroup, used when submitting an HTML form.',
     },
     {
       prop: 'value',
       type: 'string',
-      description: 'Checkbox 的 value。',
+      description: 'The value of the checkbox.(controlled)',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: '用于转发 Checkbox 内的 input。',
+      description: 'Ref for forwarding to the root element.',
     },
     {
       prop: 'onChange',
       type: '(event: ChangeEvent<HTMLInputElement>) => void',
-      description: '当 Checkbox 状态发生变化时会触发该回调函数。',
+      description:
+        "Handler that is called when the element's checked state changes.",
     },
     {
       prop: 'onCheckedChange',
       type: '(checked: boolean) => void',
-      description: '当 Checkbox 状态发生变化时会触发该回调函数。',
+      description:
+        "Handler that is called when the element's checked state changes.",
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'input'",
-      description:
-        '用于 Checkbox 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      description: 'The component used for the input element.',
     },
     {
       prop: 'sx',
       type: 'SxProps<CheckboxOwnerState>',
-      description: '用于根元素的 sx 属性。',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Checkbox Slots 的 className。',
+      description: 'The className used for each slot.',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Checkbox Slots 的 props。',
+      description: 'The props used for each slot.',
     },
   ]}
 />
@@ -173,22 +176,21 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
       slot: 'root',
       class: '.nui-checkbox-root',
       component: "'label'",
-      description: 'Checkbox 的根元素。',
+      description: 'The root element of the checkbox.',
     },
     {
       slot: 'icon',
       class: '.nui-checkbox-icon',
       component: "'span'",
-      description: 'Checkbox 内的 icon 容器。',
+      description: 'The container of the icon inside the checkbox.',
     },
     {
       slot: 'label',
       class: '.nui-checkbox-label',
       component: "'span'",
-      description: 'Checkbox 的标签。',
+      description: 'The label of the checkbox.',
     },
-
-]}
+  ]}
 />
 
 ### Checkbox Group Props
@@ -198,17 +200,18 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'CheckboxGroup 的子元素。',
+      description: 'The checkboxes items.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
-      description: 'CheckboxGroup 是否禁用。',
+      description: 'If true, the checkboxes are disabled.',
     },
     {
       prop: 'name',
       type: ['string', 'number'],
-      description: 'CheckboxGroup 的 name。',
+      description:
+        'The name of the CheckboxGroup, used when submitting an HTML form.',
     },
     {
       prop: 'color',
@@ -224,34 +227,34 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
         "'gray'",
       ],
       default: "'blue'",
-      description: 'CheckboxGroup 的颜色。',
+      description: 'The color of the checkboxes.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'CheckboxGroup 的大小。',
+      description: 'The size of the checkboxes.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
       default: 'size',
-      description: 'CheckboxGroup 的 BorderRadius。',
+      description: 'The border radius of the checkboxes.',
     },
     {
       prop: 'value',
       type: ['T extends (string | number)[]'],
-      description: 'CheckboxGroup 指定选中的值。',
+      description: 'The current selected values. (controlled)',
     },
     {
       prop: 'defaultValue',
       type: ['T extends (string | number)[]'],
-      description: 'CheckboxGroup 默认选中的值。',
+      description: 'The default checked values. (uncontrolled)',
     },
     {
       prop: 'onValueChange',
       type: '(value: T[]) => void',
-      description: '当 CheckboxGroup 的值发生变化时触发回调函数。',
+      description: 'Handler that is called when the value changes.',
     },
   ]}
 />

@@ -1,17 +1,17 @@
 ---
 title: Input
-description: Input 是一个允许用户输入文本的组件。
+description: The input is a component that allows users to enter text.
 ---
 
 import { input } from '@/content/_demo'
 
 # Input
 
-Input 是一个允许用户输入文本的组件。
+The input is a component that allows users to enter text.
 
 <ComponentLinks component='input' />
 
-## 使用
+## Usage
 
 <Example {...input.usage} />
 
@@ -37,31 +37,27 @@ Input 是一个允许用户输入文本的组件。
 
 ### Label Placements
 
-可以设置 `labelPlacement` 属性为 `inside`、`outside`、`float-outside` 或 `float-inside` 来改变 label 的位置。
+The `labelPlacement` property can be set to `inside`, `outside`, `float-outside` or `float-inside` to change the position of the label.
 
 <Example {...input.labelPlacements} />
 
 ### Clear Button
 
-如果传递了 `clearable` 属性，将在输入的末尾有一个 clear 按钮，仅在有值时是可见的。
+If the `clearable` property is passed, there will be a clear button at the end of the input, which is only visible when there is a value.
 
 <Example {...input.clearable} />
 
 ### Prefix & Suffix
 
-可以设置 `prefix` 和 `suffix` 属性来添加前缀和后缀。
+The `prefix` and `suffix` properties can be set to add a prefix and a suffix.
 
 <Example {...input.icons} />
-
-### Invalid
-
-<Example {...input.invalid} />
 
 ## API
 
 ### Input Props
 
-Input Props 继承 `as` (默认为 `input` 标签) 的 Props。
+The input props inherit the props of `as` (by default, it is the `input` tag).
 
 <PropsTable
   dataSource={[
@@ -79,30 +75,30 @@ Input Props 继承 `as` (默认为 `input` 标签) 的 Props。
         "'gray'",
       ],
       default: "'blue'",
-      description: 'Input 的颜色。',
+      description: 'The color of the input.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'Input 的大小。',
+      description: 'The size of the input.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
       default: 'size',
-      description: 'Input 的 BorderRadius。',
+      description: 'The border radius of the input.',
     },
     {
       prop: 'variant',
       type: ["'filled'", "'outlined'", "'underlined'"],
       default: "'outlined'",
-      description: 'Input 的外观样式。',
+      description: 'The input appearance style.',
     },
     {
       prop: 'placeholder',
       type: 'string',
-      description: 'Input 的占位符。',
+      description: 'The placeholder of the input.',
     },
     {
       prop: 'type',
@@ -121,114 +117,114 @@ Input Props 继承 `as` (默认为 `input` 标签) 的 Props。
         "'time'",
       ],
       default: "'text'",
-      description: 'Input 的类型。',
+      description: 'The type of the input element.',
     },
     {
       prop: 'value',
       type: 'string',
-      description: 'Input 的值。',
+      description: 'The value of the input. (controlled)',
     },
     {
       prop: 'defaultValue',
       type: 'string',
-      description: 'Input 的默认值。（非受控）',
+      description: 'The default value of the input. (uncontrolled)',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'Input 是否禁用。',
+      description: 'If true, the input is disabled.',
     },
     {
       prop: 'name',
       type: 'string',
-      description: 'Input 的 name。',
+      description: 'The name of the input.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: '用于根元素的 className。',
+      description: 'Additional class names to apply to the root element.',
     },
     {
       prop: 'prefix',
       type: 'ReactNode',
-      description: 'Input 的前缀。',
+      description: 'The element is placed before the input.',
     },
     {
       prop: 'suffix',
       type: 'ReactNode',
-      description: 'Input 的后缀。',
+      description: 'The element is placed after the input.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: '用于转发 Input 内的 input',
+      description: 'Ref for forwarding to the root element.',
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       default: 'false',
-      description: '是否占满父元素的宽度。',
+      description: 'If true, the input takes the full width of its parent.',
     },
     {
       prop: 'label',
       type: 'ReactNode',
-      description: 'Input 的 label。',
+      description: 'The label of the input.',
     },
     {
       prop: 'labelPlacement',
       type: ["'inside'", "'outside'", "'float-outside'", "'float-inside'"],
       default: "'float-outside'",
-      description: 'Input 的 label 的位置。',
+      description: 'The position of the label.',
     },
     {
       prop: 'invaild',
       type: 'boolean',
       default: 'false',
-      description: 'Input 是否无效。',
+      description: 'If true, the input is invalid.',
     },
     {
       prop: 'clearable',
       type: 'boolean',
       default: 'false',
-      description: '是否显示清除按钮。',
+      description: 'If true, the input has a clear button.',
     },
     {
       prop: 'onChange',
       type: 'function',
-      description: '当 Input 的值发生变化时会触发该回调函数。',
+      description: "Handler that is called when the element's value changes.",
     },
     {
       prop: 'onValueChange',
       type: '(value: string) => void',
-      description: '当 Input 的值发生变化时会触发该回调函数。',
+      description: "Handler that is called when the element's value changes.",
     },
     {
       prop: 'onClear',
       type: 'function',
-      description: '当 Cleat 按钮被点击时触发该回调函数。',
+      description: 'Handler that is called when the clear button is clicked.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'input'",
-      description:
-        '用于 Input 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      description: 'The component used for the root node.',
     },
     {
       prop: 'sx',
       type: 'SxProps<SwitchOwnerState>',
-      description: '用于根元素的 sx 属性。',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'classes',
       type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Input Slots 的 className。',
+      description: 'The className used for each slot.',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Input Slots 的 props。',
+      description: 'The props used for each slot.',
     },
   ]}
 />
@@ -241,31 +237,31 @@ Input Props 继承 `as` (默认为 `input` 标签) 的 Props。
       slot: 'root',
       class: '.nui-input-root',
       component: "'div'",
-      description: 'Input 的根元素。',
+      description: 'The root element of the input.',
     },
     {
       slot: 'label',
       class: '.nui-input-label',
       component: "'label'",
-      description: 'Input 的 label。',
+      description: 'The label of the input.',
     },
     {
       slot: 'clearBtn',
       class: '.nui-input-clear-btn',
       component: 'Button',
-      description: 'Input 的清除按钮。',
+      description: 'The clear button of the input.',
     },
     {
       slot: 'prefix',
       class: '.nui-input-prefix',
       component: "'span'",
-      description: 'Input 的前缀。',
+      description: 'The prefix of the input.',
     },
     {
       slot: 'suffix',
       class: '.nui-input-suffix',
       component: "'span'",
-      description: 'Input 的后缀。',
+      description: 'The suffix of the input.',
     },
   ]}
 />

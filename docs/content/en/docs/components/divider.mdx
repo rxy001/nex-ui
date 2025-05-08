@@ -1,17 +1,17 @@
 ---
 title: Divider
-description: Divider 是一种用于分隔页面中内容的组件。
+description: The divider is a component used to separate content on the page.
 ---
 
 import { divider } from '@/content/_demo'
 
 # Divider
 
-Divider 是一种用于分隔页面中内容的组件。
+The divider is a component used to separate content on the page.
 
 <ComponentLinks component='divider' />
 
-## 使用
+## Usage
 
 <Example {...divider.usage} />
 
@@ -19,37 +19,37 @@ Divider 是一种用于分隔页面中内容的组件。
 
 ### Divider Props
 
-Divider Props 继承 `as` (默认为 `div` 标签) 的 Props。
+The divider props inherit the props of `as` (by default, it is the `div` tag).
 
 <PropsTable
   dataSource={[
     {
       prop: 'orientation',
-      description: 'Divider 的方向。',
+      description: 'The orientation of the divider.',
       type: ["'horizontal'", "'vertical'"],
       default: "'horizontal'",
     },
     {
       prop: 'className',
-      description: '用于根元素的 className。',
+      description: 'Additional class names to apply to the root element.',
       type: 'ClassValue',
     },
     {
       prop: 'ref',
-      description: '用于转发根元素。',
+      description: 'Ref for forwarding to the root element.',
       type: 'Ref',
     },
     {
       prop: 'sx',
       type: 'SxProps<DividerOwnerState>',
-      description: '用于根元素的 sx 属性。',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      description: 'The component used for the root node.',
     },
   ]}
 />

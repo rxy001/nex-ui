@@ -1,17 +1,17 @@
 ---
 title: Semantic Tokens
-description: Semantic Tokens 专为特定上下文使用而设计的 Tokens。与 Tokens 不同，其更侧重于传达内容的语义信息。
+description: Semantic tokens are designed for use in specific contexts. Different from Tokens, they focus more on conveying semantic information of the content.
 ---
 
 import { Callout } from 'nextra/components'
 
 # Semantic Tokens
 
-Semantic Tokens 专为特定上下文使用而设计的 Tokens。与 Tokens 不同，其更侧重于传达内容的语义信息。
+Semantic tokens are designed for use in specific contexts. Different from Tokens, they focus more on conveying semantic information of the content.
 
-## 自定义 Semantic Tokens
+## Customizing Semantic Tokens
 
-Semantic Tokens 可在您的主题配置 `theme.semanticTokens` 部分定义：
+Semantic tokens can be defined in the `theme.semanticTokens` section of your theme configuration:
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -28,17 +28,18 @@ const theme = defineTheme({
 ```
 
 <Callout>
-  若 `semanticTokens` 与 `tokens`
-  中存在名称重复的情况，`semanticTokens`的定义将会覆盖 `tokens` 里同名的定义。
+  If there are names that repeat between `semanticTokens` and `tokens`, the
+  definitions in `semanticTokens` will override the definitions with the same
+  names in `tokens`.
 </Callout>
 
-在大多数情况下，Semantic Tokens 的值可以直接引用现有的 Tokens。
+In most cases, the values of Semantic Tokens can directly reference existing Tokens.
 
-> 要在 Semantic Tokens 中引用一个 Token ，请使用 \{} 语法。
+> To reference a Token in Semantic Tokens, use the `{}` syntax.
 >
-> 若引用了 Semantic Token，该定义必须在所引用 Semantic Token 定义之后。 如下述 demo 中 borders.button.sm 必须定义在 colors 之下。
+> If a Semantic Token is referenced, its definition must come after the definition of the referenced Semantic Token. For example, `borders.button.sm` in the following demo must be defined after `colors`.
 >
-> 在 Nex UI 系统中 Tokens 执行于 Semantic Tokens 之前，因此可正常引用。
+> Tokens in the Nex UI system are executed before Semantic Tokens, so they can be referenced normally.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -59,7 +60,7 @@ const theme = defineTheme({
     },
     borders: {
       button: {
-        // borders.button.sm 必须定义在 colors 之后。
+        // borders.button.sm must be defined after colors.
         sm: '1px solid {colors.danger}',
       },
     },
@@ -69,8 +70,7 @@ const theme = defineTheme({
 
 ### TypeScript
 
-之后，如果您正在使用 TypeScript，可通过 [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)
-扩展自定义的 SemanticTokens。
+Later, if you are using TypeScript, you can extend the custom SemanticTokens through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
 ```tsx
 declare module '@nex-ui/react' {
@@ -81,13 +81,13 @@ declare module '@nex-ui/react' {
 }
 ```
 
-## 使用 Semantic Tokens
+## Using Semantic Tokens
 
-使用方式同 [Tokens](/docs/customization/tokens) 一致。
+The usage is the same as that of [Tokens](/docs/customization/tokens).
 
-## 深色模式
+## Dark Mode
 
-Semantic Tokens 也可以根据浅色或深色模式等条件进行变化。 Nex UI 组件的深色主题就是基于此方式实现。
+Semantic Tokens can also change according to conditions such as light or dark mode. The dark theme of Nex UI components is implemented in this way.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -105,9 +105,9 @@ const theme = defineTheme({
 })
 ```
 
-## 嵌套的 Semantic Tokens
+## Nested Semantic Tokens
 
-Semantic Tokens 可以嵌套以创建层次结构。这在将 Semantic Tokens 组合在一起时，非常有用。
+Semantic Tokens can be nested to create a hierarchical structure. This is very useful when combining Semantic Tokens.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -126,10 +126,10 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  使用 `DEFAULT` 键定义嵌套 Semantic Token 的默认值。
+  Use the `DEFAULT` key to define the default value of a nested Semantic Token.
 </Callout>
 
-由于使用 `DEFAULT` 键定义了 `bg` 的默认值，这允许您使用 `bg` Semantic Token：
+Since the default value of `bg` is defined using the `DEFAULT` key, you can use the `bg` Semantic Token like this:
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -160,7 +160,7 @@ export default function App() {
 }
 ```
 
-**当然，在嵌套结构中使用 `_dark` 等条件也是可以的。**
+**Of course, you can also use conditions like `_dark` in a nested structure.**
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -185,8 +185,8 @@ const theme = defineTheme({
 })
 ```
 
-`_DEFAULT` 与 `DEFAULT` 不同，`_DEFAULT` 表示在默认条件下的样式。
+`_DEFAULT` is different from `DEFAULT`. `_DEFAULT` represents the style under the default condition.
 
-## Semantic Tokens 类型
+## Types of Semantic Tokens
 
-类型同 [Tokens](/docs/customization/tokens) 一致。
+The types are the same as those of [Tokens](/docs/customization/tokens).

@@ -1,1 +1,225 @@
-## Button
+---
+title: Button
+description: The button component enables users to perform actions and make decisions with a single click.
+---
+
+import { Button } from '@nex-ui/react'
+import { button } from '@/content/_demo'
+
+# Button
+
+The button component allows users to trigger actions and make selections through click interactions.
+
+<ComponentLinks component='button' ariaCompatible />
+
+---
+
+## Usage
+
+<Example {...button.usage} />
+
+### Disabled
+
+<Example {...button.disabled} />
+
+### Sizes
+
+<Example {...button.sizes} />
+
+### Radius
+
+<Example {...button.radius} />
+
+### Colors
+
+<Example {...button.colors} />
+
+### Variants
+
+<Example {...button.variants} />
+
+### Loading
+
+Enable the `loading` prop to display a spinner indicator within the button.
+
+<Example {...button.loading} />
+
+Customize the loading indicator using the `spinner` prop.
+
+### With Icons
+
+Add icons to the button using `startIcon` or `endIcon` props.
+
+<Example {...button.withIcons} />
+
+### Icon Only
+
+Enable `iconOnly` prop for square-shaped icon-only buttons without text.
+
+<Example {...button.iconOnly} />
+
+## API
+
+### Button Props
+
+The button props inherit the props of `as` (by default, it is the `button` tag).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '',
+      description: 'The content of the button.',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'The color of the button.',
+    },
+    {
+      prop: 'variant',
+      type: ["'solid'", "'outlined'", "'text'"],
+      default: "'solid'",
+      description: 'The button appearance style.',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'The size of the button.',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
+      default: 'size',
+      description: 'The border radius of the button.',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, the button is disabled.',
+    },
+    {
+      prop: 'loading',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'If true, the loading indicator is visible and the button is disabled.',
+    },
+    {
+      prop: 'fullWidth',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, the button takes the full width of its parent.',
+    },
+    {
+      prop: 'iconOnly',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, the button has the same width and height.',
+    },
+    {
+      prop: 'startIcon',
+      type: 'ReactNode',
+      description: 'The element is placed before the children.',
+    },
+    {
+      prop: 'endIcon',
+      type: 'ReactNode',
+      description: 'The element is placed after the children.',
+    },
+    {
+      prop: 'spinner',
+      type: 'ReactNode',
+      description: 'Spinner to display when loading.',
+    },
+    {
+      prop: 'spinnerPlacement',
+      type: ["'start'", "'end'"],
+      default: "'start'",
+      description: 'The spinner placement.',
+    },
+    {
+      prop: 'disableRipple',
+      type: 'boolean',
+      description: 'If true, the ripple effect is disabled.',
+    },
+    {
+      prop: 'href',
+      type: 'string',
+      description:
+        'The URL to link to when the button is clicked. If defined, an a element will be used as the root node.',
+    },
+    {
+      prop: 'target',
+      type: 'string',
+      description: 'Specifies where to display the linked URL.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root element.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'button'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProps<ButtonOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### Button Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'startIcon',
+      class: '.nui-btn-start-icon',
+      component: "'span'",
+      description:
+        'The container for the icon before the child element of the button.',
+    },
+    {
+      slot: 'endIcon',
+      class: '.nui-btn-end-icon',
+      component: "'span'",
+      description:
+        'The container for the icon after the child element of the button.',
+    },
+  ]}
+/>

@@ -1,0 +1,31 @@
+---
+title: Radii
+description: Radius tokens are a set of preset corner radius values, ensuring consistent rounded corner effects for UI elements (such as buttons, cards, input boxes, etc.).
+---
+
+import { Callout } from 'nextra/components'
+import { AvailableProps, TokensTable } from '../../../_components'
+import { map } from '@nex-ui/utils'
+import { defaultConfig } from '@nex-ui/react'
+
+# Radii
+
+Radius tokens are a set of preset corner radius values, ensuring consistent rounded corner effects for UI elements (such as buttons, cards, input boxes, etc.).
+
+<Callout type='info'>
+  <span className='x:float-left'>
+    By default, radius tokens can be directly applied to the following
+    properties&nbsp;
+  </span>
+  <AvailableProps.Radii />
+  <span>.</span>
+</Callout>
+
+Nex UI supports the following tokens out of the box.
+
+<TokensTable
+  dataSource={map(defaultConfig.tokens.radii, (value, key) => ({
+    token: `radii.${key}`,
+    value,
+  }))}
+/>
