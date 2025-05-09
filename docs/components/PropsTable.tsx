@@ -9,7 +9,7 @@ import {
   Tr,
   HighlightItem,
   DefaultItem,
-} from './Table'
+} from './table'
 
 type PropsTableProps = {
   dataSource: {

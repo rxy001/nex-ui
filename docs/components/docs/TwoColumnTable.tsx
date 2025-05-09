@@ -1,4 +1,4 @@
-import { Table, Tbody, Td, Th, Thead, Tr } from '@/components/Table'
+import { Table, Tbody, Td, Th, Thead, Tr } from '../table'
 import clsx from 'clsx'
 
 type Column = { title: string; dataIndex: string; className?: string }

@@ -8,7 +8,7 @@ import {
   Tr,
   DefaultItem,
   HighlightItem,
-} from './Table'
+} from './table'
 
 type SlotsTableProps = {
   dataSource: {

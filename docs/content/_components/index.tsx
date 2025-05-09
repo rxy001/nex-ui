@@ -1,7 +1,0 @@
-export * from './AliasTable'
-export * from './BreakpointTable'
-export * from './ScaleTable'
-export * from './SelectorTable'
-export * from './ColorsSet'
-export * from './AvailableProps'
-export * from './TokensTable'
