@@ -2,7 +2,7 @@ import { Button } from '@nex-ui/react'
 import Link from 'next/link'
 import type { ElementType, ReactNode } from 'react'
 import type { ButtonProps } from '@nex-ui/react'
-import TsIcon from '@/icons/typescript.svg'
+import AccessibilityIcon from '@/icons/accessibility.svg'
 import { BoltOutlined, MoonOutlined, MagicOutlined } from '@nex-ui/icons'
 import { Theme, Style, DarkMode } from './features'
 import type { ThemeProps } from './features'
@@ -25,6 +25,7 @@ type HomePageProps = {
     darkMode?: Content
     customization?: Content
     learnMore?: string
+    accessibility?: Content
   } & ThemeProps['translations']
 }
 
@@ -92,9 +93,15 @@ export function HomePage({ translations }: HomePageProps) {
         <Card icon={<BoltOutlined />} title={translations?.dx?.title}>
           {translations?.dx?.desc}
         </Card>
-        <Card icon={<TsIcon />} title={translations?.ts?.title}>
-          {translations?.ts?.desc}
+        <Card
+          icon={<AccessibilityIcon />}
+          title={translations?.accessibility?.title}
+        >
+          {translations?.accessibility?.desc}
         </Card>
+        {/* <Card icon={<TsIcon />} title={translations?.ts?.title}>
+          {translations?.ts?.desc}
+        </Card> */}
       </section>
       <section className='x:flex x:flex-col x:gap-[150px]'>
         <div className='x:flex x:flex-col x:gap-5'>
