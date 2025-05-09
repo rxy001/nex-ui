@@ -349,6 +349,21 @@ export default function Example() {
 
 在 [深色模式](/docs/customization/dark-mode) 了解更多信息。
 
+## Color Opacity Modifier
+
+当 CSS 属性在 `scales` 中定义为 `colors` 时，不论属性值是原始颜色还是 ColorTokens，您都可以使用 `opacity` 修饰符来设置颜色的透明度。
+
+例如 `color: 'blue.500'` 可以通过 `color: 'blue.500/50'` 来设置透明度为 50% 的蓝色。
+
+`````tsx
+<Box
+  sx={{
+    color: 'blue.500/0.5',
+    bg: 'orange/0.5',
+  }}
+>
+````tsx
+
 ## `colorPalette` 属性
 
 `colorPalette` 属性可以创建一个颜色占位符，以便更好地进行主题设置和自定义。
@@ -392,7 +407,7 @@ export default function Example() {
 >
   Hello World
 </Box>
-```
+`````
 
 ## Token 引用语法
 

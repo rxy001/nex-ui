@@ -23,12 +23,20 @@ function includeColorPalette(value: string) {
   return colorPaletteRegExp.test(value)
 }
 
+function includeColorOpacityModifier(value: string) {
+  return /\//.test(value)
+}
+
 function replaceColorPalette(colorPalette: string | undefined, value: string) {
   if (!colorPalette) {
     console.error('[Nex UI] colorPalette: The color palette was not provided.')
     return value
   }
   return value.replace('colorPalette', colorPalette)
+}
+
+function colorMix(color: string, percent: string) {
+  return `color-mix(in srgb, ${color} ${percent}%, transparent)`
 }
 
 export const createNormalize = ({
@@ -47,8 +55,8 @@ export const createNormalize = ({
   }) {
     const matches = extractTokenPlaceholders(originalTokenName)
 
-    // 替换 token reference syntax
     if (matches.length) {
+      // Handle token reference syntax replacements
       return reduce(
         matches,
         (acc: string, match: RegExpExecArray) => {
@@ -58,29 +66,51 @@ export const createNormalize = ({
           if (includeColorPalette(tokenName)) {
             tokenName = replaceColorPalette(colorPalette, tokenName)
           }
+
           const token = getToken(tokenName)
-          if (token) {
-            return acc.replace(placeholder, token.value)
+          if (!token) {
+            console.error(
+              '[Nex UI] token reference syntax: An unknown token %s exists in the token reference syntax.',
+              tokenName,
+            )
+            return acc.replace(placeholder, tokenName)
           }
-          console.error(
-            '[Nex UI] token reference syntax: An unknown token %s exists in the token reference syntax.',
-            tokenName,
-          )
-          return acc.replace(placeholder, tokenName)
+
+          return acc.replace(placeholder, token.value)
         },
         originalTokenName,
       )
     }
 
-    let tokenName = pathToTokenName([category, originalTokenName])
+    let tokenName = originalTokenName
+    let opacity: string | null = null
+    if (category === 'colors') {
+      if (includeColorOpacityModifier(tokenName)) {
+        const pair = tokenName.split('/')
 
-    // 替换 colorPalette
-    if (category === 'colors' && includeColorPalette(tokenName)) {
-      tokenName = replaceColorPalette(colorPalette, tokenName)
+        const percent = Number(pair[1])
+        if (
+          pair.length === 2 &&
+          !isNaN(percent) &&
+          percent >= 0 &&
+          percent <= 100
+        ) {
+          ;[tokenName, opacity] = pair
+        }
+      }
+
+      if (includeColorPalette(tokenName)) {
+        tokenName = replaceColorPalette(colorPalette, tokenName)
+      }
     }
 
-    const token = getToken(tokenName)
-    return token?.value ?? originalTokenName
+    const token = getToken(pathToTokenName([category, tokenName]))
+
+    if (opacity) {
+      return colorMix(token?.value ?? tokenName, opacity)
+    }
+
+    return token?.value ?? tokenName
   }
 
   function normalze({ propKey, propValue, colorPalette }: NormalizeConfig) {
@@ -93,7 +123,7 @@ export const createNormalize = ({
 
       let newPropValue = propValue
 
-      // 只支持 string，避免使用 number 时也会映射到 token
+      // Only string values are supported. Avoid using numbers, as they may inadvertently map to tokens.
       if (category && isString(newPropValue)) {
         newPropValue = normalizePropValue({
           colorPalette,
