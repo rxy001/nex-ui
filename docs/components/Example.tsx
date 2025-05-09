@@ -2,7 +2,7 @@
 
 import { Tabs } from 'nextra/components'
 import { useMemo, type ReactNode } from 'react'
-import { Sandpack } from './Sandpack'
+import { Sandpack } from './sandpack'
 
 type ExampleProps = {
   code: string
