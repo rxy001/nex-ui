@@ -56,11 +56,11 @@
 
 25. createTokens 延迟生成含有 token 引用语法的 token，以规避 token 定义顺序的限制
 
-26. color token 支持 opacity 修饰符
+<!-- 26. color token 支持 opacity 修饰符 -->
 
 27. 优化 useSlotProps 属性优先级，例如 accordionItems.trigger 的 tabIndex
 
-28. 将 storybook 改为 sb，是因为 storybook cli 会将其识别为 storybook 包，导致服务启动失败。
+<!-- 28. 将 storybook 改为 sb，是因为 storybook cli 会将其识别为 storybook 包，导致服务启动失败。 -->
 
 <!-- 29. 修改 recipes 中标签选择器 -->
 

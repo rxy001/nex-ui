@@ -447,6 +447,37 @@ Moreover, you can also use `colorPalette` in the Token reference syntax:
 
 At this time, the `border` will apply the values corresponding to `borderWidths.sm` and `colors.colorPalette.500`.
 
+## Color Opacity Modifier
+
+When a CSS property is defined as the `colors` type within `scales`, whether a color value is used directly or a color token is referenced, the `opacity` modifier can be flexibly used to set the color transparency.
+
+This feature also applies to the token reference syntax. When referencing color token, the `opacity` modifier can be conveniently used to achieve diverse visual effect adjustments.
+
+For example, `color: 'blue.500/50'` sets the transparency to 50%.
+
+```tsx
+<Box
+  sx={{
+    color: 'blue.500/50',
+    bg: 'orange/50',
+    border: '1px solid {colors.colorPalette.500/50}',
+    borderTopColor: 'colorPalette.primary/90',
+    colorPalette: 'red',
+  }}
+>
+  Box
+</Box>
+
+/**
+ * {
+ *   color: color-mix(in srgb, var(--nui-colors-blue-500) 50%, transparent);
+ *   background-color: color-mix(in srgb, orange 50%, transparent);
+ *   border: 1px solid color-mix(in srgb, var(--nui-colors-red-500) 50%, transparent);
+ *   border-top-color: color-mix(in srgb, var(--nui-colors-red-primary) 90%, transparent);
+ * }
+ **/
+```
+
 ## Array Values
 
 Array types are useful when you want to partially override some styles in the former index:
