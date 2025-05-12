@@ -23,6 +23,10 @@ function includeColorPalette(value: string) {
   return colorPaletteRegExp.test(value)
 }
 
+function includeColorOpacityModifier(value: string) {
+  return /\//.test(value)
+}
+
 function replaceColorPalette(colorPalette: string | undefined, value: string) {
   if (!colorPalette) {
     console.error('[Nex UI] colorPalette: The color palette was not provided.')
@@ -31,56 +35,56 @@ function replaceColorPalette(colorPalette: string | undefined, value: string) {
   return value.replace('colorPalette', colorPalette)
 }
 
+function colorMix(color: string, percent: string) {
+  return `color-mix(in srgb, ${color} ${percent}%, transparent)`
+}
+
 export const createNormalize = ({
   getPropertiesByAlias,
   getCategoryByProperty,
   getToken,
 }: CreateNormalizeConfig) => {
   function normalizePropValue({
-    tokenName: originalTokenName,
+    propValue: originalPropValue,
     category,
     colorPalette,
   }: {
-    tokenName: string
+    propValue: string
     category: TokenCategory
     colorPalette?: string
   }) {
-    const matches = extractTokenPlaceholders(originalTokenName)
+    let propValue = originalPropValue
+    let opacity = null
 
-    // 替换 token reference syntax
-    if (matches.length) {
-      return reduce(
-        matches,
-        (acc: string, match: RegExpExecArray) => {
-          const placeholder = match[0]
-          let tokenName = match[1]
+    if (category === 'colors') {
+      if (includeColorOpacityModifier(propValue)) {
+        const pair = propValue.split('/')
 
-          if (includeColorPalette(tokenName)) {
-            tokenName = replaceColorPalette(colorPalette, tokenName)
-          }
-          const token = getToken(tokenName)
-          if (token) {
-            return acc.replace(placeholder, token.value)
-          }
-          console.error(
-            '[Nex UI] token reference syntax: An unknown token %s exists in the token reference syntax.',
-            tokenName,
-          )
-          return acc.replace(placeholder, tokenName)
-        },
-        originalTokenName,
-      )
+        const percent = Number(pair[1])
+        if (
+          pair.length === 2 &&
+          !isNaN(percent) &&
+          percent >= 0 &&
+          percent <= 100
+        ) {
+          ;[propValue, opacity] = pair
+        }
+      }
+
+      if (includeColorPalette(propValue)) {
+        propValue = replaceColorPalette(colorPalette, propValue)
+      }
     }
 
-    let tokenName = pathToTokenName([category, originalTokenName])
-
-    // 替换 colorPalette
-    if (category === 'colors' && includeColorPalette(tokenName)) {
-      tokenName = replaceColorPalette(colorPalette, tokenName)
-    }
+    const tokenName = pathToTokenName([category, propValue])
 
     const token = getToken(tokenName)
-    return token?.value ?? originalTokenName
+
+    if (opacity) {
+      return colorMix(token?.value ?? propValue, opacity)
+    }
+
+    return token?.value ?? propValue
   }
 
   function normalze({ propKey, propValue, colorPalette }: NormalizeConfig) {
@@ -89,20 +93,44 @@ export const createNormalize = ({
     const properties = getPropertiesByAlias(propKey) ?? [propKey]
 
     forEach(properties, (property: string) => {
-      const category = getCategoryByProperty(property)
+      if (isString(propValue)) {
+        // Only string values are supported. Avoid using numbers, as they may inadvertently map to tokens.
 
-      let newPropValue = propValue
+        const matches = extractTokenPlaceholders(propValue)
+        if (matches.length) {
+          // Handle token reference syntax replacements
+          result[property] = reduce(
+            matches,
+            (acc: string, match: RegExpExecArray) => {
+              const placeholder = match[0]
+              const [category, ...rest] = match[1].split('.')
+              return acc.replace(
+                placeholder,
+                normalizePropValue({
+                  colorPalette,
+                  category: category as TokenCategory,
+                  propValue: rest.join('.'),
+                }),
+              )
+            },
+            propValue,
+          )
+          return
+        }
 
-      // 只支持 string，避免使用 number 时也会映射到 token
-      if (category && isString(newPropValue)) {
-        newPropValue = normalizePropValue({
-          colorPalette,
-          category,
-          tokenName: newPropValue,
-        })
+        const category = getCategoryByProperty(property)
+
+        if (category) {
+          result[property] = normalizePropValue({
+            colorPalette,
+            category,
+            propValue,
+          })
+          return
+        }
       }
 
-      result[property] = newPropValue
+      result[property] = propValue
     })
     return result
   }

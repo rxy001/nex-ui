@@ -349,7 +349,7 @@ export default function Example() {
 
 在 [深色模式](/docs/customization/dark-mode) 了解更多信息。
 
-## `colorPalette` 属性
+## ColorPalette 属性
 
 `colorPalette` 属性可以创建一个颜色占位符，以便更好地进行主题设置和自定义。
 使用 `colorPalette` 的基本要求是，使用的颜色必须有一致的命名规范。默认情况下，Nex UI 会为每种颜色提供 50 到 900 的颜色值。这会让你更容易创建和使用 `colorPalette`。
@@ -446,6 +446,36 @@ export default function Example() {
 ```
 
 此时，`border` 将应用`borderWidths.sm` 和 `colors.colorPalette.500` 对应的值 。
+
+## Color Opacity 修饰符
+
+当在 `scales` 中将 CSS 属性定义为 `colors` 类型时，无论是直接使用颜色值，还是引用 ColorToken，均可通过 `opacity` 修饰符灵活设置颜色透明度。
+这一特性同样适用于 Token 引用语法，在引用 ColorToken 时也能便捷地运用 `opacity` 修饰符，实现多样化的视觉效果调整。
+
+例如 `color: 'blue.500/50'` 设置透明度为 50%。
+
+```tsx
+<Box
+  sx={{
+    color: 'blue.500/50',
+    bg: 'orange/50',
+    border: '1px solid {colors.colorPalette.500/50}',
+    borderTopColor: 'colorPalette.primary/90',
+    colorPalette: 'red',
+  }}
+>
+  Box
+</Box>
+
+/**
+ * {
+ *   color: color-mix(in srgb, var(--nui-colors-blue-500) 50%, transparent);
+ *   background-color: color-mix(in srgb, orange 50%, transparent);
+ *   border: 1px solid color-mix(in srgb, var(--nui-colors-red-500) 50%, transparent);
+ *   border-top-color: color-mix(in srgb, var(--nui-colors-red-primary) 90%, transparent);
+ * }
+ **/
+```
 
 ## 数组类型
 
