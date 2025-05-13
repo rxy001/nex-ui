@@ -1,8 +1,9 @@
 {
   "name": "@nex-ui/icons",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "author": "X1ng Yu",
   "private": false,
+  "description": "Shared icons used by NexUI packages.",
   "keywords": [
     "react",
     "react-component",

@@ -1,8 +1,9 @@
 {
   "name": "@nex-ui/styled",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "author": "X1ng Yu",
   "private": false,
+  "description": "Styled API for creating atomic, theme-aware component styling.",
   "keywords": [
     "react",
     "react-component",

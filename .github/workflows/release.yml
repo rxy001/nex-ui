@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    paths:
+      - '.changeset/**'
+      - 'packages/**'
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+env:
+  CI: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Tests
+        run: pnpm test
+
+      - name: Build
+        id: build
+        continue-on-error: false
+        # Custom turbo build failure information
+        run: |
+          pnpm build || {
+            echo "Turbo build failed with exit code $?"
+            exit 1
+          }
+
+      - name: Publish to NPM
+        # Run only if the build is successful
+        if: steps.build.outcome == 'success'
+        uses: changesets/action@v1
+        with:
+          publish: pnpm release
+          title: 'ci(changesets): version packages'
+          commit: 'ci(changesets): version packages'
+          setupGitUser: false
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
