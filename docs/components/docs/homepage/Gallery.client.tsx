@@ -29,6 +29,7 @@ export const ClientGallery = () => {
         endIcon={<MoonFilled />}
         checked={resolvedColorScheme === 'dark'}
         onChange={toggleMode}
+        aria-label='Toggle dark mode'
       />
       <Input
         className='x:absolute! x:animate-[levitate_10s_ease_infinite] x:top-[130px] x:-right-[40px]'
@@ -39,6 +40,12 @@ export const ClientGallery = () => {
         alt='Author'
         className='x:h-18! x:w-18! x:absolute x:animate-[levitate_18s_ease_infinite] x:top-[110px] x:right-[230px]'
         size='lg'
+        slotProps={{
+          img: {
+            width: '72px',
+            height: '72px',
+          },
+        }}
       >
         XY
       </Avatar>

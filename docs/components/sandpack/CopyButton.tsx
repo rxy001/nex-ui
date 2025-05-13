@@ -17,7 +17,12 @@ export const CopyButton = () => {
   })
 
   return (
-    <IconButton title='Copy Code' onClick={copyHandler} data-copied={copied}>
+    <IconButton
+      aria-label='Copy Button'
+      title='Copy Code'
+      onClick={copyHandler}
+      data-copied={copied}
+    >
       <CopyOutlined height={17} width={17} />
     </IconButton>
   )

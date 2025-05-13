@@ -65,7 +65,11 @@ export const Navbar: FC<NavbarProps> = (props) => {
         )}
         <ClientNavbar>
           {projectLink && (
-            <Anchor className='x:dark:text-[#f7f7f7]' href={projectLink}>
+            <Anchor
+              className='x:dark:text-[#f7f7f7]'
+              href={projectLink}
+              aria-label='GitHub Repository'
+            >
               {projectIcon}
             </Anchor>
           )}
