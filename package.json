@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "author": "X1ng Yu",
+  "license": "MIT",
   "scripts": {
     "build": "turbo build -F !@nex-ui/docs -F !@nex-ui/storybook",
     "build:sys-ts": "tsx ./scripts/buildSysTs",
@@ -16,7 +17,7 @@
     "typecheck": "turbo typecheck -F !@nex-ui/docs",
     "changeset": "changeset",
     "version": "changeset version",
-    "publish": "changeset publish",
+    "release": "changeset publish",
     "test": "jest --config ./jest.config.ts",
     "prettier:check": "prettier --check packages/**/src --cache",
     "prettier:write": "prettier --write packages/**/src --cache",
@@ -27,6 +28,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@changesets/changelog-git": "0.2.1",
     "@changesets/cli": "2.27.7",
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",

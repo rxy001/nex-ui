@@ -2,7 +2,7 @@
   "name": "@nex-ui/docs",
   "version": "0.0.0",
   "author": "X1ng Yu",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
