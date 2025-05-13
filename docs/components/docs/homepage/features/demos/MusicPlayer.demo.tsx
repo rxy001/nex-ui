@@ -66,6 +66,7 @@ export default function MusicPlayer() {
           top: '2',
           color: 'rgb(251 251 251 / 80%)',
         }}
+        aria-label='Toggle color mode'
       >
         {resolvedColorScheme === 'dark' ? (
           <SunOutlined onClick={() => setMode('light')} />
@@ -99,7 +100,11 @@ export default function MusicPlayer() {
               borderRadius: 'xl',
               height: '100%',
             }}
+            width={160}
+            height={160}
             as='img'
+            loading='lazy'
+            alt='Album cover'
             src='https://www.heroui.com/_next/image?url=%2Fimages%2Falbum-cover.png&w=640&q=75'
           />
         </Box>
@@ -120,7 +125,7 @@ export default function MusicPlayer() {
                 Frontend Radio
               </Box>
             </Box>
-            <Button>
+            <Button aria-label='Heart'>
               <HeartOutlined />
             </Button>
           </Box>
@@ -177,10 +182,10 @@ export default function MusicPlayer() {
               mt: '2',
             }}
           >
-            <Button>
+            <Button aria-label='Repeat'>
               <RepeatOutlined />
             </Button>
-            <Button>
+            <Button aria-label='Skip Backward'>
               <SkipBackwardFilled />
             </Button>
             <Button
@@ -190,13 +195,14 @@ export default function MusicPlayer() {
                   fs: '2.3em',
                 },
               }}
+              aria-label='Pause'
             >
               <PauseCircleFilled />
             </Button>
-            <Button>
+            <Button aria-label='Skip Forward'>
               <SkipForwardFilled />
             </Button>
-            <Button>
+            <Button aria-label='Share'>
               <ShareOutlined />
             </Button>
           </Box>

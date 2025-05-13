@@ -92,7 +92,6 @@ export const ComponentLinks = ({
       >
         Recipe Source
       </ButtonLink>
-      {}
     </div>
   )
 }

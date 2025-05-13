@@ -29,7 +29,8 @@
     "./nextraTheme",
     "./components",
     "./postcss.config.mjs",
-    "./eslint.config.mjs"
+    "./eslint.config.mjs",
+    "./next-sitemap.config.mjs"
   ],
   "exclude": []
 }

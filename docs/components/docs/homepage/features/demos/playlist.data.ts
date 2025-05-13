@@ -1,50 +1,50 @@
-import beautiful640 from '@/public/images/beautiful-640.jpg'
-import asxophone640 from '@/public/images/saxophone-640.jpg'
-import dj640 from '@/public/images/dj-640.jpg'
-import woman640 from '@/public/images/woman-640.jpg'
-import music640 from '@/public/images/music-640.jpg'
-import man640 from '@/public/images/man-640.jpg'
-import accordion640 from '@/public/images/accordion-640.jpg'
-import marianoRoger640 from '@/public/images/mariano-roger-640.jpg'
+import beautiful from '@/public/images/beautiful-640.jpg'
+import asxophone from '@/public/images/saxophone-640.jpg'
+import dj from '@/public/images/dj-640.jpg'
+import woman from '@/public/images/woman-640.jpg'
+import music from '@/public/images/music-640.jpg'
+import man from '@/public/images/man-640.jpg'
+import accordion from '@/public/images/accordion-640.jpg'
+import marianoRoger from '@/public/images/mariano-roger-640.jpg'
 
 export const playlist = [
   {
-    cover: `${beautiful640.src}`,
+    cover: beautiful,
     name: 'Trip Hop',
     author: 'Ava',
   },
   {
-    cover: `${asxophone640.src}`,
+    cover: asxophone,
     name: 'Classical Music',
     author: 'Nina',
   },
   {
-    cover: `${dj640.src}`,
+    cover: dj,
     name: 'Disc Jockey',
     author: 'David',
   },
   {
-    cover: `${music640.src}`,
+    cover: music,
     name: 'Hop Hip',
     author: 'Ethan',
   },
   {
-    cover: `${woman640.src}`,
+    cover: woman,
     name: 'Folk Music',
     author: 'Olivia',
   },
   {
-    cover: `${man640.src}`,
+    cover: man,
     name: 'Light Music',
     author: 'Ryan',
   },
   {
-    cover: `${accordion640.src}`,
+    cover: accordion,
     name: 'Country Music',
     author: 'Gabriel',
   },
   {
-    cover: `${marianoRoger640.src}`,
+    cover: marianoRoger,
     name: 'Pop Music',
     author: 'Benjamin',
   },
