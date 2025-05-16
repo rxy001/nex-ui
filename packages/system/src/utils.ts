@@ -8,7 +8,7 @@ import {
   isPlainObject,
   every,
 } from '@nex-ui/utils'
-import serialize from 'serialize-javascript'
+import serialize from '@x1ngyu/serialize-javascript'
 import type {
   SemanticTokenValue,
   TokenValue,
