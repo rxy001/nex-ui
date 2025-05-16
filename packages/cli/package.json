@@ -1,0 +1,40 @@
+{
+  "name": "@nex-ui/cli",
+  "version": "0.0.3",
+  "private": false,
+  "description": "A CLI tool that unlocks seamless NexUI integration",
+  "author": "X1ng Yu",
+  "license": "MIT",
+  "keywords": [
+    "nui",
+    "cli",
+    "nex-ui",
+    "integration"
+  ],
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "bin": {
+    "nexui-cli": "./bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rxy001/nex-ui.git",
+    "directory": "packages/cli"
+  },
+  "scripts": {
+    "build": "tsx ../../scripts/buildCLI.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@clack/prompts": "0.10.1",
+    "chalk": "5.4.1",
+    "commander": "13.1.0",
+    "gradient-string": "3.0.0"
+  }
+}

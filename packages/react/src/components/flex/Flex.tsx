@@ -73,6 +73,7 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     classNames: classes.root,
     additionalProps: {
       ref,
+      as,
       sx: {
         gap,
         flexDirection: direction,
