@@ -1,10 +1,10 @@
 # @nex-ui/cli
 
-This CLI tool enables you to quickly start building an application integrated with NexUI, with everything set up for you. You can create a new app using the default templates, or by using one of the official NexUI examples. To get started, use the following command:
+This CLI tool enables you to quickly start building an application integrated with NexUI, with everything set up for you.
 
 ## Quick Start
 
-You can create a new project interactively by running:
+To get started, use the following command:
 
 ```bash copy
 
