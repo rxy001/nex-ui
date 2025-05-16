@@ -101,6 +101,10 @@ async function generateTypes({ external, name }: SharedConfigs) {
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       dts({
         tsconfig: path.resolve(cwd, './tsconfig.json'),
+        respectExternal: true,
+        compilerOptions: {
+          preserveSymlinks: true,
+        },
       }),
     ],
     output: { dir: './dist/types', format: 'es', preserveModules: true },
