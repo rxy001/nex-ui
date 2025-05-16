@@ -36,5 +36,8 @@
     "chalk": "5.4.1",
     "commander": "13.1.0",
     "gradient-string": "3.0.0"
+  },
+  "engines": {
+    "node": ">=20.11.0"
   }
 }
