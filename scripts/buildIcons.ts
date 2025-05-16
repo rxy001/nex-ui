@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { optimize } from 'svgo'
 import {
   readdirSync,

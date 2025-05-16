@@ -1,14 +1,12 @@
-/* eslint-disable no-console */
-
 import argsParse from 'yargs-parser'
 import path from 'node:path'
 import dts from 'rollup-plugin-dts'
 import swc from '@rollup/plugin-swc'
 import fs from 'node:fs'
-import { rollup } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { preserveDirectives } from 'rollup-plugin-preserve-directives'
-import type { RollupOptions, RollupBuild } from 'rollup'
+import type { RollupOptions } from 'rollup'
+import { rollup } from './utils'
 
 type SharedConfigs = { external: (string | RegExp)[]; name: string }
 
@@ -88,7 +86,7 @@ async function generateModules({ external, name }: SharedConfigs) {
       warn(warning)
     },
   }
-  await runRollup(config)
+  await rollup(config)
 
   console.log(`[${name}] [JS] Generated CJS and ESM files ✅`)
 }
@@ -107,26 +105,7 @@ async function generateTypes({ external, name }: SharedConfigs) {
     ],
     output: { dir: './dist/types', format: 'es', preserveModules: true },
   }
-  await runRollup(config)
+  await rollup(config)
 
   console.log(`[${name}] [DTS] Generated type definitions ✅`)
-}
-
-async function runRollup(config: RollupOptions) {
-  let bundle: RollupBuild
-  try {
-    bundle = await rollup(config)
-
-    const output = Array.isArray(config.output)
-      ? config.output
-      : [config.output]
-
-    await Promise.all(output.map((o) => bundle.write(o!)))
-  } catch (error: any) {
-    throw new Error(error)
-  }
-
-  if (bundle) {
-    await bundle.close()
-  }
 }

@@ -13,7 +13,6 @@ import {
 } from './generate'
 
 const log = (message: any) => {
-  // eslint-disable-next-line no-console
   console.log(`[ generateSysTs ] ${message}`)
 }
 
