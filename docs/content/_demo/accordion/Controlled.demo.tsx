@@ -1,7 +1,8 @@
 'use client'
 
 import { Accordion, AccordionItem } from '@nex-ui/react'
-import { type Key, useState } from 'react'
+import { useState } from 'react'
+import type { Key } from 'react'
 
 export default function App() {
   const [expandedKeys, setExpandedKeys] = useState<Key[]>([])

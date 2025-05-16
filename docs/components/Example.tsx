@@ -1,7 +1,8 @@
 'use client'
 
 import { Tabs } from 'nextra/components'
-import { useMemo, type ReactNode } from 'react'
+import { useMemo } from 'react'
+import type { ReactNode } from 'react'
 import { Sandpack } from './sandpack'
 
 type ExampleProps = {
