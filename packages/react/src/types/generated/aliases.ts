@@ -11,17 +11,17 @@ export interface DefaultAliases {
   w?: 'width'
   h?: 'height'
   p?: 'padding'
-  pt?: 'paddingTop'
-  pb?: 'paddingBottom'
-  pl?: 'paddingLeft'
-  pr?: 'paddingRight'
-  px?: 'paddingInline'
-  py?: 'paddingBlock'
+  pt?: 'paddingBlockStart'
+  pb?: 'paddingBlockEnd'
+  pl?: 'paddingInlineStart'
+  pr?: 'paddingInlineEnd'
+  px?: ['paddingInlineStart', 'paddingInlineEnd']
+  py?: ['paddingBlockStart', 'paddingBlockEnd']
   m?: 'margin'
-  mt?: 'marginTop'
-  mb?: 'marginBottom'
-  ml?: 'marginLeft'
-  mr?: 'marginRight'
-  mx?: 'marginInline'
-  my?: 'marginBlock'
+  mt?: 'marginBlockStart'
+  mb?: 'marginBlockEnd'
+  ml?: 'marginInlineStart'
+  mr?: 'marginInlineEnd'
+  mx?: ['marginInlineStart', 'marginInlineEnd']
+  my?: ['marginBlockStart', 'marginBlockEnd']
 }

@@ -1,4 +1,5 @@
 {
-  "**/*.{cjs,mjs,js,ts,jsx,tsx}": "eslint -c eslint.config.mjs --max-warnings=0 --fix",
-  "**/*.{cjs,mjs,js,jsx,ts,tsx,css,json,md,mdx}": "prettier --write . --config .prettierrc.json"
+  "**/*.{cjs,mjs,js,jsx,ts,tsx,css,json,md,mdx}": "prettier --write . --config .prettierrc.json",
+  "packages/**/*.ts": "eslint -c eslint.config.mjs --max-warnings=0 --fix",
+  "scripts/**/*.ts": "eslint -c eslint.config.mjs --max-warnings=0 --fix"
 }

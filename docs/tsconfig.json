@@ -27,10 +27,7 @@
     "./next.config.ts",
     "./content",
     "./nextraTheme",
-    "./components",
-    "./postcss.config.mjs",
-    "./eslint.config.mjs",
-    "./next-sitemap.config.mjs"
+    "./components"
   ],
   "exclude": []
 }

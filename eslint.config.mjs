@@ -33,16 +33,10 @@ export default tseslint.config(
   reactHooks.configs['recommended-latest'],
   eslintPluginPrettierRecommended,
   {
-    files: ['**/*.{ts,tsx}'],
     extends: [
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
     ],
-    rules: {
-      'import/no-duplicates': ['error', { considerQueryString: true }],
-    },
-  },
-  {
     languageOptions: {
       globals: {
         ...globals.node,
@@ -87,14 +81,6 @@ export default tseslint.config(
     },
   },
   {
-    files: ['__tests__/**/*.test.{tsx|jsx|js|ts}'],
-    plugins: { jest },
-    languageOptions: {
-      globals: jest.environments.globals.globals,
-    },
-    ...jest.configs['flat/recommended'],
-  },
-  {
     files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
     rules: {
       'no-console': [
@@ -133,6 +119,34 @@ export default tseslint.config(
       '@typescript-eslint/ban-ts-comment': 'off',
 
       'jsx-a11y/alt-text': 'error',
+
+      'import/no-duplicates': ['error', { considerQueryString: true }],
+      'import/no-cycle': 'error',
+      'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+      'import/prefer-default-export': 'off',
+      'import/no-named-as-default': 'off',
+    },
+  },
+  {
+    files: ['__tests__/**/*.test.{tsx,jsx,js,ts}'],
+    plugins: { jest },
+    languageOptions: {
+      globals: jest.environments.globals.globals,
+    },
+    ...jest.configs['flat/recommended'],
+  },
+  {
+    files: ['./scripts/**/*.{ts,js}'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
+  {
+    files: ['**/*.js', '**/*.mjs', '**/*.cjs', '**/*.d.ts', '**/*.d.cts'],
+    languageOptions: {
+      parserOptions: {
+        project: false,
+      },
     },
   },
 )
