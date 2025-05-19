@@ -99,7 +99,7 @@ export const ClientNavbar: FC<{
 
   return (
     <>
-      <div className='nextra-scrollbar x:flex x:gap-4 x:overflow-x-auto x:py-1.5 x:max-md:hidden'>
+      <div className='nextra-scrollbar x:flex x:gap-4 x:overflow-x-auto x:py-1.5 x:max-lg:hidden'>
         {items.map((page) => {
           if ('display' in page && page.display === 'hidden') return
           if (isMenu(page)) {
@@ -139,15 +139,14 @@ export const ClientNavbar: FC<{
         })}
       </div>
       {themeConfig.search && (
-        <div className='x:max-md:hidden'>{themeConfig.search}</div>
+        <div className='x:max-lg:hidden'>{themeConfig.search}</div>
       )}
 
       {children}
-
       <Button
         aria-label='Menu'
         className={({ active }) =>
-          cn('nextra-hamburger x:md:hidden', active && 'x:bg-gray-400/20')
+          cn('nextra-hamburger x:lg:hidden', active && 'x:bg-gray-400/20')
         }
         onClick={() => setMenu((prev) => !prev)}
       >

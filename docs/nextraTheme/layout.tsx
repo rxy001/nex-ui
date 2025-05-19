@@ -84,7 +84,9 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   const { navbar, pageMap, banner, ...rest } = data
 
   return (
-    <NexUIProvider colorScheme={{ colorSchemeSelector: 'class' }}>
+    <NexUIProvider
+      colorScheme={{ colorSchemeSelector: 'class', defaultMode: 'dark' }}
+    >
       <ThemeConfigProvider value={rest}>
         {banner}
         <ConfigProvider pageMap={pageMap} navbar={navbar}>
