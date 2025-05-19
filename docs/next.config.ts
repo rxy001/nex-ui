@@ -22,7 +22,7 @@ export default withAnalyzer(
   withNextra({
     i18n: {
       locales: ['zh', 'en'],
-      defaultLocale: 'zh',
+      defaultLocale: 'en',
     },
     webpack: (config) => {
       const fileLoaderRule = config.module.rules.find((rule: any) =>
