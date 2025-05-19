@@ -35,6 +35,13 @@
     "@clack/prompts": "0.10.1",
     "chalk": "5.4.1",
     "commander": "13.1.0",
-    "gradient-string": "3.0.0"
+    "gradient-string": "3.0.0",
+    "semver": "7.7.2"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "devDependencies": {
+    "@types/semver": "7.7.0"
   }
 }

@@ -1,17 +1,26 @@
 /* eslint-disable no-console */
 import gradient from 'gradient-string'
 import chalk from 'chalk'
+import { gte } from 'semver'
 import { createCommand } from 'commander'
 import { initAction } from './actions'
 import pkg from '../package.json'
 
-chalk.level = 3
+const VERSION = '20.11.0'
 
+if (!gte(process.version, VERSION)) {
+  console.error(
+    `NexUI CLI requires Node.js version v${VERSION} or higher, but the installed version is ${process.version}. Please upgrade Node.js to the required version.`,
+  )
+  process.exit(1)
+}
+
+chalk.level = 3
 console.log()
 console.log(
   gradient(['rgb(69, 104, 220)', 'rgb(176, 106, 179)'])('NexUI CLI 🎉'),
 )
-console.log('')
+console.log()
 
 // prettier-ignore
 const helpMessage = `The official CLI for Nex UI

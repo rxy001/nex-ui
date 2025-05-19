@@ -66,7 +66,7 @@ export const initAction = async (
       ),
       options: [
         {
-          label: chalk.blackBright('Cancel operation'),
+          label: chalk.cyanBright('Cancel operation'),
           value: 'no',
         },
         {
@@ -74,7 +74,7 @@ export const initAction = async (
           value: 'yes',
         },
         {
-          label: chalk.cyanBright('Ignore files and continue'),
+          label: chalk.magentaBright('Ignore files and continue'),
           value: 'ignore',
         },
       ],
