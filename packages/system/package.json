@@ -47,7 +47,7 @@
   "dependencies": {
     "@nex-ui/hooks": "workspace:*",
     "@nex-ui/utils": "workspace:*",
-    "@x1ngyu/serialize-javascript": "7.0.5"
+    "@x1ngyu/serialize-javascript": "7.0.7"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
