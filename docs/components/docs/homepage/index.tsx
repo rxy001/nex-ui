@@ -5,10 +5,11 @@ import type { ButtonProps } from '@nex-ui/react'
 import AccessibilityIcon from '@/icons/accessibility.svg'
 import { BoltOutlined, MoonOutlined, MagicOutlined } from '@nex-ui/icons'
 import { Theme, Style, DarkMode } from './features'
-import type { ThemeProps } from './features'
 import { Card } from './Card'
 import { Gallery } from './Gallery'
 import { CopyButton } from './CopyButton'
+import { Threads } from './Threads'
+import type { ThemeProps } from './features'
 
 type Content = { title?: ReactNode; desc?: ReactNode }
 
@@ -59,6 +60,7 @@ export function HomePage({ translations }: HomePageProps) {
   return (
     <main className='x:py-36 x:max-w-[85rem] x:mx-auto x:px-[1.5rem] x:flex x:flex-col x:gap-[200px]'>
       <section className='x:flex'>
+        <Threads />
         <section className='x:min-[970px]:w-1/2'>
           <h1 className='x:font-semibold x:text-6xl x:whitespace-pre-wrap'>
             {translations?.title}
