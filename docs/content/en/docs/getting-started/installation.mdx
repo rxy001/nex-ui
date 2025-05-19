@@ -1,0 +1,173 @@
+---
+title: Installation
+description: Install Nex UI and develop applications quickly!
+---
+
+import NpmIcon from '@/icons/npm.svg'
+import PnpmIcon from '@/icons/pnpm.svg'
+import YarnIcon from '@/icons/yarn.svg'
+import { Steps, Tabs, Callout, Cards } from 'nextra/components'
+
+# Installation
+
+Install Nex UI to develop applications quickly!
+
+## Scaffolding Your First NexUI Project
+
+<Callout type='info'>
+  The CLI requires Node.js version 20+. When your package manager issues a
+  warning, please upgrade your Node.js version.
+</Callout>
+
+Using the CLI is the simplest way to start a NexUI project. You can directly initialize the project with the following command:
+
+<Tabs
+  items={[
+    <span className='x:flex x:items-center x:gap-2'>
+      <NpmIcon />
+      npm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <PnpmIcon />
+      pnpm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <YarnIcon />
+      yarn
+    </span>,
+  ]}
+>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ``` bash copy  
+    npx nexui-cli init  
+    ```  
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ```bash copy  
+    pnpm dlx nexui-cli init  
+    ```  
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ```bash copy  
+    yarn nexui-cli init  
+    ```  
+  </Tabs.Tab>
+</Tabs>
+
+Then follow the prompts!
+
+You can also specify the project name and template directly via CLI command-line options. For example, if you want to create a Next.js app using the App Router:
+
+<Tabs
+  items={[
+    <span className='x:flex x:items-center x:gap-2'>
+      <NpmIcon />
+      npm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <PnpmIcon />
+      pnpm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <YarnIcon />
+      yarn
+    </span>,
+  ]}
+>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ``` bash copy  
+    npx nexui-cli init nexui-app -t next-app  
+    ```  
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ```bash copy  
+    pnpm dlx nexui-cli init nexui-app -t next-app  
+    ```  
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ```bash copy  
+    yarn nexui-cli init nexui-app -t next-app  
+    ```  
+  </Tabs.Tab>
+</Tabs>
+
+Currently supported templates: `next-app`, `next-pages`, `vite`, `vite-swc`.
+
+## Manual Installation
+
+In your project, you can install Nex UI using the following methods:
+
+<Tabs
+  items={[
+    <span className='x:flex x:items-center x:gap-2'>
+      <NpmIcon />
+      npm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <PnpmIcon />
+      pnpm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <YarnIcon />
+      yarn
+    </span>,
+  ]}
+>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ``` bash copy  
+    npm install @nex-ui/react @emotion/react  
+    ```  
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ```bash copy  
+    pnpm install @nex-ui/react @emotion/react  
+    ```  
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>  
+    ```bash copy  
+    yarn add @nex-ui/react @emotion/react  
+    ```  
+  </Tabs.Tab>
+</Tabs>
+
+Note that `react` and `react-dom` are `PeerDependencies`, meaning you should ensure they are installed before installing Nex UI.
+
+```json
+"peerDependencies": {
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0"
+}
+```
+
+After that, add `NexUIProvider` to the entry file of your application.
+
+```tsx
+import { NexUIProvider } from '@nex-ui/react'
+
+function App() {
+  return (
+    <NexUIProvider>
+      <YourApplication />
+    </NexUIProvider>
+  )
+}
+```
+
+Next, you can use NexUI components in your application:
+
+```tsx
+import { Button } from '@nex-ui/react'
+
+function Home() {
+  return <Button>Press me</Button>
+}
+```

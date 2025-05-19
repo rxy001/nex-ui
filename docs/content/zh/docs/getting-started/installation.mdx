@@ -1,0 +1,173 @@
+---
+title: 安装
+description: 安装 Nex UI, 快速开发应用程序！
+---
+
+import NpmIcon from '@/icons/npm.svg'
+import PnpmIcon from '@/icons/pnpm.svg'
+import YarnIcon from '@/icons/yarn.svg'
+import { Steps, Tabs, Callout, Cards } from 'nextra/components'
+
+# 安装
+
+安装 Nex UI, 快速开发应用程序！
+
+## 搭建第一个 NexUI 项目
+
+<Callout type='info'>
+  CLI 需要 Node.js 版本 20+，当您的包管理器发出警告时，请注意升级您的 Node
+  版本。
+</Callout>
+
+使用 CLI 是启动 NexUI 项目最简单的方式。您可以直接通过以下命令初始化项目：
+
+<Tabs
+  items={[
+    <span className='x:flex x:items-center x:gap-2'>
+      <NpmIcon />
+      npm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <PnpmIcon />
+      pnpm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <YarnIcon />
+      yarn
+    </span>,
+  ]}
+>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ``` bash copy 
+    npx nexui-cli init 
+    ```
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ```bash copy 
+    pnpm dlx nexui-cli init 
+    ```
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ```bash copy 
+    yarn nexui-cli init 
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+然后，根据提示操作！
+
+您也可以通过 CLI 的命令行选项直接指定项目的名称以及模版。例如，您想创建一个使用 App Router 的 Next.js 应用：
+
+<Tabs
+  items={[
+    <span className='x:flex x:items-center x:gap-2'>
+      <NpmIcon />
+      npm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <PnpmIcon />
+      pnpm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <YarnIcon />
+      yarn
+    </span>,
+  ]}
+>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ``` bash copy 
+    npx nexui-cli init nexui-app -t next-app
+    ```
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ```bash copy 
+    pnpm dlx nexui-cli init nexui-app -t next-app
+    ```
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ```bash copy 
+    yarn nexui-cli init nexui-app -t next-app
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+目前支持模版有：`next-app`、`next-pages`、`vite`、`vite-swc`。
+
+## 手动安装
+
+在您的项目中，可以用以下方法来安装 NexUI：
+
+<Tabs
+  items={[
+    <span className='x:flex x:items-center x:gap-2'>
+      <NpmIcon />
+      npm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <PnpmIcon />
+      pnpm
+    </span>,
+    <span className='x:flex x:items-center x:gap-2'>
+      <YarnIcon />
+      yarn
+    </span>,
+  ]}
+>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ``` bash copy 
+    npm install @nex-ui/react @emotion/react
+    ```
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ```bash copy 
+    pnpm install @nex-ui/react @emotion/react
+    ```
+  </Tabs.Tab>
+  {/* prettier-ignore */}
+  <Tabs.Tab className='x:mt-0!'>
+    ```bash copy 
+    yarn add @nex-ui/react @emotion/react
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+请注意，`react` 和 `react-dom` 是 `PeerDependencies`，这意味着您应该确保在安装 Nex UI 之前安装它们。
+
+```json
+"peerDependencies": {
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0"
+}
+```
+
+之后，需在应用的入口文件中添加 `NexUIProvider`。
+
+```tsx
+import { NexUIProvider } from '@nex-ui/react'
+
+function App() {
+  return (
+    <NexUIProvider>
+      <YourApplication />
+    </NexUIProvider>
+  )
+}
+```
+
+接下来在应用程序中，您就可以使用 NexUI 的组件了：
+
+```tsx
+import { Button } from '@nex-ui/react'
+
+function Home() {
+  return <Button>Press me</Button>
+}
+```
