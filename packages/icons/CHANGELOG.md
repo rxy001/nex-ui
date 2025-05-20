@@ -1,5 +1,14 @@
 # @nex-ui/icons
 
+## 0.0.6
+
+### Patch Changes
+
+- 87191c1: release
+- Updated dependencies [87191c1]
+  - @nex-ui/styled@0.0.6
+  - @nex-ui/utils@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes
