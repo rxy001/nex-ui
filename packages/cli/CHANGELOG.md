@@ -1,5 +1,11 @@
 # @nex-ui/cli
 
+## 0.0.8
+
+### Patch Changes
+
+- c8c1956: release
+
 ## 0.0.7
 
 ### Patch Changes

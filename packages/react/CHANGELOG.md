@@ -1,5 +1,17 @@
 # @nex-ui/react
 
+## 0.0.8
+
+### Patch Changes
+
+- c8c1956: release
+- Updated dependencies [c8c1956]
+  - @nex-ui/styled@0.0.8
+  - @nex-ui/system@0.0.8
+  - @nex-ui/hooks@0.0.8
+  - @nex-ui/icons@0.0.8
+  - @nex-ui/utils@0.0.8
+
 ## 0.0.7
 
 ### Patch Changes
