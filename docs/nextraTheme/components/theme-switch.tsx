@@ -15,7 +15,7 @@ type ThemeSwitchProps = {
 }
 
 export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
-  const { mode, setMode, systemColorScheme } = useColorScheme()
+  const { mode, setMode, resolvedColorScheme } = useColorScheme()
 
   const mounted = useMounted()
   const { darkMode, themeSwitch } = useThemeConfig()
@@ -23,10 +23,9 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
     return null
   }
 
-  const resolvedColorScheme = systemColorScheme ?? mode
   const IconToUse =
-    mounted && resolvedColorScheme === 'dark' ? MoonFilled : SunFilled
-  const id = mounted ? mode! : 'light'
+    mounted && resolvedColorScheme === 'light' ? SunFilled : MoonFilled
+  const id = mounted ? mode! : 'dark'
 
   const onChange = (v: string) => setMode(v as Mode)
 

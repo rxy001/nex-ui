@@ -22,6 +22,7 @@ export type ColorSchemeContext = {
   mode?: Mode
   setMode: (mode?: Mode) => void
   systemColorScheme?: SystemColorScheme
+  resolvedColorScheme?: ColorScheme
 }
 
 export type InitColorSchemeScriptProps = Pick<

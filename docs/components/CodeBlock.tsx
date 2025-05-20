@@ -12,6 +12,7 @@ interface CodeBlockProps {
   children: string
   lang: BundledLanguage
   className?: string
+  onLoaded?: () => void
 }
 
 export function CodeBlock(props: CodeBlockProps) {
@@ -30,7 +31,10 @@ export function CodeBlock(props: CodeBlockProps) {
           components: {
             // your custom `pre` element
             pre: ({ style: _style, ...p }: any) => (
-              <Pre {...p} className={clsx(p.className, 'pt-2')} />
+              <Pre
+                {...p}
+                className={clsx('x:pt-2', p.className, props.className)}
+              />
             ),
             code: (p: any) => <Code {...p} />,
             span: (p) => {
@@ -42,8 +46,9 @@ export function CodeBlock(props: CodeBlockProps) {
           },
         }),
       )
+      props.onLoaded?.()
     })
-  }, [props.children, props.className, props.lang])
+  }, [props, props.children, props.className, props.lang])
 
   return nodes
 }
