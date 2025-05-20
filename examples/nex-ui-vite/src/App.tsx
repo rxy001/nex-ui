@@ -10,7 +10,7 @@ function App() {
       sx={{ pt: '150px' }}
     >
       <Box as='h1' sx={{ mb: 2 }}>
-        Nex UI - Next.js App Router example in TypeScript
+        Nex UI - Vite example in TypeScript
       </Box>
       <Flex gap='10'>
         <Button target='_blank' href='https://nex-ui-docs.vercel.app/'>
