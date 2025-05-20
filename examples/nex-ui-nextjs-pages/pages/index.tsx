@@ -12,7 +12,7 @@ export default function Home() {
         sx={{ pt: '150px' }}
       >
         <Box as='h1' sx={{ mb: 2 }}>
-          Nex UI - Next.js App Router example in TypeScript
+          Nex UI - Next.js Pages Router example in TypeScript
         </Box>
         <Flex gap='10'>
           <Button
