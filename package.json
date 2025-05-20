@@ -5,7 +5,7 @@
   "author": "X1ng Yu",
   "license": "MIT",
   "scripts": {
-    "build": "turbo build -F !@nex-ui/docs -F !@nex-ui/storybook -F !@nex-ui/cli",
+    "build": "turbo build -F !@nex-ui/docs -F !@nex-ui/storybook",
     "build:fast": "turbo build:fast -F !@nex-ui/docs -F !@nex-ui/storybook -F !@nex-ui/cli",
     "build:sys-ts": "tsx ./scripts/buildSysTs",
     "build:icons": "tsx ./scripts/buildIcons",
