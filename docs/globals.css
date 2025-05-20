@@ -56,7 +56,10 @@
   box-shadow: none;
   max-height: 400px;
   background-color: #24292e !important;
-  scrollbar-color: #e3e3e3 #24292e;
+}
+
+.nextra-code > pre::-webkit-scrollbar-thumb {
+  background-color: #24292e;
 }
 
 .nextra-code button[title='Copy code'] {

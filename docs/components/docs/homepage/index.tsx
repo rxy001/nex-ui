@@ -62,10 +62,10 @@ export function HomePage({ translations }: HomePageProps) {
       <section className='x:flex'>
         <Threads />
         <section className='x:min-[970px]:w-1/2'>
-          <h1 className='x:font-semibold x:text-6xl x:whitespace-pre-wrap'>
+          <h1 className='x:font-semibold x:whitespace-pre-wrap x:sm:text-6xl x:sm:text-left x:text-4xl x:text-center'>
             {translations?.title}
           </h1>
-          <h2 className='x:mt-6 x:font-medium x:text-[#71717a] x:text-2xl'>
+          <h2 className='x:mt-6 x:font-medium x:text-[#71717a] x:text-2xl x:text-center x:sm:text-left'>
             {translations?.desc}
           </h2>
           <div className='x:mt-8 x:flex x:gap-3 x:items-center'>
