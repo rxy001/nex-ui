@@ -26,7 +26,7 @@ export function GradientText({
 
   return (
     <div
-      className={`x:relative x:mx-auto x:flex x:max-w-fit x:flex-row x:items-center x:justify-center x:rounded-[1.25rem] x:font-medium x:backdrop-blur x:transition-shadow x:duration-500 x:overflow-hidden ${className}`}
+      className={`x:relative x:mx-auto x:flex x:max-w-fit x:flex-row x:items-center x:justify-center x:rounded-[1.25rem] x:backdrop-blur x:transition-shadow x:duration-500 x:overflow-hidden ${className}`}
     >
       <div
         className='x:inline-block x:relative x:z-2 x:text-transparent x:bg-cover x:animate-gradient'

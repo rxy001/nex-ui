@@ -101,12 +101,9 @@ type BreakpointArray =
   | (string | number | null | undefined)[]
   | readonly (string | number | null | undefined)[]
 
-type NestedConditions<T> =
-  | {
-      _DEFAULT?: T
-    }
-  | Conditions<T>
-  | { [K in keyof Conditions<T>]: NestedConditions<T> }
+type NestedConditions<T> = {
+  _DEFAULT?: T
+} & Conditions<T> & { [K in keyof Conditions<T>]: NestedConditions<T> }
 
 type ExtraCSSPropertyValue<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]?:

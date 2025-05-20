@@ -3,24 +3,6 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { CodeWindow } from '../CodeWindow'
-// const contents = [
-//   {
-//     title: 'Tokens',
-//     description: 'Design tokens are the platform-agnostic way to manage design decisions in your application or website',
-//   },
-//   {
-//     title: 'SemanticTokens',
-//     description: 'Define SemanticToken with our built-in solution',
-//   },
-//   {
-//     title: 'Token Aliases',
-//     description: 'Reference pre-existing tokens to define token aliases',
-//   },
-//   {
-//     title: 'Components',
-//     description: 'override component style',
-//   },
-// ]
 
 const snippets = [
   `import { defineTheme } from '@nex-ui/react'
@@ -207,7 +189,12 @@ export function Theme({ translations }: ThemeProps) {
           </button>
         ))}
       </div>
-      <CodeWindow lang='ts' file='Theme.ts' className='x:lg:flex-1'>
+      <CodeWindow
+        lang='ts'
+        file='Theme.ts'
+        className='x:lg:flex-1'
+        codeClassName='x:max-h-[480px]!'
+      >
         {snippets[index]}
       </CodeWindow>
     </div>

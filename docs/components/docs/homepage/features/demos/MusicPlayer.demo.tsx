@@ -39,9 +39,7 @@ function Button({ children, ...props }: ButtonProps) {
 }
 
 export default function MusicPlayer() {
-  const { mode, setMode, systemColorScheme } = useColorScheme()
-
-  const resolvedColorScheme = mode ?? systemColorScheme
+  const { setMode, resolvedColorScheme } = useColorScheme()
 
   return (
     <Box
@@ -57,6 +55,7 @@ export default function MusicPlayer() {
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
+        justifyContent: 'center',
       }}
     >
       <Button
@@ -68,10 +67,10 @@ export default function MusicPlayer() {
         }}
         aria-label='Toggle color mode'
       >
-        {resolvedColorScheme === 'dark' ? (
-          <SunOutlined onClick={() => setMode('light')} />
-        ) : (
+        {resolvedColorScheme === 'light' ? (
           <MoonOutlined onClick={() => setMode('dark')} />
+        ) : (
+          <SunOutlined onClick={() => setMode('light')} />
         )}
       </Button>
       <Box
@@ -87,6 +86,14 @@ export default function MusicPlayer() {
           borderRadius: 'xl',
           p: '2',
           flex: 1,
+          maxWidth: {
+            _DEFAULT: '250px',
+            _sm: 'none',
+          },
+          flexDirection: {
+            _DEFAULT: 'column',
+            _sm: 'row',
+          },
         }}
       >
         <Box
