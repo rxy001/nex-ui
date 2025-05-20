@@ -407,8 +407,8 @@ importers:
         specifier: workspace:*
         version: link:../utils
       '@x1ngyu/serialize-javascript':
-        specifier: 7.0.7
-        version: 7.0.7
+        specifier: 7.0.8
+        version: 7.0.8
       react:
         specifier: '>=19'
         version: 19.1.0
@@ -3873,8 +3873,8 @@ packages:
   '@webassemblyjs/wast-printer@1.14.1':
     resolution: {integrity: sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==}
 
-  '@x1ngyu/serialize-javascript@7.0.7':
-    resolution: {integrity: sha512-worQmxG+VMCRPzLFCzxvJRudbkWN8deEl7/xezuZh9XMzxXjuCrSGb4ywJHo0ECDH2SVCz1uktYEunqeGrP3qg==}
+  '@x1ngyu/serialize-javascript@7.0.8':
+    resolution: {integrity: sha512-s0wlfhQQeEGevQj51Ofl0K8g5V/tbasCDwzfN3G3rTteqr9qDHJo05irm+RiKyDSt+O1zv36bW/A09cllsu7pQ==}
 
   '@xmldom/xmldom@0.9.8':
     resolution: {integrity: sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==}
@@ -12004,7 +12004,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@x1ngyu/serialize-javascript@7.0.7': {}
+  '@x1ngyu/serialize-javascript@7.0.8': {}
 
   '@xmldom/xmldom@0.9.8': {}
 
