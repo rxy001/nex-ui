@@ -24,8 +24,9 @@ async function build() {
   const { name } = pkg
 
   const external = [
-    ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.peerDependencies),
+    ...Object.keys(pkg.dependencies ?? {}),
+    ...Object.keys(pkg.devDependencies ?? {}),
+    ...Object.keys(pkg.peerDependencies ?? {}),
     /node_modules/,
   ]
 

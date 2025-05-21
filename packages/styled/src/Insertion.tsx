@@ -1,6 +1,6 @@
-import type { EmotionCache } from '@emotion/cache'
 import { registerStyles, insertStyles } from '@emotion/utils'
 import type { SerializedStyles } from '@emotion/serialize'
+import type { EmotionCache } from '@emotion/cache'
 // @ts-ignore
 import { useInsertionEffectAlwaysWithSyncFallback } from '@emotion/use-insertion-effect-with-fallbacks'
 
