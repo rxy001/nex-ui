@@ -1,13 +1,13 @@
 ---
 title: Semantic Tokens
-description: Semantic tokens are designed for use in specific contexts. Different from Tokens, they focus more on conveying semantic information of the content.
+description: Semantic tokens are designed for use in specific contexts. Different from tokens, they focus more on conveying semantic information of the content.
 ---
 
 import { Callout } from 'nextra/components'
 
 # Semantic Tokens
 
-Semantic tokens are designed for use in specific contexts. Different from Tokens, they focus more on conveying semantic information of the content.
+Semantic tokens are designed for use in specific contexts. Different from tokens, they focus more on conveying semantic information of the content.
 
 ## Customizing Semantic Tokens
 
@@ -33,13 +33,13 @@ const theme = defineTheme({
   names in `tokens`.
 </Callout>
 
-In most cases, the values of Semantic Tokens can directly reference existing Tokens.
+In most cases, the values of semantic tokens can directly reference existing tokens.
 
-> To reference a Token in Semantic Tokens, use the `{}` syntax.
+> To reference a token in semantic tokens, use the `{}` syntax.
 >
-> If a Semantic Token is referenced, its definition must come after the definition of the referenced Semantic Token. For example, `borders.button.sm` in the following demo must be defined after `colors`.
+> If a semantic token is referenced, its definition must come after the definition of the referenced semantic token. For example, `borders.button.sm` in the following demo must be defined after `colors`.
 >
-> Tokens in the Nex UI system are executed before Semantic Tokens, so they can be referenced normally.
+> Tokens in the Nex UI system are executed before semantic tokens, so they can be referenced normally.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -83,11 +83,11 @@ declare module '@nex-ui/react' {
 
 ## Using Semantic Tokens
 
-The usage is the same as that of [Tokens](/docs/customization/tokens).
+It works the same way as [tokens](/docs/customization/tokens).
 
 ## Dark Mode
 
-Semantic Tokens can also change according to conditions such as light or dark mode. The dark theme of Nex UI components is implemented in this way.
+Semantic tokens can also change according to conditions such as light or dark mode. The dark theme of Nex UI components is implemented in this way.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -107,7 +107,7 @@ const theme = defineTheme({
 
 ## Nested Semantic Tokens
 
-Semantic Tokens can be nested to create a hierarchical structure. This is very useful when combining Semantic Tokens.
+Semantic tokens can be nested to create a hierarchical structure. This is very useful when combining semantic tokens.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -126,10 +126,10 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  Use the `DEFAULT` key to define the default value of a nested Semantic Token.
+  Use the `DEFAULT` key to define the default value of a nested semantic token.
 </Callout>
 
-Since the default value of `bg` is defined using the `DEFAULT` key, you can use the `bg` Semantic Token like this:
+Since the default value of `bg` is defined using the `DEFAULT` key, you can use the `bg` semantic token like this:
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -189,4 +189,4 @@ const theme = defineTheme({
 
 ## Types of Semantic Tokens
 
-The types are the same as those of [Tokens](/docs/customization/tokens).
+The types are the same as [tokens](/docs/customization/tokens).

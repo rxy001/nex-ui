@@ -39,7 +39,7 @@ const theme = defineTheme({
 })
 ```
 
-Tokens are pieces of information associated with an intuitive and readable name, generally in the form of name/value pairs. Except for tokens of the `Colors` type, they also support the above object format.
+Tokens are pieces of information associated with an intuitive and readable name, generally in the form of name/value pairs. Except for color tokens, they also support the above object format.
 
 <Callout>
   It is recommended that you define some objective tokens in `tokens` that have
@@ -95,14 +95,14 @@ export default function App() {
   Nex UI has associated the mapping between `backgroundColor` and `colors`,
   `padding` and `spaces`. Therefore, they can be used directly. If you change
   `backgroundColor: 'sky.500'` to `outlineColor: 'sky.500'`, it will not work
-  properly. Learn more in [Scales](/docs/customization/scales).
+  properly. Read more on the [Scales](/docs/customization/scales) page.
 </Callout>
 
-## Types of Tokens
+## Token Types
 
 ### Colors
 
-Tokens of the `Colors` type represent the visually presented colors of elements. Their value type is `string | object`.
+Color tokens represent the visually presented colors of elements. Their value type is `string | object`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -119,14 +119,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.Colors />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### Sizes
 
-Tokens of the `Sizes` type represent the height and width of elements. Their value type is `string | number`.
+Size tokens represent the height and width of elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -141,14 +141,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.Sizes />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### Spaces
 
-Tokens of the `Spaces` type represent the spacing between elements. Their value type is `string | number`.
+Space tokens represent the spacing between elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -163,14 +163,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.Spaces />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### FontSizes
 
-Tokens of the `FontSizes` type represent the font size of text elements. Their value type is `string | number`.
+FontSize tokens represent the font size of text elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -185,14 +185,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.FontSizes />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### FontFamilies
 
-Tokens of the `FontFamilies` type represent the font of text elements. Their value type is `string`.
+FontFamiliy tokens represent the font of text elements. Their value type is `string`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -207,14 +207,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.FontFamilies />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### FontWeights
 
-Tokens of the `FontWeights` type represent the font weight of text elements. Their value type is `string | number`.
+FontWeight tokens represent the font weight of text elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -229,14 +229,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.FontWeights />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### LineHeights
 
-Tokens of the `LineHeights` type represent the amount of space for multi-line elements, such as the spacing of multi-line text. Their value type is `string | number`.
+LineHeight tokens represent the amount of space for multi-line elements, such as the spacing of multi-line text. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -251,14 +251,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.LineHeights />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### Borders
 
-Tokens of the `Borders` type represent the borders of elements. Their value type is `string`.
+Border tokens represent the borders of elements. Their value type is `string`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -273,14 +273,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.Borders />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### BorderWidths
 
-Tokens of the `BorderWidths` type represent the border width of elements. Their value type is `string | number`.
+BorderWidth tokens represent the border width of elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -295,14 +295,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.BorderWidths />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### Radii
 
-Tokens of the `Radii` type represent the outer border radius of elements. Their value type is `string | number`.
+Radius tokens represent the outer border radius of elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -317,14 +317,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.Radii />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### Shadows
 
-Tokens of the `Shadows` type represent the shadow effect of elements. Their value type is `string`.
+Shadow tokens represent the shadow effect of elements. Their value type is `string`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -339,14 +339,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.Shadows />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### Transitions
 
-Tokens of the `Transitions` type represent different transition effects when elements switch between different states. Their value type is `string`.
+Transition tokens represent different transition effects when elements switch between different states. Their value type is `string`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -361,14 +361,14 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.Transitions />
   <span>&nbsp;property by default.</span>
 </Callout>
 
 ### Z-Indexes
 
-Tokens of the `Z-Indexes` type represent the z-axis order of elements and their descendant elements. Their value type is `number`.
+Z-Index tokens represent the z-axis order of elements and their descendant elements. Their value type is `number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -383,7 +383,7 @@ const theme = defineTheme({
 ```
 
 <Callout type='info'>
-  <span className='x:float-left'>Can be used for the </span>
+  <span className='x:float-left'>Can be used for the &nbsp;</span>
   <AvailableProps.ZIndexes />
   <span>&nbsp;property by default.</span>
 </Callout>

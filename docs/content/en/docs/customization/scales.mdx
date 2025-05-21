@@ -1,6 +1,6 @@
 ---
 title: Scales
-description: Scales can associate `tokens` and `semanticTokens` with CSS properties, allowing CSS properties to map to corresponding Token types, and enabling CSS properties to use Tokens of the corresponding types as values.
+description: Scales map tokens and semantic tokens to CSS properties, allowing CSS properties to directly reference tokens of the appropriate type. This enables the use of tokens as values for CSS properties, ensuring consistency and scalability across the design system.',
 ---
 
 import { Callout } from 'nextra/components'
@@ -8,7 +8,7 @@ import { ScaleTable } from '@/components/docs'
 
 # Scales
 
-Scales can associate `tokens` and `semanticTokens` with CSS properties, allowing CSS properties to map to corresponding Token types, and enabling CSS properties to use Tokens of the corresponding types as values.
+Scales map tokens and semantic tokens to CSS properties, allowing CSS properties to directly reference tokens of the appropriate type. This enables the use of tokens as values for CSS properties, ensuring consistency and scalability across the design system.',
 
 ## Customizing Scales
 
@@ -51,7 +51,7 @@ The `key` of the Scale is of the `CSSProperty` type, and the `value` is of the `
 
 <Callout>There is no need to associate CSS properties with Alias here.</Callout>
 
-After the above definition, in the usage of methods such as the `sx` property, `defineRecipe`, and `defineSlotRecipe`, `color`, `borderColor`, and `backgroundColor` can directly reference Tokens of the Colors type, `width` references Tokens of the Sizes type, and `padding` references Tokens of the Spaces type.
+After the above definition, in the usage of methods such as the `sx` property, `defineRecipe`, and `defineSlotRecipe`, `color`, `borderColor`, and `backgroundColor` can directly reference color tokens, `width` references size tokens, and `padding` references space tokens.
 
 ```tsx
 import { Box } from '@nex-ui/react'

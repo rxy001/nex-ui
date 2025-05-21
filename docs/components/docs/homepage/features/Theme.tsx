@@ -22,7 +22,7 @@ export const theme = defineTheme({
         700: '#004493',
         800: '#002E62',
         900: '#14204a',
-      }
+      },
     },
     borders: {
       xs: '0.5px solid',
@@ -157,7 +157,7 @@ export function Theme({ translations }: ThemeProps) {
       description: translations?.tokensDesc,
     },
     {
-      title: 'SemanticToken',
+      title: 'Semantic Tokens',
       description: translations?.semanticTokensDesc,
     },
     {

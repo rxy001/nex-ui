@@ -16,7 +16,7 @@ Define your own design tokens and apply them seamlessly as CSS values. CSS prope
 
 ### Scales
 
-Scales can associate design tokens with CSS properties, enabling CSS properties to be mapped to the corresponding token types. As a result, CSS properties can use tokens of the corresponding types as values.
+Scales map tokens and semantic tokens to CSS properties, allowing CSS properties to directly reference tokens of the appropriate type. This enables the use of tokens as values for CSS properties, ensuring consistency and scalability across the design system.',
 
 ### Aliases
 
