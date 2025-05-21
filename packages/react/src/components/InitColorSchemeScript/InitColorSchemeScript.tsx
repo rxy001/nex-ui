@@ -17,4 +17,6 @@ export const InitColorSchemeScript = ({
   />
 )
 
+InitColorSchemeScript.displayName = 'InitColorSchemeScript'
+
 export type { InitColorSchemeScriptProps }

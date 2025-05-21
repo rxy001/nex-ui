@@ -25,6 +25,8 @@ function InnerProvider({
   )
 }
 
+InnerProvider.displayName = 'InnerProvider'
+
 function TopLevelProvider(props: NexUIProviderProps) {
   const { theme, children, colorScheme, prefix = 'nui' } = props
 
@@ -68,6 +70,8 @@ function TopLevelProvider(props: NexUIProviderProps) {
   )
 }
 
+TopLevelProvider.displayName = 'TopLevelProvider'
+
 function NestedProvider(props: NexUIProviderProps) {
   const { theme, children } = props
 
@@ -102,6 +106,8 @@ function NestedProvider(props: NexUIProviderProps) {
     </InnerProvider>
   )
 }
+
+NestedProvider.displayName = 'NestedProvider'
 
 export function NexUIProvider(props: NexUIProviderProps) {
   const outer = useNexUI()

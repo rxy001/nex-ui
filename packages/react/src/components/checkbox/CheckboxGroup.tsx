@@ -66,3 +66,5 @@ export const CheckboxGroup = <
     </CheckboxGroupProvider>
   )
 }
+
+CheckboxGroup.displayName = 'CheckboxGroup'

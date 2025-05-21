@@ -23,6 +23,7 @@ export default tseslint.config(
       '**/*.yaml',
       '**/build',
       '**/.turbo',
+      '**/bin/*.js',
     ],
   },
   eslint.configs.recommended,
@@ -89,13 +90,6 @@ export default tseslint.config(
           allow: ['error', 'warn'],
         },
       ],
-      'react/jsx-filename-extension': [
-        'error',
-        {
-          extensions: ['.tsx', '.jsx'],
-        },
-      ],
-      'react/prop-types': 'off',
 
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-use-before-define': [
@@ -120,11 +114,29 @@ export default tseslint.config(
 
       'jsx-a11y/alt-text': 'error',
 
+      'react/void-dom-elements-no-children': 'error',
+      'react/jsx-pascal-case': 'error',
+      'react/forbid-prop-types': 'error',
+      'react/prop-types': 'off',
+      'react/jsx-filename-extension': [
+        'error',
+        {
+          extensions: ['.tsx', '.jsx'],
+        },
+      ],
+
       'import/no-duplicates': ['error', { considerQueryString: true }],
       'import/no-cycle': 'error',
       'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
       'import/prefer-default-export': 'off',
       'import/no-named-as-default': 'off',
+    },
+  },
+  {
+    files: ['packages/react/**/*.{ts,tsx,js,jsx}'],
+    ignores: ['**/*.stories.tsx', '**/*.test.tsx'],
+    rules: {
+      'react/display-name': ['error', { ignoreTranspilerName: true }],
     },
   },
   {
