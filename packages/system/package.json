@@ -55,7 +55,6 @@
     "react-dom": ">=19"
   },
   "devDependencies": {
-    "@types/serialize-javascript": "5.0.4",
     "csstype": "3.1.3"
   }
 }
