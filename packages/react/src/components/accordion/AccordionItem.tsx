@@ -315,3 +315,5 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     </LazyMotion>
   )
 }
+
+AccordionItem.displayName = 'AccordionItem'

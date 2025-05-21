@@ -142,3 +142,5 @@ export const AvatarGroup = <RootElement extends ElementType = 'div'>(
     </nex.div>
   )
 }
+
+AvatarGroup.displayName = 'AvatarGroup'

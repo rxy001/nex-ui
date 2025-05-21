@@ -41,3 +41,5 @@ export const Insertion = ({
   }
   return null
 }
+
+Insertion.displayName = 'Insertion'

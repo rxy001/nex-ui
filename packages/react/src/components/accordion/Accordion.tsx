@@ -156,3 +156,5 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     </AccordionGroupProvider>
   )
 }
+
+Accordion.displayName = 'Accordion'

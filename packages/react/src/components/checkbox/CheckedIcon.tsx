@@ -51,3 +51,5 @@ export const CheckedIcon = ({ checked }: CheckedIconProps) => {
     </LazyMotion>
   )
 }
+
+CheckedIcon.displayName = 'CheckedIcon'
