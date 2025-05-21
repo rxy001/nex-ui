@@ -1,5 +1,13 @@
 # @nex-ui/hooks
 
+## 0.0.9
+
+### Patch Changes
+
+- 4a5c359: release
+- Updated dependencies [4a5c359]
+  - @nex-ui/utils@0.0.9
+
 ## 0.0.8
 
 ### Patch Changes
