@@ -11,4 +11,10 @@ export default defineConfig([
       'react/require-default-props': 'off',
     },
   },
+  {
+    files: ['nextraTheme/**/*.{ts,tsx}'],
+    rules: {
+      'react/jsx-pascal-case': 'off',
+    },
+  },
 ])
