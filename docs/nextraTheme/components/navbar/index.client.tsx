@@ -64,6 +64,7 @@ const NavbarMenu: FC<{
           (menu.items as Record<string, { title: string; href?: string }>) ||
             {},
         ).map(([key, item]) => (
+          // eslint-disable-next-line react/jsx-pascal-case
           <_MenuItem
             key={key}
             as={Anchor}

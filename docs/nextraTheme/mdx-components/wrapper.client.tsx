@@ -35,6 +35,7 @@ export const ClientWrapper: MDXWrapper = ({
           aria-label='table of contents'
         >
           {themeContext.toc && (
+            // eslint-disable-next-line react/jsx-pascal-case
             <TOC
               toc={toc}
               filePath={metadata.filePath}
