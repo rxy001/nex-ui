@@ -13,11 +13,11 @@ import logo from '@/public/images/logo.png'
 The `sx` prop is a shortcut for defining custom styles that can access the theme.
 
 The `sx` prop provides a superset of CSS. In addition to including all CSS properties and selectors, it also has custom properties and selectors built into Nex UI. The values of CSS properties can directly use the predefined theme.
-If you're not satisfied with the existing CSS custom properties, selectors, and themes, Nex UI also offers extensibility. You can learn more information in [Customizing the Theme](/docs/customization/theming).
+If you're not satisfied with the existing CSS custom properties, selectors, and themes, Nex UI also offers extensibility. You can read more on [Customizing the Theme page](/docs/customization/theming).
 
 ## Usage
 
-The following example demonstrates how to use the `sx` prop. Note that not all values are valid CSS properties. This is because the keys of `sx` are mapped to specific Token types. This concept will be introduced in more detail next.
+The following example demonstrates how to use the `sx` prop. Note that not all values are valid CSS properties. This is because the keys of `sx` are mapped to specific token types. This concept will be introduced in more detail next.
 
 <FlexCenter justify='center'>
   <Box
@@ -110,7 +110,7 @@ export default function Example() {
 
 ## Theme-Aware Properties
 
-Scales can be used to associate Tokens and SemanticTokens with CSS properties. This enables CSS properties to be mapped to the corresponding Token types, allowing CSS properties to use Tokens of the appropriate types as values.
+Scales map tokens and semantic tokens to CSS properties, allowing CSS properties to directly reference tokens of the appropriate type. This enables the use of tokens as values for CSS properties, ensuring consistency and scalability across the design system.',
 
 ```tsx {11,12,13}
 import { Box, defineTheme, NexUIProvider } from '@nex-ui/react'
@@ -153,7 +153,7 @@ Note that only when the CSS property value is a string can it be potentially map
 
 In the above example, the actual value of `width` is `10px`, while the actual value of `height` is `1px`.
 
-Learn more information in [Scales](/docs/customization/scales).
+Read more on the [Scales page](/docs/customization/scales).
 
 ### Colors
 
@@ -169,7 +169,7 @@ The `backgroundColor` property can also be accessed via the alias `bg`:
 <Box sx={{ bg: 'blue.400' }} />
 ```
 
-Learn more information in [Colors](/docs/customization/colors).
+Read more on the [Colors page](/docs/customization/colors).
 
 ### Borders
 
@@ -179,7 +179,7 @@ The `borderWidth` property can accept paths from `tokens.borders` and `semanticT
 <Box sx={{ border: 'sm', borderColor: 'blue.500' }} />
 ```
 
-Learn more information in [Borders](/docs/customization/borders).
+Read more on the [Borders page](/docs/customization/borders).
 
 ### Sizes
 
@@ -195,7 +195,7 @@ The `width` and `height` properties can also be accessed via the aliases `w` and
 <Box sx={{ w: '2', h: '1' }} />
 ```
 
-Learn more information in [Sizes](/docs/customization/sizes).
+Read more on the [Sizes page](/docs/customization/sizes).
 
 ### Spaces
 
@@ -211,7 +211,7 @@ The `padding` and `margin` properties can also be accessed via the aliases `p` a
 <Box sx={{ p: '1', m: '1' }} />
 ```
 
-Learn more information in [Spaces](/docs/customization/spaces).
+Read more on the [Spaces page](/docs/customization/spaces).
 
 ### Radii
 
@@ -221,7 +221,7 @@ The `borderRadius` property can accept paths from `tokens.radii` and `semanticTo
 <Box sx={{ borderRadius: 'sm' }} />
 ```
 
-Learn more information in [Radii](/docs/customization/radii).
+Read more on the [Radii page](/docs/customization/radii).
 
 ### Typography
 
@@ -249,7 +249,7 @@ The `lineHeight` property can accept paths from `tokens.lineHeights` and `semant
 <Box sx={{ lineHeight: 'base' }} />
 ```
 
-Learn more information in [Typography](/docs/customization/typography).
+Read more on the [Typography page](/docs/customization/typography).
 
 ### BorderWidths
 
@@ -259,7 +259,7 @@ The `borderWidth` property can accept paths from `tokens.borderWidths` and `sema
 <Box sx={{ borderWidth: 'sm' }} />
 ```
 
-Learn more information in [BorderWidths](/docs/customization/border-widths).
+Read more on the [BorderWidths page](/docs/customization/border-widths).
 
 ### Shadows
 
@@ -269,7 +269,7 @@ The `boxShadow` property can accept paths from `tokens.shadows` and `semanticTok
 <Box sx={{ boxShadow: 'sm' }} />
 ```
 
-Learn more information in [Shadows](/docs/customization/shadows).
+Read more on the [Shadows page](/docs/customization/shadows).
 
 ### Transitions
 
@@ -279,7 +279,7 @@ The `transition` property can accept paths from `tokens.transitions` and `semant
 <Box sx={{ transition: 'all' }} />
 ```
 
-Learn more information in [Transitions](/docs/customization/transitions).
+Read more on the [Transitions page](/docs/customization/transitions).
 
 ### Z-Indexes
 
@@ -289,13 +289,13 @@ The `zIndex` property can accept paths from `tokens.zIndexes` and `semanticToken
 <Box sx={{ zIndex: 'min' }} />
 ```
 
-Learn more information in [Z-Indexes](/docs/customization/z-indexes).
+Read more on the [Z-Indexes page](/docs/customization/z-indexes).
 
 ## Responsive Value
 
 All CSS properties related to the `sx` property also support responsive values for specific breakpoints, and the `sx` property simplifies the process of defining and implementing responsive breakpoints.
 
-Learn more information in [Responsive Design](/docs/customization/responsive-design).
+Read more on the [Responsive Design page](/docs/customization/responsive-design).
 
 ## Dark Mode
 
@@ -347,7 +347,7 @@ The following example demonstrates how to define styles for components in differ
 </Box>
 ```
 
-Learn more information in [Dark Mode](/docs/customization/dark-mode).
+Read more on the [Dark Mode page](/docs/customization/dark-mode).
 
 ## `colorPalette` Prop
 
@@ -396,7 +396,7 @@ Suppose we need to create a button with themeable styles from scratch.
 
 ## Token Reference Syntax
 
-Normally, only when the mapping relationship between CSS properties and Token types is defined in `scales` can the corresponding types of Tokens be referenced when defining `CSS`. Nex UI has default `Scales` settings:
+Normally, only when the mapping relationship between CSS properties and token types is defined in `scales` can the corresponding types of tokens be referenced when defining `CSS`. Nex UI has default `Scales` settings:
 
 ```tsx
 {
@@ -419,8 +419,8 @@ Therefore, in the `sx` property, you can use:
 </Box>
 ```
 
-However, in special shorthand CSS properties such as `border` and `padding`, Tokens cannot be referenced in the above way. To address this, Nex UI provides a Token reference syntax,
-allowing you to reference Tokens in shorthand properties:
+However, in special shorthand CSS properties such as `border` and `padding`, tokens cannot be referenced in the above way. To address this, Nex UI provides a token reference syntax,
+allowing you to reference tokens in shorthand properties:
 
 ```tsx
 <Box
@@ -432,7 +432,7 @@ allowing you to reference Tokens in shorthand properties:
 </Box>
 ```
 
-Moreover, you can also use `colorPalette` in the Token reference syntax:
+Moreover, you can also use `colorPalette` in the token reference syntax:
 
 ```tsx
 <Box
@@ -519,4 +519,4 @@ You can define aliases for CSS properties through [Aliases](/docs/customization/
 
 When you want to combine CSS selectors, such as `'&:not(:disabled):not([data-disabled=true]):hover'`, you can customize more selectors through Selectors and unlock additional usage scenarios.
 
-Learn more information in [Selectors](/docs/customization/selectors).
+Read more on the [Selectors page](/docs/customization/selectors).
