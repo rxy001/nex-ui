@@ -7,7 +7,7 @@ Thanks for showing interest to contribute to Nex UI ✨, you rock!
 ## Tooling
 
 - [PNPM](https://pnpm.io/) to manage packages and dependencies.
-- [Rolldown](https://rolldown.rs/) to bundle packages.
+- [Rollup](https://rollupjs.org/) to bundle packages.
 - [Storybook](https://storybook.js.org/) for rapid UI component development and
   testing.
 - [Testing Library](https://testing-library.com/) for testing components and
