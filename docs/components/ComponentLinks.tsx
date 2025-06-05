@@ -1,9 +1,9 @@
 import { Button } from '@nex-ui/react'
-import type { ButtonProps } from '@nex-ui/react'
 import { GithubOutlined } from '@nex-ui/icons'
 import StorybookIcon from '@/icons/storybook.svg'
 import W3cIcon from '@/icons/w3c.svg'
 import NextIcon from '@/icons/nextjs.svg'
+import type { ButtonProps } from '@nex-ui/react'
 
 type ComponentLinksProps = {
   rscCompatible?: boolean

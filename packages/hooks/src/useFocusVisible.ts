@@ -1,7 +1,7 @@
 'use client'
 
-import type { Dispatch, RefObject, SetStateAction } from 'react'
 import { useEffect, useId, useState } from 'react'
+import type { Dispatch, RefObject, SetStateAction } from 'react'
 
 function isFocusVisible(element: Element): boolean {
   try {

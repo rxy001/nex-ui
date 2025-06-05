@@ -1,8 +1,7 @@
 import { registerStyles, insertStyles } from '@emotion/utils'
+import { useInsertionEffectAlwaysWithSyncFallback } from '@emotion/use-insertion-effect-with-fallbacks'
 import type { SerializedStyles } from '@emotion/serialize'
 import type { EmotionCache } from '@emotion/cache'
-// @ts-ignore
-import { useInsertionEffectAlwaysWithSyncFallback } from '@emotion/use-insertion-effect-with-fallbacks'
 
 const isBrowser = typeof document !== 'undefined'
 

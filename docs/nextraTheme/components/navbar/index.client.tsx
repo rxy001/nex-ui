@@ -10,9 +10,9 @@ import cn from 'clsx'
 import { Anchor, Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
+import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 import type { MenuItem } from 'nextra/normalize-pages'
 import type { FC, ReactNode } from 'react'
-import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 
 const classes = {
   link: cn(

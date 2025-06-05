@@ -1,7 +1,6 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { ElementType, SVGProps } from 'react'
 import { __DEV__ } from '@nex-ui/utils'
 import { useNexUI } from '../provider/Context'
 import { iconRecipe } from '../../theme/recipes'
@@ -12,6 +11,7 @@ import {
   getUtilityClass,
   useSlotProps,
 } from '../utils'
+import type { ElementType, SVGProps } from 'react'
 import type { IconOwnerState, IconProps } from './types'
 
 const useSlotClasses = (ownerState: IconOwnerState) => {

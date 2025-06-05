@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { Divider } from '../Divider'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Divider',

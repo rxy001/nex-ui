@@ -1,8 +1,8 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { FC } from 'react'
 import { useConfig, useThemeConfig } from '../stores'
+import type { FC } from 'react'
 
 const classes = {
   link: cn(

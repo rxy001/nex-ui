@@ -1,13 +1,4 @@
 import { forEach, isString, walkObject, reduce, __DEV__ } from '@nex-ui/utils'
-import type {
-  CreateTokensConfig,
-  TokenMap,
-  CssVarMap,
-  TokenCategory,
-  ConditionKey,
-  SemanticTokenValue,
-  TokenValue,
-} from './types'
 import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
@@ -19,6 +10,15 @@ import {
   isValidSemanticTokenValue,
   isResponsiveColor,
 } from '../utils'
+import type {
+  CreateTokensConfig,
+  TokenMap,
+  CssVarMap,
+  TokenCategory,
+  ConditionKey,
+  SemanticTokenValue,
+  TokenValue,
+} from './types'
 import type { Token } from './createToken'
 
 export function createTokens(config: CreateTokensConfig) {

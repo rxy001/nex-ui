@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { some } from '@nex-ui/utils'
 import { useColorScheme } from '@nex-ui/react'
+import { rootFile, getHtmlFile } from './entries'
 import type {
   SandpackFiles,
   SandpackPredefinedTemplate,
 } from '@codesandbox/sandpack-react'
-import { rootFile, getHtmlFile } from './entries'
 
 export type UseSandpackProps = {
   files: SandpackFiles

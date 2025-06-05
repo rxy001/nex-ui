@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { SearchOutlined } from '@nex-ui/icons'
+import { useState } from 'react'
 import { Input } from '../Input'
 import { Flex } from '../../flex'
 import { Icon } from '../../icon'
-import { useState } from 'react'
 import { InputProps } from '../types'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Input',

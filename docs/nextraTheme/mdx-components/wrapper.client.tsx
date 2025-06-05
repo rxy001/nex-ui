@@ -1,10 +1,10 @@
 'use client'
 
 import cn from 'clsx'
-import type { MDXWrapper } from 'nextra'
 import { cloneElement, useEffect } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../components'
 import { setToc, useConfig, useThemeConfig } from '../stores'
+import type { MDXWrapper } from 'nextra'
 
 export const ClientWrapper: MDXWrapper = ({
   toc,

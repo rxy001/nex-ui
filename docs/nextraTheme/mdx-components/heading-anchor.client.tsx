@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import type { FC } from 'react'
 import { setActiveSlug } from '../stores'
+import type { FC } from 'react'
 
 const callback: IntersectionObserverCallback = (entries) => {
   const entry = entries.find((e: IntersectionObserverEntry) => e.isIntersecting)

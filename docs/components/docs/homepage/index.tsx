@@ -1,14 +1,14 @@
 import { Button } from '@nex-ui/react'
 import Link from 'next/link'
-import type { ElementType, ReactNode } from 'react'
-import type { ButtonProps } from '@nex-ui/react'
-import AccessibilityIcon from '@/icons/accessibility.svg'
 import { BoltOutlined, MoonOutlined, MagicOutlined } from '@nex-ui/icons'
+import AccessibilityIcon from '@/icons/accessibility.svg'
 import { Theme, Style, DarkMode } from './features'
 import { Card } from './Card'
 import { Gallery } from './Gallery'
 import { CopyButton } from './CopyButton'
 import { Threads } from './Threads'
+import type { ButtonProps } from '@nex-ui/react'
+import type { ElementType, ReactNode } from 'react'
 import type { ThemeProps } from './features'
 
 type Content = { title?: ReactNode; desc?: ReactNode }

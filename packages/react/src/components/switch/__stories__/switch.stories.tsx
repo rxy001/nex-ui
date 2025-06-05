@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
 import { Switch } from '../Switch'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { SwitchProps } from '../types'
 
 const meta = {

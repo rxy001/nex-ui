@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import mergeWith from 'lodash.mergewith'
-import type { ClassValue } from 'clsx'
 import { chain } from './chain'
+import type { ClassValue } from 'clsx'
 
 interface Props {
   [key: string]: any

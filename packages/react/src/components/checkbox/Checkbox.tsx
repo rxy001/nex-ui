@@ -4,13 +4,6 @@ import { nex } from '@nex-ui/styled'
 import { isValidElement, useId, useRef } from 'react'
 import { isFunction, __DEV__, isString, mergeRefs } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
-import type {
-  ElementType,
-  ChangeEvent,
-  HTMLAttributes,
-  KeyboardEvent,
-  InputHTMLAttributes,
-} from 'react'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { useCheckboxGroup } from './CheckboxGroupContext'
@@ -21,9 +14,16 @@ import {
   getUtilityClass,
   useSlotProps,
 } from '../utils'
-import type { CheckboxOwnerState, CheckboxProps } from './types'
 import { CheckedIcon } from './CheckedIcon'
 import { Box } from '../box'
+import type { CheckboxOwnerState, CheckboxProps } from './types'
+import type {
+  ElementType,
+  ChangeEvent,
+  HTMLAttributes,
+  KeyboardEvent,
+  InputHTMLAttributes,
+} from 'react'
 
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
   const { prefix } = useNexUI()

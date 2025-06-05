@@ -4,12 +4,6 @@ import { LoadingOutlined } from '@nex-ui/icons'
 import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { nex } from '@nex-ui/styled'
 import { useRef } from 'react'
-import type {
-  ButtonHTMLAttributes,
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-} from 'react'
 import { mergeRefs } from '@nex-ui/utils'
 import { useNexUI } from '../provider'
 import { buttonRecipe } from '../../theme/recipes'
@@ -21,6 +15,12 @@ import {
   Ripple,
   useStyles,
 } from '../utils'
+import type {
+  ButtonHTMLAttributes,
+  ElementType,
+  HTMLAttributes,
+  KeyboardEvent,
+} from 'react'
 import type { ButtonProps, ButtonOwnerState } from './types'
 
 const useSlotClasses = (ownerState: ButtonOwnerState) => {

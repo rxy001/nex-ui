@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { isArray } from '@nex-ui/utils'
 import { nex } from '@nex-ui/styled'
-import type { ElementType } from 'react'
 import {
   useDefaultProps,
   useSlotProps,
@@ -13,6 +12,7 @@ import { AvatarGroupProvider } from './AvatarGroupContext'
 import { avatarGroupRecipe } from '../../theme/recipes'
 import { Avatar } from './Avatar'
 import { useNexUI } from '../provider'
+import type { ElementType } from 'react'
 import type { AvatarGroupOwnerState, AvatarGroupProps } from './types'
 
 const useSlotClasses = (ownerState: AvatarGroupOwnerState) => {

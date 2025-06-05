@@ -1,8 +1,8 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { ElementType } from 'react'
 import { useSlotProps } from '../utils'
+import type { ElementType } from 'react'
 import type { BoxProps } from './types'
 
 export const Box = <RootComponent extends ElementType = 'div'>(

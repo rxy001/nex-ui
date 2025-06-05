@@ -2,13 +2,6 @@
 
 import { useId, useRef } from 'react'
 import { nex } from '@nex-ui/styled'
-import type {
-  ChangeEvent,
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-  InputHTMLAttributes,
-} from 'react'
 import { isFunction, isString, mergeRefs } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
@@ -20,6 +13,13 @@ import {
   composeClasses,
   getUtilityClass,
 } from '../utils'
+import type {
+  ChangeEvent,
+  ElementType,
+  HTMLAttributes,
+  KeyboardEvent,
+  InputHTMLAttributes,
+} from 'react'
 import type { SwitchOwnerState, SwitchProps } from './types'
 
 const useSlotClasses = (ownerState: SwitchOwnerState) => {

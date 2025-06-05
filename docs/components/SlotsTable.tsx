@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import {
   Table,
   Tbody,
@@ -9,6 +8,7 @@ import {
   DefaultItem,
   HighlightItem,
 } from './table'
+import type { ReactNode } from 'react'
 
 type SlotsTableProps = {
   dataSource: {

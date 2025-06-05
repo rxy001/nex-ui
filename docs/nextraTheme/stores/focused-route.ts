@@ -1,5 +1,5 @@
-import type { Dispatch } from 'react'
 import { create } from 'zustand'
+import type { Dispatch } from 'react'
 
 const useFocusedRouteStore = create<{
   focused: string

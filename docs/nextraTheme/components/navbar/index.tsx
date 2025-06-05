@@ -3,10 +3,10 @@ import NextLink from 'next/link'
 import { Anchor } from 'nextra/components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { element } from 'nextra/schemas'
-import type { FC } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
+import type { FC } from 'react'
 
 const propsSchema = z.strictObject({
   children: element.optional(),

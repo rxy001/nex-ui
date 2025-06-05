@@ -4,10 +4,10 @@ import cn from 'clsx'
 import { Select } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { useColorScheme } from '@nex-ui/react'
-import type { Mode } from '@nex-ui/react'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
-import type { FC } from 'react'
 import { useThemeConfig } from '../stores'
+import type { Mode } from '@nex-ui/react'
+import type { FC } from 'react'
 
 type ThemeSwitchProps = {
   lite?: boolean

@@ -1,3 +1,4 @@
+import { ClassValue } from 'clsx'
 import type { ElementType, Key, ReactNode } from 'react'
 import type { HTMLMotionProps, DOMMotionComponents } from 'motion/react'
 import type {
@@ -7,7 +8,6 @@ import type {
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 import type { AccordionItemVariants } from '../../theme/recipes'
-import { ClassValue } from 'clsx'
 
 // Accordion
 export interface AccordionPropsOverrides {}

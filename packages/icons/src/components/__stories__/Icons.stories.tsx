@@ -1,6 +1,6 @@
 import { map } from '@nex-ui/utils'
-import type { StoryObj } from '@storybook/react'
 import * as Icon from '../index'
+import type { StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Icon',

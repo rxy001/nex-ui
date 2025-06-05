@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { fireEvent } from '@testing-library/react'
 import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
 import { Button } from '../Button'
-import type { ButtonProps } from '../types'
 import { buttonClasses } from '../buttonClasses'
+import type { ButtonProps } from '../types'
 
 describe('Button', () => {
   mountTest(<Button />)

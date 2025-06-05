@@ -1,7 +1,7 @@
 import cn from 'clsx'
-import type { FC, ReactNode } from 'react'
 import { H1 } from '../../mdx-components/heading'
 import { NotFoundLink } from './index.client'
+import type { FC, ReactNode } from 'react'
 
 type NotFoundPageProps = {
   content?: ReactNode

@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
 import { isFunction, isPlainObject } from '@nex-ui/utils'
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
+import { useNexUI } from '../provider/Context'
 import type {
   RecipeRuntimeFn,
   CSSObject,
   SlotRecipeRuntimeFn,
 } from '@nex-ui/system'
-import { useNexUI } from '../provider/Context'
 import type { ComponentNames } from '../../types/componentThemes'
 
 type UseStylesProps<S extends RecipeRuntimeFn | SlotRecipeRuntimeFn> = {

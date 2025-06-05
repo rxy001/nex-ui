@@ -4,7 +4,6 @@ import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { __DEV__, filter } from '@nex-ui/utils'
-import type { ElementType, Key } from 'react'
 import { AccordionGroupProvider } from './AccordionContext'
 import { useNexUI } from '../provider'
 import {
@@ -15,6 +14,7 @@ import {
   getUtilityClass,
 } from '../utils'
 import { accordionRecipe } from '../../theme/recipes'
+import type { ElementType, Key } from 'react'
 import type { AccordionOwnerState, AccordionProps } from './types'
 
 const useSlotClasses = (ownerState: AccordionProps) => {

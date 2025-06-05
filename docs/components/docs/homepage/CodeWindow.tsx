@@ -1,9 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
-import type { BundledLanguage } from 'shiki'
-import { CodeBlock } from '../../CodeBlock'
 import { useState } from 'react'
+import { CodeBlock } from '../../CodeBlock'
+import type { BundledLanguage } from 'shiki'
 
 interface CodeBlockProps {
   children: string

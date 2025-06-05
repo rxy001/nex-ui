@@ -5,7 +5,6 @@ import { nex } from '@nex-ui/styled'
 import { isString, mergeRefs } from '@nex-ui/utils'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
-import type { ElementType, ChangeEvent, MouseEvent } from 'react'
 import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
 import {
@@ -16,6 +15,7 @@ import {
   useStyles,
 } from '../utils'
 import { Button } from '../button'
+import type { ElementType, ChangeEvent, MouseEvent } from 'react'
 import type { InputOwnerState, InputProps } from './types'
 
 const useSlotClasses = (ownerState: InputOwnerState) => {
