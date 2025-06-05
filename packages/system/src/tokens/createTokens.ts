@@ -28,98 +28,12 @@ export function createTokens(config: CreateTokensConfig) {
 
   const cssVarMap: CssVarMap = new Map()
 
-  let workInProgress: Token | null = null
-
-  function addToTokenMap() {
-    if (workInProgress) {
-      tokenMap.set(workInProgress.name, workInProgress)
-    }
+  function registerToken(workInProgress: Token) {
+    tokenMap.set(workInProgress.name, workInProgress)
+    return workInProgress
   }
 
-  function createCssVar() {
-    if (workInProgress) {
-      const { path } = workInProgress
-
-      const variableName = createCssVarName(prefix, path)
-
-      const newValue = `var(${variableName})`
-
-      workInProgress.cssVar = {
-        var: variableName,
-        ref: newValue,
-      }
-
-      workInProgress.value = newValue
-    }
-  }
-
-  function addNegativeToken() {
-    if (workInProgress) {
-      const { category, value, path, originalValue, cssVar } = workInProgress
-      const newPath = [...path]
-      newPath.push(`-${newPath.pop()}`)
-
-      workInProgress = createToken({
-        category,
-        originalValue,
-        path: newPath,
-        name: pathToTokenName(newPath),
-        value: negate(cssVar?.ref ?? value),
-      })
-
-      addToTokenMap()
-    }
-  }
-
-  function buildCssVars() {
-    if (workInProgress) {
-      const { conditions, cssVar } = workInProgress
-
-      const variableName = cssVar!.var
-      forEach(
-        conditions,
-        // @ts-ignore
-        (value: string | number | undefined, condition: ConditionKey) => {
-          if (!value) {
-            return
-          }
-
-          if (!cssVarMap.has(condition)) {
-            cssVarMap.set(condition, new Map())
-          }
-
-          cssVarMap.get(condition)!.set(variableName, value)
-        },
-      )
-    }
-  }
-
-  function handleToken() {
-    if (workInProgress) {
-      createCssVar()
-
-      buildCssVars()
-
-      addToTokenMap()
-
-      const { category, originalValue } = workInProgress
-
-      switch (category) {
-        case 'spaces':
-          if (originalValue === '0rem' || originalValue === 0) {
-            return
-          }
-          addNegativeToken()
-          break
-        default:
-          break
-      }
-
-      workInProgress = null
-    }
-  }
-
-  function replaceTokenPlaceholders(value?: TokenValue) {
+  function resolveTokenReferences(value?: TokenValue) {
     if (isString(value)) {
       const matches = extractTokenPlaceholders(value)
 
@@ -134,7 +48,7 @@ export function createTokens(config: CreateTokensConfig) {
             return acc.replace(placeholder, token.value)
           }
           console.error(
-            '[Nex UI] token reference syntax: An unknown token %s exists in the token reference syntax.',
+            '[Nex UI] system: An unknown token %s exists in the token reference syntax.',
             tokenName,
           )
           return acc.replace(placeholder, tokenName)
@@ -146,18 +60,108 @@ export function createTokens(config: CreateTokensConfig) {
     return value
   }
 
+  function createConditions(workInProgress: Token): Token {
+    const { originalValue } = workInProgress
+    const conditions = isResponsiveColor(originalValue)
+      ? {
+          base: resolveTokenReferences(originalValue._DEFAULT),
+          dark: resolveTokenReferences(originalValue._dark),
+          light: resolveTokenReferences(originalValue._light),
+        }
+      : { base: resolveTokenReferences(originalValue) }
+
+    return {
+      ...workInProgress,
+      conditions,
+    }
+  }
+
+  function createCssVar(workInProgress: Token): Token {
+    const { path } = workInProgress
+
+    const variableName = createCssVarName(prefix, path)
+
+    const newValue = `var(${variableName})`
+
+    return {
+      ...workInProgress,
+      cssVar: {
+        var: variableName,
+        ref: newValue,
+      },
+      value: newValue,
+    }
+  }
+
+  function registerNegativeToken(workInProgress: Token) {
+    const { category, value, path, originalValue, cssVar } = workInProgress
+
+    if (
+      category !== 'spaces' ||
+      originalValue === '0rem' ||
+      originalValue === '0px' ||
+      originalValue === 0
+    ) {
+      return workInProgress
+    }
+
+    const newPath = [...path.slice(0, -1), `-${path[path.length - 1]}`]
+
+    registerToken(
+      createToken({
+        category,
+        originalValue,
+        path: newPath,
+        name: pathToTokenName(newPath),
+        value: negate(cssVar?.ref ?? value),
+      }),
+    )
+  }
+
+  function registerCssVars(workInProgress: Token) {
+    const { conditions, cssVar } = workInProgress
+    if (cssVar) {
+      const variableName = cssVar.var
+      forEach(
+        conditions,
+        // @ts-expect-error
+        (value: string | number | undefined, condition: ConditionKey) => {
+          if (!value) {
+            return
+          }
+
+          if (!cssVarMap.has(condition)) {
+            cssVarMap.set(condition, new Map())
+          }
+
+          cssVarMap.get(condition)!.set(variableName, value)
+        },
+      )
+    }
+
+    return workInProgress
+  }
+
+  function handleToken(token: Token) {
+    const workInProgress = createCssVar(createConditions(token))
+
+    registerCssVars(workInProgress)
+    registerToken(workInProgress)
+    registerNegativeToken(workInProgress)
+  }
+
   function workloop() {
     walkObject(
       tokens,
       (value: TokenValue, path: string[]) => {
         if (__DEV__ && !isValidTokenCategory(path[0])) {
-          console.error('[Nex-UI] tokens: Unknown token category: %s.', path[0])
+          console.error('[Nex-UI] system: Unknown token category: %s.', path[0])
           return
         }
 
         if (__DEV__ && !isValidTokenValue(value)) {
           console.error(
-            '[Nex-UI] tokens: Expect the token value to be a string or a number. but what is currently received is %o.',
+            '[Nex-UI] system: Expect the token value to be a string or a number. but what is currently received is %o.',
             value,
           )
           return
@@ -165,18 +169,15 @@ export function createTokens(config: CreateTokensConfig) {
 
         const category = path[0] as TokenCategory
 
-        workInProgress = createToken({
+        const token = createToken({
           path,
           category,
           value: '',
           name: pathToTokenName(path),
           originalValue: value,
-          conditions: {
-            base: replaceTokenPlaceholders(value),
-          },
         })
 
-        handleToken()
+        handleToken(token)
       },
       {
         predicate: (_, path: string[]) => {
@@ -195,15 +196,12 @@ export function createTokens(config: CreateTokensConfig) {
       semanticTokens,
       (value: SemanticTokenValue, path: string[]) => {
         if (__DEV__ && !isValidTokenCategory(path[0])) {
-          console.error(
-            '[Nex-UI] semanticTokens: Unknown token category: %s.',
-            path[0],
-          )
+          console.error('[Nex-UI] system: Unknown token category: %s.', path[0])
           return
         }
         if (__DEV__ && !isValidSemanticTokenValue(value)) {
           console.error(
-            '[Nex-UI] semanticTokens: Expect the semanticToken value to be a string, a number, or a responsive color. but what is currently received is %o.',
+            '[Nex-UI] system: Expect the semanticToken value to be a string, a number, or a responsive color. but what is currently received is %o.',
             value,
           )
           return
@@ -213,24 +211,15 @@ export function createTokens(config: CreateTokensConfig) {
 
         const newPath = filterDefault(path)
 
-        const conditions = isResponsiveColor(value)
-          ? {
-              base: replaceTokenPlaceholders(value._DEFAULT),
-              dark: replaceTokenPlaceholders(value._dark),
-              light: replaceTokenPlaceholders(value._light),
-            }
-          : { base: replaceTokenPlaceholders(value) }
-
-        workInProgress = createToken({
+        const token = createToken({
           value: '',
           category,
-          conditions,
           path: newPath,
           name: pathToTokenName(newPath),
           originalValue: value,
         })
 
-        handleToken()
+        handleToken(token)
       },
       {
         predicate: isResponsiveColor,

@@ -22,7 +22,9 @@ export type ComponentPropsWithCommonProps<
   }
 >
 
-export type SxProps<OwnerState> = Interpolation<OwnerState>
+export type SxProps<OwnerState> =
+  | Interpolation
+  | ((OwnerState: OwnerState) => Interpolation)
 
 export type ComponentUtilityClasses<T extends string> = Partial<
   Record<T, ClassValue>
