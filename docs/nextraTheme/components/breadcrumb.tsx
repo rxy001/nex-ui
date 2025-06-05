@@ -1,9 +1,9 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
+import { Fragment } from 'react'
 import type { Item } from 'nextra/normalize-pages'
 import type { FC } from 'react'
-import { Fragment } from 'react'
 
 export const Breadcrumb: FC<{
   activePath: Item[]

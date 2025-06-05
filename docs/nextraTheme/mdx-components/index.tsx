@@ -12,13 +12,13 @@ import {
   withIcons,
 } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
-import type { MDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
-import type { ComponentProps, FC } from 'react'
 import { Sidebar } from '../components'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { ClientWrapper } from './wrapper.client'
+import type { ComponentProps, FC } from 'react'
+import type { MDXComponents } from 'nextra/mdx-components'
 
 const Blockquote: FC<ComponentProps<'blockquote'>> = (props) => (
   <blockquote

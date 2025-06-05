@@ -1,6 +1,6 @@
-import type { MouseEvent, ReactElement } from 'react'
 import { cloneElement, isValidElement } from 'react'
 import { useRippleMotion } from './useRippleMotion'
+import type { MouseEvent, ReactElement } from 'react'
 import type { UseRippleMotionProps } from './useRippleMotion'
 
 export type RippleProps = {

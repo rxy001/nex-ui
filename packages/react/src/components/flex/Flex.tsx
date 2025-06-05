@@ -1,10 +1,8 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { ElementType } from 'react'
 import { useNexUI } from '../provider'
 import { flexRecipe } from '../../theme/recipes'
-import type { FlexOwnerState, FlexProps } from './types'
 import {
   useDefaultProps,
   useStyles,
@@ -12,6 +10,8 @@ import {
   getUtilityClass,
   useSlotProps,
 } from '../utils'
+import type { FlexOwnerState, FlexProps } from './types'
+import type { ElementType } from 'react'
 
 const useSlotClasses = (ownerState: FlexOwnerState) => {
   const { prefix } = useNexUI()

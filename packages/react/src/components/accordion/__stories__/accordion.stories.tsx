@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
 import { Accordion } from '../Accordion'
 import { AccordionItem } from '../AccordionItem'
 import { Flex } from '../../flex'
 import { Button } from '../../button'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Accordion',

@@ -7,13 +7,6 @@ import { LazyMotion, AnimatePresence, domAnimation } from 'motion/react'
 import { nex } from '@nex-ui/styled'
 import { mergeRefs } from '@nex-ui/utils'
 import { useEffect, useId, useRef } from 'react'
-import type { Variants } from 'motion/react'
-import type {
-  ButtonHTMLAttributes,
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-} from 'react'
 import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
 import {
@@ -24,6 +17,13 @@ import {
   getUtilityClass,
 } from '../utils'
 import { useAccordionGroup } from './AccordionContext'
+import type {
+  ButtonHTMLAttributes,
+  ElementType,
+  HTMLAttributes,
+  KeyboardEvent,
+} from 'react'
+import type { Variants } from 'motion/react'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
 
 const contentMotionVariants: Variants = {

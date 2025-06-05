@@ -5,8 +5,8 @@ import { useSystem } from '@nex-ui/system'
 import { serializeStyles } from '@emotion/serialize'
 import { getDefaultShouldForwardProp } from './utils'
 import { tags } from './tags'
-import type { CreateStyled, Styled as NexUIStyled } from './types'
 import { Insertion } from './Insertion'
+import type { CreateStyled, Styled as NexUIStyled } from './types'
 
 const createStyled: CreateStyled = (tag: any): any => {
   if (__DEV__ && tag === undefined) {

@@ -2,13 +2,13 @@
 
 import { useEvent } from '@nex-ui/hooks'
 import { clamp } from '@nex-ui/utils'
-import type { MotionProps } from 'motion/react'
 import { LazyMotion, AnimatePresence, domAnimation } from 'motion/react'
 import * as m from 'motion/react-m'
-import type { CSSProperties, MouseEvent } from 'react'
 import { useRef } from 'react'
-import type { Root } from 'react-dom/client'
 import { createRoot } from 'react-dom/client'
+import type { CSSProperties, MouseEvent } from 'react'
+import type { Root } from 'react-dom/client'
+import type { MotionProps } from 'motion/react'
 import type { Ripples } from './types'
 
 // TODO: motion 的 async load 和 types 有 bug

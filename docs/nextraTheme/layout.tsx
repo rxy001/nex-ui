@@ -1,12 +1,12 @@
 import { Search } from 'nextra/components'
 import { NexUIProvider } from '@nex-ui/react'
 import { element, stringOrElement } from 'nextra/schemas'
-import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { LastUpdated } from './components/last-updated'
 import { MobileNav } from './components/sidebar'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
+import type { FC, ReactNode } from 'react'
 
 const theme = z.strictObject({
   banner: element.optional(),

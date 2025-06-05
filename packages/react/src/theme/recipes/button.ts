@@ -1,5 +1,4 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import type { RecipeVariants } from '@nex-ui/system'
 import {
   colorVariant,
   radiusVariant,
@@ -7,6 +6,7 @@ import {
   fullWidth,
   sizeVariant,
 } from '../shared'
+import type { RecipeVariants } from '@nex-ui/system'
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {

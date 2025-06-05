@@ -1,7 +1,6 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { ElementType } from 'react'
 import {
   useDefaultProps,
   useStyles,
@@ -11,6 +10,7 @@ import {
 } from '../utils'
 import { useNexUI } from '../provider'
 import { dividerRecipe } from '../../theme/recipes'
+import type { ElementType } from 'react'
 import type { DividerOwnerState, DividerProps } from './types'
 
 const useSlotClasses = (ownerState: DividerOwnerState) => {

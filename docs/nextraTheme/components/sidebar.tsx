@@ -4,12 +4,9 @@
 
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
-import type { Heading } from 'nextra'
 import { Anchor, Button, Collapse } from 'nextra/components'
 import { useFSRoute, useHash } from 'nextra/hooks'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
 import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
@@ -24,6 +21,9 @@ import {
 } from '../stores'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
+import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
+import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
+import type { Heading } from 'nextra'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 

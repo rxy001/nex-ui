@@ -1,6 +1,6 @@
+import { create } from 'zustand'
 import type { Heading } from 'nextra'
 import type { Dispatch } from 'react'
-import { create } from 'zustand'
 
 const useTocStore = create<{
   toc: Heading[]

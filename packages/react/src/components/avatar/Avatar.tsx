@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { nex } from '@nex-ui/styled'
-import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
@@ -13,6 +12,7 @@ import {
 } from '../utils'
 import { useNexUI } from '../provider'
 import { useAvatarGroup } from './AvatarGroupContext'
+import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 import type {
   AvatarOwnerState,
   AvatarProps,

@@ -1,13 +1,13 @@
 'use client'
 
 import cn from 'clsx'
-import type { Heading } from 'nextra'
-import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig, useThemeConfig } from '../stores'
 import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { BackToTop } from './back-to-top'
+import type { FC } from 'react'
+import type { Heading } from 'nextra'
 
 type TOCProps = {
   toc: Heading[]

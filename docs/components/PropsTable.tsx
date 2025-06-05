@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import type { ReactNode } from 'react'
 import {
   Table,
   Tbody,
@@ -10,6 +9,7 @@ import {
   HighlightItem,
   DefaultItem,
 } from './table'
+import type { ReactNode } from 'react'
 
 type PropsTableProps = {
   dataSource: {

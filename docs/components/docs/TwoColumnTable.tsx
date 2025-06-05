@@ -1,5 +1,5 @@
-import { Table, Tbody, Td, Th, Thead, Tr } from '../table'
 import clsx from 'clsx'
+import { Table, Tbody, Td, Th, Thead, Tr } from '../table'
 
 type Column = { title: string; dataIndex: string; className?: string }
 

@@ -1,9 +1,9 @@
 import { forEach, isString, reduce } from '@nex-ui/utils'
-import type { CSSObject } from '@emotion/react'
 import { extractTokenPlaceholders, memoizeFn, pathToTokenName } from './utils'
-import type { TokenCategory, Tokens } from './tokens'
+import type { CSSObject } from '@emotion/react'
 import type { Scales } from './scales'
 import type { Aliases } from './aliases'
+import type { TokenCategory, Tokens } from './tokens'
 
 interface CreateNormalizeConfig {
   getToken: Tokens['getToken']

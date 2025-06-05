@@ -1,5 +1,5 @@
-import type { Dispatch, SetStateAction } from 'react'
 import { create } from 'zustand'
+import type { Dispatch, SetStateAction } from 'react'
 
 const useMenuStore = create<{
   hasMenu: boolean

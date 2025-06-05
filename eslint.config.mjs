@@ -32,7 +32,6 @@ export default tseslint.config(
   react.configs.flat['jsx-runtime'],
   jsxA11y.flatConfigs.recommended,
   reactHooks.configs['recommended-latest'],
-  eslintPluginPrettierRecommended,
   {
     extends: [
       importPlugin.flatConfigs.recommended,
@@ -130,6 +129,19 @@ export default tseslint.config(
       'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
       'import/prefer-default-export': 'off',
       'import/no-named-as-default': 'off',
+      'import/newline-after-import': 'error',
+      'import/order': [
+        'error',
+        {
+          groups: [
+            ['builtin', 'external'],
+            ['internal'],
+            ['parent', 'sibling', 'index'],
+            'type',
+          ],
+          warnOnUnassignedImports: true,
+        },
+      ],
     },
   },
   {
@@ -161,4 +173,5 @@ export default tseslint.config(
       },
     },
   },
+  eslintPluginPrettierRecommended,
 )

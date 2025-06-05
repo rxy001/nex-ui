@@ -5,12 +5,12 @@ import {
   SandpackLayout,
   SandpackPreview,
 } from '@codesandbox/sandpack-react'
-import type { ReactNode } from 'react'
 import { useSandpack } from './useSandpack'
 import { SandpackCodeViewer } from './SandpackCodeViewer'
 import { CopyButton } from './CopyButton'
 import { CodeSandboxButton } from './CodeSandboxButton'
 import { BugReportButton } from './BugReportButton'
+import type { ReactNode } from 'react'
 import type { UseSandpackProps } from './useSandpack'
 
 type SandpackProps = UseSandpackProps & {

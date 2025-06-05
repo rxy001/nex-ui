@@ -1,6 +1,6 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import type { RecipeVariants } from '@nex-ui/system'
 import { colorVariant, fullWidth, radiusVariant, toSlots } from '../shared'
+import type { RecipeVariants } from '@nex-ui/system'
 
 const WITHIN_SELECTOR = '&:has(+ *:is(:focus-within, [data-focus-within=true]))'
 

@@ -4,8 +4,8 @@ import {
   useActiveCode,
   SandpackStack,
 } from '@codesandbox/sandpack-react'
-import type { BundledLanguage } from 'shiki'
 import { CodeBlock } from '../CodeBlock'
+import type { BundledLanguage } from 'shiki'
 
 export const SandpackCodeViewer = () => {
   const { sandpack } = useSandpack()

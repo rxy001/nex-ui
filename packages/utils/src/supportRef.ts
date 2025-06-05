@@ -1,9 +1,9 @@
+import { isForwardRef, isMemo, ForwardRef } from 'react-is'
 import type {
   ReactElement,
   MemoExoticComponent,
   ForwardRefExoticComponent,
 } from 'react'
-import { isForwardRef, isMemo, ForwardRef } from 'react-is'
 
 export function supportRef(
   nodeOrComponent:

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
 import { CheckboxGroup } from '../CheckboxGroup'
 import { Checkbox } from '../Checkbox'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { CheckboxGroupProps } from '../types'
 
 const meta = {

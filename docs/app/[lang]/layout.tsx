@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { InitColorSchemeScript } from '@nex-ui/react'
-import type { Metadata } from 'next'
 import logo from '@/public/images/logo.png'
 import {
   LastUpdated,
@@ -12,8 +11,9 @@ import {
   ThemeSwitch,
   Footer,
 } from '@/nextraTheme'
-import { getDictionary } from '../_dictionaries/getDictionary'
 import '@/globals.css'
+import { getDictionary } from '../_dictionaries/getDictionary'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   appleWebApp: {

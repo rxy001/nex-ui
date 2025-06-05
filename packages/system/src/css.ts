@@ -9,6 +9,7 @@ import {
   isPlainObject,
   isFunction,
 } from '@nex-ui/utils'
+import { memoizeFn } from './utils'
 import type {
   ComponentSelector,
   Keyframes,
@@ -24,7 +25,6 @@ import type {
   ArrayInterpolation,
   FunctionInterpolation,
 } from './types'
-import { memoizeFn } from './utils'
 
 interface CreateCssFnConfig {
   getCustomizedSelector: Selectors['getCustomizedSelector']

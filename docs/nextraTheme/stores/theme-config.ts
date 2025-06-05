@@ -1,7 +1,7 @@
 'use client'
 
-import type { ComponentProps } from 'react'
 import { createContext, createElement, useContext } from 'react'
+import type { ComponentProps } from 'react'
 import type { ThemeConfigProps } from '../layout'
 
 const ThemeConfigContext = createContext<
