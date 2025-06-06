@@ -12,7 +12,7 @@ export function createAliases(aliases: AliasesDefinition) {
   forEach(aliases, (value: string | string[], key: string) => {
     if (__DEV__ && !isValidAliasValue(value)) {
       console.error(
-        '[Nex UI] aliases: Expect the alias value to be a CSSProperty or CSSProperty[], but what is currently received is %o.',
+        '[Nex UI] system: Expect the alias value to be a CSSProperty or CSSProperty[], but what is currently received is %o.',
         value,
       )
       return

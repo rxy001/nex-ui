@@ -50,7 +50,7 @@
 
 <!-- 22. 重命名语义化颜色 -->
 
-23. 修改 NexUIProvider api
+<!-- 23. 修改 NexUIProvider api -->
 
 <!-- 24. 调整 react pkg 的 ts 模块声明 -->
 

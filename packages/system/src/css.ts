@@ -7,7 +7,6 @@ import {
   __DEV__,
   map,
   isPlainObject,
-  isFunction,
 } from '@nex-ui/utils'
 import { memoizeFn } from './utils'
 import type {
@@ -19,12 +18,7 @@ import type {
 } from '@emotion/react'
 import type { NormailizeFn } from './normalize'
 import type { Selectors } from './selectors'
-import type {
-  Interpolation,
-  CSSObject,
-  ArrayInterpolation,
-  FunctionInterpolation,
-} from './types'
+import type { Interpolation, CSSObject, ArrayInterpolation } from './types'
 
 interface CreateCssFnConfig {
   getCustomizedSelector: Selectors['getCustomizedSelector']
@@ -53,12 +47,6 @@ export const createCssFn = ({
       return componentSelector
     }
 
-    if (isFunction(interpolation)) {
-      const functionInterpolation = interpolation as FunctionInterpolation
-
-      return css(functionInterpolation(undefined))
-    }
-
     if (isArray(interpolation)) {
       const arrayInterpolation = interpolation as ArrayInterpolation
       return map(arrayInterpolation, (v: Interpolation) => css(v))
@@ -78,7 +66,6 @@ export const createCssFn = ({
       }
 
       const cssOjbect = interpolation as CSSObject
-      const { colorPalette, ...style } = cssOjbect
 
       const handlePath = (path: string[]) => {
         return path
@@ -88,7 +75,7 @@ export const createCssFn = ({
             // 0 - 9
             if (p.charCodeAt(0) > 47 && p.charCodeAt(0) < 58) {
               const part = path.slice(0, path.length - 1)
-              const prevValue = get(style, part)
+              const prevValue = get(cssOjbect, part)
               const index = Number(p)
 
               if (!Number.isNaN(index) && isArray(prevValue)) {
@@ -104,19 +91,54 @@ export const createCssFn = ({
           })
       }
 
+      const getColorPalette = (path: string[]): string | undefined => {
+        if (path.length === 0) {
+          return cssOjbect['colorPalette']
+        }
+
+        return get(
+          cssOjbect,
+          [...path, 'colorPalette'],
+          getColorPalette(path.slice(0, path.length - 1)),
+        )
+      }
+
       const result: EmotionCSSObject = {}
 
-      walkObject(style, (propValue: string | number, path: string[]) => {
-        const [propKey, ...selectors] = handlePath(path)
+      walkObject(
+        cssOjbect,
+        (propValue: string | number, path: string[]) => {
+          const prop = path[path.length - 1]
 
-        const normalized = normalize({
-          propKey,
-          propValue,
-          colorPalette,
-        })
+          // TODO: 暂时解决自定义选择器时 CSSObject 数组
+          if (isArray(propValue)) {
+            mergeByPath(result, path, css(propValue), (v: string) => {
+              if (v === prop) return []
+            })
+            return
+          }
 
-        mergeByPath(result, selectors, normalized)
-      })
+          const prefix = path.slice(0, path.length - 1)
+          if (prop === 'colorPalette') {
+            return
+          }
+
+          const colorPalette = getColorPalette(prefix)
+
+          const [propKey, ...selectors] = handlePath(path)
+
+          const normalized = normalize({
+            propKey,
+            propValue,
+            colorPalette,
+          })
+
+          mergeByPath(result, selectors, normalized)
+        },
+        {
+          predicate: (v) => isArray(v) && v.every(isPlainObject),
+        },
+      )
 
       return result
     }
@@ -127,12 +149,17 @@ export const createCssFn = ({
   return memoizeFn(css)
 }
 
-function mergeByPath(target: Record<string, any>, path: string[], value: any) {
+function mergeByPath(
+  target: Record<string, any>,
+  path: string[],
+  value: any,
+  customizer?: Function,
+) {
   let acc = target
 
   forEach(path, (k: string) => {
     if (!k) return
-    if (!acc[k]) acc[k] = {}
+    if (!acc[k]) acc[k] = customizer ? (customizer(k) ?? {}) : {}
     acc = acc[k]
   })
 

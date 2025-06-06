@@ -25,7 +25,7 @@ export function defineRecipe<
     const config = arg as RecipeConfig<V>
     if (config.compoundVariants && !isArray(config.compoundVariants)) {
       throw new TypeError(
-        `[Nex UI] defineRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
+        `[Nex UI] system: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
       )
     }
   }
