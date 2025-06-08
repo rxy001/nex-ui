@@ -183,7 +183,6 @@ export const inputRecipe = defineSlotRecipe({
         label: {
           [WITHIN_SELECTOR]: {
             transform: 'translateY(-90%) scale(0.8)',
-            colorPalette: 'red',
           },
         },
         input: {
