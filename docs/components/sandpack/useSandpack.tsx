@@ -72,11 +72,28 @@ export const useSandpack = ({
   )
 
   // sort files by dependency
-  const { sortedFiles, dependencies } = useMemo(() => {
+  const { sortedFiles, dependencies, devDependencies } = useMemo(() => {
     const deps = {
-      '@emotion': '11.13.5',
+      '@emotion/react': 'latest',
       '@nex-ui/react': 'latest',
+      react: 'latest',
+      'react-dom': 'latest',
     }
+
+    let devDeps: Record<string, string> = {
+      vite: 'latest',
+      '@vitejs/plugin-react': 'latest',
+    }
+
+    if (sandpackTemplate === 'vite-react-ts') {
+      devDeps = {
+        ...devDeps,
+        '@types/react': 'latest',
+        '@types/react-dom': 'latest',
+        typescript: 'latest',
+      }
+    }
+
     const sFiles = Object.keys(filteredFiles)
       .sort((a: string, b: string) => {
         const aFile = files[a] as string
@@ -136,13 +153,15 @@ export const useSandpack = ({
     return {
       dependencies: deps,
       sortedFiles: sFiles,
+      devDependencies: devDeps,
     }
-  }, [files, filteredFiles])
+  }, [files, filteredFiles, sandpackTemplate])
 
   return useMemo(
     () => ({
       customSetup: {
         dependencies,
+        devDependencies,
         entry: entryFile,
       },
       files: {
@@ -166,6 +185,7 @@ export const useSandpack = ({
       sandpackTemplate,
       sortedFiles,
       systemColorScheme,
+      devDependencies,
     ],
   )
 }
