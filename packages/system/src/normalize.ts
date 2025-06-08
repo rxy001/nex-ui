@@ -27,9 +27,9 @@ function includeColorOpacityModifier(value: string) {
   return /\//.test(value)
 }
 
-function replaceColorPalette(colorPalette: string | undefined, value: string) {
+function resolveColorPalette(colorPalette: string | undefined, value: string) {
   if (!colorPalette) {
-    console.error('[Nex UI] colorPalette: The color palette was not provided.')
+    console.error('[Nex UI] system: The color palette was not provided.')
     return value
   }
   return value.replace('colorPalette', colorPalette)
@@ -72,7 +72,7 @@ export const createNormalize = ({
       }
 
       if (includeColorPalette(propValue)) {
-        propValue = replaceColorPalette(colorPalette, propValue)
+        propValue = resolveColorPalette(colorPalette, propValue)
       }
     }
 
@@ -95,7 +95,6 @@ export const createNormalize = ({
     forEach(properties, (property: string) => {
       if (isString(propValue)) {
         // Only string values are supported. Avoid using numbers, as they may inadvertently map to tokens.
-
         const matches = extractTokenPlaceholders(propValue)
         if (matches.length) {
           // Handle token reference syntax replacements

@@ -1,7 +1,8 @@
 import clsx from 'clsx'
 import { mergeProps, map, isFunction, isArray } from '@nex-ui/utils'
 import type { ClassValue } from 'clsx'
-import type { ArrayInterpolation, Interpolation } from '@nex-ui/system'
+import type { ArrayInterpolation } from '@nex-ui/system'
+import type { SxProps } from '../../types/utils'
 
 type UseSlotPropsArgs<
   SlotProps extends {},
@@ -13,7 +14,7 @@ type UseSlotPropsArgs<
   /**
    * The style of the slot.
    */
-  sx?: Interpolation<OwnerState>
+  sx?: SxProps<OwnerState>
 
   /**
    * Extra class name(s) to be placed on the slot.
@@ -70,9 +71,7 @@ export const useSlotProps = <
 
   const className = clsx(classNamesProp, props?.className)
 
-  const resolveSx = (
-    arg: ArrayInterpolation<OwnerState>,
-  ): ArrayInterpolation<OwnerState> => {
+  const resolveSx = (arg: ArrayInterpolation): ArrayInterpolation => {
     return map(arg, (v) => {
       if (isFunction(v)) {
         return v(ownerState!)

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createTokens should support light and dark conditions 1`] = `
-Token {
+{
   "category": "colors",
   "conditions": {
     "base": "yellow",
@@ -27,7 +27,7 @@ Token {
 `;
 
 exports[`createTokens should support light and dark conditions 2`] = `
-Token {
+{
   "category": "colors",
   "conditions": {
     "base": "yellow",
@@ -73,7 +73,7 @@ Map {
 `;
 
 exports[`createTokens should support token reference syntax 1`] = `
-Token {
+{
   "category": "colors",
   "conditions": {
     "base": "var(--test-colors-blue-100)",
@@ -103,7 +103,7 @@ Map {
 `;
 
 exports[`createTokens should work correctly 1`] = `
-Token {
+{
   "category": "colors",
   "conditions": {
     "base": "#fff",
@@ -123,7 +123,7 @@ Token {
 `;
 
 exports[`createTokens should work correctly 2`] = `
-Token {
+{
   "category": "colors",
   "conditions": {
     "base": "#cce3fd",

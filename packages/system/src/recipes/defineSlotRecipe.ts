@@ -36,7 +36,7 @@ export function defineSlotRecipe<
     const config = arg as SlotRecipeConfig<S, undefined, V>
     if (config.compoundVariants && !isArray(config.compoundVariants)) {
       throw new TypeError(
-        `[Nex UI] defineSlotRecipe: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
+        `[Nex UI] system: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
       )
     }
   }

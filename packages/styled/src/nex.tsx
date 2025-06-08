@@ -46,7 +46,9 @@ const createNexImpl = (tag: any) => {
       const cssProp = sys.css(sx)
 
       let { className = '' } = props
-      const registeredStyles: any[] = [cssProp]
+      const registeredStyles: any[] = Array.isArray(cssProp)
+        ? cssProp
+        : [cssProp]
       if (typeof props.className === 'string') {
         className = getRegisteredStyles(
           cache.registered,
@@ -57,7 +59,7 @@ const createNexImpl = (tag: any) => {
         className = `${props.className} `
       }
 
-      const serialized = serializeStyles(registeredStyles, undefined, props)
+      const serialized = serializeStyles(registeredStyles, undefined, {})
 
       className += `${cache.key}-${serialized.name}`
 

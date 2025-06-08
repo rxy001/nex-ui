@@ -15,7 +15,7 @@ export const createBreakpoints = (breakpoints: BreakpointsDefinition) => {
   forEach(breakpoints, (value: string, key: string) => {
     if (__DEV__ && !isValidBreakpointValue(value)) {
       console.error(
-        `[Nex UI] breakpoints: Expect the breakpoints value to be a string, but what is currently received is %o.`,
+        `[Nex UI] system: Expect the breakpoints value to be a string, but what is currently received is %o.`,
         value,
       )
       return

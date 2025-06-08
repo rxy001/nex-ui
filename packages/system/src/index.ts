@@ -31,7 +31,6 @@ export type {
   InterpolationPrimitive,
   CSSObject,
   CSSProperties,
-  CSSInterpolation,
   ArrayInterpolation,
   Interpolation,
   Tokens,
