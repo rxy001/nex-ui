@@ -56,6 +56,7 @@ const createStyled: CreateStyled = (tag: any): any => {
           className = `${props.className} `
         }
 
+        // TODO
         const resolveSx = (arg: any): any => {
           return map(arg, (v: any) => {
             if (isFunction(v)) {

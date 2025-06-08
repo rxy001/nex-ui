@@ -4,8 +4,8 @@ import json from '@rollup/plugin-json'
 import commonjs from '@rollup/plugin-commonjs'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import fs from 'node:fs'
-import type { RollupOptions } from 'rollup'
 import { rollup, copy } from './utils'
+import type { RollupOptions } from 'rollup'
 
 build()
 

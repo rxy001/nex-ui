@@ -5,8 +5,8 @@ import swc from '@rollup/plugin-swc'
 import fs from 'node:fs'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { preserveDirectives } from 'rollup-plugin-preserve-directives'
-import type { RollupOptions } from 'rollup'
 import { rollup } from './utils'
+import type { RollupOptions } from 'rollup'
 
 type SharedConfigs = { external: (string | RegExp)[]; name: string }
 

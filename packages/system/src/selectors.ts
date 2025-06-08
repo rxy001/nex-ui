@@ -15,7 +15,7 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
   forEach(selectors, (value: string, key: string) => {
     if (!isString(value)) {
       console.error(
-        `[Nex UI] selectors: Expect the selector value to be a string, but what is currently received is %o.`,
+        `[Nex UI] system: Expect the selector value to be a string, but what is currently received is %o.`,
         value,
       )
       return
@@ -30,7 +30,7 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
 
     if (selectorMap.get(k)) {
       console.error(
-        '[Nex UI] selectors: The selector %s has already been defined in the breakpoint.',
+        '[Nex UI] system: The selector %s has already been defined in the breakpoint.',
         selector,
       )
       return

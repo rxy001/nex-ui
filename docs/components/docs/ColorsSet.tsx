@@ -154,8 +154,11 @@ export function SemanticColors() {
                   return
                 }
 
-                const realColor =
-                  get(defaultConfig.tokens?.colors, color.split('.')) ?? color
+                const realColor = get(
+                  defaultConfig.tokens?.colors,
+                  color.split('.'),
+                  color,
+                )
 
                 return (
                   <div

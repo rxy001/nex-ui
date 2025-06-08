@@ -13,22 +13,22 @@ export type GenericStyledComponentProps<E extends ElementType = ElementType> =
     ReactComponentProps<E>,
     {
       as?: E
-      sx?: Interpolation<ReactComponentProps<E>>
+      sx?: Interpolation
     }
   >
 
 export interface CreateGenericStyledComponent<C extends ElementType> {
   (
-    interpolation?: Interpolation<ReactComponentProps<C>>,
+    interpolation?: Interpolation,
   ): <E extends ElementType = C>(
     props: GenericStyledComponentProps<E>,
   ) => JSX.Element
 }
 
 export interface CreateStyledComponent<C extends ElementType> {
-  (interpolation?: Interpolation<ReactComponentProps<C>>): (
+  (interpolation?: Interpolation): (
     props: ReactComponentProps<C> & {
-      sx: Interpolation<ReactComponentProps<C>>
+      sx: Interpolation
     },
   ) => JSX.Element
 }
