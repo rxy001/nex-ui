@@ -6,8 +6,8 @@ import type {
   SlotRecipeConfig,
   SlotVariantGroups,
   SlotRecipeRuntimeFn,
-  CombineVariants,
-  CombineSlots,
+  MergeVariants,
+  MergeSlots,
 } from './types'
 
 export function defineSlotRecipe<
@@ -17,15 +17,15 @@ export function defineSlotRecipe<
 export function defineSlotRecipe<
   S extends SlotGroups,
   E extends SlotRecipeRuntimeFn,
-  V extends SlotVariantGroups<CombineSlots<S, E>>,
+  V extends SlotVariantGroups<MergeSlots<S, E>>,
 >(
   extend: E,
   config: SlotRecipeConfig<S, E, V>,
-): SlotRecipeRuntimeFn<CombineSlots<S, E>, CombineVariants<V, E>>
+): SlotRecipeRuntimeFn<MergeSlots<S, E>, MergeVariants<V, E>>
 export function defineSlotRecipe<
   S extends SlotGroups,
   E extends SlotRecipeRuntimeFn,
-  V extends SlotVariantGroups<CombineSlots<S, E>>,
+  V extends SlotVariantGroups<MergeSlots<S, E>>,
 >(
   extendOrConfig: E | SlotRecipeConfig<S, undefined, V>,
   maybeConfig?: SlotRecipeConfig<S, E, V>,
@@ -70,3 +70,55 @@ export function defineSlotRecipe<
 
   return runtimeFn
 }
+
+const a = defineSlotRecipe({
+  slots: {
+    a: {
+      color: 'red',
+    },
+    b: {
+      color: 'red',
+    },
+  },
+  variants: {
+    a: {
+      aa: {
+        a: {
+          color: 'red',
+        },
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      a: ['aa'],
+      css: {
+        a: {
+          color: 'red',
+        },
+      },
+    },
+  ],
+})
+
+const b = defineSlotRecipe(a, {
+  slots: {},
+  variants: {
+    a: {
+      bb: {},
+    },
+  },
+  compoundVariants: [
+    {
+      a: 'aa',
+      css: {},
+    },
+  ],
+})
+
+const c = defineSlotRecipe(b, {
+  variants: {},
+  defaultVariants: {
+    a: 'aa',
+  },
+})

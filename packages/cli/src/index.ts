@@ -64,17 +64,6 @@ command.configureHelp({
   formatHelp: () => helpMessage,
 })
 
-// command.helpCommand(false)
-
-// command.addHelpText(
-//   'after',
-//   `
-
-// Example call:
-//   $ nexui-cli init
-// `,
-// )
-
 try {
   command.parse(process.argv)
 } catch (error) {

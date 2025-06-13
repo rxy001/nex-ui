@@ -1,11 +1,11 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import type { CSSObject } from '@nex-ui/system'
+import type { Interpolation } from '@nex-ui/system'
 import type { SVGProps, ReactNode } from 'react'
 
 export const createIcon = (children: ReactNode, displayName?: string) => {
-  const Icon = (props: SVGProps<SVGSVGElement> & { sx?: CSSObject }) => {
+  const Icon = (props: SVGProps<SVGSVGElement> & { sx?: Interpolation }) => {
     return (
       <nex.svg
         xmlns='http://www.w3.org/2000/svg'
