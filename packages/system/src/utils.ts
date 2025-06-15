@@ -112,11 +112,12 @@ export function extractTokenPlaceholders(value: string) {
   return [...matches]
 }
 
-export function mergeRecipeConfigs(...args: any[]) {
+// TODO 明确 CSS 合并规则
+export function mergeRecipeConfigs<T, B>(...args: [T, B]) {
   return mergeWith(
     {},
     ...args,
-    (targetValue: any, srcValue: any, key: string) => {
+    (targetValue: unknown, srcValue: unknown, key: string) => {
       if (key === 'compoundVariants') {
         if (targetValue === undefined) {
           return srcValue
@@ -125,6 +126,14 @@ export function mergeRecipeConfigs(...args: any[]) {
           return [...targetValue, ...srcValue]
         }
         return targetValue
+      }
+
+      if (
+        typeof targetValue !== typeof srcValue ||
+        isArray(targetValue) !== isArray(srcValue) ||
+        isPlainObject(targetValue) !== isPlainObject(srcValue)
+      ) {
+        return srcValue
       }
     },
   )

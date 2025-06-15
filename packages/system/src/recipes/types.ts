@@ -1,5 +1,15 @@
 import type { CSSObject, Dictionary } from '../types'
 
+type IsIndexType<T> = string extends keyof T
+  ? true
+  : number extends keyof T
+    ? true
+    : symbol extends keyof T
+      ? true
+      : false
+
+type FilterOutIndexType<T> = IsIndexType<T> extends true ? {} : T
+
 type BooleanMap<T> = T extends 'true' | 'false' ? boolean : T
 
 export type SlotGroups = Dictionary<CSSObject>
@@ -11,136 +21,179 @@ export type SlotVariantGroups<S extends SlotGroups = SlotGroups> = Dictionary<
 >
 
 type CompoundVariantsSelection<
-  V extends BaseVariantGroups | SlotVariantGroups,
-> = {
-  [K in keyof V]?: string extends K
-    ? unknown
-    : BooleanMap<keyof V[K]> | BooleanMap<keyof V[K]>[]
-}
-
-type VariantSelection<V extends BaseVariantGroups | SlotVariantGroups> = {
-  [K in keyof V]?: string extends K ? unknown : BooleanMap<keyof V[K]>
-}
-
-interface RuntimeFn<V extends Record<string, any>, R> {
-  (variants?: VariantSelection<V>): R
-  splitVariantProps: (props: Record<string, any>) => VariantSelection<V>
-}
-
-export type CombineVariants<
-  V,
-  E extends RecipeRuntimeFn | SlotRecipeRuntimeFn | undefined,
-> = E extends RecipeRuntimeFn | SlotRecipeRuntimeFn
-  ? V & E['__config']['variants']
-  : V
-
-export type UniteVariants<
-  V,
-  T extends RecipeRuntimeFn | SlotRecipeRuntimeFn | undefined,
-  R,
-  Key = T extends RecipeRuntimeFn | SlotRecipeRuntimeFn
-    ? T['__config']['variants']
-    : undefined,
-> =
-  | V
-  | {
-      [K in keyof Key]?: {
-        [P in keyof Key[K]]?: R
-      }
-    }
-
-export type RecipeConfig<
-  V extends BaseVariantGroups = BaseVariantGroups,
-  E extends RecipeRuntimeFn | undefined = undefined,
-> = {
-  base?: CSSObject
-  variants?: UniteVariants<V, E, CSSObject>
-  compoundVariants?: Array<
-    CompoundVariantsSelection<CombineVariants<V, E>> & {
-      css?: CSSObject
-    }
-  >
-  defaultVariants?: VariantSelection<CombineVariants<V, E>>
-}
-
-export interface RecipeRuntimeFn<
-  V extends BaseVariantGroups = BaseVariantGroups,
-> extends RuntimeFn<V, CSSObject> {
-  __recipe: true
-  __config: RecipeConfig<V>
-  variants: (keyof V)[]
-}
-
-export type UniteSlots<
-  V,
-  E extends SlotRecipeRuntimeFn | undefined,
-  Key = E extends SlotRecipeRuntimeFn ? E['__config']['slots'] : undefined,
-> =
-  | V
-  | {
-      [K in keyof Key]: CSSObject
-    }
-
-type FilterIndexKey<T> = {
-  [K in keyof T as string extends K ? never : K]: T[K]
-}
-
-export type CombineSlots<
-  S,
-  E extends SlotRecipeRuntimeFn | undefined,
-  Key = E extends SlotRecipeRuntimeFn
-    ? E['__config']['slots']
-    : NonNullable<unknown>,
-> = FilterIndexKey<
-  S & {
-    [K in keyof Key]: CSSObject
+  Variants extends BaseVariantGroups | SlotVariantGroups,
+  RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn | undefined,
+  Value,
+  ExtendedVariants = RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn
+    ? Exclude<RuntimeFn['__config']['variants'], undefined>
+    : {},
+  FilteredVariants = FilterOutIndexType<Variants>,
+  FilteredExtendedVariants = FilterOutIndexType<ExtendedVariants>,
+> = Array<
+  {
+    [K in
+      | keyof FilteredVariants
+      | keyof FilteredExtendedVariants]?: string extends K
+      ? unknown
+      :
+            | (K extends keyof FilteredVariants
+                ? keyof FilteredVariants[K]
+                : never)
+            | (K extends keyof FilteredExtendedVariants
+                ? keyof FilteredExtendedVariants[K]
+                : never) extends infer L
+        ? BooleanMap<L> | BooleanMap<L[]>
+        : never
+  } & {
+    css?: Value
   }
 >
 
-export type SlotRecipeConfig<
-  S extends SlotGroups = SlotGroups,
-  E extends SlotRecipeRuntimeFn | undefined = undefined,
-  V extends SlotVariantGroups<CombineSlots<S, E>> = SlotVariantGroups<
-    CombineSlots<S, E>
-  >,
+type VariantsSelection<
+  Variants extends BaseVariantGroups | SlotVariantGroups,
+  RuntimeFn extends
+    | RecipeRuntimeFn
+    | SlotRecipeRuntimeFn
+    | undefined = undefined,
+  ExtendedVariants = RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn
+    ? Exclude<RuntimeFn['__config']['variants'], undefined>
+    : {},
+  FilteredVariants = FilterOutIndexType<Variants>,
+  FilteredExtendedVariants = FilterOutIndexType<ExtendedVariants>,
 > = {
-  slots?: Partial<UniteSlots<S, E>>
-  variants?: UniteVariants<
-    V,
-    E,
-    {
-      [K in keyof CombineSlots<S, E>]?: CSSObject
-    }
-  >
-  compoundVariants?: Array<
-    CompoundVariantsSelection<CombineVariants<V, E>> & {
-      css?: {
-        [K in keyof CombineSlots<S, E>]?: CSSObject
+  [K in
+    | keyof FilteredVariants
+    | keyof FilteredExtendedVariants]?: string extends K
+    ? unknown
+    : BooleanMap<
+        | (K extends keyof FilteredVariants ? keyof FilteredVariants[K] : never)
+        | (K extends keyof FilteredExtendedVariants
+            ? keyof FilteredExtendedVariants[K]
+            : never)
+      >
+}
+
+interface RuntimeFn<V extends Record<string, any>, R> {
+  (variants?: VariantsSelection<V>): R
+  splitVariantProps: (props: Record<string, any>) => VariantsSelection<V>
+}
+
+export type RuntimeFnVariants<
+  RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn | undefined,
+  Value,
+> = RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn
+  ? Exclude<RuntimeFn['__config']['variants'], undefined> extends infer L
+    ? {
+        [K in keyof L]?: {
+          [P in keyof L[K]]?: Value
+        }
       }
-    }
+    : never
+  : never
+
+export type MergeVariants<
+  Variants,
+  RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn | undefined,
+> = RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn
+  ? Exclude<RuntimeFn['__config']['variants'], undefined> extends infer V
+    ? IsIndexType<V> extends true
+      ? IsIndexType<Variants> extends true
+        ? {}
+        : Variants
+      : IsIndexType<Variants> extends true
+        ? V
+        : V & Variants
+    : {}
+  : IsIndexType<Variants> extends true
+    ? {}
+    : Variants
+
+export type RecipeConfig<
+  Variants extends BaseVariantGroups,
+  RuntimeFn extends RecipeRuntimeFn | undefined = undefined,
+> = {
+  base?: CSSObject
+  variants?: Variants | RuntimeFnVariants<RuntimeFn, CSSObject>
+  compoundVariants?: CompoundVariantsSelection<Variants, RuntimeFn, CSSObject>
+  defaultVariants?: VariantsSelection<Variants, RuntimeFn>
+  extend?: RuntimeFn
+}
+
+export interface RecipeRuntimeFn<
+  Variants extends BaseVariantGroups = BaseVariantGroups,
+> extends RuntimeFn<Variants, CSSObject> {
+  __recipe: true
+  __config: RecipeConfig<Variants>
+  variants: (keyof Variants)[]
+}
+
+export type RuntimeFnSlots<RuntimeFn> = RuntimeFn extends SlotRecipeRuntimeFn
+  ? Exclude<RuntimeFn['__config']['slots'], undefined> extends infer Slots
+    ? IsIndexType<Slots> extends false
+      ? {
+          [K in keyof Slots]: CSSObject
+        }
+      : never
+    : never
+  : never
+
+export type MergeSlots<
+  Slots extends SlotGroups,
+  RuntimeFn extends SlotRecipeRuntimeFn | undefined,
+> = RuntimeFn extends SlotRecipeRuntimeFn
+  ? IsIndexType<Slots> extends false
+    ? {
+        [K in keyof Slots | keyof RuntimeFnSlots<RuntimeFn>]: CSSObject
+      }
+    : {
+        [K in keyof RuntimeFnSlots<RuntimeFn>]: CSSObject
+      }
+  : IsIndexType<Slots> extends false
+    ? Slots
+    : {}
+
+export type SlotRecipeConfig<
+  Slots extends SlotGroups,
+  RuntimeFn extends SlotRecipeRuntimeFn | undefined = undefined,
+  Variants extends SlotVariantGroups<
+    MergeSlots<Slots, RuntimeFn>
+  > = SlotVariantGroups<MergeSlots<Slots, RuntimeFn>>,
+> = {
+  slots?: Slots | Partial<RuntimeFnSlots<RuntimeFn>>
+  variants?:
+    | Variants
+    | RuntimeFnVariants<
+        RuntimeFn,
+        Partial<Record<keyof MergeSlots<Slots, RuntimeFn>, CSSObject>>
+      >
+  compoundVariants?: CompoundVariantsSelection<
+    Variants,
+    RuntimeFn,
+    Partial<Record<keyof MergeSlots<Slots, RuntimeFn>, CSSObject>>
   >
-  defaultVariants?: VariantSelection<CombineVariants<V, E>>
+  defaultVariants?: VariantsSelection<Variants, RuntimeFn>
+  extend?: RuntimeFn
 }
 
 export interface SlotRecipeRuntimeFn<
-  S extends SlotGroups = SlotGroups,
-  V extends SlotVariantGroups<S> = SlotVariantGroups<S>,
-> extends RuntimeFn<V, Record<keyof S, CSSObject>> {
+  Slots extends SlotGroups = SlotGroups,
+  Variants extends SlotVariantGroups<Slots> = SlotVariantGroups<Slots>,
+> extends RuntimeFn<Variants, Record<keyof Slots, CSSObject>> {
   __slotRecipe: true
-  __config: SlotRecipeConfig<S, undefined, V>
-  variants: (keyof V)[]
-  slots: (keyof S)[]
+  __config: SlotRecipeConfig<Slots, undefined, Variants>
+  variants: (keyof Variants)[]
+  slots: (keyof Slots)[]
 }
 
 export type RecipeVariants<
-  RecipeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn,
-  V = Parameters<RecipeFn>[0],
+  RuntimeFn extends RecipeRuntimeFn | SlotRecipeRuntimeFn,
+  Args = Parameters<RuntimeFn>[0],
 > = Exclude<
   {
-    [Key in keyof V]-?: V[Key]
-  } & NonNullable<unknown>,
+    [Key in keyof Args]-?: Args[Key]
+  },
   undefined
 >
 
-export type RecipeSlots<RecipeFn extends SlotRecipeRuntimeFn> =
-  RecipeFn['slots'][number]
+export type RecipeSlots<RuntimeFn extends SlotRecipeRuntimeFn> =
+  RuntimeFn['slots'][number]

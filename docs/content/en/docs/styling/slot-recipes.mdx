@@ -207,7 +207,8 @@ export const checkboxSlotRecipe = defineSlotRecipe({
   ],
 })
 
-const extendedSlotRecipe = defineSlotRecipe(checkboxSlotRecipe, {
+const extendedSlotRecipe = defineSlotRecipe({
+  extend: checkboxSlotRecipe,
   slots: {},
   variants: {},
   compoundVariants: {},

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { mergeProps, map, isFunction, isArray } from '@nex-ui/utils'
+import { mergeProps, isFunction, isArray, forEach } from '@nex-ui/utils'
 import type { ClassValue } from 'clsx'
-import type { ArrayInterpolation } from '@nex-ui/system'
+import type { ArrayInterpolation, InterpolationPrimitive } from '@nex-ui/system'
 import type { SxProps } from '../../types/utils'
 
 type UseSlotPropsArgs<
@@ -72,15 +72,18 @@ export const useSlotProps = <
   const className = clsx(classNamesProp, props?.className)
 
   const resolveSx = (arg: ArrayInterpolation): ArrayInterpolation => {
-    return map(arg, (v) => {
-      if (isFunction(v)) {
-        return v(ownerState!)
+    const result: InterpolationPrimitive[] = []
+
+    forEach(arg, (sx) => {
+      if (isFunction(sx)) {
+        result.push(sx(ownerState!))
+      } else if (isArray(sx)) {
+        result.push(...sx)
+      } else if (sx != null) {
+        result.push(sx)
       }
-      if (isArray(v)) {
-        return resolveSx(v)
-      }
-      return v
     })
+    return result
   }
 
   return {

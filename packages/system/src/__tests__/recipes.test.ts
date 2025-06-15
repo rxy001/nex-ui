@@ -263,7 +263,9 @@ describe('Recipe', () => {
       base,
     })
 
-    const extendedRecipe = defineRecipe(recipe, {})
+    const extendedRecipe = defineRecipe({
+      extend: recipe,
+    })
 
     expect(extendedRecipe()).toEqual(base)
   })
@@ -274,7 +276,9 @@ describe('Recipe', () => {
       variants,
     })
 
-    const extendedRecipe = defineRecipe(recipe, {})
+    const extendedRecipe = defineRecipe({
+      extend: recipe,
+    })
 
     expect(
       extendedRecipe({
@@ -327,7 +331,9 @@ describe('Recipe', () => {
       ],
     })
 
-    const extendedRecipe = defineRecipe(recipe, {})
+    const extendedRecipe = defineRecipe({
+      extend: recipe,
+    })
 
     expect(
       extendedRecipe({
@@ -361,7 +367,9 @@ describe('Recipe', () => {
       },
     })
 
-    const extendedRecipe = defineRecipe(recipe, {})
+    const extendedRecipe = defineRecipe({
+      extend: recipe,
+    })
 
     expect(extendedRecipe()).toEqual({
       ...base,
@@ -376,7 +384,8 @@ describe('Recipe', () => {
       base,
     })
 
-    const extendedRecipe = defineRecipe(recipe, {
+    const extendedRecipe = defineRecipe({
+      extend: recipe,
       base: {
         h: '1',
         w: '2',
@@ -396,7 +405,8 @@ describe('Recipe', () => {
       variants,
     })
 
-    const extendedRecipe1 = defineRecipe(recipe, {
+    const extendedRecipe1 = defineRecipe({
+      extend: recipe,
       base: {
         h: '1',
         w: '2',
@@ -422,7 +432,8 @@ describe('Recipe', () => {
       background: 'red',
     })
 
-    const extendedRecipe2 = defineRecipe(recipe, {
+    const extendedRecipe2 = defineRecipe({
+      extend: recipe,
       variants: {
         color: {
           red: {
@@ -444,7 +455,8 @@ describe('Recipe', () => {
       background: 'black',
     })
 
-    const extendedRecipe3 = defineRecipe(recipe, {
+    const extendedRecipe3 = defineRecipe({
+      extend: recipe,
       variants: {
         color: {
           black: {
@@ -482,7 +494,8 @@ describe('Recipe', () => {
       ],
     })
 
-    const extendedRecipe1 = defineRecipe(recipe, {
+    const extendedRecipe1 = defineRecipe({
+      extend: recipe,
       compoundVariants: [
         {
           color: 'red',
@@ -507,7 +520,8 @@ describe('Recipe', () => {
       background: 'red',
     })
 
-    const extendedRecipe2 = defineRecipe(recipe, {
+    const extendedRecipe2 = defineRecipe({
+      extend: recipe,
       compoundVariants: [
         {
           color: 'red',
@@ -543,7 +557,8 @@ describe('Recipe', () => {
       },
     })
 
-    const extendedRecipe = defineRecipe(recipe, {
+    const extendedRecipe = defineRecipe({
+      extend: recipe,
       defaultVariants: {
         color: 'red',
       },
