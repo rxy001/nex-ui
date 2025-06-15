@@ -260,9 +260,11 @@ describe('SlotRecieps', () => {
   })
 
   it('should include the styles of the extended slot recipe', () => {
-    const slotRecipes = defineSlotRecipe({ slots })
+    const slotRecipe = defineSlotRecipe({ slots })
 
-    const extendedSlotRecipe = defineSlotRecipe(slotRecipes, {})
+    const extendedSlotRecipe = defineSlotRecipe({
+      extend: slotRecipe,
+    })
 
     expect(extendedSlotRecipe()).toEqual({
       ...slots,
@@ -270,9 +272,11 @@ describe('SlotRecieps', () => {
   })
 
   it('should include the styles of the extended slot recipe with variants', () => {
-    const slotRecipes = defineSlotRecipe({ slots, variants })
+    const slotRecipe = defineSlotRecipe({ slots, variants })
 
-    const extendedSlotRecipe = defineSlotRecipe(slotRecipes, {})
+    const extendedSlotRecipe = defineSlotRecipe({
+      extend: slotRecipe,
+    })
 
     expect(
       extendedSlotRecipe({
@@ -357,7 +361,9 @@ describe('SlotRecieps', () => {
       ],
     })
 
-    const extendedSlotRecipe = defineSlotRecipe(slotRecipe, {})
+    const extendedSlotRecipe = defineSlotRecipe({
+      extend: slotRecipe,
+    })
 
     expect(extendedSlotRecipe()).toEqual({
       root: {
@@ -416,7 +422,9 @@ describe('SlotRecieps', () => {
       },
     })
 
-    const extendedSlotRecipe = defineSlotRecipe(slotRecipe, {})
+    const extendedSlotRecipe = defineSlotRecipe({
+      extend: slotRecipe,
+    })
 
     expect(extendedSlotRecipe()).toEqual({
       root: {
@@ -437,7 +445,8 @@ describe('SlotRecieps', () => {
       slots,
     })
 
-    const extendedSlotRecipe = defineSlotRecipe(slotRecipe, {
+    const extendedSlotRecipe = defineSlotRecipe({
+      extend: slotRecipe,
       slots: {
         root: {
           borderColor: 'yellow',
@@ -466,7 +475,8 @@ describe('SlotRecieps', () => {
       variants,
     })
 
-    const extendedSlotRecipe1 = defineSlotRecipe(slotRecipe, {
+    const extendedSlotRecipe1 = defineSlotRecipe({
+      extend: slotRecipe,
       variants: {
         color: {
           blue: {
@@ -493,7 +503,8 @@ describe('SlotRecieps', () => {
       },
     })
 
-    const extendedSlotRecipe2 = defineSlotRecipe(slotRecipe, {
+    const extendedSlotRecipe2 = defineSlotRecipe({
+      extend: slotRecipe,
       variants: {
         type: {
           primary: {
@@ -539,7 +550,8 @@ describe('SlotRecieps', () => {
       ],
     })
 
-    const extendedSlotRecipe = defineSlotRecipe(slotRecipe, {
+    const extendedSlotRecipe = defineSlotRecipe({
+      extend: slotRecipe,
       compoundVariants: [
         {
           color: 'blue',
@@ -579,7 +591,8 @@ describe('SlotRecieps', () => {
       },
     })
 
-    const extendedSlotRecipe = defineSlotRecipe(slotRecipe, {
+    const extendedSlotRecipe = defineSlotRecipe({
+      extend: slotRecipe,
       defaultVariants: {
         size: 'sm',
       },

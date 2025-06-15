@@ -1,28 +1,20 @@
-import { isPlainObject, isArray, __DEV__ } from '@nex-ui/utils'
+import { isArray, __DEV__ } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
 import { mergeRecipeConfigs } from '../utils'
 import type {
   RecipeConfig,
   BaseVariantGroups,
   RecipeRuntimeFn,
-  CombineVariants,
+  MergeVariants,
 } from './types'
 
-export function defineRecipe<V extends BaseVariantGroups>(
-  config: RecipeConfig<V>,
-): RecipeRuntimeFn<V>
 export function defineRecipe<
-  V extends BaseVariantGroups,
-  E extends RecipeRuntimeFn,
->(extend: E, config: RecipeConfig<V, E>): RecipeRuntimeFn<CombineVariants<V, E>>
-export function defineRecipe<
-  V extends BaseVariantGroups,
-  E extends RecipeRuntimeFn,
->(extendOrConfig: E | RecipeConfig<V>, maybeConfig?: RecipeConfig<V, E>) {
-  const arg = maybeConfig || extendOrConfig
-
-  if (__DEV__ && isPlainObject(arg)) {
-    const config = arg as RecipeConfig<V>
+  Variants extends BaseVariantGroups,
+  RuntimeFn extends RecipeRuntimeFn | undefined = undefined,
+>(
+  config: RecipeConfig<Variants, RuntimeFn>,
+): RecipeRuntimeFn<MergeVariants<Variants, RuntimeFn>> {
+  if (__DEV__) {
     if (config.compoundVariants && !isArray(config.compoundVariants)) {
       throw new TypeError(
         `[Nex UI] system: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
@@ -30,28 +22,22 @@ export function defineRecipe<
     }
   }
 
-  let config = extendOrConfig as RecipeConfig<V> | RecipeConfig<V, E>
+  // eslint-disable-next-line prefer-const
+  let { extend, ...other } = config
 
-  if (
-    (extendOrConfig as RecipeRuntimeFn)?.__recipe === true &&
-    (extendOrConfig as RecipeRuntimeFn)?.__config &&
-    isPlainObject(maybeConfig)
-  ) {
-    config = mergeRecipeConfigs(
-      (extendOrConfig as RecipeRuntimeFn).__config,
-      maybeConfig,
-    )
+  if (extend && extend?.__recipe === true && extend?.__config) {
+    other = mergeRecipeConfigs(extend.__config, other)
   }
 
-  const { base, ...other } = config
+  const { base, ...o } = other
   const runtimeFn = createRuntimeFn({
     mainStyles: base,
-    ...other,
+    ...o,
   }) as any
 
   runtimeFn.__recipe = true
-  runtimeFn.__config = config
-  runtimeFn.variants = config.variants ? Object.keys(config.variants) : []
+  runtimeFn.__config = other
+  runtimeFn.variants = other.variants ? Object.keys(other.variants) : []
 
   return runtimeFn
 }

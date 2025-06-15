@@ -362,7 +362,8 @@ const buttonRecipe = defineRecipe({
   },
 })
 
-const extendedRecipe = defineRecipe(buttonRecipe, {
+const extendedRecipe = defineRecipe({
+  extend: buttonRecipe,
   variants: {
     color: {
       muted: {

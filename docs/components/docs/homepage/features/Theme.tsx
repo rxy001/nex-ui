@@ -193,7 +193,7 @@ export function Theme({ translations }: ThemeProps) {
         lang='ts'
         file='Theme.ts'
         className='x:lg:flex-1'
-        codeClassName='x:max-h-[480px]!'
+        codeClassName='x:h-[480px]!'
       >
         {snippets[index]}
       </CodeWindow>

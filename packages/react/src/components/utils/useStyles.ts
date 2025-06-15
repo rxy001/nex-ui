@@ -32,10 +32,16 @@ export const useStyles = <
       const slotRecipe = recipe as SlotRecipeRuntimeFn
       if (slotRecipe.__slotRecipe) {
         // @ts-ignore
-        return defineSlotRecipe(slotRecipe, styleOverrides)
+        return defineSlotRecipe({
+          extend: slotRecipe,
+          ...styleOverrides,
+        })
       }
-      // @ts-ignore
-      return defineRecipe(recipe, styleOverrides)
+      return defineRecipe({
+        // @ts-ignore
+        extend: recipe,
+        ...styleOverrides,
+      })
     }
     return recipe
   }, [recipe, styleOverrides])

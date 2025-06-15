@@ -1,4 +1,4 @@
-import { isPlainObject, isArray, __DEV__ } from '@nex-ui/utils'
+import { isArray, __DEV__ } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
 import { mergeRecipeConfigs } from '../utils'
 import type {
@@ -6,34 +6,23 @@ import type {
   SlotRecipeConfig,
   SlotVariantGroups,
   SlotRecipeRuntimeFn,
-  CombineVariants,
-  CombineSlots,
+  MergeVariants,
+  MergeSlots,
 } from './types'
 
 export function defineSlotRecipe<
-  S extends SlotGroups,
-  V extends SlotVariantGroups<S>,
->(config: SlotRecipeConfig<S, undefined, V>): SlotRecipeRuntimeFn<S, V>
-export function defineSlotRecipe<
-  S extends SlotGroups,
-  E extends SlotRecipeRuntimeFn,
-  V extends SlotVariantGroups<CombineSlots<S, E>>,
+  Slots extends SlotGroups,
+  RuntimeFn extends SlotRecipeRuntimeFn | undefined = undefined,
+  Variants extends SlotVariantGroups<
+    MergeSlots<Slots, RuntimeFn>
+  > = SlotVariantGroups<MergeSlots<Slots, RuntimeFn>>,
 >(
-  extend: E,
-  config: SlotRecipeConfig<S, E, V>,
-): SlotRecipeRuntimeFn<CombineSlots<S, E>, CombineVariants<V, E>>
-export function defineSlotRecipe<
-  S extends SlotGroups,
-  E extends SlotRecipeRuntimeFn,
-  V extends SlotVariantGroups<CombineSlots<S, E>>,
->(
-  extendOrConfig: E | SlotRecipeConfig<S, undefined, V>,
-  maybeConfig?: SlotRecipeConfig<S, E, V>,
-) {
-  const arg = maybeConfig || extendOrConfig
-
-  if (__DEV__ && isPlainObject(arg)) {
-    const config = arg as SlotRecipeConfig<S, undefined, V>
+  config: SlotRecipeConfig<Slots, RuntimeFn, Variants>,
+): SlotRecipeRuntimeFn<
+  MergeSlots<Slots, RuntimeFn>,
+  MergeVariants<Variants, RuntimeFn>
+> {
+  if (__DEV__) {
     if (config.compoundVariants && !isArray(config.compoundVariants)) {
       throw new TypeError(
         `[Nex UI] system: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
@@ -41,32 +30,24 @@ export function defineSlotRecipe<
     }
   }
 
-  let config = extendOrConfig as
-    | SlotRecipeConfig<S, undefined, V>
-    | SlotRecipeConfig<S, E, V>
+  // eslint-disable-next-line prefer-const
+  let { extend, ...other } = config
 
-  if (
-    (extendOrConfig as SlotRecipeRuntimeFn)?.__slotRecipe === true &&
-    (extendOrConfig as SlotRecipeRuntimeFn)?.__config &&
-    isPlainObject(maybeConfig)
-  ) {
-    config = mergeRecipeConfigs(
-      (extendOrConfig as SlotRecipeRuntimeFn).__config,
-      maybeConfig,
-    )
+  if (extend && extend?.__slotRecipe === true && extend?.__config) {
+    other = mergeRecipeConfigs(extend.__config, other)
   }
 
-  const { slots, ...other } = config
+  const { slots, ...o } = other
 
   const runtimeFn = createRuntimeFn({
     mainStyles: slots,
-    ...other,
+    ...o,
   }) as any
 
   runtimeFn.__slotRecipe = true
-  runtimeFn.__config = config
-  runtimeFn.variants = config.variants ? Object.keys(config.variants) : []
-  runtimeFn.slots = config.slots ? Object.keys(config.slots) : []
+  runtimeFn.__config = other
+  runtimeFn.variants = other.variants ? Object.keys(other.variants) : []
+  runtimeFn.slots = other.slots ? Object.keys(other.slots) : []
 
   return runtimeFn
 }
