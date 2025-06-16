@@ -1,5 +1,11 @@
 # @nex-ui/system
 
+## 0.0.10
+
+### Patch Changes
+
+- 5a229bd: release
+
 ## 0.0.9
 
 ### Patch Changes
