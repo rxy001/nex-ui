@@ -174,10 +174,12 @@ export default function MusicPlayer() {
                 justifyContent: 'space-between',
                 fs: 'md',
                 fontWeight: 'medium',
+                color: 'gray.200',
+                userSelect: 'none',
               }}
             >
               <Box>1:34</Box>
-              <Box sx={{ color: 'gray.500' }}>4:45</Box>
+              <Box>4:45</Box>
             </Box>
           </Box>
           <Box
