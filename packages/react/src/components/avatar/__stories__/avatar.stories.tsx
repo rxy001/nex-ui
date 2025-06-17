@@ -69,7 +69,7 @@ export const IconAvatar: Story = {
 
 export const Fallbacks: Story = {
   args: {
-    src: 'https://avatars.githubusercontent.com/u/25546323?v=4',
+    src: 'https://xxx.com',
     alt: 'XY',
   },
   render: (args) => (
