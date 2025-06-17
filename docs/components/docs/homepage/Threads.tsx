@@ -3,6 +3,25 @@
 import React, { useEffect, useRef } from 'react'
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl'
 
+function isSafari() {
+  const userAgent = navigator.userAgent
+
+  // 检测 Safari
+  const isSafari = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(
+    userAgent,
+  )
+
+  // 检测 Chrome iOS 和 Firefox iOS
+  const isChromeIOS = /CriOS/i.test(userAgent)
+  const isFirefoxIOS = /FxiOS/i.test(userAgent)
+
+  // 检测 Edge
+  const isEdge = /Edg/i.test(userAgent)
+
+  // 最终判断：是 Safari 且不是其他浏览器
+  return isSafari && !isChromeIOS && !isFirefoxIOS && !isEdge
+}
+
 interface ThreadsProps {
   color?: [number, number, number]
   amplitude?: number
@@ -155,7 +174,9 @@ export const Threads: React.FC<ThreadsProps> = () => {
             gl.canvas.width / gl.canvas.height,
           ),
         },
-        uColor: { value: new Color(0, 188, 255) },
+        uColor: {
+          value: isSafari() ? new Color('cyan') : new Color(0, 188, 255),
+        },
         uAmplitude: { value: 3 },
         uDistance: { value: 0.3 },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
