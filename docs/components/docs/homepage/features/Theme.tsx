@@ -172,14 +172,14 @@ export function Theme({ translations }: ThemeProps) {
 
   return (
     <div className='x:gap-12 x:flex x:flex-col x:lg:flex-row'>
-      <div className='x:lg:w-1/2 x:flex x:flex-col x:gap-2 x:min-lg:min-h-[435px]'>
+      <div className='x:max-lg:gap-3 x:flex x:flex-col x:lg:justify-between x:lg:h-[544px] x:lg:w-1/2 '>
         {contents.map(({ title, description }, i) => (
           <button
             key={title}
             className={clsx(
-              'x:p-4 x:text-left x:hover:shadow-lg x:hover:transform-[translateY(-2px)] x:transition-transform x:dark:hover:bg-[#202425]',
+              'x:p-4 x:text-left x:hover:shadow-lg x:rounded-md x:hover:transform-[translateY(-2px)] x:transition-transform x:dark:hover:bg-[#202425]',
               i === index
-                ? 'x:shadow-lg x:transform-[translateY(-2px)] x:rounded-md x:dark:bg-[#202425] '
+                ? 'x:shadow-lg x:transform-[translateY(-2px)] x:dark:bg-[#202425] '
                 : '',
             )}
             onClick={() => setIndex(i)}
@@ -193,7 +193,7 @@ export function Theme({ translations }: ThemeProps) {
         lang='ts'
         file='Theme.ts'
         className='x:lg:flex-1'
-        codeClassName='x:h-[480px]!'
+        codeClassName='x:lg:max-h-[512px]! x:lg:h-[512px]!'
       >
         {snippets[index]}
       </CodeWindow>

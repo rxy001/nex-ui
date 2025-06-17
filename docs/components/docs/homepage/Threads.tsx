@@ -6,19 +6,15 @@ import { Renderer, Program, Mesh, Triangle, Color } from 'ogl'
 function isSafari() {
   const userAgent = navigator.userAgent
 
-  // 检测 Safari
   const isSafari = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(
     userAgent,
   )
 
-  // 检测 Chrome iOS 和 Firefox iOS
   const isChromeIOS = /CriOS/i.test(userAgent)
   const isFirefoxIOS = /FxiOS/i.test(userAgent)
 
-  // 检测 Edge
   const isEdge = /Edg/i.test(userAgent)
 
-  // 最终判断：是 Safari 且不是其他浏览器
   return isSafari && !isChromeIOS && !isFirefoxIOS && !isEdge
 }
 
