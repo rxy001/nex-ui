@@ -1,0 +1,35 @@
+name: Visual Tests
+
+on:
+  push:
+    paths:
+      - 'packages/**'
+    branches:
+      - dev
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  chromatic:
+    name: Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install
+        uses: ./.github/common-actions/install
+
+      - name: Build Storybook
+        run: pnpm build:sb
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+          workingDir: sb
+          storybookBuildDir: './dist'
+          configFile: './chromatic.config.json'
