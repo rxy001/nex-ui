@@ -1,18 +1,21 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     paths:
       - '.changeset/**'
       - 'packages/**'
     branches:
       - main
+  push:
+    # paths:
+    #   - '.changeset/**'
+    #   - 'packages/**'
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-
-env:
-  CI: true
 
 jobs:
   release:
@@ -38,16 +41,23 @@ jobs:
             exit 1
           }
 
-      - name: Publish to NPM
-        # Run only if the build is successful
+      - name: Create PR
+        id: changesets-create-pr
         if: steps.build.outcome == 'success'
         uses: changesets/action@v1
         with:
-          publish: pnpm release
+          version: pnpm run version
           title: 'ci(changesets): version packages'
           commit: 'ci(changesets): version packages'
-          setupGitUser: false
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to NPM
+        if: "${{steps.changesets-create-pr.outputs.hasChangesets == 'false' && contains(github.event.head_commit.message, 'ci(changesets): version packages')}}"
+        uses: changesets/action@v1
+        with:
+          publish: pnpm run release
+        env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
