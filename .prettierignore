@@ -9,3 +9,4 @@ coverage
 *.yaml
 build
 .turbo
+.github/*
