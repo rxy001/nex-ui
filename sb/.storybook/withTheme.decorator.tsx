@@ -1,6 +1,6 @@
 import { DecoratorHelpers } from '@storybook/addon-themes'
 import { useColorScheme } from '@nex-ui/react'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import type { DecoratorFunction, Renderer } from 'storybook/internal/types'
 
 const { initializeThemeState, pluckThemeFromContext } = DecoratorHelpers
@@ -22,7 +22,7 @@ export const withTheme = <TRenderer extends Renderer = Renderer>({
 
     const { setMode } = useColorScheme()
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const selectedThemeName = themeOverride || selected || defaultTheme
       setMode(selectedThemeName)
     }, [selected, setMode, themeOverride])
