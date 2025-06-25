@@ -5,7 +5,7 @@ export const dividerRecipe = defineRecipe({
   base: {
     m: 0,
     border: 'none',
-    bg: 'gray.muted',
+    bg: 'gray.highlight',
   },
   variants: {
     orientation: {

@@ -10,10 +10,6 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.blue.400}',
       _dark: '{colors.blue.500}',
     },
-    tertiary: {
-      _DEFAULT: '{colors.blue.600}',
-      _dark: '{colors.blue.700}',
-    },
     subtle: { _DEFAULT: '{colors.blue.100}', _dark: '{colors.blue.900}' },
     muted: {
       _DEFAULT: '{colors.blue.200}',
@@ -36,10 +32,6 @@ export const colors = defineSemanticTokens.colors({
     secondary: {
       _DEFAULT: '{colors.gray.400}',
       _dark: '{colors.gray.500}',
-    },
-    tertiary: {
-      _DEFAULT: '{colors.gray.600}',
-      _dark: '{colors.gray.700}',
     },
     subtle: { _DEFAULT: '{colors.gray.100}', _dark: '{colors.gray.900}' },
     muted: {
@@ -64,10 +56,6 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.red.400}',
       _dark: '{colors.red.500}',
     },
-    tertiary: {
-      _DEFAULT: '{colors.red.600}',
-      _dark: '{colors.red.700}',
-    },
     subtle: { _DEFAULT: '{colors.red.100}', _dark: '{colors.red.900}' },
     muted: {
       _DEFAULT: '{colors.red.200}',
@@ -90,10 +78,6 @@ export const colors = defineSemanticTokens.colors({
     secondary: {
       _DEFAULT: '{colors.orange.400}',
       _dark: '{colors.orange.500}',
-    },
-    tertiary: {
-      _DEFAULT: '{colors.orange.600}',
-      _dark: '{colors.orange.700}',
     },
     subtle: { _DEFAULT: '{colors.orange.100}', _dark: '{colors.orange.900}' },
     muted: {
@@ -118,10 +102,6 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.yellow.400}',
       _dark: '{colors.yellow.500}',
     },
-    tertiary: {
-      _DEFAULT: '{colors.yellow.600}',
-      _dark: '{colors.yellow.700}',
-    },
     subtle: { _DEFAULT: '{colors.yellow.100}', _dark: '{colors.yellow.900}' },
     muted: {
       _DEFAULT: '{colors.yellow.200}',
@@ -144,10 +124,6 @@ export const colors = defineSemanticTokens.colors({
     secondary: {
       _DEFAULT: '{colors.green.400}',
       _dark: '{colors.green.500}',
-    },
-    tertiary: {
-      _DEFAULT: '{colors.green.600}',
-      _dark: '{colors.green.700}',
     },
     subtle: { _DEFAULT: '{colors.green.100}', _dark: '{colors.green.900}' },
     muted: {
@@ -172,10 +148,6 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.cyan.400}',
       _dark: '{colors.cyan.500}',
     },
-    tertiary: {
-      _DEFAULT: '{colors.cyan.600}',
-      _dark: '{colors.cyan.700}',
-    },
     subtle: { _DEFAULT: '{colors.cyan.100}', _dark: '{colors.cyan.900}' },
     muted: {
       _DEFAULT: '{colors.cyan.200}',
@@ -199,10 +171,6 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.purple.400}',
       _dark: '{colors.purple.500}',
     },
-    tertiary: {
-      _DEFAULT: '{colors.purple.600}',
-      _dark: '{colors.purple.700}',
-    },
     subtle: { _DEFAULT: '{colors.purple.100}', _dark: '{colors.purple.900}' },
     muted: {
       _DEFAULT: '{colors.purple.200}',
@@ -225,10 +193,6 @@ export const colors = defineSemanticTokens.colors({
     secondary: {
       _DEFAULT: '{colors.pink.400}',
       _dark: '{colors.pink.500}',
-    },
-    tertiary: {
-      _DEFAULT: '{colors.pink.600}',
-      _dark: '{colors.pink.700}',
     },
     subtle: { _DEFAULT: '{colors.pink.100}', _dark: '{colors.pink.900}' },
     muted: {

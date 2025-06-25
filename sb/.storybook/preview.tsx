@@ -1,5 +1,4 @@
 import { NexUIProvider } from '@nex-ui/react'
-import { themes } from '@storybook/theming'
 import { withTheme } from './withTheme.decorator'
 import type { ReactRenderer, Preview } from '@storybook/react'
 
@@ -10,9 +9,6 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
-    },
-    docs: {
-      theme: themes.dark,
     },
     a11y: {
       config: {
@@ -30,7 +26,6 @@ const preview: Preview = {
       },
     },
   },
-
   decorators: [
     withTheme<ReactRenderer>({
       defaultTheme: 'light',
@@ -40,7 +35,11 @@ const preview: Preview = {
       },
     }),
     (Story: any) => (
-      <NexUIProvider>
+      <NexUIProvider
+        colorScheme={{
+          colorSchemeSelector: 'class',
+        }}
+      >
         <Story />
       </NexUIProvider>
     ),

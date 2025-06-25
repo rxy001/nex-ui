@@ -114,10 +114,16 @@ export const inputRecipe = defineSlotRecipe({
           },
         },
         label: {
-          color: 'colorPalette.primary',
+          color: {
+            _DEFAULT: 'colorPalette.500',
+            _dark: 'colorPalette.400',
+          },
         },
         input: {
-          color: 'colorPalette.primary',
+          color: {
+            _DEFAULT: 'colorPalette.500',
+            _dark: 'colorPalette.400',
+          },
           transition: 'colors',
         },
       },

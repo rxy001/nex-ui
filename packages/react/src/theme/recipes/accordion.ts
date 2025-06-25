@@ -8,7 +8,7 @@ export const accordionRecipe = defineRecipe({
   variants: {
     variant: {
       outlined: {
-        border: '1px solid {colors.gray.muted}',
+        border: '1px solid {colors.gray.highlight}',
         borderRadius: 'md',
       },
     },
@@ -69,13 +69,13 @@ export const accordionItemRecipe = defineSlotRecipe({
     variant: {
       underlined: {
         root: {
-          borderBottom: '1px solid {colors.gray.muted}',
+          borderBottom: '1px solid {colors.gray.highlight}',
         },
       },
       outlined: {
         root: {
           ':not(:last-child)': {
-            borderBottom: '1px solid {colors.gray.muted}',
+            borderBottom: '1px solid {colors.gray.highlight}',
           },
         },
       },
