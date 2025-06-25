@@ -1,5 +1,10 @@
 import { forEach, isString, reduce } from '@nex-ui/utils'
-import { extractTokenPlaceholders, memoizeFn, pathToTokenName } from './utils'
+import {
+  extractTokenPlaceholders,
+  isValidTokenCategory,
+  memoizeFn,
+  pathToTokenName,
+} from './utils'
 import type { CSSObject } from '@emotion/react'
 import type { Scales } from './scales'
 import type { Aliases } from './aliases'
@@ -93,7 +98,7 @@ export const createNormalize = ({
     const properties = getPropertiesByAlias(propKey) ?? [propKey]
 
     forEach(properties, (property: string) => {
-      if (isString(propValue)) {
+      if (isString(propValue) && !propValue.startsWith('_EMO_animation')) {
         // Only string values are supported. Avoid using numbers, as they may inadvertently map to tokens.
         const matches = extractTokenPlaceholders(propValue)
         if (matches.length) {
@@ -103,14 +108,17 @@ export const createNormalize = ({
             (acc: string, match: RegExpExecArray) => {
               const placeholder = match[0]
               const [category, ...rest] = match[1].split('.')
-              return acc.replace(
-                placeholder,
-                normalizePropValue({
-                  colorPalette,
-                  category: category as TokenCategory,
-                  propValue: rest.join('.'),
-                }),
-              )
+              if (isValidTokenCategory(category)) {
+                return acc.replace(
+                  placeholder,
+                  normalizePropValue({
+                    colorPalette,
+                    category: category as TokenCategory,
+                    propValue: rest.join('.'),
+                  }),
+                )
+              }
+              return acc
             },
             propValue,
           )

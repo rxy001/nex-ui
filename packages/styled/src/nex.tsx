@@ -17,22 +17,15 @@ const createNexImpl = (tag: any) => {
     )
   }
 
-  const defaultShouldForwardProp = getDefaultShouldForwardProp(tag)
-
-  const shouldUseAs = !defaultShouldForwardProp('as')
-
   const Styled = withEmotionCache(
     ({ sx, ...props }: any, cache: any, ref: any) => {
-      const FinalTag = (shouldUseAs && props.as) || tag
-
-      const finalShouldForwardProp = shouldUseAs
-        ? getDefaultShouldForwardProp(FinalTag)
-        : defaultShouldForwardProp
-
+      const sys = useSystem()
+      const FinalTag = props.as || tag
+      const finalShouldForwardProp = getDefaultShouldForwardProp(FinalTag)
       const newProps: any = ref ? { ref } : {}
 
       forEach(props, (prop: any, key: string) => {
-        if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
+        if (!(key === 'as') && finalShouldForwardProp(key)) {
           newProps[key] = prop
         }
       })
@@ -41,14 +34,10 @@ const createNexImpl = (tag: any) => {
         return <FinalTag {...newProps} />
       }
 
-      const sys = useSystem()
-
       const cssProp = sys.css(sx)
-
       let { className = '' } = props
-      const registeredStyles: any[] = Array.isArray(cssProp)
-        ? cssProp
-        : [cssProp]
+      const registeredStyles = Array.isArray(cssProp) ? cssProp : [cssProp]
+
       if (typeof props.className === 'string') {
         className = getRegisteredStyles(
           cache.registered,
@@ -60,9 +49,7 @@ const createNexImpl = (tag: any) => {
       }
 
       const serialized = serializeStyles(registeredStyles, undefined, {})
-
       className += `${cache.key}-${serialized.name}`
-
       newProps.className = className.trim()
 
       return (
@@ -78,7 +65,7 @@ const createNexImpl = (tag: any) => {
     },
   )
 
-  Styled.displayName = 'NexUIStyledComponent'
+  Styled.displayName = 'NexUIComponent'
 
   return Styled
 }
