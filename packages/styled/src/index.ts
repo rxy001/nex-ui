@@ -2,6 +2,6 @@ export * from './styled'
 
 export * from './nex'
 
-export type { Styled } from './types'
+export type { NexUIStyled } from './types'
 
-export { isPropValid } from './utils'
+export type { NexUIFactory } from './types'

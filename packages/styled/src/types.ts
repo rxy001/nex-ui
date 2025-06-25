@@ -1,55 +1,29 @@
-import type {
-  ComponentProps as ReactComponentProps,
-  ComponentType,
-  JSX,
-  ElementType,
-} from 'react'
+import type { ComponentProps, ComponentType, JSX, ElementType } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 
 type Overwrite<K, T> = Omit<K, keyof T> & T
 
-export type GenericStyledComponentProps<E extends ElementType = ElementType> =
-  Overwrite<
-    ReactComponentProps<E>,
-    {
-      as?: E
-      sx?: Interpolation
-    }
-  >
-
-export interface CreateGenericStyledComponent<C extends ElementType> {
+interface CreateStyledComponent<C extends ElementType> {
   (
-    interpolation?: Interpolation,
-  ): <E extends ElementType = C>(
-    props: GenericStyledComponentProps<E>,
-  ) => JSX.Element
-}
-
-export interface CreateStyledComponent<C extends ElementType> {
-  (interpolation?: Interpolation): (
-    props: ReactComponentProps<C> & {
-      sx: Interpolation
-    },
-  ) => JSX.Element
+    interpolation?:
+      | Interpolation
+      | ((props: ComponentProps<C>) => Interpolation),
+  ): C
 }
 
 type HTMLElementTagName = keyof JSX.IntrinsicElements
 
-export interface CreateStyled {
-  <Tag extends HTMLElementTagName>(tag: Tag): CreateGenericStyledComponent<Tag>
-  <C extends ComponentType<ReactComponentProps<C>>>(
+export interface NexUIStyled {
+  <C extends ComponentType<ComponentProps<C>>>(
     component: C,
+    options?: StyledOptions,
   ): CreateStyledComponent<C>
-}
-
-type StyledTags = {
-  [Tag in HTMLElementTagName]: CreateGenericStyledComponent<Tag>
 }
 
 export type NexUIFactory = {
   [Tag in HTMLElementTagName]: <E extends ElementType = Tag>(
     props: Overwrite<
-      ReactComponentProps<E>,
+      ComponentProps<E>,
       {
         as?: E
         sx?: Interpolation
@@ -58,4 +32,14 @@ export type NexUIFactory = {
   ) => JSX.Element
 }
 
-export interface Styled extends StyledTags, CreateStyled {}
+export interface StyledOptions {
+  shouldForwardProp?: (propName: string) => boolean
+  target?: string
+}
+
+export type StyledElementType = React.ElementType & {
+  defaultProps?: Partial<any>
+  __emotion_real?: ElementType
+  __emotion_base?: ElementType
+  __emotion_forwardProp?: (propName: string) => boolean
+}

@@ -1,112 +1,102 @@
-import { withEmotionCache } from '@emotion/react'
-import { getRegisteredStyles } from '@emotion/utils'
-import { __DEV__, forEach, map, isFunction, isArray } from '@nex-ui/utils'
-import { useSystem } from '@nex-ui/system'
-import { serializeStyles } from '@emotion/serialize'
-import { getDefaultShouldForwardProp } from './utils'
-import { tags } from './tags'
-import { Insertion } from './Insertion'
-import type { CreateStyled, Styled as NexUIStyled } from './types'
+import { __DEV__, forEach, isArray } from '@nex-ui/utils'
+import { getDefaultShouldForwardProp, composeShouldForwardProps } from './utils'
+import type { NexUIStyled } from './types'
 
-const createStyled: CreateStyled = (tag: any): any => {
+const resolveSx = (...args: any[]) => {
+  const result: any[] = []
+
+  args.forEach((arg) => {
+    if (arg) {
+      if (isArray(arg)) {
+        result.push(...arg)
+      } else if (typeof arg === 'function') {
+        result.push(arg)
+      } else if (typeof arg === 'object') {
+        result.push(arg)
+      }
+    }
+  })
+
+  if (result.length === 0) {
+    return null
+  }
+
+  if (result.length === 1) {
+    return result[0]
+  }
+
+  if (result.length > 1) {
+    return result
+  }
+}
+
+const createStyled: NexUIStyled = (tag: any, options?: any): any => {
   if (__DEV__ && tag === undefined) {
     throw new Error(
       '[Nex UI] styled: You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',
     )
   }
 
-  const defaultShouldForwardProp = getDefaultShouldForwardProp(tag)
+  const isReal = tag.__nexui_real === tag
+  const baseTag = (isReal && tag.__nexui_base) || tag
+  const existingStyles = isReal ? tag.__nexui_styles : null
+
+  let targetClassName: string | undefined
+
+  if (options !== undefined) {
+    targetClassName = options.target
+  }
+
+  const shouldForwardProp = composeShouldForwardProps(tag, options, isReal)
+
+  const defaultShouldForwardProp =
+    shouldForwardProp || getDefaultShouldForwardProp(tag)
 
   const shouldUseAs = !defaultShouldForwardProp('as')
 
-  return (...args: any[]) => {
-    const styles = args.slice()
+  return (arg: any) => {
+    const styles = resolveSx(existingStyles, arg)
 
-    const Styled = withEmotionCache(
-      ({ sx, ...props }: any, cache: any, ref: any) => {
-        const FinalTag = (shouldUseAs && props.as) || tag
-        const sys = useSystem()
-        const mergedSx = sx ? [...styles, sx] : [...styles]
-        const finalShouldForwardProp = shouldUseAs
+    const Styled = ({ sx, ...props }: any) => {
+      const FinalTag = (shouldUseAs && props.as) || baseTag
+      const finalShouldForwardProp =
+        shouldUseAs && shouldForwardProp === undefined
           ? getDefaultShouldForwardProp(FinalTag)
           : defaultShouldForwardProp
 
-        const newProps: any = ref ? { ref } : {}
+      const forwardedProps: any = {}
 
-        forEach(props, (prop: any, key: string) => {
-          if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
-            newProps[key] = prop
-          }
-        })
-
-        if (mergedSx.length === 0) {
-          return <FinalTag {...newProps} />
+      forEach(props, (prop: any, key: string) => {
+        if (!(shouldUseAs && key === 'as') && finalShouldForwardProp(key)) {
+          forwardedProps[key] = prop
         }
+      })
 
-        let className = ''
-        let registeredStyles: any[] = []
+      if (targetClassName) {
+        forwardedProps.className = forwardedProps.className
+          ? `${forwardedProps.className} ${targetClassName}`
+          : targetClassName
+      }
 
-        if (typeof props.className === 'string') {
-          className = getRegisteredStyles(
-            cache.registered,
-            registeredStyles,
-            props.className,
-          )
-        } else if (props.className != null) {
-          className = `${props.className} `
-        }
+      const resolvedSx = resolveSx(styles, sx)
+      if (resolvedSx) {
+        forwardedProps.sx = resolvedSx
+      }
 
-        // TODO
-        const resolveSx = (arg: any): any => {
-          return map(arg, (v: any) => {
-            if (isFunction(v)) {
-              return v(props)
-            }
-            if (isArray(v)) {
-              return resolveSx(v)
-            }
-            return v
-          })
-        }
-
-        const cssProp = sys.css(resolveSx(mergedSx))
-
-        registeredStyles = [...registeredStyles, cssProp]
-        const serialized = serializeStyles(
-          registeredStyles,
-          cache.registered,
-          props,
-        )
-
-        className += `${cache.key}-${serialized.name}`
-
-        newProps.className = className
-
-        return (
-          <>
-            <Insertion
-              cache={cache}
-              serialized={serialized}
-              isStringTag={typeof FinalTag === 'string'}
-            />
-            <FinalTag {...newProps} />
-          </>
-        )
-      },
-    )
+      return <FinalTag {...forwardedProps} />
+    }
 
     Styled.displayName = 'NexUIStyledComponent'
+    Styled.__nexui_real = Styled
+    Styled.__nexui_base = baseTag
+    Styled.__nexui_styles = styles
+    Styled.__emotion_forwardProp = shouldForwardProp
 
     return Styled
   }
 }
 
 // @ts-ignore
-const styled = createStyled.bind() as NexUIStyled
-
-tags.forEach((tag) => {
-  // @ts-ignore
-  styled[tag] = styled(tag)
-})
+const styled = createStyled.bind()
 
 export { styled }
