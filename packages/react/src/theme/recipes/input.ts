@@ -133,8 +133,8 @@ export const inputRecipe = defineSlotRecipe({
           '::before': {
             content: '""',
             position: 'absolute',
-            bottom: 0,
-            left: 0,
+            insetBlockEnd: 0,
+            insetInlineStart: 0,
             w: '100%',
             h: '1px',
             bg: 'gray.highlight',
@@ -142,8 +142,8 @@ export const inputRecipe = defineSlotRecipe({
           '::after': {
             content: '""',
             position: 'absolute',
-            bottom: -1,
-            left: '50%',
+            insetBlockEnd: -1,
+            insetInlineStart: '50%',
             transform: 'translateX(-50%)',
             width: 0,
             h: '2px',
@@ -211,7 +211,7 @@ export const inputRecipe = defineSlotRecipe({
       labelPlacement: ['float-outside', 'float-inside'],
       css: {
         label: {
-          transitionProperty: 'top, left, font-size, transform',
+          transitionProperty: 'inset, font-size, transform',
           transform: 'translateY(-50%) scale(1)',
           insetBlockStart: '50%',
           transitionDuration: '0.2s',
