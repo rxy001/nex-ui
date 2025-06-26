@@ -52,7 +52,7 @@ export const switchRecipe = defineSlotRecipe({
       justifyContent: 'center',
       position: 'absolute',
       transition: 'scale',
-      left: '1',
+      insetInlineStart: '1',
       opacity: 0,
       scale: 0,
     },
@@ -62,7 +62,7 @@ export const switchRecipe = defineSlotRecipe({
       justifyContent: 'center',
       position: 'absolute',
       transition: 'transform',
-      right: '1',
+      insetInlineEnd: '1',
     },
     label: {
       ml: '2',
