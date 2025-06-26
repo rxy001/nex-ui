@@ -16,6 +16,7 @@ import {
 } from '../utils'
 import { CheckedIcon } from './CheckedIcon'
 import { Box } from '../box'
+import { IndeterminateIcon } from './IndeterminateIcon'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
 import type {
   ElementType,
@@ -132,6 +133,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     children,
     slotProps,
     onCheckedChange,
+    indeterminate,
     checked: checkedProp,
     type = 'checkbox',
     defaultChecked = false,
@@ -253,28 +255,38 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     additionalProps: slotAriaProps.label,
   })
 
-  const customIcon = icon ? (isFunction(icon) ? icon(ownerState) : icon) : null
+  const renderCheckedIcon = () => {
+    const customIcon = icon
+      ? isFunction(icon)
+        ? icon(ownerState)
+        : icon
+      : null
 
-  const checkedIcon = customIcon ? (
-    isValidElement(customIcon) ? (
-      <Box
-        // @ts-ignore
-        as={customIcon.type}
-        sx={styles.checkedIcon}
-        key={customIcon.key}
-        {...(customIcon.props ?? {})}
-      />
-    ) : (
-      customIcon
-    )
-  ) : (
-    <CheckedIcon checked={checked} />
-  )
+    if (customIcon) {
+      return isValidElement(customIcon) ? (
+        <Box
+          // @ts-ignore
+          as={customIcon.type}
+          sx={styles.checkedIcon}
+          key={customIcon.key}
+          {...(customIcon.props ?? {})}
+        />
+      ) : (
+        customIcon
+      )
+    }
+
+    if (indeterminate) {
+      return <IndeterminateIcon />
+    }
+
+    return <CheckedIcon checked={checked} />
+  }
 
   return (
     <nex.label {...rootProps}>
       <nex.input {...inputProps} />
-      <nex.span {...iconProps}>{checkedIcon}</nex.span>
+      <nex.span {...iconProps}>{renderCheckedIcon()}</nex.span>
       {children && <nex.span {...labelProps}>{children}</nex.span>}
     </nex.label>
   )

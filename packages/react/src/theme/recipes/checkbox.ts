@@ -1,6 +1,22 @@
-import { defineSlotRecipe } from '@nex-ui/system'
+import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
 import { colorVariant, toSlots } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
+
+export const checkboxGroupRecipe = defineRecipe({
+  base: {
+    display: 'flex',
+  },
+  variants: {
+    orientation: {
+      horizontal: {
+        flexDirection: 'row',
+      },
+      vertical: {
+        flexDirection: 'column',
+      },
+    },
+  },
+})
 
 export const checkboxRecipe = defineSlotRecipe({
   slots: {
@@ -9,10 +25,9 @@ export const checkboxRecipe = defineSlotRecipe({
       position: 'relative',
       alignItems: 'center',
       boxSizing: 'border-box',
-      h: '10',
-      p: '2',
       cursor: 'pointer',
       WebkitTapHighlightColor: 'transparent',
+      maxWidth: 'fit-content',
     },
     input: {
       position: 'absolute',
@@ -86,6 +101,10 @@ export const checkboxRecipe = defineSlotRecipe({
     },
     size: {
       sm: {
+        root: {
+          h: '6',
+          p: '1',
+        },
         icon: {
           w: '4',
           h: '4',
@@ -96,16 +115,24 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
       md: {
+        root: {
+          h: '8',
+          p: '1.5',
+        },
         icon: {
           w: '5',
           h: '5',
           fs: 'md',
         },
         label: {
-          fs: 'md',
+          fs: 'lg',
         },
       },
       lg: {
+        root: {
+          h: '10',
+          p: '2',
+        },
         icon: {
           w: '6',
           h: '6',
@@ -166,6 +193,16 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
     },
+    indeterminate: {
+      true: {
+        icon: {
+          '::after': {
+            opacity: 1,
+            transform: 'scale(1)',
+          },
+        },
+      },
+    },
     color: toSlots(colorVariant, 'input', 'icon'),
   },
   defaultVariants: {
@@ -177,3 +214,4 @@ export const checkboxRecipe = defineSlotRecipe({
 
 export type CheckboxRecipe = typeof checkboxRecipe
 export type CheckboxVariants = RecipeVariants<CheckboxRecipe>
+export type CheckboxGroupRecipe = typeof checkboxGroupRecipe
