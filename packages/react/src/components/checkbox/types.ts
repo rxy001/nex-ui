@@ -6,7 +6,6 @@ import type {
   OverrideProps,
   SxProps,
   ComponentPropsWithCommonProps,
-  Overwrite,
 } from '../../types/utils'
 
 export interface CheckboxPropsOverrides {}
@@ -109,6 +108,8 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
    * @default size
    */
   radius?: CheckboxVariants['radius']
+
+  indeterminate?: boolean
 }
 
 export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
@@ -117,6 +118,7 @@ export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
     CheckboxOwnProps<CheckboxComponent>,
     CheckboxPropsOverrides
   >
+
 export type CheckboxOwnerState<
   CheckboxComponent extends ElementType = 'input',
 > = CheckboxProps<CheckboxComponent> & {
@@ -133,61 +135,92 @@ export type CheckboxGroupValueType = number | string
 
 export interface CheckboxGroupPropsOverrides {}
 
+type CheckboxGroupOwnProps<
+  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  CheckboxGroupComponent extends ElementType = 'div',
+> = {
+  /**
+   * The component used for the root element.
+   * @default 'div'
+   */
+  as?: CheckboxGroupComponent
+
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx?: SxProps<CheckboxGroupOwnerState<T, CheckboxGroupComponent>>
+
+  /**
+   * The current selected values. (controlled)
+   */
+  value?: T[]
+
+  /**
+   * The name of the checkbox group, used when submitting an HTML form.
+   */
+  name?: string
+
+  /**
+   * The checkboxes items.
+   */
+  children?: ReactNode
+
+  /**
+   * The default checked values. (uncontrolled)
+   */
+  defaultValue?: T[]
+
+  /**
+   * Handler that is called when the value changes.
+   */
+  onValueChange?: (value: T[]) => void
+
+  /**
+   * If true, the checkboxes are disabled.
+   * @default false
+   */
+  disabled?: boolean
+
+  /**
+   * The color of the checkboxes.
+   * @default primaryThemeColor
+   */
+  color?: CheckboxVariants['color']
+
+  /**
+   * The size of the checkboxes.
+   * @default 'md'
+   */
+  size?: CheckboxVariants['size']
+
+  /**
+   * The border radius of the checkboxes.
+   * @default size
+   */
+  radius?: CheckboxVariants['radius']
+
+  /**
+   * The axis the checkbox group items should align with.
+   * @default 'horizontal'
+   */
+  orientation?: 'vertical' | 'horziontal'
+}
+
 export type CheckboxGroupProps<
   T extends CheckboxGroupValueType = CheckboxGroupValueType,
-> = Overwrite<
-  {
-    /**
-     * The current selected values. (controlled)
-     */
-    value?: T[]
-
-    /**
-     * The name of the checkbox group, used when submitting an HTML form.
-     */
-    name?: string
-
-    /**
-     * The checkboxes items.
-     */
-    children?: ReactNode
-
-    /**
-     * The default checked values. (uncontrolled)
-     */
-    defaultValue?: T[]
-
-    /**
-     * Handler that is called when the value changes.
-     */
-    onValueChange?: (value: T[]) => void
-
-    /**
-     * If true, the checkboxes are disabled.
-     * @default false
-     */
-    disabled?: boolean
-
-    /**
-     * The color of the checkboxes.
-     * @default primaryThemeColor
-     */
-    color?: CheckboxVariants['color']
-
-    /**
-     * The size of the checkboxes.
-     * @default 'md'
-     */
-    size?: CheckboxVariants['size']
-
-    /**
-     * The border radius of the checkboxes.
-     * @default size
-     */
-    radius?: CheckboxVariants['radius']
-  },
+  CheckboxGroupComponent extends ElementType = 'div',
+> = OverrideProps<
+  CheckboxGroupComponent,
+  CheckboxGroupOwnProps<T, CheckboxGroupComponent>,
   CheckboxGroupPropsOverrides
 >
+
+export type CheckboxGroupOwnerState<
+  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  CheckboxGroupComponent extends ElementType = 'div',
+> = CheckboxGroupProps<T, CheckboxGroupComponent> & {
+  value: T[]
+}
 
 export type CheckboxGroupContextValue<
   T extends CheckboxGroupValueType = CheckboxGroupValueType,

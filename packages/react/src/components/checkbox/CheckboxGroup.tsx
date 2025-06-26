@@ -1,36 +1,94 @@
 'use client'
 
 import { useMemo } from 'react'
+import { nex } from '@nex-ui/styled'
 import { useControlledState } from '@nex-ui/hooks'
 import { CheckboxGroupProvider } from './CheckboxGroupContext'
+import {
+  useDefaultProps,
+  useSlotProps,
+  composeClasses,
+  getUtilityClass,
+  useStyles,
+} from '../utils'
+import { useNexUI } from '../provider'
+import { checkboxGroupRecipe } from '../../theme/recipes'
+import type { ElementType } from 'react'
 import type {
   CheckboxGroupContextValue,
   CheckboxGroupProps,
   CheckboxGroupValueType,
+  CheckboxGroupOwnerState,
 } from './types'
+
+const useSlotClasses = () => {
+  const { prefix } = useNexUI()
+
+  const dividerRoot = `${prefix}-checkbox-group`
+
+  const slots = {
+    root: ['root'],
+  }
+
+  const composedClasses = composeClasses(slots, getUtilityClass(dividerRoot))
+
+  return composedClasses
+}
 
 export const CheckboxGroup = <
   T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  CheckboxGroupComponent extends ElementType = 'div',
 >(
-  props: CheckboxGroupProps<T>,
+  inProps: CheckboxGroupProps<T, CheckboxGroupComponent>,
 ) => {
+  const props = useDefaultProps<CheckboxGroupProps<T>>({
+    name: 'CheckboxGroup',
+    props: inProps,
+  })
+
   const {
     name,
-    onValueChange,
     children,
     disabled,
+    onValueChange,
     size,
     color,
     radius,
+    value,
+    orientation = 'horziontal',
     defaultValue = [],
-    value: valueProp,
+    ...remainingProps
   } = props
 
-  const [values, setValues] = useControlledState(
-    valueProp,
+  const [values, setValues] = useControlledState<T[]>(
+    value,
     defaultValue,
     onValueChange,
   )
+
+  const ownerState: CheckboxGroupOwnerState<T> = {
+    ...props,
+    orientation,
+    value: values,
+  }
+
+  const classes = useSlotClasses()
+
+  const styles = useStyles({
+    name: 'CheckboxGroup',
+    ownerState,
+    recipe: checkboxGroupRecipe,
+  })
+
+  const rootProps = useSlotProps({
+    ownerState,
+    sx: styles,
+    classNames: classes.root,
+    externalForwardedProps: remainingProps,
+    additionalProps: {
+      role: 'group',
+    },
+  })
 
   const ctx: CheckboxGroupContextValue<T> = useMemo(
     () => ({
@@ -61,9 +119,11 @@ export const CheckboxGroup = <
   )
 
   return (
-    <CheckboxGroupProvider value={ctx as CheckboxGroupContextValue}>
-      {children}
-    </CheckboxGroupProvider>
+    <nex.div {...rootProps}>
+      <CheckboxGroupProvider value={ctx as CheckboxGroupContextValue}>
+        {children}
+      </CheckboxGroupProvider>
+    </nex.div>
   )
 }
 

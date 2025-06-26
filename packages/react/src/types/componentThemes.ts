@@ -7,6 +7,7 @@ import type {
   ButtonRecipe,
   InputRecipe,
   CheckboxRecipe,
+  CheckboxGroupRecipe,
   SwitchRecipe,
   AccordionRecipe,
   AccordionItemRecipe,
@@ -31,6 +32,8 @@ import type {
   AccordionOwnerState,
   AccordionItemProps,
   AvatarGroupProps,
+  CheckboxGroupProps,
+  CheckboxGroupOwnerState,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -83,6 +86,12 @@ export type ComponentThemes = {
       | ComponentThemeObject<CheckboxRecipe>
       | ComponentThemeFn<CheckboxOwnerState, CheckboxRecipe>
     defaultProps?: CheckboxProps
+  }
+  CheckboxGroup?: {
+    styleOverrides?:
+      | ComponentThemeObject<CheckboxGroupRecipe>
+      | ComponentThemeFn<CheckboxGroupOwnerState, CheckboxGroupRecipe>
+    defaultProps?: CheckboxGroupProps
   }
   Switch?: {
     styleOverrides?:

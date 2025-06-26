@@ -33,6 +33,10 @@ const meta = {
     disabled: {
       control: 'boolean',
     },
+    orientation: {
+      options: ['vertical', 'horziontal'],
+      control: 'select',
+    },
   },
   args: {
     color: 'blue',
@@ -58,6 +62,12 @@ export const Default: Story = {}
 export const Disabled: Story = {
   args: {
     disabled: true,
+  },
+}
+
+export const Vertical: Story = {
+  args: {
+    orientation: 'vertical',
   },
 }
 
