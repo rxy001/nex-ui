@@ -30,3 +30,8 @@ Please adhere to this project's [CODE_OF_CONDUCT](/CODE_OF_CONDUCT.md).
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## UNDER CONSTRUCTION
+
+<p>Right now there is no stable version available for this library. We're just working on it. 🚀</p>
+<img src='./assets/construction.png' style="width: 400px; height: 400px;" />
