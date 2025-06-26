@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Head } from 'nextra/components'
+import { Head, Banner } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { InitColorSchemeScript } from '@nex-ui/react'
 import logo from '@/public/images/logo.png'
@@ -65,6 +65,10 @@ export default async function RootLayout({ children, params }: any) {
         <InitColorSchemeScript colorSchemeSelector='class' />
       </Head>
       <body>
+        <Banner dismissible={false}>
+          Right now there is no stable version available for this library.
+          We&apos;re just working on it. 🚀
+        </Banner>
         <Layout
           navbar={navbar}
           footer={footer}
