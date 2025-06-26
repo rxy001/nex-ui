@@ -69,7 +69,9 @@ type OverriddenCSSProps = Overwrite<
           | CSSProperties[K]
           | TypeValueByKey<Tokens, Scales[K]>
           | TypeValueByKey<SemanticTokens, Scales[K]>
-          | (Scales[K] extends 'colors' ? VirtualColor : never)
+          | (Exclude<Scales[K], undefined> extends 'colors'
+              ? VirtualColor
+              : never)
       : CSSProperties[K]
   }
 >
