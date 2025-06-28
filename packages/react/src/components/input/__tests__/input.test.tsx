@@ -245,7 +245,7 @@ describe('Input', () => {
       <Input
         classes={{
           root: rootClassName,
-          clearBtn: clearBtnClassName,
+          clearButton: clearBtnClassName,
         }}
         clearable
         defaultValue='default'
@@ -253,9 +253,9 @@ describe('Input', () => {
     )
 
     const root = container.firstChild
-    const clearBtn = container.querySelector(`.${inputClasses['clear-btn']}`)
+    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
 
     expect(root).toHaveClass(rootClassName)
-    expect(clearBtn).toHaveClass(clearBtnClassName)
+    expect(clearButton).toHaveClass(clearBtnClassName)
   })
 })

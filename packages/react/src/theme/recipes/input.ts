@@ -34,7 +34,7 @@ export const inputRecipe = defineSlotRecipe({
         appearance: 'none',
       },
     },
-    clearBtn: {
+    clearButton: {
       padding: 0,
       w: 'auto',
       h: 'auto',
@@ -272,7 +272,7 @@ export const inputRecipe = defineSlotRecipe({
         suffix: {
           pt: '0.9em',
         },
-        clearBtn: {
+        clearButton: {
           mt: '0.9em',
         },
       },
@@ -293,7 +293,7 @@ export const inputRecipe = defineSlotRecipe({
         suffix: {
           pt: '1em',
         },
-        clearBtn: {
+        clearButton: {
           mt: '1em',
         },
       },
@@ -314,7 +314,7 @@ export const inputRecipe = defineSlotRecipe({
         suffix: {
           pt: '1.2em',
         },
-        clearBtn: {
+        clearButton: {
           mt: '1.2em',
         },
       },
