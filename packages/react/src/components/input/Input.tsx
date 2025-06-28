@@ -50,7 +50,7 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
       labelPlacement && `label-placement-${labelPlacement}`,
     ],
     input: ['input'],
-    clearBtn: ['clear-btn'],
+    clearButton: ['clear-btn'],
     prefix: ['prefix'],
     suffix: ['suffix'],
     label: ['label'],
@@ -85,7 +85,7 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
     htmlFor: labelString ? inputId : undefined,
   }
 
-  const clearBtnProps = {
+  const clearButtonProps = {
     'aria-label': 'Clear input',
     tabIndex: -1,
   }
@@ -93,7 +93,7 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
   return {
     input: inputProps,
     label: labelProps,
-    clearBtn: clearBtnProps,
+    clearButton: clearButtonProps,
   }
 }
 
@@ -252,11 +252,11 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     },
   })
 
-  const clearBtnProps = useSlotProps({
+  const clearButtonProps = useSlotProps({
     ownerState,
-    externalSlotProps: slotProps?.clearBtn,
-    sx: styles.clearBtn,
-    classNames: classes.clearBtn,
+    externalSlotProps: slotProps?.clearButton,
+    sx: styles.clearButton,
+    classNames: classes.clearButton,
     additionalProps: {
       onClick: onClearValue,
       iconOnly: true,
@@ -268,7 +268,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
       sx: {
         visibility: value ? 'visible' : 'hidden',
       },
-      ...slotAriaProps.clearBtn,
+      ...slotAriaProps.clearButton,
     },
   })
 
@@ -292,7 +292,8 @@ export const Input = <InputComponent extends ElementType = 'input'>(
       {label && <nex.label {...labelProps}>{label}</nex.label>}
       <nex.input {...inputProps} />
       {clearable && (
-        <Button {...clearBtnProps}>
+        // @ts-expect-error
+        <Button {...clearButtonProps}>
           <CloseCircleFilled />
         </Button>
       )}

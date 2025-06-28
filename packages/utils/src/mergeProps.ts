@@ -44,7 +44,7 @@ export function mergeProps<T extends PropsArg[]>(...args: T) {
             clsx(classObj, classSrc),
         )
       } else if (key === 'sx' && a && b) {
-        result[key] = [a, b]
+        result[key] = [a, b].flat(1)
       } else {
         result[key] = b !== undefined ? b : a
       }

@@ -13,8 +13,8 @@ export interface InputPropsOverrides {}
 
 type InputSlotProps<InputComponent extends ElementType> = {
   root?: ComponentPropsWithCommonProps<'div', InputOwnerState<InputComponent>>
-  clearBtn?: ComponentPropsWithCommonProps<
-    typeof Button,
+  clearButton?: ComponentPropsWithCommonProps<
+    typeof Button<'button'>,
     InputOwnerState<InputComponent>
   >
   prefix?: ComponentPropsWithCommonProps<
@@ -157,7 +157,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'root' | 'label' | 'clearBtn' | 'prefix' | 'suffix'
+    'root' | 'label' | 'clearButton' | 'prefix' | 'suffix'
   >
 
   /**

@@ -2,7 +2,7 @@ import type {
   CSSObject,
   RecipeRuntimeFn,
   SlotRecipeRuntimeFn,
-  Interpolation,
+  InterpolationPrimitive,
 } from '@nex-ui/system'
 import type { ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
@@ -22,9 +22,18 @@ export type ComponentPropsWithCommonProps<
   }
 >
 
+type FunctionInterpolation<T> = (
+  OwnerState: T,
+) => InterpolationPrimitive | ReadonlyArray<InterpolationPrimitive>
+
+type ArrayInterpolation<T> = ReadonlyArray<
+  InterpolationPrimitive | FunctionInterpolation<T>
+>
+
 export type SxProps<OwnerState> =
-  | Interpolation
-  | ((OwnerState: OwnerState) => Interpolation)
+  | InterpolationPrimitive
+  | ArrayInterpolation<OwnerState>
+  | FunctionInterpolation<OwnerState>
 
 export type ComponentUtilityClasses<T extends string> = Partial<
   Record<T, ClassValue>

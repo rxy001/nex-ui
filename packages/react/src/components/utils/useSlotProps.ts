@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import { mergeProps, isFunction } from '@nex-ui/utils'
+import { mergeProps, isFunction, isArray, isPlainObject } from '@nex-ui/utils'
+import { useMemo } from 'react'
 import type { ClassValue } from 'clsx'
 import type { ArrayInterpolation } from '@nex-ui/system'
 import type { SxProps } from '../../types/utils'
@@ -71,9 +72,28 @@ export const useSlotProps = <
 
   const className = clsx(classNamesProp, props?.className)
 
-  let resolvedSx = isFunction(props.sx) ? props.sx(ownerState!) : props.sx
-
-  resolvedSx = resolvedSx ? [sx, resolvedSx].flat(1) : sx
+  const resolvedSx = useMemo(() => {
+    if (isFunction(props.sx)) {
+      return [sx, props.sx(ownerState ?? {})].flat(1)
+    }
+    if (isArray(props.sx)) {
+      return props.sx
+        .reduce(
+          (acc, v) => {
+            if (isFunction(v)) {
+              return [...acc, v(ownerState ?? {})]
+            }
+            return [...acc, v]
+          },
+          [sx],
+        )
+        .flat(1)
+    }
+    if (isPlainObject(props.sx)) {
+      return [sx, props.sx]
+    }
+    return sx
+  }, [ownerState, props, sx])
 
   return {
     ...props,
