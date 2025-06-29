@@ -3,12 +3,12 @@ import { __DEV__, mergeProps } from '@nex-ui/utils'
 import { useNexUI } from '../provider/Context'
 import type { ComponentNames } from '../../types/componentThemes'
 
-type useDefaultPropsArgs = {
+type UseDefaultPropsArgs = {
   name: ComponentNames
   props: Record<string, any>
 }
 
-export const useDefaultProps = <T>({ name, props }: useDefaultPropsArgs): T => {
+export const useDefaultProps = <T>({ name, props }: UseDefaultPropsArgs): T => {
   const { components = {} } = useNexUI()
 
   return useMemo(() => {

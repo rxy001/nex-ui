@@ -305,7 +305,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
         </nex.h3>
         <AnimatePresence>
           {(keepMounted || expanded) && (
-            // @ts-ignore
             <m.div {...contentMotionProps} {...motionProps}>
               <nex.div {...contentProps}>{children}</nex.div>
             </m.div>

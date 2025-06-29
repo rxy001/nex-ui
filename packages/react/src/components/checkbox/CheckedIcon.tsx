@@ -1,7 +1,8 @@
 import { LazyMotion, domAnimation } from 'motion/react'
 import * as m from 'motion/react-m'
+import type { Variants } from 'motion/react'
 
-const tickVariants = {
+const tickVariants: Variants = {
   checked: {
     pathLength: 1,
     opacity: 1,
