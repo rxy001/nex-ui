@@ -3,7 +3,7 @@
 import * as m from 'motion/react-m'
 import { useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
-import { LazyMotion, AnimatePresence, domAnimation } from 'motion/react'
+import { LazyMotion, AnimatePresence } from 'motion/react'
 import { nex } from '@nex-ui/styled'
 import { mergeRefs } from '@nex-ui/utils'
 import { useEffect, useId, useRef } from 'react'
@@ -15,6 +15,7 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
+  motionFeatures,
 } from '../utils'
 import { useAccordionGroup } from './AccordionContext'
 import type {
@@ -291,7 +292,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   }, [])
 
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={motionFeatures}>
       <nex.div {...rootProps}>
         <nex.h3 {...headingProps}>
           <nex.button {...triggerProps}>

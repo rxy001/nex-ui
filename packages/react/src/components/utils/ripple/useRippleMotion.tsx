@@ -2,17 +2,15 @@
 
 import { useEvent } from '@nex-ui/hooks'
 import { clamp } from '@nex-ui/utils'
-import { LazyMotion, AnimatePresence, domAnimation } from 'motion/react'
+import { LazyMotion, AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
 import { useRef } from 'react'
 import { createRoot } from 'react-dom/client'
+import { motionFeatures } from '../motionFeatures'
 import type { CSSProperties, MouseEvent } from 'react'
 import type { Root } from 'react-dom/client'
 import type { MotionProps } from 'motion/react'
 import type { Ripples } from './types'
-
-// TODO: motion 的 async load 和 types 有 bug
-// const loadFeatures = import('./features').then((res) => res.default)
 
 export type UseRippleMotionProps = {
   motionProps?: MotionProps
@@ -61,7 +59,7 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
     })
 
     rootRef.current.render(
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={motionFeatures}>
         {ripplesRef.current.map((ripple) => {
           const duration = clamp(
             0.01 * ripple.size,
