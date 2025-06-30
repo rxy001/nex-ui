@@ -1,7 +1,9 @@
-import { LazyMotion, domAnimation } from 'motion/react'
+import { LazyMotion } from 'motion/react'
 import * as m from 'motion/react-m'
+import { motionFeatures } from '../utils'
+import type { Variants } from 'motion/react'
 
-const tickVariants = {
+const tickVariants: Variants = {
   checked: {
     pathLength: 1,
     opacity: 1,
@@ -29,7 +31,7 @@ export type CheckedIconProps = {
 
 export const CheckedIcon = ({ checked }: CheckedIconProps) => {
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={motionFeatures}>
       <m.svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
