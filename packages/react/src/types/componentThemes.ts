@@ -111,6 +111,11 @@ export type ComponentThemes = {
       | ComponentThemeFn<AccordionOwnerState, AccordionItemRecipe>
     defaultProps?: AccordionItemProps
   }
+  Modal: {}
+  ModalContent: {}
+  ModalHeader: {}
+  ModalBody: {}
+  ModalFooter: {}
 }
 
 export type ComponentNames = keyof ComponentThemes

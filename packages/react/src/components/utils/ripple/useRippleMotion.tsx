@@ -11,7 +11,7 @@ import type { Root } from 'react-dom/client'
 import type { MotionProps } from 'motion/react'
 import type { Ripples } from './types'
 
-// TODO: motion 的 async load 和 types 有 bug
+// TODO: motion 的 async load 有 bug
 // const loadFeatures = import('./features').then((res) => res.default)
 
 export type UseRippleMotionProps = {
@@ -61,7 +61,7 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
     })
 
     rootRef.current.render(
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={domAnimation} strict>
         {ripplesRef.current.map((ripple) => {
           const duration = clamp(
             0.01 * ripple.size,
@@ -71,7 +71,6 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
 
           return (
             <AnimatePresence mode='popLayout' key={ripple.key}>
-              {/* @ts-ignore */}
               <m.span
                 animate={{ transform: 'scale(2)', opacity: 0 }}
                 className='heroui-ripple'
