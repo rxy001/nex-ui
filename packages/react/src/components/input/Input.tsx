@@ -1,21 +1,25 @@
 'use client'
 
 import { useId, useRef } from 'react'
-import { nex } from '@nex-ui/styled'
-import { isString, mergeRefs } from '@nex-ui/utils'
+import { isFunction, isString } from '@nex-ui/utils'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
+import { ButtonBase } from '../button/ButtonBase'
 import {
   useDefaultProps,
   composeClasses,
   getUtilityClass,
-  useSlotProps,
   useStyles,
+  useSlot,
 } from '../utils'
-import { Button } from '../button'
-import type { ElementType, ChangeEvent, MouseEvent } from 'react'
+import type {
+  ElementType,
+  ChangeEvent,
+  MouseEvent,
+  InputHTMLAttributes,
+} from 'react'
 import type { InputOwnerState, InputProps } from './types'
 
 const useSlotClasses = (ownerState: InputOwnerState) => {
@@ -66,34 +70,57 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
 }
 
 const useSlotAriaProps = (ownerState: InputOwnerState) => {
-  const { tabIndex, disabled, invaild, label } = ownerState
-  const labelString = isString(label)
+  const {
+    disabled,
+    invaild,
+    as,
+    type,
+    value,
+    placeholder,
+    slotProps,
+    label: inputLabel,
+    tabIndex = 0,
+  } = ownerState
+  const labelProps = slotProps?.label ?? {}
+  const clearButtonProps = slotProps?.clearButton ?? {}
+  const stringLabel = isString(inputLabel)
   const id = useId()
-  const inputId = `input-${id}`
-  const labelId = `label-${id}`
+  const inputId = ownerState['id'] ?? (stringLabel ? `input-${id}` : undefined)
+  const labelId = labelProps['id'] ?? (stringLabel ? `label-${id}` : undefined)
 
-  const inputProps = {
+  let input: InputHTMLAttributes<HTMLInputElement> = {
+    id: inputId,
     tabIndex: disabled ? -1 : tabIndex,
     'aria-invalid': invaild,
-    id: labelString ? inputId : undefined,
-    'aria-labelledby': labelString ? labelId : undefined,
-    'aria-label': labelString ? label : undefined,
+    'aria-labelledby': labelId,
+    'aria-label':
+      ownerState['aria-label'] ?? (stringLabel ? inputLabel : undefined),
   }
 
-  const labelProps = {
-    id: labelString ? labelId : undefined,
-    htmlFor: labelString ? inputId : undefined,
+  if (!as || as === 'input' || isFunction(as)) {
+    input = {
+      ...input,
+      value,
+      disabled,
+      placeholder,
+      type,
+    }
   }
 
-  const clearButtonProps = {
-    'aria-label': 'Clear input',
-    tabIndex: -1,
+  const label = {
+    id: labelId,
+    htmlFor: inputId,
+  }
+
+  const clearButton = {
+    'aria-label': clearButtonProps['aria-label'] ?? 'Clear input',
+    tabIndex: clearButtonProps.tabIndex ?? -1,
   }
 
   return {
-    input: inputProps,
-    label: labelProps,
-    clearButton: clearButtonProps,
+    input,
+    label,
+    clearButton,
   }
 }
 
@@ -109,7 +136,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
 
   const {
     sx,
-    ref,
     label,
     className,
     prefix,
@@ -118,8 +144,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     slotProps,
     onValueChange,
     placeholder,
-    tabIndex = 0,
-    as = 'input',
     defaultValue = '',
     value: valueProp,
     color = primaryThemeColor,
@@ -141,7 +165,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     onValueChange,
   )
   const inputRef = useRef<HTMLInputElement>(null)
-  const mergedRefs = mergeRefs<HTMLInputElement>(ref, inputRef)
   const hasLabel = !!label
   const hasValue = !!value
   const hasPlaceholder = !!placeholder
@@ -174,8 +197,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
 
   const ownerState: InputOwnerState = {
     ...props,
-    as,
-    tabIndex,
     color,
     disabled,
     variant,
@@ -199,7 +220,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const onClearValue = useEvent(() => {
+  const handleClearValue = useEvent(() => {
     setValue('')
     onClear?.()
     inputRef.current?.focus()
@@ -209,96 +230,91 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     setValue(e.target.value)
   })
 
-  const rootProps = useSlotProps({
+  const handleFocusInput = useEvent((e: MouseEvent<HTMLDivElement>) => {
+    if (inputRef.current && e.target === e.currentTarget) {
+      inputRef.current.focus()
+    }
+  })
+
+  const [InputRoot, getInputRootProps] = useSlot({
     ownerState,
+    elementType: 'div',
     externalSlotProps: slotProps?.root,
-    externalForwardedProps: {
-      className,
-      sx,
-    },
-    sx: styles.root,
+    style: styles.root,
     classNames: classes.root,
     additionalProps: {
-      onClick: (e: MouseEvent<HTMLDivElement>) => {
-        if (inputRef.current && e.target === e.currentTarget) {
-          inputRef.current.focus()
-        }
-      },
+      sx,
+      className,
+      onClick: handleFocusInput,
     },
   })
 
-  const labelProps = useSlotProps({
+  const [InputLabel, getInputLabelProps] = useSlot({
     ownerState,
+    elementType: 'label',
     externalSlotProps: slotProps?.label,
-    sx: styles.label,
+    style: styles.label,
     classNames: classes.label,
-    additionalProps: slotAriaProps.label,
+    a11y: slotAriaProps.label,
   })
 
-  const inputProps = useSlotProps({
+  const [InputControl, getInputControlProps] = useSlot({
     ownerState,
+    elementType: 'input',
     externalForwardedProps: remainingProps,
-    sx: styles.input,
+    style: styles.input,
     classNames: classes.input,
+    a11y: slotAriaProps.input,
     additionalProps: {
-      as,
-      type,
-      value,
-      disabled,
-      placeholder,
-      ref: mergedRefs,
+      ref: inputRef,
       onChange: handleChange,
-      ...slotAriaProps.input,
     },
   })
 
-  const clearButtonProps = useSlotProps({
+  const [InputClearButton, getClearButtonProps] = useSlot({
     ownerState,
+    elementType: ButtonBase,
+    style: styles.clearButton,
     externalSlotProps: slotProps?.clearButton,
-    sx: styles.clearButton,
     classNames: classes.clearButton,
+    a11y: slotAriaProps.clearButton,
     additionalProps: {
-      onClick: onClearValue,
-      iconOnly: true,
-      disableRipple: true,
-      size: 'sm',
-      color: variant === 'filled' ? color : 'gray',
-      variant: 'text',
+      onClick: handleClearValue,
       disabled: disabled,
       sx: {
         visibility: value ? 'visible' : 'hidden',
       },
-      ...slotAriaProps.clearButton,
     },
   })
 
-  const prefixProps = useSlotProps({
+  const [InputPrefix, getInputPrefixProps] = useSlot({
     ownerState,
+    elementType: 'span',
     externalSlotProps: slotProps?.prefix,
-    sx: styles.prefix,
+    style: styles.prefix,
     classNames: classes.prefix,
   })
 
-  const suffixProps = useSlotProps({
+  const [InputSuffix, getInputSuffixProps] = useSlot({
     ownerState,
+    elementType: 'span',
     externalSlotProps: slotProps?.suffix,
-    sx: styles.suffix,
+    style: styles.suffix,
     classNames: classes.suffix,
   })
 
   return (
-    <nex.div {...rootProps}>
-      {prefix && <nex.span {...prefixProps}>{prefix}</nex.span>}
-      {label && <nex.label {...labelProps}>{label}</nex.label>}
-      <nex.input {...inputProps} />
+    <InputRoot {...getInputRootProps()}>
+      {prefix && <InputPrefix {...getInputPrefixProps()}>{prefix}</InputPrefix>}
+      {label && <InputLabel {...getInputLabelProps()}>{label}</InputLabel>}
+      <InputControl {...getInputControlProps()} />
       {clearable && (
-        // @ts-expect-error
-        <Button {...clearButtonProps}>
+        <InputClearButton {...getClearButtonProps()}>
           <CloseCircleFilled />
-        </Button>
+        </InputClearButton>
       )}
-      {suffix && <nex.span {...suffixProps}>{suffix}</nex.span>}
-    </nex.div>
+      {suffix && <InputSuffix {...getInputSuffixProps()}>{suffix}</InputSuffix>}
+    </InputRoot>
   )
 }
 

@@ -1,15 +1,14 @@
 'use client'
 
 import { useMemo } from 'react'
-import { nex } from '@nex-ui/styled'
 import { useControlledState } from '@nex-ui/hooks'
 import { CheckboxGroupProvider } from './CheckboxGroupContext'
 import {
   useDefaultProps,
-  useSlotProps,
   composeClasses,
   getUtilityClass,
   useStyles,
+  useSlot,
 } from '../utils'
 import { useNexUI } from '../provider'
 import { checkboxGroupRecipe } from '../../theme/recipes'
@@ -55,6 +54,7 @@ export const CheckboxGroup = <
     color,
     radius,
     value,
+    role = 'group',
     orientation = 'horziontal',
     defaultValue = [],
     ...remainingProps
@@ -80,13 +80,14 @@ export const CheckboxGroup = <
     recipe: checkboxGroupRecipe,
   })
 
-  const rootProps = useSlotProps({
+  const [CheckboxGroupRoot, getCheckboxGroupRootProps] = useSlot({
     ownerState,
-    sx: styles,
+    elementType: 'div',
+    style: styles,
     classNames: classes.root,
     externalForwardedProps: remainingProps,
-    additionalProps: {
-      role: 'group',
+    a11y: {
+      role,
     },
   })
 
@@ -101,7 +102,6 @@ export const CheckboxGroup = <
         if (disabled) {
           return
         }
-
         let newValues: T[]
         if (values.includes(value)) {
           newValues = values.filter((existingValue) => existingValue !== value)
@@ -119,11 +119,11 @@ export const CheckboxGroup = <
   )
 
   return (
-    <nex.div {...rootProps}>
+    <CheckboxGroupRoot {...getCheckboxGroupRootProps()}>
       <CheckboxGroupProvider value={ctx as CheckboxGroupContextValue}>
         {children}
       </CheckboxGroupProvider>
-    </nex.div>
+    </CheckboxGroupRoot>
   )
 }
 

@@ -1,21 +1,18 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
-import { useSlotProps } from '../utils'
+import { useSlot } from '../utils'
 import type { ElementType } from 'react'
 import type { BoxProps } from './types'
 
 export const Box = <RootComponent extends ElementType = 'div'>(
   props: BoxProps<RootComponent>,
 ) => {
-  const rootProps = useSlotProps({
+  const [BoxRoot, getBoxRootProps] = useSlot({
+    elementType: 'div',
     externalForwardedProps: props as BoxProps,
-    additionalProps: {
-      as: props.as || 'div',
-    },
   })
 
-  return <nex.div {...rootProps} />
+  return <BoxRoot {...getBoxRootProps()} />
 }
 
 Box.displayName = 'Box'

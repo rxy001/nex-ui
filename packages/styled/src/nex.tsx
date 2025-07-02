@@ -8,9 +8,9 @@ import { getRegisteredStyles } from '@emotion/utils'
 import { getDefaultShouldForwardProp } from './utils'
 import { tags } from './tags'
 import { Insertion } from './Insertion'
-import type { NexUIFactory } from './types'
+import type { NexFactory } from './types'
 
-const createNexImpl = (tag: any) => {
+const createNexComponent = (tag: any) => {
   if (__DEV__ && tag === undefined) {
     throw new Error(
       '[Nex UI] nex: You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',
@@ -70,13 +70,9 @@ const createNexImpl = (tag: any) => {
   return Styled
 }
 
-// @ts-ignore
-const createNex = createNexImpl.bind()
-
-const nex = {} as NexUIFactory
+const nex = createNexComponent as NexFactory
 tags.forEach((tag) => {
-  // @ts-ignore
-  nex[tag] = createNex(tag)
+  nex[tag] = nex(tag)
 })
 
 export { nex }

@@ -1,27 +1,26 @@
-import type { ComponentProps, ComponentType, JSX, ElementType } from 'react'
+import type { ComponentProps, ComponentType, JSX, ElementType, FC } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 
 type Overwrite<K, T> = Omit<K, keyof T> & T
 
-interface CreateStyledComponent<C extends ElementType> {
-  (
-    interpolation?:
-      | Interpolation
-      | ((props: ComponentProps<C>) => Interpolation),
-  ): C
-}
-
-type HTMLElementTagName = keyof JSX.IntrinsicElements
-
-export interface NexUIStyled {
+export interface NexStyled {
   <C extends ComponentType<ComponentProps<C>>>(
     component: C,
     options?: StyledOptions,
-  ): CreateStyledComponent<C>
+  ): (interpolation?: Interpolation) => C
 }
 
-export type NexUIFactory = {
-  [Tag in HTMLElementTagName]: <E extends ElementType = Tag>(
+export interface NexComponent<T extends ElementType>
+  extends FC<
+    Overwrite<
+      ComponentProps<T>,
+      {
+        as?: ElementType
+        sx?: Interpolation
+      }
+    >
+  > {
+  <E extends ElementType = T>(
     props: Overwrite<
       ComponentProps<E>,
       {
@@ -29,8 +28,18 @@ export type NexUIFactory = {
         sx?: Interpolation
       }
     >,
-  ) => JSX.Element
+  ): JSX.Element
 }
+
+export type HTMLNexComponents = {
+  [Tag in keyof JSX.IntrinsicElements]: NexComponent<Tag>
+}
+
+export interface CreateNexComponent {
+  <C extends ElementType>(component: C): NexComponent<C>
+}
+
+export interface NexFactory extends HTMLNexComponents, CreateNexComponent {}
 
 export interface StyledOptions {
   shouldForwardProp?: (propName: string) => boolean

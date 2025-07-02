@@ -1,12 +1,11 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
-  useSlotProps,
+  useSlot,
 } from '../utils'
 import { useNexUI } from '../provider'
 import { dividerRecipe } from '../../theme/recipes'
@@ -38,34 +37,33 @@ export const Divider = <RootComponent extends ElementType = 'hr'>(
   })
 
   const {
-    ref,
-    as = 'hr',
+    role = 'separator',
     orientation = 'horizontal',
     ...remainingProps
   } = props
 
-  const ownerState: DividerOwnerState = { ...props, orientation, as }
+  const ownerState: DividerOwnerState = { ...props, orientation }
 
   const classes = useSlotClasses(ownerState)
 
-  const styles = useStyles({
-    name: 'Divider',
+  const style = useStyles({
     ownerState,
+    name: 'Divider',
     recipe: dividerRecipe,
   })
 
-  const rootProps = useSlotProps({
+  const [DividerRoot, getDividerRootProps] = useSlot({
     ownerState,
+    style,
+    elementType: 'hr',
     externalForwardedProps: remainingProps,
-    sx: styles,
     classNames: classes.root,
-    additionalProps: {
-      ref,
-      role: 'separator',
+    a11y: {
+      role,
     },
   })
 
-  return <nex.hr {...rootProps} />
+  return <DividerRoot {...getDividerRootProps()} />
 }
 
 Divider.displayName = 'Divider'

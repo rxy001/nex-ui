@@ -1,7 +1,10 @@
-export * from './styled'
+// export * from './styled'
 
 export * from './nex'
 
-export type { NexUIStyled } from './types'
-
-export type { NexUIFactory } from './types'
+export type {
+  // NexStyled,
+  NexFactory,
+  NexComponent,
+  CreateNexComponent,
+} from './types'

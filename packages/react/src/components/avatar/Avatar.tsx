@@ -1,14 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { nex } from '@nex-ui/styled'
 import { avatarRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
   useStyles,
   composeClasses,
   getUtilityClass,
-  useSlotProps,
+  useSlot,
 } from '../utils'
 import { useNexUI } from '../provider'
 import { useAvatarGroup } from './AvatarGroupContext'
@@ -91,20 +90,20 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
 const useSlotAriaProps = (
   ownerState: AvatarOwnerState,
 ): Record<'root', HTMLAttributes<HTMLElement>> => {
-  const { alt, children, loaded } = ownerState
+  const { alt, children, loaded, role = 'img' } = ownerState
 
   let root = {}
 
   if (loaded === false || loaded === 'error') {
     if (typeof children === 'string') {
       root = {
-        role: 'img',
-        'aria-label': children,
+        role,
+        'aria-label': ownerState['aria-label'] ?? children,
       }
     } else if (typeof alt === 'string') {
       root = {
-        role: 'img',
-        'aria-label': alt,
+        role,
+        'aria-label': ownerState['aria-label'] ?? alt,
       }
     }
   }
@@ -128,11 +127,9 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
   const {
     src,
     alt,
-    ref,
     srcSet,
     slotProps,
     children: childrenProp,
-    as = 'div',
     size = groupCtx?.size ?? 'md',
     radius = groupCtx?.radius ?? size,
     color = groupCtx?.color ?? 'gray',
@@ -147,59 +144,55 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     size,
     radius,
     color,
-    as,
     outlined,
     inGroup,
     loaded,
   }
 
   const styles = useStyles({
-    name: 'Avatar',
     ownerState,
+    name: 'Avatar',
     recipe: avatarRecipe,
   })
 
   const classes = useSlotClasses(ownerState)
 
-  const hasImg = src || srcSet
-
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const rootProps = useSlotProps({
+  const [AvatarRoot, getAvatarRootProps] = useSlot({
     ownerState,
+    elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: classes.root,
-    sx: styles.root,
-    additionalProps: {
-      ref,
-      as,
-      ...slotAriaProps.root,
-    },
+    style: styles.root,
+    a11y: slotAriaProps.root,
   })
 
-  const imgProps = useSlotProps({
+  const [AvatarImg, getAvatarImgProps] = useSlot({
     ownerState,
+    elementType: 'img',
     externalSlotProps: slotProps?.img,
-    externalForwardedProps: {
+    classNames: classes.img,
+    style: styles.img,
+    additionalProps: {
       src,
       alt,
       srcSet,
     },
-    classNames: classes.img,
-    sx: styles.img,
   })
 
   let children: ReactNode = null
+  const hasImg = src || srcSet
 
   if (hasImg && loaded === 'loaded') {
-    children = <nex.img {...imgProps} />
+    children = <AvatarImg {...getAvatarImgProps()} />
   } else if (childrenProp) {
     children = childrenProp
   } else if (hasImg && alt) {
     children = alt[0]
   }
 
-  return <nex.div {...rootProps}>{children}</nex.div>
+  return <AvatarRoot {...getAvatarRootProps()}>{children}</AvatarRoot>
 }
 
 Avatar.displayName = 'Avatar'

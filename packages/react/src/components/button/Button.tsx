@@ -1,26 +1,18 @@
 'use client'
 
 import { LoadingOutlined } from '@nex-ui/icons'
-import { useEvent, useFocusVisible } from '@nex-ui/hooks'
-import { nex } from '@nex-ui/styled'
-import { useRef } from 'react'
-import { mergeRefs } from '@nex-ui/utils'
 import { useNexUI } from '../provider'
+import { ButtonBase } from './ButtonBase'
 import { buttonRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
   composeClasses,
   getUtilityClass,
-  useSlotProps,
   Ripple,
   useStyles,
+  useSlot,
 } from '../utils'
-import type {
-  ButtonHTMLAttributes,
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-} from 'react'
+import type { ElementType } from 'react'
 import type { ButtonProps, ButtonOwnerState } from './types'
 
 const useSlotClasses = (ownerState: ButtonOwnerState) => {
@@ -39,6 +31,7 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
     fullWidth,
     classes,
     disableRipple,
+    spinnerPlacement,
   } = ownerState
 
   const slots = {
@@ -58,9 +51,14 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
       `icon`,
       `start-icon`,
       `icon-size-${size}`,
-      loading && `icon-loading`,
+      loading && spinnerPlacement === 'start' && `icon-loading`,
     ],
-    endIcon: [`icon`, `end-icon`, `icon-size-${size}`],
+    endIcon: [
+      `icon`,
+      `end-icon`,
+      `icon-size-${size}`,
+      loading && spinnerPlacement === 'end' && `icon-loading`,
+    ],
   }
 
   const composedClasses = composeClasses(
@@ -70,32 +68,6 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
   )
 
   return composedClasses
-}
-
-const useSlotAriaProps = (
-  ownerState: ButtonOwnerState,
-): Record<'root', HTMLAttributes<HTMLElement>> => {
-  const { as, disabled: disabledProps, role, loading, tabIndex } = ownerState
-  const disabled = disabledProps || loading
-
-  let root: ButtonHTMLAttributes<HTMLButtonElement> = {
-    tabIndex: disabled ? -1 : tabIndex,
-  }
-
-  if (as === 'button') {
-    root = {
-      ...root,
-      disabled,
-    }
-  } else {
-    root = {
-      ...root,
-      role: role ?? 'button',
-      'aria-disabled': disabled || undefined,
-    }
-  }
-
-  return { root }
 }
 
 export const Button = <RootComponent extends ElementType = 'button'>(
@@ -109,14 +81,9 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   })
 
   const {
-    as,
-    ref,
     children,
     slotProps,
     spinner,
-    href,
-    type = 'button',
-    tabIndex = 0,
     color = primaryThemeColor,
     spinnerPlacement = 'start',
     variant = 'solid',
@@ -132,20 +99,10 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     ...remainingProps
   } = props
 
-  const btnRef = useRef<HTMLButtonElement>(null)
-
-  const mergedRefs = mergeRefs(btnRef, ref)
-
   const disabled = loading || disabledProp
-
-  const rootElement = (
-    as !== undefined ? as : typeof href === 'string' && href ? 'a' : 'button'
-  ) as 'button'
 
   const ownerState: ButtonOwnerState = {
     ...props,
-    type,
-    tabIndex,
     variant,
     size,
     radius,
@@ -155,92 +112,61 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     color,
     disableRipple,
     disabled: disabledProp,
-    as: rootElement,
   }
-
-  const [focusVisible] = useFocusVisible({ ref: btnRef })
 
   const classes = useSlotClasses(ownerState)
 
   const styles = useStyles({
-    ownerState: {
-      ...ownerState,
-      disabled,
-    },
+    ownerState,
     name: 'Button',
     recipe: buttonRecipe,
   })
 
-  const handleKeyDown = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
-    // Limit the repeated triggering of the click event when the Enter key is pressed.
-    if (focusVisible && rootElement === 'button' && event.code === 'Enter') {
-      event.preventDefault()
-    }
-  })
-
-  const handleKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
-    // Keyboard accessibility for non interactive elements
-    if (
-      focusVisible &&
-      as !== 'button' &&
-      (event.code === 'Space' || event.code === 'Enter')
-    ) {
-      event.currentTarget.click()
-    }
-  })
-
-  const slotAriaProps = useSlotAriaProps(ownerState)
-
-  const rootProps = useSlotProps({
+  const [ButtonRoot, getButtonRootProps] = useSlot({
     ownerState,
+    elementType: ButtonBase<'button'>,
     externalForwardedProps: remainingProps,
     classNames: classes.root,
-    sx: styles.root,
+    style: styles.root,
+    shouldForwardComponent: false,
     additionalProps: {
-      href,
-      type,
-      onKeyUp: handleKeyUp,
-      onKeyDown: handleKeyDown,
-      ref: mergedRefs,
-      as: rootElement,
-      ...slotAriaProps.root,
+      disabled,
     },
   })
 
-  const startIconProps = useSlotProps({
+  const [ButtonStartIcon, getButtonStartIconProps] = useSlot({
     ownerState,
+    elementType: 'span',
     externalSlotProps: slotProps?.startIcon,
     classNames: classes.startIcon,
-    sx: styles.startIcon,
+    style: styles.startIcon,
   })
 
-  const endIconProps = useSlotProps({
+  const [ButtonEndIcon, getButtonEndIconProps] = useSlot({
     ownerState,
+    elementType: 'span',
     externalSlotProps: slotProps?.endIcon,
     classNames: classes.endIcon,
-    sx: styles.endIcon,
+    style: styles.endIcon,
   })
 
   const loadingIcon = spinner ?? <LoadingOutlined />
 
-  const startIcon = ((spinnerPlacement === 'start' && loading) ||
-    startIconProp) && (
-    <nex.span {...startIconProps}>
-      {loading ? loadingIcon : startIconProp}
-    </nex.span>
-  )
-
-  const endIcon = ((spinnerPlacement === 'end' && loading) || endIconProp) && (
-    <nex.span {...endIconProps}>{loading ? loadingIcon : endIconProp}</nex.span>
-  )
-
   return (
     <Ripple disabled={disableRipple ?? disabled}>
-      <nex.button {...rootProps}>
-        {startIcon}
+      <ButtonRoot {...getButtonRootProps()}>
+        {((spinnerPlacement === 'start' && loading) || startIconProp) && (
+          <ButtonStartIcon {...getButtonStartIconProps()}>
+            {loading ? loadingIcon : startIconProp}
+          </ButtonStartIcon>
+        )}
         {children}
-        {endIcon}
-      </nex.button>
+        {((spinnerPlacement === 'end' && loading) || endIconProp) && (
+          <ButtonEndIcon {...getButtonEndIconProps()}>
+            {loading ? loadingIcon : endIconProp}
+          </ButtonEndIcon>
+        )}
+      </ButtonRoot>
     </Ripple>
   )
 }

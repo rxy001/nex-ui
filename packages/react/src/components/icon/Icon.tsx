@@ -1,6 +1,5 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { __DEV__ } from '@nex-ui/utils'
 import { useNexUI } from '../provider/Context'
 import { iconRecipe } from '../../theme/recipes'
@@ -9,9 +8,9 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
-  useSlotProps,
+  useSlot,
 } from '../utils'
-import type { ElementType, SVGProps } from 'react'
+import type { ElementType } from 'react'
 import type { IconOwnerState, IconProps } from './types'
 
 const useSlotClasses = (ownerState: IconOwnerState) => {
@@ -30,13 +29,6 @@ const useSlotClasses = (ownerState: IconOwnerState) => {
   return composedClasses
 }
 
-const useAriaProps = (): SVGProps<SVGSVGElement> => {
-  return {
-    'aria-hidden': true,
-    focusable: false,
-  }
-}
-
 export const Icon = <RootComponent extends ElementType = 'svg'>(
   inProps: IconProps<RootComponent>,
 ) => {
@@ -47,8 +39,8 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
 
   const {
     as,
-    ref,
     color,
+    focusable = false,
     spin = false,
     size = 'md',
     width = '1em',
@@ -70,9 +62,7 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
     height,
   }
 
-  const ariaProps = useAriaProps()
-
-  const styles = useStyles({
+  const style = useStyles({
     ownerState,
     name: 'Icon',
     recipe: iconRecipe,
@@ -80,15 +70,18 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
 
   const classes = useSlotClasses(ownerState)
 
-  const rootIcon = useSlotProps({
+  const [IconRoot, getIconRootProps] = useSlot({
+    style,
     ownerState,
+    elementType: 'svg',
     externalForwardedProps: remainingProps,
-    sx: styles,
     classNames: classes.root,
+    a11y: {
+      focusable,
+      'aria-hidden': props['aria-hidden'] ?? true,
+    },
     additionalProps: {
-      ref,
       as,
-      ...ariaProps,
       sx: {
         color,
         width,
@@ -97,7 +90,7 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
     },
   })
 
-  return <nex.span {...rootIcon} />
+  return <IconRoot {...getIconRootProps()} />
 }
 
 Icon.displayName = 'Icon'

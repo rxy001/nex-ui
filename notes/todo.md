@@ -58,7 +58,7 @@
 
 <!-- 26. color token 支持 opacity 修饰符 -->
 
-27. 优化 useSlotProps 属性优先级，例如 accordionItems.trigger 的 tabIndex
+<!-- 27. 优化 useSlotProps 属性优先级，例如 accordionItems.trigger 的 tabIndex -->
 
 <!-- 28. 将 storybook 改为 sb，是因为 storybook cli 会将其识别为 storybook 包，导致服务启动失败。 -->
 
@@ -83,3 +83,5 @@
         },
     ```
     
+
+31. 调整组件颜色

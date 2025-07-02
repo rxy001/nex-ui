@@ -1,3 +1,4 @@
+import * as m from 'motion/react-m'
 import type {
   CSSObject,
   RecipeRuntimeFn,
@@ -19,10 +20,11 @@ export type ComponentPropsWithCommonProps<
   {
     sx?: SxProps<OwnerState>
     as?: ElementType
+    className?: ClassValue
   }
 >
 
-type FunctionInterpolation<T> = (
+export type FunctionInterpolation<T> = (
   OwnerState: T,
 ) => InterpolationPrimitive | ReadonlyArray<InterpolationPrimitive>
 
@@ -94,3 +96,6 @@ export type ComponentThemeFn<P, S> = (
   : S extends RecipeRuntimeFn
     ? CSSObject
     : never
+
+type Motion = typeof m
+export type HTMLMotionProps<T extends keyof Motion> = ComponentProps<Motion[T]>

@@ -9,11 +9,17 @@ import { createRoot } from 'react-dom/client'
 import { motionFeatures } from '../motionFeatures'
 import type { CSSProperties, MouseEvent } from 'react'
 import type { Root } from 'react-dom/client'
-import type { MotionProps } from 'motion/react'
-import type { Ripples } from './types'
+import type { HTMLMotionProps } from '../../../types/utils'
+
+type Ripples = {
+  size: number
+  x: number
+  y: number
+  key: string
+}
 
 export type UseRippleMotionProps = {
-  motionProps?: MotionProps
+  motionProps?: HTMLMotionProps<'span'>
   motionStyle?: CSSProperties
 }
 
@@ -69,7 +75,6 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
 
           return (
             <AnimatePresence mode='popLayout' key={ripple.key}>
-              {/* @ts-ignore */}
               <m.span
                 animate={{ transform: 'scale(2)', opacity: 0 }}
                 className='heroui-ripple'
