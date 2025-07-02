@@ -13,7 +13,7 @@ type BoxOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<undefined>
+  sx?: SxProps<{}>
 }
 
 export type BoxProps<RootComponent extends ElementType = 'div'> = OverrideProps<

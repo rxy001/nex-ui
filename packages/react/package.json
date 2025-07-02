@@ -44,8 +44,7 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "@storybook/react": "8.6.12",
-    "framer-motion": "12.7.2"
+    "@storybook/react": "8.6.12"
   },
   "dependencies": {
     "@nex-ui/hooks": "workspace:*",

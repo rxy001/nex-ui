@@ -14,7 +14,6 @@ export function mergeProps<T extends PropsArg[]>(...args: T) {
 
   for (let i = 1; i < args.length; i += 1) {
     const props = args[i]
-
     for (const key in props) {
       const a = result[key]
       const b = props[key]

@@ -1,12 +1,11 @@
 import { useMemo } from 'react'
 import { isArray } from '@nex-ui/utils'
-import { nex } from '@nex-ui/styled'
 import {
   useDefaultProps,
-  useSlotProps,
   useStyles,
   composeClasses,
   getUtilityClass,
+  useSlot,
 } from '../utils'
 import { AvatarGroupProvider } from './AvatarGroupContext'
 import { avatarGroupRecipe } from '../../theme/recipes'
@@ -55,9 +54,7 @@ export const AvatarGroup = <RootElement extends ElementType = 'div'>(
     total,
     slotProps,
     spacing,
-    ref,
     renderSurplus,
-    as = 'div',
     size = 'md',
     color = 'gray',
     outlined = false,
@@ -74,37 +71,37 @@ export const AvatarGroup = <RootElement extends ElementType = 'div'>(
     color,
     outlined,
     radius,
-    as,
     max,
   }
 
   const classes = useSlotClasses(ownerState)
 
-  const styles = useStyles({
-    name: 'AvatarGroup',
+  const style = useStyles({
     ownerState,
+    name: 'AvatarGroup',
     recipe: avatarGroupRecipe,
   })
 
-  const rootProps = useSlotProps({
+  const [AvatarGroupRoot, getAvatarGroupRootProps] = useSlot({
+    style,
     ownerState,
+    elementType: 'div',
     externalForwardedProps: remainingProps,
-    sx: styles,
     classNames: classes.root,
     additionalProps: {
-      ref,
-      as,
       style: {
-        [`--avatar-group-spacing`]:
+        [`--avatar-group-spacing` as string]:
           spacing !== undefined ? `${spacing}px` : undefined,
       },
     },
   })
 
-  const surplusProps = useSlotProps({
+  const [AvatarSurplus, getAvatarSurplusProps] = useSlot({
     ownerState,
+    elementType: Avatar,
     externalSlotProps: slotProps?.surplus,
     classNames: classes.surplus,
+    shouldForwardComponent: false,
   })
 
   const ctx = useMemo(
@@ -127,19 +124,20 @@ export const AvatarGroup = <RootElement extends ElementType = 'div'>(
 
   const extraAvatars = Math.max(0, totalAvatars - lastAvatar)
 
-  const extraElement = renderSurplus ? (
-    renderSurplus(extraAvatars)
-  ) : (
-    <Avatar {...surplusProps}>+{extraAvatars}</Avatar>
-  )
-
   return (
-    <nex.div {...rootProps}>
+    <AvatarGroupRoot {...getAvatarGroupRootProps()}>
       <AvatarGroupProvider value={ctx}>
         {children.slice(0, lastAvatar)}
-        {!!extraAvatars && extraElement}
+        {!!extraAvatars &&
+          (renderSurplus ? (
+            renderSurplus(extraAvatars)
+          ) : (
+            <AvatarSurplus {...getAvatarSurplusProps()}>
+              +{extraAvatars}
+            </AvatarSurplus>
+          ))}
       </AvatarGroupProvider>
-    </nex.div>
+    </AvatarGroupRoot>
   )
 }
 

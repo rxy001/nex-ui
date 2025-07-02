@@ -1,6 +1,6 @@
 import { __DEV__, forEach, isArray } from '@nex-ui/utils'
 import { getDefaultShouldForwardProp, composeShouldForwardProps } from './utils'
-import type { NexUIStyled } from './types'
+import type { NexStyled } from './types'
 
 const resolveSx = (...args: any[]) => {
   const result: any[] = []
@@ -30,7 +30,8 @@ const resolveSx = (...args: any[]) => {
   }
 }
 
-const createStyled: NexUIStyled = (tag: any, options?: any): any => {
+// TODO 重构 styled, 使其不仅能重新设计 NexUI 组件样式，还包括其他组件。
+const createStyled: NexStyled = (tag: any, options?: any): any => {
   if (__DEV__ && tag === undefined) {
     throw new Error(
       '[Nex UI] styled: You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',

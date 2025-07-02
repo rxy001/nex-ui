@@ -1,6 +1,5 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { useNexUI } from '../provider'
 import { flexRecipe } from '../../theme/recipes'
 import {
@@ -8,7 +7,7 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
-  useSlotProps,
+  useSlot,
 } from '../utils'
 import type { FlexOwnerState, FlexProps } from './types'
 import type { ElementType } from 'react'
@@ -44,12 +43,10 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
 
   const {
     gap,
-    ref,
     children,
     justify,
     align,
     wrap,
-    as = 'div',
     direction = 'row',
     inline = false,
     ...remainingProps
@@ -59,21 +56,19 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     ...props,
     direction,
     inline,
-    as,
   }
 
   const classes = useSlotClasses(ownerState)
 
-  const styles = useStyles({ name: 'Flex', ownerState, recipe: flexRecipe })
+  const style = useStyles({ ownerState, name: 'Flex', recipe: flexRecipe })
 
-  const rootProps = useSlotProps({
+  const [FlexRoot, getFlexRootProps] = useSlot({
+    style,
     ownerState,
+    elementType: 'div',
     externalForwardedProps: remainingProps,
-    sx: styles,
     classNames: classes.root,
     additionalProps: {
-      ref,
-      as,
       sx: {
         gap,
         flexDirection: direction,
@@ -84,7 +79,7 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     },
   })
 
-  return <nex.div {...rootProps}>{children}</nex.div>
+  return <FlexRoot {...getFlexRootProps()}>{children}</FlexRoot>
 }
 
 Flex.displayName = 'Flex'

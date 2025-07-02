@@ -1,29 +1,23 @@
 'use client'
 
 import * as m from 'motion/react-m'
-import { useEvent, useFocusVisible } from '@nex-ui/hooks'
+import { useEvent } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { LazyMotion, AnimatePresence } from 'motion/react'
-import { nex } from '@nex-ui/styled'
-import { mergeRefs } from '@nex-ui/utils'
-import { useEffect, useId, useRef } from 'react'
+import { useId, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
+import { ButtonBase } from '../button/ButtonBase'
 import {
   useDefaultProps,
-  useSlotProps,
   useStyles,
   composeClasses,
   getUtilityClass,
   motionFeatures,
+  useSlot,
 } from '../utils'
 import { useAccordionGroup } from './AccordionContext'
-import type {
-  ButtonHTMLAttributes,
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-} from 'react'
+import type { ElementType, HTMLAttributes } from 'react'
 import type { Variants } from 'motion/react'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
 
@@ -95,38 +89,39 @@ const useSlotClasses = (ownerState: AccordionItemOwnerState) => {
 
 const useSlotAriaProps = (
   ownerState: AccordionItemOwnerState,
-): Record<'trigger' | 'content', HTMLAttributes<HTMLElement>> => {
-  const { itemKey, disabled, expanded, slotProps } = ownerState
+): Record<'trigger' | 'content' | 'indicator', HTMLAttributes<HTMLElement>> => {
+  const { itemKey, expanded, slotProps } = ownerState
   const triggerProps = slotProps?.trigger || {}
-  const triggerId = useId()
-  const contentId = `panel-${itemKey}-content`
+  const contentProps = slotProps?.content || {}
+  const indicatorProps = slotProps?.indicator || {}
+  let triggerId = useId()
 
-  let trigger: ButtonHTMLAttributes<HTMLButtonElement> = {
-    type: 'button',
-    disabled,
-    id: triggerId,
-    tabIndex: disabled ? -1 : 0,
-    'aria-expanded': expanded,
-    'aria-controls': contentId,
-    'aria-disabled': disabled || undefined,
+  if (triggerProps.id) {
+    triggerId = triggerProps.id
   }
 
-  if (triggerProps.as && triggerProps.as !== 'button') {
-    trigger = {
-      ...trigger,
-      role: 'button',
-    }
+  const contentId = contentProps.id ?? `panel-${itemKey}-content`
+
+  const trigger = {
+    id: triggerId,
+    'aria-expanded': triggerProps['aria-expanded'] ?? expanded,
+    'aria-controls': triggerProps['aria-controls'] ?? contentId,
   }
 
   const content = {
-    role: 'region',
-    'aria-labelledby': triggerId,
     id: contentId,
+    role: contentProps.role ?? 'region',
+    'aria-labelledby': contentProps['aria-labelledby'] ?? triggerId,
+  }
+
+  const indicator = {
+    'aria-hidden': indicatorProps['aria-hidden'] ?? true,
   }
 
   return {
     trigger,
     content,
+    indicator,
   }
 }
 
@@ -134,10 +129,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   inProps: AccordionItemProps<RootComponent>,
 ) => {
   const defaultKey = useId()
-
-  const firstRender = useRef(true)
-
-  const triggerRef = useRef<HTMLButtonElement>(null)
 
   const props = useDefaultProps<AccordionItemProps>({
     name: 'AccordionItem',
@@ -158,11 +149,9 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   } = useAccordionGroup()
 
   const {
-    ref,
     children,
     title,
     slotProps,
-    as = 'div',
     indicatorMotionProps = defaultIndicatorMotionProps,
     motionProps = defaultMotionProps,
     hideIndicator = defaultHideIndicator,
@@ -174,8 +163,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   } = props
 
   const expanded = expandedKeys.includes(itemKey)
-
-  const [focusVisible] = useFocusVisible({ ref: triggerRef })
 
   const ownerState: AccordionItemOwnerState = {
     ...props,
@@ -195,124 +182,108 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     recipe: accordionItemRecipe,
   })
 
-  const onClick = useEvent(() => {
-    toggleExpandedKey(itemKey)
-  })
-
-  const onKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
-    // Keyboard accessibility for non interactive elements
-    if (
-      focusVisible &&
-      slotProps?.trigger?.as &&
-      slotProps?.trigger?.as !== 'button' &&
-      (event.code === 'Space' || event.code === 'Enter')
-    ) {
-      event.currentTarget.click()
-    }
-  })
-
   const classes = useSlotClasses(ownerState)
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
   const animate = expanded ? 'expanded' : 'unexpanded'
 
+  const motionInitialRef = useRef(animate)
+
   const contentMotionProps = keepMounted
     ? {
         animate,
-        initial: firstRender.current && animate,
+        initial: motionInitialRef.current,
         variants: contentMotionVariants,
       }
     : {
         variants: contentMotionVariants,
-        initial: firstRender.current && animate,
+        initial: motionInitialRef.current,
         animate: 'expanded',
         exit: 'unexpanded',
       }
 
-  const rootProps = useSlotProps({
+  const [AccordionItemRoot, getAccordionItemRootProps] = useSlot({
     ownerState,
+    elementType: 'div',
     externalForwardedProps: remainingProps,
-    sx: styles.root,
+    style: styles.root,
     classNames: classes.root,
-    additionalProps: {
-      ref,
-      as,
-    },
   })
 
-  const headingProps = useSlotProps({
+  const [AccordionItemHeading, getAccordionItemHeadingProps] = useSlot({
     ownerState,
+    elementType: 'h3',
     externalSlotProps: slotProps?.heading,
-    sx: styles.heading,
+    style: styles.heading,
     classNames: classes.heading,
   })
 
-  const triggerProps = useSlotProps({
+  const handleClick = useEvent(() => {
+    toggleExpandedKey(itemKey)
+  })
+
+  const [AccordionItemTrigger, getAccordionItemTriggerProps] = useSlot({
     ownerState,
-    externalSlotProps: {
-      ...slotProps?.trigger,
-      ref: mergeRefs(triggerRef, slotProps?.trigger?.ref),
-    },
-    sx: styles.trigger,
+    elementType: ButtonBase,
+    externalSlotProps: slotProps?.trigger,
+    style: styles.trigger,
     classNames: classes.trigger,
+    a11y: slotAriaProps.trigger,
+    shouldForwardComponent: false,
     additionalProps: {
-      onClick,
-      onKeyUp,
-      ...slotAriaProps.trigger,
+      disabled,
+      onClick: handleClick,
     },
   })
 
-  const contentProps = useSlotProps({
+  const [AccordionItemContent, getAccordionItemContentProps] = useSlot({
     ownerState,
+    elementType: 'div',
     externalSlotProps: slotProps?.content,
-    sx: styles.content,
+    style: styles.content,
     classNames: classes.content,
-    additionalProps: slotAriaProps.content,
+    a11y: slotAriaProps.content,
   })
 
-  const indicatorProps = useSlotProps({
+  const [AccordionItemIndicator, getAccordionItemIndicatorProps] = useSlot({
     ownerState,
+    elementType: m.span,
     externalSlotProps: slotProps?.indicator,
-    sx: styles.indicator,
+    style: styles.indicator,
     classNames: classes.indicator,
+    a11y: slotAriaProps.indicator,
     additionalProps: {
-      size: 'sm',
-      as: m.span,
       animate,
       variants: indicatorMotionVariants,
+      initial: animate,
       ...indicatorMotionProps,
     },
   })
 
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false
-    }
-  }, [])
-
   return (
     <LazyMotion features={motionFeatures}>
-      <nex.div {...rootProps}>
-        <nex.h3 {...headingProps}>
-          <nex.button {...triggerProps}>
+      <AccordionItemRoot {...getAccordionItemRootProps()}>
+        <AccordionItemHeading {...getAccordionItemHeadingProps()}>
+          <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
             <span>{title}</span>
             {!hideIndicator && (
-              <nex.span {...indicatorProps}>
+              <AccordionItemIndicator {...getAccordionItemIndicatorProps()}>
                 {indicator ?? <ChevronDownOutlined />}
-              </nex.span>
+              </AccordionItemIndicator>
             )}
-          </nex.button>
-        </nex.h3>
+          </AccordionItemTrigger>
+        </AccordionItemHeading>
         <AnimatePresence>
           {(keepMounted || expanded) && (
-            // @ts-ignore
             <m.div {...contentMotionProps} {...motionProps}>
-              <nex.div {...contentProps}>{children}</nex.div>
+              <AccordionItemContent {...getAccordionItemContentProps()}>
+                {children}
+              </AccordionItemContent>
             </m.div>
           )}
         </AnimatePresence>
-      </nex.div>
+      </AccordionItemRoot>
     </LazyMotion>
   )
 }

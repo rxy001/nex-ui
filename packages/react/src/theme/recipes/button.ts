@@ -6,7 +6,12 @@ import {
   fullWidth,
   sizeVariant,
 } from '../shared'
-import type { RecipeVariants } from '@nex-ui/system'
+import type { CSSObject, RecipeVariants } from '@nex-ui/system'
+
+const disabledVariant: CSSObject = {
+  opacity: 0.6,
+  pointerEvents: 'none',
+}
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
@@ -81,10 +86,12 @@ export const buttonRecipe = defineSlotRecipe({
     size: toSlots(sizeVariant, 'root'),
     disabled: {
       true: {
-        root: {
-          opacity: 0.6,
-          pointerEvents: 'none',
-        },
+        root: disabledVariant,
+      },
+    },
+    loading: {
+      true: {
+        root: disabledVariant,
       },
     },
     fullWidth: toSlots(fullWidth, 'root'),

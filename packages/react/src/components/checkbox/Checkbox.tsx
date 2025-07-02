@@ -1,8 +1,7 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { isValidElement, useId, useRef } from 'react'
-import { isFunction, __DEV__, isString, mergeRefs } from '@nex-ui/utils'
+import { isFunction, __DEV__, isString } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
@@ -12,7 +11,7 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
-  useSlotProps,
+  useSlot,
 } from '../utils'
 import { CheckedIcon } from './CheckedIcon'
 import { Box } from '../box'
@@ -24,6 +23,7 @@ import type {
   HTMLAttributes,
   KeyboardEvent,
   InputHTMLAttributes,
+  MouseEvent,
 } from 'react'
 
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
@@ -59,38 +59,49 @@ const useSlotClasses = (ownerState: CheckboxOwnerState) => {
 const useSlotAriaProps = (
   ownerState: CheckboxOwnerState,
 ): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
+  const {
+    as,
+    disabled,
+    type,
+    checked,
+    children,
+    value,
+    role,
+    slotProps,
+    tabIndex = 0,
+  } = ownerState
   const id = useId()
-  const { as, disabled, tabIndex, type, checked, children, value } = ownerState
 
-  const childrenString = isString(children)
+  const labelProps = slotProps?.label
+
+  const stringChildren = isString(children)
+
+  const label = {
+    id: labelProps?.id ?? (stringChildren ? id : undefined),
+  }
 
   let input: InputHTMLAttributes<HTMLInputElement> = {
-    disabled,
-    checked,
-    type,
+    'aria-labelledby': ownerState['aria-labelledby'] ?? label.id,
+    'aria-label':
+      ownerState['aria-label'] ?? (stringChildren ? children : undefined),
     tabIndex: disabled ? -1 : tabIndex,
   }
 
-  if (as === 'input') {
+  if (!as || as === 'input' || isFunction(as)) {
     input = {
-      ...input,
+      disabled,
+      checked,
+      type,
       value,
-      'aria-labelledby': childrenString ? id : undefined,
-      'aria-label': childrenString ? children : undefined,
+      ...input,
     }
   } else {
     input = {
-      role: 'checkbox',
-      tabIndex: disabled ? -1 : tabIndex,
-      'aria-checked': checked,
-      'aria-disabled': disabled || undefined,
-      'aria-labelledby': childrenString ? id : undefined,
-      'aria-label': childrenString ? children : undefined,
+      role: role ?? 'checkbox',
+      'aria-checked': ownerState['aria-checked'] ?? checked,
+      'aria-disabled': ownerState['aria-disabled'] ?? (disabled || undefined),
+      ...input,
     }
-  }
-
-  const label = {
-    id: childrenString ? id : undefined,
   }
 
   return { input, label }
@@ -126,7 +137,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
 
   const {
     sx,
-    ref,
     icon,
     value,
     className,
@@ -137,8 +147,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     checked: checkedProp,
     type = 'checkbox',
     defaultChecked = false,
-    as = 'input',
-    tabIndex = 0,
     name = groupCtx?.name,
     color = groupCtx?.color ?? primaryThemeColor,
     disabled = groupCtx?.disabled ?? false,
@@ -161,14 +169,12 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     ...props,
     defaultChecked,
     type,
-    tabIndex,
     name,
     disabled,
     color,
     checked,
     size,
     radius,
-    as,
     inGroup,
   }
 
@@ -182,8 +188,8 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     }
   })
 
-  const handleClick = useEvent(() => {
-    if (isString(as) && as !== 'input') {
+  const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
+    if (event.currentTarget.tagName !== 'INPUT') {
       if (inGroup && value) {
         groupCtx.toggleValue(value)
       }
@@ -196,7 +202,11 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
 
   const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
     // Keyboard accessibility for non interactive elements
-    if (focusVisible && as !== 'input' && event.code === 'Space') {
+    if (
+      focusVisible &&
+      event.currentTarget.tagName !== 'INPUT' &&
+      event.code === 'Space'
+    ) {
       event.currentTarget.click()
     }
   })
@@ -204,55 +214,58 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   const classes = useSlotClasses(ownerState)
 
   const styles = useStyles({
-    name: 'Checkbox',
     ownerState,
+    name: 'Checkbox',
     recipe: checkboxRecipe,
   })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const mergedRefs = mergeRefs(ref, inputRef)
-
-  const rootProps = useSlotProps({
+  const [CheckboxRoot, getCheckboxRootProps] = useSlot({
     ownerState,
+    elementType: 'label',
     externalSlotProps: slotProps?.root,
-    externalForwardedProps: {
+    style: styles.root,
+    classNames: classes.root,
+    additionalProps: {
       sx,
       className,
     },
-    sx: styles.root,
-    classNames: classes.root,
   })
 
-  const inputProps = useSlotProps({
+  const [CheckboxInput, getCheckboxInputProps] = useSlot({
     ownerState,
+    elementType: 'input',
     externalForwardedProps: remainingProps,
     classNames: classes.input,
-    sx: styles.input,
+    style: styles.input,
+    a11y: {
+      ...slotAriaProps.input,
+      onKeyUp: handleKeyUp,
+    },
     additionalProps: {
-      as,
       name,
       onChange: handleChange,
       onClick: handleClick,
-      onKeyUp: handleKeyUp,
-      ref: mergedRefs,
-      ...slotAriaProps.input,
+      ref: inputRef,
     },
   })
 
-  const iconProps = useSlotProps({
+  const [CheckboxIcon, getCheckboxIconProps] = useSlot({
     ownerState,
+    elementType: 'span',
     externalSlotProps: slotProps?.icon,
-    sx: styles.icon,
+    style: styles.icon,
     classNames: classes.icon,
   })
 
-  const labelProps = useSlotProps({
+  const [CheckboxLabel, getCheckboxLabelProps] = useSlot({
     ownerState,
+    elementType: 'span',
     externalSlotProps: slotProps?.label,
-    sx: styles.label,
+    style: styles.label,
     classNames: classes.label,
-    additionalProps: slotAriaProps.label,
+    a11y: slotAriaProps.label,
   })
 
   const renderCheckedIcon = () => {
@@ -265,8 +278,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     if (customIcon) {
       return isValidElement(customIcon) ? (
         <Box
-          // @ts-ignore
-          as={customIcon.type}
+          as={customIcon.type as ElementType}
           sx={styles.checkedIcon}
           key={customIcon.key}
           {...(customIcon.props ?? {})}
@@ -284,11 +296,15 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   }
 
   return (
-    <nex.label {...rootProps}>
-      <nex.input {...inputProps} />
-      <nex.span {...iconProps}>{renderCheckedIcon()}</nex.span>
-      {children && <nex.span {...labelProps}>{children}</nex.span>}
-    </nex.label>
+    <CheckboxRoot {...getCheckboxRootProps()}>
+      <CheckboxInput {...getCheckboxInputProps()} />
+      <CheckboxIcon {...getCheckboxIconProps()}>
+        {renderCheckedIcon()}
+      </CheckboxIcon>
+      {children && (
+        <CheckboxLabel {...getCheckboxLabelProps()}>{children}</CheckboxLabel>
+      )}
+    </CheckboxRoot>
   )
 }
 

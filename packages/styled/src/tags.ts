@@ -63,7 +63,6 @@ export const tags = [
   'main',
   'map',
   'mark',
-  'marquee',
   'menu',
   'menuitem',
   'meta',
@@ -135,4 +134,4 @@ export const tags = [
   'svg',
   'text',
   'tspan',
-]
+] as const
