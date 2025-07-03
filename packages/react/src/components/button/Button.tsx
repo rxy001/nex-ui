@@ -1,6 +1,7 @@
 'use client'
 
 import { LoadingOutlined } from '@nex-ui/icons'
+import { useMemo } from 'react'
 import { useNexUI } from '../provider'
 import { ButtonBase } from './ButtonBase'
 import { buttonRecipe } from '../../theme/recipes'
@@ -18,8 +19,6 @@ import type { ButtonProps, ButtonOwnerState } from './types'
 const useSlotClasses = (ownerState: ButtonOwnerState) => {
   const { prefix } = useNexUI()
 
-  const btnRoot = `${prefix}-btn`
-
   const {
     color,
     variant,
@@ -34,40 +33,51 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
     spinnerPlacement,
   } = ownerState
 
-  const slots = {
-    root: [
-      'root',
-      `variant-${variant}`,
-      `radius-${radius}`,
-      `size-${size}`,
-      `color-${color}`,
-      iconOnly && `icon-only`,
-      loading && `loading`,
-      disabled && `disabled`,
-      fullWidth && `full-width`,
-      disableRipple && 'disable-ripple',
-    ],
-    startIcon: [
-      `icon`,
-      `start-icon`,
-      `icon-size-${size}`,
-      loading && spinnerPlacement === 'start' && `icon-loading`,
-    ],
-    endIcon: [
-      `icon`,
-      `end-icon`,
-      `icon-size-${size}`,
-      loading && spinnerPlacement === 'end' && `icon-loading`,
-    ],
-  }
+  return useMemo(() => {
+    const btnRoot = `${prefix}-btn`
 
-  const composedClasses = composeClasses(
-    slots,
-    getUtilityClass(btnRoot),
+    const slots = {
+      root: [
+        'root',
+        `variant-${variant}`,
+        `radius-${radius}`,
+        `size-${size}`,
+        `color-${color}`,
+        iconOnly && `icon-only`,
+        loading && `loading`,
+        disabled && `disabled`,
+        fullWidth && `full-width`,
+        disableRipple && 'disable-ripple',
+      ],
+      startIcon: [
+        `icon`,
+        `start-icon`,
+        `icon-size-${size}`,
+        loading && spinnerPlacement === 'start' && `icon-loading`,
+      ],
+      endIcon: [
+        `icon`,
+        `end-icon`,
+        `icon-size-${size}`,
+        loading && spinnerPlacement === 'end' && `icon-loading`,
+      ],
+    }
+
+    return composeClasses(slots, getUtilityClass(btnRoot), classes)
+  }, [
     classes,
-  )
-
-  return composedClasses
+    color,
+    disableRipple,
+    disabled,
+    fullWidth,
+    iconOnly,
+    loading,
+    prefix,
+    radius,
+    size,
+    spinnerPlacement,
+    variant,
+  ])
 }
 
 export const Button = <RootComponent extends ElementType = 'button'>(

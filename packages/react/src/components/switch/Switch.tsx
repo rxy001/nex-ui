@@ -1,6 +1,6 @@
 'use client'
 
-import { useId } from 'react'
+import { useId, useMemo } from 'react'
 import { isFunction, isString } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
@@ -25,33 +25,29 @@ import type { SwitchOwnerState, SwitchProps } from './types'
 const useSlotClasses = (ownerState: SwitchOwnerState) => {
   const { prefix } = useNexUI()
 
-  const switchRoot = `${prefix}-switch`
-
   const { size, color, disabled, checked, classes } = ownerState
 
-  const slots = {
-    root: [
-      'root',
-      `color-${color}`,
-      `size-${size}`,
-      disabled && 'disabled',
-      checked && 'checked',
-    ],
-    input: ['input'],
-    track: ['track'],
-    thumb: ['thumb'],
-    startIcon: ['start-icon'],
-    endIcon: ['end-icon'],
-    label: ['label'],
-  }
+  return useMemo(() => {
+    const switchRoot = `${prefix}-switch`
 
-  const composedClasses = composeClasses(
-    slots,
-    getUtilityClass(switchRoot),
-    classes,
-  )
+    const slots = {
+      root: [
+        'root',
+        `color-${color}`,
+        `size-${size}`,
+        disabled && 'disabled',
+        checked && 'checked',
+      ],
+      input: ['input'],
+      track: ['track'],
+      thumb: ['thumb'],
+      startIcon: ['start-icon'],
+      endIcon: ['end-icon'],
+      label: ['label'],
+    }
 
-  return composedClasses
+    return composeClasses(slots, getUtilityClass(switchRoot), classes)
+  }, [checked, classes, color, disabled, size, prefix])
 }
 
 const useSlotAriaProps = (
@@ -68,42 +64,60 @@ const useSlotAriaProps = (
     type = 'checkbox',
   } = ownerState
 
-  const labelProps = slotProps?.label
-
-  const stringChildren = isString(children)
-
   const id = useId()
 
-  const labelId = labelProps?.id ?? (stringChildren ? id : undefined)
+  const ariaLabelledby = ownerState['aria-labelledby']
+  const ariaLabel = ownerState['aria-label']
+  const ariaChecked = ownerState['aria-checked']
+  const ariaDisabled = ownerState['aria-disabled']
 
-  let input: InputHTMLAttributes<HTMLInputElement> = {
+  return useMemo(() => {
+    const stringChildren = isString(children)
+    const labelProps = slotProps?.label ?? {}
+    const labelId = labelProps.id ?? (stringChildren ? id : undefined)
+
+    let input: InputHTMLAttributes<HTMLInputElement> = {
+      checked,
+      disabled,
+      role,
+      tabIndex: disabled ? -1 : tabIndex,
+      'aria-labelledby': ariaLabelledby ?? labelId,
+      'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
+    }
+
+    if (!as || as === 'input' || isFunction(as)) {
+      input = {
+        ...input,
+        type,
+      }
+    } else {
+      input = {
+        ...input,
+        'aria-checked': ariaChecked ?? checked,
+        'aria-disabled': ariaDisabled ?? (disabled || undefined),
+      }
+    }
+
+    const label = {
+      id: labelId,
+    }
+
+    return { input, label }
+  }, [
+    ariaChecked,
+    ariaDisabled,
+    ariaLabel,
+    ariaLabelledby,
+    as,
     checked,
+    children,
     disabled,
+    id,
     role,
-    tabIndex: disabled ? -1 : tabIndex,
-    'aria-labelledby': ownerState['aria-labelledby'] ?? labelId,
-    'aria-label':
-      ownerState['aria-label'] ?? (stringChildren ? children : undefined),
-  }
-
-  if (!as || as === 'input' || isFunction(as)) {
-    input = {
-      ...input,
-      type,
-    }
-  } else {
-    input = {
-      ...input,
-      'aria-checked': ownerState['aria-checked'] ?? checked,
-      'aria-disabled': ownerState['aria-disabled'] ?? (disabled || undefined),
-    }
-  }
-
-  const label = {
-    id: labelId,
-  }
-
-  return { input, label }
+    slotProps?.label,
+    tabIndex,
+    type,
+  ])
 }
 
 export const Switch = <SwitchComponent extends ElementType = 'input'>(

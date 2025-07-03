@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import { __DEV__ } from '@nex-ui/utils'
 import { useNexUI } from '../provider/Context'
 import { iconRecipe } from '../../theme/recipes'
@@ -16,17 +17,17 @@ import type { IconOwnerState, IconProps } from './types'
 const useSlotClasses = (ownerState: IconOwnerState) => {
   const { prefix } = useNexUI()
 
-  const iconRoot = `${prefix}-icon`
-
   const { spin, size } = ownerState
 
-  const slots = {
-    root: ['root', spin && `spin`, size && `size-${size}`],
-  }
+  return useMemo(() => {
+    const iconRoot = `${prefix}-icon`
 
-  const composedClasses = composeClasses(slots, getUtilityClass(iconRoot))
+    const slots = {
+      root: ['root', spin && `spin`, size && `size-${size}`],
+    }
 
-  return composedClasses
+    return composeClasses(slots, getUtilityClass(iconRoot))
+  }, [prefix, size, spin])
 }
 
 export const Icon = <RootComponent extends ElementType = 'svg'>(

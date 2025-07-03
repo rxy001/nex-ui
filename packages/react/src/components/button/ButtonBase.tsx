@@ -80,9 +80,7 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     }
   }, [disabled, props, role, rootElement, tabIndex, type])
 
-  const mergedProps = useMemo(() => {
-    return mergeProps(remainingProps, focusProps, ariaProps)
-  }, [ariaProps, focusProps, remainingProps])
+  const mergedProps = mergeProps(remainingProps, focusProps, ariaProps)
 
   return (
     <nex.button

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
@@ -21,29 +21,24 @@ import type {
 
 const useSlotClasses = (ownerState: AvatarOwnerState) => {
   const { prefix } = useNexUI()
-
-  const avatarRoot = `${prefix}-avatar`
-
   const { color, size, radius, classes, outlined } = ownerState
 
-  const slots = {
-    root: [
-      'root',
-      `radius-${radius}`,
-      `size-${size}`,
-      `color-${color}`,
-      outlined && 'outlined',
-    ],
-    img: [`img`],
-  }
+  return useMemo(() => {
+    const avatarRoot = `${prefix}-avatar`
 
-  const composedClasses = composeClasses(
-    slots,
-    getUtilityClass(avatarRoot),
-    classes,
-  )
+    const slots = {
+      root: [
+        'root',
+        `radius-${radius}`,
+        `size-${size}`,
+        `color-${color}`,
+        outlined && 'outlined',
+      ],
+      img: [`img`],
+    }
 
-  return composedClasses
+    return composeClasses(slots, getUtilityClass(avatarRoot), classes)
+  }, [classes, color, outlined, prefix, radius, size])
 }
 
 const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
@@ -92,24 +87,28 @@ const useSlotAriaProps = (
 ): Record<'root', HTMLAttributes<HTMLElement>> => {
   const { alt, children, loaded, role = 'img' } = ownerState
 
-  let root = {}
+  const ariaLabel = ownerState['aria-label']
 
-  if (loaded === false || loaded === 'error') {
-    if (typeof children === 'string') {
-      root = {
-        role,
-        'aria-label': ownerState['aria-label'] ?? children,
-      }
-    } else if (typeof alt === 'string') {
-      root = {
-        role,
-        'aria-label': ownerState['aria-label'] ?? alt,
+  return useMemo(() => {
+    let root = {}
+
+    if (loaded === false || loaded === 'error') {
+      if (typeof children === 'string') {
+        root = {
+          role,
+          'aria-label': ariaLabel ?? children,
+        }
+      } else if (typeof alt === 'string') {
+        root = {
+          role,
+          'aria-label': ariaLabel ?? alt,
+        }
       }
     }
-  }
-  return {
-    root,
-  }
+    return {
+      root,
+    }
+  }, [alt, ariaLabel, children, loaded, role])
 }
 
 export const Avatar = <RootComponent extends ElementType = 'div'>(

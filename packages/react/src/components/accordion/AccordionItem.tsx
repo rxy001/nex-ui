@@ -4,7 +4,7 @@ import * as m from 'motion/react-m'
 import { useEvent } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { LazyMotion, AnimatePresence } from 'motion/react'
-import { useId, useRef } from 'react'
+import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../button/ButtonBase'
@@ -61,68 +61,70 @@ const indicatorMotionVariants: Variants = {
 const useSlotClasses = (ownerState: AccordionItemOwnerState) => {
   const { prefix } = useNexUI()
 
-  const accordionItemRoot = `${prefix}-accordion-item`
-
   const { hideIndicator, keepMounted, disabled, classes } = ownerState
 
-  const slots = {
-    root: [
-      'root',
-      hideIndicator && 'hide-indicator',
-      keepMounted && 'keep-mounted',
-      disabled && 'disabled',
-    ],
-    heading: ['heading'],
-    trigger: ['trigger'],
-    content: ['content'],
-    indicator: ['indicator'],
-  }
+  return useMemo(() => {
+    const accordionItemRoot = `${prefix}-accordion-item`
 
-  const composedClasses = composeClasses(
-    slots,
-    getUtilityClass(accordionItemRoot),
-    classes,
-  )
+    const slots = {
+      root: [
+        'root',
+        hideIndicator && 'hide-indicator',
+        keepMounted && 'keep-mounted',
+        disabled && 'disabled',
+      ],
+      heading: ['heading'],
+      trigger: ['trigger'],
+      content: ['content'],
+      indicator: ['indicator'],
+    }
 
-  return composedClasses
+    return composeClasses(slots, getUtilityClass(accordionItemRoot), classes)
+  }, [classes, disabled, hideIndicator, keepMounted, prefix])
 }
 
 const useSlotAriaProps = (
   ownerState: AccordionItemOwnerState,
 ): Record<'trigger' | 'content' | 'indicator', HTMLAttributes<HTMLElement>> => {
   const { itemKey, expanded, slotProps } = ownerState
-  const triggerProps = slotProps?.trigger || {}
-  const contentProps = slotProps?.content || {}
-  const indicatorProps = slotProps?.indicator || {}
-  let triggerId = useId()
+  const id = useId()
 
-  if (triggerProps.id) {
-    triggerId = triggerProps.id
-  }
+  return useMemo(() => {
+    const triggerProps = slotProps?.trigger || {}
+    const contentProps = slotProps?.content || {}
+    const indicatorProps = slotProps?.indicator || {}
+    const triggerId = triggerProps.id ?? id
+    const contentId = contentProps.id ?? `panel-${itemKey}-content`
 
-  const contentId = contentProps.id ?? `panel-${itemKey}-content`
+    const trigger = {
+      id: triggerId,
+      'aria-expanded': triggerProps['aria-expanded'] ?? expanded,
+      'aria-controls': triggerProps['aria-controls'] ?? contentId,
+    }
 
-  const trigger = {
-    id: triggerId,
-    'aria-expanded': triggerProps['aria-expanded'] ?? expanded,
-    'aria-controls': triggerProps['aria-controls'] ?? contentId,
-  }
+    const content = {
+      id: contentId,
+      role: contentProps.role ?? 'region',
+      'aria-labelledby': contentProps['aria-labelledby'] ?? triggerId,
+    }
 
-  const content = {
-    id: contentId,
-    role: contentProps.role ?? 'region',
-    'aria-labelledby': contentProps['aria-labelledby'] ?? triggerId,
-  }
+    const indicator = {
+      'aria-hidden': indicatorProps['aria-hidden'] ?? true,
+    }
 
-  const indicator = {
-    'aria-hidden': indicatorProps['aria-hidden'] ?? true,
-  }
-
-  return {
-    trigger,
-    content,
-    indicator,
-  }
+    return {
+      trigger,
+      content,
+      indicator,
+    }
+  }, [
+    expanded,
+    id,
+    itemKey,
+    slotProps?.content,
+    slotProps?.indicator,
+    slotProps?.trigger,
+  ])
 }
 
 export const AccordionItem = <RootComponent extends ElementType = 'div'>(

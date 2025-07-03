@@ -27,11 +27,11 @@ exports[`Input renders correctly 1`] = `
   border-color: var(--nui-colors-gray-highlight);
 }
 
-.emotion-0:hover {
+.emotion-0:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
   border-color: var(--nui-colors-gray-secondary);
 }
 
-.emotion-0:is(:focus-within, [data-focus-within=true]) {
+.emotion-0:is(:focus-within, [data-focus-within=true]):not(:disabled, [data-disabled=true]) {
   border-color: var(--nui-colors-blue-primary);
 }
 
