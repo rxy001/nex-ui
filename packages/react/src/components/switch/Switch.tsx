@@ -1,8 +1,8 @@
 'use client'
 
-import { useId, useRef } from 'react'
+import { useId } from 'react'
 import { isFunction, isString } from '@nex-ui/utils'
-import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
+import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
 import { switchRecipe } from '../../theme/recipes'
 import {
@@ -111,8 +111,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
 ) => {
   const { primaryThemeColor } = useNexUI()
 
-  const inputRef = useRef<HTMLInputElement>(null)
-
   const props = useDefaultProps<SwitchProps>({
     name: 'Switch',
     props: inProps,
@@ -135,7 +133,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     ...remainingProps
   } = props
 
-  const [focusVisible] = useFocusVisible({ ref: inputRef })
+  const { focusVisible, focusProps } = useFocusRing()
 
   const [checked, setChecked] = useControlledState(
     checkdeProp,
@@ -167,8 +165,9 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&
-      event.currentTarget.tagName !== 'INPUT' &&
-      event.code === 'Space'
+      event.code === 'Space' &&
+      event.target === event.currentTarget &&
+      event.currentTarget.tagName !== 'INPUT'
     ) {
       event.currentTarget.click()
     }
@@ -207,7 +206,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
       onChange: handleChange,
       onClick: handleClick,
       onKeyUp: handleKeyUp,
-      ref: inputRef,
+      ...focusProps,
     },
   })
 

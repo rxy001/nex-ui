@@ -2,7 +2,7 @@
 
 import { useId, useRef } from 'react'
 import { isFunction, isString } from '@nex-ui/utils'
-import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
@@ -144,6 +144,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     slotProps,
     onValueChange,
     placeholder,
+    autoFocus,
     defaultValue = '',
     value: valueProp,
     color = primaryThemeColor,
@@ -208,7 +209,13 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     clearable,
     value,
     labelPlacement,
+    autoFocus,
   }
+
+  const { focusVisible, focusProps } = useFocusRing({
+    autoFocus,
+    input: true,
+  })
 
   const styles = useStyles({
     ownerState,
@@ -246,6 +253,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
       sx,
       className,
       onClick: handleFocusInput,
+      ['data-focus-visible']: focusVisible || undefined,
     },
   })
 
@@ -267,7 +275,9 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     a11y: slotAriaProps.input,
     additionalProps: {
       ref: inputRef,
+      autoFocus,
       onChange: handleChange,
+      ...focusProps,
     },
   })
 

@@ -1,8 +1,8 @@
 'use client'
 
-import { isValidElement, useId, useRef } from 'react'
+import { isValidElement, useId } from 'react'
 import { isFunction, __DEV__, isString } from '@nex-ui/utils'
-import { useControlledState, useEvent, useFocusVisible } from '@nex-ui/hooks'
+import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { useCheckboxGroup } from './CheckboxGroupContext'
@@ -111,7 +111,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   inProps: CheckboxProps<CheckboxComponent>,
 ) => {
   const { primaryThemeColor } = useNexUI()
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const props = useDefaultProps<CheckboxProps>({
     name: 'Checkbox',
@@ -161,7 +160,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     onCheckedChange,
   )
 
-  const [focusVisible] = useFocusVisible({ ref: inputRef })
+  const { focusVisible, focusProps } = useFocusRing()
 
   const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
 
@@ -204,8 +203,9 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&
-      event.currentTarget.tagName !== 'INPUT' &&
-      event.code === 'Space'
+      event.code === 'Space' &&
+      event.target === event.currentTarget &&
+      event.currentTarget.tagName !== 'INPUT'
     ) {
       event.currentTarget.click()
     }
@@ -247,7 +247,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
       name,
       onChange: handleChange,
       onClick: handleClick,
-      ref: inputRef,
+      ...focusProps,
     },
   })
 

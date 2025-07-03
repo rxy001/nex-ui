@@ -105,7 +105,7 @@ export const inputRecipe = defineSlotRecipe({
         root: {
           border: 'md',
           borderColor: 'gray.highlight',
-          ':hover': {
+          _hover: {
             borderColor: 'gray.secondary',
           },
           _focusWithin: {
@@ -116,11 +116,14 @@ export const inputRecipe = defineSlotRecipe({
       filled: {
         root: {
           bg: 'colorPalette.muted',
-          ':hover': {
+          _hover: {
             bg: 'colorPalette.subtle',
           },
           _focusWithin: {
             bg: 'colorPalette.subtle',
+          },
+          _focusVisible: {
+            outline: 'focusVisibleOutline',
           },
         },
         label: {
@@ -137,7 +140,6 @@ export const inputRecipe = defineSlotRecipe({
           transition: 'colors',
         },
       },
-
       underlined: {
         root: {
           px: '1.5',
@@ -153,7 +155,7 @@ export const inputRecipe = defineSlotRecipe({
           '::after': {
             content: '""',
             position: 'absolute',
-            insetBlockEnd: -1,
+            insetBlockEnd: 0,
             insetInlineStart: '50%',
             transform: 'translateX(-50%)',
             width: 0,
@@ -385,12 +387,18 @@ export const inputRecipe = defineSlotRecipe({
       variant: 'filled',
       css: {
         root: {
+          bg: 'red.subtle',
+          _hover: {
+            bg: 'red.muted',
+          },
+          _focusWithin: {
+            bg: 'red.muted',
+          },
+        },
+        label: {
           colorPalette: 'red',
         },
         input: {
-          colorPalette: 'red',
-        },
-        label: {
           colorPalette: 'red',
         },
       },
@@ -400,12 +408,12 @@ export const inputRecipe = defineSlotRecipe({
       variant: 'outlined',
       css: {
         root: {
-          borderColor: 'red.500',
-          ':hover': {
-            borderColor: 'red.500',
+          borderColor: 'red.primary',
+          _hover: {
+            borderColor: 'red.primary',
           },
           _focusWithin: {
-            borderColor: 'red.500',
+            borderColor: 'red.primary',
           },
         },
         input: {
@@ -419,11 +427,11 @@ export const inputRecipe = defineSlotRecipe({
       css: {
         root: {
           '::after': {
-            bg: 'red.500',
+            bg: 'red.primary',
           },
           _focusWithin: {
             '::after': {
-              bg: 'red.500',
+              bg: 'red.primary',
             },
           },
         },
