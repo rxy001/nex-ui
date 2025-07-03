@@ -1,6 +1,6 @@
 'use client'
 
-import { isValidElement, useId } from 'react'
+import { isValidElement, useId, useMemo } from 'react'
 import { isFunction, __DEV__, isString } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
@@ -29,31 +29,27 @@ import type {
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
   const { prefix } = useNexUI()
 
-  const checkboxRoot = `${prefix}-checkbox`
-
   const { radius, size, color, disabled, checked, classes } = ownerState
 
-  const slots = {
-    root: [
-      'root',
-      `radius-${radius}`,
-      `size-${size}`,
-      `color-${color}`,
-      disabled && 'disabled',
-      checked && 'checked',
-    ],
-    input: ['input'],
-    label: ['label'],
-    icon: ['icon'],
-  }
+  return useMemo(() => {
+    const checkboxRoot = `${prefix}-checkbox`
 
-  const composedClasses = composeClasses(
-    slots,
-    getUtilityClass(checkboxRoot),
-    classes,
-  )
+    const slots = {
+      root: [
+        'root',
+        `radius-${radius}`,
+        `size-${size}`,
+        `color-${color}`,
+        disabled && 'disabled',
+        checked && 'checked',
+      ],
+      input: ['input'],
+      label: ['label'],
+      icon: ['icon'],
+    }
 
-  return composedClasses
+    return composeClasses(slots, getUtilityClass(checkboxRoot), classes)
+  }, [checked, classes, color, disabled, prefix, radius, size])
 }
 
 const useSlotAriaProps = (
@@ -70,41 +66,62 @@ const useSlotAriaProps = (
     slotProps,
     tabIndex = 0,
   } = ownerState
+
+  const ariaLabel = ownerState['aria-label']
+  const ariaLabelledby = ownerState['aria-labelledby']
+  const ariaChecked = ownerState['aria-checked']
+  const ariaDisabled = ownerState['aria-disabled']
+
   const id = useId()
 
-  const labelProps = slotProps?.label
+  return useMemo(() => {
+    const labelProps = slotProps?.label
+    const stringChildren = isString(children)
 
-  const stringChildren = isString(children)
-
-  const label = {
-    id: labelProps?.id ?? (stringChildren ? id : undefined),
-  }
-
-  let input: InputHTMLAttributes<HTMLInputElement> = {
-    'aria-labelledby': ownerState['aria-labelledby'] ?? label.id,
-    'aria-label':
-      ownerState['aria-label'] ?? (stringChildren ? children : undefined),
-    tabIndex: disabled ? -1 : tabIndex,
-  }
-
-  if (!as || as === 'input' || isFunction(as)) {
-    input = {
-      disabled,
-      checked,
-      type,
-      value,
-      ...input,
+    const label = {
+      id: labelProps?.id ?? (stringChildren ? id : undefined),
     }
-  } else {
-    input = {
-      role: role ?? 'checkbox',
-      'aria-checked': ownerState['aria-checked'] ?? checked,
-      'aria-disabled': ownerState['aria-disabled'] ?? (disabled || undefined),
-      ...input,
-    }
-  }
 
-  return { input, label }
+    let input: InputHTMLAttributes<HTMLInputElement> = {
+      'aria-labelledby': ariaLabelledby ?? label.id,
+      'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
+      tabIndex: disabled ? -1 : tabIndex,
+    }
+
+    if (!as || as === 'input' || isFunction(as)) {
+      input = {
+        disabled,
+        checked,
+        type,
+        value,
+        ...input,
+      }
+    } else {
+      input = {
+        role: role ?? 'checkbox',
+        'aria-checked': ariaChecked ?? checked,
+        'aria-disabled': ariaDisabled ?? (disabled || undefined),
+        ...input,
+      }
+    }
+
+    return { input, label }
+  }, [
+    ariaChecked,
+    ariaDisabled,
+    ariaLabel,
+    ariaLabelledby,
+    as,
+    checked,
+    children,
+    disabled,
+    id,
+    role,
+    slotProps?.label,
+    tabIndex,
+    type,
+    value,
+  ])
 }
 
 export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(

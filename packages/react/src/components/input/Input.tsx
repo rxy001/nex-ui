@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useRef } from 'react'
+import { useId, useMemo, useRef } from 'react'
 import { isFunction, isString } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
@@ -25,8 +25,6 @@ import type { InputOwnerState, InputProps } from './types'
 const useSlotClasses = (ownerState: InputOwnerState) => {
   const { prefix } = useNexUI()
 
-  const inputRoot = `${prefix}-input`
-
   const {
     variant,
     clearable,
@@ -40,33 +38,43 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
     labelPlacement,
   } = ownerState
 
-  const slots = {
-    root: [
-      'root',
-      `variant-${variant}`,
-      `radius-${radius}`,
-      `size-${size}`,
-      `color-${color}`,
-      disabled && 'disabled',
-      fullWidth && 'full-width',
-      invaild && 'invaild',
-      clearable && 'clearable',
-      labelPlacement && `label-placement-${labelPlacement}`,
-    ],
-    input: ['input'],
-    clearButton: ['clear-btn'],
-    prefix: ['prefix'],
-    suffix: ['suffix'],
-    label: ['label'],
-  }
+  return useMemo(() => {
+    const inputRoot = `${prefix}-input`
 
-  const composedClasses = composeClasses(
-    slots,
-    getUtilityClass(inputRoot),
+    const slots = {
+      root: [
+        'root',
+        `variant-${variant}`,
+        `radius-${radius}`,
+        `size-${size}`,
+        `color-${color}`,
+        disabled && 'disabled',
+        fullWidth && 'full-width',
+        invaild && 'invaild',
+        clearable && 'clearable',
+        labelPlacement && `label-placement-${labelPlacement}`,
+      ],
+      input: ['input'],
+      clearButton: ['clear-btn'],
+      prefix: ['prefix'],
+      suffix: ['suffix'],
+      label: ['label'],
+    }
+
+    return composeClasses(slots, getUtilityClass(inputRoot), classes)
+  }, [
     classes,
-  )
-
-  return composedClasses
+    clearable,
+    color,
+    disabled,
+    fullWidth,
+    invaild,
+    labelPlacement,
+    prefix,
+    radius,
+    size,
+    variant,
+  ])
 }
 
 const useSlotAriaProps = (ownerState: InputOwnerState) => {
@@ -80,48 +88,68 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
     slotProps,
     label: inputLabel,
     tabIndex = 0,
+    id: idProp,
   } = ownerState
-  const labelProps = slotProps?.label ?? {}
-  const clearButtonProps = slotProps?.clearButton ?? {}
-  const stringLabel = isString(inputLabel)
+
   const id = useId()
-  const inputId = ownerState['id'] ?? (stringLabel ? `input-${id}` : undefined)
-  const labelId = labelProps['id'] ?? (stringLabel ? `label-${id}` : undefined)
+  const ariaLabel = ownerState['aria-label']
 
-  let input: InputHTMLAttributes<HTMLInputElement> = {
-    id: inputId,
-    tabIndex: disabled ? -1 : tabIndex,
-    'aria-invalid': invaild,
-    'aria-labelledby': labelId,
-    'aria-label':
-      ownerState['aria-label'] ?? (stringLabel ? inputLabel : undefined),
-  }
+  return useMemo(() => {
+    const labelProps = slotProps?.label ?? {}
+    const clearButtonProps = slotProps?.clearButton ?? {}
+    const stringLabel = isString(inputLabel)
+    const inputId = idProp ?? (stringLabel ? `input-${id}` : undefined)
+    const labelId =
+      labelProps['id'] ?? (stringLabel ? `label-${id}` : undefined)
 
-  if (!as || as === 'input' || isFunction(as)) {
-    input = {
-      ...input,
-      value,
-      disabled,
-      placeholder,
-      type,
+    let input: InputHTMLAttributes<HTMLInputElement> = {
+      id: inputId,
+      tabIndex: disabled ? -1 : tabIndex,
+      'aria-invalid': invaild,
+      'aria-labelledby': labelId,
+      'aria-label': ariaLabel ?? (stringLabel ? inputLabel : undefined),
     }
-  }
 
-  const label = {
-    id: labelId,
-    htmlFor: inputId,
-  }
+    if (!as || as === 'input' || isFunction(as)) {
+      input = {
+        ...input,
+        value,
+        disabled,
+        placeholder,
+        type,
+      }
+    }
 
-  const clearButton = {
-    'aria-label': clearButtonProps['aria-label'] ?? 'Clear input',
-    tabIndex: clearButtonProps.tabIndex ?? -1,
-  }
+    const label = {
+      id: labelId,
+      htmlFor: inputId,
+    }
 
-  return {
-    input,
-    label,
-    clearButton,
-  }
+    const clearButton = {
+      'aria-label': clearButtonProps['aria-label'] ?? 'Clear input',
+      tabIndex: clearButtonProps.tabIndex ?? -1,
+    }
+
+    return {
+      input,
+      label,
+      clearButton,
+    }
+  }, [
+    ariaLabel,
+    as,
+    disabled,
+    id,
+    idProp,
+    inputLabel,
+    invaild,
+    placeholder,
+    slotProps?.clearButton,
+    slotProps?.label,
+    tabIndex,
+    type,
+    value,
+  ])
 }
 
 export const Input = <InputComponent extends ElementType = 'input'>(

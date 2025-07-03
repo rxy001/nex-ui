@@ -23,15 +23,15 @@ import type {
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
 
-  const dividerRoot = `${prefix}-checkbox-group`
+  return useMemo(() => {
+    const dividerRoot = `${prefix}-checkbox-group`
 
-  const slots = {
-    root: ['root'],
-  }
+    const slots = {
+      root: ['root'],
+    }
 
-  const composedClasses = composeClasses(slots, getUtilityClass(dividerRoot))
-
-  return composedClasses
+    return composeClasses(slots, getUtilityClass(dividerRoot))
+  }, [prefix])
 }
 
 export const CheckboxGroup = <

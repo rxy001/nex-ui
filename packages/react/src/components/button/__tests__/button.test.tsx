@@ -297,6 +297,7 @@ describe('Button', () => {
       return (
         <Button
           loading={loading}
+          spinnerPlacement='start'
           data-testid='button'
           onClick={() => setLoading(true)}
         >
@@ -308,7 +309,6 @@ describe('Button', () => {
 
     const button = getByTestId('button')
     fireEvent.click(button)
-
     expect(button).toHaveClass(buttonClasses.loading)
     expect(
       button.querySelector(`.${buttonClasses['icon-loading']}`),
