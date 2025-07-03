@@ -45,8 +45,8 @@ export default async function RootLayout({ children, params }: any) {
       projectLink='https://github.com/rxy001/nex-ui'
     >
       <>
-        <LocaleSwitch className='x:hidden x:lg:flex' />
-        <ThemeSwitch className='x:hidden x:lg:flex' />
+        <LocaleSwitch className='x:hidden x:md:flex' />
+        <ThemeSwitch className='x:hidden x:md:flex' />
       </>
     </Navbar>
   )

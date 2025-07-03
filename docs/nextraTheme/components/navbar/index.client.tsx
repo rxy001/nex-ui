@@ -140,14 +140,13 @@ export const ClientNavbar: FC<{
         })}
       </div>
       {themeConfig.search && (
-        <div className='x:max-lg:hidden'>{themeConfig.search}</div>
+        <div className='x:max-md:hidden'>{themeConfig.search}</div>
       )}
-
       {children}
       <Button
         aria-label='Menu'
         className={({ active }) =>
-          cn('nextra-hamburger x:lg:hidden', active && 'x:bg-gray-400/20')
+          cn('nextra-hamburger x:md:hidden', active && 'x:bg-gray-400/20')
         }
         onClick={() => setMenu((prev) => !prev)}
       >

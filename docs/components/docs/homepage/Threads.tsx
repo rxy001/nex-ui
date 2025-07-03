@@ -215,7 +215,7 @@ export const Threads: React.FC<ThreadsProps> = () => {
   return (
     <div
       ref={containerRef}
-      className='x:absolute x:w-screen x:h-[500px] x:top-[350px] x:left-0'
+      className='x:absolute x:hidden x:md:flex x:w-screen x:h-[500px] x:top-[350px] x:left-0'
     />
   )
 }
