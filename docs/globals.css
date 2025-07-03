@@ -69,3 +69,7 @@
 .nextra-code button[title='Toggle word wrap'] {
   color: white;
 }
+
+.nextra-banner:not(#\#) {
+  background: rgba(0, 0, 0);
+}
