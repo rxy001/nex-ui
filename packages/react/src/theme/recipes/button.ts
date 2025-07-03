@@ -53,7 +53,7 @@ export const buttonRecipe = defineSlotRecipe({
       outlined: {
         root: {
           bg: 'transparent',
-          border: '{borders.md} {colors.colorPalette.primary}',
+          border: '{borders.md}',
           borderColor: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
@@ -75,10 +75,10 @@ export const buttonRecipe = defineSlotRecipe({
       },
       text: {
         root: {
-          color: 'colorPalette.primary',
+          color: 'colorPalette.500',
           bg: {
             _DEFAULT: 'transparent',
-            _hover: 'colorPalette.subtle',
+            _hover: 'colorPalette.500/10',
           },
         },
       },

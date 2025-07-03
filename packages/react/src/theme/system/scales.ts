@@ -10,6 +10,7 @@ export const scales = defineConfig.scales({
   borderRightColor: 'colors',
   fill: 'colors',
   stroke: 'colors',
+  outlineColor: 'colors',
 
   width: 'sizes',
   minWidth: 'sizes',

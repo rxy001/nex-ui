@@ -44,7 +44,8 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@nex-ui/utils": "workspace:*"
+    "@nex-ui/utils": "workspace:*",
+    "@react-aria/focus": "3.20.5"
   },
   "peerDependencies": {
     "react": ">=19",

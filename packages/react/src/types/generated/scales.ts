@@ -14,6 +14,7 @@ export interface DefaultScales {
   borderRightColor?: 'colors'
   fill?: 'colors'
   stroke?: 'colors'
+  outlineColor?: 'colors'
   width?: 'sizes'
   minWidth?: 'sizes'
   maxWidth?: 'sizes'

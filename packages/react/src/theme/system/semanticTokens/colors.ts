@@ -10,14 +10,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.blue.400}',
       _dark: '{colors.blue.500}',
     },
-    subtle: { _DEFAULT: '{colors.blue.100}', _dark: '{colors.blue.900}' },
+    subtle: { _DEFAULT: '{colors.blue.50}', _dark: '{colors.blue.900}' },
     muted: {
-      _DEFAULT: '{colors.blue.200}',
+      _DEFAULT: '{colors.blue.100}',
       _dark: '{colors.blue.800}',
     },
     highlight: {
       _DEFAULT: '{colors.blue.300}',
-      _dark: '{colors.blue.700}',
+      _dark: '{colors.blue.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.white}',
@@ -33,14 +33,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.gray.400}',
       _dark: '{colors.gray.500}',
     },
-    subtle: { _DEFAULT: '{colors.gray.100}', _dark: '{colors.gray.900}' },
+    subtle: { _DEFAULT: '{colors.gray.50}', _dark: '{colors.gray.900}' },
     muted: {
-      _DEFAULT: '{colors.gray.200}',
+      _DEFAULT: '{colors.gray.100}',
       _dark: '{colors.gray.800}',
     },
     highlight: {
       _DEFAULT: '{colors.gray.300}',
-      _dark: '{colors.gray.700}',
+      _dark: '{colors.gray.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.white}',
@@ -56,14 +56,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.red.400}',
       _dark: '{colors.red.500}',
     },
-    subtle: { _DEFAULT: '{colors.red.100}', _dark: '{colors.red.900}' },
+    subtle: { _DEFAULT: '{colors.red.50}', _dark: '{colors.red.900}' },
     muted: {
-      _DEFAULT: '{colors.red.200}',
+      _DEFAULT: '{colors.red.100}',
       _dark: '{colors.red.800}',
     },
     highlight: {
       _DEFAULT: '{colors.red.300}',
-      _dark: '{colors.red.700}',
+      _dark: '{colors.red.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.white}',
@@ -79,14 +79,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.orange.400}',
       _dark: '{colors.orange.500}',
     },
-    subtle: { _DEFAULT: '{colors.orange.100}', _dark: '{colors.orange.900}' },
+    subtle: { _DEFAULT: '{colors.orange.50}', _dark: '{colors.orange.900}' },
     muted: {
-      _DEFAULT: '{colors.orange.200}',
+      _DEFAULT: '{colors.orange.100}',
       _dark: '{colors.orange.800}',
     },
     highlight: {
       _DEFAULT: '{colors.orange.300}',
-      _dark: '{colors.orange.700}',
+      _dark: '{colors.orange.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.black}',
@@ -102,14 +102,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.yellow.400}',
       _dark: '{colors.yellow.500}',
     },
-    subtle: { _DEFAULT: '{colors.yellow.100}', _dark: '{colors.yellow.900}' },
+    subtle: { _DEFAULT: '{colors.yellow.50}', _dark: '{colors.yellow.900}' },
     muted: {
-      _DEFAULT: '{colors.yellow.200}',
+      _DEFAULT: '{colors.yellow.100}',
       _dark: '{colors.yellow.800}',
     },
     highlight: {
       _DEFAULT: '{colors.yellow.300}',
-      _dark: '{colors.yellow.700}',
+      _dark: '{colors.yellow.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.black}',
@@ -125,14 +125,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.green.400}',
       _dark: '{colors.green.500}',
     },
-    subtle: { _DEFAULT: '{colors.green.100}', _dark: '{colors.green.900}' },
+    subtle: { _DEFAULT: '{colors.green.50}', _dark: '{colors.green.900}' },
     muted: {
-      _DEFAULT: '{colors.green.200}',
+      _DEFAULT: '{colors.green.100}',
       _dark: '{colors.green.800}',
     },
     highlight: {
       _DEFAULT: '{colors.green.300}',
-      _dark: '{colors.green.700}',
+      _dark: '{colors.green.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.black}',
@@ -148,14 +148,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.cyan.400}',
       _dark: '{colors.cyan.500}',
     },
-    subtle: { _DEFAULT: '{colors.cyan.100}', _dark: '{colors.cyan.900}' },
+    subtle: { _DEFAULT: '{colors.cyan.50}', _dark: '{colors.cyan.900}' },
     muted: {
-      _DEFAULT: '{colors.cyan.200}',
+      _DEFAULT: '{colors.cyan.100}',
       _dark: '{colors.cyan.800}',
     },
     highlight: {
       _DEFAULT: '{colors.cyan.300}',
-      _dark: '{colors.cyan.700}',
+      _dark: '{colors.cyan.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.white}',
@@ -171,14 +171,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.purple.400}',
       _dark: '{colors.purple.500}',
     },
-    subtle: { _DEFAULT: '{colors.purple.100}', _dark: '{colors.purple.900}' },
+    subtle: { _DEFAULT: '{colors.purple.50}', _dark: '{colors.purple.900}' },
     muted: {
-      _DEFAULT: '{colors.purple.200}',
+      _DEFAULT: '{colors.purple.100}',
       _dark: '{colors.purple.800}',
     },
     highlight: {
       _DEFAULT: '{colors.purple.300}',
-      _dark: '{colors.purple.700}',
+      _dark: '{colors.purple.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.white}',
@@ -194,14 +194,14 @@ export const colors = defineSemanticTokens.colors({
       _DEFAULT: '{colors.pink.400}',
       _dark: '{colors.pink.500}',
     },
-    subtle: { _DEFAULT: '{colors.pink.100}', _dark: '{colors.pink.900}' },
+    subtle: { _DEFAULT: '{colors.pink.50}', _dark: '{colors.pink.900}' },
     muted: {
-      _DEFAULT: '{colors.pink.200}',
+      _DEFAULT: '{colors.pink.100}',
       _dark: '{colors.pink.800}',
     },
     highlight: {
       _DEFAULT: '{colors.pink.300}',
-      _dark: '{colors.pink.700}',
+      _dark: '{colors.pink.600}',
     },
     contrastText: {
       _DEFAULT: '{colors.white}',
