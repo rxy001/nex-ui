@@ -7,7 +7,7 @@ import { LazyMotion, AnimatePresence } from 'motion/react'
 import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
-import { ButtonBase } from '../button/ButtonBase'
+import { ButtonBase } from '../buttonBase'
 import {
   useDefaultProps,
   useStyles,

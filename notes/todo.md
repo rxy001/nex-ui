@@ -97,3 +97,5 @@ https://github.com/microsoft/TypeScript/issues/40426
     
 
 <!-- 31. 调整组件颜色 -->
+
+32. 当 recipe 没有 variants 时 runtimeFn 可传入任何值。

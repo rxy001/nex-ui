@@ -6,7 +6,7 @@ import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
-import { ButtonBase } from '../button/ButtonBase'
+import { ButtonBase } from '../buttonBase'
 import {
   useDefaultProps,
   composeClasses,
@@ -316,6 +316,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     externalSlotProps: slotProps?.clearButton,
     classNames: classes.clearButton,
     a11y: slotAriaProps.clearButton,
+    shouldForwardComponent: false,
     additionalProps: {
       onClick: handleClearValue,
       disabled: disabled,
