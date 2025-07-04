@@ -23,26 +23,12 @@
   "scripts": {
     "build": "tsx ../../scripts/build.ts --dts",
     "build:fast": "tsx ../../scripts/build.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "type": "module",
-  "main": "dist/cjs/index.cjs",
-  "module": "dist/esm/index.mjs",
-  "types": "dist/types/index.d.ts",
-  "exports": {
-    ".": {
-      "source": "./src/index.ts",
-      "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.mjs"
-      },
-      "require": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/cjs/index.cjs"
-      }
-    },
-    "./package.json": "./package.json"
-  },
+  "main": "src/index.ts",
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19"
@@ -55,5 +41,6 @@
   "dependencies": {
     "@nex-ui/styled": "workspace:*",
     "@nex-ui/utils": "workspace:*"
-  }
+  },
+  "clean-package": "../../clean-package.config.json"
 }

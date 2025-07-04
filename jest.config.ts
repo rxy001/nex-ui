@@ -10,19 +10,16 @@ const jestConfig = {
   ],
   moduleNameMapper: {
     '^~/(.*)$': '<rootDir>/$1',
-    '^@nex-ui/styled$': '<rootDir>/./packages/styled/src',
-    '^@nex-ui/utils$': '<rootDir>/./packages/utils/src',
-    '^@nex-ui/system$': '<rootDir>/./packages/system/src',
-    '^@nex-ui/icons$': '<rootDir>/./packages/icons/src',
-    '^@nex-ui/react$': '<rootDir>/./packages/react/src',
-    '^@nex-ui/hooks$': '<rootDir>/./packages/hooks/src',
   },
   transform: {
     '^.+\\.(t|j)sx?$': [
       '@swc/jest',
       {
         jsc: {
-          parser: { tsx: true, syntax: 'typescript' },
+          parser: {
+            tsx: true,
+            syntax: 'typescript',
+          },
           transform: {
             react: {
               runtime: 'automatic',
@@ -36,7 +33,6 @@ const jestConfig = {
     '^.+\\.svg$': 'jest-transformer-svg',
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
-  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   // collectCoverage: true,
   collectCoverageFrom: ['packages/**/*.{ts,tsx}'],
   testEnvironment: 'jsdom',
