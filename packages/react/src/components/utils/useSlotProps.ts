@@ -3,7 +3,7 @@ import { mergeProps, isFunction, isArray, isPlainObject } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import type { ClassValue } from 'clsx'
 import type { ArrayInterpolation } from '@nex-ui/system'
-import type { SxProps } from '../../types/utils'
+import type { SxProp } from '../../types/utils'
 
 type UseSlotPropsArgs<
   SlotProps extends {},
@@ -15,7 +15,7 @@ type UseSlotPropsArgs<
   /**
    * The style of the slot.
    */
-  sx?: SxProps<OwnerState>
+  sx?: SxProp<OwnerState>
 
   /**
    * Extra class name(s) to be placed on the slot.

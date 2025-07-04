@@ -1,5 +1,5 @@
 import type { ElementType } from 'react'
-import type { OverrideProps, SxProps } from '../../types/utils'
+import type { OverrideProps, SxProp } from '../../types/utils'
 
 export interface BoxPropsOverrides {}
 
@@ -13,7 +13,7 @@ type BoxOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<{}>
+  sx?: SxProp<{}>
 }
 
 export type BoxProps<RootComponent extends ElementType = 'div'> = OverrideProps<

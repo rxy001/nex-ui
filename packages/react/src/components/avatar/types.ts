@@ -4,7 +4,7 @@ import type { AvatarVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProps,
+  SxProp,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 import type { Avatar } from './Avatar'
@@ -25,7 +25,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<AvatarOwnerState<RootComponent>>
+  sx?: SxProp<AvatarOwnerState<RootComponent>>
 
   /**
    * Used in combination with src or srcSet to provide an alt attribute for the rendered img element.
@@ -130,7 +130,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<AvatarGroupOwnerState<RootComponent>>
+  sx?: SxProp<AvatarGroupOwnerState<RootComponent>>
 
   /**
    * The props used for each slot.

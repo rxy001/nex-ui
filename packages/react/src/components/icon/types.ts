@@ -2,7 +2,7 @@ import type { ComponentType, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CSSObject } from '@nex-ui/system'
 import type { IconVariants } from '../../theme/recipes'
-import type { OverrideProps, SxProps } from '../../types/utils'
+import type { OverrideProps, SxProp } from '../../types/utils'
 
 export interface IconPropsOverrides {}
 
@@ -10,7 +10,7 @@ export type IconOwnProsp<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<IconOwnerState<RootComponent>>
+  sx?: SxProp<IconOwnerState<RootComponent>>
 
   /**
    * Additional class names to apply to the root element.
