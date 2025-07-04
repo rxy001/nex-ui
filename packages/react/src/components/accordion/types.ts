@@ -1,6 +1,6 @@
 import { ClassValue } from 'clsx'
-import * as m from 'motion/react-m'
 import type { ElementType, Key, ReactNode } from 'react'
+import type { DOMMotionComponents } from 'motion/react'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
@@ -9,6 +9,7 @@ import type {
   HTMLMotionProps,
 } from '../../types/utils'
 import type { AccordionItemVariants } from '../../theme/recipes'
+import type { ButtonBase } from '../buttonBase'
 
 // Accordion
 export interface AccordionPropsOverrides {}
@@ -129,7 +130,7 @@ export interface AccordionItemSlotProps<RootComponent extends ElementType> {
     AccordionItemOwnerState<RootComponent>
   >
   indicator?: ComponentPropsWithCommonProps<
-    typeof m.span,
+    DOMMotionComponents['span'],
     AccordionItemOwnerState<RootComponent>
   >
   content?: ComponentPropsWithCommonProps<
@@ -137,7 +138,7 @@ export interface AccordionItemSlotProps<RootComponent extends ElementType> {
     AccordionItemOwnerState<RootComponent>
   >
   trigger?: ComponentPropsWithCommonProps<
-    'button',
+    typeof ButtonBase<'button'>,
     AccordionItemOwnerState<RootComponent>
   >
 }

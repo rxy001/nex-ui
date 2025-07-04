@@ -35,16 +35,9 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     clearButton: {
-      padding: 0,
       w: 'auto',
       h: 'auto',
       fs: 'inherit',
-      bg: 'transparent',
-      outline: 'none',
-      border: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
       color: 'gray.400',
       _hover: {
         color: 'gray.500',

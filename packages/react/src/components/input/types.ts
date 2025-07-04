@@ -7,14 +7,14 @@ import type {
   OverrideProps,
   SxProp,
 } from '../../types/utils'
-import type { Button } from '../button'
+import type { ButtonBase } from '../buttonBase'
 
 export interface InputPropsOverrides {}
 
 type InputSlotProps<InputComponent extends ElementType> = {
   root?: ComponentPropsWithCommonProps<'div', InputOwnerState<InputComponent>>
   clearButton?: ComponentPropsWithCommonProps<
-    typeof Button<'button'>,
+    typeof ButtonBase<'button'>,
     InputOwnerState<InputComponent>
   >
   prefix?: ComponentPropsWithCommonProps<

@@ -3,33 +3,38 @@
 import { nex } from '@nex-ui/styled'
 import { useEvent, useFocusRing } from '@nex-ui/hooks'
 import { useMemo } from 'react'
-import { isFunction, mergeProps } from '@nex-ui/utils'
-import type { ComponentProps, ElementType, KeyboardEvent } from 'react'
-import type { Interpolation } from '@nex-ui/system'
-import type { Overwrite } from '../../types/utils'
+import { isFunction } from '@nex-ui/utils'
+import { useSlotProps } from '../utils'
+import { buttonBaseRecipes } from '../../theme/recipes'
+import type { ElementType, KeyboardEvent } from 'react'
+import type { ButtonBaseProps } from './types'
 
-type ButtonBaseProps<RootComponent extends ElementType = 'button'> = Overwrite<
-  ComponentProps<RootComponent>,
-  {
-    as?: RootComponent
-    sx?: Interpolation
-    href?: string
-  }
->
+const style = buttonBaseRecipes()
+
+const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
+  const { as, disabled, role = 'button', type = 'button', tabIndex = 0 } = props
+
+  return useMemo(() => {
+    if (as !== 'button' && !isFunction(as)) {
+      return {
+        role,
+        tabIndex: disabled ? -1 : tabIndex,
+        'aria-disabled': props['aria-disabled'] ?? (disabled || undefined),
+      }
+    }
+    return {
+      type,
+      disabled,
+      tabIndex: disabled ? -1 : tabIndex,
+    }
+  }, [disabled, props, role, as, tabIndex, type])
+}
 
 export const ButtonBase = <RootComponent extends ElementType = 'button'>(
   inProps: ButtonBaseProps<RootComponent>,
 ) => {
   const props = inProps as ButtonBaseProps<'button'>
-  const {
-    as,
-    role,
-    children,
-    disabled,
-    type = 'button',
-    tabIndex = 0,
-    ...remainingProps
-  } = props
+  const { as, children, ...remainingProps } = props
 
   const rootElement =
     as !== undefined
@@ -64,31 +69,24 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     }
   })
 
-  const ariaProps = useMemo(() => {
-    if (rootElement !== 'button' && !isFunction(rootElement)) {
-      return {
-        tabIndex: disabled ? -1 : tabIndex,
-        role: role ?? 'button',
-        'aria-disabled': props['aria-disabled'] ?? (disabled || undefined),
-      }
-    }
-    return {
-      tabIndex: disabled ? -1 : tabIndex,
-      type,
-      disabled,
-      role,
-    }
-  }, [disabled, props, role, rootElement, tabIndex, type])
+  const ariaProps = useAriaProps({
+    ...props,
+    as: rootElement,
+  })
 
-  const mergedProps = mergeProps(remainingProps, focusProps, ariaProps)
+  const rootProps = useSlotProps({
+    style,
+    a11y: ariaProps,
+    externalForwardedProps: remainingProps,
+    additionalProps: {
+      onKeyUp: handleKeyUp,
+      onKeyDown: handleKeyDown,
+      ...focusProps,
+    },
+  })
 
   return (
-    <nex.button
-      as={rootElement}
-      onKeyUp={handleKeyUp}
-      onKeyDown={handleKeyDown}
-      {...mergedProps}
-    >
+    <nex.button as={rootElement} {...rootProps}>
       {children}
     </nex.button>
   )

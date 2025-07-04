@@ -1,26 +1,16 @@
-import clsx from 'clsx'
-import { mergeProps, isFunction, isArray, isPlainObject } from '@nex-ui/utils'
+import { mergeProps, isArray, isPlainObject } from '@nex-ui/utils'
 import { useMemo } from 'react'
-import type { ClassValue } from 'clsx'
-import type { ArrayInterpolation } from '@nex-ui/system'
-import type { SxProp } from '../../types/utils'
+import type { Interpolation } from '@nex-ui/system'
 
 type UseSlotPropsArgs<
   SlotProps extends {},
   ForwardedProps extends {},
   AdditionalProps extends {},
-  OwnerState extends {},
 > = {
-  ownerState?: OwnerState
   /**
    * The style of the slot.
    */
-  sx?: SxProp<OwnerState>
-
-  /**
-   * Extra class name(s) to be placed on the slot.
-   */
-  classNames?: ClassValue
+  style?: Interpolation
 
   /**
    * The properties of the component SlotProps.*
@@ -36,68 +26,50 @@ type UseSlotPropsArgs<
    * Additional props to be placed on the slot.
    */
   additionalProps?: AdditionalProps
+
+  a11y?: {}
 }
 
-type UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps> = Omit<
-  SlotProps & ForwardedProps & AdditionalProps,
-  'className' | 'sx'
-> & {
-  className: string
-  sx: ArrayInterpolation
-}
+type UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps> =
+  SlotProps & ForwardedProps & AdditionalProps
 
 export const useSlotProps = <
   SlotProps extends {},
   ForwardedProps extends {},
   AdditionalProps extends {},
-  OwnerState extends {},
 >({
-  ownerState,
-  sx,
+  style,
   externalSlotProps,
   externalForwardedProps,
   additionalProps,
-  classNames: classNamesProp,
+  a11y,
 }: UseSlotPropsArgs<
   SlotProps,
   ForwardedProps,
-  AdditionalProps,
-  OwnerState
+  AdditionalProps
 >): UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps> => {
   const props = mergeProps(
     additionalProps,
     externalForwardedProps,
     externalSlotProps,
+    a11y,
   )
 
-  const className = clsx(classNamesProp, props?.className)
-
   const resolvedSx = useMemo(() => {
-    if (isFunction(props.sx)) {
-      return [sx, props.sx(ownerState ?? {})].flat(1)
+    if (!style) {
+      return props.sx
     }
     if (isArray(props.sx)) {
-      return props.sx
-        .reduce(
-          (acc, v) => {
-            if (isFunction(v)) {
-              return [...acc, v(ownerState ?? {})]
-            }
-            return [...acc, v]
-          },
-          [sx],
-        )
-        .flat(1)
+      return props.sx.reduce((acc, v) => [...acc, v], [style]).flat(1)
     }
     if (isPlainObject(props.sx)) {
-      return [sx, props.sx]
+      return [style, props.sx]
     }
-    return sx
-  }, [ownerState, props, sx])
+    return style
+  }, [props, style])
 
   return {
     ...props,
-    className,
     sx: resolvedSx,
   } as unknown as UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps>
 }

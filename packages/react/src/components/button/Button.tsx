@@ -3,7 +3,7 @@
 import { LoadingOutlined } from '@nex-ui/icons'
 import { useMemo } from 'react'
 import { useNexUI } from '../provider'
-import { ButtonBase } from './ButtonBase'
+import { ButtonBase } from '../buttonBase'
 import { buttonRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
