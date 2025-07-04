@@ -4,7 +4,7 @@ import type {
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
   OverrideProps,
-  SxProps,
+  SxProp,
 } from '../../types/utils'
 import type { SwitchVariants } from '../../theme/recipes'
 
@@ -47,7 +47,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<SwitchOwnerState<SwitchComponent>>
+  sx?: SxProp<SwitchOwnerState<SwitchComponent>>
 
   /**
    * The label of the switch.

@@ -1,6 +1,6 @@
 import type { ElementType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { OverrideProps, SxProps } from '../../types/utils'
+import type { OverrideProps, SxProp } from '../../types/utils'
 import type { DividerVariants } from '../../theme/recipes'
 
 export interface DividerPropsOverrides {}
@@ -15,7 +15,7 @@ type DividerOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<DividerOwnProps<RootComponent>>
+  sx?: SxProp<DividerOwnProps<RootComponent>>
 
   /**
    * Additional class names to apply to the root element.

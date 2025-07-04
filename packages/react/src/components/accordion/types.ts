@@ -4,7 +4,7 @@ import type { ElementType, Key, ReactNode } from 'react'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProps,
+  SxProp,
   ComponentPropsWithCommonProps,
   HTMLMotionProps,
 } from '../../types/utils'
@@ -23,7 +23,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<AccordionOwnerState<RootComponent>>
+  sx?: SxProp<AccordionOwnerState<RootComponent>>
 
   /**
    * If true, the accordion items can be expanded at the same time.
@@ -152,7 +152,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<AccordionItemOwnerState<RootComponent>>
+  sx?: SxProp<AccordionItemOwnerState<RootComponent>>
 
   /**
    * The content of the component.

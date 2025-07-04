@@ -5,7 +5,7 @@ import type {
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
   OverrideProps,
-  SxProps,
+  SxProp,
 } from '../../types/utils'
 import type { Button } from '../button'
 
@@ -41,7 +41,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<InputOwnerState<InputComponent>>
+  sx?: SxProp<InputOwnerState<InputComponent>>
 
   /**
    * The label of the input.

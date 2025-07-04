@@ -1,7 +1,7 @@
 import type { ElementType, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CSSObject } from '@nex-ui/system'
-import type { OverrideProps, SxProps } from '../../types/utils'
+import type { OverrideProps, SxProp } from '../../types/utils'
 
 export interface FlexPropsOverrides {}
 
@@ -15,7 +15,7 @@ type FlexOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<FlexOwnerState<RootComponent>>
+  sx?: SxProp<FlexOwnerState<RootComponent>>
 
   /**
    * The content of the flex.

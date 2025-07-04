@@ -4,7 +4,7 @@ import type { CheckboxVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProps,
+  SxProp,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
@@ -35,7 +35,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<CheckboxOwnerState<CheckboxComponent>>
+  sx?: SxProp<CheckboxOwnerState<CheckboxComponent>>
 
   /**
    * The label of the checkbox.
@@ -148,7 +148,7 @@ type CheckboxGroupOwnProps<
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<CheckboxGroupOwnerState<T, CheckboxGroupComponent>>
+  sx?: SxProp<CheckboxGroupOwnerState<T, CheckboxGroupComponent>>
 
   /**
    * The current selected values. (controlled)

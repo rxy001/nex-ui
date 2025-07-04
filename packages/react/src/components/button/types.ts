@@ -4,7 +4,7 @@ import type { ButtonVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProps,
+  SxProp,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
@@ -31,7 +31,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProps<ButtonOwnerState<RootComponent>>
+  sx?: SxProp<ButtonOwnerState<RootComponent>>
 
   /**
    * The element is placed before the children.

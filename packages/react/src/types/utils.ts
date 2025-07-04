@@ -18,7 +18,7 @@ export type ComponentPropsWithCommonProps<
 > = Overwrite<
   ComponentProps<T>,
   {
-    sx?: SxProps<OwnerState>
+    sx?: SxProp<OwnerState>
     as?: ElementType
     className?: ClassValue
   }
@@ -32,7 +32,7 @@ type ArrayInterpolation<T> = ReadonlyArray<
   InterpolationPrimitive | FunctionInterpolation<T>
 >
 
-export type SxProps<OwnerState> =
+export type SxProp<OwnerState> =
   | InterpolationPrimitive
   | ArrayInterpolation<OwnerState>
   | FunctionInterpolation<OwnerState>
