@@ -1,4 +1,16 @@
-<!-- 1. 使用 customConditions 替换掉 clean-package -->
+<!-- 1. 使用 customConditions 替换掉 clean-package
+customConditions:["source"]，可能会引用到 node_modules 中同样使用 exports.source 的源码，由于 ts 配置不同，在运用 tsc 
+检查类型时会出现类型错误。
+即使使用 skipLibCheck 和 exclude 依法无法解决
+skipLibCheck 表明不在检查 .d.ts 文件
+exclude 只是作用于过滤 include 中包含的文件，而 import * 是发生在编译时
+
+https://github.com/microsoft/TypeScript/issues/47387
+https://github.com/microsoft/TypeScript/issues/40426
+
+还是需要使用 clean-package 替换 customConditions，从而解决该问题，且用户也可避免发生此类问题。
+-->
+
 <!-- 2. stylesFn 支持 aliases -->
 <!-- 3. system 支持 深色模式 响应式 -->
 <!-- 4. .test.ts 需使用 `"types": ["@testing-library/jest-dom/jest-globals", "node", "react"],` -->
@@ -84,4 +96,4 @@
     ```
     
 
-31. 调整组件颜色
+<!-- 31. 调整组件颜色 -->

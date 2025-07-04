@@ -5,7 +5,6 @@
     "paths": {
       "~/*": ["../../*"]
     },
-    "baseUrl": "./",
-    "customConditions": ["source"]
+    "baseUrl": "./"
   }
 }

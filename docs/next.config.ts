@@ -45,12 +45,6 @@ export default withAnalyzer(
       })
 
       config.resolve.alias['@'] = resolve('.')
-      config.resolve.alias['@nex-ui/react'] = resolve('../packages/react/src')
-      config.resolve.alias['@nex-ui/hooks'] = resolve('../packages/hooks/src')
-      config.resolve.alias['@nex-ui/styled'] = resolve('../packages/styled/src')
-      config.resolve.alias['@nex-ui/icons'] = resolve('../packages/icons/src')
-      config.resolve.alias['@nex-ui/system'] = resolve('../packages/system/src')
-      config.resolve.alias['@nex-ui/utils'] = resolve('../packages/utils/src')
 
       return config
     },
