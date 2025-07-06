@@ -62,14 +62,13 @@ const useSlotAriaProps = (
     role = 'switch',
     tabIndex = 0,
     type = 'checkbox',
+    'aria-labelledby': labelledBy,
+    'aria-label': ariaLabel,
+    'aria-checked': ariaChecked,
+    'aria-disabled': ariaDisabled,
   } = ownerState
 
   const id = useId()
-
-  const ariaLabelledby = ownerState['aria-labelledby']
-  const ariaLabel = ownerState['aria-label']
-  const ariaChecked = ownerState['aria-checked']
-  const ariaDisabled = ownerState['aria-disabled']
 
   return useMemo(() => {
     const stringChildren = isString(children)
@@ -81,7 +80,7 @@ const useSlotAriaProps = (
       disabled,
       role,
       tabIndex: disabled ? -1 : tabIndex,
-      'aria-labelledby': ariaLabelledby ?? labelId,
+      'aria-labelledby': labelledBy ?? labelId,
       'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
     }
 
@@ -107,12 +106,12 @@ const useSlotAriaProps = (
     ariaChecked,
     ariaDisabled,
     ariaLabel,
-    ariaLabelledby,
     as,
     checked,
     children,
     disabled,
     id,
+    labelledBy,
     role,
     slotProps?.label,
     tabIndex,

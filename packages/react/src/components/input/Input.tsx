@@ -87,12 +87,12 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
     placeholder,
     slotProps,
     label: inputLabel,
+    'aria-label': ariaLabel,
     tabIndex = 0,
     id: idProp,
   } = ownerState
 
   const id = useId()
-  const ariaLabel = ownerState['aria-label']
 
   return useMemo(() => {
     const labelProps = slotProps?.label ?? {}
