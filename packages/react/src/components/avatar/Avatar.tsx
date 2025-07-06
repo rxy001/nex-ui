@@ -85,9 +85,13 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
 const useSlotAriaProps = (
   ownerState: AvatarOwnerState,
 ): Record<'root', HTMLAttributes<HTMLElement>> => {
-  const { alt, children, loaded, role = 'img' } = ownerState
-
-  const ariaLabel = ownerState['aria-label']
+  const {
+    alt,
+    children,
+    loaded,
+    'aria-label': ariaLabel,
+    role = 'img',
+  } = ownerState
 
   return useMemo(() => {
     let root = {}

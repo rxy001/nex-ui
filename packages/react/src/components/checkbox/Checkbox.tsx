@@ -64,13 +64,12 @@ const useSlotAriaProps = (
     value,
     role,
     slotProps,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-checked': ariaChecked,
+    'aria-disabled': ariaDisabled,
     tabIndex = 0,
   } = ownerState
-
-  const ariaLabel = ownerState['aria-label']
-  const ariaLabelledby = ownerState['aria-labelledby']
-  const ariaChecked = ownerState['aria-checked']
-  const ariaDisabled = ownerState['aria-disabled']
 
   const id = useId()
 
@@ -83,7 +82,7 @@ const useSlotAriaProps = (
     }
 
     let input: InputHTMLAttributes<HTMLInputElement> = {
-      'aria-labelledby': ariaLabelledby ?? label.id,
+      'aria-labelledby': ariaLabelledBy ?? label.id,
       'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
       tabIndex: disabled ? -1 : tabIndex,
     }
@@ -110,7 +109,7 @@ const useSlotAriaProps = (
     ariaChecked,
     ariaDisabled,
     ariaLabel,
-    ariaLabelledby,
+    ariaLabelledBy,
     as,
     checked,
     children,

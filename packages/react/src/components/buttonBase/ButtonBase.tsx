@@ -12,14 +12,21 @@ import type { ButtonBaseProps } from './types'
 const style = buttonBaseRecipes()
 
 const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
-  const { as, disabled, role = 'button', type = 'button', tabIndex = 0 } = props
+  const {
+    as,
+    disabled,
+    'aria-disabled': ariaDisabled,
+    role = 'button',
+    type = 'button',
+    tabIndex = 0,
+  } = props
 
   return useMemo(() => {
     if (as !== 'button' && !isFunction(as)) {
       return {
         role,
         tabIndex: disabled ? -1 : tabIndex,
-        'aria-disabled': props['aria-disabled'] ?? (disabled || undefined),
+        'aria-disabled': ariaDisabled ?? (disabled || undefined),
       }
     }
     return {
@@ -27,7 +34,7 @@ const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
       disabled,
       tabIndex: disabled ? -1 : tabIndex,
     }
-  }, [disabled, props, role, as, tabIndex, type])
+  }, [as, type, disabled, tabIndex, role, ariaDisabled])
 }
 
 export const ButtonBase = <RootComponent extends ElementType = 'button'>(
