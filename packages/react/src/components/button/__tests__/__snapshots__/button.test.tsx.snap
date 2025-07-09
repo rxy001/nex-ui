@@ -2,13 +2,28 @@
 
 exports[`Button renders correctly 1`] = `
 .emotion-0 {
+  background-color: transparent;
+  padding: 0;
+  border: none;
   outline: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border: none;
   cursor: pointer;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   position: relative;
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
@@ -18,15 +33,6 @@ exports[`Button renders correctly 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  box-sizing: border-box;
   line-height: var(--nui-line-heights-base);
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
@@ -61,13 +67,28 @@ exports[`Button renders correctly 1`] = `
 
 exports[`Button should support link button 1`] = `
 .emotion-0 {
+  background-color: transparent;
+  padding: 0;
+  border: none;
   outline: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border: none;
   cursor: pointer;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   position: relative;
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
@@ -77,15 +98,6 @@ exports[`Button should support link button 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  box-sizing: border-box;
   line-height: var(--nui-line-heights-base);
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;

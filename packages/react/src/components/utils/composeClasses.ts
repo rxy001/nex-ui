@@ -1,16 +1,21 @@
 import { forEach, reduce } from '@nex-ui/utils'
+import clsx from 'clsx'
 import type { ClassArray, ClassValue } from 'clsx'
 
-export function composeClasses<ClassKey extends string>(
+export function composeClasses<ClassKey extends string, K extends ClassKey>(
   slots: Record<ClassKey, ClassArray>,
   getUtilityClass: (slotClass: string) => string,
-  classes?: Partial<Record<string, ClassValue>>,
+  classes?: Partial<Record<K, ClassValue>>,
 ) {
-  const output = {} as Record<ClassKey, ClassArray>
+  const output = {} as Record<ClassKey, ClassValue>
 
   // @ts-expect-error
   forEach(slots, (slotClasses: ClassArray, slot: ClassKey) => {
-    const className = classes?.[slot]
+    let className = undefined
+
+    if (classes && slot in classes) {
+      className = classes?.[slot]
+    }
 
     const result = reduce<ClassValue, ClassValue[]>(
       slotClasses,
@@ -26,7 +31,7 @@ export function composeClasses<ClassKey extends string>(
       [],
     )
 
-    output[slot] = [className, result]
+    output[slot] = clsx([className, result])
   })
 
   return output

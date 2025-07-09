@@ -110,6 +110,7 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-unsafe-function-type': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/no-import-type-side-effects': 'error',
 
       'jsx-a11y/alt-text': 'error',
 
@@ -123,13 +124,13 @@ export default tseslint.config(
           extensions: ['.tsx', '.jsx'],
         },
       ],
-
       'import/no-duplicates': ['error', { considerQueryString: true }],
       'import/no-cycle': 'error',
       'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
       'import/prefer-default-export': 'off',
       'import/no-named-as-default': 'off',
       'import/newline-after-import': 'error',
+      'import/first': 'error',
       'import/order': [
         'error',
         {
