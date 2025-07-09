@@ -6,7 +6,7 @@ import type { CheckboxGroupProps } from '../types'
 
 const meta = {
   title: 'Components/CheckboxGroup',
-  component: CheckboxGroup<string>,
+  component: CheckboxGroup<string, 'div'>,
   argTypes: {
     color: {
       options: [
@@ -51,7 +51,7 @@ const meta = {
       <Checkbox value='orange'>Orange</Checkbox>
     </CheckboxGroup>
   ),
-} satisfies Meta<typeof CheckboxGroup<string>>
+} satisfies Meta<typeof CheckboxGroup<string, 'div'>>
 
 export default meta
 

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Icon',
-  component: IconComponent,
+  component: IconComponent<'svg'>,
   argTypes: {
     size: {
       control: 'select',
@@ -27,7 +27,7 @@ const meta = {
     height: '1em',
     spin: false,
   },
-} satisfies Meta<typeof IconComponent>
+} satisfies Meta<typeof IconComponent<'svg'>>
 
 export default meta
 

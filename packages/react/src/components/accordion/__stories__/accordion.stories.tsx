@@ -7,7 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Accordion',
-  component: Accordion,
+  component: Accordion<'div'>,
   argTypes: {
     disabled: {
       control: 'boolean',
@@ -51,7 +51,7 @@ const meta = {
       </Accordion>
     )
   },
-} satisfies Meta<typeof Accordion>
+} satisfies Meta<typeof Accordion<'div'>>
 
 export default meta
 

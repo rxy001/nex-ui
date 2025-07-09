@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Button',
-  component: Button,
+  component: Button<'button'>,
   argTypes: {
     disabled: {
       control: 'boolean',
@@ -67,7 +67,7 @@ const meta = {
       </Flex>
     )
   },
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof Button<'button'>>
 
 export default meta
 
