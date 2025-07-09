@@ -111,6 +111,11 @@ export type ComponentThemes = {
       | ComponentThemeFn<AccordionOwnerState, AccordionItemRecipe>
     defaultProps?: AccordionItemProps
   }
+  Dialog?: {}
+  DialogContent?: {}
+  DialogHeader?: {}
+  DialogBody?: {}
+  DialogFooter?: {}
 }
 
 export type ComponentNames = keyof ComponentThemes
