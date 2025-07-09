@@ -100,9 +100,9 @@ https://github.com/microsoft/TypeScript/issues/40426
 
 32. 当 recipe 没有 variants 时 runtimeFn 可传入任何值。
 
-33. story 的组件需加上泛性类型
+<!-- 33. story 的组件需加上泛性类型 -->
 
-34. 组件的 classes 应该只添加与样式有关的 API
+<!-- 34. 组件的 classes 应该只添加与样式有关的 API -->
 
 35. monorepo ts 配置  "verbatimModuleSyntax": true
 

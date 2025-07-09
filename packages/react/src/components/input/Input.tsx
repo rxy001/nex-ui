@@ -27,7 +27,6 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
 
   const {
     variant,
-    clearable,
     radius,
     size,
     color,
@@ -51,7 +50,6 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
         disabled && 'disabled',
         fullWidth && 'full-width',
         invaild && 'invaild',
-        clearable && 'clearable',
         labelPlacement && `label-placement-${labelPlacement}`,
       ],
       input: ['input'],
@@ -64,7 +62,6 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
     return composeClasses(slots, getUtilityClass(inputRoot), classes)
   }, [
     classes,
-    clearable,
     color,
     disabled,
     fullWidth,
