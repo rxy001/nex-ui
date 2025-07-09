@@ -104,6 +104,4 @@ https://github.com/microsoft/TypeScript/issues/40426
 
 <!-- 34. 组件的 classes 应该只添加与样式有关的 API -->
 
-35. monorepo ts 配置  "verbatimModuleSyntax": true
-
 36. 支持嵌套 modal
