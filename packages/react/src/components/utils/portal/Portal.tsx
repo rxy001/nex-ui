@@ -1,3 +1,5 @@
+'use client'
+
 import { createPortal } from 'react-dom'
 import { useEffect, useState } from 'react'
 import { isFunction } from '@nex-ui/utils'

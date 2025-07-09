@@ -110,7 +110,6 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-unsafe-function-type': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/no-import-type-side-effects': 'error',
 
       'jsx-a11y/alt-text': 'error',
 
