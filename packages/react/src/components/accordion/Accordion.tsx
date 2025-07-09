@@ -18,24 +18,17 @@ import type { AccordionOwnerState, AccordionProps } from './types'
 
 const useSlotClasses = (ownerState: AccordionProps) => {
   const { prefix } = useNexUI()
-  const { disabled, hideIndicator, multiple, variant, keepMounted } = ownerState
+  const { variant } = ownerState
 
   return useMemo(() => {
     const accordionRoot = `${prefix}-accordion`
 
     const slots = {
-      root: [
-        'root',
-        variant && `variant-${variant}`,
-        hideIndicator && 'hide-indicator',
-        keepMounted && 'keep-mounted',
-        disabled && 'disabled',
-        multiple && 'multiple',
-      ],
+      root: ['root', variant && `variant-${variant}`],
     }
 
     return composeClasses(slots, getUtilityClass(accordionRoot))
-  }, [disabled, hideIndicator, keepMounted, multiple, prefix, variant])
+  }, [prefix, variant])
 }
 
 export const Accordion = <RootComponent extends ElementType = 'div'>(

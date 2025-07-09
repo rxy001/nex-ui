@@ -14,27 +14,18 @@ import {
 import type { FlexOwnerState, FlexProps } from './types'
 import type { ElementType } from 'react'
 
-const useSlotClasses = (ownerState: FlexOwnerState) => {
+const useSlotClasses = () => {
   const { prefix } = useNexUI()
-  const { inline, justify, align, direction, wrap, gap } = ownerState
 
   return useMemo(() => {
     const flexRoot = `${prefix}-flex`
 
     const slots = {
-      root: [
-        'root',
-        inline && `inline`,
-        justify && `justify-${justify}`,
-        align && `align-${align}`,
-        direction && `direction-${direction}`,
-        wrap && `wrap-${wrap}`,
-        gap ? `gap-${gap}` : '',
-      ],
+      root: ['root'],
     }
 
     return composeClasses(slots, getUtilityClass(flexRoot))
-  }, [align, direction, gap, inline, justify, prefix, wrap])
+  }, [prefix])
 }
 
 export const Flex = <RootComponent extends ElementType = 'div'>(
@@ -59,7 +50,7 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     inline,
   }
 
-  const classes = useSlotClasses(ownerState)
+  const classes = useSlotClasses()
 
   const style = useStyles({ ownerState, name: 'Flex', recipe: flexRecipe })
 

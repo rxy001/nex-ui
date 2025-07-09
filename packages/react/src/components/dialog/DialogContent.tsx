@@ -28,7 +28,11 @@ const useSlotClasses = (ownerState: DialogContentOwnerState) => {
     const dialogRoot = `${prefix}-dialog`
 
     const slots = {
-      content: ['content', `max-width-${maxWidth}`, fullScreen && 'fullScreen'],
+      content: [
+        'content',
+        `max-width-${maxWidth}`,
+        fullScreen && 'full-screen',
+      ],
       closeButton: ['close-button'],
     }
 

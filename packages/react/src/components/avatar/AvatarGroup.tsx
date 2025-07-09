@@ -16,24 +16,18 @@ import type { AvatarGroupOwnerState, AvatarGroupProps } from './types'
 
 const useSlotClasses = (ownerState: AvatarGroupOwnerState) => {
   const { prefix } = useNexUI()
-  const { color, size, radius, outlined, classes } = ownerState
+  const { classes } = ownerState
 
   return useMemo(() => {
     const avatarGroupRoot = `${prefix}-avatar-group`
 
     const slots = {
-      root: [
-        'root',
-        `radius-${radius}`,
-        `size-${size}`,
-        `color-${color}`,
-        outlined && 'outlined',
-      ],
+      root: ['root'],
       surplus: ['surplus'],
     }
 
     return composeClasses(slots, getUtilityClass(avatarGroupRoot), classes)
-  }, [classes, color, outlined, prefix, radius, size])
+  }, [classes, prefix])
 }
 
 export const AvatarGroup = <RootElement extends ElementType = 'div'>(
