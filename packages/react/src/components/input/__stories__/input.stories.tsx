@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Input } from '../Input'
 import { Flex } from '../../flex'
 import { Icon } from '../../icon'
-import { InputProps } from '../types'
+import type { InputProps } from '../types'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

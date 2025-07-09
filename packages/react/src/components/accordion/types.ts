@@ -1,4 +1,4 @@
-import { ClassValue } from 'clsx'
+import type { ClassValue } from 'clsx'
 import type { ElementType, Key, ReactNode } from 'react'
 import type { DOMMotionComponents } from 'motion/react'
 import type {

@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Avatar',
-  component: Avatar,
+  component: Avatar<'div'>,
   argTypes: {
     size: {
       control: 'select',
@@ -38,7 +38,7 @@ const meta = {
     size: 'md',
     outlined: false,
   },
-} satisfies Meta<typeof Avatar>
+} satisfies Meta<typeof Avatar<'div'>>
 
 export default meta
 

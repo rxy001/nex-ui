@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Flex',
-  component: Flex,
+  component: Flex<'div'>,
   argTypes: {
     direction: {
       options: ['row', 'column', 'column-reverse', 'row-reverse', 'revert'],
@@ -92,7 +92,7 @@ const meta = {
       </Flex>
     )
   },
-} satisfies Meta<typeof Flex>
+} satisfies Meta<typeof Flex<'div'>>
 
 export default meta
 

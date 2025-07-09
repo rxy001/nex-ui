@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Divider',
-  component: Divider,
+  component: Divider<'hr'>,
   argTypes: {
     orientation: {
       control: 'select',
@@ -13,7 +13,7 @@ const meta = {
   args: {
     orientation: 'horizontal',
   },
-} satisfies Meta<typeof Divider>
+} satisfies Meta<typeof Divider<'hr'>>
 
 export default meta
 
