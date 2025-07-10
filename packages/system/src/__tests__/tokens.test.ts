@@ -67,7 +67,58 @@ describe('createTokens', () => {
     expect(getGlobalCssVars()).toMatchSnapshot()
   })
 
-  it('should restrict the hierarchical structure of tokens', () => {
+  it('should warn when passing invalid tokens', () => {
+    const consoleSpy = jest.spyOn(console, 'error')
+
+    createTokens({
+      tokens: {
+        // @ts-expect-error
+        border: '1px solid',
+      },
+      semanticTokens: {
+        // @ts-expect-error
+        border: '1px solid',
+      },
+    })
+
+    expect(consoleSpy).toHaveBeenCalledTimes(2)
+    consoleSpy.mockRestore()
+  })
+
+  it('should warn when passing invalid token values', () => {
+    const consoleSpy = jest.spyOn(console, 'error')
+    createTokens({
+      tokens: {
+        borderWidths: {
+          // @ts-expect-error
+          sm: null,
+          // @ts-expect-error
+          md: undefined,
+          // @ts-expect-error
+          lg: () => {},
+          // @ts-expect-error
+          xxl: Symbol('xxl'),
+        },
+      },
+      semanticTokens: {
+        colors: {
+          primary: {
+            // @ts-expect-error
+            md: null,
+            // @ts-expect-error
+            xl: () => {},
+            // @ts-expect-error
+            xxl: Symbol('xxl'),
+          },
+        },
+      },
+    })
+
+    expect(consoleSpy).toHaveBeenCalledTimes(7)
+    consoleSpy.mockRestore()
+  })
+
+  it('should warn when tokens have invalid nested structures', () => {
     const consoleSpy = jest.spyOn(console, 'error')
 
     const testToken = {
@@ -118,8 +169,8 @@ describe('createTokens', () => {
       prefix: PREFIX,
     })
 
-    expect(consoleSpy).toBeCalled()
-    expect(consoleSpy).toBeCalledTimes(13)
+    expect(consoleSpy).toHaveBeenCalled()
+    expect(consoleSpy).toHaveBeenCalledTimes(13)
 
     consoleSpy.mockRestore()
   })
@@ -239,3 +290,5 @@ describe('createTokens', () => {
     )
   })
 })
+
+describe('defineTokens', () => {})

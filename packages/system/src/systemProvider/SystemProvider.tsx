@@ -57,10 +57,6 @@ export const SystemProvider = ({
   ])
 
   const globalStyles = useMemo(() => {
-    if (!getGlobalCssVars) {
-      return null
-    }
-
     const cssVarMap = getGlobalCssVars()
     const result: Dictionary = {}
 

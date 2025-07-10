@@ -1,5 +1,4 @@
 import { forEach, isString, walkObject, reduce, __DEV__ } from '@nex-ui/utils'
-import { negate } from '../calc'
 import { createToken } from './createToken'
 import {
   pathToTokenName,
@@ -9,6 +8,7 @@ import {
   isValidTokenValue,
   isValidSemanticTokenValue,
   isResponsiveColor,
+  negate,
 } from '../utils'
 import type {
   CreateTokensConfig,

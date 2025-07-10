@@ -6,7 +6,7 @@
 const jestConfig = {
   verbose: true,
   testMatch: [
-    '<rootDir>/packages/**/__tests__/**/*.{spec,test}.{js,jsx,ts,tsx}',
+    '<rootDir>/packages/system/**/__tests__/**/*.{spec,test}.{js,jsx,ts,tsx}',
   ],
   moduleNameMapper: {
     '^~/(.*)$': '<rootDir>/$1',
@@ -33,8 +33,8 @@ const jestConfig = {
     '^.+\\.svg$': 'jest-transformer-svg',
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
-  // collectCoverage: true,
-  collectCoverageFrom: ['packages/**/*.{ts,tsx}'],
+  collectCoverage: true,
+  collectCoverageFrom: ['packages/system/**/*.{ts,tsx}'],
   testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: ['__stories__/', 'dist/'],

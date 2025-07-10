@@ -569,4 +569,42 @@ describe('Recipe', () => {
       ...variants.color.red,
     })
   })
+
+  it('should work correctly for splitVariantProps', () => {
+    const recipe = defineRecipe({
+      base,
+      variants,
+    })
+
+    expect(
+      recipe.splitVariantProps({
+        a: 'a',
+        b: 'b',
+        size: 'sm',
+        color: 'red',
+        disabled: true,
+      }),
+    ).toEqual({
+      size: 'sm',
+      color: 'red',
+      disabled: true,
+    })
+
+    expect(
+      recipe.splitVariantProps({
+        color: 'red',
+        disabled: false,
+      }),
+    ).toEqual({
+      color: 'red',
+      disabled: false,
+    })
+
+    expect(
+      recipe.splitVariantProps({
+        a: 'a',
+        b: 'b',
+      }),
+    ).toEqual({})
+  })
 })

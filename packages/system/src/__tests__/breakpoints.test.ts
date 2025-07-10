@@ -30,7 +30,7 @@ describe('createBreakpoint', () => {
       lg: toMediaKey('900px'),
     })
 
-    expect(consoleSpy).not.toBeCalled()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   it('should throw an error if the breakpoint is invalid', () => {
@@ -46,6 +46,6 @@ describe('createBreakpoint', () => {
     })
 
     expect(consoleSpy).toHaveBeenCalled()
-    expect(consoleSpy).toBeCalledTimes(4)
+    expect(consoleSpy).toHaveBeenCalledTimes(4)
   })
 })
