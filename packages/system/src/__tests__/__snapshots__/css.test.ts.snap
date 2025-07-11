@@ -28,6 +28,7 @@ Map {
     "--test-colors-blue-100" => "#dbeafe",
     "--test-colors-blue-200" => "#bfdbfe",
     "--test-colors-blue-300" => "#a3cfff",
+    "--test-colors-red-100" => "#fca5a5",
     "--test-borders-sm" => "1px solid",
     "--test-radii-sm" => "4px",
     "--test-radii-md" => "6px",
@@ -35,6 +36,7 @@ Map {
     "--test-sizes-1" => "32px",
     "--test-sizes-2" => "40px",
     "--test-sizes-3" => "48px",
+    "--test-sizes-1-5" => "36px",
     "--test-spaces-1" => "4px",
     "--test-spaces-2" => "8px",
     "--test-spaces-3" => "12px",
@@ -54,6 +56,9 @@ Map {
     "--test-border-widths-sm" => "1px",
     "--test-colors-primary" => "var(--test-colors-blue-100)",
     "--test-colors-secondary" => "var(--test-colors-blue-200)",
+  },
+  "dark" => Map {
+    "--test-colors-primary" => "var(--test-colors-blue-300)",
   },
 }
 `;

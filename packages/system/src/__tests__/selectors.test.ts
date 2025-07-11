@@ -42,7 +42,7 @@ describe('createSelectors', () => {
     })
 
     expect(consoleSpy).toHaveBeenCalled()
-    expect(consoleSpy).toBeCalledTimes(4)
+    expect(consoleSpy).toHaveBeenCalledTimes(4)
   })
 
   it('should throw an error if duplicate selectors are encountered', () => {
@@ -53,7 +53,7 @@ describe('createSelectors', () => {
       }),
     })
 
-    expect(consoleSpy).toBeCalled()
-    expect(consoleSpy).toBeCalledTimes(1)
+    expect(consoleSpy).toHaveBeenCalled()
+    expect(consoleSpy).toHaveBeenCalledTimes(1)
   })
 })

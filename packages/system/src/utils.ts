@@ -20,20 +20,20 @@ export function pathToTokenName(path: string[]) {
   return path.join('.')
 }
 
-export function camelToKebab(str: string) {
+function camelToKebab(str: string) {
   return str.replace(/([A-Z])/g, (match) => {
     return `-${match.toLowerCase()}`
   })
 }
 
-function isPositiveFloatNumber(str: string) {
+function isDecimalString(str: string) {
   return /^\d+\.\d+$/.test(str)
 }
 
 export function createCssVarName(prefix: string, path: string[]) {
   return `--${prefix}-${path
     .map((k) => {
-      if (isPositiveFloatNumber(k)) {
+      if (isDecimalString(k)) {
         return k.split('.').join('-')
       }
       return camelToKebab(k)
@@ -125,7 +125,6 @@ export function mergeRecipeConfigs<T, B>(...args: [T, B]) {
         if (isArray(targetValue) && isArray(srcValue)) {
           return [...targetValue, ...srcValue]
         }
-        return targetValue
       }
 
       if (
@@ -137,4 +136,37 @@ export function mergeRecipeConfigs<T, B>(...args: [T, B]) {
       }
     },
   )
+}
+
+type Operand = string | number
+
+type Operator = '+' | '-' | '*' | '/'
+
+const toExpression = (operator: Operator, ...operands: Array<Operand>) =>
+  operands.map(String).join(` ${operator} `).replace(/calc/g, '')
+
+export const add = (...operands: Array<Operand>) =>
+  `calc(${toExpression('+', ...operands)})`
+
+export const subtract = (...operands: Array<Operand>) =>
+  `calc(${toExpression('-', ...operands)})`
+
+export const multiply = (...operands: Array<Operand>) =>
+  `calc(${toExpression('*', ...operands)})`
+
+export const divide = (...operands: Array<Operand>) =>
+  `calc(${toExpression('/', ...operands)})`
+
+export const negate = (x: number | string) => {
+  const value = String(x)
+
+  if (value != null && !Number.isNaN(parseFloat(value))) {
+    if (Number(value) === 0) {
+      return '0'
+    }
+
+    return value.startsWith('-') ? value.slice(1) : `-${value}`
+  }
+
+  return multiply(value, -1)
 }

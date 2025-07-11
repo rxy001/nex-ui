@@ -22,7 +22,7 @@ describe('createScales', () => {
 
     expect(getCategoryByProperty('color')).toEqual('colors')
     expect(getCategoryByProperty('width')).toEqual('sizes')
-    expect(consoleSpy).not.toBeCalled()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   it('should throw an error if the scale is invalid', () => {
@@ -35,6 +35,6 @@ describe('createScales', () => {
     })
 
     expect(consoleSpy).toHaveBeenCalled()
-    expect(consoleSpy).toBeCalledTimes(4)
+    expect(consoleSpy).toHaveBeenCalledTimes(4)
   })
 })

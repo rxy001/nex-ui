@@ -7,6 +7,7 @@ import {
   __DEV__,
   map,
   isPlainObject,
+  some,
 } from '@nex-ui/utils'
 import { memoizeFn } from './utils'
 import type {
@@ -42,6 +43,7 @@ export const createCssFn = ({
       return ''
     }
 
+    // TODO: unused
     const componentSelector = interpolation as ComponentSelector
     if (componentSelector.__emotion_styles !== undefined) {
       return componentSelector
@@ -59,8 +61,8 @@ export const createCssFn = ({
         return keyframes
       }
 
+      // TODO: unused
       const serializedStyles = interpolation as SerializedStyles
-
       if (serializedStyles.styles !== undefined) {
         return serializedStyles
       }
@@ -80,9 +82,10 @@ export const createCssFn = ({
 
               if (!Number.isNaN(index) && isArray(prevValue)) {
                 // 处理数组 breakpoints
-                return getCustomizedSelector(`_${index}`) ?? p
+                return getCustomizedSelector(`_${index}`) ?? ''
               }
             }
+
             if (isCustomSelector(p)) {
               // 处理自定义的 selectors 和 对象 breakpoints
               return getCustomizedSelector(p) ?? p
@@ -110,8 +113,8 @@ export const createCssFn = ({
         (propValue: string | number, path: string[]) => {
           const prop = path[path.length - 1]
 
-          // TODO: 暂时解决自定义选择器时 CSSObject 数组
-          if (isArray(propValue)) {
+          // FIXME: 暂时解决自定义选择器时 CSSObject 数组. 如果数组中都为基础类型，将会作为 breakpoints 处理
+          if (isArray(propValue) && some(propValue, isPlainObject)) {
             mergeByPath(result, path, css(propValue), (v: string) => {
               if (v === prop) return []
             })
@@ -136,7 +139,7 @@ export const createCssFn = ({
           mergeByPath(result, selectors, normalized)
         },
         {
-          predicate: (v) => isArray(v) && v.every(isPlainObject),
+          predicate: (v) => isArray(v) && some(v, isPlainObject),
         },
       )
 
@@ -159,7 +162,7 @@ function mergeByPath(
 
   forEach(path, (k: string) => {
     if (!k) return
-    if (!acc[k]) acc[k] = customizer ? (customizer(k) ?? {}) : {}
+    if (!acc[k]) acc[k] = customizer ? customizer(k) : {}
     acc = acc[k]
   })
 

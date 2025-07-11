@@ -22,7 +22,7 @@ describe('createAliases', () => {
 
     expect(getPropertiesByAlias('w')).toEqual(['width'])
     expect(getPropertiesByAlias('px')).toEqual(['paddingLeft', 'paddingRight'])
-    expect(consoleSpy).not.toBeCalled()
+    expect(consoleSpy).not.toHaveBeenCalled()
   })
 
   it('should throw an error if the alias is invalid', () => {
@@ -44,6 +44,6 @@ describe('createAliases', () => {
     })
 
     expect(consoleSpy).toHaveBeenCalled()
-    expect(consoleSpy).toBeCalledTimes(7)
+    expect(consoleSpy).toHaveBeenCalledTimes(7)
   })
 })

@@ -36,7 +36,7 @@ export interface ArrayInterpolation
 export type Interpolation = InterpolationPrimitive | ArrayInterpolation
 
 type CSSOthersObject = {
-  // TODO: 理想情况为 InterpolationPrimitive，但索引类型无法兼容明确字段的类型
+  // TODO: 理想情况为 InterpolationPrimitive ，但索引类型无法兼容明确字段的类型
   [propertiesName: string]: Interpolation
 }
 
