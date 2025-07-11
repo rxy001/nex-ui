@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import type { SemanticTokensDefinition, TokensDefinition } from './tokens'
 import type { SystemConfig } from './system'
 

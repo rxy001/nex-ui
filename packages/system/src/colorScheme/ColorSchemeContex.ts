@@ -7,7 +7,7 @@ const [InnerColorSchemeProvider, useColorScheme] =
   createContext<ColorSchemeContext>({
     contextName: 'ColorSchemeContext',
     providerName: 'InnerColorSchemeProvider',
-    hookName: 'useSystem',
+    hookName: 'useColorScheme',
     strict: false,
     defaultValue: {
       mode: undefined,

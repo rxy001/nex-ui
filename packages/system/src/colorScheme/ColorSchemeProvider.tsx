@@ -6,7 +6,7 @@ import { InnerColorSchemeProvider } from './ColorSchemeContex'
 import type {
   State,
   Mode,
-  SystemColorScheme,
+  ColorScheme,
   ColorSchemeProviderProps,
   ColorSchemeContext,
 } from './types'
@@ -27,7 +27,7 @@ function initializeValue(key: string, defaultValue: string) {
   return value || defaultValue
 }
 
-function getSystemColorScheme(mode?: Mode): SystemColorScheme | undefined {
+function getSystemColorScheme(mode?: Mode): ColorScheme | undefined {
   if (
     typeof window !== 'undefined' &&
     typeof window.matchMedia === 'function' &&
@@ -62,7 +62,7 @@ function getColorScheme(state: State) {
 export function createGetColorSchemeSelector(
   selector: ColorSchemeProviderProps['colorSchemeSelector'],
 ) {
-  return function getColorSchemeSelector(colorScheme: SystemColorScheme) {
+  return function getColorSchemeSelector(colorScheme: ColorScheme) {
     if (selector === 'media') {
       return `@media (prefers-color-scheme: ${colorScheme})`
     }
@@ -97,7 +97,7 @@ export const ColorSchemeProvider = ({
 
     return {
       mode: initialMode,
-      systemColorScheme: systemColorScheme as SystemColorScheme,
+      systemColorScheme,
     }
   })
 
@@ -163,7 +163,8 @@ export const ColorSchemeProvider = ({
   useEffect(() => {
     if (colorScheme && colorSchemeSelector && colorSchemeSelector !== 'media') {
       const selector = colorSchemeSelector
-      let rule = ''
+
+      let rule = selector
       if (selector === 'class') {
         rule = `.%s`
       }
@@ -190,11 +191,6 @@ export const ColorSchemeProvider = ({
         const matches = rule.replace('%s', colorScheme).match(/\[([^\]]+)\]/)
         if (matches) {
           const [attr, value] = matches[1].split('=')
-          if (!value) {
-            supportedColorSchemes.forEach((scheme) => {
-              node.removeAttribute(attr.replace(colorScheme, scheme))
-            })
-          }
           node.setAttribute(attr, value ? value.replace(/"|'/g, '') : '')
         } else {
           node.setAttribute(rule, colorScheme)

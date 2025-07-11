@@ -33,7 +33,7 @@ const jestConfig = {
     '^.+\\.svg$': 'jest-transformer-svg',
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
-  // collectCoverage: true,
+  collectCoverage: true,
   collectCoverageFrom: ['packages/**/*.{ts,tsx}'],
   testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',

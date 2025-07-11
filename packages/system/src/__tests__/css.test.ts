@@ -1,4 +1,5 @@
-import { createSystem } from '../system'
+import { ComponentSelector, keyframes, SerializedStyles } from '@emotion/react'
+import { createSystem } from '../index'
 import { defineConfig } from '../defineConfig'
 import { toMediaKey } from '../breakpoints'
 
@@ -26,11 +27,15 @@ describe('css', () => {
           200: '#bfdbfe',
           300: '#a3cfff',
         },
+        red: {
+          '100': '#fca5a5',
+        },
       },
       borders: { sm: '1px solid' },
       radii: { sm: '4px', md: '6px', lg: '8px' },
       sizes: {
         1: '32px',
+        '1.5': '36px',
         2: '40px',
         3: '48px',
       },
@@ -97,7 +102,10 @@ describe('css', () => {
     },
     semanticTokens: {
       colors: {
-        primary: '{colors.blue.100}',
+        primary: {
+          _DEFAULT: '{colors.blue.100}',
+          _dark: '{colors.blue.300}',
+        },
         secondary: '{colors.blue.200}',
       },
     },
@@ -119,9 +127,11 @@ describe('css', () => {
     expect(
       css({
         width: '1',
+        height: '1.5',
       }),
     ).toEqual({
       width: getCssVar('sizes.1'),
+      height: getCssVar('sizes.1.5'),
     })
   })
 
@@ -226,6 +236,22 @@ describe('css', () => {
         backgroundColor: getCssVar('colors.blue.200'),
       },
     })
+
+    expect(
+      css({
+        color: 'colorPalette.100',
+        colorPalette: 'red',
+        _hover: {
+          color: 'colorPalette.200',
+          colorPalette: 'blue',
+        },
+      }),
+    ).toEqual({
+      color: getCssVar('colors.red.100'),
+      [SELECTOR_HORVER]: {
+        color: getCssVar('colors.blue.200'),
+      },
+    })
   })
 
   it('should throw an error if color placeholder is used without providing the colorPalette prop', () => {
@@ -233,12 +259,11 @@ describe('css', () => {
     css({
       color: 'colorPalette.100',
     })
-    expect(consoleSpy).toBeCalled()
+    expect(consoleSpy).toHaveBeenCalled()
   })
 
   it('should support responsive value (object)', () => {
     expect(
-      // @ts-ignore
       css({
         width: {
           // @ts-ignore
@@ -254,21 +279,38 @@ describe('css', () => {
         width: getCssVar('sizes.2'),
       },
     })
+
+    expect(
+      css({
+        width: {
+          // @ts-ignore
+          _xl: '2',
+        },
+      }),
+    ).toEqual({
+      _xl: {
+        width: getCssVar('sizes.2'),
+      },
+    })
   })
 
   it('should support responsive value (array)', () => {
     expect(
       // @ts-ignore
       css({
-        width: ['1', '2'],
+        width: ['1', '1.5', '2', '3'],
       }),
     ).toEqual({
       [toMediaKey('500px')]: {
         width: getCssVar('sizes.1'),
       },
       [toMediaKey('700px')]: {
+        width: getCssVar('sizes.1.5'),
+      },
+      [toMediaKey('900px')]: {
         width: getCssVar('sizes.2'),
       },
+      width: getCssVar('sizes.3'),
     })
   })
 
@@ -279,6 +321,23 @@ describe('css', () => {
       }),
     ).toEqual({
       border: `1px solid ${getCssVar('colors.blue.100')}`,
+    })
+
+    expect(
+      css({
+        border: '1px solid {colors.colorPalette.100}',
+        colorPalette: 'blue',
+      }),
+    ).toEqual({
+      border: `1px solid ${getCssVar('colors.blue.100')}`,
+    })
+
+    expect(
+      css({
+        border: '1px solid {color.red.100}',
+      }),
+    ).toEqual({
+      border: '1px solid {color.red.100}',
     })
   })
 
@@ -298,6 +357,88 @@ describe('css', () => {
     css({
       border: '1px solid {colors.pink.100}',
     })
-    expect(consoleSpy).toBeCalled()
+    expect(consoleSpy).toHaveBeenCalled()
+  })
+
+  it('should support color opacity modifier', () => {
+    expect(
+      css({
+        color: 'blue.100/50',
+        backgroundColor: 'blue.200/80',
+        borderColor: 'orange/30',
+      }),
+    ).toEqual({
+      color: `color-mix(in srgb, ${getCssVar('colors.blue.100')} 50%, transparent)`,
+      backgroundColor: `color-mix(in srgb, ${getCssVar('colors.blue.200')} 80%, transparent)`,
+      borderColor: `color-mix(in srgb, orange 30%, transparent)`,
+    })
+
+    expect(
+      css({
+        border: '1px solid {colors.colorPalette.100/50}',
+        borderColor: 'colorPalette.200/90',
+        colorPalette: 'blue',
+      }),
+    ).toEqual({
+      border: `1px solid color-mix(in srgb, ${getCssVar('colors.blue.100')} 50%, transparent)`,
+      borderColor: `color-mix(in srgb, ${getCssVar('colors.blue.200')} 90%, transparent)`,
+    })
+  })
+
+  it('should handle edge cases', () => {
+    expect(css('')).toEqual('')
+    expect(css(null)).toEqual('')
+    expect(css(false)).toEqual('')
+    expect(css(0)).toEqual('')
+    expect(css(2)).toEqual(2)
+    const componentSelector: ComponentSelector = { __emotion_styles: {} }
+    expect(css(componentSelector)).toBe(componentSelector)
+
+    const serializedStyles: SerializedStyles = { name: '', styles: '' }
+    expect(css(serializedStyles)).toBe(serializedStyles)
+
+    const animation = keyframes({
+      '0%': {
+        transform: 'translate3d(0, -15px, 0)',
+      },
+      '90%': {
+        transform: 'translate3d(0, -4px, 0)',
+      },
+    })
+
+    expect(css(animation)).toBe(animation)
+
+    const customSelector = {
+      '& > div': [
+        {
+          w: '1',
+        },
+        {
+          color: 'blue.100',
+        },
+      ],
+    }
+
+    expect(css(customSelector)).toEqual({
+      '& > div': [
+        {
+          width: getCssVar('sizes.1'),
+        },
+        {
+          color: getCssVar('colors.blue.100'),
+        },
+      ],
+    })
+
+    expect(
+      css({
+        color: {
+          // @ts-expect-error
+          '': 'red',
+        },
+      }),
+    ).toEqual({
+      color: 'red',
+    })
   })
 })
