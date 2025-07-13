@@ -11,6 +11,11 @@ import type {
   SwitchRecipe,
   AccordionRecipe,
   AccordionItemRecipe,
+  DialogRecipe,
+  DialogContentRecipe,
+  DialogHeaderRecipe,
+  DialogBodyRecipe,
+  DialogFooterRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -34,6 +39,16 @@ import type {
   AvatarGroupProps,
   CheckboxGroupProps,
   CheckboxGroupOwnerState,
+  DialogProps,
+  DialogBodyOwnerState,
+  DialogBodyProps,
+  DialogContentOwnerState,
+  DialogContentProps,
+  DialogFooterOwnerState,
+  DialogFooterProps,
+  DialogHeaderOwnerState,
+  DialogHeaderProps,
+  DialogOwnerState,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -111,11 +126,36 @@ export type ComponentThemes = {
       | ComponentThemeFn<AccordionOwnerState, AccordionItemRecipe>
     defaultProps?: AccordionItemProps
   }
-  Dialog?: {}
-  DialogContent?: {}
-  DialogHeader?: {}
-  DialogBody?: {}
-  DialogFooter?: {}
+  Dialog?: {
+    styleOverrides?:
+      | ComponentThemeObject<DialogRecipe>
+      | ComponentThemeFn<DialogOwnerState, DialogRecipe>
+    defaultProps?: DialogProps
+  }
+  DialogContent?: {
+    styleOverrides?:
+      | ComponentThemeObject<DialogContentRecipe>
+      | ComponentThemeFn<DialogContentOwnerState, DialogContentRecipe>
+    defaultProps?: DialogContentProps
+  }
+  DialogHeader?: {
+    styleOverrides?:
+      | ComponentThemeObject<DialogHeaderRecipe>
+      | ComponentThemeFn<DialogHeaderOwnerState, DialogHeaderRecipe>
+    defaultProps?: DialogHeaderProps
+  }
+  DialogBody?: {
+    styleOverrides?:
+      | ComponentThemeObject<DialogBodyRecipe>
+      | ComponentThemeFn<DialogBodyOwnerState, DialogBodyRecipe>
+    defaultProps?: DialogBodyProps
+  }
+  DialogFooter?: {
+    styleOverrides?:
+      | ComponentThemeObject<DialogFooterRecipe>
+      | ComponentThemeFn<DialogFooterOwnerState, DialogFooterRecipe>
+    defaultProps?: DialogFooterProps
+  }
 }
 
 export type ComponentNames = keyof ComponentThemes
