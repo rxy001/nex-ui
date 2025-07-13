@@ -41,10 +41,5 @@ export const buttonClasses = generateUtilityClasses('nui-btn', [
   'icon',
   'start-icon',
   'end-icon',
-
-  'icon-size-sm',
-  'icon-size-md',
-  'icon-size-lg',
-
   'icon-loading',
 ])
