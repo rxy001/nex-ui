@@ -61,13 +61,13 @@ const indicatorMotionVariants: Variants = {
 const useSlotClasses = (ownerState: AccordionItemOwnerState) => {
   const { prefix } = useNexUI()
 
-  const { disabled, classes } = ownerState
+  const { disabled, classes, expanded } = ownerState
 
   return useMemo(() => {
     const accordionItemRoot = `${prefix}-accordion-item`
 
     const slots = {
-      root: ['root', disabled && 'disabled'],
+      root: ['root', disabled && 'disabled', expanded && 'expanded'],
       heading: ['heading'],
       trigger: ['trigger'],
       content: ['content'],
@@ -75,7 +75,7 @@ const useSlotClasses = (ownerState: AccordionItemOwnerState) => {
     }
 
     return composeClasses(slots, getUtilityClass(accordionItemRoot), classes)
-  }, [classes, disabled, prefix])
+  }, [classes, disabled, expanded, prefix])
 }
 
 const useSlotAriaProps = (

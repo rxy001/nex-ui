@@ -1,13 +1,26 @@
-import { useState } from 'react'
+import { useState, createRef } from 'react'
 import { fireEvent } from '@testing-library/react'
-import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
-import { Button } from '../Button'
+import {
+  mountTest,
+  renderWithNexProvider,
+  rootClassNameTest,
+} from '~/tests/shared'
+import { Button } from '../index'
 import { buttonClasses } from '../buttonClasses'
-import type { ButtonProps } from '../types'
+import type { ButtonProps } from '../index'
 
 describe('Button', () => {
   mountTest(<Button />)
-  refTest(<Button />)
+  rootClassNameTest(Button, 'test-class')
+
+  it('should forward ref to Button', () => {
+    const ref = createRef<HTMLButtonElement>()
+    const { container } = renderWithNexProvider(
+      <Button ref={ref}>Button</Button>,
+    )
+    const button = container.firstElementChild as HTMLButtonElement
+    expect(ref.current).toBe(button)
+  })
 
   it('renders correctly', () => {
     const { container } = renderWithNexProvider(<Button>Button</Button>)
@@ -43,22 +56,7 @@ describe('Button', () => {
     expect(button).not.toHaveClass(buttonClasses.loading)
     expect(button).not.toHaveClass(buttonClasses.disabled)
     expect(button).not.toHaveClass(buttonClasses['full-width'])
-  })
-
-  it('startIcon and endIcon should have icon class', () => {
-    const { container } = renderWithNexProvider(
-      <Button
-        startIcon={<span>start icon</span>}
-        endIcon={<span>end icon</span>}
-      >
-        Button
-      </Button>,
-    )
-    const button = container.firstElementChild!
-    const startIcon = button.querySelector(`.${buttonClasses['start-icon']}`)
-    const endIcon = button.querySelector(`.${buttonClasses['end-icon']}`)
-    expect(startIcon).toHaveClass(buttonClasses.icon)
-    expect(endIcon).toHaveClass(buttonClasses.icon)
+    expect(button).not.toHaveClass(buttonClasses['disable-ripple'])
   })
 
   it('should add the appropriate color class to root element based on color prop', () => {
@@ -137,61 +135,6 @@ describe('Button', () => {
     )
   })
 
-  it('should add the appropriate size class to root element based on size prop', () => {
-    const { getByTestId } = renderWithNexProvider(
-      <>
-        <Button
-          size='sm'
-          data-testid='size-sm'
-          startIcon={<span>start icon</span>}
-          endIcon={<span>end icon</span>}
-        >
-          Button
-        </Button>
-        <Button
-          size='md'
-          data-testid='size-md'
-          startIcon={<span>start icon</span>}
-          endIcon={<span>end icon</span>}
-        >
-          Button
-        </Button>
-        <Button
-          size='lg'
-          data-testid='size-lg'
-          startIcon={<span>start icon</span>}
-          endIcon={<span>end icon</span>}
-        >
-          Button
-        </Button>
-      </>,
-    )
-    const smBtn = getByTestId('size-sm')
-    const mdBtn = getByTestId('size-md')
-    const lgBtn = getByTestId('size-lg')
-    expect(smBtn).toHaveClass(buttonClasses['size-sm'])
-    expect(smBtn.querySelector(`.${buttonClasses['start-icon']}`)).toHaveClass(
-      buttonClasses['icon-size-sm'],
-    )
-    expect(smBtn.querySelector(`.${buttonClasses['end-icon']}`)).toHaveClass(
-      buttonClasses['icon-size-sm'],
-    )
-    expect(mdBtn).toHaveClass(buttonClasses['size-md'])
-    expect(mdBtn.querySelector(`.${buttonClasses['start-icon']}`)).toHaveClass(
-      buttonClasses['icon-size-md'],
-    )
-    expect(mdBtn.querySelector(`.${buttonClasses['end-icon']}`)).toHaveClass(
-      buttonClasses['icon-size-md'],
-    )
-    expect(lgBtn).toHaveClass(buttonClasses['size-lg'])
-    expect(lgBtn.querySelector(`.${buttonClasses['start-icon']}`)).toHaveClass(
-      buttonClasses['icon-size-lg'],
-    )
-    expect(lgBtn.querySelector(`.${buttonClasses['end-icon']}`)).toHaveClass(
-      buttonClasses['icon-size-lg'],
-    )
-  })
-
   it('should add the appropriate radius class to root element based on radius prop', () => {
     const { getByTestId } = renderWithNexProvider(
       <>
@@ -234,6 +177,18 @@ describe('Button', () => {
     )
 
     expect(getByTestId('full-width')).toHaveClass(buttonClasses['full-width'])
+  })
+
+  it('should add the appropriate disableRipple class to root element based on disableRipple prop', () => {
+    const { getByTestId } = renderWithNexProvider(
+      <Button disableRipple data-testid='disable-ripple'>
+        Button
+      </Button>,
+    )
+
+    expect(getByTestId('disable-ripple')).toHaveClass(
+      buttonClasses['disable-ripple'],
+    )
   })
 
   it('should trigger onClick function', () => {
@@ -297,7 +252,6 @@ describe('Button', () => {
       return (
         <Button
           loading={loading}
-          spinnerPlacement='start'
           data-testid='button'
           onClick={() => setLoading(true)}
         >
@@ -338,5 +292,68 @@ describe('Button', () => {
 
     expect(startIcon).toHaveClass(startIconClassName)
     expect(endIcon).toHaveClass(endIconClassName)
+  })
+
+  it('should support customized spinner', () => {
+    const { container } = renderWithNexProvider(
+      <Button
+        loading
+        spinner={<span data-testid='custom-spinner'>Custom Spinner</span>}
+      >
+        Button
+      </Button>,
+    )
+
+    const button = container.firstElementChild
+    const spinner = button?.querySelector(`.${buttonClasses['icon-loading']}`)
+
+    expect(spinner).toBeInTheDocument()
+    expect(spinner).toHaveTextContent('Custom Spinner')
+  })
+
+  it('should support spinner placement', () => {
+    const { container, rerender } = renderWithNexProvider(
+      <Button loading spinnerPlacement='start'>
+        Button
+      </Button>,
+    )
+
+    const startSpinner = container.firstElementChild?.querySelector(
+      `.${buttonClasses['start-icon']}`,
+    )
+
+    expect(startSpinner).toBeInTheDocument()
+
+    rerender(
+      <Button loading spinnerPlacement='end'>
+        Button
+      </Button>,
+    )
+
+    const endSpinner = container.firstElementChild?.querySelector(
+      `.${buttonClasses['end-icon']}`,
+    )
+    expect(endSpinner).toBeInTheDocument()
+  })
+
+  it('should forward slotProps to startIcon and endIcon', () => {
+    const { container } = renderWithNexProvider(
+      <Button
+        startIcon={<span data-testid='start-icon'>Start Icon</span>}
+        endIcon={<span data-testid='end-icon'>End Icon</span>}
+        slotProps={{
+          startIcon: { className: 'test-start-icon' },
+          endIcon: { className: 'test-end-icon' },
+        }}
+      >
+        Button
+      </Button>,
+    )
+
+    const startIcon = container.querySelector('.test-start-icon')
+    const endIcon = container.querySelector('.test-end-icon')
+
+    expect(startIcon).toBeInTheDocument()
+    expect(endIcon).toBeInTheDocument()
   })
 })

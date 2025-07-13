@@ -52,13 +52,11 @@ const useSlotClasses = (ownerState: ButtonOwnerState) => {
       startIcon: [
         `icon`,
         `start-icon`,
-        `icon-size-${size}`,
         loading && spinnerPlacement === 'start' && `icon-loading`,
       ],
       endIcon: [
         `icon`,
         `end-icon`,
-        `icon-size-${size}`,
         loading && spinnerPlacement === 'end' && `icon-loading`,
       ],
     }
@@ -95,7 +93,6 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     slotProps,
     spinner,
     color = primaryThemeColor,
-    spinnerPlacement = 'start',
     variant = 'solid',
     size = 'md',
     radius = size,
@@ -106,6 +103,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     disableRipple = false,
     startIcon: startIconProp,
     endIcon: endIconProp,
+    spinnerPlacement = 'start',
     ...remainingProps
   } = props
 
@@ -113,6 +111,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
 
   const ownerState: ButtonOwnerState = {
     ...props,
+    spinnerPlacement,
     variant,
     size,
     radius,
@@ -163,7 +162,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   const loadingIcon = spinner ?? <LoadingOutlined />
 
   return (
-    <Ripple disabled={disableRipple ?? disabled}>
+    <Ripple disabled={disableRipple || disabled}>
       <ButtonRoot {...getButtonRootProps()}>
         {((spinnerPlacement === 'start' && loading) || startIconProp) && (
           <ButtonStartIcon {...getButtonStartIconProps()}>

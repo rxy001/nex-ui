@@ -1,7 +1,7 @@
 import { renderWithNexProvider } from './renderWithProvider'
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 
-export const mountTest = (Component: ReactNode) => {
+export const mountTest = (Component: ReactElement) => {
   it(`component could be updated and unmounted without errors`, () => {
     const { unmount, rerender } = renderWithNexProvider(Component)
     expect(() => {

@@ -157,4 +157,5 @@ export type ButtonOwnerState<RootComponent extends ElementType = 'button'> =
     disabled: boolean
     disableRipple: boolean
     loading: boolean
+    spinnerPlacement: 'start' | 'end'
   }
