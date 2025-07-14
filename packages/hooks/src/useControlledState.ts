@@ -4,6 +4,15 @@ import { useState, useEffect, useRef } from 'react'
 import { __DEV__, isFunction } from '@nex-ui/utils'
 import { useEvent } from './useEvent'
 
+/**
+ * A custom React hook that manages a controlled or uncontrolled state value.
+ *
+ * @typeParam T - The type of the state value.
+ * @param value - The controlled value. If provided, the state is controlled.
+ * @param defaultValue - The initial value to use when uncontrolled.
+ * @param onChange - Optional callback invoked when the value changes.
+ * @returns A tuple containing the current value and a function to update it.
+ */
 export function useControlledState<T>(
   value: T | undefined,
   defaultValue: T | undefined,
