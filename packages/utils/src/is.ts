@@ -2,7 +2,8 @@ export const isNumber = (value?: any): value is number =>
   typeof value === 'number'
 
 export const isFunction = (value?: any): value is (...args: any[]) => any =>
-  typeof value === 'function'
+  typeof value === 'function' &&
+  !/^class\s/.test(Function.prototype.toString.call(value))
 
 export const isPlainObject = (value: any): boolean =>
   typeof value === 'object' &&
