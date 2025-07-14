@@ -97,6 +97,7 @@ Map {
   "base" => Map {
     "--test-colors-blue-100" => "blue",
     "--test-colors-primary" => "var(--test-colors-blue-100)",
+    "--test-colors-secondary" => "colors.blue.900",
     "--test-borders-sm" => "1px solid var(--test-colors-blue-100)",
   },
 }

@@ -1,26 +1,25 @@
 import type { InitColorSchemeScriptProps } from './types'
 
 export const InitColorSchemeScript = ({
-  modeStorageKey,
   forcedMode,
+  modeStorageKey = 'color-scheme',
   defaultMode = 'system',
   colorSchemeSelector = 'data',
   colorSchemeNode = 'document.documentElement',
 }: InitColorSchemeScriptProps) => {
   let setter = ''
   let attribute = colorSchemeSelector
+
   if (colorSchemeSelector === 'class') {
     attribute = '.%s'
-  }
-  if (colorSchemeSelector === 'data') {
-    attribute = `[data-color-scheme=%s]`
-  }
-  if (
+  } else if (colorSchemeSelector === 'data') {
+    attribute = `[data-color-scheme='%s']`
+  } else if (
     colorSchemeSelector?.startsWith('data-') &&
     !colorSchemeSelector.includes('%s')
   ) {
     // 'data-nui-color-scheme' -> '[data-nui-color-scheme="%s"]'
-    attribute = `[${colorSchemeSelector}="%s"]`
+    attribute = `[${colorSchemeSelector}='%s']`
   }
 
   const root = colorSchemeNode
@@ -38,7 +37,7 @@ export const InitColorSchemeScript = ({
         ${root}.removeAttribute('${attr}'.replace('%s', 'dark'));`
       }
       setter += `
-        ${root}.setAttribute('${attr}'.replace('%s', colorScheme), ${value ? `${value}.replace('%s', colorScheme)` : '""'});`
+        ${root}.setAttribute('${attr}'.replace('%s', colorScheme), ${value ? `'${value.replace(/"|'/g, '')}'.replace('%s', colorScheme)` : '""'});`
     } else {
       setter += `${root}.setAttribute('${attribute}', colorScheme);`
     }
@@ -52,7 +51,7 @@ try {
 
   let colorScheme = ''
 
-  const mode = ${forcedMode} ?? (localStorage.getItem('${modeStorageKey}') || ${defaultMode})
+  const mode = ${forcedMode ? `'${forcedMode}'` : `localStorage.getItem('${modeStorageKey}') || '${defaultMode}'`}; 
 
   if (mode === 'system') {
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
@@ -66,7 +65,9 @@ try {
   }
  
   ${setter}
-} catch {}
+} catch (error) {
+  console.error('Error initializing color scheme:', error);
+}
 `,
       }}
     />

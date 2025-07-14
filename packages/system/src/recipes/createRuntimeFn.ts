@@ -20,13 +20,13 @@ function shouldApplyCompound(compoundCheck: any, selections: any) {
   return true
 }
 
-export function createRuntimeFn(options?: any) {
+export function createRuntimeFn(options: any) {
   const {
     mainStyles,
     variants = {},
     compoundVariants = [],
     defaultVariants = {},
-  } = options ?? {}
+  } = options
 
   function splitVariantProps(props: any) {
     const variantKeys = Object.keys(variants)

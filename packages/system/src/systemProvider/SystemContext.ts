@@ -15,4 +15,4 @@ const [InnerSystemProvider, useSystem] = createContext<SystemContext>({
   defaultValue: DEFAULT_CONTEXT_VALUE as unknown as SystemContext,
 })
 
-export { InnerSystemProvider, useSystem, DEFAULT_CONTEXT_VALUE }
+export { InnerSystemProvider, useSystem }

@@ -1,6 +1,12 @@
 import { fireEvent, render } from '@testing-library/react'
 import { SystemProvider } from '../systemProvider'
-import { ColorSchemeProviderProps, Mode, useColorScheme } from '../index'
+import {
+  ColorSchemeProviderProps,
+  Mode,
+  useColorScheme,
+  InitColorSchemeScript,
+} from '../index'
+import { ColorSchemeProvider } from '../colorScheme'
 
 type Listener = (event: { matches: boolean }) => void
 
@@ -53,214 +59,388 @@ function createMatchMedia(defaultMatches: boolean) {
 }
 
 describe('SystemProvider', () => {
-  describe('colorScheme', () => {
-    afterEach(() => {
-      window.localStorage.clear()
-    })
+  let originalMatchMedia: typeof window.matchMedia
+  beforeEach(() => {
+    originalMatchMedia = window.matchMedia
+  })
 
-    function testColorScheme(props: ColorSchemeProviderProps) {
-      let mode: Mode | undefined = props.defaultMode
-      const Text = () => {
-        const { setMode, ...colorScheme } = useColorScheme()
-        return (
-          <>
-            <button data-testid='switch-button' onClick={() => setMode(mode)}>
-              switch
-            </button>
-            <div data-testid='color-scheme'>{JSON.stringify(colorScheme)}</div>
-          </>
-        )
-      }
+  afterEach(() => {
+    window.localStorage.clear()
+    const html = document.documentElement
+    const attrs = Array.from(html.attributes)
+    attrs.forEach((attr) => html.removeAttribute(attr.name))
 
-      const { getByTestId, rerender } = render(
-        <SystemProvider {...props}>
-          <Text />
-        </SystemProvider>,
+    window.matchMedia = originalMatchMedia
+  })
+
+  function testColorScheme(props: ColorSchemeProviderProps) {
+    let mode: Mode | undefined = props.defaultMode
+    const Text = () => {
+      const { setMode, ...colorScheme } = useColorScheme()
+      return (
+        <>
+          <button data-testid='switch-button' onClick={() => setMode(mode)}>
+            switch
+          </button>
+          <div data-testid='color-scheme'>{JSON.stringify(colorScheme)}</div>
+        </>
       )
-
-      return {
-        rerender: (newProps?: ColorSchemeProviderProps) => {
-          rerender(
-            <SystemProvider {...props} {...newProps}>
-              <Text />
-            </SystemProvider>,
-          )
-        },
-        setMode: (newMode?: Mode) => {
-          mode = newMode
-          fireEvent.click(getByTestId('switch-button'))
-        },
-        getContent: () => JSON.parse(getByTestId('color-scheme').textContent!),
-      }
     }
 
-    it('default mode: system with prefers-color-scheme: light', () => {
-      const originalMatchMedia = window.matchMedia
+    const { getByTestId, rerender } = render(
+      <SystemProvider {...props}>
+        <Text />
+      </SystemProvider>,
+    )
 
-      // @ts-expect-error
-      window.matchMedia = createMatchMedia(false)
-      const { getContent } = testColorScheme({
-        defaultMode: 'system',
-      })
-      expect(getContent()).toEqual(systemLightColorScheme)
+    return {
+      rerender: (newProps?: ColorSchemeProviderProps) => {
+        rerender(
+          <SystemProvider {...props} {...newProps}>
+            <Text />
+          </SystemProvider>,
+        )
+      },
+      setMode: (newMode?: Mode) => {
+        mode = newMode
+        fireEvent.click(getByTestId('switch-button'))
+      },
+      getContent: () => JSON.parse(getByTestId('color-scheme').textContent!),
+    }
+  }
 
-      window.matchMedia = originalMatchMedia
+  it('default mode: system with prefers-color-scheme: light', () => {
+    // @ts-expect-error
+    window.matchMedia = createMatchMedia(false)
+    const { getContent } = testColorScheme({
+      defaultMode: 'system',
+    })
+    expect(getContent()).toEqual(systemLightColorScheme)
+  })
+
+  it('default mode: system with prefers-color-scheme: dark', () => {
+    // @ts-expect-error
+    window.matchMedia = createMatchMedia(true)
+
+    const { getContent } = testColorScheme({
+      defaultMode: 'system',
     })
 
-    it('default mode: system with prefers-color-scheme: dark', () => {
-      const originalMatchMedia = window.matchMedia
-      // @ts-expect-error
-      window.matchMedia = createMatchMedia(true)
+    expect(getContent()).toEqual(systemDarkColorScheme)
+  })
 
-      const { getContent } = testColorScheme({
-        defaultMode: 'system',
-      })
+  it('should update color scheme on prefers-color-scheme change', () => {
+    // @ts-expect-error
+    window.matchMedia = createMatchMedia(false)
 
-      expect(getContent()).toEqual(systemDarkColorScheme)
-
-      window.matchMedia = originalMatchMedia
+    const { getContent, rerender } = testColorScheme({
+      defaultMode: 'system',
     })
 
-    it('should update color scheme on prefers-color-scheme change', () => {
-      const originalMatchMedia = window.matchMedia
-      // @ts-expect-error
-      window.matchMedia = createMatchMedia(false)
+    expect(getContent()).toEqual(systemLightColorScheme)
 
-      const { getContent, rerender } = testColorScheme({
-        defaultMode: 'system',
-      })
+    setMatches(true)
+    rerender()
+    expect(getContent()).toEqual(systemDarkColorScheme)
 
-      expect(getContent()).toEqual(systemLightColorScheme)
+    setMatches(false)
+    rerender()
+    expect(getContent()).toEqual(systemLightColorScheme)
 
-      setMatches(true)
-      rerender()
-      expect(getContent()).toEqual(systemDarkColorScheme)
+    // simulate repeated changes to ensure coverage
+    setMatches(false)
+    rerender()
+    expect(getContent()).toEqual(systemLightColorScheme)
+  })
 
-      setMatches(false)
-      rerender()
-      expect(getContent()).toEqual(systemLightColorScheme)
-
-      // simulate repeated changes to ensure coverage
-      setMatches(false)
-      rerender()
-      expect(getContent()).toEqual(systemLightColorScheme)
-
-      window.matchMedia = originalMatchMedia
+  it('default mode: light', () => {
+    const { getContent } = testColorScheme({
+      defaultMode: 'light',
     })
 
-    it('default mode: light', () => {
-      const { getContent } = testColorScheme({
-        defaultMode: 'light',
-      })
+    expect(getContent()).toEqual(lightColorScheme)
+  })
 
-      expect(getContent()).toEqual(lightColorScheme)
+  it('default mode: dark', () => {
+    const { getContent } = testColorScheme({
+      defaultMode: 'dark',
+    })
+    expect(getContent()).toEqual(darkColorScheme)
+  })
+
+  it('should update mode', () => {
+    // @ts-expect-error
+    window.matchMedia = createMatchMedia(false)
+
+    const { getContent, setMode } = testColorScheme({
+      defaultMode: 'system',
     })
 
-    it('default mode: dark', () => {
-      const { getContent } = testColorScheme({
-        defaultMode: 'dark',
-      })
-      expect(getContent()).toEqual(darkColorScheme)
+    expect(getContent()).toEqual(systemLightColorScheme)
+
+    setMode('light')
+    expect(getContent()).toEqual(lightColorScheme)
+
+    setMode('dark')
+    expect(getContent()).toEqual(darkColorScheme)
+
+    // simulate repeated changes to ensure coverage
+    setMode('dark')
+    expect(getContent()).toEqual(darkColorScheme)
+  })
+
+  it('resets mode to default', () => {
+    const { getContent, setMode } = testColorScheme({
+      defaultMode: 'light',
     })
 
-    it('should update mode', () => {
-      const originalMatchMedia = window.matchMedia
-      // @ts-expect-error
-      window.matchMedia = createMatchMedia(false)
+    expect(getContent()).toEqual(lightColorScheme)
 
-      const { getContent, setMode } = testColorScheme({
-        defaultMode: 'system',
-      })
+    setMode('dark')
+    expect(getContent()).toEqual(darkColorScheme)
 
-      expect(getContent()).toEqual(systemLightColorScheme)
+    setMode()
 
-      setMode('light')
-      expect(getContent()).toEqual(lightColorScheme)
+    expect(getContent()).toEqual(lightColorScheme)
+  })
 
-      setMode('dark')
-      expect(getContent()).toEqual(darkColorScheme)
+  it('should persist mode in localStorage', () => {
+    render(<SystemProvider defaultMode='light' />)
 
-      // simulate repeated changes to ensure coverage
-      setMode('dark')
-      expect(getContent()).toEqual(darkColorScheme)
-
-      window.matchMedia = originalMatchMedia
+    const { getContent } = testColorScheme({
+      defaultMode: 'dark',
     })
 
-    it('resets mode to default', () => {
-      const { getContent, setMode } = testColorScheme({
-        defaultMode: 'light',
-      })
+    expect(getContent()).toEqual(lightColorScheme)
+  })
 
-      expect(getContent()).toEqual(lightColorScheme)
-
-      setMode('dark')
-      expect(getContent()).toEqual(darkColorScheme)
-
-      setMode()
-
-      expect(getContent()).toEqual(lightColorScheme)
+  it('should not update mode when forced mode is set', () => {
+    const { getContent, setMode } = testColorScheme({
+      forcedMode: 'dark',
     })
 
-    it('should persist mode in localStorage', () => {
-      render(<SystemProvider defaultMode='light' />)
+    expect(getContent()).toEqual(darkColorScheme)
 
-      const { getContent } = testColorScheme({
-        defaultMode: 'dark',
-      })
+    setMode('light')
 
-      expect(getContent()).toEqual(lightColorScheme)
+    expect(getContent()).toEqual(darkColorScheme)
+
+    setMode('system')
+
+    expect(getContent()).toEqual(darkColorScheme)
+  })
+
+  it('default colorSchemeSelector: data', () => {
+    testColorScheme({
+      colorSchemeSelector: 'data',
+      defaultMode: 'light',
     })
 
-    it('should not update mode when forced mode is set', () => {
-      const { getContent, setMode } = testColorScheme({
-        forcedMode: 'dark',
-      })
+    expect(document.documentElement.dataset.colorScheme).toBe('light')
+  })
 
-      expect(getContent()).toEqual(darkColorScheme)
-
-      setMode('light')
-
-      expect(getContent()).toEqual(darkColorScheme)
-
-      setMode('system')
-
-      expect(getContent()).toEqual(darkColorScheme)
+  it('default colorSchemeSelector: custom attr', () => {
+    const { rerender } = testColorScheme({
+      colorSchemeSelector: 'data-nui-color-scheme',
+      defaultMode: 'light',
     })
 
-    it('default colorSchemeSelector: data', () => {
-      testColorScheme({
-        colorSchemeSelector: 'data',
-        defaultMode: 'light',
-      })
+    expect(document.documentElement.getAttribute('data-nui-color-scheme')).toBe(
+      'light',
+    )
 
-      expect(document.documentElement.dataset.colorScheme).toBe('light')
+    rerender({
+      colorSchemeSelector: 'color-scheme',
     })
 
-    it('default colorSchemeSelector: custom attr', () => {
-      const { rerender } = testColorScheme({
-        colorSchemeSelector: 'data-nui-color-scheme',
-        defaultMode: 'light',
-      })
+    expect(document.documentElement.getAttribute('color-scheme')).toBe('light')
 
-      expect(document.documentElement.dataset.nuiColorScheme).toBe('light')
+    rerender({
+      colorSchemeSelector: '[data-mode-%s]',
+    })
+    expect(document.documentElement.getAttribute('data-mode-light')).toBe('')
+    expect(document.documentElement.getAttribute('data-mode-dark')).toBe(null)
+  })
 
-      rerender({
-        colorSchemeSelector: 'color-scheme',
-      })
-
-      expect(document.documentElement.getAttribute('color-scheme')).toBe(
-        'light',
-      )
+  it('default colorSchemeSelector: class', () => {
+    testColorScheme({
+      colorSchemeSelector: 'class',
+      defaultMode: 'light',
     })
 
-    it('default colorSchemeSelector: class', () => {
-      testColorScheme({
-        colorSchemeSelector: 'class',
-        defaultMode: 'light',
-      })
+    expect(document.documentElement).toHaveClass('light')
+  })
+})
 
-      expect(document.documentElement.classList.contains('light')).toBe(true)
-    })
+describe('InitColorSchemeScript', () => {
+  afterEach(() => {
+    window.localStorage.clear()
+    const html = document.documentElement
+    const attrs = Array.from(html.attributes)
+    attrs.forEach((attr) => html.removeAttribute(attr.name))
+  })
+
+  const DEFAULT_STORAGE_KEY = 'test-mode'
+  const DEFAULT_COLOR_SCHEME_SELECTOR = 'data-color-scheme'
+  it('should set correct color scheme to html based on system preference', () => {
+    const originalMatchMedia = window.matchMedia
+
+    // @ts-expect-error
+    window.matchMedia = createMatchMedia(true)
+    const { container, rerender } = render(<InitColorSchemeScript />)
+    eval(container.firstElementChild!.textContent!)
+    expect(
+      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
+    ).toBe('dark')
+
+    // @ts-expect-error
+    window.matchMedia = createMatchMedia(false)
+    rerender(<InitColorSchemeScript />)
+    eval(container.firstElementChild!.textContent!)
+    expect(
+      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
+    ).toBe('light')
+
+    window.matchMedia = originalMatchMedia
+  })
+
+  it('should set `light` color scheme to html with data', () => {
+    const defaultMode = 'light'
+
+    const { container } = render(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeSelector='data'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(
+      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
+    ).toBe(defaultMode)
+  })
+
+  it('should set `light` color scheme to html with custom attribute', () => {
+    const defaultMode = 'light'
+
+    const { container, rerender } = render(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeSelector='data-test-color-scheme'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(
+      document.documentElement.getAttribute('data-test-color-scheme'),
+    ).toBe(defaultMode)
+
+    rerender(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeSelector='[data-mode-%s]'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(document.documentElement.getAttribute('data-mode-light')).toBe('')
+    expect(document.documentElement.getAttribute('data-mode-dark')).toBe(null)
+
+    rerender(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeSelector='[data-mode="%s"]'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(document.documentElement.getAttribute('data-mode')).toBe(defaultMode)
+
+    rerender(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeSelector='color-scheme'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(document.documentElement.getAttribute('color-scheme')).toBe(
+      defaultMode,
+    )
+
+    rerender(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeSelector='[data-mode="%s"]'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(document.documentElement.getAttribute('data-mode')).toBe(defaultMode)
+  })
+
+  it('should set `dark` color scheme to html with class', () => {
+    const defaultMode = 'dark'
+
+    const { container } = render(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeSelector='class'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(document.documentElement).toHaveClass('dark')
+  })
+
+  it('should set `dark` color scheme to body', () => {
+    const defaultMode = 'dark'
+
+    const { container } = render(
+      <InitColorSchemeScript
+        defaultMode={defaultMode}
+        colorSchemeNode='document.body'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(document.body.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR)).toBe(
+      'dark',
+    )
+  })
+
+  it('should use forced mode if provided', () => {
+    const forcedMode = 'dark'
+
+    const { container } = render(
+      <InitColorSchemeScript forcedMode={forcedMode} defaultMode='light' />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(
+      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
+    ).toBe(forcedMode)
+  })
+
+  it('should use localStorage value if available', () => {
+    window.localStorage.setItem(DEFAULT_STORAGE_KEY, 'dark')
+
+    const { container } = render(
+      <InitColorSchemeScript
+        modeStorageKey={DEFAULT_STORAGE_KEY}
+        defaultMode='light'
+      />,
+    )
+    eval(container.firstElementChild!.textContent!)
+    expect(
+      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
+    ).toBe('dark')
+  })
+})
+
+describe('ColorSchemeProvider', () => {
+  it('should render with default props', () => {
+    const originalMatchMedia = window.matchMedia
+
+    // @ts-expect-error
+    window.matchMedia = createMatchMedia(false)
+    render(<ColorSchemeProvider />)
+
+    expect(document.documentElement.getAttribute('data-color-scheme')).toBe(
+      'light',
+    )
+    expect(localStorage.getItem('color-scheme')).toBe('system')
+    window.matchMedia = originalMatchMedia
   })
 })
