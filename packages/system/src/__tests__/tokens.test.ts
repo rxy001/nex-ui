@@ -1,4 +1,4 @@
-import { createTokens } from '../tokens/createTokens'
+import { createTokens } from '../tokens'
 
 const PREFIX = 'test'
 
@@ -176,6 +176,7 @@ describe('createTokens', () => {
   })
 
   it('should support token reference syntax', () => {
+    const errorSpy = jest.spyOn(console, 'error')
     const { getToken, getGlobalCssVars } = createTokens({
       tokens: {
         colors: {
@@ -187,6 +188,8 @@ describe('createTokens', () => {
       semanticTokens: {
         colors: {
           primary: '{colors.blue.100}',
+          // error case
+          secondary: '{colors.blue.900}',
         },
         borders: {
           sm: '1px solid {colors.blue.100}',
@@ -196,6 +199,7 @@ describe('createTokens', () => {
     })
 
     expect(getToken('colors.primary')).toMatchSnapshot()
+    expect(errorSpy).toHaveBeenCalled()
     expect(getGlobalCssVars()).toMatchSnapshot()
   })
 

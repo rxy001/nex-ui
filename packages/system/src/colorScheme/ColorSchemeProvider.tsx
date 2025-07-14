@@ -13,6 +13,8 @@ import type {
 
 function initializeValue(key: string, defaultValue: string) {
   if (typeof window === 'undefined') {
+    // FIXME: mock ssr environment
+    /* istanbul ignore next */
     return undefined
   }
   let value
@@ -56,6 +58,8 @@ function getColorScheme(state: State) {
   ) {
     return 'dark'
   }
+  // FIXME: mock ssr environment
+  /* istanbul ignore next */
   return undefined
 }
 
@@ -63,9 +67,6 @@ export function createGetColorSchemeSelector(
   selector: ColorSchemeProviderProps['colorSchemeSelector'],
 ) {
   return function getColorSchemeSelector(colorScheme: ColorScheme) {
-    if (selector === 'media') {
-      return `@media (prefers-color-scheme: ${colorScheme})`
-    }
     if (selector) {
       if (selector.startsWith('data-') && !selector.includes('%s')) {
         return `[${selector}="${colorScheme}"] &`
@@ -78,6 +79,7 @@ export function createGetColorSchemeSelector(
       }
       return `${selector.replace('%s', colorScheme)}`
     }
+    /* istanbul ignore next */
     return '&'
   }
 }
@@ -161,7 +163,7 @@ export const ColorSchemeProvider = ({
   const colorScheme = useMemo(() => getColorScheme(state), [state])
 
   useEffect(() => {
-    if (colorScheme && colorSchemeSelector && colorSchemeSelector !== 'media') {
+    if (colorScheme && colorSchemeSelector) {
       const selector = colorSchemeSelector
 
       let rule = selector
@@ -171,9 +173,10 @@ export const ColorSchemeProvider = ({
       if (selector === 'data') {
         rule = `[data-color-scheme=%s]`
       }
+
       if (selector?.startsWith('data-') && !selector.includes('%s')) {
         // 'data-nui-color-scheme' -> '[data-nui-color-scheme="%s"]'
-        rule = `[${selector}="%s"]`
+        rule = `[${selector}=%s]`
       }
 
       const supportedColorSchemes = ['light', 'dark']
@@ -191,6 +194,11 @@ export const ColorSchemeProvider = ({
         const matches = rule.replace('%s', colorScheme).match(/\[([^\]]+)\]/)
         if (matches) {
           const [attr, value] = matches[1].split('=')
+          if (!value) {
+            supportedColorSchemes.forEach((scheme) => {
+              node.removeAttribute(attr.replace(colorScheme, scheme))
+            })
+          }
           node.setAttribute(attr, value ? value.replace(/"|'/g, '') : '')
         } else {
           node.setAttribute(rule, colorScheme)
