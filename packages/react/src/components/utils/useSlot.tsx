@@ -6,8 +6,9 @@ import {
   isPlainObject,
   mergeRefs,
 } from '@nex-ui/utils'
-import { ElementType as ReactElementType, useMemo } from 'react'
+import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
+import type { ElementType as ReactElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { NexComponent } from '@nex-ui/styled'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
