@@ -2,7 +2,7 @@ import { useState, createRef } from 'react'
 import { fireEvent } from '@testing-library/react'
 import {
   mountTest,
-  renderWithNexProvider,
+  renderWithNexUIProvider,
   rootClassNameTest,
 } from '~/tests/shared'
 import { Button } from '../index'
@@ -15,7 +15,7 @@ describe('Button', () => {
 
   it('should forward ref to Button', () => {
     const ref = createRef<HTMLButtonElement>()
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Button ref={ref}>Button</Button>,
     )
     const button = container.firstElementChild as HTMLButtonElement
@@ -23,12 +23,12 @@ describe('Button', () => {
   })
 
   it('renders correctly', () => {
-    const { container } = renderWithNexProvider(<Button>Button</Button>)
+    const { container } = renderWithNexUIProvider(<Button>Button</Button>)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
   it('should render with the root, variant-solid, size-md, radius-md, and color-blue classes but no others', () => {
-    const { container } = renderWithNexProvider(<Button>Button</Button>)
+    const { container } = renderWithNexUIProvider(<Button>Button</Button>)
 
     const button = container.firstElementChild
 
@@ -60,7 +60,7 @@ describe('Button', () => {
   })
 
   it('should add the appropriate color class to root element based on color prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Button color='red' data-testid='color-red'>
           Button
@@ -110,7 +110,7 @@ describe('Button', () => {
   })
 
   it('should add the appropriate variant class to root element based on variant prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Button variant='solid' data-testid='variant-solid'>
           Button
@@ -136,7 +136,7 @@ describe('Button', () => {
   })
 
   it('should add the appropriate radius class to root element based on radius prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Button radius='sm' data-testid='radius-sm'>
           Button
@@ -160,7 +160,7 @@ describe('Button', () => {
   })
 
   it('should add the appropriate iconOnly class to root element based on iconOnly prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Button iconOnly data-testid='icon-only'>
         Button
       </Button>,
@@ -170,7 +170,7 @@ describe('Button', () => {
   })
 
   it('should add the appropriate fullWidth class to root element based on fullWidth prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Button fullWidth data-testid='full-width'>
         Button
       </Button>,
@@ -180,7 +180,7 @@ describe('Button', () => {
   })
 
   it('should add the appropriate disableRipple class to root element based on disableRipple prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Button disableRipple data-testid='disable-ripple'>
         Button
       </Button>,
@@ -193,14 +193,14 @@ describe('Button', () => {
 
   it('should trigger onClick function', () => {
     const onClick = jest.fn()
-    const { container } = renderWithNexProvider(<Button onClick={onClick} />)
+    const { container } = renderWithNexUIProvider(<Button onClick={onClick} />)
     fireEvent.click(container.firstElementChild!)
     expect(onClick).toHaveBeenCalled()
   })
 
   it('should ignore events when disabled', () => {
     const onClick = jest.fn()
-    const { getByText } = renderWithNexProvider(
+    const { getByText } = renderWithNexUIProvider(
       <Button disabled onClick={onClick}>
         Btn Tag
       </Button>,
@@ -214,7 +214,7 @@ describe('Button', () => {
   })
 
   it('should support link button', () => {
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Button target='_blank' href='https://'>
         Link Button
       </Button>,
@@ -223,7 +223,7 @@ describe('Button', () => {
   })
 
   it('should render with start icon', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Button startIcon={<span data-testid='start-icon'>Icon</span>}>
         Button
       </Button>,
@@ -235,7 +235,7 @@ describe('Button', () => {
   })
 
   it('should render with end icon', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Button endIcon={<span data-testid='end-icon'>Icon</span>}>
         Button
       </Button>,
@@ -259,7 +259,7 @@ describe('Button', () => {
         </Button>
       )
     }
-    const { getByTestId } = renderWithNexProvider(<DefaultButton />)
+    const { getByTestId } = renderWithNexUIProvider(<DefaultButton />)
 
     const button = getByTestId('button')
     fireEvent.click(button)
@@ -273,7 +273,7 @@ describe('Button', () => {
     const startIconClassName = 'test-start-icon-class'
     const endIconClassName = 'test-end-icon-class'
 
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Button
         classes={{
           startIcon: startIconClassName,
@@ -295,7 +295,7 @@ describe('Button', () => {
   })
 
   it('should support customized spinner', () => {
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Button
         loading
         spinner={<span data-testid='custom-spinner'>Custom Spinner</span>}
@@ -312,7 +312,7 @@ describe('Button', () => {
   })
 
   it('should support spinner placement', () => {
-    const { container, rerender } = renderWithNexProvider(
+    const { container, rerender } = renderWithNexUIProvider(
       <Button loading spinnerPlacement='start'>
         Button
       </Button>,
@@ -337,7 +337,7 @@ describe('Button', () => {
   })
 
   it('should forward slotProps to startIcon and endIcon', () => {
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Button
         startIcon={<span data-testid='start-icon'>Start Icon</span>}
         endIcon={<span data-testid='end-icon'>End Icon</span>}

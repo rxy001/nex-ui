@@ -1,4 +1,4 @@
-import { renderWithNexProvider } from './renderWithProvider'
+import { renderWithNexUIProvider } from './renderWithProvider'
 import type { FC } from 'react'
 
 export const rootClassNameTest = (
@@ -6,7 +6,7 @@ export const rootClassNameTest = (
   className: string,
 ) => {
   it('should have the correct root class name', () => {
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Component className={className} />,
     )
     const rootElement = container.firstChild

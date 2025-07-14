@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
+import { mountTest, refTest, renderWithNexUIProvider } from '~/tests/shared'
 import { Icon } from '../Icon'
 
 const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
@@ -23,7 +23,7 @@ describe('Icon', () => {
   refTest(<Icon as={HeartSvg} />)
 
   it('renders correctly', () => {
-    const { container } = renderWithNexProvider(<Icon as={HeartSvg} />)
+    const { container } = renderWithNexUIProvider(<Icon as={HeartSvg} />)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 })
