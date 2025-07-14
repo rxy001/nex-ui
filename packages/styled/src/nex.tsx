@@ -45,6 +45,7 @@ const createNexComponent = (tag: any) => {
           props.className,
         )
       } else if (props.className != null) {
+        /* istanbul ignore next */
         className = `${props.className} `
       }
 

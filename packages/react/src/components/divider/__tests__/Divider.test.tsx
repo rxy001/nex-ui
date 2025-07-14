@@ -1,4 +1,4 @@
-import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
+import { mountTest, refTest, renderWithNexUIProvider } from '~/tests/shared'
 import { Divider } from '../Divider'
 import { dividerClasses } from '../dividerClasses'
 
@@ -7,12 +7,12 @@ describe('Divider', () => {
   refTest(<Divider />)
 
   it('renders correctly', () => {
-    const { container } = renderWithNexProvider(<Divider />)
+    const { container } = renderWithNexUIProvider(<Divider />)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
   it('should render with the root, orientation-horizontal classes but no others', () => {
-    const { container } = renderWithNexProvider(<Divider />)
+    const { container } = renderWithNexUIProvider(<Divider />)
 
     const divider = container.firstElementChild
 
@@ -21,7 +21,7 @@ describe('Divider', () => {
   })
 
   it('should add the appropriate orientation class to root element based on orientation prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Divider orientation='vertical' data-testid='orientation-vertical' />
         <Divider

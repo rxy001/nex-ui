@@ -1,7 +1,7 @@
 import { createRef, useState } from 'react'
 import { fireEvent } from '@testing-library/react'
 import {
-  renderWithNexProvider,
+  renderWithNexUIProvider,
   mountTest,
   rootClassNameTest,
 } from '~/tests/shared'
@@ -23,7 +23,7 @@ describe('Accordion', () => {
   rootClassNameTest(Accordion, 'test-class')
 
   it('renders correctly', () => {
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Accordion>{children}</Accordion>,
     )
     expect(container.firstElementChild).toMatchSnapshot()
@@ -31,7 +31,7 @@ describe('Accordion', () => {
 
   it('should forward ref to Accordion', () => {
     const ref = createRef<HTMLDivElement>()
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Accordion ref={ref} data-testid='accordion'>
         {children}
       </Accordion>,
@@ -42,7 +42,7 @@ describe('Accordion', () => {
 
   it('should forward ref to AccordionItem', () => {
     const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion>
         <AccordionItem
           ref={ref}
@@ -65,7 +65,7 @@ describe('Accordion', () => {
       trigger: { className: 'test-trigger' },
       content: { className: 'test-content' },
     }
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion>
         <AccordionItem
           itemKey='1'
@@ -101,7 +101,7 @@ describe('Accordion', () => {
       trigger: 'test-trigger',
       content: 'test-content',
     }
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion>
         <AccordionItem
           itemKey='1'
@@ -121,7 +121,7 @@ describe('Accordion', () => {
   })
 
   it('should have correct class names', () => {
-    const { container, getByTestId, rerender } = renderWithNexProvider(
+    const { container, getByTestId, rerender } = renderWithNexUIProvider(
       <Accordion>{children}</Accordion>,
     )
     const accordionRoot = container.firstElementChild
@@ -151,7 +151,7 @@ describe('Accordion', () => {
   })
 
   it('should add the appropriate variant class to root element based on variant prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Accordion variant='outlined' data-testid='variant-outlined'>
           Button
@@ -172,7 +172,7 @@ describe('Accordion', () => {
   })
 
   it('should handle defaultExpandedKeys prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion defaultExpandedKeys={['1']}>{children}</Accordion>,
     )
     const accordionItem = getByTestId('accordion-item')
@@ -204,7 +204,7 @@ describe('Accordion', () => {
       )
     }
 
-    const { getByTestId } = renderWithNexProvider(<ControlledAccordion />)
+    const { getByTestId } = renderWithNexUIProvider(<ControlledAccordion />)
     const accordionItem = getByTestId('accordion-item')
     expect(accordionItem).not.toHaveClass(accordionItemClasses.expanded)
 
@@ -214,7 +214,7 @@ describe('Accordion', () => {
   })
 
   it('should always render the AccordionItem content when keepMounted is true', () => {
-    const { getByTestId, rerender } = renderWithNexProvider(
+    const { getByTestId, rerender } = renderWithNexUIProvider(
       <Accordion keepMounted expandedKeys={['1']}>
         {children}
       </Accordion>,
@@ -231,7 +231,7 @@ describe('Accordion', () => {
   })
 
   it('should unmount AccordionItem content when collapsed and keepMounted is false', () => {
-    const { getByTestId, rerender } = renderWithNexProvider(
+    const { getByTestId, rerender } = renderWithNexUIProvider(
       <Accordion keepMounted={false} expandedKeys={['1']}>
         {children}
       </Accordion>,
@@ -266,7 +266,7 @@ describe('Accordion', () => {
         malesuada lacus ex, sit amet blandit leo lobortis eget.
       </AccordionItem>,
     ]
-    const { rerender, container } = renderWithNexProvider(
+    const { rerender, container } = renderWithNexUIProvider(
       <Accordion multiple expandedKeys={['1']}>
         {arrayChildren}
       </Accordion>,
@@ -288,7 +288,7 @@ describe('Accordion', () => {
   })
 
   it('should handle disabled prop correctly', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion disabled={true}>
         <AccordionItem
           itemKey='1'
@@ -314,7 +314,7 @@ describe('Accordion', () => {
   })
 
   it('should hide indicator when hideIndicator is true', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion hideIndicator={true}>{children}</Accordion>,
     )
     const accordionItem = getByTestId('accordion-item')
@@ -325,7 +325,7 @@ describe('Accordion', () => {
 
   it('should customize indicator', () => {
     const customIndicator = <span data-testid='custom-indicator'>▼</span>
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion indicator={customIndicator}>{children}</Accordion>,
     )
 
@@ -335,7 +335,7 @@ describe('Accordion', () => {
 
   it('should call onExpandedKeysChange when expanded keys change', () => {
     const onExpandedKeysChange = jest.fn()
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion onExpandedKeysChange={onExpandedKeysChange}>
         {children}
       </Accordion>,
@@ -355,7 +355,7 @@ describe('Accordion', () => {
       .spyOn(console, 'warn')
       .mockImplementation(() => {})
 
-    renderWithNexProvider(
+    renderWithNexUIProvider(
       <Accordion multiple={false} expandedKeys={['1', '2']}>
         {children}
       </Accordion>,
@@ -368,7 +368,7 @@ describe('Accordion', () => {
   })
 
   it('should toggle between expanded and collapsed states when clicking the trigger', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Accordion defaultExpandedKeys={['1']} multiple>
         <AccordionItem
           key='1'

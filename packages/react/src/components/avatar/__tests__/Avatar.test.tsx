@@ -1,7 +1,7 @@
 import {
   mountTest,
   refTest,
-  renderWithNexProvider,
+  renderWithNexUIProvider,
   mockGlobalImage,
   restoreGlobalImage,
 } from '~/tests/shared'
@@ -18,12 +18,12 @@ describe('Avatar', () => {
   refTest(<Avatar />)
 
   it('renders correctly', () => {
-    const { container } = renderWithNexProvider(<Avatar>A</Avatar>)
+    const { container } = renderWithNexUIProvider(<Avatar>A</Avatar>)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
   it('should render with the root, variant-filled, size-md, radius-md, and color-blue classes but no others', () => {
-    const { container } = renderWithNexProvider(<Avatar>Avatar</Avatar>)
+    const { container } = renderWithNexUIProvider(<Avatar>Avatar</Avatar>)
 
     const avatar = container.firstElementChild
 
@@ -48,7 +48,7 @@ describe('Avatar', () => {
   })
 
   it('should add the appropriate color class to root element based on color prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Avatar color='red' data-testid='color-red'>
           Avatar
@@ -98,7 +98,7 @@ describe('Avatar', () => {
   })
 
   it('should add the appropriate size class to root element based on size prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Avatar size='sm' data-testid='size-sm'>
           Avatar
@@ -118,7 +118,7 @@ describe('Avatar', () => {
   })
 
   it('should add the appropriate radius class to root element based on radius prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Avatar radius='sm' data-testid='radius-sm'>
           Avatar
@@ -149,7 +149,7 @@ describe('Avatar', () => {
     it('should render a div containing an img when the image loads successfully', () => {
       mockGlobalImage('loaded')
 
-      const { container } = renderWithNexProvider(
+      const { container } = renderWithNexUIProvider(
         <Avatar src='/fake.png' alt='Avatar' />,
       )
 
@@ -167,7 +167,7 @@ describe('Avatar', () => {
     it('should render its children when the image fails to load', () => {
       mockGlobalImage('error')
 
-      const { container } = renderWithNexProvider(
+      const { container } = renderWithNexUIProvider(
         <Avatar src='/fake.png' alt='Avatar' data-testid='avatar-children'>
           B
         </Avatar>,
@@ -181,7 +181,7 @@ describe('Avatar', () => {
     it('should render the first letter of its alt when the image fails to load', () => {
       mockGlobalImage('error')
 
-      const { container } = renderWithNexProvider(
+      const { container } = renderWithNexUIProvider(
         <Avatar src='/fake.png' alt='Avatar' data-testid='avatar-text' />,
       )
 
@@ -193,7 +193,7 @@ describe('Avatar', () => {
 
   describe('Text Avatar', () => {
     it('should render a div containing a string', () => {
-      const { container } = renderWithNexProvider(<Avatar>O</Avatar>)
+      const { container } = renderWithNexUIProvider(<Avatar>O</Avatar>)
       const avatar = container.firstElementChild
 
       expect(avatar?.tagName).toBe('DIV')
@@ -203,7 +203,7 @@ describe('Avatar', () => {
 
   describe('Icon Avatar', () => {
     it('should render a div containing an svg icon', () => {
-      const { container } = renderWithNexProvider(
+      const { container } = renderWithNexUIProvider(
         <Avatar>
           <UserOutlined className='nui-icon' />
         </Avatar>,
@@ -219,7 +219,7 @@ describe('Avatar', () => {
     mockGlobalImage('loaded')
     const imgClassName = 'test-img-class'
 
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Avatar
         src='/fake.png'
         classes={{

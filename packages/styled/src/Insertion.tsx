@@ -1,3 +1,7 @@
+/* istanbul ignore file */
+
+// fork from http://github.com/emotion-js/emotion/blob/main/packages/react/src/emotion-element.tsx
+
 import { registerStyles, insertStyles } from '@emotion/utils'
 import { useInsertionEffectAlwaysWithSyncFallback } from '@emotion/use-insertion-effect-with-fallbacks'
 import type { SerializedStyles } from '@emotion/serialize'

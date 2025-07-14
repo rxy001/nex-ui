@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { fireEvent } from '@testing-library/react'
-import { mountTest, refTest, renderWithNexProvider } from '~/tests/shared'
+import { mountTest, refTest, renderWithNexUIProvider } from '~/tests/shared'
 import { Input } from '../Input'
 import { inputClasses } from '../inputClasses'
 
@@ -9,12 +9,12 @@ describe('Input', () => {
   refTest(<Input />)
 
   it('renders correctly', () => {
-    const { container } = renderWithNexProvider(<Input />)
+    const { container } = renderWithNexUIProvider(<Input />)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
   it('should render with the root, variant-outlined, radius-md, size-md, color-blue classes but no others', () => {
-    const { container } = renderWithNexProvider(<Input />)
+    const { container } = renderWithNexUIProvider(<Input />)
 
     const root = container.firstElementChild
 
@@ -43,7 +43,7 @@ describe('Input', () => {
   })
 
   it('input should have proper class', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Input data-testid='test-input' />,
     )
 
@@ -51,7 +51,7 @@ describe('Input', () => {
   })
 
   it('should add the appropriate color class to root element based on color prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Input color='red' data-testid='color-red' />
         <Input color='blue' data-testid='color-blue' />
@@ -95,7 +95,7 @@ describe('Input', () => {
   })
 
   it('should add the appropriate variant class to root element based on variant prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Input variant='outlined' data-testid='variant-outlined' />
       </>,
@@ -107,7 +107,7 @@ describe('Input', () => {
   })
 
   it('should add the appropriate size class to root element based on size prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Input size='sm' data-testid='size-sm' />
 
@@ -127,7 +127,7 @@ describe('Input', () => {
   })
 
   it('should add the appropriate radius class to root element based on radius prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <>
         <Input radius='sm' data-testid='radius-sm' />
         <Input radius='md' data-testid='radius-md' />
@@ -151,7 +151,7 @@ describe('Input', () => {
   })
 
   it('should add the appropriate radius class to root element based on invaild prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Input invaild data-testid='invaild' />,
     )
 
@@ -161,7 +161,7 @@ describe('Input', () => {
   })
 
   it('should add the appropriate radius class to root element based on disabled prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Input disabled data-testid='disabled' />,
     )
 
@@ -171,7 +171,7 @@ describe('Input', () => {
   })
 
   it('should add the appropriate radius class to root element based on fullWidth prop', () => {
-    const { getByTestId } = renderWithNexProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Input fullWidth data-testid='full-width' />,
     )
 
@@ -181,7 +181,7 @@ describe('Input', () => {
   })
 
   it('should support prefix and suffix props', () => {
-    const { getByText } = renderWithNexProvider(
+    const { getByText } = renderWithNexUIProvider(
       <Input prefix={<span>Prefix</span>} suffix={<span>Suffix</span>} />,
     )
     expect(getByText('Prefix')).toBeInTheDocument()
@@ -204,7 +204,9 @@ describe('Input', () => {
         />
       )
     }
-    const { getByTestId, container } = renderWithNexProvider(<ClearableInput />)
+    const { getByTestId, container } = renderWithNexUIProvider(
+      <ClearableInput />,
+    )
     const input = getByTestId('clearable-input')
 
     expect(input.getAttribute('value')).toBe('defalt')
@@ -229,7 +231,7 @@ describe('Input', () => {
   })
 
   it(`should not allow clear value when disabled`, () => {
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Input clearable defaultValue='test' disabled />,
     )
     expect(
@@ -241,7 +243,7 @@ describe('Input', () => {
     const rootClassName = 'test-root-class'
     const clearBtnClassName = 'test-clear-btn-class'
 
-    const { container } = renderWithNexProvider(
+    const { container } = renderWithNexUIProvider(
       <Input
         classes={{
           root: rootClassName,
