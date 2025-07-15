@@ -1,5 +1,9 @@
 import { createRef } from 'react'
-import { mountTest, renderWithNexUIProvider } from '~/tests/shared'
+import {
+  mountTest,
+  renderWithNexUIProvider,
+  rootClassNameTest,
+} from '~/tests/shared'
 import { AvatarGroup, Avatar } from '../index'
 import { avatarClasses, avatarGroupClasses } from '../avatarClasses'
 
@@ -10,6 +14,14 @@ describe('AvatarGroup', () => {
       <Avatar />
       <Avatar />
     </AvatarGroup>,
+  )
+
+  rootClassNameTest(
+    <AvatarGroup className='test-class'>
+      <Avatar />
+      <Avatar />
+    </AvatarGroup>,
+    'test-class',
   )
 
   it('should render group when multiple avatars are passed', () => {

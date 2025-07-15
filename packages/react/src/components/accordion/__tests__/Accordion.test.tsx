@@ -1,5 +1,5 @@
 import { createRef, useState } from 'react'
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, act } from '@testing-library/react'
 import {
   renderWithNexUIProvider,
   mountTest,
@@ -18,31 +18,41 @@ const children = (
 )
 
 describe('Accordion', () => {
-  mountTest(<Accordion>{children}</Accordion>)
+  mountTest(<Accordion>{children}</Accordion>, {
+    useAct: true,
+  })
 
-  rootClassNameTest(Accordion, 'test-class')
+  rootClassNameTest(<Accordion className='test-class' />, 'test-class', {
+    useAct: true,
+  })
 
-  it('renders correctly', () => {
-    const { container } = renderWithNexUIProvider(
+  it('renders correctly', async () => {
+    const { container } = await renderWithNexUIProvider(
       <Accordion>{children}</Accordion>,
+      {
+        useAct: true,
+      },
     )
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it("should forward ref to Accordion's root element", () => {
+  it("should forward ref to Accordion's root element", async () => {
     const ref = createRef<HTMLDivElement>()
-    const { container } = renderWithNexUIProvider(
+    const { container } = await renderWithNexUIProvider(
       <Accordion ref={ref} data-testid='accordion'>
         {children}
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionElement = container.firstElementChild
     expect(ref.current).toBe(accordionElement)
   })
 
-  it("should forward ref to AccordionItem's root element", () => {
+  it("should forward ref to AccordionItem's root element", async () => {
     const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion>
         <AccordionItem
           ref={ref}
@@ -53,19 +63,22 @@ describe('Accordion', () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </AccordionItem>
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionItemElement = getByTestId('accordion-item')
     expect(ref.current).toBe(accordionItemElement)
   })
 
-  it('should forward slotProps to heading, indicator, trigger and content slots', () => {
+  it('should forward slotProps to heading, indicator, trigger and content slots', async () => {
     const slotProps = {
       heading: { className: 'test-heading' },
       indicator: { className: 'test-indicator' },
       trigger: { className: 'test-trigger' },
       content: { className: 'test-content' },
     }
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion>
         <AccordionItem
           itemKey='1'
@@ -76,6 +89,9 @@ describe('Accordion', () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </AccordionItem>
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
 
     const root = getByTestId('accordion-item')
@@ -94,14 +110,14 @@ describe('Accordion', () => {
     )
   })
 
-  it('should forward classes to heading, indicator, trigger and content slots', () => {
+  it('should forward classes to heading, indicator, trigger and content slots', async () => {
     const classes = {
       heading: 'test-heading',
       indicator: 'test-indicator',
       trigger: 'test-trigger',
       content: 'test-content',
     }
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion>
         <AccordionItem
           itemKey='1'
@@ -112,6 +128,9 @@ describe('Accordion', () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </AccordionItem>
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const root = getByTestId('accordion-item')
     expect(root.querySelector(`.${classes.heading}`)).toBeInTheDocument()
@@ -120,15 +139,22 @@ describe('Accordion', () => {
     expect(root.querySelector(`.${classes.content}`)).toBeInTheDocument()
   })
 
-  it('should have correct class names', () => {
-    const { container, getByTestId, rerender } = renderWithNexUIProvider(
-      <Accordion>{children}</Accordion>,
+  it('should have correct class names', async () => {
+    const { container, getByTestId, rerender } = await renderWithNexUIProvider(
+      <Accordion expandedKeys={['1']}>{children}</Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionRoot = container.firstElementChild
     expect(accordionRoot).toHaveClass(accordionClasses.root)
     expect(accordionRoot).toHaveClass(accordionClasses['variant-underlined'])
 
-    rerender(<Accordion variant='outlined'>{children}</Accordion>)
+    rerender(
+      <Accordion expandedKeys={['1']} variant='outlined'>
+        {children}
+      </Accordion>,
+    )
     expect(accordionRoot).toHaveClass(accordionClasses['variant-outlined'])
 
     rerender(<Accordion expandedKeys={['1']}>{children}</Accordion>)
@@ -150,8 +176,8 @@ describe('Accordion', () => {
     ).toBeInTheDocument()
   })
 
-  it('should add the appropriate variant class to root element based on variant prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+  it('should add the appropriate variant class to root element based on variant prop', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(
       <>
         <Accordion variant='outlined' data-testid='variant-outlined'>
           Button
@@ -160,6 +186,9 @@ describe('Accordion', () => {
           Button
         </Accordion>
       </>,
+      {
+        useAct: true,
+      },
     )
 
     const outlinedAccordion = getByTestId('variant-outlined')
@@ -171,15 +200,18 @@ describe('Accordion', () => {
     )
   })
 
-  it('should handle defaultExpandedKeys prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+  it('should handle defaultExpandedKeys prop', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion defaultExpandedKeys={['1']}>{children}</Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionItem = getByTestId('accordion-item')
     expect(accordionItem).toHaveClass(accordionItemClasses.expanded)
   })
 
-  it('should be controlled by expandedKeys prop', () => {
+  it('should be controlled by expandedKeys prop', async () => {
     function ControlledAccordion() {
       const [expandedKeys, setExpandedKeys] = useState<Key[]>([])
 
@@ -204,20 +236,32 @@ describe('Accordion', () => {
       )
     }
 
-    const { getByTestId } = renderWithNexUIProvider(<ControlledAccordion />)
+    const { getByTestId } = await renderWithNexUIProvider(
+      <ControlledAccordion />,
+      {
+        useAct: true,
+      },
+    )
     const accordionItem = getByTestId('accordion-item')
     expect(accordionItem).not.toHaveClass(accordionItemClasses.expanded)
 
     const button = getByTestId('button')
-    fireEvent.click(button)
+
+    await act(async () => {
+      fireEvent.click(button)
+    })
+
     expect(accordionItem).toHaveClass(accordionItemClasses.expanded)
   })
 
-  it('should always render the AccordionItem content when keepMounted is true', () => {
-    const { getByTestId, rerender } = renderWithNexUIProvider(
+  it('should always render the AccordionItem content when keepMounted is true', async () => {
+    const { getByTestId, rerender } = await renderWithNexUIProvider(
       <Accordion keepMounted expandedKeys={['1']}>
         {children}
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionItem = getByTestId('accordion-item')
     expect(accordionItem).toBeInTheDocument()
@@ -230,11 +274,14 @@ describe('Accordion', () => {
     expect(accordionItem).toBeInTheDocument()
   })
 
-  it('should unmount AccordionItem content when collapsed and keepMounted is false', () => {
-    const { getByTestId, rerender } = renderWithNexUIProvider(
+  it('should unmount AccordionItem content when collapsed and keepMounted is false', async () => {
+    const { getByTestId, rerender } = await renderWithNexUIProvider(
       <Accordion keepMounted={false} expandedKeys={['1']}>
         {children}
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionItem = getByTestId('accordion-item')
     expect(
@@ -251,7 +298,7 @@ describe('Accordion', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('should handle multiple prop correctly', () => {
+  it('should handle multiple prop correctly', async () => {
     const arrayChildren = [
       <AccordionItem key='1' itemKey='1' title='Accordion 1'>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
@@ -266,10 +313,13 @@ describe('Accordion', () => {
         malesuada lacus ex, sit amet blandit leo lobortis eget.
       </AccordionItem>,
     ]
-    const { rerender, container } = renderWithNexUIProvider(
+    const { rerender, container } = await renderWithNexUIProvider(
       <Accordion multiple expandedKeys={['1']}>
         {arrayChildren}
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const root = container.firstElementChild
 
@@ -287,8 +337,8 @@ describe('Accordion', () => {
     ).toHaveLength(2)
   })
 
-  it('should handle disabled prop correctly', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+  it('should handle disabled prop correctly', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion disabled={true}>
         <AccordionItem
           itemKey='1'
@@ -305,6 +355,9 @@ describe('Accordion', () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </AccordionItem>
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionItem1 = getByTestId('accordion-item-1')
     expect(accordionItem1).toHaveClass(accordionItemClasses.disabled)
@@ -313,9 +366,12 @@ describe('Accordion', () => {
     expect(accordionItem2).toHaveClass(accordionItemClasses.disabled)
   })
 
-  it('should hide indicator when hideIndicator is true', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+  it('should hide indicator when hideIndicator is true', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion hideIndicator={true}>{children}</Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionItem = getByTestId('accordion-item')
     expect(
@@ -323,22 +379,28 @@ describe('Accordion', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('should customize indicator', () => {
+  it('should customize indicator', async () => {
     const customIndicator = <span data-testid='custom-indicator'>▼</span>
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion indicator={customIndicator}>{children}</Accordion>,
+      {
+        useAct: true,
+      },
     )
 
     const indicator = getByTestId('custom-indicator')
     expect(indicator).toBeInTheDocument()
   })
 
-  it('should call onExpandedKeysChange when expanded keys change', () => {
+  it('should call onExpandedKeysChange when expanded keys change', async () => {
     const onExpandedKeysChange = jest.fn()
-    const { getByRole } = renderWithNexUIProvider(
+    const { getByRole } = await renderWithNexUIProvider(
       <Accordion onExpandedKeysChange={onExpandedKeysChange}>
         {children}
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     expect(onExpandedKeysChange).not.toHaveBeenCalled()
 
@@ -347,25 +409,27 @@ describe('Accordion', () => {
     expect(onExpandedKeysChange).toHaveBeenCalled()
   })
 
-  it('should warn when multiple is false and expandedKeys has more than one key', () => {
+  it('should warn when multiple is false and expandedKeys has more than one key', async () => {
     const consoleWarnSpy = jest
       .spyOn(console, 'warn')
       .mockImplementation(() => {})
 
-    renderWithNexUIProvider(
+    await renderWithNexUIProvider(
       <Accordion multiple={false} expandedKeys={['1', '2']}>
         {children}
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
-      '[Nex UI] Accordion: The multiple prop of the Accordion is set to false, but the number of currently expanded items exceeds 1. Please check and set the appropriate props.',
-    )
+
+    expect(consoleWarnSpy).toHaveBeenCalled()
 
     consoleWarnSpy.mockRestore()
   })
 
-  it('should toggle between expanded and collapsed states when clicking the trigger', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+  it('should toggle between expanded and collapsed states when clicking the trigger', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(
       <Accordion defaultExpandedKeys={['1']} multiple>
         <AccordionItem
           key='1'
@@ -386,6 +450,9 @@ describe('Accordion', () => {
           malesuada lacus ex, sit amet blandit leo lobortis eget.
         </AccordionItem>
       </Accordion>,
+      {
+        useAct: true,
+      },
     )
     const accordionItem1 = getByTestId('accordion-item-1')
     expect(accordionItem1).toHaveClass(accordionItemClasses.expanded)

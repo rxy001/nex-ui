@@ -18,7 +18,7 @@ afterAll(() => {
 describe('Avatar', () => {
   mountTest(<Avatar />)
 
-  rootClassNameTest(Avatar, 'test-class')
+  rootClassNameTest(<Avatar className='test-class' />, 'test-class')
 
   it('renders correctly', () => {
     const { container } = renderWithNexUIProvider(<Avatar>A</Avatar>)
@@ -234,7 +234,7 @@ describe('Avatar', () => {
       expect(avatar?.textContent).toBe('A')
     })
 
-    it('should not update state if image is unmounted before load event', async () => {
+    it('should not update state if image is unmounted before load event', () => {
       mockGlobalImage('loading')
 
       const { unmount, container } = renderWithNexUIProvider(
