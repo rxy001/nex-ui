@@ -105,3 +105,9 @@ https://github.com/microsoft/TypeScript/issues/40426
 <!-- 34. 组件的 classes 应该只添加与样式有关的 API -->
 
 36. 支持嵌套 modal
+
+<!-- 37. slotProps 原生元素无法传递 data-*
+
+> Note: If an attribute name is not a valid JS identifier (like a data-* attribute), it is not considered to be an error if it is not found in the element attributes type.
+
+要修复该问题只能手动定义 -->

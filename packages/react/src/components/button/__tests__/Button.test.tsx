@@ -1,5 +1,5 @@
 import { useState, createRef } from 'react'
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, act } from '@testing-library/react'
 import {
   mountTest,
   renderWithNexUIProvider,
@@ -12,7 +12,7 @@ import type { ButtonProps } from '../index'
 describe('Button', () => {
   mountTest(<Button />)
 
-  rootClassNameTest(Button, 'test-class')
+  rootClassNameTest(<Button className='test-class' />, 'test-class')
 
   it("should forward ref to Button's root element", () => {
     const ref = createRef<HTMLButtonElement>()
@@ -207,14 +207,16 @@ describe('Button', () => {
     )
   })
 
-  it('should trigger onClick function', () => {
+  it('should trigger onClick function', async () => {
     const onClick = jest.fn()
     const { container } = renderWithNexUIProvider(<Button onClick={onClick} />)
-    fireEvent.click(container.firstElementChild!)
+    await act(async () => {
+      fireEvent.click(container.firstElementChild!)
+    })
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should ignore events when disabled', () => {
+  it('should ignore events when disabled', async () => {
     const onClick = jest.fn()
     const { getByText } = renderWithNexUIProvider(
       <Button disabled onClick={onClick}>
@@ -223,7 +225,9 @@ describe('Button', () => {
     )
 
     const button = getByText('Btn Tag')
-    fireEvent.click(button)
+    await act(async () => {
+      fireEvent.click(button)
+    })
     expect(button).toHaveClass(buttonClasses.disabled)
     expect(button).toHaveStyleRule('pointer-events', 'none')
     expect(onClick).not.toHaveBeenCalled()
@@ -262,7 +266,7 @@ describe('Button', () => {
     expect(endIcon.parentElement).toHaveClass(buttonClasses['end-icon'])
   })
 
-  it('should support to change loading', () => {
+  it('should support to change loading', async () => {
     const DefaultButton: React.FC = () => {
       const [loading, setLoading] = useState<ButtonProps['loading']>(false)
       return (
@@ -276,9 +280,11 @@ describe('Button', () => {
       )
     }
     const { getByTestId } = renderWithNexUIProvider(<DefaultButton />)
-
     const button = getByTestId('button')
-    fireEvent.click(button)
+
+    await act(async () => {
+      fireEvent.click(button)
+    })
     expect(button).toHaveClass(buttonClasses.loading)
     expect(
       button.querySelector(`.${buttonClasses['icon-loading']}`),

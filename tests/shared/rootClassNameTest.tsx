@@ -1,13 +1,17 @@
-import { renderWithNexUIProvider } from './renderWithProvider'
-import type { FC } from 'react'
+import {
+  renderWithNexUIProvider,
+  RenderWithNexUIProviderOptions,
+} from './renderWithProvider'
+import type { ReactNode } from 'react'
 
 export const rootClassNameTest = (
-  Component: FC<{ className?: string }>,
+  Component: ReactNode,
   className: string,
+  options?: RenderWithNexUIProviderOptions,
 ) => {
-  it('should have the correct root class name', () => {
-    const { container } = renderWithNexUIProvider(
-      <Component className={className} />,
+  it('should have the correct root class name', async () => {
+    const { container } = await Promise.resolve(
+      renderWithNexUIProvider(Component, options),
     )
     const rootElement = container.firstElementChild
     expect(rootElement).toHaveClass(className)
