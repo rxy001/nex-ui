@@ -11,6 +11,7 @@ import type { ButtonProps } from '../index'
 
 describe('Button', () => {
   mountTest(<Button />)
+
   rootClassNameTest(Button, 'test-class')
 
   it('should forward ref to Button', () => {
@@ -160,33 +161,48 @@ describe('Button', () => {
   })
 
   it('should add the appropriate iconOnly class to root element based on iconOnly prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByTestId, rerender } = renderWithNexUIProvider(
       <Button iconOnly data-testid='icon-only'>
         Button
       </Button>,
     )
 
     expect(getByTestId('icon-only')).toHaveClass(buttonClasses['icon-only'])
+
+    rerender(<Button data-testid='not-icon-only'>Button</Button>)
+    expect(getByTestId('not-icon-only')).not.toHaveClass(
+      buttonClasses['icon-only'],
+    )
   })
 
   it('should add the appropriate fullWidth class to root element based on fullWidth prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByTestId, rerender } = renderWithNexUIProvider(
       <Button fullWidth data-testid='full-width'>
         Button
       </Button>,
     )
 
     expect(getByTestId('full-width')).toHaveClass(buttonClasses['full-width'])
+
+    rerender(<Button data-testid='not-full-width'>Button</Button>)
+    expect(getByTestId('not-full-width')).not.toHaveClass(
+      buttonClasses['full-width'],
+    )
   })
 
   it('should add the appropriate disableRipple class to root element based on disableRipple prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByTestId, rerender } = renderWithNexUIProvider(
       <Button disableRipple data-testid='disable-ripple'>
         Button
       </Button>,
     )
 
     expect(getByTestId('disable-ripple')).toHaveClass(
+      buttonClasses['disable-ripple'],
+    )
+
+    rerender(<Button data-testid='not-disable-ripple'>Button</Button>)
+    expect(getByTestId('not-disable-ripple')).not.toHaveClass(
       buttonClasses['disable-ripple'],
     )
   })
@@ -336,7 +352,7 @@ describe('Button', () => {
     expect(endSpinner).toBeInTheDocument()
   })
 
-  it('should forward slotProps to startIcon and endIcon', () => {
+  it('should forward slotProps to Button', () => {
     const { container } = renderWithNexUIProvider(
       <Button
         startIcon={<span data-testid='start-icon'>Start Icon</span>}
@@ -355,5 +371,17 @@ describe('Button', () => {
 
     expect(startIcon).toBeInTheDocument()
     expect(endIcon).toBeInTheDocument()
+  })
+
+  it('should disable the button when loading', () => {
+    const { getByTestId } = renderWithNexUIProvider(
+      <Button loading data-testid='loading-button'>
+        Button
+      </Button>,
+    )
+
+    const button = getByTestId('loading-button')
+    expect(button).toHaveClass(buttonClasses.loading)
+    expect(button).toHaveStyleRule('pointer-events', 'none')
   })
 })
