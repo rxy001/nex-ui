@@ -29,7 +29,7 @@ describe('Accordion', () => {
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it('should forward ref to Accordion', () => {
+  it("should forward ref to Accordion's root element", () => {
     const ref = createRef<HTMLDivElement>()
     const { container } = renderWithNexUIProvider(
       <Accordion ref={ref} data-testid='accordion'>
@@ -40,7 +40,7 @@ describe('Accordion', () => {
     expect(ref.current).toBe(accordionElement)
   })
 
-  it('should forward ref to AccordionItem', () => {
+  it("should forward ref to AccordionItem's root element", () => {
     const ref = createRef<HTMLDivElement>()
     const { getByTestId } = renderWithNexUIProvider(
       <Accordion>
@@ -58,7 +58,7 @@ describe('Accordion', () => {
     expect(ref.current).toBe(accordionItemElement)
   })
 
-  it('should forward slotProps to AccordionItem', () => {
+  it('should forward slotProps to heading, indicator, trigger and content slots', () => {
     const slotProps = {
       heading: { className: 'test-heading' },
       indicator: { className: 'test-indicator' },
@@ -94,7 +94,7 @@ describe('Accordion', () => {
     )
   })
 
-  it('should forward classes to AccordionItem', () => {
+  it('should forward classes to heading, indicator, trigger and content slots', () => {
     const classes = {
       heading: 'test-heading',
       indicator: 'test-indicator',
@@ -335,18 +335,15 @@ describe('Accordion', () => {
 
   it('should call onExpandedKeysChange when expanded keys change', () => {
     const onExpandedKeysChange = jest.fn()
-    const { getByTestId } = renderWithNexUIProvider(
+    const { getByRole } = renderWithNexUIProvider(
       <Accordion onExpandedKeysChange={onExpandedKeysChange}>
         {children}
       </Accordion>,
     )
     expect(onExpandedKeysChange).not.toHaveBeenCalled()
 
-    const accordionItem = getByTestId('accordion-item')
-    const trigger = accordionItem.querySelector(
-      `.${accordionItemClasses.trigger}`,
-    )
-    fireEvent.click(trigger!)
+    const trigger = getByRole('button')
+    fireEvent.click(trigger)
     expect(onExpandedKeysChange).toHaveBeenCalled()
   })
 

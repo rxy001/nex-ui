@@ -25,7 +25,7 @@ describe('Avatar', () => {
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it('should forward ref to root element', () => {
+  it("should forward ref to Avatar's root element", () => {
     const ref = createRef<HTMLDivElement>()
     const { container } = renderWithNexUIProvider(<Avatar ref={ref}>A</Avatar>)
     expect(container.firstElementChild).toBe(ref.current)
@@ -154,7 +154,7 @@ describe('Avatar', () => {
     expect(getByTestId('outlined')).toHaveClass(avatarClasses.outlined)
   })
 
-  it('should forward classes to Avatar', () => {
+  it('should forward classes to img slots', () => {
     mockGlobalImage('loaded')
     const imgClassName = 'test-img-class'
     const { container } = renderWithNexUIProvider(
@@ -170,7 +170,7 @@ describe('Avatar', () => {
     restoreGlobalImage()
   })
 
-  it('should forward slotProps to Avatar', () => {
+  it('should forward slotProps to img slots', () => {
     mockGlobalImage('loaded')
 
     const { getByTestId } = renderWithNexUIProvider(
