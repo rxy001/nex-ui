@@ -1,4 +1,5 @@
 import { createTokens } from '../tokens'
+import { Token } from '../tokens/createToken'
 
 const PREFIX = 'test'
 
@@ -295,4 +296,25 @@ describe('createTokens', () => {
   })
 })
 
-describe('defineTokens', () => {})
+describe('Token', () => {
+  it('should create a token instance', () => {
+    const token = new Token({
+      path: ['colors', 'blue', '100'],
+      value: 'blue',
+      category: 'colors',
+      name: 'blue-100',
+      originalValue: 'blue',
+      cssVar: {
+        var: 'var(--color-blue-100)',
+        ref: 'colors.blue.100',
+      },
+      conditions: {
+        base: 'blue',
+        light: 'light-blue',
+        dark: 'dark-blue',
+      },
+    })
+
+    expect(token).toMatchSnapshot()
+  })
+})

@@ -1,4 +1,7 @@
-export const mockGlobalImage = (status: 'loaded' | 'error') => {
+const images: HTMLImageElement[] = []
+const originalImage = global.Image
+
+export const mockGlobalImage = (status: 'loaded' | 'error' | 'loading') => {
   global.Image = jest.fn(() => {
     const imageMock: Partial<HTMLImageElement> = {}
 
@@ -15,6 +18,10 @@ export const mockGlobalImage = (status: 'loaded' | 'error') => {
             new ErrorEvent('error', { message: 'Image failed to load' }),
           )
         }
+
+        if (status === 'loading') {
+          images.push(this)
+        }
       },
     })
 
@@ -23,5 +30,19 @@ export const mockGlobalImage = (status: 'loaded' | 'error') => {
 }
 
 export function restoreGlobalImage() {
-  global.Image = window.Image
+  global.Image = originalImage
+}
+
+export function flushMockedImages(status: 'loaded' | 'error') {
+  const imagesToFlush = images.splice(0, images.length)
+  imagesToFlush.forEach((image) => {
+    if (status === 'loaded' && image.onload) {
+      image.onload.call(image, new Event('load'))
+    } else if (status === 'error' && image.onerror) {
+      image.onerror.call(
+        image,
+        new ErrorEvent('error', { message: 'Image failed to load' }),
+      )
+    }
+  })
 }

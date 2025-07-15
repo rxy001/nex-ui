@@ -103,20 +103,22 @@ export const AvatarGroup = <RootElement extends ElementType = 'div'>(
     [color, outlined, radius, size],
   )
 
-  if (!isArray(children)) {
+  const childrenLength = isArray(children) ? children.length : 1
+
+  if (childrenLength === 1 && (total === undefined || total < 2)) {
     return children
   }
 
-  const lastAvatar = Math.min(children.length, max)
+  const lastAvatar = Math.min(childrenLength, max)
 
-  const totalAvatars = total ?? children.length
+  const totalAvatars = total ?? childrenLength
 
   const extraAvatars = Math.max(0, totalAvatars - lastAvatar)
 
   return (
     <AvatarGroupRoot {...getAvatarGroupRootProps()}>
       <AvatarGroupProvider value={ctx}>
-        {children.slice(0, lastAvatar)}
+        {isArray(children) ? children.slice(0, lastAvatar) : children}
         {!!extraAvatars &&
           (renderSurplus ? (
             renderSurplus(extraAvatars)

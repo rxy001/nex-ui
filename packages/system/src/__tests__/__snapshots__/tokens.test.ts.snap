@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Token should create a token instance 1`] = `
+Token {
+  "category": "colors",
+  "conditions": {
+    "base": "blue",
+    "dark": "dark-blue",
+    "light": "light-blue",
+  },
+  "cssVar": {
+    "ref": "colors.blue.100",
+    "var": "var(--color-blue-100)",
+  },
+  "name": "blue-100",
+  "originalValue": "blue",
+  "path": [
+    "colors",
+    "blue",
+    "100",
+  ],
+  "value": "blue",
+}
+`;
+
 exports[`createTokens should support light and dark conditions 1`] = `
 {
   "category": "colors",

@@ -9,7 +9,7 @@ export const rootClassNameTest = (
     const { container } = renderWithNexUIProvider(
       <Component className={className} />,
     )
-    const rootElement = container.firstChild
+    const rootElement = container.firstElementChild
     expect(rootElement).toHaveClass(className)
   })
 }
