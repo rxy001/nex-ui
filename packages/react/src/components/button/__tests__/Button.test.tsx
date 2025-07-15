@@ -14,7 +14,7 @@ describe('Button', () => {
 
   rootClassNameTest(Button, 'test-class')
 
-  it('should forward ref to Button', () => {
+  it("should forward ref to Button's root element", () => {
     const ref = createRef<HTMLButtonElement>()
     const { container } = renderWithNexUIProvider(
       <Button ref={ref}>Button</Button>,
@@ -285,7 +285,7 @@ describe('Button', () => {
     ).toBeInTheDocument()
   })
 
-  it('should forward classes to Button', () => {
+  it('should forward classes to startIcon and endIcon slots', () => {
     const startIconClassName = 'test-start-icon-class'
     const endIconClassName = 'test-end-icon-class'
 
@@ -352,7 +352,7 @@ describe('Button', () => {
     expect(endSpinner).toBeInTheDocument()
   })
 
-  it('should forward slotProps to Button', () => {
+  it('should forward slotProps to startIcon and endIcon slots', () => {
     const { container } = renderWithNexUIProvider(
       <Button
         startIcon={<span data-testid='start-icon'>Start Icon</span>}
