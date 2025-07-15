@@ -5,4 +5,8 @@ export {
   renderWithSystemProvider,
   renderWithNexUIProvider,
 } from './renderWithProvider'
-export { mockGlobalImage, restoreGlobalImage } from './mockGlobalImage'
+export {
+  mockGlobalImage,
+  restoreGlobalImage,
+  flushMockedImages,
+} from './mockGlobalImage'

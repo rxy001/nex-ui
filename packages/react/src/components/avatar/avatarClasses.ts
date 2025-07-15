@@ -28,3 +28,8 @@ export const avatarClasses = generateUtilityClasses('nui-avatar', [
 
   'img',
 ])
+
+export const avatarGroupClasses = generateUtilityClasses('nui-avatar-group', [
+  'root',
+  'surplus',
+])

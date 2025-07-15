@@ -1,6 +1,6 @@
 import type { TokenValue, TokenCategory, SemanticTokenValue } from './types'
 
-class Token {
+export class Token {
   path: string[]
 
   value: string
