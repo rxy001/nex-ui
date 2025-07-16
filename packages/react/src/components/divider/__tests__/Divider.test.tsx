@@ -1,14 +1,20 @@
-import { mountTest, refTest, renderWithNexUIProvider } from '~/tests/shared'
-import { Divider } from '../Divider'
+import { createRef } from 'react'
+import { mountTest, renderWithNexUIProvider } from '~/tests/shared'
+import { Divider } from '../index'
 import { dividerClasses } from '../dividerClasses'
 
 describe('Divider', () => {
   mountTest(<Divider />)
-  refTest(<Divider />)
 
   it('renders correctly', () => {
     const { container } = renderWithNexUIProvider(<Divider />)
     expect(container.firstElementChild).toMatchSnapshot()
+  })
+
+  it('should forward ref to root element', () => {
+    const ref = createRef<HTMLHRElement>()
+    const { container } = renderWithNexUIProvider(<Divider ref={ref} />)
+    expect(container.firstElementChild).toBe(ref.current)
   })
 
   it('should render with the root, orientation-horizontal classes but no others', () => {
