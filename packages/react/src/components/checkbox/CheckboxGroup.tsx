@@ -20,18 +20,22 @@ import type {
   CheckboxGroupOwnerState,
 } from './types'
 
-const useSlotClasses = () => {
+const useSlotClasses = <T extends number | string>(
+  ownerState: CheckboxGroupOwnerState<T>,
+) => {
   const { prefix } = useNexUI()
+
+  const { orientation } = ownerState
 
   return useMemo(() => {
     const dividerRoot = `${prefix}-checkbox-group`
 
     const slots = {
-      root: ['root'],
+      root: ['root', orientation],
     }
 
     return composeClasses(slots, getUtilityClass(dividerRoot))
-  }, [prefix])
+  }, [prefix, orientation])
 }
 
 export const CheckboxGroup = <
@@ -55,7 +59,7 @@ export const CheckboxGroup = <
     radius,
     value,
     role = 'group',
-    orientation = 'horziontal',
+    orientation = 'horizontal',
     defaultValue = [],
     ...remainingProps
   } = props
@@ -72,7 +76,7 @@ export const CheckboxGroup = <
     value: values,
   }
 
-  const classes = useSlotClasses()
+  const classes = useSlotClasses(ownerState)
 
   const styles = useStyles({
     name: 'CheckboxGroup',
@@ -99,6 +103,7 @@ export const CheckboxGroup = <
       color,
       radius,
       toggleValue: (value: T) => {
+        // istanbul ignore next
         if (disabled) {
           return
         }
