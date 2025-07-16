@@ -410,9 +410,7 @@ describe('Accordion', () => {
   })
 
   it('should warn when multiple is false and expandedKeys has more than one key', async () => {
-    const consoleWarnSpy = jest
-      .spyOn(console, 'warn')
-      .mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation()
 
     await renderWithNexUIProvider(
       <Accordion multiple={false} expandedKeys={['1', '2']}>

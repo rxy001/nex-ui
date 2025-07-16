@@ -7,7 +7,7 @@ describe('createScales', () => {
   >
 
   beforeEach(() => {
-    consoleSpy = jest.spyOn(console, 'error')
+    consoleSpy = jest.spyOn(console, 'error').mockImplementation()
   })
 
   afterEach(() => {

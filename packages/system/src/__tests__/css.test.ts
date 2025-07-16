@@ -255,7 +255,7 @@ describe('css', () => {
   })
 
   it('should throw an error if color placeholder is used without providing the colorPalette prop', () => {
-    const consoleSpy = jest.spyOn(console, 'error')
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     css({
       color: 'colorPalette.100',
     })
@@ -353,7 +353,7 @@ describe('css', () => {
   })
 
   it('should throw an error if an invalid token is used in the token reference syntax', () => {
-    const consoleSpy = jest.spyOn(console, 'error')
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     css({
       border: '1px solid {colors.pink.100}',
     })
