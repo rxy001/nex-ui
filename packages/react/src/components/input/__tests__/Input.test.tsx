@@ -1,19 +1,30 @@
-import { useState } from 'react'
+import { useState, createRef } from 'react'
 import { fireEvent } from '@testing-library/react'
-import { mountTest, refTest, renderWithNexUIProvider } from '~/tests/shared'
-import { Input } from '../Input'
+import {
+  mountTest,
+  renderWithNexUIProvider,
+  rootClassNameTest,
+} from '~/tests/shared'
+import { Input } from '../index'
 import { inputClasses } from '../inputClasses'
 
 describe('Input', () => {
   mountTest(<Input />)
-  refTest(<Input />)
+
+  rootClassNameTest(<Input className='test-class' />, 'test-class')
 
   it('renders correctly', () => {
     const { container } = renderWithNexUIProvider(<Input />)
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
-  it('should render with the root, variant-outlined, radius-md, size-md, color-blue classes but no others', () => {
+  it('should forward ref to input element', () => {
+    const ref = createRef<HTMLInputElement>()
+    renderWithNexUIProvider(<Input ref={ref} />)
+    expect(ref.current).toBeInstanceOf(HTMLInputElement)
+  })
+
+  it('should render with the root, variant-outlined, radius-md, size-md, color-blue, classes but no others', () => {
     const { container } = renderWithNexUIProvider(<Input />)
 
     const root = container.firstElementChild
@@ -29,6 +40,7 @@ describe('Input', () => {
     expect(root).not.toHaveClass(inputClasses['radius-full'])
     expect(root).not.toHaveClass(inputClasses['radius-lg'])
     expect(root).not.toHaveClass(inputClasses['radius-sm'])
+    expect(root).not.toHaveClass(inputClasses['radius-none'])
     expect(root).not.toHaveClass(inputClasses['color-yellow'])
     expect(root).not.toHaveClass(inputClasses['color-cyan'])
     expect(root).not.toHaveClass(inputClasses['color-red'])
@@ -37,9 +49,15 @@ describe('Input', () => {
     expect(root).not.toHaveClass(inputClasses['color-orange'])
     expect(root).not.toHaveClass(inputClasses['color-purple'])
     expect(root).not.toHaveClass(inputClasses['color-pink'])
-    expect(root).not.toHaveClass(inputClasses.invaild)
+    expect(root).not.toHaveClass(inputClasses.invalid)
     expect(root).not.toHaveClass(inputClasses.disabled)
     expect(root).not.toHaveClass(inputClasses['full-width'])
+    expect(root).not.toHaveClass(inputClasses['variant-filled'])
+    expect(root).not.toHaveClass(inputClasses['variant-underlined'])
+    expect(root).not.toHaveClass(inputClasses['label-placement-inside'])
+    expect(root).not.toHaveClass(inputClasses['label-placement-outside'])
+    expect(root).not.toHaveClass(inputClasses['label-placement-float-outside'])
+    expect(root).not.toHaveClass(inputClasses['label-placement-float-inside'])
   })
 
   it('input should have proper class', () => {
@@ -98,11 +116,19 @@ describe('Input', () => {
     const { getByTestId } = renderWithNexUIProvider(
       <>
         <Input variant='outlined' data-testid='variant-outlined' />
+        <Input variant='filled' data-testid='variant-filled' />
+        <Input variant='underlined' data-testid='variant-underlined' />
       </>,
     )
 
     expect(getByTestId('variant-outlined').parentElement).toHaveClass(
       inputClasses['variant-outlined'],
+    )
+    expect(getByTestId('variant-filled').parentElement).toHaveClass(
+      inputClasses['variant-filled'],
+    )
+    expect(getByTestId('variant-underlined').parentElement).toHaveClass(
+      inputClasses['variant-underlined'],
     )
   })
 
@@ -110,7 +136,6 @@ describe('Input', () => {
     const { getByTestId } = renderWithNexUIProvider(
       <>
         <Input size='sm' data-testid='size-sm' />
-
         <Input size='md' data-testid='size-md' />
         <Input size='lg' data-testid='size-lg' />
       </>,
@@ -129,6 +154,7 @@ describe('Input', () => {
   it('should add the appropriate radius class to root element based on radius prop', () => {
     const { getByTestId } = renderWithNexUIProvider(
       <>
+        <Input radius='none' data-testid='radius-none' />
         <Input radius='sm' data-testid='radius-sm' />
         <Input radius='md' data-testid='radius-md' />
         <Input radius='lg' data-testid='radius-lg' />
@@ -136,6 +162,9 @@ describe('Input', () => {
       </>,
     )
 
+    expect(getByTestId('radius-none').parentElement).toHaveClass(
+      inputClasses['radius-none'],
+    )
     expect(getByTestId('radius-sm').parentElement).toHaveClass(
       inputClasses['radius-sm'],
     )
@@ -150,24 +179,84 @@ describe('Input', () => {
     )
   })
 
-  it('should add the appropriate radius class to root element based on invaild prop', () => {
+  it('should add the appropriate label placement class to root element based on labelPlacement and value prop', () => {
     const { getByTestId } = renderWithNexUIProvider(
-      <Input invaild data-testid='invaild' />,
+      <>
+        <Input
+          labelPlacement='inside'
+          data-testid='label-inside'
+          label='Label Inside'
+        />
+        <Input
+          labelPlacement='outside'
+          data-testid='label-outside'
+          label='Label Outside'
+        />
+        <Input
+          labelPlacement='float-inside'
+          data-testid='label-float-inside'
+          label='Label Float Inside'
+        />
+        <Input
+          labelPlacement='float-outside'
+          data-testid='label-float-outside'
+          label='Label Float Outside'
+        />
+        <Input
+          labelPlacement='float-outside'
+          data-testid='label-float-outside-with-value'
+          label='Label Float Outside'
+          value='Test Value'
+        />
+        <Input
+          labelPlacement='float-inside'
+          data-testid='label-float-inside-with-value'
+          label='Label Float Inside'
+          value='Test Value'
+        />
+      </>,
     )
 
-    expect(getByTestId('invaild').parentElement).toHaveClass(
-      inputClasses.invaild,
+    expect(getByTestId('label-inside').parentElement).toHaveClass(
+      inputClasses['label-placement-inside'],
     )
+    expect(getByTestId('label-outside').parentElement).toHaveClass(
+      inputClasses['label-placement-outside'],
+    )
+    expect(getByTestId('label-float-inside').parentElement).toHaveClass(
+      inputClasses['label-placement-float-inside'],
+    )
+    expect(getByTestId('label-float-outside').parentElement).toHaveClass(
+      inputClasses['label-placement-float-outside'],
+    )
+    expect(
+      getByTestId('label-float-outside-with-value').parentElement,
+    ).toHaveClass(inputClasses['label-placement-outside'])
+    expect(
+      getByTestId('label-float-inside-with-value').parentElement,
+    ).toHaveClass(inputClasses['label-placement-inside'])
   })
 
-  it('should add the appropriate radius class to root element based on disabled prop', () => {
+  it('should mark input as invalid when invalid prop is true', () => {
     const { getByTestId } = renderWithNexUIProvider(
-      <Input disabled data-testid='disabled' />,
+      <Input invalid data-testid='input' />,
     )
 
-    expect(getByTestId('disabled').parentElement).toHaveClass(
-      inputClasses.disabled,
+    const input = getByTestId('input')
+
+    expect(input).toBeInvalid()
+    expect(input.parentElement).toHaveClass(inputClasses.invalid)
+  })
+
+  it('should disable input when disabled prop is true', () => {
+    const { getByTestId } = renderWithNexUIProvider(
+      <Input disabled data-testid='input' />,
     )
+
+    const input = getByTestId('input')
+
+    expect(input).toBeDisabled()
+    expect(input.parentElement).toHaveClass(inputClasses.disabled)
   })
 
   it('should add the appropriate radius class to root element based on fullWidth prop', () => {
@@ -208,11 +297,10 @@ describe('Input', () => {
       <ClearableInput />,
     )
     const input = getByTestId('clearable-input')
+    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
 
     expect(input.getAttribute('value')).toBe('defalt')
-    expect(
-      container.querySelector(`.${inputClasses['clear-btn']}`),
-    ).toBeInTheDocument()
+    expect(clearButton).toBeInTheDocument()
 
     fireEvent.change(input, {
       target: {
@@ -221,43 +309,156 @@ describe('Input', () => {
     })
 
     expect(input.getAttribute('value')).toBe('changed')
-    expect(
-      container.querySelector(`.${inputClasses['clear-btn']}`),
-    ).toBeInTheDocument()
 
-    fireEvent.click(container.querySelector(`.${inputClasses['clear-btn']}`)!)
+    fireEvent.click(clearButton!)
     expect(input.getAttribute('value')).toBe('')
     expect(document.activeElement).toBe(input)
   })
 
   it(`should not allow clear value when disabled`, () => {
-    const { container } = renderWithNexUIProvider(
-      <Input clearable defaultValue='test' disabled />,
+    const { container, getByTestId } = renderWithNexUIProvider(
+      <Input data-testid='input' clearable defaultValue='test' disabled />,
     )
-    expect(
-      container.querySelector('.ant-input-clear-icon-hidden'),
-    ).not.toBeInTheDocument()
+
+    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
+    const input = getByTestId('input')
+
+    expect(clearButton).toBeInTheDocument()
+    expect(clearButton).toBeDisabled()
+    expect(input.getAttribute('value')).toBe('test')
+
+    fireEvent.click(clearButton!)
+    expect(input.getAttribute('value')).toBe('test')
   })
 
-  it('should forward classes to Input', () => {
+  it('should forward classes to root, label, prefix, suffix, input, clearButton slots', () => {
     const rootClassName = 'test-root-class'
+    const labelClassName = 'test-label-class'
+    const prefixClassName = 'test-prefix-class'
+    const suffixClassName = 'test-suffix-class'
     const clearBtnClassName = 'test-clear-btn-class'
+    const inputClassName = 'test-input-class'
 
     const { container } = renderWithNexUIProvider(
       <Input
         classes={{
           root: rootClassName,
+          label: labelClassName,
+          prefix: prefixClassName,
+          suffix: suffixClassName,
           clearButton: clearBtnClassName,
+          input: inputClassName,
         }}
+        prefix={<span>Prefix</span>}
+        suffix={<span>Suffix</span>}
         clearable
-        defaultValue='default'
+        label='Test Label'
       />,
     )
 
     const root = container.firstChild
+    const label = container.querySelector(`.${inputClasses['label']}`)
+    const prefix = container.querySelector(`.${inputClasses['prefix']}`)
+    const suffix = container.querySelector(`.${inputClasses['suffix']}`)
     const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
+    const input = container.querySelector(`.${inputClasses['input']}`)
 
     expect(root).toHaveClass(rootClassName)
+    expect(label).toHaveClass(labelClassName)
+    expect(prefix).toHaveClass(prefixClassName)
+    expect(suffix).toHaveClass(suffixClassName)
     expect(clearButton).toHaveClass(clearBtnClassName)
+    expect(input).toHaveClass(inputClassName)
+  })
+
+  it('should forward slotProps to root, label, prefix, suffix, clearButton slots', () => {
+    const { container } = renderWithNexUIProvider(
+      <Input
+        slotProps={{
+          root: {
+            className: 'test-root-class',
+          },
+          clearButton: {
+            className: 'test-clear-btn-class',
+          },
+          label: {
+            className: 'test-label-class',
+          },
+          prefix: {
+            className: 'test-prefix-class',
+          },
+          suffix: {
+            className: 'test-suffix-class',
+          },
+        }}
+        defaultValue='default'
+        label='Test Label'
+        prefix={<span>Prefix</span>}
+        suffix={<span>Suffix</span>}
+        clearable
+      />,
+    )
+
+    const root = container.firstChild
+    const label = container.querySelector(`.${inputClasses['label']}`)
+    const prefix = container.querySelector(`.${inputClasses['prefix']}`)
+    const suffix = container.querySelector(`.${inputClasses['suffix']}`)
+    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
+
+    expect(root).toHaveClass('test-root-class')
+    expect(label).toHaveClass('test-label-class')
+    expect(prefix).toHaveClass('test-prefix-class')
+    expect(suffix).toHaveClass('test-suffix-class')
+    expect(clearButton).toHaveClass('test-clear-btn-class')
+  })
+
+  it('should be controlled by value prop', () => {
+    const ControlledInput: React.FC = () => {
+      const [value, setValue] = useState('controlled')
+
+      return (
+        <Input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          data-testid='controlled-input'
+        />
+      )
+    }
+
+    const { getByTestId } = renderWithNexUIProvider(<ControlledInput />)
+    const input = getByTestId('controlled-input')
+
+    expect(input.getAttribute('value')).toBe('controlled')
+
+    fireEvent.change(input, {
+      target: {
+        value: 'new value',
+      },
+    })
+
+    expect(input.getAttribute('value')).toBe('new value')
+  })
+
+  it('should support defaultValue prop', () => {
+    const { getByTestId } = renderWithNexUIProvider(
+      <Input defaultValue='uncontrolled' data-testid='uncontrolled-input' />,
+    )
+    const input = getByTestId('uncontrolled-input')
+
+    expect(input.getAttribute('value')).toBe('uncontrolled')
+  })
+
+  it('should focus on input when clicking label', () => {
+    const { getByTestId } = renderWithNexUIProvider(
+      <Input data-testid='input-with-label' label='Click me' />,
+    )
+    const input = getByTestId('input-with-label')
+    const label = input.parentElement
+
+    expect(document.activeElement).not.toBe(input)
+
+    fireEvent.click(label!)
+
+    expect(document.activeElement).toBe(input)
   })
 })

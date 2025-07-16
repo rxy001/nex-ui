@@ -84,7 +84,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
    * If true, the input is invalid.
    * @default false
    */
-  invaild?: boolean
+  invalid?: boolean
 
   /**
    * If true, the input is clearable.
@@ -157,7 +157,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'root' | 'label' | 'clearButton' | 'prefix' | 'suffix'
+    'root' | 'label' | 'clearButton' | 'prefix' | 'suffix' | 'input'
   >
 
   /**
@@ -181,7 +181,7 @@ export type InputOwnerState<InputComponent extends ElementType = 'input'> =
     fullWidth: boolean
     size: InputVariants['size']
     radius: InputVariants['radius']
-    invaild: boolean
+    invalid: boolean
     type: InputProps['type']
     clearable: boolean
     value: string

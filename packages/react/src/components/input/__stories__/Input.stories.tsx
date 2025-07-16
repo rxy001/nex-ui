@@ -17,7 +17,7 @@ const meta = {
     disabled: {
       control: 'boolean',
     },
-    invaild: {
+    invalid: {
       control: 'boolean',
     },
     color: {
@@ -72,7 +72,7 @@ const meta = {
     disabled: false,
     size: 'md',
     color: 'blue',
-    invaild: false,
+    invalid: false,
     clearable: false,
     labelPlacement: 'float-outside',
     type: 'text',
