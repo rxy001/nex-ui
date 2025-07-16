@@ -69,7 +69,7 @@ describe('createTokens', () => {
   })
 
   it('should warn when passing invalid tokens', () => {
-    const consoleSpy = jest.spyOn(console, 'error')
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
 
     createTokens({
       tokens: {
@@ -87,7 +87,7 @@ describe('createTokens', () => {
   })
 
   it('should warn when passing invalid token values', () => {
-    const consoleSpy = jest.spyOn(console, 'error')
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     createTokens({
       tokens: {
         borderWidths: {
@@ -120,7 +120,7 @@ describe('createTokens', () => {
   })
 
   it('should warn when tokens have invalid nested structures', () => {
-    const consoleSpy = jest.spyOn(console, 'error')
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
 
     const testToken = {
       sm: '1px',
@@ -177,7 +177,7 @@ describe('createTokens', () => {
   })
 
   it('should support token reference syntax', () => {
-    const errorSpy = jest.spyOn(console, 'error')
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation()
     const { getToken, getGlobalCssVars } = createTokens({
       tokens: {
         colors: {

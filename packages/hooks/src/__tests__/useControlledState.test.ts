@@ -57,9 +57,7 @@ describe('useControlledState', () => {
   })
 
   it('should warn if setValue is called with a function', async () => {
-    const consoleError = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => {})
+    const consoleError = jest.spyOn(console, 'error').mockImplementation()
     const { result } = renderHook(() =>
       useControlledState(undefined, 'default'),
     )
@@ -72,9 +70,7 @@ describe('useControlledState', () => {
   })
 
   it('should warn when switching between controlled and uncontrolled', () => {
-    const consoleError = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => {})
+    const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
     const { rerender } = renderHook(
       ({ value }) => useControlledState(value, 'default'),

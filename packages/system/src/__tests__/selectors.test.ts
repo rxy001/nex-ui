@@ -7,7 +7,7 @@ describe('createSelectors', () => {
   >
 
   beforeEach(() => {
-    consoleSpy = jest.spyOn(console, 'error')
+    consoleSpy = jest.spyOn(console, 'error').mockImplementation()
   })
 
   afterEach(() => {

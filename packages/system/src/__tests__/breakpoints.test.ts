@@ -7,7 +7,7 @@ describe('createBreakpoint', () => {
   >
 
   beforeEach(() => {
-    consoleSpy = jest.spyOn(console, 'error')
+    consoleSpy = jest.spyOn(console, 'error').mockImplementation()
   })
 
   afterEach(() => {

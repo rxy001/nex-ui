@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, act } from '@testing-library/react'
 import { SystemProvider } from '../systemProvider'
 import {
   ColorSchemeProviderProps,
@@ -129,7 +129,7 @@ describe('SystemProvider', () => {
     expect(getContent()).toEqual(systemDarkColorScheme)
   })
 
-  it('should update color scheme on prefers-color-scheme change', () => {
+  it('should update color scheme on prefers-color-scheme change', async () => {
     // @ts-expect-error
     window.matchMedia = createMatchMedia(false)
 
@@ -139,17 +139,23 @@ describe('SystemProvider', () => {
 
     expect(getContent()).toEqual(systemLightColorScheme)
 
-    setMatches(true)
-    rerender()
+    await act(async () => {
+      setMatches(true)
+      rerender()
+    })
     expect(getContent()).toEqual(systemDarkColorScheme)
 
-    setMatches(false)
-    rerender()
+    await act(async () => {
+      setMatches(false)
+      rerender()
+    })
     expect(getContent()).toEqual(systemLightColorScheme)
 
     // simulate repeated changes to ensure coverage
-    setMatches(false)
-    rerender()
+    await act(async () => {
+      setMatches(false)
+      rerender()
+    })
     expect(getContent()).toEqual(systemLightColorScheme)
   })
 
