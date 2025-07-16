@@ -30,9 +30,15 @@ export const checkboxClasses = generateUtilityClasses('nui-checkbox', [
 
   'checked',
   'disabled',
+  'indeterminate',
   // ---------root---------
 
   'input',
   'label',
   'icon',
 ])
+
+export const checkboxGroupClasses = generateUtilityClasses(
+  'nui-checkbox-group',
+  ['root', 'vertical', 'horizontal'],
+)

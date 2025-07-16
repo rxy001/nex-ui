@@ -76,6 +76,13 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     }
   })
 
+  const handleClick = useEvent((event: React.MouseEvent<HTMLButtonElement>) => {
+    if (props.disabled) {
+      event.preventDefault()
+      return
+    }
+  })
+
   const ariaProps = useAriaProps({
     ...props,
     as: rootElement,
@@ -88,6 +95,7 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     additionalProps: {
       onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
+      onClick: handleClick,
       ...focusProps,
     },
   })

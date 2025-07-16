@@ -29,7 +29,8 @@ import type {
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
   const { prefix } = useNexUI()
 
-  const { radius, size, color, disabled, checked, classes } = ownerState
+  const { radius, size, color, disabled, checked, classes, indeterminate } =
+    ownerState
 
   return useMemo(() => {
     const checkboxRoot = `${prefix}-checkbox`
@@ -42,6 +43,7 @@ const useSlotClasses = (ownerState: CheckboxOwnerState) => {
         `color-${color}`,
         disabled && 'disabled',
         checked && 'checked',
+        indeterminate && 'indeterminate',
       ],
       input: ['input'],
       label: ['label'],
@@ -49,7 +51,7 @@ const useSlotClasses = (ownerState: CheckboxOwnerState) => {
     }
 
     return composeClasses(slots, getUtilityClass(checkboxRoot), classes)
-  }, [checked, classes, color, disabled, prefix, radius, size])
+  }, [checked, classes, color, disabled, indeterminate, prefix, radius, size])
 }
 
 const useSlotAriaProps = (
@@ -140,12 +142,18 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   if (__DEV__ && inGroup) {
     if ('checked' in props) {
       console.warn(
-        '[Nex UI] Checkbox: The Checkbox.Group is being used, `checked` will be ignored. Use the `value` of the Checkbox.Group instead.',
+        '[Nex UI] Checkbox: The CheckboxGroup is being used, `checked` will be ignored. Use the `value` of the CheckboxGroup instead.',
       )
     }
     if ('defaultChecked' in props) {
       console.warn(
-        '[Nex UI] Checkbox: The Checkbox.Group is being used, `defaultChecked` will be ignored. Use the `defaultValue` of the Checkbox.Group instead.',
+        '[Nex UI] Checkbox: The CheckboxGroup is being used, `defaultChecked` will be ignored. Use the `defaultValue` of the CheckboxGroup instead.',
+      )
+    }
+
+    if (!('value' in props)) {
+      console.warn(
+        '[Nex UI] Checkbox: The CheckboxGroup is being used, but `value` is not provided.',
       )
     }
   }
@@ -194,6 +202,11 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   }
 
   const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      return
+    }
+
     if (inGroup && value) {
       groupCtx.toggleValue(value)
     }
@@ -204,6 +217,11 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   })
 
   const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      return
+    }
+
     if (event.currentTarget.tagName !== 'INPUT') {
       if (inGroup && value) {
         groupCtx.toggleValue(value)

@@ -109,6 +109,10 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
    */
   radius?: CheckboxVariants['radius']
 
+  /**
+   * If true, the checkbox appears indeterminate.
+   * @default false
+   */
   indeterminate?: boolean
 }
 
@@ -203,7 +207,7 @@ type CheckboxGroupOwnProps<
    * The axis the checkbox group items should align with.
    * @default 'horizontal'
    */
-  orientation?: 'vertical' | 'horziontal'
+  orientation?: 'vertical' | 'horizontal'
 }
 
 export type CheckboxGroupProps<
