@@ -153,7 +153,7 @@ describe('CheckboxGroup', () => {
     expect(appleCheckbox).toBeChecked()
   })
 
-  it('should be uncontrolled by defaultValue prop', async () => {
+  it('should support defaultValue prop', async () => {
     const { getAllByRole } = await renderWithNexUIProvider(
       <CheckboxGroup defaultValue={['orange']}>{children}</CheckboxGroup>,
       {

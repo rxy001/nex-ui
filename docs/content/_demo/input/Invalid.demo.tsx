@@ -7,7 +7,7 @@ export default function App() {
       defaultValue='Nex UI'
       labelPlacement='float-inside'
       size='lg'
-      invaild
+      invalid
     />
   )
 }

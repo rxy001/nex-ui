@@ -62,7 +62,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'label' | 'icon'>
+  classes?: ComponentUtilityClasses<'root' | 'label' | 'icon' | 'input'>
 
   /**
    * The default checked state.(uncontrolled)

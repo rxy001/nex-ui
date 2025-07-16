@@ -6,12 +6,15 @@ export const inputClasses = generateUtilityClasses('nui-input', [
   'root',
 
   'variant-outlined',
+  'variant-filled',
+  'variant-underlined',
 
-  // "sm" | "md" | "lg" | "full"
+  // "sm" | "md" | "lg" | "full" | "none"
   'radius-sm',
   'radius-md',
   'radius-lg',
   'radius-full',
+  'radius-none',
 
   // "blue" | "gray" | "pink" | "purple" | "cyan" | "yellow" | "orange" | "red" | "green"
   'color-gray',
@@ -29,11 +32,24 @@ export const inputClasses = generateUtilityClasses('nui-input', [
   'size-md',
   'size-lg',
 
+  'label-placement-inside',
+  'label-placement-outside',
+  'label-placement-float-outside',
+  'label-placement-float-inside',
+
   'disabled',
   'full-width',
-  'invaild',
+  'invalid',
+
   // ---------root---------
 
   'input',
+
   'clear-btn',
+
+  'suffix',
+
+  'prefix',
+
+  'label',
 ])

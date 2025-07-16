@@ -172,7 +172,7 @@ export const inputRecipe = defineSlotRecipe({
         },
       },
     },
-    invaild: {
+    invalid: {
       true: {},
     },
     labelPlacement: {
@@ -353,7 +353,7 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     {
-      invaild: false,
+      invalid: false,
       variant: ['outlined', 'underlined'],
       css: {
         label: {
@@ -364,7 +364,7 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     {
-      invaild: true,
+      invalid: true,
       variant: ['outlined', 'underlined'],
       css: {
         label: {
@@ -376,7 +376,7 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     {
-      invaild: true,
+      invalid: true,
       variant: 'filled',
       css: {
         root: {
@@ -397,7 +397,7 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     {
-      invaild: true,
+      invalid: true,
       variant: 'outlined',
       css: {
         root: {
@@ -415,7 +415,7 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     {
-      invaild: true,
+      invalid: true,
       variant: 'underlined',
       css: {
         root: {
