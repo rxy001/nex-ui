@@ -1,20 +1,74 @@
 import { createRef } from 'react'
 import { fireEvent, act } from '@testing-library/react'
 import {
-  mountTest,
+  testColorClasses,
+  testComponentStability,
   renderWithNexUIProvider,
-  rootClassNameTest,
+  testRootClassName,
+  testSizeClasses,
+  testRadiusClasses,
 } from '~/tests/shared'
 import { Checkbox, CheckboxGroup } from '../index'
 import { checkboxClasses } from '../checkboxClasses'
 
 describe('Checkbox', () => {
-  mountTest(<Checkbox />, {
+  testComponentStability(<Checkbox />, {
     useAct: true,
   })
 
-  rootClassNameTest(<Checkbox className='test-class' />, 'test-class', {
+  testRootClassName(<Checkbox className='test-class' />, 'test-class', {
     useAct: true,
+  })
+
+  testColorClasses(<Checkbox>Checkbox</Checkbox>, checkboxClasses, {
+    useAct: true,
+  })
+
+  testSizeClasses(<Checkbox>Checkbox</Checkbox>, checkboxClasses, {
+    useAct: true,
+  })
+
+  testRadiusClasses(<Checkbox>Checkbox</Checkbox>, checkboxClasses, {
+    useAct: true,
+  })
+
+  it('should render with default props', async () => {
+    const { container, getByRole } = await renderWithNexUIProvider(
+      <Checkbox />,
+      {
+        useAct: true,
+      },
+    )
+
+    const root = container.firstElementChild
+    expect(root).toHaveClass(checkboxClasses.root)
+    expect(root).toHaveClass(checkboxClasses['size-md'])
+    expect(root).toHaveClass(checkboxClasses['radius-md'])
+    expect(root).toHaveClass(checkboxClasses['color-blue'])
+
+    expect(root).not.toHaveClass(checkboxClasses['color-green'])
+    expect(root).not.toHaveClass(checkboxClasses['color-cyan'])
+    expect(root).not.toHaveClass(checkboxClasses['color-orange'])
+    expect(root).not.toHaveClass(checkboxClasses['color-pink'])
+    expect(root).not.toHaveClass(checkboxClasses['color-purple'])
+    expect(root).not.toHaveClass(checkboxClasses['color-yellow'])
+    expect(root).not.toHaveClass(checkboxClasses['color-red'])
+    expect(root).not.toHaveClass(checkboxClasses['color-gray'])
+    expect(root).not.toHaveClass(checkboxClasses['size-sm'])
+    expect(root).not.toHaveClass(checkboxClasses['size-lg'])
+    expect(root).not.toHaveClass(checkboxClasses['radius-sm'])
+    expect(root).not.toHaveClass(checkboxClasses['radius-lg'])
+    expect(root).not.toHaveClass(checkboxClasses['radius-full'])
+    expect(root).not.toHaveClass(checkboxClasses.indeterminate)
+    expect(root).not.toHaveClass(checkboxClasses.checked)
+    expect(root).not.toHaveClass(checkboxClasses.disabled)
+
+    const checkbox = getByRole('checkbox')
+
+    expect(checkbox).toHaveClass(checkboxClasses.input)
+    expect(checkbox.nextElementSibling).toHaveClass(checkboxClasses.icon)
+
+    expect(root).toMatchSnapshot()
   })
 
   it("should forward ref to Checkbox's input element", async () => {
@@ -37,163 +91,6 @@ describe('Checkbox', () => {
       },
     )
     expect(getByText('Test Label')).toBeInTheDocument()
-  })
-
-  it('should render Checkbox with the root, size-md, radius-md, and color-blue classes but no others', async () => {
-    const { container } = await renderWithNexUIProvider(<Checkbox />, {
-      useAct: true,
-    })
-
-    const checkbox = container.firstElementChild
-    expect(checkbox).toHaveClass(checkboxClasses.root)
-    expect(checkbox).toHaveClass(checkboxClasses['size-md'])
-    expect(checkbox).toHaveClass(checkboxClasses['radius-md'])
-    expect(checkbox).toHaveClass(checkboxClasses['color-blue'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-green'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-cyan'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-orange'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-pink'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-purple'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-yellow'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-red'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['color-gray'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['size-sm'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['size-lg'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['radius-sm'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['radius-lg'])
-    expect(checkbox).not.toHaveClass(checkboxClasses['radius-full'])
-    expect(checkbox).not.toHaveClass(checkboxClasses.indeterminate)
-    expect(checkbox).not.toHaveClass(checkboxClasses.checked)
-    expect(checkbox).not.toHaveClass(checkboxClasses.disabled)
-  })
-
-  it('should add the appropriate color class to root element based on color prop', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <>
-        <Checkbox color='red' data-testid='color-red'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='blue' data-testid='color-blue'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='cyan' data-testid='color-cyan'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='orange' data-testid='color-orange'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='pink' data-testid='color-pink'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='purple' data-testid='color-purple'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='gray' data-testid='color-gray'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='yellow' data-testid='color-yellow'>
-          Checkbox
-        </Checkbox>
-        <Checkbox color='green' data-testid='color-green'>
-          Checkbox
-        </Checkbox>
-      </>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(getByTestId('color-red').parentElement).toHaveClass(
-      checkboxClasses['color-red'],
-    )
-    expect(getByTestId('color-blue').parentElement).toHaveClass(
-      checkboxClasses['color-blue'],
-    )
-    expect(getByTestId('color-cyan').parentElement).toHaveClass(
-      checkboxClasses['color-cyan'],
-    )
-    expect(getByTestId('color-orange').parentElement).toHaveClass(
-      checkboxClasses['color-orange'],
-    )
-    expect(getByTestId('color-pink').parentElement).toHaveClass(
-      checkboxClasses['color-pink'],
-    )
-    expect(getByTestId('color-purple').parentElement).toHaveClass(
-      checkboxClasses['color-purple'],
-    )
-    expect(getByTestId('color-green').parentElement).toHaveClass(
-      checkboxClasses['color-green'],
-    )
-    expect(getByTestId('color-yellow').parentElement).toHaveClass(
-      checkboxClasses['color-yellow'],
-    )
-    expect(getByTestId('color-green').parentElement).toHaveClass(
-      checkboxClasses['color-green'],
-    )
-  })
-
-  it('should add the appropriate size class to root element based on size prop', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <>
-        <Checkbox size='sm' data-testid='size-sm'>
-          Checkbox
-        </Checkbox>
-        <Checkbox size='md' data-testid='size-md'>
-          Checkbox
-        </Checkbox>
-        <Checkbox size='lg' data-testid='size-lg'>
-          Checkbox
-        </Checkbox>
-      </>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(getByTestId('size-sm').parentElement).toHaveClass(
-      checkboxClasses['size-sm'],
-    )
-    expect(getByTestId('size-md').parentElement).toHaveClass(
-      checkboxClasses['size-md'],
-    )
-    expect(getByTestId('size-lg').parentElement).toHaveClass(
-      checkboxClasses['size-lg'],
-    )
-  })
-
-  it('should add the appropriate radius class to root element based on radius prop', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <>
-        <Checkbox radius='sm' data-testid='radius-sm'>
-          Checkbox
-        </Checkbox>
-        <Checkbox radius='md' data-testid='radius-md'>
-          Checkbox
-        </Checkbox>
-        <Checkbox radius='lg' data-testid='radius-lg'>
-          Checkbox
-        </Checkbox>
-        <Checkbox radius='full' data-testid='radius-full'>
-          Checkbox
-        </Checkbox>
-      </>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(getByTestId('radius-sm').parentElement).toHaveClass(
-      checkboxClasses['radius-sm'],
-    )
-    expect(getByTestId('radius-md').parentElement).toHaveClass(
-      checkboxClasses['radius-md'],
-    )
-    expect(getByTestId('radius-lg').parentElement).toHaveClass(
-      checkboxClasses['radius-lg'],
-    )
-    expect(getByTestId('radius-full').parentElement).toHaveClass(
-      checkboxClasses['radius-full'],
-    )
   })
 
   it('should render unchecked checkbox by default', async () => {

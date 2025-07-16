@@ -2,11 +2,13 @@ import { generateUtilityClasses } from '../utils'
 
 export const avatarClasses = generateUtilityClasses('nui-avatar', [
   'root',
-  // "sm" | "md" | "lg" | "full"
+
   'radius-sm',
   'radius-md',
   'radius-lg',
+  'radius-xl',
   'radius-full',
+  'radius-none',
 
   // "blue" | "gray" | "pink" | "purple" | "cyan" | "yellow" | "orange" | "red" | "green"
   'color-gray',

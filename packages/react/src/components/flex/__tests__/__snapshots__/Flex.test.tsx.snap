@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Flex renders correctly 1`] = `
+exports[`Flex should render with default props 1`] = `
 .emotion-0 {
   display: -webkit-box;
   display: -webkit-flex;

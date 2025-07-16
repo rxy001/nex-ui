@@ -144,6 +144,16 @@ export const checkboxRecipe = defineSlotRecipe({
       },
     },
     radius: {
+      none: {
+        icon: {
+          '::before': {
+            borderRadius: 0,
+          },
+          '::after': {
+            borderRadius: 0,
+          },
+        },
+      },
       sm: {
         icon: {
           '::before': {

@@ -1,6 +1,6 @@
-import { mountTest } from '~/tests/shared'
+import { testComponentStability } from '~/tests/shared'
 import { Modal } from '../index'
 
 describe('Modal', () => {
-  mountTest(<Modal />)
+  testComponentStability(<Modal />)
 })

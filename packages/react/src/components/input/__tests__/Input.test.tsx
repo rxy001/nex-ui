@@ -1,31 +1,38 @@
 import { useState, createRef } from 'react'
 import { fireEvent } from '@testing-library/react'
 import {
-  mountTest,
+  testColorClasses,
+  testComponentStability,
   renderWithNexUIProvider,
-  rootClassNameTest,
+  testRootClassName,
+  testSizeClasses,
+  testRadiusClasses,
+  testVariantClasses,
 } from '~/tests/shared'
 import { Input } from '../index'
 import { inputClasses } from '../inputClasses'
 
 describe('Input', () => {
-  mountTest(<Input />)
+  testComponentStability(<Input />)
 
-  rootClassNameTest(<Input className='test-class' />, 'test-class')
+  testRootClassName(<Input className='test-class' />, 'test-class')
 
-  it('renders correctly', () => {
-    const { container } = renderWithNexUIProvider(<Input />)
-    expect(container.firstElementChild).toMatchSnapshot()
-  })
+  testColorClasses(<Input />, inputClasses)
 
-  it('should forward ref to input element', () => {
-    const ref = createRef<HTMLInputElement>()
-    renderWithNexUIProvider(<Input ref={ref} />)
-    expect(ref.current).toBeInstanceOf(HTMLInputElement)
-  })
+  testSizeClasses(<Input />, inputClasses)
 
-  it('should render with the root, variant-outlined, radius-md, size-md, color-blue, classes but no others', () => {
-    const { container } = renderWithNexUIProvider(<Input />)
+  testRadiusClasses(<Input />, inputClasses)
+
+  testVariantClasses(
+    <Input />,
+    ['variant', ['outlined', 'filled', 'underlined']],
+    inputClasses,
+  )
+
+  it('should render with default props', () => {
+    const { container, getByTestId } = renderWithNexUIProvider(
+      <Input data-testid='test-input' />,
+    )
 
     const root = container.firstElementChild
 
@@ -34,6 +41,7 @@ describe('Input', () => {
     expect(root).toHaveClass(inputClasses['size-md'])
     expect(root).toHaveClass(inputClasses['radius-md'])
     expect(root).toHaveClass(inputClasses['color-blue'])
+    expect(getByTestId('test-input')).toHaveClass(inputClasses.input)
 
     expect(root).not.toHaveClass(inputClasses['size-lg'])
     expect(root).not.toHaveClass(inputClasses['size-sm'])
@@ -58,125 +66,14 @@ describe('Input', () => {
     expect(root).not.toHaveClass(inputClasses['label-placement-outside'])
     expect(root).not.toHaveClass(inputClasses['label-placement-float-outside'])
     expect(root).not.toHaveClass(inputClasses['label-placement-float-inside'])
+
+    expect(root).toMatchSnapshot()
   })
 
-  it('input should have proper class', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <Input data-testid='test-input' />,
-    )
-
-    expect(getByTestId('test-input')).toHaveClass(inputClasses.input)
-  })
-
-  it('should add the appropriate color class to root element based on color prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Input color='red' data-testid='color-red' />
-        <Input color='blue' data-testid='color-blue' />
-        <Input color='cyan' data-testid='color-cyan' />
-        <Input color='orange' data-testid='color-orange' />
-        <Input color='pink' data-testid='color-pink' />
-        <Input color='purple' data-testid='color-purple' />
-        <Input color='gray' data-testid='color-gray' />
-        <Input color='yellow' data-testid='color-yellow' />
-        <Input color='green' data-testid='color-green' />
-      </>,
-    )
-
-    expect(getByTestId('color-red').parentElement).toHaveClass(
-      inputClasses['color-red'],
-    )
-    expect(getByTestId('color-blue').parentElement).toHaveClass(
-      inputClasses['color-blue'],
-    )
-    expect(getByTestId('color-cyan').parentElement).toHaveClass(
-      inputClasses['color-cyan'],
-    )
-    expect(getByTestId('color-orange').parentElement).toHaveClass(
-      inputClasses['color-orange'],
-    )
-    expect(getByTestId('color-pink').parentElement).toHaveClass(
-      inputClasses['color-pink'],
-    )
-    expect(getByTestId('color-purple').parentElement).toHaveClass(
-      inputClasses['color-purple'],
-    )
-    expect(getByTestId('color-green').parentElement).toHaveClass(
-      inputClasses['color-green'],
-    )
-    expect(getByTestId('color-yellow').parentElement).toHaveClass(
-      inputClasses['color-yellow'],
-    )
-    expect(getByTestId('color-green').parentElement).toHaveClass(
-      inputClasses['color-green'],
-    )
-  })
-
-  it('should add the appropriate variant class to root element based on variant prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Input variant='outlined' data-testid='variant-outlined' />
-        <Input variant='filled' data-testid='variant-filled' />
-        <Input variant='underlined' data-testid='variant-underlined' />
-      </>,
-    )
-
-    expect(getByTestId('variant-outlined').parentElement).toHaveClass(
-      inputClasses['variant-outlined'],
-    )
-    expect(getByTestId('variant-filled').parentElement).toHaveClass(
-      inputClasses['variant-filled'],
-    )
-    expect(getByTestId('variant-underlined').parentElement).toHaveClass(
-      inputClasses['variant-underlined'],
-    )
-  })
-
-  it('should add the appropriate size class to root element based on size prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Input size='sm' data-testid='size-sm' />
-        <Input size='md' data-testid='size-md' />
-        <Input size='lg' data-testid='size-lg' />
-      </>,
-    )
-    expect(getByTestId('size-sm').parentElement).toHaveClass(
-      inputClasses['size-sm'],
-    )
-    expect(getByTestId('size-md').parentElement).toHaveClass(
-      inputClasses['size-md'],
-    )
-    expect(getByTestId('size-lg').parentElement).toHaveClass(
-      inputClasses['size-lg'],
-    )
-  })
-
-  it('should add the appropriate radius class to root element based on radius prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Input radius='none' data-testid='radius-none' />
-        <Input radius='sm' data-testid='radius-sm' />
-        <Input radius='md' data-testid='radius-md' />
-        <Input radius='lg' data-testid='radius-lg' />
-        <Input radius='full' data-testid='radius-full' />
-      </>,
-    )
-
-    expect(getByTestId('radius-none').parentElement).toHaveClass(
-      inputClasses['radius-none'],
-    )
-    expect(getByTestId('radius-sm').parentElement).toHaveClass(
-      inputClasses['radius-sm'],
-    )
-    expect(getByTestId('radius-md').parentElement).toHaveClass(
-      inputClasses['radius-md'],
-    )
-    expect(getByTestId('radius-lg').parentElement).toHaveClass(
-      inputClasses['radius-lg'],
-    )
-    expect(getByTestId('radius-full').parentElement).toHaveClass(
-      inputClasses['radius-full'],
-    )
+  it("should forward ref to Input's input element", () => {
+    const ref = createRef<HTMLInputElement>()
+    renderWithNexUIProvider(<Input ref={ref} />)
+    expect(ref.current).toBeInstanceOf(HTMLInputElement)
   })
 
   it('should add the appropriate label placement class to root element based on labelPlacement and value prop', () => {

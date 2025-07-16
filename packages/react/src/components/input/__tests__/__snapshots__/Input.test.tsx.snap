@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input renders correctly 1`] = `
+exports[`Input should render with default props 1`] = `
 .emotion-0 {
   box-sizing: border-box;
   -webkit-transition: var(--nui-transitions-colors);
@@ -84,6 +84,7 @@ exports[`Input renders correctly 1`] = `
   <input
     aria-invalid="false"
     class="nui-input-input emotion-1"
+    data-testid="test-input"
     tabindex="0"
     type="text"
     value=""

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accordion renders correctly 1`] = `
+exports[`Accordion should render with default props 1`] = `
 .emotion-0 {
   width: var(--nui-sizes-full);
 }

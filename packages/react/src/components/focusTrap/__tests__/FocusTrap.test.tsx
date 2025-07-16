@@ -1,8 +1,8 @@
-import { mountTest } from '~/tests/shared'
+import { testComponentStability } from '~/tests/shared'
 import { FocusTrap } from '../index'
 
 describe('FocusTrap', () => {
-  mountTest(
+  testComponentStability(
     <FocusTrap>
       <div />
     </FocusTrap>,

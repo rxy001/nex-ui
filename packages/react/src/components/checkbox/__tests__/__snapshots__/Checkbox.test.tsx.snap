@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox should render with default props 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  height: var(--nui-sizes-8);
+  padding: var(--nui-spaces-1-5);
+}
+
+.emotion-1 {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: inherit;
+  z-index: 1;
+}
+
+.emotion-1:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+*::before {
+  outline: var(--nui-borders-focus-visible-outline);
+  outline-offset: var(--nui-spaces-0-5);
+}
+
+.emotion-1:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true])+*::before {
+  border-color: var(--nui-colors-blue-secondary);
+}
+
+.emotion-2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: var(--nui-colors-blue-contrast-text);
+  width: var(--nui-sizes-5);
+  height: var(--nui-sizes-5);
+  font-size: var(--nui-font-sizes-md);
+}
+
+.emotion-2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: var(--nui-borders-md);
+  border-color: var(--nui-colors-gray-highlight);
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  background: transparent;
+  z-index: -2;
+  border-radius: calc(var(--nui-radii-lg) * .6);
+}
+
+.emotion-2::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--nui-colors-blue-primary);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  -webkit-transform: scale(0.4);
+  -moz-transform: scale(0.4);
+  -ms-transform: scale(0.4);
+  transform: scale(0.4);
+  opacity: 0;
+  z-index: -1;
+  border-radius: calc(var(--nui-radii-lg) * .6);
+}
+
+<label
+  class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-0"
+>
+  <input
+    class="nui-checkbox-input emotion-1"
+    tabindex="0"
+    type="checkbox"
+  />
+  <span
+    class="nui-checkbox-icon emotion-2"
+  >
+    <svg
+      aria-hidden="true"
+      fill="none"
+      focusable="false"
+      stroke="currentColor"
+      stroke-width="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="m7 12.9l3.143 3.6L18 7.5"
+        opacity="0"
+        pathLength="1"
+        stroke-dasharray="0px 1px"
+        stroke-dashoffset="0px"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </span>
+</label>
+`;

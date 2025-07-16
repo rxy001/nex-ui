@@ -1,6 +1,6 @@
-import { mountTest } from '~/tests/shared'
+import { testComponentStability } from '~/tests/shared'
 import { Dialog } from '../index'
 
 describe('Dialog', () => {
-  mountTest(<Dialog />)
+  testComponentStability(<Dialog />)
 })

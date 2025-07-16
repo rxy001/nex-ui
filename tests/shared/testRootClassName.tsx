@@ -4,14 +4,14 @@ import {
 } from './renderWithProvider'
 import type { ReactNode } from 'react'
 
-export const rootClassNameTest = (
-  Component: ReactNode,
+export const testRootClassName = (
+  component: ReactNode,
   className: string,
   options?: RenderWithNexUIProviderOptions,
 ) => {
   it('should have the correct root class name', async () => {
     const { container } = await Promise.resolve(
-      renderWithNexUIProvider(Component, options),
+      renderWithNexUIProvider(component, options),
     )
     const rootElement = container.firstElementChild
     expect(rootElement).toHaveClass(className)

@@ -2,8 +2,9 @@ import { createRef, useState } from 'react'
 import { fireEvent, act } from '@testing-library/react'
 import {
   renderWithNexUIProvider,
-  mountTest,
-  rootClassNameTest,
+  testComponentStability,
+  testRootClassName,
+  testVariantClasses,
 } from '~/tests/shared'
 import { Accordion, AccordionItem } from '../index'
 import { Button } from '../../button'
@@ -18,22 +19,36 @@ const children = (
 )
 
 describe('Accordion', () => {
-  mountTest(<Accordion>{children}</Accordion>, {
+  testComponentStability(<Accordion>{children}</Accordion>, {
     useAct: true,
   })
 
-  rootClassNameTest(<Accordion className='test-class' />, 'test-class', {
+  testRootClassName(<Accordion className='test-class' />, 'test-class', {
     useAct: true,
   })
 
-  it('renders correctly', async () => {
+  testVariantClasses(
+    <Accordion>Button</Accordion>,
+    ['variant', ['outlined', 'underlined']],
+    accordionClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  it('should render with default props', async () => {
     const { container } = await renderWithNexUIProvider(
       <Accordion>{children}</Accordion>,
       {
         useAct: true,
       },
     )
-    expect(container.firstElementChild).toMatchSnapshot()
+    const accordionRoot = container.firstElementChild
+
+    expect(accordionRoot).toMatchSnapshot()
+    expect(accordionRoot).toHaveClass(accordionClasses.root)
+    expect(accordionRoot).toHaveClass(accordionClasses['variant-underlined'])
+    expect(accordionRoot).not.toHaveClass(accordionClasses['variant-outlined'])
   })
 
   it("should forward ref to Accordion's root element", async () => {
@@ -137,67 +152,6 @@ describe('Accordion', () => {
     expect(root.querySelector(`.${classes.indicator}`)).toBeInTheDocument()
     expect(root.querySelector(`.${classes.trigger}`)).toBeInTheDocument()
     expect(root.querySelector(`.${classes.content}`)).toBeInTheDocument()
-  })
-
-  it('should have correct class names', async () => {
-    const { container, getByTestId, rerender } = await renderWithNexUIProvider(
-      <Accordion expandedKeys={['1']}>{children}</Accordion>,
-      {
-        useAct: true,
-      },
-    )
-    const accordionRoot = container.firstElementChild
-    expect(accordionRoot).toHaveClass(accordionClasses.root)
-    expect(accordionRoot).toHaveClass(accordionClasses['variant-underlined'])
-
-    rerender(
-      <Accordion expandedKeys={['1']} variant='outlined'>
-        {children}
-      </Accordion>,
-    )
-    expect(accordionRoot).toHaveClass(accordionClasses['variant-outlined'])
-
-    rerender(<Accordion expandedKeys={['1']}>{children}</Accordion>)
-    const accordionItem = getByTestId('accordion-item')
-    expect(accordionItem).toHaveClass(accordionItemClasses.root)
-    expect(accordionItem).not.toHaveClass(accordionItemClasses.disabled)
-    expect(accordionItem).toHaveClass(accordionItemClasses.expanded)
-    expect(
-      accordionItem.querySelector(`.${accordionItemClasses.trigger}`),
-    ).toBeInTheDocument()
-    expect(
-      accordionItem.querySelector(`.${accordionItemClasses.heading}`),
-    ).toBeInTheDocument()
-    expect(
-      accordionItem.querySelector(`.${accordionItemClasses.content}`),
-    ).toBeInTheDocument()
-    expect(
-      accordionItem.querySelector(`.${accordionItemClasses.indicator}`),
-    ).toBeInTheDocument()
-  })
-
-  it('should add the appropriate variant class to root element based on variant prop', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <>
-        <Accordion variant='outlined' data-testid='variant-outlined'>
-          Button
-        </Accordion>
-        <Accordion variant='underlined' data-testid='variant-underlined'>
-          Button
-        </Accordion>
-      </>,
-      {
-        useAct: true,
-      },
-    )
-
-    const outlinedAccordion = getByTestId('variant-outlined')
-    const underlinedAccordion = getByTestId('variant-underlined')
-
-    expect(outlinedAccordion).toHaveClass(accordionClasses['variant-outlined'])
-    expect(underlinedAccordion).toHaveClass(
-      accordionClasses['variant-underlined'],
-    )
   })
 
   it('should handle defaultExpandedKeys prop', async () => {

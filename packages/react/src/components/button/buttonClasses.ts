@@ -9,7 +9,8 @@ export const buttonClasses = generateUtilityClasses('nui-btn', [
   'variant-solid',
   'variant-outlined',
 
-  // "sm" | "md" | "lg" | "full"
+  // "none" | "sm" | "md" | "lg" | "full"
+  'radius-none',
   'radius-sm',
   'radius-md',
   'radius-lg',

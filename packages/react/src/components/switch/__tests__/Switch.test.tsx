@@ -1,6 +1,6 @@
-import { mountTest } from '~/tests/shared'
+import { testComponentStability } from '~/tests/shared'
 import { Switch } from '../index'
 
 describe('Switch', () => {
-  mountTest(<Switch />)
+  testComponentStability(<Switch />)
 })

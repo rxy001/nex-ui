@@ -1,34 +1,30 @@
 import { createRef } from 'react'
 import {
-  mountTest,
+  testComponentStability,
   renderWithNexUIProvider,
-  rootClassNameTest,
+  testRootClassName,
 } from '~/tests/shared'
 import { Flex } from '../index'
 import { flexClasses } from '../flexClasses'
 
 describe('Flex', () => {
-  mountTest(<Flex />)
+  testComponentStability(<Flex />)
 
-  rootClassNameTest(<Flex className='test-class' />, 'test-class')
+  testRootClassName(<Flex className='test-class' />, 'test-class')
 
-  it('renders correctly', () => {
-    const { container } = renderWithNexUIProvider(<Flex />)
-    expect(container.firstElementChild).toMatchSnapshot()
-  })
-
-  it('should forward ref to root element', () => {
-    const ref = createRef<HTMLDivElement>()
-    const { container } = renderWithNexUIProvider(<Flex ref={ref} />)
-    expect(container.firstElementChild).toBe(ref.current)
-  })
-
-  it('should render with the root, direction classes but no others', () => {
+  it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Flex />)
 
     const flex = container.firstElementChild
 
     expect(flex).toHaveClass(flexClasses.root)
+    expect(container.firstElementChild).toMatchSnapshot()
+  })
+
+  it("should forward ref to Flex's root element", () => {
+    const ref = createRef<HTMLDivElement>()
+    const { container } = renderWithNexUIProvider(<Flex ref={ref} />)
+    expect(container.firstElementChild).toBe(ref.current)
   })
 
   it('should render inline flex when inline prop is true', () => {
