@@ -1,6 +1,4 @@
-export { mountTest } from './mountTest'
 export { refTest } from './refTest'
-export { rootClassNameTest } from './rootClassNameTest'
 export {
   renderWithSystemProvider,
   renderWithNexUIProvider,
@@ -10,3 +8,9 @@ export {
   restoreGlobalImage,
   flushMockedImages,
 } from './mockGlobalImage'
+export { testColorClasses } from './testColorClasses'
+export { testVariantClasses } from './testVariantClasses'
+export { testComponentStability } from './testComponentStability'
+export { testRootClassName } from './testRootClassName'
+export { testSizeClasses } from './testSizeClasses'
+export { testRadiusClasses } from './testRadiusClasses'

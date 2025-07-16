@@ -1,5 +1,9 @@
 import { forwardRef } from 'react'
-import { mountTest, refTest, renderWithNexUIProvider } from '~/tests/shared'
+import {
+  testComponentStability,
+  refTest,
+  renderWithNexUIProvider,
+} from '~/tests/shared'
 import { Icon } from '../Icon'
 
 const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
@@ -19,7 +23,7 @@ const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
 HeartSvg.displayName = 'HeartSvg'
 
 describe('Icon', () => {
-  mountTest(<Icon as={HeartSvg} />)
+  testComponentStability(<Icon as={HeartSvg} />)
   refTest(<Icon as={HeartSvg} />)
 
   it('renders correctly', () => {

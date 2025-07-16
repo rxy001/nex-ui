@@ -4,17 +4,17 @@ import {
 } from './renderWithProvider'
 import type { ReactElement } from 'react'
 
-export const mountTest = (
-  Component: ReactElement,
+export const testComponentStability = (
+  component: ReactElement,
   options?: RenderWithNexUIProviderOptions,
 ) => {
   it(`component could be updated and unmounted without errors`, async () => {
     const { unmount, rerender } = await Promise.resolve(
-      renderWithNexUIProvider(Component, options),
+      renderWithNexUIProvider(component, options),
     )
 
     expect(() => {
-      rerender(Component)
+      rerender(component)
       unmount()
     }).not.toThrow()
   })

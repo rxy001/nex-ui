@@ -1,8 +1,8 @@
 import { createRef, useState } from 'react'
 import {
-  mountTest,
+  testComponentStability,
   renderWithNexUIProvider,
-  rootClassNameTest,
+  testRootClassName,
 } from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { Checkbox } from '../Checkbox'
@@ -22,11 +22,11 @@ const children = [
 ]
 
 describe('CheckboxGroup', () => {
-  mountTest(<CheckboxGroup>{children}</CheckboxGroup>, {
+  testComponentStability(<CheckboxGroup>{children}</CheckboxGroup>, {
     useAct: true,
   })
 
-  rootClassNameTest(
+  testRootClassName(
     <CheckboxGroup className='test-class'>{children}</CheckboxGroup>,
     'test-class',
     {
@@ -34,7 +34,23 @@ describe('CheckboxGroup', () => {
     },
   )
 
-  it('should forward ref to root element', async () => {
+  it('should render with default props', async () => {
+    const { container } = await renderWithNexUIProvider(
+      <CheckboxGroup>{children}</CheckboxGroup>,
+      {
+        useAct: true,
+      },
+    )
+    const root = container.firstElementChild
+
+    expect(root).toHaveClass(checkboxGroupClasses.root)
+    expect(root).toHaveClass(checkboxGroupClasses.horizontal)
+    expect(root).not.toHaveClass(checkboxGroupClasses.vertical)
+
+    expect(root).toMatchSnapshot()
+  })
+
+  it("should forward ref to CheckboxGroup's root element", async () => {
     const ref = createRef<HTMLDivElement>()
     const { getByTestId } = await renderWithNexUIProvider(
       <CheckboxGroup ref={ref} data-testid='checkbox-group'>
@@ -45,20 +61,6 @@ describe('CheckboxGroup', () => {
       },
     )
     expect(getByTestId('checkbox-group')).toBe(ref.current)
-  })
-
-  it('should render with root, horizontal class, but no other classes', async () => {
-    const { container } = await renderWithNexUIProvider(
-      <CheckboxGroup>{children}</CheckboxGroup>,
-      {
-        useAct: true,
-      },
-    )
-    const checkboxGroup = container.firstElementChild
-
-    expect(checkboxGroup).toHaveClass(checkboxGroupClasses.root)
-    expect(checkboxGroup).toHaveClass(checkboxGroupClasses.horizontal)
-    expect(checkboxGroup).not.toHaveClass(checkboxGroupClasses.vertical)
   })
 
   it('should render with orientation class based on orientation prop', async () => {

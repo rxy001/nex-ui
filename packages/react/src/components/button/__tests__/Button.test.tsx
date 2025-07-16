@@ -1,36 +1,34 @@
 import { useState, createRef } from 'react'
 import { fireEvent, act } from '@testing-library/react'
 import {
-  mountTest,
+  testColorClasses,
+  testComponentStability,
   renderWithNexUIProvider,
-  rootClassNameTest,
+  testRootClassName,
+  testVariantClasses,
+  testRadiusClasses,
 } from '~/tests/shared'
 import { Button } from '../index'
 import { buttonClasses } from '../buttonClasses'
 import type { ButtonProps } from '../index'
 
 describe('Button', () => {
-  mountTest(<Button />)
+  testComponentStability(<Button />)
 
-  rootClassNameTest(<Button className='test-class' />, 'test-class')
+  testRootClassName(<Button className='test-class' />, 'test-class')
 
-  it("should forward ref to Button's root element", () => {
-    const ref = createRef<HTMLButtonElement>()
-    const { container } = renderWithNexUIProvider(
-      <Button ref={ref}>Button</Button>,
-    )
-    const button = container.firstElementChild as HTMLButtonElement
-    expect(ref.current).toBe(button)
-  })
+  testColorClasses(<Button>Button</Button>, buttonClasses)
 
-  it('renders correctly', () => {
+  testVariantClasses(
+    <Button>Button</Button>,
+    ['variant', ['solid', 'outlined', 'text']],
+    buttonClasses,
+  )
+
+  testRadiusClasses(<Button>Button</Button>, buttonClasses)
+
+  it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Button>Button</Button>)
-    expect(container.firstElementChild).toMatchSnapshot()
-  })
-
-  it('should render with the root, variant-solid, size-md, radius-md, and color-blue classes but no others', () => {
-    const { container } = renderWithNexUIProvider(<Button>Button</Button>)
-
     const button = container.firstElementChild
 
     expect(button).toHaveClass(buttonClasses.root)
@@ -58,106 +56,17 @@ describe('Button', () => {
     expect(button).not.toHaveClass(buttonClasses.disabled)
     expect(button).not.toHaveClass(buttonClasses['full-width'])
     expect(button).not.toHaveClass(buttonClasses['disable-ripple'])
+
+    expect(button).toMatchSnapshot()
   })
 
-  it('should add the appropriate color class to root element based on color prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Button color='red' data-testid='color-red'>
-          Button
-        </Button>
-        <Button color='blue' data-testid='color-blue'>
-          Button
-        </Button>
-        <Button color='cyan' data-testid='color-cyan'>
-          Button
-        </Button>
-        <Button color='orange' data-testid='color-orange'>
-          Button
-        </Button>
-        <Button color='pink' data-testid='color-pink'>
-          Button
-        </Button>
-        <Button color='purple' data-testid='color-purple'>
-          Button
-        </Button>
-        <Button color='gray' data-testid='color-gray'>
-          Button
-        </Button>
-        <Button color='yellow' data-testid='color-yellow'>
-          Button
-        </Button>
-        <Button color='green' data-testid='color-green'>
-          Button
-        </Button>
-      </>,
+  it("should forward ref to Button's root element", () => {
+    const ref = createRef<HTMLButtonElement>()
+    const { container } = renderWithNexUIProvider(
+      <Button ref={ref}>Button</Button>,
     )
-
-    expect(getByTestId('color-red')).toHaveClass(buttonClasses['color-red'])
-    expect(getByTestId('color-blue')).toHaveClass(buttonClasses['color-blue'])
-    expect(getByTestId('color-cyan')).toHaveClass(buttonClasses['color-cyan'])
-    expect(getByTestId('color-orange')).toHaveClass(
-      buttonClasses['color-orange'],
-    )
-    expect(getByTestId('color-pink')).toHaveClass(buttonClasses['color-pink'])
-    expect(getByTestId('color-purple')).toHaveClass(
-      buttonClasses['color-purple'],
-    )
-    expect(getByTestId('color-green')).toHaveClass(buttonClasses['color-green'])
-    expect(getByTestId('color-yellow')).toHaveClass(
-      buttonClasses['color-yellow'],
-    )
-    expect(getByTestId('color-green')).toHaveClass(buttonClasses['color-green'])
-  })
-
-  it('should add the appropriate variant class to root element based on variant prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Button variant='solid' data-testid='variant-solid'>
-          Button
-        </Button>
-        <Button variant='outlined' data-testid='variant-outlined'>
-          Button
-        </Button>
-        <Button variant='text' data-testid='variant-text'>
-          Button
-        </Button>
-      </>,
-    )
-
-    expect(getByTestId('variant-solid')).toHaveClass(
-      buttonClasses['variant-solid'],
-    )
-    expect(getByTestId('variant-outlined')).toHaveClass(
-      buttonClasses['variant-outlined'],
-    )
-    expect(getByTestId('variant-text')).toHaveClass(
-      buttonClasses['variant-text'],
-    )
-  })
-
-  it('should add the appropriate radius class to root element based on radius prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Button radius='sm' data-testid='radius-sm'>
-          Button
-        </Button>
-        <Button radius='md' data-testid='radius-md'>
-          Button
-        </Button>
-        <Button radius='lg' data-testid='radius-lg'>
-          Button
-        </Button>
-        <Button radius='full' data-testid='radius-full'>
-          Button
-        </Button>
-      </>,
-    )
-
-    expect(getByTestId('radius-sm')).toHaveClass(buttonClasses['radius-sm'])
-    expect(getByTestId('radius-md')).toHaveClass(buttonClasses['radius-md'])
-    expect(getByTestId('radius-lg')).toHaveClass(buttonClasses['radius-lg'])
-    expect(getByTestId('radius-full')).toHaveClass(buttonClasses['radius-full'])
+    const button = container.firstElementChild as HTMLButtonElement
+    expect(ref.current).toBe(button)
   })
 
   it('should add the appropriate iconOnly class to root element based on iconOnly prop', () => {

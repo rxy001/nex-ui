@@ -1,14 +1,14 @@
 import { createRef } from 'react'
 import {
-  mountTest,
+  testComponentStability,
   renderWithNexUIProvider,
-  rootClassNameTest,
+  testRootClassName,
 } from '~/tests/shared'
 import { AvatarGroup, Avatar } from '../index'
 import { avatarClasses, avatarGroupClasses } from '../avatarClasses'
 
 describe('AvatarGroup', () => {
-  mountTest(
+  testComponentStability(
     <AvatarGroup>
       <Avatar />
       <Avatar />
@@ -16,7 +16,7 @@ describe('AvatarGroup', () => {
     </AvatarGroup>,
   )
 
-  rootClassNameTest(
+  testRootClassName(
     <AvatarGroup className='test-class'>
       <Avatar />
       <Avatar />
@@ -43,7 +43,7 @@ describe('AvatarGroup', () => {
     expect(container.firstElementChild).toHaveClass(avatarGroupClasses.root)
   })
 
-  it('should forward ref to root element', () => {
+  it("should forward ref to AvatarGroup's root element", () => {
     const ref = createRef<HTMLDivElement>()
     const { getByTestId } = renderWithNexUIProvider(
       <AvatarGroup ref={ref} data-testid='avatar-group'>
@@ -57,7 +57,7 @@ describe('AvatarGroup', () => {
     expect(root).toBe(ref.current)
   })
 
-  it('should forward classes to AvatarGroup', () => {
+  it('should forward classes to surplus slot', () => {
     const { getByTestId } = renderWithNexUIProvider(
       <AvatarGroup
         data-testid='avatar-group'
@@ -170,7 +170,7 @@ describe('AvatarGroup', () => {
     expect(avatar).toHaveClass(avatarClasses['radius-full'])
   })
 
-  it('should forward slotProps to surplus avatar', () => {
+  it('should forward slotProps to surplus slot', () => {
     const { container } = renderWithNexUIProvider(
       <AvatarGroup slotProps={{ surplus: { className: 'test-class' } }} max={2}>
         <Avatar />
