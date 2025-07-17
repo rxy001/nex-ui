@@ -251,7 +251,7 @@ describe('Switch', () => {
     expect(onCheckedChange).toHaveBeenCalledWith(false)
   })
 
-  it('should disable switch when disabled prop is true', async () => {
+  it('should disable switch when disabled prop is true', () => {
     const { getByRole, container } = renderWithNexUIProvider(
       <Switch disabled />,
     )
@@ -260,13 +260,8 @@ describe('Switch', () => {
     const input = getByRole('switch')
 
     expect(input).toBeDisabled()
-    expect(root).not.toHaveClass(switchClasses.checked)
-
-    await act(async () => {
-      fireEvent.click(input)
-    })
-
-    expect(root).not.toHaveClass(switchClasses.checked)
+    expect(root).toHaveClass(switchClasses.disabled)
+    expect(root).toHaveStyle('pointer-events: none')
   })
 
   it('should render startIcon and endIcon', () => {
@@ -309,6 +304,143 @@ describe('Switch', () => {
       color: 'blue',
       defaultChecked: false,
       thumbIcon: mockFn,
+    })
+  })
+
+  it('should have data-focus-visible attribute when focused', async () => {
+    const { getByRole, user } = renderWithNexUIProvider(
+      <Switch>Checkbox</Switch>,
+    )
+
+    const switchElement = getByRole('switch')
+
+    expect(switchElement).not.toHaveAttribute('data-focus-visible')
+
+    await user.tab()
+    expect(document.activeElement).toBe(switchElement)
+    expect(switchElement).toHaveAttribute('data-focus-visible', 'true')
+  })
+
+  describe('Accessibility', () => {
+    it('should have type="checkbox" by default', () => {
+      const { getByRole } = renderWithNexUIProvider(<Switch />)
+      const input = getByRole('switch')
+      expect(input).toHaveAttribute('type', 'checkbox')
+    })
+
+    it('should have role="switch" by default', () => {
+      const { container } = renderWithNexUIProvider(<Switch />)
+      const input = container.querySelector(`.${switchClasses.input}`)
+      expect(input).toHaveRole('switch')
+    })
+
+    it('should have tabIndex=0 by default', () => {
+      const { getByRole } = renderWithNexUIProvider(<Switch />)
+      const input = getByRole('switch')
+      expect(input).toHaveAttribute('tabIndex', '0')
+    })
+
+    it('should apply checked attribute when checked', () => {
+      const { getByRole } = renderWithNexUIProvider(<Switch checked />)
+      const input = getByRole('switch')
+      expect(input).toHaveAttribute('checked', '')
+      expect(input).not.toHaveAttribute('aria-checked', 'true')
+    })
+
+    it('should apply disabled attribute when disabled', async () => {
+      const { getByRole } = await renderWithNexUIProvider(<Switch disabled />)
+      const switchElement = getByRole('switch')
+
+      expect(switchElement).toBeDisabled()
+      expect(switchElement).not.toHaveAttribute('aria-disabled')
+    })
+
+    it('should apply aria-label when children is a string', () => {
+      const { getByRole } = renderWithNexUIProvider(<Switch>Switch</Switch>)
+      const input = getByRole('switch')
+      expect(input).toHaveAttribute('aria-label', 'Switch')
+    })
+
+    it('should apply aria-labelledby when aria-labelledby prop is provided', () => {
+      const { getByRole } = renderWithNexUIProvider(
+        <Switch aria-labelledby='label-id'>
+          <span id='label-id'>Switch</span>
+        </Switch>,
+      )
+      const input = getByRole('switch')
+      expect(input).toHaveAttribute('aria-labelledby', 'label-id')
+    })
+
+    it('should apply aria-labelledby="label-id" when children is a string', () => {
+      const { getByRole, container } = renderWithNexUIProvider(
+        <Switch>Switch</Switch>,
+      )
+      const input = getByRole('switch')
+      const label = container.querySelector(`.${switchClasses.label}`)
+
+      expect(input).toHaveAttribute('aria-labelledby', label!.id)
+    })
+
+    it('should apply aria-label when aria-label prop is provided', () => {
+      const { getByRole } = renderWithNexUIProvider(
+        <Switch aria-label='Custom Switch'>Switch</Switch>,
+      )
+      const input = getByRole('switch')
+      expect(input).toHaveAttribute('aria-label', 'Custom Switch')
+    })
+
+    it('should apply aria-checked="true" to non-input elements when checked', () => {
+      const { getByRole } = renderWithNexUIProvider(<Switch checked as='div' />)
+      const input = getByRole('switch')
+
+      expect(input).toHaveAttribute('aria-checked', 'true')
+      expect(input).not.toHaveAttribute('checked')
+    })
+
+    it('should apply aria-checked="false" to non-input elements when unchecked', () => {
+      const { getByRole } = renderWithNexUIProvider(<Switch as='div' />)
+      const input = getByRole('switch')
+
+      expect(input).toHaveAttribute('aria-checked', 'false')
+      expect(input).not.toHaveAttribute('checked')
+    })
+
+    it('should apply aria-disabled="true" to non-input elements when disabled', () => {
+      const { getByRole } = renderWithNexUIProvider(
+        <Switch disabled as='div' />,
+      )
+      const input = getByRole('switch')
+
+      expect(input).toHaveAttribute('aria-disabled', 'true')
+      expect(input).not.toBeDisabled()
+    })
+
+    it('should check non-input elements when clicked', () => {
+      const { getByRole } = renderWithNexUIProvider(<Switch as='div' />)
+      const input = getByRole('switch')
+
+      expect(input).toHaveAttribute('aria-checked', 'false')
+
+      fireEvent.click(input)
+
+      expect(input).toHaveAttribute('aria-checked', 'true')
+    })
+
+    it('should activate non-interactive elements when space is pressed', async () => {
+      const onClick = jest.fn()
+
+      const { user, getByRole } = renderWithNexUIProvider(
+        <Switch as='span' onClick={onClick}>
+          Focusable Span
+        </Switch>,
+      )
+
+      const span = getByRole('switch')
+      await user.tab()
+      expect(document.activeElement).toBe(span)
+
+      await user.keyboard('[Space]')
+      expect(onClick).toHaveBeenCalled()
     })
   })
 })
