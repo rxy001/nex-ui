@@ -13,4 +13,11 @@ export const buttonBaseRecipes = defineRecipe({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  variants: {
+    disabled: {
+      true: {
+        pointerEvents: 'none',
+      },
+    },
+  },
 })

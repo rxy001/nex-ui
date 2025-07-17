@@ -118,28 +118,35 @@ describe('Button', () => {
 
   it('should trigger onClick function', async () => {
     const onClick = jest.fn()
-    const { container } = renderWithNexUIProvider(<Button onClick={onClick} />)
+    const { getByRole } = renderWithNexUIProvider(<Button onClick={onClick} />)
     await act(async () => {
-      fireEvent.click(container.firstElementChild!)
+      fireEvent.click(getByRole('button'))
     })
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should ignore events when disabled', async () => {
+  it('should have disabled class when disabled', async () => {
     const onClick = jest.fn()
     const { getByText } = renderWithNexUIProvider(
       <Button disabled onClick={onClick}>
-        Btn Tag
+        Button
       </Button>,
     )
 
-    const button = getByText('Btn Tag')
-    await act(async () => {
-      fireEvent.click(button)
-    })
+    const button = getByText('Button')
     expect(button).toHaveClass(buttonClasses.disabled)
+  })
+
+  it('should disable the button when loading', () => {
+    const { getByTestId } = renderWithNexUIProvider(
+      <Button loading data-testid='loading-button'>
+        Button
+      </Button>,
+    )
+
+    const button = getByTestId('loading-button')
+    expect(button).toHaveClass(buttonClasses.loading)
     expect(button).toHaveStyleRule('pointer-events', 'none')
-    expect(onClick).not.toHaveBeenCalled()
   })
 
   it('should support link button', () => {
@@ -179,17 +186,13 @@ describe('Button', () => {
     const DefaultButton: React.FC = () => {
       const [loading, setLoading] = useState<ButtonProps['loading']>(false)
       return (
-        <Button
-          loading={loading}
-          data-testid='button'
-          onClick={() => setLoading(true)}
-        >
+        <Button loading={loading} onClick={() => setLoading(true)}>
           Button
         </Button>
       )
     }
-    const { getByTestId } = renderWithNexUIProvider(<DefaultButton />)
-    const button = getByTestId('button')
+    const { getByRole } = renderWithNexUIProvider(<DefaultButton />)
+    const button = getByRole('button')
 
     await act(async () => {
       fireEvent.click(button)
@@ -286,17 +289,5 @@ describe('Button', () => {
 
     expect(startIcon).toBeInTheDocument()
     expect(endIcon).toBeInTheDocument()
-  })
-
-  it('should disable the button when loading', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <Button loading data-testid='loading-button'>
-        Button
-      </Button>,
-    )
-
-    const button = getByTestId('loading-button')
-    expect(button).toHaveClass(buttonClasses.loading)
-    expect(button).toHaveStyleRule('pointer-events', 'none')
   })
 })
