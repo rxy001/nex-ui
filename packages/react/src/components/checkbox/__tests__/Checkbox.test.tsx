@@ -151,17 +151,15 @@ describe('Checkbox', () => {
   })
 
   it('should forward classes to icon, root, input and label slots', async () => {
+    const classes = {
+      icon: 'test-class-icon',
+      root: 'test-class-root',
+      input: 'test-class-input',
+      label: 'test-class-label',
+    }
+
     const { container } = await renderWithNexUIProvider(
-      <Checkbox
-        classes={{
-          icon: 'test-class-icon',
-          root: 'test-class-root',
-          input: 'test-class-input',
-          label: 'test-class-label',
-        }}
-      >
-        Checkbox
-      </Checkbox>,
+      <Checkbox classes={classes}>Checkbox</Checkbox>,
       {
         useAct: true,
       },
@@ -172,10 +170,10 @@ describe('Checkbox', () => {
     const icon = container.querySelector(`.${checkboxClasses.icon}`)
     const input = container.querySelector(`.${checkboxClasses.input}`)
 
-    expect(root).toHaveClass('test-class-root')
-    expect(icon).toHaveClass('test-class-icon')
-    expect(label).toHaveClass('test-class-label')
-    expect(input).toHaveClass('test-class-input')
+    expect(root).toHaveClass(classes.root)
+    expect(icon).toHaveClass(classes.icon)
+    expect(label).toHaveClass(classes.label)
+    expect(input).toHaveClass(classes.input)
   })
 
   it('should forward slotProps to icon, root and label slots', async () => {

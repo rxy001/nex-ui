@@ -200,16 +200,15 @@ describe('Button', () => {
     ).toBeInTheDocument()
   })
 
-  it('should forward classes to startIcon and endIcon slots', () => {
-    const startIconClassName = 'test-start-icon-class'
-    const endIconClassName = 'test-end-icon-class'
+  it('should forward classes to root, startIcon and endIcon slots', () => {
+    const classes = {
+      startIcon: 'test-start-icon-class',
+      endIcon: 'test-end-icon-class',
+    }
 
     const { container } = renderWithNexUIProvider(
       <Button
-        classes={{
-          startIcon: startIconClassName,
-          endIcon: endIconClassName,
-        }}
+        classes={classes}
         startIcon={<span>start icon</span>}
         endIcon={<span>end icon</span>}
       >
@@ -221,8 +220,9 @@ describe('Button', () => {
     const startIcon = button?.querySelector(`.${buttonClasses['start-icon']}`)
     const endIcon = button?.querySelector(`.${buttonClasses['end-icon']}`)
 
-    expect(startIcon).toHaveClass(startIconClassName)
-    expect(endIcon).toHaveClass(endIconClassName)
+    expect(button).toHaveClass(buttonClasses.root)
+    expect(startIcon).toHaveClass(classes.startIcon)
+    expect(endIcon).toHaveClass(classes.endIcon)
   })
 
   it('should support customized spinner', () => {
