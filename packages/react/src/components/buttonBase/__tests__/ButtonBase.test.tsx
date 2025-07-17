@@ -210,6 +210,15 @@ describe('ButtonBase', () => {
   })
 
   describe('disabled', () => {
+    it('should apply disabled attribute with native button', () => {
+      const { getByRole } = renderWithNexUIProvider(
+        <ButtonBase disabled>Disabled Button</ButtonBase>,
+      )
+
+      const button = getByRole('button')
+      expect(button).toBeDisabled()
+    })
+
     it('should have disabled styles', () => {
       const { getByRole } = renderWithNexUIProvider(
         <ButtonBase disabled>Disabled Button</ButtonBase>,
