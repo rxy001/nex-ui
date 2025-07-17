@@ -125,8 +125,9 @@ describe('Accordion', () => {
     )
   })
 
-  it('should forward classes to heading, indicator, trigger and content slots', async () => {
+  it('should forward classes to root, heading, indicator, trigger and content slots', async () => {
     const classes = {
+      root: 'test-root',
       heading: 'test-heading',
       indicator: 'test-indicator',
       trigger: 'test-trigger',
@@ -148,6 +149,7 @@ describe('Accordion', () => {
       },
     )
     const root = getByTestId('accordion-item')
+    expect(root).toHaveClass(classes.root)
     expect(root.querySelector(`.${classes.heading}`)).toBeInTheDocument()
     expect(root.querySelector(`.${classes.indicator}`)).toBeInTheDocument()
     expect(root.querySelector(`.${classes.trigger}`)).toBeInTheDocument()
