@@ -60,12 +60,12 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   className?: ClassValue
 
   /**
-   * The element is placed before the children.
+   * The element is placed before the switch.
    */
   startIcon?: ReactNode
 
   /**
-   * The element is placed after the children.
+   * The element is placed after the switch.
    */
   endIcon?: ReactNode
 
@@ -78,11 +78,12 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label'
+    'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label' | 'input'
   >
 
   /**
-   * The icon to be displayed when the switch is checked.
+   * The icon displayed inside the thumb.
+   * Can be a ReactNode or a function that returns a ReactNode.
    */
   thumbIcon?:
     | ReactNode

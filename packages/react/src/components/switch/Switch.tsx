@@ -76,8 +76,6 @@ const useSlotAriaProps = (
     const labelId = labelProps.id ?? (stringChildren ? id : undefined)
 
     let input: InputHTMLAttributes<HTMLInputElement> = {
-      checked,
-      disabled,
       role,
       tabIndex: disabled ? -1 : tabIndex,
       'aria-labelledby': labelledBy ?? labelId,
@@ -88,6 +86,8 @@ const useSlotAriaProps = (
       input = {
         ...input,
         type,
+        disabled,
+        checked,
       }
     } else {
       input = {
@@ -163,11 +163,21 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     defaultChecked,
   }
 
-  const handleChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.target.checked)
+  const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      return
+    }
+
+    setChecked(event.target.checked)
   })
 
   const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      return
+    }
+
     // Compatible with non interactive elements
     if (event.currentTarget.tagName !== 'INPUT') {
       setChecked(!checked)
@@ -175,6 +185,11 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      return
+    }
+
     // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&

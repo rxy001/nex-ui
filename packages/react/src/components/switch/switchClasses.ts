@@ -30,4 +30,5 @@ export const switchClasses = generateUtilityClasses('nui-switch', [
   'thumb',
   'start-icon',
   'end-icon',
+  'label',
 ])
