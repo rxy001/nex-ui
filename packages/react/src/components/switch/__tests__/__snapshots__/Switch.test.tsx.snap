@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch should render with default props 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  height: 32px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.emotion-1 {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  z-index: 1;
+}
+
+.emotion-1:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+* {
+  outline: var(--nui-borders-focus-visible-outline);
+  outline-offset: var(--nui-spaces-0-5);
+}
+
+.emotion-2 {
+  background-color: var(--nui-colors-gray-200);
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: var(--nui-radii-full);
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  overflow: hidden;
+  position: relative;
+  -webkit-padding-start: var(--nui-spaces-1);
+  padding-inline-start: var(--nui-spaces-1);
+  -webkit-padding-end: var(--nui-spaces-1);
+  padding-inline-end: var(--nui-spaces-1);
+  width: var(--nui-sizes-12);
+  height: var(--nui-sizes-7);
+  font-size: var(--nui-font-sizes-lg);
+}
+
+[data-nui-color-scheme="dark"] .emotion-2 {
+  background-color: var(--nui-colors-gray-500);
+}
+
+.emotion-3 {
+  background-color: var(--nui-colors-white);
+  border-radius: inherit;
+  -webkit-transition: var(--nui-transitions-margin);
+  transition: var(--nui-transitions-margin);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: var(--nui-sizes-5);
+  height: var(--nui-sizes-5);
+}
+
+<label
+  class="nui-switch-root nui-switch-color-blue nui-switch-size-md emotion-0"
+>
+  <input
+    class="nui-switch-input emotion-1"
+    role="switch"
+    tabindex="0"
+    type="checkbox"
+  />
+  <span
+    class="nui-switch-track emotion-2"
+  >
+    <span
+      class="nui-switch-thumb emotion-3"
+    />
+  </span>
+</label>
+`;

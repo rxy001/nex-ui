@@ -4,10 +4,14 @@ import {
   RenderWithNexUIProviderOptions,
 } from './renderWithProvider'
 
-export const testVariantClasses = (
+export const testVariantClasses = <
+  T extends string,
+  C extends string,
+  K extends Record<`${T}-${C}`, string>,
+>(
   component: ReactElement,
-  variant: [string, string[]],
-  classes: Record<string, string>,
+  variant: [T, C[]],
+  classes: K,
   options?: RenderWithNexUIProviderOptions,
 ) => {
   const [variantName, variantValues] = variant
@@ -26,8 +30,8 @@ export const testVariantClasses = (
     )
     const children = container.children
 
-    variantValues.forEach((value, index) => {
-      const classKey = `${variantName}-${value}`
+    variantValues.forEach((value: C, index) => {
+      const classKey = `${variantName}-${value}` as `${T}-${C}`
       expect(children[index]).toHaveClass(classes[classKey])
     })
   })
