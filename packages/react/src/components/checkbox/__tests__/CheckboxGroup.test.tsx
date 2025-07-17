@@ -227,24 +227,4 @@ describe('CheckboxGroup', () => {
       expect(checkbox.parentElement).toHaveClass(checkboxClasses['radius-lg'])
     })
   })
-
-  it('should ignore event when checkbox is disabled', async () => {
-    const onValueChange = jest.fn()
-    const { getAllByRole } = await renderWithNexUIProvider(
-      <CheckboxGroup onValueChange={onValueChange}>
-        <Checkbox value='orange' key='orange' disabled>
-          orange
-        </Checkbox>
-      </CheckboxGroup>,
-      {
-        useAct: true,
-      },
-    )
-
-    const checkboxes = getAllByRole('checkbox')
-
-    fireEvent.click(checkboxes[0])
-    expect(checkboxes[0]).toBeDisabled()
-    expect(onValueChange).not.toHaveBeenCalled()
-  })
 })

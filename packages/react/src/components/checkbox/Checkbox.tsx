@@ -58,7 +58,6 @@ const useSlotAriaProps = (
   ownerState: CheckboxOwnerState,
 ): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
   const {
-    as,
     disabled,
     type,
     checked,
@@ -70,6 +69,7 @@ const useSlotAriaProps = (
     'aria-labelledby': ariaLabelledBy,
     'aria-checked': ariaChecked,
     'aria-disabled': ariaDisabled,
+    as = 'input',
     tabIndex = 0,
   } = ownerState
 
@@ -89,7 +89,7 @@ const useSlotAriaProps = (
       tabIndex: disabled ? -1 : tabIndex,
     }
 
-    if (!as || as === 'input' || isFunction(as)) {
+    if (as === 'input' || isFunction(as)) {
       input = {
         disabled,
         checked,
@@ -202,11 +202,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   }
 
   const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {
-    if (disabled) {
-      event.preventDefault()
-      return
-    }
-
     if (inGroup && value) {
       groupCtx.toggleValue(value)
     }
@@ -217,12 +212,10 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   })
 
   const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
-    if (disabled) {
-      event.preventDefault()
-      return
-    }
-
-    if (event.currentTarget.tagName !== 'INPUT') {
+    if (
+      event.currentTarget.tagName !== 'INPUT' &&
+      event.currentTarget === event.target
+    ) {
       if (inGroup && value) {
         groupCtx.toggleValue(value)
       }
@@ -239,7 +232,8 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
       focusVisible &&
       event.code === 'Space' &&
       event.target === event.currentTarget &&
-      event.currentTarget.tagName !== 'INPUT'
+      event.currentTarget.tagName !== 'INPUT' &&
+      event.currentTarget === event.target
     ) {
       event.currentTarget.click()
     }
@@ -281,6 +275,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
       name,
       onChange: handleChange,
       onClick: handleClick,
+      'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },
   })

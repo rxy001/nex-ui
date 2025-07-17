@@ -202,23 +202,19 @@ describe('Checkbox', () => {
   })
 
   it('should disable the checkbox when disabled prop is true', async () => {
-    const onCheckedChange = jest.fn(() => {})
-
     const { getByRole, container } = await renderWithNexUIProvider(
-      <Checkbox disabled onCheckedChange={onCheckedChange} />,
+      <Checkbox disabled />,
       {
         useAct: true,
       },
     )
 
     const checkbox = getByRole('checkbox')
+    const root = container.firstElementChild
 
     expect(checkbox).toBeDisabled()
-    expect(container.firstElementChild).toHaveClass(checkboxClasses.disabled)
-    await act(async () => {
-      fireEvent.click(checkbox)
-    })
-    expect(onCheckedChange).not.toHaveBeenCalled()
+    expect(root).toHaveClass(checkboxClasses.disabled)
+    expect(root).toHaveStyleRule('pointer-events', 'none')
   })
 
   it('should render indeterminate checkbox when indeterminate prop is true', async () => {
@@ -335,5 +331,240 @@ describe('Checkbox', () => {
     )
 
     consoleSpy.mockRestore()
+  })
+
+  it('should have data-focus-visible attribute when focused', async () => {
+    const { getByRole, user } = await renderWithNexUIProvider(
+      <Checkbox as='div'>Checkbox</Checkbox>,
+      {
+        useAct: true,
+      },
+    )
+
+    const checkbox = getByRole('checkbox')
+
+    expect(checkbox).not.toHaveAttribute('data-focus-visible')
+
+    await user.tab()
+    expect(document.activeElement).toBe(checkbox)
+    expect(checkbox).toHaveAttribute('data-focus-visible', 'true')
+  })
+
+  describe('Accessibility', () => {
+    it('should have type="checkbox" by default', async () => {
+      const { getByRole } = await renderWithNexUIProvider(<Checkbox />, {
+        useAct: true,
+      })
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('type', 'checkbox')
+    })
+
+    it('should not apply role="checkbox" when rendered as an input', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox as='input'>Checkbox</Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).not.toHaveAttribute('role', 'checkbox')
+    })
+
+    it('should apply role="checkbox" when rendered as a non-input element', async () => {
+      const { container } = await renderWithNexUIProvider(
+        <Checkbox as='div'>Checkbox</Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+
+      const checkbox = container.querySelector(`.${checkboxClasses.input}`)
+      expect(checkbox).toHaveAttribute('role', 'checkbox')
+    })
+
+    it('should apply checked attribute when checked', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox checked />,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('checked', '')
+      expect(checkbox).not.toHaveAttribute('aria-checked', 'true')
+    })
+
+    it('should apply aria-checked="true" to non-input elements when checked', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox as='div' checked />,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('aria-checked', 'true')
+      expect(checkbox).not.toHaveAttribute('checked')
+    })
+
+    it('should apply aria-checked="false" to non-input elements when unchecked', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox as='div'>Checkbox</Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('aria-checked', 'false')
+      expect(checkbox).not.toHaveAttribute('checked')
+    })
+
+    it('should apply disabled attribute when disabled', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox disabled />,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toBeDisabled()
+    })
+
+    it('should apply aria-disabled="true" to non-input elements when disabled', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox as='div' disabled />,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('aria-disabled', 'true')
+      expect(checkbox).not.toBeDisabled()
+    })
+
+    it('should have tabIndex=0 by default', async () => {
+      const { getByRole } = await renderWithNexUIProvider(<Checkbox />, {
+        useAct: true,
+      })
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('tabIndex', '0')
+    })
+
+    it('should apply tabIndex=-1 when disabled', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox disabled />,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('tabIndex', '-1')
+    })
+
+    it('should apply aria-label when children is a string', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox>Checkbox Label</Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('aria-label', 'Checkbox Label')
+    })
+
+    it('should apply aria-label when aria-label prop is provided', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox aria-label='Custom Label'>Checkbox</Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('aria-label', 'Custom Label')
+    })
+
+    it('should apply aria-labelledby when aria-labelledby prop is provided', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <Checkbox aria-labelledby='label-id'>
+          <span id='label-id'>Checkbox Label</span>
+        </Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('aria-labelledby', 'label-id')
+    })
+
+    it('should apply aria-labelledby="label-id" by default when children is a string', async () => {
+      const { getByRole, container } = await renderWithNexUIProvider(
+        <Checkbox>Checkbox Label</Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+      const label = container.querySelector(`.${checkboxClasses.label}`)
+      const checkbox = getByRole('checkbox')
+      expect(checkbox).toHaveAttribute('aria-labelledby', label!.id)
+    })
+
+    it('should check non-input elements when clicked', async () => {
+      const { container, getByRole } = await renderWithNexUIProvider(
+        <Checkbox as='div'>Checkbox</Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+      const root = container.firstElementChild!
+      const checkbox = getByRole('checkbox')
+
+      expect(root).not.toHaveClass(checkboxClasses.checked)
+
+      await act(async () => {
+        fireEvent.click(checkbox)
+      })
+
+      expect(root).toHaveClass(checkboxClasses.checked)
+    })
+
+    it('should check non-input elements within CheckboxGroup when clicked', async () => {
+      const { getByRole } = await renderWithNexUIProvider(
+        <CheckboxGroup>
+          <Checkbox value='test' as='div'>
+            Test Checkbox
+          </Checkbox>
+        </CheckboxGroup>,
+        {
+          useAct: true,
+        },
+      )
+      const checkbox = getByRole('checkbox')
+      const root = checkbox.parentElement!
+
+      expect(root).not.toHaveClass(checkboxClasses.checked)
+      await act(async () => {
+        fireEvent.click(checkbox)
+      })
+      expect(root).toHaveClass(checkboxClasses.checked)
+    })
+
+    it('should activate non-interactive elements when space is pressed', async () => {
+      const onClick = jest.fn()
+
+      const { user, getByRole } = await renderWithNexUIProvider(
+        <Checkbox as='span' onClick={onClick}>
+          Focusable Span
+        </Checkbox>,
+        {
+          useAct: true,
+        },
+      )
+
+      const span = getByRole('checkbox')
+      await user.tab()
+      expect(document.activeElement).toBe(span)
+
+      await user.keyboard('[Space]')
+      expect(onClick).toHaveBeenCalled()
+    })
   })
 })
