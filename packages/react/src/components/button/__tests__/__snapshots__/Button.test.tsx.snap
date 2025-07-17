@@ -124,7 +124,6 @@ exports[`Button should support link button 1`] = `
 <a
   class="nui-btn-root nui-btn-variant-solid nui-btn-radius-md nui-btn-size-md nui-btn-color-blue emotion-0"
   href="https://"
-  role="button"
   tabindex="0"
   target="_blank"
 >

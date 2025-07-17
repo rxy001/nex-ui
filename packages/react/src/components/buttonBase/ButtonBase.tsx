@@ -9,24 +9,25 @@ import { buttonBaseRecipes } from '../../theme/recipes'
 import type { ElementType, KeyboardEvent } from 'react'
 import type { ButtonBaseProps } from './types'
 
-const style = buttonBaseRecipes()
-
 const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
   const {
     as,
     disabled,
-    'aria-disabled': ariaDisabled,
-    role = 'button',
+    role,
+    href,
     type = 'button',
+    'aria-disabled': ariaDisabled,
     tabIndex = 0,
   } = props
 
   return useMemo(() => {
     if (as !== 'button' && !isFunction(as)) {
       return {
-        role,
+        role: role ?? (as === 'a' && href ? undefined : 'button'),
         tabIndex: disabled ? -1 : tabIndex,
         'aria-disabled': ariaDisabled ?? (disabled || undefined),
+        // aria-label is not set by default, because the accessible name
+        // is computed from any text content inside the button element
       }
     }
     return {
@@ -34,14 +35,14 @@ const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
       disabled,
       tabIndex: disabled ? -1 : tabIndex,
     }
-  }, [as, type, disabled, tabIndex, role, ariaDisabled])
+  }, [as, type, disabled, tabIndex, role, href, ariaDisabled])
 }
 
 export const ButtonBase = <RootComponent extends ElementType = 'button'>(
   inProps: ButtonBaseProps<RootComponent>,
 ) => {
   const props = inProps as ButtonBaseProps<'button'>
-  const { as, children, ...remainingProps } = props
+  const { as, children, disabled, ...remainingProps } = props
 
   const rootElement =
     as !== undefined
@@ -76,16 +77,13 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     }
   })
 
-  const handleClick = useEvent((event: React.MouseEvent<HTMLButtonElement>) => {
-    if (props.disabled) {
-      event.preventDefault()
-      return
-    }
-  })
-
   const ariaProps = useAriaProps({
     ...props,
     as: rootElement,
+  })
+
+  const style = buttonBaseRecipes({
+    disabled,
   })
 
   const rootProps = useSlotProps({
@@ -93,9 +91,10 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     a11y: ariaProps,
     externalForwardedProps: remainingProps,
     additionalProps: {
+      disabled,
       onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
-      onClick: handleClick,
+      'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },
   })

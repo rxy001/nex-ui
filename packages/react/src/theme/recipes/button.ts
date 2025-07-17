@@ -10,7 +10,6 @@ import type { CSSObject, RecipeVariants } from '@nex-ui/system'
 
 const disabledVariant: CSSObject = {
   opacity: 0.6,
-  pointerEvents: 'none',
 }
 
 export const buttonRecipe = defineSlotRecipe({
