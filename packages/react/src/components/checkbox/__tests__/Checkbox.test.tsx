@@ -427,6 +427,7 @@ describe('Checkbox', () => {
       )
       const checkbox = getByRole('checkbox')
       expect(checkbox).toBeDisabled()
+      expect(checkbox).not.toHaveAttribute('aria-disabled')
     })
 
     it('should apply aria-disabled="true" to non-input elements when disabled', async () => {

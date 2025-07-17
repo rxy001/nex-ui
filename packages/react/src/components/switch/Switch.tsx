@@ -54,7 +54,6 @@ const useSlotAriaProps = (
   ownerState: SwitchOwnerState,
 ): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
   const {
-    as,
     checked,
     disabled,
     children,
@@ -62,6 +61,7 @@ const useSlotAriaProps = (
     role = 'switch',
     tabIndex = 0,
     type = 'checkbox',
+    as = 'input',
     'aria-labelledby': labelledBy,
     'aria-label': ariaLabel,
     'aria-checked': ariaChecked,
@@ -82,7 +82,7 @@ const useSlotAriaProps = (
       'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
     }
 
-    if (!as || as === 'input' || isFunction(as)) {
+    if (as === 'input' || isFunction(as)) {
       input = {
         ...input,
         type,
@@ -164,32 +164,20 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   }
 
   const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {
-    if (disabled) {
-      event.preventDefault()
-      return
-    }
-
     setChecked(event.target.checked)
   })
 
   const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
-    if (disabled) {
-      event.preventDefault()
-      return
-    }
-
     // Compatible with non interactive elements
-    if (event.currentTarget.tagName !== 'INPUT') {
+    if (
+      event.currentTarget.tagName !== 'INPUT' &&
+      event.target === event.currentTarget
+    ) {
       setChecked(!checked)
     }
   })
 
   const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
-    if (disabled) {
-      event.preventDefault()
-      return
-    }
-
     // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&
@@ -234,6 +222,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
       onChange: handleChange,
       onClick: handleClick,
       onKeyUp: handleKeyUp,
+      'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },
   })
