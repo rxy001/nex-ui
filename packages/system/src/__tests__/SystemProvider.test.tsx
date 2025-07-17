@@ -251,21 +251,21 @@ describe('SystemProvider', () => {
       defaultMode: 'light',
     })
 
-    expect(document.documentElement.getAttribute('data-nui-color-scheme')).toBe(
+    expect(document.documentElement).toHaveAttribute(
+      'data-nui-color-scheme',
       'light',
     )
 
     rerender({
       colorSchemeSelector: 'color-scheme',
     })
-
-    expect(document.documentElement.getAttribute('color-scheme')).toBe('light')
+    expect(document.documentElement).toHaveAttribute('color-scheme', 'light')
 
     rerender({
       colorSchemeSelector: '[data-mode-%s]',
     })
-    expect(document.documentElement.getAttribute('data-mode-light')).toBe('')
-    expect(document.documentElement.getAttribute('data-mode-dark')).toBe(null)
+    expect(document.documentElement).toHaveAttribute('data-mode-light')
+    expect(document.documentElement).not.toHaveAttribute('data-mode-dark')
   })
 
   it('default colorSchemeSelector: class', () => {
@@ -295,17 +295,19 @@ describe('InitColorSchemeScript', () => {
     window.matchMedia = createMatchMedia(true)
     const { container, rerender } = render(<InitColorSchemeScript />)
     eval(container.firstElementChild!.textContent!)
-    expect(
-      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
-    ).toBe('dark')
+    expect(document.documentElement).toHaveAttribute(
+      DEFAULT_COLOR_SCHEME_SELECTOR,
+      'dark',
+    )
 
     // @ts-expect-error
     window.matchMedia = createMatchMedia(false)
     rerender(<InitColorSchemeScript />)
     eval(container.firstElementChild!.textContent!)
-    expect(
-      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
-    ).toBe('light')
+    expect(document.documentElement).toHaveAttribute(
+      DEFAULT_COLOR_SCHEME_SELECTOR,
+      'light',
+    )
 
     window.matchMedia = originalMatchMedia
   })
@@ -320,9 +322,10 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(
-      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
-    ).toBe(defaultMode)
+    expect(document.documentElement).toHaveAttribute(
+      DEFAULT_COLOR_SCHEME_SELECTOR,
+      defaultMode,
+    )
   })
 
   it('should set `light` color scheme to html with custom attribute', () => {
@@ -335,9 +338,10 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(
-      document.documentElement.getAttribute('data-test-color-scheme'),
-    ).toBe(defaultMode)
+    expect(document.documentElement).toHaveAttribute(
+      'data-test-color-scheme',
+      defaultMode,
+    )
 
     rerender(
       <InitColorSchemeScript
@@ -346,8 +350,8 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(document.documentElement.getAttribute('data-mode-light')).toBe('')
-    expect(document.documentElement.getAttribute('data-mode-dark')).toBe(null)
+    expect(document.documentElement).toHaveAttribute('data-mode-light')
+    expect(document.documentElement).not.toHaveAttribute('data-mode-dark')
 
     rerender(
       <InitColorSchemeScript
@@ -356,7 +360,7 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(document.documentElement.getAttribute('data-mode')).toBe(defaultMode)
+    expect(document.documentElement).toHaveAttribute('data-mode', defaultMode)
 
     rerender(
       <InitColorSchemeScript
@@ -365,7 +369,8 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(document.documentElement.getAttribute('color-scheme')).toBe(
+    expect(document.documentElement).toHaveAttribute(
+      'color-scheme',
       defaultMode,
     )
 
@@ -376,7 +381,7 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(document.documentElement.getAttribute('data-mode')).toBe(defaultMode)
+    expect(document.documentElement).toHaveAttribute('data-mode', defaultMode)
   })
 
   it('should set `dark` color scheme to html with class', () => {
@@ -402,9 +407,7 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(document.body.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR)).toBe(
-      'dark',
-    )
+    expect(document.body).toHaveAttribute(DEFAULT_COLOR_SCHEME_SELECTOR, 'dark')
   })
 
   it('should use forced mode if provided', () => {
@@ -414,9 +417,10 @@ describe('InitColorSchemeScript', () => {
       <InitColorSchemeScript forcedMode={forcedMode} defaultMode='light' />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(
-      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
-    ).toBe(forcedMode)
+    expect(document.documentElement).toHaveAttribute(
+      DEFAULT_COLOR_SCHEME_SELECTOR,
+      forcedMode,
+    )
   })
 
   it('should use localStorage value if available', () => {
@@ -429,9 +433,10 @@ describe('InitColorSchemeScript', () => {
       />,
     )
     eval(container.firstElementChild!.textContent!)
-    expect(
-      document.documentElement.getAttribute(DEFAULT_COLOR_SCHEME_SELECTOR),
-    ).toBe('dark')
+    expect(document.documentElement).toHaveAttribute(
+      DEFAULT_COLOR_SCHEME_SELECTOR,
+      'dark',
+    )
   })
 })
 
@@ -443,7 +448,8 @@ describe('ColorSchemeProvider', () => {
     window.matchMedia = createMatchMedia(false)
     render(<ColorSchemeProvider />)
 
-    expect(document.documentElement.getAttribute('data-color-scheme')).toBe(
+    expect(document.documentElement).toHaveAttribute(
+      'data-color-scheme',
       'light',
     )
     expect(localStorage.getItem('color-scheme')).toBe('system')

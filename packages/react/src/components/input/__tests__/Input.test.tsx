@@ -196,7 +196,7 @@ describe('Input', () => {
     const input = getByTestId('clearable-input')
     const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
 
-    expect(input.getAttribute('value')).toBe('defalt')
+    expect(input).toHaveAttribute('value', 'defalt')
     expect(clearButton).toBeInTheDocument()
 
     fireEvent.change(input, {
@@ -205,10 +205,10 @@ describe('Input', () => {
       },
     })
 
-    expect(input.getAttribute('value')).toBe('changed')
+    expect(input).toHaveAttribute('value', 'changed')
 
     fireEvent.click(clearButton!)
-    expect(input.getAttribute('value')).toBe('')
+    expect(input).toHaveAttribute('value', '')
     expect(document.activeElement).toBe(input)
   })
 
@@ -222,10 +222,10 @@ describe('Input', () => {
 
     expect(clearButton).toBeInTheDocument()
     expect(clearButton).toBeDisabled()
-    expect(input.getAttribute('value')).toBe('test')
+    expect(input).toHaveAttribute('value', 'test')
 
     fireEvent.click(clearButton!)
-    expect(input.getAttribute('value')).toBe('test')
+    expect(input).toHaveAttribute('value', 'test')
   })
 
   it('should forward classes to root, label, prefix, suffix, input, clearButton slots', () => {
@@ -320,7 +320,7 @@ describe('Input', () => {
     const { getByTestId } = renderWithNexUIProvider(<ControlledInput />)
     const input = getByTestId('controlled-input')
 
-    expect(input.getAttribute('value')).toBe('controlled')
+    expect(input).toHaveAttribute('value', 'controlled')
 
     fireEvent.change(input, {
       target: {
@@ -328,7 +328,7 @@ describe('Input', () => {
       },
     })
 
-    expect(input.getAttribute('value')).toBe('new value')
+    expect(input).toHaveAttribute('value', 'new value')
   })
 
   it('should support defaultValue prop', () => {
@@ -337,7 +337,7 @@ describe('Input', () => {
     )
     const input = getByTestId('uncontrolled-input')
 
-    expect(input.getAttribute('value')).toBe('uncontrolled')
+    expect(input).toHaveAttribute('value', 'uncontrolled')
   })
 
   it('should focus on input when clicking label', () => {
