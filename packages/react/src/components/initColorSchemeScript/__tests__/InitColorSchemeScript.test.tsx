@@ -15,9 +15,7 @@ describe('InitColorSchemeScript', () => {
     const { container } = render(<InitColorSchemeScript />)
 
     eval(container.firstElementChild!.textContent!)
-    expect(
-      document.documentElement.getAttribute('data-nui-color-scheme'),
-    ).not.toBeNull()
+    expect(document.documentElement).toHaveAttribute('data-nui-color-scheme')
 
     window.matchMedia = originalMatchMedia
   })
