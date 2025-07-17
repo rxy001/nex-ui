@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Icon renders correctly 1`] = `
+exports[`Icon should render correctly 1`] = `
 .emotion-0 {
   -webkit-user-select: none;
   -moz-user-select: none;

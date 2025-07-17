@@ -57,13 +57,13 @@ describe('AvatarGroup', () => {
     expect(root).toBe(ref.current)
   })
 
-  it('should forward classes to surplus slot', () => {
+  it('should forward classes to root and surplus slots', () => {
+    const classes = {
+      root: 'test-root-class',
+      surplus: 'test-surplus-class',
+    }
     const { getByTestId } = renderWithNexUIProvider(
-      <AvatarGroup
-        data-testid='avatar-group'
-        classes={{ surplus: 'test-class' }}
-        max={2}
-      >
+      <AvatarGroup data-testid='avatar-group' classes={classes} max={2}>
         <Avatar />
         <Avatar />
         <Avatar />
@@ -72,7 +72,8 @@ describe('AvatarGroup', () => {
     )
 
     const root = getByTestId('avatar-group')
-    expect(root.lastElementChild).toHaveClass('test-class')
+    expect(root).toHaveClass(classes.root)
+    expect(root.lastElementChild).toHaveClass(classes.surplus)
   })
 
   it('should render `+N` when there are more than 4 avatars', () => {

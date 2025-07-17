@@ -1,4 +1,3 @@
-export { refTest } from './refTest'
 export {
   renderWithSystemProvider,
   renderWithNexUIProvider,

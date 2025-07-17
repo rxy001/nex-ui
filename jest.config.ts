@@ -38,7 +38,11 @@ const jestConfig = {
   collectCoverageFrom: ['packages/**/*.{ts,tsx}'],
   testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',
-  coveragePathIgnorePatterns: ['__stories__/', 'dist/'],
+  coveragePathIgnorePatterns: [
+    '__stories__/',
+    'dist/',
+    '<rootDir>/packages/icons/',
+  ],
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
   watchman: true,
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],

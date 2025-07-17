@@ -1,9 +1,5 @@
-import { forwardRef } from 'react'
-import {
-  testComponentStability,
-  refTest,
-  renderWithNexUIProvider,
-} from '~/tests/shared'
+import { createRef, forwardRef } from 'react'
+import { testComponentStability, renderWithNexUIProvider } from '~/tests/shared'
 import { Icon } from '../Icon'
 
 const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
@@ -24,10 +20,27 @@ HeartSvg.displayName = 'HeartSvg'
 
 describe('Icon', () => {
   testComponentStability(<Icon as={HeartSvg} />)
-  refTest(<Icon as={HeartSvg} />)
 
-  it('renders correctly', () => {
+  it('should forward ref to the SVG element', () => {
+    const ref = createRef<SVGSVGElement>()
+
+    const { getByTestId } = renderWithNexUIProvider(
+      <Icon as={HeartSvg} ref={ref} data-testid='icon-svg' />,
+    )
+    expect(getByTestId('icon-svg')).toBe(ref.current)
+  })
+
+  it('should render correctly', () => {
     const { container } = renderWithNexUIProvider(<Icon as={HeartSvg} />)
     expect(container.firstElementChild).toMatchSnapshot()
+  })
+
+  it('should warn when `as` prop is not provided', () => {
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation()
+
+    renderWithNexUIProvider(<Icon />)
+
+    expect(consoleSpy).toHaveBeenCalled()
+    consoleSpy.mockRestore()
   })
 })
