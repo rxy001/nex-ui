@@ -90,11 +90,13 @@ export type ComponentThemeObject<T> = T extends RecipeRuntimeFn
 export type ComponentThemeFn<P, S> = (
   ownerState: P,
 ) => S extends SlotRecipeRuntimeFn
-  ? {
-      [K in S['slots'][number]]?: CSSObject
-    }
+  ?
+      | {
+          [K in S['slots'][number]]?: CSSObject
+        }
+      | void
   : S extends RecipeRuntimeFn
-    ? CSSObject
+    ? CSSObject | void
     : never
 
 type Motion = typeof m

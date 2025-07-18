@@ -1,7 +1,4 @@
-import { merge } from '@nex-ui/utils'
-import { defaultConfig } from './preset'
 import type { Theme } from '../types/theme'
-import type { Scales } from '../types/generated/scales'
 
 export function defineTheme({
   aliases,
@@ -13,24 +10,12 @@ export function defineTheme({
   semanticTokens,
 }: Theme): Theme {
   return {
-    aliases: {
-      ...aliases,
-      ...defaultConfig.aliases,
-    },
-    scales: {
-      ...scales,
-      ...(defaultConfig.scales as Scales),
-    },
-    breakpoints: {
-      ...defaultConfig.breakpoints,
-      ...breakpoints,
-    },
-    selectors: {
-      ...defaultConfig.selectors,
-      ...selectors,
-    },
-    tokens: merge({}, defaultConfig.tokens, tokens),
-    semanticTokens: merge({}, defaultConfig.semanticTokens, semanticTokens),
+    aliases,
+    scales,
+    breakpoints,
+    selectors,
+    tokens,
+    semanticTokens,
     components,
   }
 }

@@ -114,9 +114,11 @@ export function extractTokenPlaceholders(value: string) {
 
 // TODO 明确 CSS 合并规则
 export function mergeRecipeConfigs<T, B>(...args: [T, B]) {
+  const recipes = JSON.parse(JSON.stringify(args))
+
   return mergeWith(
     {},
-    ...args,
+    ...recipes,
     (targetValue: unknown, srcValue: unknown, key: string) => {
       if (key === 'compoundVariants') {
         if (targetValue === undefined) {
