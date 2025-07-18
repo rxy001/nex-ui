@@ -15,6 +15,7 @@ const useAriaProps = (props: ModalContentProps) => {
   const { role = 'dialog', tabIndex = -1 } = props
   const labelledBy = props['aria-labelledby']
   const describedBy = props['aria-describedby']
+
   return useMemo(() => {
     return {
       role,
