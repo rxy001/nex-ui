@@ -2,7 +2,7 @@
 
 import { useSystem, SystemProvider, mergeRecipeConfigs } from '@nex-ui/system'
 import { useMemo } from 'react'
-import { mergeWith } from '@nex-ui/utils'
+import { isPlainObject, merge, mergeWith } from '@nex-ui/utils'
 import { defaultConfig } from '../../theme/preset'
 import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { NexUIProviderProps, InnerProviderProps } from './types'
@@ -33,18 +33,34 @@ function TopLevelProvider(props: NexUIProviderProps) {
   const systemProviderProps = useMemo<SystemProviderProps>(() => {
     return {
       cssVarsPrefix: prefix,
-      scales: theme?.scales ?? defaultConfig.scales,
-      selectors: theme?.selectors ?? defaultConfig.selectors,
-      aliases: theme?.aliases ?? defaultConfig.aliases,
-      tokens: theme?.tokens ?? defaultConfig.tokens,
-      semanticTokens: theme?.semanticTokens ?? defaultConfig.semanticTokens,
-      breakpoints: theme?.breakpoints ?? defaultConfig.breakpoints,
+      scales: {
+        ...theme?.scales,
+        ...defaultConfig.scales,
+      },
+      selectors: {
+        ...defaultConfig.selectors,
+        ...theme?.selectors,
+      },
+      aliases: {
+        ...theme?.aliases,
+        ...defaultConfig.aliases,
+      },
+      breakpoints: {
+        ...defaultConfig.breakpoints,
+        ...theme?.breakpoints,
+      },
+      tokens: merge({}, defaultConfig.tokens, theme?.tokens),
+      semanticTokens: merge(
+        {},
+        defaultConfig.semanticTokens,
+        theme?.semanticTokens,
+      ),
       colorSchemeNode: colorScheme?.colorSchemeNode,
       modeStorageKey: colorScheme?.modeStorageKey ?? `${prefix}-color-scheme`,
       colorSchemeSelector:
         colorScheme?.colorSchemeSelector ?? `data-${prefix}-color-scheme`,
       forcedMode: colorScheme?.forcedMode,
-      defaultMode: colorScheme?.defaultMode ?? 'light',
+      defaultMode: colorScheme?.defaultMode ?? 'system',
     }
   }, [
     prefix,
@@ -84,7 +100,10 @@ function NestedProvider(props: NexUIProviderProps) {
       theme?.components,
       (target: any, source: any, key: string) => {
         if (key === 'styleOverrides') {
-          return mergeRecipeConfigs(target, source)
+          if (isPlainObject(target) && isPlainObject(source)) {
+            return mergeRecipeConfigs(target, source)
+          }
+          return source
         }
         if (key === 'defaultProps') {
           return {

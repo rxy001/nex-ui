@@ -1,6 +1,10 @@
 import { useMemo } from 'react'
 import { isFunction, isPlainObject } from '@nex-ui/utils'
-import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
+import {
+  defineRecipe,
+  defineSlotRecipe,
+  mergeRecipeConfigs,
+} from '@nex-ui/system'
 import { useNexUI } from '../provider/Context'
 import type {
   RecipeRuntimeFn,
@@ -25,6 +29,7 @@ export const useStyles = <
   ? Record<Recipe['slots'][number], CSSObject>
   : CSSObject => {
   const { components } = useNexUI()
+
   const styleOverrides = components?.[name]?.styleOverrides
 
   const extendedRecipe = useMemo(() => {
@@ -48,11 +53,11 @@ export const useStyles = <
 
   if (isFunction(styleOverrides)) {
     // @ts-ignore
-    return {
-      ...extendedRecipe(extendedRecipe.splitVariantProps(ownerState)),
+    return mergeRecipeConfigs(
+      extendedRecipe(extendedRecipe.splitVariantProps(ownerState)),
       // @ts-ignore
-      ...styleOverrides(ownerState),
-    }
+      styleOverrides(ownerState),
+    )
   }
 
   // @ts-ignore
