@@ -45,7 +45,7 @@ describe('AvatarGroup', () => {
 
   it("should forward ref to AvatarGroup's root element", () => {
     const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = renderWithNexUIProvider(
+    const { container } = renderWithNexUIProvider(
       <AvatarGroup ref={ref} data-testid='avatar-group'>
         <Avatar />
         <Avatar />
@@ -53,8 +53,7 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    const root = getByTestId('avatar-group')
-    expect(root).toBe(ref.current)
+    expect(container.firstElementChild).toBe(ref.current)
   })
 
   it('should forward classes to root and surplus slots', () => {
@@ -62,6 +61,7 @@ describe('AvatarGroup', () => {
       root: 'test-root-class',
       surplus: 'test-surplus-class',
     }
+
     const { getByTestId } = renderWithNexUIProvider(
       <AvatarGroup data-testid='avatar-group' classes={classes} max={2}>
         <Avatar />
@@ -71,9 +71,9 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    const root = getByTestId('avatar-group')
-    expect(root).toHaveClass(classes.root)
-    expect(root.lastElementChild).toHaveClass(classes.surplus)
+    const avatarGroupRoot = getByTestId('avatar-group')
+    expect(avatarGroupRoot).toHaveClass(classes.root)
+    expect(avatarGroupRoot.lastElementChild).toHaveClass(classes.surplus)
   })
 
   it('should render `+N` when there are more than 4 avatars', () => {
@@ -90,9 +90,9 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    const root = getByTestId('avatar-group')
-    expect(root.childNodes.length).toBe(5)
-    expect(root.lastElementChild?.textContent).toBe('+4')
+    const avatarGroupRoot = getByTestId('avatar-group')
+    expect(avatarGroupRoot.childNodes.length).toBe(5)
+    expect(avatarGroupRoot.lastElementChild?.textContent).toBe('+4')
   })
 
   it('should render `+N` when total exceeds max children', () => {
@@ -102,9 +102,9 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    const root = getByTestId('avatar-group')
-    expect(root.childNodes.length).toBe(2)
-    expect(root.lastElementChild?.textContent).toBe('+4')
+    const avatarGroupRoot = getByTestId('avatar-group')
+    expect(avatarGroupRoot.childNodes.length).toBe(2)
+    expect(avatarGroupRoot.lastElementChild?.textContent).toBe('+4')
 
     rerender(
       <AvatarGroup max={3} total={10}>
@@ -139,8 +139,8 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    const root = getByTestId('avatar-group')
-    expect(root.lastElementChild?.textContent).toBe('More')
+    const avatarGroupRoot = getByTestId('avatar-group')
+    expect(avatarGroupRoot.lastElementChild?.textContent).toBe('More')
   })
 
   it('should customize spacing between avatars', () => {
@@ -151,8 +151,9 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    const root = container.firstElementChild
-    expect(root).toHaveStyle({ '--avatar-group-spacing': '10px' })
+    expect(container.firstElementChild).toHaveStyle({
+      '--avatar-group-spacing': '10px',
+    })
   })
 
   it('avatar should extend appearance styles', () => {
@@ -164,11 +165,11 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    const avatar = container.firstElementChild?.firstElementChild
-    expect(avatar).toHaveClass(avatarClasses['size-lg'])
-    expect(avatar).toHaveClass(avatarClasses['color-blue'])
-    expect(avatar).toHaveClass(avatarClasses.outlined)
-    expect(avatar).toHaveClass(avatarClasses['radius-full'])
+    const avatarRoot = container.firstElementChild?.firstElementChild
+    expect(avatarRoot).toHaveClass(avatarClasses['size-lg'])
+    expect(avatarRoot).toHaveClass(avatarClasses['color-blue'])
+    expect(avatarRoot).toHaveClass(avatarClasses.outlined)
+    expect(avatarRoot).toHaveClass(avatarClasses['radius-full'])
   })
 
   it('should forward slotProps to surplus slot', () => {

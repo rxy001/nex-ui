@@ -17,7 +17,7 @@ describe('ButtonBase', () => {
     expect(root).toMatchSnapshot()
   })
 
-  it('should forward ref to root element', () => {
+  it("should forward ref to ButtonBase's root element", () => {
     const ref = createRef<HTMLButtonElement>()
     const { getByRole } = renderWithNexUIProvider(
       <ButtonBase ref={ref}>Button</ButtonBase>,
@@ -174,7 +174,25 @@ describe('ButtonBase', () => {
     expect(button).toHaveAttribute('data-focus-visible', 'true')
   })
 
-  it('should activate non-interactive elements when space or enter is pressed', async () => {
+  it('should activate button element when Space or Enter is pressed', async () => {
+    const onClick = jest.fn()
+
+    const { user, getByRole } = renderWithNexUIProvider(
+      <ButtonBase onClick={onClick}>Focusable Button</ButtonBase>,
+    )
+
+    const button = getByRole('button')
+    await user.tab()
+    expect(document.activeElement).toBe(button)
+
+    await user.keyboard('{Space}')
+    expect(onClick).toHaveBeenCalledTimes(1)
+
+    await user.keyboard('{Enter}')
+    expect(onClick).toHaveBeenCalledTimes(2)
+  })
+
+  it('should activate non-interactive elements when Space or Enter is pressed', async () => {
     const onClick = jest.fn()
 
     const { user, getByRole } = renderWithNexUIProvider(
@@ -186,10 +204,10 @@ describe('ButtonBase', () => {
     const span = getByRole('button')
     await user.tab()
     expect(document.activeElement).toBe(span)
-    await user.keyboard('[Space]')
+    await user.keyboard('{Space}')
     expect(onClick).toHaveBeenCalledTimes(1)
 
-    await user.keyboard('[Enter]')
+    await user.keyboard('{Enter}')
     expect(onClick).toHaveBeenCalledTimes(2)
   })
 
@@ -205,7 +223,7 @@ describe('ButtonBase', () => {
     await user.tab()
     expect(document.activeElement).toBe(button)
 
-    await user.keyboard('[Enter>5/]')
+    await user.keyboard('{Enter>5/}')
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 

@@ -1,8 +1,7 @@
-import { cloneElement, ReactElement } from 'react'
-import {
-  renderWithNexUIProvider,
-  RenderWithNexUIProviderOptions,
-} from './renderWithProvider'
+import { cloneElement } from 'react'
+import { renderWithNexUIProvider } from './renderWithProvider'
+import type { ReactElement } from 'react'
+import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
 export const testVariantClasses = <
   T extends string,

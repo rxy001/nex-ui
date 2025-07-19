@@ -1,8 +1,6 @@
-import {
-  renderWithNexUIProvider,
-  RenderWithNexUIProviderOptions,
-} from './renderWithProvider'
+import { renderWithNexUIProvider } from './renderWithProvider'
 import type { ReactElement } from 'react'
+import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
 export const testComponentStability = (
   component: ReactElement,

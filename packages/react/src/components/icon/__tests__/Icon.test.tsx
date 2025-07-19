@@ -24,10 +24,10 @@ describe('Icon', () => {
   it('should forward ref to the SVG element', () => {
     const ref = createRef<SVGSVGElement>()
 
-    const { getByTestId } = renderWithNexUIProvider(
-      <Icon as={HeartSvg} ref={ref} data-testid='icon-svg' />,
+    const { container } = renderWithNexUIProvider(
+      <Icon as={HeartSvg} ref={ref} />,
     )
-    expect(getByTestId('icon-svg')).toBe(ref.current)
+    expect(container.firstElementChild).toBe(ref.current)
   })
 
   it('should render correctly', () => {

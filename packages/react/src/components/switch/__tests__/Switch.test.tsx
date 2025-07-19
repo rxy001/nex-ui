@@ -439,7 +439,7 @@ describe('Switch', () => {
       await user.tab()
       expect(document.activeElement).toBe(span)
 
-      await user.keyboard('[Space]')
+      await user.keyboard('{Space}')
       expect(onClick).toHaveBeenCalled()
     })
   })

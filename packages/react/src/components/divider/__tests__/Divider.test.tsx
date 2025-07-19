@@ -8,13 +8,13 @@ describe('Divider', () => {
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Divider />)
-    const divider = container.firstElementChild
+    const dividerRoot = container.firstElementChild
 
-    expect(divider).toHaveClass(dividerClasses.root)
-    expect(divider).toHaveClass(dividerClasses['orientation-horizontal'])
-    expect(divider).not.toHaveClass(dividerClasses['orientation-vertical'])
+    expect(dividerRoot).toHaveClass(dividerClasses.root)
+    expect(dividerRoot).toHaveClass(dividerClasses['orientation-horizontal'])
+    expect(dividerRoot).not.toHaveClass(dividerClasses['orientation-vertical'])
 
-    expect(divider).toMatchSnapshot()
+    expect(dividerRoot).toMatchSnapshot()
   })
 
   it("should forward ref to Divider's root element", () => {

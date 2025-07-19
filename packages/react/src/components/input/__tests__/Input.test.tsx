@@ -34,40 +34,43 @@ describe('Input', () => {
       <Input data-testid='test-input' />,
     )
 
-    const root = container.firstElementChild
+    const inputRoot = container.firstElementChild
 
-    expect(root).toHaveClass(inputClasses.root)
-    expect(root).toHaveClass(inputClasses['variant-outlined'])
-    expect(root).toHaveClass(inputClasses['size-md'])
-    expect(root).toHaveClass(inputClasses['radius-md'])
-    expect(root).toHaveClass(inputClasses['color-blue'])
+    expect(inputRoot).toHaveClass(inputClasses.root)
+    expect(inputRoot).toHaveClass(inputClasses['variant-outlined'])
+    expect(inputRoot).toHaveClass(inputClasses['size-md'])
+    expect(inputRoot).toHaveClass(inputClasses['radius-md'])
+    expect(inputRoot).toHaveClass(inputClasses['color-blue'])
     expect(getByTestId('test-input')).toHaveClass(inputClasses.input)
 
-    expect(root).not.toHaveClass(inputClasses['size-lg'])
-    expect(root).not.toHaveClass(inputClasses['size-sm'])
-    expect(root).not.toHaveClass(inputClasses['radius-full'])
-    expect(root).not.toHaveClass(inputClasses['radius-lg'])
-    expect(root).not.toHaveClass(inputClasses['radius-sm'])
-    expect(root).not.toHaveClass(inputClasses['radius-none'])
-    expect(root).not.toHaveClass(inputClasses['color-yellow'])
-    expect(root).not.toHaveClass(inputClasses['color-cyan'])
-    expect(root).not.toHaveClass(inputClasses['color-red'])
-    expect(root).not.toHaveClass(inputClasses['color-gray'])
-    expect(root).not.toHaveClass(inputClasses['color-green'])
-    expect(root).not.toHaveClass(inputClasses['color-orange'])
-    expect(root).not.toHaveClass(inputClasses['color-purple'])
-    expect(root).not.toHaveClass(inputClasses['color-pink'])
-    expect(root).not.toHaveClass(inputClasses.invalid)
-    expect(root).not.toHaveClass(inputClasses.disabled)
-    expect(root).not.toHaveClass(inputClasses['full-width'])
-    expect(root).not.toHaveClass(inputClasses['variant-filled'])
-    expect(root).not.toHaveClass(inputClasses['variant-underlined'])
-    expect(root).not.toHaveClass(inputClasses['label-placement-inside'])
-    expect(root).not.toHaveClass(inputClasses['label-placement-outside'])
-    expect(root).not.toHaveClass(inputClasses['label-placement-float-outside'])
-    expect(root).not.toHaveClass(inputClasses['label-placement-float-inside'])
-
-    expect(root).toMatchSnapshot()
+    expect(inputRoot).not.toHaveClass(inputClasses['size-lg'])
+    expect(inputRoot).not.toHaveClass(inputClasses['size-sm'])
+    expect(inputRoot).not.toHaveClass(inputClasses['radius-full'])
+    expect(inputRoot).not.toHaveClass(inputClasses['radius-lg'])
+    expect(inputRoot).not.toHaveClass(inputClasses['radius-sm'])
+    expect(inputRoot).not.toHaveClass(inputClasses['radius-none'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-yellow'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-cyan'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-red'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-gray'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-green'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-orange'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-purple'])
+    expect(inputRoot).not.toHaveClass(inputClasses['color-pink'])
+    expect(inputRoot).not.toHaveClass(inputClasses.invalid)
+    expect(inputRoot).not.toHaveClass(inputClasses.disabled)
+    expect(inputRoot).not.toHaveClass(inputClasses['full-width'])
+    expect(inputRoot).not.toHaveClass(inputClasses['variant-filled'])
+    expect(inputRoot).not.toHaveClass(inputClasses['variant-underlined'])
+    expect(inputRoot).not.toHaveClass(inputClasses['label-placement-inside'])
+    expect(inputRoot).not.toHaveClass(inputClasses['label-placement-outside'])
+    expect(inputRoot).not.toHaveClass(
+      inputClasses['label-placement-float-outside'],
+    )
+    expect(inputRoot).not.toHaveClass(
+      inputClasses['label-placement-float-inside'],
+    )
+    expect(inputRoot).toMatchSnapshot()
   })
 
   it("should forward ref to Input's input element", () => {
@@ -248,17 +251,17 @@ describe('Input', () => {
       />,
     )
 
-    const root = container.firstChild
-    const label = container.querySelector(`.${inputClasses['label']}`)
-    const prefix = container.querySelector(`.${inputClasses['prefix']}`)
-    const suffix = container.querySelector(`.${inputClasses['suffix']}`)
+    const inputRoot = container.firstChild
+    const inputLabel = container.querySelector(`.${inputClasses['label']}`)
+    const inputPrefix = container.querySelector(`.${inputClasses['prefix']}`)
+    const inputSuffix = container.querySelector(`.${inputClasses['suffix']}`)
     const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
     const input = container.querySelector(`.${inputClasses['input']}`)
 
-    expect(root).toHaveClass(classes.root)
-    expect(label).toHaveClass(classes.label)
-    expect(prefix).toHaveClass(classes.prefix)
-    expect(suffix).toHaveClass(classes.suffix)
+    expect(inputRoot).toHaveClass(classes.root)
+    expect(inputLabel).toHaveClass(classes.label)
+    expect(inputPrefix).toHaveClass(classes.prefix)
+    expect(inputSuffix).toHaveClass(classes.suffix)
     expect(clearButton).toHaveClass(classes.clearButton)
     expect(input).toHaveClass(classes.input)
   })
@@ -291,16 +294,16 @@ describe('Input', () => {
       />,
     )
 
-    const root = container.firstChild
-    const label = container.querySelector(`.${inputClasses['label']}`)
-    const prefix = container.querySelector(`.${inputClasses['prefix']}`)
-    const suffix = container.querySelector(`.${inputClasses['suffix']}`)
+    const inputRoot = container.firstChild
+    const inputLabel = container.querySelector(`.${inputClasses['label']}`)
+    const inputPrefix = container.querySelector(`.${inputClasses['prefix']}`)
+    const inputSuffix = container.querySelector(`.${inputClasses['suffix']}`)
     const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
 
-    expect(root).toHaveClass('test-root-class')
-    expect(label).toHaveClass('test-label-class')
-    expect(prefix).toHaveClass('test-prefix-class')
-    expect(suffix).toHaveClass('test-suffix-class')
+    expect(inputRoot).toHaveClass('test-root-class')
+    expect(inputLabel).toHaveClass('test-label-class')
+    expect(inputPrefix).toHaveClass('test-prefix-class')
+    expect(inputSuffix).toHaveClass('test-suffix-class')
     expect(clearButton).toHaveClass('test-clear-btn-class')
   })
 

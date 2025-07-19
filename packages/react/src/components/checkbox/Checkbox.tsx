@@ -230,7 +230,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&
-      event.code === 'Space' &&
+      event.key === 'Space' &&
       event.target === event.currentTarget &&
       event.currentTarget.tagName !== 'INPUT' &&
       event.currentTarget === event.target
