@@ -15,10 +15,10 @@ describe('Flex', () => {
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Flex />)
 
-    const flex = container.firstElementChild
+    const flexRoot = container.firstElementChild
 
-    expect(flex).toHaveClass(flexClasses.root)
-    expect(container.firstElementChild).toMatchSnapshot()
+    expect(flexRoot).toHaveClass(flexClasses.root)
+    expect(flexRoot).toMatchSnapshot()
   })
 
   it("should forward ref to Flex's root element", () => {

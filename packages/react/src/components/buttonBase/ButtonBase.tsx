@@ -57,7 +57,7 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     // Limit the repeated triggering of the click event when the Enter key is pressed.
     if (
       focusVisible &&
-      event.code === 'Enter' &&
+      event.key === 'Enter' &&
       event.target === event.currentTarget &&
       (event.currentTarget.tagName === 'BUTTON' ||
         event.currentTarget.tagName === 'A')
@@ -71,7 +71,7 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     if (
       focusVisible &&
       event.target === event.currentTarget &&
-      (event.code === 'Space' || event.code === 'Enter')
+      (event.key === 'Space' || event.key === 'Enter')
     ) {
       event.currentTarget.click()
     }

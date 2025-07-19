@@ -36,27 +36,27 @@ describe('Avatar', () => {
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Avatar>A</Avatar>)
 
-    const avatar = container.firstElementChild
-    expect(avatar).toHaveClass(avatarClasses.root)
-    expect(avatar).toHaveClass(avatarClasses['size-md'])
-    expect(avatar).toHaveClass(avatarClasses['radius-md'])
-    expect(avatar).toHaveClass(avatarClasses['color-gray'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-green'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-cyan'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-orange'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-pink'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-purple'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-yellow'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-red'])
-    expect(avatar).not.toHaveClass(avatarClasses['color-blue'])
-    expect(avatar).not.toHaveClass(avatarClasses['size-sm'])
-    expect(avatar).not.toHaveClass(avatarClasses['size-lg'])
-    expect(avatar).not.toHaveClass(avatarClasses['radius-sm'])
-    expect(avatar).not.toHaveClass(avatarClasses['radius-lg'])
-    expect(avatar).not.toHaveClass(avatarClasses['radius-full'])
-    expect(avatar).not.toHaveClass(avatarClasses.outlined)
+    const avatarRoot = container.firstElementChild
+    expect(avatarRoot).toHaveClass(avatarClasses.root)
+    expect(avatarRoot).toHaveClass(avatarClasses['size-md'])
+    expect(avatarRoot).toHaveClass(avatarClasses['radius-md'])
+    expect(avatarRoot).toHaveClass(avatarClasses['color-gray'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-green'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-cyan'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-orange'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-pink'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-purple'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-yellow'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-red'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['color-blue'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['size-sm'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['size-lg'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['radius-sm'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['radius-lg'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses['radius-full'])
+    expect(avatarRoot).not.toHaveClass(avatarClasses.outlined)
 
-    expect(avatar).toMatchSnapshot()
+    expect(avatarRoot).toMatchSnapshot()
   })
 
   it("should forward ref to Avatar's root element", () => {
@@ -65,13 +65,11 @@ describe('Avatar', () => {
     expect(container.firstElementChild).toBe(ref.current)
   })
 
-  it('should add the outlined class to root element when outlined prop is true', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <Avatar outlined data-testid='outlined'>
-        Avatar
-      </Avatar>,
+  it('should add the outlined class to root element when outlined=true', () => {
+    const { container } = renderWithNexUIProvider(
+      <Avatar outlined>Avatar</Avatar>,
     )
-    expect(getByTestId('outlined')).toHaveClass(avatarClasses.outlined)
+    expect(container.firstElementChild).toHaveClass(avatarClasses.outlined)
   })
 
   it('should forward classes to root and img slots', () => {
@@ -89,9 +87,9 @@ describe('Avatar', () => {
         }}
       />,
     )
-    const root = container.firstElementChild
-    expect(root).toHaveClass(classes.root)
-    expect(root?.firstElementChild).toHaveClass(classes.img)
+    const avatarRoot = container.firstElementChild
+    expect(avatarRoot).toHaveClass(classes.root)
+    expect(avatarRoot?.firstElementChild).toHaveClass(classes.img)
     restoreGlobalImage()
   })
 
@@ -116,8 +114,8 @@ describe('Avatar', () => {
           Avatar
         </Avatar>,
       )
-      const avatar = getByTestId('avatar')
-      expect(avatar.querySelector(`.${avatarClasses.img}`)).toHaveClass(
+      const avatarRoot = getByTestId('avatar')
+      expect(avatarRoot.querySelector(`.${avatarClasses.img}`)).toHaveClass(
         'test-img-class',
       )
     })
@@ -127,14 +125,19 @@ describe('Avatar', () => {
       const { container, rerender } = renderWithNexUIProvider(
         <Avatar src='/fake.png' alt='Avatar' />,
       )
-      const avatar = container.firstElementChild
-      const img = avatar?.firstElementChild
-      expect(avatar?.tagName).toBe('DIV')
-      expect(img?.tagName).toBe('IMG')
-      expect(img).toHaveAttribute('alt', 'Avatar')
-      expect(img).toHaveAttribute('src', '/fake.png')
+      const avatarRoot = container.firstElementChild
+      const avatarImg = avatarRoot?.firstElementChild
+      expect(avatarRoot?.tagName).toBe('DIV')
+      expect(avatarImg?.tagName).toBe('IMG')
+      expect(avatarImg).toHaveAttribute('alt', 'Avatar')
+      expect(avatarImg).toHaveAttribute('src', '/fake.png')
+
       rerender(<Avatar srcSet='/fake.png 1x, /fake@2x.png 2x' />)
-      expect(img).toHaveAttribute('srcSet', '/fake.png 1x, /fake@2x.png 2x')
+
+      expect(avatarImg).toHaveAttribute(
+        'srcSet',
+        '/fake.png 1x, /fake@2x.png 2x',
+      )
     })
 
     it('should render its children when the image fails to load', () => {
@@ -144,9 +147,7 @@ describe('Avatar', () => {
           B
         </Avatar>,
       )
-      const avatar = container.firstElementChild
-      expect(avatar?.tagName).toBe('DIV')
-      expect(avatar?.textContent).toBe('B')
+      expect(container.firstElementChild?.textContent).toBe('B')
     })
 
     it('should render the first letter of its alt when the image fails to load', () => {
@@ -154,9 +155,7 @@ describe('Avatar', () => {
       const { container } = renderWithNexUIProvider(
         <Avatar src='/fake.png' alt='Avatar' data-testid='avatar-text' />,
       )
-      const avatar = container.firstElementChild
-      expect(avatar?.tagName).toBe('DIV')
-      expect(avatar?.textContent).toBe('A')
+      expect(container.firstElementChild?.textContent).toBe('A')
     })
 
     it('should not update state if image is unmounted before load event', () => {
@@ -195,9 +194,9 @@ describe('Avatar', () => {
   describe('Text Avatar', () => {
     it('should render a div containing a string', () => {
       const { container } = renderWithNexUIProvider(<Avatar>O</Avatar>)
-      const avatar = container.firstElementChild
-      expect(avatar?.tagName).toBe('DIV')
-      expect(avatar?.firstChild?.textContent).toBe('O')
+      const avatarRoot = container.firstElementChild
+      expect(avatarRoot?.tagName).toBe('DIV')
+      expect(avatarRoot?.firstChild?.textContent).toBe('O')
     })
   })
 
@@ -208,9 +207,9 @@ describe('Avatar', () => {
           <UserOutlined className='nui-icon' />
         </Avatar>,
       )
-      const avatar = container.firstElementChild
-      expect(avatar?.tagName).toBe('DIV')
-      const userIcon = avatar?.firstElementChild
+      const avatarRoot = container.firstElementChild
+      expect(avatarRoot?.tagName).toBe('DIV')
+      const userIcon = avatarRoot?.firstElementChild
       expect(userIcon).toHaveClass('nui-icon')
     })
   })

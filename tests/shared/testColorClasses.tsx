@@ -1,6 +1,6 @@
-import { ReactElement } from 'react'
-import { RenderWithNexUIProviderOptions } from './renderWithProvider'
 import { testVariantClasses } from './testVariantClasses'
+import type { ReactElement } from 'react'
+import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
 type Color =
   | 'red'

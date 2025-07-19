@@ -1,12 +1,8 @@
-import {
-  render,
-  act,
-  RenderResult,
-  RenderOptions,
-} from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SystemProvider } from '../../packages/system/src'
 import { NexUIProvider } from '../../packages/react/src'
+import type { RenderResult, RenderOptions } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import type { UserEvent } from '@testing-library/user-event'
 

@@ -125,7 +125,7 @@ describe('Button', () => {
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should have disabled class when disabled', async () => {
+  it('should apply disabled class when disabled', async () => {
     const onClick = jest.fn()
     const { getByText } = renderWithNexUIProvider(
       <Button disabled onClick={onClick}>
@@ -155,6 +155,7 @@ describe('Button', () => {
         Link Button
       </Button>,
     )
+
     expect(container.firstElementChild).toMatchSnapshot()
   })
 
@@ -164,8 +165,8 @@ describe('Button', () => {
         Button
       </Button>,
     )
+
     const startIcon = getByTestId('start-icon')
-    expect(startIcon).toBeInTheDocument()
     expect(startIcon.parentElement).toHaveClass(buttonClasses.icon)
     expect(startIcon.parentElement).toHaveClass(buttonClasses['start-icon'])
   })
@@ -177,7 +178,6 @@ describe('Button', () => {
       </Button>,
     )
     const endIcon = getByTestId('end-icon')
-    expect(endIcon).toBeInTheDocument()
     expect(endIcon.parentElement).toHaveClass(buttonClasses.icon)
     expect(endIcon.parentElement).toHaveClass(buttonClasses['end-icon'])
   })
@@ -197,6 +197,7 @@ describe('Button', () => {
     await act(async () => {
       fireEvent.click(button)
     })
+
     expect(button).toHaveClass(buttonClasses.loading)
     expect(
       button.querySelector(`.${buttonClasses['icon-loading']}`),
@@ -205,6 +206,7 @@ describe('Button', () => {
 
   it('should forward classes to root, startIcon and endIcon slots', () => {
     const classes = {
+      root: 'test-root-class',
       startIcon: 'test-start-icon-class',
       endIcon: 'test-end-icon-class',
     }
@@ -223,7 +225,7 @@ describe('Button', () => {
     const startIcon = button?.querySelector(`.${buttonClasses['start-icon']}`)
     const endIcon = button?.querySelector(`.${buttonClasses['end-icon']}`)
 
-    expect(button).toHaveClass(buttonClasses.root)
+    expect(button).toHaveClass(classes.root)
     expect(startIcon).toHaveClass(classes.startIcon)
     expect(endIcon).toHaveClass(classes.endIcon)
   })
@@ -271,7 +273,7 @@ describe('Button', () => {
   })
 
   it('should forward slotProps to startIcon and endIcon slots', () => {
-    const { container } = renderWithNexUIProvider(
+    const { getByTestId } = renderWithNexUIProvider(
       <Button
         startIcon={<span data-testid='start-icon'>Start Icon</span>}
         endIcon={<span data-testid='end-icon'>End Icon</span>}
@@ -284,10 +286,10 @@ describe('Button', () => {
       </Button>,
     )
 
-    const startIcon = container.querySelector('.test-start-icon')
-    const endIcon = container.querySelector('.test-end-icon')
+    const startIcon = getByTestId('start-icon')
+    const endIcon = getByTestId('end-icon')
 
-    expect(startIcon).toBeInTheDocument()
-    expect(endIcon).toBeInTheDocument()
+    expect(startIcon.parentElement).toHaveClass('test-start-icon')
+    expect(endIcon.parentElement).toHaveClass('test-end-icon')
   })
 })
