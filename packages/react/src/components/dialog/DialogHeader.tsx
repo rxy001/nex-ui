@@ -18,13 +18,13 @@ const useSlotClasses = () => {
   const { prefix } = useNexUI()
 
   return useMemo(() => {
-    const dialogRoot = `${prefix}-dialog`
+    const prefixClassName = `${prefix}-dialog-header`
 
     const slots = {
-      header: ['header'],
+      root: ['root'],
     }
 
-    return composeClasses(slots, getUtilityClass(dialogRoot))
+    return composeClasses(slots, getUtilityClass(prefixClassName))
   }, [prefix])
 }
 
@@ -54,7 +54,7 @@ export const DialogHeader = <RootComponent extends ElementType = 'h2'>(
     ownerState,
     style,
     elementType: ModalHeader,
-    classNames: classes.header,
+    classNames: classes.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })

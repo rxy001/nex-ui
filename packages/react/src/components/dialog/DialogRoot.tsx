@@ -38,7 +38,7 @@ const useSlotClasses = (ownerState: DialogOwnerState) => {
 
   const modalRoot = `${prefix}-dialog`
 
-  const { classes, open, scroll, fullScreen, placement } = ownerState
+  const { classes, open, scroll, placement, maxWidth, fullScreen } = ownerState
 
   const slots = {
     root: [
@@ -46,6 +46,7 @@ const useSlotClasses = (ownerState: DialogOwnerState) => {
       `placement-${placement}`,
       `scroll-${scroll}`,
       open && 'open',
+      `max-width-${maxWidth}`,
       fullScreen && 'full-screen',
     ],
     backdrop: ['backdrop'],

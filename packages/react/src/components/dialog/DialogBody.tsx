@@ -19,13 +19,13 @@ const useSlotClasses = () => {
   const { prefix } = useNexUI()
 
   return useMemo(() => {
-    const modalRoot = `${prefix}-dialog`
+    const prefixClassName = `${prefix}-dialog-body`
 
     const slots = {
-      body: ['body'],
+      root: ['root'],
     }
 
-    return composeClasses(slots, getUtilityClass(modalRoot))
+    return composeClasses(slots, getUtilityClass(prefixClassName))
   }, [prefix])
 }
 
@@ -60,7 +60,7 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
     ownerState,
     style,
     elementType: ModalBody,
-    classNames: classes.body,
+    classNames: classes.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })

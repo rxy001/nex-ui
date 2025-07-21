@@ -20,24 +20,19 @@ import { ModalContent } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogContentOwnerState, DialogContentProps } from './types'
 
-const useSlotClasses = (ownerState: DialogContentOwnerState) => {
+const useSlotClasses = () => {
   const { prefix } = useNexUI()
-  const { maxWidth, fullScreen } = ownerState
 
   return useMemo(() => {
-    const dialogRoot = `${prefix}-dialog`
+    const prefixClassName = `${prefix}-dialog-content`
 
     const slots = {
-      content: [
-        'content',
-        `max-width-${maxWidth}`,
-        fullScreen && 'full-screen',
-      ],
+      root: ['root'],
       closeButton: ['close-button'],
     }
 
-    return composeClasses(slots, getUtilityClass(dialogRoot))
-  }, [fullScreen, maxWidth, prefix])
+    return composeClasses(slots, getUtilityClass(prefixClassName))
+  }, [prefix])
 }
 
 export const DialogContent = <RootComponent extends ElementType = 'section'>(
@@ -78,13 +73,13 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
     recipe: dialogContentRecipe,
   })
 
-  const classes = useSlotClasses(ownerState)
+  const classes = useSlotClasses()
 
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
     ownerState,
     elementType: ModalContent,
     style: styles.content,
-    classNames: classes.content,
+    classNames: classes.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })

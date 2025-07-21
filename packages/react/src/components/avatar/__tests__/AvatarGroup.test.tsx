@@ -5,7 +5,7 @@ import {
   testRootClassName,
 } from '~/tests/shared'
 import { AvatarGroup, Avatar } from '../index'
-import { avatarClasses, avatarGroupClasses } from '../avatarClasses'
+import { avatarClasses, avatarGroupClasses } from '../classes'
 
 describe('AvatarGroup', () => {
   testComponentStability(

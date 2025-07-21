@@ -12,7 +12,7 @@ import {
 } from '~/tests/shared'
 import { UserOutlined } from '@nex-ui/icons'
 import { Avatar } from '../index'
-import { avatarClasses } from '../avatarClasses'
+import { avatarClasses } from '../classes'
 
 afterAll(() => {
   restoreGlobalImage()

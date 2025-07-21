@@ -7,7 +7,7 @@ import {
 import { fireEvent } from '@testing-library/react'
 import { Checkbox } from '../Checkbox'
 import { CheckboxGroup } from '../CheckboxGroup'
-import { checkboxClasses, checkboxGroupClasses } from '../checkboxClasses'
+import { checkboxClasses, checkboxGroupClasses } from '../classes'
 
 const children = [
   <Checkbox value='orange' key='orange'>

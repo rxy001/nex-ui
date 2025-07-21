@@ -45,7 +45,7 @@ type DialogOwnProps<RootComponent extends ElementType> = Omit<
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'backdrop' | 'panel'>
+  classes?: ComponentUtilityClasses<'root' | 'backdrop' | 'panel'>
 
   /**
    * The dialog scroll behavior.
