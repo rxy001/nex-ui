@@ -9,11 +9,11 @@ import type { DialogProps } from './types'
 const Provider = (props: DialogProps) => {
   const {
     children,
+    fullScreen = false,
     placement = 'top',
     hideCloseButton = false,
     maxWidth = 'md',
     scroll = 'outside',
-    fullScreen = false,
     hideBackdrop = false,
   } = props
   const {
@@ -63,8 +63,7 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
     keepMounted,
     closeOnEscape,
     closeOnInteractBackdrop,
-    fullScreen = false,
-    preventScroll = fullScreen,
+    preventScroll,
     'aria-describedby': describedby,
     'aria-labelledby': labelledby,
     ...remainingProps

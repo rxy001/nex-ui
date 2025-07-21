@@ -9,7 +9,7 @@ import {
   testRadiusClasses,
 } from '~/tests/shared'
 import { Checkbox, CheckboxGroup } from '../index'
-import { checkboxClasses } from '../checkboxClasses'
+import { checkboxClasses } from '../classes'
 
 describe('Checkbox', () => {
   testComponentStability(<Checkbox />, {

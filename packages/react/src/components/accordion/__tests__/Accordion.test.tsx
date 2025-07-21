@@ -8,7 +8,7 @@ import {
 } from '~/tests/shared'
 import { Accordion, AccordionItem } from '../index'
 import { Button } from '../../button'
-import { accordionClasses, accordionItemClasses } from '../accordionClasses'
+import { accordionClasses, accordionItemClasses } from '../classes'
 import type { Key } from 'react'
 
 const children = (

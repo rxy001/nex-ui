@@ -103,7 +103,8 @@ export const dialogContentRecipe = defineSlotRecipe({
     fullScreen: {
       true: {
         content: {
-          w: '100%',
+          w: 'full',
+          h: 'full',
           maxHeight: undefined,
           maxWidth: 'full',
           m: 0,
