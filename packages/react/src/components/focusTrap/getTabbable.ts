@@ -67,7 +67,10 @@ function getTabIndex(node: HTMLElement): number {
   //  yet they are still part of the regular tab order; in FF, they get a default
   //  `tabIndex` of 0; since Chrome still puts those elements in the regular tab
   //  order, consider their tab index to be 0.
+
   if (
+    // jest not support contentEditable
+    // istanbul ignore next
     node.contentEditable === 'true' ||
     ((node.nodeName === 'AUDIO' ||
       node.nodeName === 'VIDEO' ||

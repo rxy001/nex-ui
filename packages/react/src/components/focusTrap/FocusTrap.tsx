@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-
 import { __DEV__, addEventListener, mergeRefs } from '@nex-ui/utils'
 import {
   cloneElement,
@@ -26,7 +24,6 @@ export const FocusTrap = ({
   const pausedRef = useLatest(paused)
   const restoredNode = useRef<EventTarget>(null)
   const ignoreNextFocus = useRef<boolean>(false)
-
   const mergedRefs = mergeRefs(rootRef, children?.props.ref)
 
   useEffect(() => {
@@ -35,6 +32,7 @@ export const FocusTrap = ({
     }
 
     if (!rootRef.current.contains(document.activeElement)) {
+      // If the focus is not inside the focus trap, focus the root element
       rootRef.current?.focus()
     }
 
@@ -139,13 +137,13 @@ export const FocusTrap = ({
 
   return (
     <>
-      <div tabIndex={active ? 0 : -1} ref={sentinelStartRef} />
+      <div tabIndex={active && !paused ? 0 : -1} ref={sentinelStartRef} />
       {cloneElement(children, {
         ...children.props,
         ref: mergedRefs,
         onFocus: handleFocus,
       })}
-      <div tabIndex={active ? 0 : -1} ref={sentinelEndRef} />
+      <div tabIndex={active && !paused ? 0 : -1} ref={sentinelEndRef} />
     </>
   )
 }
