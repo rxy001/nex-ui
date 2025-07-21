@@ -18,13 +18,13 @@ const useSlotClasses = () => {
   const { prefix } = useNexUI()
 
   return useMemo(() => {
-    const modalRoot = `${prefix}-dialog`
+    const prefixClassName = `${prefix}-dialog-footer`
 
     const slots = {
-      footer: ['footer'],
+      root: ['root'],
     }
 
-    return composeClasses(slots, getUtilityClass(modalRoot))
+    return composeClasses(slots, getUtilityClass(prefixClassName))
   }, [prefix])
 }
 
@@ -54,7 +54,7 @@ export const DialogFooter = <RootComponent extends ElementType>(
     ownerState,
     style,
     elementType: ModalFooter,
-    classNames: classes.footer,
+    classNames: classes.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })
