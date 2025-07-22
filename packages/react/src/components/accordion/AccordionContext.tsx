@@ -8,16 +8,6 @@ export const [AccordionGroupProvider, useAccordionGroup] =
     contextName: 'AccordionGroupContext',
     hookName: 'useAccordionGroup',
     providerName: 'AccordionGroupProvider',
-    defaultValue: {
-      expandedKeys: [],
-      toggleExpandedKey: () => {},
-      keepMounted: true,
-      hideIndicator: false,
-      motionProps: {},
-      disabledKeys: [],
-      disabled: false,
-      variant: 'underlined',
-      indicatorMotionProps: {},
-    },
+    defaultValue: null as unknown as AccordionGroupContextValue,
     strict: true,
   })

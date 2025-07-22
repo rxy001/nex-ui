@@ -8,12 +8,8 @@ const [InnerColorSchemeProvider, useColorScheme] =
     contextName: 'ColorSchemeContext',
     providerName: 'InnerColorSchemeProvider',
     hookName: 'useColorScheme',
-    strict: false,
-    defaultValue: {
-      mode: undefined,
-      setMode: () => {},
-      systemColorScheme: undefined,
-    },
+    strict: true,
+    defaultValue: null as unknown as ColorSchemeContext,
   })
 
 export { InnerColorSchemeProvider, useColorScheme }

@@ -22,14 +22,5 @@ export const [ModalProvider, useModal] = createContext<ModalContextValue>({
   hookName: 'useModal',
   providerName: 'ModalProvider',
   strict: true,
-  defaultValue: {
-    restoreFocus: true,
-    open: false,
-    preventScroll: false,
-    setOpen: () => {},
-    defaultOpen: false,
-    keepMounted: false,
-    closeOnInteractOutside: true,
-    closeOnEscape: true,
-  },
+  defaultValue: null as unknown as ModalContextValue,
 })
