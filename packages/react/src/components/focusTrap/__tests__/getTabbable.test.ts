@@ -53,16 +53,18 @@ describe('getTabbable', () => {
       <input id="input1" tabindex="3" />
       <button id="button1" tabindex="1">Button</button>
       <a href="#" id="link1" tabindex="2">Link</a>
+      <a href="#" id="link2" tabindex="2">Link</a>
       <input id="input2" />
     `
 
     const result = getTabbable(container)
 
-    expect(result).toHaveLength(4)
+    expect(result).toHaveLength(5)
     expect(result[0].id).toBe('button1') // tabindex 1
     expect(result[1].id).toBe('link1') // tabindex 2
-    expect(result[2].id).toBe('input1') // tabindex 3
-    expect(result[3].id).toBe('input2') // tabindex 0 (default)
+    expect(result[2].id).toBe('link2') // tabindex 2
+    expect(result[3].id).toBe('input1') // tabindex 3
+    expect(result[4].id).toBe('input2') // tabindex 0 (default)
   })
 
   it('should exclude disabled elements', () => {

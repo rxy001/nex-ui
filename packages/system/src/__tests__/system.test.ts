@@ -7,6 +7,13 @@ const SELECTOR_HORVER = '&:not(:disabled):not([data-disabled=true]):hover'
 const SELECTOR_ACTIVE = '&:not(:disabled):not([data-disabled=true]):active'
 const CSS_VARS_PREFIX = 'test'
 
+describe('createSystem', () => {
+  it('should call with default config', () => {
+    const system = createSystem({ cssVarsPrefix: CSS_VARS_PREFIX })
+    expect(system).toBeDefined()
+  })
+})
+
 describe('css', () => {
   const sysConfig = defineConfig({
     cssVarsPrefix: CSS_VARS_PREFIX,
