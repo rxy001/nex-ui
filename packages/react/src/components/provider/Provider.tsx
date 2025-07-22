@@ -3,7 +3,7 @@
 import { useSystem, SystemProvider, mergeRecipeConfigs } from '@nex-ui/system'
 import { useMemo } from 'react'
 import { isPlainObject, merge, mergeWith } from '@nex-ui/utils'
-import { defaultConfig } from '../../theme/preset'
+import { defaultConfig } from '../../theme'
 import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { NexUIProviderProps, InnerProviderProps } from './types'
 import type { SystemProviderProps } from '@nex-ui/system'

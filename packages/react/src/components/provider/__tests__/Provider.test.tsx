@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import { NexUIProvider } from '../index'
 import { Button } from '../../button'
+import { Divider } from '../../divider'
 import { buttonClasses } from '../../button/buttonClasses'
 import type { Theme } from '../../../types/theme'
 
@@ -62,8 +63,8 @@ describe('NexUIProvider', () => {
     expect(button).toHaveClass(buttonClasses['color-orange'])
   })
 
-  it('should customize component styles', () => {
-    const { getByRole, rerender } = render(
+  it('should customize component styles by the styleOverrides object', () => {
+    const { getByRole } = render(
       <NexUIProvider
         theme={{
           components: {
@@ -87,57 +88,77 @@ describe('NexUIProvider', () => {
                 },
               },
             },
+            Divider: {
+              styleOverrides: {
+                base: {
+                  bg: 'gray',
+                },
+              },
+            },
           },
         }}
       >
         <Button>Button</Button>
+        <Divider />
       </NexUIProvider>,
     )
 
     const button = getByRole('button')
+    const divider = getByRole('separator')
+
     expect(button).toHaveStyleRule('background-color', '#f0f0f0')
     expect(button).toHaveStyleRule('width', '200px')
+    expect(divider).toHaveStyleRule('background-color', 'gray')
+  })
 
-    const theme: Theme = {
-      components: {
-        Button: {
-          styleOverrides: (ownerState) => {
-            if (ownerState.size === 'lg') {
-              return {
-                root: {
-                  width: '300px',
-                  height: '200px',
-                },
-              }
-            }
-            return {
-              root: {
-                width: '200px',
-                height: '100px',
+  it('should customize component styles by the styleOverrides function', () => {
+    const { getByTestId, getByRole } = render(
+      <NexUIProvider
+        theme={{
+          components: {
+            Button: {
+              styleOverrides: (ownerState) => {
+                if (ownerState.size === 'lg') {
+                  return {
+                    root: {
+                      width: '300px',
+                      height: '200px',
+                    },
+                  }
+                }
+                return {
+                  root: {
+                    width: '200px',
+                    height: '100px',
+                  },
+                }
               },
-            }
+            },
+            Divider: {
+              styleOverrides: () => ({
+                bg: 'blue',
+              }),
+            },
           },
-        },
-      },
-    }
-
-    rerender(
-      <NexUIProvider theme={theme}>
-        <Button>Button</Button>
+        }}
+      >
+        <Button data-testid='button1'>Button</Button>
+        <Button data-testid='button2' size='lg'>
+          Button
+        </Button>
+        <Divider />
       </NexUIProvider>,
     )
 
-    expect(button).toHaveStyleRule('width', '200px')
-    expect(button).toHaveStyleRule('height', '100px')
+    const button1 = getByTestId('button1')
+    const button2 = getByTestId('button2')
+    const divider = getByRole('separator')
 
-    rerender(
-      <NexUIProvider theme={theme}>
-        <Button size='lg'>Button</Button>
-      </NexUIProvider>,
-    )
-
-    expect(button).toHaveStyleRule('width', '300px')
-    expect(button).toHaveStyleRule('height', '200px')
+    expect(button1).toHaveStyleRule('width', '200px')
+    expect(button1).toHaveStyleRule('height', '100px')
+    expect(button2).toHaveStyleRule('width', '300px')
+    expect(button2).toHaveStyleRule('height', '200px')
+    expect(divider).toHaveStyleRule('background-color', 'blue')
   })
 
   it('should customize component default props', () => {

@@ -6,7 +6,7 @@ import { isFunction } from '@nex-ui/utils'
 import type { PortalProps } from './types'
 
 export const Portal = (props: PortalProps) => {
-  const { container, children } = props
+  const { children, container } = props
   const [mountNode, setMountNode] = useState<Element | null | undefined>(null)
 
   useEffect(() => {

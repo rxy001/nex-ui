@@ -2,10 +2,10 @@ import { mergeProps, isArray, isPlainObject } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 
-type UseSlotPropsArgs<
-  SlotProps extends {},
-  ForwardedProps extends {},
-  AdditionalProps extends {},
+export type UseSlotPropsArgs<
+  SlotProps extends {} = {},
+  ForwardedProps extends {} = {},
+  AdditionalProps extends {} = {},
 > = {
   /**
    * The style of the slot.
@@ -66,7 +66,7 @@ export const useSlotProps = <
       return [style, props.sx]
     }
     return style
-  }, [props, style])
+  }, [props.sx, style])
 
   return {
     ...props,
