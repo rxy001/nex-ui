@@ -2,13 +2,9 @@ name: Visual Tests
 
 on:
   pull_request:
-    paths:
-      - 'packages/**'
     branches:
       - dev
   push:
-    paths:
-      - 'packages/**'
     branches:
       - dev
 
