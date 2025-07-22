@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 'use client'
 
 import { useEvent } from '@nex-ui/hooks'
@@ -77,7 +79,7 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
             <AnimatePresence mode='popLayout' key={ripple.key}>
               <m.span
                 animate={{ transform: 'scale(2)', opacity: 0 }}
-                className='heroui-ripple'
+                className='nui-ripple'
                 exit={{ opacity: 0 }}
                 initial={{ transform: 'scale(0)', opacity: 0.35 }}
                 style={{

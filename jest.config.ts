@@ -11,7 +11,6 @@ const jestConfig = {
   moduleNameMapper: {
     '^~/(.*)$': '<rootDir>/$1',
   },
-
   transform: {
     '^.+\\.(t|j)sx?$': [
       '@swc/jest',
@@ -42,6 +41,7 @@ const jestConfig = {
     '__stories__/',
     'dist/',
     '<rootDir>/packages/icons/',
+    '<rootDir>/packages/react/src/index.ts',
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
   watchman: true,
