@@ -163,9 +163,9 @@ export type TokensDefinition = {
 }
 
 export type CreateTokensConfig = {
-  tokens: TokensDefinition
-  semanticTokens: SemanticTokensDefinition
   prefix: string
+  tokens?: TokensDefinition
+  semanticTokens?: SemanticTokensDefinition
 }
 
 export type TokenMap = Map<string, Token>

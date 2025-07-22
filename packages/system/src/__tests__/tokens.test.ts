@@ -66,6 +66,12 @@ describe('createTokens', () => {
     expect(getToken('colors.white')).toMatchSnapshot()
     expect(getToken('colors.blue.100')).toMatchSnapshot()
     expect(getGlobalCssVars()).toMatchSnapshot()
+
+    expect(() => {
+      createTokens({
+        prefix: PREFIX,
+      })
+    }).not.toThrow()
   })
 
   it('should warn when passing invalid tokens', () => {

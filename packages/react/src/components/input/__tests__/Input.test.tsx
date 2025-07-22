@@ -356,4 +356,163 @@ describe('Input', () => {
 
     expect(document.activeElement).toBe(input)
   })
+
+  describe('Accessibility', () => {
+    it('should have type="text" by default', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' />,
+      )
+      const input = getByTestId('input')
+      expect(input).toHaveAttribute('type', 'text')
+    })
+
+    it('should have tabIndex=0 by default', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' />,
+      )
+      const input = getByTestId('input')
+      expect(input).toHaveAttribute('tabIndex', '0')
+    })
+
+    it('should apply type attribute with native input', () => {
+      const { getByTestId, rerender } = renderWithNexUIProvider(
+        <Input data-testid='input' />,
+      )
+
+      const input = getByTestId('input')
+      expect(input).toHaveAttribute('type', 'text')
+
+      rerender(<Input data-testid='input' type='email' />)
+
+      expect(input).toHaveAttribute('type', 'email')
+    })
+
+    it('should apply disabled attribute to native input when disabled', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' disabled />,
+      )
+
+      const input = getByTestId('input')
+      expect(input).toBeDisabled()
+    })
+
+    it('should apply tabIndex=-1', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' disabled />,
+      )
+
+      const input = getByTestId('input')
+      expect(input).toHaveAttribute('tabIndex', '-1')
+    })
+
+    it('should have aria-invalid attribute', () => {
+      const { getByTestId, rerender } = renderWithNexUIProvider(
+        <Input data-testid='input' />,
+      )
+
+      const input = getByTestId('input')
+      expect(input).not.toBeInvalid()
+
+      rerender(<Input data-testid='input' invalid />)
+      expect(input).toBeInvalid()
+    })
+
+    it("should the for of label refer to input's id when label is provided", () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' label='Test Label' />,
+      )
+
+      const input = getByTestId('input')
+
+      expect(input).toHaveAttribute('id', input.id)
+
+      const label = document.querySelector(`.${inputClasses['label']}`)
+      expect(label).toHaveAttribute('for', input.id)
+    })
+
+    it('should apply aria-label when label is provided', () => {
+      const { getByTestId, rerender } = renderWithNexUIProvider(
+        <Input data-testid='input' />,
+      )
+
+      const input = getByTestId('input')
+
+      expect(input).not.toHaveAttribute('aria-label')
+
+      rerender(<Input data-testid='input' label='Test Label' />)
+      expect(input).toHaveAttribute('aria-label', 'Test Label')
+    })
+
+    it('should apply aria-label when aria-label prop is provided', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' aria-label='Custom Label' label='Input' />,
+      )
+
+      const input = getByTestId('input')
+      expect(input).toHaveAttribute('aria-label', 'Custom Label')
+    })
+
+    it('should apply aria-labelledby when label is provided', () => {
+      const { getByTestId, container, rerender } = renderWithNexUIProvider(
+        <Input data-testid='input' />,
+      )
+
+      const input = getByTestId('input')
+
+      expect(input).not.toHaveAttribute('aria-labelledby')
+
+      rerender(<Input data-testid='input' label='Test Label' />)
+      const label = container.querySelector(`.${inputClasses['label']}`)
+      expect(input).toHaveAttribute('aria-labelledby', label!.id)
+      expect(label).toHaveAttribute('id', label!.id)
+    })
+
+    it('should apply aria-labelledby when aria-labelledby prop is provided', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' aria-labelledby='label-id' label='Input' />,
+      )
+
+      const input = getByTestId('input')
+      expect(input).toHaveAttribute('aria-labelledby', 'label-id')
+    })
+
+    it('should apply aria-labelledby=label.id when id of label is provided', () => {
+      const { getByTestId, container } = renderWithNexUIProvider(
+        <Input
+          data-testid='input'
+          label='Test Label'
+          slotProps={{ label: { id: 'custom-id' } }}
+        />,
+      )
+
+      const input = getByTestId('input')
+      const label = container.querySelector(`.${inputClasses['label']}`)
+
+      expect(label).toHaveAttribute('id', 'custom-id')
+      expect(input).toHaveAttribute('aria-labelledby', label!.id)
+    })
+
+    it('should use aria-disabled and role with non-input elements', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <Input data-testid='input' as='div' disabled />,
+      )
+
+      const input = getByTestId('input')
+
+      expect(input).toHaveAttribute('role', 'textbox')
+      expect(input).toHaveAttribute('aria-disabled', 'true')
+    })
+
+    it('should have aria-label on clear button', () => {
+      const { container } = renderWithNexUIProvider(
+        <Input clearable data-testid='input' />,
+      )
+
+      const clearButton = container.querySelector(
+        `.${inputClasses['clear-btn']}`,
+      )
+
+      expect(clearButton).toHaveAttribute('aria-label', 'Clear input')
+    })
+  })
 })
