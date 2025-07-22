@@ -1,10 +1,20 @@
-<div style="background:white;">
-  <p align="center">
+<div align="center">
+  <p>
     <img src='./assets/logo.png' style="width: 150px; height: 150px;" />
   </p>
-  <h1 align="center">Nex UI</h1>
-  <p align="center">🎉 A beautiful, modern, and reliable React component library.</p>
-  <p align="center"><b>Theme Customizable, Light & Dark UI, Unique DX, Written In TypeScript</b></p>
+  
+# Nex UI
+
+🎉 A beautiful, modern, and reliable React component library.
+
+Theme Customizable, Light & Dark UI, Unique DX, Written In TypeScript
+
+<hr/>
+<br/>
+
+[![CI status](./assets/badge.svg)](https://github.com/rxy001/nex-ui/actions/workflows/QA.yml)
+[![codecov](https://codecov.io/github/rxy001/nex-ui/branch/main/graph/badge.svg?token=7NN7B1ZO6H)](https://codecov.io/github/rxy001/nex-ui)
+
 </div>
 
 ## Documentation
