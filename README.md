@@ -9,11 +9,10 @@
 
 Theme Customizable, Light & Dark UI, Unique DX, Written In TypeScript
 
-<hr/>
-<br/>
+<h2></h2>
 
 [![CI status](./assets/badge.svg)](https://github.com/rxy001/nex-ui/actions/workflows/QA.yml)
-[![codecov](https://codecov.io/github/rxy001/nex-ui/branch/main/graph/badge.svg?token=7NN7B1ZO6H)](https://codecov.io/github/rxy001/nex-ui)
+[![codecov](https://codecov.io/github/rxy001/nex-ui/branch/dev/graph/badge.svg?token=7NN7B1ZO6H)](https://codecov.io/github/rxy001/nex-ui)
 
 </div>
 
