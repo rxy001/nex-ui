@@ -176,6 +176,28 @@ describe('Accordion', () => {
     )
   })
 
+  it('should have default itemKey on AccordionItem', async () => {
+    const { getByTestId, getByRole } = await renderWithNexUIProvider(
+      <Accordion>
+        <AccordionItem title='Accordion 1' data-testid='accordion-item'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </AccordionItem>
+      </Accordion>,
+      {
+        useAct: true,
+      },
+    )
+
+    const accordionItemRoot = getByTestId('accordion-item')
+    const trigger = getByRole('button')
+
+    await act(async () => {
+      fireEvent.click(trigger)
+    })
+
+    expect(accordionItemRoot).toHaveClass(accordionItemClasses.expanded)
+  })
+
   it('should be controlled by expandedKeys prop', async () => {
     function ControlledAccordion() {
       const [expandedKeys, setExpandedKeys] = useState<Key[]>([])

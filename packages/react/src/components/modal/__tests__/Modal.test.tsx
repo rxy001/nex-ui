@@ -334,6 +334,32 @@ describe('Modal', () => {
     expect(queryByTestId('modal-root')).toBeNull()
   })
 
+  it("should return children as-is when ModalTrigger's children is not a valid React element", async () => {
+    const { container } = await renderWithNexUIProvider(
+      <Modal>
+        <ModalTrigger>Child</ModalTrigger>
+      </Modal>,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(container.textContent).toBe('Child')
+  })
+
+  it("should return children as-is when ModalClose's children is not a valid React element", async () => {
+    const { container } = await renderWithNexUIProvider(
+      <Modal>
+        <ModalClose>Child</ModalClose>
+      </Modal>,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(container.textContent).toBe('Child')
+  })
+
   describe('Accessibility', () => {
     it("should have tabIndex=-1 on the Modal's root element", async () => {
       const { getByTestId } = await renderWithNexUIProvider(
