@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "storybook build -o dist"
+    "build": "storybook build --webpack-stats-json -o dist"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
