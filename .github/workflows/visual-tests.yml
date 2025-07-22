@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Install
         uses: ./.github/common-actions/install
@@ -31,3 +32,4 @@ jobs:
           workingDir: sb
           storybookBuildDir: './dist'
           configFile: './chromatic.config.json'
+          onlyChanged: true
