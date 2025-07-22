@@ -6,11 +6,6 @@ on:
       - '.changeset/**'
     branches:
       - main
-  push:
-    paths:
-      - '.changeset/**'
-    branches:
-      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
