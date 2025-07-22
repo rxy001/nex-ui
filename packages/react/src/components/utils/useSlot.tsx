@@ -18,13 +18,13 @@ import type {
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
-type UseSlotArgs<
+export type UseSlotArgs<
   ElementType extends ReactElementType,
-  SlotProps extends {},
-  ForwardedProps extends {},
-  AdditonalProps extends {},
-  OwnerState extends {},
-  ShouldForwardComponent extends boolean,
+  SlotProps extends {} = {},
+  ForwardedProps extends {} = {},
+  AdditonalProps extends {} = {},
+  OwnerState extends {} = {},
+  ShouldForwardComponent extends boolean = boolean,
 > = {
   /**
    * The slot's default component
@@ -150,7 +150,10 @@ export const useSlot = <
   }
 
   const Component = useMemo(
-    () => (shouldForwardComponent ? nex(elementType) : elementType),
+    () =>
+      shouldForwardComponent
+        ? (nex[elementType as keyof typeof nex] ?? nex(elementType))
+        : elementType,
     [elementType, shouldForwardComponent],
   )
 
