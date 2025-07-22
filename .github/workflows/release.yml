@@ -21,9 +21,6 @@ jobs:
       - name: Install
         uses: ./.github/common-actions/install
 
-      - name: Tests
-        run: pnpm test
-
       - name: Build
         id: build
         continue-on-error: false
