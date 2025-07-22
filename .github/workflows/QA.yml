@@ -35,7 +35,12 @@ jobs:
         uses: ./.github/common-actions/install
 
       - name: Run tests
-        run: pnpm test
+        run: pnpm test --coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   eslint:
     name: ESLint
