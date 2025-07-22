@@ -1,6 +1,6 @@
 'use client'
 
-import { isValidElement, useId, useMemo } from 'react'
+import { cloneElement, isValidElement, useId, useMemo } from 'react'
 import { isFunction, __DEV__, isString } from '@nex-ui/utils'
 import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
@@ -14,8 +14,8 @@ import {
   useSlot,
 } from '../utils'
 import { CheckedIcon } from './CheckedIcon'
-import { Box } from '../box'
 import { IndeterminateIcon } from './IndeterminateIcon'
+import type { CSSObject } from '@emotion/react'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
 import type {
   ElementType,
@@ -24,6 +24,7 @@ import type {
   KeyboardEvent,
   InputHTMLAttributes,
   MouseEvent,
+  ReactElement,
 } from 'react'
 
 const useSlotClasses = (ownerState: CheckboxOwnerState) => {
@@ -128,7 +129,7 @@ const useSlotAriaProps = (
 export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   inProps: CheckboxProps<CheckboxComponent>,
 ) => {
-  const { primaryThemeColor } = useNexUI()
+  const { primaryThemeColor, css } = useNexUI()
 
   const props = useDefaultProps<CheckboxProps>({
     name: 'Checkbox',
@@ -298,30 +299,32 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   })
 
   const renderCheckedIcon = () => {
+    if (indeterminate) {
+      return <IndeterminateIcon />
+    }
+
     const customIcon = icon
       ? isFunction(icon)
         ? icon(ownerState)
         : icon
       : null
 
-    if (customIcon) {
-      return isValidElement(customIcon) ? (
-        <Box
-          as={customIcon.type as ElementType}
-          sx={styles.checkedIcon}
-          key={customIcon.key}
-          {...(customIcon.props ?? {})}
-        />
-      ) : (
-        customIcon
-      )
+    if (!customIcon) {
+      return <CheckedIcon checked={checked} />
     }
 
-    if (indeterminate) {
-      return <IndeterminateIcon />
-    }
+    if (isValidElement(customIcon)) {
+      const element = customIcon as ReactElement<any>
 
-    return <CheckedIcon checked={checked} />
+      return cloneElement(element, {
+        ...element.props,
+        style: {
+          ...element.props.style,
+          ...(css(styles.checkedIcon) as CSSObject),
+        },
+      })
+    }
+    return customIcon
   }
 
   return (

@@ -12,9 +12,9 @@ import type {
 } from './types'
 
 function initializeValue(key: string, defaultValue: string) {
+  // FIXME: mock ssr environment
+  /* istanbul ignore if */
   if (typeof window === 'undefined') {
-    // FIXME: mock ssr environment
-    /* istanbul ignore next */
     return undefined
   }
   let value

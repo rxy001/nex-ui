@@ -78,15 +78,16 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
   const {
     disabled,
     invalid,
-    as,
     type,
     value,
     placeholder,
     slotProps,
     label: inputLabel,
     'aria-label': ariaLabel,
-    tabIndex = 0,
+    'aria-labelledby': ariaLabelledBy,
     id: idProp,
+    as = 'input',
+    tabIndex = 0,
   } = ownerState
 
   const id = useId()
@@ -103,17 +104,23 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
       id: inputId,
       tabIndex: disabled ? -1 : tabIndex,
       'aria-invalid': invalid,
-      'aria-labelledby': labelId,
+      'aria-labelledby': ariaLabelledBy ?? labelId,
       'aria-label': ariaLabel ?? (stringLabel ? inputLabel : undefined),
     }
 
-    if (!as || as === 'input' || isFunction(as)) {
+    if (as === 'input' || isFunction(as)) {
       input = {
         ...input,
         value,
         disabled,
         placeholder,
         type,
+      }
+    } else {
+      input = {
+        ...input,
+        role: 'textbox',
+        'aria-disabled': disabled,
       }
     }
 
@@ -124,7 +131,6 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
 
     const clearButton = {
       'aria-label': clearButtonProps['aria-label'] ?? 'Clear input',
-      tabIndex: clearButtonProps.tabIndex ?? -1,
     }
 
     return {
@@ -134,6 +140,7 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
     }
   }, [
     ariaLabel,
+    ariaLabelledBy,
     as,
     disabled,
     id,
@@ -141,11 +148,11 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
     inputLabel,
     invalid,
     placeholder,
-    slotProps?.clearButton,
-    slotProps?.label,
     tabIndex,
     type,
     value,
+    slotProps?.clearButton,
+    slotProps?.label,
   ])
 }
 

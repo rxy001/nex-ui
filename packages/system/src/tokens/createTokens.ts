@@ -22,7 +22,7 @@ import type {
 import type { Token } from './createToken'
 
 export function createTokens(config: CreateTokensConfig) {
-  const { tokens, semanticTokens = {}, prefix } = config
+  const { tokens = {}, semanticTokens = {}, prefix } = config
 
   const tokenMap: TokenMap = new Map()
 

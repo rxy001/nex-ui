@@ -1,6 +1,11 @@
 import { createRef, forwardRef } from 'react'
-import { testComponentStability, renderWithNexUIProvider } from '~/tests/shared'
+import {
+  testComponentStability,
+  renderWithNexUIProvider,
+  testSizeClasses,
+} from '~/tests/shared'
 import { Icon } from '../Icon'
+import { iconClasses } from '../iconClasses'
 
 const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
   <svg
@@ -21,6 +26,8 @@ HeartSvg.displayName = 'HeartSvg'
 describe('Icon', () => {
   testComponentStability(<Icon as={HeartSvg} />)
 
+  testSizeClasses(<Icon as={HeartSvg} />, iconClasses)
+
   it('should forward ref to the SVG element', () => {
     const ref = createRef<SVGSVGElement>()
 
@@ -28,6 +35,12 @@ describe('Icon', () => {
       <Icon as={HeartSvg} ref={ref} />,
     )
     expect(container.firstElementChild).toBe(ref.current)
+  })
+
+  it('should add the spin class to root element when spin=true', () => {
+    const { container } = renderWithNexUIProvider(<Icon as={HeartSvg} spin />)
+
+    expect(container.firstElementChild).toHaveClass(iconClasses.spin)
   })
 
   it('should render correctly', () => {
