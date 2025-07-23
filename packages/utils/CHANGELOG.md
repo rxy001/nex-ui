@@ -1,5 +1,11 @@
 # @nex-ui/utils
 
+## 0.0.10
+
+### Patch Changes
+
+- 259356e: Test
+
 ## 0.0.9
 
 ### Patch Changes

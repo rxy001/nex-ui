@@ -1,5 +1,14 @@
 # @nex-ui/icons
 
+## 0.0.11
+
+### Patch Changes
+
+- 259356e: Test
+- Updated dependencies [259356e]
+  - @nex-ui/styled@0.0.11
+  - @nex-ui/utils@0.0.10
+
 ## 0.0.10
 
 ### Patch Changes

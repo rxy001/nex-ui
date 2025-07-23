@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/styled",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "author": "X1ng Yu",
   "private": false,
   "description": "Styled API for creating atomic, theme-aware component styling.",
