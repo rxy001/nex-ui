@@ -1,11 +1,11 @@
 name: Release
 
 on:
-  pull_request:
+  push:
     paths:
       - '.changeset/**'
     branches:
-      - main
+      - dev
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
