@@ -1,0 +1,70 @@
+name: Sync Main to Dev
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      triggered_by:
+        description: 'Which workflow triggered this sync'
+        required: true
+        type: string
+    outputs:
+      sync_status:
+        description: 'Status of the sync operation'
+        value: ${{ jobs.sync-main-to-dev.outputs.sync_status }}
+
+permissions:
+  contents: write
+
+jobs:
+  sync-main-to-dev:
+    name: Sync main to dev
+    runs-on: ubuntu-latest
+    outputs:
+      sync_status: ${{ steps.sync-result.outputs.sync_status }}
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync main to dev
+        id: sync-operation
+        run: |
+          # 确保获取最新的远程分支信息
+          git fetch origin
+
+          git checkout -b dev origin/dev
+            
+          # 尝试 rebase，如果失败则记录冲突
+          if ! git rebase origin/main; then
+            git rebase --abort
+            echo "sync_status=failed" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            # 推送到 dev 分支
+            git push origin dev
+          fi
+
+          echo "sync_status=success" >> $GITHUB_OUTPUT
+
+      - name: Set sync result
+        id: sync-result
+        if: always()
+        run: |
+          # 从上一步获取结果并重新设置（确保即使失败也能获取输出）
+          echo "sync_status=${{ steps.sync-operation.outputs.sync_status || 'failed' }}" >> $GITHUB_OUTPUT
+
+      - name: Create summary
+        if: always()
+        run: |
+          STATUS="${{ steps.sync-result.outputs.sync_status }}"
+
+          if [ "$STATUS" = "success" ]; then
+            echo "✅ Successfully synced main to dev via rebase"
+            echo "📤 main -> dev"
+          else
+            echo "❌ Rebase failed due to conflicts"
+            echo "🔥 Conflicts detected"
+          fi
