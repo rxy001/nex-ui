@@ -27,33 +27,30 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Use PAT_TOKEN to bypass branch protection rules
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Sync main to dev
         id: sync-operation
         run: |
-          # 确保获取最新的远程分支信息
           git fetch origin
 
           git checkout -b dev origin/dev
             
-          # 尝试 rebase，如果失败则记录冲突
           if ! git rebase origin/main; then
             git rebase --abort
             echo "sync_status=failed" >> $GITHUB_OUTPUT
             exit 1
           else
-            # 推送到 dev 分支
             git push origin dev
+            echo "sync_status=success" >> $GITHUB_OUTPUT
           fi
-
-          echo "sync_status=success" >> $GITHUB_OUTPUT
 
       - name: Set sync result
         id: sync-result
         if: always()
         run: |
-          # 从上一步获取结果并重新设置（确保即使失败也能获取输出）
+          # Ensure sync_status is set even if previous step fails
           echo "sync_status=${{ steps.sync-operation.outputs.sync_status || 'failed' }}" >> $GITHUB_OUTPUT
 
       - name: Create summary
