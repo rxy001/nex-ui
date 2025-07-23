@@ -5,15 +5,22 @@ on:
     paths:
       - '.changeset/**'
     branches:
-      - dev
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.changesets-publish.outputs.published }}
+      pull_request_number: ${{ steps.changesets-create-pr.outputs.pullRequestNumber }}
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
@@ -45,9 +52,76 @@ jobs:
       - name: Publish to NPM
         if: "${{steps.changesets-create-pr.outputs.hasChangesets == 'false' && contains(github.event.head_commit.message, 'ci(changesets): version packages')}}"
         uses: changesets/action@v1
+        id: changesets-publish
+        continue-on-error: false
         with:
           publish: pnpm run release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  call-sync:
+    needs: release
+    uses: ./.github/workflows/sync-main-to-dev.yml
+    if: needs.release.outputs.published == 'true'
+    with:
+      triggered_by: 'release_workflow'
+
+  comment-pr:
+    needs: [release, call-sync]
+    if: always() && needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    name: Comment on PR
+    steps:
+      - name: Handle sync success
+        if: needs.call-sync.outputs.sync_status == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `## 🎉 Auto-sync Completed
+
+            ✅ **Status**: Successfully synced \`main\` branch to \`dev\` branch
+
+            📝 **Details**:
+            - Source: \`main\` branch
+            - Target: \`dev\` branch  
+            - Method: Rebase
+            - Triggered by: Release workflow
+
+            > The \`dev\` branch is now up to date with the latest changes from \`main\`.`;
+
+            github.rest.issues.createComment({
+              issue_number: ${{ needs.release.outputs.pull_request_number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            })
+      - name: Handle sync failure
+        if: needs.call-sync.outputs.sync_status == 'failed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `## ⚠️ Auto-sync Failed
+
+            ❌ **Status**: Failed to sync \`main\` branch to \`dev\` branch
+
+            📝 **Details**:
+            - Source: \`main\` branch
+            - Target: \`dev\` branch
+            - Method: Rebase
+            - Error: Merge conflicts detected
+
+            🔧 **Next Steps**:
+            1. Check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details
+            2. Manually resolve conflicts in the \`dev\` branch
+            3. Or contact the development team for assistance
+
+            > Manual intervention required to complete the sync.`;
+
+            github.rest.issues.createComment({
+              issue_number: ${{ needs.release.outputs.pull_request_number  }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            })
