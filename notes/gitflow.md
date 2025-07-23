@@ -14,7 +14,6 @@ Gitflow@v0.0.0
 - 完成后，向 `dev` 分支提交 PR.
 - 检查 QA、Visual Tests 的 workflows 状态.
 
-
 ### 紧急修复
 - 基于 `main` 分支，创建 `fix/boo`,
 - 完成后，向 `main` 分支提交 PR.

@@ -38,11 +38,11 @@
     "@nex-ui/styled": "workspace:*",
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
-    "clsx": "2.1.1",
-    "motion": "12.7.2"
+    "clsx": "2.1.1"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
+    "motion": "^12.7.2",
     "react": ">=19",
     "react-dom": ">=19"
   },
