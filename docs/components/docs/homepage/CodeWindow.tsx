@@ -36,7 +36,7 @@ export function CodeWindow({
       </div>
       <CodeBlock
         lang={lang}
-        className={codeClassName}
+        className={clsx('x:pt-2', codeClassName)}
         onLoaded={() => {
           setLoaded(true)
         }}
