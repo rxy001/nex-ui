@@ -59,9 +59,9 @@ export function HomePage({ translations }: HomePageProps) {
 
   return (
     <main className='x:py-36 x:max-w-[85rem] x:mx-auto x:px-[1.5rem] x:flex x:flex-col x:gap-[200px]'>
-      <section className='x:flex'>
+      <section className='x:flex x:max-sm:justify-center'>
         <Threads />
-        <section className='x:min-[970px]:w-1/2'>
+        <section className='x:min-[970px]:w-1/2 x:max-md:max-w-[400px]'>
           <h1 className='x:font-semibold x:whitespace-pre-wrap x:sm:text-6xl x:sm:text-left x:text-4xl x:text-center'>
             {translations?.title}
           </h1>

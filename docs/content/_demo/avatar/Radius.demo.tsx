@@ -6,7 +6,9 @@ export default function App() {
       <Avatar radius='sm' />
       <Avatar radius='md' />
       <Avatar radius='lg' />
+      <Avatar radius='xl' />
       <Avatar radius='full' />
+      <Avatar radius='none' />
     </Flex>
   )
 }

@@ -3,7 +3,6 @@ title: Avatar
 description: The avatar component represents users by displaying profile photos, initials, or fallback icons.
 ---
 
-import { Avatar } from '@nex-ui/react'
 import { avatar } from '@/content/_demo'
 
 # Avatar
@@ -60,7 +59,7 @@ The avatar props inherit the props of `as` (by default, it is the `div` tag).
     },
     {
       prop: 'size',
-      type: ["'sm'", "'md'", "'lg'"],
+      type: ["'sm'", "'md'", "'lg'", "'xl'"],
       default: "'md'",
       description: 'The size of the avatar.',
     },
@@ -82,7 +81,7 @@ The avatar props inherit the props of `as` (by default, it is the `div` tag).
     },
     {
       prop: 'radius',
-      type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
+      type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
       default: 'size',
       description: 'The border radius of the avatar.',
     },
@@ -132,7 +131,7 @@ The avatar props inherit the props of `as` (by default, it is the `div` tag).
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'img', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {

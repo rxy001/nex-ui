@@ -3,7 +3,6 @@ title: Button
 description: The button component enables users to perform actions and make decisions with a single click.
 ---
 
-import { Button } from '@nex-ui/react'
 import { button } from '@/content/_demo'
 
 # Button
@@ -155,6 +154,7 @@ The button props inherit the props of `as` (by default, it is the `button` tag).
     {
       prop: 'disableRipple',
       type: 'boolean',
+      default: 'false',
       description: 'If true, the ripple effect is disabled.',
     },
     {
@@ -192,7 +192,7 @@ The button props inherit the props of `as` (by default, it is the `button` tag).
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'startIcon' | 'endIcon', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {

@@ -148,7 +148,7 @@ The switch props inherit the props of `as` (by default, it is the `input` tag).
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label' | 'input', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {

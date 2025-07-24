@@ -4,7 +4,6 @@ description: Checkbox 允许用户从一个集合中选择一个或多个项目�
 ---
 
 import { checkbox } from '@/content/_demo'
-import { type } from 'os'
 
 # Checkbox
 
@@ -31,6 +30,12 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 ### Icon
 
 <Example {...checkbox.icon} />
+
+### Indeterminate
+
+`Indeterminate` 将使 Checkbox 处于不确定状态，覆盖它的外观并保持它的状态，无论用户交互如何，直到设置为 `false` 。
+
+<Example {...checkbox.indeterminate} />
 
 ### Controlled
 
@@ -85,7 +90,7 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
     },
     {
       prop: 'radius',
-      type: ["'sm'", "'md'", "'lg'", "'full'"],
+      type: ["'sm'", "'md'", "'lg'", "'none'", "'full'"],
       default: 'size',
       description: 'Checkbox 的 borderRadius。',
     },
@@ -94,6 +99,12 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
       type: 'boolean',
       default: 'false',
       description: 'Checkbox 是否禁用。',
+    },
+    {
+      prop: 'indeterminate',
+      type: 'boolean',
+      default: 'false',
+      description: 'Checkbox 是否为不确定状态。',
     },
     {
       prop: 'checked',
@@ -154,7 +165,7 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'label' | 'icon' | 'input', ClassValue>>",
       description: 'Checkbox Slots 的 className。',
     },
     {

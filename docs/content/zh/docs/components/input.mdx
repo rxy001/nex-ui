@@ -222,7 +222,7 @@ Input Props 继承 `as` (默认为 `input` 标签) 的 Props。
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'label' | 'clearButton' | 'prefix' | 'suffix' | 'input', ClassValue>>",
       description: 'Input Slots 的 className。',
     },
     {
@@ -252,7 +252,7 @@ Input Props 继承 `as` (默认为 `input` 标签) 的 Props。
     {
       slot: 'clearButton',
       class: '.nui-input-clear-btn',
-      component: 'Button',
+      component: "'button'",
       description: 'Input 的清除按钮。',
     },
     {

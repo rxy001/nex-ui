@@ -218,7 +218,7 @@ The input props inherit the props of `as` (by default, it is the `input` tag).
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'label' | 'clearButton' | 'prefix' | 'suffix' | 'input', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {
@@ -248,7 +248,7 @@ The input props inherit the props of `as` (by default, it is the `input` tag).
     {
       slot: 'clearButton',
       class: '.nui-input-clear-btn',
-      component: 'Button',
+      component: "'button'",
       description: 'The clear button of the input.',
     },
     {

@@ -7,9 +7,6 @@ const sx = {
   _hover: {
     bg: '#6d6d6f',
   },
-  _active: {
-    bg: 'gray.700',
-  },
 }
 
 export const IconButton = <T extends ElementType>(props: ButtonProps<T>) => (

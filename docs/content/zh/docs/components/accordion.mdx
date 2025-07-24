@@ -3,7 +3,6 @@ title: Accordion
 description: Accordion 能够在页面上展开和折叠相关的内容部分。
 ---
 
-import { Accordion } from '@nex-ui/react'
 import { accordion } from '@/content/_demo'
 
 # Accordion
@@ -169,6 +168,8 @@ Accordion Props 继承 `as` (默认为 `div` 标签) 的 Props。
 
 ### AccordionItem Props
 
+AccordionItem Props 继承 `as` (默认为 `div` 标签) 的 Props。
+
 <PropsTable
   dataSource={[
     {
@@ -242,7 +243,7 @@ Accordion Props 继承 `as` (默认为 `div` 标签) 的 Props。
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'heading' | 'indicator' | 'content' | 'trigger', ClassValue>>",
       description: 'AccordionItem Slots 的 className。',
     },
     {
@@ -256,8 +257,6 @@ Accordion Props 继承 `as` (默认为 `div` 标签) 的 Props。
 
 ### AccordionItem Slots
 
-AccordionItem Props 继承 `as` (默认为 `div` 标签) 的 Props。
-
 <SlotsTable
   dataSource={[
     {
@@ -268,8 +267,8 @@ AccordionItem Props 继承 `as` (默认为 `div` 标签) 的 Props。
     },
     {
       slot: 'content',
-      class: '.nui-accordion-item-panel',
-      component: "'span'",
+      class: '.nui-accordion-item-content',
+      component: "'div'",
       description: 'accordion item 的内容。',
     },
     {
