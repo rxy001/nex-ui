@@ -11,8 +11,10 @@ Theme Customizable, Light & Dark UI, Unique DX, Written In TypeScript
 
 <h2></h2>
 
-[![CI status](./assets/badge.svg)](https://github.com/rxy001/nex-ui/actions/workflows/QA.yml)
+[![QA](https://github.com/rxy001/nex-ui/actions/workflows/QA.yml/badge.svg)](https://github.com/rxy001/nex-ui/actions/workflows/QA.yml)
+[![Visual Tests](https://github.com/rxy001/nex-ui/actions/workflows/visual-tests.yml/badge.svg)](https://github.com/rxy001/nex-ui/actions/workflows/visual-tests.yml)
 [![codecov](https://codecov.io/github/rxy001/nex-ui/graph/badge.svg?token=7NN7B1ZO6H)](https://codecov.io/github/rxy001/nex-ui)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
 </div>
 
