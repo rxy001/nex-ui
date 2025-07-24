@@ -3,7 +3,6 @@ title: Button
 description: Button 使用户能够通过一次点击执行操作并做出选择。
 ---
 
-import { Button } from '@nex-ui/react'
 import { button } from '@/content/_demo'
 
 # Button
@@ -154,6 +153,7 @@ Button Props 继承 `as` (默认为 `button` 标签) 的 Props。
     {
       prop: 'disableRipple',
       type: 'boolean',
+      default: 'false',
       description: '是否禁用 Button 点击后的 Ripple 效果。',
     },
     {
@@ -190,7 +190,7 @@ Button Props 继承 `as` (默认为 `button` 标签) 的 Props。
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'startIcon' | 'endIcon', ClassValue>>",
       description: 'Button Slots 的 className。',
     },
     {

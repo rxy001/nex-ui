@@ -16,6 +16,8 @@ import groupVerticalCode from './GroupVertical.demo?raw'
 import GroupVerticalDemo from './GroupVertical.demo'
 import groupDisabledCode from './GroupDisabled.demo?raw'
 import GroupDisabledDemo from './GroupDisabled.demo'
+import indeterminateCode from './Indeterminate.demo?raw'
+import IndeterminateDemo from './Indeterminate.demo'
 
 export const checkbox = {
   usage: {
@@ -53,5 +55,9 @@ export const checkbox = {
   groupDisabled: {
     code: groupDisabledCode,
     demo: <GroupDisabledDemo />,
+  },
+  indeterminate: {
+    code: indeterminateCode,
+    demo: <IndeterminateDemo />,
   },
 }
