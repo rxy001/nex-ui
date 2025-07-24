@@ -3,7 +3,6 @@ title: Accordion
 description: The accordion component allows expanding and collapsing content sections on the page.
 ---
 
-import { Accordion } from '@nex-ui/react'
 import { accordion } from '@/content/_demo'
 
 # Accordion
@@ -174,6 +173,8 @@ The accordion props inherit the props of `as` (by default, it is the `div` tag).
 
 ### AccordionItem Props
 
+The accordionItem props inherit the props of `as` (by default, it is the `div` tag).
+
 <PropsTable
   dataSource={[
     {
@@ -204,7 +205,8 @@ The accordion props inherit the props of `as` (by default, it is the `div` tag).
     {
       prop: 'indicatorMotionProps',
       type: 'HTMLMotionProps',
-      description: 'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
+      description:
+        'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
     },
     {
       prop: 'disabled',
@@ -216,12 +218,14 @@ The accordion props inherit the props of `as` (by default, it is the `div` tag).
       prop: 'keepMounted',
       type: 'boolean',
       default: 'true',
-      description: 'If true, the accordion item content should always be mounted.',
+      description:
+        'If true, the accordion item content should always be mounted.',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: 'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
+      description:
+        'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
     },
     {
       prop: 'itemKey',
@@ -237,17 +241,17 @@ The accordion props inherit the props of `as` (by default, it is the `div` tag).
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description:
-        'The component or element to render as the root.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'sx',
       type: 'SxProp<AccordionItemOwnerState>',
-      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'heading' | 'indicator' | 'content' | 'trigger', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {
@@ -255,13 +259,10 @@ The accordion props inherit the props of `as` (by default, it is the `div` tag).
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
     },
-
-]}
+  ]}
 />
 
 ### AccordionItem Slots
-
-The accordionItem props inherit the props of `as` (by default, it is the `div` tag).
 
 <SlotsTable
   dataSource={[
@@ -273,8 +274,8 @@ The accordionItem props inherit the props of `as` (by default, it is the `div` t
     },
     {
       slot: 'content',
-      class: '.nui-accordion-item-panel',
-      component: "'span'",
+      class: '.nui-accordion-item-content',
+      component: "'div'",
       description: 'Content panel element.',
     },
     {

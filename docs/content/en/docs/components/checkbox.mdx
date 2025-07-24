@@ -4,7 +4,6 @@ description: The checkbox allows users to select one or more items from a collec
 ---
 
 import { checkbox } from '@/content/_demo'
-import { type } from 'os'
 
 # Checkbox
 
@@ -31,6 +30,13 @@ The checkbox allows users to select one or more items from a collection.
 ### Icon
 
 <Example {...checkbox.icon} />
+
+### Indeterminate
+
+The `isIndeterminate` prop sets a Checkbox to an indeterminate state, overriding its
+appearance and maintaining it until set to `false`, regardless of user interaction.
+
+<Example {...checkbox.indeterminate} />
 
 ### Controlled
 
@@ -85,7 +91,7 @@ The checkbox props inherit the props of `as` (by default, it is the `input` tag)
     },
     {
       prop: 'radius',
-      type: ["'sm'", "'md'", "'lg'", "'full'"],
+      type: ["'sm'", "'md'", "'lg'", "'none'", "'full'"],
       default: 'size',
       description: 'The border radius of the checkbox.',
     },
@@ -94,6 +100,13 @@ The checkbox props inherit the props of `as` (by default, it is the `input` tag)
       type: 'boolean',
       default: 'false',
       description: 'If true, the checkbox is disabled.',
+    },
+    {
+      prop: 'indeterminate',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Indeterminism is presentational only. The indeterminate visual representation remains regardless of user interaction.',
     },
     {
       prop: 'checked',
@@ -157,7 +170,7 @@ The checkbox props inherit the props of `as` (by default, it is the `input` tag)
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'label' | 'icon' | 'input', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {

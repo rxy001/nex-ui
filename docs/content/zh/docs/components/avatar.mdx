@@ -3,7 +3,6 @@ title: Avatar
 description: Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字母或备用图标。
 ---
 
-import { Avatar } from '@nex-ui/react'
 import { avatar } from '@/content/_demo'
 
 # Avatar
@@ -60,7 +59,7 @@ Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
     },
     {
       prop: 'size',
-      type: ["'sm'", "'md'", "'lg'"],
+      type: ["'sm'", "'md'", "'lg'", "'xl'"],
       default: "'md'",
       description: 'Avatar 的大小。',
     },
@@ -82,7 +81,7 @@ Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
     },
     {
       prop: 'radius',
-      type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
+      type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
       default: 'size',
       description: 'Avatar 的 borderRadius。',
     },
@@ -132,7 +131,7 @@ Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
     },
     {
       prop: 'classes',
-      type: 'Partial<Record<Slots, ClassValue>>',
+      type: "Partial<Record<'root' | 'img', ClassValue>>",
       description: 'Avatar Slots 的 className。',
     },
     {

@@ -6,6 +6,7 @@ export default function App() {
       <Avatar size='sm' />
       <Avatar size='md' />
       <Avatar size='lg' />
+      <Avatar size='xl' />
     </Flex>
   )
 }

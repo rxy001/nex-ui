@@ -126,7 +126,7 @@ export interface AccordionItemPropsOverrides {}
 
 export interface AccordionItemSlotProps<RootComponent extends ElementType> {
   heading?: ComponentPropsWithCommonProps<
-    'div',
+    'h3',
     AccordionItemOwnerState<RootComponent>
   >
   indicator?: ComponentPropsWithCommonProps<
