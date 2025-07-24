@@ -9,7 +9,7 @@
 
 Theme Customizable, Light & Dark UI, Unique DX, Written In TypeScript
 
-<h2></h2>
+<h2>.    </h2>
 
 [![CI status](./assets/badge.svg)](https://github.com/rxy001/nex-ui/actions/workflows/QA.yml)
 [![codecov](https://codecov.io/github/rxy001/nex-ui/graph/badge.svg?token=7NN7B1ZO6H)](https://codecov.io/github/rxy001/nex-ui)
