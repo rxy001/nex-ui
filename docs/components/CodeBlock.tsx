@@ -31,10 +31,7 @@ export function CodeBlock(props: CodeBlockProps) {
           components: {
             // your custom `pre` element
             pre: ({ style: _style, ...p }: any) => (
-              <Pre
-                {...p}
-                className={clsx('x:pt-2', p.className, props.className)}
-              />
+              <Pre {...p} className={clsx(p.className, props.className)} />
             ),
             code: (p: any) => <Code {...p} />,
             span: (p) => {
