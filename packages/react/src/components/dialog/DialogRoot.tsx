@@ -65,7 +65,23 @@ const useSlotClasses = (ownerState: DialogOwnerState) => {
 export const DialogRoot = ({ children }: DialogRootProps) => {
   const ownerState = useDialog()
 
-  const { slotProps, hideBackdrop, open: _, ...remainingProps } = ownerState
+  const {
+    slotProps,
+    hideBackdrop,
+    open: _open,
+    closeOnEscape: _closeOnEscape,
+    fullScreen: _fullScreen,
+    preventScroll: _preventScroll,
+    scroll: _scroll,
+    maxWidth: _maxWidth,
+    hideCloseButton: _hideCloseButton,
+    closeOnInteractBackdrop: _closeOnInteractBackdrop,
+    defaultOpen: _defaultOpen,
+    keepMounted: _keepMounted,
+    setOpen: _setOpen,
+    placement: _placement,
+    ...remainingProps
+  } = ownerState
 
   const classes = useSlotClasses(ownerState)
 
