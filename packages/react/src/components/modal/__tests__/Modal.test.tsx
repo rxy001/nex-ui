@@ -75,7 +75,7 @@ describe('Modal', () => {
     expect(container.firstChild).toBeNull()
 
     const modalRoot = getByTestId('modal-root')
-    expect(modalRoot.parentElement?.parentElement).toBe(document.body)
+    expect(modalRoot.parentElement).toBe(document.body)
 
     const modalHeader = getByTestId('modal-header')
     expect(modalRoot).toContainElement(modalHeader)
@@ -98,7 +98,7 @@ describe('Modal', () => {
     expect(container.firstChild).toBeNull()
 
     const modalRoot = getByTestId('modal-root')
-    expect(modalRoot.parentElement?.parentElement).toBe(document.body)
+    expect(modalRoot.parentElement).toBe(document.body)
   })
 
   it('should render into custom container when container prop is provided', async () => {
@@ -115,7 +115,7 @@ describe('Modal', () => {
     expect(container.firstChild).not.toBeNull()
 
     const modalRoot = getByTestId('modal-root')
-    expect(modalRoot.parentElement?.parentElement).toBe(container)
+    expect(modalRoot.parentElement).toBe(container)
 
     container.remove()
   })
@@ -243,7 +243,7 @@ describe('Modal', () => {
     )
     const modalRoot = getByTestId('modal-root')
 
-    expect(modalRoot.parentElement).toHaveStyle({
+    expect(modalRoot).toHaveStyle({
       opacity: '0',
       display: 'none',
     })
@@ -263,7 +263,7 @@ describe('Modal', () => {
     rerender(<TestModal keepMounted open={false} />)
     waitFor(
       () => {
-        return expect(modalRoot.parentElement).toHaveStyle({
+        return expect(modalRoot).toHaveStyle({
           display: 'none',
           opacity: '0',
         })
@@ -368,7 +368,7 @@ describe('Modal', () => {
           useAct: true,
         },
       )
-      const root = getByTestId('modal-root').parentElement
+      const root = getByTestId('modal-root')
       expect(root).toHaveAttribute('tabIndex', '-1')
       expect(root).not.toHaveAttribute('role')
     })

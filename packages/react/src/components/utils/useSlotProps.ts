@@ -1,4 +1,4 @@
-import { mergeProps, isArray, isPlainObject } from '@nex-ui/utils'
+import { mergeProps, isArray, isPlainObject, mergeRefs } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 
@@ -34,9 +34,9 @@ type UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps> =
   SlotProps & ForwardedProps & AdditionalProps
 
 export const useSlotProps = <
-  SlotProps extends {},
-  ForwardedProps extends {},
-  AdditionalProps extends {},
+  SlotProps extends Record<string, any>,
+  ForwardedProps extends Record<string, any>,
+  AdditionalProps extends Record<string, any>,
 >({
   style,
   externalSlotProps,
@@ -55,6 +55,12 @@ export const useSlotProps = <
     a11y,
   )
 
+  const ref = mergeRefs(
+    additionalProps?.ref,
+    externalForwardedProps?.ref,
+    externalSlotProps?.ref,
+  )
+
   const resolvedSx = useMemo(() => {
     if (!style) {
       return props.sx
@@ -70,6 +76,7 @@ export const useSlotProps = <
 
   return {
     ...props,
+    ref,
     sx: resolvedSx,
   } as unknown as UseSlotPropsResult<SlotProps, ForwardedProps, AdditionalProps>
 }
