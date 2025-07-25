@@ -3,6 +3,7 @@ export default {
   avatar: 'Avatar',
   button: 'Button',
   checkbox: 'Checkbox',
+  dialog: 'Dialog',
   divider: 'Divider',
   flex: 'Flex',
   input: 'Input',

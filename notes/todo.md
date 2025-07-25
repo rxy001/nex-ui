@@ -113,3 +113,5 @@ https://github.com/microsoft/TypeScript/issues/40426
 要修复该问题只能手动定义 -->
 
 38. getBy... 当无匹配元素时会报错， 因此通过该方式查询到元素，无需在使用 toBeInTheDocument
+
+ dialog 添加阴影
