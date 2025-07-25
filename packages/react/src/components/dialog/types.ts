@@ -1,5 +1,4 @@
 import { ButtonBase } from '../buttonBase/ButtonBase'
-import type { DOMMotionComponents } from 'motion/react'
 import type {
   OverrideProps,
   SxProp,
@@ -16,10 +15,7 @@ type DialogSlotProps<RootComponent extends ElementType> = {
     'div',
     DialogOwnerState<RootComponent>
   >
-  panel?: ComponentPropsWithCommonProps<
-    DOMMotionComponents['div'],
-    DialogOwnerState<RootComponent>
-  >
+  panel?: ComponentPropsWithCommonProps<'div', DialogOwnerState<RootComponent>>
 }
 
 type DialogOwnProps<RootComponent extends ElementType> = Omit<
