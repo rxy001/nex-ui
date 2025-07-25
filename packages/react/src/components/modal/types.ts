@@ -1,6 +1,7 @@
 import type { Interpolation } from '@nex-ui/system'
 import type { Overwrite } from '../../types/utils'
 import type { ComponentProps, ElementType, ReactNode } from 'react'
+import type * as m from 'motion/react-m'
 
 type ModalSlotProps<RootComponent extends ElementType> = Overwrite<
   ComponentProps<RootComponent>,
@@ -103,7 +104,7 @@ export type ModalFooterProps<RootComponent extends ElementType = 'div'> =
   ModalSlotProps<RootComponent>
 
 // ModalRoot
-export type ModalRootProps<RootComponent extends ElementType = 'div'> =
+export type ModalRootProps<RootComponent extends ElementType = typeof m.div> =
   ModalSlotProps<RootComponent>
 
 // ModalBackdrop
