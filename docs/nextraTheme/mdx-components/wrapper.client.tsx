@@ -2,7 +2,7 @@
 
 import cn from 'clsx'
 import { cloneElement, useEffect } from 'react'
-import { Breadcrumb, Pagination, TOC } from '../components'
+import { Pagination, TOC } from '../components'
 import { setToc, useConfig, useThemeConfig } from '../stores'
 import type { MDXWrapper } from 'nextra'
 
@@ -12,11 +12,8 @@ export const ClientWrapper: MDXWrapper = ({
   metadata,
   bottomContent,
 }) => {
-  const {
-    activeType,
-    activeThemeContext: themeContext,
-    activePath,
-  } = useConfig().normalizePagesResult
+  const { activeType, activeThemeContext: themeContext } =
+    useConfig().normalizePagesResult
 
   const themeConfig = useThemeConfig()
 
@@ -52,9 +49,9 @@ export const ClientWrapper: MDXWrapper = ({
             'nextra-body-typesetting-article',
         )}
       >
-        {themeContext.breadcrumb && activeType !== 'page' && (
+        {/* {themeContext.breadcrumb && activeType !== 'page' && (
           <Breadcrumb activePath={activePath} />
-        )}
+        )} */}
         {children}
         {date ? (
           <div className='x:mt-12 x:mb-8 x:text-xs x:text-gray-500 x:text-end x:dark:text-gray-400'>

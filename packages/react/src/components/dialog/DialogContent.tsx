@@ -96,6 +96,9 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
     style: styles.closeButton,
     classNames: classes.closeButton,
     shouldForwardComponent: false,
+    additionalProps: {
+      'aria-label': 'Close button',
+    },
   })
 
   return (
