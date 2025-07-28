@@ -32,7 +32,7 @@ export const dialogClasses = generateUtilityClasses('nui-dialog', [
 
 export const dialogContentClasses = generateUtilityClasses(
   'nui-dialog-content',
-  ['root'],
+  ['root', 'close-button'],
 )
 
 export const dialogHeaderClasses = generateUtilityClasses('nui-dialog-header', [

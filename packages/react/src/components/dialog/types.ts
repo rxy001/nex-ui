@@ -1,9 +1,11 @@
 import type * as m from 'motion/react-m'
+import type { DOMMotionComponents } from 'motion/react'
 import type {
   OverrideProps,
   SxProp,
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
+  HTMLMotionProps,
 } from '../../types/utils'
 import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants, DialogVariants } from '../../theme/recipes'
@@ -14,7 +16,10 @@ type DialogSlotProps<RootComponent extends ElementType> = {
     'div',
     DialogOwnerState<RootComponent>
   >
-  panel?: ComponentPropsWithCommonProps<'div', DialogOwnerState<RootComponent>>
+  panel?: ComponentPropsWithCommonProps<
+    DOMMotionComponents['div'],
+    DialogOwnerState<RootComponent>
+  >
 }
 
 type DialogOwnProps<RootComponent extends ElementType> = {
@@ -58,7 +63,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
    * The container element in which the dialog will be placed.
    * @default document.body
    */
-  container?: Element | null | (() => Element | null)
+  container?: HTMLElement | null | (() => HTMLElement | null)
 
   /**
    * If true, always keep the children in the DOM.
@@ -140,6 +145,12 @@ type DialogOwnProps<RootComponent extends ElementType> = {
    * @default true
    */
   closeOnInteractBackdrop?: boolean
+
+  /**
+   * The props to modify the framer motion animation.
+   * Use the `variants` API to create your own animation.
+   */
+  motionProps?: HTMLMotionProps<'div'>
 
   /**
    * The id(s) of the element(s) that label the dialog.
