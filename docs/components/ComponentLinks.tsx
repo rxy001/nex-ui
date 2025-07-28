@@ -56,6 +56,10 @@ const ButtonLink = (props: ButtonProps) => {
   )
 }
 
+const ariaPatternMap: Record<string, string> = {
+  dialog: 'dialog-modal',
+}
+
 export const ComponentLinks = ({
   component,
   rscCompatible = false,
@@ -72,7 +76,7 @@ export const ComponentLinks = ({
       {ariaCompatible && (
         <ButtonLink
           startIcon={<W3cIcon />}
-          href={`${WAI_ARIA_PATH}${component}`}
+          href={`${WAI_ARIA_PATH}${ariaPatternMap[component] || component}`}
         >
           WAI-ARIA
         </ButtonLink>
