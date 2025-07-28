@@ -37,7 +37,7 @@ export type ModalProps = {
   container?: Element | null | (() => Element | null)
 
   /**
-   * Always keep the children in the DOM.
+   * If true, always keep the children in the DOM.
    * @default false
    */
   keepMounted?: boolean
@@ -55,7 +55,7 @@ export type ModalProps = {
   preventScroll?: boolean
 
   /**
-   * close the modal when the escape key is pressed
+   * If true, close the modal when the escape key is pressed.
    * @default true
    */
   closeOnEscape?: boolean
@@ -67,12 +67,12 @@ export type ModalProps = {
   restoreFocus?: boolean
 
   /**
-   * The id(s) of the element(s) that describe the modal.
+   * The id(s) of the element(s) that label the modal.
    */
   'aria-labelledby'?: string
 
   /**
-   * The id(s) of the element(s) that label the modal.
+   * The id(s) of the element(s) that describe the modal.
    */
   'aria-describedby'?: string
 }

@@ -1,35 +1,26 @@
 'use client'
 
-import * as m from 'motion/react-m'
 import { ModalBackdrop, ModalPanel, ModalRoot } from '../modal'
 import { useStyles, composeClasses, getUtilityClass, useSlot } from '../utils'
 import { useDialog } from './DialogContext'
 import { dialogRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
-import type { DialogOwnerState } from './types'
 import type { Variants } from 'motion'
 import type { ReactNode } from 'react'
+import type { DialogOwnerState } from './types'
 
 type DialogRootProps = {
   children?: ReactNode
 }
 
-const panelVariants: Variants = {
+const motionVariants: Variants = {
   visible: {
     opacity: 1,
     transform: 'scale(1)',
-    transition: {
-      ease: 'easeInOut',
-      duration: 0.2,
-    },
   },
   hidden: {
     opacity: 0,
     transform: 'scale(1.04)',
-    transition: {
-      ease: 'easeInOut',
-      duration: 0.2,
-    },
   },
 }
 
@@ -98,6 +89,9 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
     classNames: classes.root,
+    additionalProps: {
+      variants: motionVariants,
+    },
   })
 
   const [DialogBackdrop, getDialogBackdropProps] = useSlot({
@@ -116,10 +110,6 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     externalSlotProps: slotProps?.panel,
     shouldForwardComponent: false,
     classNames: classes.panel,
-    additionalProps: {
-      as: m.div,
-      variants: panelVariants,
-    },
   })
 
   return (

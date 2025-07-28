@@ -2,7 +2,6 @@ import { forEach, isString, reduce } from '@nex-ui/utils'
 import {
   extractTokenPlaceholders,
   isValidTokenCategory,
-  memoizeFn,
   pathToTokenName,
 } from './utils'
 import type { CSSObject } from '@emotion/react'
@@ -142,7 +141,7 @@ export const createNormalize = ({
     return result
   }
 
-  return memoizeFn(normalze)
+  return normalze
 }
 
 export type NormailizeFn = ReturnType<typeof createNormalize>

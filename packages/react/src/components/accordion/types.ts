@@ -9,7 +9,6 @@ import type {
   HTMLMotionProps,
 } from '../../types/utils'
 import type { AccordionItemVariants } from '../../theme/recipes'
-import type { ButtonBase } from '../buttonBase'
 
 // Accordion
 export interface AccordionPropsOverrides {}
@@ -138,7 +137,7 @@ export interface AccordionItemSlotProps<RootComponent extends ElementType> {
     AccordionItemOwnerState<RootComponent>
   >
   trigger?: ComponentPropsWithCommonProps<
-    typeof ButtonBase<'button'>,
+    'button',
     AccordionItemOwnerState<RootComponent>
   >
 }

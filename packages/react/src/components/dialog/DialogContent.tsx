@@ -20,8 +20,10 @@ import { ModalContent } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogContentOwnerState, DialogContentProps } from './types'
 
-const useSlotClasses = () => {
+const useSlotClasses = (ownerState: DialogContentOwnerState) => {
   const { prefix } = useNexUI()
+
+  const { classes } = ownerState
 
   return useMemo(() => {
     const prefixClassName = `${prefix}-dialog-content`
@@ -31,17 +33,17 @@ const useSlotClasses = () => {
       closeButton: ['close-button'],
     }
 
-    return composeClasses(slots, getUtilityClass(prefixClassName))
-  }, [prefix])
+    return composeClasses(slots, getUtilityClass(prefixClassName), classes)
+  }, [classes, prefix])
 }
 
 export const DialogContent = <RootComponent extends ElementType = 'section'>(
   inProps: DialogContentProps<RootComponent>,
 ) => {
   const {
-    hideCloseButton,
     scroll,
     fullScreen,
+    hideCloseButton: defaultHideCloseButton,
     closeIcon: defaultCloseIcon,
     maxWidth: defaultMaxWidth,
   } = useDialog()
@@ -53,6 +55,7 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
   const {
     children,
     slotProps,
+    hideCloseButton = defaultHideCloseButton,
     maxWidth = defaultMaxWidth,
     closeIcon = defaultCloseIcon,
     ...remainingProps
@@ -62,18 +65,20 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
     ...props,
     maxWidth,
     fullScreen,
+    closeIcon,
+    hideCloseButton,
   }
 
   const styles = useStyles({
     ownerState: {
-      scroll,
       ...ownerState,
+      scroll,
     },
     name: 'DialogContent',
     recipe: dialogContentRecipe,
   })
 
-  const classes = useSlotClasses()
+  const classes = useSlotClasses(ownerState)
 
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
     ownerState,

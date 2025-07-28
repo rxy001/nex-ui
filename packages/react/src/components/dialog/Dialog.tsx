@@ -4,6 +4,7 @@ import { useDefaultProps } from '../utils'
 import { Modal, useModal } from '../modal'
 import { DialogProvider } from './DialogContext'
 import type { ElementType } from 'react'
+import type * as m from 'motion/react-m'
 import type { DialogProps } from './types'
 
 const Provider = (props: DialogProps) => {
@@ -20,6 +21,7 @@ const Provider = (props: DialogProps) => {
     open,
     preventScroll,
     keepMounted,
+    restoreFocus,
     defaultOpen,
     closeOnEscape,
     closeOnInteractOutside,
@@ -38,6 +40,7 @@ const Provider = (props: DialogProps) => {
     setOpen,
     placement,
     keepMounted,
+    restoreFocus,
     defaultOpen,
     hideCloseButton,
     closeOnInteractBackdrop: closeOnInteractOutside,
@@ -46,7 +49,7 @@ const Provider = (props: DialogProps) => {
   return <DialogProvider value={ownerState}>{children}</DialogProvider>
 }
 
-export const Dialog = <RootComponent extends ElementType = 'div'>(
+export const Dialog = <RootComponent extends ElementType = typeof m.div>(
   inProps: DialogProps<RootComponent>,
 ) => {
   const props = useDefaultProps<DialogProps>({
@@ -60,6 +63,7 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
     restoreFocus,
     onOpenChange,
     defaultOpen,
+    container,
     keepMounted,
     closeOnEscape,
     closeOnInteractBackdrop,
@@ -72,15 +76,18 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
   return (
     <Modal
       open={open}
+      container={container}
       restoreFocus={restoreFocus}
       onOpenChange={onOpenChange}
       defaultOpen={defaultOpen}
       keepMounted={keepMounted}
-      closeOnInteractOutside={closeOnInteractBackdrop}
       preventScroll={preventScroll}
       closeOnEscape={closeOnEscape}
       aria-describedby={describedby}
       aria-labelledby={labelledby}
+      closeOnInteractOutside={
+        !remainingProps.hideBackdrop && closeOnInteractBackdrop
+      }
     >
       <Provider {...remainingProps}>{children}</Provider>
     </Modal>

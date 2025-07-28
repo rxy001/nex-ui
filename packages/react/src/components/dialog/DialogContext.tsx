@@ -3,10 +3,7 @@
 import { createContext } from '@nex-ui/utils'
 import type { DialogOwnerState } from './types'
 
-interface DialogContextValue extends DialogOwnerState {
-  open: boolean
-  setOpen: (open: boolean) => void
-}
+interface DialogContextValue extends DialogOwnerState {}
 
 export const [DialogProvider, useDialog] = createContext<DialogContextValue>({
   contextName: 'DialogContext',
