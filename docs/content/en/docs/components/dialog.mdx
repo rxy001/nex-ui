@@ -1,0 +1,416 @@
+---
+title: Dialog
+description: Displays a dialog with custom content that requires attention or provides additional information.
+---
+
+import { dialog } from '@/content/_demo'
+
+# Dialog
+
+Displays a dialog with custom content that requires attention or provides additional information.
+
+<ComponentLinks component='dialog' ariaCompatible />
+
+## Usage
+
+<Example {...dialog.usage} />
+
+### MaxWidths
+
+The `maxWidth` property sets the maximum width of the dialog, defaults to `md`.
+
+<Example {...dialog.maxWidths} />
+
+### FullScreen
+
+Use the `fullScreen` property to make the dialog display in full screen.
+
+<Example {...dialog.fullScreen} />
+
+### Placements
+
+The `placement` property sets the display position of the dialog, defaults to `top`.
+
+<Example {...dialog.placements} />
+
+### HideBackdrop
+
+Use the `hideBackdrop` property to hide the dialog's background overlay.
+
+<Example {...dialog.hideBackdrop} />
+
+### PreventScroll
+
+Use the `preventScroll` property to prevent page scrolling when the dialog is open.
+
+<Example {...dialog.preventScroll} />
+
+### KeepMounted
+
+Use the `keepMounted` property to keep the dialog content mounted when closed.
+
+<Example {...dialog.keepMounted} />
+
+### Custom Motion
+
+Use the `motionProps` property to customize the animation effects for `visible` / `hidden`.
+
+<Example {...dialog.customMotion} />
+
+### Overflow Scroll
+
+Use the `scrollBehavior` property to control the scrolling behavior of dialog content.
+
+- `inside`: Content scrolls inside the dialog.
+- `outside`: Content scrolls outside the dialog.
+
+<Example {...dialog.scrollBehavior} />
+
+### Controlled Dialog
+
+<Example {...dialog.controlled} />
+
+## API
+
+### Dialog Props
+
+The dialog props inherit the props of `as` (by default, it is the `m.div`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: "It's usually DialogContent, DialogTrigger, etc.",
+    },
+    {
+      prop: 'open',
+      type: 'boolean',
+      description: 'If true, the dialog is shown.(controlled)',
+    },
+    {
+      prop: 'defaultOpen',
+      type: 'boolean',
+      description: 'If true, the dialog is shown by default.',
+    },
+    {
+      prop: 'onOpenChange',
+      type: '((open: boolean) => void)',
+      description: 'Handler that is called when the dialog is opened or closed',
+    },
+    {
+      prop: 'className',
+      type: 'string',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
+      prop: 'placement',
+      type: ["'top'", "'bottom'", "'left'", "'right'"],
+      description: 'The display position of the dialog.',
+      default: "'top'",
+    },
+    {
+      prop: 'hideBackdrop',
+      type: 'boolean',
+      description: 'If true, the backdrop is not rendered.',
+      default: 'false',
+    },
+    {
+      prop: 'fullScreen',
+      type: 'boolean',
+      description: 'If true, the dialog is full-screen.',
+      default: 'false',
+    },
+    {
+      prop: 'maxWidth',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
+      description: 'Determine the max-width of the dialog.',
+      default: "'md'",
+    },
+    {
+      prop: 'container',
+      type: 'HTMLElement | null | (() => HTMLElement | null)',
+      description: 'The container element for the portal.',
+      default: 'document.body',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      description: 'If true, always keep the children in the DOM.',
+      default: 'false',
+    },
+    {
+      prop: 'scroll',
+      type: ["'inside'", "'outside'"],
+      description: 'The dialog scroll behavior.',
+      default: "'inside'",
+    },
+    {
+      prop: 'hideCloseButton',
+      type: 'boolean',
+      description: 'If true, the close buton is not rendered.',
+      default: 'false',
+    },
+    {
+      prop: 'preventScroll',
+      type: 'boolean',
+      description: 'If true, the dialog prevents page scrolling.',
+      default: 'false',
+    },
+    {
+      prop: 'closeOnInteractBackdrop',
+      type: 'boolean',
+      description: 'If true, close the dialog when the backdrop is clicked.',
+      default: 'true',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      description: 'If true, close the modal when the escape key is pressed.',
+      default: 'true',
+    },
+    {
+      prop: 'closeIcon',
+      type: 'ReactNode',
+      description: 'Custom close button to display on top right corner.',
+    },
+    {
+      prop: 'restoreFocus',
+      type: 'boolean',
+      description:
+        'If true, the dialog will restore focus to previously focused element once the modal is hidden or unmounted.',
+      default: 'true',
+    },
+    {
+      prop: 'aria-labelledby',
+      type: 'string',
+      description: 'The id(s) of the element(s) that label the modal.',
+    },
+    {
+      prop: 'aria-describedby',
+      type: 'string',
+      description: 'The id(s) of the element(s) that describe the modal.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description: 'The component or element to render as the root.',
+      default: 'm.div',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'panel' | 'backdrop', ClassValue>>",
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### Dialog Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'panel',
+      class: '.nui-dialog-panel',
+      component: "'div'",
+      description: 'The panel element of the dialog.',
+    },
+    {
+      slot: 'backdrop',
+      class: '.nui-dialog-backdrop',
+      component: "'div'",
+      description: 'The backdrop element of the dialog.',
+    },
+  ]}
+/>
+
+### DialogContent Props
+
+The dialog content props inherit the props of `as` (by default, it is the `section` tag).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: "It's usually DialogHeader, DialogBody, DialogFooter, etc.",
+    },
+    {
+      prop: 'closeIcon',
+      type: 'ReactNode',
+      description: 'Custom close button to display on top right corner.',
+    },
+    {
+      prop: 'maxWidth',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
+      description: 'Determine the max-width of the dialog.',
+      default: "'md'",
+    },
+    {
+      prop: 'fullScreen',
+      type: 'boolean',
+      description: 'If true, the dialog is full-screen.',
+      default: 'false',
+    },
+    {
+      prop: 'hideCloseButton',
+      type: 'boolean',
+      description: 'If true, the close buton is not rendered.',
+      default: 'false',
+    },
+    {
+      prop: 'motionProps',
+      type: 'HTMLMotionProps',
+      description:
+        'The props to modify the framer motion animation. Use the variants API to create your own animation.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description: 'The component or element to render as the root.',
+      default: 'section',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogContentOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'closeButton', ClassValue>>",
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### DialogContent Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'closeButton',
+      class: '.nui-dialog-content-close-button',
+      component: "'button'",
+      description: 'The close button element of the dialog content.',
+    },
+  ]}
+/>
+
+### DialogHeader Props
+
+The dialog header props inherit the props of `as` (by default, it is the `h2` tag).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the dialog header.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description: 'The component or element to render as the root.',
+      default: 'h2',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogHeaderOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+  ]}
+/>
+
+### DialogBody Props
+
+The dialog body props inherit the props of `as` (by default, it is the `div` tag).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the dialog body.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description: 'The component or element to render as the root.',
+      default: 'div',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogBodyOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+  ]}
+/>
+
+### DialogFooter Props
+
+The dialog footer props inherit the props of `as` (by default, it is the `div` tag).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of tht dialog footer.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description: 'The component or element to render as the root.',
+      default: 'div',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogFooterOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+  ]}
+/>
+
+### DialogTrigger Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The element that triggers the dialog to open.',
+    },
+  ]}
+/>
+
+### DialogClose Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The element that triggers the dialog to close',
+    },
+  ]}
+/>

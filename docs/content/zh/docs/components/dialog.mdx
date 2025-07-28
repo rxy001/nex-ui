@@ -1,0 +1,414 @@
+---
+title: Dialog
+description: 显示需要关注或提供额外信息的自定义内容的对话框。
+---
+
+import { dialog } from '@/content/_demo'
+
+# Dialog
+
+显示需要关注或提供额外信息的自定义内容的对话框。
+
+<ComponentLinks component='dialog' ariaCompatible />
+
+## 使用
+
+<Example {...dialog.usage} />
+
+### MaxWidths
+
+`maxWidth` 属性可以设置对话框的最大宽度，默认为 `md`。
+
+<Example {...dialog.maxWidths} />
+
+### FullScreen
+
+使用 `fullScreen` 属性可以使对话框全屏显示。
+
+<Example {...dialog.fullScreen} />
+
+### Placements
+
+`placement` 属性可以设置对话框的显示位置，默认为 `top`。
+
+<Example {...dialog.placements} />
+
+### HideBackdrop
+
+使用 `hideBackdrop` 属性可以隐藏对话框的背景遮罩。
+
+<Example {...dialog.hideBackdrop} />
+
+### PreventScroll
+
+使用 `preventScroll` 属性可以限制对话框打开时页面滚动。
+
+<Example {...dialog.preventScroll} />
+
+### KeepMounted
+
+使用 `keepMounted` 属性可以保持对话框内容在关闭时仍然挂载。
+
+<Example {...dialog.keepMounted} />
+
+### Custom Motion
+
+使用 `motionProps` 属性可以自定义 `visible` / `hidden` 的动画效果。
+
+<Example {...dialog.customMotion} />
+
+### Overflow Scroll
+
+使用 `scrollBehavior` 属性可以控制对话框内容的滚动行为。
+
+- `inside`: 内容在对话框内部滚动。
+- `outside`: 内容在对话框外部滚动。
+
+<Example {...dialog.scrollBehavior} />
+
+### Controlled Dialog
+
+<Example {...dialog.controlled} />
+
+## API
+
+### Dialog Props
+
+Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '通常是 DialogContent、DialogTrigger 等组件。',
+    },
+    {
+      prop: 'open',
+      type: 'boolean',
+      description: '控制对话框的打开状态。',
+    },
+    {
+      prop: 'defaultOpen',
+      type: 'boolean',
+      description: '对话框的默认打开状态。',
+    },
+    {
+      prop: 'onOpenChange',
+      type: '((open: boolean) => void)',
+      description: '对话框打开状态变化时的回调函数。',
+    },
+    {
+      prop: 'className',
+      type: 'string',
+      description: '对话框根元素的类名。',
+    },
+    {
+      prop: 'placement',
+      type: ["'top'", "'bottom'", "'left'", "'right'"],
+      description: '对话框的显示位置。',
+      default: "'top'",
+    },
+    {
+      prop: 'hideBackdrop',
+      type: 'boolean',
+      description: '是否隐藏对话框的背景遮罩。',
+      default: 'false',
+    },
+    {
+      prop: 'fullScreen',
+      type: 'boolean',
+      description: '是否使对话框全屏显示。',
+      default: 'false',
+    },
+    {
+      prop: 'container',
+      type: 'HTMLElement | null | (() => HTMLElement | null)',
+      description: '放置 Portal 的容器元素。',
+      default: 'document.body',
+    },
+    {
+      prop: 'maxWidth',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
+      description: '对话框的最大宽度。',
+      default: "'md'",
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      description: '是否保持对话框内容在关闭时仍然挂载。',
+      default: 'false',
+    },
+    {
+      prop: 'scroll',
+      type: ["'inside'", "'outside'"],
+      description: '对话框内容的滚动行为。',
+      default: "'inside'",
+    },
+    {
+      prop: 'hideCloseButton',
+      type: 'boolean',
+      description: '是否隐藏对话框的关闭按钮。',
+      default: 'false',
+    },
+    {
+      prop: 'preventScroll',
+      type: 'boolean',
+      description: '是否限制对话框打开时页面滚动。',
+      default: 'false',
+    },
+    {
+      prop: 'closeOnInteractBackdrop',
+      type: 'boolean',
+      description: '是否在与背景遮罩交互时关闭对话框。',
+      default: 'true',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      description: '是否在按下 Escape 键时关闭对话框。',
+      default: 'true',
+    },
+    {
+      prop: 'closeIcon',
+      type: 'ReactNode',
+      description: '自定义对话框的关闭图标。',
+    },
+    {
+      prop: 'restoreFocus',
+      type: 'boolean',
+      description: '是否在对话框关闭时恢复焦点到之前聚焦的元素。',
+      default: 'true',
+    },
+    {
+      prop: 'motionProps',
+      type: 'HTMLMotionProps',
+      description: '自定义对话框的动画效果。',
+    },
+    {
+      prop: 'aria-labelledby',
+      type: 'string',
+      description: '对话框标题的 ARIA 标签。',
+    },
+    {
+      prop: 'aria-describedby',
+      type: 'string',
+      description: '对话框描述的 ARIA 标签。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      default: 'm.div',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'panel' | 'backdrop', ClassValue>>",
+      description: 'Dialog Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Dialog Slots 的 props。',
+    },
+  ]}
+/>
+
+### Dialog Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'panel',
+      class: '.nui-dialog-panel',
+      component: "'div'",
+      description: '对话框的面板元素。',
+    },
+    {
+      slot: 'backdrop',
+      class: '.nui-dialog-backdrop',
+      component: "'div'",
+      description: '对话框的背景遮罩元素。',
+    },
+  ]}
+/>
+
+### DialogContent Props
+
+DialogContent Props 继承 `as` (默认为 `section` 标签) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '通常是 DialogHeader、DialogBody、DialogFooter 等组件。',
+    },
+    {
+      prop: 'closeIcon',
+      type: 'ReactNode',
+      description: '自定义对话框的关闭图标。',
+    },
+    {
+      prop: 'maxWidth',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
+      description: '对话框的最大宽度。',
+      default: "'md'",
+    },
+    {
+      prop: 'fullScreen',
+      type: 'boolean',
+      description: '是否使对话框全屏显示。',
+      default: 'false',
+    },
+    {
+      prop: 'hideCloseButton',
+      type: 'boolean',
+      description: '是否隐藏对话框的关闭按钮。',
+      default: 'false',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      default: 'section',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogContentOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'closeButton', ClassValue>>",
+      description: 'DialogContent Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'DialogContent Slots 的 props。',
+    },
+  ]}
+/>
+
+### DialogContent Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'closeButton',
+      class: '.nui-dialog-content-close-button',
+      component: "'button'",
+      description: '对话框的关闭按钮元素。',
+    },
+  ]}
+/>
+
+### DialogHeader Props
+
+DialogHeader Props 继承 `as` (默认为 `h2` 标签) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '对话框的标题内容。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      default: 'h2',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogHeaderOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### DialogBody Props
+
+DialogBody Props 继承 `as` (默认为 `div` 标签) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '对话框的内容。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      default: 'div',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogBodyOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### DialogFooter Props
+
+DialogFooter Props 继承 `as` (默认为 `div` 标签) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '对话框的底部内容。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      default: 'div',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogFooterOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### DialogTrigger Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '触发对话框打开的元素。',
+    },
+  ]}
+/>
+
+### DialogClose Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '触发对话框关闭的元素。',
+    },
+  ]}
+/>
