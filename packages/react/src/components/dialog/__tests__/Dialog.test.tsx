@@ -335,7 +335,7 @@ describe('Dialog', () => {
   })
 
   describe('DialogContent', () => {
-    it('should render with content classes but no others', async () => {
+    it('should render with root class but no others', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestDialog open />,
         {
@@ -345,6 +345,31 @@ describe('Dialog', () => {
 
       const dialogContent = getByTestId('dialog-content')
       expect(dialogContent).toHaveClass(dialogContentClasses.root)
+    })
+
+    it('should forward classes to root and closeButton slots', async () => {
+      const classes = {
+        root: 'test-dialog-content-root',
+        closeButton: 'test-dialog-content-close-button',
+      }
+      const { getByTestId } = await renderWithNexUIProvider(
+        <Dialog open>
+          <DialogContent data-testid='dialog-content' classes={classes}>
+            <DialogHeader>Dialog Header</DialogHeader>
+            <DialogBody>Dialog Body</DialogBody>
+            <DialogFooter>Dialog Footer</DialogFooter>
+          </DialogContent>
+        </Dialog>,
+        {
+          useAct: true,
+        },
+      )
+
+      const dialogContent = getByTestId('dialog-content')
+      expect(dialogContent).toHaveClass(classes.root)
+      expect(
+        dialogContent.querySelector(`.${dialogContentClasses['close-button']}`),
+      ).toHaveClass(classes.closeButton)
     })
   })
 

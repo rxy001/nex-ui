@@ -6,8 +6,6 @@ export { DialogBody } from './DialogBody'
 export { DialogFooter } from './DialogFooter'
 export { DialogClose } from './DialogClose'
 
-export { useDialog } from './DialogContext'
-
 export type {
   DialogProps,
   DialogContentProps,
