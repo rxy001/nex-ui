@@ -1,0 +1,5 @@
+// istanbul ignore file
+
+export function ownerDocument(node: Node | null | undefined): Document {
+  return (node && node.ownerDocument) || document
+}

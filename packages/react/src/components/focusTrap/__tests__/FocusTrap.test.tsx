@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import { useState } from 'react'
 import userEvent from '@testing-library/user-event'
-import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import { FocusTrap } from '../index'
 import type { UserEvent } from '@testing-library/user-event'
 
@@ -162,7 +162,7 @@ describe('FocusTrap', () => {
   it('should handle shift+tab to move focus backwards within trap', async () => {
     const { getByTestId } = render(
       <FocusTrap active>
-        <div data-testid='focus-trap-container' tabIndex={0}>
+        <div data-testid='focus-trap-container' tabIndex={-1}>
           <button data-testid='first-button'>First</button>
           <button data-testid='second-button'>Second</button>
         </div>
@@ -180,9 +180,7 @@ describe('FocusTrap', () => {
 
     await user.tab({ shift: true })
     await user.tab({ shift: true })
-    waitFor(() => expect(document.activeElement).toBe(firstButton), {
-      timeout: 1000,
-    })
+    expect(document.activeElement).toBe(firstButton)
   })
 
   it('should not trap focus when paused', async () => {
@@ -203,13 +201,14 @@ describe('FocusTrap', () => {
     outsideButton.focus()
     expect(document.activeElement).toBe(outsideButton)
 
-    await user.tab()
     // move to focus-trap-container
     await user.tab()
+    await user.tab()
+
     expect(document.activeElement).toBe(insideButton)
 
-    await user.tab()
     // move to body
+    await user.tab()
     await user.tab()
     expect(document.activeElement).toBe(outsideButton)
   })

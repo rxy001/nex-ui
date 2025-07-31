@@ -1,5 +1,5 @@
 import { createRef, useState } from 'react'
-import { fireEvent, act } from '@testing-library/react'
+import { fireEvent, act, waitFor } from '@testing-library/react'
 import {
   renderWithNexUIProvider,
   testComponentStability,
@@ -270,19 +270,25 @@ describe('Accordion', () => {
         useAct: true,
       },
     )
+
     const accordionItemRoot = getByTestId('accordion-item')
     expect(
       accordionItemRoot.querySelector(`.${accordionItemClasses.content}`),
     ).toBeInTheDocument()
 
-    rerender(
-      <Accordion keepMounted={false} expandedKeys={[]}>
-        {children}
-      </Accordion>,
-    )
-    expect(
-      accordionItemRoot.querySelector(`.${accordionItemClasses.content}`),
-    ).not.toBeInTheDocument()
+    await act(async () => {
+      rerender(
+        <Accordion keepMounted={false} expandedKeys={[]}>
+          {children}
+        </Accordion>,
+      )
+    })
+
+    await waitFor(() => {
+      expect(
+        accordionItemRoot.querySelector(`.${accordionItemClasses.content}`),
+      ).not.toBeInTheDocument()
+    })
   })
 
   it('should render multiple expanded AccordionItems when multiple=true', async () => {
