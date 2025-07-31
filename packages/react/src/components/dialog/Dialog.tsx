@@ -4,8 +4,8 @@ import { useDefaultProps } from '../utils'
 import { Modal, useModal } from '../modal'
 import { DialogProvider } from './DialogContext'
 import type { ElementType } from 'react'
-import type * as m from 'motion/react-m'
 import type { DialogProps } from './types'
+import type { DOMMotionComponents } from 'motion/react'
 
 const Provider = (props: DialogProps) => {
   const {
@@ -49,7 +49,9 @@ const Provider = (props: DialogProps) => {
   return <DialogProvider value={ownerState}>{children}</DialogProvider>
 }
 
-export const Dialog = <RootComponent extends ElementType = typeof m.div>(
+export const Dialog = <
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+>(
   inProps: DialogProps<RootComponent>,
 ) => {
   const props = useDefaultProps<DialogProps>({

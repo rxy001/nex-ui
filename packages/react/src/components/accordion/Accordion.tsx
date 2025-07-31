@@ -50,7 +50,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     multiple = false,
     disabled = false,
     disabledKeys = [],
-    keepMounted = true,
+    keepMounted = false,
     defaultExpandedKeys = [],
     expandedKeys: expandedKeysProps,
     ...remainingProps

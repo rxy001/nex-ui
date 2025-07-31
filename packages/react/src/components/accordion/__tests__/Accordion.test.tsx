@@ -93,7 +93,7 @@ describe('Accordion', () => {
       content: { className: 'test-content' },
     }
     const { getByTestId } = await renderWithNexUIProvider(
-      <Accordion>
+      <Accordion keepMounted>
         <AccordionItem
           itemKey='1'
           title='Accordion 1'
@@ -133,7 +133,7 @@ describe('Accordion', () => {
       content: 'test-content',
     }
     const { getByTestId } = await renderWithNexUIProvider(
-      <Accordion>
+      <Accordion keepMounted>
         <AccordionItem
           itemKey='1'
           title='Accordion 1'
@@ -251,11 +251,13 @@ describe('Accordion', () => {
       accordionItemRoot.querySelector(`.${accordionItemClasses.content}`),
     ).toBeInTheDocument()
 
-    rerender(
-      <Accordion keepMounted expandedKeys={[]}>
-        {children}
-      </Accordion>,
-    )
+    await act(async () => {
+      rerender(
+        <Accordion keepMounted expandedKeys={[]}>
+          {children}
+        </Accordion>,
+      )
+    })
     expect(
       accordionItemRoot.querySelector(`.${accordionItemClasses.content}`),
     ).toBeInTheDocument()
@@ -320,11 +322,13 @@ describe('Accordion', () => {
       accordionRoot?.querySelectorAll(`.${accordionItemClasses.expanded}`),
     ).toHaveLength(1)
 
-    rerender(
-      <Accordion multiple expandedKeys={['1', '2']}>
-        {arrayChildren}
-      </Accordion>,
-    )
+    await act(async () => {
+      rerender(
+        <Accordion multiple expandedKeys={['1', '2']}>
+          {arrayChildren}
+        </Accordion>,
+      )
+    })
     expect(
       accordionRoot?.querySelectorAll(`.${accordionItemClasses.expanded}`),
     ).toHaveLength(2)
@@ -400,7 +404,9 @@ describe('Accordion', () => {
     expect(onExpandedKeysChange).not.toHaveBeenCalled()
 
     const trigger = getByRole('button')
-    fireEvent.click(trigger)
+    await act(async () => {
+      fireEvent.click(trigger)
+    })
     expect(onExpandedKeysChange).toHaveBeenCalled()
   })
 
@@ -452,7 +458,9 @@ describe('Accordion', () => {
     const trigger1 = accordionItemRoot1.querySelector(
       `.${accordionItemClasses.trigger}`,
     )
-    fireEvent.click(trigger1!)
+    await act(async () => {
+      fireEvent.click(trigger1!)
+    })
     expect(accordionItemRoot1).not.toHaveClass(accordionItemClasses.expanded)
 
     const accordionItemRoot2 = getByTestId('accordion-item-2')
@@ -460,17 +468,21 @@ describe('Accordion', () => {
     const trigger2 = accordionItemRoot2.querySelector(
       `.${accordionItemClasses.trigger}`,
     )
-    fireEvent.click(trigger2!)
+    await act(async () => {
+      fireEvent.click(trigger2!)
+    })
     expect(accordionItemRoot2).toHaveClass(accordionItemClasses.expanded)
 
-    fireEvent.click(trigger2!)
+    await act(async () => {
+      fireEvent.click(trigger2!)
+    })
     expect(accordionItemRoot2).not.toHaveClass(accordionItemClasses.expanded)
   })
 
   describe('Accessibility', () => {
     it('should have role="button", aria-expanded and aria-controls in AccordionItem heading', async () => {
       const { getByRole } = await renderWithNexUIProvider(
-        <Accordion>{children}</Accordion>,
+        <Accordion keepMounted>{children}</Accordion>,
         {
           useAct: true,
         },
@@ -485,7 +497,7 @@ describe('Accordion', () => {
 
     it('should have aria-labelledby and role="region" in AccordionItem content', async () => {
       const { getByRole } = await renderWithNexUIProvider(
-        <Accordion>{children}</Accordion>,
+        <Accordion keepMounted>{children}</Accordion>,
         {
           useAct: true,
         },
@@ -508,10 +520,14 @@ describe('Accordion', () => {
       const trigger = getByRole('button')
       expect(trigger).toHaveAttribute('aria-expanded', 'false')
 
-      fireEvent.click(trigger)
+      await act(async () => {
+        fireEvent.click(trigger)
+      })
       expect(trigger).toHaveAttribute('aria-expanded', 'true')
 
-      fireEvent.click(trigger)
+      await act(async () => {
+        fireEvent.click(trigger)
+      })
       expect(trigger).toHaveAttribute('aria-expanded', 'false')
     })
 
