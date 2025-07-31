@@ -37,6 +37,20 @@ const useSlotClasses = (ownerState: DialogContentOwnerState) => {
   }, [classes, prefix])
 }
 
+const useSlotAriaProps = (ownerState: DialogContentOwnerState) => {
+  const { role = 'dialog', 'aria-modal': modal = true } = ownerState
+
+  return useMemo(
+    () => ({
+      root: {
+        role,
+        'aria-modal': modal,
+      },
+    }),
+    [role, modal],
+  )
+}
+
 export const DialogContent = <RootComponent extends ElementType = 'section'>(
   inProps: DialogContentProps<RootComponent>,
 ) => {
@@ -78,6 +92,8 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
     recipe: dialogContentRecipe,
   })
 
+  const slotAriaProps = useSlotAriaProps(ownerState)
+
   const classes = useSlotClasses(ownerState)
 
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
@@ -87,6 +103,7 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
     classNames: classes.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
+    a11y: slotAriaProps.root,
   })
 
   const [DialogContentCloseButton, getDialogContentCloseButtonProps] = useSlot({

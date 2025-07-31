@@ -371,6 +371,30 @@ describe('Dialog', () => {
         dialogContent.querySelector(`.${dialogContentClasses['close-button']}`),
       ).toHaveClass(classes.closeButton)
     })
+
+    describe('Accessibility', () => {
+      it('should have role="dialog" on the DialogContent element', async () => {
+        const { getByTestId } = await renderWithNexUIProvider(
+          <TestDialog open />,
+          {
+            useAct: true,
+          },
+        )
+        const content = getByTestId('dialog-content')
+        expect(content).toHaveAttribute('role', 'dialog')
+      })
+
+      it('should have aria-modal="true" on the DialogContent element', async () => {
+        const { getByTestId } = await renderWithNexUIProvider(
+          <TestDialog open />,
+          {
+            useAct: true,
+          },
+        )
+        const content = getByTestId('dialog-content')
+        expect(content).toHaveAttribute('aria-modal', 'true')
+      })
+    })
   })
 
   describe('DialogHeader', () => {

@@ -104,7 +104,7 @@ https://github.com/microsoft/TypeScript/issues/40426
 
 <!-- 34. 组件的 classes 应该只添加与样式有关的 API -->
 
-36. 支持嵌套 modal
+<!-- 36. 支持嵌套 modal -->
 
 <!-- 37. slotProps 原生元素无法传递 data-*
 
@@ -113,3 +113,5 @@ https://github.com/microsoft/TypeScript/issues/40426
 要修复该问题只能手动定义 -->
 
 38. getBy... 当无匹配元素时会报错， 因此通过该方式查询到元素，无需在使用 toBeInTheDocument
+
+<!-- 39. modal - preventScroll:true 应该将 overflow:hidden 添加到相应的 container 上 -->

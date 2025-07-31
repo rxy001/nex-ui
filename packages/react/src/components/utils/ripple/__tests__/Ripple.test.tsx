@@ -1,5 +1,8 @@
 import { render, fireEvent, act } from '@testing-library/react'
+import { MotionGlobalConfig } from 'motion/react'
 import { Ripple } from '../Ripple'
+
+MotionGlobalConfig.skipAnimations = false
 
 describe('Ripple', () => {
   it('should return children as-is when children is not a valid React element', () => {
