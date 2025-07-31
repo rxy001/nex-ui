@@ -7,6 +7,7 @@ import { Button } from '../../button'
 import { DialogFooter } from '../DialogFooter'
 import { DialogClose } from '../DialogClose'
 import type { Meta, StoryObj } from '@storybook/react'
+import type { DOMMotionComponents } from 'motion/react'
 import type { DialogProps } from '../types'
 
 const meta = {
@@ -100,7 +101,7 @@ const meta = {
       </Dialog>
     )
   },
-} satisfies Meta<typeof Dialog<'div'>>
+} satisfies Meta<typeof Dialog<DOMMotionComponents['div']>>
 
 export default meta
 

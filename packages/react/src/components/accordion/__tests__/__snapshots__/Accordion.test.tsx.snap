@@ -68,16 +68,6 @@ exports[`Accordion should render with default props 1`] = `
   display: flex;
 }
 
-.emotion-5 {
-  -webkit-padding-start: var(--nui-spaces-4);
-  padding-inline-start: var(--nui-spaces-4);
-  -webkit-padding-end: var(--nui-spaces-4);
-  padding-inline-end: var(--nui-spaces-4);
-  padding-block-start: var(--nui-spaces-2);
-  padding-block-end: var(--nui-spaces-2);
-  font-size: 16px;
-}
-
 <div
   class="nui-accordion-root nui-accordion-variant-underlined emotion-0"
 >
@@ -92,7 +82,7 @@ exports[`Accordion should render with default props 1`] = `
         aria-controls="panel-1-content"
         aria-expanded="false"
         class="nui-accordion-item-trigger emotion-3"
-        id="«r4»"
+        id="«r3»"
         tabindex="0"
         type="button"
       >
@@ -122,18 +112,6 @@ exports[`Accordion should render with default props 1`] = `
         </span>
       </button>
     </h3>
-    <div
-      style="opacity: 0; height: 0px; overflow: hidden;"
-    >
-      <div
-        aria-labelledby="«r4»"
-        class="nui-accordion-item-content emotion-5"
-        id="panel-1-content"
-        role="region"
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-      </div>
-    </div>
   </div>
 </div>
 `;

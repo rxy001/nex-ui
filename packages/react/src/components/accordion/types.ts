@@ -53,7 +53,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
 
   /**
    * If true, the accordion items content should always be mounted.
-   * @default true
+   * @default false
    */
   keepMounted?: boolean
 

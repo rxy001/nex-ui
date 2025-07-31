@@ -1,4 +1,3 @@
-import type * as m from 'motion/react-m'
 import type { DOMMotionComponents } from 'motion/react'
 import type {
   OverrideProps,
@@ -165,29 +164,31 @@ type DialogOwnProps<RootComponent extends ElementType> = {
 
 export interface DialogPropsOverrides {}
 
-export type DialogProps<RootComponent extends ElementType = typeof m.div> =
-  OverrideProps<
-    RootComponent,
-    DialogOwnProps<RootComponent>,
-    DialogPropsOverrides
-  >
+export type DialogProps<
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+> = OverrideProps<
+  RootComponent,
+  DialogOwnProps<RootComponent>,
+  DialogPropsOverrides
+>
 
-export type DialogOwnerState<RootComponent extends ElementType = typeof m.div> =
-  DialogProps<RootComponent> & {
-    hideBackdrop: boolean
-    fullScreen: boolean
-    preventScroll: boolean
-    scroll: 'inside' | 'outside'
-    maxWidth: DialogContentVariants['maxWidth']
-    open: boolean
-    setOpen: (open: boolean) => void
-    placement: DialogVariants['placement']
-    keepMounted: boolean
-    hideCloseButton: boolean
-    closeOnInteractBackdrop: boolean
-    closeOnEscape: boolean
-    restoreFocus: boolean
-  }
+export type DialogOwnerState<
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+> = DialogProps<RootComponent> & {
+  hideBackdrop: boolean
+  fullScreen: boolean
+  preventScroll: boolean
+  scroll: 'inside' | 'outside'
+  maxWidth: DialogContentVariants['maxWidth']
+  open: boolean
+  setOpen: (open: boolean) => void
+  placement: DialogVariants['placement']
+  keepMounted: boolean
+  hideCloseButton: boolean
+  closeOnInteractBackdrop: boolean
+  closeOnEscape: boolean
+  restoreFocus: boolean
+}
 
 // ------------- DialogTrigger -------------
 export type DialogTriggerProps = {

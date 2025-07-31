@@ -19,7 +19,7 @@ describe('ModalManager', () => {
     const modal = 'modal-id'
     modalManager.register(modal)
     const index = modalManager.unregister(modal)
-    expect(index).toBe(index)
+    expect(index).toBe(0)
 
     expect(modalManager.unregister(modal)).toBe(-1)
   })
