@@ -36,7 +36,6 @@ const contentMotionVariants: Variants = {
   unexpanded: {
     opacity: 0,
     height: 0,
-    overflow: 'hidden',
     transition: {
       ease: 'easeInOut',
       duration: 0.2,
@@ -192,6 +191,9 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
         animate,
         initial: motionInitialRef.current,
         variants: contentMotionVariants,
+        style: {
+          overflow: 'hidden',
+        },
       }
     : {
         variants: contentMotionVariants,

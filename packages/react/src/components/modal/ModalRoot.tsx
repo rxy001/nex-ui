@@ -211,9 +211,7 @@ export function getScrollBarWidth(container: HTMLElement): number {
     return Math.max(0, win.innerWidth - doc.documentElement.clientWidth)
   }
 
-  return container.scrollHeight > container.clientHeight
-    ? container.offsetWidth - container.clientWidth
-    : 0
+  return container.offsetWidth - container.clientWidth
 }
 
 ModalRoot.displayName = 'ModalRoot'

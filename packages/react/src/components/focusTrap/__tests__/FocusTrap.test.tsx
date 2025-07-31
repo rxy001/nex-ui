@@ -135,7 +135,7 @@ describe('FocusTrap', () => {
       <div>
         <button data-testid='outside-button'>Outside Button</button>
         <FocusTrap active>
-          <div data-testid='focus-trap-container' tabIndex={0}>
+          <div data-testid='focus-trap-container' tabIndex={-1}>
             <button data-testid='first-button'>First</button>
             <button data-testid='second-button'>Second</button>
           </div>
@@ -262,7 +262,7 @@ describe('FocusTrap', () => {
   it('should handle focus when no tabbable elements exist', async () => {
     const { getByTestId } = render(
       <FocusTrap active>
-        <div data-testid='focus-trap-container' tabIndex={0}>
+        <div data-testid='focus-trap-container' tabIndex={-1}>
           <span>No tabbable content</span>
         </div>
       </FocusTrap>,
