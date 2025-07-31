@@ -14,6 +14,10 @@ export * from './mergeProps'
 
 export * from './chain'
 
+export * from './ownerDocument'
+
+export * from './ownerWindow'
+
 export { default as map } from 'lodash.map'
 
 export { default as forEach } from 'lodash.foreach'

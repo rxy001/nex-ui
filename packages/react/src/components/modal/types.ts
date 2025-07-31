@@ -1,7 +1,7 @@
 import type { Interpolation } from '@nex-ui/system'
 import type { Overwrite } from '../../types/utils'
 import type { ComponentProps, ElementType, ReactNode } from 'react'
-import type * as m from 'motion/react-m'
+import type { DOMMotionComponents } from 'motion/react'
 
 type ModalSlotProps<RootComponent extends ElementType> = Overwrite<
   ComponentProps<RootComponent>,
@@ -34,7 +34,7 @@ export type ModalProps = {
    * The container element in which the overlay portal will be placed.
    * @default document.body
    */
-  container?: Element | null | (() => Element | null)
+  container?: HTMLElement | null | (() => HTMLElement | null)
 
   /**
    * If true, always keep the children in the DOM.
@@ -104,8 +104,9 @@ export type ModalFooterProps<RootComponent extends ElementType = 'div'> =
   ModalSlotProps<RootComponent>
 
 // ModalRoot
-export type ModalRootProps<RootComponent extends ElementType = typeof m.div> =
-  ModalSlotProps<RootComponent>
+export type ModalRootProps<
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+> = ModalSlotProps<RootComponent>
 
 // ModalBackdrop
 export type ModalBackdropProps<RootComponent extends ElementType = 'div'> =

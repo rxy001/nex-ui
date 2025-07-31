@@ -60,6 +60,7 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     hideBackdrop,
     motionProps,
     open: _open,
+    restoreFocus: _restoreFocus,
     closeOnEscape: _closeOnEscape,
     fullScreen: _fullScreen,
     preventScroll: _preventScroll,

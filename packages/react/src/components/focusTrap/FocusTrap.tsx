@@ -21,9 +21,9 @@ export const FocusTrap = ({
   const sentinelStartRef = useRef<HTMLDivElement>(null)
   const sentinelEndRef = useRef<HTMLDivElement>(null)
   const lastKeydownRef = useRef<KeyboardEvent>(null)
-  const pausedRef = useLatest(paused)
   const restoredNode = useRef<EventTarget>(null)
   const ignoreNextFocus = useRef<boolean>(false)
+  const pausedRef = useLatest(paused)
   const mergedRefs = mergeRefs(rootRef, children?.props.ref)
 
   useEffect(() => {
@@ -102,6 +102,9 @@ export const FocusTrap = ({
       document.body,
       'keydown',
       (e: KeyboardEvent) => {
+        if (e.key !== 'Tab' || pausedRef.current) {
+          return
+        }
         lastKeydownRef.current = e
       },
       true,
@@ -137,13 +140,19 @@ export const FocusTrap = ({
 
   return (
     <>
-      <div tabIndex={active && !paused ? 0 : -1} ref={sentinelStartRef} />
+      <div
+        tabIndex={active && !pausedRef.current ? 0 : -1}
+        ref={sentinelStartRef}
+      />
       {cloneElement(children, {
         ...children.props,
         ref: mergedRefs,
         onFocus: handleFocus,
       })}
-      <div tabIndex={active && !paused ? 0 : -1} ref={sentinelEndRef} />
+      <div
+        tabIndex={active && !pausedRef.current ? 0 : -1}
+        ref={sentinelEndRef}
+      />
     </>
   )
 }

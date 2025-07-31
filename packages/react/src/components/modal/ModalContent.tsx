@@ -1,48 +1,52 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useId, useMemo } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
 import { useSlotProps } from '../utils'
 import { modalContentRecipe } from '../../theme/recipes'
 import { ModalProvider, useModal } from './ModalContext'
 import { FocusTrap } from '../focusTrap'
+import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
 import type { ModalContentProps } from './types'
 
 const style = modalContentRecipe()
 
 const useAriaProps = (props: ModalContentProps) => {
-  const { role = 'dialog', tabIndex = -1 } = props
-  const labelledBy = props['aria-labelledby']
-  const describedBy = props['aria-describedby']
+  const labelId = useId()
+  const descriptionId = useId()
+
+  const {
+    tabIndex = -1,
+    'aria-labelledby': labelledBy = labelId,
+    'aria-describedby': describedBy = descriptionId,
+  } = props
 
   return useMemo(() => {
     return {
-      role,
       tabIndex,
-      'aria-modal': true,
       'aria-labelledby': labelledBy,
       'aria-describedby': describedBy,
     }
-  }, [describedBy, labelledBy, role, tabIndex])
+  }, [describedBy, labelledBy, tabIndex])
 }
 
 export const ModalContent = <RootComponent extends ElementType = 'section'>(
   inProps: ModalContentProps<RootComponent>,
 ) => {
   const props = inProps as ModalContentProps
-  const labelId = useId()
-  const describtionId = useId()
+
+  const [paused, setPaused] = useState(false)
+
+  const modalManager = useModalManager()
   const modalState = useModal()
-  const labelledBy =
-    props['aria-labelledby'] ?? modalState['aria-labelledby'] ?? labelId
-  const describedBy =
-    props['aria-describedby'] ?? modalState['aria-describedby'] ?? describtionId
+
+  const { isTopmostModal } = modalState
 
   const ariaProps = useAriaProps({
+    'aria-labelledby': modalState['aria-labelledby'],
+    'aria-describedby': modalState['aria-describedby'],
     ...props,
-    'aria-labelledby': labelledBy,
-    'aria-describedby': describedBy,
   })
 
   const rootProps = useSlotProps({
@@ -54,17 +58,26 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
   const ctx = useMemo(
     () => ({
       ...modalState,
-      'aria-labelledby': labelledBy,
-      'aria-describedby': describedBy,
+      'aria-labelledby': ariaProps['aria-labelledby'],
+      'aria-describedby': ariaProps['aria-describedby'],
     }),
-    [describedBy, labelledBy, modalState],
+    [ariaProps, modalState],
   )
+
+  useEffect(() => {
+    const unsubscribe = modalManager.subscribe(() => {
+      setPaused(!isTopmostModal?.())
+    })
+
+    return unsubscribe
+  }, [isTopmostModal, modalManager])
 
   return (
     <ModalProvider value={ctx}>
       <FocusTrap
         active={modalState.open}
         restoreFocus={modalState.restoreFocus}
+        paused={paused}
       >
         <nex.section {...rootProps} />
       </FocusTrap>

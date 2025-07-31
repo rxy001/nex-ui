@@ -1,85 +1,85 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
-import { addEventListener } from '@nex-ui/utils'
-import { useEffect, useState } from 'react'
-import { AnimatePresence, LazyMotion } from 'motion/react'
-import * as m from 'motion/react-m'
-import { Portal, useSlotProps, motionFeatures } from '../utils'
+import {
+  addEventListener,
+  isFunction,
+  ownerDocument,
+  ownerWindow,
+} from '@nex-ui/utils'
+import { useEffect, useMemo, useRef, useId } from 'react'
+import { useEvent } from '@nex-ui/hooks'
+import { Portal, useSlotProps } from '../utils'
 import { modalRootRecipe } from '../../theme/recipes'
-import { useModal } from './ModalContext'
+import { ModalProvider, useModal } from './ModalContext'
+import { useModalManager } from './ModalManager'
+import { ModalMotion } from './ModalMotion'
 import type { ElementType } from 'react'
-import type { Variants } from 'motion/react'
+import type { DOMMotionComponents } from 'motion/react'
 import type { ModalRootProps } from './types'
-
-const transition = {
-  ease: 'easeInOut',
-  duration: 0.2,
-} as const
-
-const variants: Variants = {
-  visible: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 0,
-  },
-}
 
 const style = modalRootRecipe()
 
-export const ModalRoot = <RootComponent extends ElementType = 'div'>(
+export const ModalRoot = <
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+>(
   inProps: ModalRootProps<RootComponent>,
 ) => {
   const { children, ...props } = inProps as ModalRootProps
+  const rootRef = useRef<HTMLDivElement>(null)
+  const modalId = useId()
+  const modalState = useModal()
+  const modalManager = useModalManager()
+  const registeredRef = useRef(false)
+  const resolver = useRef<() => void>(undefined)
 
   const {
-    container,
     open,
+    container,
     keepMounted,
     setOpen,
-    preventScroll,
     closeOnEscape,
-  } = useModal()
+    preventScroll,
+  } = modalState
 
-  const [display, setDisplay] = useState<'block' | 'none'>(() =>
-    keepMounted ? 'none' : 'block',
-  )
-
-  if (keepMounted && open && display === 'none') {
-    setDisplay('block')
-  }
-
-  // istanbul ignore next. Test environment doesn't work.
-  const onAnimationComplete = (animation: string) => {
-    if (animation === 'hidden') {
-      setDisplay('none')
-    }
+  if (registeredRef.current === false && open) {
+    modalManager.register(modalId)
+    registeredRef.current = true
   }
 
   const rootProps = useSlotProps({
     style,
     externalForwardedProps: props,
     additionalProps: {
-      as: m.div,
-      initial: 'hidden',
-      transition,
-      variants,
-      ...(keepMounted
-        ? {
-            animate: open ? 'visible' : 'hidden',
-            style: { display },
-            onAnimationComplete: onAnimationComplete,
-          }
-        : {
-            animate: 'visible',
-            exit: 'hidden',
-          }),
+      ref: rootRef,
+      tabIndex: -1,
+      onAnimationComplete: (animation: string) => {
+        if (animation === 'hidden') {
+          resolver.current?.()
+        }
+      },
     },
     a11y: {
-      tabIndex: -1,
+      // Ignore the user's settings to ensure proper access for assistive technologies.
+      'aria-hidden': open ? undefined : 'true',
     },
   })
+
+  const isTopmostModal = useEvent(() => modalManager.isTopmostModal(modalId))
+
+  // Portal renders asynchronously.
+  const handlePortalMount = () => {
+    if (open && rootRef.current && isTopmostModal()) {
+      modalManager.mount(modalId)
+    }
+  }
+
+  const ctx = useMemo(
+    () => ({
+      ...modalState,
+      isTopmostModal: isTopmostModal,
+    }),
+    [modalState, isTopmostModal],
+  )
 
   useEffect(() => {
     if (!open || !closeOnEscape) {
@@ -87,40 +87,133 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
     }
 
     const removeListener = addEventListener(document.body, 'keyup', (e) => {
-      if (e.key === 'Escape' && open) {
+      if (open && e.key === 'Escape' && isTopmostModal()) {
         setOpen(false)
         e.stopPropagation()
       }
     })
 
     return removeListener
-  }, [closeOnEscape, open, setOpen])
+  }, [closeOnEscape, isTopmostModal, open, setOpen])
 
   useEffect(() => {
-    if (preventScroll && open) {
-      const body = document.querySelector('body')
-      if (body) {
-        body.style.overflow = 'hidden'
-        return () => {
-          body.style.overflow = ''
+    if (open) {
+      const unsubscribe = modalManager.subscribe(() => {
+        const ariaHidden = rootRef.current?.getAttribute('aria-hidden')
+        if (isTopmostModal()) {
+          if (ariaHidden === 'false' || ariaHidden === null) {
+            return
+          }
+          rootRef.current?.removeAttribute('aria-hidden')
+        } else {
+          if (ariaHidden === 'true') {
+            return
+          }
+          rootRef.current?.setAttribute('aria-hidden', 'true')
         }
+      })
+
+      return () => {
+        unsubscribe()
       }
     }
-  }, [open, preventScroll])
+  }, [modalManager, open, isTopmostModal])
+
+  useEffect(() => {
+    if (open) {
+      let prevOverflow: string | null = null
+      let prevOverflowX: string | null = null
+      let prevOverflowY: string | null = null
+      let prevPaddingRight: string | null = null
+
+      const resolvedContainer =
+        (isFunction(container) ? container() : container) || document.body
+
+      const unsubscribe = modalManager.subscribe(() => {
+        // Store overflow and paddingRight only if the modal first mounts.
+        if (preventScroll && prevOverflow === null && isTopmostModal()) {
+          // Is vertical scrollbar displayed?
+          if (isOverflowing(resolvedContainer)) {
+            // Avoid scroll content jumping.
+            const scrollBarWidth = getScrollBarWidth(resolvedContainer)
+            prevPaddingRight = resolvedContainer.style.paddingRight
+            resolvedContainer.style.paddingRight = `${parseInt(prevPaddingRight || '0', 10) + scrollBarWidth}px`
+          }
+          prevOverflow = resolvedContainer.style.overflow
+          prevOverflowX = resolvedContainer.style.overflowX
+          prevOverflowY = resolvedContainer.style.overflowY
+          resolvedContainer.style.overflow = 'hidden'
+        }
+      })
+
+      return () => {
+        const { promise, resolve } = Promise.withResolvers<void>()
+        resolver.current = resolve
+        promise.then(() => {
+          if (prevOverflow !== null) {
+            resolvedContainer.style.overflow = prevOverflow
+            resolvedContainer.style.overflowX = prevOverflowX!
+            resolvedContainer.style.overflowY = prevOverflowY!
+          }
+          if (prevPaddingRight !== null) {
+            resolvedContainer.style.paddingRight = prevPaddingRight
+          }
+        })
+        unsubscribe()
+      }
+    }
+  }, [container, isTopmostModal, modalManager, open, preventScroll])
+
+  useEffect(() => {
+    if (open) {
+      if (rootRef.current && isTopmostModal()) {
+        modalManager.mount(modalId)
+      }
+
+      return () => {
+        modalManager.unregister(modalId)
+        registeredRef.current = false
+      }
+    }
+  }, [isTopmostModal, modalId, modalManager, open])
 
   return (
-    <Portal container={container}>
-      <LazyMotion features={motionFeatures}>
-        {keepMounted ? (
-          <nex.div {...rootProps}>{children}</nex.div>
-        ) : (
-          <AnimatePresence>
-            {open ? <nex.div {...rootProps}>{children}</nex.div> : null}
-          </AnimatePresence>
-        )}
-      </LazyMotion>
+    <Portal container={container} onMount={handlePortalMount}>
+      <ModalProvider value={ctx}>
+        <ModalMotion
+          open={open}
+          keepMounted={keepMounted}
+          rootProps={rootProps}
+        >
+          {children}
+        </ModalMotion>
+      </ModalProvider>
     </Portal>
   )
+}
+
+// Is a vertical scrollbar displayed?
+function isOverflowing(container: Element): boolean {
+  const doc = ownerDocument(container)
+
+  if (doc.body === container) {
+    return ownerWindow(container).innerWidth > doc.documentElement.clientWidth
+  }
+
+  return container.scrollHeight > container.clientHeight
+}
+
+export function getScrollBarWidth(container: HTMLElement): number {
+  const doc = ownerDocument(container)
+  const win = ownerWindow(container)
+
+  if (doc.body === container) {
+    return Math.max(0, win.innerWidth - doc.documentElement.clientWidth)
+  }
+
+  return container.scrollHeight > container.clientHeight
+    ? container.offsetWidth - container.clientWidth
+    : 0
 }
 
 ModalRoot.displayName = 'ModalRoot'
