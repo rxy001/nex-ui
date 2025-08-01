@@ -62,7 +62,7 @@ export default async function RootLayout({ children, params }: any) {
           href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap'
           rel='stylesheet'
         />
-        <InitColorSchemeScript colorSchemeSelector='class' />
+        <InitColorSchemeScript colorSchemeSelector='class' defaultMode='dark' />
       </Head>
       <body>
         <Banner dismissible={false}>
