@@ -4,6 +4,7 @@ import type { RecipeVariants } from '@nex-ui/system'
 export const accordionRecipe = defineRecipe({
   base: {
     w: 'full',
+    overflow: 'hidden',
   },
   variants: {
     variant: {

@@ -14,7 +14,7 @@ const sx = {
   transition: 'opacity',
   bg: {
     _DEFAULT: '#f4f4f5',
-    _dark: '#222227',
+    _dark: '#18181b',
   },
   color: {
     _DEFAULT: 'gray.800',
@@ -26,7 +26,7 @@ const sx = {
   _hover: {
     bg: {
       _DEFAULT: '#f0f0f0',
-      _dark: '#222227',
+      _dark: '#18181b',
     },
     opacity: '.8',
   },
