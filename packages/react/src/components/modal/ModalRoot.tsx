@@ -86,7 +86,9 @@ export const ModalRoot = <
       return
     }
 
-    const removeListener = addEventListener(document.body, 'keyup', (e) => {
+    const doc = ownerDocument(rootRef.current)
+
+    const removeListener = addEventListener(doc.body, 'keyup', (e) => {
       if (open && e.key === 'Escape' && isTopmostModal()) {
         setOpen(false)
         e.stopPropagation()
@@ -121,13 +123,15 @@ export const ModalRoot = <
 
   useEffect(() => {
     if (open) {
+      const doc = ownerDocument(rootRef.current)
+
       let prevOverflow: string | null = null
       let prevOverflowX: string | null = null
       let prevOverflowY: string | null = null
       let prevPaddingRight: string | null = null
 
       const resolvedContainer =
-        (isFunction(container) ? container() : container) || document.body
+        (isFunction(container) ? container() : container) || doc.body
 
       const unsubscribe = modalManager.subscribe(() => {
         // Store overflow and paddingRight only if the modal first mounts.
