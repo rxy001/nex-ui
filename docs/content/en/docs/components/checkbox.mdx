@@ -48,6 +48,8 @@ appearance and maintaining it until set to `false`, regardless of user interacti
 
 ### Vertical
 
+Set the `orientation` prop to `vertical` to display checkboxes in a vertical layout.
+
 <Example {...checkbox.groupVertical} />
 
 ### Disabled
@@ -58,7 +60,7 @@ appearance and maintaining it until set to `false`, regardless of user interacti
 
 ### Checkbox Props
 
-The checkbox props inherit the props of `as` (by default, it is the `input` tag).
+Checkbox props inherit the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
@@ -208,6 +210,8 @@ The checkbox props inherit the props of `as` (by default, it is the `input` tag)
 
 ### Checkbox Group Props
 
+CheckboxGroup props inherit the props of `as` (by default, `'div'`).
+
 <PropsTable
   dataSource={[
     {
@@ -222,7 +226,7 @@ The checkbox props inherit the props of `as` (by default, it is the `input` tag)
     },
     {
       prop: 'name',
-      type: ['string', 'number'],
+      type: 'string',
       description:
         'The name of the CheckboxGroup, used when submitting an HTML form.',
     },
@@ -239,35 +243,60 @@ The checkbox props inherit the props of `as` (by default, it is the `input` tag)
         "'purple'",
         "'gray'",
       ],
-      default: "'blue'",
       description: 'The color of the checkboxes.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
-      default: "'md'",
       description: 'The size of the checkboxes.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
-      default: 'size',
       description: 'The border radius of the checkboxes.',
     },
     {
       prop: 'value',
-      type: ['T extends (string | number)[]'],
+      type: 'T extends (string | number)[]',
       description: 'The current selected values. (controlled)',
     },
     {
       prop: 'defaultValue',
-      type: ['T extends (string | number)[]'],
+      type: 'T extends (string | number)[]',
       description: 'The default checked values. (uncontrolled)',
     },
     {
       prop: 'onValueChange',
       type: '(value: T[]) => void',
       description: 'Handler that is called when the value changes.',
+    },
+    {
+      prop: 'orientation',
+      type: ["'horizontal'", "'vertical'"],
+      default: "'horizontal'",
+      description: 'The axis the checkbox group items should align with.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component used for the root element.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root element.',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<CheckboxGroupOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
   ]}
 />

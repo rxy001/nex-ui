@@ -57,7 +57,7 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 
 ### Checkbox Props
 
-Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
+Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -263,6 +263,33 @@ Checkbox Props 继承 `as` (默认为 `input` 标签) 的 Props。
       prop: 'onValueChange',
       type: '(value: T[]) => void',
       description: '当 CheckboxGroup 的值发生变化时触发回调函数。',
+    },
+    {
+      prop: 'orientation',
+      type: ["'horizontal'", "'vertical'"],
+      default: "'horizontal'",
+      description: 'CheckboxGroup 的排列方向。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'CheckboxGroup 的根元素组件。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素的 ref。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<CheckboxGroupOwnerState>',
+      description: '用于根元素的 sx 属性。',
     },
   ]}
 />

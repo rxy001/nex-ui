@@ -46,19 +46,19 @@ Avatar provides fallback mechanisms in this order when image loading fails:
 
 ### Group Max Count
 
-`max` prop limits the number of Avatars displayed in the Avatar Group.
+Set the `max` prop to limit the number of Avatars displayed in the Avatar Group. It accepts a number value.
 
 <Example {...avatar.groupMaxCount} />
 
 ### Group Total Count
 
-`total` prop controls the total number of Avatars displayed in the Avatar Group.
+Use the `total` prop to set the total number of Avatars displayed in the Avatar Group. It accepts a number value.
 
 <Example {...avatar.groupTotalCount} />
 
 ### Custom Spacing
 
-`spacing` prop sets the spacing between Avatars in the Avatar Group.
+Use the `spacing` prop to set the spacing between Avatars in the Avatar Group. It accepts a number value.
 
 <Example {...avatar.groupSpacing} />
 
@@ -72,7 +72,7 @@ Avatar provides fallback mechanisms in this order when image loading fails:
 
 ### Avatar Props
 
-Avatar props inherit the props of `as` (by default, it is the `div` tag).
+Avatar props inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -183,7 +183,7 @@ Avatar props inherit the props of `as` (by default, it is the `div` tag).
 
 ### Avatar Group Props
 
-AvatarGroup props inherit the props of `as` (by default, it is the `div` tag).
+AvatarGroup props inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -236,12 +236,12 @@ AvatarGroup props inherit the props of `as` (by default, it is the `div` tag).
       prop: 'max',
       type: 'number',
       default: '5',
-      description: 'The total number of avatars.',
+      description: 'Max avatars to show before +x.',
     },
     {
       prop: 'total',
       type: 'number',
-      description: 'Max avatars to show before +x.',
+      description: 'The total number of avatars.',
     },
     {
       prop: 'spacing',
@@ -277,7 +277,8 @@ AvatarGroup props inherit the props of `as` (by default, it is the `div` tag).
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
     },
-  ]}
+
+]}
 />
 
 ### Avatar Group Slots

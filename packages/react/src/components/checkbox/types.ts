@@ -187,19 +187,16 @@ type CheckboxGroupOwnProps<
 
   /**
    * The color of the checkboxes.
-   * @default primaryThemeColor
    */
   color?: CheckboxVariants['color']
 
   /**
    * The size of the checkboxes.
-   * @default 'md'
    */
   size?: CheckboxVariants['size']
 
   /**
    * The border radius of the checkboxes.
-   * @default size
    */
   radius?: CheckboxVariants['radius']
 
