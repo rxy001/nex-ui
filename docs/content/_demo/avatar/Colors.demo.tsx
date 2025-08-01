@@ -3,15 +3,69 @@ import { Avatar, Flex } from '@nex-ui/react'
 export default function App() {
   return (
     <Flex gap='5' wrap='wrap'>
-      <Avatar color='gray' size='lg' radius='full' outlined />
-      <Avatar color='blue' size='lg' radius='full' outlined />
-      <Avatar color='cyan' size='lg' radius='full' outlined />
-      <Avatar color='orange' size='lg' radius='full' outlined />
-      <Avatar color='red' size='lg' radius='full' outlined />
-      <Avatar color='green' size='lg' radius='full' outlined />
-      <Avatar color='pink' size='lg' radius='full' outlined />
-      <Avatar color='purple' size='lg' radius='full' outlined />
-      <Avatar color='yellow' size='lg' radius='full' outlined />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=28'
+        color='gray'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=29'
+        color='blue'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=31'
+        color='cyan'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=32'
+        color='orange'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=33'
+        color='red'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=36'
+        color='green'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=37'
+        color='pink'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=47'
+        color='purple'
+        size='lg'
+        radius='full'
+        outlined
+      />
+      <Avatar
+        src='https://i.pravatar.cc/150?img=50'
+        color='yellow'
+        size='lg'
+        radius='full'
+        outlined
+      />
     </Flex>
   )
 }
