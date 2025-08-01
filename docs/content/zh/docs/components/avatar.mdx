@@ -43,6 +43,32 @@ Avatar 如果加载图片时出现错误，将按以下顺序回退到备用选�
 
 <Example {...avatar.fallback} />
 
+## Avatar Group
+
+### Group Max Count
+
+`max` 属性可限制 Avatar Group 中显示的最大 Avatar 数量。
+
+<Example {...avatar.groupMaxCount} />
+
+### Group Total Count
+
+`total` 属性控制显示 Avatar Group 中的总 Avatar 数量。
+
+<Example {...avatar.groupTotalCount} />
+
+### Custom Spacing
+
+`spacing` 属性可设置 Avatar Group 中 Avatar 之间的间距。
+
+<Example {...avatar.groupSpacing} />
+
+### Custom Surplus
+
+`renderSurplus` 为 Avatar Group 中的剩余 Avatar 提供自定义渲染。设置 `renderSurplus` 为一个函数，该函数接收一个基于 `children` 和 `max` 计算出的多余数量作为参数。
+
+<Example {...avatar.groupCustomSurplus} />
+
 ## API
 
 ### Avatar Props
@@ -151,6 +177,123 @@ Avatar Props 继承 `as` (默认为 `div` 标签) 的 Props。
       class: '.nui-avatar-img',
       component: "'img'",
       description: 'HTML img 元素。',
+    },
+  ]}
+/>
+
+### Avatar Group Props
+
+AvatarGroup Props 继承 `as` (默认为 `div` 标签) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      default: '',
+      description: '通常为 Avatar 组件。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'", "'xl'"],
+      default: "'md'",
+      description: '所有 Avatar 的大小。',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'gray'",
+      description: '所有 Avatar 的颜色。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
+      default: 'size',
+      description: '所有 Avatar 的 borderRadius。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素。',
+    },
+    {
+      prop: 'outlined',
+      type: 'boolean',
+      default: 'false',
+      description: '是否显示所有 Avatar 的边框。',
+    },
+    {
+      prop: 'max',
+      type: 'number',
+      default: '5',
+      description: 'AvatarGroup 中显示的最大 Avatar 数量。',
+    },
+    {
+      prop: 'total',
+      type: 'number',
+      description: 'AvatarGroup 中的总 Avatar 数量。',
+    },
+    {
+      prop: 'spacing',
+      type: 'string | number',
+      description: 'Avatar 之间的间距。',
+    },
+    {
+      prop: 'renderSurplus',
+      type: '(surplus: number) => ReactNode',
+      default: '',
+      description:
+        '自定义渲染剩余 Avatar 的函数。接收一个 surplus 参数，表示多余的 Avatar 数量。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<AvatarOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'surplus', ClassValue>>",
+      description: 'AvatarGroup Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'AvatarGroup Slots 的 props。',
+    },
+  ]}
+/>
+
+### Avatar Group Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'surplus',
+      class: '.nui-avatar-group-surplus',
+      component: 'Avatar',
+      description: '用于显示多余的 Avatar 的组件。',
     },
   ]}
 />

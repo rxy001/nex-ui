@@ -42,11 +42,37 @@ Avatar provides fallback mechanisms in this order when image loading fails:
 
 <Example {...avatar.fallback} />
 
+## Avatar Group
+
+### Group Max Count
+
+`max` prop limits the number of Avatars displayed in the Avatar Group.
+
+<Example {...avatar.groupMaxCount} />
+
+### Group Total Count
+
+`total` prop controls the total number of Avatars displayed in the Avatar Group.
+
+<Example {...avatar.groupTotalCount} />
+
+### Custom Spacing
+
+`spacing` prop sets the spacing between Avatars in the Avatar Group.
+
+<Example {...avatar.groupSpacing} />
+
+### Custom Surplus
+
+`renderSurplus` allows custom rendering of surplus Avatars in the Avatar Group. Set `renderSurplus` to a function that receives the surplus count based on `children` and `max`.
+
+<Example {...avatar.groupCustomSurplus} />
+
 ## API
 
 ### Avatar Props
 
-The avatar props inherit the props of `as` (by default, it is the `div` tag).
+Avatar props inherit the props of `as` (by default, it is the `div` tag).
 
 <PropsTable
   dataSource={[
@@ -151,6 +177,118 @@ The avatar props inherit the props of `as` (by default, it is the `div` tag).
       class: '.nui-avatar-img',
       component: "'img'",
       description: 'Image element slot.',
+    },
+  ]}
+/>
+
+### Avatar Group Props
+
+AvatarGroup props inherit the props of `as` (by default, it is the `div` tag).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'Usually contains Avatar components.',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'", "'xl'"],
+      description: 'The size of all Avatars.',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      description: 'The color of all Avatars.',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
+      description: 'The borderRadius of all Avatars.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root element.',
+    },
+    {
+      prop: 'outlined',
+      type: 'boolean',
+      description: 'If true, adds an outline around all Avatars.',
+    },
+    {
+      prop: 'max',
+      type: 'number',
+      default: '5',
+      description: 'The total number of avatars.',
+    },
+    {
+      prop: 'total',
+      type: 'number',
+      description: 'Max avatars to show before +x.',
+    },
+    {
+      prop: 'spacing',
+      type: 'string | number',
+      description: 'Spacing between avatars.',
+    },
+    {
+      prop: 'renderSurplus',
+      type: '(surplus: number) => ReactNode',
+      default: '',
+      description:
+        'Custom renderer of extraAvatars. Receives surplus count based on children and max.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<AvatarOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'surplus', ClassValue>>",
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### Avatar Group Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'surplus',
+      class: '.nui-avatar-group-surplus',
+      component: 'Avatar',
+      description: 'The component used to display surplus Avatars.',
     },
   ]}
 />

@@ -81,8 +81,17 @@ export const avatarRecipe = defineSlotRecipe({
     inGroup: {
       true: {
         root: {
+          transition: 'transform',
+          position: 'relative',
+          zIndex: 1,
           ':not(:first-of-type)': {
             ml: 'var(--avatar-group-spacing, {spaces.-2})',
+          },
+          ':not(:last-of-type)': {
+            _hover: {
+              transform:
+                'translateX(min(0px, var(--avatar-group-spacing, {spaces.-2})))',
+            },
           },
         },
       },

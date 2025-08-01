@@ -1,3 +1,5 @@
+'use client'
+
 import { useMemo } from 'react'
 import { isArray } from '@nex-ui/utils'
 import {

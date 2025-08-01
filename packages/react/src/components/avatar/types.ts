@@ -115,7 +115,7 @@ export interface AvatarGroupPropsOverrides {}
 
 type AvatarGroupSlotProps<RootComponent extends ElementType> = {
   surplus?: ComponentPropsWithCommonProps<
-    typeof Avatar,
+    typeof Avatar<'div'>,
     AvatarGroupOwnerState<RootComponent>
   >
 }
@@ -143,26 +143,25 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   classes?: ComponentUtilityClasses<'root' | 'surplus'>
 
   /**
-   * The size of the Avatars.
+   * The size of all Avatars.
    * @default 'md'
    */
   size?: AvatarVariants['size']
 
   /**
-   * The border radius of the Avatars
+   * The border radius of all Avatars
    * @default size
    */
   radius?: AvatarVariants['radius']
 
   /**
-   * The color of the Avatars
+   * The color of all Avatars
    * @default 'gray'
    */
   color?: AvatarVariants['color']
 
   /**
-   * If true, adds an outline around the avatars.
-   * @default false
+   * If true, adds an outline around all avatars.
    * @default false
    */
   outlined?: boolean
@@ -174,7 +173,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   max?: number
 
   /**
-   * 	The total number of avatars.
+   * The total number of avatars.
    */
   total?: number
 
@@ -184,7 +183,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   spacing?: number
 
   /**
-   * custom renderer of extraAvatars
+   * Custom renderer of extraAvatars.
    */
   renderSurplus?: (surplus: number) => ReactNode
 }
