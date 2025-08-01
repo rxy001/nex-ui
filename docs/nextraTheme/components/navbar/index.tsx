@@ -45,7 +45,7 @@ export const Navbar: FC<NavbarProps> = (props) => {
         className={cn(
           'nextra-navbar-blur',
           'x:absolute x:-z-1 x:size-full',
-          'x:border-b-black',
+          'x:border-b-[var(--x-color-nextra-bg)] x:border-b',
           'x:backdrop-blur-md x:bg-nextra-bg/70',
         )}
       />
