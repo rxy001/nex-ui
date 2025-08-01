@@ -2,7 +2,7 @@ import { Avatar, Flex } from '@nex-ui/react'
 
 export default function App() {
   return (
-    <Flex gap='5'>
+    <Flex gap='5' wrap='wrap'>
       <Avatar color='gray' size='lg' radius='full' outlined />
       <Avatar color='blue' size='lg' radius='full' outlined />
       <Avatar color='cyan' size='lg' radius='full' outlined />

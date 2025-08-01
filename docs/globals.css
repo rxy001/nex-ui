@@ -55,7 +55,7 @@
 .nextra-code > pre {
   box-shadow: none;
   max-height: 400px;
-  background-color: #24292e !important;
+  background-color: #111113 !important;
 }
 
 .nextra-code > pre::-webkit-scrollbar-thumb {
@@ -72,4 +72,8 @@
 
 .nextra-banner:not(#\#) {
   background: rgba(0, 0, 0);
+}
+
+.dark:root {
+  --nextra-bg: 0 0 0;
 }
