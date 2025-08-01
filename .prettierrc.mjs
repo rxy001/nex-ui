@@ -9,4 +9,5 @@ export default {
   tabWidth: 2,
   useTabs: false,
   jsxSingleQuote: true,
+  endOfLine: 'lf',
 }

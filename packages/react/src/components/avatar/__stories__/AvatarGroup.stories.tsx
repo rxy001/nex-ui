@@ -81,7 +81,7 @@ export const WithTotal: Story = {
 export const CustomSurplus: Story = {
   args: {
     renderSurplus: (surplus) => {
-      return <p style={{ marginLeft: 10 }}>+{surplus}</p>
+      return <div style={{ marginLeft: 10 }}>+{surplus}</div>
     },
     total: 10,
   },

@@ -5,7 +5,7 @@ export default function App() {
   return (
     <Flex gap='5'>
       <Avatar
-        src='https://github.com/rxy001/nex-ui/blob/temp/docs/public/images/avatar_1.jpeg?raw=true'
+        src='https://avatars.githubusercontent.com/u/25546323?v=4'
         alt='Avatar'
       />
       <Avatar>XY</Avatar>
