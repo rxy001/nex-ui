@@ -23,7 +23,7 @@ export function CodeWindow({
   const [loaded, setLoaded] = useState(false)
 
   return (
-    <div className={clsx('x:bg-[#24292e] x:rounded-md x:w-full', className)}>
+    <div className={clsx('x:bg-[#111113] x:rounded-md x:w-full', className)}>
       <div
         className={`x:text-[#e1e4e8] x:h-8 x:text-center x:py-2 x:font-mono x:text-xs x:relative x:-mb-6 ${loaded ? 'x:block' : 'x:hidden'}`}
       >
