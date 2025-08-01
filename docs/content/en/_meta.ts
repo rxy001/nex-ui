@@ -13,7 +13,7 @@ export default {
   },
   docs: {
     type: 'page',
-    title: 'Documents',
+    title: 'Documentation',
   },
   components: {
     type: 'page',
