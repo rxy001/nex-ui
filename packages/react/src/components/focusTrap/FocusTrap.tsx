@@ -1,4 +1,9 @@
-import { __DEV__, addEventListener, mergeRefs } from '@nex-ui/utils'
+import {
+  __DEV__,
+  addEventListener,
+  mergeRefs,
+  ownerDocument,
+} from '@nex-ui/utils'
 import {
   cloneElement,
   Fragment,
@@ -31,7 +36,9 @@ export const FocusTrap = ({
       return
     }
 
-    if (!rootRef.current.contains(document.activeElement)) {
+    const doc = ownerDocument(rootRef.current)
+
+    if (!rootRef.current.contains(doc.activeElement)) {
       // If the focus is not inside the focus trap, focus the root element
       rootRef.current?.focus()
     }
@@ -50,6 +57,8 @@ export const FocusTrap = ({
       return
     }
 
+    const doc = ownerDocument(rootRef.current)
+
     const trapFocus = () => {
       const rootElement = rootRef.current
 
@@ -61,11 +70,11 @@ export const FocusTrap = ({
       }
 
       // The focus is already inside
-      if (rootElement.contains(document.activeElement)) return
+      if (rootElement.contains(doc.activeElement)) return
 
       if (
-        document.activeElement !== sentinelEndRef.current &&
-        document.activeElement !== sentinelStartRef.current
+        doc.activeElement !== sentinelEndRef.current &&
+        doc.activeElement !== sentinelStartRef.current
       ) {
         return
       }
@@ -92,14 +101,14 @@ export const FocusTrap = ({
     }
 
     const removeFocusEventListener = addEventListener(
-      document.body,
+      doc.body,
       'focus',
       trapFocus,
       true,
     )
 
     const removeKeydownEventListener = addEventListener(
-      document.body,
+      doc.body,
       'keydown',
       (e: KeyboardEvent) => {
         if (e.key !== 'Tab' || pausedRef.current) {
