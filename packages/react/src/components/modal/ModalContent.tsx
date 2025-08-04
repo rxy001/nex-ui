@@ -43,11 +43,7 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
 
   const { isTopmostModal } = modalState
 
-  const ariaProps = useAriaProps({
-    'aria-labelledby': modalState['aria-labelledby'],
-    'aria-describedby': modalState['aria-describedby'],
-    ...props,
-  })
+  const ariaProps = useAriaProps(props)
 
   const rootProps = useSlotProps({
     style,

@@ -14,13 +14,13 @@ export default function App() {
   const placements = ['top', 'center', 'bottom'] as const
 
   return (
-    <Flex gap='5'>
+    <Flex gap='5' wrap='wrap'>
       {placements.map((placement) => (
-        <Dialog key={placement} placement={placement}>
+        <Dialog key={placement}>
           <DialogTrigger>
             <Button>Open {placement}</Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent placement={placement}>
             <DialogHeader>Dialog Header</DialogHeader>
             <DialogBody>
               <p>

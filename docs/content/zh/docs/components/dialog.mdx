@@ -15,51 +15,51 @@ Dialog 显示需要关注或提供额外信息的自定义内容。
 
 <Example {...dialog.usage} />
 
-### MaxWidths
-
-`maxWidth` 属性可以设置对话框的最大宽度，默认为 `md`。
-
-<Example {...dialog.maxWidths} />
-
-### FullScreen
-
-使用 `fullScreen` 属性可以使对话框全屏显示。
-
-<Example {...dialog.fullScreen} />
-
-### Placements
-
-`placement` 属性可以设置对话框的显示位置，默认为 `top`。
-
-<Example {...dialog.placements} />
-
 ### HideBackdrop
 
-使用 `hideBackdrop` 属性可以隐藏对话框的背景遮罩。
+使用 `Dialog` 的 `hideBackdrop` 属性可以隐藏对话框的背景遮罩。
 
 <Example {...dialog.hideBackdrop} />
 
 ### PreventScroll
 
-使用 `preventScroll` 属性可以限制对话框打开时页面滚动。
+使用 `Dialog` 的 `preventScroll` 属性可以限制对话框打开时页面滚动。
 
 <Example {...dialog.preventScroll} />
 
 ### KeepMounted
 
-使用 `keepMounted` 属性可以保持对话框内容在关闭时仍然挂载。
+使用 `Dialog` 的 `keepMounted` 属性可以保持对话框内容在关闭时仍然挂载。
 
 <Example {...dialog.keepMounted} />
 
+### Sizes
+
+使用 `DialogContent` 的 `size` 属性可以设置对话框的大小，默认为 `md`。
+
+<Example {...dialog.sizes} />
+
+### FullScreen
+
+使用 `DialogContent` 的 `fullScreen` 属性可以使对话框全屏显示。
+
+<Example {...dialog.fullScreen} />
+
+### Placements
+
+使用 `DialogContent` 的 `placement` 属性可以设置对话框的显示位置，默认为 `top`。
+
+<Example {...dialog.placements} />
+
 ### Custom Motion
 
-使用 `motionProps` 属性可以自定义 `visible` / `hidden` 的动画效果。
+使用 `DialogContent` 的 `motionProps` 属性可以自定义 `visible` / `hidden` 的动画效果。
 
 <Example {...dialog.customMotion} />
 
 ### Overflow Scroll
 
-使用 `scrollBehavior` 属性可以控制对话框内容的滚动行为。
+使用 `DialogContent` 的 `scroll` 属性可以控制对话框内容的滚动行为。
 
 - `inside`: 内容在对话框内部滚动。
 - `outside`: 内容在对话框外部滚动。
@@ -104,21 +104,9 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
       description: '对话框根元素的类名。',
     },
     {
-      prop: 'placement',
-      type: ["'top'", "'bottom'", "'left'", "'right'"],
-      description: '对话框的显示位置。',
-      default: "'top'",
-    },
-    {
       prop: 'hideBackdrop',
       type: 'boolean',
       description: '是否隐藏对话框的背景遮罩。',
-      default: 'false',
-    },
-    {
-      prop: 'fullScreen',
-      type: 'boolean',
-      description: '是否使对话框全屏显示。',
       default: 'false',
     },
     {
@@ -128,27 +116,9 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
       default: 'document.body',
     },
     {
-      prop: 'maxWidth',
-      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: '对话框的最大宽度。',
-      default: "'md'",
-    },
-    {
       prop: 'keepMounted',
       type: 'boolean',
       description: '是否保持对话框内容在关闭时仍然挂载。',
-      default: 'false',
-    },
-    {
-      prop: 'scroll',
-      type: ["'inside'", "'outside'"],
-      description: '对话框内容的滚动行为。',
-      default: "'inside'",
-    },
-    {
-      prop: 'hideCloseButton',
-      type: 'boolean',
-      description: '是否隐藏对话框的关闭按钮。',
       default: 'false',
     },
     {
@@ -170,19 +140,98 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
       default: 'true',
     },
     {
-      prop: 'closeIcon',
-      type: 'ReactNode',
-      description: '自定义对话框的关闭图标。',
-    },
-    {
       prop: 'restoreFocus',
       type: 'boolean',
       description: '是否在对话框关闭时恢复焦点到之前聚焦的元素。',
       default: 'true',
     },
     {
+      prop: 'as',
+      type: 'ElementType',
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      default: 'm.div',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<DialogOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'backdrop', ClassValue>>",
+      description: 'Dialog Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Dialog Slots 的 props。',
+    },
+  ]}
+/>
+
+### Dialog Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'backdrop',
+      class: '.nui-dialog-backdrop',
+      component: "'div'",
+      description: '对话框的背景遮罩元素。',
+    },
+  ]}
+/>
+
+### DialogContent Props
+
+DialogContent Props 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '通常是 DialogHeader、DialogBody、DialogFooter 等组件。',
+    },
+    {
+      prop: 'closeIcon',
+      type: 'ReactNode',
+      description: '自定义对话框的关闭图标。',
+    },
+    {
+      prop: 'size',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
+      description: '对话框的尺寸。',
+      default: "'md'",
+    },
+    {
+      prop: 'fullScreen',
+      type: 'boolean',
+      description: '是否使对话框全屏显示。',
+      default: 'false',
+    },
+    {
+      prop: 'hideCloseButton',
+      type: 'boolean',
+      description: '是否隐藏对话框的关闭按钮。',
+      default: 'false',
+    },
+    {
+      prop: 'scroll',
+      type: ["'inside'", "'outside'"],
+      description: '对话框内容的滚动行为。',
+      default: "'outside'",
+    },
+    {
+      prop: 'placement',
+      type: ["'top'", "'bottom'", "'left'", "'right'"],
+      description: '对话框的显示位置。',
+      default: "'top'",
+    },
+    {
       prop: 'motionProps',
-      type: 'HTMLMotionProps',
+      type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
       description: '自定义对话框的动画效果。',
     },
     {
@@ -200,85 +249,7 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
       type: 'ElementType',
       description:
         '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-      default: 'm.div',
-    },
-    {
-      prop: 'sx',
-      type: 'SxProp<DialogOwnerState>',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classes',
-      type: "Partial<Record<'root' | 'panel' | 'backdrop', ClassValue>>",
-      description: 'Dialog Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Dialog Slots 的 props。',
-    },
-  ]}
-/>
-
-### Dialog Slots
-
-<SlotsTable
-  dataSource={[
-    {
-      slot: 'panel',
-      class: '.nui-dialog-panel',
-      component: "'div'",
-      description: '对话框的面板元素。',
-    },
-    {
-      slot: 'backdrop',
-      class: '.nui-dialog-backdrop',
-      component: "'div'",
-      description: '对话框的背景遮罩元素。',
-    },
-  ]}
-/>
-
-### DialogContent Props
-
-DialogContent Props 继承 `as` (默认为 `'section'`) 的 Props。
-
-<PropsTable
-  dataSource={[
-    {
-      prop: 'children',
-      type: 'ReactNode',
-      description: '通常是 DialogHeader、DialogBody、DialogFooter 等组件。',
-    },
-    {
-      prop: 'closeIcon',
-      type: 'ReactNode',
-      description: '自定义对话框的关闭图标。',
-    },
-    {
-      prop: 'maxWidth',
-      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: '对话框的最大宽度。',
-      default: "'md'",
-    },
-    {
-      prop: 'fullScreen',
-      type: 'boolean',
-      description: '是否使对话框全屏显示。',
-      default: 'false',
-    },
-    {
-      prop: 'hideCloseButton',
-      type: 'boolean',
-      description: '是否隐藏对话框的关闭按钮。',
-      default: 'false',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-      default: 'section',
+      default: "'div'",
     },
     {
       prop: 'sx',
@@ -287,7 +258,7 @@ DialogContent Props 继承 `as` (默认为 `'section'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'closeButton', ClassValue>>",
+      type: "Partial<Record<'root' | 'paper' | 'closeButton', ClassValue>>",
       description: 'DialogContent Slots 的 className。',
     },
     {
@@ -308,6 +279,12 @@ DialogContent Props 继承 `as` (默认为 `'section'`) 的 Props。
       component: "'button'",
       description: '对话框的关闭按钮元素。',
     },
+    {
+      slot: 'paper',
+      class: '.nui-dialog-content-paper',
+      component: 'm.section',
+      description: '对话框的内容部分。',
+    },
   ]}
 />
 
@@ -327,7 +304,7 @@ DialogHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
       type: 'ElementType',
       description:
         '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-      default: 'h2',
+      default: "'h2'",
     },
     {
       prop: 'sx',
@@ -353,7 +330,7 @@ DialogBody Props 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'ElementType',
       description:
         '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-      default: 'div',
+      default: "'div'",
     },
     {
       prop: 'sx',
@@ -379,7 +356,7 @@ DialogFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'ElementType',
       description:
         '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-      default: 'div',
+      default: "'div'",
     },
     {
       prop: 'sx',

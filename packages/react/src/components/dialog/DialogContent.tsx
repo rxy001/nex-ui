@@ -1,5 +1,6 @@
 'use client'
 
+import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
@@ -14,53 +15,72 @@ import {
 } from '../utils'
 import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
-import { useDialog } from './DialogContext'
 import { ButtonBase } from '../buttonBase'
-import { ModalContent } from '../modal'
+import { ModalContent, ModalPanel } from '../modal'
+import { DialogContentProvider } from './DialogContext'
 import type { ElementType } from 'react'
 import type { DialogContentOwnerState, DialogContentProps } from './types'
 
 const useSlotClasses = (ownerState: DialogContentOwnerState) => {
   const { prefix } = useNexUI()
 
-  const { classes } = ownerState
+  const { classes, size, fullScreen, placement, scroll } = ownerState
 
   return useMemo(() => {
     const prefixClassName = `${prefix}-dialog-content`
 
     const slots = {
-      root: ['root'],
+      root: [
+        'root',
+        `size-${size}`,
+        `scroll-${scroll}`,
+        `placement-${placement}`,
+        fullScreen && 'full-screen',
+      ],
+      paper: ['paper'],
       closeButton: ['close-button'],
     }
 
     return composeClasses(slots, getUtilityClass(prefixClassName), classes)
-  }, [classes, prefix])
+  }, [prefix, size, scroll, placement, fullScreen, classes])
 }
 
 const useSlotAriaProps = (ownerState: DialogContentOwnerState) => {
-  const { role = 'dialog', 'aria-modal': modal = true } = ownerState
+  const {
+    'aria-labelledby': defaultAriaLabelledBy,
+    'aria-describedby': defaultAriaDescribedBy,
+  } = ownerState
+
+  const { paper = {}, closeButton = {} } = ownerState.slotProps ?? {}
+
+  const { 'aria-label': closeButtonAriaLabel = 'Close dialog' } = closeButton
+
+  const {
+    role = 'dialog',
+    'aria-modal': modal = true,
+    'aria-labelledby': ariaLabelledBy = defaultAriaLabelledBy,
+    'aria-describedby': ariaDescribedBy = defaultAriaDescribedBy,
+  } = paper
 
   return useMemo(
     () => ({
-      root: {
+      paper: {
         role,
         'aria-modal': modal,
+        'aria-labelledby': ariaLabelledBy,
+        'aria-describedby': ariaDescribedBy,
+      },
+      closeButton: {
+        'aria-label': closeButtonAriaLabel,
       },
     }),
-    [role, modal],
+    [role, modal, ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
   )
 }
 
-export const DialogContent = <RootComponent extends ElementType = 'section'>(
+export const DialogContent = <RootComponent extends ElementType = 'div'>(
   inProps: DialogContentProps<RootComponent>,
 ) => {
-  const {
-    scroll,
-    fullScreen,
-    hideCloseButton: defaultHideCloseButton,
-    closeIcon: defaultCloseIcon,
-    maxWidth: defaultMaxWidth,
-  } = useDialog()
   const props = useDefaultProps<DialogContentProps>({
     name: 'DialogContent',
     props: inProps,
@@ -69,25 +89,28 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
   const {
     children,
     slotProps,
-    hideCloseButton = defaultHideCloseButton,
-    maxWidth = defaultMaxWidth,
-    closeIcon = defaultCloseIcon,
+    closeIcon,
+    motionProps: motionPropsProp,
+    placement = 'top',
+    scroll = 'outside',
+    fullScreen = false,
+    hideCloseButton = false,
+    size = 'md',
     ...remainingProps
   } = props
 
   const ownerState: DialogContentOwnerState = {
     ...props,
-    maxWidth,
+    placement,
+    scroll,
+    size,
     fullScreen,
     closeIcon,
     hideCloseButton,
   }
 
   const styles = useStyles({
-    ownerState: {
-      ...ownerState,
-      scroll,
-    },
+    ownerState,
     name: 'DialogContent',
     recipe: dialogContentRecipe,
   })
@@ -96,14 +119,46 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
 
   const classes = useSlotClasses(ownerState)
 
+  const motionProps = useMemo(() => {
+    const mProps =
+      typeof motionPropsProp === 'function'
+        ? motionPropsProp(placement)
+        : motionPropsProp
+
+    return {
+      variants: {
+        visible: {
+          transform: 'scale(1)',
+        },
+        hidden: {
+          transform: 'scale(1.04)',
+        },
+      },
+      ...mProps,
+    }
+  }, [motionPropsProp, placement])
+
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
     ownerState,
-    elementType: ModalContent,
-    style: styles.content,
-    classNames: classes.root,
+    elementType: ModalPanel,
+    style: styles.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
-    a11y: slotAriaProps.root,
+    classNames: classes.root,
+  })
+
+  const [DialogContentSection, getDialogContentSectionProps] = useSlot({
+    ownerState,
+    elementType: ModalContent,
+    style: styles.paper,
+    classNames: classes.paper,
+    externalSlotProps: slotProps?.paper,
+    shouldForwardComponent: false,
+    a11y: slotAriaProps.paper,
+    additionalProps: {
+      as: m.section,
+      ...motionProps,
+    },
   })
 
   const [DialogContentCloseButton, getDialogContentCloseButtonProps] = useSlot({
@@ -113,24 +168,28 @@ export const DialogContent = <RootComponent extends ElementType = 'section'>(
     style: styles.closeButton,
     classNames: classes.closeButton,
     shouldForwardComponent: false,
-    additionalProps: {
-      'aria-label': 'Close button',
-    },
+    a11y: slotAriaProps.closeButton,
   })
 
   return (
     <DialogRoot>
       <DialogContentRoot {...getDialogContentRootProps()}>
-        {!hideCloseButton && (
-          <DialogClose>
-            <Ripple>
-              <DialogContentCloseButton {...getDialogContentCloseButtonProps()}>
-                {closeIcon ?? <CloseOutlined />}
-              </DialogContentCloseButton>
-            </Ripple>
-          </DialogClose>
-        )}
-        {children}
+        <DialogContentSection {...getDialogContentSectionProps()}>
+          <DialogContentProvider value={ownerState}>
+            {!hideCloseButton && (
+              <DialogClose>
+                <Ripple>
+                  <DialogContentCloseButton
+                    {...getDialogContentCloseButtonProps()}
+                  >
+                    {closeIcon ?? <CloseOutlined />}
+                  </DialogContentCloseButton>
+                </Ripple>
+              </DialogClose>
+            )}
+            {children}
+          </DialogContentProvider>
+        </DialogContentSection>
       </DialogContentRoot>
     </DialogRoot>
   )
