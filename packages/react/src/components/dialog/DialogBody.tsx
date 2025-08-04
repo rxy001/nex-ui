@@ -10,7 +10,7 @@ import {
 } from '../utils'
 import { dialogBodyRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
-import { useDialog } from './DialogContext'
+import { useDialogContent } from './DialogContext'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogBodyOwnerState, DialogBodyProps } from './types'
@@ -32,7 +32,7 @@ const useSlotClasses = () => {
 export const DialogBody = <RootComponent extends ElementType = 'div'>(
   inProps: DialogBodyProps<RootComponent>,
 ) => {
-  const { scroll } = useDialog()
+  const { scroll } = useDialogContent()
 
   const props = useDefaultProps<DialogBodyProps>({
     name: 'DialogBody',
@@ -41,9 +41,7 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
 
   const { children, ...remainingProps } = props
 
-  const ownerState: DialogBodyOwnerState = {
-    ...props,
-  }
+  const ownerState: DialogBodyOwnerState = props
 
   const style = useStyles({
     ownerState: {

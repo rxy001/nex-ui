@@ -4,19 +4,11 @@ import { useDefaultProps } from '../utils'
 import { Modal, useModal } from '../modal'
 import { DialogProvider } from './DialogContext'
 import type { ElementType } from 'react'
-import type { DialogProps } from './types'
 import type { DOMMotionComponents } from 'motion/react'
+import type { DialogProps, DialogOwnerState } from './types'
 
 const Provider = (props: DialogProps) => {
-  const {
-    children,
-    fullScreen = false,
-    placement = 'top',
-    hideCloseButton = false,
-    maxWidth = 'md',
-    scroll = 'outside',
-    hideBackdrop = false,
-  } = props
+  const { children, hideBackdrop = false } = props
   const {
     open,
     preventScroll,
@@ -28,21 +20,16 @@ const Provider = (props: DialogProps) => {
     setOpen,
   } = useModal()
 
-  const ownerState = {
+  const ownerState: DialogOwnerState = {
     ...props,
     closeOnEscape,
     hideBackdrop,
-    fullScreen,
     preventScroll,
-    scroll,
-    maxWidth,
     open,
     setOpen,
-    placement,
     keepMounted,
     restoreFocus,
     defaultOpen,
-    hideCloseButton,
     closeOnInteractBackdrop: closeOnInteractOutside,
   }
 
@@ -70,8 +57,7 @@ export const Dialog = <
     closeOnEscape,
     closeOnInteractBackdrop,
     preventScroll,
-    'aria-describedby': describedby,
-    'aria-labelledby': labelledby,
+    hideBackdrop,
     ...remainingProps
   } = props
 
@@ -85,16 +71,14 @@ export const Dialog = <
       keepMounted={keepMounted}
       preventScroll={preventScroll}
       closeOnEscape={closeOnEscape}
-      aria-describedby={describedby}
-      aria-labelledby={labelledby}
-      closeOnInteractOutside={
-        !remainingProps.hideBackdrop && closeOnInteractBackdrop
-      }
+      closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
-      <Provider {...remainingProps}>{children}</Provider>
+      <Provider hideBackdrop={hideBackdrop} {...remainingProps}>
+        {children}
+      </Provider>
     </Modal>
   )
 }
 
 Dialog.displayName = 'Dialog'
-Provider.displayName = 'InnerProvider'
+Provider.displayName = 'DialogInnerProvider'

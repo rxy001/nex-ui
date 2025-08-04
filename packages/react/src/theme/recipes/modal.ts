@@ -11,13 +11,9 @@ export const modalRootRecipe = defineRecipe({
 export const modalContentRecipe = defineRecipe({
   base: {
     width: 'full',
-    borderRadius: 'lg',
     position: 'relative',
-    my: '15',
-    mx: '6',
     display: 'flex',
     flexDirection: 'column',
-    boxShadow: 'lg',
     outline: 'none',
     bg: {
       _DEFAULT: 'white',
@@ -66,7 +62,5 @@ export const modalPanelRecipe = defineRecipe({
   base: {
     position: 'fixed',
     inset: 0,
-    display: 'flex',
-    justifyContent: 'center',
   },
 })

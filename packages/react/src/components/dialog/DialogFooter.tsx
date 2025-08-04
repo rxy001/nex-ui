@@ -28,7 +28,7 @@ const useSlotClasses = () => {
   }, [prefix])
 }
 
-export const DialogFooter = <RootComponent extends ElementType>(
+export const DialogFooter = <RootComponent extends ElementType = 'div'>(
   inProps: DialogFooterProps<RootComponent>,
 ) => {
   const props = useDefaultProps<DialogFooterProps>({

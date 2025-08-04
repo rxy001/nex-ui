@@ -16,11 +16,11 @@ export default function App() {
   return (
     <Flex gap='5'>
       {scrollBehavior.map((scroll) => (
-        <Dialog key={scroll} scroll={scroll}>
+        <Dialog key={scroll}>
           <DialogTrigger>
             <Button>Open {scroll}</Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent scroll={scroll}>
             <DialogHeader>Dialog Header</DialogHeader>
             <DialogBody>
               <Flex direction='column' gap='5'>

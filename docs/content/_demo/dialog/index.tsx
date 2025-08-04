@@ -1,7 +1,7 @@
 import usageCode from './Usage.demo?raw'
 import UsageDemo from './Usage.demo'
-import maxWidthsCode from './MaxWidths.demo?raw'
-import MaxWidthsDemo from './MaxWidths.demo'
+import sizesCode from './Sizes.demo?raw'
+import SizesDemo from './Sizes.demo'
 import fullScreenCode from './FullScreen.demo?raw'
 import FullScreenDemo from './FullScreen.demo'
 import placementsCode from './Placements.demo?raw'
@@ -24,9 +24,9 @@ export const dialog = {
     code: usageCode,
     demo: <UsageDemo />,
   },
-  maxWidths: {
-    code: maxWidthsCode,
-    demo: <MaxWidthsDemo />,
+  sizes: {
+    code: sizesCode,
+    demo: <SizesDemo />,
   },
   fullScreen: {
     code: fullScreenCode,

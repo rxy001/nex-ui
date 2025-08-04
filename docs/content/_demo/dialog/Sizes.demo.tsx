@@ -11,16 +11,16 @@ import {
 } from '@nex-ui/react'
 
 export default function App() {
-  const maxWidths = ['xs', 'sm', 'md', 'lg', 'xl', 'full'] as const
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'full'] as const
 
   return (
-    <Flex gap='5'>
-      {maxWidths.map((maxWidth) => (
-        <Dialog key={maxWidth} maxWidth={maxWidth}>
+    <Flex gap='5' wrap='wrap'>
+      {sizes.map((size) => (
+        <Dialog key={size}>
           <DialogTrigger>
-            <Button>Open {maxWidth}</Button>
+            <Button>Open {size}</Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent size={size}>
             <DialogHeader>Dialog Header</DialogHeader>
             <DialogBody>
               <p>

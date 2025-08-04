@@ -1,43 +1,25 @@
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
 import type { RecipeVariants } from '@nex-ui/system'
 
-export const dialogRecipe = defineSlotRecipe({
+export const dialogRootRecipe = defineSlotRecipe({
   slots: {
     root: {},
     backdrop: {},
-    panel: {},
-  },
-  variants: {
-    scroll: {
-      outside: {
-        panel: {
-          overflow: 'hidden auto',
-        },
-      },
-    },
-    placement: {
-      top: {
-        panel: {
-          alignItems: 'flex-start',
-        },
-      },
-      center: {
-        panel: {
-          alignItems: 'center',
-        },
-      },
-      bottom: {
-        panel: {
-          alignItems: 'flex-end',
-        },
-      },
-    },
   },
 })
 
 export const dialogContentRecipe = defineSlotRecipe({
   slots: {
-    content: {},
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+    },
+    paper: {
+      my: '15',
+      mx: '6',
+      borderRadius: 'lg',
+      boxShadow: 'lg',
+    },
     closeButton: {
       position: 'absolute',
       insetInlineEnd: '2',
@@ -61,54 +43,76 @@ export const dialogContentRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    maxWidth: {
+    size: {
       xs: {
-        content: {
+        paper: {
           maxWidth: 300,
         },
       },
       sm: {
-        content: {
+        paper: {
           maxWidth: 450,
         },
       },
       md: {
-        content: {
+        paper: {
           maxWidth: 600,
         },
       },
       lg: {
-        content: {
+        paper: {
           maxWidth: 750,
         },
       },
       xl: {
-        content: {
+        paper: {
           maxWidth: 900,
         },
       },
       full: {
-        content: {
+        paper: {
           maxWidth: '100vw',
         },
       },
     },
     scroll: {
+      outside: {
+        root: {
+          overflow: 'hidden auto',
+        },
+      },
       inside: {
-        content: {
+        paper: {
           maxHeight: 'calc(100% - {spaces.15} * 2)',
         },
       },
     },
     fullScreen: {
       true: {
-        content: {
+        paper: {
           w: 'full',
           h: 'full',
           maxHeight: undefined,
           maxWidth: 'full',
           m: 0,
           borderRadius: 0,
+        },
+      },
+    },
+    placement: {
+      top: {
+        root: {
+          alignItems: 'flex-start',
+        },
+      },
+      center: {
+        root: {
+          alignItems: 'center',
+        },
+      },
+      bottom: {
+        root: {
+          alignItems: 'flex-end',
         },
       },
     },
@@ -146,17 +150,14 @@ export const dialogFooterRecipe = defineRecipe({
   },
 })
 
-export type DialogRecipe = typeof dialogRecipe
-export type DialogVariants = RecipeVariants<DialogRecipe>
+export type DialogRootRecipe = typeof dialogRootRecipe
+export type DialogRootVariants = RecipeVariants<DialogRootRecipe>
 
 export type DialogContentRecipe = typeof dialogContentRecipe
 export type DialogContentVariants = RecipeVariants<DialogContentRecipe>
 
 export type DialogHeaderRecipe = typeof dialogHeaderRecipe
-export type DialogHeaderVariants = RecipeVariants<DialogHeaderRecipe>
 
 export type DialogBodyRecipe = typeof dialogBodyRecipe
-export type DialogBodyVariants = RecipeVariants<DialogBodyRecipe>
 
 export type DialogFooterRecipe = typeof dialogFooterRecipe
-export type DialogFooterVariants = RecipeVariants<DialogFooterRecipe>

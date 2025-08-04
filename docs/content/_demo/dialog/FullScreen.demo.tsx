@@ -11,11 +11,11 @@ import {
 
 export default function App() {
   return (
-    <Dialog fullScreen>
+    <Dialog preventScroll>
       <DialogTrigger>
         <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent fullScreen>
         <DialogHeader>Dialog Header</DialogHeader>
         <DialogBody>
           <p>

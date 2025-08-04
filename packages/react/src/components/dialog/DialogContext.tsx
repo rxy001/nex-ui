@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { DialogOwnerState } from './types'
+import type { DialogOwnerState, DialogContentOwnerState } from './types'
 
 interface DialogContextValue extends DialogOwnerState {}
 
@@ -12,3 +12,14 @@ export const [DialogProvider, useDialog] = createContext<DialogContextValue>({
   strict: true,
   defaultValue: null as unknown as DialogContextValue,
 })
+
+interface DialogContentContextValue extends DialogContentOwnerState {}
+
+export const [DialogContentProvider, useDialogContent] =
+  createContext<DialogContentContextValue>({
+    contextName: 'DialogContentContext',
+    hookName: 'useDialogContent',
+    providerName: 'DialogContentProvider',
+    strict: true,
+    defaultValue: null as unknown as DialogContentContextValue,
+  })

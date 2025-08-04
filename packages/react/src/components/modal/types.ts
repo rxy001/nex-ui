@@ -65,16 +65,6 @@ export type ModalProps = {
    * @default true
    */
   restoreFocus?: boolean
-
-  /**
-   * The id(s) of the element(s) that label the modal.
-   */
-  'aria-labelledby'?: string
-
-  /**
-   * The id(s) of the element(s) that describe the modal.
-   */
-  'aria-describedby'?: string
 }
 
 // ------------- ModalTrigger -------------

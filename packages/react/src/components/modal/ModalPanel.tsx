@@ -10,7 +10,7 @@ import type { ModalPanelProps } from './types'
 
 const style = modalPanelRecipe()
 
-export const ModalPanel = <RootComponent extends ElementType>(
+export const ModalPanel = <RootComponent extends ElementType = 'div'>(
   inProps: ModalPanelProps<RootComponent>,
 ) => {
   const { closeOnInteractOutside, setOpen } = useModal()

@@ -540,23 +540,6 @@ describe('Modal', () => {
       expect(content).toHaveAttribute('aria-describedby', body.id)
     })
 
-    it('should have aria-labelledby and aria-describedby attributes on the ModalContent element when provided', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestModal
-          open
-          aria-labelledby='custom-label'
-          aria-describedby='custom-description'
-        />,
-        {
-          useAct: true,
-        },
-      )
-      const content = getByTestId('modal-content')
-
-      expect(content).toHaveAttribute('aria-labelledby', 'custom-label')
-      expect(content).toHaveAttribute('aria-describedby', 'custom-description')
-    })
-
     it('should have tabIndex=-1 on the ModalContent element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestModal open />,

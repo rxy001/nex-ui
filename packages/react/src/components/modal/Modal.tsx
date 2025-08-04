@@ -10,8 +10,6 @@ export const Modal = (props: ModalProps) => {
     container,
     onOpenChange,
     open: openProp,
-    'aria-labelledby': labelledBy,
-    'aria-describedby': describedBy,
     restoreFocus = true,
     closeOnEscape = true,
     preventScroll = false,
@@ -37,8 +35,6 @@ export const Modal = (props: ModalProps) => {
     onOpenChange,
     preventScroll,
     container,
-    'aria-labelledby': labelledBy,
-    'aria-describedby': describedBy,
   }
 
   return <ModalProvider value={rootProps}>{children}</ModalProvider>

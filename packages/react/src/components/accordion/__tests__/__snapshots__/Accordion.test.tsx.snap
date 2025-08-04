@@ -3,7 +3,6 @@
 exports[`Accordion should render with default props 1`] = `
 .emotion-0 {
   width: var(--nui-sizes-full);
-  overflow: hidden;
 }
 
 .emotion-1 {

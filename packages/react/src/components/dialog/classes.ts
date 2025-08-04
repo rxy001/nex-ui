@@ -1,38 +1,36 @@
 import { generateUtilityClasses } from '../utils'
 
 export const dialogClasses = generateUtilityClasses('nui-dialog', [
-  // ---------root---------
   'root',
   'open',
-  'placement-top',
-  'placement-bottom',
-  'placement-center',
-  'scroll-inside',
-  'scroll-outside',
-  'max-width-xs',
-  'max-width-sm',
-  'max-width-md',
-  'max-width-lg',
-  'max-width-xl',
-  'max-width-full',
-  'full-screen',
-
-  // ---------root---------
 
   'backdrop',
-  'panel',
-
-  'content',
-  'close-button',
-
-  'header',
-  'body',
-  'footer',
 ])
 
 export const dialogContentClasses = generateUtilityClasses(
   'nui-dialog-content',
-  ['root', 'close-button'],
+  [
+    'root',
+
+    'size-xs',
+    'size-sm',
+    'size-md',
+    'size-lg',
+    'size-xl',
+    'size-full',
+
+    'full-screen',
+
+    'placement-top',
+    'placement-bottom',
+    'placement-center',
+
+    'scroll-inside',
+    'scroll-outside',
+
+    'paper',
+    'close-button',
+  ],
 )
 
 export const dialogHeaderClasses = generateUtilityClasses('nui-dialog-header', [

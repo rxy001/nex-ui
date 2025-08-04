@@ -10,12 +10,12 @@ interface ModalContextValue {
   setOpen: (open: boolean) => void
   container?: HTMLElement | null | (() => HTMLElement | null)
   onOpenChange?: (open: boolean) => void
-  'aria-labelledby'?: string
-  'aria-describedby'?: string
   preventScroll: boolean
   closeOnEscape: boolean
   restoreFocus: boolean
   isTopmostModal?: () => boolean
+  'aria-describedby'?: string
+  'aria-labelledby'?: string
 }
 
 export const [ModalProvider, useModal] = createContext<ModalContextValue>({

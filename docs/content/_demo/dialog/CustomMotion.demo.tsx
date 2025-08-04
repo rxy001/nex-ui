@@ -8,23 +8,26 @@ import {
   DialogFooter,
   DialogClose,
 } from '@nex-ui/react'
+import type { DialogContentProps } from '@nex-ui/react'
 
-export default function App() {
-  const variants = {
+const motionProps: DialogContentProps<'div'>['motionProps'] = {
+  variants: {
     visible: {
       transform: 'translateY(0)',
     },
     hidden: {
       transform: 'translateY(-50px)',
     },
-  }
+  },
+}
 
+export default function App() {
   return (
-    <Dialog motionProps={{ variants }}>
+    <Dialog>
       <DialogTrigger>
         <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent motionProps={motionProps}>
         <DialogHeader>Dialog Header</DialogHeader>
         <DialogBody>
           <p>
