@@ -11,7 +11,7 @@ import type {
   SwitchRecipe,
   AccordionRecipe,
   AccordionItemRecipe,
-  DialogRecipe,
+  DialogRootRecipe,
   DialogContentRecipe,
   DialogHeaderRecipe,
   DialogBodyRecipe,
@@ -128,8 +128,8 @@ export type ComponentThemes = {
   }
   Dialog?: {
     styleOverrides?:
-      | ComponentThemeObject<DialogRecipe>
-      | ComponentThemeFn<DialogOwnerState, DialogRecipe>
+      | ComponentThemeObject<DialogRootRecipe>
+      | ComponentThemeFn<DialogOwnerState, DialogRootRecipe>
     defaultProps?: DialogProps
   }
   DialogContent?: {

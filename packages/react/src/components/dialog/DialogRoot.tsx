@@ -1,12 +1,11 @@
 'use client'
 
-import * as m from 'motion/react-m'
-import { ModalBackdrop, ModalPanel, ModalRoot } from '../modal'
+import { useMemo } from 'react'
+import { ModalBackdrop, ModalRoot } from '../modal'
 import { useStyles, composeClasses, getUtilityClass, useSlot } from '../utils'
 import { useDialog } from './DialogContext'
-import { dialogRecipe } from '../../theme/recipes'
+import { dialogRootRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
-import type { Variants } from 'motion'
 import type { ReactNode } from 'react'
 import type { DialogOwnerState } from './types'
 
@@ -14,42 +13,27 @@ type DialogRootProps = {
   children?: ReactNode
 }
 
-const panelMotionVariants: Variants = {
-  visible: {
-    transform: 'scale(1)',
-  },
-  hidden: {
-    transform: 'scale(1.04)',
-  },
-}
-
 const useSlotClasses = (ownerState: DialogOwnerState) => {
   const { prefix } = useNexUI()
 
   const modalRoot = `${prefix}-dialog`
 
-  const { classes, open, scroll, placement, maxWidth, fullScreen } = ownerState
+  const { classes, open } = ownerState
 
-  const slots = {
-    root: [
-      'root',
-      `placement-${placement}`,
-      `scroll-${scroll}`,
-      open && 'open',
-      `max-width-${maxWidth}`,
-      fullScreen && 'full-screen',
-    ],
-    backdrop: ['backdrop'],
-    panel: ['panel'],
-  }
+  return useMemo(() => {
+    const slots = {
+      root: ['root', open && 'open'],
+      backdrop: ['backdrop'],
+    }
 
-  const composedClasses = composeClasses(
-    slots,
-    getUtilityClass(modalRoot),
-    classes,
-  )
+    const composedClasses = composeClasses(
+      slots,
+      getUtilityClass(modalRoot),
+      classes,
+    )
 
-  return composedClasses
+    return composedClasses
+  }, [classes, modalRoot, open])
 }
 
 export const DialogRoot = ({ children }: DialogRootProps) => {
@@ -58,20 +42,17 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
   const {
     slotProps,
     hideBackdrop,
-    motionProps,
+    onOpenChange: _onOpenChange,
+    container: _container,
+    classes: _classes,
     open: _open,
+    setOpen: _setOpen,
     restoreFocus: _restoreFocus,
     closeOnEscape: _closeOnEscape,
-    fullScreen: _fullScreen,
     preventScroll: _preventScroll,
-    scroll: _scroll,
-    maxWidth: _maxWidth,
-    hideCloseButton: _hideCloseButton,
-    closeOnInteractBackdrop: _closeOnInteractBackdrop,
     defaultOpen: _defaultOpen,
     keepMounted: _keepMounted,
-    setOpen: _setOpen,
-    placement: _placement,
+    closeOnInteractBackdrop: _closeOnInteractBackdrop,
     ...remainingProps
   } = ownerState
 
@@ -80,7 +61,7 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
   const styles = useStyles({
     ownerState,
     name: 'Dialog',
-    recipe: dialogRecipe,
+    recipe: dialogRootRecipe,
   })
 
   const [Root, getRootProps] = useSlot({
@@ -101,24 +82,10 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     classNames: classes.backdrop,
   })
 
-  const [DialogPanel, getDialogPanelProps] = useSlot({
-    ownerState,
-    elementType: ModalPanel,
-    style: styles.panel,
-    externalSlotProps: slotProps?.panel,
-    shouldForwardComponent: false,
-    classNames: classes.panel,
-    additionalProps: {
-      as: m.div,
-      variants: panelMotionVariants,
-      ...motionProps,
-    },
-  })
-
   return (
     <Root {...getRootProps()}>
       {!hideBackdrop && <DialogBackdrop {...getDialogBackdropProps()} />}
-      <DialogPanel {...getDialogPanelProps()}>{children}</DialogPanel>
+      {children}
     </Root>
   )
 }

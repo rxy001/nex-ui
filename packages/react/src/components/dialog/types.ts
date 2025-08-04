@@ -7,7 +7,7 @@ import type {
   HTMLMotionProps,
 } from '../../types/utils'
 import type { ElementType, ReactNode } from 'react'
-import type { DialogContentVariants, DialogVariants } from '../../theme/recipes'
+import type { DialogContentVariants } from '../../theme/recipes'
 
 // ------------- Dialog --------------
 type DialogSlotProps<RootComponent extends ElementType> = {
@@ -15,16 +15,12 @@ type DialogSlotProps<RootComponent extends ElementType> = {
     'div',
     DialogOwnerState<RootComponent>
   >
-  panel?: ComponentPropsWithCommonProps<
-    DOMMotionComponents['div'],
-    DialogOwnerState<RootComponent>
-  >
 }
 
 type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * The component used for the root element.
-   * @default 'div'
+   * @default m.div
    */
   as?: RootComponent
 
@@ -42,6 +38,16 @@ type DialogOwnProps<RootComponent extends ElementType> = {
    * The content of the dialog. It's usually the `DialogContent` component.
    */
   children?: ReactNode
+
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: DialogSlotProps<RootComponent>
+
+  /**
+   * The className used for each slot.
+   */
+  classes?: ComponentUtilityClasses<'root' | 'backdrop'>
 
   /**
    * If true, the dialog is open.
@@ -83,46 +89,6 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   restoreFocus?: boolean
 
   /**
-   * The props used for each slot.
-   */
-  slotProps?: DialogSlotProps<RootComponent>
-
-  /**
-   * The className used for each slot.
-   */
-  classes?: ComponentUtilityClasses<'root' | 'backdrop' | 'panel'>
-
-  /**
-   * The dialog scroll behavior.
-   * @default 'outside''
-   */
-  scroll?: 'inside' | 'outside'
-
-  /**
-   * The dialog position.
-   * @default 'top'
-   */
-  placement?: DialogVariants['placement']
-
-  /**
-   * If true, the close buton is not rendered.
-   * @default false
-   */
-  hideCloseButton?: boolean
-
-  /**
-   * Determine the max-width of the dialog.
-   * @default 'md'
-   */
-  maxWidth?: DialogContentVariants['maxWidth']
-
-  /**
-   * If true, the dialog is full-screen.
-   * @default false
-   */
-  fullScreen?: boolean
-
-  /**
    * If true, the backdrop is not rendered.
    * @default false
    */
@@ -130,36 +96,15 @@ type DialogOwnProps<RootComponent extends ElementType> = {
 
   /**
    * If true, the dialog prevents page scrolling.
-   * @default fullScreen
+   * @default false
    */
   preventScroll?: boolean
-
-  /**
-   * Custom close button to display on top right corner.
-   */
-  closeIcon?: ReactNode
 
   /**
    * If true, close the dialog when the backdrop is clicked.
    * @default true
    */
   closeOnInteractBackdrop?: boolean
-
-  /**
-   * The props to modify the framer motion animation.
-   * Use the `variants` API to create your own animation.
-   */
-  motionProps?: HTMLMotionProps<'div'>
-
-  /**
-   * The id(s) of the element(s) that label the dialog.
-   */
-  'aria-labelledby'?: string
-
-  /**
-   * The id(s) of the element(s) that describe the dialog.
-   */
-  'aria-describedby'?: string
 }
 
 export interface DialogPropsOverrides {}
@@ -176,28 +121,14 @@ export type DialogOwnerState<
   RootComponent extends ElementType = DOMMotionComponents['div'],
 > = DialogProps<RootComponent> & {
   hideBackdrop: boolean
-  fullScreen: boolean
   preventScroll: boolean
-  scroll: 'inside' | 'outside'
-  maxWidth: DialogContentVariants['maxWidth']
   open: boolean
   setOpen: (open: boolean) => void
-  placement: DialogVariants['placement']
   keepMounted: boolean
-  hideCloseButton: boolean
   closeOnInteractBackdrop: boolean
   closeOnEscape: boolean
   restoreFocus: boolean
-}
-
-// ------------- DialogTrigger -------------
-export type DialogTriggerProps = {
-  children?: ReactNode
-}
-
-// ------------- DialogClose -------------
-export interface DialogCloseProps {
-  children?: ReactNode
+  defaultOpen: boolean
 }
 
 // ------------- DialogContent -------------
@@ -206,14 +137,18 @@ type DialogContentSlotProps<RootComponent extends ElementType> = {
     'button',
     DialogContentOwnerState<RootComponent>
   >
+  paper?: ComponentPropsWithCommonProps<
+    DOMMotionComponents['section'],
+    DialogContentOwnerState<RootComponent>
+  >
 }
 
 export interface DialogContentPropsOverrides {}
 
-type DialogContentOwnProps<RootComponent extends ElementType> = {
+type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The component used for the root element.
-   * @default 'section'
+   * @default 'div'
    */
   as?: RootComponent
 
@@ -236,7 +171,7 @@ type DialogContentOwnProps<RootComponent extends ElementType> = {
    * Determine the max-width of the dialog
    * @default 'md'
    */
-  maxWidth?: DialogContentVariants['maxWidth']
+  size?: DialogContentVariants['size']
 
   /**
    * Custom close button to display on top right corner.
@@ -258,24 +193,56 @@ type DialogContentOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'closeButton'>
+  classes?: ComponentUtilityClasses<'root' | 'paper' | 'closeButton'>
+
+  /**
+   * The dialog scroll behavior.
+   * @default 'outside''
+   */
+  scroll?: DialogContentVariants['scroll']
+
+  /**
+   * The dialog position.
+   * @default 'top'
+   */
+  placement?: DialogContentVariants['placement']
+
+  /**
+   * The id(s) of the element(s) that label the dialog.
+   */
+  'aria-labelledby'?: string
+
+  /**
+   * The id(s) of the element(s) that describe the dialog.
+   */
+  'aria-describedby'?: string
+
+  /**
+   * The props to modify the framer motion animation.
+   * Use the `variants` API to create your own animation.
+   */
+  motionProps?:
+    | ((
+        placement: DialogContentVariants['placement'],
+      ) => HTMLMotionProps<'section'>)
+    | HTMLMotionProps<'section'>
 }
 
-export type DialogContentProps<RootComponent extends ElementType = 'section'> =
+export type DialogContentProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
     RootComponent,
     DialogContentOwnProps<RootComponent>,
     DialogContentPropsOverrides
   >
 
-export type DialogContentOwnerState<
-  RootComponent extends ElementType = 'section',
-> = DialogContentProps<RootComponent> & {
-  maxWidth: DialogContentVariants['maxWidth']
-  fullScreen: boolean
-  hideCloseButton: boolean
-  closeIcon: ReactNode
-}
+export type DialogContentOwnerState<RootComponent extends ElementType = 'div'> =
+  DialogContentProps<RootComponent> & {
+    size: DialogContentVariants['size']
+    fullScreen: boolean
+    hideCloseButton: boolean
+    scroll: DialogContentVariants['scroll']
+    placement: DialogContentVariants['placement']
+  }
 
 // ------------- DialogHeader -------------
 export interface DialogHeaderPropsOverrides {}
@@ -369,3 +336,13 @@ export type DialogFooterProps<RootComponent extends ElementType = 'div'> =
 
 export type DialogFooterOwnerState<RootComponent extends ElementType = 'div'> =
   DialogFooterOwnProps<RootComponent>
+
+// ------------- DialogTrigger -------------
+export type DialogTriggerProps = {
+  children?: ReactNode
+}
+
+// ------------- DialogClose -------------
+export interface DialogCloseProps {
+  children?: ReactNode
+}

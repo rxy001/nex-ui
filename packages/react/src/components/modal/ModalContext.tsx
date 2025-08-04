@@ -10,8 +10,6 @@ interface ModalContextValue {
   setOpen: (open: boolean) => void
   container?: HTMLElement | null | (() => HTMLElement | null)
   onOpenChange?: (open: boolean) => void
-  'aria-labelledby'?: string
-  'aria-describedby'?: string
   preventScroll: boolean
   closeOnEscape: boolean
   restoreFocus: boolean

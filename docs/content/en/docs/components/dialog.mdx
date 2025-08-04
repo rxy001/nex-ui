@@ -15,51 +15,51 @@ Display a dialog with custom content that requires attention or provides additio
 
 <Example {...dialog.usage} />
 
-### MaxWidths
-
-The `maxWidth` property sets the maximum width of the dialog, defaults to `md`.
-
-<Example {...dialog.maxWidths} />
-
-### FullScreen
-
-Use the `fullScreen` property to make the dialog display in full screen.
-
-<Example {...dialog.fullScreen} />
-
-### Placements
-
-The `placement` property sets the display position of the dialog, defaults to `top`.
-
-<Example {...dialog.placements} />
-
 ### HideBackdrop
 
-Use the `hideBackdrop` property to hide the dialog's background overlay.
+Use the `hideBackdrop` property of `Dialog` to hide the dialog's background overlay.
 
 <Example {...dialog.hideBackdrop} />
 
 ### PreventScroll
 
-Use the `preventScroll` property to prevent page scrolling when the dialog is open.
+Use the `preventScroll` property of `Dialog` to prevent page scrolling when the dialog is open.
 
 <Example {...dialog.preventScroll} />
 
 ### KeepMounted
 
-Use the `keepMounted` property to keep the dialog content mounted when closed.
+Use the `keepMounted` property of `Dialog` to keep the dialog content mounted when closed.
 
 <Example {...dialog.keepMounted} />
 
+### Sizes
+
+Use the `size` property of `DialogContent` to set the maximum width of the dialog, defaults to `md`.
+
+<Example {...dialog.sizes} />
+
+### FullScreen
+
+Use the `fullScreen` property of `DialogContent` to make the dialog display in full screen.
+
+<Example {...dialog.fullScreen} />
+
+### Placements
+
+Use the `placement` property of `DialogContent` to set the display position of the dialog, defaults to `top`.
+
+<Example {...dialog.placements} />
+
 ### Custom Motion
 
-Use the `motionProps` property to customize the animation effects for `visible` / `hidden`.
+Use the `motionProps` property of `DialogContent` to customize the animation effects for `visible` / `hidden`.
 
 <Example {...dialog.customMotion} />
 
 ### Overflow Scroll
 
-Use the `scrollBehavior` property to control the scrolling behavior of dialog content.
+Use the `scroll` property of `DialogContent` to control the scrolling behavior of dialog content.
 
 - `inside`: Content scrolls inside the dialog.
 - `outside`: Content scrolls outside the dialog.
@@ -104,28 +104,10 @@ Dialog props inherit the props of `as` (by default, `m.div`).
       description: 'Additional class names to apply to the root element.',
     },
     {
-      prop: 'placement',
-      type: ["'top'", "'bottom'", "'left'", "'right'"],
-      description: 'The display position of the dialog.',
-      default: "'top'",
-    },
-    {
       prop: 'hideBackdrop',
       type: 'boolean',
       description: 'If true, the backdrop is not rendered.',
       default: 'false',
-    },
-    {
-      prop: 'fullScreen',
-      type: 'boolean',
-      description: 'If true, the dialog is full-screen.',
-      default: 'false',
-    },
-    {
-      prop: 'maxWidth',
-      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: 'Determine the max-width of the dialog.',
-      default: "'md'",
     },
     {
       prop: 'container',
@@ -137,18 +119,6 @@ Dialog props inherit the props of `as` (by default, `m.div`).
       prop: 'keepMounted',
       type: 'boolean',
       description: 'If true, always keep the children in the DOM.',
-      default: 'false',
-    },
-    {
-      prop: 'scroll',
-      type: ["'inside'", "'outside'"],
-      description: 'The dialog scroll behavior.',
-      default: "'inside'",
-    },
-    {
-      prop: 'hideCloseButton',
-      type: 'boolean',
-      description: 'If true, the close buton is not rendered.',
       default: 'false',
     },
     {
@@ -170,26 +140,11 @@ Dialog props inherit the props of `as` (by default, `m.div`).
       default: 'true',
     },
     {
-      prop: 'closeIcon',
-      type: 'ReactNode',
-      description: 'Custom close button to display on top right corner.',
-    },
-    {
       prop: 'restoreFocus',
       type: 'boolean',
       description:
         'If true, the dialog will restore focus to previously focused element once the modal is hidden or unmounted.',
       default: 'true',
-    },
-    {
-      prop: 'aria-labelledby',
-      type: 'string',
-      description: 'The id(s) of the element(s) that label the modal.',
-    },
-    {
-      prop: 'aria-describedby',
-      type: 'string',
-      description: 'The id(s) of the element(s) that describe the modal.',
     },
     {
       prop: 'as',
@@ -205,7 +160,7 @@ Dialog props inherit the props of `as` (by default, `m.div`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'panel' | 'backdrop', ClassValue>>",
+      type: "Partial<Record<'root' | 'backdrop', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {
@@ -221,12 +176,6 @@ Dialog props inherit the props of `as` (by default, `m.div`).
 <SlotsTable
   dataSource={[
     {
-      slot: 'panel',
-      class: '.nui-dialog-panel',
-      component: "'div'",
-      description: 'The panel element of the dialog.',
-    },
-    {
       slot: 'backdrop',
       class: '.nui-dialog-backdrop',
       component: "'div'",
@@ -237,7 +186,7 @@ Dialog props inherit the props of `as` (by default, `m.div`).
 
 ### DialogContent Props
 
-DialogContent props inherit the props of `as` (by default, `'section'`).
+DialogContent props inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -252,10 +201,22 @@ DialogContent props inherit the props of `as` (by default, `'section'`).
       description: 'Custom close button to display on top right corner.',
     },
     {
-      prop: 'maxWidth',
+      prop: 'size',
       type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: 'Determine the max-width of the dialog.',
+      description: 'The size of the dialog.',
       default: "'md'",
+    },
+    {
+      prop: 'placement',
+      type: ["'top'", "'bottom'", "'left'", "'right'"],
+      description: 'The display position of the dialog.',
+      default: "'top'",
+    },
+    {
+      prop: 'scroll',
+      type: ["'inside'", "'outside'"],
+      description: 'The dialog scroll behavior.',
+      default: "'outside'",
     },
     {
       prop: 'fullScreen',
@@ -271,15 +232,24 @@ DialogContent props inherit the props of `as` (by default, `'section'`).
     },
     {
       prop: 'motionProps',
-      type: 'HTMLMotionProps',
-      description:
-        'The props to modify the framer motion animation. Use the variants API to create your own animation.',
+      type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
+      description: '自定义对话框的动画效果。',
+    },
+    {
+      prop: 'aria-labelledby',
+      type: 'string',
+      description: 'The id(s) of the element(s) that label the modal.',
+    },
+    {
+      prop: 'aria-describedby',
+      type: 'string',
+      description: 'The id(s) of the element(s) that describe the modal.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       description: 'The component or element to render as the root.',
-      default: 'section',
+      default: "'div'",
     },
     {
       prop: 'sx',
@@ -289,7 +259,7 @@ DialogContent props inherit the props of `as` (by default, `'section'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'closeButton', ClassValue>>",
+      type: "Partial<Record<'root' | 'paper' | 'closeButton', ClassValue>>",
       description: 'The className used for each slot.',
     },
     {
@@ -310,6 +280,12 @@ DialogContent props inherit the props of `as` (by default, `'section'`).
       component: "'button'",
       description: 'The close button element of the dialog content.',
     },
+    {
+      slot: 'paper',
+      class: '.nui-dialog-content-paper',
+      component: 'm.section',
+      description: 'The paper element of the dialog.',
+    },
   ]}
 />
 
@@ -328,7 +304,7 @@ DialogHeader props inherit the props of `as` (by default, `'h2'`).
       prop: 'as',
       type: 'ElementType',
       description: 'The component or element to render as the root.',
-      default: 'h2',
+      default: "'h2'",
     },
     {
       prop: 'sx',
@@ -354,7 +330,7 @@ The dialog body props inherit the props of `as` (by default, `'div'`).
       prop: 'as',
       type: 'ElementType',
       description: 'The component or element to render as the root.',
-      default: 'div',
+      default: "'div'",
     },
     {
       prop: 'sx',
@@ -380,7 +356,7 @@ DialogFooter props inherit the props of `as` (by default,`'div'`).
       prop: 'as',
       type: 'ElementType',
       description: 'The component or element to render as the root.',
-      default: 'div',
+      default: "'div'",
     },
     {
       prop: 'sx',
