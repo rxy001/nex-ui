@@ -23,7 +23,7 @@ describe('DialogContent', () => {
     )
   }
 
-  it('should render with root and size class but no others', async () => {
+  it('should render with default props', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
       useAct: true,
     })
@@ -31,6 +31,20 @@ describe('DialogContent', () => {
     const dialogContent = getByTestId('dialog-content')
     expect(dialogContent).toHaveClass(dialogContentClasses.root)
     expect(dialogContent).toHaveClass(dialogContentClasses['size-md'])
+    expect(dialogContent).toHaveClass(dialogContentClasses['placement-top'])
+    expect(dialogContent).not.toHaveClass(dialogContentClasses['full-screen'])
+    expect(dialogContent).not.toHaveClass(
+      dialogContentClasses['placement-bottom'],
+    )
+    expect(dialogContent).not.toHaveClass(
+      dialogContentClasses['placement-center'],
+    )
+    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-xs'])
+    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-sm'])
+    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-lg'])
+    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-xl'])
+    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-full'])
+    expect(dialogContent).not.toHaveClass(dialogContentClasses['scroll-inside'])
   })
 
   it("should forward ref to DialogContent's root element", async () => {
@@ -102,7 +116,7 @@ describe('DialogContent', () => {
     )
   })
 
-  it('should forward classes to root、section and closeButton slots', async () => {
+  it('should forward classes to root, paper and closeButton slots', async () => {
     const classes = {
       root: 'test-dialog-content-root',
       paper: 'test-dialog-content-paper',
@@ -295,9 +309,14 @@ describe('DialogContent', () => {
       )
       const content = getByTestId('dialog-content')
       const paper = content.querySelector(`.${dialogContentClasses.paper}`)
+      const header = getByTestId('dialog-header')
+      const body = getByTestId('dialog-body')
 
       expect(paper).toHaveAttribute('aria-labelledby', 'custom-label')
       expect(paper).toHaveAttribute('aria-describedby', 'custom-description')
+
+      expect(header).toHaveAttribute('id', 'custom-label')
+      expect(body).toHaveAttribute('id', 'custom-description')
     })
   })
 })

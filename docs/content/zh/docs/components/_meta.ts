@@ -5,6 +5,7 @@ export default {
   checkbox: 'Checkbox',
   dialog: 'Dialog',
   divider: 'Divider',
+  drawer: 'Drawer',
   flex: 'Flex',
   input: 'Input',
   switch: 'Switch',

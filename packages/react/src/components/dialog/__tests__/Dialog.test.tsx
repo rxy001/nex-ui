@@ -48,7 +48,7 @@ describe('Dialog', () => {
 
   testComponentStability(<TestDialog open />)
 
-  it('should render with root, and open classes but no others', async () => {
+  it('should render with root, and open classes on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog open />, {
       useAct: true,
     })
@@ -111,7 +111,7 @@ describe('Dialog', () => {
     )
   })
 
-  it('should forward slotProps to backdrop slots', async () => {
+  it('should forward slotProps to backdrop slot', async () => {
     const slotProps = {
       backdrop: { className: 'test-dialog-backdrop' },
     }
@@ -162,7 +162,7 @@ describe('Dialog', () => {
   })
 
   describe('DialogHeader', () => {
-    it('should render with header classes but no others', async () => {
+    it('should render with header class on root element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestDialog open />,
         {
@@ -176,7 +176,7 @@ describe('Dialog', () => {
   })
 
   describe('DialogBody', () => {
-    it('should render with body classes but no others', async () => {
+    it('should render with body class on root element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestDialog open />,
         {
@@ -190,7 +190,7 @@ describe('Dialog', () => {
   })
 
   describe('DialogFooter', () => {
-    it('should render with footer classes but no others', async () => {
+    it('should render with footer class on root element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestDialog open />,
         {
