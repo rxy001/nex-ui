@@ -3,7 +3,6 @@ import { generateUtilityClasses } from '../utils'
 export const dialogClasses = generateUtilityClasses('nui-dialog', [
   'root',
   'open',
-
   'backdrop',
 ])
 

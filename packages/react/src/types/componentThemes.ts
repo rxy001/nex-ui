@@ -16,6 +16,11 @@ import type {
   DialogHeaderRecipe,
   DialogBodyRecipe,
   DialogFooterRecipe,
+  DrawerRootRecipe,
+  DrawerContentRecipe,
+  DrawerHeaderRecipe,
+  DrawerBodyRecipe,
+  DrawerFooterRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -49,6 +54,16 @@ import type {
   DialogHeaderOwnerState,
   DialogHeaderProps,
   DialogOwnerState,
+  DrawerProps,
+  DrawerBodyOwnerState,
+  DrawerBodyProps,
+  DrawerContentOwnerState,
+  DrawerContentProps,
+  DrawerFooterOwnerState,
+  DrawerFooterProps,
+  DrawerHeaderOwnerState,
+  DrawerHeaderProps,
+  DrawerOwnerState,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -155,6 +170,36 @@ export type ComponentThemes = {
       | ComponentThemeObject<DialogFooterRecipe>
       | ComponentThemeFn<DialogFooterOwnerState, DialogFooterRecipe>
     defaultProps?: DialogFooterProps
+  }
+  Drawer?: {
+    styleOverrides?:
+      | ComponentThemeObject<DrawerRootRecipe>
+      | ComponentThemeFn<DrawerOwnerState, DrawerRootRecipe>
+    defaultProps?: DrawerProps
+  }
+  DrawerContent?: {
+    styleOverrides?:
+      | ComponentThemeObject<DrawerContentRecipe>
+      | ComponentThemeFn<DrawerContentOwnerState, DrawerContentRecipe>
+    defaultProps?: DrawerContentProps
+  }
+  DrawerHeader?: {
+    styleOverrides?:
+      | ComponentThemeObject<DrawerHeaderRecipe>
+      | ComponentThemeFn<DrawerHeaderOwnerState, DrawerHeaderRecipe>
+    defaultProps?: DrawerHeaderProps
+  }
+  DrawerBody?: {
+    styleOverrides?:
+      | ComponentThemeObject<DrawerBodyRecipe>
+      | ComponentThemeFn<DrawerBodyOwnerState, DrawerBodyRecipe>
+    defaultProps?: DrawerBodyProps
+  }
+  DrawerFooter?: {
+    styleOverrides?:
+      | ComponentThemeObject<DrawerFooterRecipe>
+      | ComponentThemeFn<DrawerFooterOwnerState, DrawerFooterRecipe>
+    defaultProps?: DrawerFooterProps
   }
 }
 

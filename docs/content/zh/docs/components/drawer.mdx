@@ -1,112 +1,97 @@
 ---
-title: Dialog
-description: Dialog 显示需要关注或提供额外信息的自定义内容。
+title: Drawer
+description: Drawer 是一个从屏幕边缘滑出的浮层面板。
 ---
 
-import { dialog } from '@/content/_demo'
+import { drawer } from '@/content/_demo'
 
-# Dialog
+# Drawer
 
-Dialog 显示需要关注或提供额外信息的自定义内容。
+Drawer 是一个从屏幕边缘滑出的浮层面板。
 
-<ComponentLinks component='dialog' ariaCompatible />
+<ComponentLinks component='drawer' />
 
 ## 使用
 
-<Example {...dialog.usage} />
+<Example {...drawer.usage} />
 
 ### HideBackdrop
 
-设置 `Dialog` 的 `hideBackdrop` 属性为 `true` 可以隐藏 Dialog 的背景遮罩。
+设置 `Drawer` 的 `hideBackdrop` 属性为 `true` 可以隐藏 Drawer 的背景遮罩。
 
-<Example {...dialog.hideBackdrop} />
+<Example {...drawer.hideBackdrop} />
 
 ### PreventScroll
 
-设置 `Dialog` 的 `preventScroll` 属性为 `true` 可以限制 Dialog 打开时页面滚动。
+设置 `Drawer` 的 `preventScroll` 属性为 `true` 可以限制 Drawer 打开时页面滚动。
 
-<Example {...dialog.preventScroll} />
+<Example {...drawer.preventScroll} />
 
 ### KeepMounted
 
-设置 `Dialog` 的 `keepMounted` 属性为 `true` 可以保持 Dialog 内容在关闭时仍然挂载。
+设置 `Drawer` 的 `keepMounted` 属性为 `true` 可以保持 Drawer 内容在关闭时仍然挂载。
 
-<Example {...dialog.keepMounted} />
+<Example {...drawer.keepMounted} />
 
 ### Sizes
 
-使用 `DialogContent` 的 `size` 属性可以设置 Dialog 的大小，默认为 `md`。
+使用 `DrawerContent` 的 `size` 属性可以设置 Drawer 的大小，默认为 `md`。
 
-<Example {...dialog.sizes} />
-
-### FullScreen
-
-设置 `DialogContent` 的 `fullScreen` 属性为 `true` 可以使 Dialog 全屏显示。
-
-<Example {...dialog.fullScreen} />
+<Example {...drawer.sizes} />
 
 ### Placements
 
-使用 `DialogContent` 的 `placement` 属性可以设置 Dialog 的显示位置，默认为 `top`。
+使用 `DrawerContent` 的 `placement` 属性可以设置 Drawer 的显示位置，默认为 `right`。
 
-<Example {...dialog.placements} />
+<Example {...drawer.placements} />
 
 ### Custom Motion
 
-使用 `DialogContent` 的 `motionProps` 属性可以自定义 `visible` / `hidden` 的动画效果。
+使用 `DrawerContent` 的 `motionProps` 属性可以自定义 Drawer 显示/隐藏的动画效果。
 
-<Example {...dialog.customMotion} />
+<Example {...drawer.customMotion} />
 
-### Overflow Scroll
+### Controlled
 
-使用 `DialogContent` 的 `scroll` 属性可以控制 Dialog 内容的滚动行为。
-
-- `inside`: 内容在 Dialog 内部滚动。
-- `outside`: 内容在 Dialog 外部滚动。
-
-<Example {...dialog.scrollBehavior} />
-
-### Controlled Dialog
-
-<Example {...dialog.controlled} />
+<Example {...drawer.controlled} />
 
 ## API
 
-### Dialog Props
+### Drawer Props
 
-Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
+Drawer Props 继承 `as` (默认为 `m.div`) 的 Props。
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '通常是 DialogContent、DialogTrigger 等组件。',
+      description: '通常是 DrawerContent、DrawerTrigger 等组件。',
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: '控制 Dialog 的打开状态。',
+      description: '控制 Drawer 的打开状态。',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'Dialog 的默认打开状态。',
+      description: 'Drawer 的默认打开状态。',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
-      description: '当 Dialog 打开/关闭时触发回调函数。',
+      description: '当 Drawer 打开/关闭时触发回调函数。',
     },
     {
       prop: 'className',
       type: 'string',
-      description: 'Dialog 根元素的类名。',
+      description: 'Drawer 根元素的类名。',
     },
     {
       prop: 'hideBackdrop',
       type: 'boolean',
-      description: '是否隐藏 Dialog 的背景遮罩。',
+      description: '是否隐藏 Drawer 的背景遮罩。',
       default: 'false',
     },
     {
@@ -118,31 +103,31 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
     {
       prop: 'keepMounted',
       type: 'boolean',
-      description: '是否保持 Dialog 内容在关闭时仍然挂载。',
+      description: '是否保持 Drawer 内容在关闭时仍然挂载。',
       default: 'false',
     },
     {
       prop: 'preventScroll',
       type: 'boolean',
-      description: '是否限制 Dialog 打开时页面滚动。',
+      description: '是否限制 Drawer 打开时页面滚动。',
       default: 'false',
     },
     {
       prop: 'closeOnInteractBackdrop',
       type: 'boolean',
-      description: '是否在与背景遮罩交互时关闭 Dialog 。',
+      description: '是否在与背景遮罩交互时关闭 Drawer。',
       default: 'true',
     },
     {
       prop: 'closeOnEscape',
       type: 'boolean',
-      description: '是否在按下 Escape 键时关闭 Dialog 。',
+      description: '是否在按下 Escape 键时关闭 Drawer。',
       default: 'true',
     },
     {
       prop: 'restoreFocus',
       type: 'boolean',
-      description: '是否在 Dialog 关闭时恢复焦点到之前聚焦的元素。',
+      description: '是否在 Drawer 关闭时恢复焦点到之前聚焦的元素。',
       default: 'true',
     },
     {
@@ -154,95 +139,83 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogOwnerState>',
+      type: 'SxProp<DrawerOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
     {
       prop: 'classes',
       type: "Partial<Record<'root' | 'backdrop', ClassValue>>",
-      description: 'Dialog Slots 的 className。',
+      description: 'Drawer Slots 的 className。',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Dialog Slots 的 props。',
+      description: 'Drawer Slots 的 props。',
     },
   ]}
 />
 
-### Dialog Slots
+### Drawer Slots
 
 <SlotsTable
   dataSource={[
     {
       slot: 'backdrop',
-      class: '.nui-dialog-backdrop',
+      class: '.nui-drawer-backdrop',
       component: "'div'",
-      description: 'Dialog 的背景遮罩元素。',
+      description: 'Drawer 的背景遮罩元素。',
     },
   ]}
 />
 
-### DialogContent Props
+### DrawerContent Props
 
-DialogContent Props 继承 `as` (默认为 `'div'`) 的 Props。
+DrawerContent Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '通常是 DialogHeader、DialogBody、DialogFooter 等组件。',
+      description: '通常是 DrawerHeader、DrawerBody、DrawerFooter 等组件。',
     },
     {
       prop: 'closeIcon',
       type: 'ReactNode',
-      description: '自定义 Dialog 的关闭图标。',
+      description: '自定义 Drawer 的关闭图标。',
     },
     {
       prop: 'size',
       type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: 'Dialog 的尺寸。',
+      description: 'Drawer 的尺寸。',
       default: "'md'",
-    },
-    {
-      prop: 'fullScreen',
-      type: 'boolean',
-      description: '是否使 Dialog 全屏显示。',
-      default: 'false',
     },
     {
       prop: 'hideCloseButton',
       type: 'boolean',
-      description: '是否隐藏 Dialog 的关闭按钮。',
+      description: '是否隐藏 Drawer 的关闭按钮。',
       default: 'false',
-    },
-    {
-      prop: 'scroll',
-      type: ["'inside'", "'outside'"],
-      description: 'Dialog 内容的滚动行为。',
-      default: "'outside'",
     },
     {
       prop: 'placement',
       type: ["'top'", "'bottom'", "'left'", "'right'"],
-      description: 'Dialog 的显示位置。',
-      default: "'top'",
+      description: 'Drawer 的显示位置。',
+      default: "'right'",
     },
     {
       prop: 'motionProps',
       type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
-      description: '自定义 Dialog 的动画效果。',
+      description: '自定义 Drawer 的动画效果。',
     },
     {
       prop: 'aria-labelledby',
       type: 'string',
-      description: 'Dialog 标题的 ARIA 标签。',
+      description: 'Drawer 标题的 ARIA 标签。',
     },
     {
       prop: 'aria-describedby',
       type: 'string',
-      description: 'Dialog 描述的 ARIA 标签。',
+      description: 'Drawer 描述的 ARIA 标签。',
     },
     {
       prop: 'as',
@@ -253,51 +226,51 @@ DialogContent Props 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogContentOwnerState>',
+      type: 'SxProp<DrawerContentOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
     {
       prop: 'classes',
       type: "Partial<Record<'root' | 'paper' | 'closeButton', ClassValue>>",
-      description: 'DialogContent Slots 的 className。',
+      description: 'DrawerContent Slots 的 className。',
     },
     {
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'DialogContent Slots 的 props。',
+      description: 'DrawerContent Slots 的 props。',
     },
   ]}
 />
 
-### DialogContent Slots
+### DrawerContent Slots
 
 <SlotsTable
   dataSource={[
     {
       slot: 'closeButton',
-      class: '.nui-dialog-content-close-button',
+      class: '.nui-drawer-content-close-button',
       component: "'button'",
-      description: 'Dialog 的关闭按钮元素。',
+      description: 'Drawer 的关闭按钮元素。',
     },
     {
       slot: 'paper',
-      class: '.nui-dialog-content-paper',
+      class: '.nui-drawer-content-paper',
       component: 'm.section',
-      description: 'Dialog 的内容部分。',
+      description: 'Drawer 的内容部分。',
     },
   ]}
 />
 
-### DialogHeader Props
+### DrawerHeader Props
 
-DialogHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
+DrawerHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'Dialog 的标题内容。',
+      description: 'Drawer 的标题内容。',
     },
     {
       prop: 'as',
@@ -308,22 +281,22 @@ DialogHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogHeaderOwnerState>',
+      type: 'SxProp<DrawerHeaderOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
   ]}
 />
 
-### DialogBody Props
+### DrawerBody Props
 
-DialogBody Props 继承 `as` (默认为 `'div'`) 的 Props。
+DrawerBody Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'Dialog 的内容。',
+      description: 'Drawer 的内容。',
     },
     {
       prop: 'as',
@@ -334,22 +307,22 @@ DialogBody Props 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogBodyOwnerState>',
+      type: 'SxProp<DrawerBodyOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
   ]}
 />
 
-### DialogFooter Props
+### DrawerFooter Props
 
-DialogFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
+DrawerFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'Dialog 的底部内容。',
+      description: 'Drawer 的底部内容。',
     },
     {
       prop: 'as',
@@ -360,32 +333,32 @@ DialogFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogFooterOwnerState>',
+      type: 'SxProp<DrawerFooterOwnerState>',
       description: '用于根元素的 sx 属性。',
     },
   ]}
 />
 
-### DialogTrigger Props
+### DrawerTrigger Props
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '触发 Dialog 打开的元素。',
+      description: '触发 Drawer 打开的元素。',
     },
   ]}
 />
 
-### DialogClose Props
+### DrawerClose Props
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '触发 Dialog 关闭的元素。',
+      description: '触发 Drawer 关闭的元素。',
     },
   ]}
 />
