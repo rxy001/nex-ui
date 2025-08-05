@@ -1,102 +1,85 @@
 ---
-title: Dialog
-description: Display a dialog with custom content that requires attention or provides additional information.
+title: Drawer
+description: Drawer is a component that slides in from the side of the screen.
 ---
 
-import { dialog } from '@/content/_demo'
+import { drawer } from '@/content/_demo'
 
-# Dialog
+# Drawer
 
-Display a dialog with custom content that requires attention or provides additional information.
-
-<ComponentLinks component='dialog' ariaCompatible />
+Drawer is a component that slides in from the side of the screen.
 
 ## Usage
 
-<Example {...dialog.usage} />
+<Example {...drawer.usage} />
 
 ### HideBackdrop
 
-Set the `hideBackdrop` property of `Dialog` to `true` to hide the dialog's background overlay.
+Set the `hideBackdrop` property of `Drawer` to `true` to hide the background overlay.
 
-<Example {...dialog.hideBackdrop} />
+<Example {...drawer.hideBackdrop} />
 
 ### PreventScroll
 
-Set the `preventScroll` property of `Dialog` to `true` to prevent page scrolling when the dialog is open.
+Set the `preventScroll` property of `Drawer` to `true` to prevent page scrolling when the drawer is open.
 
-<Example {...dialog.preventScroll} />
+<Example {...drawer.preventScroll} />
 
 ### KeepMounted
 
-Set the `keepMounted` property of `Dialog` to `true` to keep the dialog content mounted when closed.
+Set the `keepMounted` property of `Drawer` to `true` to keep the drawer content mounted when closed.
 
-<Example {...dialog.keepMounted} />
+<Example {...drawer.keepMounted} />
 
 ### Sizes
 
-Use the `size` property of `DialogContent` to set the maximum width of the dialog, defaults to `md`.
+Use the `size` property of `DrawerContent` to set the size of the drawer, defaults to `md`.
 
-<Example {...dialog.sizes} />
-
-### FullScreen
-
-Set the `fullScreen` property of `DialogContent` to `true` to make the dialog full-screen.
-
-<Example {...dialog.fullScreen} />
+<Example {...drawer.sizes} />
 
 ### Placements
 
-Use the `placement` property of `DialogContent` to set the display position of the dialog, defaults to `top`.
+Use the `placement` property of `DrawerContent` to set the display position of the drawer, defaults to `right`.
 
-<Example {...dialog.placements} />
+<Example {...drawer.placements} />
 
 ### Custom Motion
 
-Use the `motionProps` property of `DialogContent` to customize the animation effects for `visible` / `hidden`.
+Use the `motionProps` property of `DrawerContent` to customize the animation effects for showing/hiding the drawer.
 
-<Example {...dialog.customMotion} />
+<Example {...drawer.customMotion} />
 
-### Overflow Scroll
+### Controlled
 
-Use the `scroll` property of `DialogContent` to control the scrolling behavior of dialog content.
-
-- `inside`: Content scrolls inside the dialog.
-- `outside`: Content scrolls outside the dialog.
-
-<Example {...dialog.scrollBehavior} />
-
-### Controlled Dialog
-
-<Example {...dialog.controlled} />
+<Example {...drawer.controlled} />
 
 ## API
 
-### Dialog Props
+### Drawer Props
 
-Dialog props inherit the props of `as` (by default, `m.div`).
+Drawer props inherit the props of `as` (by default, `m.div`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: "It's usually DialogContent, DialogTrigger, etc.",
+      description: "It's usually DrawerContent, DrawerTrigger, etc.",
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the dialog is shown.(controlled)',
+      description: 'If true, the drawer is shown.(controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the dialog is shown by default.',
+      description: 'If true, the drawer is shown by default.',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
-      description: 'Handler that is called when the dialog is opened or closed',
+      description: 'Handler that is called when the drawer is opened or closed',
     },
     {
       prop: 'className',
@@ -124,13 +107,13 @@ Dialog props inherit the props of `as` (by default, `m.div`).
     {
       prop: 'preventScroll',
       type: 'boolean',
-      description: 'If true, the dialog prevents page scrolling.',
+      description: 'If true, the drawer prevents page scrolling.',
       default: 'false',
     },
     {
       prop: 'closeOnInteractBackdrop',
       type: 'boolean',
-      description: 'If true, close the dialog when the backdrop is clicked.',
+      description: 'If true, close the drawer when the backdrop is clicked.',
       default: 'true',
     },
     {
@@ -143,7 +126,7 @@ Dialog props inherit the props of `as` (by default, `m.div`).
       prop: 'restoreFocus',
       type: 'boolean',
       description:
-        'If true, the dialog will restore focus to previously focused element once the modal is hidden or unmounted.',
+        'If true, the drawer will restore focus to previously focused element once the modal is hidden or unmounted.',
       default: 'true',
     },
     {
@@ -154,7 +137,7 @@ Dialog props inherit the props of `as` (by default, `m.div`).
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogOwnerState>',
+      type: 'SxProp<DrawerOwnerState>',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
@@ -171,29 +154,29 @@ Dialog props inherit the props of `as` (by default, `m.div`).
   ]}
 />
 
-### Dialog Slots
+### Drawer Slots
 
 <SlotsTable
   dataSource={[
     {
       slot: 'backdrop',
-      class: '.nui-dialog-backdrop',
+      class: '.nui-drawer-backdrop',
       component: "'div'",
-      description: 'The backdrop element of the dialog.',
+      description: 'The backdrop element of the drawer.',
     },
   ]}
 />
 
-### DialogContent Props
+### DrawerContent Props
 
-DialogContent props inherit the props of `as` (by default, `'div'`).
+DrawerContent props inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: "It's usually DialogHeader, DialogBody, DialogFooter, etc.",
+      description: "It's usually DrawerHeader, DrawerBody, DrawerFooter, etc.",
     },
     {
       prop: 'closeIcon',
@@ -203,31 +186,19 @@ DialogContent props inherit the props of `as` (by default, `'div'`).
     {
       prop: 'size',
       type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: 'The size of the dialog.',
+      description: 'The size of the drawer.',
       default: "'md'",
     },
     {
       prop: 'placement',
       type: ["'top'", "'bottom'", "'left'", "'right'"],
-      description: 'The display position of the dialog.',
-      default: "'top'",
-    },
-    {
-      prop: 'scroll',
-      type: ["'inside'", "'outside'"],
-      description: 'The dialog scroll behavior.',
-      default: "'outside'",
-    },
-    {
-      prop: 'fullScreen',
-      type: 'boolean',
-      description: 'If true, the dialog is full-screen.',
-      default: 'false',
+      description: 'The display position of the drawer.',
+      default: "'right'",
     },
     {
       prop: 'hideCloseButton',
       type: 'boolean',
-      description: 'If true, the close buton is not rendered.',
+      description: 'If true, the close button is not rendered.',
       default: 'false',
     },
     {
@@ -253,7 +224,7 @@ DialogContent props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogContentOwnerState>',
+      type: 'SxProp<DrawerContentOwnerState>',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
@@ -270,35 +241,35 @@ DialogContent props inherit the props of `as` (by default, `'div'`).
   ]}
 />
 
-### DialogContent Slots
+### DrawerContent Slots
 
 <SlotsTable
   dataSource={[
     {
       slot: 'closeButton',
-      class: '.nui-dialog-content-close-button',
+      class: '.nui-drawer-content-close-button',
       component: "'button'",
-      description: 'The close button element of the dialog content.',
+      description: 'The close button element of the drawer content.',
     },
     {
       slot: 'paper',
-      class: '.nui-dialog-content-paper',
+      class: '.nui-drawer-content-paper',
       component: 'm.section',
-      description: 'The paper element of the dialog.',
+      description: 'The paper element of the drawer.',
     },
   ]}
 />
 
-### DialogHeader Props
+### DrawerHeader Props
 
-DialogHeader props inherit the props of `as` (by default, `'h2'`).
+DrawerHeader props inherit the props of `as` (by default, `'h2'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the dialog header.',
+      description: 'The content of the drawer header.',
     },
     {
       prop: 'as',
@@ -308,23 +279,23 @@ DialogHeader props inherit the props of `as` (by default, `'h2'`).
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogHeaderOwnerState>',
+      type: 'SxProp<DrawerHeaderOwnerState>',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
   ]}
 />
 
-### DialogBody Props
+### DrawerBody Props
 
-The dialog body props inherit the props of `as` (by default, `'div'`).
+The drawer body props inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the dialog body.',
+      description: 'The content of the drawer body.',
     },
     {
       prop: 'as',
@@ -334,23 +305,23 @@ The dialog body props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogBodyOwnerState>',
+      type: 'SxProp<DrawerBodyOwnerState>',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
   ]}
 />
 
-### DialogFooter Props
+### DrawerFooter Props
 
-DialogFooter props inherit the props of `as` (by default,`'div'`).
+DrawerFooter props inherit the props of `as` (by default,`'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the dialog footer.',
+      description: 'The content of the drawer footer.',
     },
     {
       prop: 'as',
@@ -360,33 +331,33 @@ DialogFooter props inherit the props of `as` (by default,`'div'`).
     },
     {
       prop: 'sx',
-      type: 'SxProp<DialogFooterOwnerState>',
+      type: 'SxProp<DrawerFooterOwnerState>',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
   ]}
 />
 
-### DialogTrigger Props
+### DrawerTrigger Props
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The element that triggers the dialog to open.',
+      description: 'The element that triggers the drawer to open.',
     },
   ]}
 />
 
-### DialogClose Props
+### DrawerClose Props
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The element that triggers the dialog to close',
+      description: 'The element that triggers the drawer to close',
     },
   ]}
 />

@@ -147,7 +147,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     classNames: classes.root,
   })
 
-  const [DialogContentSection, getDialogContentSectionProps] = useSlot({
+  const [DialogContentPaper, getDialogContentPaperProps] = useSlot({
     ownerState,
     elementType: ModalContent,
     style: styles.paper,
@@ -174,7 +174,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   return (
     <DialogRoot>
       <DialogContentRoot {...getDialogContentRootProps()}>
-        <DialogContentSection {...getDialogContentSectionProps()}>
+        <DialogContentPaper {...getDialogContentPaperProps()}>
           <DialogContentProvider value={ownerState}>
             {!hideCloseButton && (
               <DialogClose>
@@ -189,7 +189,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
             )}
             {children}
           </DialogContentProvider>
-        </DialogContentSection>
+        </DialogContentPaper>
       </DialogContentRoot>
     </DialogRoot>
   )
