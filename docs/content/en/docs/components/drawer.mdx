@@ -15,41 +15,47 @@ Drawer is a component that slides in from the side of the screen.
 
 ### HideBackdrop
 
-Set the `hideBackdrop` property of `Drawer` to `true` to hide the background overlay.
+Set the `hideBackdrop` property of Drawer to `true` to hide the background overlay.
 
 <Example {...drawer.hideBackdrop} />
 
 ### PreventScroll
 
-Set the `preventScroll` property of `Drawer` to `true` to prevent page scrolling when the drawer is open.
+Set the `preventScroll` property of Drawer to `true` to prevent page scrolling when the drawer is open.
 
 <Example {...drawer.preventScroll} />
 
 ### KeepMounted
 
-Set the `keepMounted` property of `Drawer` to `true` to keep the drawer content mounted when closed.
+Set the `keepMounted` property of Drawer to `true` to keep the drawer content mounted when closed.
 
 <Example {...drawer.keepMounted} />
 
 ### Sizes
 
-Use the `size` property of `DrawerContent` to set the size of the drawer, defaults to `md`.
+Use the `size` property of DrawerContent to set the size of the drawer, defaults to `md`.
 
 <Example {...drawer.sizes} />
 
 ### Placements
 
-Use the `placement` property of `DrawerContent` to set the display position of the drawer, defaults to `right`.
+Use the `placement` property of DrawerContent to set the display position of the drawer, defaults to `right`.
 
 <Example {...drawer.placements} />
 
 ### Custom Motion
 
-Use the `motionProps` property of `DrawerContent` to customize the animation effects for showing/hiding the drawer.
+Use the `motionProps` property of DrawerContent to customize the animation effects for showing/hiding the drawer.
 
 <Example {...drawer.customMotion} />
 
-### Controlled
+### Asynchronously Close
+
+DrawerClose supports asynchronously closing the drawer. The `onClick` event of its `children` can return a `Promise`, and the drawer will close after the `Promise` is resolved.
+
+<Example {...drawer.asynchronouslyClose} />
+
+### Controlled Drawer
 
 <Example {...drawer.controlled} />
 
@@ -128,6 +134,12 @@ Drawer props inherit the props of `as` (by default, `m.div`).
       description:
         'If true, the drawer will restore focus to previously focused element once the modal is hidden or unmounted.',
       default: 'true',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description:
+        'Callback function that is called when the drawer is closed.',
     },
     {
       prop: 'as',
@@ -345,7 +357,8 @@ DrawerFooter props inherit the props of `as` (by default,`'div'`).
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The element that triggers the drawer to open.',
+      description:
+        'The element that triggers the drawer to open, must support `onClick` event.',
     },
   ]}
 />
@@ -357,7 +370,8 @@ DrawerFooter props inherit the props of `as` (by default,`'div'`).
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The element that triggers the drawer to close',
+      description:
+        'The element that triggers the drawer to close, must support `onClick` event.',
     },
   ]}
 />

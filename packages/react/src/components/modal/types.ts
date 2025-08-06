@@ -65,6 +65,11 @@ export type ModalProps = {
    * @default true
    */
   restoreFocus?: boolean
+
+  /**
+   * Callback function that is called when the modal is closed.
+   */
+  onClose?: () => void
 }
 
 // ------------- ModalTrigger -------------

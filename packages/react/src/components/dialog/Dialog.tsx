@@ -57,6 +57,7 @@ export const Dialog = <
     closeOnEscape,
     closeOnInteractBackdrop,
     preventScroll,
+    onClose,
     hideBackdrop,
     ...remainingProps
   } = props
@@ -71,6 +72,7 @@ export const Dialog = <
       keepMounted={keepMounted}
       preventScroll={preventScroll}
       closeOnEscape={closeOnEscape}
+      onClose={onClose}
       closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
       <Provider hideBackdrop={hideBackdrop} {...remainingProps}>

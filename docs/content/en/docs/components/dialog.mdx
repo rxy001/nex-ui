@@ -17,54 +17,60 @@ Display a dialog with custom content that requires attention or provides additio
 
 ### HideBackdrop
 
-Set the `hideBackdrop` property of `Dialog` to `true` to hide the dialog's background overlay.
+Set the `hideBackdrop` property of Dialog to `true` to hide the dialog's background overlay.
 
 <Example {...dialog.hideBackdrop} />
 
 ### PreventScroll
 
-Set the `preventScroll` property of `Dialog` to `true` to prevent page scrolling when the dialog is open.
+Set the `preventScroll` property of Dialog to `true` to prevent page scrolling when the dialog is open.
 
 <Example {...dialog.preventScroll} />
 
 ### KeepMounted
 
-Set the `keepMounted` property of `Dialog` to `true` to keep the dialog content mounted when closed.
+Set the `keepMounted` property of Dialog to `true` to keep the dialog content mounted when closed.
 
 <Example {...dialog.keepMounted} />
 
 ### Sizes
 
-Use the `size` property of `DialogContent` to set the maximum width of the dialog, defaults to `md`.
+Use the `size` property of DialogContent to set the maximum width of the dialog, defaults to `md`.
 
 <Example {...dialog.sizes} />
 
 ### FullScreen
 
-Set the `fullScreen` property of `DialogContent` to `true` to make the dialog full-screen.
+Set the `fullScreen` property of DialogContent to `true` to make the dialog full-screen.
 
 <Example {...dialog.fullScreen} />
 
 ### Placements
 
-Use the `placement` property of `DialogContent` to set the display position of the dialog, defaults to `top`.
+Use the `placement` property of DialogContent to set the display position of the dialog, defaults to `top`.
 
 <Example {...dialog.placements} />
 
 ### Custom Motion
 
-Use the `motionProps` property of `DialogContent` to customize the animation effects for `visible` / `hidden`.
+Use the `motionProps` property of DialogContent to customize the animation effects for `visible` / `hidden`.
 
 <Example {...dialog.customMotion} />
 
 ### Overflow Scroll
 
-Use the `scroll` property of `DialogContent` to control the scrolling behavior of dialog content.
+Use the `scroll` property of DialogContent to control the scrolling behavior of dialog content.
 
 - `inside`: Content scrolls inside the dialog.
 - `outside`: Content scrolls outside the dialog.
 
 <Example {...dialog.scrollBehavior} />
+
+### Asynchronously Close
+
+DialogClose supports asynchronously closing the dialog. The `onClick` event of its `children` can return a `Promise` , and the dialog will close when the `Promise` is resolved.
+
+<Example {...dialog.asynchronouslyClose} />
 
 ### Controlled Dialog
 
@@ -145,6 +151,12 @@ Dialog props inherit the props of `as` (by default, `m.div`).
       description:
         'If true, the dialog will restore focus to previously focused element once the modal is hidden or unmounted.',
       default: 'true',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description:
+        'Callback function that is called when the dialog is closed.',
     },
     {
       prop: 'as',
@@ -374,7 +386,8 @@ DialogFooter props inherit the props of `as` (by default,`'div'`).
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The element that triggers the dialog to open.',
+      description:
+        'The element that triggers the dialog to open, must support `onClick` event.',
     },
   ]}
 />
@@ -386,7 +399,8 @@ DialogFooter props inherit the props of `as` (by default,`'div'`).
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The element that triggers the dialog to close',
+      description:
+        'The element that triggers the dialog to close, must support `onClick` event.',
     },
   ]}
 />

@@ -105,6 +105,11 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
    * @default true
    */
   restoreFocus?: boolean
+
+  /**
+   * Callback function that is called when the drawer is closed.
+   */
+  onClose?: () => void
 }
 
 export type DrawerOwnerState<

@@ -105,6 +105,11 @@ type DialogOwnProps<RootComponent extends ElementType> = {
    * @default true
    */
   closeOnInteractBackdrop?: boolean
+
+  /**
+   * Callback function that is called when the dialog is closed.
+   */
+  onClose?: () => void
 }
 
 export interface DialogPropsOverrides {}
