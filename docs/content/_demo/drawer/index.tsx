@@ -14,6 +14,8 @@ import controlledCode from './Controlled.demo?raw'
 import ControlledDemo from './Controlled.demo'
 import customMotionCode from './CustomMotion.demo?raw'
 import CustomMotionDemo from './CustomMotion.demo'
+import AsynchronouslyCloseDemo from './AsynchronouslyClose.demo'
+import asynchronouslyCloseCode from './AsynchronouslyClose.demo?raw'
 
 export const drawer = {
   usage: {
@@ -47,5 +49,9 @@ export const drawer = {
   customMotion: {
     code: customMotionCode,
     demo: <CustomMotionDemo />,
+  },
+  asynchronouslyClose: {
+    code: asynchronouslyCloseCode,
+    demo: <AsynchronouslyCloseDemo />,
   },
 }

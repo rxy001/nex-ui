@@ -18,6 +18,8 @@ import scrollBehaviorCode from './ScrollBehavior.demo?raw'
 import ScrollBehaviorDemo from './ScrollBehavior.demo'
 import customMotionCode from './CustomMotion.demo?raw'
 import CustomMotionDemo from './CustomMotion.demo'
+import AsynchronouslyCloseDemo from './AsynchronouslyClose.demo'
+import asynchronouslyCloseCode from './AsynchronouslyClose.demo?raw'
 
 export const dialog = {
   usage: {
@@ -59,5 +61,9 @@ export const dialog = {
   customMotion: {
     code: customMotionCode,
     demo: <CustomMotionDemo />,
+  },
+  asynchronouslyClose: {
+    code: asynchronouslyCloseCode,
+    demo: <AsynchronouslyCloseDemo />,
   },
 }

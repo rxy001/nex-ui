@@ -58,6 +58,7 @@ export const Drawer = <
     closeOnInteractBackdrop,
     preventScroll,
     hideBackdrop,
+    onClose,
     ...remainingProps
   } = props
 
@@ -71,6 +72,7 @@ export const Drawer = <
       keepMounted={keepMounted}
       preventScroll={preventScroll}
       closeOnEscape={closeOnEscape}
+      onClose={onClose}
       closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
       <Provider hideBackdrop={hideBackdrop} {...remainingProps}>

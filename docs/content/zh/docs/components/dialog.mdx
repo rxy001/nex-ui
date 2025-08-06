@@ -17,54 +17,60 @@ Dialog 显示需要关注或提供额外信息的自定义内容。
 
 ### HideBackdrop
 
-设置 `Dialog` 的 `hideBackdrop` 属性为 `true` 可以隐藏 Dialog 的背景遮罩。
+设置 Dialog 的 `hideBackdrop` 属性为 `true` 可以隐藏 Dialog 的背景遮罩。
 
 <Example {...dialog.hideBackdrop} />
 
 ### PreventScroll
 
-设置 `Dialog` 的 `preventScroll` 属性为 `true` 可以限制 Dialog 打开时页面滚动。
+设置 Dialog 的 `preventScroll` 属性为 `true` 可以限制 Dialog 打开时页面滚动。
 
 <Example {...dialog.preventScroll} />
 
 ### KeepMounted
 
-设置 `Dialog` 的 `keepMounted` 属性为 `true` 可以保持 Dialog 内容在关闭时仍然挂载。
+设置 Dialog 的 `keepMounted` 属性为 `true` 可以保持 Dialog 内容在关闭时仍然挂载。
 
 <Example {...dialog.keepMounted} />
 
 ### Sizes
 
-使用 `DialogContent` 的 `size` 属性可以设置 Dialog 的大小，默认为 `md`。
+DialogContent 的 `size` 属性可以设置 Dialog 的大小，默认为 `md`。
 
 <Example {...dialog.sizes} />
 
 ### FullScreen
 
-设置 `DialogContent` 的 `fullScreen` 属性为 `true` 可以使 Dialog 全屏显示。
+设置 DialogContent 的 `fullScreen` 属性为 `true` 可以使 Dialog 全屏显示。
 
 <Example {...dialog.fullScreen} />
 
 ### Placements
 
-使用 `DialogContent` 的 `placement` 属性可以设置 Dialog 的显示位置，默认为 `top`。
+DialogContent 的 `placement` 属性可以设置 Dialog 的显示位置，默认为 `top`。
 
 <Example {...dialog.placements} />
 
 ### Custom Motion
 
-使用 `DialogContent` 的 `motionProps` 属性可以自定义 `visible` / `hidden` 的动画效果。
+DialogContent 的 `motionProps` 属性可以自定义 `visible` / `hidden` 的动画效果。
 
 <Example {...dialog.customMotion} />
 
 ### Overflow Scroll
 
-使用 `DialogContent` 的 `scroll` 属性可以控制 Dialog 内容的滚动行为。
+DialogContent 的 `scroll` 属性可以控制 Dialog 内容的滚动行为。
 
 - `inside`: 内容在 Dialog 内部滚动。
 - `outside`: 内容在 Dialog 外部滚动。
 
 <Example {...dialog.scrollBehavior} />
+
+### Asynchronously Close
+
+DialogClose 支持异步关闭 Dialog ，其 `children` 的 `onClick` 事件可返回一个 `Promise` , Dialog 会在 `Promise` 被 `resolve` 后关闭。
+
+<Example {...dialog.asynchronouslyClose} />
 
 ### Controlled Dialog
 
@@ -144,6 +150,11 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
       type: 'boolean',
       description: '是否在 Dialog 关闭时恢复焦点到之前聚焦的元素。',
       default: 'true',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: 'Dialog 关闭时执行的回调函数。',
     },
     {
       prop: 'as',
@@ -373,7 +384,7 @@ DialogFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '触发 Dialog 打开的元素。',
+      description: '触发 Dialog 打开的元素，需支持 `onClick` 事件。',
     },
   ]}
 />
@@ -385,7 +396,7 @@ DialogFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '触发 Dialog 关闭的元素。',
+      description: '触发 Dialog 关闭的元素，需支持 `onClick` 事件。',
     },
   ]}
 />

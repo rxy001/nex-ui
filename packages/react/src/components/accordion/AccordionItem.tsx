@@ -4,7 +4,7 @@ import * as m from 'motion/react-m'
 import { useEvent } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { LazyMotion, AnimatePresence } from 'motion/react'
-import { useEffect, useId, useMemo, useRef } from 'react'
+import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
@@ -268,8 +268,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       ...indicatorMotionProps,
     },
   })
-
-  useEffect(() => {}, [])
 
   return (
     <LazyMotion features={motionFeatures}>

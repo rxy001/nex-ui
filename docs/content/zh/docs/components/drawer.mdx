@@ -17,41 +17,47 @@ Drawer 是一个从屏幕边缘滑出的浮层面板。
 
 ### HideBackdrop
 
-设置 `Drawer` 的 `hideBackdrop` 属性为 `true` 可以隐藏 Drawer 的背景遮罩。
+设置 Drawer 的 `hideBackdrop` 属性为 `true` 可以隐藏 Drawer 的背景遮罩。
 
 <Example {...drawer.hideBackdrop} />
 
 ### PreventScroll
 
-设置 `Drawer` 的 `preventScroll` 属性为 `true` 可以限制 Drawer 打开时页面滚动。
+设置 Drawer 的 `preventScroll` 属性为 `true` 可以限制 Drawer 打开时页面滚动。
 
 <Example {...drawer.preventScroll} />
 
 ### KeepMounted
 
-设置 `Drawer` 的 `keepMounted` 属性为 `true` 可以保持 Drawer 内容在关闭时仍然挂载。
+设置 Drawer 的 `keepMounted` 属性为 `true` 可以保持 Drawer 内容在关闭时仍然挂载。
 
 <Example {...drawer.keepMounted} />
 
 ### Sizes
 
-使用 `DrawerContent` 的 `size` 属性可以设置 Drawer 的大小，默认为 `md`。
+DrawerContent 的 `size` 属性可以设置 Drawer 的大小，默认为 `md`。
 
 <Example {...drawer.sizes} />
 
 ### Placements
 
-使用 `DrawerContent` 的 `placement` 属性可以设置 Drawer 的显示位置，默认为 `right`。
+DrawerContent 的 `placement` 属性可以设置 Drawer 的显示位置，默认为 `right`。
 
 <Example {...drawer.placements} />
 
 ### Custom Motion
 
-使用 `DrawerContent` 的 `motionProps` 属性可以自定义 Drawer 显示/隐藏的动画效果。
+DrawerContent 的 `motionProps` 属性可以自定义 Drawer 显示/隐藏的动画效果。
 
 <Example {...drawer.customMotion} />
 
-### Controlled
+### Asynchronously Close
+
+DrawerClose 支持异步关闭 Drawer，其 `children` 的 `onClick` 事件可返回一个 `Promise`，Drawer 会在 `Promise` 被 `resolve` 后关闭。
+
+<Example {...drawer.asynchronouslyClose} />
+
+### Controlled Drawer
 
 <Example {...drawer.controlled} />
 
@@ -129,6 +135,11 @@ Drawer Props 继承 `as` (默认为 `m.div`) 的 Props。
       type: 'boolean',
       description: '是否在 Drawer 关闭时恢复焦点到之前聚焦的元素。',
       default: 'true',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: 'Drawer 关闭时执行的回调函数。',
     },
     {
       prop: 'as',
@@ -346,7 +357,7 @@ DrawerFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '触发 Drawer 打开的元素。',
+      description: '触发 Drawer 打开的元素，需支持 `onClick` 事件。',
     },
   ]}
 />
@@ -358,7 +369,7 @@ DrawerFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
     {
       prop: 'children',
       type: 'ReactNode',
-      description: '触发 Drawer 关闭的元素。',
+      description: '触发 Drawer 关闭的元素，需支持 `onClick` 事件。',
     },
   ]}
 />
