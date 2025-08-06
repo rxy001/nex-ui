@@ -5,26 +5,19 @@ import {
   Modal,
   ModalBackdrop,
   ModalBody,
-  ModalClose,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalPanel,
   ModalRoot,
-  ModalTrigger,
 } from '../index'
 import { getScrollBarWidth } from '../ModalRoot'
 import type { ModalProps } from '../index'
 
-type TestModalProps = ModalProps & { onAnimationComplete?: (v: string) => void }
-
-function TestModal({ onAnimationComplete, ...props }: TestModalProps) {
+function TestModal(props: ModalProps) {
   return (
     <Modal {...props}>
-      <ModalRoot
-        data-testid='modal-root'
-        onAnimationComplete={onAnimationComplete}
-      >
+      <ModalRoot data-testid='modal-root'>
         <ModalBackdrop data-testid='modal-backdrop' />
         <ModalPanel data-testid='modal-panel'>
           <ModalContent data-testid='modal-content'>
@@ -42,7 +35,7 @@ function TestModal({ onAnimationComplete, ...props }: TestModalProps) {
   )
 }
 
-const ControlledModal = ({ defaultOpen = false, ...props }: TestModalProps) => {
+const ControlledModal = ({ defaultOpen = false, ...props }: ModalProps) => {
   const [open, setOpen] = useState(defaultOpen)
 
   return (
@@ -279,74 +272,23 @@ describe('Modal', () => {
     })
   })
 
-  it('should open when the ModalTrigger is clicked', async () => {
-    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-      <Modal>
-        <ModalTrigger>
-          <button data-testid='open-button'>Open Modal</button>
-        </ModalTrigger>
-        <ModalRoot data-testid='modal-root'>
-          <ModalPanel />
-        </ModalRoot>
-      </Modal>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(queryByTestId('modal-root')).toBeNull()
-    const openButton = getByTestId('open-button')
-
-    await user.click(openButton)
-    expect(queryByTestId('modal-root')).toBeInTheDocument()
-  })
-
-  it('should close when the ModalClose is clicked', async () => {
-    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-      <Modal defaultOpen>
-        <ModalClose>
-          <button data-testid='close-button'>Close Modal</button>
-        </ModalClose>
-        <ModalRoot data-testid='modal-root'>
-          <ModalPanel />
-        </ModalRoot>
-      </Modal>,
+  it('should onClose callback be called when modal is closed', async () => {
+    const onClose = jest.fn()
+    const { queryByTestId, rerender } = await renderWithNexUIProvider(
+      <TestModal open onClose={onClose} />,
       {
         useAct: true,
       },
     )
 
     expect(queryByTestId('modal-root')).toBeInTheDocument()
-    const closeButton = getByTestId('close-button')
 
-    await user.click(closeButton)
-    expect(queryByTestId('modal-root')).toBeNull()
-  })
+    rerender(<TestModal open={false} onClose={onClose} />)
 
-  it("should return children as-is when ModalTrigger's children is not a valid React element", async () => {
-    const { container } = await renderWithNexUIProvider(
-      <Modal>
-        <ModalTrigger>Child</ModalTrigger>
-      </Modal>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(container.textContent).toBe('Child')
-  })
-
-  it("should return children as-is when ModalClose's children is not a valid React element", async () => {
-    const { container } = await renderWithNexUIProvider(
-      <Modal>
-        <ModalClose>Child</ModalClose>
-      </Modal>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(container.textContent).toBe('Child')
+    await waitFor(() => {
+      expect(queryByTestId('modal-root')).toBeNull()
+      expect(onClose).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('PreventScroll', () => {
