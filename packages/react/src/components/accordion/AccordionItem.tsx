@@ -4,7 +4,7 @@ import * as m from 'motion/react-m'
 import { useEvent } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { LazyMotion, AnimatePresence } from 'motion/react'
-import { useId, useMemo, useRef } from 'react'
+import { useEffect, useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
@@ -184,7 +184,13 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
 
   const animate = expanded ? 'expanded' : 'unexpanded'
 
+  // Skip initial animation when first rendering and the item is expanded
   const motionInitialRef = useRef(animate)
+
+  if (motionInitialRef.current === 'expanded' && !expanded) {
+    // Restore open animation for subsequent renders
+    motionInitialRef.current = 'unexpanded'
+  }
 
   const contentMotionProps = keepMounted
     ? {
@@ -200,6 +206,9 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
         initial: motionInitialRef.current,
         animate: 'expanded',
         exit: 'unexpanded',
+        style: {
+          overflow: 'hidden',
+        },
       }
 
   const [AccordionItemRoot, getAccordionItemRootProps] = useSlot({
@@ -259,6 +268,8 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       ...indicatorMotionProps,
     },
   })
+
+  useEffect(() => {}, [])
 
   return (
     <LazyMotion features={motionFeatures}>
