@@ -50,6 +50,7 @@ export const checkboxRecipe = defineSlotRecipe({
     },
     label: {
       ml: '2',
+      lineHeight: 1,
     },
     checkedIcon: {
       opacity: 0,
@@ -102,7 +103,6 @@ export const checkboxRecipe = defineSlotRecipe({
     size: {
       sm: {
         root: {
-          h: '6',
           p: '1',
         },
         icon: {
@@ -116,7 +116,6 @@ export const checkboxRecipe = defineSlotRecipe({
       },
       md: {
         root: {
-          h: '8',
           p: '1.5',
         },
         icon: {
@@ -130,7 +129,6 @@ export const checkboxRecipe = defineSlotRecipe({
       },
       lg: {
         root: {
-          h: '10',
           p: '2',
         },
         icon: {

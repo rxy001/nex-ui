@@ -10,6 +10,8 @@ import type {
 
 export interface CheckboxPropsOverrides {}
 
+export type CheckboxValueType = number | string
+
 type CheckboxSlotProps<CheckboxComponent extends ElementType> = {
   root?: ComponentPropsWithCommonProps<
     'label',
@@ -135,12 +137,10 @@ export type CheckboxOwnerState<
   inGroup: boolean
 }
 
-export type CheckboxGroupValueType = number | string
-
 export interface CheckboxGroupPropsOverrides {}
 
 type CheckboxGroupOwnProps<
-  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  T extends CheckboxValueType = CheckboxValueType,
   CheckboxGroupComponent extends ElementType = 'div',
 > = {
   /**
@@ -208,7 +208,7 @@ type CheckboxGroupOwnProps<
 }
 
 export type CheckboxGroupProps<
-  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  T extends CheckboxValueType = CheckboxValueType,
   CheckboxGroupComponent extends ElementType = 'div',
 > = OverrideProps<
   CheckboxGroupComponent,
@@ -217,14 +217,14 @@ export type CheckboxGroupProps<
 >
 
 export type CheckboxGroupOwnerState<
-  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  T extends CheckboxValueType = CheckboxValueType,
   CheckboxGroupComponent extends ElementType = 'div',
 > = CheckboxGroupProps<T, CheckboxGroupComponent> & {
   value: T[]
 }
 
 export type CheckboxGroupContextValue<
-  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  T extends CheckboxValueType = CheckboxValueType,
 > = {
   toggleValue: (value: T) => void
   isChecked: (value?: T) => boolean

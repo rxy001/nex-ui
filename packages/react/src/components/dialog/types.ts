@@ -338,7 +338,7 @@ export type DialogFooterOwnerState<RootComponent extends ElementType = 'div'> =
   DialogFooterOwnProps<RootComponent>
 
 // ------------- DialogTrigger -------------
-export type DialogTriggerProps = {
+export interface DialogTriggerProps {
   children?: ReactNode
 }
 

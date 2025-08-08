@@ -68,7 +68,7 @@ export type ModalProps = {
 }
 
 // ------------- ModalTrigger -------------
-export type ModalTriggerProps = {
+export interface ModalTriggerProps {
   children?: ReactNode
 }
 

@@ -64,6 +64,7 @@ const useSlotAriaProps = (
     checked,
     children,
     value,
+    name,
     role,
     slotProps,
     'aria-label': ariaLabel,
@@ -74,14 +75,14 @@ const useSlotAriaProps = (
     tabIndex = 0,
   } = ownerState
 
-  const id = useId()
+  const labelId = useId()
 
   return useMemo(() => {
     const labelProps = slotProps?.label
     const stringChildren = isString(children)
 
     const label = {
-      id: labelProps?.id ?? (stringChildren ? id : undefined),
+      id: labelProps?.id ?? (stringChildren ? labelId : undefined),
     }
 
     let input: InputHTMLAttributes<HTMLInputElement> = {
@@ -94,8 +95,10 @@ const useSlotAriaProps = (
       input = {
         disabled,
         checked,
+        role,
         type,
         value,
+        name,
         ...input,
       }
     } else {
@@ -117,7 +120,8 @@ const useSlotAriaProps = (
     checked,
     children,
     disabled,
-    id,
+    labelId,
+    name,
     role,
     slotProps?.label,
     tabIndex,
@@ -153,8 +157,8 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     }
 
     if (!('value' in props)) {
-      console.warn(
-        '[Nex UI] Checkbox: The CheckboxGroup is being used, but `value` is not provided.',
+      console.error(
+        '[Nex UI] Checkbox: The `value` prop is required when using Checkbox inside a CheckboxGroup',
       )
     }
   }
@@ -268,14 +272,11 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     externalForwardedProps: remainingProps,
     classNames: classes.input,
     style: styles.input,
-    a11y: {
-      ...slotAriaProps.input,
-      onKeyUp: handleKeyUp,
-    },
+    a11y: slotAriaProps.input,
     additionalProps: {
-      name,
       onChange: handleChange,
       onClick: handleClick,
+      onKeyUp: handleKeyUp,
       'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },

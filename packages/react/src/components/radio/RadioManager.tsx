@@ -1,0 +1,3 @@
+class RadioManager {
+  constructor() {}
+}

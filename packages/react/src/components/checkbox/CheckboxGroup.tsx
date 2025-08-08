@@ -16,11 +16,12 @@ import type { ElementType } from 'react'
 import type {
   CheckboxGroupContextValue,
   CheckboxGroupProps,
-  CheckboxGroupValueType,
+  CheckboxValueType,
   CheckboxGroupOwnerState,
 } from './types'
+import type { RadioValueType } from '../radio/types'
 
-const useSlotClasses = <T extends number | string>(
+const useSlotClasses = <T extends CheckboxValueType>(
   ownerState: CheckboxGroupOwnerState<T>,
 ) => {
   const { prefix } = useNexUI()
@@ -39,12 +40,12 @@ const useSlotClasses = <T extends number | string>(
 }
 
 export const CheckboxGroup = <
-  T extends CheckboxGroupValueType = CheckboxGroupValueType,
+  T extends CheckboxValueType = CheckboxValueType,
   CheckboxGroupComponent extends ElementType = 'div',
 >(
   inProps: CheckboxGroupProps<T, CheckboxGroupComponent>,
 ) => {
-  const props = useDefaultProps<CheckboxGroupProps<T>>({
+  const props = useDefaultProps<CheckboxGroupProps>({
     name: 'CheckboxGroup',
     props: inProps,
   })
@@ -64,13 +65,13 @@ export const CheckboxGroup = <
     ...remainingProps
   } = props
 
-  const [values, setValues] = useControlledState<T[]>(
+  const [values, setValues] = useControlledState(
     value,
     defaultValue,
     onValueChange,
   )
 
-  const ownerState: CheckboxGroupOwnerState<T> = {
+  const ownerState: CheckboxGroupOwnerState = {
     ...props,
     orientation,
     value: values,
@@ -95,19 +96,19 @@ export const CheckboxGroup = <
     },
   })
 
-  const ctx: CheckboxGroupContextValue<T> = useMemo(
+  const ctx = useMemo<CheckboxGroupContextValue>(
     () => ({
       disabled,
       name,
       size,
       color,
       radius,
-      toggleValue: (value: T) => {
+      toggleValue: (value: RadioValueType) => {
         // istanbul ignore next
         if (disabled) {
           return
         }
-        let newValues: T[]
+        let newValues: RadioValueType[]
         if (values.includes(value)) {
           newValues = values.filter((existingValue) => existingValue !== value)
         } else {
@@ -116,7 +117,7 @@ export const CheckboxGroup = <
 
         setValues(newValues)
       },
-      isChecked: (value?: T) => {
+      isChecked: (value?: RadioValueType) => {
         return value ? values.includes(value) : false
       },
     }),
@@ -125,9 +126,7 @@ export const CheckboxGroup = <
 
   return (
     <CheckboxGroupRoot {...getCheckboxGroupRootProps()}>
-      <CheckboxGroupProvider value={ctx as CheckboxGroupContextValue}>
-        {children}
-      </CheckboxGroupProvider>
+      <CheckboxGroupProvider value={ctx}>{children}</CheckboxGroupProvider>
     </CheckboxGroupRoot>
   )
 }
