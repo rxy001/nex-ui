@@ -277,15 +277,10 @@ describe('DrawerContent', () => {
         },
       )
       const content = getByTestId('drawer-content')
-      const header = getByTestId('drawer-header')
-      const body = getByTestId('drawer-body')
       const paper = content.querySelector(`.${drawerContentClasses.paper}`)
 
       expect(paper).toHaveAttribute('aria-labelledby', 'custom-label')
       expect(paper).toHaveAttribute('aria-describedby', 'custom-description')
-
-      expect(header).toHaveAttribute('id', 'custom-label')
-      expect(body).toHaveAttribute('id', 'custom-description')
     })
   })
 })

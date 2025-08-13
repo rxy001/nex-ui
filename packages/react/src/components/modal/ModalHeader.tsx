@@ -5,14 +5,17 @@ import { nex } from '@nex-ui/styled'
 import { useSlotProps } from '../utils'
 import { useModal } from './ModalContext'
 import { modalHeaderRecipe } from '../../theme/recipes'
+import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalHeaderProps } from './types'
 
 const style = modalHeaderRecipe()
 
 const useAriaProps = (props: ModalHeaderProps) => {
-  const modal = useModal()
-  const labelId = props.id ?? modal['aria-labelledby']
+  const { 'aria-labelledby': labelledBy } = useModal()
+  const labelId =
+    props.id ??
+    (labelledBy?.startsWith(MODAL_INTERNAL_ID_PREFIX) ? labelledBy : undefined)
 
   return useMemo(() => {
     return {

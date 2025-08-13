@@ -185,7 +185,7 @@ describe('ButtonBase', () => {
     await user.tab()
     expect(document.activeElement).toBe(button)
 
-    await user.keyboard('{Space}')
+    await user.keyboard('{ }')
     expect(onClick).toHaveBeenCalledTimes(1)
 
     await user.keyboard('{Enter}')
@@ -204,7 +204,8 @@ describe('ButtonBase', () => {
     const span = getByRole('button')
     await user.tab()
     expect(document.activeElement).toBe(span)
-    await user.keyboard('{Space}')
+
+    await user.keyboard('{ }')
     expect(onClick).toHaveBeenCalledTimes(1)
 
     await user.keyboard('{Enter}')

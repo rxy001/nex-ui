@@ -88,10 +88,18 @@ exports[`Checkbox should render with default props 1`] = `
   border-radius: calc(var(--nui-radii-lg) * .6);
 }
 
+.emotion-3 {
+  -webkit-margin-start: var(--nui-spaces-2);
+  margin-inline-start: var(--nui-spaces-2);
+  font-size: var(--nui-font-sizes-lg);
+}
+
 <label
   class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-0"
 >
   <input
+    aria-label="Checkbox"
+    aria-labelledby="«rj»"
     class="nui-checkbox-input emotion-1"
     tabindex="0"
     type="checkbox"
@@ -118,6 +126,12 @@ exports[`Checkbox should render with default props 1`] = `
         stroke-linejoin="round"
       />
     </svg>
+  </span>
+  <span
+    class="nui-checkbox-label emotion-3"
+    id="«rj»"
+  >
+    Checkbox
   </span>
 </label>
 `;

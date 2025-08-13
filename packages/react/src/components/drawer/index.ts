@@ -17,4 +17,9 @@ export type {
   DrawerHeaderOwnerState,
   DrawerBodyOwnerState,
   DrawerFooterOwnerState,
+  DrawerPropsOverrides,
+  DrawerBodyPropsOverrides,
+  DrawerFooterPropsOverrides,
+  DrawerHeaderPropsOverrides,
+  DrawerContentPropsOverrides,
 } from './types'

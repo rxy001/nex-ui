@@ -309,14 +309,9 @@ describe('DialogContent', () => {
       )
       const content = getByTestId('dialog-content')
       const paper = content.querySelector(`.${dialogContentClasses.paper}`)
-      const header = getByTestId('dialog-header')
-      const body = getByTestId('dialog-body')
 
       expect(paper).toHaveAttribute('aria-labelledby', 'custom-label')
       expect(paper).toHaveAttribute('aria-describedby', 'custom-description')
-
-      expect(header).toHaveAttribute('id', 'custom-label')
-      expect(body).toHaveAttribute('id', 'custom-description')
     })
   })
 })

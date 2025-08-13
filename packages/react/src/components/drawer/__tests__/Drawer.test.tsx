@@ -6,6 +6,8 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerFooter,
+  DrawerClose,
+  DrawerTrigger,
 } from '../index'
 import {
   drawerClasses,
@@ -198,6 +200,52 @@ describe('Drawer', () => {
 
       const drawerFooter = getByTestId('drawer-footer')
       expect(drawerFooter).toHaveClass(drawerFooterClasses.root)
+    })
+  })
+
+  describe('DrawerTrigger', () => {
+    it('should open when the DrawerTrigger is clicked', async () => {
+      const { getByTestId, queryByTestId, user } =
+        await renderWithNexUIProvider(
+          <Drawer>
+            <DrawerTrigger>
+              <button data-testid='open-button'>Open Drawer</button>
+            </DrawerTrigger>
+            <DrawerContent data-testid='drawer-content' />
+          </Drawer>,
+          {
+            useAct: true,
+          },
+        )
+
+      expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
+      const openButton = getByTestId('open-button')
+
+      await user.click(openButton)
+      expect(queryByTestId('drawer-content')).toBeInTheDocument()
+    })
+  })
+
+  describe('DrawerClose', () => {
+    it('should close when the DiglogClose is clicked', async () => {
+      const { getByTestId, queryByTestId, user } =
+        await renderWithNexUIProvider(
+          <Drawer defaultOpen>
+            <DrawerClose>
+              <button data-testid='close-button'>Close Drawer</button>
+            </DrawerClose>
+            <DrawerContent data-testid='drawer-content' />
+          </Drawer>,
+          {
+            useAct: true,
+          },
+        )
+
+      expect(queryByTestId('drawer-content')).toBeInTheDocument()
+      const closeButton = getByTestId('close-button')
+
+      await user.click(closeButton)
+      expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
     })
   })
 })

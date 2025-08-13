@@ -34,7 +34,7 @@ describe('Checkbox', () => {
 
   it('should render with default props', async () => {
     const { container, getByRole } = await renderWithNexUIProvider(
-      <Checkbox />,
+      <Checkbox>Checkbox</Checkbox>,
       {
         useAct: true,
       },
@@ -312,8 +312,8 @@ describe('Checkbox', () => {
     consoleSpy.mockRestore()
   })
 
-  it("should warn when Checkbox's value is not set within CheckboxGroup", async () => {
-    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation()
+  it("should error when Checkbox's value is not set within CheckboxGroup", async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
 
     await renderWithNexUIProvider(
       <CheckboxGroup>
@@ -325,7 +325,7 @@ describe('Checkbox', () => {
     )
 
     expect(consoleSpy).toHaveBeenCalledWith(
-      '[Nex UI] Checkbox: The CheckboxGroup is being used, but `value` is not provided.',
+      '[Nex UI] Checkbox: The `value` prop is required when using Checkbox inside a CheckboxGroup.',
     )
 
     consoleSpy.mockRestore()
@@ -517,12 +517,14 @@ describe('Checkbox', () => {
       const checkbox = getByRole('checkbox')
 
       expect(checkboxRoot).not.toHaveClass(checkboxClasses.checked)
+      expect(checkbox).toHaveAttribute('aria-checked', 'false')
 
       await act(async () => {
         fireEvent.click(checkbox)
       })
 
       expect(checkboxRoot).toHaveClass(checkboxClasses.checked)
+      expect(checkbox).toHaveAttribute('aria-checked', 'true')
     })
 
     it('should check non-input elements within CheckboxGroup when clicked', async () => {
@@ -546,11 +548,10 @@ describe('Checkbox', () => {
       expect(checkboxRoot).toHaveClass(checkboxClasses.checked)
     })
 
-    it('should activate non-interactive elements when space is pressed', async () => {
-      const onClick = jest.fn()
-
+    it('should activate non-input elements when space is pressed', async () => {
+      const onChange = jest.fn()
       const { user, getByRole } = await renderWithNexUIProvider(
-        <Checkbox as='span' onClick={onClick}>
+        <Checkbox as='span' onCheckedChange={onChange}>
           Focusable Span
         </Checkbox>,
         {
@@ -562,8 +563,13 @@ describe('Checkbox', () => {
       await user.tab()
       expect(document.activeElement).toBe(span)
 
-      await user.keyboard('{Space}')
-      expect(onClick).toHaveBeenCalled()
+      await user.keyboard('{ }')
+      expect(span).toHaveAttribute('aria-checked', 'true')
+      expect(onChange).toHaveBeenCalledWith(true)
+
+      await user.keyboard('{ }')
+      expect(span).toHaveAttribute('aria-checked', 'false')
+      expect(onChange).toHaveBeenCalledWith(false)
     })
   })
 })
