@@ -21,6 +21,8 @@ import type {
   DrawerHeaderRecipe,
   DrawerBodyRecipe,
   DrawerFooterRecipe,
+  RadioRecipe,
+  RadioGroupRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -64,6 +66,10 @@ import type {
   DrawerHeaderOwnerState,
   DrawerHeaderProps,
   DrawerOwnerState,
+  RadioOwnerState,
+  RadioProps,
+  RadioGroupOwnerState,
+  RadioGroupProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -200,6 +206,18 @@ export type ComponentThemes = {
       | ComponentThemeObject<DrawerFooterRecipe>
       | ComponentThemeFn<DrawerFooterOwnerState, DrawerFooterRecipe>
     defaultProps?: DrawerFooterProps
+  }
+  Radio?: {
+    styleOverrides?:
+      | ComponentThemeObject<RadioRecipe>
+      | ComponentThemeFn<RadioOwnerState, RadioRecipe>
+    defaultProps?: RadioProps
+  }
+  RadioGroup?: {
+    styleOverrides?:
+      | ComponentThemeObject<RadioGroupRecipe>
+      | ComponentThemeFn<RadioGroupOwnerState, RadioGroupRecipe>
+    defaultProps?: RadioGroupProps
   }
 }
 

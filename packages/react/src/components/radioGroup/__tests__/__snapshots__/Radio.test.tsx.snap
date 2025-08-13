@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio should render with default props 1`] = `
+.emotion-0 {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding: var(--nui-spaces-1-5);
+  height: var(--nui-sizes-8);
+}
+
+.emotion-1 {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: inherit;
+  z-index: 1;
+}
+
+.emotion-1:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true])+* {
+  border-color: var(--nui-colors-blue-secondary);
+}
+
+.emotion-1:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+* {
+  outline: var(--nui-borders-focus-visible-outline);
+  outline-offset: var(--nui-spaces-0-5);
+}
+
+.emotion-2 {
+  border-radius: var(--nui-radii-full);
+  border: var(--nui-borders-md);
+  border-color: var(--nui-colors-gray-highlight);
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  box-sizing: border-box;
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  width: var(--nui-sizes-5);
+  height: var(--nui-sizes-5);
+}
+
+.emotion-2::before {
+  content: "";
+  display: block;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  border-radius: var(--nui-radii-full);
+  background-color: var(--nui-colors-blue-primary);
+  -webkit-transition: var(--nui-transitions-all);
+  transition: var(--nui-transitions-all);
+  width: var(--nui-sizes-2);
+  height: var(--nui-sizes-2);
+}
+
+.emotion-3 {
+  -webkit-margin-start: var(--nui-spaces-2);
+  margin-inline-start: var(--nui-spaces-2);
+  font-size: var(--nui-font-sizes-lg);
+}
+
+<label
+  class="nui-radio-root nui-radio-size-md nui-radio-color-blue emotion-0"
+>
+  <input
+    aria-label="Radio"
+    aria-labelledby="«re»"
+    class="nui-radio-input emotion-1"
+    tabindex="0"
+    type="radio"
+  />
+  <span
+    class="nui-radio-dot emotion-2"
+  />
+  <span
+    class="nui-radio-label emotion-3"
+    id="«re»"
+  >
+    Radio
+  </span>
+</label>
+`;
