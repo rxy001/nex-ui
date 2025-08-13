@@ -5,14 +5,19 @@ import { useMemo } from 'react'
 import { useSlotProps } from '../utils'
 import { modalBodyRecipe } from '../../theme/recipes'
 import { useModal } from './ModalContext'
+import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalBodyProps } from './types'
 
 const style = modalBodyRecipe()
 
 const useAriaProps = (props: ModalBodyProps) => {
-  const modal = useModal()
-  const bodyId = props.id ?? modal['aria-describedby']
+  const { 'aria-describedby': describedBy } = useModal()
+  const bodyId =
+    props.id ??
+    (describedBy?.startsWith(MODAL_INTERNAL_ID_PREFIX)
+      ? describedBy
+      : undefined)
 
   return useMemo(() => {
     return {

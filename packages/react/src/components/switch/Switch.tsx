@@ -168,7 +168,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
-    // Compatible with non interactive elements
     if (
       event.currentTarget.tagName !== 'INPUT' &&
       event.target === event.currentTarget
@@ -178,10 +177,9 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
-    // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&
-      event.key === 'Space' &&
+      event.key === ' ' &&
       event.target === event.currentTarget &&
       event.currentTarget.tagName !== 'INPUT'
     ) {

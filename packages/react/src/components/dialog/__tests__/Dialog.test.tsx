@@ -6,6 +6,8 @@ import {
   DialogHeader,
   DialogFooter,
   DialogBody,
+  DialogTrigger,
+  DialogClose,
 } from '../index'
 import {
   dialogBodyClasses,
@@ -198,6 +200,52 @@ describe('Dialog', () => {
 
       const dialogFooter = getByTestId('dialog-footer')
       expect(dialogFooter).toHaveClass(dialogFooterClasses.root)
+    })
+  })
+
+  describe('DialogClose', () => {
+    it('should close when the DiglogClose is clicked', async () => {
+      const { getByTestId, queryByTestId, user } =
+        await renderWithNexUIProvider(
+          <Dialog defaultOpen>
+            <DialogClose>
+              <button data-testid='close-button'>Close Dialog</button>
+            </DialogClose>
+            <DialogContent data-testid='dialog-content' />
+          </Dialog>,
+          {
+            useAct: true,
+          },
+        )
+
+      expect(queryByTestId('dialog-content')).toBeInTheDocument()
+      const closeButton = getByTestId('close-button')
+
+      await user.click(closeButton)
+      expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('DialogTrigger', () => {
+    it('should open when the DialogTrigger is clicked', async () => {
+      const { getByTestId, queryByTestId, user } =
+        await renderWithNexUIProvider(
+          <Dialog>
+            <DialogTrigger>
+              <button data-testid='open-button'>Open Dialog</button>
+            </DialogTrigger>
+            <DialogContent data-testid='dialog-content' />
+          </Dialog>,
+          {
+            useAct: true,
+          },
+        )
+
+      expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
+      const openButton = getByTestId('open-button')
+
+      await user.click(openButton)
+      expect(queryByTestId('dialog-content')).toBeInTheDocument()
     })
   })
 })

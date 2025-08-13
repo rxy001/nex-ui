@@ -426,11 +426,10 @@ describe('Switch', () => {
       expect(input).toHaveAttribute('aria-checked', 'true')
     })
 
-    it('should activate non-interactive elements when space is pressed', async () => {
-      const onClick = jest.fn()
-
+    it('should activate non-input elements when space is pressed', async () => {
+      const onChange = jest.fn()
       const { user, getByRole } = renderWithNexUIProvider(
-        <Switch as='span' onClick={onClick}>
+        <Switch as='span' onCheckedChange={onChange}>
           Focusable Span
         </Switch>,
       )
@@ -439,8 +438,13 @@ describe('Switch', () => {
       await user.tab()
       expect(document.activeElement).toBe(span)
 
-      await user.keyboard('{Space}')
-      expect(onClick).toHaveBeenCalled()
+      await user.keyboard('{ }')
+      expect(span).toHaveAttribute('aria-checked', 'true')
+      expect(onChange).toHaveBeenCalledWith(true)
+
+      await user.keyboard('{ }')
+      expect(span).toHaveAttribute('aria-checked', 'false')
+      expect(onChange).toHaveBeenCalledWith(false)
     })
   })
 })
