@@ -19,4 +19,9 @@ export type {
   DialogFooterOwnerState,
   DialogHeaderOwnerState,
   DialogContentOwnerState,
+  DialogPropsOverrides,
+  DialogBodyPropsOverrides,
+  DialogFooterPropsOverrides,
+  DialogHeaderPropsOverrides,
+  DialogContentPropsOverrides,
 } from './types'

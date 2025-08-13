@@ -7,6 +7,7 @@ import { modalContentRecipe } from '../../theme/recipes'
 import { ModalProvider, useModal } from './ModalContext'
 import { FocusTrap } from '../focusTrap'
 import { useModalManager } from './ModalManager'
+import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalContentProps } from './types'
 
@@ -18,8 +19,9 @@ const useAriaProps = (props: ModalContentProps) => {
 
   const {
     tabIndex = -1,
-    'aria-labelledby': labelledBy = labelId,
-    'aria-describedby': describedBy = descriptionId,
+    'aria-labelledby': labelledBy = `${MODAL_INTERNAL_ID_PREFIX}${labelId}`,
+    'aria-describedby':
+      describedBy = `${MODAL_INTERNAL_ID_PREFIX}${descriptionId}`,
   } = props
 
   return useMemo(() => {

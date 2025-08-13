@@ -57,8 +57,8 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     // Limit the repeated triggering of the click event when the Enter key is pressed.
     if (
       focusVisible &&
-      event.key === 'Enter' &&
       event.target === event.currentTarget &&
+      (event.key === ' ' || event.key === 'Enter') &&
       (event.currentTarget.tagName === 'BUTTON' ||
         event.currentTarget.tagName === 'A')
     ) {
@@ -67,11 +67,10 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
   })
 
   const handleKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
-    // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&
       event.target === event.currentTarget &&
-      (event.key === 'Space' || event.key === 'Enter')
+      (event.key === ' ' || event.key === 'Enter')
     ) {
       event.currentTarget.click()
     }

@@ -116,3 +116,4 @@ https://github.com/microsoft/TypeScript/issues/40426
 
 <!-- 39. modal - preventScroll:true 应该将 overflow:hidden 添加到相应的 container 上 -->
 
+<!-- 40. modal 的 aria-labelledby 不应该传给 header -->
