@@ -32,8 +32,13 @@ export const radioClasses = generateUtilityClasses('nui-radio', [
 
 export const radioGroupClasses = generateUtilityClasses('nui-radio-group', [
   'root',
-  'vertical',
-  'horizontal',
+
+  'orientation-vertical',
+  'orientation-horizontal',
+
+  'size-sm',
+  'size-md',
+  'size-lg',
 
   'label',
   'wrapper',

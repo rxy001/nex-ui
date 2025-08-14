@@ -22,19 +22,19 @@ import type {
 
 const useSlotClasses = (ownerState: RadioGroupOwnerState) => {
   const { prefix } = useNexUI()
-  const { orientation, classes } = ownerState
+  const { orientation, classes, size } = ownerState
 
   return useMemo(() => {
     const radioGroupRoot = `${prefix}-radio-group`
 
     const slots = {
-      root: ['root', orientation],
+      root: ['root', `orientation-${orientation}`, `size-${size}`],
       label: ['label'],
       wrapper: ['wrapper'],
     }
 
     return composeClasses(slots, getUtilityClass(radioGroupRoot), classes)
-  }, [prefix, orientation, classes])
+  }, [prefix, orientation, size, classes])
 }
 
 const useSlotAriaProps = (ownerState: RadioGroupOwnerState) => {
