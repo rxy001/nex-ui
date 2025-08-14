@@ -3,7 +3,6 @@ import {
   renderWithNexUIProvider,
   testComponentStability,
   testRootClassName,
-  testSizeClasses,
 } from '~/tests/shared'
 import { act, fireEvent } from '@testing-library/react'
 import { RadioGroup, Radio } from '../index'
@@ -25,8 +24,6 @@ describe('RadioGroup', () => {
   testComponentStability(<TestComponent />)
 
   testRootClassName(<TestComponent className='test-class' />, 'test-class')
-
-  testSizeClasses(<TestComponent />, radioGroupClasses)
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<TestComponent />)

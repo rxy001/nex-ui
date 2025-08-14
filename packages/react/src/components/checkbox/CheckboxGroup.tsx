@@ -23,19 +23,19 @@ import type {
 const useSlotClasses = (ownerState: CheckboxGroupOwnerState) => {
   const { prefix } = useNexUI()
 
-  const { orientation, classes, size } = ownerState
+  const { orientation, classes } = ownerState
 
   return useMemo(() => {
     const dividerRoot = `${prefix}-checkbox-group`
 
     const slots = {
-      root: ['root', `orientation-${orientation}`, `size-${size}`],
+      root: ['root', `orientation-${orientation}`],
       label: ['label'],
       wrapper: ['wrapper'],
     }
 
     return composeClasses(slots, getUtilityClass(dividerRoot), classes)
-  }, [prefix, orientation, size, classes])
+  }, [prefix, orientation, classes])
 }
 
 const useSlotAriaProps = (ownerState: CheckboxGroupOwnerState) => {
@@ -86,7 +86,7 @@ export const CheckboxGroup = <
     radius,
     value,
     label,
-    size = 'md',
+    size,
     orientation = 'horizontal',
     defaultValue = [],
     ...remainingProps
@@ -101,7 +101,6 @@ export const CheckboxGroup = <
   const ownerState: CheckboxGroupOwnerState = {
     ...props,
     orientation,
-    size,
     value: values,
   }
 

@@ -9,6 +9,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  gap: var(--nui-spaces-2);
 }
 
 .emotion-1 {
@@ -39,6 +40,10 @@ exports[`CheckboxGroup should render with default props 1`] = `
   max-width: fit-content;
   height: var(--nui-sizes-8);
   padding: var(--nui-spaces-1-5);
+  -webkit-margin-start: calc(var(--nui-spaces-1-5) * -1);
+  margin-inline-start: calc(var(--nui-spaces-1-5) * -1);
+  -webkit-margin-end: var(--nui-spaces-1-5);
+  margin-inline-end: var(--nui-spaces-1-5);
 }
 
 .emotion-3 {
@@ -115,7 +120,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
 }
 
 <div
-  class="nui-checkbox-group-root nui-checkbox-group-orientation-horizontal nui-checkbox-group-size-md emotion-0"
+  class="nui-checkbox-group-root nui-checkbox-group-orientation-horizontal emotion-0"
   role="group"
 >
   <div
@@ -126,7 +131,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
     >
       <input
         aria-label="orange"
-        aria-labelledby="«rt»"
+        aria-labelledby="«rh»"
         class="nui-checkbox-input emotion-3"
         tabindex="0"
         type="checkbox"
@@ -157,7 +162,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
       <span
         class="nui-checkbox-label emotion-5"
-        id="«rt»"
+        id="«rh»"
       >
         orange
       </span>
@@ -167,7 +172,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
     >
       <input
         aria-label="pear"
-        aria-labelledby="«ru»"
+        aria-labelledby="«ri»"
         class="nui-checkbox-input emotion-3"
         tabindex="0"
         type="checkbox"
@@ -198,7 +203,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
       <span
         class="nui-checkbox-label emotion-5"
-        id="«ru»"
+        id="«ri»"
       >
         pear
       </span>
@@ -208,7 +213,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
     >
       <input
         aria-label="Apple"
-        aria-labelledby="«rv»"
+        aria-labelledby="«rj»"
         class="nui-checkbox-input emotion-3"
         tabindex="0"
         type="checkbox"
@@ -239,7 +244,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
       <span
         class="nui-checkbox-label emotion-5"
-        id="«rv»"
+        id="«rj»"
       >
         Apple
       </span>
