@@ -1,6 +1,9 @@
 import type { ReactNode, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { CheckboxVariants } from '../../theme/recipes'
+import type {
+  CheckboxVariants,
+  CheckboxGroupVariants,
+} from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
@@ -137,20 +140,44 @@ export type CheckboxOwnerState<
 
 export interface CheckboxGroupPropsOverrides {}
 
+type CheckboxGroupSlotProps<
+  T extends string | number,
+  RootComponent extends ElementType,
+> = {
+  label?: ComponentPropsWithCommonProps<
+    'h3',
+    CheckboxGroupOwnerState<T, RootComponent>
+  >
+  wrapper?: ComponentPropsWithCommonProps<
+    'div',
+    CheckboxGroupOwnerState<T, RootComponent>
+  >
+}
+
 type CheckboxGroupOwnProps<
   T extends number | string = number | string,
-  CheckboxGroupComponent extends ElementType = 'div',
+  RootComponent extends ElementType = 'div',
 > = {
   /**
    * The component used for the root element.
    * @default 'div'
    */
-  as?: CheckboxGroupComponent
+  as?: RootComponent
 
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CheckboxGroupOwnerState<T, CheckboxGroupComponent>>
+  sx?: SxProp<CheckboxGroupOwnerState<T, RootComponent>>
+
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: CheckboxGroupSlotProps<T, RootComponent>
+
+  /**
+   * The className used for each slot.
+   */
+  classes?: ComponentUtilityClasses<'root' | 'label' | 'wrapper'>
 
   /**
    * The current selected values. (controlled)
@@ -190,8 +217,9 @@ type CheckboxGroupOwnProps<
 
   /**
    * The size of the checkboxes.
+   * @default 'md'
    */
-  size?: CheckboxVariants['size']
+  size?: CheckboxGroupVariants['size']
 
   /**
    * The border radius of the checkboxes.
@@ -202,23 +230,30 @@ type CheckboxGroupOwnProps<
    * The axis the checkbox group items should align with.
    * @default 'horizontal'
    */
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: CheckboxGroupVariants['orientation']
+
+  /**
+   * The label of the checkbox group.
+   */
+  label?: string
 }
 
 export type CheckboxGroupProps<
   T extends number | string = number | string,
-  CheckboxGroupComponent extends ElementType = 'div',
+  RootComponent extends ElementType = 'div',
 > = OverrideProps<
-  CheckboxGroupComponent,
-  CheckboxGroupOwnProps<T, CheckboxGroupComponent>,
+  RootComponent,
+  CheckboxGroupOwnProps<T, RootComponent>,
   CheckboxGroupPropsOverrides
 >
 
 export type CheckboxGroupOwnerState<
   T extends number | string = number | string,
-  CheckboxGroupComponent extends ElementType = 'div',
-> = CheckboxGroupProps<T, CheckboxGroupComponent> & {
+  RootComponent extends ElementType = 'div',
+> = CheckboxGroupProps<T, RootComponent> & {
   value: T[]
+  orientation: CheckboxGroupVariants['orientation']
+  size: CheckboxGroupVariants['size']
 }
 
 export type CheckboxGroupContextValue<
