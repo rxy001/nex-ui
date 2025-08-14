@@ -3,6 +3,7 @@ import {
   renderWithNexUIProvider,
   testComponentStability,
   testRootClassName,
+  testSizeClasses,
 } from '~/tests/shared'
 import { act, fireEvent } from '@testing-library/react'
 import { RadioGroup, Radio } from '../index'
@@ -25,13 +26,15 @@ describe('RadioGroup', () => {
 
   testRootClassName(<TestComponent className='test-class' />, 'test-class')
 
+  testSizeClasses(<TestComponent />, radioGroupClasses)
+
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<TestComponent />)
     const root = container.firstElementChild
 
     expect(root).toHaveClass(radioGroupClasses.root)
-    expect(root).toHaveClass(radioGroupClasses.horizontal)
-    expect(root).not.toHaveClass(radioGroupClasses.vertical)
+    expect(root).toHaveClass(radioGroupClasses['orientation-horizontal'])
+    expect(root).not.toHaveClass(radioGroupClasses['orientation-vertical'])
 
     expect(root).toMatchSnapshot()
   })
@@ -43,16 +46,13 @@ describe('RadioGroup', () => {
       wrapper: 'test-wrapper',
     }
 
-    const { container } = renderWithNexUIProvider(
+    const { container, queryByClassName } = renderWithNexUIProvider(
       <TestComponent classes={classes} label='Label' />,
     )
-    const root = container.firstElementChild
 
-    expect(root).toHaveClass(classes.root)
-    expect(root!.querySelector(`.${radioGroupClasses.label}`)).toHaveClass(
-      classes.label,
-    )
-    expect(root!.querySelector(`.${radioGroupClasses.wrapper}`)).toHaveClass(
+    expect(container.firstElementChild).toHaveClass(classes.root)
+    expect(queryByClassName(radioGroupClasses.label)).toHaveClass(classes.label)
+    expect(queryByClassName(radioGroupClasses.wrapper)).toHaveClass(
       classes.wrapper,
     )
   })
@@ -67,15 +67,14 @@ describe('RadioGroup', () => {
       },
     }
 
-    const { container } = renderWithNexUIProvider(
+    const { queryByClassName } = renderWithNexUIProvider(
       <TestComponent slotProps={slotProps} label='Label' />,
     )
-    const root = container.firstElementChild
 
-    expect(root!.querySelector(`.${radioGroupClasses.label}`)).toHaveClass(
+    expect(queryByClassName(radioGroupClasses.label)).toHaveClass(
       slotProps.label.className,
     )
-    expect(root!.querySelector(`.${radioGroupClasses.wrapper}`)).toHaveClass(
+    expect(queryByClassName(radioGroupClasses.wrapper)).toHaveClass(
       slotProps.wrapper.className,
     )
   })
@@ -97,8 +96,12 @@ describe('RadioGroup', () => {
       </>,
     )
 
-    expect(getByTestId('vertical')).toHaveClass(radioGroupClasses.vertical)
-    expect(getByTestId('horizontal')).toHaveClass(radioGroupClasses.horizontal)
+    expect(getByTestId('vertical')).toHaveClass(
+      radioGroupClasses['orientation-vertical'],
+    )
+    expect(getByTestId('horizontal')).toHaveClass(
+      radioGroupClasses['orientation-horizontal'],
+    )
   })
 
   it('should switch different values when radios are clicked', () => {

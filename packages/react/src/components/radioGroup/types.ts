@@ -203,7 +203,11 @@ export type RadioGroupProps<
 export type RadioGroupOwnerState<
   T extends string | number = string | number,
   RootComponent extends ElementType = 'div',
-> = RadioGroupProps<T, RootComponent>
+> = RadioGroupProps<T, RootComponent> & {
+  orientation: RadioGroupVariants['orientation']
+  size: RadioGroupVariants['size']
+  value: T
+}
 
 export type RadioState = { value?: string | number; disabled?: boolean }
 
