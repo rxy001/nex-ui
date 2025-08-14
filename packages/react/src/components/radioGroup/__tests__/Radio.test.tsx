@@ -353,7 +353,7 @@ describe('Radio', () => {
       await user.tab()
       expect(document.activeElement).toBe(span)
 
-      await user.keyboard('{ }')
+      await user.keyboard(' ')
       expect(span).toHaveAttribute('aria-checked', 'true')
       expect(onChange).toHaveBeenCalledWith(true)
     })
