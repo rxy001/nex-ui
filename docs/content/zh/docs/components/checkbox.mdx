@@ -198,8 +198,7 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
       component: "'span'",
       description: 'Checkbox 的标签。',
     },
-
-]}
+  ]}
 />
 
 ### Checkbox Group Props
@@ -212,13 +211,18 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'CheckboxGroup 的子元素。',
     },
     {
+      prop: 'label',
+      type: 'ReactNode',
+      description: 'CheckboxGroup 的标签。',
+    },
+    {
       prop: 'disabled',
       type: 'boolean',
       description: 'CheckboxGroup 是否禁用。',
     },
     {
       prop: 'name',
-      type: ['string', 'number'],
+      type: 'string',
       description: 'CheckboxGroup 的 name。',
     },
     {
@@ -234,7 +238,6 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
         "'purple'",
         "'gray'",
       ],
-      default: "'blue'",
       description: 'CheckboxGroup 的颜色。',
     },
     {
@@ -246,7 +249,6 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
-      default: 'size',
       description: 'CheckboxGroup 的 BorderRadius。',
     },
     {
@@ -290,6 +292,35 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
       prop: 'sx',
       type: 'SxProp<CheckboxGroupOwnerState>',
       description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'label' | 'wrapper', ClassValue>>",
+      description: 'CheckboxGroup Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'CheckboxGroup Slots 的 props。',
+    },
+  ]}
+/>
+
+### Checkbox Group Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'label',
+      class: '.nui-checkbox-group-label',
+      component: "'h3'",
+      description: 'CheckboxGroup 的标签。',
+    },
+    {
+      slot: 'wrapper',
+      class: '.nui-checkbox-group-wrapper',
+      component: "'div'",
+      description: 'CheckboxGroup 中所有 Checkbox 的容器。',
     },
   ]}
 />

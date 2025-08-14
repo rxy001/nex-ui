@@ -23,13 +23,15 @@ Space tokens are a set of preset spacing values that ensure visual consistency o
 Nex UI supports the following tokens out of the box.
 
 export const dataSource = (() => {
-  return Object.entries(defaultConfig.tokens.spaces)
+  const tokens = Object.entries(defaultConfig.tokens.spaces)
     .map(([key, value]) => {
       const numValue = parseFloat(value);
-      return { token: key, value: value, numValue };
+      return { token:key, value: value, numValue };
     })
-    .sort((a, b) => a.numValue - b.numValue) // Sort by pixel value
-    .map(({ numValue, ...rest }) => rest); // Remove temporary properties
+    .sort((a, b) => a.numValue - b.numValue) 
+    .map(({ numValue, ...rest }) => rest);
+
+return tokens.concat(tokens.map(({token,value})=>({token: `-${token}`, value: `-${value}`})))
 
 })()
 

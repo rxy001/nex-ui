@@ -7,7 +7,11 @@ export default function App() {
   const [value, setValue] = useState(['pear'])
 
   return (
-    <CheckboxGroup value={value} onValueChange={setValue}>
+    <CheckboxGroup
+      value={value}
+      onValueChange={setValue}
+      label='Select your favorite fruits'
+    >
       <Checkbox value='apple'>Apple</Checkbox>
       <Checkbox value='pear'>Pear</Checkbox>
       <Checkbox value='orange'>Orange</Checkbox>
