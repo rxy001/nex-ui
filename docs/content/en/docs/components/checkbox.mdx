@@ -220,6 +220,11 @@ CheckboxGroup props inherit the props of `as` (by default, `'div'`).
       description: 'The checkboxes items.',
     },
     {
+      prop: 'label',
+      type: 'ReactNode',
+      description: 'The label of the CheckboxGroup.',
+    },
+    {
       prop: 'disabled',
       type: 'boolean',
       description: 'If true, the checkboxes are disabled.',
@@ -248,6 +253,7 @@ CheckboxGroup props inherit the props of `as` (by default, `'div'`).
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
       description: 'The size of the checkboxes.',
     },
     {
@@ -297,6 +303,35 @@ CheckboxGroup props inherit the props of `as` (by default, `'div'`).
       type: 'SxProp<CheckboxGroupOwnerState>',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'label' | 'wrapper', ClassValue>>",
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### Checkbox Group Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'label',
+      class: '.nui-checkbox-group-label',
+      component: "'h3'",
+      description: 'The label of the CheckboxGroup.',
+    },
+    {
+      slot: 'wrapper',
+      class: '.nui-checkbox-group-wrapper',
+      component: "'div'",
+      description: 'The container for all checkboxes in the CheckboxGroup.',
     },
   ]}
 />

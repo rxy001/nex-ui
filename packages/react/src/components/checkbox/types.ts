@@ -235,7 +235,7 @@ type CheckboxGroupOwnProps<
   /**
    * The label of the checkbox group.
    */
-  label?: string
+  label?: ReactNode
 }
 
 export type CheckboxGroupProps<

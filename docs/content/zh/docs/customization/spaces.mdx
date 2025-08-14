@@ -22,13 +22,15 @@ Space Tokens 是一组预设的间距值，确保 UI 元素（如外边距、内
 Nex UI 开箱即支持以下 Tokens。
 
 export const dataSource = (() => {
-  return Object.entries(defaultConfig.tokens.spaces)
+  const tokens = Object.entries(defaultConfig.tokens.spaces)
     .map(([key, value]) => {
       const numValue = parseFloat(value);
       return { token:key, value: value, numValue };
     })
-    .sort((a, b) => a.numValue - b.numValue) // 按像素值排序
-    .map(({ numValue, ...rest }) => rest); // 移除临时属性
+    .sort((a, b) => a.numValue - b.numValue) 
+    .map(({ numValue, ...rest }) => rest);
+
+return tokens.concat(tokens.map(({token,value})=>({token: `-${token}`, value: `-${value}`})))
 
 })()
 

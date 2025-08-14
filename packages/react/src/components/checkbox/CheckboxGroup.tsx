@@ -2,6 +2,7 @@
 
 import { useMemo, useId } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
+import { isString } from '@nex-ui/utils'
 import { CheckboxGroupProvider } from './CheckboxGroupContext'
 import {
   useDefaultProps,
@@ -46,8 +47,9 @@ const useSlotAriaProps = (ownerState: CheckboxGroupOwnerState) => {
     role = 'group',
     'aria-labelledby': labelledBy,
   } = ownerState
+  const stringLabel = isString(label)
 
-  const labelId = slotProps?.label?.id || (label ? id : undefined)
+  const labelId = slotProps?.label?.id || (stringLabel ? id : undefined)
 
   return useMemo(
     () => ({
