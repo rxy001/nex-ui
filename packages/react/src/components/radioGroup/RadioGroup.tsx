@@ -2,6 +2,7 @@
 
 import { useId, useMemo, useRef } from 'react'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { isString } from '@nex-ui/utils'
 import { useNexUI } from '../provider'
 import {
   useDefaultProps,
@@ -22,19 +23,19 @@ import type {
 
 const useSlotClasses = (ownerState: RadioGroupOwnerState) => {
   const { prefix } = useNexUI()
-  const { orientation, classes, size } = ownerState
+  const { orientation, classes } = ownerState
 
   return useMemo(() => {
     const radioGroupRoot = `${prefix}-radio-group`
 
     const slots = {
-      root: ['root', `orientation-${orientation}`, `size-${size}`],
+      root: ['root', `orientation-${orientation}`],
       label: ['label'],
       wrapper: ['wrapper'],
     }
 
     return composeClasses(slots, getUtilityClass(radioGroupRoot), classes)
-  }, [prefix, orientation, size, classes])
+  }, [prefix, orientation, classes])
 }
 
 const useSlotAriaProps = (ownerState: RadioGroupOwnerState) => {
@@ -47,7 +48,9 @@ const useSlotAriaProps = (ownerState: RadioGroupOwnerState) => {
     'aria-labelledby': labelledBy,
   } = ownerState
 
-  const labelId = slotProps?.label?.id || (label ? id : undefined)
+  const stringLabel = isString(label)
+
+  const labelId = slotProps?.label?.id || (stringLabel ? id : undefined)
 
   return useMemo(
     () => ({
@@ -93,8 +96,8 @@ export const RadioGroup = <
     label,
     slotProps,
     role,
+    size,
     value: valueProp,
-    size = 'md',
     name = defaultName,
     orientation = 'horizontal',
     ...remainingProps
@@ -108,7 +111,6 @@ export const RadioGroup = <
 
   const ownerState: RadioGroupOwnerState = {
     ...props,
-    size,
     role,
     orientation,
     value,

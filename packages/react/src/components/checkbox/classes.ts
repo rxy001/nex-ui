@@ -42,15 +42,9 @@ export const checkboxGroupClasses = generateUtilityClasses(
   'nui-checkbox-group',
   [
     'root',
-
-    'orientation-vertical',
-    'orientation-horizontal',
-
-    'size-sm',
-    'size-md',
-    'size-lg',
-
     'label',
     'wrapper',
+    'orientation-vertical',
+    'orientation-horizontal',
   ],
 )
