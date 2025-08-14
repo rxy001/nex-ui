@@ -4,7 +4,6 @@ import {
   renderWithNexUIProvider,
   testRootClassName,
   testVariantClasses,
-  testSizeClasses,
 } from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { Checkbox } from '../Checkbox'
@@ -39,14 +38,6 @@ describe('CheckboxGroup', () => {
   testVariantClasses(
     <CheckboxGroup>{children}</CheckboxGroup>,
     ['orientation', ['vertical', 'horizontal']],
-    checkboxGroupClasses,
-    {
-      useAct: true,
-    },
-  )
-
-  testSizeClasses(
-    <CheckboxGroup>{children}</CheckboxGroup>,
     checkboxGroupClasses,
     {
       useAct: true,

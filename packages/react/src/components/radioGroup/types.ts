@@ -170,7 +170,7 @@ type RadioGroupOwnProps<
   /**
    * The size of the radios.
    */
-  size?: RadioGroupVariants['size']
+  size?: RadioVariants['size']
 
   /**
    * The color of the radios.
@@ -186,7 +186,7 @@ type RadioGroupOwnProps<
   /**
    * The label of the radio group.
    */
-  label?: string
+  label?: ReactNode
 }
 
 export interface RadioGroupPropsOverrides {}
@@ -205,7 +205,6 @@ export type RadioGroupOwnerState<
   RootComponent extends ElementType = 'div',
 > = RadioGroupProps<T, RootComponent> & {
   orientation: RadioGroupVariants['orientation']
-  size: RadioGroupVariants['size']
   value: T
 }
 

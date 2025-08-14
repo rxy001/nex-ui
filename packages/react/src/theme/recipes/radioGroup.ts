@@ -128,7 +128,42 @@ export const radioRecipe = defineSlotRecipe({
         },
       },
     },
+    inGroup: {
+      true: {},
+    },
   },
+  compoundVariants: [
+    {
+      inGroup: true,
+      size: 'sm',
+      css: {
+        root: {
+          ml: '-1',
+          mr: '1',
+        },
+      },
+    },
+    {
+      inGroup: true,
+      size: 'md',
+      css: {
+        root: {
+          ml: '-1.5',
+          mr: '1.5',
+        },
+      },
+    },
+    {
+      inGroup: true,
+      size: 'lg',
+      css: {
+        root: {
+          ml: '-2',
+          mr: '2',
+        },
+      },
+    },
+  ],
   defaultVariants: {
     size: 'md',
     color: 'blue',
@@ -140,6 +175,7 @@ export const radioGroupRecipe = defineSlotRecipe({
     root: {
       display: 'flex',
       flexDirection: 'column',
+      gap: '2',
     },
     label: {
       all: 'unset',
@@ -158,26 +194,6 @@ export const radioGroupRecipe = defineSlotRecipe({
       vertical: {
         wrapper: {
           flexDirection: 'column',
-        },
-      },
-    },
-    size: {
-      sm: {
-        label: {
-          fs: 'md',
-          p: '1',
-        },
-      },
-      md: {
-        label: {
-          fs: 'lg',
-          p: '1.5',
-        },
-      },
-      lg: {
-        label: {
-          fs: 'xl',
-          p: '2',
         },
       },
     },

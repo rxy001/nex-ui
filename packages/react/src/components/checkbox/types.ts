@@ -217,9 +217,8 @@ type CheckboxGroupOwnProps<
 
   /**
    * The size of the checkboxes.
-   * @default 'md'
    */
-  size?: CheckboxGroupVariants['size']
+  size?: CheckboxVariants['size']
 
   /**
    * The border radius of the checkboxes.
@@ -253,7 +252,6 @@ export type CheckboxGroupOwnerState<
 > = CheckboxGroupProps<T, RootComponent> & {
   value: T[]
   orientation: CheckboxGroupVariants['orientation']
-  size: CheckboxGroupVariants['size']
 }
 
 export type CheckboxGroupContextValue<
