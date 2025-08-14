@@ -572,9 +572,9 @@ describe('Accordion', () => {
       await user.keyboard('{Enter}')
       expect(trigger).toHaveAttribute('aria-expanded', 'false')
 
-      await user.keyboard('{ }')
+      await user.keyboard(' ')
       expect(trigger).toHaveAttribute('aria-expanded', 'true')
-      await user.keyboard('{ }')
+      await user.keyboard(' ')
       expect(trigger).toHaveAttribute('aria-expanded', 'false')
     })
 
