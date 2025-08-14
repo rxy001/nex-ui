@@ -6,12 +6,22 @@ exports[`CheckboxGroup should render with default props 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
 
-.emotion-1 {
+.emotion-2 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -31,7 +41,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
   padding: var(--nui-spaces-1-5);
 }
 
-.emotion-2 {
+.emotion-3 {
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -40,16 +50,16 @@ exports[`CheckboxGroup should render with default props 1`] = `
   z-index: 1;
 }
 
-.emotion-2:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+*::before {
+.emotion-3:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+*::before {
   outline: var(--nui-borders-focus-visible-outline);
   outline-offset: var(--nui-spaces-0-5);
 }
 
-.emotion-2:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true])+*::before {
+.emotion-3:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true])+*::before {
   border-color: var(--nui-colors-blue-secondary);
 }
 
-.emotion-3 {
+.emotion-4 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -69,7 +79,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
   font-size: var(--nui-font-sizes-md);
 }
 
-.emotion-3::before {
+.emotion-4::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -82,7 +92,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
   border-radius: calc(var(--nui-radii-lg) * .6);
 }
 
-.emotion-3::after {
+.emotion-4::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -98,138 +108,142 @@ exports[`CheckboxGroup should render with default props 1`] = `
   border-radius: calc(var(--nui-radii-lg) * .6);
 }
 
-.emotion-4 {
+.emotion-5 {
   -webkit-margin-start: var(--nui-spaces-2);
   margin-inline-start: var(--nui-spaces-2);
   font-size: var(--nui-font-sizes-lg);
 }
 
 <div
-  class="nui-checkbox-group-root nui-checkbox-group-horizontal emotion-0"
+  class="nui-checkbox-group-root nui-checkbox-group-orientation-horizontal nui-checkbox-group-size-md emotion-0"
   role="group"
 >
-  <label
-    class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-1"
+  <div
+    class="nui-checkbox-group-wrapper emotion-1"
   >
-    <input
-      aria-label="orange"
-      aria-labelledby="«r6»"
-      class="nui-checkbox-input emotion-2"
-      tabindex="0"
-      type="checkbox"
-      value="orange"
-    />
-    <span
-      class="nui-checkbox-icon emotion-3"
+    <label
+      class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-2"
     >
-      <svg
-        aria-hidden="true"
-        fill="none"
-        focusable="false"
-        stroke="currentColor"
-        stroke-width="1.5"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
+      <input
+        aria-label="orange"
+        aria-labelledby="«rt»"
+        class="nui-checkbox-input emotion-3"
+        tabindex="0"
+        type="checkbox"
+        value="orange"
+      />
+      <span
+        class="nui-checkbox-icon emotion-4"
       >
-        <path
-          d="m7 12.9l3.143 3.6L18 7.5"
-          opacity="0"
-          pathLength="1"
-          stroke-dasharray="0px 1px"
-          stroke-dashoffset="0px"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </span>
-    <span
-      class="nui-checkbox-label emotion-4"
-      id="«r6»"
-    >
-      orange
-    </span>
-  </label>
-  <label
-    class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-1"
-  >
-    <input
-      aria-label="pear"
-      aria-labelledby="«r7»"
-      class="nui-checkbox-input emotion-2"
-      tabindex="0"
-      type="checkbox"
-      value="pear"
-    />
-    <span
-      class="nui-checkbox-icon emotion-3"
-    >
-      <svg
-        aria-hidden="true"
-        fill="none"
-        focusable="false"
-        stroke="currentColor"
-        stroke-width="1.5"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
+        <svg
+          aria-hidden="true"
+          fill="none"
+          focusable="false"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m7 12.9l3.143 3.6L18 7.5"
+            opacity="0"
+            pathLength="1"
+            stroke-dasharray="0px 1px"
+            stroke-dashoffset="0px"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+      <span
+        class="nui-checkbox-label emotion-5"
+        id="«rt»"
       >
-        <path
-          d="m7 12.9l3.143 3.6L18 7.5"
-          opacity="0"
-          pathLength="1"
-          stroke-dasharray="0px 1px"
-          stroke-dashoffset="0px"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </span>
-    <span
-      class="nui-checkbox-label emotion-4"
-      id="«r7»"
+        orange
+      </span>
+    </label>
+    <label
+      class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-2"
     >
-      pear
-    </span>
-  </label>
-  <label
-    class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-1"
-  >
-    <input
-      aria-label="Apple"
-      aria-labelledby="«r8»"
-      class="nui-checkbox-input emotion-2"
-      tabindex="0"
-      type="checkbox"
-      value="apple"
-    />
-    <span
-      class="nui-checkbox-icon emotion-3"
-    >
-      <svg
-        aria-hidden="true"
-        fill="none"
-        focusable="false"
-        stroke="currentColor"
-        stroke-width="1.5"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
+      <input
+        aria-label="pear"
+        aria-labelledby="«ru»"
+        class="nui-checkbox-input emotion-3"
+        tabindex="0"
+        type="checkbox"
+        value="pear"
+      />
+      <span
+        class="nui-checkbox-icon emotion-4"
       >
-        <path
-          d="m7 12.9l3.143 3.6L18 7.5"
-          opacity="0"
-          pathLength="1"
-          stroke-dasharray="0px 1px"
-          stroke-dashoffset="0px"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </span>
-    <span
-      class="nui-checkbox-label emotion-4"
-      id="«r8»"
+        <svg
+          aria-hidden="true"
+          fill="none"
+          focusable="false"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m7 12.9l3.143 3.6L18 7.5"
+            opacity="0"
+            pathLength="1"
+            stroke-dasharray="0px 1px"
+            stroke-dashoffset="0px"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+      <span
+        class="nui-checkbox-label emotion-5"
+        id="«ru»"
+      >
+        pear
+      </span>
+    </label>
+    <label
+      class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-2"
     >
-      Apple
-    </span>
-  </label>
+      <input
+        aria-label="Apple"
+        aria-labelledby="«rv»"
+        class="nui-checkbox-input emotion-3"
+        tabindex="0"
+        type="checkbox"
+        value="apple"
+      />
+      <span
+        class="nui-checkbox-icon emotion-4"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          focusable="false"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m7 12.9l3.143 3.6L18 7.5"
+            opacity="0"
+            pathLength="1"
+            stroke-dasharray="0px 1px"
+            stroke-dashoffset="0px"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+      <span
+        class="nui-checkbox-label emotion-5"
+        id="«rv»"
+      >
+        Apple
+      </span>
+    </label>
+  </div>
 </div>
 `;

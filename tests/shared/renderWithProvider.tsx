@@ -13,6 +13,8 @@ export interface RenderWithNexUIProviderOptions
 
 export interface RenderResultWithProvider extends RenderResult {
   user: UserEvent
+  queryByClassName: (className: string) => Element | null
+  queryAllByClassName: (className: string) => NodeListOf<Element>
 }
 
 export function renderWithNexUIProvider(
@@ -29,16 +31,25 @@ export function renderWithNexUIProvider(
 ): Promise<RenderResultWithProvider> | RenderResultWithProvider {
   const { useAct = false, ...other } = options || {}
 
-  if (useAct) {
-    const asyncRender = async () => {
-      return {
-        ...render(component, {
-          wrapper: (props) => <NexUIProvider>{props.children}</NexUIProvider>,
-          ...other,
-        }),
-        user: userEvent.setup(),
-      }
+  function r() {
+    const result = render(component, {
+      wrapper: (props) => <NexUIProvider>{props.children}</NexUIProvider>,
+      ...other,
+    })
+
+    return {
+      ...result,
+      user: userEvent.setup(),
+      queryByClassName: (className: string) =>
+        result.container.querySelector(`.${className}`),
+      queryAllByClassName: (className: string) =>
+        result.container.querySelectorAll(`.${className}`),
     }
+  }
+
+  if (useAct) {
+    const asyncRender = async () => r()
+
     return new Promise((resolve) => {
       act(asyncRender).then((result) => {
         resolve(result)
@@ -46,13 +57,7 @@ export function renderWithNexUIProvider(
     })
   }
 
-  return {
-    ...render(component, {
-      wrapper: (props) => <NexUIProvider>{props.children}</NexUIProvider>,
-      ...other,
-    }),
-    user: userEvent.setup(),
-  }
+  return r()
 }
 
 export const renderWithSystemProvider = (component: ReactNode) => {

@@ -1,18 +1,51 @@
-import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
+import { defineSlotRecipe } from '@nex-ui/system'
 import { colorVariant, toSlots } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
-export const checkboxGroupRecipe = defineRecipe({
-  base: {
-    display: 'flex',
+export const checkboxGroupRecipe = defineSlotRecipe({
+  slots: {
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    label: {
+      all: 'unset',
+    },
+    wrapper: {
+      display: 'flex',
+    },
   },
   variants: {
     orientation: {
       horizontal: {
-        flexDirection: 'row',
+        wrapper: {
+          flexDirection: 'row',
+        },
       },
       vertical: {
-        flexDirection: 'column',
+        wrapper: {
+          flexDirection: 'column',
+        },
+      },
+    },
+    size: {
+      sm: {
+        label: {
+          fs: 'md',
+          p: '1',
+        },
+      },
+      md: {
+        label: {
+          fs: 'lg',
+          p: '1.5',
+        },
+      },
+      lg: {
+        label: {
+          fs: 'xl',
+          p: '2',
+        },
       },
     },
   },
@@ -225,3 +258,4 @@ export const checkboxRecipe = defineSlotRecipe({
 export type CheckboxRecipe = typeof checkboxRecipe
 export type CheckboxVariants = RecipeVariants<CheckboxRecipe>
 export type CheckboxGroupRecipe = typeof checkboxGroupRecipe
+export type CheckboxGroupVariants = RecipeVariants<CheckboxGroupRecipe>

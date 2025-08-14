@@ -3,6 +3,8 @@ import {
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
+  testVariantClasses,
+  testSizeClasses,
 } from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { Checkbox } from '../Checkbox'
@@ -34,6 +36,23 @@ describe('CheckboxGroup', () => {
     },
   )
 
+  testVariantClasses(
+    <CheckboxGroup>{children}</CheckboxGroup>,
+    ['orientation', ['vertical', 'horizontal']],
+    checkboxGroupClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  testSizeClasses(
+    <CheckboxGroup>{children}</CheckboxGroup>,
+    checkboxGroupClasses,
+    {
+      useAct: true,
+    },
+  )
+
   it('should render with default props', async () => {
     const { container } = await renderWithNexUIProvider(
       <CheckboxGroup>{children}</CheckboxGroup>,
@@ -44,8 +63,8 @@ describe('CheckboxGroup', () => {
     const root = container.firstElementChild
 
     expect(root).toHaveClass(checkboxGroupClasses.root)
-    expect(root).toHaveClass(checkboxGroupClasses.horizontal)
-    expect(root).not.toHaveClass(checkboxGroupClasses.vertical)
+    expect(root).toHaveClass(checkboxGroupClasses['orientation-horizontal'])
+    expect(root).not.toHaveClass(checkboxGroupClasses['orientation-vertical'])
 
     expect(root).toMatchSnapshot()
   })
@@ -63,24 +82,72 @@ describe('CheckboxGroup', () => {
     expect(getByTestId('checkbox-group')).toBe(ref.current)
   })
 
-  it('should render with orientation class based on orientation prop', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <>
-        <CheckboxGroup orientation='vertical' data-testid='vertical'>
-          {children}
-        </CheckboxGroup>
-        <CheckboxGroup orientation='horizontal' data-testid='horizontal'>
-          {children}
-        </CheckboxGroup>
-      </>,
+  it('should render with label', async () => {
+    const { rerender, queryByClassName } = await renderWithNexUIProvider(
+      <CheckboxGroup>{children}</CheckboxGroup>,
       {
         useAct: true,
       },
     )
 
-    expect(getByTestId('vertical')).toHaveClass(checkboxGroupClasses.vertical)
-    expect(getByTestId('horizontal')).toHaveClass(
-      checkboxGroupClasses.horizontal,
+    expect(queryByClassName(checkboxGroupClasses.label)).not.toBeInTheDocument()
+
+    rerender(<CheckboxGroup label='Fruits'>{children}</CheckboxGroup>)
+
+    const label = queryByClassName(checkboxGroupClasses.label)
+    expect(label).toBeInTheDocument()
+    expect(label).toHaveTextContent('Fruits')
+  })
+
+  it('should forward classes to root, label and wrapper slots', async () => {
+    const classes = {
+      root: 'test-root',
+      label: 'test-label',
+      wrapper: 'test-wrapper',
+    }
+
+    const { container, queryByClassName } = await renderWithNexUIProvider(
+      <CheckboxGroup label='Label' classes={classes}>
+        {children}
+      </CheckboxGroup>,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(container.firstElementChild).toHaveClass(classes.root)
+    expect(queryByClassName(checkboxGroupClasses.label)).toHaveClass(
+      classes.label,
+    )
+    expect(queryByClassName(checkboxGroupClasses.wrapper)).toHaveClass(
+      classes.wrapper,
+    )
+  })
+
+  it('should forward slotProps to label and wrapper slots', async () => {
+    const slotProps = {
+      label: {
+        className: 'test-label',
+      },
+      wrapper: {
+        className: 'test-wrapper',
+      },
+    }
+
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <CheckboxGroup label='Label' slotProps={slotProps}>
+        {children}
+      </CheckboxGroup>,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(queryByClassName(checkboxGroupClasses.label)).toHaveClass(
+      slotProps.label.className,
+    )
+    expect(queryByClassName(checkboxGroupClasses.wrapper)).toHaveClass(
+      slotProps.wrapper.className,
     )
   })
 
@@ -225,6 +292,40 @@ describe('CheckboxGroup', () => {
       expect(checkbox.parentElement).toHaveClass(checkboxClasses['color-green'])
       expect(checkbox.parentElement).toHaveClass(checkboxClasses['size-lg'])
       expect(checkbox.parentElement).toHaveClass(checkboxClasses['radius-lg'])
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('should have role="group" by default', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(
+        <CheckboxGroup data-testid='group'>{children}</CheckboxGroup>,
+        {
+          useAct: true,
+        },
+      )
+      expect(getByTestId('group')).toHaveAttribute('role', 'group')
+    })
+
+    it('should apply aria-labelledby to the root element when label is provided', async () => {
+      const { getByTestId, getByRole, rerender } =
+        await renderWithNexUIProvider(
+          <CheckboxGroup data-testid='group'>{children}</CheckboxGroup>,
+          {
+            useAct: true,
+          },
+        )
+
+      const group = getByTestId('group')
+      expect(group).not.toHaveAttribute('aria-labelledby')
+
+      rerender(
+        <CheckboxGroup data-testid='group' label='Label'>
+          {children}
+        </CheckboxGroup>,
+      )
+
+      const heading = getByRole('heading', { name: 'Label' })
+      expect(group).toHaveAttribute('aria-labelledby', heading.id)
     })
   })
 })

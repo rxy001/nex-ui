@@ -92,6 +92,12 @@ function ControlledTemplate(props: CheckboxGroupProps<string>) {
   )
 }
 
+export const WithLabel: Story = {
+  args: {
+    label: 'Select fruits',
+  },
+}
+
 export const Controlled: Story = {
   render: ControlledTemplate,
 }

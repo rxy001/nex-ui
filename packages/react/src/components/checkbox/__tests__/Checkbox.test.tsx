@@ -156,17 +156,17 @@ describe('Checkbox', () => {
       label: 'test-class-label',
     }
 
-    const { container } = await renderWithNexUIProvider(
+    const { queryByClassName } = await renderWithNexUIProvider(
       <Checkbox classes={classes}>Checkbox</Checkbox>,
       {
         useAct: true,
       },
     )
 
-    const checkboxRoot = container.querySelector(`.${checkboxClasses.root}`)
-    const checkboxLabel = container.querySelector(`.${checkboxClasses.label}`)
-    const checkboxIcon = container.querySelector(`.${checkboxClasses.icon}`)
-    const checkbox = container.querySelector(`.${checkboxClasses.input}`)
+    const checkboxRoot = queryByClassName(checkboxClasses.root)
+    const checkboxLabel = queryByClassName(checkboxClasses.label)
+    const checkboxIcon = queryByClassName(checkboxClasses.icon)
+    const checkbox = queryByClassName(checkboxClasses.input)
 
     expect(checkboxRoot).toHaveClass(classes.root)
     expect(checkboxIcon).toHaveClass(classes.icon)
@@ -175,7 +175,7 @@ describe('Checkbox', () => {
   })
 
   it('should forward slotProps to icon, root and label slots', async () => {
-    const { container } = await renderWithNexUIProvider(
+    const { queryByClassName } = await renderWithNexUIProvider(
       <Checkbox
         slotProps={{
           root: { className: 'test-class-root' },
@@ -190,9 +190,9 @@ describe('Checkbox', () => {
       },
     )
 
-    const checkboxRoot = container.querySelector(`.${checkboxClasses.root}`)
-    const checkboxLabel = container.querySelector(`.${checkboxClasses.label}`)
-    const checkboxIcon = container.querySelector(`.${checkboxClasses.icon}`)
+    const checkboxRoot = queryByClassName(checkboxClasses.root)
+    const checkboxLabel = queryByClassName(checkboxClasses.label)
+    const checkboxIcon = queryByClassName(checkboxClasses.icon)
 
     expect(checkboxRoot).toHaveClass('test-class-root')
     expect(checkboxLabel).toHaveClass('test-class-label')
@@ -231,15 +231,16 @@ describe('Checkbox', () => {
   })
 
   it('should render custom icon when icon prop is provided', async () => {
-    const { getByTestId, rerender, container } = await renderWithNexUIProvider(
-      <Checkbox
-        defaultChecked
-        icon={<span data-testid='custom-icon'>Icon</span>}
-      />,
-      {
-        useAct: true,
-      },
-    )
+    const { getByTestId, rerender, queryByClassName } =
+      await renderWithNexUIProvider(
+        <Checkbox
+          defaultChecked
+          icon={<span data-testid='custom-icon'>Icon</span>}
+        />,
+        {
+          useAct: true,
+        },
+      )
     const checkboxIcon = getByTestId('custom-icon')
     expect(checkboxIcon).toBeInTheDocument()
 
@@ -265,9 +266,7 @@ describe('Checkbox', () => {
 
     rerender(<Checkbox icon='123' defaultChecked />)
 
-    expect(
-      container.querySelector(`.${checkboxClasses.icon}`),
-    ).toHaveTextContent('123')
+    expect(queryByClassName(checkboxClasses.icon)).toHaveTextContent('123')
   })
 
   it("should warn when Checkbox's checked is set within CheckboxGroup", async () => {
@@ -369,15 +368,17 @@ describe('Checkbox', () => {
     })
 
     it('should apply role="checkbox" when rendered as a non-input element', async () => {
-      const { container } = await renderWithNexUIProvider(
+      const { queryByClassName } = await renderWithNexUIProvider(
         <Checkbox as='div'>Checkbox</Checkbox>,
         {
           useAct: true,
         },
       )
 
-      const checkbox = container.querySelector(`.${checkboxClasses.input}`)
-      expect(checkbox).toHaveAttribute('role', 'checkbox')
+      expect(queryByClassName(checkboxClasses.input)).toHaveAttribute(
+        'role',
+        'checkbox',
+      )
     })
 
     it('should apply checked attribute when checked', async () => {
@@ -495,13 +496,13 @@ describe('Checkbox', () => {
     })
 
     it('should apply aria-labelledby="label-id" by default when children is a string', async () => {
-      const { getByRole, container } = await renderWithNexUIProvider(
+      const { getByRole, queryByClassName } = await renderWithNexUIProvider(
         <Checkbox>Checkbox Label</Checkbox>,
         {
           useAct: true,
         },
       )
-      const label = container.querySelector(`.${checkboxClasses.label}`)
+      const label = queryByClassName(checkboxClasses.label)
       const checkbox = getByRole('checkbox')
       expect(checkbox).toHaveAttribute('aria-labelledby', label!.id)
     })
