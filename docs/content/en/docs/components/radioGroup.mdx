@@ -143,7 +143,7 @@ Radio inherit the props of `as` (by default, `'input'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'input' | 'dot' | 'label', ClassValue>>",
+      type: "Partial<Record<Slots, ClassValue>>",
       description: 'The className used for each slot.',
     },
     {
@@ -273,7 +273,7 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'wrapper', ClassValue>>",
+      type: "Partial<Record<Slots, ClassValue>>",
       description: 'The className used for each slot.',
     },
     {

@@ -61,14 +61,13 @@ Button 使用户能够通过一次点击执行操作并做出选择。
 
 ### Button Props
 
-Button Props 继承 `as` (默认为 `'button'`) 的 Props。
+Button 继承 `as` (默认为 `'button'`) 的 Props。
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      default: '',
       description: 'Button 的内容。',
     },
     {
@@ -190,7 +189,7 @@ Button Props 继承 `as` (默认为 `'button'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'startIcon' | 'endIcon', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'Button Slots 的 className。',
     },
     {
