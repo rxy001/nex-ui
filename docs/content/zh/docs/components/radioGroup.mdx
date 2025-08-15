@@ -140,7 +140,7 @@ Radio 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'input' | 'dot' | 'label', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'Radio Slots 的 className。',
     },
     {
@@ -266,7 +266,7 @@ RadioGroup 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'wrapper', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'RadioGroup Slots 的 className。',
     },
     {

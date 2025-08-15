@@ -72,14 +72,13 @@ Use the `spacing` prop to set the spacing between Avatars in the Avatar Group. I
 
 ### Avatar Props
 
-Avatar props inherit the props of `as` (by default, `'div'`).
+Avatar inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      default: '',
       description:
         'Used to render icon or text elements inside the avatar if src is not set. This can be an element, or just a string.',
     },
@@ -157,7 +156,7 @@ Avatar props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'img', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -183,7 +182,7 @@ Avatar props inherit the props of `as` (by default, `'div'`).
 
 ### Avatar Group Props
 
-AvatarGroup props inherit the props of `as` (by default, `'div'`).
+AvatarGroup inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -269,7 +268,7 @@ AvatarGroup props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'surplus', ClassValue>>",
+      type: "Partial<Record<Slots, ClassValue>>",
       description: 'The className used for each slot.',
     },
     {

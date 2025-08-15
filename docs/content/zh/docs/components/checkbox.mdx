@@ -39,6 +39,8 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 
 ### Controlled
 
+使用 `checked` 和 `onCheckedChange` Props 来控制 Checkbox 的选中状态。
+
 <Example {...checkbox.controlled} />
 
 ## CheckboxGroup
@@ -46,6 +48,8 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 <Example {...checkbox.groupUseage} />
 
 ### Vertical
+
+设置 `orientation` Props 为 `vertical` 以垂直排列 Checkbox。
 
 <Example {...checkbox.groupVertical} />
 
@@ -57,7 +61,7 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 
 ### Checkbox Props
 
-Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
+Checkbox 继承 `as` (默认为 `'input'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -165,7 +169,7 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'icon' | 'input', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'Checkbox Slots 的 className。',
     },
     {
@@ -202,6 +206,8 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
 />
 
 ### CheckboxGroup Props
+
+CheckboxGroup 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -294,7 +300,7 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'wrapper', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'CheckboxGroup Slots 的 className。',
     },
     {

@@ -59,13 +59,15 @@ DrawerClose 支持异步关闭 Drawer，其 `children` 的 `onClick` 事件可�
 
 ### Controlled Drawer
 
+使用 Drawer 的 `open` 和 `onOpenChange` 属性来控制 Drawer 的打开状态。
+
 <Example {...drawer.controlled} />
 
 ## API
 
 ### Drawer Props
 
-Drawer Props 继承 `as` (默认为 `m.div`) 的 Props。
+Drawer 继承 `as` (默认为 `m.div`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -77,12 +79,12 @@ Drawer Props 继承 `as` (默认为 `m.div`) 的 Props。
     {
       prop: 'open',
       type: 'boolean',
-      description: '控制 Drawer 的打开状态。',
+      description: '控制 Drawer 的打开状态。(受控)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'Drawer 的默认打开状态。',
+      description: 'Drawer 的默认打开状态。(非受控)',
     },
     {
       prop: 'onOpenChange',
@@ -155,7 +157,7 @@ Drawer Props 继承 `as` (默认为 `m.div`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'backdrop', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'Drawer Slots 的 className。',
     },
     {
@@ -181,7 +183,7 @@ Drawer Props 继承 `as` (默认为 `m.div`) 的 Props。
 
 ### DrawerContent Props
 
-DrawerContent Props 继承 `as` (默认为 `'div'`) 的 Props。
+DrawerContent 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -242,7 +244,7 @@ DrawerContent Props 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'paper' | 'closeButton', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'DrawerContent Slots 的 className。',
     },
     {
@@ -274,7 +276,7 @@ DrawerContent Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 ### DrawerHeader Props
 
-DrawerHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
+DrawerHeader 继承 `as` (默认为 `'h2'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -300,7 +302,7 @@ DrawerHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
 
 ### DrawerBody Props
 
-DrawerBody Props 继承 `as` (默认为 `'div'`) 的 Props。
+DrawerBody 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -326,7 +328,7 @@ DrawerBody Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 ### DrawerFooter Props
 
-DrawerFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
+DrawerFooter 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
