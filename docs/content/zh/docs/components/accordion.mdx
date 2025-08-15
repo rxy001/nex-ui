@@ -59,7 +59,7 @@ Accordion 组件提供了多种变体，您可以通过 `variant` 属性来设�
 
 ### Controlled
 
-Accordion 组件支持受控模式，您可以通过 `expandedKeys` 属性来控制展开的 items。
+Accordion 组件支持受控模式，您可以通过 `expandedKeys` 和 `onExpandedKeysChange` 属性来控制展开的 items。
 
 <Example {...accordion.controlled} />
 
@@ -67,7 +67,7 @@ Accordion 组件支持受控模式，您可以通过 `expandedKeys` 属性来控
 
 ### Accordion Props
 
-Accordion Props 继承 `as` (默认为 `'div'`) 的 Props。
+Accordion 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -100,7 +100,7 @@ Accordion Props 继承 `as` (默认为 `'div'`) 的 Props。
     {
       prop: 'expandedKeys',
       type: 'Key[]',
-      description: '展开的 items 的 keys。',
+      description: '展开的 items 的 keys。(受控)',
     },
     {
       prop: 'onExpandedKeysChange',
@@ -168,7 +168,7 @@ Accordion Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 ### AccordionItem Props
 
-AccordionItem Props 继承 `as` (默认为 `'div'`) 的 Props。
+AccordionItem 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -243,7 +243,7 @@ AccordionItem Props 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'heading' | 'indicator' | 'content' | 'trigger', ClassValue>>",
+      type: "Partial<Record<Slots, ClassValue>>",
       description: 'AccordionItem Slots 的 className。',
     },
     {

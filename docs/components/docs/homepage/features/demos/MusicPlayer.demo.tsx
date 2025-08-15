@@ -10,7 +10,9 @@ import {
   MoonOutlined,
   SunOutlined,
 } from '@nex-ui/icons'
+import Image from 'next/image'
 import { Box, Button as NexBtn, useColorScheme } from '@nex-ui/react'
+import albumCover from '@/public/images/album-cover.png'
 import type { ButtonProps, CSSObject } from '@nex-ui/react'
 
 function Button({ children, ...props }: ButtonProps) {
@@ -109,10 +111,9 @@ export default function MusicPlayer() {
             }}
             width={160}
             height={160}
-            as='img'
-            loading='lazy'
+            as={Image}
             alt='Album cover'
-            src='https://www.heroui.com/_next/image?url=%2Fimages%2Falbum-cover.png&w=640&q=75'
+            src={albumCover}
           />
         </Box>
         <Box sx={{ flex: 1 }}>
@@ -174,8 +175,11 @@ export default function MusicPlayer() {
                 justifyContent: 'space-between',
                 fs: 'md',
                 fontWeight: 'medium',
-                color: 'gray.200',
                 userSelect: 'none',
+                color: {
+                  _dark: 'gray.300',
+                  _DEFAULT: 'gray.500',
+                },
               }}
             >
               <Box>1:34</Box>

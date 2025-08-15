@@ -57,13 +57,15 @@ DrawerClose supports asynchronously closing the drawer. The `onClick` event of i
 
 ### Controlled Drawer
 
+Use the `open` and `onOpenChange` props of Drawer to control the drawer's open state.
+
 <Example {...drawer.controlled} />
 
 ## API
 
 ### Drawer Props
 
-Drawer props inherit the props of `as` (by default, `m.div`).
+Drawer inherit the props of `as` (by default, `m.div`).
 
 <PropsTable
   dataSource={[
@@ -80,7 +82,7 @@ Drawer props inherit the props of `as` (by default, `m.div`).
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the drawer is shown by default.',
+      description: 'If true, the drawer is shown by default.(uncontrolled)',
     },
     {
       prop: 'onOpenChange',
@@ -155,7 +157,7 @@ Drawer props inherit the props of `as` (by default, `m.div`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'backdrop', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -181,7 +183,7 @@ Drawer props inherit the props of `as` (by default, `m.div`).
 
 ### DrawerContent Props
 
-DrawerContent props inherit the props of `as` (by default, `'div'`).
+DrawerContent inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -242,7 +244,7 @@ DrawerContent props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'paper' | 'closeButton', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -274,7 +276,7 @@ DrawerContent props inherit the props of `as` (by default, `'div'`).
 
 ### DrawerHeader Props
 
-DrawerHeader props inherit the props of `as` (by default, `'h2'`).
+DrawerHeader inherit the props of `as` (by default, `'h2'`).
 
 <PropsTable
   dataSource={[
@@ -300,7 +302,7 @@ DrawerHeader props inherit the props of `as` (by default, `'h2'`).
 
 ### DrawerBody Props
 
-The drawer body props inherit the props of `as` (by default, `'div'`).
+DrawerBody inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -326,7 +328,7 @@ The drawer body props inherit the props of `as` (by default, `'div'`).
 
 ### DrawerFooter Props
 
-DrawerFooter props inherit the props of `as` (by default,`'div'`).
+DrawerFooter inherit the props of `as` (by default,`'div'`).
 
 <PropsTable
   dataSource={[

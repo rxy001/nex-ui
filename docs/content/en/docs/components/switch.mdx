@@ -39,13 +39,15 @@ You can also add icons at the start and end of the switch by using the `startIco
 
 ### Controlled
 
+You can use `checked` and `onCheckedChange` props to control the switch's checked state.
+
 <Example {...$switch.controlled} />
 
 ## API
 
 ### Switch Props
 
-Switch props inherit the props of `as` (by default, `'input'`).
+Switch inherit the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
@@ -148,7 +150,7 @@ Switch props inherit the props of `as` (by default, `'input'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label' | 'input', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {

@@ -39,13 +39,15 @@ Switch 用于在选中和未选中状态之间进行切换。
 
 ### Controlled
 
+使用 `checked` 和 `onCheckedChange` 属性控制 Switch 的选中状态。
+
 <Example {...$switch.controlled} />
 
 ## API
 
 ### Switch Props
 
-Switch Props 继承 `as` (默认为 `'input'`) 的 Props。
+Switch 继承 `as` (默认为 `'input'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -80,7 +82,7 @@ Switch Props 继承 `as` (默认为 `'input'`) 的 Props。
     {
       prop: 'checked',
       type: 'boolean',
-      description: 'Switch 是否选中。',
+      description: 'Switch 是否选中。(受控)',
     },
     {
       prop: 'defaultChecked',
@@ -146,7 +148,7 @@ Switch Props 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label' | 'input', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'Switch Slots 的 className。',
     },
     {

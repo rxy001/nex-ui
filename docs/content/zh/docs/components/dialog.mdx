@@ -72,7 +72,9 @@ DialogClose 支持异步关闭 Dialog ，其 `children` 的 `onClick` 事件可�
 
 <Example {...dialog.asynchronouslyClose} />
 
-### Controlled Dialog
+### Controlled
+
+使用 Dialog 的 `open` 和 `onOpenChange` 属性来控制 Dialog 的打开状态。
 
 <Example {...dialog.controlled} />
 
@@ -80,7 +82,7 @@ DialogClose 支持异步关闭 Dialog ，其 `children` 的 `onClick` 事件可�
 
 ### Dialog Props
 
-Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
+Dialog 继承 `as` (默认为 `m.div`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -92,12 +94,12 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
     {
       prop: 'open',
       type: 'boolean',
-      description: '控制 Dialog 的打开状态。',
+      description: '控制 Dialog 的打开状态。(受控)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'Dialog 的默认打开状态。',
+      description: 'Dialog 的默认打开状态。(非受控)',
     },
     {
       prop: 'onOpenChange',
@@ -170,7 +172,7 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'backdrop', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'Dialog Slots 的 className。',
     },
     {
@@ -196,7 +198,7 @@ Dialog Props 继承 `as` (默认为 `m.div`) 的 Props。
 
 ### DialogContent Props
 
-DialogContent Props 继承 `as` (默认为 `'div'`) 的 Props。
+DialogContent 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -269,7 +271,7 @@ DialogContent Props 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'paper' | 'closeButton', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'DialogContent Slots 的 className。',
     },
     {
@@ -301,7 +303,7 @@ DialogContent Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 ### DialogHeader Props
 
-DialogHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
+DialogHeader 继承 `as` (默认为 `'h2'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -327,7 +329,7 @@ DialogHeader Props 继承 `as` (默认为 `'h2'`) 的 Props。
 
 ### DialogBody Props
 
-DialogBody Props 继承 `as` (默认为 `'div'`) 的 Props。
+DialogBody 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -353,7 +355,7 @@ DialogBody Props 继承 `as` (默认为 `'div'`) 的 Props。
 
 ### DialogFooter Props
 
-DialogFooter Props 继承 `as` (默认为 `'div'`) 的 Props。
+DialogFooter 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[

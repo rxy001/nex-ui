@@ -72,7 +72,9 @@ DialogClose supports asynchronously closing the dialog. The `onClick` event of i
 
 <Example {...dialog.asynchronouslyClose} />
 
-### Controlled Dialog
+### Controlled
+
+Use the `open` and `onOpenChange` props of Dialog to control the open state of the dialog.
 
 <Example {...dialog.controlled} />
 
@@ -80,7 +82,7 @@ DialogClose supports asynchronously closing the dialog. The `onClick` event of i
 
 ### Dialog Props
 
-Dialog props inherit the props of `as` (by default, `m.div`).
+Dialog inherit the props of `as` (by default, `m.div`).
 
 <PropsTable
   dataSource={[
@@ -97,7 +99,7 @@ Dialog props inherit the props of `as` (by default, `m.div`).
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the dialog is shown by default.',
+      description: 'If true, the dialog is shown by default.(uncontrolled)',
     },
     {
       prop: 'onOpenChange',
@@ -172,7 +174,7 @@ Dialog props inherit the props of `as` (by default, `m.div`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'backdrop', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -198,7 +200,7 @@ Dialog props inherit the props of `as` (by default, `m.div`).
 
 ### DialogContent Props
 
-DialogContent props inherit the props of `as` (by default, `'div'`).
+DialogContent inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -271,7 +273,7 @@ DialogContent props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'paper' | 'closeButton', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -303,7 +305,7 @@ DialogContent props inherit the props of `as` (by default, `'div'`).
 
 ### DialogHeader Props
 
-DialogHeader props inherit the props of `as` (by default, `'h2'`).
+DialogHeader inherit the props of `as` (by default, `'h2'`).
 
 <PropsTable
   dataSource={[
@@ -329,7 +331,7 @@ DialogHeader props inherit the props of `as` (by default, `'h2'`).
 
 ### DialogBody Props
 
-The dialog body props inherit the props of `as` (by default, `'div'`).
+DialogBody inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -355,7 +357,7 @@ The dialog body props inherit the props of `as` (by default, `'div'`).
 
 ### DialogFooter Props
 
-DialogFooter props inherit the props of `as` (by default,`'div'`).
+DialogFooter inherit the props of `as` (by default,`'div'`).
 
 <PropsTable
   dataSource={[

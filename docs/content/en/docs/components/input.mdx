@@ -57,7 +57,7 @@ The `prefix` and `suffix` properties can be set to add a prefix and a suffix.
 
 ### Input Props
 
-Input props inherit the props of `as` (by default, `'input'`).
+Input inherit the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
@@ -218,7 +218,7 @@ Input props inherit the props of `as` (by default, `'input'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'clearButton' | 'prefix' | 'suffix' | 'input', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -243,7 +243,7 @@ Input props inherit the props of `as` (by default, `'input'`).
       slot: 'label',
       class: '.nui-input-label',
       component: "'label'",
-      description: 'The label of the input.',
+      description: 'The label element of the input.',
     },
     {
       slot: 'clearButton',
@@ -255,13 +255,13 @@ Input props inherit the props of `as` (by default, `'input'`).
       slot: 'prefix',
       class: '.nui-input-prefix',
       component: "'span'",
-      description: 'The prefix of the input.',
+      description: 'The prefix element of the input.',
     },
     {
       slot: 'suffix',
       class: '.nui-input-suffix',
       component: "'span'",
-      description: 'The suffix of the input.',
+      description: 'The suffix element of the input.',
     },
   ]}
 />

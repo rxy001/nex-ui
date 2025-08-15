@@ -59,7 +59,7 @@ Customize the expand/collapse indicator using the `indicator` prop. Use `hideInd
 
 ### Controlled
 
-Accordion supports controlled mode through the `expandedKeys` prop.
+Accordion supports controlled mode through the `expandedKeys` and `onExpandedKeysChange` props.
 
 <Example {...accordion.controlled} />
 
@@ -67,7 +67,7 @@ Accordion supports controlled mode through the `expandedKeys` prop.
 
 ### Accordion Props
 
-Accordion props inherit the props of `as` (by default, `'div'`).
+Accordion inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -173,7 +173,7 @@ Accordion props inherit the props of `as` (by default, `'div'`).
 
 ### AccordionItem Props
 
-AccordionItem props inherit the props of `as` (by default, `'div'`).
+AccordionItem inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -251,7 +251,7 @@ AccordionItem props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'heading' | 'indicator' | 'content' | 'trigger', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {

@@ -61,7 +61,7 @@ Input 允许用户输入文本。
 
 ### Input Props
 
-Input Props 继承 `as` (默认为 `'input'`) 的 Props。
+Input 继承 `as` (默认为 `'input'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -126,7 +126,7 @@ Input Props 继承 `as` (默认为 `'input'`) 的 Props。
     {
       prop: 'value',
       type: 'string',
-      description: 'Input 的值。',
+      description: 'Input 的值。(受控)',
     },
     {
       prop: 'defaultValue',
@@ -222,7 +222,7 @@ Input Props 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'clearButton' | 'prefix' | 'suffix' | 'input', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'Input Slots 的 className。',
     },
     {

@@ -61,14 +61,13 @@ Enable `iconOnly` prop for square-shaped icon-only buttons without text.
 
 ### Button Props
 
-Button props inherit the props of `as` (by default, `'button'`).
+Button inherit the props of `as` (by default, `'button'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      default: '',
       description: 'The content of the button.',
     },
     {
@@ -192,7 +191,7 @@ Button props inherit the props of `as` (by default, `'button'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'startIcon' | 'endIcon', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {

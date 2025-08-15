@@ -40,6 +40,8 @@ appearance and maintaining it until set to `false`, regardless of user interacti
 
 ### Controlled
 
+Use the `checked` and `onCheckedChange` props to control the checked state of the checkbox.
+
 <Example {...checkbox.controlled} />
 
 ## CheckboxGroup
@@ -60,7 +62,7 @@ Set the `orientation` prop to `vertical` to display checkboxes in a vertical lay
 
 ### Checkbox Props
 
-Checkbox props inherit the props of `as` (by default, `'input'`).
+Checkbox inherit the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
@@ -144,7 +146,8 @@ Checkbox props inherit the props of `as` (by default, `'input'`).
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the input element inside the checkbox.',
+      description:
+        'Ref for forwarding to the input element inside the checkbox.',
     },
     {
       prop: 'onChange',
@@ -172,7 +175,7 @@ Checkbox props inherit the props of `as` (by default, `'input'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'icon' | 'input', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -180,8 +183,7 @@ Checkbox props inherit the props of `as` (by default, `'input'`).
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
     },
-
-]}
+  ]}
 />
 
 ### Checkbox Slots
@@ -211,7 +213,7 @@ Checkbox props inherit the props of `as` (by default, `'input'`).
 
 ### CheckboxGroup Props
 
-CheckboxGroup props inherit the props of `as` (by default, `'div'`).
+CheckboxGroup inherit the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -306,7 +308,7 @@ CheckboxGroup props inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classes',
-      type: "Partial<Record<'root' | 'label' | 'wrapper', ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
