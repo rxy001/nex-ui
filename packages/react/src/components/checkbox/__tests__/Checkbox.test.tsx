@@ -258,6 +258,7 @@ describe('Checkbox', () => {
       inGroup: false,
       name: undefined,
       icon: renderIcon,
+      role: 'checkbox',
     })
     expect(getByTestId('custom-icon')).toBeInTheDocument()
 
