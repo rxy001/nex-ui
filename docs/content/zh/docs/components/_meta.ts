@@ -8,5 +8,6 @@ export default {
   drawer: 'Drawer',
   flex: 'Flex',
   input: 'Input',
+  radioGroup: 'RadioGroup',
   switch: 'Switch',
 }

@@ -1,0 +1,297 @@
+---
+title: RadioGroup
+description: RadioGroup 允许用户从一组中选择一个项目。
+---
+
+import { radioGroup } from '@/content/_demo'
+
+# RadioGroup
+
+RadioGroup 允许用户从一组中选择一个项目。
+
+## 使用
+
+<Example {...radioGroup.usage} />
+
+### Disabled
+
+<Example {...radioGroup.disabled} />
+
+### Colors
+
+<Example {...radioGroup.colors} />
+
+### Sizes
+
+使用 `size` 属性可以设置 RadioGroup 的大小，默认为 `md`。
+
+<Example {...radioGroup.sizes} />
+
+### Default Value
+
+使用 `defaultValue` 属性可以设置 RadioGroup 的默认选中项。
+
+<Example {...radioGroup.defaultValue} />
+
+### Vertical
+
+使用 `orientation` 属性可以设置 RadioGroup 的排列方向，默认为 `horizontal`。
+
+<Example {...radioGroup.vertical} />
+
+### Controlled
+
+使用 `value` 和 `onValueChange` 属性可以控制 Radio 的值。
+
+<Example {...radioGroup.controlled} />
+
+## API
+
+### Radio Props
+
+Radio 继承 `as` (默认为 `'input'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'Radio 的标签。',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'Radio 的颜色。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'Radio 的大小。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Radio 是否禁用。',
+    },
+    {
+      prop: 'checked',
+      type: 'boolean',
+      description: 'Radio 是否选中。(受控)',
+    },
+    {
+      prop: 'defaultChecked',
+      type: 'boolean',
+      description: 'Radio 是否默认选中。（非受控）',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'name',
+      type: 'string',
+      description: 'Radio 的 name。',
+    },
+    {
+      prop: 'value',
+      type: ['string', 'number'],
+      description: 'Radio 的 value。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Radio 内的 input。',
+    },
+    {
+      prop: 'onChange',
+      type: '(event: ChangeEvent<HTMLInputElement>) => void',
+      description: '当 Radio 状态发生变化时会触发该回调函数。',
+    },
+    {
+      prop: 'onCheckedChange',
+      type: '(checked: boolean) => void',
+      description: '当 Radio 状态发生变化时会触发该回调函数。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于 Radio 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<RadioOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'input' | 'dot' | 'label', ClassValue>>",
+      description: 'Radio Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Radio Slots 的 props。',
+    },
+  ]}
+/>
+
+### Radio Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'root',
+      class: '.nui-radio-root',
+      component: "'label'",
+      description: 'Radio 的根元素。',
+    },
+    {
+      slot: 'dot',
+      class: '.nui-radio-dot',
+      component: "'span'",
+      description: 'Radio 内表示圆圈的元素。',
+    },
+    {
+      slot: 'label',
+      class: '.nui-radio-label',
+      component: "'span'",
+      description: 'Radio 的标签元素。',
+    },
+  ]}
+/>
+
+### RadioGroup Props
+
+RadioGroup 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'RadioGroup 的子元素，通常为 Radio 组件。',
+    },
+    {
+      prop: 'label',
+      type: 'ReactNode',
+      description: 'RadioGroup 的标签。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'RadioGroup 是否禁用。',
+    },
+    {
+      prop: 'name',
+      type: 'string',
+      description: 'RadioGroup 的 name。',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pick'",
+        "'purple'",
+        "'gray'",
+      ],
+      description: 'RadioGroup 的颜色。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      description: 'RadioGroup 的大小。',
+    },
+    {
+      prop: 'value',
+      type: ['T extends string | number'],
+      description: 'RadioGroup 指定选中的值。(受控)',
+    },
+    {
+      prop: 'defaultValue',
+      type: ['T extends string | number'],
+      description: 'RadioGroup 默认选中的值。(非受控)',
+    },
+    {
+      prop: 'onValueChange',
+      type: '(value: T) => void',
+      description: '当 RadioGroup 的值发生变化时触发回调函数。',
+    },
+    {
+      prop: 'orientation',
+      type: ["'horizontal'", "'vertical'"],
+      default: "'horizontal'",
+      description: 'RadioGroup 的排列方向。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'RadioGroup 的根元素组件。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素的 ref。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<RadioGroupOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: "Partial<Record<'root' | 'label' | 'wrapper', ClassValue>>",
+      description: 'RadioGroup Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'RadioGroup Slots 的 props。',
+    },
+  ]}
+/>
+
+### RadioGroup Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'label',
+      class: '.nui-radio-group-label',
+      component: "'h3'",
+      description: 'RadioGroup 的标签元素。',
+    },
+    {
+      slot: 'wrapper',
+      class: '.nui-radio-group-wrapper',
+      component: "'div'",
+      description: 'RadioGroup 中所有 Radio 的容器元素。',
+    },
+  ]}
+/>
