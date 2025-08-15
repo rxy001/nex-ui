@@ -192,6 +192,7 @@ export const RadioGroup = <
     }
 
     const value = radioGroupStateRef.current[nextIndex].value
+
     if (value !== undefined) {
       nextElement.focus()
       setValue(value)
@@ -249,6 +250,7 @@ export const RadioGroup = <
     }
 
     const setGroupState = (state: RadioState) => {
+      if (radioGroupStateRef.current.some((s) => s === state)) return
       radioGroupStateRef.current.push(state)
     }
 

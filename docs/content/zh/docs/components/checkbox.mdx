@@ -41,7 +41,7 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 
 <Example {...checkbox.controlled} />
 
-## Checkbox Group
+## CheckboxGroup
 
 <Example {...checkbox.groupUseage} />
 
@@ -133,7 +133,7 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'value',
-      type: 'string',
+      type: ['string', 'number'],
       description: 'Checkbox 的 value。',
     },
     {
@@ -201,7 +201,7 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
   ]}
 />
 
-### Checkbox Group Props
+### CheckboxGroup Props
 
 <PropsTable
   dataSource={[
@@ -243,7 +243,6 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
-      default: "'md'",
       description: 'CheckboxGroup 的大小。',
     },
     {
@@ -306,7 +305,7 @@ Checkbox Props 继承 `as` (默认为 `'input'`) 的 Props。
   ]}
 />
 
-### Checkbox Group Slots
+### CheckboxGroup Slots
 
 <SlotsTable
   dataSource={[

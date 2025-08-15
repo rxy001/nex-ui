@@ -1,14 +1,17 @@
 'use client'
 
-import { Checkbox } from '@nex-ui/react'
+import { Checkbox, Flex } from '@nex-ui/react'
 import { useState } from 'react'
 
 export default function App() {
   const [checked, setChecked] = useState(true)
 
   return (
-    <Checkbox checked={checked} onCheckedChange={setChecked}>
-      Option
-    </Checkbox>
+    <Flex direction='column' gap='5'>
+      <Checkbox checked={checked} onCheckedChange={setChecked}>
+        Option
+      </Checkbox>
+      <p>Checked: {checked ? 'Yes' : 'No'}</p>
+    </Flex>
   )
 }

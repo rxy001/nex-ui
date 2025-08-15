@@ -2,7 +2,7 @@
 
 import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
 import { __DEV__, isFunction } from '@nex-ui/utils'
-import { useId, useMemo } from 'react'
+import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { useRadioGroup } from './RadioGroupContext'
 import {
@@ -189,8 +189,13 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
   )
 
   const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
-
   const { focusVisible, focusProps } = useFocusRing()
+
+  // Use ref to avoid repeated adding in strict mode.
+  const radioStateRef = useRef({
+    value,
+    disabled,
+  })
 
   const ownerState: RadioOwnerState = {
     ...props,
@@ -205,7 +210,9 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
   }
 
   if (inGroup) {
-    groupCtx.setGroupState({ value, disabled })
+    radioStateRef.current.value = value
+    radioStateRef.current.disabled = disabled
+    groupCtx.setGroupState(radioStateRef.current)
   }
 
   const styles = useStyles({
