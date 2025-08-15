@@ -156,7 +156,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'root' | 'label' | 'clearButton' | 'prefix' | 'suffix' | 'input'
+    'root' | 'label' | 'clearButton' | 'prefix' | 'suffix'
   >
 
   /**

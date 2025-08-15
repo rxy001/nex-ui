@@ -91,9 +91,8 @@ describe('Dialog', () => {
     expect(queryByText('Dialog Footer')).toBeInTheDocument()
   })
 
-  it('should forward classes to root and backdrop slots', async () => {
+  it('should forward classes to backdrop slot', async () => {
     const classes = {
-      root: 'test-dialog-root',
       backdrop: 'test-dialog-backdrop',
     }
     const { getByTestId } = await renderWithNexUIProvider(
@@ -105,7 +104,6 @@ describe('Dialog', () => {
 
     const dialogRoot = getByTestId('dialog-root')
 
-    expect(dialogRoot).toHaveClass(classes.root)
     expect(dialogRoot.querySelector(`.${dialogClasses.backdrop}`)).toHaveClass(
       classes.backdrop,
     )

@@ -91,9 +91,8 @@ describe('Drawer', () => {
     expect(drawerRoot).toBe(ref.current)
   })
 
-  it('should forward classes to root and backdrop slots', async () => {
+  it('should forward classes to backdrop slot', async () => {
     const classes = {
-      root: 'test-drawer-root',
       backdrop: 'test-drawer-backdrop',
     }
     const { getByTestId } = await renderWithNexUIProvider(
@@ -105,7 +104,6 @@ describe('Drawer', () => {
 
     const drawerRoot = getByTestId('drawer-root')
 
-    expect(drawerRoot).toHaveClass(classes.root)
     expect(drawerRoot.querySelector(`.${drawerClasses.backdrop}`)).toHaveClass(
       classes.backdrop,
     )

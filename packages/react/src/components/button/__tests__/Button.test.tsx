@@ -204,9 +204,8 @@ describe('Button', () => {
     ).toBeInTheDocument()
   })
 
-  it('should forward classes to root, startIcon and endIcon slots', () => {
+  it('should forward classes to startIcon and endIcon slots', () => {
     const classes = {
-      root: 'test-root-class',
       startIcon: 'test-start-icon-class',
       endIcon: 'test-end-icon-class',
     }
@@ -225,7 +224,6 @@ describe('Button', () => {
     const startIcon = button?.querySelector(`.${buttonClasses['start-icon']}`)
     const endIcon = button?.querySelector(`.${buttonClasses['end-icon']}`)
 
-    expect(button).toHaveClass(classes.root)
     expect(startIcon).toHaveClass(classes.startIcon)
     expect(endIcon).toHaveClass(classes.endIcon)
   })

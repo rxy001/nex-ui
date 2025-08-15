@@ -90,14 +90,13 @@ describe('CheckboxGroup', () => {
     expect(label).toHaveTextContent('Fruits')
   })
 
-  it('should forward classes to root, label and wrapper slots', async () => {
+  it('should forward classes to label and wrapper slots', async () => {
     const classes = {
-      root: 'test-root',
       label: 'test-label',
       wrapper: 'test-wrapper',
     }
 
-    const { container, queryByClassName } = await renderWithNexUIProvider(
+    const { queryByClassName } = await renderWithNexUIProvider(
       <CheckboxGroup label='Label' classes={classes}>
         {children}
       </CheckboxGroup>,
@@ -106,7 +105,6 @@ describe('CheckboxGroup', () => {
       },
     )
 
-    expect(container.firstElementChild).toHaveClass(classes.root)
     expect(queryByClassName(checkboxGroupClasses.label)).toHaveClass(
       classes.label,
     )

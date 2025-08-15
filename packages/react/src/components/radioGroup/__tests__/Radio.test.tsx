@@ -95,10 +95,9 @@ describe('Radio', () => {
     expect(onCheckedChange).toHaveBeenCalledWith(true)
   })
 
-  it('should forward classes to root, input, dot and label slots', () => {
+  it('should forward classes to root, dot and label slots', () => {
     const classes = {
       root: 'test-class-root',
-      input: 'test-class-input',
       dot: 'test-class-dot',
       label: 'test-class-label',
     }
@@ -110,12 +109,10 @@ describe('Radio', () => {
     const radioRoot = container.querySelector(`.${radioClasses.root}`)
     const radioLabel = container.querySelector(`.${radioClasses.label}`)
     const radioDot = container.querySelector(`.${radioClasses.dot}`)
-    const radio = container.querySelector(`.${radioClasses.input}`)
 
     expect(radioRoot).toHaveClass(classes.root)
     expect(radioDot).toHaveClass(classes.dot)
     expect(radioLabel).toHaveClass(classes.label)
-    expect(radio).toHaveClass(classes.input)
   })
 
   it('should forward slotProps to root, dot and label slots', () => {

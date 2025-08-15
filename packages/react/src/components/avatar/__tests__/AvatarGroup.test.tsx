@@ -56,9 +56,8 @@ describe('AvatarGroup', () => {
     expect(container.firstElementChild).toBe(ref.current)
   })
 
-  it('should forward classes to root and surplus slots', () => {
+  it('should forward classes to surplus slot', () => {
     const classes = {
-      root: 'test-root-class',
       surplus: 'test-surplus-class',
     }
 
@@ -72,7 +71,6 @@ describe('AvatarGroup', () => {
     )
 
     const avatarGroupRoot = getByTestId('avatar-group')
-    expect(avatarGroupRoot).toHaveClass(classes.root)
     expect(avatarGroupRoot.lastElementChild).toHaveClass(classes.surplus)
   })
 

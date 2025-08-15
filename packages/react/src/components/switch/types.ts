@@ -78,7 +78,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label' | 'input'
+    'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label'
   >
 
   /**

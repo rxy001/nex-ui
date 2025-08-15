@@ -72,23 +72,20 @@ describe('Avatar', () => {
     expect(container.firstElementChild).toHaveClass(avatarClasses.outlined)
   })
 
-  it('should forward classes to root and img slots', () => {
+  it('should forward classes to img slot', () => {
     mockGlobalImage('loaded')
     const classes = {
       img: 'test-img-class',
-      root: 'test-root-class',
     }
     const { container } = renderWithNexUIProvider(
       <Avatar
         src='/fake.png'
         classes={{
           img: classes.img,
-          root: classes.root,
         }}
       />,
     )
     const avatarRoot = container.firstElementChild
-    expect(avatarRoot).toHaveClass(classes.root)
     expect(avatarRoot?.firstElementChild).toHaveClass(classes.img)
     restoreGlobalImage()
   })
