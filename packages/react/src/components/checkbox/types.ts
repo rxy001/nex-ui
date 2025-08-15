@@ -65,7 +65,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'label' | 'icon' | 'input'>
+  classes?: ComponentUtilityClasses<'root' | 'label' | 'icon'>
 
   /**
    * The default checked state.(uncontrolled)
@@ -177,7 +177,7 @@ type CheckboxGroupOwnProps<
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'label' | 'wrapper'>
+  classes?: ComponentUtilityClasses<'label' | 'wrapper'>
 
   /**
    * The current selected values. (controlled)

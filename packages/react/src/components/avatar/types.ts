@@ -66,7 +66,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'img'>
+  classes?: ComponentUtilityClasses<'img'>
 
   /**
    * The size of the avatar.
@@ -140,7 +140,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'surplus'>
+  classes?: ComponentUtilityClasses<'surplus'>
 
   /**
    * The size of all Avatars.

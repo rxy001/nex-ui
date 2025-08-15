@@ -36,18 +36,16 @@ describe('RadioGroup', () => {
     expect(root).toMatchSnapshot()
   })
 
-  it('should forward classes to root, label and wrapper slots', () => {
+  it('should forward classes to label and wrapper slots', () => {
     const classes = {
-      root: 'test-root',
       label: 'test-label',
       wrapper: 'test-wrapper',
     }
 
-    const { container, queryByClassName } = renderWithNexUIProvider(
+    const { queryByClassName } = renderWithNexUIProvider(
       <TestComponent classes={classes} label='Label' />,
     )
 
-    expect(container.firstElementChild).toHaveClass(classes.root)
     expect(queryByClassName(radioGroupClasses.label)).toHaveClass(classes.label)
     expect(queryByClassName(radioGroupClasses.wrapper)).toHaveClass(
       classes.wrapper,

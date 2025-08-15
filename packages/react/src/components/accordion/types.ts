@@ -213,7 +213,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
    * The className used for each slot.
    */
   classes?: ComponentUtilityClasses<
-    'root' | 'heading' | 'indicator' | 'content' | 'trigger'
+    'heading' | 'indicator' | 'content' | 'trigger'
   >
 }
 

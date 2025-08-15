@@ -116,9 +116,8 @@ describe('DialogContent', () => {
     )
   })
 
-  it('should forward classes to root, paper and closeButton slots', async () => {
+  it('should forward classes to paper and closeButton slots', async () => {
     const classes = {
-      root: 'test-dialog-content-root',
       paper: 'test-dialog-content-paper',
       closeButton: 'test-dialog-content-close-button',
     }
@@ -130,7 +129,6 @@ describe('DialogContent', () => {
     )
 
     const dialogContent = getByTestId('dialog-content')
-    expect(dialogContent).toHaveClass(classes.root)
     expect(
       dialogContent.querySelector(`.${dialogContentClasses.paper}`),
     ).toHaveClass(classes.paper)
