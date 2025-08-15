@@ -76,7 +76,7 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'input' | 'dot' | 'label'>
+  classes?: ComponentUtilityClasses<'root' | 'dot' | 'label'>
 
   /**
    * The props used for each slot.
@@ -139,7 +139,7 @@ type RadioGroupOwnProps<
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'label' | 'wrapper'>
+  classes?: ComponentUtilityClasses<'label' | 'wrapper'>
 
   /**
    * If true, the radios are disabled.

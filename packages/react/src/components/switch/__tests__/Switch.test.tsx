@@ -106,7 +106,6 @@ describe('Switch', () => {
       startIcon: 'test-start-icon-class',
       endIcon: 'test-end-icon-class',
       label: 'test-label-class',
-      input: 'test-input-class',
     }
     const { container } = renderWithNexUIProvider(
       <Switch
@@ -124,7 +123,6 @@ describe('Switch', () => {
     const startIcon = container.querySelector(`.${switchClasses['start-icon']}`)
     const endIcon = container.querySelector(`.${switchClasses['end-icon']}`)
     const label = container.querySelector(`.${switchClasses.label}`)
-    const input = container.querySelector(`.${switchClasses.input}`)
 
     expect(root).toHaveClass(classes.root)
     expect(track).toHaveClass(classes.track)
@@ -132,7 +130,6 @@ describe('Switch', () => {
     expect(startIcon).toHaveClass(classes.startIcon)
     expect(endIcon).toHaveClass(classes.endIcon)
     expect(label).toHaveClass(classes.label)
-    expect(input).toHaveClass(classes.input)
   })
 
   it('should render label with children', () => {

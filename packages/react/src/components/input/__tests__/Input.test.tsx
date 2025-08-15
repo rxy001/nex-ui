@@ -231,14 +231,13 @@ describe('Input', () => {
     expect(input).toHaveAttribute('value', 'test')
   })
 
-  it('should forward classes to root, label, prefix, suffix, input, clearButton slots', () => {
+  it('should forward classes to root, label, prefix, suffix, clearButton slots', () => {
     const classes = {
       root: 'test-root-class',
       label: 'test-label-class',
       prefix: 'test-prefix-class',
       suffix: 'test-suffix-class',
       clearButton: 'test-clear-btn-class',
-      input: 'test-input-class',
     }
 
     const { container } = renderWithNexUIProvider(
@@ -256,14 +255,12 @@ describe('Input', () => {
     const inputPrefix = container.querySelector(`.${inputClasses['prefix']}`)
     const inputSuffix = container.querySelector(`.${inputClasses['suffix']}`)
     const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
-    const input = container.querySelector(`.${inputClasses['input']}`)
 
     expect(inputRoot).toHaveClass(classes.root)
     expect(inputLabel).toHaveClass(classes.label)
     expect(inputPrefix).toHaveClass(classes.prefix)
     expect(inputSuffix).toHaveClass(classes.suffix)
     expect(clearButton).toHaveClass(classes.clearButton)
-    expect(input).toHaveClass(classes.input)
   })
 
   it('should forward slotProps to root, label, prefix, suffix, clearButton slots', () => {

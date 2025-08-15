@@ -47,7 +47,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'backdrop'>
+  classes?: ComponentUtilityClasses<'backdrop'>
 
   /**
    * If true, the dialog is open.
@@ -198,7 +198,7 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'paper' | 'closeButton'>
+  classes?: ComponentUtilityClasses<'paper' | 'closeButton'>
 
   /**
    * The dialog scroll behavior.

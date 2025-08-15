@@ -148,11 +148,10 @@ describe('Checkbox', () => {
     expect(onCheckedChange).toHaveBeenCalledWith(false)
   })
 
-  it('should forward classes to icon, root, input and label slots', async () => {
+  it('should forward classes to icon, root and label slots', async () => {
     const classes = {
       icon: 'test-class-icon',
       root: 'test-class-root',
-      input: 'test-class-input',
       label: 'test-class-label',
     }
 
@@ -166,12 +165,10 @@ describe('Checkbox', () => {
     const checkboxRoot = queryByClassName(checkboxClasses.root)
     const checkboxLabel = queryByClassName(checkboxClasses.label)
     const checkboxIcon = queryByClassName(checkboxClasses.icon)
-    const checkbox = queryByClassName(checkboxClasses.input)
 
     expect(checkboxRoot).toHaveClass(classes.root)
     expect(checkboxIcon).toHaveClass(classes.icon)
     expect(checkboxLabel).toHaveClass(classes.label)
-    expect(checkbox).toHaveClass(classes.input)
   })
 
   it('should forward slotProps to icon, root and label slots', async () => {

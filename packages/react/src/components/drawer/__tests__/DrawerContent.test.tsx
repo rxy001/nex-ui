@@ -126,9 +126,8 @@ describe('DrawerContent', () => {
     expect(drawerContentRoot).toHaveClass(drawerContentClasses['placement-top'])
   })
 
-  it('should forward classes to root, paper and closeButton slots', async () => {
+  it('should forward classes to paper and closeButton slots', async () => {
     const classes = {
-      root: 'test-drawer-content-root',
       paper: 'test-drawer-content-paper',
       closeButton: 'test-drawer-content-close-button',
     }
@@ -140,7 +139,7 @@ describe('DrawerContent', () => {
     )
 
     const drawerContent = getByTestId('drawer-content')
-    expect(drawerContent).toHaveClass(classes.root)
+
     expect(
       drawerContent.querySelector(`.${drawerContentClasses.paper}`),
     ).toHaveClass(classes.paper)
