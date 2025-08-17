@@ -120,3 +120,5 @@ https://github.com/microsoft/TypeScript/issues/40426
 
 41. Checkbox 内 input element 无法添加 classname 和 sx.
     组件的 className 和 sx 都是用于 根元素。一般像控件组件内部的 input 都是隐藏的，所以感觉也不需要 classname 和 sx
+
+42. Input 自动填充时样式有些问题

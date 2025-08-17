@@ -17,15 +17,12 @@ export const inputRecipe = defineSlotRecipe({
       px: '3',
     },
     input: {
-      outline: 'none',
-      border: 'none',
+      all: 'unset',
       fs: 'inherit',
-      bg: 'transparent',
       color: 'inherit',
       flex: 1,
       cursor: 'inherit',
       w: 'full',
-      p: 0,
       '::placeholder': {
         color: 'inherit',
       },
