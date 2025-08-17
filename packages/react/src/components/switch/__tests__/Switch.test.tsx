@@ -301,6 +301,8 @@ describe('Switch', () => {
       color: 'blue',
       defaultChecked: false,
       thumbIcon: mockFn,
+      as: 'input',
+      type: 'checkbox',
     })
   })
 

@@ -36,17 +36,14 @@ exports[`Input should render with default props 1`] = `
 }
 
 .emotion-1 {
-  outline: none;
-  border: none;
+  all: unset;
   font-size: inherit;
-  background-color: transparent;
   color: inherit;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   cursor: inherit;
   width: var(--nui-sizes-full);
-  padding: 0;
   padding-block-start: var(--nui-spaces-2-5);
   padding-block-end: var(--nui-spaces-2-5);
 }
@@ -82,7 +79,6 @@ exports[`Input should render with default props 1`] = `
   class="nui-input-root nui-input-variant-outlined nui-input-radius-md nui-input-size-md nui-input-color-blue emotion-0"
 >
   <input
-    aria-invalid="false"
     class="nui-input-input emotion-1"
     data-testid="test-input"
     tabindex="0"
