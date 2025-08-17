@@ -1,7 +1,7 @@
 'use client'
 
-import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
-import { __DEV__, isFunction } from '@nex-ui/utils'
+import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { __DEV__ } from '@nex-ui/utils'
 import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { useRadioGroup } from './RadioGroupContext'
@@ -11,20 +11,11 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
+  useInputA11yProps,
 } from '../utils'
 import { radioRecipe } from '../../theme/recipes'
-import type {
-  ChangeEvent,
-  ElementType,
-  InputHTMLAttributes,
-  KeyboardEvent,
-  MouseEvent,
-} from 'react'
-import type {
-  RadioOwnerState,
-  RadioProps,
-  RadioGroupContextValue,
-} from './types'
+import type { ElementType } from 'react'
+import type { RadioOwnerState, RadioProps } from './types'
 
 const useSlotClasses = (ownerState: RadioOwnerState) => {
   const { prefix } = useNexUI()
@@ -51,83 +42,44 @@ const useSlotClasses = (ownerState: RadioOwnerState) => {
   }, [checked, classes, color, prefix, size, disabled])
 }
 
-const useSlotAriaProps = (
-  ownerState: RadioOwnerState,
-  ctx: RadioGroupContextValue | undefined | null,
-) => {
+const useSlotAriaProps = (ownerState: RadioOwnerState) => {
   const {
-    disabled,
-    name,
-    value,
-    checked,
     children,
     slotProps,
     role,
+    as,
     type,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
-    'aria-checked': ariaChecked,
-    'aria-disabled': ariaDisabled,
-    as = 'input',
-    tabIndex = 0,
   } = ownerState
 
-  const labelId = useId()
+  const id = useId()
 
   return useMemo(() => {
+    const hasLabel = !!children
     const stringChildren = typeof children === 'string'
     const labelSlotProps = slotProps?.label || {}
-
-    const label = {
-      id: labelSlotProps.id ?? (stringChildren ? labelId : undefined),
-    }
-
-    let input: InputHTMLAttributes<HTMLInputElement> = {
-      tabIndex: disabled || !(ctx?.isTabbable(value) ?? true) ? -1 : tabIndex,
-      'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
-      'aria-labelledby': ariaLabelledBy ?? label.id,
-    }
-
-    if (as === 'input' || isFunction(as)) {
-      input = {
-        name,
-        role,
-        value,
-        disabled,
-        checked,
-        type,
-        ...input,
-      }
-    } else {
-      input = {
-        role: role ?? 'radio',
-        'aria-checked': ariaChecked ?? checked,
-        'aria-disabled': ariaDisabled ?? disabled,
-        ...input,
-      }
-    }
+    const labelId = labelSlotProps.id ?? (hasLabel ? id : undefined)
 
     return {
-      input,
-      label,
+      input: {
+        'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
+        'aria-labelledby': ariaLabelledBy ?? labelId,
+        role: !role && as !== 'input' && type === 'radio' ? 'radio' : role,
+      },
+      label: {
+        id: labelId,
+      },
     }
   }, [
     children,
     slotProps?.label,
-    labelId,
-    disabled,
-    ctx,
-    checked,
-    tabIndex,
+    id,
     ariaLabel,
     ariaLabelledBy,
-    as,
-    name,
     role,
-    value,
+    as,
     type,
-    ariaChecked,
-    ariaDisabled,
   ])
 }
 
@@ -153,6 +105,8 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     className,
     slotProps,
     checked: checkedProp,
+    tabIndex = 0,
+    as = 'input',
     type = 'radio',
     disabled = groupCtx?.disabled,
     name = groupCtx?.name,
@@ -189,7 +143,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
   )
 
   const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
-  const { focusVisible, focusProps } = useFocusRing()
 
   // Use ref to avoid repeated adding in strict mode.
   const radioStateRef = useRef({
@@ -197,8 +150,16 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     disabled,
   })
 
+  if (inGroup) {
+    radioStateRef.current.value = value
+    radioStateRef.current.disabled = disabled
+    groupCtx.setGroupState(radioStateRef.current)
+  }
+
   const ownerState: RadioOwnerState = {
     ...props,
+    tabIndex: (groupCtx?.isTabbable(value) ?? true) ? tabIndex : -1,
+    as,
     inGroup,
     disabled,
     type,
@@ -209,12 +170,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     defaultChecked,
   }
 
-  if (inGroup) {
-    radioStateRef.current.value = value
-    radioStateRef.current.disabled = disabled
-    groupCtx.setGroupState(radioStateRef.current)
-  }
-
   const styles = useStyles({
     name: 'Radio',
     recipe: radioRecipe,
@@ -223,41 +178,21 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
 
   const slotClasses = useSlotClasses(ownerState)
 
-  const slotAriaProps = useSlotAriaProps(ownerState, groupCtx)
+  const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useEvent((newChecked: boolean) => {
     if (inGroup && value !== undefined) {
       groupCtx.setValue(value)
-      return
     }
 
-    setRawChecked(event.target.checked)
-  })
-
-  const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
-    if (
-      event.currentTarget.tagName !== 'INPUT' &&
-      event.currentTarget === event.target
-    ) {
-      if (inGroup && value !== undefined) {
-        groupCtx.setValue(value)
-      }
-
-      if (!inGroup) {
-        setRawChecked(!checked)
-      }
+    if (!inGroup) {
+      setRawChecked(newChecked)
     }
   })
 
-  const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
-    if (
-      focusVisible &&
-      event.key === ' ' &&
-      event.currentTarget.tagName !== 'INPUT' &&
-      event.currentTarget === event.target
-    ) {
-      event.currentTarget.click()
-    }
+  const { getInputA11yProps, focusVisible } = useInputA11yProps({
+    ...ownerState,
+    onCheckedChange: handleChange,
   })
 
   const [RadioRoot, getRadioRootProps] = useSlot({
@@ -278,14 +213,14 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
-    additionalProps: {
-      onChange: handleChange,
-      onClick: handleClick,
-      onKeyUp: handleKeyUp,
-      'data-focus-visible': focusVisible || undefined,
-      ...focusProps,
+    a11y: {
+      ...getInputA11yProps(),
+      ...slotAriaProps.input,
     },
-    a11y: slotAriaProps.input,
+    additionalProps: {
+      as,
+      'data-focus-visible': focusVisible || undefined,
+    },
   })
 
   const [RadioLabel, getRadioLabelProps] = useSlot({

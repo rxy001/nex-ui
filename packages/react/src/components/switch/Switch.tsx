@@ -2,7 +2,7 @@
 
 import { useId, useMemo } from 'react'
 import { isFunction, isString } from '@nex-ui/utils'
-import { useControlledState, useEvent, useFocusRing } from '@nex-ui/hooks'
+import { useControlledState } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
 import { switchRecipe } from '../../theme/recipes'
 import {
@@ -11,15 +11,9 @@ import {
   composeClasses,
   getUtilityClass,
   useSlot,
+  useInputA11yProps,
 } from '../utils'
-import type {
-  ChangeEvent,
-  ElementType,
-  HTMLAttributes,
-  KeyboardEvent,
-  InputHTMLAttributes,
-  MouseEvent,
-} from 'react'
+import type { ElementType, HTMLAttributes } from 'react'
 import type { SwitchOwnerState, SwitchProps } from './types'
 
 const useSlotClasses = (ownerState: SwitchOwnerState) => {
@@ -54,69 +48,32 @@ const useSlotAriaProps = (
   ownerState: SwitchOwnerState,
 ): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
   const {
-    checked,
-    disabled,
     children,
     slotProps,
-    role = 'switch',
-    tabIndex = 0,
-    type = 'checkbox',
-    as = 'input',
+    role,
     'aria-labelledby': labelledBy,
     'aria-label': ariaLabel,
-    'aria-checked': ariaChecked,
-    'aria-disabled': ariaDisabled,
   } = ownerState
 
   const id = useId()
 
   return useMemo(() => {
+    const hasLabel = !!children
     const stringChildren = isString(children)
     const labelProps = slotProps?.label ?? {}
-    const labelId = labelProps.id ?? (stringChildren ? id : undefined)
+    const labelId = labelProps.id ?? (hasLabel ? id : undefined)
 
-    let input: InputHTMLAttributes<HTMLInputElement> = {
-      role,
-      tabIndex: disabled ? -1 : tabIndex,
-      'aria-labelledby': labelledBy ?? labelId,
-      'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
+    return {
+      input: {
+        role: role ?? 'switch',
+        'aria-labelledby': labelledBy ?? labelId,
+        'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
+      },
+      label: {
+        id: labelId,
+      },
     }
-
-    if (as === 'input' || isFunction(as)) {
-      input = {
-        ...input,
-        type,
-        disabled,
-        checked,
-      }
-    } else {
-      input = {
-        ...input,
-        'aria-checked': ariaChecked ?? checked,
-        'aria-disabled': ariaDisabled ?? (disabled || undefined),
-      }
-    }
-
-    const label = {
-      id: labelId,
-    }
-
-    return { input, label }
-  }, [
-    ariaChecked,
-    ariaDisabled,
-    ariaLabel,
-    as,
-    checked,
-    children,
-    disabled,
-    id,
-    labelledBy,
-    role,
-    slotProps?.label,
-    tabIndex,
-    type,
-  ])
+  }, [ariaLabel, children, id, labelledBy, role, slotProps?.label])
 }
 
 export const Switch = <SwitchComponent extends ElementType = 'input'>(
@@ -138,18 +95,18 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     endIcon,
     onCheckedChange,
     thumbIcon: thumbIconProp,
-    checked: checkdeProp,
+    checked: checkedProp,
     disabled = false,
+    as = 'input',
     size = 'md',
+    type = 'checkbox',
     defaultChecked = false,
     color = primaryThemeColor,
     ...remainingProps
   } = props
 
-  const { focusVisible, focusProps } = useFocusRing()
-
   const [checked, setChecked] = useControlledState(
-    checkdeProp,
+    checkedProp,
     defaultChecked,
     onCheckedChange,
   )
@@ -157,34 +114,17 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   const ownerState: SwitchOwnerState = {
     ...props,
     color,
+    as,
+    type,
     checked,
     disabled,
     size,
     defaultChecked,
   }
 
-  const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
-  })
-
-  const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
-    if (
-      event.currentTarget.tagName !== 'INPUT' &&
-      event.target === event.currentTarget
-    ) {
-      setChecked(!checked)
-    }
-  })
-
-  const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
-    if (
-      focusVisible &&
-      event.key === ' ' &&
-      event.target === event.currentTarget &&
-      event.currentTarget.tagName !== 'INPUT'
-    ) {
-      event.currentTarget.click()
-    }
+  const { getInputA11yProps, focusVisible } = useInputA11yProps({
+    ...ownerState,
+    onCheckedChange: setChecked,
   })
 
   const classes = useSlotClasses(ownerState)
@@ -215,13 +155,13 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: classes.input,
-    a11y: slotAriaProps.input,
+    a11y: {
+      ...getInputA11yProps(),
+      ...slotAriaProps.input,
+    },
     additionalProps: {
-      onChange: handleChange,
-      onClick: handleClick,
-      onKeyUp: handleKeyUp,
+      as,
       'data-focus-visible': focusVisible || undefined,
-      ...focusProps,
     },
   })
 
