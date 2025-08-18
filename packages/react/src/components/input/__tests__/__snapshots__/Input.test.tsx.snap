@@ -44,8 +44,6 @@ exports[`Input should render with default props 1`] = `
   flex: 1;
   cursor: inherit;
   width: var(--nui-sizes-full);
-  padding-block-start: var(--nui-spaces-2-5);
-  padding-block-end: var(--nui-spaces-2-5);
 }
 
 .emotion-1::-webkit-input-placeholder {
