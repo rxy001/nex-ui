@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react'
 import { useInputA11yProps } from '../useInputA11yProps'
+import type { UseInputA11yPropsArgs } from '../useInputA11yProps'
 
 jest.mock('@nex-ui/hooks', () => {
   const originalModule = jest.requireActual('@nex-ui/hooks')
@@ -211,13 +212,16 @@ describe('useInputA11yProps', () => {
 
   it('should not call onCheckedChange when disabled', () => {
     const onCheckedChange = jest.fn()
-    const { result, rerender } = renderHook(() =>
-      useInputA11yProps({
-        as: 'div',
-        checked: false,
-        disabled: true,
-        onCheckedChange,
-      }),
+    const { result, rerender } = renderHook(
+      (props: UseInputA11yPropsArgs) => useInputA11yProps(props),
+      {
+        initialProps: {
+          as: 'div',
+          checked: false,
+          disabled: true,
+          onCheckedChange,
+        },
+      },
     )
     const props = result.current.getInputA11yProps()
 
@@ -241,17 +245,17 @@ describe('useInputA11yProps', () => {
 
     expect(onCheckedChange).not.toHaveBeenCalled()
 
-    rerender(() =>
-      useInputA11yProps({
-        as: 'input',
-        type: 'checkbox',
-        checked: false,
-        disabled: true,
-        onCheckedChange,
-      }),
-    )
+    rerender({
+      as: 'input',
+      type: 'checkbox',
+      checked: false,
+      disabled: true,
+      onCheckedChange,
+    })
 
-    props.onChange?.({
+    const nextProps = result.current.getInputA11yProps()
+
+    nextProps.onChange?.({
       currentTarget: {
         tagName: 'INPUT',
         checked: true,

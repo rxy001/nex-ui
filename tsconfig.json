@@ -1,4 +1,6 @@
 {
+  "include": ["packages", "docs", "sb", "scripts"],
+  "exclude": ["**/node_modules", "**/dist", "**/.turbo"],
   "compilerOptions": {
     "types": ["@testing-library/jest-dom", "@emotion/jest", "node"],
     "target": "ESNext",
