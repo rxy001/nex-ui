@@ -64,26 +64,17 @@ export const inputRecipe = defineSlotRecipe({
           fs: 'md',
           h: '8',
         },
-        input: {
-          py: '2',
-        },
       },
       md: {
         root: {
           fs: 'lg',
           h: '10',
         },
-        input: {
-          py: '2.5',
-        },
       },
       lg: {
         root: {
           fs: 'lg',
           h: '12',
-        },
-        input: {
-          py: '3',
         },
       },
     },
@@ -194,17 +185,11 @@ export const inputRecipe = defineSlotRecipe({
             transform: 'translateY(-90%) scale(0.8)',
           },
         },
-        input: {
-          pb: 0,
-        },
       },
       inside: {
         label: {
           insetBlockStart: '50%',
           transform: 'translateY(-90%) scale(0.8)',
-        },
-        input: {
-          pb: 0,
         },
       },
     },
@@ -267,13 +252,13 @@ export const inputRecipe = defineSlotRecipe({
           h: '10',
         },
         input: {
-          pt: '0.9em',
+          mt: '0.9em',
         },
         prefix: {
-          pt: '0.9em',
+          mt: '0.9em',
         },
         suffix: {
-          pt: '0.9em',
+          mt: '0.9em',
         },
         clearButton: {
           mt: '0.9em',
@@ -288,13 +273,13 @@ export const inputRecipe = defineSlotRecipe({
           h: '12',
         },
         input: {
-          pt: '1em',
+          mt: '1em',
         },
         prefix: {
-          pt: '1em',
+          mt: '1em',
         },
         suffix: {
-          pt: '1em',
+          mt: '1em',
         },
         clearButton: {
           mt: '1em',
@@ -309,13 +294,13 @@ export const inputRecipe = defineSlotRecipe({
           h: '14',
         },
         input: {
-          pt: '1.2em',
+          mt: '1.2em',
         },
         prefix: {
-          pt: '1.2em',
+          mt: '1.2em',
         },
         suffix: {
-          pt: '1.2em',
+          mt: '1.2em',
         },
         clearButton: {
           mt: '1.2em',
