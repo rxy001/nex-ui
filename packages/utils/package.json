@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/utils",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": false,
   "author": "X1ng Yu",
   "description": "Utility functions for React components.",
