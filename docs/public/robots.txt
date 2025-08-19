@@ -5,5 +5,11 @@ Allow: /
 # Host
 Host: https://nex-ui-docs.vercel.app
 
+# Disallow sensitive paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /private/
+
 # Sitemaps
 Sitemap: https://nex-ui-docs.vercel.app/sitemap.xml
