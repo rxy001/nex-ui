@@ -245,14 +245,14 @@ describe('DrawerContent', () => {
   })
 
   describe('Accessibility', () => {
-    it('should have role="drawer" on the DrawerContent element', async () => {
+    it('should have role="dialog" on the DrawerContent element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(<TestDrawer />, {
         useAct: true,
       })
 
       const contentRoot = getByTestId('drawer-content')
       const paper = contentRoot.querySelector(`.${drawerContentClasses.paper}`)
-      expect(paper).toHaveAttribute('role', 'drawer')
+      expect(paper).toHaveAttribute('role', 'dialog')
     })
 
     it('should have aria-modal="true" on the DrawerContent element', async () => {
