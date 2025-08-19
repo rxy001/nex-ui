@@ -136,6 +136,10 @@ export default async function RootLayout({ children, params }: any) {
         <link rel='shortcut icon' href='/favicon.ico' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' />
+        <meta
+          name='google-site-verification'
+          content='SEV1xf1Qi1Fw0dt-ZRQe4tTZ7w-XMuQ3YbyFEpxVQhg'
+        />
         <link
           href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap'
           rel='stylesheet'
