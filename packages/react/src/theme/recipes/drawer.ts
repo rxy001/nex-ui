@@ -234,7 +234,7 @@ export const drawerBodyRecipe = defineRecipe({
   base: {
     py: '2',
     px: '6',
-    overflow: 'auto',
+    overflowY: 'auto',
   },
 })
 

@@ -36,7 +36,7 @@ export const DrawerBody = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { children, ...remainingProps } = props
+  const { children, tabIndex = 0, ...remainingProps } = props
 
   const ownerState: DrawerBodyOwnerState = {
     ...props,
@@ -57,6 +57,10 @@ export const DrawerBody = <RootComponent extends ElementType = 'div'>(
     classNames: classes.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
+    a11y: {
+      // https://dequeuniversity.com/rules/axe/4.10/scrollable-region-focusable?application=axeAPI
+      tabIndex,
+    },
   })
 
   return (

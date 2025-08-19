@@ -50,8 +50,8 @@ const useSlotAriaProps = (ownerState: DrawerContentOwnerState) => {
   const { 'aria-label': closeButtonAriaLabel = 'Close drawer' } = closeButton
 
   const {
-    role = 'drawer',
-    'aria-modal': modal = true,
+    role = 'dialog',
+    'aria-modal': ariaModal = true,
     'aria-labelledby': ariaLabelledBy = defaultAriaLabelledBy,
     'aria-describedby': ariaDescribedBy = defaultAriaDescribedBy,
   } = paper
@@ -60,7 +60,7 @@ const useSlotAriaProps = (ownerState: DrawerContentOwnerState) => {
     () => ({
       paper: {
         role,
-        'aria-modal': modal,
+        'aria-modal': ariaModal,
         'aria-labelledby': ariaLabelledBy,
         'aria-describedby': ariaDescribedBy,
       },
@@ -68,7 +68,7 @@ const useSlotAriaProps = (ownerState: DrawerContentOwnerState) => {
         'aria-label': closeButtonAriaLabel,
       },
     }),
-    [role, modal, ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
+    [role, ariaModal, ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
   )
 }
 
