@@ -13,7 +13,7 @@ Avatar 用于代表用户，并显示用户的个人资料照片、姓名首字�
 
 ---
 
-## 使用
+## Usage
 
 <Example {...avatar.usage} />
 
@@ -43,29 +43,29 @@ Avatar 如果加载图片时出现错误，将按以下顺序回退到备用选�
 
 <Example {...avatar.fallback} />
 
-## Avatar Group
+## AvatarGroup
 
 ### Group Max Count
 
-`max` 属性可限制 Avatar Group 中显示的最大 Avatar 数量。
+`max` 属性可限制 AvatarGroup 中显示的最大 Avatar 数量。
 
 <Example {...avatar.groupMaxCount} />
 
 ### Group Total Count
 
-`total` 属性控制显示 Avatar Group 中的总 Avatar 数量。
+`total` 属性控制显示 AvatarGroup 中的总 Avatar 数量。
 
 <Example {...avatar.groupTotalCount} />
 
 ### Custom Spacing
 
-`spacing` 属性可设置 Avatar Group 中 Avatar 之间的间距。
+`spacing` 属性可设置 AvatarGroup 中 Avatar 之间的间距。
 
 <Example {...avatar.groupSpacing} />
 
 ### Custom Surplus
 
-`renderSurplus` 为 Avatar Group 中的剩余 Avatar 提供自定义渲染。设置 `renderSurplus` 为一个函数，该函数接收一个基于 `children` 和 `max` 计算出的多余数量作为参数。
+`renderSurplus` 为 AvatarGroup 中的剩余 Avatar 提供自定义渲染。设置 `renderSurplus` 为一个函数，该函数接收一个基于 `children` 和 `max` 计算出的多余数量作为参数。
 
 <Example {...avatar.groupCustomSurplus} />
 
@@ -181,7 +181,7 @@ Avatar 继承 `as` (默认为 `'div'`) 的 Props。
   ]}
 />
 
-### Avatar Group Props
+### AvatarGroup Props
 
 AvatarGroup 继承 `as` (默认为 `'div'`) 的 Props。
 
@@ -285,7 +285,7 @@ AvatarGroup 继承 `as` (默认为 `'div'`) 的 Props。
   ]}
 />
 
-### Avatar Group Slots
+### AvatarGroup Slots
 
 <SlotsTable
   dataSource={[
