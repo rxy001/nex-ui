@@ -12,15 +12,93 @@ import {
   Footer,
 } from '@/nextraTheme'
 import '@/globals.css'
+import { StructuredData } from '@/components/StructuredData'
 import { getDictionary } from '../_dictionaries/getDictionary'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  keywords: [
+    'React',
+    'Next.js',
+    'Emotion',
+    'Nex UI',
+    'React Components',
+    'UI Components',
+    'UI Kit',
+    'UI Library',
+    'UI Framework',
+    'Design System',
+    'TypeScript',
+    'Theme Customization',
+    'Dark Mode',
+    'Responsive Design',
+    'Accessibility',
+    'WCAG',
+    'CSS-in-JS',
+    'Component Library',
+    'Frontend Framework',
+    'Web Development',
+    'JavaScript Library',
+    'Open Source',
+    'Modern UI',
+    'Beautiful Components',
+    'Developer Experience',
+  ],
+  authors: [{ name: 'X1ng Yu', url: 'https://github.com/rxy001' }],
+  creator: 'X1ng Yu',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://nex-ui-docs.vercel.app',
+    siteName: 'Nex UI',
+    title: 'Nex UI - Beautiful, Modern & Reliable React Component Library',
+    description:
+      'Build beautiful user interfaces with Nex UI - a modern React component library featuring theme customization, dark mode support, and exceptional developer experience.',
+    images: [
+      {
+        url: '/og-image.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Nex UI - React Component Library',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nex UI - Beautiful, Modern & Reliable React Component Library',
+    description:
+      'Build beautiful user interfaces with Nex UI - a modern React component library featuring theme customization, dark mode support, and exceptional developer experience.',
+    images: ['/og-image.svg'],
+    creator: '@nex_ui',
+  },
   appleWebApp: {
     title: 'Nex UI',
+    statusBarStyle: 'default',
+    capable: true,
   },
-  keywords:
-    'React,Next.js,Emotion,Nex UI,React,Server Components,React Components,UI Components,UI Kit,UI Library,UI Framework,UI Design System',
+  formatDetection: {
+    telephone: false,
+  },
+  metadataBase: new URL('https://nex-ui-docs.vercel.app'),
+  alternates: {
+    canonical: 'https://nex-ui-docs.vercel.app',
+    languages: {
+      'en-US': 'https://nex-ui-docs.vercel.app/en',
+      'zh-CN': 'https://nex-ui-docs.vercel.app/zh',
+    },
+  },
+  category: 'technology',
 }
 
 export default async function RootLayout({ children, params }: any) {
@@ -55,7 +133,7 @@ export default async function RootLayout({ children, params }: any) {
   return (
     <html lang={lang} dir='ltr' suppressHydrationWarning>
       <Head>
-        <link rel='shortcut icon' href={logo.src} />
+        <link rel='shortcut icon' href='/favicon.ico' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' />
         <link
@@ -63,6 +141,8 @@ export default async function RootLayout({ children, params }: any) {
           rel='stylesheet'
         />
         <InitColorSchemeScript colorSchemeSelector='class' defaultMode='dark' />
+        <StructuredData type='website' />
+        <StructuredData type='software' />
       </Head>
       <body>
         <Banner dismissible={false}>
