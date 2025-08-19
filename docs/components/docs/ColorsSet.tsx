@@ -52,7 +52,7 @@ function Button({ className, ...props }: ComponentProps<'button'>) {
     <button
       className={clsx(
         'x:shadow-xs x:w-34 x:h-34 x:flex x:items-center x:justify-center x:flex-col',
-        'x:rounded-2xl x:overflow-hidden x:hover:opacity-80 x:active:opacity-100 x:transition-opacity',
+        'x:rounded-2xl x:overflow-hidden x:hover:opacity-80 x:active:opacity-70 x:transition-opacity',
         className,
       )}
       {...props}

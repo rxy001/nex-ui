@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Head, Banner } from 'nextra/components'
+import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { InitColorSchemeScript } from '@nex-ui/react'
 import logo from '@/public/images/logo.png'
@@ -92,13 +92,16 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://nex-ui-docs.vercel.app'),
   alternates: {
-    canonical: 'https://nex-ui-docs.vercel.app',
     languages: {
       'en-US': 'https://nex-ui-docs.vercel.app/en',
       'zh-CN': 'https://nex-ui-docs.vercel.app/zh',
     },
   },
   category: 'technology',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  },
 }
 
 export default async function RootLayout({ children, params }: any) {
@@ -133,7 +136,6 @@ export default async function RootLayout({ children, params }: any) {
   return (
     <html lang={lang} dir='ltr' suppressHydrationWarning>
       <Head>
-        <link rel='shortcut icon' href='/favicon.ico' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' />
         <meta

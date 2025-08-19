@@ -109,21 +109,30 @@ export function HomePage({ translations }: HomePageProps) {
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.customization)}
           <Theme translations={translations} />
-          <LinkButton href='/docs/customization/theming'>
+          <LinkButton
+            href='/docs/customization/theming'
+            aria-label='Learn more about customization'
+          >
             {translations?.learnMore}
           </LinkButton>
         </div>
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.styling)}
           <Style />
-          <LinkButton href='/docs/styling/sx-prop'>
+          <LinkButton
+            href='/docs/styling/sx-prop'
+            aria-label='Learn more about styling'
+          >
             {translations?.learnMore}
           </LinkButton>
         </div>
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.darkMode)}
           <DarkMode />
-          <LinkButton href='/docs/customization/dark-mode'>
+          <LinkButton
+            href='/docs/customization/dark-mode'
+            aria-label='Learn more about dark mode'
+          >
             {translations?.learnMore}
           </LinkButton>
         </div>
