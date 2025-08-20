@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputBase should render with default props 1`] = `
+<input
+  data-focus-visible="true"
+  tabindex="0"
+  type="text"
+/>
+`;

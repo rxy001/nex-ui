@@ -12,8 +12,8 @@ import {
   composeClasses,
   getUtilityClass,
   useSlot,
-  useInputA11yProps,
 } from '../utils'
+import { InputBase } from '../inputBase'
 import { CheckedIcon } from './CheckedIcon'
 import { IndeterminateIcon } from './IndeterminateIcon'
 import type { CSSObject } from '@emotion/react'
@@ -54,9 +54,6 @@ const useSlotAriaProps = (
   const {
     children,
     slotProps,
-    role,
-    as,
-    type,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
   } = ownerState
@@ -71,8 +68,6 @@ const useSlotAriaProps = (
 
     return {
       input: {
-        role:
-          !role && as !== 'input' && type === 'checkbox' ? 'checkbox' : role,
         'aria-labelledby': ariaLabelledBy ?? labelId,
         'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
       },
@@ -80,16 +75,7 @@ const useSlotAriaProps = (
         id: labelId,
       },
     }
-  }, [
-    ariaLabel,
-    ariaLabelledBy,
-    as,
-    children,
-    id,
-    role,
-    slotProps?.label,
-    type,
-  ])
+  }, [ariaLabel, ariaLabelledBy, children, id, slotProps?.label])
 }
 
 export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
@@ -188,11 +174,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const { getInputA11yProps, focusVisible } = useInputA11yProps({
-    ...ownerState,
-    onCheckedChange: handleChange,
-  })
-
   const [CheckboxRoot, getCheckboxRootProps] = useSlot({
     ownerState,
     elementType: 'label',
@@ -207,17 +188,21 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
 
   const [CheckboxInput, getCheckboxInputProps] = useSlot({
     ownerState,
-    elementType: 'input',
+    elementType: InputBase,
     externalForwardedProps: remainingProps,
     classNames: classes.input,
     style: styles.input,
-    a11y: {
-      ...getInputA11yProps(),
-      ...slotAriaProps.input,
-    },
+    a11y: slotAriaProps.input,
+    shouldForwardComponent: false,
     additionalProps: {
       as,
-      'data-focus-visible': focusVisible || undefined,
+      type,
+      name,
+      disabled,
+      checked,
+      value,
+      defaultChecked,
+      onCheckedChange: handleChange,
     },
   })
 

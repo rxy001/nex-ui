@@ -4,6 +4,7 @@ import { useId, useMemo } from 'react'
 import { isFunction, isString } from '@nex-ui/utils'
 import { useControlledState } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
+import { InputBase } from '../inputBase'
 import { switchRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
@@ -11,7 +12,6 @@ import {
   composeClasses,
   getUtilityClass,
   useSlot,
-  useInputA11yProps,
 } from '../utils'
 import type { ElementType, HTMLAttributes } from 'react'
 import type { SwitchOwnerState, SwitchProps } from './types'
@@ -96,6 +96,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     onCheckedChange,
     thumbIcon: thumbIconProp,
     checked: checkedProp,
+    role = 'switch',
     disabled = false,
     as = 'input',
     size = 'md',
@@ -120,12 +121,8 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     disabled,
     size,
     defaultChecked,
+    role,
   }
-
-  const { getInputA11yProps, focusVisible } = useInputA11yProps({
-    ...ownerState,
-    onCheckedChange: setChecked,
-  })
 
   const classes = useSlotClasses(ownerState)
 
@@ -151,17 +148,20 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
 
   const [SwitchInput, getSwitchInputProps] = useSlot({
     ownerState,
-    elementType: 'input',
+    elementType: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: classes.input,
-    a11y: {
-      ...getInputA11yProps(),
-      ...slotAriaProps.input,
-    },
+    a11y: slotAriaProps.input,
+    shouldForwardComponent: false,
     additionalProps: {
       as,
-      'data-focus-visible': focusVisible || undefined,
+      type,
+      checked,
+      disabled,
+      defaultChecked,
+      role,
+      onCheckedChange: setChecked,
     },
   })
 
