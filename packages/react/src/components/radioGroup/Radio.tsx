@@ -4,6 +4,7 @@ import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { __DEV__ } from '@nex-ui/utils'
 import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
+import { InputBase } from '../inputBase'
 import { useRadioGroup } from './RadioGroupContext'
 import {
   useDefaultProps,
@@ -11,7 +12,6 @@ import {
   useStyles,
   composeClasses,
   getUtilityClass,
-  useInputA11yProps,
 } from '../utils'
 import { radioRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
@@ -105,7 +105,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     className,
     slotProps,
     checked: checkedProp,
-    tabIndex = 0,
+    tabIndex: tabIndexProp = 0,
     as = 'input',
     type = 'radio',
     disabled = groupCtx?.disabled,
@@ -156,9 +156,11 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     groupCtx.setGroupState(radioStateRef.current)
   }
 
+  const tabIndex = (groupCtx?.isTabbable(value) ?? true) ? tabIndexProp : -1
+
   const ownerState: RadioOwnerState = {
     ...props,
-    tabIndex: (groupCtx?.isTabbable(value) ?? true) ? tabIndex : -1,
+    tabIndex,
     as,
     inGroup,
     disabled,
@@ -190,11 +192,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     }
   })
 
-  const { getInputA11yProps, focusVisible } = useInputA11yProps({
-    ...ownerState,
-    onCheckedChange: handleChange,
-  })
-
   const [RadioRoot, getRadioRootProps] = useSlot({
     elementType: 'label',
     ownerState,
@@ -209,17 +206,22 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
 
   const [RadioInput, getRadioInputProps] = useSlot({
     ownerState,
-    elementType: 'input',
+    elementType: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
-    a11y: {
-      ...getInputA11yProps(),
-      ...slotAriaProps.input,
-    },
+    a11y: slotAriaProps.input,
+    shouldForwardComponent: false,
     additionalProps: {
+      tabIndex,
       as,
-      'data-focus-visible': focusVisible || undefined,
+      disabled,
+      type,
+      name,
+      checked,
+      defaultChecked,
+      value,
+      onCheckedChange: handleChange,
     },
   })
 
