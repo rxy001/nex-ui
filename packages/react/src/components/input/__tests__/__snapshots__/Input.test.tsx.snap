@@ -42,7 +42,6 @@ exports[`Input should render with default props 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  cursor: inherit;
   width: var(--nui-sizes-full);
 }
 

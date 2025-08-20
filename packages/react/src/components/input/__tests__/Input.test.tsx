@@ -340,7 +340,7 @@ describe('Input', () => {
     expect(input).toHaveAttribute('value', 'uncontrolled')
   })
 
-  it('should focus on input when clicking label', () => {
+  it('should focus on input when clicking root', async () => {
     const { getByTestId } = renderWithNexUIProvider(
       <Input data-testid='input-with-label' label='Click me' />,
     )
@@ -349,7 +349,7 @@ describe('Input', () => {
 
     expect(document.activeElement).not.toBe(input)
 
-    fireEvent.click(label!)
+    fireEvent.mouseDown(label!)
 
     expect(document.activeElement).toBe(input)
   })

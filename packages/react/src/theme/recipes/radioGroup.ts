@@ -14,11 +14,10 @@ export const radioRecipe = defineSlotRecipe({
       maxWidth: 'fit-content',
     },
     input: {
+      all: 'unset',
       position: 'absolute',
       inset: 0,
       opacity: 0,
-      m: 0,
-      cursor: 'inherit',
       zIndex: 1,
       _hover: {
         '& + *': {

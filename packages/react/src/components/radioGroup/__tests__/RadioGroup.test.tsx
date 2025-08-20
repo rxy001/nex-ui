@@ -231,6 +231,37 @@ describe('RadioGroup', () => {
     expect(radio).toBeChecked()
   })
 
+  it('should not add duplicate radio states to the group', () => {
+    // This test covers coverage for setGroupState
+    function CustomRadio() {
+      const [value, setValue] = useState('custom')
+
+      return (
+        <div>
+          <Radio value={value}>Custom Radio</Radio>
+          <button
+            data-testid='change-value-button'
+            onClick={() => setValue('changed')}
+          >
+            Change Value
+          </button>
+        </div>
+      )
+    }
+
+    const { getByTestId, getByRole } = renderWithNexUIProvider(
+      <RadioGroup>
+        <CustomRadio />
+      </RadioGroup>,
+    )
+
+    const button = getByTestId('change-value-button')
+    const radio = getByRole('radio')
+
+    fireEvent.click(button)
+    expect(radio).toHaveAttribute('value', 'changed')
+  })
+
   describe('Accessibility', () => {
     it('should have role="radiogroup" by default', () => {
       const { getByTestId } = renderWithNexUIProvider(

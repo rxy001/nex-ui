@@ -7,13 +7,13 @@ import { CloseCircleFilled } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
+import { InputBase } from '../inputBase'
 import {
   useDefaultProps,
   composeClasses,
   getUtilityClass,
   useStyles,
   useSlot,
-  useInputA11yProps,
 } from '../utils'
 import type { ElementType, ChangeEvent, MouseEvent } from 'react'
 import type { InputOwnerState, InputProps } from './types'
@@ -73,10 +73,7 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
 const useSlotAriaProps = (ownerState: InputOwnerState) => {
   const {
     label,
-    as,
-    type,
     slotProps,
-    role,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     id: idProp,
@@ -95,7 +92,6 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
     return {
       input: {
         id: inputId,
-        role: !role && as !== 'input' && type === 'text' ? 'textbox' : role,
         'aria-labelledby': ariaLabelledBy ?? labelId,
         'aria-label': ariaLabel ?? (stringLabel ? label : undefined),
       },
@@ -110,14 +106,11 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
   }, [
     ariaLabel,
     ariaLabelledBy,
-    as,
     id,
     idProp,
     label,
-    role,
     slotProps?.clearButton,
     slotProps?.label,
-    type,
   ])
 }
 
@@ -218,7 +211,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   const classes = useSlotClasses(ownerState)
 
   const slotAriaProps = useSlotAriaProps(ownerState)
-  const { getInputA11yProps, focusVisible } = useInputA11yProps(ownerState)
 
   const handleClearValue = useEvent(() => {
     setValue('')
@@ -233,6 +225,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   const handleFocusInput = useEvent((e: MouseEvent<HTMLDivElement>) => {
     if (inputRef.current && e.target === e.currentTarget) {
       inputRef.current.focus()
+      e.preventDefault()
     }
   })
 
@@ -245,8 +238,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     additionalProps: {
       sx,
       className,
-      onClick: handleFocusInput,
-      ['data-focus-visible']: focusVisible || undefined,
+      onMouseDown: handleFocusInput,
     },
   })
 
@@ -261,16 +253,18 @@ export const Input = <InputComponent extends ElementType = 'input'>(
 
   const [InputControl, getInputControlProps] = useSlot({
     ownerState,
-    elementType: 'input',
+    elementType: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: classes.input,
-    a11y: {
-      ...getInputA11yProps(),
-      ...slotAriaProps.input,
-    },
+    a11y: slotAriaProps.input,
+    shouldForwardComponent: false,
     additionalProps: {
       as,
+      disabled,
+      invalid,
+      type,
+      value,
       ref: inputRef,
       onChange: handleChange,
     },

@@ -16,10 +16,10 @@ exports[`Switch should render with default props 1`] = `
 }
 
 .emotion-1 {
+  all: unset;
   position: absolute;
   inset: 0;
   opacity: 0;
-  margin: 0;
   z-index: 1;
 }
 

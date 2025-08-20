@@ -12,10 +12,10 @@ export const switchRecipe = defineSlotRecipe({
       cursor: 'pointer',
     },
     input: {
+      all: 'unset',
       position: 'absolute',
       inset: 0,
       opacity: 0,
-      m: 0,
       zIndex: 1,
       _focusVisible: {
         '& + *': {

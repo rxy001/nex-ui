@@ -21,7 +21,6 @@ export const inputRecipe = defineSlotRecipe({
       fs: 'inherit',
       color: 'inherit',
       flex: 1,
-      cursor: 'inherit',
       w: 'full',
       '::placeholder': {
         color: 'inherit',
@@ -32,6 +31,11 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     clearButton: {
+      all: 'unset',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
       w: 'auto',
       h: 'auto',
       fs: 'inherit',
@@ -43,8 +47,8 @@ export const inputRecipe = defineSlotRecipe({
     label: {
       position: 'absolute',
       transformOrigin: 'top left',
-      pointerEvents: 'none',
       transition: 'colors',
+      pointerEvents: 'none',
     },
     prefix: {
       display: 'flex',
@@ -102,8 +106,6 @@ export const inputRecipe = defineSlotRecipe({
           },
           _focusWithin: {
             bg: 'colorPalette.subtle',
-          },
-          _focusVisible: {
             outline: 'focusVisibleOutline',
           },
         },
@@ -155,8 +157,8 @@ export const inputRecipe = defineSlotRecipe({
     disabled: {
       true: {
         root: {
-          pointerEvents: 'none',
           opacity: 0.6,
+          pointerEvents: 'none',
         },
       },
     },
@@ -177,6 +179,7 @@ export const inputRecipe = defineSlotRecipe({
           insetInlineStart: '0',
           insetBlockStart: '-1em',
           transform: 'translateY(-50%)',
+          pointerEvents: 'auto',
         },
       },
       'float-inside': {
