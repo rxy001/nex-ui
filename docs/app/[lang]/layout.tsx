@@ -17,6 +17,9 @@ import { getDictionary } from '../_dictionaries/getDictionary'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  title: 'Nex UI - Beautiful, Modern & Reliable React Component Library',
+  description:
+    'Build beautiful user interfaces with Nex UI - a modern React component library featuring theme customization, dark mode support, TypeScript integration, and exceptional developer experience.',
   keywords: [
     'React',
     'Next.js',

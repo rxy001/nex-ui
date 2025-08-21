@@ -4,6 +4,7 @@ import { nex } from '@nex-ui/styled'
 import { useEvent, useFocusRing } from '@nex-ui/hooks'
 import { useMemo } from 'react'
 import { isFunction } from '@nex-ui/utils'
+import { defineRecipe } from '@nex-ui/system'
 import { useSlotProps } from '../utils'
 import type { ElementType, KeyboardEvent, MouseEvent } from 'react'
 import type { ButtonBaseProps } from './types'
@@ -40,6 +41,23 @@ const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
     }
   }, [as, type, disabled, tabIndex, role, href, ariaDisabled])
 }
+
+const recipe = defineRecipe({
+  base: {
+    p: 0,
+    m: 0,
+    outline: 'none',
+    background: 'none',
+    border: 'none',
+    textDecoration: 'none',
+    userSelect: 'none',
+    cursor: 'pointer',
+    boxSizing: 'border-box',
+    WebkitTapHighlightColor: 'transparent',
+  },
+})
+
+const style = recipe()
 
 export const ButtonBase = <RootComponent extends ElementType = 'button'>(
   inProps: ButtonBaseProps<RootComponent>,
@@ -124,6 +142,7 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
   })
 
   const rootProps = useSlotProps({
+    style,
     a11y: {
       ...ariaProps,
       onKeyUp: handleKeyUp,

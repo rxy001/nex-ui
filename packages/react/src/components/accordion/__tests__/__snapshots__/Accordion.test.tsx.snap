@@ -15,7 +15,20 @@ exports[`Accordion should render with default props 1`] = `
 }
 
 .emotion-3 {
-  all: unset;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background: none;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,13 +37,11 @@ exports[`Accordion should render with default props 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
   position: relative;
   box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
   width: var(--nui-sizes-full);
   min-height: inherit;
   -webkit-padding-start: var(--nui-spaces-4);
@@ -39,9 +50,6 @@ exports[`Accordion should render with default props 1`] = `
   padding-inline-end: var(--nui-spaces-4);
   font-size: var(--nui-font-sizes-xl);
   font-weight: var(--nui-font-weights-normal);
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
 }
 
 .emotion-3:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
