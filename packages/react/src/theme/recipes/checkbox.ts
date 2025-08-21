@@ -51,7 +51,7 @@ export const checkboxRecipe = defineSlotRecipe({
       opacity: 0,
       cursor: 'inherit',
       zIndex: 1,
-      _focusVisible: {
+      _focusVisibleRing: {
         '& + *::before': {
           outline: 'focusVisibleOutline',
           outlineOffset: '0.5',

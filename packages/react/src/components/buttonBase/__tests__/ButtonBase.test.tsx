@@ -160,7 +160,7 @@ describe('ButtonBase', () => {
     expect(onMouseLeave).toHaveBeenCalled()
   })
 
-  it('should apply data-focus-visible="true" when focused', async () => {
+  it('should apply data-focus-visible="true" when keyboard focused', async () => {
     const { getByRole, user } = renderWithNexUIProvider(
       <ButtonBase>Focusable Button</ButtonBase>,
     )

@@ -24,7 +24,7 @@ export const radioRecipe = defineSlotRecipe({
           borderColor: 'colorPalette.secondary',
         },
       },
-      _focusVisible: {
+      _focusVisibleRing: {
         '& + *': {
           outline: 'focusVisibleOutline',
           outlineOffset: '0.5',

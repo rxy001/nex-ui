@@ -8,6 +8,6 @@ export const selectors = defineConfig.selectors({
   focusWithin:
     '&:is(:focus-within, [data-focus-within=true]):not(:disabled, [data-disabled=true])',
   disabled: '&:is(:disabled, [data-disabled=true])',
-  focusVisible:
+  focusVisibleRing:
     '&[data-focus-visible=true]:not(:disabled, [data-disabled=true])',
 })

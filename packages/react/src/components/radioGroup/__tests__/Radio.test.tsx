@@ -200,7 +200,7 @@ describe('Radio', () => {
     consoleSpy.mockRestore()
   })
 
-  it('should have data-focus-visible attribute when focused', async () => {
+  it('should have data-focus-visible attribute when keyboard focused', async () => {
     const { getByRole, user } = renderWithNexUIProvider(
       <Radio as='div'>Radio</Radio>,
     )
