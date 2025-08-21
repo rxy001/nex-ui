@@ -22,6 +22,7 @@ export const dialogContentRecipe = defineSlotRecipe({
     },
     closeButton: {
       all: 'unset',
+      boxSizing: 'border-box',
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',

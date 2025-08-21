@@ -1,5 +1,5 @@
 import { nex } from '@nex-ui/styled'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useEvent, useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
 import { useSlotProps } from '../utils'
@@ -100,6 +100,15 @@ const isCheckableControl = (element: HTMLInputElement) => {
   }
 }
 
+/**
+ * InputBase is a lower-level construct that is leveraged by the following components:
+ *
+ * - Switch
+ * - Input
+ * - Checkbox
+ * - Radio
+ */
+
 export const InputBase = (props: InputBaseProps) => {
   const {
     defaultChecked,
@@ -109,12 +118,20 @@ export const InputBase = (props: InputBaseProps) => {
     onClick,
     onKeyUp,
     onChange,
-    checked = defaultChecked,
+    checked: checkProp,
     type = 'text',
     as = 'input',
     tabIndex = 0,
     ...remainingProps
   } = props
+
+  const controlled = 'checked' in props
+
+  const [internalChecked, setInternalChecked] = useState(
+    defaultChecked ?? false,
+  )
+
+  const currentChecked = controlled ? checkProp : internalChecked
 
   const { focusVisible, focusProps } = useFocusRing({
     autoFocus,
@@ -128,8 +145,8 @@ export const InputBase = (props: InputBaseProps) => {
 
     onCheckedChange?.(newChecked)
 
-    if (!('checked' in props)) {
-      element.setAttribute('aria-checked', `${newChecked}`)
+    if (!controlled) {
+      setInternalChecked(newChecked)
     }
   })
 
@@ -193,10 +210,10 @@ export const InputBase = (props: InputBaseProps) => {
 
   const ariaProps = useAriaProps({
     ...props,
-    checked,
-    tabIndex,
-    type,
     as,
+    type,
+    tabIndex,
+    checked: currentChecked,
   })
 
   const rootProps = useSlotProps({
@@ -209,10 +226,10 @@ export const InputBase = (props: InputBaseProps) => {
     externalForwardedProps: remainingProps,
     additionalProps: {
       as,
-      autoFocus,
-      disabled,
-      checked,
       type,
+      disabled,
+      autoFocus,
+      checked: currentChecked,
       'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },
