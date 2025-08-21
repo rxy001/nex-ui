@@ -238,15 +238,6 @@ describe('ButtonBase', () => {
       expect(button).toBeDisabled()
     })
 
-    it('should have disabled styles', () => {
-      const { getByRole } = renderWithNexUIProvider(
-        <ButtonBase disabled>Disabled Button</ButtonBase>,
-      )
-
-      const button = getByRole('button')
-      expect(button).toHaveStyleRule('pointer-events', 'none')
-    })
-
     it('should apply tabIndex=-1', () => {
       const { getByRole } = renderWithNexUIProvider(
         <ButtonBase disabled>Disabled Button</ButtonBase>,
@@ -274,6 +265,34 @@ describe('ButtonBase', () => {
 
       const span = getByRole('button')
       expect(span).toHaveAttribute('aria-disabled', 'true')
+    })
+
+    it('should not fire event callbacks', () => {
+      const onClick = jest.fn()
+      const onKeyUp = jest.fn()
+      const onKeyDown = jest.fn()
+
+      const { getByRole } = renderWithNexUIProvider(
+        <ButtonBase
+          as='span'
+          disabled
+          onClick={onClick}
+          onKeyUp={onKeyUp}
+          onKeyDown={onKeyDown}
+        >
+          Disabled Span
+        </ButtonBase>,
+      )
+      const span = getByRole('button')
+
+      fireEvent.click(span)
+      expect(onClick).not.toHaveBeenCalled()
+
+      fireEvent.keyUp(span)
+      expect(onKeyUp).not.toHaveBeenCalled()
+
+      fireEvent.keyDown(span)
+      expect(onKeyDown).not.toHaveBeenCalled()
     })
   })
 })

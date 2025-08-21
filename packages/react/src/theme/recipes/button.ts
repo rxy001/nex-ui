@@ -10,18 +10,25 @@ import type { CSSObject, RecipeVariants } from '@nex-ui/system'
 
 const disabledVariant: CSSObject = {
   opacity: 0.6,
+  pointerEvents: 'none',
 }
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
     root: {
+      all: 'unset',
       position: 'relative',
       transition: 'colors',
       textDecoration: 'none',
-      display: 'inline-flex',
       lineHeight: 'base',
       overflow: 'hidden',
       WebkitTapHighlightColor: 'transparent',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      userSelect: 'none',
+      cursor: 'pointer',
       _focusVisible: {
         outline: 'focusVisibleOutline',
         outlineOffset: '0.5',

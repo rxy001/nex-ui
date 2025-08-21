@@ -20,21 +20,22 @@ export const accordionItemRecipe = defineSlotRecipe({
     root: {},
     heading: {
       m: 0,
-      fs: 18,
-      minHeight: 48,
-      fontWeight: 'normal',
+      height: 48,
     },
     trigger: {
-      w: 'full',
-      h: 'inherit',
-      minHeight: 'inherit',
-      textAlign: 'left',
-      justifyContent: 'space-between',
-      color: 'inherit',
-      px: '4',
-      fs: 'inherit',
+      all: 'unset',
+      display: 'inline-flex',
+      alignItems: 'center',
+      position: 'relative',
       boxSizing: 'border-box',
-      fontWeight: 'inherit',
+      userSelect: 'none',
+      cursor: 'pointer',
+      w: 'full',
+      h: 'full',
+      px: '4',
+      fs: 'xl',
+      fontWeight: 'normal',
+      justifyContent: 'space-between',
       _focusVisible: {
         outline: 'focusVisibleOutline',
       },
@@ -53,7 +54,7 @@ export const accordionItemRecipe = defineSlotRecipe({
     disabled: {
       true: {
         root: {
-          opacity: 0.5,
+          opacity: 0.6,
           pointerEvents: 'none',
         },
       },
