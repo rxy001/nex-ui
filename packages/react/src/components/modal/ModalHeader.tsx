@@ -9,7 +9,7 @@ import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalHeaderProps } from './types'
 
-const modalHeaderRecipe = defineRecipe({
+const recipe = defineRecipe({
   base: {
     w: 'full',
     m: 0,
@@ -30,7 +30,7 @@ const useAriaProps = (props: ModalHeaderProps) => {
   }, [labelId])
 }
 
-const style = modalHeaderRecipe()
+const style = recipe()
 
 export const ModalHeader = <RootComponent extends ElementType = 'h2'>(
   inProps: ModalHeaderProps<RootComponent>,

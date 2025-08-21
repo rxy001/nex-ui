@@ -32,7 +32,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       _hover: {
         bg: 'gray.muted',
       },
-      _focusVisible: {
+      _focusVisibleRing: {
         outline: 'focusVisibleOutline',
       },
     },
