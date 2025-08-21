@@ -44,7 +44,7 @@ exports[`Button should render with default props 1`] = `
   border-radius: var(--nui-radii-lg);
 }
 
-.emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
+.emotion-0[data-focus-visible=true]:not(:disabled, [data-disabled=true]) {
   outline: var(--nui-borders-focus-visible-outline);
   outline-offset: var(--nui-spaces-0-5);
 }
@@ -106,7 +106,7 @@ exports[`Button should support link button 1`] = `
   border-radius: var(--nui-radii-lg);
 }
 
-.emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
+.emotion-0[data-focus-visible=true]:not(:disabled, [data-disabled=true]) {
   outline: var(--nui-borders-focus-visible-outline);
   outline-offset: var(--nui-spaces-0-5);
 }

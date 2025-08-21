@@ -67,6 +67,12 @@ exports[`Input should render with default props 1`] = `
   -webkit-appearance: none;
 }
 
+.emotion-1:is(:-webkit-autofill, :autofill) {
+  background-color: transparent!important;
+  -webkit-transition: background-color 50000s ease-in-out 0s;
+  transition: background-color 50000s ease-in-out 0s;
+}
+
 .emotion-1::-webkit-input-placeholder {
   color: inherit;
 }
