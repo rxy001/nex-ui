@@ -2,6 +2,7 @@ import { nex } from '@nex-ui/styled'
 import { useMemo, useState } from 'react'
 import { useEvent, useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
+import { defineRecipe } from '@nex-ui/system'
 import { useSlotProps } from '../utils'
 import type {
   InputHTMLAttributes,
@@ -108,6 +109,33 @@ const isCheckableControl = (element: HTMLInputElement) => {
  * - Checkbox
  * - Radio
  */
+
+const recipe = defineRecipe({
+  base: {
+    m: '0',
+    p: '0',
+    border: 'none',
+    background: 'none',
+    outline: 'none',
+    appearance: 'none',
+    WebkitAppearance: 'none',
+    MozAppearance: 'none',
+    borderRadius: '0',
+    boxShadow: 'none',
+    boxSizing: 'border-box',
+
+    '&[type="search"]': {
+      '::-webkit-search-decoration': {
+        WebkitAppearance: 'none',
+      },
+      '::-webkit-search-cancel-button': {
+        WebkitAppearance: 'none',
+      },
+    },
+  },
+})
+
+const style = recipe()
 
 export const InputBase = (props: InputBaseProps) => {
   const {
@@ -217,6 +245,7 @@ export const InputBase = (props: InputBaseProps) => {
   })
 
   const rootProps = useSlotProps({
+    style,
     a11y: {
       ...ariaProps,
       onKeyUp: handleKeyUp,

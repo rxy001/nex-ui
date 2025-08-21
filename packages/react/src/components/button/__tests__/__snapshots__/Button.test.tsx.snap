@@ -2,15 +2,25 @@
 
 exports[`Button should render with default props 1`] = `
 .emotion-0 {
-  all: unset;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background: none;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
   position: relative;
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
-  -webkit-text-decoration: none;
-  text-decoration: none;
   line-height: var(--nui-line-heights-base);
   overflow: hidden;
-  -webkit-tap-highlight-color: transparent;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -23,12 +33,6 @@ exports[`Button should render with default props 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
   background-color: var(--nui-colors-blue-primary);
   color: var(--nui-colors-blue-contrast-text);
   -webkit-padding-start: var(--nui-spaces-4);
@@ -60,15 +64,25 @@ exports[`Button should render with default props 1`] = `
 
 exports[`Button should support link button 1`] = `
 .emotion-0 {
-  all: unset;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background: none;
+  border: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
   position: relative;
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
-  -webkit-text-decoration: none;
-  text-decoration: none;
   line-height: var(--nui-line-heights-base);
   overflow: hidden;
-  -webkit-tap-highlight-color: transparent;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -81,12 +95,6 @@ exports[`Button should support link button 1`] = `
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
-  box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
   background-color: var(--nui-colors-blue-primary);
   color: var(--nui-colors-blue-contrast-text);
   -webkit-padding-start: var(--nui-spaces-4);

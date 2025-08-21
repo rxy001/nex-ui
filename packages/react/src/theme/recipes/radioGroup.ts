@@ -9,16 +9,16 @@ export const radioRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       cursor: 'pointer',
-      WebkitTapHighlightColor: 'transparent',
       boxSizing: 'border-box',
       maxWidth: 'fit-content',
+      WebkitTapHighlightColor: 'transparent',
     },
     input: {
-      all: 'unset',
       position: 'absolute',
       inset: 0,
       opacity: 0,
       zIndex: 1,
+      cursor: 'inherit',
       _hover: {
         '& + *': {
           borderColor: 'colorPalette.secondary',
@@ -177,7 +177,9 @@ export const radioGroupRecipe = defineSlotRecipe({
       gap: '2',
     },
     label: {
-      all: 'unset',
+      m: 0,
+      fs: 'lg',
+      fontWeight: 'normal',
     },
     wrapper: {
       display: 'flex',

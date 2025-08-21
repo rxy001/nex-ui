@@ -42,7 +42,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    'aria-label': 'Default Switch',
+  },
 }
 
 export const WithLabel: Story = {

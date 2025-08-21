@@ -2,7 +2,7 @@ import { Button } from '@nex-ui/react'
 import Link from 'next/link'
 import { BoltOutlined, MoonOutlined, MagicOutlined } from '@nex-ui/icons'
 import AccessibilityIcon from '@/icons/accessibility.svg'
-import { Theme, Style, DarkMode } from './features'
+import { Theme, Styling, DarkMode } from './features'
 import { Card } from './Card'
 import { Gallery } from './Gallery'
 import { CopyButton } from './CopyButton'
@@ -118,7 +118,7 @@ export function HomePage({ translations }: HomePageProps) {
         </div>
         <div className='x:flex x:flex-col x:gap-5'>
           {renderHighlight(translations?.styling)}
-          <Style />
+          <Styling />
           <LinkButton
             href='/docs/styling/sx-prop'
             aria-label='Learn more about styling'
