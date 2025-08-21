@@ -2,13 +2,20 @@
 
 import { nex } from '@nex-ui/styled'
 import { useEvent } from '@nex-ui/hooks'
-import { modalPanelRecipe } from '../../theme/recipes'
+import { defineRecipe } from '@nex-ui/system'
 import { useSlotProps } from '../utils'
 import { useModal } from './ModalContext'
 import type { ElementType, MouseEvent } from 'react'
 import type { ModalPanelProps } from './types'
 
-const style = modalPanelRecipe()
+const recipe = defineRecipe({
+  base: {
+    position: 'fixed',
+    inset: 0,
+  },
+})
+
+const style = recipe()
 
 export const ModalPanel = <RootComponent extends ElementType = 'div'>(
   inProps: ModalPanelProps<RootComponent>,
