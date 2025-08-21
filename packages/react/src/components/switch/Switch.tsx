@@ -157,10 +157,9 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     additionalProps: {
       as,
       type,
+      role,
       checked,
       disabled,
-      defaultChecked,
-      role,
       onCheckedChange: setChecked,
     },
   })

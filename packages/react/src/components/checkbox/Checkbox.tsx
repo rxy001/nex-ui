@@ -201,7 +201,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
       disabled,
       checked,
       value,
-      defaultChecked,
       onCheckedChange: handleChange,
     },
   })

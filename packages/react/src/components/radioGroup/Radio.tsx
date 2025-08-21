@@ -219,7 +219,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
       type,
       name,
       checked,
-      defaultChecked,
       value,
       onCheckedChange: handleChange,
     },
