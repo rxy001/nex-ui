@@ -11,49 +11,37 @@ exports[`Accordion should render with default props 1`] = `
 
 .emotion-2 {
   margin: 0;
-  font-size: 18px;
-  min-height: 48px;
-  font-weight: var(--nui-font-weights-normal);
+  height: 48px;
 }
 
 .emotion-3 {
-  background-color: transparent;
-  padding: 0;
-  border: none;
-  outline: none;
+  all: unset;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
-  box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   width: var(--nui-sizes-full);
-  height: inherit;
-  min-height: inherit;
-  text-align: left;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-  color: inherit;
+  height: var(--nui-sizes-full);
   -webkit-padding-start: var(--nui-spaces-4);
   padding-inline-start: var(--nui-spaces-4);
   -webkit-padding-end: var(--nui-spaces-4);
   padding-inline-end: var(--nui-spaces-4);
-  font-size: inherit;
-  box-sizing: border-box;
-  font-weight: inherit;
+  font-size: var(--nui-font-sizes-xl);
+  font-weight: var(--nui-font-weights-normal);
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
 }
 
 .emotion-3:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
