@@ -87,16 +87,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     capable: true,
   },
-  formatDetection: {
-    telephone: false,
-  },
   metadataBase: new URL('https://nex-ui-docs.vercel.app'),
-  alternates: {
-    languages: {
-      'en-US': 'https://nex-ui-docs.vercel.app/en',
-      'zh-CN': 'https://nex-ui-docs.vercel.app/zh',
-    },
-  },
   category: 'technology',
   icons: {
     icon: '/favicon.ico',
