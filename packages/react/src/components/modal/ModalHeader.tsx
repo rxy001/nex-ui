@@ -2,14 +2,20 @@
 
 import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
+import { defineRecipe } from '@nex-ui/system'
 import { useSlotProps } from '../utils'
 import { useModal } from './ModalContext'
-import { modalHeaderRecipe } from '../../theme/recipes'
 import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalHeaderProps } from './types'
 
-const style = modalHeaderRecipe()
+const modalHeaderRecipe = defineRecipe({
+  base: {
+    w: 'full',
+    m: 0,
+    boxSizing: 'border-box',
+  },
+})
 
 const useAriaProps = (props: ModalHeaderProps) => {
   const { 'aria-labelledby': labelledBy } = useModal()
@@ -23,6 +29,8 @@ const useAriaProps = (props: ModalHeaderProps) => {
     }
   }, [labelId])
 }
+
+const style = modalHeaderRecipe()
 
 export const ModalHeader = <RootComponent extends ElementType = 'h2'>(
   inProps: ModalHeaderProps<RootComponent>,

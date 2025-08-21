@@ -6,10 +6,10 @@ import {
   ownerDocument,
   ownerWindow,
 } from '@nex-ui/utils'
+import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useMemo, useRef, useId } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { Portal, useSlotProps } from '../utils'
-import { modalRootRecipe } from '../../theme/recipes'
 import { ModalProvider, useModal } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import { ModalMotion } from './ModalMotion'
@@ -17,7 +17,15 @@ import type { ElementType } from 'react'
 import type { DOMMotionComponents } from 'motion/react'
 import type { ModalRootProps } from './types'
 
-const style = modalRootRecipe()
+const recipe = defineRecipe({
+  base: {
+    position: 'fixed',
+    inset: 0,
+    zIndex: 'modal',
+  },
+})
+
+const style = recipe()
 
 export const ModalRoot = <
   RootComponent extends ElementType = DOMMotionComponents['div'],
