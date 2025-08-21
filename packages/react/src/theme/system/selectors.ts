@@ -9,5 +9,5 @@ export const selectors = defineConfig.selectors({
     '&:is(:focus-within, [data-focus-within=true]):not(:disabled, [data-disabled=true])',
   disabled: '&:is(:disabled, [data-disabled=true])',
   focusVisible:
-    '&:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])',
+    '&[data-focus-visible=true]:not(:disabled, [data-disabled=true])',
 })

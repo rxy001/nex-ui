@@ -100,8 +100,11 @@ export const inputRecipe = defineSlotRecipe({
           },
           _focusWithin: {
             bg: 'colorPalette.subtle',
-            outline: 'focusVisibleOutline',
           },
+          '&:has(> [data-focus-visible=true]:not(:disabled, [data-disabled=true]))':
+            {
+              outline: 'focusVisibleOutline',
+            },
         },
         label: {
           color: {
