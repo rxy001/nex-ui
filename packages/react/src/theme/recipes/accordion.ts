@@ -33,7 +33,7 @@ export const accordionItemRecipe = defineSlotRecipe({
       px: '4',
       fs: 'xl',
       fontWeight: 'normal',
-      _focusVisible: {
+      _focusVisibleRing: {
         outline: 'focusVisibleOutline',
       },
     },

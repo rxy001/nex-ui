@@ -307,7 +307,7 @@ describe('Switch', () => {
     })
   })
 
-  it('should have data-focus-visible attribute when focused', async () => {
+  it('should have data-focus-visible attribute when keyboard focused', async () => {
     const { getByRole, user } = renderWithNexUIProvider(
       <Switch>Checkbox</Switch>,
     )

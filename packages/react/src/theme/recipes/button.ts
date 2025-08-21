@@ -23,7 +23,7 @@ export const buttonRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      _focusVisible: {
+      _focusVisibleRing: {
         outline: 'focusVisibleOutline',
         outlineOffset: '0.5',
       },
