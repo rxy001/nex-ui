@@ -33,11 +33,11 @@ exports[`RadioGroup should render with default props 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
+  -webkit-tap-highlight-color: transparent;
   padding: var(--nui-spaces-1-5);
   height: var(--nui-sizes-8);
   -webkit-margin-start: calc(var(--nui-spaces-1-5) * -1);
@@ -47,11 +47,33 @@ exports[`RadioGroup should render with default props 1`] = `
 }
 
 .emotion-3 {
-  all: unset;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
   position: absolute;
   inset: 0;
   opacity: 0;
   z-index: 1;
+  cursor: inherit;
+}
+
+.emotion-3[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.emotion-3[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }
 
 .emotion-3:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true])+* {

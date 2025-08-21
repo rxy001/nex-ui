@@ -10,7 +10,9 @@ export const checkboxGroupRecipe = defineSlotRecipe({
       gap: '2',
     },
     label: {
-      all: 'unset',
+      m: 0,
+      fs: 'lg',
+      fontWeight: 'normal',
     },
     wrapper: {
       display: 'flex',
@@ -44,7 +46,6 @@ export const checkboxRecipe = defineSlotRecipe({
       maxWidth: 'fit-content',
     },
     input: {
-      all: 'unset',
       position: 'absolute',
       inset: 0,
       opacity: 0,

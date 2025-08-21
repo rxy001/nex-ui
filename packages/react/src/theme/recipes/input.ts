@@ -17,25 +17,19 @@ export const inputRecipe = defineSlotRecipe({
       px: '3',
     },
     input: {
-      all: 'unset',
       fs: 'inherit',
       color: 'inherit',
+      cursor: 'inherit',
       flex: 1,
       w: 'full',
       '::placeholder': {
         color: 'inherit',
       },
-      '::WebkitSearchCancelButton': {
-        WebkitAppearance: 'none',
-        appearance: 'none',
-      },
     },
     clearButton: {
-      all: 'unset',
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      cursor: 'pointer',
       w: 'auto',
       h: 'auto',
       fs: 'inherit',

@@ -7,16 +7,17 @@ export const switchRecipe = defineSlotRecipe({
     root: {
       display: 'inline-flex',
       position: 'relative',
-      h: 32,
+      h: '8',
       alignItems: 'center',
       cursor: 'pointer',
+      WebkitTapHighlightColor: 'transparent',
     },
     input: {
-      all: 'unset',
       position: 'absolute',
       inset: 0,
       opacity: 0,
       zIndex: 1,
+      cursor: 'inherit',
       _focusVisible: {
         '& + *': {
           outline: 'focusVisibleOutline',

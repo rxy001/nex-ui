@@ -1,7 +1,7 @@
 import { CodeWindow } from '../CodeWindow'
 import { Playlist, playlistCode } from './demos'
 
-export const Style = () => {
+export const Styling = () => {
   return (
     <div className='x:flex x:gap-12 x:flex-col x:lg:flex-row'>
       <Playlist />

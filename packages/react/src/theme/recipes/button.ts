@@ -16,19 +16,13 @@ const disabledVariant: CSSObject = {
 export const buttonRecipe = defineSlotRecipe({
   slots: {
     root: {
-      all: 'unset',
       position: 'relative',
       transition: 'colors',
-      textDecoration: 'none',
       lineHeight: 'base',
       overflow: 'hidden',
-      WebkitTapHighlightColor: 'transparent',
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      boxSizing: 'border-box',
-      userSelect: 'none',
-      cursor: 'pointer',
       _focusVisible: {
         outline: 'focusVisibleOutline',
         outlineOffset: '0.5',
