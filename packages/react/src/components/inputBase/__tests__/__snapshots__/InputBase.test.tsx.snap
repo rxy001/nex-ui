@@ -26,6 +26,12 @@ exports[`InputBase should render with default props 1`] = `
   -webkit-appearance: none;
 }
 
+.emotion-0:is(:-webkit-autofill, :autofill) {
+  background-color: transparent!important;
+  -webkit-transition: background-color 50000s ease-in-out 0s;
+  transition: background-color 50000s ease-in-out 0s;
+}
+
 <input
   class="emotion-0"
   data-focus-visible="true"

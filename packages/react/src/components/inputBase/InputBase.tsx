@@ -132,6 +132,11 @@ const recipe = defineRecipe({
         WebkitAppearance: 'none',
       },
     },
+
+    '&:is(:-webkit-autofill, :autofill)': {
+      bg: 'transparent !important',
+      transition: 'background-color 50000s ease-in-out 0s',
+    },
   },
 })
 

@@ -51,11 +51,17 @@ exports[`Radio should render with default props 1`] = `
   -webkit-appearance: none;
 }
 
+.emotion-1:is(:-webkit-autofill, :autofill) {
+  background-color: transparent!important;
+  -webkit-transition: background-color 50000s ease-in-out 0s;
+  transition: background-color 50000s ease-in-out 0s;
+}
+
 .emotion-1:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true])+* {
   border-color: var(--nui-colors-blue-secondary);
 }
 
-.emotion-1:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+* {
+.emotion-1[data-focus-visible=true]:not(:disabled, [data-disabled=true])+* {
   outline: var(--nui-borders-focus-visible-outline);
   outline-offset: var(--nui-spaces-0-5);
 }

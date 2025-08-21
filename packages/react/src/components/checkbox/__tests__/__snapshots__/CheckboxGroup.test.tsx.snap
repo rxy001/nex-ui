@@ -76,7 +76,13 @@ exports[`CheckboxGroup should render with default props 1`] = `
   -webkit-appearance: none;
 }
 
-.emotion-3:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+*::before {
+.emotion-3:is(:-webkit-autofill, :autofill) {
+  background-color: transparent!important;
+  -webkit-transition: background-color 50000s ease-in-out 0s;
+  transition: background-color 50000s ease-in-out 0s;
+}
+
+.emotion-3[data-focus-visible=true]:not(:disabled, [data-disabled=true])+*::before {
   outline: var(--nui-borders-focus-visible-outline);
   outline-offset: var(--nui-spaces-0-5);
 }

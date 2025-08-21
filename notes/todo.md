@@ -125,4 +125,8 @@ https://github.com/microsoft/TypeScript/issues/40426
 
 43. Threads 有时会闪屏
 
-44. all:unset，可能覆盖低优先级 layer 的样式。例如 Tailwind
+<!-- 44. all:unset，可能覆盖低优先级 layer 的样式。例如 Tailwind -->
+
+<!-- 45. 修改添加 focusVisible 样式的时机 -->
+
+<!-- 46. 删除 input autofill 的样式 -->
