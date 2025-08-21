@@ -5,8 +5,7 @@ import { useEvent, useFocusRing } from '@nex-ui/hooks'
 import { useMemo } from 'react'
 import { isFunction } from '@nex-ui/utils'
 import { useSlotProps } from '../utils'
-import { buttonBaseRecipes } from '../../theme/recipes'
-import type { ElementType, KeyboardEvent } from 'react'
+import type { ElementType, KeyboardEvent, MouseEvent } from 'react'
 import type { ButtonBaseProps } from './types'
 
 const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
@@ -15,13 +14,17 @@ const useAriaProps = (props: ButtonBaseProps<'a' | 'button'>) => {
     disabled,
     role,
     href,
-    type = 'button',
+    type,
     'aria-disabled': ariaDisabled,
-    tabIndex = 0,
+    tabIndex,
   } = props
 
   return useMemo(() => {
-    if (as !== 'button' && !isFunction(as)) {
+    if (isFunction(as)) {
+      return {}
+    }
+
+    if (as !== 'button') {
       return {
         role: role ?? (as === 'a' && href ? undefined : 'button'),
         tabIndex: disabled ? -1 : tabIndex,
@@ -42,19 +45,36 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
   inProps: ButtonBaseProps<RootComponent>,
 ) => {
   const props = inProps as ButtonBaseProps<'button'>
-  const { as, children, disabled, ...remainingProps } = props
+  const {
+    as,
+    children,
+    disabled,
+    type = 'button',
+    tabIndex = 0,
+    onClick,
+    onKeyDown,
+    onKeyUp,
+    ...remainingProps
+  } = props
 
-  const rootElement =
+  const rootElement = (
     as !== undefined
       ? as
       : typeof props.href === 'string' && props.href
         ? 'a'
         : 'button'
+  ) as 'button'
 
   const { focusVisible, focusProps } = useFocusRing()
 
   const handleKeyDown = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
     // Limit the repeated triggering of the click event when the Enter key is pressed.
+    if (disabled) {
+      event.preventDefault()
+      event.stopPropagation()
+      return
+    }
+
     if (
       focusVisible &&
       event.target === event.currentTarget &&
@@ -64,9 +84,17 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     ) {
       event.preventDefault()
     }
+
+    onKeyDown?.(event)
   })
 
   const handleKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      event.stopPropagation()
+      return
+    }
+
     if (
       focusVisible &&
       event.target === event.currentTarget &&
@@ -74,35 +102,43 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     ) {
       event.currentTarget.click()
     }
+
+    onKeyUp?.(event)
+  })
+
+  const handleClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      event.stopPropagation()
+      return
+    }
+
+    onClick?.(event)
   })
 
   const ariaProps = useAriaProps({
     ...props,
+    type,
+    tabIndex,
     as: rootElement,
   })
 
-  const style = buttonBaseRecipes({
-    disabled,
-  })
-
   const rootProps = useSlotProps({
-    style,
-    a11y: ariaProps,
-    externalForwardedProps: remainingProps,
-    additionalProps: {
-      disabled,
+    a11y: {
+      ...ariaProps,
       onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
+      onClick: handleClick,
+    },
+    externalForwardedProps: remainingProps,
+    additionalProps: {
+      as: rootElement,
       'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },
   })
 
-  return (
-    <nex.button as={rootElement} {...rootProps}>
-      {children}
-    </nex.button>
-  )
+  return <nex.button {...rootProps}>{children}</nex.button>
 }
 
 ButtonBase.displayName = 'ButtonBase'
