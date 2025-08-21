@@ -72,7 +72,17 @@ export const createCssFn = ({
       const handlePath = (path: string[]) => {
         return path
           .filter((v) => v !== '_DEFAULT')
-          .sort((a) => 96 - a.charCodeAt(0))
+          .sort((a) => {
+            const charCode = a.charCodeAt(0)
+
+            // A-Z
+            if (charCode > 64 && charCode < 91) {
+              return -1
+            }
+
+            // a-z
+            return 96 - a.charCodeAt(0)
+          })
           .map((p) => {
             // 0 - 9
             if (p.charCodeAt(0) > 47 && p.charCodeAt(0) < 58) {

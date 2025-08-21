@@ -392,6 +392,34 @@ describe('css', () => {
     })
   })
 
+  it('should handle non-standard CSS properties', () => {
+    expect(
+      css({
+        '&[type="search"]': {
+          '::-webkit-search-decoration': {
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+          },
+          '::-webkit-search-cancel-button': {
+            WebkitAppearance: 'none',
+            MozAppearance: 'none',
+          },
+        },
+      }),
+    ).toEqual({
+      '&[type="search"]': {
+        '::-webkit-search-decoration': {
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
+        },
+        '::-webkit-search-cancel-button': {
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
+        },
+      },
+    })
+  })
+
   it('should handle edge cases', () => {
     expect(css('')).toEqual('')
     expect(css(null)).toEqual('')
