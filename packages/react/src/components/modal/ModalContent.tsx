@@ -2,8 +2,8 @@
 
 import { nex } from '@nex-ui/styled'
 import { useEffect, useId, useMemo, useState } from 'react'
+import { defineRecipe } from '@nex-ui/system'
 import { useSlotProps } from '../utils'
-import { modalContentRecipe } from '../../theme/recipes'
 import { ModalProvider, useModal } from './ModalContext'
 import { FocusTrap } from '../focusTrap'
 import { useModalManager } from './ModalManager'
@@ -11,7 +11,21 @@ import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalContentProps } from './types'
 
-const style = modalContentRecipe()
+const recipe = defineRecipe({
+  base: {
+    width: 'full',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    outline: 'none',
+    bg: {
+      _DEFAULT: 'white',
+      _dark: '#18181b',
+    },
+  },
+})
+
+const style = recipe()
 
 const useAriaProps = (props: ModalContentProps) => {
   const labelId = useId()

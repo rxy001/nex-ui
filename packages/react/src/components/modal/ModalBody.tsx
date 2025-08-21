@@ -2,14 +2,23 @@
 
 import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
+import { defineRecipe } from '@nex-ui/system'
 import { useSlotProps } from '../utils'
-import { modalBodyRecipe } from '../../theme/recipes'
 import { useModal } from './ModalContext'
 import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalBodyProps } from './types'
 
-const style = modalBodyRecipe()
+const recipe = defineRecipe({
+  base: {
+    w: 'full',
+    boxSizing: 'border-box',
+    height: '100%',
+    wordBreak: 'break-word',
+  },
+})
+
+const style = recipe()
 
 const useAriaProps = (props: ModalBodyProps) => {
   const { 'aria-describedby': describedBy } = useModal()
