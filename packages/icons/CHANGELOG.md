@@ -1,5 +1,14 @@
 # @nex-ui/icons
 
+## 0.0.14
+
+### Patch Changes
+
+- ca25983: Release
+- Updated dependencies [ca25983]
+  - @nex-ui/styled@0.0.14
+  - @nex-ui/utils@0.0.14
+
 ## 0.0.13
 
 ### Patch Changes
