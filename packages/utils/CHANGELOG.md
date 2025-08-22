@@ -1,5 +1,11 @@
 # @nex-ui/utils
 
+## 0.0.16
+
+### Patch Changes
+
+- 11ce3f4: Release
+
 ## 0.0.15
 
 ### Patch Changes
