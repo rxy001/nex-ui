@@ -8,6 +8,9 @@ on:
         description: 'Which workflow triggered this sync'
         required: true
         type: string
+    secrets:
+      PAT_TOKEN:
+        required: true
     outputs:
       sync_status:
         description: 'Status of the sync operation'
