@@ -71,6 +71,7 @@ export function HomePage({ translations }: HomePageProps) {
           <div className='x:mt-8 x:flex x:gap-3 x:items-center'>
             <Button
               size='lg'
+              as={Link}
               href='/docs/getting-started/introduction'
               radius='full'
               className='x:px-5 x:max-sm:w-full'
