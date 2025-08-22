@@ -202,13 +202,26 @@ export const Threads: React.FC<ThreadsProps> = () => {
     }
     animationFrameId.current = requestAnimationFrame(update)
 
+    function hideCanvas() {
+      if (gl.canvas) {
+        gl.canvas.style.display = 'none'
+      }
+    }
+
+    // Fix flickering on refresh page.
+    window.addEventListener('beforeunload', hideCanvas)
+
     return () => {
       if (animationFrameId.current)
         cancelAnimationFrame(animationFrameId.current)
       window.removeEventListener('resize', resize)
 
-      if (container.contains(gl.canvas)) container.removeChild(gl.canvas)
-      gl.getExtension('WEBGL_lose_context')?.loseContext()
+      // Use gl.clear instead of gl.getExtension('WEBGL_lose_context')?.loseContext() to fix flickering on page switch.
+      gl.clear(gl.COLOR_BUFFER_BIT)
+
+      gl.canvas.remove()
+
+      window.removeEventListener('beforeunload', hideCanvas)
     }
   }, [])
 
