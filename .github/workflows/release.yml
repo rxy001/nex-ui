@@ -80,6 +80,12 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const pullRequestNumber = '${{ needs.release.outputs.pull_request_number }}';
+            if (!pullRequestNumber || pullRequestNumber === '') {
+              console.log('No pull request number available, skipping comment');
+              return;
+            }
+
             const comment = `## 🎉 Auto-sync Completed
 
             ✅ **Status**: Successfully synced \`main\` branch to \`dev\` branch
@@ -93,7 +99,7 @@ jobs:
             > The \`dev\` branch is now up to date with the latest changes from \`main\`.`;
 
             github.rest.issues.createComment({
-              issue_number: ${{ needs.release.outputs.pull_request_number }},
+              issue_number: parseInt(pullRequestNumber),
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: comment
@@ -103,6 +109,12 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const pullRequestNumber = '${{ needs.release.outputs.pull_request_number }}';
+            if (!pullRequestNumber || pullRequestNumber === '') {
+              console.log('No pull request number available, skipping comment');
+              return;
+            }
+
             const comment = `## ⚠️ Auto-sync Failed
 
             ❌ **Status**: Failed to sync \`main\` branch to \`dev\` branch
@@ -121,7 +133,7 @@ jobs:
             > Manual intervention required to complete the sync.`;
 
             github.rest.issues.createComment({
-              issue_number: ${{ needs.release.outputs.pull_request_number  }},
+              issue_number: parseInt(pullRequestNumber),
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: comment
