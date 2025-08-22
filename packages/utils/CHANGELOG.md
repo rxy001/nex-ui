@@ -1,5 +1,11 @@
 # @nex-ui/utils
 
+## 0.0.14
+
+### Patch Changes
+
+- ca25983: Release
+
 ## 0.0.13
 
 ### Patch Changes
