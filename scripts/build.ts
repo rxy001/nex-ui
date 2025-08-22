@@ -92,23 +92,25 @@ async function generateModules({ external, name }: SharedConfigs) {
   console.log(`[${name}] [JS] Generated CJS and ESM files ✅`)
 }
 
-async function generateTypes({ external, name }: SharedConfigs) {
+async function generateTypes({ name }: SharedConfigs) {
   const cwd = process.cwd()
 
   const config: RollupOptions = {
-    external,
     input: './src/index.ts',
     plugins: [
-      nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
+      nodeResolve({
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      }),
       dts({
         tsconfig: path.resolve(cwd, './tsconfig.json'),
-        respectExternal: true,
-        compilerOptions: {
-          preserveSymlinks: true,
-        },
       }),
     ],
-    output: { dir: './dist/types', format: 'es', preserveModules: true },
+    output: {
+      dir: './dist/types',
+      format: 'es',
+      preserveModules: true,
+      entryFileNames: '[name].d.ts',
+    },
   }
   await rollup(config)
 
