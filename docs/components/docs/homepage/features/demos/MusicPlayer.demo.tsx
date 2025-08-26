@@ -68,12 +68,11 @@ export default function MusicPlayer() {
           color: 'rgb(251 251 251 / 80%)',
         }}
         aria-label='Toggle color mode'
+        onClick={() => {
+          setMode(resolvedColorScheme === 'light' ? 'dark' : 'light')
+        }}
       >
-        {resolvedColorScheme === 'light' ? (
-          <MoonOutlined onClick={() => setMode('dark')} />
-        ) : (
-          <SunOutlined onClick={() => setMode('light')} />
-        )}
+        {resolvedColorScheme === 'light' ? <SunOutlined /> : <MoonOutlined />}
       </Button>
       <Box
         sx={{
