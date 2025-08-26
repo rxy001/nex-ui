@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/hooks",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "private": false,
   "description": "A collection of React Hooks for Nex UI components.",
   "author": "X1ng Yu",
