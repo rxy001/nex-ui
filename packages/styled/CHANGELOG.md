@@ -1,5 +1,14 @@
 # @nex-ui/styled
 
+## 0.0.17
+
+### Patch Changes
+
+- 0f0381c: Release
+- Updated dependencies [0f0381c]
+  - @nex-ui/system@0.0.17
+  - @nex-ui/utils@0.0.17
+
 ## 0.0.16
 
 ### Patch Changes

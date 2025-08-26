@@ -1,5 +1,11 @@
 # @nex-ui/cli
 
+## 0.0.11
+
+### Patch Changes
+
+- 0f0381c: Release
+
 ## 0.0.10
 
 ### Patch Changes

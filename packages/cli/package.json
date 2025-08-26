@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/cli",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "description": "A CLI tool that unlocks seamless NexUI integration",
   "author": "X1ng Yu",

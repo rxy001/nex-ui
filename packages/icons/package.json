@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/icons",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "author": "X1ng Yu",
   "private": false,
   "description": "Shared icons used by NexUI packages.",
