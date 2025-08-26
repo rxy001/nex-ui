@@ -1,5 +1,4 @@
-import { useMemo } from 'react'
-import { __DEV__, mergeProps } from '@nex-ui/utils'
+import { mergeProps } from '@nex-ui/utils'
 import { useNexUI } from '../provider/Context'
 import type { ComponentNames } from '../../types/componentThemes'
 
@@ -9,11 +8,12 @@ type UseDefaultPropsArgs = {
 }
 
 export const useDefaultProps = <T>({ name, props }: UseDefaultPropsArgs): T => {
-  const { components = {} } = useNexUI()
+  const { components } = useNexUI()
+  const defaultProps = components?.[name]?.defaultProps
 
-  return useMemo(() => {
-    const defaultProps = components[name]?.defaultProps ?? {}
-
+  if (defaultProps) {
     return mergeProps(defaultProps, props) as T
-  }, [components, name, props])
+  }
+
+  return props as T
 }
