@@ -15,8 +15,8 @@ export default function App() {
         label='Variant'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
-        defaultValue='Filled'
+        variant='faded'
+        defaultValue='Faded'
         color='gray'
       />
       <Input

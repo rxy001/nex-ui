@@ -4,8 +4,8 @@ import { generateUtilityClasses } from '../utils'
 export const buttonClasses = generateUtilityClasses('nui-btn', [
   // ---------root---------
   'root',
-  // "text" | "solid" | "outlined"
-  'variant-text',
+  // "ghost" | "solid" | "outlined"
+  'variant-ghost',
   'variant-solid',
   'variant-outlined',
 

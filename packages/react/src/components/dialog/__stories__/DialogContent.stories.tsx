@@ -64,7 +64,7 @@ const meta = {
           </DialogBody>
           <DialogFooter>
             <DialogClose>
-              <Button color='red' variant='text'>
+              <Button color='red' variant='ghost'>
                 Cancel
               </Button>
             </DialogClose>
@@ -135,7 +135,7 @@ function ScrollTemplate(props: DialogContentProps) {
         </DialogBody>
         <DialogFooter>
           <DialogClose>
-            <Button color='red' variant='text'>
+            <Button color='red' variant='ghost'>
               Cancel
             </Button>
           </DialogClose>

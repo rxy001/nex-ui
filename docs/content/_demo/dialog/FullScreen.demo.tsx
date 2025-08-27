@@ -37,7 +37,7 @@ export default function App() {
         </DialogBody>
         <DialogFooter>
           <DialogClose>
-            <Button color='red' variant='text'>
+            <Button color='red' variant='ghost'>
               Cancel
             </Button>
           </DialogClose>

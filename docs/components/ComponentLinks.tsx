@@ -49,7 +49,7 @@ const ButtonLink = (props: ButtonProps) => {
       size='sm'
       color='gray'
       sx={sx}
-      variant='text'
+      variant='ghost'
       target='_blank'
       {...props}
     />
