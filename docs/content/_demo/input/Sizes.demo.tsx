@@ -31,7 +31,7 @@ export default function App() {
           label='Size'
           size='sm'
           labelPlacement='float-inside'
-          variant='filled'
+          variant='faded'
           defaultValue='sm'
           color='gray'
         />
@@ -39,7 +39,7 @@ export default function App() {
           label='Size'
           size='md'
           labelPlacement='float-inside'
-          variant='filled'
+          variant='faded'
           defaultValue='md'
           color='gray'
         />
@@ -47,7 +47,7 @@ export default function App() {
           label='Size'
           size='lg'
           labelPlacement='float-inside'
-          variant='filled'
+          variant='faded'
           defaultValue='lg'
           color='gray'
         />

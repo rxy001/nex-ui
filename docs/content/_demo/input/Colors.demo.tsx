@@ -6,7 +6,7 @@ export default function App() {
       <Input
         label='Color'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         size='lg'
         color='blue'
         defaultValue='blue'
@@ -15,7 +15,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='cyan'
         defaultValue='cyan'
       />
@@ -23,7 +23,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='gray'
         defaultValue='gray'
       />
@@ -31,7 +31,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='green'
         defaultValue='green'
       />
@@ -39,7 +39,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='orange'
         defaultValue='orange'
       />
@@ -47,7 +47,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='pink'
         defaultValue='pink'
       />
@@ -55,7 +55,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='purple'
         defaultValue='purple'
       />
@@ -63,7 +63,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='yellow'
         defaultValue='yellow'
       />
@@ -71,7 +71,7 @@ export default function App() {
         label='Color'
         size='lg'
         labelPlacement='float-inside'
-        variant='filled'
+        variant='faded'
         color='red'
         defaultValue='red'
       />

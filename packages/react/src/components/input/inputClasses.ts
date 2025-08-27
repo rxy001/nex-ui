@@ -6,7 +6,7 @@ export const inputClasses = generateUtilityClasses('nui-input', [
   'root',
 
   'variant-outlined',
-  'variant-filled',
+  'variant-faded',
   'variant-underlined',
 
   // "sm" | "md" | "lg" | "full" | "none"

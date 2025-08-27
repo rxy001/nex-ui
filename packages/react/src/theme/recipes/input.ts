@@ -92,7 +92,7 @@ export const inputRecipe = defineSlotRecipe({
           },
         },
       },
-      filled: {
+      faded: {
         root: {
           bg: 'colorPalette.muted',
           _hover: {
@@ -309,7 +309,7 @@ export const inputRecipe = defineSlotRecipe({
     },
     {
       radius: 'full',
-      variant: ['filled', 'outlined'],
+      variant: ['faded', 'outlined'],
       labelPlacement: ['float-inside', 'inside'],
       css: {
         root: {
@@ -323,7 +323,7 @@ export const inputRecipe = defineSlotRecipe({
     {
       radius: 'full',
       labelPlacement: ['float-inside', 'inside'],
-      variant: ['filled', 'outlined'],
+      variant: ['faded', 'outlined'],
       size: 'lg',
       css: {
         root: {
@@ -359,7 +359,7 @@ export const inputRecipe = defineSlotRecipe({
     },
     {
       invalid: true,
-      variant: 'filled',
+      variant: 'faded',
       css: {
         root: {
           bg: 'red.subtle',
@@ -427,7 +427,7 @@ export const inputRecipe = defineSlotRecipe({
         'red',
         'yellow',
       ],
-      variant: 'filled',
+      variant: 'faded',
       css: {
         clearButton: {
           color: 'colorPalette.500',

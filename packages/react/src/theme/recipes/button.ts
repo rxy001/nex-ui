@@ -66,7 +66,7 @@ export const buttonRecipe = defineSlotRecipe({
           color: 'colorPalette.contrastText',
         },
       },
-      text: {
+      ghost: {
         root: {
           color: 'colorPalette.500',
           bg: {
