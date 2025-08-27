@@ -21,7 +21,7 @@ describe('Button', () => {
 
   testVariantClasses(
     <Button>Button</Button>,
-    ['variant', ['solid', 'outlined', 'text']],
+    ['variant', ['solid', 'outlined', 'ghost']],
     buttonClasses,
   )
 
@@ -38,7 +38,7 @@ describe('Button', () => {
     expect(button).toHaveClass(buttonClasses['color-blue'])
 
     expect(button).not.toHaveClass(buttonClasses['variant-outlined'])
-    expect(button).not.toHaveClass(buttonClasses['variant-text'])
+    expect(button).not.toHaveClass(buttonClasses['variant-ghost'])
     expect(button).not.toHaveClass(buttonClasses['color-green'])
     expect(button).not.toHaveClass(buttonClasses['color-cyan'])
     expect(button).not.toHaveClass(buttonClasses['color-orange'])

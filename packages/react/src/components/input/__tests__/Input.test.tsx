@@ -25,7 +25,7 @@ describe('Input', () => {
 
   testVariantClasses(
     <Input />,
-    ['variant', ['outlined', 'filled', 'underlined']],
+    ['variant', ['outlined', 'faded', 'underlined']],
     inputClasses,
   )
 
@@ -60,7 +60,7 @@ describe('Input', () => {
     expect(inputRoot).not.toHaveClass(inputClasses.invalid)
     expect(inputRoot).not.toHaveClass(inputClasses.disabled)
     expect(inputRoot).not.toHaveClass(inputClasses['full-width'])
-    expect(inputRoot).not.toHaveClass(inputClasses['variant-filled'])
+    expect(inputRoot).not.toHaveClass(inputClasses['variant-faded'])
     expect(inputRoot).not.toHaveClass(inputClasses['variant-underlined'])
     expect(inputRoot).not.toHaveClass(inputClasses['label-placement-inside'])
     expect(inputRoot).not.toHaveClass(inputClasses['label-placement-outside'])

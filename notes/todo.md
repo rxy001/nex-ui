@@ -130,3 +130,11 @@ https://github.com/microsoft/TypeScript/issues/40426
 <!-- 45. 修改添加 focusVisible 样式的时机 -->
 
 <!-- 46. 删除 input autofill 的样式 -->
+
+47. 统一 Variant 视觉效果
+    solid: 完全填充的背景色，突出显示的元素
+    outlined: 边框色彩，背景透明，文字颜色与边框一致
+    ghost: 透明背景，悬停时显示背景
+    faded: 浅色背景，深色文本
+    subtle: 浅色背景、浅色边框、深色文本
+    underlined: 下划线

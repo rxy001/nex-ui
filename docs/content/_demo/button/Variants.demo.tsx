@@ -5,7 +5,7 @@ export default function App() {
     <Flex gap='5'>
       <Button variant='solid'>Solid</Button>
       <Button variant='outlined'>Outlined</Button>
-      <Button variant='text'>Text</Button>
+      <Button variant='ghost'>Ghost</Button>
     </Flex>
   )
 }
