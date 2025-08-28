@@ -1,5 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, toSlots } from '../shared'
+import { colorVariant, disabledVariant, toSlots } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const switchRecipe = defineSlotRecipe({
@@ -20,7 +20,7 @@ export const switchRecipe = defineSlotRecipe({
       cursor: 'inherit',
       _focusVisibleRing: {
         '& + *': {
-          outline: 'focusVisibleOutline',
+          outline: '{borders.md} {colors.colorPalette.primary}',
           outlineOffset: '0.5',
         },
       },
@@ -70,7 +70,7 @@ export const switchRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    color: toSlots(colorVariant, 'track'),
+    color: toSlots(colorVariant, 'track', 'input'),
     size: {
       sm: {
         track: {
@@ -157,14 +157,7 @@ export const switchRecipe = defineSlotRecipe({
         },
       },
     },
-    disabled: {
-      true: {
-        root: {
-          opacity: 0.6,
-          pointerEvents: 'none',
-        },
-      },
-    },
+    disabled: toSlots(disabledVariant, 'root'),
   },
   defaultVariants: {
     color: 'blue',

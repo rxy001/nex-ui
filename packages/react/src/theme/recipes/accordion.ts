@@ -1,4 +1,5 @@
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
+import { disabledVariant, toSlots } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const accordionRecipe = defineRecipe({
@@ -48,14 +49,7 @@ export const accordionItemRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    disabled: {
-      true: {
-        root: {
-          opacity: 0.6,
-          pointerEvents: 'none',
-        },
-      },
-    },
+    disabled: toSlots(disabledVariant, 'root'),
     variant: {
       underlined: {
         root: {

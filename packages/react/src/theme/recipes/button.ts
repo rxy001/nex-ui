@@ -5,13 +5,9 @@ import {
   toSlots,
   fullWidth,
   sizeVariant,
+  disabledVariant,
 } from '../shared'
-import type { CSSObject, RecipeVariants } from '@nex-ui/system'
-
-const disabledVariant: CSSObject = {
-  opacity: 0.6,
-  pointerEvents: 'none',
-}
+import type { RecipeVariants } from '@nex-ui/system'
 
 export const buttonRecipe = defineSlotRecipe({
   slots: {
@@ -24,7 +20,7 @@ export const buttonRecipe = defineSlotRecipe({
       alignItems: 'center',
       justifyContent: 'center',
       _focusVisibleRing: {
-        outline: 'focusVisibleOutline',
+        outline: '{borders.md} {colors.colorPalette.primary}',
         outlineOffset: '0.5',
       },
     },
@@ -46,7 +42,7 @@ export const buttonRecipe = defineSlotRecipe({
       outlined: {
         root: {
           bg: 'transparent',
-          border: '{borders.md}',
+          border: 'md',
           borderColor: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
@@ -77,16 +73,8 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     size: toSlots(sizeVariant, 'root'),
-    disabled: {
-      true: {
-        root: disabledVariant,
-      },
-    },
-    loading: {
-      true: {
-        root: disabledVariant,
-      },
-    },
+    disabled: toSlots(disabledVariant, 'root'),
+    loading: toSlots(disabledVariant, 'root'),
     fullWidth: toSlots(fullWidth, 'root'),
     radius: toSlots(radiusVariant, 'root'),
     iconOnly: {

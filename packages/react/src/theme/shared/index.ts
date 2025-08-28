@@ -1,5 +1,2 @@
-export * from './colorVariant'
-export * from './radiusVariant'
 export * from './toSlots'
-export * from './fullWidthVariant'
-export * from './sizeVariant'
+export * from './variants'
