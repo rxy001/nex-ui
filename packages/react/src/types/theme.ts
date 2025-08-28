@@ -38,7 +38,7 @@ import type {
 } from './generated/tokens'
 import type { DefaultSelectors } from './generated/selectors'
 import type { ComponentThemes } from './componentThemes'
-import type { colorVariant } from '../theme/shared/colorVariant'
+import type { colorVariant } from '../theme/shared'
 
 export type Theme = {
   aliases?: AliasesDefinition & DefaultAliases
