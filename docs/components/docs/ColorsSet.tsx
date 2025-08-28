@@ -2,7 +2,6 @@
 
 import { defaultConfig } from '@nex-ui/react'
 import { forEach, get, isString, map, walkObject } from '@nex-ui/utils'
-import { readableColor } from 'color2k'
 import { useClipboard } from '@nex-ui/hooks'
 import clsx from 'clsx'
 import type { ComponentProps } from 'react'
@@ -51,7 +50,7 @@ function Button({ className, ...props }: ComponentProps<'button'>) {
   return (
     <button
       className={clsx(
-        'x:shadow-xs x:w-34 x:h-34 x:flex x:items-center x:justify-center x:flex-col',
+        'x:shadow-xs x:w-26 x:h-26 x:flex x:items-center x:justify-center x:flex-col',
         'x:rounded-2xl x:overflow-hidden x:hover:opacity-80 x:active:opacity-70 x:transition-opacity',
         className,
       )}
@@ -72,12 +71,12 @@ export function CommonColors() {
         {tokens.map(({ color, token }) => (
           <Button
             className='x:px-4'
-            style={{ background: color, color: readableColor(color) }}
+            style={{ background: color, color: getReadableColor(color) }}
             key={color}
             onClick={() => copy(token)}
           >
-            <p className='x:font-medium x:uppercase'>{color}</p>
-            <p className='x:text-sm x:font-medium'>{token}</p>
+            {/* <p className='x:text-sm x:uppercase'>{color}</p> */}
+            <p className='x:text-sm x:font-medium'>{getColorVariant(token)}</p>
           </Button>
         ))}
       </div>
@@ -166,7 +165,7 @@ export function SemanticColors() {
                     key={key}
                     style={{
                       background: realColor,
-                      color: readableColor(realColor),
+                      color: getReadableColor(realColor),
                     }}
                   >
                     <p className='x:uppercase x:text-sm'>{key}</p>
@@ -175,12 +174,31 @@ export function SemanticColors() {
                 )
               })}
             </Button>
-            <p title={token} className='x:text-center x:w-34 x:truncate'>
-              {token}
+            <p title={token} className='x:text-center x:w-26 x:truncate'>
+              {getColorVariant(token)}
             </p>
           </div>
         ))}
       </div>
     </div>
   ))
+}
+
+function getReadableColor(oklchColor: string): 'white' | 'black' {
+  const match = oklchColor.match(/oklch\((\d+(?:\.\d+)?)%?\s/)
+
+  if (!match) {
+    return 'black'
+  }
+
+  const lightness = parseFloat(match[1])
+
+  const normalizedLightness = lightness > 1 ? lightness / 100 : lightness
+
+  return normalizedLightness > 0.6 ? 'black' : 'white'
+}
+
+function getColorVariant(token: string) {
+  const [, variant] = token.split('.')
+  return variant
 }
