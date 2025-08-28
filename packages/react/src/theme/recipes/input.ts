@@ -1,5 +1,11 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, fullWidth, radiusVariant, toSlots } from '../shared'
+import {
+  colorVariant,
+  fullWidth,
+  radiusVariant,
+  toSlots,
+  disabledVariant,
+} from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 const WITHIN_SELECTOR = '&:has(~ *:is(:focus-within, [data-focus-within=true]))'
@@ -43,6 +49,8 @@ export const inputRecipe = defineSlotRecipe({
       transformOrigin: 'top left',
       transition: 'colors',
       pointerEvents: 'none',
+      transitionProperty: 'inset, color, transform',
+      transitionDuration: '0.2s',
     },
     prefix: {
       display: 'flex',
@@ -78,7 +86,7 @@ export const inputRecipe = defineSlotRecipe({
     },
     fullWidth: toSlots(fullWidth, 'root'),
     radius: toSlots(radiusVariant, 'root'),
-    color: toSlots(colorVariant, 'root', 'label', 'input', 'clearButton'),
+    color: toSlots(colorVariant, 'root', 'label', 'clearButton'),
     variant: {
       outlined: {
         root: {
@@ -89,6 +97,11 @@ export const inputRecipe = defineSlotRecipe({
           },
           _focusWithin: {
             borderColor: 'colorPalette.primary',
+          },
+        },
+        label: {
+          [WITHIN_SELECTOR]: {
+            color: 'colorPalette.primary',
           },
         },
       },
@@ -103,21 +116,24 @@ export const inputRecipe = defineSlotRecipe({
           },
           '&:has(> [data-focus-visible=true]:not(:disabled, [data-disabled=true]))':
             {
-              outline: 'focusVisibleOutline',
+              outline: '{borders.md} {colors.colorPalette.primary}',
             },
-        },
-        label: {
           color: {
             _DEFAULT: 'colorPalette.500',
             _dark: 'colorPalette.400',
           },
         },
-        input: {
-          color: {
-            _DEFAULT: 'colorPalette.500',
-            _dark: 'colorPalette.400',
+        clearButton: {
+          color: 'colorPalette.500',
+          _hover: {
+            color: 'colorPalette.400',
           },
-          transition: 'colors',
+          _dark: {
+            color: 'colorPalette.400',
+            _hover: {
+              color: 'colorPalette.300',
+            },
+          },
         },
       },
       underlined: {
@@ -131,6 +147,7 @@ export const inputRecipe = defineSlotRecipe({
             w: '100%',
             h: '2px',
             bg: 'gray.highlight',
+            transition: 'colors',
           },
           '::after': {
             content: '""',
@@ -148,17 +165,20 @@ export const inputRecipe = defineSlotRecipe({
               width: '100%',
             },
           },
+          _hover: {
+            '::before': {
+              bg: 'gray.secondary',
+            },
+          },
+        },
+        label: {
+          [WITHIN_SELECTOR]: {
+            color: 'colorPalette.primary',
+          },
         },
       },
     },
-    disabled: {
-      true: {
-        root: {
-          opacity: 0.6,
-          pointerEvents: 'none',
-        },
-      },
-    },
+    disabled: toSlots(disabledVariant, 'root'),
     invalid: {
       true: {},
     },
@@ -199,10 +219,8 @@ export const inputRecipe = defineSlotRecipe({
       labelPlacement: ['float-outside', 'float-inside'],
       css: {
         label: {
-          transitionProperty: 'inset, font-size, transform',
           transform: 'translateY(-50%) scale(1)',
           insetBlockStart: '50%',
-          transitionDuration: '0.2s',
           insetInlineStart: '3',
         },
       },
@@ -335,24 +353,13 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     {
-      invalid: false,
-      variant: ['outlined', 'underlined'],
-      css: {
-        label: {
-          [WITHIN_SELECTOR]: {
-            color: 'colorPalette.500',
-          },
-        },
-      },
-    },
-    {
       invalid: true,
       variant: ['outlined', 'underlined'],
       css: {
         label: {
-          color: 'red.500',
+          color: 'red.primary',
           [WITHIN_SELECTOR]: {
-            color: 'red.500',
+            color: 'red.primary',
           },
         },
       },
@@ -369,11 +376,6 @@ export const inputRecipe = defineSlotRecipe({
           _focusWithin: {
             bg: 'red.muted',
           },
-        },
-        label: {
-          colorPalette: 'red',
-        },
-        input: {
           colorPalette: 'red',
         },
       },
@@ -392,7 +394,7 @@ export const inputRecipe = defineSlotRecipe({
           },
         },
         input: {
-          color: 'red.500',
+          color: 'red.primary',
         },
       },
     },
@@ -404,42 +406,22 @@ export const inputRecipe = defineSlotRecipe({
           '::after': {
             bg: 'red.primary',
           },
+          '::before': {
+            bg: 'red.primary',
+          },
           _focusWithin: {
             '::after': {
               bg: 'red.primary',
             },
           },
-        },
-        input: {
-          color: 'red.500',
-        },
-      },
-    },
-    {
-      color: [
-        'blue',
-        'cyan',
-        'gray',
-        'green',
-        'orange',
-        'pink',
-        'purple',
-        'red',
-        'yellow',
-      ],
-      variant: 'faded',
-      css: {
-        clearButton: {
-          color: 'colorPalette.500',
           _hover: {
-            color: 'colorPalette.400',
-          },
-          _dark: {
-            color: 'colorPalette.400',
-            _hover: {
-              color: 'colorPalette.300',
+            '::before': {
+              bg: 'red.primary',
             },
           },
+        },
+        input: {
+          color: 'red.primary',
         },
       },
     },

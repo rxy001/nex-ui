@@ -58,12 +58,12 @@ exports[`Checkbox should render with default props 1`] = `
 }
 
 .emotion-1[data-focus-visible=true]:not(:disabled, [data-disabled=true])+*::before {
-  outline: var(--nui-borders-focus-visible-outline);
+  outline: var(--nui-borders-md) var(--nui-colors-blue-primary);
   outline-offset: var(--nui-spaces-0-5);
 }
 
 .emotion-1:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true])+*::before {
-  border-color: var(--nui-colors-blue-secondary);
+  border-color: var(--nui-colors-gray-secondary);
 }
 
 .emotion-2 {
