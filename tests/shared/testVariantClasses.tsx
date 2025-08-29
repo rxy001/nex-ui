@@ -3,6 +3,21 @@ import { renderWithNexUIProvider } from './renderWithProvider'
 import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
+/**
+ * Test the variant classes of a component.
+ * @param component The component to test.
+ * @param variant The variant prop and its possible values.
+ * @param classes The expected class names for each variant value.
+ * @param options Options to pass to the renderWithNexUIProvider function.
+ *
+ * @example
+ *
+ * testVariantClasses(
+ *   <Button />,
+ *   ['variant', ['outlined', 'solid']],
+ *   buttonClasses,
+ * )
+ */
 export const testVariantClasses = <
   T extends string,
   C extends string,

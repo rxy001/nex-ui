@@ -23,6 +23,7 @@ import type {
   DrawerFooterRecipe,
   RadioRecipe,
   RadioGroupRecipe,
+  AlertRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -70,6 +71,8 @@ import type {
   RadioProps,
   RadioGroupOwnerState,
   RadioGroupProps,
+  AlertOwnerState,
+  AlertProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -218,6 +221,12 @@ export type ComponentThemes = {
       | ComponentThemeObject<RadioGroupRecipe>
       | ComponentThemeFn<RadioGroupOwnerState, RadioGroupRecipe>
     defaultProps?: RadioGroupProps
+  }
+  Alert?: {
+    styleOverrides?:
+      | ComponentThemeObject<AlertRecipe>
+      | ComponentThemeFn<AlertOwnerState, AlertRecipe>
+    defaultProps?: AlertProps
   }
 }
 
