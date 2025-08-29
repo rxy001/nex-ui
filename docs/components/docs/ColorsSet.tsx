@@ -72,7 +72,7 @@ export function CommonColors() {
           <Button
             className='x:px-4'
             style={{ background: color, color: getReadableColor(color) }}
-            key={color}
+            key={token}
             onClick={() => copy(token)}
           >
             {/* <p className='x:text-sm x:uppercase'>{color}</p> */}
@@ -199,6 +199,7 @@ function getReadableColor(oklchColor: string): 'white' | 'black' {
 }
 
 function getColorVariant(token: string) {
-  const [, variant] = token.split('.')
-  return variant
+  const parts = token.split('.')
+
+  return parts[1] ?? parts[0] ?? token
 }

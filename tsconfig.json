@@ -1,5 +1,5 @@
 {
-  "include": ["packages", "docs", "sb", "scripts"],
+  "include": ["packages", "docs", "sb", "scripts", "tests"],
   "exclude": ["**/node_modules", "**/dist", "**/.turbo"],
   "compilerOptions": {
     "types": ["@testing-library/jest-dom", "@emotion/jest", "node"],
