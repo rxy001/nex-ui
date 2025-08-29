@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert should render with default props 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-padding-start: var(--nui-spaces-4);
+  padding-inline-start: var(--nui-spaces-4);
+  -webkit-padding-end: var(--nui-spaces-4);
+  padding-inline-end: var(--nui-spaces-4);
+  padding-block-start: var(--nui-spaces-3);
+  padding-block-end: var(--nui-spaces-3);
+  gap: var(--nui-spaces-3);
+  overflow: hidden;
+  background-color: var(--nui-colors-blue-subtle);
+  color: var(--nui-colors-blue-600);
+  border-radius: var(--nui-radii-lg);
+}
+
+[data-nui-color-scheme="dark"] .emotion-0 {
+  color: var(--nui-colors-blue-400);
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.emotion-2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-height: var(--nui-sizes-8);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: var(--nui-spaces-1);
+  color: inherit;
+}
+
+<div
+  class="nui-alert-root nui-alert-radius-md nui-alert-variant-faded nui-alert-color-blue nui-alert-status-info emotion-0"
+  role="alert"
+>
+  <div
+    class="nui-alert-icon emotion-1"
+  >
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      height="1em"
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clip-rule="evenodd"
+        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10s10-4.477 10-10M12 6.25a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0V7a.75.75 0 0 1 .75-.75M12 17a1 1 0 1 0 0-2a1 1 0 0 0 0 2"
+        fill="currentColor"
+        fill-rule="evenodd"
+      />
+    </svg>
+  </div>
+  <div
+    class="nui-alert-content emotion-2"
+  />
+</div>
+`;
