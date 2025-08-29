@@ -216,6 +216,15 @@ describe('Alert', () => {
     consoleSpy.mockRestore()
   })
 
+  it('should call onClose when close button is clicked', () => {
+    const onClose = jest.fn()
+    const { queryByClassName, user } = renderWithNexUIProvider(
+      <Alert closable onClose={onClose} />,
+    )
+    user.click(queryByClassName(alertClasses['close-button'])!)
+    expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
   describe('Accessibility', () => {
     it('should have role alert on root element', () => {
       const { container } = renderWithNexUIProvider(<Alert />)
