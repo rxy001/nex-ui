@@ -32,8 +32,8 @@ const useSlotClasses = (ownerState: AvatarGroupOwnerState) => {
   }, [classes, prefix])
 }
 
-export const AvatarGroup = <RootElement extends ElementType = 'div'>(
-  inProps: AvatarGroupProps<RootElement>,
+export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
+  inProps: AvatarGroupProps<RootComponent>,
 ) => {
   const props = useDefaultProps<AvatarGroupProps>({
     name: 'AvatarGroup',
