@@ -11,14 +11,14 @@ import {
   SunOutlined,
 } from '@nex-ui/icons'
 import Image from 'next/image'
-import { Box, Button as NexBtn, useColorScheme } from '@nex-ui/react'
+import { Box, Button as NexUIButton, useColorScheme } from '@nex-ui/react'
 import albumCover from '@/public/images/album-cover.png'
 import type { ButtonProps, CSSObject } from '@nex-ui/react'
 
 function Button({ children, ...props }: ButtonProps) {
   return (
-    <NexBtn
-      variant='text'
+    <NexUIButton
+      variant='ghost'
       iconOnly
       radius='full'
       {...props}
@@ -36,7 +36,7 @@ function Button({ children, ...props }: ButtonProps) {
       ]}
     >
       {children}
-    </NexBtn>
+    </NexUIButton>
   )
 }
 
@@ -68,12 +68,11 @@ export default function MusicPlayer() {
           color: 'rgb(251 251 251 / 80%)',
         }}
         aria-label='Toggle color mode'
+        onClick={() => {
+          setMode(resolvedColorScheme === 'light' ? 'dark' : 'light')
+        }}
       >
-        {resolvedColorScheme === 'light' ? (
-          <MoonOutlined onClick={() => setMode('dark')} />
-        ) : (
-          <SunOutlined onClick={() => setMode('light')} />
-        )}
+        {resolvedColorScheme === 'light' ? <SunOutlined /> : <MoonOutlined />}
       </Button>
       <Box
         sx={{

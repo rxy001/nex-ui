@@ -1,5 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, toSlots } from '../shared'
+import { colorVariant, toSlots, disabledVariant } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const checkboxGroupRecipe = defineSlotRecipe({
@@ -53,13 +53,13 @@ export const checkboxRecipe = defineSlotRecipe({
       zIndex: 1,
       _focusVisibleRing: {
         '& + *::before': {
-          outline: 'focusVisibleOutline',
+          outline: '{borders.md} {colors.colorPalette.primary}',
           outlineOffset: '0.5',
         },
       },
       _hover: {
         '& + *::before': {
-          borderColor: 'colorPalette.secondary',
+          borderColor: 'gray.secondary',
         },
       },
     },
@@ -210,14 +210,7 @@ export const checkboxRecipe = defineSlotRecipe({
         },
       },
     },
-    disabled: {
-      true: {
-        root: {
-          opacity: 0.6,
-          pointerEvents: 'none',
-        },
-      },
-    },
+    disabled: toSlots(disabledVariant, 'root'),
     indeterminate: {
       true: {
         icon: {

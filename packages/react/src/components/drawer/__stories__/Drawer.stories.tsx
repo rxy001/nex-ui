@@ -81,7 +81,7 @@ const meta = {
           </DrawerBody>
           <DrawerFooter>
             <DrawerClose>
-              <Button color='red' variant='text'>
+              <Button color='red' variant='ghost'>
                 Cancel
               </Button>
             </DrawerClose>

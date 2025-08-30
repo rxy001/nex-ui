@@ -11,7 +11,7 @@ const meta = {
   component: Input<'input'>,
   argTypes: {
     variant: {
-      options: ['filled', 'outlined', 'underlined'],
+      options: ['faded', 'outlined', 'underlined'],
       control: 'select',
     },
     disabled: {
@@ -102,7 +102,7 @@ export const Variants: Story = {
       <>
         <Flex gap='5'>
           <Input {...args} variant='outlined' label='Outlined' />
-          <Input {...args} variant='filled' label='Filled' />
+          <Input {...args} variant='faded' label='Faded' />
           <Input {...args} variant='underlined' label='Underlined' />
         </Flex>
         <Flex gap='5' sx={{ mt: '10' }}>
@@ -115,8 +115,8 @@ export const Variants: Story = {
           <Input
             {...args}
             placeholder='Placeholder'
-            variant='filled'
-            label='Filled'
+            variant='faded'
+            label='Faded'
           />
           <Input
             {...args}

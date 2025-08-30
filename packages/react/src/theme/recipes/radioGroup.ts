@@ -1,5 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, toSlots } from '../shared'
+import { colorVariant, toSlots, disabledVariant } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const radioRecipe = defineSlotRecipe({
@@ -21,12 +21,17 @@ export const radioRecipe = defineSlotRecipe({
       cursor: 'inherit',
       _hover: {
         '& + *': {
+          borderColor: 'gray.secondary',
+        },
+      },
+      _checked: {
+        '& + *': {
           borderColor: 'colorPalette.secondary',
         },
       },
       _focusVisibleRing: {
         '& + *': {
-          outline: 'focusVisibleOutline',
+          outline: '{borders.md} {colors.colorPalette.primary}',
           outlineOffset: '0.5',
         },
       },
@@ -119,14 +124,7 @@ export const radioRecipe = defineSlotRecipe({
         },
       },
     },
-    disabled: {
-      true: {
-        root: {
-          opacity: 0.6,
-          pointerEvents: 'none',
-        },
-      },
-    },
+    disabled: toSlots(disabledVariant, 'root'),
     inGroup: {
       true: {},
     },
@@ -190,6 +188,7 @@ export const radioGroupRecipe = defineSlotRecipe({
       horizontal: {
         wrapper: {
           flexDirection: 'row',
+          flexWrap: 'wrap',
         },
       },
       vertical: {

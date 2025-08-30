@@ -101,6 +101,7 @@ const useSlotAriaProps = (ownerState: InputOwnerState) => {
       },
       clearButton: {
         'aria-label': clearButtonProps['aria-label'] ?? 'Clear input',
+        tabIndex: -1,
       },
     }
   }, [
@@ -305,8 +306,8 @@ export const Input = <InputComponent extends ElementType = 'input'>(
 
   return (
     <InputRoot {...getInputRootProps()}>
-      {prefix && <InputPrefix {...getInputPrefixProps()}>{prefix}</InputPrefix>}
       {label && <InputLabel {...getInputLabelProps()}>{label}</InputLabel>}
+      {prefix && <InputPrefix {...getInputPrefixProps()}>{prefix}</InputPrefix>}
       <InputControl {...getInputControlProps()} />
       {clearable && (
         <InputClearButton {...getClearButtonProps()}>
