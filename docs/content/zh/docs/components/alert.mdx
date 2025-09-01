@@ -1,0 +1,212 @@
+---
+title: Alert
+description: Alert 是一种临时通知，提供有关操作或事件的简明反馈。
+---
+
+import { alert } from '@/content/_demo'
+
+# Alert
+
+Alert 是一种临时通知，提供有关操作或事件的简明反馈。
+
+<ComponentLinks component='alert' ariaCompatible />
+
+---
+
+## Usage
+
+<Example {...alert.usage} />
+
+### Colors
+
+<Example {...alert.colors} />
+
+### Variants
+
+<Example {...alert.variants} />
+
+### Radius
+
+<Example {...alert.radius} />
+
+### Status
+
+使用 `status` 属性可以设置 Alert 的状态，每个状态都具有不同的颜色以及图标。
+
+Alert 支持 `error`、`success`、`warning` 和 `info` 四种状态，默认为 `info`。
+
+Note: `color` 属性可覆盖状态的默认颜色。
+
+<Example {...alert.status} />
+
+### Custom Icon
+
+默认，Alert 会根据 `status` 属性显示相应的图标。您也可以通过 `icon` 属性传入自定义图标。
+
+<Example {...alert.customIcon} />
+
+### Without Icon
+
+将 `hideIcon` 属性设置为 `true`，可以隐藏图标。
+
+<Example {...alert.hideIcon} />
+
+### With Action
+
+使用 `action` 属性执行额外的操作。
+
+<Example {...alert.withAction} />
+
+### Closable
+
+将 `closable` 属性设置为 `true`，将会显示一个关闭按钮，`onClose` 在按钮被点击时触发。
+
+<Example {...alert.closable} />
+
+## API
+
+### Alert Props
+
+Alert 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pink'",
+        "'purple'",
+        "'gray'",
+      ],
+      description: 'Alert 的颜色。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
+      default: "'md'",
+      description: 'Alert 的 borderRadius。',
+    },
+    {
+      prop: 'variant',
+      type: ["'outlined'", "'faded'", "'solid'", "'subtle'"],
+      default: "'solid'",
+      description: 'Alert 的外观样式。',
+    },
+    {
+      prop: 'icon',
+      type: 'ReactNode',
+      description: '自定义图标。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素。',
+    },
+    {
+      prop: 'action',
+      type: 'ReactNode',
+      description: '在信息的后面显示的操作。',
+    },
+    {
+      prop: 'title',
+      type: 'ReactNode',
+      description: 'Alert 的标题。',
+    },
+    {
+      prop: 'description',
+      type: 'ReactNode',
+      description: 'Alert 的描述。',
+    },
+    {
+      prop: 'closable',
+      type: 'boolean',
+      description: 'Alert 是否可关闭。',
+    },
+    {
+      prop: 'status',
+      type: ["'error'", "'info'", "'success'", "'warning'"],
+      default: "'info'",
+      description: 'Alert 的状态。',
+    },
+    {
+      prop: 'hideIcon',
+      type: 'boolean',
+      description: '是否隐藏 icon。',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: '当关闭按钮被点击时触发。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<AlertOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Alert Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Alert Slots 的 props。',
+    },
+  ]}
+/>
+
+### Alert Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'icon',
+      class: '.nui-alert-icon',
+      component: "'div'",
+      description: 'Alert 的图标容器。',
+    },
+    {
+      slot: 'content',
+      class: '.nui-alert-content',
+      component: "'div'",
+      description: 'Alert 的内容容器。',
+    },
+    {
+      slot: 'title',
+      class: '.nui-alert-title',
+      component: "'div'",
+      description: 'Alert 的标题容器。',
+    },
+    {
+      slot: 'description',
+      class: '.nui-alert-description',
+      component: "'div'",
+      description: 'Alert 的描述容器。',
+    },
+    {
+      slot: 'closeButton',
+      class: '.nui-alert-close-button',
+      component: 'Button',
+      description: 'Alert 的关闭按钮。',
+    },
+  ]}
+/>

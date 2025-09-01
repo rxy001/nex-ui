@@ -62,7 +62,7 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   color?: AlertVariants['color']
 
   /**
-   * The radius of the alert.
+   * The border radius of the alert.
    * @default 'md'
    */
   radius?: AlertVariants['radius']

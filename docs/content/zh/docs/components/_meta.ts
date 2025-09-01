@@ -1,5 +1,6 @@
 export default {
   accordion: 'Accordion',
+  alert: 'Alert',
   avatar: 'Avatar',
   button: 'Button',
   checkbox: 'Checkbox',

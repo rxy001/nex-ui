@@ -50,25 +50,25 @@ export const Variants: Story = {
         <Alert
           {...props}
           variant='faded'
-          title='Faded Alert'
+          title='Faded Variant'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           variant='solid'
-          title='Solid Alert'
+          title='Solid Variant'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           variant='outlined'
-          title='Outlined Alert'
+          title='Outlined Variant'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           variant='subtle'
-          title='Subtle Alert'
+          title='Subtle Variant'
           description='This is an example alert description.'
         />
       </Flex>
@@ -83,55 +83,55 @@ export const Colors: Story = {
         <Alert
           {...props}
           color='blue'
-          title='Blue Alert'
+          title='Blue Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='cyan'
-          title='Cyan Alert'
+          title='Cyan Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='gray'
-          title='Gray Alert'
+          title='Gray Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='red'
-          title='Red Alert'
+          title='Red Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='yellow'
-          title='Yellow Alert'
+          title='Yellow Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='purple'
-          title='Purple Alert'
+          title='Purple Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='pink'
-          title='Pink Alert'
+          title='Pink Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='green'
-          title='Green Alert'
+          title='Green Color'
           description='This is an example alert description.'
         />
         <Alert
           {...props}
           color='orange'
-          title='Orange Alert'
+          title='Orange Color'
           description='This is an example alert description.'
         />
       </Flex>
@@ -191,32 +191,32 @@ export const Radius: Story = {
         <Alert
           {...props}
           radius='none'
-          title='Info Alert'
-          description='This is an info alert.'
+          title='None Radius'
+          description='This is an example alert description.'
         />
         <Alert
           {...props}
           radius='sm'
-          title='Success Alert'
-          description='This is a success alert.'
+          title='Small Radius'
+          description='This is an example alert description.'
         />
         <Alert
           {...props}
           radius='md'
-          title='Warning Alert'
-          description='This is a warning alert.'
+          title='Medium Radius'
+          description='This is an example alert description.'
         />
         <Alert
           {...props}
           radius='lg'
-          title='Warning Alert'
-          description='This is a warning alert.'
+          title='Large Radius'
+          description='This is an example alert description.'
         />
         <Alert
           {...props}
           radius='full'
-          title='Error Alert'
-          description='This is an error alert.'
+          title='Full Radius'
+          description='This is an example alert description.'
         />
       </Flex>
     )
