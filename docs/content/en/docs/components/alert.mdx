@@ -1,0 +1,211 @@
+---
+title: Alert
+description: Alerts are temporary notifications that provide concise feedback about an action or event.
+---
+
+import { alert } from '@/content/_demo'
+
+# Alert
+
+Alerts are temporary notifications that provide concise feedback about an action or event.
+
+<ComponentLinks component='alert' ariaCompatible />
+
+---
+
+## Usage
+
+<Example {...alert.usage} />
+
+### Colors
+
+<Example {...alert.colors} />
+
+### Variants
+
+<Example {...alert.variants} />
+
+### Radius
+
+<Example {...alert.radius} />
+
+### Status
+
+Change the `status` of the alerts by passing the status prop. This affects the color scheme and icon used. Alert supports `error`, `success`, `warning`, and `info` statuses.
+
+Note: `color` prop can override the default color of the status.
+
+<Example {...alert.status} />
+
+### Custom Icon
+
+By default, Alert displays an appropriate icon based on the `status` prop. You can override this by providing a custom icon using the `icon` prop.
+
+<Example {...alert.customIcon} />
+
+### Without Icon
+
+You can hide the icon by setting the `hideIcon` prop to true.
+
+<Example {...alert.hideIcon} />
+
+### With Action
+
+Alert supports an `action` prop for additional actions.
+
+<Example {...alert.withAction} />
+
+### Closable
+
+Setting the `closable` property to true will display a close button, and `onClose` will be triggered when the button is clicked.
+
+<Example {...alert.closable} />
+
+## API
+
+### Alert Props
+
+Alert inherit the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'ryan'",
+        "'red'",
+        "'green'",
+        "'pink'",
+        "'purple'",
+        "'gray'",
+      ],
+      description: 'The color of the alert.',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
+      default: "'md'",
+      description: 'The border radius of the alert.',
+    },
+    {
+      prop: 'variant',
+      type: ["'outlined'", "'faded'", "'solid'", "'subtle'"],
+      default: "'solid'",
+      description: 'The alert appearance style.',
+    },
+    {
+      prop: 'icon',
+      type: 'ReactNode',
+      description: 'The alert icon',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root element.',
+    },
+    {
+      prop: 'action',
+      type: 'ReactNode',
+      description: 'The action to display. It renders after the message, at the end of the alert.',
+    },
+    {
+      prop: 'title',
+      type: 'ReactNode',
+      description: 'The title of the alert.',
+    },
+    {
+      prop: 'description',
+      type: 'ReactNode',
+      description: 'The description of the alert.',
+    },
+    {
+      prop: 'closable',
+      type: 'boolean',
+      description: 'If true, the alert end will show a close button.',
+    },
+    {
+      prop: 'status',
+      type: ["'error'", "'info'", "'success'", "'warning'"],
+      default: "'info'",
+      description: 'The status of the alert.',
+    },
+    {
+      prop: 'hideIcon',
+      type: 'boolean',
+      description: 'If true, the alert will not display the icon.',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: 'Callback fired when the close button is clicked.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<AlertOwnerState>',
+      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+
+]}
+/>
+
+### Alert Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'icon',
+      class: '.nui-alert-icon',
+      component: "'div'",
+      description: 'The icon container of the alert.',
+    },
+    {
+      slot: 'content',
+      class: '.nui-alert-content',
+      component: "'div'",
+      description: 'The alert container of the alert.',
+    },
+    {
+      slot: 'title',
+      class: '.nui-alert-title',
+      component: "'div'",
+      description: 'The title container of the alert.',
+    },
+    {
+      slot: 'description',
+      class: '.nui-alert-description',
+      component: "'div'",
+      description: 'The icon description of the alert.',
+    },
+    {
+      slot: 'closeButton',
+      class: '.nui-alert-close-button',
+      component: 'Button',
+      description: 'The close button of the alert.',
+    },
+  ]}
+/>
