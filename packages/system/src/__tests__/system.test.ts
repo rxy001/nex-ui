@@ -375,9 +375,9 @@ describe('css', () => {
         borderColor: 'orange/30',
       }),
     ).toEqual({
-      color: `color-mix(in srgb, ${getCssVar('colors.blue.100')} 50%, transparent)`,
-      backgroundColor: `color-mix(in srgb, ${getCssVar('colors.blue.200')} 80%, transparent)`,
-      borderColor: `color-mix(in srgb, orange 30%, transparent)`,
+      color: `color-mix(in oklab, ${getCssVar('colors.blue.100')} 50%, transparent)`,
+      backgroundColor: `color-mix(in oklab, ${getCssVar('colors.blue.200')} 80%, transparent)`,
+      borderColor: `color-mix(in oklab, orange 30%, transparent)`,
     })
 
     expect(
@@ -387,8 +387,8 @@ describe('css', () => {
         colorPalette: 'blue',
       }),
     ).toEqual({
-      border: `1px solid color-mix(in srgb, ${getCssVar('colors.blue.100')} 50%, transparent)`,
-      borderColor: `color-mix(in srgb, ${getCssVar('colors.blue.200')} 90%, transparent)`,
+      border: `1px solid color-mix(in oklab, ${getCssVar('colors.blue.100')} 50%, transparent)`,
+      borderColor: `color-mix(in oklab, ${getCssVar('colors.blue.200')} 90%, transparent)`,
     })
   })
 
