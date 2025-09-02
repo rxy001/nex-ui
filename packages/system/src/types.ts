@@ -87,13 +87,25 @@ type BreakpointArray =
   | (string | number | null | undefined)[]
   | readonly (string | number | null | undefined)[]
 
+type NestedConditions<T> = {
+  _DEFAULT?: T
+} & { [K in keyof Conditions<T>]: NestedConditions<T> | T }
+
 type ExtraCSSPropertyValue<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]?:
     | T[K]
     | BreakpointArray
-    | ({
-        _DEFAULT?: T[K]
-      } & Conditions<T[K]>)
+    /**
+     * bg: {
+     *      _DEFAULT: 'colorPalette.100',
+     *      _hover: 'colorPalette.50',
+     *      _dark: {
+     *        _DEFAULT: 'colorPalette.800/30',
+     *        _hover: 'colorPalette.900/30',
+     *      },
+     *    },
+     */
+    | NestedConditions<T[K]>
 }
 
 /**
