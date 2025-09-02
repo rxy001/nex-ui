@@ -35,20 +35,30 @@ export const ClientGallery = () => {
         className='x:absolute! x:animate-[levitate_10s_ease_infinite] x:top-[130px] x:-right-[40px]'
         label='Nex UI'
       />
-      <Avatar
-        src='https://avatars.githubusercontent.com/u/25546323?v=4'
-        alt='Author'
-        className='x:h-18! x:w-18! x:absolute x:animate-[levitate_18s_ease_infinite] x:top-[110px] x:right-[230px]'
-        size='lg'
-        slotProps={{
-          img: {
-            width: '72px',
-            height: '72px',
-          },
-        }}
-      >
-        XY
-      </Avatar>
+      <div className='x:absolute x:animate-[levitate_18s_ease_infinite] x:top-[-10px] x:left-[200px] x:size-[140px] x:flex x:items-center x:justify-center x:flex-wrap x:shrink-0 x:gap-4 x:py-4 x:shadow-sm x:dark:bg-[#18181b] x:rounded-3xl'>
+        <Avatar src='/avatars/avatar-1.jpg' alt='Avatar' size='lg' outlined />
+        <Avatar
+          src='/avatars/avatar-2.jpg'
+          size='lg'
+          alt='Avatar'
+          outlined
+          color='orange'
+        />
+        <Avatar
+          size='lg'
+          src='/avatars/avatar-3.webp'
+          alt='Avatar'
+          outlined
+          color='pink'
+        />
+        <Avatar
+          size='lg'
+          src='/avatars/avatar-4.jpg'
+          alt='Avatar'
+          outlined
+          color='purple'
+        />
+      </div>
     </section>
   )
 }
