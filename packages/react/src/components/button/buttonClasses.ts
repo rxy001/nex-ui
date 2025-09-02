@@ -8,6 +8,7 @@ export const buttonClasses = generateUtilityClasses('nui-btn', [
   'variant-ghost',
   'variant-solid',
   'variant-outlined',
+  'variant-faded',
 
   // "none" | "sm" | "md" | "lg" | "full"
   'radius-none',

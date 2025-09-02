@@ -40,7 +40,7 @@ function resolveColorPalette(colorPalette: string | undefined, value: string) {
 }
 
 function colorMix(color: string, percent: string) {
-  return `color-mix(in srgb, ${color} ${percent}%, transparent)`
+  return `color-mix(in oklab, ${color} ${percent}%, transparent)`
 }
 
 export const createNormalize = ({

@@ -6,6 +6,7 @@ export default function App() {
       <Button variant='solid'>Solid</Button>
       <Button variant='outlined'>Outlined</Button>
       <Button variant='ghost'>Ghost</Button>
+      <Button variant='faded'>Faded</Button>
     </Flex>
   )
 }
