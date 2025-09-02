@@ -107,13 +107,23 @@ export const inputRecipe = defineSlotRecipe({
       },
       faded: {
         root: {
-          bg: 'colorPalette.muted',
+          bg: 'colorPalette.100',
           _hover: {
-            bg: 'colorPalette.subtle',
+            bg: 'colorPalette.50',
           },
           _focusWithin: {
-            bg: 'colorPalette.subtle',
+            bg: 'colorPalette.50',
           },
+          _dark: {
+            bg: 'colorPalette.800/50',
+            _hover: {
+              bg: 'colorPalette.900/50',
+            },
+            _focusWithin: {
+              bg: 'colorPalette.900/50',
+            },
+          },
+
           '&:has(> [data-focus-visible=true]:not(:disabled, [data-disabled=true]))':
             {
               outline: '{borders.md} {colors.colorPalette.primary}',
