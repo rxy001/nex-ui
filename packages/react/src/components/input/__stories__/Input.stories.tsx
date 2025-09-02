@@ -97,29 +97,29 @@ export const Disabled: Story = {
 }
 
 export const Variants: Story = {
-  render: (args) => {
+  render: (props) => {
     return (
       <>
         <Flex gap='5'>
-          <Input {...args} variant='outlined' label='Outlined' />
-          <Input {...args} variant='faded' label='Faded' />
-          <Input {...args} variant='underlined' label='Underlined' />
+          <Input {...props} variant='outlined' label='Outlined' />
+          <Input {...props} variant='faded' label='Faded' />
+          <Input {...props} variant='underlined' label='Underlined' />
         </Flex>
         <Flex gap='5' sx={{ mt: '10' }}>
           <Input
-            {...args}
+            {...props}
             placeholder='Placeholder'
             variant='outlined'
             label='Outlined'
           />
           <Input
-            {...args}
+            {...props}
             placeholder='Placeholder'
             variant='faded'
             label='Faded'
           />
           <Input
-            {...args}
+            {...props}
             placeholder='Placeholder'
             variant='underlined'
             label='Underlined'
@@ -130,21 +130,37 @@ export const Variants: Story = {
   },
 }
 
+export const Colors: Story = {
+  render: (props) => (
+    <Flex gap='5' wrap='wrap'>
+      <Input {...props} label='Color' color='blue' defaultValue='blue' />
+      <Input {...props} label='Color' color='cyan' defaultValue='cyan' />
+      <Input {...props} label='Color' color='gray' defaultValue='gray' />
+      <Input {...props} label='Color' color='green' defaultValue='green' />
+      <Input {...props} label='Color' color='orange' defaultValue='orange' />
+      <Input {...props} label='Color' color='pink' defaultValue='pink' />
+      <Input {...props} label='Color' color='purple' defaultValue='purple' />
+      <Input {...props} label='Color' color='yellow' defaultValue='yellow' />
+      <Input {...props} label='Color' color='red' defaultValue='red' />
+    </Flex>
+  ),
+}
+
 export const LabelPlacement: Story = {
-  render: (args) => {
+  render: (props) => {
     return (
       <>
         <Flex gap='5' align='end'>
           <Input
-            {...args}
+            {...props}
             label='FloatOutside'
             labelPlacement='float-outside'
           />
-          <Input {...args} label='FloatInside' labelPlacement='float-inside' />
+          <Input {...props} label='FloatInside' labelPlacement='float-inside' />
         </Flex>
         <Flex gap='5' align='end' sx={{ mt: '10' }}>
-          <Input {...args} label='Outside' labelPlacement='outside' />
-          <Input {...args} label='Inside' labelPlacement='inside' />
+          <Input {...props} label='Outside' labelPlacement='outside' />
+          <Input {...props} label='Inside' labelPlacement='inside' />
         </Flex>
       </>
     )
@@ -180,56 +196,56 @@ export const Controlled: Story = {
 }
 
 export const InputTypes: Story = {
-  render: (args) => {
+  render: (props) => {
     return (
       <Flex gap='5' wrap='wrap' sx={{ '& > div': { width: '250px' } }}>
-        <Input {...args} label='Text' placeholder='Enter your text' />
+        <Input {...props} label='Text' placeholder='Enter your text' />
         <Input
-          {...args}
+          {...props}
           label='Number'
           placeholder='Enter your number'
           type='number'
         />
         <Input
-          {...args}
+          {...props}
           label='Password'
           placeholder='Enter your password'
           type='password'
         />
         <Input
-          {...args}
+          {...props}
           label='Email'
           placeholder='Enter your email'
           type='email'
         />
-        <Input {...args} label='URL' placeholder='Enter your url' type='url' />
+        <Input {...props} label='URL' placeholder='Enter your url' type='url' />
         <Input
-          {...args}
+          {...props}
           label='Search'
           placeholder='Enter your search'
           type='search'
         />
         <Input
-          {...args}
+          {...props}
           label='Tel'
           placeholder='Enter your phone'
           type='tel'
         />
-        <Input {...args} label='Date' type='date' />
+        <Input {...props} label='Date' type='date' />
         <Input
-          {...args}
+          {...props}
           label='Time'
           placeholder='Enter your time'
           type='time'
         />
         <Input
-          {...args}
+          {...props}
           label='Month'
           placeholder='Enter your month'
           type='month'
         />
         <Input
-          {...args}
+          {...props}
           label='Week'
           placeholder='Enter your week'
           type='week'
@@ -246,17 +262,17 @@ export const WithLabel: Story = {
 }
 
 export const WithIcons: Story = {
-  render: (args) => {
+  render: (props) => {
     return (
       <>
         <Flex gap='5' align='end'>
           <Input
-            {...args}
+            {...props}
             prefix={<Icon as={SearchOutlined} />}
             label='Prefix'
           />
           <Input
-            {...args}
+            {...props}
             suffix={<Icon as={SearchOutlined} />}
             label='Suffix'
           />

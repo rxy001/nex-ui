@@ -89,7 +89,7 @@ type BreakpointArray =
 
 type NestedConditions<T> = {
   _DEFAULT?: T
-} & { [K in keyof Conditions<T>]: NestedConditions<T> | T }
+} & { [K in keyof Conditions<T>]?: NestedConditions<T> | T }
 
 type ExtraCSSPropertyValue<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]?:
