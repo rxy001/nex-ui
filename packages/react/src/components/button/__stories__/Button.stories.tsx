@@ -17,7 +17,7 @@ const meta = {
       control: 'boolean',
     },
     variant: {
-      options: ['solid', 'outlined', 'ghost'],
+      options: ['solid', 'outlined', 'ghost', 'faded'],
       control: 'select',
     },
     size: {
@@ -52,21 +52,6 @@ const meta = {
     loading: false,
     spinnerPlacement: 'start',
   },
-  render: (args) => {
-    return (
-      <Flex gap={30} wrap='wrap'>
-        <Button {...args} key='blue' />
-        <Button {...args} key='purple' color='purple' />
-        <Button {...args} key='gray' color='gray' />
-        <Button {...args} key='red' color='red' />
-        <Button {...args} key='cyan' color='cyan' />
-        <Button {...args} key='pink' color='pink' />
-        <Button {...args} key='yellow' color='yellow' />
-        <Button {...args} key='green' color='green' />
-        <Button {...args} key='orange' color='orange' />
-      </Flex>
-    )
-  },
 } satisfies Meta<typeof Button<'button'>>
 
 export default meta
@@ -83,10 +68,73 @@ export const FullWidthButton: Story = {
   },
 }
 
+export const Variants: Story = {
+  render: (props) => {
+    return (
+      <Flex gap={30} wrap='wrap'>
+        <Button {...props} variant='solid'>
+          Solid
+        </Button>
+        <Button {...props} variant='outlined'>
+          Outlined
+        </Button>
+        <Button {...props} variant='ghost'>
+          Ghost
+        </Button>
+        <Button {...props} variant='faded'>
+          Faded
+        </Button>
+      </Flex>
+    )
+  },
+}
+
+export const Colors: Story = {
+  render: (props) => {
+    return (
+      <Flex gap={30} wrap='wrap'>
+        <Button {...props} key='blue'>
+          Blue
+        </Button>
+        <Button {...props} key='purple' color='purple'>
+          Purple
+        </Button>
+        <Button {...props} key='gray' color='gray'>
+          Gray
+        </Button>
+        <Button {...props} key='red' color='red'>
+          Red
+        </Button>
+        <Button {...props} key='cyan' color='cyan'>
+          Cyan
+        </Button>
+        <Button {...props} key='pink' color='pink'>
+          Pink
+        </Button>
+        <Button {...props} key='yellow' color='yellow'>
+          Yellow
+        </Button>
+        <Button {...props} key='green' color='green'>
+          Green
+        </Button>
+        <Button {...props} key='orange' color='orange'>
+          Orange
+        </Button>
+      </Flex>
+    )
+  },
+}
+
 export const LoadingButton: Story = {
   args: {
     loading: true,
     onClick: () => {},
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
   },
 }
 

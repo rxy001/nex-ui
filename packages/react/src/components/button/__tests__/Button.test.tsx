@@ -21,7 +21,7 @@ describe('Button', () => {
 
   testVariantClasses(
     <Button>Button</Button>,
-    ['variant', ['solid', 'outlined', 'ghost']],
+    ['variant', ['solid', 'outlined', 'ghost', 'faded']],
     buttonClasses,
   )
 

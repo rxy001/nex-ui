@@ -71,6 +71,22 @@ export const buttonRecipe = defineSlotRecipe({
           },
         },
       },
+      faded: {
+        root: {
+          bg: {
+            _DEFAULT: 'colorPalette.100',
+            _hover: 'colorPalette.50',
+            _dark: {
+              _DEFAULT: 'colorPalette.800/50',
+              _hover: 'colorPalette.900/50',
+            },
+          },
+          color: {
+            _DEFAULT: 'colorPalette.600',
+            _dark: 'colorPalette.400',
+          },
+        },
+      },
     },
     size: toSlots(sizeVariant, 'root'),
     disabled: toSlots(disabledVariant, 'root'),
