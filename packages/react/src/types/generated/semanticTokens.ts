@@ -63,5 +63,6 @@ export interface DefaultSemanticTokens {
     | 'pink.muted'
     | 'pink.highlight'
     | 'pink.contrastText'
+    | 'content'
   borders: 'focusVisibleOutline'
 }

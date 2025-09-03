@@ -24,6 +24,11 @@ import type {
   RadioRecipe,
   RadioGroupRecipe,
   AlertRecipe,
+  CardRecipe,
+  CardHeaderRecipe,
+  CardBodyRecipe,
+  CardFooterRecipe,
+  CardActionAreaRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -73,6 +78,16 @@ import type {
   RadioGroupProps,
   AlertOwnerState,
   AlertProps,
+  CardProps,
+  CardOwnerState,
+  CardHeaderProps,
+  CardHeaderOwnerState,
+  CardBodyProps,
+  CardBodyOwnerState,
+  CardFooterProps,
+  CardFooterOwnerState,
+  CardActionAreaProps,
+  CardActionAreaOwnerState,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject, ComponentThemeFn } from './utils'
@@ -227,6 +242,36 @@ export type ComponentThemes = {
       | ComponentThemeObject<AlertRecipe>
       | ComponentThemeFn<AlertOwnerState, AlertRecipe>
     defaultProps?: AlertProps
+  }
+  Card?: {
+    styleOverrides?:
+      | ComponentThemeObject<CardRecipe>
+      | ComponentThemeFn<CardOwnerState, CardRecipe>
+    defaultProps?: CardProps
+  }
+  CardHeader?: {
+    styleOverrides?:
+      | ComponentThemeObject<CardHeaderRecipe>
+      | ComponentThemeFn<CardHeaderOwnerState, CardHeaderRecipe>
+    defaultProps?: CardHeaderProps
+  }
+  CardBody?: {
+    styleOverrides?:
+      | ComponentThemeObject<CardBodyRecipe>
+      | ComponentThemeFn<CardBodyOwnerState, CardBodyRecipe>
+    defaultProps?: CardBodyProps
+  }
+  CardFooter?: {
+    styleOverrides?:
+      | ComponentThemeObject<CardFooterRecipe>
+      | ComponentThemeFn<CardFooterOwnerState, CardFooterRecipe>
+    defaultProps?: CardFooterProps
+  }
+  CardActionArea?: {
+    styleOverrides?:
+      | ComponentThemeObject<CardActionAreaRecipe>
+      | ComponentThemeFn<CardActionAreaOwnerState, CardActionAreaRecipe>
+    defaultProps?: CardActionAreaProps
   }
 }
 

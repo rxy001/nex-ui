@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card should render with default props 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: var(--nui-colors-content);
+  max-width: 345px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--nui-shadows-md);
+  border-radius: var(--nui-radii-lg);
+}
+
+<div
+  class="nui-card-root nui-card-shadow-md nui-card-radius-md emotion-0"
+/>
+`;

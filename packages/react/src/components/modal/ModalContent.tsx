@@ -18,10 +18,7 @@ const recipe = defineRecipe({
     display: 'flex',
     flexDirection: 'column',
     outline: 'none',
-    bg: {
-      _DEFAULT: 'white',
-      _dark: '#18181b',
-    },
+    bg: 'content',
   },
 })
 
