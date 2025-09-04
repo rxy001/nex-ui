@@ -10,19 +10,19 @@ import {
 import { dialogContentClasses } from '../classes'
 import type { DialogContentProps } from '../index'
 
-describe('DialogContent', () => {
-  function TestDialog(props: DialogContentProps) {
-    return (
-      <Dialog data-testid='dialog-root' defaultOpen>
-        <DialogContent data-testid='dialog-content' {...props}>
-          <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
-          <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>
-          <DialogFooter data-testid='dialog-footer'>Dialog Footer</DialogFooter>
-        </DialogContent>
-      </Dialog>
-    )
-  }
+function TestDialog(props: DialogContentProps) {
+  return (
+    <Dialog data-testid='dialog-root' defaultOpen>
+      <DialogContent data-testid='dialog-content' {...props}>
+        <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
+        <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>
+        <DialogFooter data-testid='dialog-footer'>Dialog Footer</DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
 
+describe('DialogContent', () => {
   it('should render with default props', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
       useAct: true,

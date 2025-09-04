@@ -1,4 +1,3 @@
-import { createRef } from 'react'
 import {
   testComponentStability,
   renderWithNexUIProvider,
@@ -9,6 +8,7 @@ import {
   testColorClasses,
   testSizeClasses,
   testVariantClasses,
+  testRefForwarding,
 } from '~/tests/shared'
 import { UserOutlined } from '@nex-ui/icons'
 import { Avatar } from '../index'
@@ -21,7 +21,7 @@ afterAll(() => {
 describe('Avatar', () => {
   testComponentStability(<Avatar />)
 
-  testRootClassName(<Avatar className='test-class' />, 'test-class')
+  testRootClassName(<Avatar />)
 
   testColorClasses(<Avatar>Avatar</Avatar>, avatarClasses)
 
@@ -30,6 +30,14 @@ describe('Avatar', () => {
   testVariantClasses(
     <Avatar>Avatar</Avatar>,
     ['radius', ['none', 'sm', 'md', 'lg', 'xl', 'full']],
+    avatarClasses,
+  )
+
+  testRefForwarding(<Avatar />)
+
+  testVariantClasses(
+    <Avatar outlined>Avatar</Avatar>,
+    ['outlined', [true]],
     avatarClasses,
   )
 
@@ -59,46 +67,33 @@ describe('Avatar', () => {
     expect(avatarRoot).toMatchSnapshot()
   })
 
-  it("should forward ref to Avatar's root element", () => {
-    const ref = createRef<HTMLDivElement>()
-    const { container } = renderWithNexUIProvider(<Avatar ref={ref}>A</Avatar>)
-    expect(container.firstElementChild).toBe(ref.current)
-  })
-
-  it('should add the outlined class to root element when outlined=true', () => {
-    const { container } = renderWithNexUIProvider(
-      <Avatar outlined>Avatar</Avatar>,
-    )
-    expect(container.firstElementChild).toHaveClass(avatarClasses.outlined)
-  })
-
-  it('should forward classes to img slot', () => {
-    mockGlobalImage('loaded')
-    const classes = {
-      img: 'test-img-class',
-    }
-    const { container } = renderWithNexUIProvider(
-      <Avatar
-        src='/fake.png'
-        classes={{
-          img: classes.img,
-        }}
-      />,
-    )
-    const avatarRoot = container.firstElementChild
-    expect(avatarRoot?.firstElementChild).toHaveClass(classes.img)
-    restoreGlobalImage()
-  })
-
   describe('Image Avatar', () => {
     afterEach(() => {
+      restoreGlobalImage()
+    })
+
+    it('should forward classes to img slot', () => {
+      mockGlobalImage('loaded')
+      const classes = {
+        img: 'test-img-class',
+      }
+      const { container } = renderWithNexUIProvider(
+        <Avatar
+          src='/fake.png'
+          classes={{
+            img: classes.img,
+          }}
+        />,
+      )
+      const avatarRoot = container.firstElementChild
+      expect(avatarRoot?.firstElementChild).toHaveClass(classes.img)
       restoreGlobalImage()
     })
 
     it('should forward slotProps to img slot', () => {
       mockGlobalImage('loaded')
 
-      const { getByTestId } = renderWithNexUIProvider(
+      const { queryByClassName } = renderWithNexUIProvider(
         <Avatar
           data-testid='avatar'
           src='/fake.png'
@@ -111,10 +106,7 @@ describe('Avatar', () => {
           Avatar
         </Avatar>,
       )
-      const avatarRoot = getByTestId('avatar')
-      expect(avatarRoot.querySelector(`.${avatarClasses.img}`)).toHaveClass(
-        'test-img-class',
-      )
+      expect(queryByClassName(avatarClasses.img)).toHaveClass('test-img-class')
     })
 
     it('should render an img when the image loads successfully', () => {

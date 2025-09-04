@@ -4,12 +4,14 @@ import {
   renderWithNexUIProvider,
   testVariantClasses,
   testRefForwarding,
+  testRootClassName,
 } from '~/tests/shared'
 import { cardClasses } from '../classes'
 import { Card } from '../index'
 
 describe('Card', () => {
   testComponentStability(<Card />)
+
   testVariantClasses(
     <Card />,
     ['shadow', ['xs', 'sm', 'md', 'lg', 'xl']],
@@ -20,7 +22,9 @@ describe('Card', () => {
     ['radius', ['none', 'sm', 'md', 'lg']],
     cardClasses,
   )
-  testRefForwarding(Card)
+  testRefForwarding(<Card />)
+
+  testRootClassName(<Card />)
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Card />)

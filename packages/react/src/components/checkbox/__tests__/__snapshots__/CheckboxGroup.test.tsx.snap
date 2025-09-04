@@ -158,7 +158,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
     >
       <input
         aria-label="orange"
-        aria-labelledby="«rh»"
+        aria-labelledby="«rq»"
         class="nui-checkbox-input emotion-3"
         tabindex="0"
         type="checkbox"
@@ -189,7 +189,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
       <span
         class="nui-checkbox-label emotion-5"
-        id="«rh»"
+        id="«rq»"
       >
         orange
       </span>
@@ -199,7 +199,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
     >
       <input
         aria-label="pear"
-        aria-labelledby="«ri»"
+        aria-labelledby="«rr»"
         class="nui-checkbox-input emotion-3"
         tabindex="0"
         type="checkbox"
@@ -230,7 +230,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
       <span
         class="nui-checkbox-label emotion-5"
-        id="«ri»"
+        id="«rr»"
       >
         pear
       </span>
@@ -240,7 +240,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
     >
       <input
         aria-label="Apple"
-        aria-labelledby="«rj»"
+        aria-labelledby="«rs»"
         class="nui-checkbox-input emotion-3"
         tabindex="0"
         type="checkbox"
@@ -271,7 +271,7 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
       <span
         class="nui-checkbox-label emotion-5"
-        id="«rj»"
+        id="«rs»"
       >
         Apple
       </span>

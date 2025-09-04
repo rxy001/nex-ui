@@ -45,7 +45,7 @@ export const inputClasses = generateUtilityClasses('nui-input', [
 
   'input',
 
-  'clear-btn',
+  'clear-button',
 
   'suffix',
 

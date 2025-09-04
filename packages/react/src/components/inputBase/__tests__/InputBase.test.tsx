@@ -1,5 +1,9 @@
-import { createRef, useState } from 'react'
-import { testComponentStability, renderWithNexUIProvider } from '~/tests/shared'
+import { useState } from 'react'
+import {
+  testComponentStability,
+  renderWithNexUIProvider,
+  testRefForwarding,
+} from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { InputBase } from '../index'
 
@@ -16,11 +20,12 @@ jest.mock('@nex-ui/hooks', () => {
 })
 
 describe('InputBase', () => {
-  testComponentStability(<InputBase />)
-
   afterAll(() => {
     jest.clearAllMocks()
   })
+  testComponentStability(<InputBase />)
+
+  testRefForwarding(<InputBase />)
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<InputBase />)
@@ -28,12 +33,6 @@ describe('InputBase', () => {
     const root = container.firstElementChild
 
     expect(root).toMatchSnapshot()
-  })
-
-  it("should forward ref to InputBase's root element", () => {
-    const ref = createRef<HTMLInputElement>()
-    const { getByRole } = renderWithNexUIProvider(<InputBase ref={ref} />)
-    expect(getByRole('textbox')).toBe(ref.current)
   })
 
   it('should have aria-invalid=true attribute when invalid', () => {

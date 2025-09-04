@@ -1,11 +1,16 @@
-import { createRef } from 'react'
-import { testComponentStability, renderWithNexUIProvider } from '~/tests/shared'
+import {
+  testComponentStability,
+  renderWithNexUIProvider,
+  testRefForwarding,
+} from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { ButtonBase } from '../index'
 import type { ButtonHTMLAttributes } from 'react'
 
 describe('ButtonBase', () => {
   testComponentStability(<ButtonBase />)
+
+  testRefForwarding(<ButtonBase />)
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(
@@ -15,14 +20,6 @@ describe('ButtonBase', () => {
     const root = container.firstElementChild
 
     expect(root).toMatchSnapshot()
-  })
-
-  it("should forward ref to ButtonBase's root element", () => {
-    const ref = createRef<HTMLButtonElement>()
-    const { getByRole } = renderWithNexUIProvider(
-      <ButtonBase ref={ref}>Button</ButtonBase>,
-    )
-    expect(getByRole('button')).toBe(ref.current)
   })
 
   it('should have type="button" by default', () => {

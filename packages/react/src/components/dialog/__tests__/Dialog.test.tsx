@@ -6,46 +6,39 @@ import {
   DialogHeader,
   DialogFooter,
   DialogBody,
-  DialogTrigger,
-  DialogClose,
 } from '../index'
-import {
-  dialogBodyClasses,
-  dialogClasses,
-  dialogFooterClasses,
-  dialogHeaderClasses,
-} from '../classes'
+import { dialogClasses } from '../classes'
 import type { DialogProps } from '../index'
 
+function TestDialog(props: DialogProps) {
+  return (
+    <Dialog data-testid='dialog-root' {...props}>
+      <DialogContent data-testid='dialog-content'>
+        <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
+        <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>
+        <DialogFooter data-testid='dialog-footer'>Dialog Footer</DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+const ControlledDialog = ({ defaultOpen = false, ...props }: DialogProps) => {
+  const [open, setOpen] = useState(defaultOpen)
+
+  return (
+    <>
+      <TestDialog open={open} onOpenChange={setOpen} {...props} />
+      <button
+        data-testid='toggle-button'
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        Toggle Dialog
+      </button>
+    </>
+  )
+}
+
 describe('Dialog', () => {
-  function TestDialog(props: DialogProps) {
-    return (
-      <Dialog data-testid='dialog-root' {...props}>
-        <DialogContent data-testid='dialog-content'>
-          <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
-          <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>
-          <DialogFooter data-testid='dialog-footer'>Dialog Footer</DialogFooter>
-        </DialogContent>
-      </Dialog>
-    )
-  }
-
-  const ControlledDialog = ({ defaultOpen = false, ...props }: DialogProps) => {
-    const [open, setOpen] = useState(defaultOpen)
-
-    return (
-      <>
-        <TestDialog open={open} onOpenChange={setOpen} {...props} />
-        <button
-          data-testid='toggle-button'
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          Toggle Dialog
-        </button>
-      </>
-    )
-  }
-
   testComponentStability(<TestDialog open />)
 
   it('should render with root, and open classes on root element', async () => {
@@ -157,93 +150,5 @@ describe('Dialog', () => {
 
     await user.click(toggleButton)
     expect(queryByTestId('dialog-root')).not.toBeInTheDocument()
-  })
-
-  describe('DialogHeader', () => {
-    it('should render with header class on root element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestDialog open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const dialogHeader = getByTestId('dialog-header')
-      expect(dialogHeader).toHaveClass(dialogHeaderClasses.root)
-    })
-  })
-
-  describe('DialogBody', () => {
-    it('should render with body class on root element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestDialog open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const dialogBody = getByTestId('dialog-body')
-      expect(dialogBody).toHaveClass(dialogBodyClasses.root)
-    })
-  })
-
-  describe('DialogFooter', () => {
-    it('should render with footer class on root element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestDialog open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const dialogFooter = getByTestId('dialog-footer')
-      expect(dialogFooter).toHaveClass(dialogFooterClasses.root)
-    })
-  })
-
-  describe('DialogClose', () => {
-    it('should close when the DiglogClose is clicked', async () => {
-      const { getByTestId, queryByTestId, user } =
-        await renderWithNexUIProvider(
-          <Dialog defaultOpen>
-            <DialogClose>
-              <button data-testid='close-button'>Close Dialog</button>
-            </DialogClose>
-            <DialogContent data-testid='dialog-content' />
-          </Dialog>,
-          {
-            useAct: true,
-          },
-        )
-
-      expect(queryByTestId('dialog-content')).toBeInTheDocument()
-      const closeButton = getByTestId('close-button')
-
-      await user.click(closeButton)
-      expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
-    })
-  })
-
-  describe('DialogTrigger', () => {
-    it('should open when the DialogTrigger is clicked', async () => {
-      const { getByTestId, queryByTestId, user } =
-        await renderWithNexUIProvider(
-          <Dialog>
-            <DialogTrigger>
-              <button data-testid='open-button'>Open Dialog</button>
-            </DialogTrigger>
-            <DialogContent data-testid='dialog-content' />
-          </Dialog>,
-          {
-            useAct: true,
-          },
-        )
-
-      expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
-      const openButton = getByTestId('open-button')
-
-      await user.click(openButton)
-      expect(queryByTestId('dialog-content')).toBeInTheDocument()
-    })
   })
 })

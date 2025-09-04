@@ -10,19 +10,19 @@ import {
 import { drawerContentClasses } from '../classes'
 import type { DrawerContentProps } from '../index'
 
-describe('DrawerContent', () => {
-  function TestDrawer(props: DrawerContentProps) {
-    return (
-      <Drawer data-testid='drawer-root' defaultOpen>
-        <DrawerContent data-testid='drawer-content' {...props}>
-          <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
-          <DrawerBody data-testid='drawer-body'>Drawer Body</DrawerBody>
-          <DrawerFooter data-testid='drawer-footer'>Drawer Footer</DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-    )
-  }
+function TestDrawer(props: DrawerContentProps) {
+  return (
+    <Drawer data-testid='drawer-root' defaultOpen>
+      <DrawerContent data-testid='drawer-content' {...props}>
+        <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
+        <DrawerBody data-testid='drawer-body'>Drawer Body</DrawerBody>
+        <DrawerFooter data-testid='drawer-footer'>Drawer Footer</DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}
 
+describe('DrawerContent', () => {
   it('should render with default props', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDrawer />, {
       useAct: true,
