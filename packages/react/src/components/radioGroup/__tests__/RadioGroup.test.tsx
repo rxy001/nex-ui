@@ -1,14 +1,19 @@
-import { createRef, useState } from 'react'
+import { useState } from 'react'
 import {
   renderWithNexUIProvider,
   testComponentStability,
   testRootClassName,
+  testClassesForwarding,
+  testSlotPropsForwarding,
+  testRefForwarding,
 } from '~/tests/shared'
 import { act, fireEvent } from '@testing-library/react'
 import { RadioGroup, Radio } from '../index'
 import { radioGroupClasses, radioClasses } from '../classes'
 import type { ElementType } from 'react'
 import type { RadioGroupProps } from '../index'
+
+const slots = ['label', 'wrapper'] as const
 
 describe('RadioGroup', () => {
   function TestComponent(props: RadioGroupProps<string, ElementType>) {
@@ -23,7 +28,33 @@ describe('RadioGroup', () => {
 
   testComponentStability(<TestComponent />)
 
-  testRootClassName(<TestComponent className='test-class' />, 'test-class')
+  testRootClassName(<TestComponent />)
+
+  testClassesForwarding(
+    <TestComponent label='Label' />,
+    slots,
+    {
+      label: 'test-label',
+      wrapper: 'test-wrapper',
+    },
+    radioGroupClasses,
+  )
+
+  testSlotPropsForwarding(
+    <TestComponent label='Label' />,
+    slots,
+    {
+      label: {
+        className: 'test-label',
+      },
+      wrapper: {
+        className: 'test-wrapper',
+      },
+    },
+    radioGroupClasses,
+  )
+
+  testRefForwarding(<TestComponent />)
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<TestComponent />)
@@ -34,53 +65,6 @@ describe('RadioGroup', () => {
     expect(root).not.toHaveClass(radioGroupClasses['orientation-vertical'])
 
     expect(root).toMatchSnapshot()
-  })
-
-  it('should forward classes to label and wrapper slots', () => {
-    const classes = {
-      label: 'test-label',
-      wrapper: 'test-wrapper',
-    }
-
-    const { queryByClassName } = renderWithNexUIProvider(
-      <TestComponent classes={classes} label='Label' />,
-    )
-
-    expect(queryByClassName(radioGroupClasses.label)).toHaveClass(classes.label)
-    expect(queryByClassName(radioGroupClasses.wrapper)).toHaveClass(
-      classes.wrapper,
-    )
-  })
-
-  it('should forward slotProps to label and wrapper slots', () => {
-    const slotProps = {
-      label: {
-        className: 'test-label',
-      },
-      wrapper: {
-        className: 'test-wrapper',
-      },
-    }
-
-    const { queryByClassName } = renderWithNexUIProvider(
-      <TestComponent slotProps={slotProps} label='Label' />,
-    )
-
-    expect(queryByClassName(radioGroupClasses.label)).toHaveClass(
-      slotProps.label.className,
-    )
-    expect(queryByClassName(radioGroupClasses.wrapper)).toHaveClass(
-      slotProps.wrapper.className,
-    )
-  })
-
-  it("should forward ref to RadioGroup's root element", () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = renderWithNexUIProvider(
-      <TestComponent data-testid='radiogroup' ref={ref} />,
-    )
-
-    expect(ref.current).toBe(getByTestId('radiogroup'))
   })
 
   it('should render with orientation class based on orientation prop', () => {

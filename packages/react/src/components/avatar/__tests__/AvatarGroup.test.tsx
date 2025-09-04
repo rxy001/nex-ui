@@ -1,27 +1,57 @@
-import { createRef } from 'react'
 import {
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
+  testRefForwarding,
+  testClassesForwarding,
+  testSlotPropsForwarding,
 } from '~/tests/shared'
 import { AvatarGroup, Avatar } from '../index'
 import { avatarClasses, avatarGroupClasses } from '../classes'
+
+const slots = ['surplus'] as const
 
 describe('AvatarGroup', () => {
   testComponentStability(
     <AvatarGroup>
       <Avatar />
       <Avatar />
-      <Avatar />
     </AvatarGroup>,
   )
 
   testRootClassName(
-    <AvatarGroup className='test-class'>
+    <AvatarGroup>
       <Avatar />
       <Avatar />
     </AvatarGroup>,
-    'test-class',
+  )
+
+  testRefForwarding(<AvatarGroup />)
+
+  testClassesForwarding(
+    <AvatarGroup max={2}>
+      <Avatar />
+      <Avatar />
+      <Avatar />
+      <Avatar />
+    </AvatarGroup>,
+    slots,
+    {
+      surplus: 'test-surplus-class',
+    },
+    avatarGroupClasses,
+  )
+
+  testSlotPropsForwarding(
+    <AvatarGroup max={2}>
+      <Avatar />
+      <Avatar />
+      <Avatar />
+      <Avatar />
+    </AvatarGroup>,
+    slots,
+    { surplus: { className: 'test-surplus-class' } },
+    avatarGroupClasses,
   )
 
   it('should render group when multiple avatars are passed', () => {
@@ -41,37 +71,6 @@ describe('AvatarGroup', () => {
     )
 
     expect(container.firstElementChild).toHaveClass(avatarGroupClasses.root)
-  })
-
-  it("should forward ref to AvatarGroup's root element", () => {
-    const ref = createRef<HTMLDivElement>()
-    const { container } = renderWithNexUIProvider(
-      <AvatarGroup ref={ref} data-testid='avatar-group'>
-        <Avatar />
-        <Avatar />
-        <Avatar />
-      </AvatarGroup>,
-    )
-
-    expect(container.firstElementChild).toBe(ref.current)
-  })
-
-  it('should forward classes to surplus slot', () => {
-    const classes = {
-      surplus: 'test-surplus-class',
-    }
-
-    const { getByTestId } = renderWithNexUIProvider(
-      <AvatarGroup data-testid='avatar-group' classes={classes} max={2}>
-        <Avatar />
-        <Avatar />
-        <Avatar />
-        <Avatar />
-      </AvatarGroup>,
-    )
-
-    const avatarGroupRoot = getByTestId('avatar-group')
-    expect(avatarGroupRoot.lastElementChild).toHaveClass(classes.surplus)
   })
 
   it('should render `+N` when there are more than 4 avatars', () => {
@@ -168,18 +167,5 @@ describe('AvatarGroup', () => {
     expect(avatarRoot).toHaveClass(avatarClasses['color-blue'])
     expect(avatarRoot).toHaveClass(avatarClasses.outlined)
     expect(avatarRoot).toHaveClass(avatarClasses['radius-full'])
-  })
-
-  it('should forward slotProps to surplus slot', () => {
-    const { container } = renderWithNexUIProvider(
-      <AvatarGroup slotProps={{ surplus: { className: 'test-class' } }} max={2}>
-        <Avatar />
-        <Avatar />
-        <Avatar />
-      </AvatarGroup>,
-    )
-
-    const surplusAvatar = container.firstElementChild?.lastElementChild
-    expect(surplusAvatar).toHaveClass('test-class')
   })
 })

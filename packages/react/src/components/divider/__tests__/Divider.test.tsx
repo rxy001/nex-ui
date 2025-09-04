@@ -1,10 +1,25 @@
-import { createRef } from 'react'
-import { testComponentStability, renderWithNexUIProvider } from '~/tests/shared'
+import {
+  testComponentStability,
+  renderWithNexUIProvider,
+  testRefForwarding,
+  testVariantClasses,
+  testRootClassName,
+} from '~/tests/shared'
 import { Divider } from '../index'
 import { dividerClasses } from '../dividerClasses'
 
 describe('Divider', () => {
   testComponentStability(<Divider />)
+
+  testRefForwarding(<Divider />)
+
+  testRootClassName(<Divider />)
+
+  testVariantClasses(
+    <Divider />,
+    ['orientation', ['horizontal', 'vertical']],
+    dividerClasses,
+  )
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Divider />)
@@ -15,30 +30,5 @@ describe('Divider', () => {
     expect(dividerRoot).not.toHaveClass(dividerClasses['orientation-vertical'])
 
     expect(dividerRoot).toMatchSnapshot()
-  })
-
-  it("should forward ref to Divider's root element", () => {
-    const ref = createRef<HTMLHRElement>()
-    const { container } = renderWithNexUIProvider(<Divider ref={ref} />)
-    expect(container.firstElementChild).toBe(ref.current)
-  })
-
-  it('should add the appropriate orientation class to root element based on orientation prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Divider orientation='vertical' data-testid='orientation-vertical' />
-        <Divider
-          orientation='horizontal'
-          data-testid='orientation-horizontal'
-        />
-      </>,
-    )
-
-    expect(getByTestId('orientation-horizontal')).toHaveClass(
-      dividerClasses['orientation-horizontal'],
-    )
-    expect(getByTestId('orientation-vertical')).toHaveClass(
-      dividerClasses['orientation-vertical'],
-    )
   })
 })

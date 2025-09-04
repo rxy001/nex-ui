@@ -1,8 +1,8 @@
-import { createRef } from 'react'
 import {
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
+  testRefForwarding,
 } from '~/tests/shared'
 import { Flex } from '../index'
 import { flexClasses } from '../flexClasses'
@@ -10,7 +10,9 @@ import { flexClasses } from '../flexClasses'
 describe('Flex', () => {
   testComponentStability(<Flex />)
 
-  testRootClassName(<Flex className='test-class' />, 'test-class')
+  testRootClassName(<Flex />)
+
+  testRefForwarding(<Flex />)
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Flex />)
@@ -19,12 +21,6 @@ describe('Flex', () => {
 
     expect(flexRoot).toHaveClass(flexClasses.root)
     expect(flexRoot).toMatchSnapshot()
-  })
-
-  it("should forward ref to Flex's root element", () => {
-    const ref = createRef<HTMLDivElement>()
-    const { container } = renderWithNexUIProvider(<Flex ref={ref} />)
-    expect(container.firstElementChild).toBe(ref.current)
   })
 
   it('should render inline flex when inline prop is true', () => {

@@ -1,18 +1,23 @@
-import { createRef } from 'react'
+import { cloneElement, createRef } from 'react'
 import { renderWithNexUIProvider } from './renderWithProvider'
-import type { ElementType } from 'react'
+import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
 export function testRefForwarding(
-  Component: ElementType,
+  component: ReactElement<{ ref?: React.Ref<unknown> }>,
   constructor?: Function,
 ): void
 export function testRefForwarding(
-  Component: ElementType,
+  component: ReactElement<{ ref?: React.Ref<unknown> }>,
   options?: RenderWithNexUIProviderOptions,
 ): void
 export function testRefForwarding(
-  Component: ElementType,
+  component: ReactElement<{ ref?: React.Ref<unknown> }>,
+  constructor?: Function,
+  options?: RenderWithNexUIProviderOptions,
+): void
+export function testRefForwarding(
+  component: ReactElement<{ ref?: React.Ref<unknown> }>,
   constructor?: Function | RenderWithNexUIProviderOptions,
   options?: RenderWithNexUIProviderOptions,
 ) {
@@ -28,7 +33,7 @@ export function testRefForwarding(
     const ref = createRef<HTMLElement>()
 
     const { container } = await Promise.resolve(
-      renderWithNexUIProvider(<Component ref={ref} />, o),
+      renderWithNexUIProvider(cloneElement(component, { ref }), o),
     )
 
     if (c) {

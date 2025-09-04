@@ -49,7 +49,7 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
         labelPlacement && `label-placement-${labelPlacement}`,
       ],
       input: ['input'],
-      clearButton: ['clear-btn'],
+      clearButton: ['clear-button'],
       prefix: ['prefix'],
       suffix: ['suffix'],
       label: ['label'],

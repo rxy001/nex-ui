@@ -1,4 +1,3 @@
-import { createRef } from 'react'
 import { fireEvent, act } from '@testing-library/react'
 import {
   testColorClasses,
@@ -7,16 +6,21 @@ import {
   testRootClassName,
   testSizeClasses,
   testRadiusClasses,
+  testRefForwarding,
+  testClassesForwarding,
+  testSlotPropsForwarding,
 } from '~/tests/shared'
 import { Checkbox, CheckboxGroup } from '../index'
 import { checkboxClasses } from '../classes'
+
+const slots = ['icon', 'root', 'label'] as const
 
 describe('Checkbox', () => {
   testComponentStability(<Checkbox />, {
     useAct: true,
   })
 
-  testRootClassName(<Checkbox className='test-class' />, 'test-class', {
+  testRootClassName(<Checkbox />, {
     useAct: true,
   })
 
@@ -31,6 +35,38 @@ describe('Checkbox', () => {
   testRadiusClasses(<Checkbox>Checkbox</Checkbox>, checkboxClasses, {
     useAct: true,
   })
+
+  testRefForwarding(<Checkbox />, HTMLInputElement, {
+    useAct: true,
+  })
+
+  testClassesForwarding(
+    <Checkbox>Checkbox</Checkbox>,
+    slots,
+    {
+      icon: 'test-class-icon',
+      root: 'test-class-root',
+      label: 'test-class-label',
+    },
+    checkboxClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  testSlotPropsForwarding(
+    <Checkbox>Checkbox</Checkbox>,
+    slots,
+    {
+      root: { className: 'test-class-root' },
+      label: { className: 'test-class-label' },
+      icon: { className: 'test-class-icon' },
+    },
+    checkboxClasses,
+    {
+      useAct: true,
+    },
+  )
 
   it('should render with default props', async () => {
     const { container, getByRole } = await renderWithNexUIProvider(
@@ -67,17 +103,6 @@ describe('Checkbox', () => {
     const checkbox = getByRole('checkbox')
     expect(checkbox).toHaveClass(checkboxClasses.input)
     expect(checkbox.nextElementSibling).toHaveClass(checkboxClasses.icon)
-  })
-
-  it("should forward ref to Checkbox's input element", async () => {
-    const ref = createRef<HTMLInputElement>()
-    const { getByRole } = await renderWithNexUIProvider(
-      <Checkbox ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-    expect(ref.current).toBe(getByRole('checkbox'))
   })
 
   it("should render Checkbox's label with text children", async () => {
@@ -146,54 +171,6 @@ describe('Checkbox', () => {
 
     expect(checkbox).not.toBeChecked()
     expect(onCheckedChange).toHaveBeenCalledWith(false)
-  })
-
-  it('should forward classes to icon, root and label slots', async () => {
-    const classes = {
-      icon: 'test-class-icon',
-      root: 'test-class-root',
-      label: 'test-class-label',
-    }
-
-    const { queryByClassName } = await renderWithNexUIProvider(
-      <Checkbox classes={classes}>Checkbox</Checkbox>,
-      {
-        useAct: true,
-      },
-    )
-
-    const checkboxRoot = queryByClassName(checkboxClasses.root)
-    const checkboxLabel = queryByClassName(checkboxClasses.label)
-    const checkboxIcon = queryByClassName(checkboxClasses.icon)
-
-    expect(checkboxRoot).toHaveClass(classes.root)
-    expect(checkboxIcon).toHaveClass(classes.icon)
-    expect(checkboxLabel).toHaveClass(classes.label)
-  })
-
-  it('should forward slotProps to icon, root and label slots', async () => {
-    const { queryByClassName } = await renderWithNexUIProvider(
-      <Checkbox
-        slotProps={{
-          root: { className: 'test-class-root' },
-          label: { className: 'test-class-label' },
-          icon: { className: 'test-class-icon' },
-        }}
-      >
-        Checkbox
-      </Checkbox>,
-      {
-        useAct: true,
-      },
-    )
-
-    const checkboxRoot = queryByClassName(checkboxClasses.root)
-    const checkboxLabel = queryByClassName(checkboxClasses.label)
-    const checkboxIcon = queryByClassName(checkboxClasses.icon)
-
-    expect(checkboxRoot).toHaveClass('test-class-root')
-    expect(checkboxLabel).toHaveClass('test-class-label')
-    expect(checkboxIcon).toHaveClass('test-class-icon')
   })
 
   it('should disable the checkbox when disabled prop is true', async () => {

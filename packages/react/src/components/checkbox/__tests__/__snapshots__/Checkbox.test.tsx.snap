@@ -126,7 +126,7 @@ exports[`Checkbox should render with default props 1`] = `
 >
   <input
     aria-label="Checkbox"
-    aria-labelledby="«rj»"
+    aria-labelledby="«rm»"
     class="nui-checkbox-input emotion-1"
     tabindex="0"
     type="checkbox"
@@ -156,7 +156,7 @@ exports[`Checkbox should render with default props 1`] = `
   </span>
   <span
     class="nui-checkbox-label emotion-3"
-    id="«rj»"
+    id="«rm»"
   >
     Checkbox
   </span>

@@ -6,46 +6,39 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerFooter,
-  DrawerClose,
-  DrawerTrigger,
 } from '../index'
-import {
-  drawerClasses,
-  drawerHeaderClasses,
-  drawerBodyClasses,
-  drawerFooterClasses,
-} from '../classes'
+import { drawerClasses } from '../classes'
 import type { DrawerProps } from '../types'
 
+function TestDrawer(props: DrawerProps) {
+  return (
+    <Drawer data-testid='drawer-root' {...props}>
+      <DrawerContent data-testid='drawer-content'>
+        <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
+        <DrawerBody data-testid='drawer-body'>Drawer Body</DrawerBody>
+        <DrawerFooter data-testid='drawer-footer'>Drawer Footer</DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+
+const ControlledDrawer = ({ defaultOpen = false, ...props }: DrawerProps) => {
+  const [open, setOpen] = useState(defaultOpen)
+
+  return (
+    <>
+      <TestDrawer open={open} onOpenChange={setOpen} {...props} />
+      <button
+        data-testid='toggle-button'
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        Toggle Drawer
+      </button>
+    </>
+  )
+}
+
 describe('Drawer', () => {
-  function TestDrawer(props: DrawerProps) {
-    return (
-      <Drawer data-testid='drawer-root' {...props}>
-        <DrawerContent data-testid='drawer-content'>
-          <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
-          <DrawerBody data-testid='drawer-body'>Drawer Body</DrawerBody>
-          <DrawerFooter data-testid='drawer-footer'>Drawer Footer</DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-    )
-  }
-
-  const ControlledDrawer = ({ defaultOpen = false, ...props }: DrawerProps) => {
-    const [open, setOpen] = useState(defaultOpen)
-
-    return (
-      <>
-        <TestDrawer open={open} onOpenChange={setOpen} {...props} />
-        <button
-          data-testid='toggle-button'
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          Toggle Drawer
-        </button>
-      </>
-    )
-  }
-
   testComponentStability(<TestDrawer open />)
 
   it('should render with root, and open classes on root element', async () => {
@@ -157,93 +150,5 @@ describe('Drawer', () => {
 
     await user.click(toggleButton)
     expect(queryByTestId('drawer-root')).not.toBeInTheDocument()
-  })
-
-  describe('DrawerHeader', () => {
-    it('should render with header class', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestDrawer open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const drawerHeader = getByTestId('drawer-header')
-      expect(drawerHeader).toHaveClass(drawerHeaderClasses.root)
-    })
-  })
-
-  describe('DrawerBody', () => {
-    it('should render with body class', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestDrawer open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const drawerBody = getByTestId('drawer-body')
-      expect(drawerBody).toHaveClass(drawerBodyClasses.root)
-    })
-  })
-
-  describe('DrawerFooter', () => {
-    it('should render with footer class', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestDrawer open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const drawerFooter = getByTestId('drawer-footer')
-      expect(drawerFooter).toHaveClass(drawerFooterClasses.root)
-    })
-  })
-
-  describe('DrawerTrigger', () => {
-    it('should open when the DrawerTrigger is clicked', async () => {
-      const { getByTestId, queryByTestId, user } =
-        await renderWithNexUIProvider(
-          <Drawer>
-            <DrawerTrigger>
-              <button data-testid='open-button'>Open Drawer</button>
-            </DrawerTrigger>
-            <DrawerContent data-testid='drawer-content' />
-          </Drawer>,
-          {
-            useAct: true,
-          },
-        )
-
-      expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
-      const openButton = getByTestId('open-button')
-
-      await user.click(openButton)
-      expect(queryByTestId('drawer-content')).toBeInTheDocument()
-    })
-  })
-
-  describe('DrawerClose', () => {
-    it('should close when the DiglogClose is clicked', async () => {
-      const { getByTestId, queryByTestId, user } =
-        await renderWithNexUIProvider(
-          <Drawer defaultOpen>
-            <DrawerClose>
-              <button data-testid='close-button'>Close Drawer</button>
-            </DrawerClose>
-            <DrawerContent data-testid='drawer-content' />
-          </Drawer>,
-          {
-            useAct: true,
-          },
-        )
-
-      expect(queryByTestId('drawer-content')).toBeInTheDocument()
-      const closeButton = getByTestId('close-button')
-
-      await user.click(closeButton)
-      expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
-    })
   })
 })

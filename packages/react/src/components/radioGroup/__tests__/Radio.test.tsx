@@ -5,19 +5,47 @@ import {
   testColorClasses,
   testSizeClasses,
   renderWithNexUIProvider,
+  testRefForwarding,
+  testClassesForwarding,
+  testSlotPropsForwarding,
 } from '~/tests/shared'
-import { createRef } from 'react'
 import { Radio, RadioGroup } from '../index'
 import { radioClasses } from '../classes'
+
+const slots = ['root', 'dot', 'label'] as const
 
 describe('Radio', () => {
   testComponentStability(<Radio value='1'>Option 1</Radio>)
 
-  testRootClassName(<Radio className='test-class' />, 'test-class')
+  testRootClassName(<Radio />)
+
+  testRefForwarding(<Radio />, HTMLInputElement)
 
   testColorClasses(<Radio>Radio</Radio>, radioClasses)
 
   testSizeClasses(<Radio>Radio</Radio>, radioClasses)
+
+  testClassesForwarding(
+    <Radio>Radio</Radio>,
+    slots,
+    {
+      root: 'test-class-root',
+      dot: 'test-class-dot',
+      label: 'test-class-label',
+    },
+    radioClasses,
+  )
+
+  testSlotPropsForwarding(
+    <Radio>Radio</Radio>,
+    slots,
+    {
+      root: { className: 'test-class-root' },
+      label: { className: 'test-class-label' },
+      dot: { className: 'test-class-dot' },
+    },
+    radioClasses,
+  )
 
   it('should render with default props', () => {
     const { container, getByRole } = renderWithNexUIProvider(
@@ -46,12 +74,6 @@ describe('Radio', () => {
     const radio = getByRole('radio')
     expect(radio).toHaveClass(radioClasses.input)
     expect(radio.nextElementSibling).toHaveClass(radioClasses.dot)
-  })
-
-  it("should forward ref to Radio's input element", () => {
-    const ref = createRef<HTMLInputElement>()
-    const { getByRole } = renderWithNexUIProvider(<Radio ref={ref} />)
-    expect(ref.current).toBe(getByRole('radio'))
   })
 
   it("should render Radio's label with text children", () => {
@@ -93,48 +115,6 @@ describe('Radio', () => {
 
     expect(radio).toBeChecked()
     expect(onCheckedChange).toHaveBeenCalledWith(true)
-  })
-
-  it('should forward classes to root, dot and label slots', () => {
-    const classes = {
-      root: 'test-class-root',
-      dot: 'test-class-dot',
-      label: 'test-class-label',
-    }
-
-    const { container } = renderWithNexUIProvider(
-      <Radio classes={classes}>Radio</Radio>,
-    )
-
-    const radioRoot = container.querySelector(`.${radioClasses.root}`)
-    const radioLabel = container.querySelector(`.${radioClasses.label}`)
-    const radioDot = container.querySelector(`.${radioClasses.dot}`)
-
-    expect(radioRoot).toHaveClass(classes.root)
-    expect(radioDot).toHaveClass(classes.dot)
-    expect(radioLabel).toHaveClass(classes.label)
-  })
-
-  it('should forward slotProps to root, dot and label slots', () => {
-    const { container } = renderWithNexUIProvider(
-      <Radio
-        slotProps={{
-          root: { className: 'test-class-root' },
-          label: { className: 'test-class-label' },
-          dot: { className: 'test-class-dot' },
-        }}
-      >
-        Radio
-      </Radio>,
-    )
-
-    const radioRoot = container.querySelector(`.${radioClasses.root}`)
-    const radioLabel = container.querySelector(`.${radioClasses.label}`)
-    const radioIcon = container.querySelector(`.${radioClasses.dot}`)
-
-    expect(radioRoot).toHaveClass('test-class-root')
-    expect(radioLabel).toHaveClass('test-class-label')
-    expect(radioIcon).toHaveClass('test-class-dot')
   })
 
   it('should disable the radio when disabled prop is true', () => {
@@ -222,19 +202,19 @@ describe('Radio', () => {
     })
 
     it('should not apply role="radio" when rendered as an input', () => {
-      const { container } = renderWithNexUIProvider(
+      const { queryByClassName } = renderWithNexUIProvider(
         <Radio as='input'>Radio</Radio>,
       )
-      const radio = container.querySelector(`.${radioClasses.input}`)
+      const radio = queryByClassName(radioClasses.input)
       expect(radio).not.toHaveAttribute('role', 'radio')
     })
 
     it('should apply role="radio" when rendered as a non-input element', () => {
-      const { container } = renderWithNexUIProvider(
+      const { queryByClassName } = renderWithNexUIProvider(
         <Radio as='div'>Radio</Radio>,
       )
 
-      const radio = container.querySelector(`.${radioClasses.input}`)
+      const radio = queryByClassName(radioClasses.input)
       expect(radio).toHaveAttribute('role', 'radio')
     })
 
@@ -311,10 +291,10 @@ describe('Radio', () => {
     })
 
     it('should apply aria-labelledby="label-id" by default when children is a string', () => {
-      const { getByRole, container } = renderWithNexUIProvider(
+      const { getByRole, queryByClassName } = renderWithNexUIProvider(
         <Radio>Radio Label</Radio>,
       )
-      const label = container.querySelector(`.${radioClasses.label}`)
+      const label = queryByClassName(radioClasses.label)
       const radio = getByRole('radio')
       expect(radio).toHaveAttribute('aria-labelledby', label!.id)
     })

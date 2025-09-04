@@ -1,4 +1,4 @@
-import { useState, createRef } from 'react'
+import { useState } from 'react'
 import { fireEvent } from '@testing-library/react'
 import {
   testColorClasses,
@@ -8,14 +8,19 @@ import {
   testSizeClasses,
   testRadiusClasses,
   testVariantClasses,
+  testRefForwarding,
+  testClassesForwarding,
+  testSlotPropsForwarding,
 } from '~/tests/shared'
 import { Input } from '../index'
 import { inputClasses } from '../inputClasses'
 
+const slots = ['root', 'label', 'prefix', 'suffix', 'clearButton'] as const
+
 describe('Input', () => {
   testComponentStability(<Input />)
 
-  testRootClassName(<Input className='test-class' />, 'test-class')
+  testRootClassName(<Input />)
 
   testColorClasses(<Input />, inputClasses)
 
@@ -23,9 +28,66 @@ describe('Input', () => {
 
   testRadiusClasses(<Input />, inputClasses)
 
+  testRefForwarding(<Input />, HTMLInputElement)
+
   testVariantClasses(
     <Input />,
     ['variant', ['outlined', 'faded', 'underlined']],
+    inputClasses,
+  )
+
+  testVariantClasses(
+    <Input label='Label' />,
+    ['labelPlacement', ['inside', 'outside', 'float-inside', 'float-outside']],
+    inputClasses,
+  )
+
+  testVariantClasses(<Input />, ['fullWidth', [true, false]], inputClasses)
+
+  testClassesForwarding(
+    <Input
+      prefix={<span>Prefix</span>}
+      suffix={<span>Suffix</span>}
+      clearable
+      label='Test Label'
+    />,
+    slots,
+    {
+      root: 'test-root-class',
+      label: 'test-label-class',
+      prefix: 'test-prefix-class',
+      suffix: 'test-suffix-class',
+      clearButton: 'test-clear-button-class',
+    },
+    inputClasses,
+  )
+
+  testSlotPropsForwarding(
+    <Input
+      defaultValue='default'
+      label='Test Label'
+      prefix={<span>Prefix</span>}
+      suffix={<span>Suffix</span>}
+      clearable
+    />,
+    slots,
+    {
+      root: {
+        className: 'test-root-class',
+      },
+      clearButton: {
+        className: 'test-clear-button-class',
+      },
+      label: {
+        className: 'test-label-class',
+      },
+      prefix: {
+        className: 'test-prefix-class',
+      },
+      suffix: {
+        className: 'test-suffix-class',
+      },
+    },
     inputClasses,
   )
 
@@ -73,70 +135,6 @@ describe('Input', () => {
     expect(inputRoot).toMatchSnapshot()
   })
 
-  it("should forward ref to Input's input element", () => {
-    const ref = createRef<HTMLInputElement>()
-    renderWithNexUIProvider(<Input ref={ref} />)
-    expect(ref.current).toBeInstanceOf(HTMLInputElement)
-  })
-
-  it('should add the appropriate label placement class to root element based on labelPlacement and value prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <Input
-          labelPlacement='inside'
-          data-testid='label-inside'
-          label='Label Inside'
-        />
-        <Input
-          labelPlacement='outside'
-          data-testid='label-outside'
-          label='Label Outside'
-        />
-        <Input
-          labelPlacement='float-inside'
-          data-testid='label-float-inside'
-          label='Label Float Inside'
-        />
-        <Input
-          labelPlacement='float-outside'
-          data-testid='label-float-outside'
-          label='Label Float Outside'
-        />
-        <Input
-          labelPlacement='float-outside'
-          data-testid='label-float-outside-with-value'
-          label='Label Float Outside'
-          value='Test Value'
-        />
-        <Input
-          labelPlacement='float-inside'
-          data-testid='label-float-inside-with-value'
-          label='Label Float Inside'
-          value='Test Value'
-        />
-      </>,
-    )
-
-    expect(getByTestId('label-inside').parentElement).toHaveClass(
-      inputClasses['label-placement-inside'],
-    )
-    expect(getByTestId('label-outside').parentElement).toHaveClass(
-      inputClasses['label-placement-outside'],
-    )
-    expect(getByTestId('label-float-inside').parentElement).toHaveClass(
-      inputClasses['label-placement-float-inside'],
-    )
-    expect(getByTestId('label-float-outside').parentElement).toHaveClass(
-      inputClasses['label-placement-float-outside'],
-    )
-    expect(
-      getByTestId('label-float-outside-with-value').parentElement,
-    ).toHaveClass(inputClasses['label-placement-outside'])
-    expect(
-      getByTestId('label-float-inside-with-value').parentElement,
-    ).toHaveClass(inputClasses['label-placement-inside'])
-  })
-
   it('should mark input as invalid when invalid prop is true', () => {
     const { getByTestId } = renderWithNexUIProvider(
       <Input invalid data-testid='input' />,
@@ -157,16 +155,6 @@ describe('Input', () => {
 
     expect(input).toBeDisabled()
     expect(input.parentElement).toHaveClass(inputClasses.disabled)
-  })
-
-  it('should add the appropriate radius class to root element based on fullWidth prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <Input fullWidth data-testid='full-width' />,
-    )
-
-    expect(getByTestId('full-width').parentElement).toHaveClass(
-      inputClasses['full-width'],
-    )
   })
 
   it('should support prefix and suffix props', () => {
@@ -193,11 +181,11 @@ describe('Input', () => {
         />
       )
     }
-    const { getByTestId, container } = renderWithNexUIProvider(
+    const { getByTestId, queryByClassName } = renderWithNexUIProvider(
       <ClearableInput />,
     )
     const input = getByTestId('clearable-input')
-    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
+    const clearButton = queryByClassName(inputClasses['clear-button'])
 
     expect(input).toHaveAttribute('value', 'defalt')
     expect(clearButton).toBeInTheDocument()
@@ -216,11 +204,11 @@ describe('Input', () => {
   })
 
   it(`should not allow clear value when disabled`, () => {
-    const { container, getByTestId } = renderWithNexUIProvider(
+    const { getByTestId, queryByClassName } = renderWithNexUIProvider(
       <Input data-testid='input' clearable defaultValue='test' disabled />,
     )
 
-    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
+    const clearButton = queryByClassName(inputClasses['clear-button'])
     const input = getByTestId('input')
 
     expect(clearButton).toBeInTheDocument()
@@ -229,79 +217,6 @@ describe('Input', () => {
 
     fireEvent.click(clearButton!)
     expect(input).toHaveAttribute('value', 'test')
-  })
-
-  it('should forward classes to root, label, prefix, suffix, clearButton slots', () => {
-    const classes = {
-      root: 'test-root-class',
-      label: 'test-label-class',
-      prefix: 'test-prefix-class',
-      suffix: 'test-suffix-class',
-      clearButton: 'test-clear-btn-class',
-    }
-
-    const { container } = renderWithNexUIProvider(
-      <Input
-        classes={classes}
-        prefix={<span>Prefix</span>}
-        suffix={<span>Suffix</span>}
-        clearable
-        label='Test Label'
-      />,
-    )
-
-    const inputRoot = container.firstChild
-    const inputLabel = container.querySelector(`.${inputClasses['label']}`)
-    const inputPrefix = container.querySelector(`.${inputClasses['prefix']}`)
-    const inputSuffix = container.querySelector(`.${inputClasses['suffix']}`)
-    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
-
-    expect(inputRoot).toHaveClass(classes.root)
-    expect(inputLabel).toHaveClass(classes.label)
-    expect(inputPrefix).toHaveClass(classes.prefix)
-    expect(inputSuffix).toHaveClass(classes.suffix)
-    expect(clearButton).toHaveClass(classes.clearButton)
-  })
-
-  it('should forward slotProps to root, label, prefix, suffix, clearButton slots', () => {
-    const { container } = renderWithNexUIProvider(
-      <Input
-        slotProps={{
-          root: {
-            className: 'test-root-class',
-          },
-          clearButton: {
-            className: 'test-clear-btn-class',
-          },
-          label: {
-            className: 'test-label-class',
-          },
-          prefix: {
-            className: 'test-prefix-class',
-          },
-          suffix: {
-            className: 'test-suffix-class',
-          },
-        }}
-        defaultValue='default'
-        label='Test Label'
-        prefix={<span>Prefix</span>}
-        suffix={<span>Suffix</span>}
-        clearable
-      />,
-    )
-
-    const inputRoot = container.firstChild
-    const inputLabel = container.querySelector(`.${inputClasses['label']}`)
-    const inputPrefix = container.querySelector(`.${inputClasses['prefix']}`)
-    const inputSuffix = container.querySelector(`.${inputClasses['suffix']}`)
-    const clearButton = container.querySelector(`.${inputClasses['clear-btn']}`)
-
-    expect(inputRoot).toHaveClass('test-root-class')
-    expect(inputLabel).toHaveClass('test-label-class')
-    expect(inputPrefix).toHaveClass('test-prefix-class')
-    expect(inputSuffix).toHaveClass('test-suffix-class')
-    expect(clearButton).toHaveClass('test-clear-btn-class')
   })
 
   it('should be controlled by value prop', () => {
@@ -415,7 +330,7 @@ describe('Input', () => {
     })
 
     it("should the for of label refer to input's id when label is provided", () => {
-      const { getByTestId } = renderWithNexUIProvider(
+      const { getByTestId, queryByClassName } = renderWithNexUIProvider(
         <Input data-testid='input' label='Test Label' />,
       )
 
@@ -423,7 +338,7 @@ describe('Input', () => {
 
       expect(input).toHaveAttribute('id', input.id)
 
-      const label = document.querySelector(`.${inputClasses['label']}`)
+      const label = queryByClassName(inputClasses['label'])
       expect(label).toHaveAttribute('for', input.id)
     })
 
@@ -450,16 +365,15 @@ describe('Input', () => {
     })
 
     it('should apply aria-labelledby when label is provided', () => {
-      const { getByTestId, container, rerender } = renderWithNexUIProvider(
-        <Input data-testid='input' />,
-      )
+      const { getByTestId, rerender, queryByClassName } =
+        renderWithNexUIProvider(<Input data-testid='input' />)
 
       const input = getByTestId('input')
 
       expect(input).not.toHaveAttribute('aria-labelledby')
 
       rerender(<Input data-testid='input' label='Test Label' />)
-      const label = container.querySelector(`.${inputClasses['label']}`)
+      const label = queryByClassName(inputClasses['label'])
       expect(input).toHaveAttribute('aria-labelledby', label!.id)
       expect(label).toHaveAttribute('id', label!.id)
     })
@@ -474,7 +388,7 @@ describe('Input', () => {
     })
 
     it('should apply aria-labelledby=label.id when id of label is provided', () => {
-      const { getByTestId, container } = renderWithNexUIProvider(
+      const { getByTestId, queryByClassName } = renderWithNexUIProvider(
         <Input
           data-testid='input'
           label='Test Label'
@@ -483,7 +397,7 @@ describe('Input', () => {
       )
 
       const input = getByTestId('input')
-      const label = container.querySelector(`.${inputClasses['label']}`)
+      const label = queryByClassName(inputClasses['label'])
 
       expect(label).toHaveAttribute('id', 'custom-id')
       expect(input).toHaveAttribute('aria-labelledby', label!.id)
@@ -501,13 +415,11 @@ describe('Input', () => {
     })
 
     it('should have aria-label on clear button', () => {
-      const { container } = renderWithNexUIProvider(
+      const { queryByClassName } = renderWithNexUIProvider(
         <Input clearable data-testid='input' />,
       )
 
-      const clearButton = container.querySelector(
-        `.${inputClasses['clear-btn']}`,
-      )
+      const clearButton = queryByClassName(inputClasses['clear-button'])
 
       expect(clearButton).toHaveAttribute('aria-label', 'Clear input')
     })

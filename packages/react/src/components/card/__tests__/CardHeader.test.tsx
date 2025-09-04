@@ -4,6 +4,7 @@ import {
   testRefForwarding,
   testSlotPropsForwarding,
   testClassesForwarding,
+  testRootClassName,
 } from '~/tests/shared'
 import { CardHeader } from '../index'
 import { cardHeaderClasses } from '../classes'
@@ -12,7 +13,11 @@ const slots = ['content', 'title', 'subtitle'] as const
 
 describe('CardHeader', () => {
   testComponentStability(<CardHeader title='Title' subtitle='Subtitle' />)
-  testRefForwarding(CardHeader)
+
+  testRefForwarding(<CardHeader />)
+
+  testRootClassName(<CardHeader />)
+
   testSlotPropsForwarding(
     <CardHeader<'div'> title='Title' subtitle='Subtitle' />,
     slots,
@@ -23,6 +28,7 @@ describe('CardHeader', () => {
     },
     cardHeaderClasses,
   )
+
   testClassesForwarding(
     <CardHeader title='Title' subtitle='Subtitle' />,
     slots,
@@ -33,6 +39,7 @@ describe('CardHeader', () => {
     },
     cardHeaderClasses,
   )
+
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<CardHeader />)
 

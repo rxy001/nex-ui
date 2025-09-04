@@ -1,9 +1,12 @@
-import { createRef, useState } from 'react'
+import { useState } from 'react'
 import {
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
   testVariantClasses,
+  testRefForwarding,
+  testClassesForwarding,
+  testSlotPropsForwarding,
 } from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { Checkbox } from '../Checkbox'
@@ -22,22 +25,54 @@ const children = [
   </Checkbox>,
 ]
 
+const slots = ['label', 'wrapper'] as const
+
 describe('CheckboxGroup', () => {
   testComponentStability(<CheckboxGroup>{children}</CheckboxGroup>, {
     useAct: true,
   })
 
-  testRootClassName(
-    <CheckboxGroup className='test-class'>{children}</CheckboxGroup>,
-    'test-class',
+  testRootClassName(<CheckboxGroup>{children}</CheckboxGroup>, {
+    useAct: true,
+  })
+
+  testVariantClasses(
+    <CheckboxGroup>{children}</CheckboxGroup>,
+    ['orientation', ['vertical', 'horizontal']],
+    checkboxGroupClasses,
     {
       useAct: true,
     },
   )
 
-  testVariantClasses(
-    <CheckboxGroup>{children}</CheckboxGroup>,
-    ['orientation', ['vertical', 'horizontal']],
+  testRefForwarding(<CheckboxGroup />, {
+    useAct: true,
+  })
+
+  testClassesForwarding(
+    <CheckboxGroup label='Label'>{children}</CheckboxGroup>,
+    slots,
+    {
+      label: 'test-label',
+      wrapper: 'test-wrapper',
+    },
+    checkboxGroupClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  testSlotPropsForwarding(
+    <CheckboxGroup label='Label'>{children}</CheckboxGroup>,
+    slots,
+    {
+      label: {
+        className: 'test-label',
+      },
+      wrapper: {
+        className: 'test-wrapper',
+      },
+    },
     checkboxGroupClasses,
     {
       useAct: true,
@@ -60,19 +95,6 @@ describe('CheckboxGroup', () => {
     expect(root).toMatchSnapshot()
   })
 
-  it("should forward ref to CheckboxGroup's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <CheckboxGroup ref={ref} data-testid='checkbox-group'>
-        {children}
-      </CheckboxGroup>,
-      {
-        useAct: true,
-      },
-    )
-    expect(getByTestId('checkbox-group')).toBe(ref.current)
-  })
-
   it('should render with label', async () => {
     const { rerender, queryByClassName } = await renderWithNexUIProvider(
       <CheckboxGroup>{children}</CheckboxGroup>,
@@ -88,56 +110,6 @@ describe('CheckboxGroup', () => {
     const label = queryByClassName(checkboxGroupClasses.label)
     expect(label).toBeInTheDocument()
     expect(label).toHaveTextContent('Fruits')
-  })
-
-  it('should forward classes to label and wrapper slots', async () => {
-    const classes = {
-      label: 'test-label',
-      wrapper: 'test-wrapper',
-    }
-
-    const { queryByClassName } = await renderWithNexUIProvider(
-      <CheckboxGroup label='Label' classes={classes}>
-        {children}
-      </CheckboxGroup>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(queryByClassName(checkboxGroupClasses.label)).toHaveClass(
-      classes.label,
-    )
-    expect(queryByClassName(checkboxGroupClasses.wrapper)).toHaveClass(
-      classes.wrapper,
-    )
-  })
-
-  it('should forward slotProps to label and wrapper slots', async () => {
-    const slotProps = {
-      label: {
-        className: 'test-label',
-      },
-      wrapper: {
-        className: 'test-wrapper',
-      },
-    }
-
-    const { queryByClassName } = await renderWithNexUIProvider(
-      <CheckboxGroup label='Label' slotProps={slotProps}>
-        {children}
-      </CheckboxGroup>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(queryByClassName(checkboxGroupClasses.label)).toHaveClass(
-      slotProps.label.className,
-    )
-    expect(queryByClassName(checkboxGroupClasses.wrapper)).toHaveClass(
-      slotProps.wrapper.className,
-    )
   })
 
   it('should switch different values when checkboxes are clicked', async () => {
