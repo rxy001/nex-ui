@@ -1,4 +1,4 @@
-import { createRef, useState } from 'react'
+import { useState } from 'react'
 import { act, fireEvent } from '@testing-library/react'
 import {
   testComponentStability,
@@ -6,18 +6,76 @@ import {
   testRootClassName,
   testColorClasses,
   testSizeClasses,
+  testRefForwarding,
+  testClassesForwarding,
+  testSlotPropsForwarding,
 } from '~/tests/shared'
 import { Switch } from '../index'
 import { switchClasses } from '../switchClasses'
 
+const slots = [
+  'root',
+  'track',
+  'thumb',
+  'startIcon',
+  'endIcon',
+  'label',
+] as const
+
 describe('Switch', () => {
   testComponentStability(<Switch />)
 
-  testRootClassName(<Switch className='test-class' />, 'test-class')
+  testRootClassName(<Switch />)
 
   testColorClasses(<Switch />, switchClasses)
 
   testSizeClasses(<Switch />, switchClasses)
+
+  testRefForwarding(<Switch />, HTMLInputElement)
+
+  testClassesForwarding(
+    <Switch startIcon={<span>Start</span>} endIcon={<span>End</span>}>
+      Switch
+    </Switch>,
+    slots,
+    {
+      root: 'test-root-class',
+      track: 'test-track-class',
+      thumb: 'test-thumb-class',
+      startIcon: 'test-start-icon-class',
+      endIcon: 'test-end-icon-class',
+      label: 'test-label-class',
+    },
+    switchClasses,
+  )
+
+  testSlotPropsForwarding(
+    <Switch startIcon={<span>Start</span>} endIcon={<span>End</span>}>
+      Switch
+    </Switch>,
+    slots,
+    {
+      root: {
+        className: 'test-root-class',
+      },
+      track: {
+        className: 'test-track-class',
+      },
+      thumb: {
+        className: 'test-thumb-class',
+      },
+      startIcon: {
+        className: 'test-start-icon-class',
+      },
+      endIcon: {
+        className: 'test-end-icon-class',
+      },
+      label: {
+        className: 'test-label-class',
+      },
+    },
+    switchClasses,
+  )
 
   it('should render with default props', () => {
     const { container, getByRole } = renderWithNexUIProvider(<Switch />)
@@ -43,93 +101,6 @@ describe('Switch', () => {
     expect(root).not.toHaveClass(switchClasses['color-yellow'])
     expect(root).not.toHaveClass(switchClasses['size-sm'])
     expect(root).not.toHaveClass(switchClasses['size-lg'])
-  })
-
-  it("should forward ref to Switch's input element", () => {
-    const ref = createRef<HTMLInputElement>()
-    const { getByRole } = renderWithNexUIProvider(<Switch ref={ref} />)
-    expect(getByRole('switch')).toBe(ref.current)
-  })
-
-  it('should forward slotProps to root, track, thumb, startIcon, endIcon and label slots', () => {
-    const slotProps = {
-      root: {
-        className: 'test-root-class',
-      },
-      track: {
-        className: 'test-track-class',
-      },
-      thumb: {
-        className: 'test-thumb-class',
-      },
-      startIcon: {
-        className: 'test-start-icon-class',
-      },
-      endIcon: {
-        className: 'test-end-icon-class',
-      },
-      label: {
-        className: 'test-label-class',
-      },
-    }
-
-    const { container } = renderWithNexUIProvider(
-      <Switch
-        slotProps={slotProps}
-        startIcon={<span>Start</span>}
-        endIcon={<span>End</span>}
-      >
-        Switch
-      </Switch>,
-    )
-
-    const root = container.firstElementChild
-    const track = container.querySelector(`.${switchClasses.track}`)
-    const thumb = container.querySelector(`.${switchClasses.thumb}`)
-    const startIcon = container.querySelector(`.${switchClasses['start-icon']}`)
-    const endIcon = container.querySelector(`.${switchClasses['end-icon']}`)
-    const label = container.querySelector(`.${switchClasses.label}`)
-
-    expect(root).toHaveClass(slotProps.root.className)
-    expect(track).toHaveClass(slotProps.track.className)
-    expect(thumb).toHaveClass(slotProps.thumb.className)
-    expect(startIcon).toHaveClass(slotProps.startIcon.className)
-    expect(endIcon).toHaveClass(slotProps.endIcon.className)
-    expect(label).toHaveClass(slotProps.label.className)
-  })
-
-  it('should forward classes to root, track, thumb, startIcon, endIcon, label and input slots', () => {
-    const classes = {
-      root: 'test-root-class',
-      track: 'test-track-class',
-      thumb: 'test-thumb-class',
-      startIcon: 'test-start-icon-class',
-      endIcon: 'test-end-icon-class',
-      label: 'test-label-class',
-    }
-    const { container } = renderWithNexUIProvider(
-      <Switch
-        classes={classes}
-        startIcon={<span>Start</span>}
-        endIcon={<span>End</span>}
-      >
-        Switch
-      </Switch>,
-    )
-
-    const root = container.firstElementChild
-    const track = container.querySelector(`.${switchClasses.track}`)
-    const thumb = container.querySelector(`.${switchClasses.thumb}`)
-    const startIcon = container.querySelector(`.${switchClasses['start-icon']}`)
-    const endIcon = container.querySelector(`.${switchClasses['end-icon']}`)
-    const label = container.querySelector(`.${switchClasses.label}`)
-
-    expect(root).toHaveClass(classes.root)
-    expect(track).toHaveClass(classes.track)
-    expect(thumb).toHaveClass(classes.thumb)
-    expect(startIcon).toHaveClass(classes.startIcon)
-    expect(endIcon).toHaveClass(classes.endIcon)
-    expect(label).toHaveClass(classes.label)
   })
 
   it('should render label with children', () => {
@@ -262,12 +233,12 @@ describe('Switch', () => {
   })
 
   it('should render startIcon and endIcon', () => {
-    const { container } = renderWithNexUIProvider(
+    const { queryByClassName } = renderWithNexUIProvider(
       <Switch startIcon={<span>Start</span>} endIcon={<span>End</span>} />,
     )
 
-    const startIcon = container.querySelector(`.${switchClasses['start-icon']}`)
-    const endIcon = container.querySelector(`.${switchClasses['end-icon']}`)
+    const startIcon = queryByClassName(switchClasses['start-icon'])
+    const endIcon = queryByClassName(switchClasses['end-icon'])
 
     expect(startIcon).toBeInTheDocument()
     expect(endIcon).toBeInTheDocument()
@@ -276,14 +247,14 @@ describe('Switch', () => {
   })
 
   it('should render custom thumbIcon', () => {
-    const { getByTestId, container, rerender } = renderWithNexUIProvider(
+    const { getByTestId, queryByClassName, rerender } = renderWithNexUIProvider(
       <Switch thumbIcon={<span data-testid='thumb-icon'>Thumb Icon</span>} />,
     )
 
     const thumbIcon = getByTestId('thumb-icon')
     expect(thumbIcon).toBeInTheDocument()
 
-    const wrapper = container.querySelector(`.${switchClasses.thumb}`)
+    const wrapper = queryByClassName(switchClasses.thumb)
     expect(wrapper).toContainElement(thumbIcon)
 
     const mockFn = jest.fn(() => (
@@ -329,8 +300,8 @@ describe('Switch', () => {
     })
 
     it('should have role="switch" by default', () => {
-      const { container } = renderWithNexUIProvider(<Switch />)
-      const input = container.querySelector(`.${switchClasses.input}`)
+      const { queryByClassName } = renderWithNexUIProvider(<Switch />)
+      const input = queryByClassName(switchClasses.input)
       expect(input).toHaveRole('switch')
     })
 
@@ -372,11 +343,11 @@ describe('Switch', () => {
     })
 
     it('should apply aria-labelledby="label-id" when children is a string', () => {
-      const { getByRole, container } = renderWithNexUIProvider(
+      const { getByRole, queryByClassName } = renderWithNexUIProvider(
         <Switch>Switch</Switch>,
       )
       const input = getByRole('switch')
-      const label = container.querySelector(`.${switchClasses.label}`)
+      const label = queryByClassName(switchClasses.label)
 
       expect(input).toHaveAttribute('aria-labelledby', label!.id)
     })

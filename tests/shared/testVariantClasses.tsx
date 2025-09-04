@@ -1,7 +1,9 @@
 import { cloneElement } from 'react'
 import { renderWithNexUIProvider } from './renderWithProvider'
+import { camelToKebab } from './utils'
 import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
+import type { CamelToKebab } from './utils'
 
 /**
  * Test the variant classes of a component.
@@ -17,36 +19,89 @@ import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
  *   ['variant', ['outlined', 'solid']],
  *   buttonClasses,
  * )
+ *
+ * @example
+ *
+ * testVariantClasses(
+ *   <Button />,
+ *   ['disabled', [true, false]],
+ *   buttonClasses,
+ * )
  */
-export const testVariantClasses = <
+
+export function testVariantClasses<
   T extends string,
-  C extends string,
-  K extends Record<`${T}-${C}`, string>,
+  C extends boolean,
+  K extends Record<CamelToKebab<T>, string>,
 >(
   component: ReactElement,
   variant: [T, C[]],
   classes: K,
   options?: RenderWithNexUIProviderOptions,
-) => {
+): void
+export function testVariantClasses<
+  T extends string,
+  C extends string,
+  K extends Record<CamelToKebab<`${T}-${C}`>, string>,
+>(
+  component: ReactElement,
+  variant: [T, C[]],
+  classes: K,
+  options?: RenderWithNexUIProviderOptions,
+): void
+export function testVariantClasses<
+  T extends string,
+  C extends string | boolean,
+  K extends
+    | Record<CamelToKebab<`${T}-${C}`>, string>
+    | Record<CamelToKebab<T>, string>,
+>(
+  component: ReactElement,
+  variant: [T, C[]],
+  classes: K,
+  options?: RenderWithNexUIProviderOptions,
+) {
   const [variantName, variantValues] = variant
 
   it(`should add the appropriate ${variantName} class to root element based on ${variantName} prop`, async () => {
-    const { container } = await renderWithNexUIProvider(
-      <>
-        {variantValues.map((value) =>
-          cloneElement(component, {
-            [variantName]: value,
-            key: value,
-          }),
-        )}
-      </>,
-      options,
+    const { container } = await Promise.resolve(
+      renderWithNexUIProvider(
+        <>
+          {variantValues.map((value) =>
+            cloneElement(component, {
+              [variantName]: value,
+              key: `${value}`,
+            }),
+          )}
+        </>,
+        options,
+      ),
     )
     const children = container.children
+    const kebabVariantName = camelToKebab(variantName)
 
     variantValues.forEach((value: C, index) => {
-      const classKey = `${variantName}-${value}` as `${T}-${C}`
-      expect(children[index]).toHaveClass(classes[classKey])
+      if (typeof value === 'string') {
+        const classKey =
+          `${kebabVariantName}-${value}` as CamelToKebab<`${T}-${C}`>
+        const expectedClass = (
+          classes as Record<CamelToKebab<`${T}-${C}`>, string>
+        )[classKey]
+        expect(children[index]).toHaveClass(expectedClass)
+        return
+      }
+
+      if (typeof value === 'boolean') {
+        const classKey = kebabVariantName as CamelToKebab<T>
+        const expectedClass = (classes as Record<CamelToKebab<T>, string>)[
+          classKey
+        ]
+        if (value === true) {
+          expect(children[index]).toHaveClass(expectedClass)
+        } else {
+          expect(children[index]).not.toHaveClass(expectedClass)
+        }
+      }
     })
   })
 }

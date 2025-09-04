@@ -21,7 +21,7 @@ type CardOwnProps<RootComponent extends ElementType> = {
 
   /**
    * The shadow of the card.
-   * @default 'md
+   * @default 'md'
    */
   shadow?: CardVariants['shadow']
 

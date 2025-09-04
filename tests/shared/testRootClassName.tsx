@@ -1,5 +1,6 @@
+import { cloneElement } from 'react'
 import { renderWithNexUIProvider } from './renderWithProvider'
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
 /**
@@ -10,16 +11,16 @@ import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
  * @param options Options to pass to the renderWithNexUIProvider function.
  *
  * @example
- * testRootClassName(<Button className='test-class'/>, 'test-class')
+ * testRootClassName(<Button />)
  */
 export const testRootClassName = (
-  component: ReactNode,
-  className: string,
+  component: ReactElement<{ className?: string }>,
   options?: RenderWithNexUIProviderOptions,
 ) => {
   it('should have the correct root class name', async () => {
+    const className = 'test-class'
     const { container } = await Promise.resolve(
-      renderWithNexUIProvider(component, options),
+      renderWithNexUIProvider(cloneElement(component, { className }), options),
     )
     const rootElement = container.firstElementChild
     expect(rootElement).toHaveClass(className)

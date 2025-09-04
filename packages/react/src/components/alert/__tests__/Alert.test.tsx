@@ -1,23 +1,68 @@
-import { createRef } from 'react'
 import {
   renderWithNexUIProvider,
+  testClassesForwarding,
   testColorClasses,
   testComponentStability,
   testRadiusClasses,
+  testRefForwarding,
   testRootClassName,
+  testSlotPropsForwarding,
   testVariantClasses,
 } from '~/tests/shared'
 import { Alert } from '../index'
 import { alertClasses } from '../alertClasses'
 
+const slots = [
+  'icon',
+  'content',
+  'title',
+  'description',
+  'closeButton',
+] as const
+
 describe('Alert', () => {
   testComponentStability(<Alert />)
-  testRootClassName(<Alert className='test-class' />, 'test-class')
+  testRootClassName(<Alert />)
   testColorClasses(<Alert />, alertClasses)
   testRadiusClasses(<Alert />, alertClasses)
   testVariantClasses(
     <Alert />,
     ['status', ['error', 'success', 'warning', 'info']],
+    alertClasses,
+  )
+  testRefForwarding(<Alert />)
+  testClassesForwarding(
+    <Alert closable title='Title' description='Description' />,
+    slots,
+    {
+      icon: 'test-icon',
+      content: 'test-content',
+      title: 'test-title',
+      description: 'test-description',
+      closeButton: 'test-close-button',
+    },
+    alertClasses,
+  )
+  testSlotPropsForwarding(
+    <Alert title='Title' description='Description' closable />,
+    slots,
+    {
+      icon: {
+        className: 'test-icon',
+      },
+      content: {
+        className: 'test-content',
+      },
+      title: {
+        className: 'test-title',
+      },
+      description: {
+        className: 'test-description',
+      },
+      closeButton: {
+        className: 'test-close-button',
+      },
+    },
     alertClasses,
   )
 
@@ -53,89 +98,6 @@ describe('Alert', () => {
     expect(alertRoot).not.toHaveClass(alertClasses['variant-subtle'])
 
     expect(alertRoot).toMatchSnapshot()
-  })
-
-  it('should forward ref to root element', () => {
-    const ref = createRef<HTMLDivElement>()
-    const { container } = renderWithNexUIProvider(
-      <Alert ref={ref} data-testid='accordion' />,
-    )
-
-    expect(container.firstElementChild).toBe(ref.current)
-  })
-
-  it('should forward classes to icon, content, title, description and closeButton slots', () => {
-    const classes = {
-      icon: 'test-icon',
-      content: 'test-content',
-      title: 'test-title',
-      description: 'test-description',
-      closeButton: 'test-close-button',
-    }
-
-    const { queryByClassName } = renderWithNexUIProvider(
-      <Alert
-        closable
-        classes={classes}
-        title='Title'
-        description='Description'
-      />,
-    )
-
-    expect(queryByClassName(alertClasses.icon)).toHaveClass(classes.icon)
-    expect(queryByClassName(alertClasses.content)).toHaveClass(classes.content)
-    expect(queryByClassName(alertClasses.title)).toHaveClass(classes.title)
-    expect(queryByClassName(alertClasses.description)).toHaveClass(
-      classes.description,
-    )
-    expect(queryByClassName(alertClasses['close-button'])).toHaveClass(
-      classes.closeButton,
-    )
-  })
-
-  it('should forward slotProps to icon, content, title, description and closeButton slots', () => {
-    const slotProps = {
-      icon: {
-        className: 'test-icon',
-      },
-      content: {
-        className: 'test-content',
-      },
-      title: {
-        className: 'test-title',
-      },
-      description: {
-        className: 'test-description',
-      },
-      closeButton: {
-        className: 'test-close-button',
-      },
-    }
-
-    const { queryByClassName } = renderWithNexUIProvider(
-      <Alert
-        slotProps={slotProps}
-        title='Title'
-        description='Description'
-        closable
-      />,
-    )
-
-    expect(queryByClassName(alertClasses.icon)).toHaveClass(
-      slotProps.icon.className,
-    )
-    expect(queryByClassName(alertClasses.content)).toHaveClass(
-      slotProps.content.className,
-    )
-    expect(queryByClassName(alertClasses.title)).toHaveClass(
-      slotProps.title.className,
-    )
-    expect(queryByClassName(alertClasses.description)).toHaveClass(
-      slotProps.description.className,
-    )
-    expect(queryByClassName(alertClasses['close-button'])).toHaveClass(
-      slotProps.closeButton.className,
-    )
   })
 
   it('should render close button when closable is true', () => {
