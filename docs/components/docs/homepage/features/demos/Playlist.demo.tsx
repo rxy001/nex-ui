@@ -1,7 +1,5 @@
-'use client'
-
-import { Box } from '@nex-ui/react'
 import Image from 'next/image'
+import { Box } from '@nex-ui/react'
 import { playlist } from './playlist.data'
 
 export default function Playlist() {

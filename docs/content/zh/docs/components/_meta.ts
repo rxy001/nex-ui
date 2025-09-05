@@ -3,6 +3,7 @@ export default {
   alert: 'Alert',
   avatar: 'Avatar',
   button: 'Button',
+  card: 'Card',
   checkbox: 'Checkbox',
   dialog: 'Dialog',
   divider: 'Divider',
