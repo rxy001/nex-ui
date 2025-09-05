@@ -127,6 +127,17 @@ export const useSandpack = ({
           fileContent = `${importReact}\n${fileContent}\n`
         }
 
+        // Check if file content includes 'use client' directive, if yes, remove it
+        if (
+          fileContent.includes("'use client'") ||
+          fileContent.includes('"use client"')
+        ) {
+          fileContent = fileContent
+            .replace("'use client'", '')
+            .replace('"use client"', '')
+            .trim()
+        }
+
         // Check if file content includes any other dependencies, if yes, add it to dependencies
         const importRegex = /import .* from ["'](.*)["']/g
         let match: RegExpExecArray | null

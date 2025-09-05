@@ -1,5 +1,3 @@
-'use client'
-
 import {
   HeartOutlined,
   SkipBackwardFilled,
@@ -7,19 +5,8 @@ import {
   PauseCircleFilled,
   ShareOutlined,
   RepeatOutlined,
-  MoonOutlined,
-  SunOutlined,
 } from '@nex-ui/icons'
-import Image from 'next/image'
-import {
-  Box,
-  Button,
-  useColorScheme,
-  Card,
-  CardBody,
-  Flex,
-} from '@nex-ui/react'
-import albumCover from '@/public/images/album-cover.png'
+import { Box, Card, CardBody, Button, Flex } from '@nex-ui/react'
 import type { ButtonProps } from '@nex-ui/react'
 
 function IconButton({ sx, ...props }: ButtonProps) {
@@ -29,20 +16,14 @@ function IconButton({ sx, ...props }: ButtonProps) {
       iconOnly
       radius='full'
       color='gray'
-      sx={[
-        {
-          color: 'inherit',
-        },
-        // @ts-expect-error
-        sx,
-      ]}
+      // @ts-expect-error
+      sx={[{ color: 'inherit' }, sx]}
       {...props}
     />
   )
 }
-export default function MusicPlayer() {
-  const { setMode, resolvedColorScheme } = useColorScheme()
 
+export default function MusicPlayer() {
   return (
     <Box
       sx={{
@@ -50,35 +31,17 @@ export default function MusicPlayer() {
         py: '12',
         px: '8',
         borderRadius: 'xl',
-        w: {
-          _lg: '50%',
-          _DEFAULT: '100%',
-        },
         display: 'flex',
         alignItems: 'center',
-        position: 'relative',
+        pos: 'relative',
         justifyContent: 'center',
       }}
     >
-      <IconButton
-        sx={{
-          position: 'absolute',
-          right: '4',
-          top: '2',
-          color: 'rgb(251 251 251 / 80%)',
-        }}
-        aria-label='Toggle color mode'
-        onClick={() => {
-          setMode(resolvedColorScheme === 'light' ? 'dark' : 'light')
-        }}
-      >
-        {resolvedColorScheme === 'light' ? <SunOutlined /> : <MoonOutlined />}
-      </IconButton>
       <Card
         sx={{
           flex: 1,
           bg: {
-            _DEFAULT: 'white/25',
+            _DEFAULT: 'white/40',
             _dark: 'black/40',
           },
           maxW: {
@@ -113,9 +76,9 @@ export default function MusicPlayer() {
               }}
               width={160}
               height={160}
-              as={Image}
+              as='img'
               alt='Album cover'
-              src={albumCover}
+              src='/images/album-cover.png'
             />
           </Box>
           <Box sx={{ flex: 1 }}>
@@ -141,7 +104,7 @@ export default function MusicPlayer() {
               <Box
                 sx={{
                   borderRadius: 'full',
-                  bg: 'rgb(113 113 122 / 30%)',
+                  bg: 'rgb(113 113 122 / 40%)',
                   height: '1',
                   position: 'relative',
                   '::before': {

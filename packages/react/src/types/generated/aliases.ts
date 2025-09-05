@@ -10,6 +10,13 @@ export interface DefaultAliases {
   lh?: 'lineHeight'
   w?: 'width'
   h?: 'height'
+  size?: ['width', 'height']
+  maxW?: 'maxWidth'
+  minW?: 'minWidth'
+  maxH?: 'maxHeight'
+  minH?: 'minHeight'
+  pos?: 'position'
+  d?: 'display'
   p?: 'padding'
   pt?: 'paddingBlockStart'
   pb?: 'paddingBlockEnd'

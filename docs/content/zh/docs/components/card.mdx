@@ -1,0 +1,222 @@
+---
+title: Card
+description: Card 包含关于单一主题的内容和操作选项。
+---
+
+import { card } from '@/content/_demo'
+
+# Card
+
+Card 包含关于单一主题的内容和操作选项。
+
+<ComponentLinks component='card' />
+
+---
+
+## Usage
+
+<Example {...card.usage} />
+
+### Composition
+
+您可以在 Card 中使用其他 NexUI 组件来组合成更复杂的卡片。
+
+<Example {...card.composition} />
+
+### With Image
+
+<Example {...card.withImage} />
+
+### Primary Action
+
+Card 允许用户点击整个区域来触发主要操作。Card 的操作区域可以通过将其内容包装在 CardActionArea 组件中来指定。
+
+<Example {...card.primaryAction} />
+
+### Hover Effect
+
+设置 `hoverable` 属性为 `true` 可以启用悬停效果，使卡片在鼠标悬停时具有视觉反馈。
+
+<Example {...card.hoverEffect} />
+
+### Blurred Card
+
+设置 `blurred` 属性为 `true` 使卡片具有模糊效果。
+
+<Example {...card.blurredCard} />
+
+## API
+
+### Card Props
+
+Card 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        '通常为 CardHeader、CardBody、CardFooter 以及其他自定义内容。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'none'"],
+      default: "'md'",
+      description: 'Card 的 borderRadius。',
+    },
+    {
+      prop: 'shadow',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
+      default: "'md'",
+      description: 'Card 的阴影。',
+    },
+    {
+      prop: 'blurred',
+      type: 'boolean',
+      description: 'Card 是否模糊。',
+    },
+    {
+      prop: 'hoverable',
+      type: 'boolean',
+      default: 'false',
+      description: 'Card 是否显示悬停效果。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<CardOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+  ]}
+/>
+
+### CardHeader Props
+
+CardHeader 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        'CardHeader 的内容，将会使 avatar、action、title 和 subtitle 属性失效。',
+    },
+    {
+      prop: 'title',
+      type: 'ReactNode',
+      description: 'CardHeader 的标题。',
+    },
+    {
+      prop: 'subtitle',
+      type: 'ReactNode',
+      description: 'CardHeader 的副标题。',
+    },
+    {
+      prop: 'avatar',
+      type: 'ReactNode',
+      description: 'CardHeader 的头像。',
+    },
+    {
+      prop: 'action',
+      type: 'ReactNode',
+      description: 'CardHeader 的操作区域。',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<CardHeaderOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'CardHeader Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'CardHeader Slots 的 props。',
+    },
+  ]}
+/>
+
+### CardHeader Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'content',
+      class: '.nui-card-header-content',
+      component: "'div'",
+      description: 'CardHeader 的内容容器。',
+    },
+    {
+      slot: 'title',
+      class: '.nui-card-header-title',
+      component: "'div'",
+      description: 'CardHeader 的标题容器。',
+    },
+    {
+      slot: 'subtitle',
+      class: '.nui-card-header-subtitle',
+      component: "'div'",
+      description: 'CardHeader 的副标题容器。',
+    },
+  ]}
+/>
+
+### CardBody Props
+
+CardBody 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'sx',
+      type: 'SxProp<CardBodyOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+  ]}
+/>
+
+### CardFooter Props
+
+CardFooter 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'sx',
+      type: 'SxProp<CardFooterOwnerState>',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+  ]}
+/>

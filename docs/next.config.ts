@@ -77,9 +77,6 @@ export default withAnalyzer(
     //         loaders: ['@svgr/webpack'],
     //         as: '*.js',
     //       },
-    //       './content/**/*.raw.tsx': {
-    //         loaders: ['raw-loader'],
-    //       },
     //     },
     //     resolveAlias: {
     //       '@': './',

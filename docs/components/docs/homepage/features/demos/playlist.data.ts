@@ -1,50 +1,50 @@
-import beautiful from '@/public/images/beautiful-640.jpg'
-import asxophone from '@/public/images/saxophone-640.jpg'
-import dj from '@/public/images/dj-640.jpg'
-import woman from '@/public/images/woman-640.jpg'
-import music from '@/public/images/music-640.jpg'
-import man from '@/public/images/man-640.jpg'
-import accordion from '@/public/images/accordion-640.jpg'
-import marianoRoger from '@/public/images/mariano-roger-640.jpg'
+import playlistCover1 from '@/public/images/playlist-cover-1.jpg'
+import playlistCover2 from '@/public/images/playlist-cover-2.jpg'
+import playlistCover3 from '@/public/images/playlist-cover-3.jpg'
+import playlistCover4 from '@/public/images/playlist-cover-4.jpg'
+import playlistCover5 from '@/public/images/playlist-cover-5.jpg'
+import playlistCover6 from '@/public/images/playlist-cover-6.jpg'
+import playlistCover7 from '@/public/images/playlist-cover-7.jpg'
+import playlistCover8 from '@/public/images/playlist-cover-8.jpg'
 
 export const playlist = [
   {
-    cover: beautiful,
-    name: 'Trip Hop',
-    author: 'Ava',
-  },
-  {
-    cover: asxophone,
-    name: 'Classical Music',
-    author: 'Nina',
-  },
-  {
-    cover: dj,
-    name: 'Disc Jockey',
-    author: 'David',
-  },
-  {
-    cover: music,
-    name: 'Hop Hip',
-    author: 'Ethan',
-  },
-  {
-    cover: woman,
-    name: 'Folk Music',
-    author: 'Olivia',
-  },
-  {
-    cover: man,
-    name: 'Light Music',
-    author: 'Ryan',
-  },
-  {
-    cover: accordion,
+    cover: playlistCover1,
     name: 'Country Music',
     author: 'Gabriel',
   },
   {
-    cover: marianoRoger,
+    cover: playlistCover2,
+    name: 'Trip Hop',
+    author: 'Ava',
+  },
+  {
+    cover: playlistCover3,
+    name: 'Classical Music',
+    author: 'Nina',
+  },
+  {
+    cover: playlistCover4,
+    name: 'Disc Jockey',
+    author: 'David',
+  },
+  {
+    cover: playlistCover6,
+    name: 'Hip Hop',
+    author: 'Ethan',
+  },
+  {
+    cover: playlistCover5,
+    name: 'Folk Music',
+    author: 'Olivia',
+  },
+  {
+    cover: playlistCover7,
+    name: 'Light Music',
+    author: 'Ryan',
+  },
+  {
+    cover: playlistCover8,
     name: 'Pop Music',
     author: 'Benjamin',
   },
