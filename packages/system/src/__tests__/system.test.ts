@@ -420,6 +420,134 @@ describe('css', () => {
     })
   })
 
+  it('should handle array values', () => {
+    expect(
+      css([
+        {
+          w: '1',
+        },
+        {
+          h: '1',
+        },
+        {
+          px: '1',
+        },
+      ]),
+    ).toEqual([
+      {
+        width: getCssVar('sizes.1'),
+      },
+      {
+        height: getCssVar('sizes.1'),
+      },
+      {
+        paddingLeft: getCssVar('spaces.1'),
+        paddingRight: getCssVar('spaces.1'),
+      },
+    ])
+  })
+
+  it('should handle nested array values', () => {
+    expect(
+      css([
+        {
+          w: '1',
+        },
+        [
+          {
+            h: '1',
+          },
+          [
+            {
+              px: '1',
+            },
+          ],
+        ],
+      ]),
+    ).toEqual([
+      {
+        width: getCssVar('sizes.1'),
+      },
+      [
+        {
+          height: getCssVar('sizes.1'),
+        },
+        [
+          {
+            paddingLeft: getCssVar('spaces.1'),
+            paddingRight: getCssVar('spaces.1'),
+          },
+        ],
+      ],
+    ])
+  })
+
+  it('should handle both nested array values and responsive styles', () => {
+    const expected = [
+      {
+        height: getCssVar('sizes.1'),
+      },
+      [
+        {
+          width: getCssVar('sizes.1'),
+        },
+        [
+          {
+            [toMediaKey('500px')]: {
+              width: 1,
+            },
+            [toMediaKey('700px')]: {
+              width: 2,
+            },
+            [toMediaKey('900px')]: {
+              width: 3,
+            },
+          },
+        ],
+      ],
+    ]
+
+    expect(
+      css([
+        {
+          h: '1',
+        },
+        [
+          {
+            w: '1',
+          },
+          [
+            {
+              w: [1, 2, 3],
+            },
+          ],
+        ],
+      ]),
+    ).toEqual(expected)
+
+    expect(
+      css([
+        {
+          h: '1',
+        },
+        [
+          {
+            w: '1',
+          },
+          [
+            {
+              w: {
+                _sm: 1,
+                _md: 2,
+                _lg: 3,
+              },
+            },
+          ],
+        ],
+      ]),
+    ).toEqual(expected)
+  })
+
   it('should handle edge cases', () => {
     expect(css('')).toEqual('')
     expect(css(null)).toEqual('')

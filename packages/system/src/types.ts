@@ -30,14 +30,14 @@ export type InterpolationPrimitive =
 
 export type CSSProperties = CSS.Properties<number | (string & {})>
 
-export interface ArrayInterpolation
-  extends ReadonlyArray<InterpolationPrimitive> {}
+export type ArrayInterpolation = ReadonlyArray<Interpolation>
 
 export type Interpolation = InterpolationPrimitive | ArrayInterpolation
 
 type CSSOthersObject = {
-  // TODO: 理想情况为 InterpolationPrimitive ，但索引类型无法兼容明确字段的类型
-  [propertiesName: string]: Interpolation
+  [propertiesName: string]:
+    | InterpolationPrimitive
+    | ReadonlyArray<InterpolationPrimitive>
 }
 
 type ConvertToVirtualColor<T> = T extends `${string}.${infer U}`
