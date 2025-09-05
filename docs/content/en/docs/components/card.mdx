@@ -1,0 +1,223 @@
+---
+title: Card
+description: Cards contain content and actions about a single subject.
+---
+
+import { card } from '@/content/_demo'
+
+# Card
+
+Cards contain content and actions about a single subject.
+
+<ComponentLinks component='card' />
+
+---
+
+## Usage
+
+<Example {...card.usage} />
+
+### Composition
+
+You can use other NexUI components inside the card to compose a more complex card.
+
+<Example {...card.composition} />
+
+### With Image
+
+<Example {...card.withImage} />
+
+### Primary Action
+
+Often a card allow users to interact with the entirety of its surface to trigger its main action.
+The action area of the card can be specified by wrapping its contents in a `CardActionArea` component.
+
+<Example {...card.primaryAction} />
+
+### Hover Effect
+
+Set the `hoverable` property to `true` enables the hover effect, giving the card visual feedback when the mouse hovers over it.
+
+<Example {...card.hoverEffect} />
+
+### Blurred Card
+
+Set the `blurred` property to `true` enables the blur effect on the card.
+
+<Example {...card.blurredCard} />
+
+## API
+
+### Card Props
+
+Card inherit the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        'CardHeader、CardBody、CardFooter, and other custom content.',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'none'"],
+      default: "'md'",
+      description: 'The border radius of the card.',
+    },
+    {
+      prop: 'shadow',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
+      default:"'md'",
+      description: 'The shadow of the card.',
+    },
+    {
+      prop: 'blurred',
+      type: 'boolean',
+      description: 'If true, applies a backdrop filter to the card.',
+    },
+    {
+      prop: 'hoverable',
+      type: 'boolean',
+      description: 'If true, the card will have a hover effect.',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<CardOwnerState>',
+      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        'The component used for the root element.',
+    },
+
+]}
+/>
+
+### CardHeader Props
+
+CardHeader inherit the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        'The content of the card header, which will disable the avatar, action, title, and subtitle props.',
+    },
+    {
+      prop: 'title',
+      type: 'ReactNode',
+      description: 'The title of the card header.',
+    },
+    {
+      prop: 'subtitle',
+      type: 'ReactNode',
+      description: 'The subtitle of the card header.',
+    },
+    {
+      prop: 'avatar',
+      type: 'ReactNode',
+      description: 'The avatar of the card header.',
+    },
+    {
+      prop: 'action',
+      type: 'ReactNode',
+      description: 'The action area of the card header.',
+    },
+    {
+      prop: 'sx',
+      type: 'SxProp<CardHeaderOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component used for the root element.',
+    },
+    {
+      prop: 'classes',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### CardHeader Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'content',
+      class: '.nui-card-header-content',
+      component: "'div'",
+      description: 'The content container of the card header.',
+    },
+    {
+      slot: 'title',
+      class: '.nui-card-header-title',
+      component: "'div'",
+      description: 'The title container of the card header.',
+    },
+    {
+      slot: 'subtitle',
+      class: '.nui-card-header-subtitle',
+      component: "'div'",
+      description: 'The subtitle container of the card header.',
+    },
+  ]}
+/>
+
+### CardBody Props
+
+CardBody inherit the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'sx',
+      type: 'SxProp<CardBodyOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component used for the root element.',
+    },
+  ]}
+/>
+
+### CardFooter Props
+
+CardFooter inherit the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'sx',
+      type: 'SxProp<CardFooterOwnerState>',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component used for the root element.',
+    },
+  ]}
+/>

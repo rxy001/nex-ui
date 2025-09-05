@@ -45,7 +45,7 @@ export const cardRecipe = defineRecipe({
     },
     blurred: {
       true: {
-        backdropFilter: 'blur(12px) saturate(150%)',
+        backdropFilter: 'blur(12px)',
       },
     },
     hoverable: {
@@ -78,11 +78,10 @@ export const cardHeaderRecipe = defineSlotRecipe({
       alignItems: 'flex-start',
     },
     title: {
-      fs: 'md',
+      fs: 'lg',
     },
     subtitle: {
       fs: 'md',
-      color: 'gray.600',
     },
   },
 })
@@ -108,6 +107,7 @@ export const cardActionArea = defineRecipe({
     position: 'relative',
     overflow: 'hidden',
     borderRadius: 'inherit',
+    fs: 'inherit',
     '::after': {
       position: 'absolute',
       bg: {

@@ -2,12 +2,23 @@ import { defineConfig } from '@nex-ui/system'
 
 export const aliases = defineConfig.aliases({
   bg: 'backgroundColor',
+
   fs: 'fontSize',
   lh: 'lineHeight',
+
   w: 'width',
   h: 'height',
+  size: ['width', 'height'],
 
-  // padding
+  maxW: 'maxWidth',
+  minW: 'minWidth',
+  maxH: 'maxHeight',
+  minH: 'minHeight',
+
+  pos: 'position',
+
+  d: 'display',
+
   p: 'padding',
   pt: 'paddingBlockStart',
   pb: 'paddingBlockEnd',
@@ -16,7 +27,6 @@ export const aliases = defineConfig.aliases({
   px: ['paddingInlineStart', 'paddingInlineEnd'],
   py: ['paddingBlockStart', 'paddingBlockEnd'],
 
-  // margin
   m: 'margin',
   mt: 'marginBlockStart',
   mb: 'marginBlockEnd',

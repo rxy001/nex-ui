@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardActionArea,
 } from '../index'
-import { Avatar, Button, Box } from '../../index'
+import { Avatar, Button, Box, Flex } from '../../index'
 import type { CardHeaderProps } from '../index'
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -105,7 +105,7 @@ export const Hoverable: Story = {
   },
 }
 
-export const WithBlur: Story = {
+export const BlurredCard: Story = {
   args: {
     blurred: true,
   },
@@ -114,19 +114,30 @@ export const WithBlur: Story = {
       <Box
         sx={{
           backgroundImage:
-            'linear-gradient(to top right in oklab, #ffb457 0, #ff705b 100%)',
-          maxWidth: '345px',
+            'linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%)',
+          maxW: '345px',
           borderRadius: 'lg',
         }}
       >
-        <Card {...props} sx={{ bg: 'white/60' }}>
+        <Card
+          {...props}
+          sx={{
+            bg: {
+              _DEFAULT: 'white/50',
+              _dark: 'black/60',
+            },
+          }}
+        >
           <CardHeaderTemplate />
           <CardBody>
             <div>Make beautiful websites with ease and efficiency.</div>
           </CardBody>
-          <CardFooter>
-            <Button color='blue' size='sm'>
-              Share
+          <CardFooter as={Flex} gap='2'>
+            <Button color='blue' size='sm' variant='ghost'>
+              SHARE
+            </Button>
+            <Button color='blue' size='sm' variant='ghost'>
+              LEARN MORE
             </Button>
           </CardFooter>
         </Card>
