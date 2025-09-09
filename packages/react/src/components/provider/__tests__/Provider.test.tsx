@@ -111,56 +111,6 @@ describe('NexUIProvider', () => {
     expect(divider).toHaveStyleRule('background-color', 'gray')
   })
 
-  it('should customize component styles by the styleOverrides function', () => {
-    const { getByTestId, getByRole } = render(
-      <NexUIProvider
-        theme={{
-          components: {
-            Button: {
-              styleOverrides: (ownerState) => {
-                if (ownerState.size === 'lg') {
-                  return {
-                    root: {
-                      width: '300px',
-                      height: '200px',
-                    },
-                  }
-                }
-                return {
-                  root: {
-                    width: '200px',
-                    height: '100px',
-                  },
-                }
-              },
-            },
-            Divider: {
-              styleOverrides: () => ({
-                bg: 'blue',
-              }),
-            },
-          },
-        }}
-      >
-        <Button data-testid='button1'>Button</Button>
-        <Button data-testid='button2' size='lg'>
-          Button
-        </Button>
-        <Divider />
-      </NexUIProvider>,
-    )
-
-    const button1 = getByTestId('button1')
-    const button2 = getByTestId('button2')
-    const divider = getByRole('separator')
-
-    expect(button1).toHaveStyleRule('width', '200px')
-    expect(button1).toHaveStyleRule('height', '100px')
-    expect(button2).toHaveStyleRule('width', '300px')
-    expect(button2).toHaveStyleRule('height', '200px')
-    expect(divider).toHaveStyleRule('background-color', 'blue')
-  })
-
   it('should customize component default props', () => {
     const { getByRole, rerender } = render(
       <NexUIProvider>
@@ -211,7 +161,7 @@ describe('Nested NexUIProvider', () => {
             Button: {
               styleOverrides: {
                 slots: {
-                  root: { width: '100px' },
+                  root: { width: '100px', margin: '10px' },
                 },
               },
               defaultProps: { color: 'red', size: 'sm' },
@@ -235,21 +185,6 @@ describe('Nested NexUIProvider', () => {
           }}
         >
           <Button data-testid='inner-button'>Button</Button>
-          <NexUIProvider
-            theme={{
-              components: {
-                Button: {
-                  styleOverrides: () => ({
-                    root: {
-                      width: '300px',
-                    },
-                  }),
-                },
-              },
-            }}
-          >
-            <Button data-testid='innermost-button'>Button</Button>
-          </NexUIProvider>
         </NexUIProvider>
       </NexUIProvider>,
     )
@@ -261,13 +196,9 @@ describe('Nested NexUIProvider', () => {
 
     const innerButton = getByTestId('inner-button')
     expect(innerButton).toHaveStyleRule('width', '200px')
+    expect(innerButton).toHaveStyleRule('margin', '10px')
     expect(innerButton).toHaveClass(buttonClasses['color-orange'])
     expect(innerButton).toHaveClass(buttonClasses['size-sm'])
-
-    const innermostButton = getByTestId('innermost-button')
-    expect(innermostButton).toHaveStyleRule('width', '300px')
-    expect(innermostButton).toHaveClass(buttonClasses['color-orange'])
-    expect(innermostButton).toHaveClass(buttonClasses['size-sm'])
   })
 
   it('should override primaryThemeColor', () => {

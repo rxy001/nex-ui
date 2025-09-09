@@ -16,12 +16,11 @@ import { RadioGroupProvider } from './RadioGroupContext'
 import type { ElementType, KeyboardEvent } from 'react'
 import type {
   RadioGroupProps,
-  RadioGroupOwnerState,
   RadioGroupContextValue,
   RadioState,
 } from './types'
 
-const useSlotClasses = (ownerState: RadioGroupOwnerState) => {
+const useSlotClasses = (ownerState: RadioGroupProps) => {
   const { prefix } = useNexUI()
   const { orientation, classes } = ownerState
 
@@ -38,7 +37,7 @@ const useSlotClasses = (ownerState: RadioGroupOwnerState) => {
   }, [prefix, orientation, classes])
 }
 
-const useSlotAriaProps = (ownerState: RadioGroupOwnerState) => {
+const useSlotAriaProps = (ownerState: RadioGroupProps) => {
   const id = useId()
 
   const {
@@ -109,7 +108,7 @@ export const RadioGroup = <
     onValueChange,
   )
 
-  const ownerState: RadioGroupOwnerState = {
+  const ownerState: RadioGroupProps = {
     ...props,
     role,
     orientation,
@@ -200,7 +199,6 @@ export const RadioGroup = <
   })
 
   const [RadioGroupRoot, getRadioGroupRootProps] = useSlot({
-    ownerState,
     elementType: 'div',
     classNames: classes.root,
     externalForwardedProps: remainingProps,
@@ -214,7 +212,6 @@ export const RadioGroup = <
   })
 
   const [RadioGroupLabel, getRadioGroupLabelProps] = useSlot({
-    ownerState,
     elementType: 'h3',
     style: styles.label,
     classNames: classes.label,
@@ -223,7 +220,6 @@ export const RadioGroup = <
   })
 
   const [RadioGroupWrapper, getRadioGroupWrapperProps] = useSlot({
-    ownerState,
     elementType: 'div',
     style: styles.wrapper,
     classNames: classes.wrapper,

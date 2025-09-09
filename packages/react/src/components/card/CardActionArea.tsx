@@ -13,7 +13,7 @@ import { ButtonBase } from '../buttonBase'
 import { cardActionArea } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import type { ElementType } from 'react'
-import type { CardActionAreaProps, CardActionAreaOwnerState } from './types'
+import type { CardActionAreaProps } from './types'
 
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
@@ -38,7 +38,7 @@ export const CardActionArea = <RootComponent extends ElementType = 'button'>(
 
   const { children, disabled, ...remainingProps } = props
 
-  const ownerState: CardActionAreaOwnerState = {
+  const ownerState: CardActionAreaProps = {
     ...props,
   }
 

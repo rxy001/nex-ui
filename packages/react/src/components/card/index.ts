@@ -6,18 +6,13 @@ export { CardActionArea } from './CardActionArea'
 
 export type {
   CardProps,
-  CardOwnerState,
   CardPropsOverrides,
   CardHeaderProps,
-  CardHeaderOwnerState,
   CardHeaderPropsOverrides,
   CardBodyProps,
-  CardBodyOwnerState,
   CardBodyPropsOverrides,
-  CardFooterOwnerState,
   CardFooterProps,
   CardFooterPropsOverrides,
-  CardActionAreaOwnerState,
   CardActionAreaProps,
   CardActionAreaPropsOverrides,
 } from './types'

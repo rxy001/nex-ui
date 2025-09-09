@@ -1,4 +1,5 @@
 import type { ReactNode, ElementType } from 'react'
+import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type {
   CheckboxVariants,
@@ -7,25 +8,15 @@ import type {
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
 export interface CheckboxPropsOverrides {}
 
-type CheckboxSlotProps<CheckboxComponent extends ElementType> = {
-  root?: ComponentPropsWithCommonProps<
-    'label',
-    CheckboxOwnerState<CheckboxComponent>
-  >
-  label?: ComponentPropsWithCommonProps<
-    'span',
-    CheckboxOwnerState<CheckboxComponent>
-  >
-  icon?: ComponentPropsWithCommonProps<
-    'span',
-    CheckboxOwnerState<CheckboxComponent>
-  >
+type CheckboxSlotProps = {
+  root?: ComponentPropsWithCommonProps<'label'>
+  label?: ComponentPropsWithCommonProps<'span'>
+  icon?: ComponentPropsWithCommonProps<'span'>
 }
 
 type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
@@ -38,7 +29,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CheckboxOwnerState<CheckboxComponent>>
+  sx?: Interpolation
 
   /**
    * The label of the checkbox.
@@ -60,7 +51,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: CheckboxSlotProps<CheckboxComponent>
+  slotProps?: CheckboxSlotProps
 
   /**
    * The className used for each slot.
@@ -129,29 +120,14 @@ export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
 export type CheckboxOwnerState<
   CheckboxComponent extends ElementType = 'input',
 > = CheckboxProps<CheckboxComponent> & {
-  checked: boolean
-  disabled: boolean
-  color: CheckboxVariants['color']
-  size: CheckboxVariants['size']
-  radius: CheckboxVariants['radius']
-  defaultChecked: boolean
   inGroup: boolean
 }
 
 export interface CheckboxGroupPropsOverrides {}
 
-type CheckboxGroupSlotProps<
-  T extends string | number,
-  RootComponent extends ElementType,
-> = {
-  label?: ComponentPropsWithCommonProps<
-    'h3',
-    CheckboxGroupOwnerState<T, RootComponent>
-  >
-  wrapper?: ComponentPropsWithCommonProps<
-    'div',
-    CheckboxGroupOwnerState<T, RootComponent>
-  >
+type CheckboxGroupSlotProps = {
+  label?: ComponentPropsWithCommonProps<'h3'>
+  wrapper?: ComponentPropsWithCommonProps<'div'>
 }
 
 type CheckboxGroupOwnProps<
@@ -167,12 +143,12 @@ type CheckboxGroupOwnProps<
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CheckboxGroupOwnerState<T, RootComponent>>
+  sx?: Interpolation
 
   /**
    * The props used for each slot.
    */
-  slotProps?: CheckboxGroupSlotProps<T, RootComponent>
+  slotProps?: CheckboxGroupSlotProps
 
   /**
    * The className used for each slot.
@@ -245,14 +221,6 @@ export type CheckboxGroupProps<
   CheckboxGroupOwnProps<T, RootComponent>,
   CheckboxGroupPropsOverrides
 >
-
-export type CheckboxGroupOwnerState<
-  T extends number | string = number | string,
-  RootComponent extends ElementType = 'div',
-> = CheckboxGroupProps<T, RootComponent> & {
-  value: T[]
-  orientation: CheckboxGroupVariants['orientation']
-}
 
 export type CheckboxGroupContextValue<
   T extends number | string = number | string,

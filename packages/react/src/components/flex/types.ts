@@ -1,7 +1,7 @@
 import type { ElementType, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
-import type { CSSObject } from '@nex-ui/system'
-import type { OverrideProps, SxProp } from '../../types/utils'
+import type { CSSObject, Interpolation } from '@nex-ui/system'
+import type { OverrideProps } from '../../types/utils'
 
 export interface FlexPropsOverrides {}
 
@@ -15,7 +15,7 @@ type FlexOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<FlexOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the flex.
@@ -62,9 +62,3 @@ type FlexOwnProps<RootComponent extends ElementType> = {
 
 export type FlexProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<RootComponent, FlexOwnProps<RootComponent>, FlexPropsOverrides>
-
-export type FlexOwnerState<RootComponent extends ElementType = 'div'> =
-  FlexProps<RootComponent> & {
-    inline: boolean
-    direction: CSSObject['flexDirection']
-  }

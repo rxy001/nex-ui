@@ -1,18 +1,17 @@
 import type { ElementType, ReactNode } from 'react'
+import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { AvatarVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
-import type { Avatar } from './Avatar'
 
 export interface AvatarPropsOverrides {}
 
-type AvatarSlotProps<RootComponent extends ElementType> = {
-  img?: ComponentPropsWithCommonProps<'img', AvatarOwnerState<RootComponent>>
+type AvatarSlotProps = {
+  img?: ComponentPropsWithCommonProps<'img'>
 }
 
 type AvatarOwnProps<RootComponent extends ElementType> = {
@@ -25,7 +24,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<AvatarOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * Used in combination with src or srcSet to provide an alt attribute for the rendered img element.
@@ -61,7 +60,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: AvatarSlotProps<RootComponent>
+  slotProps?: AvatarSlotProps
 
   /**
    * The className used for each slot.
@@ -98,10 +97,6 @@ export type LoadedState = false | 'error' | 'loaded'
 
 export type AvatarOwnerState<RootComponent extends ElementType = 'div'> =
   AvatarProps<RootComponent> & {
-    radius: AvatarVariants['radius']
-    size: AvatarVariants['size']
-    color: AvatarVariants['color']
-    outlined: boolean
     inGroup: boolean
     loaded: LoadedState
   }
@@ -113,11 +108,8 @@ export type UseLoadedOptions = {
 
 export interface AvatarGroupPropsOverrides {}
 
-type AvatarGroupSlotProps<RootComponent extends ElementType> = {
-  surplus?: ComponentPropsWithCommonProps<
-    typeof Avatar<'div'>,
-    AvatarGroupOwnerState<RootComponent>
-  >
+type AvatarGroupSlotProps = {
+  surplus?: AvatarProps
 }
 
 type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
@@ -130,12 +122,12 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<AvatarGroupOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The props used for each slot.
    */
-  slotProps?: AvatarGroupSlotProps<RootComponent>
+  slotProps?: AvatarGroupSlotProps
 
   /**
    * The className used for each slot.
@@ -194,15 +186,6 @@ export type AvatarGroupProps<RootComponent extends ElementType = 'div'> =
     AvatarGroupOwnProps<RootComponent>,
     AvatarGroupPropsOverrides
   >
-
-export type AvatarGroupOwnerState<RootComponent extends ElementType = 'div'> =
-  AvatarGroupProps<RootComponent> & {
-    radius: AvatarVariants['radius']
-    size: AvatarVariants['size']
-    color: AvatarVariants['color']
-    outlined: boolean
-    max: number
-  }
 
 export type AvatarGroupContextValue = {
   outlined: boolean

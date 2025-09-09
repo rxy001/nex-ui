@@ -1,11 +1,14 @@
 import type { ElementType, ReactNode } from 'react'
+import type { Interpolation } from '@nex-ui/system'
+import type { ClassValue } from 'clsx'
 import type {
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
 } from '../../types/utils'
 import type { CardVariants } from '../../theme/recipes'
+
+export interface CardPropsOverrides {}
 
 type CardOwnProps<RootComponent extends ElementType> = {
   /**
@@ -15,9 +18,14 @@ type CardOwnProps<RootComponent extends ElementType> = {
   as?: RootComponent
 
   /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
+
+  /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CardOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The shadow of the card.
@@ -45,10 +53,6 @@ type CardOwnProps<RootComponent extends ElementType> = {
 export type CardProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<RootComponent, CardOwnProps<RootComponent>, CardPropsOverrides>
 
-export interface CardPropsOverrides {}
-export type CardOwnerState<RootComponent extends ElementType = 'div'> =
-  CardProps<RootComponent>
-
 type CardHeaderOwnProps<RootComponent extends ElementType> = {
   /**
    * The component used for the root element.
@@ -59,7 +63,7 @@ type CardHeaderOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CardHeaderOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The title of the card header.
@@ -90,20 +94,13 @@ type CardHeaderOwnProps<RootComponent extends ElementType> = {
    * The props used for each slot.
    */
   slotProps?: {
-    content?: ComponentPropsWithCommonProps<
-      'div',
-      CardHeaderOwnerState<RootComponent>
-    >
-    title?: ComponentPropsWithCommonProps<
-      'div',
-      CardHeaderOwnerState<RootComponent>
-    >
-    subtitle?: ComponentPropsWithCommonProps<
-      'div',
-      CardHeaderOwnerState<RootComponent>
-    >
+    content?: ComponentPropsWithCommonProps<'div'>
+    title?: ComponentPropsWithCommonProps<'div'>
+    subtitle?: ComponentPropsWithCommonProps<'div'>
   }
 }
+
+export interface CardHeaderPropsOverrides {}
 
 export type CardHeaderProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
@@ -111,10 +108,6 @@ export type CardHeaderProps<RootComponent extends ElementType = 'div'> =
     CardHeaderOwnProps<RootComponent>,
     CardHeaderPropsOverrides
   >
-
-export interface CardHeaderPropsOverrides {}
-export type CardHeaderOwnerState<RootComponent extends ElementType = 'div'> =
-  CardHeaderProps<RootComponent>
 
 type CardBodyOwnProps<RootComponent extends ElementType> = {
   /**
@@ -126,8 +119,10 @@ type CardBodyOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CardBodyOwnerState<RootComponent>>
+  sx?: Interpolation
 }
+
+export interface CardBodyPropsOverrides {}
 
 export type CardBodyProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
@@ -135,10 +130,6 @@ export type CardBodyProps<RootComponent extends ElementType = 'div'> =
     CardBodyOwnProps<RootComponent>,
     CardBodyPropsOverrides
   >
-
-export interface CardBodyPropsOverrides {}
-export type CardBodyOwnerState<RootComponent extends ElementType = 'div'> =
-  CardBodyProps<RootComponent>
 
 type CardFooterOwnProps<RootComponent extends ElementType> = {
   /**
@@ -150,8 +141,10 @@ type CardFooterOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CardFooterOwnerState<RootComponent>>
+  sx?: Interpolation
 }
+
+export interface CardFooterPropsOverrides {}
 
 export type CardFooterProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
@@ -159,10 +152,6 @@ export type CardFooterProps<RootComponent extends ElementType = 'div'> =
     CardFooterOwnProps<RootComponent>,
     CardFooterPropsOverrides
   >
-
-export interface CardFooterPropsOverrides {}
-export type CardFooterOwnerState<RootComponent extends ElementType = 'div'> =
-  CardFooterProps<RootComponent>
 
 export interface CardActionAreaPropsOverrides {}
 
@@ -176,7 +165,7 @@ type CardActionAreaOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<CardActionAreaOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * If `true`, the component is disabled.
@@ -190,7 +179,3 @@ export type CardActionAreaProps<RootComponent extends ElementType = 'button'> =
     CardActionAreaOwnProps<RootComponent>,
     CardActionAreaPropsOverrides
   >
-
-export type CardActionAreaOwnerState<
-  RootComponent extends ElementType = 'button',
-> = CardActionAreaProps<RootComponent>

@@ -1,11 +1,5 @@
 import clsx from 'clsx'
-import {
-  mergeProps,
-  isFunction,
-  isArray,
-  isPlainObject,
-  mergeRefs,
-} from '@nex-ui/utils'
+import { mergeProps, mergeRefs } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { ElementType as ReactElementType } from 'react'
@@ -13,7 +7,6 @@ import type { ClassValue } from 'clsx'
 import type { NexComponent } from '@nex-ui/styled'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type {
-  FunctionInterpolation,
   Overwrite,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
@@ -23,18 +16,12 @@ export type UseSlotArgs<
   SlotProps extends {} = {},
   ForwardedProps extends {} = {},
   AdditonalProps extends {} = {},
-  OwnerState extends {} = {},
   ShouldForwardComponent extends boolean = boolean,
 > = {
   /**
    * The slot's default component
    */
   elementType: ElementType
-
-  /**
-   * The component's ownerState
-   */
-  ownerState?: OwnerState
 
   /**
    * The slot's style.
@@ -61,8 +48,16 @@ export type UseSlotArgs<
    */
   additionalProps?: AdditonalProps
 
+  /**
+   * The accessibility props of the slot.
+   */
   a11y?: {}
 
+  /**
+   * If true, the component will be resolved from the `nex` styled factory.
+   *
+   * @default true
+   */
   shouldForwardComponent?: ShouldForwardComponent
 }
 
@@ -74,17 +69,11 @@ type SlotComponentProps<SlotProps, ForwardedProps> = Overwrite<
   }
 >
 
-const resolve = <T,>(sx: FunctionInterpolation<T>, ownerState: T) => {
-  const css = sx(ownerState)
-  return isArray(css) ? css : [css]
-}
-
 export const useSlot = <
   ElementType extends ReactElementType,
-  OwnerState extends {},
-  SlotProps extends ComponentPropsWithCommonProps<ElementType, OwnerState>,
-  ForwardedProps extends ComponentPropsWithCommonProps<ElementType, OwnerState>,
-  AdditonalProps extends ComponentPropsWithCommonProps<ElementType, OwnerState>,
+  SlotProps extends ComponentPropsWithCommonProps<ElementType>,
+  ForwardedProps extends ComponentPropsWithCommonProps<ElementType>,
+  AdditonalProps extends ComponentPropsWithCommonProps<ElementType>,
   ShouldForwardComponent extends boolean = true,
 >(
   args: UseSlotArgs<
@@ -92,14 +81,12 @@ export const useSlot = <
     SlotProps,
     ForwardedProps,
     AdditonalProps,
-    OwnerState,
     ShouldForwardComponent
   >,
 ) => {
   const {
     a11y,
     style,
-    ownerState,
     elementType,
     classNames,
     externalSlotProps,
@@ -125,19 +112,7 @@ export const useSlot = <
 
     let mergedSx: Interpolation = style
 
-    if (isFunction(props.sx)) {
-      mergedSx = [style, ...resolve(props.sx, ownerState)]
-    } else if (isArray(props.sx)) {
-      mergedSx = props.sx.reduce(
-        (acc, v) => {
-          if (isFunction(v)) {
-            return [...acc, ...resolve(v, ownerState)]
-          }
-          return [...acc, v]
-        },
-        [style],
-      )
-    } else if (isPlainObject(props.sx)) {
+    if (props.sx) {
       mergedSx = [style, props.sx]
     }
 

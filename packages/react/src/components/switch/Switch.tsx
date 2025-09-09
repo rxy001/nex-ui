@@ -14,9 +14,9 @@ import {
   useSlot,
 } from '../utils'
 import type { ElementType, HTMLAttributes } from 'react'
-import type { SwitchOwnerState, SwitchProps } from './types'
+import type { SwitchProps } from './types'
 
-const useSlotClasses = (ownerState: SwitchOwnerState) => {
+const useSlotClasses = (ownerState: SwitchProps) => {
   const { prefix } = useNexUI()
 
   const { size, color, disabled, checked, classes } = ownerState
@@ -45,7 +45,7 @@ const useSlotClasses = (ownerState: SwitchOwnerState) => {
 }
 
 const useSlotAriaProps = (
-  ownerState: SwitchOwnerState,
+  ownerState: SwitchProps,
 ): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
   const {
     children,
@@ -112,7 +112,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     onCheckedChange,
   )
 
-  const ownerState: SwitchOwnerState = {
+  const ownerState: SwitchProps = {
     ...props,
     color,
     as,
@@ -135,7 +135,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   const slotAriaProps = useSlotAriaProps(ownerState)
 
   const [SwitchRoot, getSwitchRootProps] = useSlot({
-    ownerState,
     elementType: 'label',
     externalSlotProps: slotProps?.root,
     style: styles.root,
@@ -147,7 +146,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchInput, getSwitchInputProps] = useSlot({
-    ownerState,
     elementType: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
@@ -165,7 +163,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchTrack, getSwitchTrackProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.track,
     style: styles.track,
@@ -173,7 +170,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchThumb, getSwitchThumbProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.thumb,
     style: styles.thumb,
@@ -181,7 +177,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchStartIcon, getSwitchStartIconProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.startIcon,
     style: styles.startIcon,
@@ -189,7 +184,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchEndIcon, getSwitchEndIconProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.endIcon,
     style: styles.endIcon,
@@ -197,7 +191,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchLabel, getSwitchLabelProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.label,
     style: styles.label,

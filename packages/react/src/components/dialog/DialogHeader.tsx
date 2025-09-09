@@ -12,7 +12,7 @@ import { dialogHeaderRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { ModalHeader } from '../modal'
 import type { ElementType } from 'react'
-import type { DialogHeaderOwnerState, DialogHeaderProps } from './types'
+import type { DialogHeaderProps } from './types'
 
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
@@ -38,7 +38,7 @@ export const DialogHeader = <RootComponent extends ElementType = 'h2'>(
 
   const { children, ...remainingProps } = props
 
-  const ownerState: DialogHeaderOwnerState = {
+  const ownerState: DialogHeaderProps = {
     ...props,
   }
 
@@ -51,7 +51,6 @@ export const DialogHeader = <RootComponent extends ElementType = 'h2'>(
   })
 
   const [DialogHeaderRoot, getDialogHeaderRootProps] = useSlot({
-    ownerState,
     style,
     elementType: ModalHeader,
     classNames: classes.root,

@@ -2,7 +2,7 @@
 
 import { useSystem, SystemProvider, mergeRecipeConfigs } from '@nex-ui/system'
 import { useMemo } from 'react'
-import { isPlainObject, merge, mergeWith } from '@nex-ui/utils'
+import { merge, mergeProps, mergeWith } from '@nex-ui/utils'
 import { defaultConfig } from '../../theme'
 import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { NexUIProviderProps, InnerProviderProps } from './types'
@@ -100,16 +100,10 @@ function NestedProvider(props: NexUIProviderProps) {
       theme?.components,
       (target: any, source: any, key: string) => {
         if (key === 'styleOverrides') {
-          if (isPlainObject(target) && isPlainObject(source)) {
-            return mergeRecipeConfigs(target, source)
-          }
-          return source
+          return mergeRecipeConfigs(target, source)
         }
         if (key === 'defaultProps') {
-          return {
-            ...target,
-            ...source,
-          }
+          return mergeProps(target, source)
         }
       },
     )

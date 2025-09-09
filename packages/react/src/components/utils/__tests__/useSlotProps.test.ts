@@ -74,7 +74,7 @@ describe('useSlotProps', () => {
       }),
     )
 
-    expect(result.current.sx).toEqual([style, { margin: 10 }, { padding: 5 }])
+    expect(result.current.sx).toEqual([style, [{ margin: 10 }, { padding: 5 }]])
   })
 
   it('should merge style with plain object sx', () => {

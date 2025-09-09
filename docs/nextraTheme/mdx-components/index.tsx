@@ -36,7 +36,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
     const calloutType = (
       {
         caution: 'error',
-        important: 'error', // TODO
+        important: 'error',
         note: 'info',
         tip: 'default',
         warning: 'warning',

@@ -14,13 +14,9 @@ import {
 import { useNexUI } from '../provider'
 import { checkboxGroupRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
-import type {
-  CheckboxGroupContextValue,
-  CheckboxGroupProps,
-  CheckboxGroupOwnerState,
-} from './types'
+import type { CheckboxGroupContextValue, CheckboxGroupProps } from './types'
 
-const useSlotClasses = (ownerState: CheckboxGroupOwnerState) => {
+const useSlotClasses = (ownerState: CheckboxGroupProps) => {
   const { prefix } = useNexUI()
 
   const { orientation, classes } = ownerState
@@ -38,7 +34,7 @@ const useSlotClasses = (ownerState: CheckboxGroupOwnerState) => {
   }, [prefix, orientation, classes])
 }
 
-const useSlotAriaProps = (ownerState: CheckboxGroupOwnerState) => {
+const useSlotAriaProps = (ownerState: CheckboxGroupProps) => {
   const id = useId()
 
   const {
@@ -98,7 +94,7 @@ export const CheckboxGroup = <
     onValueChange,
   )
 
-  const ownerState: CheckboxGroupOwnerState = {
+  const ownerState: CheckboxGroupProps = {
     ...props,
     orientation,
     value: values,
@@ -115,7 +111,6 @@ export const CheckboxGroup = <
   })
 
   const [CheckboxGroupRoot, getCheckboxGroupRootProps] = useSlot({
-    ownerState,
     elementType: 'div',
     style: styles.root,
     classNames: classes.root,
@@ -124,7 +119,6 @@ export const CheckboxGroup = <
   })
 
   const [CheckboxGroupLabel, getCheckboxGroupLabelProps] = useSlot({
-    ownerState,
     elementType: 'h3',
     classNames: classes.label,
     style: styles.label,
@@ -133,7 +127,6 @@ export const CheckboxGroup = <
   })
 
   const [CheckboxGroupWrapper, getCheckboxGroupWrapperProps] = useSlot({
-    ownerState,
     elementType: 'div',
     classNames: classes.wrapper,
     style: styles.wrapper,

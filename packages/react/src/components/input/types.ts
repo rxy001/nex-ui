@@ -1,33 +1,21 @@
 import type { ReactNode, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
+import type { Interpolation } from '@nex-ui/system'
 import type { InputVariants } from '../../theme/recipes'
 import type {
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
   OverrideProps,
-  SxProp,
 } from '../../types/utils'
 
 export interface InputPropsOverrides {}
 
-type InputSlotProps<InputComponent extends ElementType> = {
-  root?: ComponentPropsWithCommonProps<'div', InputOwnerState<InputComponent>>
-  clearButton?: ComponentPropsWithCommonProps<
-    'button',
-    InputOwnerState<InputComponent>
-  >
-  prefix?: ComponentPropsWithCommonProps<
-    'span',
-    InputOwnerState<InputComponent>
-  >
-  suffix?: ComponentPropsWithCommonProps<
-    'span',
-    InputOwnerState<InputComponent>
-  >
-  label?: ComponentPropsWithCommonProps<
-    'label',
-    InputOwnerState<InputComponent>
-  >
+type InputSlotProps = {
+  root?: ComponentPropsWithCommonProps<'div'>
+  clearButton?: ComponentPropsWithCommonProps<'button'>
+  prefix?: ComponentPropsWithCommonProps<'span'>
+  suffix?: ComponentPropsWithCommonProps<'span'>
+  label?: ComponentPropsWithCommonProps<'label'>
 }
 
 type InputOwnProps<InputComponent extends ElementType> = {
@@ -40,7 +28,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<InputOwnerState<InputComponent>>
+  sx?: Interpolation
 
   /**
    * The label of the input.
@@ -162,7 +150,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: InputSlotProps<InputComponent>
+  slotProps?: InputSlotProps
 }
 
 export type InputProps<InputComponent extends ElementType = 'input'> =
@@ -171,17 +159,3 @@ export type InputProps<InputComponent extends ElementType = 'input'> =
     InputOwnProps<InputComponent>,
     InputPropsOverrides
   >
-
-export type InputOwnerState<InputComponent extends ElementType = 'input'> =
-  InputProps<InputComponent> & {
-    color: InputVariants['color']
-    disabled: boolean
-    variant: InputVariants['variant']
-    fullWidth: boolean
-    size: InputVariants['size']
-    radius: InputVariants['radius']
-    invalid: boolean
-    type: InputProps['type']
-    clearable: boolean
-    value: string
-  }

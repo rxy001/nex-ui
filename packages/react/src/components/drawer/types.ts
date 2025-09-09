@@ -1,20 +1,17 @@
 import type { DOMMotionComponents } from 'motion/react'
 import type { ElementType, ReactNode } from 'react'
+import type { Interpolation } from '@nex-ui/system'
 import type { DrawerContentVariants } from '../../theme/recipes'
 import type {
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
   HTMLMotionProps,
 } from '../../types/utils'
 
 // ----------------Drawer----------------
-type DrawerSlotProps<RootComponent extends ElementType> = {
-  backdrop?: ComponentPropsWithCommonProps<
-    'div',
-    DrawerOwnerState<RootComponent>
-  >
+type DrawerSlotProps = {
+  backdrop?: ComponentPropsWithCommonProps<'div'>
 }
 
 type DrawerOwnProps<RootComponent extends ElementType> = {
@@ -27,7 +24,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DrawerOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the drawer. It's usually the `DrawerContent` component.
@@ -48,7 +45,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: DrawerSlotProps<RootComponent>
+  slotProps?: DrawerSlotProps
 
   /**
    * The className used for each slot.
@@ -116,14 +113,6 @@ export type DrawerOwnerState<
   RootComponent extends ElementType = DOMMotionComponents['div'],
 > = DrawerOwnProps<RootComponent> & {
   setOpen: (open: boolean) => void
-  open: boolean
-  preventScroll: boolean
-  keepMounted: boolean
-  restoreFocus: boolean
-  defaultOpen: boolean
-  hideBackdrop: boolean
-  closeOnInteractBackdrop: boolean
-  closeOnEscape: boolean
 }
 
 export interface DrawerPropsOverrides {}
@@ -137,15 +126,9 @@ export type DrawerProps<
 >
 
 // ----------------DrawerContent----------------
-type DrawerContentSlotProps<RootComponent extends ElementType> = {
-  closeButton?: ComponentPropsWithCommonProps<
-    'button',
-    DrawerContentOwnerState<RootComponent>
-  >
-  paper?: ComponentPropsWithCommonProps<
-    DOMMotionComponents['section'],
-    DrawerContentOwnerState<RootComponent>
-  >
+type DrawerContentSlotProps = {
+  closeButton?: ComponentPropsWithCommonProps<'button'>
+  paper?: ComponentPropsWithCommonProps<DOMMotionComponents['section']>
 }
 
 export interface DrawerContentPropsOverrides {}
@@ -160,7 +143,7 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DrawerContentOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The className used for each slot.
@@ -175,7 +158,7 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: DrawerContentSlotProps<RootComponent>
+  slotProps?: DrawerContentSlotProps
 
   /**
    * Custom close button to display on top right corner.
@@ -228,13 +211,6 @@ export type DrawerContentProps<RootComponent extends ElementType = 'div'> =
     DrawerContentPropsOverrides
   >
 
-export type DrawerContentOwnerState<RootComponent extends ElementType = 'div'> =
-  DrawerContentProps<RootComponent> & {
-    hideCloseButton: boolean
-    size: DrawerContentVariants['size']
-    placement: DrawerContentVariants['placement']
-  }
-
 // ------------- DrawerHeader -------------
 export interface DrawerHeaderPropsOverrides {}
 
@@ -248,7 +224,7 @@ type DrawerHeaderOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DrawerHeaderOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the drawer header.
@@ -263,9 +239,6 @@ export type DrawerHeaderProps<RootComponent extends ElementType = 'h2'> =
     DrawerHeaderPropsOverrides
   >
 
-export type DrawerHeaderOwnerState<RootComponent extends ElementType = 'h2'> =
-  DrawerHeaderProps<RootComponent>
-
 // ------------- DrawerBody -------------
 export interface DrawerBodyPropsOverrides {}
 
@@ -279,7 +252,7 @@ type DrawerBodyOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DrawerBodyOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the drawer body.
@@ -294,9 +267,6 @@ export type DrawerBodyProps<RootComponent extends ElementType = 'div'> =
     DrawerBodyPropsOverrides
   >
 
-export type DrawerBodyOwnerState<RootComponent extends ElementType = 'div'> =
-  DrawerBodyProps<RootComponent>
-
 // ------------- DrawerFooter -------------
 export interface DrawerFooterPropsOverrides {}
 
@@ -310,7 +280,7 @@ type DrawerFooterOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DrawerFooterOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the drawer footer.
@@ -324,6 +294,3 @@ export type DrawerFooterProps<RootComponent extends ElementType = 'div'> =
     DrawerFooterOwnProps<RootComponent>,
     DrawerFooterPropsOverrides
   >
-
-export type DrawerFooterOwnerState<RootComponent extends ElementType = 'div'> =
-  DrawerFooterOwnProps<RootComponent>

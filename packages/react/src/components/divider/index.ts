@@ -1,6 +1,2 @@
 export { Divider } from './Divider'
-export type {
-  DividerProps,
-  DividerOwnerState,
-  DividerPropsOverrides,
-} from './types'
+export type { DividerProps, DividerPropsOverrides } from './types'

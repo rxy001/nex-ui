@@ -1,16 +1,16 @@
 import type { ElementType, ReactNode } from 'react'
+import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
-  SxProp,
   ComponentUtilityClasses,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 import type { RadioGroupVariants, RadioVariants } from '../../theme/recipes'
 
-type RadioSlotProps<RadioComponent extends ElementType> = {
-  root?: ComponentPropsWithCommonProps<'label', RadioOwnerState<RadioComponent>>
-  dot?: ComponentPropsWithCommonProps<'span', RadioOwnerState<RadioComponent>>
-  label?: ComponentPropsWithCommonProps<'span', RadioOwnerState<RadioComponent>>
+type RadioSlotProps = {
+  root?: ComponentPropsWithCommonProps<'label'>
+  dot?: ComponentPropsWithCommonProps<'span'>
+  label?: ComponentPropsWithCommonProps<'span'>
 }
 
 type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
@@ -23,7 +23,7 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<RadioOwnerState<RadioComponent>>
+  sx?: Interpolation
 
   /**
    * Additional class names to apply to the root element.
@@ -81,7 +81,7 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: RadioSlotProps<RadioComponent>
+  slotProps?: RadioSlotProps
 }
 
 export interface RadioPropsOverrides {}
@@ -96,24 +96,11 @@ export type RadioProps<RadioComponent extends ElementType = 'input'> =
 export type RadioOwnerState<RadioComponent extends ElementType = 'input'> =
   RadioProps<RadioComponent> & {
     inGroup: boolean
-    color: RadioVariants['color']
-    size: RadioVariants['size']
-    checked: boolean
-    defaultChecked: boolean
   }
 
-type RadioGroupSlotProps<
-  T extends string | number,
-  RootComponent extends ElementType,
-> = {
-  label?: ComponentPropsWithCommonProps<
-    'h3',
-    RadioGroupOwnerState<T, RootComponent>
-  >
-  wrapper?: ComponentPropsWithCommonProps<
-    'div',
-    RadioGroupOwnerState<T, RootComponent>
-  >
+type RadioGroupSlotProps = {
+  label?: ComponentPropsWithCommonProps<'h3'>
+  wrapper?: ComponentPropsWithCommonProps<'div'>
 }
 
 type RadioGroupOwnProps<
@@ -129,12 +116,12 @@ type RadioGroupOwnProps<
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<RadioGroupOwnerState<T, RootComponent>>
+  sx?: Interpolation
 
   /**
    * The props used for each slot.
    */
-  slotProps?: RadioGroupSlotProps<T, RootComponent>
+  slotProps?: RadioGroupSlotProps
 
   /**
    * The className used for each slot.
@@ -199,14 +186,6 @@ export type RadioGroupProps<
   RadioGroupOwnProps<T, RootComponent>,
   RadioGroupPropsOverrides
 >
-
-export type RadioGroupOwnerState<
-  T extends string | number = string | number,
-  RootComponent extends ElementType = 'div',
-> = RadioGroupProps<T, RootComponent> & {
-  orientation: RadioGroupVariants['orientation']
-  value: T
-}
 
 export type RadioState = { value?: string | number; disabled?: boolean }
 

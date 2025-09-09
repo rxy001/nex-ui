@@ -14,9 +14,9 @@ import { avatarGroupRecipe } from '../../theme/recipes'
 import { Avatar } from './Avatar'
 import { useNexUI } from '../provider'
 import type { ElementType } from 'react'
-import type { AvatarGroupOwnerState, AvatarGroupProps } from './types'
+import type { AvatarGroupProps } from './types'
 
-const useSlotClasses = (ownerState: AvatarGroupOwnerState) => {
+const useSlotClasses = (ownerState: AvatarGroupProps) => {
   const { prefix } = useNexUI()
   const { classes } = ownerState
 
@@ -56,7 +56,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
 
   const max = Math.max(1, maxProp)
 
-  const ownerState: AvatarGroupOwnerState = {
+  const ownerState: AvatarGroupProps = {
     ...props,
     size,
     color,
@@ -75,7 +75,6 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
 
   const [AvatarGroupRoot, getAvatarGroupRootProps] = useSlot({
     style,
-    ownerState,
     elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: classes.root,
@@ -88,7 +87,6 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AvatarSurplus, getAvatarSurplusProps] = useSlot({
-    ownerState,
     elementType: Avatar,
     externalSlotProps: slotProps?.surplus,
     classNames: classes.surplus,

@@ -16,7 +16,6 @@ function IconButton({ sx, ...props }: ButtonProps) {
       iconOnly
       radius='full'
       color='gray'
-      // @ts-expect-error
       sx={[{ color: 'inherit' }, sx]}
       {...props}
     />

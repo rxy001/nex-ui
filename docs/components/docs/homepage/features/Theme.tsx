@@ -100,13 +100,6 @@ export const theme = defineTheme({
   
 export const theme = defineTheme({
   components: {
-    Avatar: {
-      styleOverrides: (ownerState) => {
-        return {
-          bg: 'transparent',
-        }
-      },
-    },
     Button: {
       defaultProps: {
         size: 'lg',

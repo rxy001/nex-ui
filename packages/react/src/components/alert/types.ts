@@ -1,27 +1,22 @@
 import type { ElementType, ReactNode, MouseEventHandler } from 'react'
+import type { Interpolation } from '@nex-ui/system'
+import type { ClassValue } from 'clsx'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
-import type { Button } from '../button'
+import type { ButtonProps } from '../button'
 import type { AlertVariants } from '../../theme/recipes'
 
 export interface AlertPropsOverrides {}
 
-type AlertSlotProps<RootComponent extends ElementType> = {
-  icon: ComponentPropsWithCommonProps<'div', AlertOwnerState<RootComponent>>
-  content: ComponentPropsWithCommonProps<'div', AlertOwnerState<RootComponent>>
-  title: ComponentPropsWithCommonProps<'div', AlertOwnerState<RootComponent>>
-  description: ComponentPropsWithCommonProps<
-    'div',
-    AlertOwnerState<RootComponent>
-  >
-  closeButton: ComponentPropsWithCommonProps<
-    typeof Button<'button'>,
-    AlertOwnerState<RootComponent>
-  >
+type AlertSlotProps = {
+  icon: ComponentPropsWithCommonProps<'div'>
+  content: ComponentPropsWithCommonProps<'div'>
+  title: ComponentPropsWithCommonProps<'div'>
+  description: ComponentPropsWithCommonProps<'div'>
+  closeButton: ButtonProps
 }
 
 type AlertStatus = 'info' | 'success' | 'warning' | 'error'
@@ -36,12 +31,17 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<AlertOwnerState<RootComponent>>
+  sx?: Interpolation
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 
   /**
    * The props used for each slot.
    */
-  slotProps?: AlertSlotProps<RootComponent>
+  slotProps?: AlertSlotProps
 
   /**
    * The className used for each slot.
@@ -115,12 +115,3 @@ export type AlertProps<RootComponent extends ElementType = 'div'> =
     AlertOwnProps<RootComponent>,
     AlertPropsOverrides
   >
-
-export type AlertOwnerState<RootComponent extends ElementType = 'div'> =
-  AlertProps<RootComponent> & {
-    status: AlertStatus
-    variant: AlertVariants['variant']
-    color: AlertVariants['color']
-    radius: AlertVariants['radius']
-    icon: ReactNode
-  }

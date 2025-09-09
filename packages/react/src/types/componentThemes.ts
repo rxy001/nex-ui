@@ -32,245 +32,157 @@ import type {
 } from '../theme/recipes'
 import type {
   ButtonProps,
-  ButtonOwnerState,
-  IconOwnerState,
-  FlexOwnerState,
   FlexProps,
-  InputOwnerState,
   InputProps,
-  DividerOwnerState,
   DividerProps,
   AvatarProps,
-  AvatarOwnerState,
   CheckboxProps,
-  CheckboxOwnerState,
   SwitchProps,
-  SwitchOwnerState,
   AccordionProps,
-  AccordionOwnerState,
   AccordionItemProps,
   AvatarGroupProps,
   CheckboxGroupProps,
-  CheckboxGroupOwnerState,
   DialogProps,
-  DialogBodyOwnerState,
   DialogBodyProps,
-  DialogContentOwnerState,
   DialogContentProps,
-  DialogFooterOwnerState,
   DialogFooterProps,
-  DialogHeaderOwnerState,
   DialogHeaderProps,
-  DialogOwnerState,
   DrawerProps,
-  DrawerBodyOwnerState,
   DrawerBodyProps,
-  DrawerContentOwnerState,
   DrawerContentProps,
-  DrawerFooterOwnerState,
   DrawerFooterProps,
-  DrawerHeaderOwnerState,
   DrawerHeaderProps,
-  DrawerOwnerState,
-  RadioOwnerState,
   RadioProps,
-  RadioGroupOwnerState,
   RadioGroupProps,
-  AlertOwnerState,
   AlertProps,
   CardProps,
-  CardOwnerState,
   CardHeaderProps,
-  CardHeaderOwnerState,
   CardBodyProps,
-  CardBodyOwnerState,
   CardFooterProps,
-  CardFooterOwnerState,
   CardActionAreaProps,
-  CardActionAreaOwnerState,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
-import type { ComponentThemeObject, ComponentThemeFn } from './utils'
+import type { ComponentThemeObject } from './utils'
 
 export type ComponentThemes = {
   Button?: {
-    styleOverrides?:
-      | ComponentThemeObject<ButtonRecipe>
-      | ComponentThemeFn<ButtonOwnerState, ButtonRecipe>
+    styleOverrides?: ComponentThemeObject<ButtonRecipe>
     defaultProps?: ButtonProps
   }
   Icon?: {
-    styleOverrides?:
-      | ComponentThemeObject<IconRecipe>
-      | ComponentThemeFn<IconOwnerState, IconRecipe>
+    styleOverrides?: ComponentThemeObject<IconRecipe>
     defaultProps?: IconProps
   }
   Flex?: {
-    styleOverrides?:
-      | ComponentThemeObject<FlexRecipe>
-      | ComponentThemeFn<FlexOwnerState, FlexRecipe>
+    styleOverrides?: ComponentThemeObject<FlexRecipe>
     defaultProps?: FlexProps
   }
   Input?: {
-    styleOverrides?:
-      | ComponentThemeObject<InputRecipe>
-      | ComponentThemeFn<InputOwnerState, InputRecipe>
+    styleOverrides?: ComponentThemeObject<InputRecipe>
     defaultProps?: InputProps
   }
   Divider?: {
-    styleOverrides?:
-      | ComponentThemeObject<DividerRecipe>
-      | ComponentThemeFn<DividerOwnerState, DividerRecipe>
+    styleOverrides?: ComponentThemeObject<DividerRecipe>
     defaultProps?: DividerProps
   }
   Avatar?: {
-    styleOverrides?:
-      | ComponentThemeObject<AvatarRecipe>
-      | ComponentThemeFn<AvatarOwnerState, AvatarRecipe>
+    styleOverrides?: ComponentThemeObject<AvatarRecipe>
     defaultProps?: AvatarProps
   }
   AvatarGroup?: {
-    styleOverrides?:
-      | ComponentThemeObject<AvatarGroupRecipe>
-      | ComponentThemeFn<AvatarOwnerState, AvatarGroupRecipe>
+    styleOverrides?: ComponentThemeObject<AvatarGroupRecipe>
     defaultProps?: AvatarGroupProps
   }
   Checkbox?: {
-    styleOverrides?:
-      | ComponentThemeObject<CheckboxRecipe>
-      | ComponentThemeFn<CheckboxOwnerState, CheckboxRecipe>
+    styleOverrides?: ComponentThemeObject<CheckboxRecipe>
     defaultProps?: CheckboxProps
   }
   CheckboxGroup?: {
-    styleOverrides?:
-      | ComponentThemeObject<CheckboxGroupRecipe>
-      | ComponentThemeFn<CheckboxGroupOwnerState, CheckboxGroupRecipe>
+    styleOverrides?: ComponentThemeObject<CheckboxGroupRecipe>
     defaultProps?: CheckboxGroupProps
   }
   Switch?: {
-    styleOverrides?:
-      | ComponentThemeObject<SwitchRecipe>
-      | ComponentThemeFn<SwitchOwnerState, SwitchRecipe>
+    styleOverrides?: ComponentThemeObject<SwitchRecipe>
     defaultProps?: SwitchProps
   }
   Accordion?: {
-    styleOverrides?:
-      | ComponentThemeObject<AccordionRecipe>
-      | ComponentThemeFn<AccordionOwnerState, AccordionRecipe>
+    styleOverrides?: ComponentThemeObject<AccordionRecipe>
     defaultProps?: AccordionProps
   }
   AccordionItem?: {
-    styleOverrides?:
-      | ComponentThemeObject<AccordionItemRecipe>
-      | ComponentThemeFn<AccordionOwnerState, AccordionItemRecipe>
+    styleOverrides?: ComponentThemeObject<AccordionItemRecipe>
     defaultProps?: AccordionItemProps
   }
   Dialog?: {
-    styleOverrides?:
-      | ComponentThemeObject<DialogRootRecipe>
-      | ComponentThemeFn<DialogOwnerState, DialogRootRecipe>
+    styleOverrides?: ComponentThemeObject<DialogRootRecipe>
     defaultProps?: DialogProps
   }
   DialogContent?: {
-    styleOverrides?:
-      | ComponentThemeObject<DialogContentRecipe>
-      | ComponentThemeFn<DialogContentOwnerState, DialogContentRecipe>
+    styleOverrides?: ComponentThemeObject<DialogContentRecipe>
     defaultProps?: DialogContentProps
   }
   DialogHeader?: {
-    styleOverrides?:
-      | ComponentThemeObject<DialogHeaderRecipe>
-      | ComponentThemeFn<DialogHeaderOwnerState, DialogHeaderRecipe>
+    styleOverrides?: ComponentThemeObject<DialogHeaderRecipe>
     defaultProps?: DialogHeaderProps
   }
   DialogBody?: {
-    styleOverrides?:
-      | ComponentThemeObject<DialogBodyRecipe>
-      | ComponentThemeFn<DialogBodyOwnerState, DialogBodyRecipe>
+    styleOverrides?: ComponentThemeObject<DialogBodyRecipe>
     defaultProps?: DialogBodyProps
   }
   DialogFooter?: {
-    styleOverrides?:
-      | ComponentThemeObject<DialogFooterRecipe>
-      | ComponentThemeFn<DialogFooterOwnerState, DialogFooterRecipe>
+    styleOverrides?: ComponentThemeObject<DialogFooterRecipe>
     defaultProps?: DialogFooterProps
   }
   Drawer?: {
-    styleOverrides?:
-      | ComponentThemeObject<DrawerRootRecipe>
-      | ComponentThemeFn<DrawerOwnerState, DrawerRootRecipe>
+    styleOverrides?: ComponentThemeObject<DrawerRootRecipe>
     defaultProps?: DrawerProps
   }
   DrawerContent?: {
-    styleOverrides?:
-      | ComponentThemeObject<DrawerContentRecipe>
-      | ComponentThemeFn<DrawerContentOwnerState, DrawerContentRecipe>
+    styleOverrides?: ComponentThemeObject<DrawerContentRecipe>
     defaultProps?: DrawerContentProps
   }
   DrawerHeader?: {
-    styleOverrides?:
-      | ComponentThemeObject<DrawerHeaderRecipe>
-      | ComponentThemeFn<DrawerHeaderOwnerState, DrawerHeaderRecipe>
+    styleOverrides?: ComponentThemeObject<DrawerHeaderRecipe>
     defaultProps?: DrawerHeaderProps
   }
   DrawerBody?: {
-    styleOverrides?:
-      | ComponentThemeObject<DrawerBodyRecipe>
-      | ComponentThemeFn<DrawerBodyOwnerState, DrawerBodyRecipe>
+    styleOverrides?: ComponentThemeObject<DrawerBodyRecipe>
     defaultProps?: DrawerBodyProps
   }
   DrawerFooter?: {
-    styleOverrides?:
-      | ComponentThemeObject<DrawerFooterRecipe>
-      | ComponentThemeFn<DrawerFooterOwnerState, DrawerFooterRecipe>
+    styleOverrides?: ComponentThemeObject<DrawerFooterRecipe>
     defaultProps?: DrawerFooterProps
   }
   Radio?: {
-    styleOverrides?:
-      | ComponentThemeObject<RadioRecipe>
-      | ComponentThemeFn<RadioOwnerState, RadioRecipe>
+    styleOverrides?: ComponentThemeObject<RadioRecipe>
     defaultProps?: RadioProps
   }
   RadioGroup?: {
-    styleOverrides?:
-      | ComponentThemeObject<RadioGroupRecipe>
-      | ComponentThemeFn<RadioGroupOwnerState, RadioGroupRecipe>
+    styleOverrides?: ComponentThemeObject<RadioGroupRecipe>
     defaultProps?: RadioGroupProps
   }
   Alert?: {
-    styleOverrides?:
-      | ComponentThemeObject<AlertRecipe>
-      | ComponentThemeFn<AlertOwnerState, AlertRecipe>
+    styleOverrides?: ComponentThemeObject<AlertRecipe>
     defaultProps?: AlertProps
   }
   Card?: {
-    styleOverrides?:
-      | ComponentThemeObject<CardRecipe>
-      | ComponentThemeFn<CardOwnerState, CardRecipe>
+    styleOverrides?: ComponentThemeObject<CardRecipe>
     defaultProps?: CardProps
   }
   CardHeader?: {
-    styleOverrides?:
-      | ComponentThemeObject<CardHeaderRecipe>
-      | ComponentThemeFn<CardHeaderOwnerState, CardHeaderRecipe>
+    styleOverrides?: ComponentThemeObject<CardHeaderRecipe>
     defaultProps?: CardHeaderProps
   }
   CardBody?: {
-    styleOverrides?:
-      | ComponentThemeObject<CardBodyRecipe>
-      | ComponentThemeFn<CardBodyOwnerState, CardBodyRecipe>
+    styleOverrides?: ComponentThemeObject<CardBodyRecipe>
     defaultProps?: CardBodyProps
   }
   CardFooter?: {
-    styleOverrides?:
-      | ComponentThemeObject<CardFooterRecipe>
-      | ComponentThemeFn<CardFooterOwnerState, CardFooterRecipe>
+    styleOverrides?: ComponentThemeObject<CardFooterRecipe>
     defaultProps?: CardFooterProps
   }
   CardActionArea?: {
-    styleOverrides?:
-      | ComponentThemeObject<CardActionAreaRecipe>
-      | ComponentThemeFn<CardActionAreaOwnerState, CardActionAreaRecipe>
+    styleOverrides?: ComponentThemeObject<CardActionAreaRecipe>
     defaultProps?: CardActionAreaProps
   }
 }

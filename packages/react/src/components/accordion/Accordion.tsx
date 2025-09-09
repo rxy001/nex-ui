@@ -14,7 +14,7 @@ import {
 } from '../utils'
 import { accordionRecipe } from '../../theme/recipes'
 import type { ElementType, Key } from 'react'
-import type { AccordionOwnerState, AccordionProps } from './types'
+import type { AccordionProps } from './types'
 
 const useSlotClasses = (ownerState: AccordionProps) => {
   const { prefix } = useNexUI()
@@ -68,7 +68,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     )
   }
 
-  const ownerState: AccordionOwnerState = {
+  const ownerState: AccordionProps = {
     ...props,
     hideIndicator,
     multiple,
@@ -90,7 +90,6 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
 
   const [AccordionRoot, getAccordionRootProps] = useSlot({
     style,
-    ownerState,
     elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: classes.root,

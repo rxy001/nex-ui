@@ -12,7 +12,7 @@ import { drawerFooterRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { ModalFooter } from '../modal'
 import type { ElementType } from 'react'
-import type { DrawerFooterOwnerState, DrawerFooterProps } from './types'
+import type { DrawerFooterProps } from './types'
 
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
@@ -38,7 +38,7 @@ export const DrawerFooter = <RootComponent extends ElementType = 'div'>(
 
   const { children, ...remainingProps } = props
 
-  const ownerState: DrawerFooterOwnerState = {
+  const ownerState: DrawerFooterProps = {
     ...props,
   }
 
@@ -51,7 +51,6 @@ export const DrawerFooter = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DrawerFooterRoot, getDrawerFooterRootProps] = useSlot({
-    ownerState,
     style,
     elementType: ModalFooter,
     classNames: classes.root,

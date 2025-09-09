@@ -29,36 +29,6 @@ const theme = defineTheme({
 
 通过 `components` 中的 `styleOverrides` 键可以更改任何 Nex UI 组件的任何默认样式。
 
-`styleOverrides` 支持两种不同方式覆盖组件的样式：函数或者对象（[Recipes](/docs/styling/recipes)、[SlotRecipes](/docs/styling/slot-recipes)）。
-
-### 函数
-
-使用回调函数来访问组件的 `ownerState`，返回 [`sx`](/docs/styling/sx-prop)。
-
-```tsx
-import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
-
-const theme = defineTheme({
-  components: {
-    Button: {
-      defaultProps: {
-        color: 'yellow',
-      },
-      styleOverrides: (ownerState: ButtonOwnerState) => {
-        if (color === 'yellow') {
-          return {
-            bg: 'yellow.500',
-            color: 'white',
-          }
-        }
-      },
-    },
-  },
-})
-```
-
-### 对象
-
 使用 [Recipes](/docs/styling/recipes) 或者 [SlotRecipes](/docs/styling/slot-recipes) （由不同的组件决定）不仅可以覆盖组件的默认样式，还包括各种不同 `variants` 以及组合式 `variants`的样式。
 
 举例来说，当您想要覆盖 `Button` 组件 `variants` 属性值为 `outlined` 的样式时：
@@ -119,26 +89,6 @@ const theme = defineTheme({
 例如，`Button` 的 `size` 属性目前仅支持 `sm`、`md`、`lg`，但我们还可以扩展其支持 `xl`：
 
 ```tsx
-import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
-
-const theme = defineTheme({
-  components: {
-    Button: {
-      styleOverrides: ({ size }: ButtonOwnerState) => {
-        if (size === 'xl') {
-          return {
-            h: '14',
-          }
-        }
-      },
-    },
-  },
-})
-```
-
-或者使用 [Recipes](/docs/styling/recipes) \ [SlotRecipes](/docs/styling/slot-recipes) （由想要扩展的组件决定）
-
-```tsx
 const theme = defineTheme({
   components: {
     Button: {
@@ -158,7 +108,7 @@ const theme = defineTheme({
 })
 ```
 
-甚至，您可以通过上述两种方式扩展尚未支持的 API 的样式。
+甚至，您可以通过上述方式扩展尚未支持的 API 的样式。
 
 ### TypeScript
 

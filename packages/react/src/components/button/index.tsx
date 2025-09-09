@@ -1,7 +1,3 @@
 export { Button } from './Button'
 
-export type {
-  ButtonProps,
-  ButtonOwnerState,
-  ButtonPropsOverrides,
-} from './types'
+export type { ButtonProps, ButtonPropsOverrides } from './types'

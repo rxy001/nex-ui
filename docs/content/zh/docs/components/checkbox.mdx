@@ -122,7 +122,7 @@ Checkbox 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'icon',
-      type: 'ReactNode | (ownerState) => ReactNode',
+      type: ['ReactNode', '(ownerState: CheckboxProps) => ReactNode'],
       description: 'Checkbox 选中时的图标。',
     },
     {
@@ -164,7 +164,7 @@ Checkbox 继承 `as` (默认为 `'input'`) 的 Props。
     },
     {
       prop: 'sx',
-      type: 'SxProp<CheckboxOwnerState>',
+      type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
     },
     {
@@ -295,7 +295,7 @@ CheckboxGroup 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'sx',
-      type: 'SxProp<CheckboxGroupOwnerState>',
+      type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
     },
     {

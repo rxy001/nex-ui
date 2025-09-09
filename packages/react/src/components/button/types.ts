@@ -1,24 +1,18 @@
 import type { ReactNode, ElementType, AnchorHTMLAttributes } from 'react'
 import type { ClassValue } from 'clsx'
+import type { Interpolation } from '@nex-ui/system'
 import type { ButtonVariants } from '../../theme/recipes'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 
 export interface ButtonPropsOverrides {}
 
-type ButtonSlotProps<RootComponent extends ElementType> = {
-  startIcon?: ComponentPropsWithCommonProps<
-    'span',
-    ButtonOwnerState<RootComponent>
-  >
-  endIcon?: ComponentPropsWithCommonProps<
-    'span',
-    ButtonOwnerState<RootComponent>
-  >
+type ButtonSlotProps = {
+  startIcon?: ComponentPropsWithCommonProps<'span'>
+  endIcon?: ComponentPropsWithCommonProps<'span'>
 }
 
 type ButtonOwnProps<RootComponent extends ElementType> = {
@@ -31,7 +25,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<ButtonOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The element is placed before the children.
@@ -77,7 +71,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: ButtonSlotProps<RootComponent>
+  slotProps?: ButtonSlotProps
 
   /**
    * The className used for each slot.
@@ -145,17 +139,3 @@ export type ButtonProps<RootComponent extends ElementType = 'button'> =
     ButtonOwnProps<RootComponent>,
     ButtonPropsOverrides
   >
-
-export type ButtonOwnerState<RootComponent extends ElementType = 'button'> =
-  ButtonProps<RootComponent> & {
-    variant: ButtonVariants['variant']
-    size: ButtonVariants['size']
-    radius: ButtonVariants['radius']
-    color: ButtonVariants['color']
-    iconOnly: boolean
-    fullWidth: boolean
-    disabled: boolean
-    disableRipple: boolean
-    loading: boolean
-    spinnerPlacement: 'start' | 'end'
-  }

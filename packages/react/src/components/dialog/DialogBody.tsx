@@ -13,7 +13,7 @@ import { useNexUI } from '../provider'
 import { useDialogContent } from './DialogContext'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
-import type { DialogBodyOwnerState, DialogBodyProps } from './types'
+import type { DialogBodyProps } from './types'
 
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
@@ -41,7 +41,7 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
 
   const { children, tabIndex, ...remainingProps } = props
 
-  const ownerState: DialogBodyOwnerState = props
+  const ownerState: DialogBodyProps = props
 
   const style = useStyles({
     ownerState: {
@@ -55,7 +55,6 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
   const classes = useSlotClasses()
 
   const [DialogBodyRoot, getDialogBodyRootProps] = useSlot({
-    ownerState,
     style,
     elementType: ModalBody,
     classNames: classes.root,

@@ -55,7 +55,6 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
   } = ownerState
 
   const [Root, getRootProps] = useSlot({
-    ownerState,
     elementType: ModalRoot,
     style: styles.root,
     externalForwardedProps: remainingProps,
@@ -64,7 +63,6 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
   })
 
   const [DrawerBackdrop, getDrawerBackdropProps] = useSlot({
-    ownerState,
     elementType: ModalBackdrop,
     style: styles.backdrop,
     externalSlotProps: slotProps?.backdrop,

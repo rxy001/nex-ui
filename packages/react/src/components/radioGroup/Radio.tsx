@@ -194,7 +194,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
 
   const [RadioRoot, getRadioRootProps] = useSlot({
     elementType: 'label',
-    ownerState,
     style: styles.root,
     externalSlotProps: slotProps?.root,
     classNames: slotClasses.root,
@@ -205,7 +204,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
   })
 
   const [RadioInput, getRadioInputProps] = useSlot({
-    ownerState,
     elementType: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
@@ -226,7 +224,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
 
   const [RadioLabel, getRadioLabelProps] = useSlot({
     elementType: 'span',
-    ownerState,
     style: styles.label,
     externalSlotProps: slotProps?.label,
     classNames: slotClasses.label,
@@ -235,7 +232,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
 
   const [RadioDot, getRadioDotProps] = useSlot({
     elementType: 'span',
-    ownerState,
     externalSlotProps: slotProps?.dot,
     style: styles.dot,
     classNames: slotClasses.dot,

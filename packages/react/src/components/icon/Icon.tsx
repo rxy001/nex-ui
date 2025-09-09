@@ -12,9 +12,9 @@ import {
   useSlot,
 } from '../utils'
 import type { ElementType } from 'react'
-import type { IconOwnerState, IconProps } from './types'
+import type { IconProps } from './types'
 
-const useSlotClasses = (ownerState: IconOwnerState) => {
+const useSlotClasses = (ownerState: IconProps) => {
   const { prefix } = useNexUI()
 
   const { spin, size } = ownerState
@@ -53,7 +53,7 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
     console.warn('[Nex UI] Icon: Please pass the "as" property.')
   }
 
-  const ownerState: IconOwnerState = {
+  const ownerState: IconProps = {
     ...props,
     color,
     as,
@@ -73,7 +73,6 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
 
   const [IconRoot, getIconRootProps] = useSlot({
     style,
-    ownerState,
     elementType: 'svg',
     externalForwardedProps: remainingProps,
     classNames: classes.root,

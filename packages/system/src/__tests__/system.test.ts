@@ -482,7 +482,7 @@ describe('css', () => {
     ])
   })
 
-  it('should handle both nested array values and responsive styles', () => {
+  it('should handle both nested array values and responsive value', () => {
     const expected = [
       {
         height: getCssVar('sizes.1'),

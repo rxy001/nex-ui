@@ -33,7 +33,6 @@ function IconButton({ sx, ...props }: ButtonProps) {
         {
           color: 'inherit',
         },
-        // @ts-expect-error
         sx,
       ]}
       {...props}

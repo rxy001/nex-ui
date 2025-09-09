@@ -1,14 +1,14 @@
 import type { ClassValue } from 'clsx'
 import type { ElementType, Key, ReactNode } from 'react'
 import type { DOMMotionComponents } from 'motion/react'
+import type { Interpolation } from '@nex-ui/system'
 import type {
   ComponentUtilityClasses,
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
   HTMLMotionProps,
 } from '../../types/utils'
-import type { AccordionItemVariants } from '../../theme/recipes'
+import type { AccordionVariants } from '../../theme/recipes'
 
 // Accordion
 export interface AccordionPropsOverrides {}
@@ -23,7 +23,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<AccordionOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * If true, the accordion items can be expanded at the same time.
@@ -98,7 +98,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
    * The accordion appearance style.
    * @default 'underlined'
    */
-  variant?: AccordionItemVariants['variant']
+  variant?: AccordionVariants['variant']
 }
 
 export type AccordionProps<RootComponent extends ElementType = 'div'> =
@@ -108,38 +108,14 @@ export type AccordionProps<RootComponent extends ElementType = 'div'> =
     AccordionPropsOverrides
   >
 
-export type AccordionOwnerState<RootComponent extends ElementType = 'div'> =
-  AccordionProps<RootComponent> & {
-    hideIndicator: boolean
-    multiple: boolean
-    disabled: boolean
-    keepMounted: boolean
-    disabledKeys: Key[]
-    defaultExpandedKeys: Key[]
-    expandedKeys: Key[]
-    variant: AccordionItemVariants['variant']
-  }
-
 // AccordionItem
 export interface AccordionItemPropsOverrides {}
 
-export interface AccordionItemSlotProps<RootComponent extends ElementType> {
-  heading?: ComponentPropsWithCommonProps<
-    'h3',
-    AccordionItemOwnerState<RootComponent>
-  >
-  indicator?: ComponentPropsWithCommonProps<
-    DOMMotionComponents['span'],
-    AccordionItemOwnerState<RootComponent>
-  >
-  content?: ComponentPropsWithCommonProps<
-    'div',
-    AccordionItemOwnerState<RootComponent>
-  >
-  trigger?: ComponentPropsWithCommonProps<
-    'button',
-    AccordionItemOwnerState<RootComponent>
-  >
+export interface AccordionItemSlotProps {
+  heading?: ComponentPropsWithCommonProps<'h3'>
+  indicator?: ComponentPropsWithCommonProps<DOMMotionComponents['span']>
+  content?: ComponentPropsWithCommonProps<'div'>
+  trigger?: ComponentPropsWithCommonProps<'button'>
 }
 
 type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
@@ -152,7 +128,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<AccordionItemOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the component.
@@ -207,7 +183,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: AccordionItemSlotProps<RootComponent>
+  slotProps?: AccordionItemSlotProps
 
   /**
    * The className used for each slot.
@@ -226,11 +202,7 @@ export type AccordionItemProps<RootComponent extends ElementType = 'div'> =
 export type AccordionItemOwnerState<RootComponent extends ElementType = 'div'> =
   AccordionItemProps<RootComponent> & {
     expanded: boolean
-    keepMounted: boolean
-    hideIndicator: boolean
-    itemKey: Key
-    disabled: boolean
-    variant: AccordionItemVariants['variant']
+    variant: AccordionVariants['variant']
   }
 
 export type AccordionGroupContextValue = {
@@ -242,6 +214,6 @@ export type AccordionGroupContextValue = {
   disabled: boolean
   indicator?: ReactNode
   motionProps?: HTMLMotionProps<'div'>
-  variant: AccordionItemVariants['variant']
+  variant: AccordionVariants['variant']
   indicatorMotionProps?: HTMLMotionProps<'span'>
 }
