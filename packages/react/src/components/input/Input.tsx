@@ -16,9 +16,9 @@ import {
   useSlot,
 } from '../utils'
 import type { ElementType, ChangeEvent, MouseEvent } from 'react'
-import type { InputOwnerState, InputProps } from './types'
+import type { InputProps } from './types'
 
-const useSlotClasses = (ownerState: InputOwnerState) => {
+const useSlotClasses = (ownerState: InputProps) => {
   const { prefix } = useNexUI()
 
   const {
@@ -70,7 +70,7 @@ const useSlotClasses = (ownerState: InputOwnerState) => {
   ])
 }
 
-const useSlotAriaProps = (ownerState: InputOwnerState) => {
+const useSlotAriaProps = (ownerState: InputProps) => {
   const {
     label,
     slotProps,
@@ -187,7 +187,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     }
   }
 
-  const ownerState: InputOwnerState = {
+  const ownerState: InputProps = {
     ...props,
     color,
     disabled,
@@ -231,7 +231,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputRoot, getInputRootProps] = useSlot({
-    ownerState,
     elementType: 'div',
     externalSlotProps: slotProps?.root,
     style: styles.root,
@@ -244,7 +243,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputLabel, getInputLabelProps] = useSlot({
-    ownerState,
     elementType: 'label',
     externalSlotProps: slotProps?.label,
     style: styles.label,
@@ -253,7 +251,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputControl, getInputControlProps] = useSlot({
-    ownerState,
     elementType: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
@@ -272,7 +269,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputClearButton, getClearButtonProps] = useSlot({
-    ownerState,
     elementType: ButtonBase,
     style: styles.clearButton,
     externalSlotProps: slotProps?.clearButton,
@@ -289,7 +285,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputPrefix, getInputPrefixProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.prefix,
     style: styles.prefix,
@@ -297,7 +292,6 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputSuffix, getInputSuffixProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.suffix,
     style: styles.suffix,

@@ -11,7 +11,7 @@ import {
 import { cardBodyRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import type { ElementType } from 'react'
-import type { CardBodyOwnerState, CardBodyProps } from './types'
+import type { CardBodyProps } from './types'
 
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
@@ -34,7 +34,7 @@ export const CardBody = <RootComponent extends ElementType>(
     props: inProps,
   })
 
-  const ownerState: CardBodyOwnerState = {
+  const ownerState: CardBodyProps = {
     ...props,
   }
 
@@ -47,7 +47,6 @@ export const CardBody = <RootComponent extends ElementType>(
   })
 
   const [CardBodyRoot, getCardBodyRootProps] = useSlot({
-    ownerState,
     style,
     classNames: slotClasses.root,
     elementType: 'div',

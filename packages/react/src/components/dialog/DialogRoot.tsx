@@ -65,7 +65,6 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
   })
 
   const [Root, getRootProps] = useSlot({
-    ownerState,
     elementType: ModalRoot,
     style: styles.root,
     externalForwardedProps: remainingProps,
@@ -74,7 +73,6 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
   })
 
   const [DialogBackdrop, getDialogBackdropProps] = useSlot({
-    ownerState,
     elementType: ModalBackdrop,
     style: styles.backdrop,
     externalSlotProps: slotProps?.backdrop,

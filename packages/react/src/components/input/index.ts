@@ -1,2 +1,2 @@
 export { Input } from './Input'
-export type { InputOwnerState, InputProps, InputPropsOverrides } from './types'
+export type { InputProps, InputPropsOverrides } from './types'

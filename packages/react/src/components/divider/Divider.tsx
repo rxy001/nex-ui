@@ -11,9 +11,9 @@ import {
 import { useNexUI } from '../provider'
 import { dividerRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
-import type { DividerOwnerState, DividerProps } from './types'
+import type { DividerProps } from './types'
 
-const useSlotClasses = (ownerState: DividerOwnerState) => {
+const useSlotClasses = (ownerState: DividerProps) => {
   const { prefix } = useNexUI()
 
   return useMemo(() => {
@@ -43,7 +43,7 @@ export const Divider = <RootComponent extends ElementType = 'hr'>(
     ...remainingProps
   } = props
 
-  const ownerState: DividerOwnerState = { ...props, orientation }
+  const ownerState: DividerProps = { ...props, orientation }
 
   const classes = useSlotClasses(ownerState)
 
@@ -54,7 +54,6 @@ export const Divider = <RootComponent extends ElementType = 'hr'>(
   })
 
   const [DividerRoot, getDividerRootProps] = useSlot({
-    ownerState,
     style,
     elementType: 'hr',
     externalForwardedProps: remainingProps,

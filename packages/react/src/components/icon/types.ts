@@ -1,16 +1,16 @@
 import type { ComponentType, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { CSSObject } from '@nex-ui/system'
+import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { IconVariants } from '../../theme/recipes'
-import type { OverrideProps, SxProp } from '../../types/utils'
+import type { OverrideProps } from '../../types/utils'
 
 export interface IconPropsOverrides {}
 
-export type IconOwnProsp<RootComponent extends ElementType> = {
+export type IconOwnProps = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<IconOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * Additional class names to apply to the root element.
@@ -53,12 +53,4 @@ export type IconOwnProsp<RootComponent extends ElementType> = {
 }
 
 export type IconProps<RootComponent extends ElementType = 'svg'> =
-  OverrideProps<RootComponent, IconOwnProsp<RootComponent>, IconPropsOverrides>
-
-export type IconOwnerState<RootComponent extends ElementType = 'svg'> =
-  IconProps<RootComponent> & {
-    spin: boolean
-    size: IconVariants['size']
-    width: CSSObject['width']
-    height: CSSObject['height']
-  }
+  OverrideProps<RootComponent, IconOwnProps, IconPropsOverrides>

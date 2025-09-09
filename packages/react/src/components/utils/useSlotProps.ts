@@ -1,4 +1,4 @@
-import { mergeProps, isArray, isPlainObject, mergeRefs } from '@nex-ui/utils'
+import { mergeProps, mergeRefs } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 
@@ -27,6 +27,9 @@ export type UseSlotPropsArgs<
    */
   additionalProps?: AdditionalProps
 
+  /**
+   * The accessibility props of the slot.
+   */
   a11y?: {}
 }
 
@@ -62,14 +65,11 @@ export const useSlotProps = <
   )
 
   const resolvedSx = useMemo(() => {
-    if (!style) {
-      return props.sx
-    }
-    if (isArray(props.sx)) {
-      return props.sx.reduce((acc, v) => [...acc, v], [style]).flat(1)
-    }
-    if (isPlainObject(props.sx)) {
+    if (style && props.sx) {
       return [style, props.sx]
+    }
+    if (props.sx) {
+      return props.sx
     }
     return style
   }, [props.sx, style])

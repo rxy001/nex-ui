@@ -6,6 +6,4 @@ export type {
   RadioGroupProps,
   RadioPropsOverrides,
   RadioGroupPropsOverrides,
-  RadioOwnerState,
-  RadioGroupOwnerState,
 } from './types'

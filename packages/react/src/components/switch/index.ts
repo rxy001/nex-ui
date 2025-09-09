@@ -1,6 +1,2 @@
 export { Switch } from './Switch'
-export type {
-  SwitchProps,
-  SwitchOwnerState,
-  SwitchPropsOverrides,
-} from './types'
+export type { SwitchProps, SwitchPropsOverrides } from './types'

@@ -29,36 +29,6 @@ const theme = defineTheme({
 
 You can change the default styles of any Nex UI component by using the `styleOverrides` key in `components`.
 
-`styleOverrides` supports two different ways to override component styles: functions or objects ([Recipes](/docs/styling/recipes), [SlotRecipes](/docs/styling/slot-recipes)).
-
-### Functions
-
-Use a callback function to access the `ownerState` of the component and return [`sx`](/docs/styling/sx-prop).
-
-```tsx
-import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
-
-const theme = defineTheme({
-  components: {
-    Button: {
-      defaultProps: {
-        color: 'yellow',
-      },
-      styleOverrides: (ownerState: ButtonOwnerState) => {
-        if (color === 'yellow') {
-          return {
-            bg: 'yellow.500',
-            color: 'white',
-          }
-        }
-      },
-    },
-  },
-})
-```
-
-### Objects
-
 Using [Recipes](/docs/styling/recipes) or [SlotRecipes](/docs/styling/slot-recipes) (determined by different components) can not only override the default styles of components but also the styles of various `variants` and combined `variants`.
 
 For example, when you want to override the style of the `Button` component with the `variants` property value of `outlined`:
@@ -119,26 +89,6 @@ const theme = defineTheme({
 For example, the `size` property of the `Button` originally only supports `sm`, `md`, `lg`, but we can extend it to support `xl`:
 
 ```tsx
-import { defineTheme, type ButtonOwnerState } from '@nex-ui/react'
-
-const theme = defineTheme({
-  components: {
-    Button: {
-      styleOverrides: ({ size }: ButtonOwnerState) => {
-        if (size === 'xl') {
-          return {
-            h: '14',
-          }
-        }
-      },
-    },
-  },
-})
-```
-
-Or use [Recipes](/docs/styling/recipes) \ [SlotRecipes](/docs/styling/slot-recipes) (determined by the component you want to extend)
-
-```tsx
 const theme = defineTheme({
   components: {
     Button: {
@@ -158,7 +108,7 @@ const theme = defineTheme({
 })
 ```
 
-Even better, you can use the above two methods to extend the styles of APIs that are not yet supported.
+Even better, you can use the above method to extend the styles of APIs that are not yet supported.
 
 ### TypeScript
 
