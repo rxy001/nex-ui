@@ -12,6 +12,7 @@ export const accordionRecipe = defineRecipe({
         border: '1px solid {colors.gray.highlight}',
         borderRadius: 'md',
       },
+      underlined: {},
     },
   },
 })
@@ -68,6 +69,7 @@ export const accordionItemRecipe = defineSlotRecipe({
 })
 
 export type AccordionRecipe = typeof accordionRecipe
+export type AccordionVariants = RecipeVariants<AccordionRecipe>
 
 export type AccordionItemRecipe = typeof accordionItemRecipe
 export type AccordionItemVariants = RecipeVariants<AccordionItemRecipe>

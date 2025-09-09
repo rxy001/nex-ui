@@ -14,9 +14,9 @@ import {
   useSlot,
 } from '../utils'
 import type { ElementType } from 'react'
-import type { ButtonProps, ButtonOwnerState } from './types'
+import type { ButtonProps } from './types'
 
-const useSlotClasses = (ownerState: ButtonOwnerState) => {
+const useSlotClasses = (ownerState: ButtonProps) => {
   const { prefix } = useNexUI()
 
   const {
@@ -109,7 +109,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
 
   const disabled = loading || disabledProp
 
-  const ownerState: ButtonOwnerState = {
+  const ownerState: ButtonProps = {
     ...props,
     spinnerPlacement,
     variant,
@@ -132,7 +132,6 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   })
 
   const [ButtonRoot, getButtonRootProps] = useSlot({
-    ownerState,
     elementType: ButtonBase<'button'>,
     externalForwardedProps: remainingProps,
     classNames: classes.root,
@@ -144,7 +143,6 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   })
 
   const [ButtonStartIcon, getButtonStartIconProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.startIcon,
     classNames: classes.startIcon,
@@ -152,7 +150,6 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   })
 
   const [ButtonEndIcon, getButtonEndIconProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.endIcon,
     classNames: classes.endIcon,

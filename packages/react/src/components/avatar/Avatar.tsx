@@ -163,7 +163,6 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
   const slotAriaProps = useSlotAriaProps(ownerState)
 
   const [AvatarRoot, getAvatarRootProps] = useSlot({
-    ownerState,
     elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: classes.root,
@@ -172,7 +171,6 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AvatarImg, getAvatarImgProps] = useSlot({
-    ownerState,
     elementType: 'img',
     externalSlotProps: slotProps?.img,
     classNames: classes.img,

@@ -20,9 +20,9 @@ import { alertRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { Button } from '../button'
 import type { ElementType } from 'react'
-import type { AlertOwnerState, AlertProps } from './types'
+import type { AlertProps } from './types'
 
-const useSlotClasses = (ownerState: AlertOwnerState) => {
+const useSlotClasses = (ownerState: AlertProps) => {
   const { prefix } = useNexUI()
   const { classes, color, radius, variant, status } = ownerState
 
@@ -48,7 +48,7 @@ const useSlotClasses = (ownerState: AlertOwnerState) => {
   }, [classes, color, prefix, radius, status, variant])
 }
 
-const useSlotAriaProps = (ownerState: AlertOwnerState) => {
+const useSlotAriaProps = (ownerState: AlertProps) => {
   const { role = 'alert' } = ownerState
 
   return {
@@ -120,7 +120,7 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     }
   }, [colorProp, status])
 
-  const ownerState: AlertOwnerState = {
+  const ownerState: AlertProps = {
     ...props,
     status,
     variant,
@@ -140,7 +140,6 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AlertRoot, getAlertRootProps] = useSlot({
-    ownerState,
     elementType: 'div',
     externalForwardedProps: remainingProps,
     style: styles.root,
@@ -149,7 +148,6 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AlertIcon, getAlertIconProps] = useSlot({
-    ownerState,
     elementType: 'div',
     style: styles.icon,
     externalSlotProps: slotProps?.icon,
@@ -157,7 +155,6 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AlertContent, getAlertContentProps] = useSlot({
-    ownerState,
     elementType: 'div',
     style: styles.content,
     externalSlotProps: slotProps?.content,
@@ -165,7 +162,6 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AlertTitle, getAlertTitleProps] = useSlot({
-    ownerState,
     elementType: 'div',
     style: styles.title,
     externalSlotProps: slotProps?.title,
@@ -173,7 +169,6 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AlertDescription, getAlertDescriptionProps] = useSlot({
-    ownerState,
     elementType: 'div',
     style: styles.description,
     externalSlotProps: slotProps?.description,
@@ -181,7 +176,6 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AlertCloseButton, getAlertCloseButtonProps] = useSlot({
-    ownerState,
     elementType: Button,
     style: styles.closeButton,
     shouldForwardComponent: false,

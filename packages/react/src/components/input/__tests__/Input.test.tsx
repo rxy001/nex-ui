@@ -135,6 +135,68 @@ describe('Input', () => {
     expect(inputRoot).toMatchSnapshot()
   })
 
+  it('should convert to the correct label placement when value exists', () => {
+    const { container, rerender } = renderWithNexUIProvider(
+      <Input labelPlacement='float-outside' value='value' label='Label' />,
+    )
+
+    expect(container.firstElementChild).toHaveClass(
+      inputClasses['label-placement-outside'],
+    )
+
+    rerender(
+      <Input labelPlacement='float-inside' value='value' label='Label' />,
+    )
+
+    expect(container.firstElementChild).toHaveClass(
+      inputClasses['label-placement-inside'],
+    )
+  })
+
+  it('should convert to the correct label placement when placeholder exists', () => {
+    const { container, rerender } = renderWithNexUIProvider(
+      <Input
+        labelPlacement='float-outside'
+        placeholder='placeholder'
+        label='Label'
+      />,
+    )
+
+    expect(container.firstElementChild).toHaveClass(
+      inputClasses['label-placement-outside'],
+    )
+
+    rerender(
+      <Input
+        labelPlacement='float-inside'
+        placeholder='placeholder'
+        label='Label'
+      />,
+    )
+
+    expect(container.firstElementChild).toHaveClass(
+      inputClasses['label-placement-inside'],
+    )
+  })
+
+  it('should convert to the correct label placement when prefix exists', () => {
+    const { container, rerender } = renderWithNexUIProvider(
+      <Input labelPlacement='float-outside' prefix='prefix' label='Label' />,
+    )
+
+    expect(container.firstElementChild).toHaveClass(
+      inputClasses['label-placement-outside'],
+    )
+
+    rerender(
+      <Input labelPlacement='float-inside' prefix='prefix' label='Label' />,
+    )
+
+    expect(container.firstElementChild).toHaveClass(
+      inputClasses['label-placement-inside'],
+    )
+  })
+
   it('should mark input as invalid when invalid prop is true', () => {
     const { getByTestId } = renderWithNexUIProvider(
       <Input invalid data-testid='input' />,

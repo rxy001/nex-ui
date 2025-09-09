@@ -1,40 +1,22 @@
 import type { ElementType, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
+import type { Interpolation } from '@nex-ui/system'
 import type {
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
   OverrideProps,
-  SxProp,
 } from '../../types/utils'
 import type { SwitchVariants } from '../../theme/recipes'
 
 export interface SwitchPropsOverrides {}
 
-type SwitchSlotProps<SwitchComponent extends ElementType> = {
-  root?: ComponentPropsWithCommonProps<
-    'label',
-    SwitchOwnerState<SwitchComponent>
-  >
-  track?: ComponentPropsWithCommonProps<
-    'span',
-    SwitchOwnerState<SwitchComponent>
-  >
-  startIcon?: ComponentPropsWithCommonProps<
-    'span',
-    SwitchOwnerState<SwitchComponent>
-  >
-  endIcon?: ComponentPropsWithCommonProps<
-    'span',
-    SwitchOwnerState<SwitchComponent>
-  >
-  thumb?: ComponentPropsWithCommonProps<
-    'span',
-    SwitchOwnerState<SwitchComponent>
-  >
-  label?: ComponentPropsWithCommonProps<
-    'span',
-    SwitchOwnerState<SwitchComponent>
-  >
+type SwitchSlotProps = {
+  root?: ComponentPropsWithCommonProps<'label'>
+  track?: ComponentPropsWithCommonProps<'span'>
+  startIcon?: ComponentPropsWithCommonProps<'span'>
+  endIcon?: ComponentPropsWithCommonProps<'span'>
+  thumb?: ComponentPropsWithCommonProps<'span'>
+  label?: ComponentPropsWithCommonProps<'span'>
 }
 
 export type SwitchOwnProps<SwitchComponent extends ElementType> = {
@@ -47,7 +29,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<SwitchOwnerState<SwitchComponent>>
+  sx?: Interpolation
 
   /**
    * The label of the switch.
@@ -72,7 +54,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: SwitchSlotProps<SwitchComponent>
+  slotProps?: SwitchSlotProps
 
   /**
    * The className used for each slot.
@@ -87,7 +69,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
    */
   thumbIcon?:
     | ReactNode
-    | ((ownerState: SwitchOwnerState<SwitchComponent>) => ReactNode)
+    | ((ownerState: SwitchProps<SwitchComponent>) => ReactNode)
 
   /**
    * Handler that is called when the element's checked state changes.
@@ -130,12 +112,3 @@ export type SwitchProps<SwitchComponent extends ElementType = 'input'> =
     SwitchOwnProps<SwitchComponent>,
     SwitchPropsOverrides
   >
-
-export type SwitchOwnerState<SwitchComponent extends ElementType = 'input'> =
-  SwitchProps<SwitchComponent> & {
-    checked: boolean
-    disabled: boolean
-    size: SwitchVariants['size']
-    color: SwitchVariants['color']
-    defaultChecked: boolean
-  }

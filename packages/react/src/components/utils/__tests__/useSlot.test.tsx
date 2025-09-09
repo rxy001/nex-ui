@@ -86,45 +86,14 @@ describe('useSlot', () => {
     )
   })
 
-  it('should handle sx as function', () => {
-    const mockSx1 = jest.fn(() => ({ color: 'red' }))
-    const mockSx2 = jest.fn(() => [{ backgroundColor: 'blue' }])
-    const ownerState = { variant: 'primary' }
-    const style = { fontSize: '16px' }
-
-    const { result, rerender } = renderHook((props) => useSlot(props), {
-      initialProps: {
-        elementType: 'div',
-        ownerState,
-        style,
-        externalSlotProps: { sx: mockSx1 },
-      } as UseSlotArgs<'div'>,
-    })
-    const props1 = result.current[1]()
-    expect(mockSx1).toHaveBeenCalledWith(ownerState)
-    expect(props1.sx).toEqual([style, { color: 'red' }])
-
-    rerender({
-      elementType: 'div',
-      ownerState,
-      style,
-      externalSlotProps: { sx: mockSx2 },
-    })
-    const props2 = result.current[1]()
-    expect(mockSx2).toHaveBeenCalledWith(ownerState)
-    expect(props2.sx).toEqual([style, { backgroundColor: 'blue' }])
-  })
-
   it('should handle sx as array', () => {
-    const mockSx1 = jest.fn(() => ({ color: 'red' }))
+    const mockSx1 = { color: 'red' }
     const mockSx2 = { backgroundColor: 'blue' }
-    const ownerState = { variant: 'primary' }
     const style = { fontSize: '16px' }
 
     const { result } = renderHook(() =>
       useSlot({
         elementType: 'div',
-        ownerState,
         style,
         externalSlotProps: { sx: [mockSx1, mockSx2] },
       }),
@@ -133,8 +102,7 @@ describe('useSlot', () => {
     const [, getProps] = result.current
     const props = getProps()
 
-    expect(mockSx1).toHaveBeenCalledWith(ownerState)
-    expect(props.sx).toEqual([style, { color: 'red' }, mockSx2])
+    expect(props.sx).toEqual([style, [mockSx1, mockSx2]])
   })
 
   it('should handle sx as plain object', () => {

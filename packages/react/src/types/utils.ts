@@ -3,7 +3,7 @@ import type {
   CSSObject,
   RecipeRuntimeFn,
   SlotRecipeRuntimeFn,
-  InterpolationPrimitive,
+  Interpolation,
 } from '@nex-ui/system'
 import type { ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
@@ -12,30 +12,14 @@ export type UniteTokens<T extends {}, U extends {}> = {
   [K in keyof T]: K extends keyof U ? T[K] | U[K] : T[K]
 }
 
-export type ComponentPropsWithCommonProps<
-  T extends ElementType,
-  OwnerState,
-> = Overwrite<
+export type ComponentPropsWithCommonProps<T extends ElementType> = Overwrite<
   ComponentProps<T>,
   {
-    sx?: SxProp<OwnerState>
+    sx?: Interpolation
     as?: ElementType
     className?: ClassValue
   }
 >
-
-export type FunctionInterpolation<T> = (
-  OwnerState: T,
-) => InterpolationPrimitive | ReadonlyArray<InterpolationPrimitive>
-
-type ArrayInterpolation<T> = ReadonlyArray<
-  InterpolationPrimitive | FunctionInterpolation<T>
->
-
-export type SxProp<OwnerState> =
-  | InterpolationPrimitive
-  | ArrayInterpolation<OwnerState>
-  | FunctionInterpolation<OwnerState>
 
 export type ComponentUtilityClasses<T extends string> = Partial<
   Record<T, ClassValue>
@@ -85,18 +69,6 @@ export type ComponentThemeObject<T> = T extends RecipeRuntimeFn
           [K in T['slots'][number]]?: CSSObject
         }
       >
-    : never
-
-export type ComponentThemeFn<P, S> = (
-  ownerState: P,
-) => S extends SlotRecipeRuntimeFn
-  ?
-      | {
-          [K in S['slots'][number]]?: CSSObject
-        }
-      | void
-  : S extends RecipeRuntimeFn
-    ? CSSObject | void
     : never
 
 type Motion = typeof m

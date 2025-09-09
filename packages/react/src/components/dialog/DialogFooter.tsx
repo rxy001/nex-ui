@@ -12,7 +12,7 @@ import { dialogFooterRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { ModalFooter } from '../modal'
 import type { ElementType } from 'react'
-import type { DialogFooterOwnerState, DialogFooterProps } from './types'
+import type { DialogFooterProps } from './types'
 
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
@@ -38,7 +38,7 @@ export const DialogFooter = <RootComponent extends ElementType = 'div'>(
 
   const { children, ...remainingProps } = props
 
-  const ownerState: DialogFooterOwnerState = {
+  const ownerState: DialogFooterProps = {
     ...props,
   }
 
@@ -51,7 +51,6 @@ export const DialogFooter = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DialogFooterRoot, getDialogFooterRootProps] = useSlot({
-    ownerState,
     style,
     elementType: ModalFooter,
     classNames: classes.root,

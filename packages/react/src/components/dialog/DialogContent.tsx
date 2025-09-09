@@ -19,9 +19,9 @@ import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
 import { DialogContentProvider } from './DialogContext'
 import type { ElementType } from 'react'
-import type { DialogContentOwnerState, DialogContentProps } from './types'
+import type { DialogContentProps } from './types'
 
-const useSlotClasses = (ownerState: DialogContentOwnerState) => {
+const useSlotClasses = (ownerState: DialogContentProps) => {
   const { prefix } = useNexUI()
 
   const { classes, size, fullScreen, placement, scroll } = ownerState
@@ -45,7 +45,7 @@ const useSlotClasses = (ownerState: DialogContentOwnerState) => {
   }, [prefix, size, scroll, placement, fullScreen, classes])
 }
 
-const useSlotAriaProps = (ownerState: DialogContentOwnerState) => {
+const useSlotAriaProps = (ownerState: DialogContentProps) => {
   const {
     'aria-labelledby': defaultAriaLabelledBy,
     'aria-describedby': defaultAriaDescribedBy,
@@ -99,7 +99,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     ...remainingProps
   } = props
 
-  const ownerState: DialogContentOwnerState = {
+  const ownerState: DialogContentProps = {
     ...props,
     placement,
     scroll,
@@ -139,7 +139,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   }, [motionPropsProp, placement])
 
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
-    ownerState,
     elementType: ModalPanel,
     style: styles.root,
     externalForwardedProps: remainingProps,
@@ -148,7 +147,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DialogContentPaper, getDialogContentPaperProps] = useSlot({
-    ownerState,
     elementType: ModalContent,
     style: styles.paper,
     classNames: classes.paper,
@@ -162,7 +160,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DialogContentCloseButton, getDialogContentCloseButtonProps] = useSlot({
-    ownerState,
     elementType: ButtonBase,
     externalSlotProps: slotProps?.closeButton,
     style: styles.closeButton,

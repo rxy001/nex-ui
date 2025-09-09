@@ -212,7 +212,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       }
 
   const [AccordionItemRoot, getAccordionItemRootProps] = useSlot({
-    ownerState,
     elementType: 'div',
     externalForwardedProps: remainingProps,
     style: styles.root,
@@ -220,7 +219,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AccordionItemHeading, getAccordionItemHeadingProps] = useSlot({
-    ownerState,
     elementType: 'h3',
     externalSlotProps: slotProps?.heading,
     style: styles.heading,
@@ -232,7 +230,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AccordionItemTrigger, getAccordionItemTriggerProps] = useSlot({
-    ownerState,
     elementType: ButtonBase,
     externalSlotProps: slotProps?.trigger,
     style: styles.trigger,
@@ -246,7 +243,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AccordionItemContent, getAccordionItemContentProps] = useSlot({
-    ownerState,
     elementType: 'div',
     externalSlotProps: slotProps?.content,
     style: styles.content,
@@ -255,7 +251,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AccordionItemIndicator, getAccordionItemIndicatorProps] = useSlot({
-    ownerState,
     elementType: m.span,
     externalSlotProps: slotProps?.indicator,
     style: styles.indicator,

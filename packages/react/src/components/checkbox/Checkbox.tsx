@@ -175,7 +175,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   const slotAriaProps = useSlotAriaProps(ownerState)
 
   const [CheckboxRoot, getCheckboxRootProps] = useSlot({
-    ownerState,
     elementType: 'label',
     externalSlotProps: slotProps?.root,
     style: styles.root,
@@ -187,7 +186,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   })
 
   const [CheckboxInput, getCheckboxInputProps] = useSlot({
-    ownerState,
     elementType: InputBase,
     externalForwardedProps: remainingProps,
     classNames: classes.input,
@@ -206,7 +204,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   })
 
   const [CheckboxIcon, getCheckboxIconProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.icon,
     style: styles.icon,
@@ -214,7 +211,6 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   })
 
   const [CheckboxLabel, getCheckboxLabelProps] = useSlot({
-    ownerState,
     elementType: 'span',
     externalSlotProps: slotProps?.label,
     style: styles.label,

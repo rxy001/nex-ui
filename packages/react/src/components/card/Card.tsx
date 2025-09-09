@@ -10,10 +10,10 @@ import {
 } from '../utils'
 import { cardRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
-import type { CardOwnerState, CardProps } from './types'
+import type { CardProps } from './types'
 import type { ElementType } from 'react'
 
-const useSlotClasses = (ownerState: CardOwnerState) => {
+const useSlotClasses = (ownerState: CardProps) => {
   const { prefix } = useNexUI()
   const { blurred, shadow, radius, hoverable } = ownerState
   const cardRoot = `${prefix}-card`
@@ -42,7 +42,7 @@ export const Card = <RootComponent extends ElementType = 'div'>(
 
   const { shadow = 'md', radius = 'md', ...remainingProps } = props
 
-  const ownerState: CardOwnerState = {
+  const ownerState: CardProps = {
     ...props,
     shadow,
     radius,
@@ -54,7 +54,6 @@ export const Card = <RootComponent extends ElementType = 'div'>(
 
   const [CardRoot, getCardProps] = useSlot({
     style,
-    ownerState,
     classNames: slotClasses.root,
     elementType: 'div',
     externalForwardedProps: remainingProps,

@@ -1,10 +1,5 @@
 import { useMemo } from 'react'
-import { isFunction, isPlainObject } from '@nex-ui/utils'
-import {
-  defineRecipe,
-  defineSlotRecipe,
-  mergeRecipeConfigs,
-} from '@nex-ui/system'
+import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
 import { useNexUI } from '../provider/Context'
 import type {
   RecipeRuntimeFn,
@@ -33,32 +28,20 @@ export const useStyles = <
   const styleOverrides = components?.[name]?.styleOverrides
 
   const extendedRecipe = useMemo(() => {
-    if (isPlainObject(styleOverrides)) {
-      const slotRecipe = recipe as SlotRecipeRuntimeFn
-      if (slotRecipe.__slotRecipe) {
-        // @ts-ignore
-        return defineSlotRecipe({
-          extend: slotRecipe,
-          ...styleOverrides,
-        })
-      }
-      return defineRecipe({
-        // @ts-ignore
-        extend: recipe,
+    const slotRecipe = recipe as SlotRecipeRuntimeFn
+    if (slotRecipe.__slotRecipe) {
+      // @ts-ignore
+      return defineSlotRecipe({
+        extend: slotRecipe,
         ...styleOverrides,
       })
     }
-    return recipe
-  }, [recipe, styleOverrides])
-
-  if (isFunction(styleOverrides)) {
-    // @ts-ignore
-    return mergeRecipeConfigs(
-      extendedRecipe(extendedRecipe.splitVariantProps(ownerState)),
+    return defineRecipe({
       // @ts-ignore
-      styleOverrides(ownerState),
-    )
-  }
+      extend: recipe,
+      ...styleOverrides,
+    })
+  }, [recipe, styleOverrides])
 
   // @ts-ignore
   return extendedRecipe(extendedRecipe.splitVariantProps(ownerState))

@@ -19,9 +19,9 @@ import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
-import type { DrawerContentOwnerState, DrawerContentProps } from './types'
+import type { DrawerContentProps } from './types'
 
-const useSlotClasses = (ownerState: DrawerContentOwnerState) => {
+const useSlotClasses = (ownerState: DrawerContentProps) => {
   const { prefix } = useNexUI()
 
   const { classes, size, placement } = ownerState
@@ -39,7 +39,7 @@ const useSlotClasses = (ownerState: DrawerContentOwnerState) => {
   }, [prefix, size, placement, classes])
 }
 
-const useSlotAriaProps = (ownerState: DrawerContentOwnerState) => {
+const useSlotAriaProps = (ownerState: DrawerContentProps) => {
   const {
     'aria-labelledby': defaultAriaLabelledBy,
     'aria-describedby': defaultAriaDescribedBy,
@@ -91,7 +91,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     ...remainingProps
   } = props
 
-  const ownerState: DrawerContentOwnerState = {
+  const ownerState: DrawerContentProps = {
     ...props,
     placement,
     size,
@@ -169,7 +169,6 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   }, [motionPropsProp, placement])
 
   const [DrawerContentRoot, getDrawerContentRootProps] = useSlot({
-    ownerState,
     elementType: ModalPanel,
     style: styles.root,
     externalForwardedProps: remainingProps,
@@ -178,7 +177,6 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DrawerContentPaper, getDrawerContentPaperProps] = useSlot({
-    ownerState,
     elementType: ModalContent,
     style: styles.paper,
     classNames: classes.paper,
@@ -192,7 +190,6 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DrawerContentCloseButton, getDrawerContentCloseButtonProps] = useSlot({
-    ownerState,
     elementType: ButtonBase,
     externalSlotProps: slotProps?.closeButton,
     style: styles.closeButton,

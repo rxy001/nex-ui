@@ -124,7 +124,7 @@ Checkbox inherit the props of `as` (by default, `'input'`).
     },
     {
       prop: 'icon',
-      type: 'ReactNode | (ownerState) => ReactNode',
+      type: ['ReactNode', '(ownerState: CheckboxProps) => ReactNode'],
       description: 'The icon to be displayed when the checkbox is checked.',
     },
     {
@@ -169,7 +169,7 @@ Checkbox inherit the props of `as` (by default, `'input'`).
     },
     {
       prop: 'sx',
-      type: 'SxProp<CheckboxOwnerState>',
+      type: 'Interpolation',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
@@ -302,7 +302,7 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'sx',
-      type: 'SxProp<CheckboxGroupOwnerState>',
+      type: 'Interpolation',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },

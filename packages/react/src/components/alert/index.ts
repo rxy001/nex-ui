@@ -1,3 +1,3 @@
 export { Alert } from './Alert'
 
-export type { AlertProps, AlertOwnerState, AlertPropsOverrides } from './types'
+export type { AlertProps, AlertPropsOverrides } from './types'

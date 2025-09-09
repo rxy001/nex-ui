@@ -1,6 +1,7 @@
 import type { ElementType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { OverrideProps, SxProp } from '../../types/utils'
+import type { Interpolation } from '@nex-ui/system'
+import type { OverrideProps } from '../../types/utils'
 import type { DividerVariants } from '../../theme/recipes'
 
 export interface DividerPropsOverrides {}
@@ -15,7 +16,7 @@ type DividerOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DividerOwnProps<RootComponent>>
+  sx?: Interpolation
 
   /**
    * Additional class names to apply to the root element.
@@ -35,8 +36,3 @@ export type DividerProps<RootComponent extends ElementType = 'hr'> =
     DividerOwnProps<RootComponent>,
     DividerPropsOverrides
   >
-
-export type DividerOwnerState<RootComponent extends ElementType = 'hr'> =
-  DividerProps<RootComponent> & {
-    orientation: DividerVariants['orientation']
-  }

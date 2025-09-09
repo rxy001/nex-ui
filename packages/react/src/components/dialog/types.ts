@@ -1,7 +1,7 @@
 import type { DOMMotionComponents } from 'motion/react'
+import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
-  SxProp,
   ComponentPropsWithCommonProps,
   ComponentUtilityClasses,
   HTMLMotionProps,
@@ -10,11 +10,8 @@ import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants } from '../../theme/recipes'
 
 // ------------- Dialog --------------
-type DialogSlotProps<RootComponent extends ElementType> = {
-  backdrop?: ComponentPropsWithCommonProps<
-    'div',
-    DialogOwnerState<RootComponent>
-  >
+type DialogSlotProps = {
+  backdrop?: ComponentPropsWithCommonProps<'div'>
 }
 
 type DialogOwnProps<RootComponent extends ElementType> = {
@@ -27,7 +24,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DialogOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * Additional class names to apply to the root element.
@@ -42,7 +39,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: DialogSlotProps<RootComponent>
+  slotProps?: DialogSlotProps
 
   /**
    * The className used for each slot.
@@ -125,27 +122,13 @@ export type DialogProps<
 export type DialogOwnerState<
   RootComponent extends ElementType = DOMMotionComponents['div'],
 > = DialogProps<RootComponent> & {
-  hideBackdrop: boolean
-  preventScroll: boolean
-  open: boolean
   setOpen: (open: boolean) => void
-  keepMounted: boolean
-  closeOnInteractBackdrop: boolean
-  closeOnEscape: boolean
-  restoreFocus: boolean
-  defaultOpen: boolean
 }
 
 // ------------- DialogContent -------------
-type DialogContentSlotProps<RootComponent extends ElementType> = {
-  closeButton?: ComponentPropsWithCommonProps<
-    'button',
-    DialogContentOwnerState<RootComponent>
-  >
-  paper?: ComponentPropsWithCommonProps<
-    DOMMotionComponents['section'],
-    DialogContentOwnerState<RootComponent>
-  >
+type DialogContentSlotProps = {
+  closeButton?: ComponentPropsWithCommonProps<'button'>
+  paper?: ComponentPropsWithCommonProps<DOMMotionComponents['section']>
 }
 
 export interface DialogContentPropsOverrides {}
@@ -160,7 +143,7 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DialogContentOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * It's usually the DialogHeader、DialogBody andd DialogFooter component.
@@ -170,7 +153,7 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The props used for each slot.
    */
-  slotProps?: DialogContentSlotProps<RootComponent>
+  slotProps?: DialogContentSlotProps
 
   /**
    * Determine the max-width of the dialog
@@ -240,15 +223,6 @@ export type DialogContentProps<RootComponent extends ElementType = 'div'> =
     DialogContentPropsOverrides
   >
 
-export type DialogContentOwnerState<RootComponent extends ElementType = 'div'> =
-  DialogContentProps<RootComponent> & {
-    size: DialogContentVariants['size']
-    fullScreen: boolean
-    hideCloseButton: boolean
-    scroll: DialogContentVariants['scroll']
-    placement: DialogContentVariants['placement']
-  }
-
 // ------------- DialogHeader -------------
 export interface DialogHeaderPropsOverrides {}
 
@@ -262,7 +236,7 @@ type DialogHeaderOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DialogHeaderOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the dialog header.
@@ -277,9 +251,6 @@ export type DialogHeaderProps<RootComponent extends ElementType = 'h2'> =
     DialogHeaderPropsOverrides
   >
 
-export type DialogHeaderOwnerState<RootComponent extends ElementType = 'h2'> =
-  DialogHeaderProps<RootComponent>
-
 // ------------- DialogBody -------------
 export interface DialogBodyPropsOverrides {}
 
@@ -293,7 +264,7 @@ type DialogBodyOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DialogBodyOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the dialog body.
@@ -308,9 +279,6 @@ export type DialogBodyProps<RootComponent extends ElementType = 'div'> =
     DialogBodyPropsOverrides
   >
 
-export type DialogBodyOwnerState<RootComponent extends ElementType = 'div'> =
-  DialogBodyProps<RootComponent>
-
 // ------------- DialogFooter -------------
 export interface DialogFooterPropsOverrides {}
 
@@ -324,7 +292,7 @@ type DialogFooterOwnProps<RootComponent extends ElementType> = {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
-  sx?: SxProp<DialogFooterOwnerState<RootComponent>>
+  sx?: Interpolation
 
   /**
    * The content of the dialog footer.
@@ -338,9 +306,6 @@ export type DialogFooterProps<RootComponent extends ElementType = 'div'> =
     DialogFooterOwnProps<RootComponent>,
     DialogFooterPropsOverrides
   >
-
-export type DialogFooterOwnerState<RootComponent extends ElementType = 'div'> =
-  DialogFooterOwnProps<RootComponent>
 
 // ------------- DialogTrigger -------------
 export interface DialogTriggerProps {

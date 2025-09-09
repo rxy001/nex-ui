@@ -10,8 +10,8 @@ import {
   getUtilityClass,
   useSlot,
 } from '../utils'
-import type { FlexOwnerState, FlexProps } from './types'
 import type { ElementType } from 'react'
+import type { FlexProps } from './types'
 
 const useSlotClasses = () => {
   const { prefix } = useNexUI()
@@ -43,7 +43,7 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     ...remainingProps
   } = props
 
-  const ownerState: FlexOwnerState = {
+  const ownerState: FlexProps = {
     ...props,
     direction,
     inline,
@@ -55,7 +55,6 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
 
   const [FlexRoot, getFlexRootProps] = useSlot({
     style,
-    ownerState,
     elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: classes.root,

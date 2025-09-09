@@ -2,10 +2,10 @@
 
 import { SunFilled, MoonFilled } from '@nex-ui/icons'
 import { Switch } from '@nex-ui/react'
-import type { SwitchOwnerState } from '@nex-ui/react'
+import type { SwitchProps } from '@nex-ui/react'
 
 export default function App() {
-  const renderThumbIcon = (e: SwitchOwnerState) =>
+  const renderThumbIcon = (e: SwitchProps) =>
     e.checked ? <SunFilled /> : <MoonFilled />
 
   return (
