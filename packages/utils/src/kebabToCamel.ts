@@ -5,6 +5,10 @@ export function kebabToCamel(str: string): string {
 
   const processed = str.replace(/^-+/, '')
 
+  if (!str.includes('-')) {
+    return str
+  }
+
   if (processed === '') {
     return ''
   }
