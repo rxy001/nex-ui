@@ -3,8 +3,10 @@ import { createSystem } from '../index'
 import { defineConfig } from '../defineConfig'
 import { toMediaKey } from '../breakpoints'
 
-const SELECTOR_HORVER = '&:not(:disabled):not([data-disabled=true]):hover'
+const SELECTOR_HOVER = '&:not(:disabled):not([data-disabled=true]):hover'
 const SELECTOR_ACTIVE = '&:not(:disabled):not([data-disabled=true]):active'
+const SELECTOR_DARK = '[data-nui-color-scheme="dark"] &'
+const SELECTOR_LIGHT = '[data-nui-color-scheme="light"] &'
 const CSS_VARS_PREFIX = 'test'
 
 describe('createSystem', () => {
@@ -24,6 +26,7 @@ describe('css', () => {
       fs: 'fontSize',
       fw: 'fontWeight',
       lh: 'lineHeight',
+      bg: 'backgroundColor',
     },
     breakpoints: { sm: '500px', md: '700px', lg: '900px' },
     tokens: {
@@ -104,8 +107,10 @@ describe('css', () => {
       boxShadow: 'shadows',
     },
     selectors: {
-      hover: SELECTOR_HORVER,
+      hover: SELECTOR_HOVER,
       active: SELECTOR_ACTIVE,
+      dark: SELECTOR_DARK,
+      light: SELECTOR_LIGHT,
     },
     semanticTokens: {
       colors: {
@@ -206,7 +211,7 @@ describe('css', () => {
         },
       }),
     ).toEqual({
-      [SELECTOR_HORVER]: {
+      [SELECTOR_HOVER]: {
         color: getCssVar('colors.white'),
       },
     })
@@ -219,7 +224,7 @@ describe('css', () => {
         },
       }),
     ).toEqual({
-      [SELECTOR_HORVER]: {
+      [SELECTOR_HOVER]: {
         color: getCssVar('colors.white'),
       },
     })
@@ -239,7 +244,7 @@ describe('css', () => {
     ).toEqual({
       color: getCssVar('colors.blue.100'),
       backgroundColor: getCssVar('colors.blue.100'),
-      [SELECTOR_HORVER]: {
+      [SELECTOR_HOVER]: {
         backgroundColor: getCssVar('colors.blue.200'),
       },
     })
@@ -255,7 +260,7 @@ describe('css', () => {
       }),
     ).toEqual({
       color: getCssVar('colors.red.100'),
-      [SELECTOR_HORVER]: {
+      [SELECTOR_HOVER]: {
         color: getCssVar('colors.blue.200'),
       },
     })
@@ -368,6 +373,9 @@ describe('css', () => {
   })
 
   it('should support color opacity modifier', () => {
+    const colorMix = (color: string, opacity: number | string) =>
+      `color-mix(in oklab, ${color} ${opacity}%, transparent)`
+
     expect(
       css({
         color: 'blue.100/50',
@@ -375,9 +383,9 @@ describe('css', () => {
         borderColor: 'orange/30',
       }),
     ).toEqual({
-      color: `color-mix(in oklab, ${getCssVar('colors.blue.100')} 50%, transparent)`,
-      backgroundColor: `color-mix(in oklab, ${getCssVar('colors.blue.200')} 80%, transparent)`,
-      borderColor: `color-mix(in oklab, orange 30%, transparent)`,
+      color: colorMix(getCssVar('colors.blue.100')!, 50),
+      backgroundColor: colorMix(getCssVar('colors.blue.200')!, 80),
+      borderColor: colorMix('orange', 30),
     })
 
     expect(
@@ -387,8 +395,18 @@ describe('css', () => {
         colorPalette: 'blue',
       }),
     ).toEqual({
-      border: `1px solid color-mix(in oklab, ${getCssVar('colors.blue.100')} 50%, transparent)`,
-      borderColor: `color-mix(in oklab, ${getCssVar('colors.blue.200')} 90%, transparent)`,
+      border: `1px solid ${colorMix(getCssVar('colors.blue.100')!, 50)}`,
+      borderColor: colorMix(getCssVar('colors.blue.200')!, 90),
+    })
+
+    expect(
+      css({
+        color: 'var(--my-color)/50',
+        '--my-color': 'red',
+      }),
+    ).toEqual({
+      color: colorMix('var(--my-color)', 50),
+      '--my-color': 'red',
     })
   })
 
@@ -445,6 +463,28 @@ describe('css', () => {
         paddingRight: getCssVar('spaces.1'),
       },
     ])
+
+    expect(
+      css({
+        '& > div': [
+          {
+            w: '1',
+          },
+          {
+            color: 'blue.100',
+          },
+        ],
+      }),
+    ).toEqual({
+      '& > div': [
+        {
+          width: getCssVar('sizes.1'),
+        },
+        {
+          color: getCssVar('colors.blue.100'),
+        },
+      ],
+    })
   })
 
   it('should handle nested array values', () => {
@@ -480,72 +520,194 @@ describe('css', () => {
         ],
       ],
     ])
-  })
 
-  it('should handle both nested array values and responsive value', () => {
-    const expected = [
-      {
-        height: getCssVar('sizes.1'),
-      },
-      [
-        {
-          width: getCssVar('sizes.1'),
+    expect(
+      css({
+        _dark: {
+          _hover: [
+            {
+              color: 'red.100',
+            },
+            [
+              {
+                bg: 'blue.100',
+              },
+            ],
+          ],
         },
-        [
+      }),
+    ).toEqual({
+      [SELECTOR_DARK]: {
+        [SELECTOR_HOVER]: [
           {
-            [toMediaKey('500px')]: {
-              width: 1,
+            color: getCssVar('colors.red.100'),
+          },
+          [
+            {
+              backgroundColor: getCssVar('colors.blue.100'),
             },
-            [toMediaKey('700px')]: {
-              width: 2,
-            },
-            [toMediaKey('900px')]: {
-              width: 3,
+          ],
+        ],
+      },
+    })
+
+    expect(
+      css({
+        _dark: [
+          {
+            _hover: [
+              {
+                color: 'red.100',
+              },
+              [
+                {
+                  bg: 'blue.100',
+                },
+              ],
+            ],
+          },
+          {
+            _active: {
+              color: 'blue.200',
             },
           },
         ],
+      }),
+    ).toEqual({
+      [SELECTOR_DARK]: [
+        {
+          [SELECTOR_HOVER]: [
+            {
+              color: getCssVar('colors.red.100'),
+            },
+            [
+              {
+                backgroundColor: getCssVar('colors.blue.100'),
+              },
+            ],
+          ],
+        },
+        {
+          [SELECTOR_ACTIVE]: {
+            color: getCssVar('colors.blue.200'),
+          },
+        },
       ],
+    })
+  })
+
+  it('should treat the array value as Interpolation when the key is a selector', () => {
+    const originalValue = [
+      {
+        color: 'red.100',
+      },
+    ]
+    const transformedValue = [
+      {
+        color: getCssVar('colors.red.100'),
+      },
     ]
 
     expect(
-      css([
-        {
-          h: '1',
-        },
-        [
-          {
-            w: '1',
-          },
-          [
-            {
-              w: [1, 2, 3],
-            },
-          ],
-        ],
-      ]),
-    ).toEqual(expected)
+      css({
+        _hover: originalValue,
+      }),
+    ).toEqual({
+      [SELECTOR_HOVER]: transformedValue,
+    })
+
+    expect(css({ '& > div': originalValue })).toEqual({
+      '& > div': transformedValue,
+    })
+
+    expect(css({ div: originalValue })).toEqual({
+      div: transformedValue,
+    })
+
+    expect(css({ '> div': originalValue })).toEqual({
+      '> div': transformedValue,
+    })
 
     expect(
-      css([
-        {
-          h: '1',
-        },
-        [
-          {
-            w: '1',
-          },
-          [
-            {
-              w: {
-                _sm: 1,
-                _md: 2,
-                _lg: 3,
-              },
-            },
-          ],
-        ],
-      ]),
-    ).toEqual(expected)
+      css({ '@media screen and (min-width: 900px)': originalValue }),
+    ).toEqual({
+      '@media screen and (min-width: 900px)': transformedValue,
+    })
+
+    expect(css({ '@supports (display: grid)': originalValue })).toEqual({
+      '@supports (display: grid)': transformedValue,
+    })
+
+    expect(css({ '@keyframes slideIn': originalValue })).toEqual({
+      '@keyframes slideIn': transformedValue,
+    })
+
+    expect(css({ '@layer components': originalValue })).toEqual({
+      '@layer components': transformedValue,
+    })
+
+    expect(
+      css({
+        '.my-class': originalValue,
+      }),
+    ).toEqual({
+      '.my-class': transformedValue,
+    })
+
+    expect(
+      css({
+        '#my-id': originalValue,
+      }),
+    ).toEqual({
+      '#my-id': transformedValue,
+    })
+
+    expect(css({ '[data-test="test"]': originalValue })).toEqual({
+      '[data-test="test"]': transformedValue,
+    })
+
+    expect(css({ 'span, div': originalValue })).toEqual({
+      'span, div': transformedValue,
+    })
+
+    expect(css({ '*': originalValue })).toEqual({
+      '*': transformedValue,
+    })
+
+    // @ts-expect-error
+    expect(css({ color: originalValue })).not.toEqual({
+      color: transformedValue,
+    })
+  })
+
+  it('should handle CSS variables', () => {
+    expect(
+      css({
+        color: 'var(--my-color)',
+        '--my-color': 'red',
+      }),
+    ).toEqual({
+      color: 'var(--my-color)',
+      '--my-color': 'red',
+    })
+
+    expect(
+      css({
+        color: 'var(--my-color)',
+        '--my-color': ['red', 'blue', 'green'],
+      }),
+    ).toEqual({
+      color: 'var(--my-color)',
+      [toMediaKey('500px')]: {
+        '--my-color': 'red',
+      },
+      [toMediaKey('700px')]: {
+        '--my-color': 'blue',
+      },
+      [toMediaKey('900px')]: {
+        '--my-color': 'green',
+      },
+    })
   })
 
   it('should handle edge cases', () => {
@@ -570,28 +732,6 @@ describe('css', () => {
     })
 
     expect(css(animation)).toBe(animation)
-
-    const customSelector = {
-      '& > div': [
-        {
-          w: '1',
-        },
-        {
-          color: 'blue.100',
-        },
-      ],
-    }
-
-    expect(css(customSelector)).toEqual({
-      '& > div': [
-        {
-          width: getCssVar('sizes.1'),
-        },
-        {
-          color: getCssVar('colors.blue.100'),
-        },
-      ],
-    })
 
     expect(
       css({

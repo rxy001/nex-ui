@@ -35,15 +35,30 @@ export type ArrayInterpolation = ReadonlyArray<Interpolation>
 export type Interpolation = InterpolationPrimitive | ArrayInterpolation
 
 type CSSOthersObject = {
-  [propertiesName: string]:
-    | InterpolationPrimitive
-    | ReadonlyArray<InterpolationPrimitive>
+  [propertiesName: string]: Interpolation
 }
 
+type CSSPropertiesWithMultiValues = ExtraCSSPropertyValue<OverriddenCSSProps> &
+  ExtraCSSPropertyValue<CSSPropShorthands> &
+  Conditions<Interpolation>
+
+type CSSPseudos = {
+  [K in CSS.Pseudos]?: CSSObject
+}
+
+export interface CSSObject
+  extends CSSPropertiesWithMultiValues,
+    CSSPseudos,
+    CSSOthersObject {
+  colorPalette?: OverriddenCSSProps['color']
+}
+
+// Converts a color token string (e.g., "colors.100") to a virtual color mapping (e.g., "colorPalette.100").
 type ConvertToVirtualColor<T> = T extends `${string}.${infer U}`
   ? `colorPalette.${U}`
   : 'colorPalette'
 
+// Map color token keys to a virtual color palette string.
 type VirtualColor =
   | (Tokens extends infer T
       ? 'colors' extends keyof T
@@ -75,7 +90,11 @@ type OverriddenCSSProps = Overwrite<
       : CSSProperties[K]
   }
 >
-
+/**
+ * The Conditions type uses template literal types to prefix keys from Selectors and Breakpoints with an underscore (e.g., _hover, _sm).
+ * This enables conditional styling based on selector or breakpoint context, allowing for easy extension and type safety.
+ * Additional keys like _dark and _light are included for theme-based conditions.
+ */
 type Conditions<T> = {
   [K in keyof Selectors | keyof Breakpoints as `_${K}`]?: T
 } & {
@@ -83,14 +102,16 @@ type Conditions<T> = {
   _light?: T
 }
 
-type BreakpointArray =
-  | (string | number | null | undefined)[]
-  | readonly (string | number | null | undefined)[]
+type BreakpointArray = (string | number | null | undefined)[]
 
 type NestedConditions<T> = {
   _DEFAULT?: T
 } & { [K in keyof Conditions<T>]?: NestedConditions<T> | T }
 
+/**
+ * Defines the possible values for each CSS property, supporting direct values, breakpoint arrays, and deeply nested conditional objects.
+ * This type enables flexible assignment of CSS property values, including responsive and state-based variations.
+ */
 type ExtraCSSPropertyValue<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]?:
     | T[K]
@@ -109,7 +130,12 @@ type ExtraCSSPropertyValue<T> = {
 }
 
 /**
- * Shorthand types for CSS properties based on aliases.
+ * CSSPropShorthands maps each key in Aliases to its corresponding CSS property value type.
+ *
+ * If an alias maps to a string, it checks if that string is a key in OverriddenCSSProps and uses its type.
+ * If an alias maps to an array of strings, it uses the type of the first string as a key in OverriddenCSSProps.
+ *
+ * This enables shorthand properties (like 'bg' for 'backgroundColor') to inherit the correct type from OverriddenCSSProps.
  */
 type CSSPropShorthands = {
   [K in keyof Aliases]?: Aliases[K] extends infer CSSProps
@@ -123,19 +149,4 @@ type CSSPropShorthands = {
           : never
         : never
     : never
-}
-
-type CSSPropertiesWithMultiValues = ExtraCSSPropertyValue<OverriddenCSSProps> &
-  ExtraCSSPropertyValue<CSSPropShorthands> &
-  Conditions<InterpolationPrimitive>
-
-type CSSPseudos = {
-  [K in CSS.Pseudos]?: CSSObject
-}
-
-export interface CSSObject
-  extends CSSPropertiesWithMultiValues,
-    CSSPseudos,
-    CSSOthersObject {
-  colorPalette?: OverriddenCSSProps['color']
 }

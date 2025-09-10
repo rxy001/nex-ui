@@ -38,7 +38,7 @@ export const createSystem = (config: SystemConfig) => {
     prefix: cssVarsPrefix,
   })
 
-  const { getPropertiesByAlias } = createAliases(aliases)
+  const { getPropertiesByAlias, isAlias } = createAliases(aliases)
 
   const { getCategoryByProperty } = createScales(scales)
 
@@ -57,6 +57,7 @@ export const createSystem = (config: SystemConfig) => {
 
   const css = createCssFn({
     normalize,
+    isAlias,
     getCustomizedSelector,
   })
 

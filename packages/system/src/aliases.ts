@@ -23,6 +23,7 @@ export function createAliases(aliases: AliasesDefinition) {
 
   return {
     getPropertiesByAlias: (key: string) => aliasMap.get(key),
+    isAlias: (key: string) => aliasMap.has(key),
   }
 }
 

@@ -91,36 +91,44 @@ describe('useSlot', () => {
     const mockSx2 = { backgroundColor: 'blue' }
     const style = { fontSize: '16px' }
 
-    const { result } = renderHook(() =>
-      useSlot({
+    const { result, rerender } = renderHook((args) => useSlot(args), {
+      initialProps: {
         elementType: 'div',
         style,
         externalSlotProps: { sx: [mockSx1, mockSx2] },
-      }),
-    )
+      } as UseSlotArgs<'div'>,
+    })
 
-    const [, getProps] = result.current
-    const props = getProps()
+    expect(result.current[1]().sx).toEqual([style, [mockSx1, mockSx2]])
 
-    expect(props.sx).toEqual([style, [mockSx1, mockSx2]])
+    rerender({
+      elementType: 'div',
+      externalSlotProps: { sx: [mockSx1, mockSx2] },
+    })
+
+    expect(result.current[1]().sx).toEqual([mockSx1, mockSx2])
   })
 
   it('should handle sx as plain object', () => {
     const style = { fontSize: '16px' }
     const sxObject = { color: 'red' }
 
-    const { result } = renderHook(() =>
-      useSlot({
+    const { result, rerender } = renderHook((args) => useSlot(args), {
+      initialProps: {
         elementType: 'div',
         style,
         externalSlotProps: { sx: sxObject },
-      }),
-    )
+      } as UseSlotArgs<'div'>,
+    })
 
-    const [, getProps] = result.current
-    const props = getProps()
+    expect(result.current[1]().sx).toEqual([style, sxObject])
 
-    expect(props.sx).toEqual([style, sxObject])
+    rerender({
+      elementType: 'div',
+      externalSlotProps: { sx: sxObject },
+    })
+
+    expect(result.current[1]().sx).toEqual(sxObject)
   })
 
   it('should handle shouldForwardComponent false', () => {

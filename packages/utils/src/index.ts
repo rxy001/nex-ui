@@ -1,3 +1,5 @@
+// istanbul ignore file
+
 export * from './mergeRefs'
 
 export * from './supportRef'

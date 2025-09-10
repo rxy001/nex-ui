@@ -7,8 +7,11 @@ import {
   mergeWith,
   isPlainObject,
   every,
+  camelToKebab,
+  kebabToCamel,
 } from '@nex-ui/utils'
 import serialize from '@x1ngyu/serialize-javascript'
+import { all as CSSProperties } from 'known-css-properties'
 import type {
   SemanticTokenValue,
   TokenValue,
@@ -18,12 +21,6 @@ import type {
 
 export function pathToTokenName(path: string[]) {
   return path.join('.')
-}
-
-function camelToKebab(str: string) {
-  return str.replace(/([A-Z])/g, (match) => {
-    return `-${match.toLowerCase()}`
-  })
 }
 
 function isDecimalString(str: string) {
@@ -171,4 +168,56 @@ export const negate = (x: number | string) => {
   }
 
   return multiply(value, -1)
+}
+
+const ALL_CSS_PROPERTIES = new Set(CSSProperties.map(kebabToCamel))
+
+const isCSSProperty = (key: string) => {
+  // CSS variable
+  if (key.startsWith('--')) return true
+
+  return ALL_CSS_PROPERTIES.has(key)
+}
+
+export const isSelector = (key: string) => {
+  // start with &
+  if (/&/.test(key)) {
+    return true
+  }
+
+  // combinators
+  if (/^(?!.*@)(?!.*\()(\s*[>+~]\s*|[a-zA-Z]\s+[a-zA-Z])/.test(key)) {
+    return true
+  }
+
+  // special rules
+  if (/^@(media|keyframes|supports|import|namespace|layer)/.test(key)) {
+    return true
+  }
+
+  // id or class selector
+  if (/^[#.]/.test(key)) {
+    return true
+  }
+
+  // attribute selector
+  if (/\[[^\]]*[=~|^$*]?[^\]]*\]/.test(key)) {
+    return true
+  }
+
+  // multiple selectors
+  if (/,/.test(key)) {
+    return true
+  }
+
+  // wildcard selector
+  if (/\*/.test(key)) {
+    return true
+  }
+
+  if (isCSSProperty(key)) {
+    return false
+  }
+
+  return true
 }

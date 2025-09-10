@@ -7,9 +7,8 @@ import {
   __DEV__,
   map,
   isPlainObject,
-  some,
 } from '@nex-ui/utils'
-import { memoizeFn } from './utils'
+import { memoizeFn, isSelector } from './utils'
 import type {
   ComponentSelector,
   Keyframes,
@@ -20,10 +19,12 @@ import type {
 import type { NormailizeFn } from './normalize'
 import type { Selectors } from './selectors'
 import type { Interpolation, CSSObject, ArrayInterpolation } from './types'
+import type { Aliases } from './aliases'
 
 interface CreateCssFnConfig {
   getCustomizedSelector: Selectors['getCustomizedSelector']
   normalize: NormailizeFn
+  isAlias: Aliases['isAlias']
 }
 
 export interface CssFn {
@@ -31,11 +32,12 @@ export interface CssFn {
 }
 
 const isCustomSelector = (key: string) => {
-  return key.startsWith('_')
+  return key.startsWith('_') && key !== '_DEFAULT'
 }
 
 export const createCssFn = ({
   normalize,
+  isAlias,
   getCustomizedSelector,
 }: CreateCssFnConfig) => {
   const css: CssFn = (interpolation) => {
@@ -73,14 +75,14 @@ export const createCssFn = ({
         return path
           .filter((v) => v !== '_DEFAULT')
           .sort((a) => {
+            // Filter out _DEFAULT first, ensure that those starting with letters are in front,
+            // and those starting with _ are at the back, to support suffix selectors
             const charCode = a.charCodeAt(0)
 
-            // A-Z
             if (charCode > 64 && charCode < 91) {
               return -1
             }
 
-            // a-z
             return 96 - a.charCodeAt(0)
           })
           .map((p) => {
@@ -91,16 +93,13 @@ export const createCssFn = ({
               const index = Number(p)
 
               if (!Number.isNaN(index) && isArray(prevValue)) {
-                // 处理数组 breakpoints
+                // Handle array breakpoints
                 return getCustomizedSelector(`_${index}`) ?? ''
               }
             }
 
-            if (isCustomSelector(p)) {
-              // 处理自定义的 selectors 和 对象 breakpoints
-              return getCustomizedSelector(p) ?? p
-            }
-            return p
+            // Handle custom selectors and object breakpoints
+            return isCustomSelector(p) ? (getCustomizedSelector(p) ?? p) : p
           })
       }
 
@@ -121,18 +120,20 @@ export const createCssFn = ({
       walkObject(
         cssOjbect,
         (propValue: string | number, path: string[]) => {
-          const prop = path[path.length - 1]
-
-          // FIXME: 暂时解决自定义选择器时 CSSObject 数组. 如果数组中都为基础类型，将会作为 breakpoints 处理
-          if (isArray(propValue) && some(propValue, isPlainObject)) {
-            mergeByPath(result, path, css(propValue), (v: string) => {
-              if (v === prop) return []
-            })
+          if (isArray(propValue)) {
+            const selectors = path.map((p) =>
+              isCustomSelector(p) ? (getCustomizedSelector(p) ?? p) : p,
+            )
+            const lastSelector = selectors[selectors.length - 1]
+            mergeByPath(result, selectors, css(propValue), (v: string) =>
+              v === lastSelector ? [] : {},
+            )
             return
           }
 
           const prefix = path.slice(0, path.length - 1)
-          if (prop === 'colorPalette') {
+
+          if (path[path.length - 1] === 'colorPalette') {
             return
           }
 
@@ -145,11 +146,18 @@ export const createCssFn = ({
             propValue,
             colorPalette,
           })
-
           mergeByPath(result, selectors, normalized)
         },
         {
-          predicate: (v) => isArray(v) && some(v, isPlainObject),
+          predicate: (v, path) => {
+            const key = path[path.length - 2]
+
+            return (
+              isArray(v) &&
+              !isAlias(key) &&
+              (isCustomSelector(key) || isSelector(key))
+            )
+          },
         },
       )
 
@@ -176,5 +184,5 @@ function mergeByPath(
     acc = acc[k]
   })
 
-  merge(acc, value)
+  return merge(acc, value)
 }

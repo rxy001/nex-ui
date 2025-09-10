@@ -110,10 +110,14 @@ export const useSlot = <
 
     const className = clsx(classNames, props?.className)
 
-    let mergedSx: Interpolation = style
+    let mergedSx: Interpolation = null
 
-    if (props.sx) {
+    if (props.sx && style) {
       mergedSx = [style, props.sx]
+    } else if (style) {
+      mergedSx = style
+    } else if (props.sx) {
+      mergedSx = props.sx
     }
 
     return {
