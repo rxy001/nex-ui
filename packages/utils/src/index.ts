@@ -18,6 +18,10 @@ export * from './ownerDocument'
 
 export * from './ownerWindow'
 
+export * from './camelToKebab'
+
+export * from './kebabToCamel'
+
 export { default as map } from 'lodash.map'
 
 export { default as forEach } from 'lodash.foreach'
