@@ -1,5 +1,4 @@
 import { Search } from 'nextra/components'
-import { NexUIProvider } from '@nex-ui/react'
 import { element, stringOrElement } from 'nextra/schemas'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
@@ -84,20 +83,16 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   const { navbar, pageMap, banner, ...rest } = data
 
   return (
-    <NexUIProvider
-      colorScheme={{ colorSchemeSelector: 'class', defaultMode: 'dark' }}
-    >
-      <ThemeConfigProvider value={rest}>
-        {banner}
-        <ConfigProvider pageMap={pageMap} navbar={navbar}>
-          {/*
-           * MobileNav should be in layout and not in mdx wrapper, otherwise for non mdx pages will
-           * be not rendered
-           */}
-          <MobileNav />
-          {children}
-        </ConfigProvider>
-      </ThemeConfigProvider>
-    </NexUIProvider>
+    <ThemeConfigProvider value={rest}>
+      {banner}
+      <ConfigProvider pageMap={pageMap} navbar={navbar}>
+        {/*
+         * MobileNav should be in layout and not in mdx wrapper, otherwise for non mdx pages will
+         * be not rendered
+         */}
+        <MobileNav />
+        {children}
+      </ConfigProvider>
+    </ThemeConfigProvider>
   )
 }
