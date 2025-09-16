@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
-import { InitColorSchemeScript } from '@nex-ui/react'
+import { InitColorSchemeScript, NexUIProvider } from '@nex-ui/react'
 import logo from '@/public/images/logo.png'
 import {
   LastUpdated,
@@ -149,37 +149,41 @@ export default async function RootLayout({ children, params }: any) {
           Right now there is no stable version available for this library.
           We&apos;re just working on it. 🚀
         </Banner>
-        <Layout
-          navbar={navbar}
-          footer={footer}
-          docsRepositoryBase='https://github.com/rxy001/nex-ui/tree/main/docs'
-          i18n={[
-            { locale: 'en', name: 'English' },
-            { locale: 'zh', name: '中文' },
-          ]}
-          sidebar={{
-            defaultMenuCollapseLevel: 2,
-            autoCollapse: false,
-            toggleButton: false,
-          }}
-          toc={{
-            backToTop: dictionary.backToTop,
-            title: dictionary.tocTitle,
-          }}
-          editLink={dictionary.editPage}
-          pageMap={pageMap}
-          lastUpdated={<LastUpdated>{dictionary.lastUpdated}</LastUpdated>}
-          themeSwitch={{
-            dark: dictionary.dark,
-            light: dictionary.light,
-            system: dictionary.system,
-          }}
-          feedback={{
-            content: dictionary.feedback.content,
-          }}
+        <NexUIProvider
+          colorScheme={{ colorSchemeSelector: 'class', defaultMode: 'dark' }}
         >
-          {children}
-        </Layout>
+          <Layout
+            navbar={navbar}
+            footer={footer}
+            docsRepositoryBase='https://github.com/rxy001/nex-ui/tree/main/docs'
+            i18n={[
+              { locale: 'en', name: 'English' },
+              { locale: 'zh', name: '中文' },
+            ]}
+            sidebar={{
+              defaultMenuCollapseLevel: 2,
+              autoCollapse: false,
+              toggleButton: false,
+            }}
+            toc={{
+              backToTop: dictionary.backToTop,
+              title: dictionary.tocTitle,
+            }}
+            editLink={dictionary.editPage}
+            pageMap={pageMap}
+            lastUpdated={<LastUpdated>{dictionary.lastUpdated}</LastUpdated>}
+            themeSwitch={{
+              dark: dictionary.dark,
+              light: dictionary.light,
+              system: dictionary.system,
+            }}
+            feedback={{
+              content: dictionary.feedback.content,
+            }}
+          >
+            {children}
+          </Layout>
+        </NexUIProvider>
       </body>
     </html>
   )
