@@ -130,7 +130,7 @@ export const ClientNavbar: FC<{
               key={href}
               className={cn(
                 classes.link,
-                'x:aria-[current="true"]:last-of-type:font-medium x:aria-[current="true"]:text-blue-600 x:dark:aria-[current="true"]:last-of-type:text-blue-400 x:aria-[current="true"]:subpixel-antialiased',
+                'x:aria-[current="true"]:text-blue-600 x:aria-[current="true"]:subpixel-antialiased',
               )}
               aria-current={isCurrentPage}
             >
