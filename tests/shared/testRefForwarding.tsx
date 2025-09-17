@@ -32,8 +32,9 @@ export function testRefForwarding(
   it('should forward ref to appropriate element', async () => {
     const ref = createRef<HTMLElement>()
 
-    const { container } = await Promise.resolve(
-      renderWithNexUIProvider(cloneElement(component, { ref }), o),
+    const { container } = await renderWithNexUIProvider(
+      cloneElement(component, { ref }),
+      o,
     )
 
     if (c) {
