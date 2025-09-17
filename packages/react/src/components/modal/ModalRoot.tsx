@@ -9,7 +9,7 @@ import {
 import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useMemo, useRef, useId } from 'react'
 import { useEvent } from '@nex-ui/hooks'
-import { Portal, useSlotProps } from '../utils'
+import { Portal, useSlot } from '../utils'
 import { ModalProvider, useModal } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import { ModalMotion } from './ModalMotion'
@@ -54,10 +54,14 @@ export const ModalRoot = <
     registeredRef.current = true
   }
 
-  const rootProps = useSlotProps({
+  const [Motion, getMotionProps] = useSlot({
     style,
+    elementType: ModalMotion,
     externalForwardedProps: props,
+    shouldForwardComponent: false,
     additionalProps: {
+      open,
+      keepMounted,
       ref: rootRef,
       tabIndex: -1,
       onAnimationComplete: (animation: string) => {
@@ -192,13 +196,7 @@ export const ModalRoot = <
   return (
     <Portal container={container} onMount={handlePortalMount}>
       <ModalProvider value={ctx}>
-        <ModalMotion
-          open={open}
-          keepMounted={keepMounted}
-          rootProps={rootProps}
-        >
-          {children}
-        </ModalMotion>
+        <Motion {...getMotionProps()}>{children}</Motion>
       </ModalProvider>
     </Portal>
   )

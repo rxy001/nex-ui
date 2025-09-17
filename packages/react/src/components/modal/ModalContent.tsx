@@ -1,9 +1,8 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { useEffect, useId, useMemo, useState } from 'react'
 import { defineRecipe } from '@nex-ui/system'
-import { useSlotProps } from '../utils'
+import { useSlot } from '../utils'
 import { ModalProvider, useModal } from './ModalContext'
 import { FocusTrap } from '../focusTrap'
 import { useModalManager } from './ModalManager'
@@ -58,8 +57,9 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
 
   const ariaProps = useAriaProps(props)
 
-  const rootProps = useSlotProps({
+  const [ModalContentRoot, getModalContentRootProps] = useSlot({
     style,
+    elementType: 'section',
     externalForwardedProps: props,
     a11y: ariaProps,
   })
@@ -88,7 +88,7 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
         restoreFocus={modalState.restoreFocus}
         paused={paused}
       >
-        <nex.section {...rootProps} />
+        <ModalContentRoot {...getModalContentRootProps()} />
       </FocusTrap>
     </ModalProvider>
   )

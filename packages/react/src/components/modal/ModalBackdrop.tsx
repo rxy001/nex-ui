@@ -1,8 +1,7 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { defineRecipe } from '@nex-ui/system'
-import { useSlotProps } from '../utils'
+import { useSlot } from '../utils'
 import type { ElementType } from 'react'
 import type { ModalBackdropProps } from './types'
 
@@ -21,15 +20,16 @@ export const ModalBackdrop = <RootComponent extends ElementType = 'div'>(
 ) => {
   const props = inProps as ModalBackdropProps
 
-  const rootProps = useSlotProps({
+  const [ModalBackdropRoot, getModalBackdropRootProps] = useSlot({
     style,
+    elementType: 'div',
     externalForwardedProps: props,
     a11y: {
       'aria-hidden': true,
     },
   })
 
-  return <nex.div {...rootProps} />
+  return <ModalBackdropRoot {...getModalBackdropRootProps()} />
 }
 
 ModalBackdrop.displayName = 'ModalBackdrop'

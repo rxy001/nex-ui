@@ -1,9 +1,8 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
 import { defineRecipe } from '@nex-ui/system'
-import { useSlotProps } from '../utils'
+import { useSlot } from '../utils'
 import { useModal } from './ModalContext'
 import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
@@ -42,13 +41,14 @@ export const ModalBody = <RootComponent extends ElementType = 'div'>(
 
   const ariaProps = useAriaProps(props)
 
-  const rootProps = useSlotProps({
+  const [ModalBodyRoot, getModalBodyRootProps] = useSlot({
     style,
+    elementType: 'div',
     a11y: ariaProps,
     externalForwardedProps: props,
   })
 
-  return <nex.div {...rootProps} />
+  return <ModalBodyRoot {...getModalBodyRootProps()} />
 }
 
 ModalBody.displayName = 'ModalBody'

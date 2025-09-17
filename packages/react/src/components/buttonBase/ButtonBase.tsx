@@ -1,11 +1,10 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { useEvent, useFocusRing } from '@nex-ui/hooks'
 import { useMemo } from 'react'
 import { isFunction } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
-import { useSlotProps } from '../utils'
+import { useSlot } from '../utils'
 import type { ElementType, KeyboardEvent, MouseEvent } from 'react'
 import type { ButtonBaseProps } from './types'
 
@@ -141,23 +140,24 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     as: rootElement,
   })
 
-  const rootProps = useSlotProps({
+  const [ButtonRoot, getButtonRootProps] = useSlot({
     style,
-    a11y: {
-      ...ariaProps,
-      onKeyUp: handleKeyUp,
-      onKeyDown: handleKeyDown,
-      onClick: handleClick,
-    },
+    elementType: 'button',
     externalForwardedProps: remainingProps,
     additionalProps: {
       as: rootElement,
       'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },
+    a11y: {
+      ...ariaProps,
+      onKeyUp: handleKeyUp,
+      onKeyDown: handleKeyDown,
+      onClick: handleClick,
+    },
   })
 
-  return <nex.button {...rootProps}>{children}</nex.button>
+  return <ButtonRoot {...getButtonRootProps()}>{children}</ButtonRoot>
 }
 
 ButtonBase.displayName = 'ButtonBase'
