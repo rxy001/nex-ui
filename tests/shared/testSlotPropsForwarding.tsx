@@ -13,8 +13,9 @@ export const testSlotPropsForwarding = <S extends string>(
   options?: RenderWithNexUIProviderOptions,
 ) => {
   it(`should forward slotProps to ${slots.join(', ')} slots`, async () => {
-    const { queryByClassName } = await Promise.resolve(
-      renderWithNexUIProvider(cloneElement(Component, { slotProps }), options),
+    const { queryByClassName } = await renderWithNexUIProvider(
+      cloneElement(Component, { slotProps }),
+      options,
     )
 
     slots.forEach((slot: S) => {

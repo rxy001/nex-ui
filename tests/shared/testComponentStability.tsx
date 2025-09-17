@@ -12,8 +12,9 @@ export const testComponentStability = (
   options?: RenderWithNexUIProviderOptions,
 ) => {
   it(`component could be updated and unmounted without errors`, async () => {
-    const { unmount, rerender } = await Promise.resolve(
-      renderWithNexUIProvider(component, options),
+    const { unmount, rerender } = await renderWithNexUIProvider(
+      component,
+      options,
     )
 
     expect(() => {

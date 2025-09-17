@@ -17,6 +17,9 @@
     "noUnusedLocals": true,
     "jsx": "react-jsx",
     "strictNullChecks": true,
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["./*"]
+    }
   }
 }

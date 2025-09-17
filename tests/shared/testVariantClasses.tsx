@@ -64,18 +64,16 @@ export function testVariantClasses<
   const [variantName, variantValues] = variant
 
   it(`should add the appropriate ${variantName} class to root element based on ${variantName} prop`, async () => {
-    const { container } = await Promise.resolve(
-      renderWithNexUIProvider(
-        <>
-          {variantValues.map((value) =>
-            cloneElement(component, {
-              [variantName]: value,
-              key: `${value}`,
-            }),
-          )}
-        </>,
-        options,
-      ),
+    const { container } = await renderWithNexUIProvider(
+      <>
+        {variantValues.map((value) =>
+          cloneElement(component, {
+            [variantName]: value,
+            key: `${value}`,
+          }),
+        )}
+      </>,
+      options,
     )
     const children = container.children
     const kebabVariantName = camelToKebab(variantName)

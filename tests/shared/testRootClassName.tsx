@@ -19,9 +19,11 @@ export const testRootClassName = (
 ) => {
   it('should have the correct root class name', async () => {
     const className = 'test-class'
-    const { container } = await Promise.resolve(
-      renderWithNexUIProvider(cloneElement(component, { className }), options),
+    const { container } = await renderWithNexUIProvider(
+      cloneElement(component, { className }),
+      options,
     )
+
     const rootElement = container.firstElementChild
     expect(rootElement).toHaveClass(className)
   })
