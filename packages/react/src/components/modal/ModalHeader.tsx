@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { useModal } from './ModalContext'
-import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalHeaderProps } from './types'
 
@@ -17,10 +16,8 @@ const recipe = defineRecipe({
 })
 
 const useAriaProps = (props: ModalHeaderProps) => {
-  const { 'aria-labelledby': labelledBy } = useModal()
-  const labelId =
-    props.id ??
-    (labelledBy?.startsWith(MODAL_INTERNAL_ID_PREFIX) ? labelledBy : undefined)
+  const { modalHeaderId } = useModal()
+  const labelId = props.id ?? modalHeaderId
 
   return useMemo(() => {
     return {

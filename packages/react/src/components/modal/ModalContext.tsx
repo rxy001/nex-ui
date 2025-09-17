@@ -14,8 +14,9 @@ interface ModalContextValue {
   closeOnEscape: boolean
   restoreFocus: boolean
   isTopmostModal?: () => boolean
-  'aria-describedby'?: string
-  'aria-labelledby'?: string
+  modalContentId: string
+  modalHeaderId: string
+  modalBodyId: string
 }
 
 export const [ModalProvider, useModal] = createContext<ModalContextValue>({

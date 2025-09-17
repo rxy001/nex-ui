@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, useId, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import { ModalProvider, useModal } from './ModalContext'
+import { useModal } from './ModalContext'
 import { FocusTrap } from '../focusTrap'
 import { useModalManager } from './ModalManager'
-import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalContentProps } from './types'
 
@@ -24,36 +23,36 @@ const recipe = defineRecipe({
 const style = recipe()
 
 const useAriaProps = (props: ModalContentProps) => {
-  const labelId = useId()
-  const descriptionId = useId()
+  const { modalContentId, modalHeaderId, modalBodyId } = useModal()
 
   const {
     tabIndex = -1,
-    'aria-labelledby': labelledBy = `${MODAL_INTERNAL_ID_PREFIX}${labelId}`,
-    'aria-describedby':
-      describedBy = `${MODAL_INTERNAL_ID_PREFIX}${descriptionId}`,
+    id = modalContentId,
+    'aria-labelledby': labelledBy = modalHeaderId,
+    'aria-describedby': describedBy = modalBodyId,
   } = props
 
   return useMemo(() => {
     return {
       tabIndex,
+      id,
       'aria-labelledby': labelledBy,
       'aria-describedby': describedBy,
     }
-  }, [describedBy, labelledBy, tabIndex])
+  }, [describedBy, id, labelledBy, tabIndex])
 }
 
 export const ModalContent = <RootComponent extends ElementType = 'section'>(
   inProps: ModalContentProps<RootComponent>,
 ) => {
   const props = inProps as ModalContentProps
+  const ctx = useModal()
 
   const [paused, setPaused] = useState(false)
 
   const modalManager = useModalManager()
-  const modalState = useModal()
 
-  const { isTopmostModal } = modalState
+  const { isTopmostModal } = ctx
 
   const ariaProps = useAriaProps(props)
 
@@ -64,15 +63,6 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     a11y: ariaProps,
   })
 
-  const ctx = useMemo(
-    () => ({
-      ...modalState,
-      'aria-labelledby': ariaProps['aria-labelledby'],
-      'aria-describedby': ariaProps['aria-describedby'],
-    }),
-    [ariaProps, modalState],
-  )
-
   useEffect(() => {
     const unsubscribe = modalManager.subscribe(() => {
       setPaused(!isTopmostModal?.())
@@ -82,15 +72,13 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
   }, [isTopmostModal, modalManager])
 
   return (
-    <ModalProvider value={ctx}>
-      <FocusTrap
-        active={modalState.open}
-        restoreFocus={modalState.restoreFocus}
-        paused={paused}
-      >
-        <ModalContentRoot {...getModalContentRootProps()} />
-      </FocusTrap>
-    </ModalProvider>
+    <FocusTrap
+      active={ctx.open}
+      restoreFocus={ctx.restoreFocus}
+      paused={paused}
+    >
+      <ModalContentRoot {...getModalContentRootProps()} />
+    </FocusTrap>
   )
 }
 

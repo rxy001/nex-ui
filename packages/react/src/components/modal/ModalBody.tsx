@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { useModal } from './ModalContext'
-import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ElementType } from 'react'
 import type { ModalBodyProps } from './types'
 
@@ -20,12 +19,8 @@ const recipe = defineRecipe({
 const style = recipe()
 
 const useAriaProps = (props: ModalBodyProps) => {
-  const { 'aria-describedby': describedBy } = useModal()
-  const bodyId =
-    props.id ??
-    (describedBy?.startsWith(MODAL_INTERNAL_ID_PREFIX)
-      ? describedBy
-      : undefined)
+  const { modalBodyId } = useModal()
+  const bodyId = props.id ?? modalBodyId
 
   return useMemo(() => {
     return {
