@@ -65,7 +65,7 @@ const useSlotAriaProps = (
 
     return {
       input: {
-        role: role ?? 'switch',
+        role,
         'aria-labelledby': labelledBy ?? labelId,
         'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
       },

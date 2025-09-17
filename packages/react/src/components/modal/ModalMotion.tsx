@@ -61,7 +61,7 @@ export const ModalMotion = ({
           transition={transition}
           variants={variants}
           {...props}
-          style={{ display, ...props.style }}
+          style={{ ...props.style, display }}
           onAnimationComplete={onAnimationComplete}
         >
           {children}

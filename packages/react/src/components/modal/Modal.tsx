@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useId, useMemo, useRef } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { ModalProvider } from './ModalContext'
+import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ModalProps } from './types'
 
 /**
@@ -13,6 +14,12 @@ import type { ModalProps } from './types'
  */
 
 export const Modal = (props: ModalProps) => {
+  const id = useId()
+
+  const modalContentId = `${MODAL_INTERNAL_ID_PREFIX}${id}-content`
+  const modalHeaderId = `${MODAL_INTERNAL_ID_PREFIX}${id}-header`
+  const modalBodyId = `${MODAL_INTERNAL_ID_PREFIX}${id}-body`
+
   const {
     children,
     container,
@@ -47,6 +54,9 @@ export const Modal = (props: ModalProps) => {
       onOpenChange,
       preventScroll,
       container,
+      modalContentId,
+      modalHeaderId,
+      modalBodyId,
     }),
     [
       setOpen,
@@ -59,6 +69,9 @@ export const Modal = (props: ModalProps) => {
       onOpenChange,
       preventScroll,
       container,
+      modalContentId,
+      modalHeaderId,
+      modalBodyId,
     ],
   )
 
