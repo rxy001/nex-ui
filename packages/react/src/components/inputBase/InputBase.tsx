@@ -1,9 +1,8 @@
-import { nex } from '@nex-ui/styled'
 import { useMemo, useState } from 'react'
 import { useEvent, useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
-import { useSlotProps } from '../utils'
+import { useSlot } from '../utils'
 import type {
   InputHTMLAttributes,
   MouseEvent,
@@ -249,8 +248,9 @@ export const InputBase = (props: InputBaseProps) => {
     checked: currentChecked,
   })
 
-  const rootProps = useSlotProps({
+  const [InputRoot, getInputRootProps] = useSlot({
     style,
+    elementType: 'input',
     a11y: {
       ...ariaProps,
       onKeyUp: handleKeyUp,
@@ -269,7 +269,7 @@ export const InputBase = (props: InputBaseProps) => {
     },
   })
 
-  return <nex.input {...rootProps} />
+  return <InputRoot {...getInputRootProps()} />
 }
 
 InputBase.displayName = 'InputBase'
