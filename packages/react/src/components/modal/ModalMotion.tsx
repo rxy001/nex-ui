@@ -24,18 +24,17 @@ const variants: Variants = {
   },
 }
 
-interface ModalMotionProps {
+interface ModalMotionProps extends HTMLMotionProps<'div'> {
   keepMounted?: boolean
   children?: ReactNode | MotionValue<string> | MotionValue<number>
-  open: boolean
-  rootProps: HTMLMotionProps<'div'>
+  open?: boolean
 }
 
 export const ModalMotion = ({
   keepMounted,
   children,
   open,
-  rootProps,
+  ...props
 }: ModalMotionProps) => {
   const [display, setDisplay] = useState<'block' | 'none'>(() =>
     keepMounted ? 'none' : 'block',
@@ -49,7 +48,7 @@ export const ModalMotion = ({
     if (animation === 'hidden') {
       if (keepMounted) setDisplay('none')
     }
-    rootProps.onAnimationComplete?.(animation)
+    props.onAnimationComplete?.(animation)
   })
 
   return (
@@ -61,8 +60,8 @@ export const ModalMotion = ({
           animate={open ? 'visible' : 'hidden'}
           transition={transition}
           variants={variants}
-          {...rootProps}
-          style={{ display, ...rootProps.style }}
+          {...props}
+          style={{ display, ...props.style }}
           onAnimationComplete={onAnimationComplete}
         >
           {children}
@@ -77,7 +76,7 @@ export const ModalMotion = ({
               exit='hidden'
               transition={transition}
               variants={variants}
-              {...rootProps}
+              {...props}
               onAnimationComplete={onAnimationComplete}
             >
               {children}

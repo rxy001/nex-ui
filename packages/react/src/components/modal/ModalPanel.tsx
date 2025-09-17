@@ -1,9 +1,8 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { useEvent } from '@nex-ui/hooks'
 import { defineRecipe } from '@nex-ui/system'
-import { useSlotProps } from '../utils'
+import { useSlot } from '../utils'
 import { useModal } from './ModalContext'
 import type { ElementType, MouseEvent } from 'react'
 import type { ModalPanelProps } from './types'
@@ -30,15 +29,16 @@ export const ModalPanel = <RootComponent extends ElementType = 'div'>(
     }
   })
 
-  const rootProps = useSlotProps({
+  const [ModalPanelRoot, getModalPanelRootProps] = useSlot({
     style,
+    elementType: 'div',
     externalForwardedProps: props,
     additionalProps: {
       onClick: handleClick,
     },
   })
 
-  return <nex.div {...rootProps} />
+  return <ModalPanelRoot {...getModalPanelRootProps()} />
 }
 
 ModalPanel.displayName = 'ModalPanel'
