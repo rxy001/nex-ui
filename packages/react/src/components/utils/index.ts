@@ -7,4 +7,7 @@ export { Ripple } from './ripple'
 export { useSlot } from './useSlot'
 export { motionFeatures } from './motionFeatures'
 export { Portal } from './portal'
+export { PresenceMotion } from './PresenceMotion'
+
+export type { PresenceMotionProps } from './PresenceMotion'
 export type { PortalProps } from './portal'
