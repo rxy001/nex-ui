@@ -12,7 +12,6 @@ import {
   useDefaultProps,
   useStyles,
   composeClasses,
-  getUtilityClass,
   motionFeatures,
   useSlot,
 } from '../utils'
@@ -33,7 +32,7 @@ const contentMotionVariants: Variants = {
       duration: 0.2,
     },
   },
-  unexpanded: {
+  collapsed: {
     opacity: 0,
     height: 0,
     transition: {
@@ -49,7 +48,7 @@ const indicatorMotionVariants: Variants = {
       duration: 0.2,
     },
   },
-  unexpanded: {
+  collapsed: {
     rotate: 0,
     transition: {
       duration: 0.2,
@@ -60,21 +59,21 @@ const indicatorMotionVariants: Variants = {
 const useSlotClasses = (ownerState: AccordionItemOwnerState) => {
   const { prefix } = useNexUI()
 
-  const { disabled, classes, expanded } = ownerState
+  const { classNames } = ownerState
 
   return useMemo(() => {
     const accordionItemRoot = `${prefix}-accordion-item`
 
     const slots = {
-      root: ['root', disabled && 'disabled', expanded && 'expanded'],
-      heading: ['heading'],
-      trigger: ['trigger'],
-      content: ['content'],
-      indicator: ['indicator'],
+      root: 'root',
+      heading: 'heading',
+      trigger: 'trigger',
+      content: 'content',
+      indicator: 'indicator',
     }
 
-    return composeClasses(slots, getUtilityClass(accordionItemRoot), classes)
-  }, [classes, disabled, expanded, prefix])
+    return composeClasses(slots, accordionItemRoot, classNames)
+  }, [classNames, prefix])
 }
 
 const useSlotAriaProps = (
@@ -182,14 +181,14 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const animate = expanded ? 'expanded' : 'unexpanded'
+  const animate = expanded ? 'expanded' : 'collapsed'
 
   // Skip initial animation when first rendering and the item is expanded
   const motionInitialRef = useRef(animate)
 
   if (motionInitialRef.current === 'expanded' && !expanded) {
     // Restore open animation for subsequent renders
-    motionInitialRef.current = 'unexpanded'
+    motionInitialRef.current = 'collapsed'
   }
 
   const contentMotionProps = keepMounted
@@ -205,7 +204,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
         variants: contentMotionVariants,
         initial: motionInitialRef.current,
         animate: 'expanded',
-        exit: 'unexpanded',
+        exit: 'collapsed',
         style: {
           overflow: 'hidden',
         },
@@ -216,6 +215,12 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     externalForwardedProps: remainingProps,
     style: styles.root,
     classNames: classes.root,
+    dataAttrs: {
+      keepMounted,
+      hideIndicator,
+      disabled,
+      state: animate,
+    },
   })
 
   const [AccordionItemHeading, getAccordionItemHeadingProps] = useSlot({

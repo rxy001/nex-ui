@@ -5,7 +5,7 @@ import {
   testComponentStability,
   testRefForwarding,
   testRootClassName,
-  testVariantClasses,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { Accordion, AccordionItem } from '../index'
 import { Button } from '../../button'
@@ -28,10 +28,9 @@ describe('Accordion', () => {
     useAct: true,
   })
 
-  testVariantClasses(
+  testVariantDataAttrs(
     <Accordion>Button</Accordion>,
     ['variant', ['outlined', 'underlined']],
-    accordionClasses,
     {
       useAct: true,
     },
@@ -108,8 +107,8 @@ describe('Accordion', () => {
     )
   })
 
-  it('should forward classes to heading, indicator, trigger and content slots', async () => {
-    const classes = {
+  it('should forward classNames to heading, indicator, trigger and content slots', async () => {
+    const classNames = {
       heading: 'test-heading',
       indicator: 'test-indicator',
       trigger: 'test-trigger',
@@ -117,7 +116,7 @@ describe('Accordion', () => {
     }
     const { queryByClassName } = await renderWithNexUIProvider(
       <Accordion keepMounted>
-        <AccordionItem itemKey='1' title='Accordion 1' classes={classes}>
+        <AccordionItem itemKey='1' title='Accordion 1' classNames={classNames}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </AccordionItem>
       </Accordion>,
@@ -126,10 +125,10 @@ describe('Accordion', () => {
       },
     )
 
-    expect(queryByClassName(classes.heading)).toBeInTheDocument()
-    expect(queryByClassName(classes.indicator)).toBeInTheDocument()
-    expect(queryByClassName(classes.trigger)).toBeInTheDocument()
-    expect(queryByClassName(classes.content)).toBeInTheDocument()
+    expect(queryByClassName(classNames.heading)).toBeInTheDocument()
+    expect(queryByClassName(classNames.indicator)).toBeInTheDocument()
+    expect(queryByClassName(classNames.trigger)).toBeInTheDocument()
+    expect(queryByClassName(classNames.content)).toBeInTheDocument()
   })
 
   it('should render expanded items when defaultExpandedKeys is provided', async () => {

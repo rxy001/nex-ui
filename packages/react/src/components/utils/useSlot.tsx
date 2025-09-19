@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { mergeProps, mergeRefs } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
+import { generateDataAttrs } from './generateDataAttrs'
 import type { ElementType as ReactElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { NexComponent } from '@nex-ui/styled'
@@ -10,6 +11,8 @@ import type {
   Overwrite,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
+
+type DataAttrs = { [key: string]: string | number | boolean }
 
 export type UseSlotArgs<
   ElementType extends ReactElementType,
@@ -59,6 +62,11 @@ export type UseSlotArgs<
    * @default true
    */
   shouldForwardComponent?: ShouldForwardComponent
+
+  /**
+   * Data attributes to be spread to the element.
+   */
+  dataAttrs?: DataAttrs
 }
 
 type SlotComponentProps<SlotProps, ForwardedProps> = Overwrite<
@@ -93,9 +101,13 @@ export const useSlot = <
     additionalProps,
     externalForwardedProps,
     shouldForwardComponent = true,
+    dataAttrs = {},
   } = args
   const getProps = () => {
+    const propsDataAttrs = generateDataAttrs(dataAttrs)
+
     const props = mergeProps(
+      propsDataAttrs,
       additionalProps,
       externalForwardedProps,
       externalSlotProps,

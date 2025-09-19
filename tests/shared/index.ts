@@ -8,7 +8,7 @@ export {
   flushMockedImages,
 } from './mockGlobalImage'
 export { testColorClasses } from './testColorClasses'
-export { testVariantClasses } from './testVariantClasses'
+export { testVariantDataAttrs } from './testVariantDataAttrs'
 export { testComponentStability } from './testComponentStability'
 export { testRootClassName } from './testRootClassName'
 export { testSizeClasses } from './testSizeClasses'

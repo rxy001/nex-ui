@@ -1,4 +1,4 @@
-import { testVariantClasses } from './testVariantClasses'
+import { testVariantClasses } from './testVariantDataAttrs'
 import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 

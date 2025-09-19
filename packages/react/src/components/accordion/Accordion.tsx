@@ -5,30 +5,23 @@ import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { __DEV__, filter } from '@nex-ui/utils'
 import { AccordionGroupProvider } from './AccordionContext'
 import { useNexUI } from '../provider'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, composeClasses, useSlot } from '../utils'
 import { accordionRecipe } from '../../theme/recipes'
 import type { ElementType, Key } from 'react'
 import type { AccordionProps } from './types'
 
-const useSlotClasses = (ownerState: AccordionProps) => {
+const useSlotClasses = () => {
   const { prefix } = useNexUI()
-  const { variant } = ownerState
 
   return useMemo(() => {
     const accordionRoot = `${prefix}-accordion`
 
     const slots = {
-      root: ['root', variant && `variant-${variant}`],
+      root: 'root',
     }
 
-    return composeClasses(slots, getUtilityClass(accordionRoot))
-  }, [prefix, variant])
+    return composeClasses(slots, accordionRoot)
+  }, [prefix])
 }
 
 export const Accordion = <RootComponent extends ElementType = 'div'>(
@@ -80,7 +73,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     variant,
   }
 
-  const classes = useSlotClasses(ownerState)
+  const classes = useSlotClasses()
 
   const style = useStyles({
     ownerState,
@@ -93,6 +86,10 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: classes.root,
+    dataAttrs: {
+      variant,
+      multiple,
+    },
   })
 
   const toggleExpandedKey = useEvent((key: Key) => {

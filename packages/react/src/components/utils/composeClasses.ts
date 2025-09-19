@@ -1,10 +1,11 @@
-import { forEach, reduce } from '@nex-ui/utils'
+import { forEach } from '@nex-ui/utils'
 import clsx from 'clsx'
-import type { ClassArray, ClassValue } from 'clsx'
+import { generateUtilityClass } from './generateUtilityClass'
+import type { ClassValue } from 'clsx'
 
 export function composeClasses<ClassKey extends string, K extends ClassKey>(
-  slots: Record<ClassKey, ClassArray>,
-  getUtilityClass: (slotClass: string) => string,
+  slots: Record<ClassKey, ClassValue>,
+  prefix: string,
   classes?: Partial<Record<K, ClassValue>>,
 ) {
   const output = {} as Record<ClassKey, ClassValue>
@@ -17,21 +18,7 @@ export function composeClasses<ClassKey extends string, K extends ClassKey>(
       className = classes?.[slot]
     }
 
-    const result = reduce<ClassValue, ClassValue[]>(
-      slotClasses,
-      (acc, slotClass: ClassValue) => {
-        if (slotClass && typeof slotClass === 'string') {
-          const utilityClass = getUtilityClass(slotClass)
-          if (utilityClass !== '') {
-            acc.push(utilityClass)
-          }
-        }
-        return acc
-      },
-      [],
-    )
-
-    output[slot] = clsx([className, result])
+    output[slot] = clsx([className, generateUtilityClass(prefix, slotClasses)])
   })
 
   return output
