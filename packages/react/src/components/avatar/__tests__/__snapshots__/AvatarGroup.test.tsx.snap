@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AvatarGroup should render with default props 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: var(--nui-colors-gray-contrast-text);
+  background-color: var(--nui-colors-gray-primary);
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: var(--nui-sizes-10);
+  height: var(--nui-sizes-10);
+  font-size: var(--nui-font-sizes-lg);
+  border-radius: var(--nui-radii-lg);
+  -webkit-transition: var(--nui-transitions-transform);
+  transition: var(--nui-transitions-transform);
+  position: relative;
+  z-index: 1;
+}
+
+.emotion-1 svg {
+  font-size: 1.6em;
+}
+
+.emotion-1:not(:first-of-type) {
+  -webkit-margin-start: var(--avatar-group-spacing, calc(var(--nui-spaces-2) * -1));
+  margin-inline-start: var(--avatar-group-spacing, calc(var(--nui-spaces-2) * -1));
+}
+
+.emotion-1:not(:last-of-type):is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
+  -webkit-transform: translateX(min(0px, var(--avatar-group-spacing, calc(var(--nui-spaces-2) * -1))));
+  -moz-transform: translateX(min(0px, var(--avatar-group-spacing, calc(var(--nui-spaces-2) * -1))));
+  -ms-transform: translateX(min(0px, var(--avatar-group-spacing, calc(var(--nui-spaces-2) * -1))));
+  transform: translateX(min(0px, var(--avatar-group-spacing, calc(var(--nui-spaces-2) * -1))));
+}
+
+<div
+  class="nui-avatar-group-root emotion-0"
+>
+  <div
+    class="nui-avatar-root emotion-1"
+    data-color="gray"
+    data-in-group="true"
+    data-outlined="false"
+    data-radius="md"
+    data-size="md"
+    data-testid="avatar"
+  />
+  <div
+    class="nui-avatar-root emotion-1"
+    data-color="gray"
+    data-in-group="true"
+    data-outlined="false"
+    data-radius="md"
+    data-size="md"
+  />
+  <div
+    class="nui-avatar-root emotion-1"
+    data-color="gray"
+    data-in-group="true"
+    data-outlined="false"
+    data-radius="md"
+    data-size="md"
+  />
+</div>
+`;

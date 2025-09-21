@@ -1,17 +1,17 @@
 import { fireEvent, act } from '@testing-library/react'
 import {
-  testColorClasses,
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
-  testSizeClasses,
-  testRadiusClasses,
   testRefForwarding,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
+  testColorDataAttrs,
+  testSizeDataAttrs,
+  testRadiusDataAttrs,
 } from '~/tests/shared'
 import { Checkbox, CheckboxGroup } from '../index'
-import { checkboxClasses } from '../classes'
+import { checkboxClasses, checkboxDataAttrs } from './constants'
 
 const slots = ['icon', 'root', 'label'] as const
 
@@ -24,15 +24,15 @@ describe('Checkbox', () => {
     useAct: true,
   })
 
-  testColorClasses(<Checkbox>Checkbox</Checkbox>, checkboxClasses, {
+  testColorDataAttrs(<Checkbox>Checkbox</Checkbox>, {
     useAct: true,
   })
 
-  testSizeClasses(<Checkbox>Checkbox</Checkbox>, checkboxClasses, {
+  testSizeDataAttrs(<Checkbox>Checkbox</Checkbox>, {
     useAct: true,
   })
 
-  testRadiusClasses(<Checkbox>Checkbox</Checkbox>, checkboxClasses, {
+  testRadiusDataAttrs(<Checkbox>Checkbox</Checkbox>, {
     useAct: true,
   })
 
@@ -40,7 +40,7 @@ describe('Checkbox', () => {
     useAct: true,
   })
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <Checkbox>Checkbox</Checkbox>,
     slots,
     {
@@ -78,26 +78,17 @@ describe('Checkbox', () => {
 
     const checkboxRoot = container.firstElementChild
     expect(checkboxRoot).toHaveClass(checkboxClasses.root)
-    expect(checkboxRoot).toHaveClass(checkboxClasses['size-md'])
-    expect(checkboxRoot).toHaveClass(checkboxClasses['radius-md'])
-    expect(checkboxRoot).toHaveClass(checkboxClasses['color-blue'])
 
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-green'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-cyan'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-orange'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-pink'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-purple'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-yellow'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-red'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['color-gray'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['size-sm'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['size-lg'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['radius-sm'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['radius-lg'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses['radius-full'])
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses.indeterminate)
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses.checked)
-    expect(checkboxRoot).not.toHaveClass(checkboxClasses.disabled)
+    expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['size-md'])
+    expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['radius-md'])
+    expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['color-blue'])
+    expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['disabled-false'])
+    expect(checkboxRoot).toHaveAttribute(
+      ...checkboxDataAttrs['indeterminate-false'],
+    )
+    expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['checked-false'])
+    expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['inGroup-false'])
+
     expect(checkboxRoot).toMatchSnapshot()
 
     const checkbox = getByRole('checkbox')
@@ -143,7 +134,9 @@ describe('Checkbox', () => {
     )
 
     expect(getByRole('checkbox')).toBeChecked()
-    expect(container.firstElementChild).toHaveClass(checkboxClasses.checked)
+    expect(container.firstElementChild).toHaveAttribute(
+      ...checkboxDataAttrs['checked-true'],
+    )
   })
 
   it('should switch checked state and call onCheckedChange when clicked', async () => {
@@ -185,7 +178,7 @@ describe('Checkbox', () => {
     const checkboxRoot = container.firstElementChild
 
     expect(checkbox).toBeDisabled()
-    expect(checkboxRoot).toHaveClass(checkboxClasses.disabled)
+    expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['disabled-true'])
     expect(checkboxRoot).toHaveStyleRule('pointer-events', 'none')
   })
 
@@ -199,9 +192,20 @@ describe('Checkbox', () => {
     const checkbox = getByRole('checkbox')
     expect(checkbox).toBeInTheDocument()
     expect(checkbox).toBeChecked()
-    expect(container.firstElementChild).toHaveClass(
-      checkboxClasses.indeterminate,
+    expect(container.firstElementChild).toHaveAttribute(
+      ...checkboxDataAttrs['indeterminate-true'],
     )
+  })
+
+  it('should render with custom name attribute', async () => {
+    const { getByRole } = await renderWithNexUIProvider(
+      <Checkbox name='agreement'>I agree to terms</Checkbox>,
+      {
+        useAct: true,
+      },
+    )
+    const checkbox = getByRole('checkbox')
+    expect(checkbox).toHaveAttribute('name', 'agreement')
   })
 
   it('should render custom icon when icon prop is provided', async () => {
@@ -236,6 +240,8 @@ describe('Checkbox', () => {
       name: undefined,
       icon: renderIcon,
       as: 'input',
+      classNames: undefined,
+      indeterminate: false,
     })
     expect(getByTestId('custom-icon')).toBeInTheDocument()
 
@@ -492,14 +498,16 @@ describe('Checkbox', () => {
       const checkboxRoot = container.firstElementChild!
       const checkbox = getByRole('checkbox')
 
-      expect(checkboxRoot).not.toHaveClass(checkboxClasses.checked)
+      expect(checkboxRoot).toHaveAttribute(
+        ...checkboxDataAttrs['checked-false'],
+      )
       expect(checkbox).toHaveAttribute('aria-checked', 'false')
 
       await act(async () => {
         fireEvent.click(checkbox)
       })
 
-      expect(checkboxRoot).toHaveClass(checkboxClasses.checked)
+      expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['checked-true'])
       expect(checkbox).toHaveAttribute('aria-checked', 'true')
     })
 
@@ -517,11 +525,14 @@ describe('Checkbox', () => {
       const checkbox = getByRole('checkbox')
       const checkboxRoot = checkbox.parentElement!
 
-      expect(checkboxRoot).not.toHaveClass(checkboxClasses.checked)
+      expect(checkboxRoot).toHaveAttribute(
+        ...checkboxDataAttrs['checked-false'],
+      )
+
       await act(async () => {
         fireEvent.click(checkbox)
       })
-      expect(checkboxRoot).toHaveClass(checkboxClasses.checked)
+      expect(checkboxRoot).toHaveAttribute(...checkboxDataAttrs['checked-true'])
     })
 
     it('should activate non-input elements when space is pressed', async () => {

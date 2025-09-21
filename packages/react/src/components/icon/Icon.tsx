@@ -1,34 +1,12 @@
 'use client'
 
-import { useMemo } from 'react'
 import { __DEV__ } from '@nex-ui/utils'
-import { useNexUI } from '../provider/Context'
 import { iconRecipe } from '../../theme/recipes'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import type { ElementType } from 'react'
 import type { IconProps } from './types'
 
-const useSlotClasses = (ownerState: IconProps) => {
-  const { prefix } = useNexUI()
-
-  const { spin, size } = ownerState
-
-  return useMemo(() => {
-    const iconRoot = `${prefix}-icon`
-
-    const slots = {
-      root: ['root', spin && `spin`, size && `size-${size}`],
-    }
-
-    return composeClasses(slots, getUtilityClass(iconRoot))
-  }, [prefix, size, spin])
-}
+const slots = ['root']
 
 export const Icon = <RootComponent extends ElementType = 'svg'>(
   inProps: IconProps<RootComponent>,
@@ -69,13 +47,16 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
     recipe: iconRecipe,
   })
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Icon',
+    slots,
+  })
 
   const [IconRoot, getIconRootProps] = useSlot({
     style,
     elementType: 'svg',
     externalForwardedProps: remainingProps,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     a11y: {
       focusable,
       'aria-hidden': props['aria-hidden'] ?? true,
@@ -87,6 +68,10 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
         width,
         height,
       },
+    },
+    dataAttrs: {
+      size,
+      spin,
     },
   })
 

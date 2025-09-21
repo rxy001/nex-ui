@@ -5,7 +5,7 @@ import type { DrawerContentVariants } from '../../theme/recipes'
 import type {
   OverrideProps,
   ComponentPropsWithCommonProps,
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   HTMLMotionProps,
 } from '../../types/utils'
 
@@ -50,7 +50,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'backdrop'>
+  classNames?: ComponentSlotClasses<'backdrop'>
 
   /**
    * If true, the drawer is open.
@@ -148,7 +148,7 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'paper' | 'closeButton'>
+  classNames?: ComponentSlotClasses<'paper' | 'closeButton'>
 
   /**
    * It's usually the DrawerHeader、DrawerBody andd DrawerFooter component.

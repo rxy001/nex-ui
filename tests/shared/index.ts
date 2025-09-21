@@ -7,12 +7,12 @@ export {
   restoreGlobalImage,
   flushMockedImages,
 } from './mockGlobalImage'
-export { testColorClasses } from './testColorClasses'
-export { testVariantClasses } from './testVariantClasses'
+export { testColorDataAttrs } from './testColorDataAttrs'
+export { testVariantDataAttrs } from './testVariantDataAttrs'
 export { testComponentStability } from './testComponentStability'
 export { testRootClassName } from './testRootClassName'
-export { testSizeClasses } from './testSizeClasses'
-export { testRadiusClasses } from './testRadiusClasses'
+export { testSizeDataAttrs } from './testSizeDataAttrs'
+export { testRadiusDataAttrs } from './testRadiusDataAttrs'
 export { testRefForwarding } from './testRefForwarding'
 export { testSlotPropsForwarding } from './testSlotPropsForwarding'
-export { testClassesForwarding } from './testClassesForwarding'
+export { testClassNamesForwarding } from './testClassNamesForwarding'

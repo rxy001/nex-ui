@@ -4,7 +4,7 @@ import type { Interpolation } from '@nex-ui/system'
 import type { InputVariants } from '../../theme/recipes'
 import type {
   ComponentPropsWithCommonProps,
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   OverrideProps,
 } from '../../types/utils'
 
@@ -143,7 +143,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<
+  classNames?: ComponentSlotClasses<
     'root' | 'label' | 'clearButton' | 'prefix' | 'suffix'
   >
 

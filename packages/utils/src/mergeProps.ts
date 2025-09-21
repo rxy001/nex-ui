@@ -34,7 +34,7 @@ export function mergeProps<T extends PropsArg[]>(...args: T) {
           ...a,
           ...b,
         }
-      } else if (key === 'classes') {
+      } else if (key === 'classNames') {
         result[key] = mergeWith(
           {},
           a,

@@ -2,11 +2,11 @@ import {
   testComponentStability,
   renderWithNexUIProvider,
   testRefForwarding,
-  testVariantClasses,
   testRootClassName,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { Divider } from '../index'
-import { dividerClasses } from '../dividerClasses'
+import { dividerClasses, dividerDataAttrs } from './constants'
 
 describe('Divider', () => {
   testComponentStability(<Divider />)
@@ -15,19 +15,16 @@ describe('Divider', () => {
 
   testRootClassName(<Divider />)
 
-  testVariantClasses(
-    <Divider />,
-    ['orientation', ['horizontal', 'vertical']],
-    dividerClasses,
-  )
+  testVariantDataAttrs(<Divider />, ['orientation', ['horizontal', 'vertical']])
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Divider />)
     const dividerRoot = container.firstElementChild
 
     expect(dividerRoot).toHaveClass(dividerClasses.root)
-    expect(dividerRoot).toHaveClass(dividerClasses['orientation-horizontal'])
-    expect(dividerRoot).not.toHaveClass(dividerClasses['orientation-vertical'])
+    expect(dividerRoot).toHaveAttribute(
+      ...dividerDataAttrs['orientation-horizontal'],
+    )
 
     expect(dividerRoot).toMatchSnapshot()
   })

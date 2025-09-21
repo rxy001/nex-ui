@@ -5,16 +5,14 @@ import { useEvent } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { LazyMotion, AnimatePresence } from 'motion/react'
 import { useId, useMemo, useRef } from 'react'
-import { useNexUI } from '../provider'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import {
   useDefaultProps,
   useStyles,
-  composeClasses,
-  getUtilityClass,
   motionFeatures,
   useSlot,
+  useSlotClasses,
 } from '../utils'
 import { useAccordionGroup } from './AccordionContext'
 import type { ElementType, HTMLAttributes } from 'react'
@@ -33,7 +31,7 @@ const contentMotionVariants: Variants = {
       duration: 0.2,
     },
   },
-  unexpanded: {
+  collapsed: {
     opacity: 0,
     height: 0,
     transition: {
@@ -49,7 +47,7 @@ const indicatorMotionVariants: Variants = {
       duration: 0.2,
     },
   },
-  unexpanded: {
+  collapsed: {
     rotate: 0,
     transition: {
       duration: 0.2,
@@ -57,25 +55,7 @@ const indicatorMotionVariants: Variants = {
   },
 }
 
-const useSlotClasses = (ownerState: AccordionItemOwnerState) => {
-  const { prefix } = useNexUI()
-
-  const { disabled, classes, expanded } = ownerState
-
-  return useMemo(() => {
-    const accordionItemRoot = `${prefix}-accordion-item`
-
-    const slots = {
-      root: ['root', disabled && 'disabled', expanded && 'expanded'],
-      heading: ['heading'],
-      trigger: ['trigger'],
-      content: ['content'],
-      indicator: ['indicator'],
-    }
-
-    return composeClasses(slots, getUtilityClass(accordionItemRoot), classes)
-  }, [classes, disabled, expanded, prefix])
-}
+const slots = ['root', 'heading', 'trigger', 'content', 'indicator']
 
 const useSlotAriaProps = (
   ownerState: AccordionItemOwnerState,
@@ -148,6 +128,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     children,
     title,
     slotProps,
+    classNames,
     indicatorMotionProps = defaultIndicatorMotionProps,
     motionProps = defaultMotionProps,
     hideIndicator = defaultHideIndicator,
@@ -178,18 +159,22 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     recipe: accordionItemRecipe,
   })
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'AccordionItem',
+    slots,
+    classNames,
+  })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const animate = expanded ? 'expanded' : 'unexpanded'
+  const animate = expanded ? 'expanded' : 'collapsed'
 
   // Skip initial animation when first rendering and the item is expanded
   const motionInitialRef = useRef(animate)
 
   if (motionInitialRef.current === 'expanded' && !expanded) {
     // Restore open animation for subsequent renders
-    motionInitialRef.current = 'unexpanded'
+    motionInitialRef.current = 'collapsed'
   }
 
   const contentMotionProps = keepMounted
@@ -205,7 +190,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
         variants: contentMotionVariants,
         initial: motionInitialRef.current,
         animate: 'expanded',
-        exit: 'unexpanded',
+        exit: 'collapsed',
         style: {
           overflow: 'hidden',
         },
@@ -215,14 +200,20 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     elementType: 'div',
     externalForwardedProps: remainingProps,
     style: styles.root,
-    classNames: classes.root,
+    classNames: slotClasses.root,
+    dataAttrs: {
+      keepMounted,
+      hideIndicator,
+      disabled,
+      state: animate,
+    },
   })
 
   const [AccordionItemHeading, getAccordionItemHeadingProps] = useSlot({
     elementType: 'h3',
     externalSlotProps: slotProps?.heading,
     style: styles.heading,
-    classNames: classes.heading,
+    classNames: slotClasses.heading,
   })
 
   const handleClick = useEvent(() => {
@@ -233,7 +224,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     elementType: ButtonBase,
     externalSlotProps: slotProps?.trigger,
     style: styles.trigger,
-    classNames: classes.trigger,
+    classNames: slotClasses.trigger,
     a11y: slotAriaProps.trigger,
     shouldForwardComponent: false,
     additionalProps: {
@@ -246,7 +237,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     elementType: 'div',
     externalSlotProps: slotProps?.content,
     style: styles.content,
-    classNames: classes.content,
+    classNames: slotClasses.content,
     a11y: slotAriaProps.content,
   })
 
@@ -254,7 +245,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     elementType: m.span,
     externalSlotProps: slotProps?.indicator,
     style: styles.indicator,
-    classNames: classes.indicator,
+    classNames: slotClasses.indicator,
     a11y: slotAriaProps.indicator,
     additionalProps: {
       animate,

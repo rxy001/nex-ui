@@ -3,14 +3,7 @@
 import { useId, useMemo, useRef } from 'react'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { isString } from '@nex-ui/utils'
-import { useNexUI } from '../provider'
-import {
-  useDefaultProps,
-  useSlot,
-  composeClasses,
-  getUtilityClass,
-  useStyles,
-} from '../utils'
+import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
 import { radioGroupRecipe } from '../../theme/recipes'
 import { RadioGroupProvider } from './RadioGroupContext'
 import type { ElementType, KeyboardEvent } from 'react'
@@ -20,22 +13,7 @@ import type {
   RadioState,
 } from './types'
 
-const useSlotClasses = (ownerState: RadioGroupProps) => {
-  const { prefix } = useNexUI()
-  const { orientation, classes } = ownerState
-
-  return useMemo(() => {
-    const radioGroupRoot = `${prefix}-radio-group`
-
-    const slots = {
-      root: ['root', `orientation-${orientation}`],
-      label: ['label'],
-      wrapper: ['wrapper'],
-    }
-
-    return composeClasses(slots, getUtilityClass(radioGroupRoot), classes)
-  }, [prefix, orientation, classes])
-}
+const slots = ['root', 'label', 'wrapper']
 
 const useSlotAriaProps = (ownerState: RadioGroupProps) => {
   const id = useId()
@@ -96,6 +74,7 @@ export const RadioGroup = <
     slotProps,
     role,
     size,
+    classNames,
     value: valueProp,
     name = defaultName,
     orientation = 'horizontal',
@@ -122,7 +101,11 @@ export const RadioGroup = <
     ownerState,
   })
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'RadioGroup',
+    slots,
+    classNames,
+  })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
@@ -200,7 +183,7 @@ export const RadioGroup = <
 
   const [RadioGroupRoot, getRadioGroupRootProps] = useSlot({
     elementType: 'div',
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     style: styles.root,
     additionalProps: {
@@ -209,12 +192,15 @@ export const RadioGroup = <
       onKeyDown: handleKeyDown,
     },
     a11y: slotAriaProps.root,
+    dataAttrs: {
+      orientation,
+    },
   })
 
   const [RadioGroupLabel, getRadioGroupLabelProps] = useSlot({
     elementType: 'h3',
     style: styles.label,
-    classNames: classes.label,
+    classNames: slotClasses.label,
     externalSlotProps: slotProps?.label,
     a11y: slotAriaProps.label,
   })
@@ -222,7 +208,7 @@ export const RadioGroup = <
   const [RadioGroupWrapper, getRadioGroupWrapperProps] = useSlot({
     elementType: 'div',
     style: styles.wrapper,
-    classNames: classes.wrapper,
+    classNames: slotClasses.wrapper,
     externalSlotProps: slotProps?.wrapper,
   })
 

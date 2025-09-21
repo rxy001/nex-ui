@@ -1,33 +1,13 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useSlotClasses, useStyles, useSlot } from '../utils'
 import { dialogBodyRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import { useDialogContent } from './DialogContext'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogBodyProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-dialog-body`
-
-    const slots = {
-      root: ['root'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName))
-  }, [prefix])
-}
+const slots = ['root']
 
 export const DialogBody = <RootComponent extends ElementType = 'div'>(
   inProps: DialogBodyProps<RootComponent>,
@@ -41,23 +21,24 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
 
   const { children, tabIndex, ...remainingProps } = props
 
-  const ownerState: DialogBodyProps = props
-
   const style = useStyles({
     ownerState: {
-      ...ownerState,
+      ...props,
       scroll,
     },
     name: 'DialogBody',
     recipe: dialogBodyRecipe,
   })
 
-  const classes = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'DialogBody',
+    slots,
+  })
 
   const [DialogBodyRoot, getDialogBodyRootProps] = useSlot({
     style,
     elementType: ModalBody,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
     a11y: {

@@ -3,7 +3,7 @@ import type { ElementType, Key, ReactNode } from 'react'
 import type { DOMMotionComponents } from 'motion/react'
 import type { Interpolation } from '@nex-ui/system'
 import type {
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
   HTMLMotionProps,
@@ -188,7 +188,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<
+  classNames?: ComponentSlotClasses<
     'heading' | 'indicator' | 'content' | 'trigger'
   >
 }

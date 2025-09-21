@@ -5,16 +5,16 @@ import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 import type { CamelToKebab } from './utils'
 
-export const testClassesForwarding = <S extends string>(
-  Component: ReactElement<{ classes?: Record<S, any> }>,
+export const testClassNamesForwarding = <S extends string>(
+  Component: ReactElement<{ classNames?: Record<S, any> }>,
   slots: readonly S[],
   testClasses: Record<S, string>,
   classes: Record<CamelToKebab<S>, string>,
   options?: RenderWithNexUIProviderOptions,
 ) => {
-  it(`should forward classes to ${slots.join(', ')} slots`, async () => {
+  it(`should forward classNames to ${slots.join(', ')} slots`, async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
-      cloneElement(Component, { classes: testClasses }),
+      cloneElement(Component, { classNames: testClasses }),
       options,
     )
 

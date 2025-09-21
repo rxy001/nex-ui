@@ -7,7 +7,7 @@ import {
   DialogFooter,
   DialogBody,
 } from '../index'
-import { dialogContentClasses } from '../classes'
+import { dialogContentClasses, dialogContentDataAttrs } from './constants'
 import type { DialogContentProps } from '../index'
 
 function TestDialog(props: DialogContentProps) {
@@ -28,23 +28,23 @@ describe('DialogContent', () => {
       useAct: true,
     })
 
-    const dialogContent = getByTestId('dialog-content')
-    expect(dialogContent).toHaveClass(dialogContentClasses.root)
-    expect(dialogContent).toHaveClass(dialogContentClasses['size-md'])
-    expect(dialogContent).toHaveClass(dialogContentClasses['placement-top'])
-    expect(dialogContent).not.toHaveClass(dialogContentClasses['full-screen'])
-    expect(dialogContent).not.toHaveClass(
-      dialogContentClasses['placement-bottom'],
+    const dialogContentRoot = getByTestId('dialog-content')
+
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['size-md'],
     )
-    expect(dialogContent).not.toHaveClass(
-      dialogContentClasses['placement-center'],
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['placement-top'],
     )
-    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-xs'])
-    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-sm'])
-    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-lg'])
-    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-xl'])
-    expect(dialogContent).not.toHaveClass(dialogContentClasses['size-full'])
-    expect(dialogContent).not.toHaveClass(dialogContentClasses['scroll-inside'])
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['fullScreen-false'],
+    )
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['scroll-outside'],
+    )
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['hideCloseButton-false'],
+    )
   })
 
   it("should forward ref to DialogContent's root element", async () => {
@@ -60,7 +60,7 @@ describe('DialogContent', () => {
     expect(dialogContentRoot).toBe(ref.current)
   })
 
-  it(`should add the appropriate size class to DialogContent's root element based on size prop`, async () => {
+  it(`should add the appropriate data-size-* to DialogContent's root element based on size prop`, async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestDialog size='sm' />,
       {
@@ -68,37 +68,38 @@ describe('DialogContent', () => {
       },
     )
 
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['size-sm'],
+    const dialogContentRoot = getByTestId('dialog-content')
+
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['size-sm'],
     )
 
     rerender(<TestDialog size='xs' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['size-xs'],
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['size-xs'],
     )
 
     rerender(<TestDialog size='md' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['size-md'],
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['size-md'],
     )
 
     rerender(<TestDialog size='lg' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['size-lg'],
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['size-lg'],
     )
-
     rerender(<TestDialog size='xl' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['size-xl'],
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['size-xl'],
     )
 
     rerender(<TestDialog size='full' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['size-full'],
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['size-full'],
     )
   })
 
-  it(`should add the appropriate fullScreen class to DialogContent's root element based on fullScreen prop`, async () => {
+  it(`should add the appropriate data-full-screen-* to DialogContent's root element based on fullScreen prop`, async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestDialog />,
       {
@@ -106,35 +107,39 @@ describe('DialogContent', () => {
       },
     )
 
-    expect(getByTestId('dialog-content')).not.toHaveClass(
-      dialogContentClasses['full-screen'],
+    const dialogContentRoot = getByTestId('dialog-content')
+
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['fullScreen-false'],
     )
 
     rerender(<TestDialog fullScreen />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['full-screen'],
+    expect(dialogContentRoot).toHaveAttribute(
+      ...dialogContentDataAttrs['fullScreen-true'],
     )
   })
 
-  it('should forward classes to paper and closeButton slots', async () => {
-    const classes = {
+  it('should forward classNames to paper and closeButton slots', async () => {
+    const classNames = {
       paper: 'test-dialog-content-paper',
       closeButton: 'test-dialog-content-close-button',
     }
     const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog classes={classes} />,
+      <TestDialog classNames={classNames} />,
       {
         useAct: true,
       },
     )
 
-    const dialogContent = getByTestId('dialog-content')
+    const dialogContentRoot = getByTestId('dialog-content')
     expect(
-      dialogContent.querySelector(`.${dialogContentClasses.paper}`),
-    ).toHaveClass(classes.paper)
+      dialogContentRoot.querySelector(`.${dialogContentClasses.paper}`),
+    ).toHaveClass(classNames.paper)
     expect(
-      dialogContent.querySelector(`.${dialogContentClasses['close-button']}`),
-    ).toHaveClass(classes.closeButton)
+      dialogContentRoot.querySelector(
+        `.${dialogContentClasses['close-button']}`,
+      ),
+    ).toHaveClass(classNames.closeButton)
   })
 
   it('should forward slotProps to backdrop slots', async () => {
@@ -233,7 +238,7 @@ describe('DialogContent', () => {
     expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
   })
 
-  it(`should add the appropriate scroll class to root element based on scroll prop`, async () => {
+  it(`should add the appropriate data-scroll-* to root element based on scroll prop`, async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestDialog scroll='inside' />,
       {
@@ -241,17 +246,20 @@ describe('DialogContent', () => {
       },
     )
 
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['scroll-inside'],
+    const dialogContent = getByTestId('dialog-content')
+
+    expect(dialogContent).toHaveAttribute(
+      ...dialogContentDataAttrs['scroll-inside'],
     )
 
     rerender(<TestDialog scroll='outside' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['scroll-outside'],
+
+    expect(dialogContent).toHaveAttribute(
+      ...dialogContentDataAttrs['scroll-outside'],
     )
   })
 
-  it(`should add the appropriate placement class to root element based on placement prop`, async () => {
+  it(`should add the appropriate data-placement-* to root element based on placement prop`, async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestDialog placement='top' />,
       {
@@ -259,18 +267,20 @@ describe('DialogContent', () => {
       },
     )
 
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['placement-top'],
+    const dialogContent = getByTestId('dialog-content')
+
+    expect(dialogContent).toHaveAttribute(
+      ...dialogContentDataAttrs['placement-top'],
     )
 
     rerender(<TestDialog placement='bottom' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['placement-bottom'],
+    expect(dialogContent).toHaveAttribute(
+      ...dialogContentDataAttrs['placement-bottom'],
     )
 
     rerender(<TestDialog placement='center' />)
-    expect(getByTestId('dialog-content')).toHaveClass(
-      dialogContentClasses['placement-center'],
+    expect(dialogContent).toHaveAttribute(
+      ...dialogContentDataAttrs['placement-center'],
     )
   })
 

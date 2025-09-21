@@ -54,73 +54,19 @@ exports[`Button should render with default props 1`] = `
 }
 
 <button
-  class="nui-btn-root nui-btn-variant-solid nui-btn-radius-md nui-btn-size-md nui-btn-color-blue emotion-0"
+  class="nui-button-root emotion-0"
+  data-color="blue"
+  data-disable-ripple="false"
+  data-disabled="false"
+  data-full-width="false"
+  data-icon-only="false"
+  data-loading="false"
+  data-radius="md"
+  data-size="md"
+  data-variant="solid"
   tabindex="0"
   type="button"
 >
   Button
 </button>
-`;
-
-exports[`Button should support link button 1`] = `
-.emotion-0 {
-  padding: 0;
-  margin: 0;
-  outline: none;
-  background: none;
-  border: none;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  -webkit-transition: var(--nui-transitions-colors);
-  transition: var(--nui-transitions-colors);
-  line-height: var(--nui-line-heights-base);
-  overflow: hidden;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background-color: var(--nui-colors-blue-primary);
-  color: var(--nui-colors-blue-contrast-text);
-  -webkit-padding-start: var(--nui-spaces-4);
-  padding-inline-start: var(--nui-spaces-4);
-  -webkit-padding-end: var(--nui-spaces-4);
-  padding-inline-end: var(--nui-spaces-4);
-  font-size: var(--nui-font-sizes-lg);
-  height: var(--nui-sizes-10);
-  border-radius: var(--nui-radii-lg);
-}
-
-.emotion-0[data-focus-visible=true]:not(:disabled, [data-disabled=true]) {
-  outline: var(--nui-borders-md) var(--nui-colors-blue-primary);
-  outline-offset: var(--nui-spaces-0-5);
-}
-
-.emotion-0:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
-  background-color: var(--nui-colors-blue-secondary);
-}
-
-<a
-  class="nui-btn-root nui-btn-variant-solid nui-btn-radius-md nui-btn-size-md nui-btn-color-blue emotion-0"
-  href="https://"
-  tabindex="0"
-  target="_blank"
->
-  Link Button
-</a>
 `;

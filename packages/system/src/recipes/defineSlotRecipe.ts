@@ -33,7 +33,7 @@ export function defineSlotRecipe<
   // eslint-disable-next-line prefer-const
   let { extend, ...other } = config
 
-  if (extend && extend?.__slotRecipe === true && extend?.__config) {
+  if (extend && extend.__slotRecipe === true && extend.__config) {
     other = mergeRecipeConfigs(extend.__config, other)
   }
 

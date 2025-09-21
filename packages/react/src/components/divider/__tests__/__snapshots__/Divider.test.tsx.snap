@@ -11,7 +11,8 @@ exports[`Divider should render with default props 1`] = `
 }
 
 <hr
-  class="nui-divider-root nui-divider-orientation-horizontal emotion-0"
+  class="nui-divider-root emotion-0"
+  data-orientation="horizontal"
   role="separator"
 />
 `;

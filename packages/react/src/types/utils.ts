@@ -21,7 +21,7 @@ export type ComponentPropsWithCommonProps<T extends ElementType> = Overwrite<
   }
 >
 
-export type ComponentUtilityClasses<T extends string> = Partial<
+export type ComponentSlotClasses<T extends string> = Partial<
   Record<T, ClassValue>
 >
 

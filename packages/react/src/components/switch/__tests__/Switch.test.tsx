@@ -4,14 +4,14 @@ import {
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
-  testColorClasses,
-  testSizeClasses,
   testRefForwarding,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
+  testColorDataAttrs,
+  testSizeDataAttrs,
 } from '~/tests/shared'
 import { Switch } from '../index'
-import { switchClasses } from '../switchClasses'
+import { switchClasses, switchDataAttrs } from './constants'
 
 const slots = [
   'root',
@@ -27,13 +27,13 @@ describe('Switch', () => {
 
   testRootClassName(<Switch />)
 
-  testColorClasses(<Switch />, switchClasses)
+  testColorDataAttrs(<Switch />)
 
-  testSizeClasses(<Switch />, switchClasses)
+  testSizeDataAttrs(<Switch />)
 
   testRefForwarding(<Switch />, HTMLInputElement)
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <Switch startIcon={<span>Start</span>} endIcon={<span>End</span>}>
       Switch
     </Switch>,
@@ -78,29 +78,16 @@ describe('Switch', () => {
   )
 
   it('should render with default props', () => {
-    const { container, getByRole } = renderWithNexUIProvider(<Switch />)
+    const { container } = renderWithNexUIProvider(<Switch />)
 
     const root = container.firstElementChild
-    const input = getByRole('switch')
 
     expect(root).toMatchSnapshot()
     expect(root).toHaveClass(switchClasses.root)
-    expect(root).toHaveClass(switchClasses['color-blue'])
-    expect(root).toHaveClass(switchClasses['size-md'])
-    expect(input).toHaveClass(switchClasses.input)
-
-    expect(root).not.toHaveClass(switchClasses.disabled)
-    expect(root).not.toHaveClass(switchClasses.checked)
-    expect(root).not.toHaveClass(switchClasses['color-cyan'])
-    expect(root).not.toHaveClass(switchClasses['color-green'])
-    expect(root).not.toHaveClass(switchClasses['color-gray'])
-    expect(root).not.toHaveClass(switchClasses['color-orange'])
-    expect(root).not.toHaveClass(switchClasses['color-pink'])
-    expect(root).not.toHaveClass(switchClasses['color-purple'])
-    expect(root).not.toHaveClass(switchClasses['color-red'])
-    expect(root).not.toHaveClass(switchClasses['color-yellow'])
-    expect(root).not.toHaveClass(switchClasses['size-sm'])
-    expect(root).not.toHaveClass(switchClasses['size-lg'])
+    expect(root).toHaveAttribute(...switchDataAttrs['disabled-false'])
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
+    expect(root).toHaveAttribute(...switchDataAttrs['size-md'])
+    expect(root).toHaveAttribute(...switchDataAttrs['color-blue'])
   })
 
   it('should render label with children', () => {
@@ -117,21 +104,22 @@ describe('Switch', () => {
     const root = container.firstElementChild
     const input = getByRole('switch')
 
-    expect(root).toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
     expect(input).toBeChecked()
 
     await act(async () => {
       fireEvent.click(input)
     })
 
-    expect(root).not.toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
+
     expect(input).not.toBeChecked()
 
     await act(async () => {
       fireEvent.click(input)
     })
 
-    expect(root).toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
     expect(input).toBeChecked()
   })
 
@@ -141,21 +129,22 @@ describe('Switch', () => {
     const root = container.firstElementChild!
     const input = getByRole('switch')
 
-    expect(root).not.toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
+
     expect(input).not.toBeChecked()
 
     await act(async () => {
       fireEvent.click(root)
     })
 
-    expect(root).toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
     expect(input).toBeChecked()
 
     await act(async () => {
       fireEvent.click(root)
     })
 
-    expect(root).not.toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
     expect(input).not.toBeChecked()
   })
 
@@ -181,21 +170,21 @@ describe('Switch', () => {
     const root = container.firstElementChild
 
     expect(input).not.toBeChecked()
-    expect(root).not.toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
 
     await act(async () => {
       fireEvent.click(input)
     })
 
     expect(input).toBeChecked()
-    expect(root).toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
 
     await act(async () => {
       fireEvent.click(input)
     })
 
     expect(input).not.toBeChecked()
-    expect(root).not.toHaveClass(switchClasses.checked)
+    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
   })
 
   it('should call onCheckedChange when checked state changes', async () => {
@@ -228,7 +217,7 @@ describe('Switch', () => {
     const input = getByRole('switch')
 
     expect(input).toBeDisabled()
-    expect(root).toHaveClass(switchClasses.disabled)
+    expect(root).toHaveAttribute(...switchDataAttrs['disabled-true'])
     expect(root).toHaveStyle('pointer-events: none')
   })
 
@@ -279,9 +268,7 @@ describe('Switch', () => {
   })
 
   it('should have data-focus-visible attribute when keyboard focused', async () => {
-    const { getByRole, user } = renderWithNexUIProvider(
-      <Switch>Checkbox</Switch>,
-    )
+    const { getByRole, user } = renderWithNexUIProvider(<Switch>Switch</Switch>)
 
     const switchElement = getByRole('switch')
 

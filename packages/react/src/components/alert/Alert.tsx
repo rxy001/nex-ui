@@ -9,44 +9,11 @@ import {
 } from '@nex-ui/icons'
 import { useMemo } from 'react'
 import { __DEV__ } from '@nex-ui/utils'
-import {
-  useDefaultProps,
-  useSlot,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-} from '../utils'
+import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { alertRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import { Button } from '../button'
 import type { ElementType } from 'react'
 import type { AlertProps } from './types'
-
-const useSlotClasses = (ownerState: AlertProps) => {
-  const { prefix } = useNexUI()
-  const { classes, color, radius, variant, status } = ownerState
-
-  return useMemo(() => {
-    const AlertRoot = `${prefix}-alert`
-
-    const slots = {
-      root: [
-        'root',
-        `radius-${radius}`,
-        `variant-${variant}`,
-        `color-${color}`,
-        `status-${status}`,
-      ],
-      icon: ['icon'],
-      content: ['content'],
-      title: ['title'],
-      description: ['description'],
-      closeButton: ['close-button'],
-    }
-
-    return composeClasses(slots, getUtilityClass(AlertRoot), classes)
-  }, [classes, color, prefix, radius, status, variant])
-}
 
 const useSlotAriaProps = (ownerState: AlertProps) => {
   const { role = 'alert' } = ownerState
@@ -60,6 +27,8 @@ const useSlotAriaProps = (ownerState: AlertProps) => {
     },
   }
 }
+
+const slots = ['root', 'icon', 'content', 'title', 'description', 'closeButton']
 
 export const Alert = <RootComponent extends ElementType = 'div'>(
   inProps: AlertProps<RootComponent>,
@@ -77,6 +46,7 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     action,
     slotProps,
     hideIcon,
+    classNames,
     icon: iconProp,
     color: colorProp,
     status = 'info',
@@ -129,7 +99,11 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     radius,
   }
 
-  const slotClasses = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Alert',
+    slots,
+    classNames,
+  })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
@@ -145,6 +119,12 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     style: styles.root,
     classNames: slotClasses.root,
     a11y: slotAriaProps.root,
+    dataAttrs: {
+      radius,
+      variant,
+      color,
+      status,
+    },
   })
 
   const [AlertIcon, getAlertIconProps] = useSlot({

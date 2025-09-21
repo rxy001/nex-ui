@@ -1,16 +1,16 @@
 import {
   renderWithNexUIProvider,
-  testClassesForwarding,
-  testColorClasses,
+  testClassNamesForwarding,
+  testColorDataAttrs,
   testComponentStability,
-  testRadiusClasses,
+  testRadiusDataAttrs,
   testRefForwarding,
   testRootClassName,
   testSlotPropsForwarding,
-  testVariantClasses,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { Alert } from '../index'
-import { alertClasses } from '../alertClasses'
+import { alertSlotClasses, alertDataAttrs } from './constants'
 
 const slots = [
   'icon',
@@ -22,16 +22,26 @@ const slots = [
 
 describe('Alert', () => {
   testComponentStability(<Alert />)
+
   testRootClassName(<Alert />)
-  testColorClasses(<Alert />, alertClasses)
-  testRadiusClasses(<Alert />, alertClasses)
-  testVariantClasses(
-    <Alert />,
-    ['status', ['error', 'success', 'warning', 'info']],
-    alertClasses,
-  )
+
+  testColorDataAttrs(<Alert />)
+
+  testRadiusDataAttrs(<Alert />)
+
+  testVariantDataAttrs(<Alert />, [
+    'status',
+    ['error', 'success', 'warning', 'info'],
+  ])
+
+  testVariantDataAttrs(<Alert />, [
+    'variant',
+    ['solid', 'subtle', 'faded', 'outlined'],
+  ])
+
   testRefForwarding(<Alert />)
-  testClassesForwarding(
+
+  testClassNamesForwarding(
     <Alert closable title='Title' description='Description' />,
     slots,
     {
@@ -41,8 +51,9 @@ describe('Alert', () => {
       description: 'test-description',
       closeButton: 'test-close-button',
     },
-    alertClasses,
+    alertSlotClasses,
   )
+
   testSlotPropsForwarding(
     <Alert title='Title' description='Description' closable />,
     slots,
@@ -63,7 +74,7 @@ describe('Alert', () => {
         className: 'test-close-button',
       },
     },
-    alertClasses,
+    alertSlotClasses,
   )
 
   it('should render with default props', () => {
@@ -71,31 +82,12 @@ describe('Alert', () => {
 
     const alertRoot = container.firstChild
 
-    expect(alertRoot).toHaveClass(alertClasses.root)
-    expect(alertRoot).toHaveClass(alertClasses['status-info'])
-    expect(alertRoot).toHaveClass(alertClasses['radius-md'])
-    expect(alertRoot).toHaveClass(alertClasses['color-blue'])
-    expect(alertRoot).toHaveClass(alertClasses['variant-faded'])
+    expect(alertRoot).toHaveClass(alertSlotClasses.root)
 
-    expect(alertRoot).not.toHaveClass(alertClasses['status-error'])
-    expect(alertRoot).not.toHaveClass(alertClasses['status-success'])
-    expect(alertRoot).not.toHaveClass(alertClasses['status-warning'])
-    expect(alertRoot).not.toHaveClass(alertClasses['radius-none'])
-    expect(alertRoot).not.toHaveClass(alertClasses['radius-sm'])
-    expect(alertRoot).not.toHaveClass(alertClasses['radius-lg'])
-    expect(alertRoot).not.toHaveClass(alertClasses['radius-full'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-red'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-orange'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-yellow'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-cyan'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-pink'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-purple'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-green'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-gray'])
-    expect(alertRoot).not.toHaveClass(alertClasses['color-gray'])
-    expect(alertRoot).not.toHaveClass(alertClasses['variant-outlined'])
-    expect(alertRoot).not.toHaveClass(alertClasses['variant-solid'])
-    expect(alertRoot).not.toHaveClass(alertClasses['variant-subtle'])
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['status-info'])
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['variant-faded'])
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['radius-md'])
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-blue'])
 
     expect(alertRoot).toMatchSnapshot()
   })
@@ -104,22 +96,45 @@ describe('Alert', () => {
     const { queryByClassName, rerender } = renderWithNexUIProvider(<Alert />)
 
     expect(
-      queryByClassName(alertClasses['close-button']),
+      queryByClassName(alertSlotClasses['close-button']),
     ).not.toBeInTheDocument()
 
     rerender(<Alert closable />)
 
-    expect(queryByClassName(alertClasses['close-button'])).toBeInTheDocument()
+    expect(
+      queryByClassName(alertSlotClasses['close-button']),
+    ).toBeInTheDocument()
   })
 
   it('should hide icon when hideIcon is true', () => {
     const { queryByClassName, rerender } = renderWithNexUIProvider(<Alert />)
 
-    expect(queryByClassName(alertClasses.icon)).toBeInTheDocument()
+    expect(queryByClassName(alertSlotClasses.icon)).toBeInTheDocument()
 
     rerender(<Alert hideIcon />)
 
-    expect(queryByClassName(alertClasses.icon)).not.toBeInTheDocument()
+    expect(queryByClassName(alertSlotClasses.icon)).not.toBeInTheDocument()
+  })
+
+  it('should verify default status color mapping', () => {
+    const { container, rerender } = renderWithNexUIProvider(
+      <Alert status='info' />,
+    )
+
+    let alertRoot = container.firstChild
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-blue'])
+
+    rerender(<Alert status='success' />)
+    alertRoot = container.firstChild
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-green'])
+
+    rerender(<Alert status='warning' />)
+    alertRoot = container.firstChild
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-yellow'])
+
+    rerender(<Alert status='error' />)
+    alertRoot = container.firstChild
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-red'])
   })
 
   it('should override status color when color is provided', () => {
@@ -127,18 +142,16 @@ describe('Alert', () => {
       <Alert color='purple' status='info' />,
     )
 
-    expect(queryByClassName(alertClasses.root)).toHaveClass(
-      alertClasses['color-purple'],
-    )
+    const alertRoot = queryByClassName(alertSlotClasses.root)
+
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-purple'])
 
     rerender(<Alert color='green' status='success' />)
 
-    expect(queryByClassName(alertClasses.root)).toHaveClass(
-      alertClasses['color-green'],
-    )
+    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-green'])
   })
 
-  it('should custom icon', () => {
+  it('should render custom icon', () => {
     const { queryByTestId } = renderWithNexUIProvider(
       <Alert icon={<span data-testid='custom-icon' />} />,
     )
@@ -146,7 +159,7 @@ describe('Alert', () => {
     expect(queryByTestId('custom-icon')).toBeInTheDocument()
   })
 
-  it('should custom action', () => {
+  it('should render custom action', () => {
     const { queryByTestId } = renderWithNexUIProvider(
       <Alert action={<span data-testid='custom-action' />} />,
     )
@@ -154,14 +167,26 @@ describe('Alert', () => {
     expect(queryByTestId('custom-action')).toBeInTheDocument()
   })
 
+  it('should render title slot when title is provided', () => {
+    const { queryByClassName, rerender } = renderWithNexUIProvider(<Alert />)
+
+    expect(queryByClassName(alertSlotClasses.title)).not.toBeInTheDocument()
+
+    rerender(<Alert title='Title' />)
+
+    expect(queryByClassName(alertSlotClasses.title)).toBeInTheDocument()
+  })
+
   it('should render description slot when description is provided', () => {
     const { queryByClassName, rerender } = renderWithNexUIProvider(<Alert />)
 
-    expect(queryByClassName(alertClasses.description)).not.toBeInTheDocument()
+    expect(
+      queryByClassName(alertSlotClasses.description),
+    ).not.toBeInTheDocument()
 
     rerender(<Alert description='Description' />)
 
-    expect(queryByClassName(alertClasses.description)).toBeInTheDocument()
+    expect(queryByClassName(alertSlotClasses.description)).toBeInTheDocument()
   })
 
   it('should error when status is invalid', () => {
@@ -178,12 +203,26 @@ describe('Alert', () => {
     consoleSpy.mockRestore()
   })
 
+  it('should prioritize action over close button when both are provided', () => {
+    const { queryByClassName, queryByTestId } = renderWithNexUIProvider(
+      <Alert
+        closable
+        action={<span data-testid='custom-action'>Action</span>}
+      />,
+    )
+
+    expect(queryByTestId('custom-action')).toBeInTheDocument()
+    expect(
+      queryByClassName(alertSlotClasses['close-button']),
+    ).not.toBeInTheDocument()
+  })
+
   it('should call onClose when close button is clicked', async () => {
     const onClose = jest.fn()
     const { queryByClassName, user } = renderWithNexUIProvider(
       <Alert closable onClose={onClose} />,
     )
-    await user.click(queryByClassName(alertClasses['close-button'])!)
+    await user.click(queryByClassName(alertSlotClasses['close-button'])!)
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
@@ -197,10 +236,9 @@ describe('Alert', () => {
     it('should have aria-label on close button', () => {
       const { queryByClassName } = renderWithNexUIProvider(<Alert closable />)
 
-      expect(queryByClassName(alertClasses['close-button'])).toHaveAttribute(
-        'aria-label',
-        'Close alert',
-      )
+      expect(
+        queryByClassName(alertSlotClasses['close-button']),
+      ).toHaveAttribute('aria-label', 'Close alert')
     })
   })
 })

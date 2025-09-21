@@ -1,32 +1,18 @@
 'use client'
 
-import { useMemo } from 'react'
 import {
   useSlot,
   Ripple,
   useDefaultProps,
   useStyles,
-  composeClasses,
-  getUtilityClass,
+  useSlotClasses,
 } from '../utils'
 import { ButtonBase } from '../buttonBase'
 import { cardActionArea } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import type { ElementType } from 'react'
 import type { CardActionAreaProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  const cardActionAreaRoot = `${prefix}-card-action-area`
-
-  return useMemo(() => {
-    const slots = {
-      root: ['root'],
-    }
-    return composeClasses(slots, getUtilityClass(cardActionAreaRoot))
-  }, [cardActionAreaRoot])
-}
+const slots = ['root']
 
 export const CardActionArea = <RootComponent extends ElementType = 'button'>(
   inProps: CardActionAreaProps<RootComponent>,
@@ -38,17 +24,16 @@ export const CardActionArea = <RootComponent extends ElementType = 'button'>(
 
   const { children, disabled, ...remainingProps } = props
 
-  const ownerState: CardActionAreaProps = {
-    ...props,
-  }
-
   const style = useStyles({
-    ownerState,
+    ownerState: props,
     name: 'CardActionArea',
     recipe: cardActionArea,
   })
 
-  const slotProps = useSlotClasses()
+  const slotProps = useSlotClasses({
+    name: 'CardActionArea',
+    slots,
+  })
 
   const [CardActionAreaRoot, getCardActionAreaProps] = useSlot({
     style,
@@ -57,6 +42,9 @@ export const CardActionArea = <RootComponent extends ElementType = 'button'>(
     shouldForwardComponent: false,
     externalForwardedProps: remainingProps,
     additionalProps: {
+      disabled,
+    },
+    dataAttrs: {
       disabled,
     },
   })

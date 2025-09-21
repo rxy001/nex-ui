@@ -3,15 +3,13 @@
 import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
-import { useNexUI } from '../provider'
 import { DrawerRoot } from './DrawerRoot'
 import {
   useStyles,
-  composeClasses,
-  getUtilityClass,
   useDefaultProps,
   useSlot,
   Ripple,
+  useSlotClasses,
 } from '../utils'
 import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
@@ -21,23 +19,7 @@ import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DrawerContentProps } from './types'
 
-const useSlotClasses = (ownerState: DrawerContentProps) => {
-  const { prefix } = useNexUI()
-
-  const { classes, size, placement } = ownerState
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-drawer-content`
-
-    const slots = {
-      root: ['root', `size-${size}`, `placement-${placement}`],
-      paper: ['paper'],
-      closeButton: ['close-button'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName), classes)
-  }, [prefix, size, placement, classes])
-}
+const slots = ['root', 'paper', 'closeButton']
 
 const useSlotAriaProps = (ownerState: DrawerContentProps) => {
   const {
@@ -81,6 +63,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const {
+    classNames,
     children,
     slotProps,
     closeIcon,
@@ -107,7 +90,11 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'DrawerContent',
+    slots,
+    classNames,
+  })
 
   const motionProps = useMemo(() => {
     const mProps =
@@ -173,13 +160,18 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     style: styles.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
-    classNames: classes.root,
+    classNames: slotClasses.root,
+    dataAttrs: {
+      size,
+      placement,
+      hideCloseButton,
+    },
   })
 
   const [DrawerContentPaper, getDrawerContentPaperProps] = useSlot({
     elementType: ModalContent,
     style: styles.paper,
-    classNames: classes.paper,
+    classNames: slotClasses.paper,
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
     a11y: slotAriaProps.paper,
@@ -193,7 +185,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     elementType: ButtonBase,
     externalSlotProps: slotProps?.closeButton,
     style: styles.closeButton,
-    classNames: classes.closeButton,
+    classNames: slotClasses.closeButton,
     shouldForwardComponent: false,
     a11y: slotAriaProps.closeButton,
   })

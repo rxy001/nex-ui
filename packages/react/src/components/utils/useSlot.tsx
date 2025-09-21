@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { mergeProps, mergeRefs } from '@nex-ui/utils'
+import { mergeProps, mergeRefs, camelToKebab } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { ElementType as ReactElementType } from 'react'
@@ -10,6 +10,8 @@ import type {
   Overwrite,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
+
+type DataAttrs = Record<string, string | number | boolean | undefined>
 
 export type UseSlotArgs<
   ElementType extends ReactElementType,
@@ -59,6 +61,11 @@ export type UseSlotArgs<
    * @default true
    */
   shouldForwardComponent?: ShouldForwardComponent
+
+  /**
+   * Data attributes to be spread to the element.
+   */
+  dataAttrs?: DataAttrs
 }
 
 type SlotComponentProps<SlotProps, ForwardedProps> = Overwrite<
@@ -93,9 +100,13 @@ export const useSlot = <
     additionalProps,
     externalForwardedProps,
     shouldForwardComponent = true,
+    dataAttrs = {},
   } = args
   const getProps = () => {
+    const propsDataAttrs = generateDataAttrs(dataAttrs)
+
     const props = mergeProps(
+      propsDataAttrs,
       additionalProps,
       externalForwardedProps,
       externalSlotProps,
@@ -142,4 +153,14 @@ export const useSlot = <
       : ElementType,
     () => SlotComponentProps<SlotProps, ForwardedProps>,
   ]
+}
+
+function generateDataAttrs(dataAttrs: DataAttrs) {
+  return Object.entries(dataAttrs).reduce((acc, [key, value]) => {
+    if (value !== undefined) {
+      acc[`data-${camelToKebab(key)}`] = value
+    }
+
+    return acc
+  }, {} as DataAttrs)
 }

@@ -1,6 +1,6 @@
 import { createRef } from 'react'
 import { renderWithNexUIProvider } from '~/tests/shared'
-import { dialogBodyClasses } from '../classes'
+import { dialogBodyClasses } from './constants'
 import {
   Dialog,
   DialogContent,

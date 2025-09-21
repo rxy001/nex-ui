@@ -3,13 +3,18 @@ import {
   renderWithNexUIProvider,
   testComponentStability,
   testRootClassName,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
   testRefForwarding,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { act, fireEvent } from '@testing-library/react'
 import { RadioGroup, Radio } from '../index'
-import { radioGroupClasses, radioClasses } from '../classes'
+import {
+  radioGroupClasses,
+  radioGroupDataAttrs,
+  radioDataAttrs,
+} from './constants'
 import type { ElementType } from 'react'
 import type { RadioGroupProps } from '../index'
 
@@ -30,7 +35,7 @@ describe('RadioGroup', () => {
 
   testRootClassName(<TestComponent />)
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <TestComponent label='Label' />,
     slots,
     {
@@ -56,31 +61,21 @@ describe('RadioGroup', () => {
 
   testRefForwarding(<TestComponent />)
 
+  testVariantDataAttrs(<TestComponent />, [
+    'orientation',
+    ['horizontal', 'vertical'],
+  ])
+
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<TestComponent />)
     const root = container.firstElementChild
 
     expect(root).toHaveClass(radioGroupClasses.root)
-    expect(root).toHaveClass(radioGroupClasses['orientation-horizontal'])
-    expect(root).not.toHaveClass(radioGroupClasses['orientation-vertical'])
+    expect(root).toHaveAttribute(
+      ...radioGroupDataAttrs['orientation-horizontal'],
+    )
 
     expect(root).toMatchSnapshot()
-  })
-
-  it('should render with orientation class based on orientation prop', () => {
-    const { getByTestId } = renderWithNexUIProvider(
-      <>
-        <TestComponent orientation='vertical' data-testid='vertical' />
-        <TestComponent orientation='horizontal' data-testid='horizontal' />
-      </>,
-    )
-
-    expect(getByTestId('vertical')).toHaveClass(
-      radioGroupClasses['orientation-vertical'],
-    )
-    expect(getByTestId('horizontal')).toHaveClass(
-      radioGroupClasses['orientation-horizontal'],
-    )
   })
 
   it('should switch different values when radios are clicked', () => {
@@ -169,8 +164,10 @@ describe('RadioGroup', () => {
     const radios = getAllByRole('radio')
 
     radios.forEach((radio) => {
-      expect(radio.parentElement).toHaveClass(radioClasses['color-green'])
-      expect(radio.parentElement).toHaveClass(radioClasses['size-lg'])
+      expect(radio.parentElement).toHaveAttribute(
+        ...radioDataAttrs['color-green'],
+      )
+      expect(radio.parentElement).toHaveAttribute(...radioDataAttrs['size-lg'])
     })
   })
 
@@ -206,12 +203,12 @@ describe('RadioGroup', () => {
     const radio = getByRole('radio')
     const radioRoot = radio.parentElement!
 
-    expect(radioRoot).not.toHaveClass(radioClasses.checked)
+    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
     expect(radio).not.toBeChecked()
     await act(async () => {
       fireEvent.click(radio)
     })
-    expect(radioRoot).toHaveClass(radioClasses.checked)
+    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-true'])
     expect(radio).toBeChecked()
   })
 

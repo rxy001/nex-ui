@@ -7,7 +7,7 @@ import {
   DrawerHeader,
   DrawerFooter,
 } from '../index'
-import { drawerClasses } from '../classes'
+import { drawerClasses, drawerDataAttrs } from './constants'
 import type { DrawerProps } from '../types'
 
 function TestDrawer(props: DrawerProps) {
@@ -41,14 +41,14 @@ const ControlledDrawer = ({ defaultOpen = false, ...props }: DrawerProps) => {
 describe('Drawer', () => {
   testComponentStability(<TestDrawer open />)
 
-  it('should render with root, and open classes on root element', async () => {
+  it('should render with root, and data-state="open" on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDrawer open />, {
       useAct: true,
     })
     const drawerRoot = getByTestId('drawer-root')
 
     expect(drawerRoot).toHaveClass(drawerClasses.root)
-    expect(drawerRoot).toHaveClass(drawerClasses.open)
+    expect(drawerRoot).toHaveAttribute(...drawerDataAttrs['open-true'])
   })
 
   it('should not render children by default', async () => {
@@ -84,12 +84,12 @@ describe('Drawer', () => {
     expect(drawerRoot).toBe(ref.current)
   })
 
-  it('should forward classes to backdrop slot', async () => {
-    const classes = {
+  it('should forward classNames to backdrop slot', async () => {
+    const classNames = {
       backdrop: 'test-drawer-backdrop',
     }
     const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer open classes={classes} />,
+      <TestDrawer open classNames={classNames} />,
       {
         useAct: true,
       },
@@ -98,7 +98,7 @@ describe('Drawer', () => {
     const drawerRoot = getByTestId('drawer-root')
 
     expect(drawerRoot.querySelector(`.${drawerClasses.backdrop}`)).toHaveClass(
-      classes.backdrop,
+      classNames.backdrop,
     )
   })
 

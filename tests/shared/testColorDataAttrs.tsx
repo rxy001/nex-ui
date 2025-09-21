@@ -1,4 +1,4 @@
-import { testVariantClasses } from './testVariantClasses'
+import { testVariantDataAttrs } from './testVariantDataAttrs'
 import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
@@ -26,27 +26,21 @@ const colors: Color[] = [
 ]
 
 /**
- * Tests color variant classes for a React component.
+ * Tests that a React component properly applies color data attributes based on the color prop.
  *
- * @param component - The component to test.
- * @param classes - The expected class names for each variant value.
+ * @param component - The React element to test.
  * @param options - Options to pass to the renderWithNexUIProvider function.
  *
  * @example
- * ```tsx
- * testColorClasses(
- *   <Button />,
- *   buttonClasses
- * );
- * ```
+ *
+ * testColorDataAttrs(<Button />);
  */
 
-export const testColorClasses = (
+export const testColorDataAttrs = (
   component: ReactElement<{
     color?: Color
   }>,
-  classes: Record<`color-${Color}`, string>,
   options?: RenderWithNexUIProviderOptions,
 ) => {
-  testVariantClasses(component, ['color', colors], classes, options)
+  testVariantDataAttrs(component, ['color', colors], options)
 }

@@ -64,7 +64,11 @@ exports[`Alert should render with default props 1`] = `
 }
 
 <div
-  class="nui-alert-root nui-alert-radius-md nui-alert-variant-faded nui-alert-color-blue nui-alert-status-info emotion-0"
+  class="nui-alert-root emotion-0"
+  data-color="blue"
+  data-radius="md"
+  data-status="info"
+  data-variant="faded"
   role="alert"
 >
   <div

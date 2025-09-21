@@ -1,40 +1,16 @@
 'use client'
 
-import { useMemo } from 'react'
 import { ModalBackdrop, ModalRoot } from '../modal'
-import { useStyles, composeClasses, getUtilityClass, useSlot } from '../utils'
+import { useStyles, useSlot, useSlotClasses } from '../utils'
 import { useDialog } from './DialogContext'
 import { dialogRootRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import type { ReactNode } from 'react'
-import type { DialogOwnerState } from './types'
 
 type DialogRootProps = {
   children?: ReactNode
 }
 
-const useSlotClasses = (ownerState: DialogOwnerState) => {
-  const { prefix } = useNexUI()
-
-  const modalRoot = `${prefix}-dialog`
-
-  const { classes, open } = ownerState
-
-  return useMemo(() => {
-    const slots = {
-      root: ['root', open && 'open'],
-      backdrop: ['backdrop'],
-    }
-
-    const composedClasses = composeClasses(
-      slots,
-      getUtilityClass(modalRoot),
-      classes,
-    )
-
-    return composedClasses
-  }, [classes, modalRoot, open])
-}
+const slots = ['root', 'backdrop']
 
 export const DialogRoot = ({ children }: DialogRootProps) => {
   const ownerState = useDialog()
@@ -42,10 +18,10 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
   const {
     slotProps,
     hideBackdrop,
+    classNames,
+    open,
     onOpenChange: _onOpenChange,
     container: _container,
-    classes: _classes,
-    open: _open,
     setOpen: _setOpen,
     restoreFocus: _restoreFocus,
     closeOnEscape: _closeOnEscape,
@@ -56,7 +32,11 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     ...remainingProps
   } = ownerState
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Dialog',
+    slots,
+    classNames,
+  })
 
   const styles = useStyles({
     ownerState,
@@ -69,7 +49,11 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     style: styles.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
-    classNames: classes.root,
+    classNames: slotClasses.root,
+    dataAttrs: {
+      state: open ? 'open' : 'closed',
+      hideBackdrop,
+    },
   })
 
   const [DialogBackdrop, getDialogBackdropProps] = useSlot({
@@ -77,7 +61,7 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     style: styles.backdrop,
     externalSlotProps: slotProps?.backdrop,
     shouldForwardComponent: false,
-    classNames: classes.backdrop,
+    classNames: slotClasses.backdrop,
   })
 
   return (

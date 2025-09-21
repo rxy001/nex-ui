@@ -1,27 +1,24 @@
-import { createRef } from 'react'
 import {
   testComponentStability,
   renderWithNexUIProvider,
-  testVariantClasses,
+  testVariantDataAttrs,
   testRefForwarding,
   testRootClassName,
 } from '~/tests/shared'
-import { cardClasses } from '../classes'
+import { cardClasses, cardDataAttrs } from './constants'
 import { Card } from '../index'
 
 describe('Card', () => {
   testComponentStability(<Card />)
 
-  testVariantClasses(
-    <Card />,
-    ['shadow', ['xs', 'sm', 'md', 'lg', 'xl']],
-    cardClasses,
-  )
-  testVariantClasses(
-    <Card />,
-    ['radius', ['none', 'sm', 'md', 'lg']],
-    cardClasses,
-  )
+  testVariantDataAttrs(<Card />, ['shadow', ['xs', 'sm', 'md', 'lg', 'xl']])
+
+  testVariantDataAttrs(<Card />, ['radius', ['none', 'sm', 'md', 'lg']])
+
+  testVariantDataAttrs(<Card />, ['blurred', [true, false]])
+
+  testVariantDataAttrs(<Card />, ['hoverable', [true, false]])
+
   testRefForwarding(<Card />)
 
   testRootClassName(<Card />)
@@ -31,38 +28,11 @@ describe('Card', () => {
     const card = container.firstElementChild
 
     expect(card).toHaveClass(cardClasses.root)
-    expect(card).toHaveClass(cardClasses['radius-md'])
-    expect(card).toHaveClass(cardClasses['shadow-md'])
+    expect(card).toHaveAttribute(...cardDataAttrs['shadow-md'])
+    expect(card).toHaveAttribute(...cardDataAttrs['radius-md'])
+    expect(card).toHaveAttribute(...cardDataAttrs['hoverable-false'])
+    expect(card).toHaveAttribute(...cardDataAttrs['blurred-false'])
 
-    expect(card).not.toHaveClass(cardClasses.blurred)
-    expect(card).not.toHaveClass(cardClasses.hoverable)
-    expect(card).not.toHaveClass(cardClasses['radius-none'])
-    expect(card).not.toHaveClass(cardClasses['radius-sm'])
-    expect(card).not.toHaveClass(cardClasses['radius-lg'])
-    expect(card).not.toHaveClass(cardClasses['shadow-xs'])
-    expect(card).not.toHaveClass(cardClasses['shadow-sm'])
-    expect(card).not.toHaveClass(cardClasses['shadow-lg'])
-    expect(card).not.toHaveClass(cardClasses['shadow-xl'])
     expect(card).toMatchSnapshot()
-  })
-
-  it('should forward ref to root element', () => {
-    const ref = createRef<HTMLDivElement>()
-
-    const { container } = renderWithNexUIProvider(<Card ref={ref} />)
-
-    expect(ref.current).toBe(container.firstElementChild)
-  })
-
-  it('should add the appropriate blurred class to root element based on blurred prop', () => {
-    const { container } = renderWithNexUIProvider(<Card blurred />)
-
-    expect(container.firstElementChild).toHaveClass(cardClasses.blurred)
-  })
-
-  it('should add the appropriate hoverable class to root element based on hoverable prop', () => {
-    const { container } = renderWithNexUIProvider(<Card hoverable />)
-
-    expect(container.firstElementChild).toHaveClass(cardClasses.hoverable)
   })
 })

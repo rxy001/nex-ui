@@ -3,7 +3,7 @@ import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type { ButtonVariants } from '../../theme/recipes'
 import type {
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
@@ -76,7 +76,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'startIcon' | 'endIcon'>
+  classNames?: ComponentSlotClasses<'startIcon' | 'endIcon'>
 
   /**
    * The button appearance style.

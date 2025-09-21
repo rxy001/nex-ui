@@ -4,7 +4,7 @@ import type { ClassValue } from 'clsx'
 import type {
   OverrideProps,
   ComponentPropsWithCommonProps,
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
 } from '../../types/utils'
 import type { CardVariants } from '../../theme/recipes'
 
@@ -88,7 +88,7 @@ type CardHeaderOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'content' | 'title' | 'subtitle'>
+  classNames?: ComponentSlotClasses<'root' | 'content' | 'title' | 'subtitle'>
 
   /**
    * The props used for each slot.

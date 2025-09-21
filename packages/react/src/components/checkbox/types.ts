@@ -6,7 +6,7 @@ import type {
   CheckboxGroupVariants,
 } from '../../theme/recipes'
 import type {
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
@@ -56,7 +56,7 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'label' | 'icon'>
+  classNames?: ComponentSlotClasses<'root' | 'label' | 'icon'>
 
   /**
    * The default checked state.(uncontrolled)
@@ -153,7 +153,7 @@ type CheckboxGroupOwnProps<
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'label' | 'wrapper'>
+  classNames?: ComponentSlotClasses<'label' | 'wrapper'>
 
   /**
    * The current selected values. (controlled)

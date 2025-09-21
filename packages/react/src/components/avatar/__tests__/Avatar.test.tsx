@@ -5,14 +5,14 @@ import {
   restoreGlobalImage,
   testRootClassName,
   flushMockedImages,
-  testColorClasses,
-  testSizeClasses,
-  testVariantClasses,
+  testColorDataAttrs,
+  testSizeDataAttrs,
+  testVariantDataAttrs,
   testRefForwarding,
 } from '~/tests/shared'
 import { UserOutlined } from '@nex-ui/icons'
 import { Avatar } from '../index'
-import { avatarClasses } from '../classes'
+import { avatarSlotClasses, avatarDataAttrs } from './constants'
 
 afterAll(() => {
   restoreGlobalImage()
@@ -23,46 +23,32 @@ describe('Avatar', () => {
 
   testRootClassName(<Avatar />)
 
-  testColorClasses(<Avatar>Avatar</Avatar>, avatarClasses)
-
-  testSizeClasses(<Avatar>Avatar</Avatar>, avatarClasses)
-
-  testVariantClasses(
-    <Avatar>Avatar</Avatar>,
-    ['radius', ['none', 'sm', 'md', 'lg', 'xl', 'full']],
-    avatarClasses,
-  )
-
   testRefForwarding(<Avatar />)
 
-  testVariantClasses(
-    <Avatar outlined>Avatar</Avatar>,
-    ['outlined', [true]],
-    avatarClasses,
-  )
+  testColorDataAttrs(<Avatar>Avatar</Avatar>)
+
+  testSizeDataAttrs(<Avatar>Avatar</Avatar>)
+
+  testVariantDataAttrs(<Avatar>Avatar</Avatar>, [
+    'radius',
+    ['none', 'sm', 'md', 'lg', 'xl', 'full'],
+  ])
+
+  testVariantDataAttrs(<Avatar outlined>Avatar</Avatar>, [
+    'outlined',
+    [true, false],
+  ])
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Avatar>A</Avatar>)
 
     const avatarRoot = container.firstElementChild
-    expect(avatarRoot).toHaveClass(avatarClasses.root)
-    expect(avatarRoot).toHaveClass(avatarClasses['size-md'])
-    expect(avatarRoot).toHaveClass(avatarClasses['radius-md'])
-    expect(avatarRoot).toHaveClass(avatarClasses['color-gray'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-green'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-cyan'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-orange'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-pink'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-purple'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-yellow'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-red'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['color-blue'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['size-sm'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['size-lg'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['radius-sm'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['radius-lg'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses['radius-full'])
-    expect(avatarRoot).not.toHaveClass(avatarClasses.outlined)
+    expect(avatarRoot).toHaveClass(avatarSlotClasses.root)
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['inGroup-false'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['size-md'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['radius-md'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['color-gray'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['outlined-false'])
 
     expect(avatarRoot).toMatchSnapshot()
   })
@@ -72,41 +58,41 @@ describe('Avatar', () => {
       restoreGlobalImage()
     })
 
-    it('should forward classes to img slot', () => {
+    it('should forward classNames to img slot', () => {
       mockGlobalImage('loaded')
-      const classes = {
+      const classNames = {
         img: 'test-img-class',
       }
       const { container } = renderWithNexUIProvider(
         <Avatar
           src='/fake.png'
-          classes={{
-            img: classes.img,
+          classNames={{
+            img: classNames.img,
           }}
         />,
       )
       const avatarRoot = container.firstElementChild
-      expect(avatarRoot?.firstElementChild).toHaveClass(classes.img)
+      expect(avatarRoot?.firstElementChild).toHaveClass(classNames.img)
       restoreGlobalImage()
     })
 
     it('should forward slotProps to img slot', () => {
       mockGlobalImage('loaded')
 
+      const slotProps = {
+        img: {
+          className: 'test-img-class',
+        },
+      }
+
       const { queryByClassName } = renderWithNexUIProvider(
-        <Avatar
-          data-testid='avatar'
-          src='/fake.png'
-          slotProps={{
-            img: {
-              className: 'test-img-class',
-            },
-          }}
-        >
+        <Avatar data-testid='avatar' src='/fake.png' slotProps={slotProps}>
           Avatar
         </Avatar>,
       )
-      expect(queryByClassName(avatarClasses.img)).toHaveClass('test-img-class')
+      expect(queryByClassName(avatarSlotClasses.img)).toHaveClass(
+        slotProps.img.className,
+      )
     })
 
     it('should render an img when the image loads successfully', () => {

@@ -209,7 +209,7 @@ describe('ButtonBase', () => {
     expect(onClick).toHaveBeenCalledTimes(2)
   })
 
-  it('should prevent repeated click event triggeringwhen the Enter key is pressed', async () => {
+  it('should prevent repeated click event triggering when the Enter key is pressed', async () => {
     const onClick = jest.fn()
 
     const { getByRole, user } = renderWithNexUIProvider(

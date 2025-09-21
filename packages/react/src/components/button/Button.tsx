@@ -1,82 +1,20 @@
 'use client'
 
 import { LoadingOutlined } from '@nex-ui/icons'
-import { useMemo } from 'react'
 import { useNexUI } from '../provider'
 import { ButtonBase } from '../buttonBase'
 import { buttonRecipe } from '../../theme/recipes'
 import {
   useDefaultProps,
-  composeClasses,
-  getUtilityClass,
   Ripple,
   useStyles,
   useSlot,
+  useSlotClasses,
 } from '../utils'
 import type { ElementType } from 'react'
 import type { ButtonProps } from './types'
 
-const useSlotClasses = (ownerState: ButtonProps) => {
-  const { prefix } = useNexUI()
-
-  const {
-    color,
-    variant,
-    radius,
-    size,
-    iconOnly,
-    loading,
-    disabled,
-    fullWidth,
-    classes,
-    disableRipple,
-    spinnerPlacement,
-  } = ownerState
-
-  return useMemo(() => {
-    const btnRoot = `${prefix}-btn`
-
-    const slots = {
-      root: [
-        'root',
-        `variant-${variant}`,
-        `radius-${radius}`,
-        `size-${size}`,
-        `color-${color}`,
-        iconOnly && `icon-only`,
-        loading && `loading`,
-        disabled && `disabled`,
-        fullWidth && `full-width`,
-        disableRipple && 'disable-ripple',
-      ],
-      startIcon: [
-        `icon`,
-        `start-icon`,
-        loading && spinnerPlacement === 'start' && `icon-loading`,
-      ],
-      endIcon: [
-        `icon`,
-        `end-icon`,
-        loading && spinnerPlacement === 'end' && `icon-loading`,
-      ],
-    }
-
-    return composeClasses(slots, getUtilityClass(btnRoot), classes)
-  }, [
-    classes,
-    color,
-    disableRipple,
-    disabled,
-    fullWidth,
-    iconOnly,
-    loading,
-    prefix,
-    radius,
-    size,
-    spinnerPlacement,
-    variant,
-  ])
-}
+const slots = ['root', 'startIcon', 'endIcon']
 
 export const Button = <RootComponent extends ElementType = 'button'>(
   inProps: ButtonProps<RootComponent>,
@@ -92,6 +30,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     children,
     slotProps,
     spinner,
+    classNames,
     color = primaryThemeColor,
     variant = 'solid',
     size = 'md',
@@ -123,7 +62,11 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     disabled: disabledProp,
   }
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Button',
+    slots,
+    classNames,
+  })
 
   const styles = useStyles({
     ownerState,
@@ -134,25 +77,36 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   const [ButtonRoot, getButtonRootProps] = useSlot({
     elementType: ButtonBase<'button'>,
     externalForwardedProps: remainingProps,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     style: styles.root,
     shouldForwardComponent: false,
     additionalProps: {
       disabled,
+    },
+    dataAttrs: {
+      variant,
+      radius,
+      size,
+      color,
+      iconOnly,
+      loading,
+      disabled,
+      fullWidth,
+      disableRipple,
     },
   })
 
   const [ButtonStartIcon, getButtonStartIconProps] = useSlot({
     elementType: 'span',
     externalSlotProps: slotProps?.startIcon,
-    classNames: classes.startIcon,
+    classNames: slotClasses.startIcon,
     style: styles.startIcon,
   })
 
   const [ButtonEndIcon, getButtonEndIconProps] = useSlot({
     elementType: 'span',
     externalSlotProps: slotProps?.endIcon,
-    classNames: classes.endIcon,
+    classNames: slotClasses.endIcon,
     style: styles.endIcon,
   })
 

@@ -147,14 +147,22 @@ exports[`CheckboxGroup should render with default props 1`] = `
 }
 
 <div
-  class="nui-checkbox-group-root nui-checkbox-group-orientation-horizontal emotion-0"
+  class="nui-checkbox-group-root emotion-0"
+  data-orientation="horizontal"
   role="group"
 >
   <div
     class="nui-checkbox-group-wrapper emotion-1"
   >
     <label
-      class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-2"
+      class="nui-checkbox-root emotion-2"
+      data-checked="false"
+      data-color="blue"
+      data-disabled="false"
+      data-in-group="true"
+      data-indeterminate="false"
+      data-radius="md"
+      data-size="md"
     >
       <input
         aria-label="orange"
@@ -195,7 +203,14 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
     </label>
     <label
-      class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-2"
+      class="nui-checkbox-root emotion-2"
+      data-checked="false"
+      data-color="blue"
+      data-disabled="false"
+      data-in-group="true"
+      data-indeterminate="false"
+      data-radius="md"
+      data-size="md"
     >
       <input
         aria-label="pear"
@@ -236,7 +251,14 @@ exports[`CheckboxGroup should render with default props 1`] = `
       </span>
     </label>
     <label
-      class="nui-checkbox-root nui-checkbox-radius-md nui-checkbox-size-md nui-checkbox-color-blue emotion-2"
+      class="nui-checkbox-root emotion-2"
+      data-checked="false"
+      data-color="blue"
+      data-disabled="false"
+      data-in-group="true"
+      data-indeterminate="false"
+      data-radius="md"
+      data-size="md"
     >
       <input
         aria-label="Apple"

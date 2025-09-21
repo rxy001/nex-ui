@@ -5,7 +5,7 @@ import {
   testRefForwarding,
 } from '~/tests/shared'
 import { Flex } from '../index'
-import { flexClasses } from '../flexClasses'
+import { flexClasses } from './constants'
 
 describe('Flex', () => {
   testComponentStability(<Flex />)

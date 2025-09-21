@@ -115,7 +115,7 @@ describe('getTabbable', () => {
     container.innerHTML = `
       <input id="radio1" type="radio" name="group1" />
       <input id="radio2" type="radio" name="group1" />
-      <input id="radio3" type="radio" name="group1' />
+      <input id="radio3" type="radio" name="group1" />
     `
     const result2 = getTabbable(container)
     expect(result2).toHaveLength(1)
@@ -124,7 +124,7 @@ describe('getTabbable', () => {
     container.innerHTML = `
       <input id="radio1" type="radio" />
       <input id="radio2" type="radio" name="group1" />
-      <input id="radio3" type="radio" name="group1' />
+      <input id="radio3" type="radio" name="group1" />
     `
     const result3 = getTabbable(container)
     expect(result3).toHaveLength(2)

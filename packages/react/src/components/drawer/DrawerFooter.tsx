@@ -1,32 +1,12 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { drawerFooterRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import { ModalFooter } from '../modal'
 import type { ElementType } from 'react'
 import type { DrawerFooterProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-drawer-footer`
-
-    const slots = {
-      root: ['root'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName))
-  }, [prefix])
-}
+const slots = ['root']
 
 export const DrawerFooter = <RootComponent extends ElementType = 'div'>(
   inProps: DrawerFooterProps<RootComponent>,
@@ -38,14 +18,13 @@ export const DrawerFooter = <RootComponent extends ElementType = 'div'>(
 
   const { children, ...remainingProps } = props
 
-  const ownerState: DrawerFooterProps = {
-    ...props,
-  }
-
-  const classes = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'DrawerFooter',
+    slots,
+  })
 
   const style = useStyles({
-    ownerState,
+    ownerState: props,
     name: 'DrawerFooter',
     recipe: drawerFooterRecipe,
   })
@@ -53,7 +32,7 @@ export const DrawerFooter = <RootComponent extends ElementType = 'div'>(
   const [DrawerFooterRoot, getDrawerFooterRootProps] = useSlot({
     style,
     elementType: ModalFooter,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })

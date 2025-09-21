@@ -2,7 +2,7 @@ import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
 import type { RadioGroupVariants, RadioVariants } from '../../theme/recipes'
@@ -76,7 +76,7 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'root' | 'dot' | 'label'>
+  classNames?: ComponentSlotClasses<'root' | 'dot' | 'label'>
 
   /**
    * The props used for each slot.
@@ -126,7 +126,7 @@ type RadioGroupOwnProps<
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'label' | 'wrapper'>
+  classNames?: ComponentSlotClasses<'label' | 'wrapper'>
 
   /**
    * If true, the radios are disabled.
