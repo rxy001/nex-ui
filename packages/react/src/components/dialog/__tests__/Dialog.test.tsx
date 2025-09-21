@@ -7,7 +7,7 @@ import {
   DialogFooter,
   DialogBody,
 } from '../index'
-import { dialogClasses } from '../classes'
+import { dialogClasses, dialogDataAttrs } from './constants'
 import type { DialogProps } from '../index'
 
 function TestDialog(props: DialogProps) {
@@ -41,14 +41,15 @@ const ControlledDialog = ({ defaultOpen = false, ...props }: DialogProps) => {
 describe('Dialog', () => {
   testComponentStability(<TestDialog open />)
 
-  it('should render with root, and open classes on root element', async () => {
+  it('should render with root class, data-state="open" on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog open />, {
       useAct: true,
     })
     const dialogRoot = getByTestId('dialog-root')
 
     expect(dialogRoot).toHaveClass(dialogClasses.root)
-    expect(dialogRoot).toHaveClass(dialogClasses.open)
+
+    expect(dialogRoot).toHaveAttribute(...dialogDataAttrs['open-true'])
   })
 
   it("should forward ref to Dialog's root element", async () => {
@@ -84,12 +85,13 @@ describe('Dialog', () => {
     expect(queryByText('Dialog Footer')).toBeInTheDocument()
   })
 
-  it('should forward classes to backdrop slot', async () => {
-    const classes = {
+  it('should forward classNames to backdrop slot', async () => {
+    const classNames = {
       backdrop: 'test-dialog-backdrop',
     }
+
     const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog open classes={classes} />,
+      <TestDialog open classNames={classNames} />,
       {
         useAct: true,
       },
@@ -98,7 +100,7 @@ describe('Dialog', () => {
     const dialogRoot = getByTestId('dialog-root')
 
     expect(dialogRoot.querySelector(`.${dialogClasses.backdrop}`)).toHaveClass(
-      classes.backdrop,
+      classNames.backdrop,
     )
   })
 
@@ -131,6 +133,7 @@ describe('Dialog', () => {
     expect(
       dialogRoot.querySelector(`.${dialogClasses.backdrop}`),
     ).not.toBeInTheDocument()
+    expect(dialogRoot).toHaveAttribute(...dialogDataAttrs['hideBackdrop-true'])
   })
 
   it('should be controlled via open prop', async () => {

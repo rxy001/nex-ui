@@ -3,15 +3,19 @@ import {
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
-  testVariantClasses,
   testRefForwarding,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { Checkbox } from '../Checkbox'
 import { CheckboxGroup } from '../CheckboxGroup'
-import { checkboxClasses, checkboxGroupClasses } from '../classes'
+import {
+  checkboxGroupClasses,
+  checkboxDataAttrs,
+  checkboxGroupDataAttrs,
+} from './constants'
 
 const children = [
   <Checkbox value='orange' key='orange'>
@@ -36,10 +40,9 @@ describe('CheckboxGroup', () => {
     useAct: true,
   })
 
-  testVariantClasses(
+  testVariantDataAttrs(
     <CheckboxGroup>{children}</CheckboxGroup>,
     ['orientation', ['vertical', 'horizontal']],
-    checkboxGroupClasses,
     {
       useAct: true,
     },
@@ -49,7 +52,7 @@ describe('CheckboxGroup', () => {
     useAct: true,
   })
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <CheckboxGroup label='Label'>{children}</CheckboxGroup>,
     slots,
     {
@@ -89,8 +92,9 @@ describe('CheckboxGroup', () => {
     const root = container.firstElementChild
 
     expect(root).toHaveClass(checkboxGroupClasses.root)
-    expect(root).toHaveClass(checkboxGroupClasses['orientation-horizontal'])
-    expect(root).not.toHaveClass(checkboxGroupClasses['orientation-vertical'])
+    expect(root).toHaveAttribute(
+      ...checkboxGroupDataAttrs['orientation-horizontal'],
+    )
 
     expect(root).toMatchSnapshot()
   })
@@ -250,9 +254,30 @@ describe('CheckboxGroup', () => {
     const checkboxes = getAllByRole('checkbox')
 
     checkboxes.forEach((checkbox) => {
-      expect(checkbox.parentElement).toHaveClass(checkboxClasses['color-green'])
-      expect(checkbox.parentElement).toHaveClass(checkboxClasses['size-lg'])
-      expect(checkbox.parentElement).toHaveClass(checkboxClasses['radius-lg'])
+      expect(checkbox.parentElement).toHaveAttribute(
+        ...checkboxDataAttrs['color-green'],
+      )
+      expect(checkbox.parentElement).toHaveAttribute(
+        ...checkboxDataAttrs['size-lg'],
+      )
+      expect(checkbox.parentElement).toHaveAttribute(
+        ...checkboxDataAttrs['radius-lg'],
+      )
+    })
+  })
+
+  it('should apply name prop to all checkboxes', async () => {
+    const { getAllByRole } = await renderWithNexUIProvider(
+      <CheckboxGroup name='fruits'>{children}</CheckboxGroup>,
+      {
+        useAct: true,
+      },
+    )
+
+    const checkboxes = getAllByRole('checkbox')
+
+    checkboxes.forEach((checkbox) => {
+      expect(checkbox).toHaveAttribute('name', 'fruits')
     })
   })
 

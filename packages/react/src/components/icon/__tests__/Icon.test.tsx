@@ -1,11 +1,12 @@
-import { createRef, forwardRef } from 'react'
+import { forwardRef } from 'react'
 import {
   testComponentStability,
   renderWithNexUIProvider,
-  testSizeClasses,
+  testSizeDataAttrs,
+  testRefForwarding,
 } from '~/tests/shared'
 import { Icon } from '../Icon'
-import { iconClasses } from '../iconClasses'
+import { iconDataAttrs, iconClasses } from './constants'
 
 const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
   <svg
@@ -26,26 +27,28 @@ HeartSvg.displayName = 'HeartSvg'
 describe('Icon', () => {
   testComponentStability(<Icon as={HeartSvg} />)
 
-  testSizeClasses(<Icon as={HeartSvg} />, iconClasses)
+  testSizeDataAttrs(<Icon as={HeartSvg} />)
 
-  it('should forward ref to the SVG element', () => {
-    const ref = createRef<SVGSVGElement>()
+  testRefForwarding(<Icon as={HeartSvg} />)
 
-    const { container } = renderWithNexUIProvider(
-      <Icon as={HeartSvg} ref={ref} />,
-    )
-    expect(container.firstElementChild).toBe(ref.current)
+  it('should render with default props', () => {
+    const { container } = renderWithNexUIProvider(<Icon as={HeartSvg} />)
+
+    const iconRoot = container.firstElementChild
+
+    expect(iconRoot).toHaveClass(iconClasses.root)
+    expect(iconRoot).toHaveAttribute(...iconDataAttrs['size-md'])
+    expect(iconRoot).toHaveAttribute(...iconDataAttrs['spin-false'])
+
+    expect(iconRoot).toMatchSnapshot()
   })
 
-  it('should add the spin class to root element when spin=true', () => {
+  it('should add the data-spin="true" to root element when spin=true', () => {
     const { container } = renderWithNexUIProvider(<Icon as={HeartSvg} spin />)
 
-    expect(container.firstElementChild).toHaveClass(iconClasses.spin)
-  })
-
-  it('should render correctly', () => {
-    const { container } = renderWithNexUIProvider(<Icon as={HeartSvg} />)
-    expect(container.firstElementChild).toMatchSnapshot()
+    expect(container.firstElementChild).toHaveAttribute(
+      ...iconDataAttrs['spin-true'],
+    )
   })
 
   it('should warn when `as` prop is not provided', () => {

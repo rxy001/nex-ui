@@ -3,7 +3,7 @@ import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { AvatarVariants } from '../../theme/recipes'
 import type {
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
@@ -65,7 +65,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'img'>
+  classNames?: ComponentSlotClasses<'img'>
 
   /**
    * The size of the avatar.
@@ -132,7 +132,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'surplus'>
+  classNames?: ComponentSlotClasses<'surplus'>
 
   /**
    * The size of all Avatars.

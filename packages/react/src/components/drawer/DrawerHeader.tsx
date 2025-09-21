@@ -1,32 +1,12 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { drawerHeaderRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import { ModalHeader } from '../modal'
 import type { ElementType } from 'react'
 import type { DrawerHeaderProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-drawer-header`
-
-    const slots = {
-      root: ['root'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName))
-  }, [prefix])
-}
+const slots = ['root']
 
 export const DrawerHeader = <RootComponent extends ElementType = 'h2'>(
   inProps: DrawerHeaderProps<RootComponent>,
@@ -38,14 +18,13 @@ export const DrawerHeader = <RootComponent extends ElementType = 'h2'>(
 
   const { children, ...remainingProps } = props
 
-  const ownerState: DrawerHeaderProps = {
-    ...props,
-  }
-
-  const classes = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'DrawerHeader',
+    slots,
+  })
 
   const style = useStyles({
-    ownerState,
+    ownerState: props,
     name: 'DrawerHeader',
     recipe: drawerHeaderRecipe,
   })
@@ -53,7 +32,7 @@ export const DrawerHeader = <RootComponent extends ElementType = 'h2'>(
   const [DrawerHeaderRoot, getDrawerHeaderRootProps] = useSlot({
     style,
     elementType: ModalHeader,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })

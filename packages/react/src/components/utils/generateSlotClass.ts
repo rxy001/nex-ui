@@ -1,4 +1,4 @@
-export function generateUtilityClass(
+export function generateSlotClass(
   componentName: string,
   slotClass: string,
 ): string {

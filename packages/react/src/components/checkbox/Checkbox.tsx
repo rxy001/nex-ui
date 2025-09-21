@@ -6,13 +6,7 @@ import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { useCheckboxGroup } from './CheckboxGroupContext'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { InputBase } from '../inputBase'
 import { CheckedIcon } from './CheckedIcon'
 import { IndeterminateIcon } from './IndeterminateIcon'
@@ -20,33 +14,7 @@ import type { CSSObject } from '@emotion/react'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
 import type { ElementType, HTMLAttributes, ReactElement } from 'react'
 
-const useSlotClasses = (ownerState: CheckboxOwnerState) => {
-  const { prefix } = useNexUI()
-
-  const { radius, size, color, disabled, checked, classes, indeterminate } =
-    ownerState
-
-  return useMemo(() => {
-    const checkboxRoot = `${prefix}-checkbox`
-
-    const slots = {
-      root: [
-        'root',
-        `radius-${radius}`,
-        `size-${size}`,
-        `color-${color}`,
-        disabled && 'disabled',
-        checked && 'checked',
-        indeterminate && 'indeterminate',
-      ],
-      input: ['input'],
-      label: ['label'],
-      icon: ['icon'],
-    }
-
-    return composeClasses(slots, getUtilityClass(checkboxRoot), classes)
-  }, [checked, classes, color, disabled, indeterminate, prefix, radius, size])
-}
+const slots = ['root', 'input', 'label', 'icon']
 
 const useSlotAriaProps = (
   ownerState: CheckboxOwnerState,
@@ -116,10 +84,11 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     icon,
     value,
     className,
+    classNames,
     children,
     slotProps,
     onCheckedChange,
-    indeterminate,
+    indeterminate = false,
     as = 'input',
     checked: checkedProp,
     type = 'checkbox',
@@ -152,6 +121,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     size,
     radius,
     inGroup,
+    indeterminate,
   }
 
   const handleChange = useEvent((newChecked: boolean) => {
@@ -164,7 +134,11 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     }
   })
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Checkbox',
+    slots,
+    classNames,
+  })
 
   const styles = useStyles({
     ownerState,
@@ -178,17 +152,26 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     elementType: 'label',
     externalSlotProps: slotProps?.root,
     style: styles.root,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     additionalProps: {
       sx,
       className,
+    },
+    dataAttrs: {
+      radius,
+      size,
+      color,
+      disabled,
+      checked,
+      indeterminate,
+      inGroup,
     },
   })
 
   const [CheckboxInput, getCheckboxInputProps] = useSlot({
     elementType: InputBase,
     externalForwardedProps: remainingProps,
-    classNames: classes.input,
+    classNames: slotClasses.input,
     style: styles.input,
     a11y: slotAriaProps.input,
     shouldForwardComponent: false,
@@ -207,14 +190,14 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     elementType: 'span',
     externalSlotProps: slotProps?.icon,
     style: styles.icon,
-    classNames: classes.icon,
+    classNames: slotClasses.icon,
   })
 
   const [CheckboxLabel, getCheckboxLabelProps] = useSlot({
     elementType: 'span',
     externalSlotProps: slotProps?.label,
     style: styles.label,
-    classNames: classes.label,
+    classNames: slotClasses.label,
     a11y: slotAriaProps.label,
   })
 

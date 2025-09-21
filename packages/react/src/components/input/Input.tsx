@@ -8,67 +8,11 @@ import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { InputBase } from '../inputBase'
-import {
-  useDefaultProps,
-  composeClasses,
-  getUtilityClass,
-  useStyles,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import type { ElementType, ChangeEvent, MouseEvent } from 'react'
 import type { InputProps } from './types'
 
-const useSlotClasses = (ownerState: InputProps) => {
-  const { prefix } = useNexUI()
-
-  const {
-    variant,
-    radius,
-    size,
-    color,
-    disabled,
-    fullWidth,
-    invalid,
-    classes,
-    labelPlacement,
-  } = ownerState
-
-  return useMemo(() => {
-    const inputRoot = `${prefix}-input`
-
-    const slots = {
-      root: [
-        'root',
-        `variant-${variant}`,
-        `radius-${radius}`,
-        `size-${size}`,
-        `color-${color}`,
-        disabled && 'disabled',
-        fullWidth && 'full-width',
-        invalid && 'invalid',
-        labelPlacement && `label-placement-${labelPlacement}`,
-      ],
-      input: ['input'],
-      clearButton: ['clear-button'],
-      prefix: ['prefix'],
-      suffix: ['suffix'],
-      label: ['label'],
-    }
-
-    return composeClasses(slots, getUtilityClass(inputRoot), classes)
-  }, [
-    classes,
-    color,
-    disabled,
-    fullWidth,
-    invalid,
-    labelPlacement,
-    prefix,
-    radius,
-    size,
-    variant,
-  ])
-}
+const slots = ['root', 'input', 'clearButton', 'suffix', 'prefix', 'label']
 
 const useSlotAriaProps = (ownerState: InputProps) => {
   const {
@@ -135,6 +79,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     slotProps,
     onValueChange,
     placeholder,
+    classNames,
     defaultValue = '',
     as = 'input',
     value: valueProp,
@@ -209,7 +154,11 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     recipe: inputRecipe,
   })
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Input',
+    slots,
+    classNames,
+  })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
@@ -234,11 +183,22 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     elementType: 'div',
     externalSlotProps: slotProps?.root,
     style: styles.root,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     additionalProps: {
       sx,
       className,
       onMouseDown: handleFocusInput,
+    },
+    dataAttrs: {
+      color,
+      disabled,
+      variant,
+      fullWidth,
+      size,
+      radius,
+      invalid,
+      clearable,
+      labelPlacement,
     },
   })
 
@@ -246,7 +206,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     elementType: 'label',
     externalSlotProps: slotProps?.label,
     style: styles.label,
-    classNames: classes.label,
+    classNames: slotClasses.label,
     a11y: slotAriaProps.label,
   })
 
@@ -254,7 +214,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     elementType: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
-    classNames: classes.input,
+    classNames: slotClasses.input,
     a11y: slotAriaProps.input,
     shouldForwardComponent: false,
     additionalProps: {
@@ -272,7 +232,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     elementType: ButtonBase,
     style: styles.clearButton,
     externalSlotProps: slotProps?.clearButton,
-    classNames: classes.clearButton,
+    classNames: slotClasses.clearButton,
     a11y: slotAriaProps.clearButton,
     shouldForwardComponent: false,
     additionalProps: {
@@ -288,14 +248,14 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     elementType: 'span',
     externalSlotProps: slotProps?.prefix,
     style: styles.prefix,
-    classNames: classes.prefix,
+    classNames: slotClasses.prefix,
   })
 
   const [InputSuffix, getInputSuffixProps] = useSlot({
     elementType: 'span',
     externalSlotProps: slotProps?.suffix,
     style: styles.suffix,
-    classNames: classes.suffix,
+    classNames: slotClasses.suffix,
   })
 
   return (

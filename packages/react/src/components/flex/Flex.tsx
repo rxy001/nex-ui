@@ -1,31 +1,11 @@
 'use client'
 
-import { useMemo } from 'react'
-import { useNexUI } from '../provider'
 import { flexRecipe } from '../../theme/recipes'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import type { ElementType } from 'react'
 import type { FlexProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const flexRoot = `${prefix}-flex`
-
-    const slots = {
-      root: ['root'],
-    }
-
-    return composeClasses(slots, getUtilityClass(flexRoot))
-  }, [prefix])
-}
+const slots = ['root']
 
 export const Flex = <RootComponent extends ElementType = 'div'>(
   inProps: FlexProps<RootComponent>,
@@ -49,7 +29,10 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     inline,
   }
 
-  const classes = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'Flex',
+    slots,
+  })
 
   const style = useStyles({ ownerState, name: 'Flex', recipe: flexRecipe })
 
@@ -57,7 +40,7 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     style,
     elementType: 'div',
     externalForwardedProps: remainingProps,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     additionalProps: {
       sx: {
         gap,

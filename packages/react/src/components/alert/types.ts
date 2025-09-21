@@ -2,7 +2,7 @@ import type { ElementType, ReactNode, MouseEventHandler } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type {
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
@@ -46,7 +46,7 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<
+  classNames?: ComponentSlotClasses<
     'icon' | 'content' | 'title' | 'description' | 'closeButton'
   >
 

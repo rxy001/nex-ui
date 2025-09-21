@@ -3,7 +3,7 @@ import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type {
   ComponentPropsWithCommonProps,
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   OverrideProps,
 } from '../../types/utils'
 import type { SwitchVariants } from '../../theme/recipes'
@@ -59,7 +59,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<
+  classNames?: ComponentSlotClasses<
     'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label'
   >
 

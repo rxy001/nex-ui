@@ -1,30 +1,11 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useSlot,
-  useStyles,
-  getUtilityClass,
-  composeClasses,
-} from '../utils'
-import { useNexUI } from '../provider'
+import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { cardFooterRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { CardFooterProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  const cardFooterRoot = `${prefix}-card-footer`
-
-  return useMemo(() => {
-    const slots = {
-      root: ['root'],
-    }
-    return composeClasses(slots, getUtilityClass(cardFooterRoot))
-  }, [cardFooterRoot])
-}
+const slots = ['root']
 
 export const CardFooter = <RootComponent extends ElementType>(
   inProps: CardFooterProps<RootComponent>,
@@ -34,17 +15,16 @@ export const CardFooter = <RootComponent extends ElementType>(
     props: inProps,
   })
 
-  const ownerState: CardFooterProps = {
-    ...props,
-  }
-
   const style = useStyles({
-    ownerState,
+    ownerState: props,
     name: 'CardFooter',
     recipe: cardFooterRecipe,
   })
 
-  const slotClasses = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'CardFooter',
+    slots,
+  })
 
   const [CardFooterRoot, getCardFooterRootProps] = useSlot({
     style,

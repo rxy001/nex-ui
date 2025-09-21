@@ -2,14 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
-import { useNexUI } from '../provider'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { useAvatarGroup } from './AvatarGroupContext'
 import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 import type {
@@ -19,27 +12,7 @@ import type {
   LoadedState,
 } from './types'
 
-const useSlotClasses = (ownerState: AvatarOwnerState) => {
-  const { prefix } = useNexUI()
-  const { color, size, radius, classes, outlined } = ownerState
-
-  return useMemo(() => {
-    const avatarRoot = `${prefix}-avatar`
-
-    const slots = {
-      root: [
-        'root',
-        `radius-${radius}`,
-        `size-${size}`,
-        `color-${color}`,
-        outlined && 'outlined',
-      ],
-      img: [`img`],
-    }
-
-    return composeClasses(slots, getUtilityClass(avatarRoot), classes)
-  }, [classes, color, outlined, prefix, radius, size])
-}
+const slots = ['root', 'img']
 
 const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
   const [loaded, setLoaded] = useState<LoadedState>(false)
@@ -132,6 +105,7 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     alt,
     srcSet,
     slotProps,
+    classNames,
     children: childrenProp,
     size = groupCtx?.size ?? 'md',
     radius = groupCtx?.radius ?? size,
@@ -158,22 +132,33 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     recipe: avatarRecipe,
   })
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Avatar',
+    slots,
+    classNames,
+  })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
   const [AvatarRoot, getAvatarRootProps] = useSlot({
     elementType: 'div',
     externalForwardedProps: remainingProps,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     style: styles.root,
     a11y: slotAriaProps.root,
+    dataAttrs: {
+      radius,
+      size,
+      color,
+      outlined,
+      inGroup,
+    },
   })
 
   const [AvatarImg, getAvatarImgProps] = useSlot({
     elementType: 'img',
     externalSlotProps: slotProps?.img,
-    classNames: classes.img,
+    classNames: slotClasses.img,
     style: styles.img,
     additionalProps: {
       src,

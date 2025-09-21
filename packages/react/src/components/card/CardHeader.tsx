@@ -1,34 +1,11 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useSlot,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-} from '../utils'
+import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { cardHeaderRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import type { ElementType } from 'react'
 import type { CardHeaderProps } from './types'
 
-const useSlotClasses = (ownerState: CardHeaderProps) => {
-  const { classes } = ownerState
-  const { prefix } = useNexUI()
-  const cardHeaderRoot = `${prefix}-card-header`
-
-  return useMemo(() => {
-    const slots = {
-      root: ['root'],
-      content: ['content'],
-      title: ['title'],
-      subtitle: ['subtitle'],
-    }
-
-    return composeClasses(slots, getUtilityClass(cardHeaderRoot), classes)
-  }, [cardHeaderRoot, classes])
-}
+const slots = ['root', 'content', 'title', 'subtitle']
 
 export const CardHeader = <RootComponent extends ElementType>(
   inProps: CardHeaderProps<RootComponent>,
@@ -45,40 +22,41 @@ export const CardHeader = <RootComponent extends ElementType>(
     action,
     children,
     slotProps,
+    classNames,
     ...remainingProps
   } = props
 
-  const ownerState: CardHeaderProps = {
-    ...props,
-  }
-
   const styles = useStyles({
-    ownerState,
+    ownerState: props,
     name: 'CardHeader',
     recipe: cardHeaderRecipe,
   })
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'CardHeader',
+    slots,
+    classNames,
+  })
 
   const [CardHeaderRoot, getCardHeaderRootProps] = useSlot({
     style: styles.root,
     elementType: 'div',
     externalForwardedProps: remainingProps,
-    classNames: classes.root,
+    classNames: slotClasses.root,
   })
 
   const [CardContent, getCardContentProps] = useSlot({
     elementType: 'div',
     style: styles.content,
     externalSlotProps: slotProps?.content,
-    classNames: classes.content,
+    classNames: slotClasses.content,
   })
 
   const [CardTitle, getCardTitleProps] = useSlot({
     style: styles.title,
     elementType: 'div',
     externalSlotProps: slotProps?.title,
-    classNames: classes.title,
+    classNames: slotClasses.title,
     additionalProps: {
       children: title,
     },
@@ -87,7 +65,7 @@ export const CardHeader = <RootComponent extends ElementType>(
   const [CardSubtitle, getCardSubtitleProps] = useSlot({
     style: styles.subtitle,
     elementType: 'div',
-    classNames: classes.subtitle,
+    classNames: slotClasses.subtitle,
     externalSlotProps: slotProps?.subtitle,
     additionalProps: {
       children: subtitle,

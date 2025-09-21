@@ -46,13 +46,13 @@ describe('mergeProps', () => {
     })
   })
 
-  it('merges classes using mergeWith and clsx', () => {
+  it('merges classNames using mergeWith and clsx', () => {
     const a = { root: 'foo', label: 'bar' }
     const b = { root: 'baz', label: 'qux' }
-    const merged = mergeProps({ classes: a }, { classes: b })
+    const merged = mergeProps({ classNames: a }, { classNames: b })
     // Should merge each key with clsx
-    expect(merged.classes.root).toBe(clsx('foo', 'baz'))
-    expect(merged.classes.label).toBe(clsx('bar', 'qux'))
+    expect(merged.classNames.root).toBe(clsx('foo', 'baz'))
+    expect(merged.classNames.label).toBe(clsx('bar', 'qux'))
   })
 
   it('merges sx arrays', () => {
