@@ -1,17 +1,19 @@
-import { useState, createRef } from 'react'
+import { useState } from 'react'
 import { fireEvent, act } from '@testing-library/react'
 import {
-  testColorClasses,
+  testColorDataAttrs,
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
-  testVariantClasses,
-  testRadiusClasses,
-  testClassesForwarding,
+  testVariantDataAttrs,
+  testRadiusDataAttrs,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
+  testSizeDataAttrs,
+  testRefForwarding,
 } from '~/tests/shared'
 import { Button } from '../index'
-import { buttonClasses } from '../buttonClasses'
+import { buttonSlotClasses, buttonDataAttrs } from './constants'
 import type { ButtonProps } from '../index'
 
 const slots = ['startIcon', 'endIcon'] as const
@@ -21,35 +23,31 @@ describe('Button', () => {
 
   testRootClassName(<Button />)
 
-  testColorClasses(<Button>Button</Button>, buttonClasses)
+  testColorDataAttrs(<Button>Button</Button>)
 
-  testVariantClasses(
-    <Button>Button</Button>,
-    ['variant', ['solid', 'outlined', 'ghost', 'faded']],
-    buttonClasses,
-  )
+  testVariantDataAttrs(<Button>Button</Button>, [
+    'variant',
+    ['solid', 'outlined', 'ghost', 'faded'],
+  ])
 
-  testVariantClasses(
-    <Button iconOnly>Button</Button>,
-    ['iconOnly', [true, false]],
-    buttonClasses,
-  )
+  testVariantDataAttrs(<Button>Button</Button>, ['iconOnly', [true, false]])
 
-  testVariantClasses(
-    <Button fullWidth>Button</Button>,
-    ['fullWidth', [true]],
-    buttonClasses,
-  )
+  testVariantDataAttrs(<Button>Button</Button>, ['fullWidth', [true, false]])
 
-  testVariantClasses(
-    <Button disableRipple>Button</Button>,
-    ['disableRipple', [true]],
-    buttonClasses,
-  )
+  testVariantDataAttrs(<Button>Button</Button>, [
+    'disableRipple',
+    [true, false],
+  ])
 
-  testRadiusClasses(<Button>Button</Button>, buttonClasses)
+  testVariantDataAttrs(<Button>Button</Button>, ['disabled', [true, false]])
 
-  testClassesForwarding(
+  testVariantDataAttrs(<Button>Button</Button>, ['loading', [true, false]])
+
+  testSizeDataAttrs(<Button>Button</Button>)
+
+  testRadiusDataAttrs(<Button>Button</Button>)
+
+  testClassNamesForwarding(
     <Button startIcon={<span>start icon</span>} endIcon={<span>end icon</span>}>
       Button
     </Button>,
@@ -58,7 +56,7 @@ describe('Button', () => {
       startIcon: 'test-start-icon-class',
       endIcon: 'test-end-icon-class',
     },
-    buttonClasses,
+    buttonSlotClasses,
   )
 
   testSlotPropsForwarding(
@@ -73,49 +71,27 @@ describe('Button', () => {
       startIcon: { className: 'test-start-icon' },
       endIcon: { className: 'test-end-icon' },
     },
-    buttonClasses,
+    buttonSlotClasses,
   )
+
+  testRefForwarding(<Button>Button</Button>)
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<Button>Button</Button>)
     const button = container.firstElementChild
 
-    expect(button).toHaveClass(buttonClasses.root)
-    expect(button).toHaveClass(buttonClasses['variant-solid'])
-    expect(button).toHaveClass(buttonClasses['size-md'])
-    expect(button).toHaveClass(buttonClasses['radius-md'])
-    expect(button).toHaveClass(buttonClasses['color-blue'])
-
-    expect(button).not.toHaveClass(buttonClasses['variant-outlined'])
-    expect(button).not.toHaveClass(buttonClasses['variant-ghost'])
-    expect(button).not.toHaveClass(buttonClasses['color-green'])
-    expect(button).not.toHaveClass(buttonClasses['color-cyan'])
-    expect(button).not.toHaveClass(buttonClasses['color-orange'])
-    expect(button).not.toHaveClass(buttonClasses['color-pink'])
-    expect(button).not.toHaveClass(buttonClasses['color-purple'])
-    expect(button).not.toHaveClass(buttonClasses['color-yellow'])
-    expect(button).not.toHaveClass(buttonClasses['color-red'])
-    expect(button).not.toHaveClass(buttonClasses['color-gray'])
-    expect(button).not.toHaveClass(buttonClasses['size-sm'])
-    expect(button).not.toHaveClass(buttonClasses['size-lg'])
-    expect(button).not.toHaveClass(buttonClasses['radius-sm'])
-    expect(button).not.toHaveClass(buttonClasses['radius-lg'])
-    expect(button).not.toHaveClass(buttonClasses['icon-only'])
-    expect(button).not.toHaveClass(buttonClasses.loading)
-    expect(button).not.toHaveClass(buttonClasses.disabled)
-    expect(button).not.toHaveClass(buttonClasses['full-width'])
-    expect(button).not.toHaveClass(buttonClasses['disable-ripple'])
+    expect(button).toHaveClass(buttonSlotClasses.root)
+    expect(button).toHaveAttribute(...buttonDataAttrs['loading-false'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['disabled-false'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['variant-solid'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['size-md'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['radius-md'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['color-blue'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['iconOnly-false'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['fullWidth-false'])
+    expect(button).toHaveAttribute(...buttonDataAttrs['disableRipple-false'])
 
     expect(button).toMatchSnapshot()
-  })
-
-  it("should forward ref to Button's root element", () => {
-    const ref = createRef<HTMLButtonElement>()
-    const { container } = renderWithNexUIProvider(
-      <Button ref={ref}>Button</Button>,
-    )
-    const button = container.firstElementChild as HTMLButtonElement
-    expect(ref.current).toBe(button)
   })
 
   it('should trigger onClick function', async () => {
@@ -127,18 +103,6 @@ describe('Button', () => {
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should apply disabled class when disabled', async () => {
-    const onClick = jest.fn()
-    const { getByText } = renderWithNexUIProvider(
-      <Button disabled onClick={onClick}>
-        Button
-      </Button>,
-    )
-
-    const button = getByText('Button')
-    expect(button).toHaveClass(buttonClasses.disabled)
-  })
-
   it('should disable the button when loading', () => {
     const { getByTestId } = renderWithNexUIProvider(
       <Button loading data-testid='loading-button'>
@@ -147,7 +111,6 @@ describe('Button', () => {
     )
 
     const button = getByTestId('loading-button')
-    expect(button).toHaveClass(buttonClasses.loading)
     expect(button).toHaveStyleRule('pointer-events', 'none')
   })
 
@@ -158,7 +121,7 @@ describe('Button', () => {
       </Button>,
     )
 
-    expect(container.firstElementChild).toMatchSnapshot()
+    expect(container.firstElementChild?.tagName).toBe('A')
   })
 
   it('should render with start icon', () => {
@@ -169,8 +132,7 @@ describe('Button', () => {
     )
 
     const startIcon = getByTestId('start-icon')
-    expect(startIcon.parentElement).toHaveClass(buttonClasses.icon)
-    expect(startIcon.parentElement).toHaveClass(buttonClasses['start-icon'])
+    expect(startIcon.parentElement).toHaveClass(buttonSlotClasses['start-icon'])
   })
 
   it('should render with end icon', () => {
@@ -180,8 +142,7 @@ describe('Button', () => {
       </Button>,
     )
     const endIcon = getByTestId('end-icon')
-    expect(endIcon.parentElement).toHaveClass(buttonClasses.icon)
-    expect(endIcon.parentElement).toHaveClass(buttonClasses['end-icon'])
+    expect(endIcon.parentElement).toHaveClass(buttonSlotClasses['end-icon'])
   })
 
   it('should support to change loading', async () => {
@@ -193,17 +154,15 @@ describe('Button', () => {
         </Button>
       )
     }
-    const { getByRole, queryByClassName } = renderWithNexUIProvider(
-      <DefaultButton />,
-    )
+    const { getByRole } = renderWithNexUIProvider(<DefaultButton />)
     const button = getByRole('button')
+    expect(button).toHaveAttribute(...buttonDataAttrs['loading-false'])
 
     await act(async () => {
       fireEvent.click(button)
     })
 
-    expect(button).toHaveClass(buttonClasses.loading)
-    expect(queryByClassName(buttonClasses['icon-loading'])).toBeInTheDocument()
+    expect(button).toHaveAttribute(...buttonDataAttrs['loading-true'])
   })
 
   it('should support customized spinner', () => {
@@ -216,7 +175,7 @@ describe('Button', () => {
       </Button>,
     )
 
-    const spinner = queryByClassName(buttonClasses['icon-loading'])
+    const spinner = queryByClassName(buttonSlotClasses['start-icon'])
 
     expect(spinner).toBeInTheDocument()
     expect(spinner).toHaveTextContent('Custom Spinner')
@@ -229,7 +188,7 @@ describe('Button', () => {
       </Button>,
     )
 
-    const startSpinner = queryByClassName(buttonClasses['start-icon'])
+    const startSpinner = queryByClassName(buttonSlotClasses['start-icon'])
 
     expect(startSpinner).toBeInTheDocument()
 
@@ -239,7 +198,7 @@ describe('Button', () => {
       </Button>,
     )
 
-    const endSpinner = queryByClassName(buttonClasses['end-icon'])
+    const endSpinner = queryByClassName(buttonSlotClasses['end-icon'])
     expect(endSpinner).toBeInTheDocument()
   })
 })

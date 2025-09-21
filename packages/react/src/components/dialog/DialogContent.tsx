@@ -3,15 +3,13 @@
 import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
-import { useNexUI } from '../provider'
 import { DialogRoot } from './DialogRoot'
 import {
   useStyles,
-  composeClasses,
-  getUtilityClass,
   useDefaultProps,
   useSlot,
   Ripple,
+  useSlotClasses,
 } from '../utils'
 import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
@@ -21,29 +19,7 @@ import { DialogContentProvider } from './DialogContext'
 import type { ElementType } from 'react'
 import type { DialogContentProps } from './types'
 
-const useSlotClasses = (ownerState: DialogContentProps) => {
-  const { prefix } = useNexUI()
-
-  const { classes, size, fullScreen, placement, scroll } = ownerState
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-dialog-content`
-
-    const slots = {
-      root: [
-        'root',
-        `size-${size}`,
-        `scroll-${scroll}`,
-        `placement-${placement}`,
-        fullScreen && 'full-screen',
-      ],
-      paper: ['paper'],
-      closeButton: ['close-button'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName), classes)
-  }, [prefix, size, scroll, placement, fullScreen, classes])
-}
+const slots = ['root', 'paper', 'closeButton']
 
 const useSlotAriaProps = (ownerState: DialogContentProps) => {
   const {
@@ -90,6 +66,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     children,
     slotProps,
     closeIcon,
+    classNames,
     motionProps: motionPropsProp,
     placement = 'top',
     scroll = 'outside',
@@ -105,7 +82,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     scroll,
     size,
     fullScreen,
-    closeIcon,
     hideCloseButton,
   }
 
@@ -117,7 +93,11 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
-  const classes = useSlotClasses(ownerState)
+  const classes = useSlotClasses({
+    name: 'DialogContent',
+    slots,
+    classNames,
+  })
 
   const motionProps = useMemo(() => {
     const mProps =
@@ -144,6 +124,13 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
     classNames: classes.root,
+    dataAttrs: {
+      size,
+      placement,
+      scroll,
+      fullScreen,
+      hideCloseButton,
+    },
   })
 
   const [DialogContentPaper, getDialogContentPaperProps] = useSlot({

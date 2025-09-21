@@ -7,7 +7,7 @@ import {
   DrawerFooter,
   DrawerBody,
 } from '../index'
-import { drawerContentClasses } from '../classes'
+import { drawerContentClasses, drawerContentDataAttrs } from './constants'
 import type { DrawerContentProps } from '../index'
 
 function TestDrawer(props: DrawerContentProps) {
@@ -30,21 +30,13 @@ describe('DrawerContent', () => {
 
     const drawerContent = getByTestId('drawer-content')
     expect(drawerContent).toHaveClass(drawerContentClasses.root)
-    expect(drawerContent).toHaveClass(drawerContentClasses['size-md'])
-    expect(drawerContent).toHaveClass(drawerContentClasses['placement-right'])
-    expect(drawerContent).not.toHaveClass(
-      drawerContentClasses['placement-bottom'],
+    expect(drawerContent).toHaveAttribute(
+      ...drawerContentDataAttrs['placement-right'],
     )
-    expect(drawerContent).not.toHaveClass(
-      drawerContentClasses['placement-left'],
+    expect(drawerContent).toHaveAttribute(...drawerContentDataAttrs['size-md'])
+    expect(drawerContent).toHaveAttribute(
+      ...drawerContentDataAttrs['hideCloseButton-false'],
     )
-    expect(drawerContent).not.toHaveClass(drawerContentClasses['placement-top'])
-
-    expect(drawerContent).not.toHaveClass(drawerContentClasses['size-xs'])
-    expect(drawerContent).not.toHaveClass(drawerContentClasses['size-sm'])
-    expect(drawerContent).not.toHaveClass(drawerContentClasses['size-lg'])
-    expect(drawerContent).not.toHaveClass(drawerContentClasses['size-xl'])
-    expect(drawerContent).not.toHaveClass(drawerContentClasses['size-full'])
   })
 
   it("should forward ref to DrawerContent's root element", async () => {
@@ -60,7 +52,7 @@ describe('DrawerContent', () => {
     expect(drawerContentRoot).toBe(ref.current)
   })
 
-  it(`should add the appropriate size class to DrawerContent's root element based on size prop`, async () => {
+  it(`should add the appropriate data-size-* to DrawerContent's root element based on size prop`, async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestDrawer size='sm' />,
       {
@@ -68,37 +60,38 @@ describe('DrawerContent', () => {
       },
     )
 
-    expect(getByTestId('drawer-content')).toHaveClass(
-      drawerContentClasses['size-sm'],
+    const drawerContentRoot = getByTestId('drawer-content')
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['size-sm'],
     )
 
     rerender(<TestDrawer size='xs' />)
-    expect(getByTestId('drawer-content')).toHaveClass(
-      drawerContentClasses['size-xs'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['size-xs'],
     )
 
     rerender(<TestDrawer size='md' />)
-    expect(getByTestId('drawer-content')).toHaveClass(
-      drawerContentClasses['size-md'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['size-md'],
     )
 
     rerender(<TestDrawer size='lg' />)
-    expect(getByTestId('drawer-content')).toHaveClass(
-      drawerContentClasses['size-lg'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['size-lg'],
     )
 
     rerender(<TestDrawer size='xl' />)
-    expect(getByTestId('drawer-content')).toHaveClass(
-      drawerContentClasses['size-xl'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['size-xl'],
     )
 
     rerender(<TestDrawer size='full' />)
-    expect(getByTestId('drawer-content')).toHaveClass(
-      drawerContentClasses['size-full'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['size-full'],
     )
   })
 
-  it(`should add the appropriate placement class to root element based on placement prop`, async () => {
+  it(`should add the appropriate data-placement-* to root element based on placement prop`, async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestDrawer placement='right' />,
       {
@@ -108,31 +101,33 @@ describe('DrawerContent', () => {
 
     const drawerContentRoot = getByTestId('drawer-content')
 
-    expect(drawerContentRoot).toHaveClass(
-      drawerContentClasses['placement-right'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['placement-right'],
     )
 
     rerender(<TestDrawer placement='bottom' />)
-    expect(drawerContentRoot).toHaveClass(
-      drawerContentClasses['placement-bottom'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['placement-bottom'],
     )
 
     rerender(<TestDrawer placement='left' />)
-    expect(drawerContentRoot).toHaveClass(
-      drawerContentClasses['placement-left'],
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['placement-left'],
     )
 
     rerender(<TestDrawer placement='top' />)
-    expect(drawerContentRoot).toHaveClass(drawerContentClasses['placement-top'])
+    expect(drawerContentRoot).toHaveAttribute(
+      ...drawerContentDataAttrs['placement-top'],
+    )
   })
 
-  it('should forward classes to paper and closeButton slots', async () => {
-    const classes = {
+  it('should forward classNames to paper and closeButton slots', async () => {
+    const classNames = {
       paper: 'test-drawer-content-paper',
       closeButton: 'test-drawer-content-close-button',
     }
     const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer classes={classes} />,
+      <TestDrawer classNames={classNames} />,
       {
         useAct: true,
       },
@@ -142,10 +137,10 @@ describe('DrawerContent', () => {
 
     expect(
       drawerContent.querySelector(`.${drawerContentClasses.paper}`),
-    ).toHaveClass(classes.paper)
+    ).toHaveClass(classNames.paper)
     expect(
       drawerContent.querySelector(`.${drawerContentClasses['close-button']}`),
-    ).toHaveClass(classes.closeButton)
+    ).toHaveClass(classNames.closeButton)
   })
 
   it('should forward slotProps to backdrop slots', async () => {

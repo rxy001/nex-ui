@@ -3,11 +3,15 @@ import {
   renderWithNexUIProvider,
   testRootClassName,
   testRefForwarding,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
 } from '~/tests/shared'
 import { AvatarGroup, Avatar } from '../index'
-import { avatarClasses, avatarGroupClasses } from '../classes'
+import {
+  avatarSlotClasses,
+  avatarGroupSlotClasses,
+  avatarDataAttrs,
+} from './constants'
 
 const slots = ['surplus'] as const
 
@@ -28,7 +32,7 @@ describe('AvatarGroup', () => {
 
   testRefForwarding(<AvatarGroup />)
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <AvatarGroup max={2}>
       <Avatar />
       <Avatar />
@@ -39,7 +43,7 @@ describe('AvatarGroup', () => {
     {
       surplus: 'test-surplus-class',
     },
-    avatarGroupClasses,
+    avatarGroupSlotClasses,
   )
 
   testSlotPropsForwarding(
@@ -51,8 +55,31 @@ describe('AvatarGroup', () => {
     </AvatarGroup>,
     slots,
     { surplus: { className: 'test-surplus-class' } },
-    avatarGroupClasses,
+    avatarGroupSlotClasses,
   )
+
+  it('should render with default props', () => {
+    const { container, queryByTestId } = renderWithNexUIProvider(
+      <AvatarGroup>
+        <Avatar data-testid='avatar' />
+        <Avatar />
+        <Avatar />
+      </AvatarGroup>,
+    )
+
+    const avatarGroupRoot = container.firstElementChild
+
+    expect(avatarGroupRoot).toHaveClass(avatarGroupSlotClasses.root)
+    expect(avatarGroupRoot).toMatchSnapshot()
+
+    const avatarRoot = queryByTestId('avatar')
+
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['inGroup-true'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['size-md'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['radius-md'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['color-gray'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['outlined-false'])
+  })
 
   it('should render group when multiple avatars are passed', () => {
     const { container, rerender } = renderWithNexUIProvider(
@@ -61,7 +88,7 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    expect(container.firstElementChild).toHaveClass(avatarClasses.root)
+    expect(container.firstElementChild).toHaveClass(avatarSlotClasses.root)
 
     rerender(
       <AvatarGroup>
@@ -70,7 +97,7 @@ describe('AvatarGroup', () => {
       </AvatarGroup>,
     )
 
-    expect(container.firstElementChild).toHaveClass(avatarGroupClasses.root)
+    expect(container.firstElementChild).toHaveClass(avatarGroupSlotClasses.root)
   })
 
   it('should render `+N` when there are more than 4 avatars', () => {
@@ -163,9 +190,10 @@ describe('AvatarGroup', () => {
     )
 
     const avatarRoot = container.firstElementChild?.firstElementChild
-    expect(avatarRoot).toHaveClass(avatarClasses['size-lg'])
-    expect(avatarRoot).toHaveClass(avatarClasses['color-blue'])
-    expect(avatarRoot).toHaveClass(avatarClasses.outlined)
-    expect(avatarRoot).toHaveClass(avatarClasses['radius-full'])
+
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['size-lg'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['color-blue'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['outlined-true'])
+    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['radius-full'])
   })
 })

@@ -3,9 +3,10 @@ import {
   testRefForwarding,
   renderWithNexUIProvider,
   testRootClassName,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { CardActionArea } from '../index'
-import { cardActionAreaClasses } from '../classes'
+import { cardActionAreaClasses } from './constants'
 
 describe('CardActionArea', () => {
   testComponentStability(<CardActionArea />)
@@ -13,6 +14,8 @@ describe('CardActionArea', () => {
   testRefForwarding(<CardActionArea />)
 
   testRootClassName(<CardActionArea />)
+
+  testVariantDataAttrs(<CardActionArea />, ['disabled', [true, false]])
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<CardActionArea />)

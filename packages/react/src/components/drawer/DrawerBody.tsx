@@ -1,32 +1,12 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { drawerBodyRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
 import type { DrawerBodyProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-drawer-body`
-
-    const slots = {
-      root: ['root'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName))
-  }, [prefix])
-}
+const slots = ['root']
 
 export const DrawerBody = <RootComponent extends ElementType = 'div'>(
   inProps: DrawerBodyProps<RootComponent>,
@@ -48,12 +28,15 @@ export const DrawerBody = <RootComponent extends ElementType = 'div'>(
     recipe: drawerBodyRecipe,
   })
 
-  const classes = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'DrawerBody',
+    slots,
+  })
 
   const [DrawerBodyRoot, getDrawerBodyRootProps] = useSlot({
     style,
     elementType: ModalBody,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
     a11y: {

@@ -1,6 +1,6 @@
 import { createRef } from 'react'
 import { renderWithNexUIProvider } from '~/tests/shared'
-import { drawerBodyClasses } from '../classes'
+import { drawerBodyClasses } from './constants'
 import {
   Drawer,
   DrawerContent,

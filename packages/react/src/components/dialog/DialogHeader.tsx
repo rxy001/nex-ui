@@ -1,32 +1,12 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { dialogHeaderRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import { ModalHeader } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogHeaderProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-dialog-header`
-
-    const slots = {
-      root: ['root'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName))
-  }, [prefix])
-}
+const slots = ['root']
 
 export const DialogHeader = <RootComponent extends ElementType = 'h2'>(
   inProps: DialogHeaderProps<RootComponent>,
@@ -42,7 +22,10 @@ export const DialogHeader = <RootComponent extends ElementType = 'h2'>(
     ...props,
   }
 
-  const classes = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'DialogHeader',
+    slots,
+  })
 
   const style = useStyles({
     ownerState,
@@ -53,7 +36,7 @@ export const DialogHeader = <RootComponent extends ElementType = 'h2'>(
   const [DialogHeaderRoot, getDialogHeaderRootProps] = useSlot({
     style,
     elementType: ModalHeader,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })

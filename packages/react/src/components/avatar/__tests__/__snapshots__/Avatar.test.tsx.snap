@@ -33,7 +33,12 @@ exports[`Avatar should render with default props 1`] = `
 
 <div
   aria-label="A"
-  class="nui-avatar-root nui-avatar-radius-md nui-avatar-size-md nui-avatar-color-gray emotion-0"
+  class="nui-avatar-root emotion-0"
+  data-color="gray"
+  data-in-group="false"
+  data-outlined="false"
+  data-radius="md"
+  data-size="md"
   role="img"
 >
   A
