@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Icon should render correctly 1`] = `
+exports[`Icon should render with default props 1`] = `
 .emotion-0 {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -13,7 +13,9 @@ exports[`Icon should render correctly 1`] = `
 
 <svg
   aria-hidden="true"
-  class="nui-icon-root nui-icon-size-md emotion-0"
+  class="nui-icon-root emotion-0"
+  data-size="md"
+  data-spin="false"
   fill="currentColor"
   focusable="false"
   height="1em"

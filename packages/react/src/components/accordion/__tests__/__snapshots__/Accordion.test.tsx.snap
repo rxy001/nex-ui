@@ -65,10 +65,16 @@ exports[`Accordion should render with default props 1`] = `
 }
 
 <div
-  class="nui-accordion-root nui-accordion-variant-underlined emotion-0"
+  class="nui-accordion-root emotion-0"
+  data-multiple="false"
+  data-variant="underlined"
 >
   <div
     class="nui-accordion-item-root emotion-1"
+    data-disabled="false"
+    data-hide-indicator="false"
+    data-keep-mounted="false"
+    data-state="collapsed"
     data-testid="accordion-item"
   >
     <h3
@@ -78,7 +84,7 @@ exports[`Accordion should render with default props 1`] = `
         aria-controls="panel-1-content"
         aria-expanded="false"
         class="nui-accordion-item-trigger emotion-3"
-        id="«r5»"
+        id="«r9»"
         tabindex="0"
         type="button"
       >

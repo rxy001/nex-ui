@@ -6,41 +6,12 @@ import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { useRadioGroup } from './RadioGroupContext'
-import {
-  useDefaultProps,
-  useSlot,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-} from '../utils'
+import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { radioRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { RadioOwnerState, RadioProps } from './types'
 
-const useSlotClasses = (ownerState: RadioOwnerState) => {
-  const { prefix } = useNexUI()
-
-  const { classes, size, color, checked, disabled } = ownerState
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-radio`
-
-    const slots = {
-      root: [
-        'root',
-        `size-${size}`,
-        `color-${color}`,
-        checked && 'checked',
-        disabled && 'disabled',
-      ],
-      input: ['input'],
-      dot: ['dot'],
-      label: ['label'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName), classes)
-  }, [checked, classes, color, prefix, size, disabled])
-}
+const slots = ['root', 'input', 'dot', 'label']
 
 const useSlotAriaProps = (ownerState: RadioOwnerState) => {
   const {
@@ -103,12 +74,13 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     onCheckedChange,
     sx,
     className,
+    classNames,
     slotProps,
     checked: checkedProp,
     tabIndex: tabIndexProp = 0,
     as = 'input',
     type = 'radio',
-    disabled = groupCtx?.disabled,
+    disabled = groupCtx?.disabled ?? false,
     name = groupCtx?.name,
     size = groupCtx?.size ?? 'md',
     defaultChecked = false,
@@ -178,7 +150,11 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     ownerState,
   })
 
-  const slotClasses = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Radio',
+    slots,
+    classNames,
+  })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
@@ -200,6 +176,12 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     additionalProps: {
       sx,
       className,
+    },
+    dataAttrs: {
+      color,
+      size,
+      checked,
+      disabled,
     },
   })
 

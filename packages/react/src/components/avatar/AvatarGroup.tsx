@@ -2,35 +2,14 @@
 
 import { useMemo } from 'react'
 import { isArray } from '@nex-ui/utils'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { AvatarGroupProvider } from './AvatarGroupContext'
 import { avatarGroupRecipe } from '../../theme/recipes'
 import { Avatar } from './Avatar'
-import { useNexUI } from '../provider'
 import type { ElementType } from 'react'
 import type { AvatarGroupProps } from './types'
 
-const useSlotClasses = (ownerState: AvatarGroupProps) => {
-  const { prefix } = useNexUI()
-  const { classes } = ownerState
-
-  return useMemo(() => {
-    const avatarGroupRoot = `${prefix}-avatar-group`
-
-    const slots = {
-      root: ['root'],
-      surplus: ['surplus'],
-    }
-
-    return composeClasses(slots, getUtilityClass(avatarGroupRoot), classes)
-  }, [classes, prefix])
-}
+const slots = ['root', 'surplus']
 
 export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
   inProps: AvatarGroupProps<RootComponent>,
@@ -46,6 +25,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     slotProps,
     spacing,
     renderSurplus,
+    classNames,
     size = 'md',
     color = 'gray',
     outlined = false,
@@ -65,7 +45,11 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     max,
   }
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'AvatarGroup',
+    slots,
+    classNames,
+  })
 
   const style = useStyles({
     ownerState,
@@ -77,7 +61,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     style,
     elementType: 'div',
     externalForwardedProps: remainingProps,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     additionalProps: {
       style: {
         [`--avatar-group-spacing` as string]:
@@ -89,7 +73,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
   const [AvatarSurplus, getAvatarSurplusProps] = useSlot({
     elementType: Avatar,
     externalSlotProps: slotProps?.surplus,
-    classNames: classes.surplus,
+    classNames: slotClasses.surplus,
     shouldForwardComponent: false,
   })
 

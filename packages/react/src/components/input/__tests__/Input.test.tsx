@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { fireEvent } from '@testing-library/react'
 import {
-  testColorClasses,
   testComponentStability,
   renderWithNexUIProvider,
   testRootClassName,
-  testSizeClasses,
-  testRadiusClasses,
-  testVariantClasses,
   testRefForwarding,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
+  testColorDataAttrs,
+  testSizeDataAttrs,
+  testRadiusDataAttrs,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { Input } from '../index'
-import { inputClasses } from '../inputClasses'
+import { inputClasses, inputDataAttrs } from './constants'
 
 const slots = ['root', 'label', 'prefix', 'suffix', 'clearButton'] as const
 
@@ -22,29 +22,27 @@ describe('Input', () => {
 
   testRootClassName(<Input />)
 
-  testColorClasses(<Input />, inputClasses)
+  testColorDataAttrs(<Input />)
 
-  testSizeClasses(<Input />, inputClasses)
+  testSizeDataAttrs(<Input />)
 
-  testRadiusClasses(<Input />, inputClasses)
+  testRadiusDataAttrs(<Input />)
 
   testRefForwarding(<Input />, HTMLInputElement)
 
-  testVariantClasses(
-    <Input />,
-    ['variant', ['outlined', 'faded', 'underlined']],
-    inputClasses,
-  )
+  testVariantDataAttrs(<Input />, [
+    'variant',
+    ['outlined', 'faded', 'underlined'],
+  ])
 
-  testVariantClasses(
-    <Input label='Label' />,
-    ['labelPlacement', ['inside', 'outside', 'float-inside', 'float-outside']],
-    inputClasses,
-  )
+  testVariantDataAttrs(<Input label='Label' />, [
+    'labelPlacement',
+    ['inside', 'outside', 'float-inside', 'float-outside'],
+  ])
 
-  testVariantClasses(<Input />, ['fullWidth', [true, false]], inputClasses)
+  testVariantDataAttrs(<Input />, ['fullWidth', [true, false]])
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <Input
       prefix={<span>Prefix</span>}
       suffix={<span>Suffix</span>}
@@ -99,39 +97,20 @@ describe('Input', () => {
     const inputRoot = container.firstElementChild
 
     expect(inputRoot).toHaveClass(inputClasses.root)
-    expect(inputRoot).toHaveClass(inputClasses['variant-outlined'])
-    expect(inputRoot).toHaveClass(inputClasses['size-md'])
-    expect(inputRoot).toHaveClass(inputClasses['radius-md'])
-    expect(inputRoot).toHaveClass(inputClasses['color-blue'])
+
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['variant-outlined'])
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['size-md'])
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['radius-md'])
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['color-blue'])
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['disabled-false'])
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['invalid-false'])
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['fullWidth-false'])
+    expect(inputRoot).toHaveAttribute(...inputDataAttrs['clearable-false'])
+
+    expect(inputRoot).not.toHaveAttribute('data-label-placement')
+
     expect(getByTestId('test-input')).toHaveClass(inputClasses.input)
 
-    expect(inputRoot).not.toHaveClass(inputClasses['size-lg'])
-    expect(inputRoot).not.toHaveClass(inputClasses['size-sm'])
-    expect(inputRoot).not.toHaveClass(inputClasses['radius-full'])
-    expect(inputRoot).not.toHaveClass(inputClasses['radius-lg'])
-    expect(inputRoot).not.toHaveClass(inputClasses['radius-sm'])
-    expect(inputRoot).not.toHaveClass(inputClasses['radius-none'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-yellow'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-cyan'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-red'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-gray'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-green'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-orange'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-purple'])
-    expect(inputRoot).not.toHaveClass(inputClasses['color-pink'])
-    expect(inputRoot).not.toHaveClass(inputClasses.invalid)
-    expect(inputRoot).not.toHaveClass(inputClasses.disabled)
-    expect(inputRoot).not.toHaveClass(inputClasses['full-width'])
-    expect(inputRoot).not.toHaveClass(inputClasses['variant-faded'])
-    expect(inputRoot).not.toHaveClass(inputClasses['variant-underlined'])
-    expect(inputRoot).not.toHaveClass(inputClasses['label-placement-inside'])
-    expect(inputRoot).not.toHaveClass(inputClasses['label-placement-outside'])
-    expect(inputRoot).not.toHaveClass(
-      inputClasses['label-placement-float-outside'],
-    )
-    expect(inputRoot).not.toHaveClass(
-      inputClasses['label-placement-float-inside'],
-    )
     expect(inputRoot).toMatchSnapshot()
   })
 
@@ -140,16 +119,18 @@ describe('Input', () => {
       <Input labelPlacement='float-outside' value='value' label='Label' />,
     )
 
-    expect(container.firstElementChild).toHaveClass(
-      inputClasses['label-placement-outside'],
+    const inputRoot = container.firstElementChild
+
+    expect(inputRoot).toHaveAttribute(
+      ...inputDataAttrs['labelPlacement-outside'],
     )
 
     rerender(
       <Input labelPlacement='float-inside' value='value' label='Label' />,
     )
 
-    expect(container.firstElementChild).toHaveClass(
-      inputClasses['label-placement-inside'],
+    expect(inputRoot).toHaveAttribute(
+      ...inputDataAttrs['labelPlacement-inside'],
     )
   })
 
@@ -162,8 +143,10 @@ describe('Input', () => {
       />,
     )
 
-    expect(container.firstElementChild).toHaveClass(
-      inputClasses['label-placement-outside'],
+    const inputRoot = container.firstElementChild
+
+    expect(inputRoot).toHaveAttribute(
+      ...inputDataAttrs['labelPlacement-outside'],
     )
 
     rerender(
@@ -174,8 +157,8 @@ describe('Input', () => {
       />,
     )
 
-    expect(container.firstElementChild).toHaveClass(
-      inputClasses['label-placement-inside'],
+    expect(inputRoot).toHaveAttribute(
+      ...inputDataAttrs['labelPlacement-inside'],
     )
   })
 
@@ -184,16 +167,18 @@ describe('Input', () => {
       <Input labelPlacement='float-outside' prefix='prefix' label='Label' />,
     )
 
-    expect(container.firstElementChild).toHaveClass(
-      inputClasses['label-placement-outside'],
+    const inputRoot = container.firstElementChild
+
+    expect(inputRoot).toHaveAttribute(
+      ...inputDataAttrs['labelPlacement-outside'],
     )
 
     rerender(
       <Input labelPlacement='float-inside' prefix='prefix' label='Label' />,
     )
 
-    expect(container.firstElementChild).toHaveClass(
-      inputClasses['label-placement-inside'],
+    expect(inputRoot).toHaveAttribute(
+      ...inputDataAttrs['labelPlacement-inside'],
     )
   })
 
@@ -205,7 +190,9 @@ describe('Input', () => {
     const input = getByTestId('input')
 
     expect(input).toBeInvalid()
-    expect(input.parentElement).toHaveClass(inputClasses.invalid)
+    expect(input.parentElement).toHaveAttribute(
+      ...inputDataAttrs['invalid-true'],
+    )
   })
 
   it('should disable input when disabled prop is true', () => {
@@ -216,7 +203,9 @@ describe('Input', () => {
     const input = getByTestId('input')
 
     expect(input).toBeDisabled()
-    expect(input.parentElement).toHaveClass(inputClasses.disabled)
+    expect(input.parentElement).toHaveAttribute(
+      ...inputDataAttrs['disabled-true'],
+    )
   })
 
   it('should support prefix and suffix props', () => {
@@ -229,7 +218,7 @@ describe('Input', () => {
 
   it('should support clearable props', () => {
     const ClearableInput: React.FC = () => {
-      const [value, setValue] = useState('defalt')
+      const [value, setValue] = useState('default')
 
       return (
         <Input
@@ -249,7 +238,7 @@ describe('Input', () => {
     const input = getByTestId('clearable-input')
     const clearButton = queryByClassName(inputClasses['clear-button'])
 
-    expect(input).toHaveAttribute('value', 'defalt')
+    expect(input).toHaveAttribute('value', 'default')
     expect(clearButton).toBeInTheDocument()
 
     fireEvent.change(input, {

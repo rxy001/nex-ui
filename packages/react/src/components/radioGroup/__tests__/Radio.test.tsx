@@ -2,15 +2,15 @@ import { act, fireEvent } from '@testing-library/react'
 import {
   testComponentStability,
   testRootClassName,
-  testColorClasses,
-  testSizeClasses,
   renderWithNexUIProvider,
   testRefForwarding,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testSlotPropsForwarding,
+  testColorDataAttrs,
+  testSizeDataAttrs,
 } from '~/tests/shared'
 import { Radio, RadioGroup } from '../index'
-import { radioClasses } from '../classes'
+import { radioClasses, radioDataAttrs } from './constants'
 
 const slots = ['root', 'dot', 'label'] as const
 
@@ -21,11 +21,11 @@ describe('Radio', () => {
 
   testRefForwarding(<Radio />, HTMLInputElement)
 
-  testColorClasses(<Radio>Radio</Radio>, radioClasses)
+  testColorDataAttrs(<Radio>Radio</Radio>)
 
-  testSizeClasses(<Radio>Radio</Radio>, radioClasses)
+  testSizeDataAttrs(<Radio>Radio</Radio>)
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <Radio>Radio</Radio>,
     slots,
     {
@@ -54,21 +54,10 @@ describe('Radio', () => {
 
     const radioRoot = container.firstElementChild
     expect(radioRoot).toHaveClass(radioClasses.root)
-    expect(radioRoot).toHaveClass(radioClasses['size-md'])
-    expect(radioRoot).toHaveClass(radioClasses['color-blue'])
-
-    expect(radioRoot).not.toHaveClass(radioClasses['color-green'])
-    expect(radioRoot).not.toHaveClass(radioClasses['color-cyan'])
-    expect(radioRoot).not.toHaveClass(radioClasses['color-orange'])
-    expect(radioRoot).not.toHaveClass(radioClasses['color-pink'])
-    expect(radioRoot).not.toHaveClass(radioClasses['color-purple'])
-    expect(radioRoot).not.toHaveClass(radioClasses['color-yellow'])
-    expect(radioRoot).not.toHaveClass(radioClasses['color-red'])
-    expect(radioRoot).not.toHaveClass(radioClasses['color-gray'])
-    expect(radioRoot).not.toHaveClass(radioClasses['size-sm'])
-    expect(radioRoot).not.toHaveClass(radioClasses['size-lg'])
-    expect(radioRoot).not.toHaveClass(radioClasses.checked)
-    expect(radioRoot).not.toHaveClass(radioClasses.disabled)
+    expect(radioRoot).toHaveAttribute(...radioDataAttrs['size-md'])
+    expect(radioRoot).toHaveAttribute(...radioDataAttrs['color-blue'])
+    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
+    expect(radioRoot).toHaveAttribute(...radioDataAttrs['disabled-false'])
     expect(radioRoot).toMatchSnapshot()
 
     const radio = getByRole('radio')
@@ -88,16 +77,23 @@ describe('Radio', () => {
   })
 
   it('should render checked radio by defaultChecked prop', () => {
-    const { getByRole } = renderWithNexUIProvider(<Radio defaultChecked />)
+    const { getByRole, container } = renderWithNexUIProvider(
+      <Radio defaultChecked />,
+    )
 
     expect(getByRole('radio')).toBeChecked()
+    expect(container.firstElementChild).toHaveAttribute(
+      ...radioDataAttrs['checked-true'],
+    )
   })
 
   it('should render checked radio when checked prop is true', () => {
     const { getByRole, container } = renderWithNexUIProvider(<Radio checked />)
 
     expect(getByRole('radio')).toBeChecked()
-    expect(container.firstElementChild).toHaveClass(radioClasses.checked)
+    expect(container.firstElementChild).toHaveAttribute(
+      ...radioDataAttrs['checked-true'],
+    )
   })
 
   it('should switch checked state and call onCheckedChange when clicked', async () => {
@@ -124,7 +120,7 @@ describe('Radio', () => {
     const radioRoot = container.firstElementChild
 
     expect(radio).toBeDisabled()
-    expect(radioRoot).toHaveClass(radioClasses.disabled)
+    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
     expect(radioRoot).toHaveStyleRule('pointer-events', 'none')
   })
 
@@ -306,14 +302,14 @@ describe('Radio', () => {
       const radioRoot = container.firstElementChild!
       const radio = getByRole('radio')
 
-      expect(radioRoot).not.toHaveClass(radioClasses.checked)
+      expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
       expect(radio).toHaveAttribute('aria-checked', 'false')
 
       await act(async () => {
         fireEvent.click(radio)
       })
 
-      expect(radioRoot).toHaveClass(radioClasses.checked)
+      expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-true'])
       expect(radio).toHaveAttribute('aria-checked', 'true')
     })
 

@@ -4,35 +4,12 @@ import { useMemo, useId } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { isString } from '@nex-ui/utils'
 import { CheckboxGroupProvider } from './CheckboxGroupContext'
-import {
-  useDefaultProps,
-  composeClasses,
-  getUtilityClass,
-  useStyles,
-  useSlot,
-} from '../utils'
-import { useNexUI } from '../provider'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { checkboxGroupRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { CheckboxGroupContextValue, CheckboxGroupProps } from './types'
 
-const useSlotClasses = (ownerState: CheckboxGroupProps) => {
-  const { prefix } = useNexUI()
-
-  const { orientation, classes } = ownerState
-
-  return useMemo(() => {
-    const dividerRoot = `${prefix}-checkbox-group`
-
-    const slots = {
-      root: ['root', `orientation-${orientation}`],
-      label: ['label'],
-      wrapper: ['wrapper'],
-    }
-
-    return composeClasses(slots, getUtilityClass(dividerRoot), classes)
-  }, [prefix, orientation, classes])
-}
+const slots = ['root', 'label', 'wrapper']
 
 const useSlotAriaProps = (ownerState: CheckboxGroupProps) => {
   const id = useId()
@@ -83,6 +60,7 @@ export const CheckboxGroup = <
     value,
     label,
     size,
+    classNames,
     orientation = 'horizontal',
     defaultValue = [],
     ...remainingProps
@@ -100,7 +78,11 @@ export const CheckboxGroup = <
     value: values,
   }
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'CheckboxGroup',
+    slots,
+    classNames,
+  })
 
   const slotAriaProps = useSlotAriaProps(ownerState)
 
@@ -113,14 +95,17 @@ export const CheckboxGroup = <
   const [CheckboxGroupRoot, getCheckboxGroupRootProps] = useSlot({
     elementType: 'div',
     style: styles.root,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     a11y: slotAriaProps.root,
+    dataAttrs: {
+      orientation,
+    },
   })
 
   const [CheckboxGroupLabel, getCheckboxGroupLabelProps] = useSlot({
     elementType: 'h3',
-    classNames: classes.label,
+    classNames: slotClasses.label,
     style: styles.label,
     externalSlotProps: slotProps?.label,
     a11y: slotAriaProps.label,
@@ -128,7 +113,7 @@ export const CheckboxGroup = <
 
   const [CheckboxGroupWrapper, getCheckboxGroupWrapperProps] = useSlot({
     elementType: 'div',
-    classNames: classes.wrapper,
+    classNames: slotClasses.wrapper,
     style: styles.wrapper,
     externalSlotProps: slotProps?.wrapper,
   })

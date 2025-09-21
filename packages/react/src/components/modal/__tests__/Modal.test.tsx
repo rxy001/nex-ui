@@ -244,7 +244,7 @@ describe('Modal', () => {
     expect(queryByTestId('modal-root')).toBeInTheDocument()
   })
 
-  it('should alway keep the children in the DOM when keepMounted=true', async () => {
+  it('should always keep the children in the DOM when keepMounted=true', async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestModal keepMounted open={false} />,
       {

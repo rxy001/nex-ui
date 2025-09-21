@@ -259,7 +259,7 @@ describe('InputBase', () => {
     expect(onCheckedChange).not.toHaveBeenCalled()
   })
 
-  it('should switch checked state for non-input element.(uncontrolled)', () => {
+  it('should switch checked state for non-input element (uncontrolled)', () => {
     function Checkbox() {
       const [checked, setChecked] = useState(false)
 
@@ -301,7 +301,7 @@ describe('InputBase', () => {
     expect(checkbox).toHaveAttribute('aria-checked', 'false')
   })
 
-  it('should switch checked state for non-input element.(controlled)', () => {
+  it('should switch checked state for non-input element (controlled)', () => {
     function Checkbox() {
       const [checked, setChecked] = useState(false)
 

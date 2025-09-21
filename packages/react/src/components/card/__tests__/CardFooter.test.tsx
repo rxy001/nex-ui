@@ -5,7 +5,7 @@ import {
   testRootClassName,
 } from '~/tests/shared'
 import { CardFooter } from '../index'
-import { cardFooterClasses } from '../classes'
+import { cardFooterClasses } from './constants'
 
 describe('CardFooter', () => {
   testComponentStability(<CardFooter />)
@@ -17,7 +17,7 @@ describe('CardFooter', () => {
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(<CardFooter />)
 
-    const cardBodyRoot = container.firstElementChild
-    expect(cardBodyRoot).toHaveClass(cardFooterClasses.root)
+    const cardFooterRoot = container.firstElementChild
+    expect(cardFooterRoot).toHaveClass(cardFooterClasses.root)
   })
 })

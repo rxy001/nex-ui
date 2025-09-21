@@ -3,7 +3,7 @@ import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
   ComponentPropsWithCommonProps,
-  ComponentUtilityClasses,
+  ComponentSlotClasses,
   HTMLMotionProps,
 } from '../../types/utils'
 import type { ElementType, ReactNode } from 'react'
@@ -44,7 +44,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'backdrop'>
+  classNames?: ComponentSlotClasses<'backdrop'>
 
   /**
    * If true, the dialog is open.
@@ -181,7 +181,7 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classes?: ComponentUtilityClasses<'paper' | 'closeButton'>
+  classNames?: ComponentSlotClasses<'paper' | 'closeButton'>
 
   /**
    * The dialog scroll behavior.

@@ -1,32 +1,12 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { dialogFooterRecipe } from '../../theme/recipes'
-import { useNexUI } from '../provider'
 import { ModalFooter } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogFooterProps } from './types'
 
-const useSlotClasses = () => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const prefixClassName = `${prefix}-dialog-footer`
-
-    const slots = {
-      root: ['root'],
-    }
-
-    return composeClasses(slots, getUtilityClass(prefixClassName))
-  }, [prefix])
-}
+const slots = ['root']
 
 export const DialogFooter = <RootComponent extends ElementType = 'div'>(
   inProps: DialogFooterProps<RootComponent>,
@@ -38,14 +18,13 @@ export const DialogFooter = <RootComponent extends ElementType = 'div'>(
 
   const { children, ...remainingProps } = props
 
-  const ownerState: DialogFooterProps = {
-    ...props,
-  }
-
-  const classes = useSlotClasses()
+  const slotClasses = useSlotClasses({
+    name: 'DialogFooter',
+    slots,
+  })
 
   const style = useStyles({
-    ownerState,
+    ownerState: props,
     name: 'DialogFooter',
     recipe: dialogFooterRecipe,
   })
@@ -53,7 +32,7 @@ export const DialogFooter = <RootComponent extends ElementType = 'div'>(
   const [DialogFooterRoot, getDialogFooterRootProps] = useSlot({
     style,
     elementType: ModalFooter,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
   })

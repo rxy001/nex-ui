@@ -3,11 +3,11 @@ import {
   testComponentStability,
   testRefForwarding,
   testSlotPropsForwarding,
-  testClassesForwarding,
+  testClassNamesForwarding,
   testRootClassName,
 } from '~/tests/shared'
 import { CardHeader } from '../index'
-import { cardHeaderClasses } from '../classes'
+import { cardHeaderClasses } from './constants'
 
 const slots = ['content', 'title', 'subtitle'] as const
 
@@ -19,7 +19,7 @@ describe('CardHeader', () => {
   testRootClassName(<CardHeader />)
 
   testSlotPropsForwarding(
-    <CardHeader<'div'> title='Title' subtitle='Subtitle' />,
+    <CardHeader title='Title' subtitle='Subtitle' />,
     slots,
     {
       content: { className: 'test-content' },
@@ -29,7 +29,7 @@ describe('CardHeader', () => {
     cardHeaderClasses,
   )
 
-  testClassesForwarding(
+  testClassNamesForwarding(
     <CardHeader title='Title' subtitle='Subtitle' />,
     slots,
     {
@@ -96,6 +96,14 @@ describe('CardHeader', () => {
     )
 
     expect(getByText('Action')).toBeInTheDocument()
+  })
+
+  it('should not render content slot when only avatar and action are provided', () => {
+    const { queryByClassName } = renderWithNexUIProvider(
+      <CardHeader avatar='Avatar' action='Action' />,
+    )
+
+    expect(queryByClassName(cardHeaderClasses.content)).not.toBeInTheDocument()
   })
 
   it('should have children override action, avatar, title, and subtitle when provided', () => {

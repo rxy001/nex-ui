@@ -1,33 +1,11 @@
 'use client'
 
-import { useMemo } from 'react'
-import {
-  useDefaultProps,
-  useStyles,
-  composeClasses,
-  getUtilityClass,
-  useSlot,
-} from '../utils'
-import { useNexUI } from '../provider'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { dividerRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { DividerProps } from './types'
 
-const useSlotClasses = (ownerState: DividerProps) => {
-  const { prefix } = useNexUI()
-
-  return useMemo(() => {
-    const dividerRoot = `${prefix}-divider`
-
-    const { orientation } = ownerState
-
-    const slots = {
-      root: ['root', orientation && `orientation-${orientation}`],
-    }
-
-    return composeClasses(slots, getUtilityClass(dividerRoot))
-  }, [ownerState, prefix])
-}
+const slots = ['root']
 
 export const Divider = <RootComponent extends ElementType = 'hr'>(
   inProps: DividerProps<RootComponent>,
@@ -45,7 +23,10 @@ export const Divider = <RootComponent extends ElementType = 'hr'>(
 
   const ownerState: DividerProps = { ...props, orientation }
 
-  const classes = useSlotClasses(ownerState)
+  const slotClasses = useSlotClasses({
+    name: 'Divider',
+    slots,
+  })
 
   const style = useStyles({
     ownerState,
@@ -57,9 +38,12 @@ export const Divider = <RootComponent extends ElementType = 'hr'>(
     style,
     elementType: 'hr',
     externalForwardedProps: remainingProps,
-    classNames: classes.root,
+    classNames: slotClasses.root,
     a11y: {
       role,
+    },
+    dataAttrs: {
+      orientation,
     },
   })
 

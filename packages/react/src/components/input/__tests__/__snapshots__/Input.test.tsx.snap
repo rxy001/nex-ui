@@ -90,7 +90,15 @@ exports[`Input should render with default props 1`] = `
 }
 
 <div
-  class="nui-input-root nui-input-variant-outlined nui-input-radius-md nui-input-size-md nui-input-color-blue emotion-0"
+  class="nui-input-root emotion-0"
+  data-clearable="false"
+  data-color="blue"
+  data-disabled="false"
+  data-full-width="false"
+  data-invalid="false"
+  data-radius="md"
+  data-size="md"
+  data-variant="outlined"
 >
   <input
     class="nui-input-input emotion-1"
