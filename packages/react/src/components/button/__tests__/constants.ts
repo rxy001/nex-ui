@@ -1,6 +1,5 @@
 import { generateSlotClasses } from '../../utils'
 
-// 用于单元测试
 export const buttonSlotClasses = generateSlotClasses('nui-button', [
   'root',
   'start-icon',
