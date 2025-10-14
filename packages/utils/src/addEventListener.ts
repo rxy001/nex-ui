@@ -1,14 +1,20 @@
+type EventMapFor<N> = N extends Window
+  ? WindowEventMap
+  : N extends HTMLElement
+    ? HTMLElementEventMap
+    : never
+
 export function addEventListener<
-  N extends HTMLElement,
-  K extends keyof HTMLElementEventMap,
+  N extends Window | HTMLElement,
+  K extends keyof EventMapFor<N>,
 >(
   node: N,
   event: K,
-  cb: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+  cb: (this: N, ev: EventMapFor<N>[K]) => any,
   options?: AddEventListenerOptions | boolean,
-) {
-  node.addEventListener<K>(event, cb, options)
+): () => void {
+  node.addEventListener(event as string, cb as EventListener, options)
   return () => {
-    node.removeEventListener(event, cb, options)
+    node.removeEventListener(event as string, cb as EventListener, options)
   }
 }

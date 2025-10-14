@@ -162,7 +162,7 @@ describe('useSlot', () => {
       }),
     )
 
-    const ref = result.current[1]().ref
+    const { ref } = result.current[1]()
     expect(ref).toBeInstanceOf(Function)
 
     // @ts-expect-error

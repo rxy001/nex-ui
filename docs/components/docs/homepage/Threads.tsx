@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl'
 
 function isSafari() {
-  const userAgent = navigator.userAgent
+  const { userAgent } = navigator
 
   const isSafari = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(
     userAgent,
@@ -151,7 +151,7 @@ export const Threads: React.FC<ThreadsProps> = () => {
     const container = containerRef.current
 
     const renderer = new Renderer({ alpha: true })
-    const gl = renderer.gl
+    const { gl } = renderer
     gl.clearColor(0, 0, 0, 0)
     gl.enable(gl.BLEND)
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
