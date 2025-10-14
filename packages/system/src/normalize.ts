@@ -105,7 +105,7 @@ export const createNormalize = ({
           result[property] = reduce(
             matches,
             (acc: string, match: RegExpExecArray) => {
-              const placeholder = match[0]
+              const [placeholder] = match
               const [category, ...rest] = match[1].split('.')
               if (isValidTokenCategory(category)) {
                 return acc.replace(

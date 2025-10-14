@@ -1,6 +1,5 @@
 import { camelToKebab } from '../index'
 
-// 测试用例
 const testCases = [
   ['backgroundColor', 'background-color'],
   ['marginTop', 'margin-top'],

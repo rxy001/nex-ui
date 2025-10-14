@@ -143,7 +143,7 @@ export const useSandpack = ({
         let match: RegExpExecArray | null
 
         while ((match = importRegex.exec(fileContent)) !== null) {
-          const dependencyName = match[1]
+          const [, dependencyName] = match
 
           if (
             !Object.prototype.hasOwnProperty.call(deps, dependencyName) &&
