@@ -29,6 +29,7 @@ export const Insertion = ({
     let { next } = serialized
     while (next !== undefined) {
       serializedNames += ` ${next.name}`
+      // eslint-disable-next-line prefer-destructuring
       next = next.next
     }
 

@@ -175,7 +175,7 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
   } else if (childrenProp) {
     children = childrenProp
   } else if (hasImg && alt) {
-    children = alt[0]
+    ;[children] = alt
   }
 
   return <AvatarRoot {...getAvatarRootProps()}>{children}</AvatarRoot>

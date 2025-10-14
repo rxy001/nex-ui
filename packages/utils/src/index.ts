@@ -1,5 +1,3 @@
-// istanbul ignore file
-
 export * from './mergeRefs'
 
 export * from './supportRef'
@@ -45,5 +43,7 @@ export { default as mergeWith } from 'lodash.mergewith'
 export { default as get } from 'lodash.get'
 
 export { default as clamp } from 'lodash.clamp'
+
+export { default as debounce } from 'lodash.debounce'
 
 export * from './env'

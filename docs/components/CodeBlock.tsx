@@ -3,10 +3,11 @@
 import clsx from 'clsx'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Pre, Code } from 'nextra/components'
-import { Fragment, useState, useEffect, JSX } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { codeToHast } from 'shiki/bundle-web.mjs'
 import type { BundledLanguage } from 'shiki'
+import type { ReactElement } from 'react'
 
 interface CodeBlockProps {
   children: string
@@ -16,7 +17,7 @@ interface CodeBlockProps {
 }
 
 export function CodeBlock(props: CodeBlockProps) {
-  const [nodes, setNodes] = useState<JSX.Element | null>(null)
+  const [nodes, setNodes] = useState<ReactElement | null>(null)
 
   useEffect(() => {
     codeToHast(props.children, {

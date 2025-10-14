@@ -1,6 +1,7 @@
 import { createRef } from 'react'
 import { render } from '@testing-library/react'
 import { mergeRefs } from '../mergeRefs'
+import type { RefObject } from 'react'
 
 describe('mergeRefs', () => {
   it('should return the single ref if only one ref is provided', () => {
@@ -10,9 +11,9 @@ describe('mergeRefs', () => {
   })
 
   it('should call all function refs and set current for object refs when node is provided', () => {
-    const ref1: React.MutableRefObject<string | null> = { current: null }
+    const ref1: RefObject<string | null> = { current: null }
     const ref2 = jest.fn()
-    const ref3: React.MutableRefObject<string | null> = { current: null }
+    const ref3: RefObject<string | null> = { current: null }
     const ref4 = jest.fn()
 
     const composedRef = mergeRefs<string | null>(

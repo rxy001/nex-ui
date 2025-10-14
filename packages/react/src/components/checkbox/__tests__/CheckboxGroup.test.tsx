@@ -124,11 +124,8 @@ describe('CheckboxGroup', () => {
       },
     )
 
-    const checkboxes = getAllByRole('checkbox')
-
-    const orangeCheckbox = checkboxes[0]
-    const pearCheckbox = checkboxes[1]
-    const appleCheckbox = checkboxes[2]
+    const [orangeCheckbox, pearCheckbox, appleCheckbox] =
+      getAllByRole('checkbox')
 
     expect(orangeCheckbox).not.toBeChecked()
     expect(pearCheckbox).not.toBeChecked()
@@ -162,10 +159,8 @@ describe('CheckboxGroup', () => {
       },
     )
 
-    const checkboxes = getAllByRole('checkbox')
-    const orangeCheckbox = checkboxes[0]
-    const pearCheckbox = checkboxes[1]
-    const appleCheckbox = checkboxes[2]
+    const [orangeCheckbox, pearCheckbox, appleCheckbox] =
+      getAllByRole('checkbox')
 
     expect(orangeCheckbox).toBeChecked()
     expect(pearCheckbox).not.toBeChecked()
@@ -195,10 +190,8 @@ describe('CheckboxGroup', () => {
       },
     )
 
-    const checkboxes = getAllByRole('checkbox')
-    const orangeCheckbox = checkboxes[0]
-    const pearCheckbox = checkboxes[1]
-    const appleCheckbox = checkboxes[2]
+    const [orangeCheckbox, pearCheckbox, appleCheckbox] =
+      getAllByRole('checkbox')
 
     expect(orangeCheckbox).toBeChecked()
     expect(pearCheckbox).not.toBeChecked()

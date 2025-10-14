@@ -1,12 +1,8 @@
 import { fireEvent, render, act } from '@testing-library/react'
 import { SystemProvider } from '../systemProvider'
-import {
-  ColorSchemeProviderProps,
-  Mode,
-  useColorScheme,
-  InitColorSchemeScript,
-} from '../index'
+import { useColorScheme, InitColorSchemeScript } from '../index'
 import { ColorSchemeProvider } from '../colorScheme'
+import type { ColorSchemeProviderProps, Mode } from '../index'
 
 type Listener = (event: { matches: boolean }) => void
 

@@ -33,7 +33,6 @@ const jestConfig = {
     '^.+\\.svg$': 'jest-transformer-svg',
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
-  // collectCoverage: true,
   collectCoverageFrom: ['packages/**/*.{ts,tsx}'],
   testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',
@@ -45,7 +44,9 @@ const jestConfig = {
     '<rootDir>/packages/styled/',
     // TODO: remove
     '<rootDir>/packages/cli/',
+
     '<rootDir>/packages/react/src/index.ts',
+    '<rootDir>/packages/utils/src/index.ts',
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
   watchman: true,

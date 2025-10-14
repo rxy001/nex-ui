@@ -18,6 +18,7 @@
     "jsx": "react-jsx",
     "strictNullChecks": true,
     "baseUrl": "./",
+    "verbatimModuleSyntax": true,
     "paths": {
       "~/*": ["./*"]
     }

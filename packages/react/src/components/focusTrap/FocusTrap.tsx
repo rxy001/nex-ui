@@ -1,9 +1,4 @@
-import {
-  __DEV__,
-  addEventListener,
-  mergeRefs,
-  ownerDocument,
-} from '@nex-ui/utils'
+import { __DEV__, addEventListener, ownerDocument } from '@nex-ui/utils'
 import {
   cloneElement,
   Fragment,
@@ -11,7 +6,7 @@ import {
   useEffect,
   useRef,
 } from 'react'
-import { useLatest } from '@nex-ui/hooks'
+import { useLatest, useMergeRefs } from '@nex-ui/hooks'
 import { getTabbable } from './getTabbable'
 import type { FocusEvent } from 'react'
 import type { FocusTrapProps } from './types'
@@ -29,7 +24,7 @@ export const FocusTrap = ({
   const restoredNode = useRef<EventTarget>(null)
   const ignoreNextFocus = useRef<boolean>(false)
   const pausedRef = useLatest(paused)
-  const mergedRefs = mergeRefs(rootRef, children?.props.ref)
+  const mergedRefs = useMergeRefs(rootRef, children?.props.ref)
 
   useEffect(() => {
     if (!active || !rootRef.current) {
@@ -87,7 +82,7 @@ export const FocusTrap = ({
         const shiftPressed =
           lastKeydownRef.current.key === 'Tab' &&
           lastKeydownRef.current.shiftKey
-        const focusNext = tabbable[0]
+        const [focusNext] = tabbable
         const focusPrevious = tabbable[tabbable.length - 1]
         if (shiftPressed) {
           focusPrevious.focus()

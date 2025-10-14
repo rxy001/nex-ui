@@ -181,7 +181,7 @@ export function createTokens(config: CreateTokensConfig) {
       },
       {
         predicate: (_, path: string[]) => {
-          const category = path[0]
+          const [category] = path
           switch (category) {
             case 'colors':
               return path.length > 3

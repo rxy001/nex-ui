@@ -1,6 +1,5 @@
 import { generateSlotClasses } from '../../utils'
 
-// 用于单元测试
 export const radioClasses = generateSlotClasses('nui-radio', [
   'root',
   'input',

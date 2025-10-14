@@ -89,7 +89,7 @@ const useAriaProps = (props: InputBaseProps) => {
 const isCheckableControl = (element: HTMLInputElement) => {
   const role = element.getAttribute('role')
   const type = element.getAttribute('type')
-  const tagName = element.tagName
+  const { tagName } = element
 
   if (role) {
     return ['switch', 'radio', 'checkbox'].includes(role)
@@ -189,7 +189,7 @@ export const InputBase = (props: InputBaseProps) => {
       return
     }
 
-    const currentTarget = event.currentTarget
+    const { currentTarget } = event
     if (
       currentTarget.tagName !== 'INPUT' &&
       currentTarget === event.target &&
@@ -208,7 +208,7 @@ export const InputBase = (props: InputBaseProps) => {
       return
     }
 
-    const currentTarget = event.currentTarget
+    const { currentTarget } = event
     // Keyboard accessibility for non interactive elements
     if (
       focusVisible &&

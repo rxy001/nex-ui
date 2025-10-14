@@ -209,7 +209,7 @@ type PkgInfo = {
 
 function pkgFromUserAgent(userAgent: string | undefined): PkgInfo | undefined {
   if (!userAgent) return undefined
-  const pkgSpec = userAgent.split(' ')[0]
+  const [pkgSpec] = userAgent.split(' ')
   const pkgSpecArr = pkgSpec.split('/')
   return {
     name: pkgSpecArr[0],

@@ -38,7 +38,7 @@ async function readFile(file: string) {
       metafile: true,
     })
 
-    const { text } = result.outputFiles[0]
+    const [{ text }] = result.outputFiles
 
     return {
       code: text,

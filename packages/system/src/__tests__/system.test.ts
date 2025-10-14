@@ -1,7 +1,8 @@
-import { ComponentSelector, keyframes, SerializedStyles } from '@emotion/react'
+import { keyframes } from '@emotion/react'
 import { createSystem } from '../index'
 import { defineConfig } from '../defineConfig'
 import { toMediaKey } from '../breakpoints'
+import type { SerializedStyles, ComponentSelector } from '@emotion/react'
 
 const SELECTOR_HOVER = '&:not(:disabled):not([data-disabled=true]):hover'
 const SELECTOR_ACTIVE = '&:not(:disabled):not([data-disabled=true]):active'

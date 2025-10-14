@@ -95,6 +95,8 @@ export default tseslint.config(
       ],
       'no-else-return': 'error',
 
+      'prefer-destructuring': 'error',
+
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-use-before-define': [
         'error',

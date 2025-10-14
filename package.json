@@ -19,7 +19,7 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "changeset publish",
-    "test": "jest --config ./jest.config.ts",
+    "test": "jest --config ./jest.config.mjs",
     "prettier:check": "prettier --check packages/**/src --cache",
     "prettier:write": "prettier --write packages/**/src --cache",
     "lint": "pnpm lint:pkg && pnpm lint:docs",

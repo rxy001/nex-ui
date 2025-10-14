@@ -173,7 +173,7 @@ export const RadioGroup = <
       }
     }
 
-    const value = radioGroupStateRef.current[nextIndex].value
+    const { value } = radioGroupStateRef.current[nextIndex]
 
     if (value !== undefined) {
       nextElement.focus()
