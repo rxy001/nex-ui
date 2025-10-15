@@ -24,7 +24,7 @@ export const testRootClassName = (
       options,
     )
 
-    const rootElement = container.firstElementChild
+    const rootElement = container.lastElementChild
     expect(rootElement).toHaveClass(className)
   })
 }

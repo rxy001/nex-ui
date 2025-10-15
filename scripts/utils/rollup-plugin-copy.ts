@@ -1,7 +1,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { Plugin } from 'rollup'
-import { GlobOptions, globSync } from 'glob'
+import { globSync } from 'glob'
+import type { Plugin } from 'rollup'
+import type { GlobOptions } from 'glob'
 
 type Options = {
   targets: ({ dest: string; pattern: string | string[] } & GlobOptions)[]

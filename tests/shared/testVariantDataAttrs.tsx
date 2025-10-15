@@ -30,30 +30,33 @@ import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
  * )
  */
 export function testVariantDataAttrs(
-  component: ReactElement,
+  component: ReactElement<{
+    [key: string]: string | boolean
+  }>,
   variant: [string, (string | boolean)[]],
   options?: RenderWithNexUIProviderOptions,
 ) {
   const [variantName, variantValues] = variant
 
   it(`should have the appropriate data-${variantName}-* attribute on element based on ${variantName} prop`, async () => {
-    const { container } = await renderWithNexUIProvider(
+    const { queryByClassName } = await renderWithNexUIProvider(
       <>
         {variantValues.map((value) =>
           cloneElement(component, {
-            [variantName]: value,
             key: `${value}`,
+            [variantName]: value,
+            className: `${variantName}-${value}`,
           }),
         )}
       </>,
       options,
     )
-    const children = container.children
+
     const kebabVariantName = camelToKebab(variantName)
 
-    variantValues.forEach((value, index) => {
+    variantValues.forEach((value) => {
       const attrKey = `data-${kebabVariantName}`
-      const element = children[index]
+      const element = queryByClassName(`${variantName}-${value}`)
 
       if (typeof value === 'boolean') {
         expect(element).toHaveAttribute(attrKey, String(value))

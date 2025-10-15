@@ -17,7 +17,7 @@ export function testRefForwarding(
   options?: RenderWithNexUIProviderOptions,
 ): void
 export function testRefForwarding(
-  component: ReactElement<{ ref?: React.Ref<unknown> }>,
+  component: ReactElement<{ ref?: React.Ref<unknown>; 'data-testid'?: string }>,
   constructor?: Function | RenderWithNexUIProviderOptions,
   options?: RenderWithNexUIProviderOptions,
 ) {
@@ -31,9 +31,10 @@ export function testRefForwarding(
 
   it('should forward ref to appropriate element', async () => {
     const ref = createRef<HTMLElement>()
+    const testid = 'test-ref'
 
-    const { container } = await renderWithNexUIProvider(
-      cloneElement(component, { ref }),
+    const { getByTestId } = await renderWithNexUIProvider(
+      cloneElement(component, { ref, 'data-testid': testid }),
       o,
     )
 
@@ -41,6 +42,6 @@ export function testRefForwarding(
       expect(ref.current).toBeInstanceOf(c)
       return
     }
-    expect(ref.current).toBe(container.firstElementChild)
+    expect(getByTestId(testid)).toBe(ref.current)
   })
 }

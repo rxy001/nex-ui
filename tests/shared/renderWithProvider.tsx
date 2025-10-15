@@ -4,11 +4,12 @@ import { SystemProvider } from '../../packages/system/src'
 import { NexUIProvider } from '../../packages/react/src'
 import type { RenderResult, RenderOptions } from '@testing-library/react'
 import type { ReactNode } from 'react'
-import type { UserEvent } from '@testing-library/user-event'
+import type { UserEvent, Options } from '@testing-library/user-event'
 
 export interface RenderWithNexUIProviderOptions
   extends Omit<RenderOptions, 'wrapper'> {
   useAct?: boolean
+  userEventOptions?: Options
 }
 
 export interface RenderResultWithProvider extends RenderResult {
@@ -29,7 +30,7 @@ export function renderWithNexUIProvider(
   component: ReactNode,
   options?: RenderWithNexUIProviderOptions,
 ): Promise<RenderResultWithProvider> | RenderResultWithProvider {
-  const { useAct = false, ...other } = options || {}
+  const { useAct = false, userEventOptions, ...other } = options || {}
 
   function r() {
     const result = render(component, {
@@ -39,11 +40,11 @@ export function renderWithNexUIProvider(
 
     return {
       ...result,
-      user: userEvent.setup(),
+      user: userEvent.setup(userEventOptions),
       queryByClassName: (className: string) =>
-        result.container.querySelector(`.${className}`),
+        document.body.querySelector(`.${className}`),
       queryAllByClassName: (className: string) =>
-        result.container.querySelectorAll(`.${className}`),
+        document.body.querySelectorAll(`.${className}`),
     }
   }
 

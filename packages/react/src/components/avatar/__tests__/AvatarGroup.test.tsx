@@ -30,7 +30,12 @@ describe('AvatarGroup', () => {
     </AvatarGroup>,
   )
 
-  testRefForwarding(<AvatarGroup />)
+  testRefForwarding(
+    <AvatarGroup>
+      <Avatar />
+      <Avatar />
+    </AvatarGroup>,
+  )
 
   testClassNamesForwarding(
     <AvatarGroup max={2}>
