@@ -29,6 +29,7 @@ import type {
   CardBodyRecipe,
   CardFooterRecipe,
   CardActionAreaRecipe,
+  TooltipRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -60,6 +61,7 @@ import type {
   CardBodyProps,
   CardFooterProps,
   CardActionAreaProps,
+  TooltipProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
@@ -184,6 +186,10 @@ export type ComponentThemes = {
   CardActionArea?: {
     styleOverrides?: ComponentThemeObject<CardActionAreaRecipe>
     defaultProps?: CardActionAreaProps
+  }
+  Tooltip?: {
+    styleOverrides?: ComponentThemeObject<TooltipRecipe>
+    defaultProps?: TooltipProps
   }
 }
 

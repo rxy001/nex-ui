@@ -40,3 +40,15 @@ jest.mock('motion/react-m', () => {
     ...Object.fromEntries(commonTags.map((tag) => [tag, module.motion[tag]])),
   }
 })
+
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}))
+
+global.IntersectionObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}))
