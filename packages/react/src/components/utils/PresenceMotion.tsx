@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { AnimatePresence, LazyMotion } from 'motion/react'
 import * as m from 'motion/react-m'
-import { motionFeatures } from '../utils'
+import { motionFeatures } from './motionFeatures'
 import type { MotionValue, Variants } from 'motion/react'
 import type { ReactNode } from 'react'
 import type { HTMLMotionProps } from '../../types/utils'
@@ -24,18 +24,18 @@ const variants: Variants = {
   },
 }
 
-interface ModalMotionProps extends HTMLMotionProps<'div'> {
+export interface PresenceMotionProps extends HTMLMotionProps<'div'> {
   keepMounted?: boolean
   children?: ReactNode | MotionValue<string> | MotionValue<number>
   open?: boolean
 }
 
-export const ModalMotion = ({
+export const PresenceMotion = ({
   keepMounted,
   children,
   open,
   ...props
-}: ModalMotionProps) => {
+}: PresenceMotionProps) => {
   const [display, setDisplay] = useState<'block' | 'none'>(() =>
     keepMounted ? 'none' : 'block',
   )
@@ -45,9 +45,7 @@ export const ModalMotion = ({
   }
 
   const onAnimationComplete = useEvent((animation: string) => {
-    if (animation === 'hidden') {
-      if (keepMounted) setDisplay('none')
-    }
+    if (animation === 'hidden' && keepMounted) setDisplay('none')
     props.onAnimationComplete?.(animation)
   })
 
@@ -88,4 +86,4 @@ export const ModalMotion = ({
   )
 }
 
-ModalMotion.displayName = 'ModalMotion'
+PresenceMotion.displayName = 'PresenceMotion'
