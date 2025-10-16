@@ -43,8 +43,8 @@ export const shift = (): Middleware => {
           negativeMaxOverflow = positiveMaxOverflow
       }
 
-      // 沿交叉轴正方向移动时，偏移量由 最小值边界 决定
-      // 沿交叉轴负方向移动时，偏移量由 最大值边界 决定
+      // When moving in the positive cross-axis direction, offset is determined by the minimum boundary
+      // When moving in the negative cross-axis direction, offset is determined by the maximum boundary
       const crossAxisCoord = clamp(
         rects.popper[crossAxis],
         rects.popper[crossAxis] +
@@ -52,8 +52,6 @@ export const shift = (): Middleware => {
         rects.popper[crossAxis] -
           Math.min(overflow[maxSide], negativeMaxOverflow),
       )
-
-      // console.log(crossAxisCoord, rects.popper[crossAxis])
 
       return {
         [mainAxis]: mainAxisCoord,

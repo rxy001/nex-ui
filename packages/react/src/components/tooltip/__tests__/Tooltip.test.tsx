@@ -10,7 +10,7 @@ import {
   testRootClassName,
 } from '~/tests/shared'
 import { Tooltip } from '../index'
-import { tooltipSlotClasses } from './constants'
+import { tooltipSlotClasses } from './classes'
 
 const slots = ['content'] as const
 
@@ -78,6 +78,20 @@ describe('Tooltip', () => {
   testRootClassName(<Tooltip open content='Content' />, {
     useAct: true,
     container: document.body,
+  })
+
+  it('should render with default props', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(
+      <Tooltip open content='Content' data-testid='tooltip-root' />,
+      {
+        useAct: true,
+      },
+    )
+
+    const tooltipRoot = getByTestId('tooltip-root')
+    expect(tooltipRoot).toHaveAttribute('data-color', 'default')
+    expect(tooltipRoot).toHaveAttribute('data-size', 'md')
+    expect(tooltipRoot).toHaveAttribute('data-radius', 'md')
   })
 
   it('should render with root, content class', async () => {

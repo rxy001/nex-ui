@@ -13,7 +13,7 @@ import {
   testVariantDataAttrs,
 } from '~/tests/shared'
 import { Input } from '../index'
-import { inputClasses, inputDataAttrs } from './constants'
+import { inputClasses } from './classes'
 
 const slots = ['root', 'label', 'prefix', 'suffix', 'clearButton'] as const
 
@@ -41,6 +41,12 @@ describe('Input', () => {
   ])
 
   testVariantDataAttrs(<Input />, ['fullWidth', [true, false]])
+
+  testVariantDataAttrs(<Input />, ['invalid', [true, false]])
+
+  testVariantDataAttrs(<Input />, ['clearable', [true, false]])
+
+  testVariantDataAttrs(<Input />, ['disabled', [true, false]])
 
   testClassNamesForwarding(
     <Input
@@ -98,14 +104,14 @@ describe('Input', () => {
 
     expect(inputRoot).toHaveClass(inputClasses.root)
 
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['variant-outlined'])
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['size-md'])
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['radius-md'])
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['color-blue'])
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['disabled-false'])
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['invalid-false'])
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['fullWidth-false'])
-    expect(inputRoot).toHaveAttribute(...inputDataAttrs['clearable-false'])
+    expect(inputRoot).toHaveAttribute('data-variant', 'outlined')
+    expect(inputRoot).toHaveAttribute('data-size', 'md')
+    expect(inputRoot).toHaveAttribute('data-radius', 'md')
+    expect(inputRoot).toHaveAttribute('data-color', 'blue')
+    expect(inputRoot).toHaveAttribute('data-disabled', 'false')
+    expect(inputRoot).toHaveAttribute('data-invalid', 'false')
+    expect(inputRoot).toHaveAttribute('data-full-width', 'false')
+    expect(inputRoot).toHaveAttribute('data-clearable', 'false')
 
     expect(inputRoot).not.toHaveAttribute('data-label-placement')
 
@@ -121,17 +127,13 @@ describe('Input', () => {
 
     const inputRoot = container.firstElementChild
 
-    expect(inputRoot).toHaveAttribute(
-      ...inputDataAttrs['labelPlacement-outside'],
-    )
+    expect(inputRoot).toHaveAttribute('data-label-placement', 'outside')
 
     rerender(
       <Input labelPlacement='float-inside' value='value' label='Label' />,
     )
 
-    expect(inputRoot).toHaveAttribute(
-      ...inputDataAttrs['labelPlacement-inside'],
-    )
+    expect(inputRoot).toHaveAttribute('data-label-placement', 'inside')
   })
 
   it('should convert to the correct label placement when placeholder exists', () => {
@@ -145,9 +147,7 @@ describe('Input', () => {
 
     const inputRoot = container.firstElementChild
 
-    expect(inputRoot).toHaveAttribute(
-      ...inputDataAttrs['labelPlacement-outside'],
-    )
+    expect(inputRoot).toHaveAttribute('data-label-placement', 'outside')
 
     rerender(
       <Input
@@ -157,9 +157,7 @@ describe('Input', () => {
       />,
     )
 
-    expect(inputRoot).toHaveAttribute(
-      ...inputDataAttrs['labelPlacement-inside'],
-    )
+    expect(inputRoot).toHaveAttribute('data-label-placement', 'inside')
   })
 
   it('should convert to the correct label placement when prefix exists', () => {
@@ -169,17 +167,13 @@ describe('Input', () => {
 
     const inputRoot = container.firstElementChild
 
-    expect(inputRoot).toHaveAttribute(
-      ...inputDataAttrs['labelPlacement-outside'],
-    )
+    expect(inputRoot).toHaveAttribute('data-label-placement', 'outside')
 
     rerender(
       <Input labelPlacement='float-inside' prefix='prefix' label='Label' />,
     )
 
-    expect(inputRoot).toHaveAttribute(
-      ...inputDataAttrs['labelPlacement-inside'],
-    )
+    expect(inputRoot).toHaveAttribute('data-label-placement', 'inside')
   })
 
   it('should mark input as invalid when invalid prop is true', () => {
@@ -190,9 +184,6 @@ describe('Input', () => {
     const input = getByTestId('input')
 
     expect(input).toBeInvalid()
-    expect(input.parentElement).toHaveAttribute(
-      ...inputDataAttrs['invalid-true'],
-    )
   })
 
   it('should disable input when disabled prop is true', () => {
@@ -203,9 +194,6 @@ describe('Input', () => {
     const input = getByTestId('input')
 
     expect(input).toBeDisabled()
-    expect(input.parentElement).toHaveAttribute(
-      ...inputDataAttrs['disabled-true'],
-    )
   })
 
   it('should support prefix and suffix props', () => {

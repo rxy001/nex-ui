@@ -46,9 +46,7 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<
-    'icon' | 'content' | 'title' | 'description' | 'closeButton'
-  >
+  classNames?: ComponentSlotClasses<keyof AlertSlotProps>
 
   /**
    * The variant of the alert.

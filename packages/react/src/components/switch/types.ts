@@ -59,9 +59,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<
-    'root' | 'track' | 'startIcon' | 'endIcon' | 'thumb' | 'label'
-  >
+  classNames?: ComponentSlotClasses<keyof SwitchSlotProps>
 
   /**
    * The icon displayed inside the thumb.

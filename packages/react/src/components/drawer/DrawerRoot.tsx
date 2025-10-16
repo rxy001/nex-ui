@@ -16,10 +16,10 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
   })
 
   const {
-    open,
     slotProps,
     classNames,
     hideBackdrop,
+    open: _open,
     onOpenChange: _onOpenChange,
     container: _container,
     restoreFocus: _restoreFocus,
@@ -44,9 +44,6 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
     classNames: slotClasses.root,
-    dataAttrs: {
-      state: open ? 'open' : 'closed',
-    },
   })
 
   const [DrawerBackdrop, getDrawerBackdropProps] = useSlot({

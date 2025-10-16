@@ -10,7 +10,7 @@ import {
   testVariantDataAttrs,
 } from '~/tests/shared'
 import { Alert } from '../index'
-import { alertSlotClasses, alertDataAttrs } from './constants'
+import { alertSlotClasses } from './classes'
 
 const slots = [
   'icon',
@@ -84,10 +84,10 @@ describe('Alert', () => {
 
     expect(alertRoot).toHaveClass(alertSlotClasses.root)
 
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['status-info'])
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['variant-faded'])
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['radius-md'])
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-blue'])
+    expect(alertRoot).toHaveAttribute('data-status', 'info')
+    expect(alertRoot).toHaveAttribute('data-variant', 'faded')
+    expect(alertRoot).toHaveAttribute('data-radius', 'md')
+    expect(alertRoot).toHaveAttribute('data-color', 'blue')
 
     expect(alertRoot).toMatchSnapshot()
   })
@@ -122,19 +122,19 @@ describe('Alert', () => {
     )
 
     let alertRoot = container.firstChild
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-blue'])
+    expect(alertRoot).toHaveAttribute('data-color', 'blue')
 
     rerender(<Alert status='success' />)
     alertRoot = container.firstChild
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-green'])
+    expect(alertRoot).toHaveAttribute('data-color', 'green')
 
     rerender(<Alert status='warning' />)
     alertRoot = container.firstChild
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-yellow'])
+    expect(alertRoot).toHaveAttribute('data-color', 'yellow')
 
     rerender(<Alert status='error' />)
     alertRoot = container.firstChild
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-red'])
+    expect(alertRoot).toHaveAttribute('data-color', 'red')
   })
 
   it('should override status color when color is provided', () => {
@@ -144,11 +144,11 @@ describe('Alert', () => {
 
     const alertRoot = queryByClassName(alertSlotClasses.root)
 
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-purple'])
+    expect(alertRoot).toHaveAttribute('data-color', 'purple')
 
     rerender(<Alert color='green' status='success' />)
 
-    expect(alertRoot).toHaveAttribute(...alertDataAttrs['color-green'])
+    expect(alertRoot).toHaveAttribute('data-color', 'green')
   })
 
   it('should render custom icon', () => {

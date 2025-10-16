@@ -1,6 +1,5 @@
-import { createRef } from 'react'
-import { renderWithNexUIProvider } from '~/tests/shared'
-import { dialogFooterClasses } from './constants'
+import { renderWithNexUIProvider, testRefForwarding } from '~/tests/shared'
+import { dialogFooterClasses } from './classes'
 import {
   Dialog,
   DialogContent,
@@ -25,6 +24,10 @@ function TestDialog(props: DialogFooterProps) {
 }
 
 describe('DialogFooter', () => {
+  testRefForwarding(<TestDialog />, {
+    useAct: true,
+  })
+
   it('should render with footer class on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
       useAct: true,
@@ -32,18 +35,5 @@ describe('DialogFooter', () => {
 
     const dialogFooter = getByTestId('dialog-footer')
     expect(dialogFooter).toHaveClass(dialogFooterClasses.root)
-  })
-
-  it("should forward ref to DialogFooter's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogFooter = getByTestId('dialog-footer')
-    expect(dialogFooter).toBe(ref.current)
   })
 })

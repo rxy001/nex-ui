@@ -1,5 +1,10 @@
-import { createRef } from 'react'
-import { renderWithNexUIProvider } from '~/tests/shared'
+import {
+  renderWithNexUIProvider,
+  testClassNamesForwarding,
+  testRefForwarding,
+  testSlotPropsForwarding,
+  testVariantDataAttrs,
+} from '~/tests/shared'
 import {
   Drawer,
   DrawerContent,
@@ -7,7 +12,7 @@ import {
   DrawerFooter,
   DrawerBody,
 } from '../index'
-import { drawerContentClasses, drawerContentDataAttrs } from './constants'
+import { drawerContentClasses } from './classes'
 import type { DrawerContentProps } from '../index'
 
 function TestDrawer(props: DrawerContentProps) {
@@ -22,7 +27,55 @@ function TestDrawer(props: DrawerContentProps) {
   )
 }
 
+const slots = ['paper', 'closeButton'] as const
+
 describe('DrawerContent', () => {
+  testRefForwarding(<TestDrawer />, {
+    useAct: true,
+  })
+
+  testVariantDataAttrs(
+    <TestDrawer />,
+    ['size', ['sm', 'xs', 'md', 'lg', 'xl', 'full']],
+    {
+      useAct: true,
+    },
+  )
+
+  testVariantDataAttrs(
+    <TestDrawer />,
+    ['placement', ['top', 'right', 'bottom', 'left']],
+    {
+      useAct: true,
+    },
+  )
+
+  testClassNamesForwarding(
+    <TestDrawer />,
+    slots,
+    {
+      closeButton: 'test-close-button',
+      paper: 'test-paper',
+    },
+    drawerContentClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  testSlotPropsForwarding(
+    <TestDrawer />,
+    slots,
+    {
+      paper: { className: 'test-drawer-content-paper' },
+      closeButton: { className: 'test-drawer-content-close-button' },
+    },
+    drawerContentClasses,
+    {
+      useAct: true,
+    },
+  )
+
   it('should render with default props', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDrawer />, {
       useAct: true,
@@ -30,140 +83,9 @@ describe('DrawerContent', () => {
 
     const drawerContent = getByTestId('drawer-content')
     expect(drawerContent).toHaveClass(drawerContentClasses.root)
-    expect(drawerContent).toHaveAttribute(
-      ...drawerContentDataAttrs['placement-right'],
-    )
-    expect(drawerContent).toHaveAttribute(...drawerContentDataAttrs['size-md'])
-    expect(drawerContent).toHaveAttribute(
-      ...drawerContentDataAttrs['hideCloseButton-false'],
-    )
-  })
-
-  it("should forward ref to DrawerContent's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerContentRoot = getByTestId('drawer-content')
-    expect(drawerContentRoot).toBe(ref.current)
-  })
-
-  it(`should add the appropriate data-size-* to DrawerContent's root element based on size prop`, async () => {
-    const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestDrawer size='sm' />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerContentRoot = getByTestId('drawer-content')
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['size-sm'],
-    )
-
-    rerender(<TestDrawer size='xs' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['size-xs'],
-    )
-
-    rerender(<TestDrawer size='md' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['size-md'],
-    )
-
-    rerender(<TestDrawer size='lg' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['size-lg'],
-    )
-
-    rerender(<TestDrawer size='xl' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['size-xl'],
-    )
-
-    rerender(<TestDrawer size='full' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['size-full'],
-    )
-  })
-
-  it(`should add the appropriate data-placement-* to root element based on placement prop`, async () => {
-    const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestDrawer placement='right' />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerContentRoot = getByTestId('drawer-content')
-
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['placement-right'],
-    )
-
-    rerender(<TestDrawer placement='bottom' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['placement-bottom'],
-    )
-
-    rerender(<TestDrawer placement='left' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['placement-left'],
-    )
-
-    rerender(<TestDrawer placement='top' />)
-    expect(drawerContentRoot).toHaveAttribute(
-      ...drawerContentDataAttrs['placement-top'],
-    )
-  })
-
-  it('should forward classNames to paper and closeButton slots', async () => {
-    const classNames = {
-      paper: 'test-drawer-content-paper',
-      closeButton: 'test-drawer-content-close-button',
-    }
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer classNames={classNames} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerContent = getByTestId('drawer-content')
-
-    expect(
-      drawerContent.querySelector(`.${drawerContentClasses.paper}`),
-    ).toHaveClass(classNames.paper)
-    expect(
-      drawerContent.querySelector(`.${drawerContentClasses['close-button']}`),
-    ).toHaveClass(classNames.closeButton)
-  })
-
-  it('should forward slotProps to backdrop slots', async () => {
-    const slotProps = {
-      paper: { className: 'test-drawer-content-paper' },
-      closeButton: { className: 'test-drawer-content-close-button' },
-    }
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer slotProps={slotProps} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerContentRoot = getByTestId('drawer-content')
-    expect(
-      drawerContentRoot.querySelector(`.${drawerContentClasses.paper}`),
-    ).toHaveClass(slotProps.paper.className)
-    expect(
-      drawerContentRoot.querySelector(
-        `.${drawerContentClasses['close-button']}`,
-      ),
-    ).toHaveClass(slotProps.closeButton.className)
+    expect(drawerContent).toHaveAttribute('data-placement', 'right')
+    expect(drawerContent).toHaveAttribute('data-size', 'md')
+    expect(drawerContent).toHaveAttribute('data-hide-close-button', 'false')
   })
 
   it('should forward motionProps to paper slot', async () => {

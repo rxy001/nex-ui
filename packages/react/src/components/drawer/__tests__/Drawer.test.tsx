@@ -1,5 +1,11 @@
-import { createRef, useState } from 'react'
-import { renderWithNexUIProvider, testComponentStability } from '~/tests/shared'
+import { useState } from 'react'
+import {
+  renderWithNexUIProvider,
+  testClassNamesForwarding,
+  testComponentStability,
+  testRefForwarding,
+  testSlotPropsForwarding,
+} from '~/tests/shared'
 import {
   Drawer,
   DrawerBody,
@@ -7,7 +13,7 @@ import {
   DrawerHeader,
   DrawerFooter,
 } from '../index'
-import { drawerClasses, drawerDataAttrs } from './constants'
+import { drawerClasses } from './classes'
 import type { DrawerProps } from '../types'
 
 function TestDrawer(props: DrawerProps) {
@@ -38,17 +44,50 @@ const ControlledDrawer = ({ defaultOpen = false, ...props }: DrawerProps) => {
   )
 }
 
-describe('Drawer', () => {
-  testComponentStability(<TestDrawer open />)
+const slots = ['backdrop'] as const
 
-  it('should render with root, and data-state="open" on root element', async () => {
+describe('Drawer', () => {
+  testComponentStability(<TestDrawer open />, {
+    useAct: true,
+  })
+
+  testRefForwarding(<TestDrawer open />, {
+    useAct: true,
+  })
+
+  testClassNamesForwarding(
+    <TestDrawer open />,
+    slots,
+    {
+      backdrop: 'test-drawer-backdrop',
+    },
+    drawerClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  testSlotPropsForwarding(
+    <TestDrawer open />,
+    slots,
+    {
+      backdrop: {
+        className: 'test-drawer-backdrop',
+      },
+    },
+    drawerClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  it('should render with root class on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDrawer open />, {
       useAct: true,
     })
     const drawerRoot = getByTestId('drawer-root')
 
     expect(drawerRoot).toHaveClass(drawerClasses.root)
-    expect(drawerRoot).toHaveAttribute(...drawerDataAttrs['open-true'])
   })
 
   it('should not render children by default', async () => {
@@ -69,54 +108,6 @@ describe('Drawer', () => {
     expect(getByText('Drawer Header')).toBeInTheDocument()
     expect(getByText('Drawer Body')).toBeInTheDocument()
     expect(getByText('Drawer Footer')).toBeInTheDocument()
-  })
-
-  it("should forward ref to Drawer's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer open ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerRoot = getByTestId('drawer-root')
-    expect(drawerRoot).toBe(ref.current)
-  })
-
-  it('should forward classNames to backdrop slot', async () => {
-    const classNames = {
-      backdrop: 'test-drawer-backdrop',
-    }
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer open classNames={classNames} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerRoot = getByTestId('drawer-root')
-
-    expect(drawerRoot.querySelector(`.${drawerClasses.backdrop}`)).toHaveClass(
-      classNames.backdrop,
-    )
-  })
-
-  it('should forward slotProps to backdrop slot', async () => {
-    const slotProps = {
-      backdrop: { className: 'test-drawer-backdrop' },
-    }
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer open slotProps={slotProps} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerRoot = getByTestId('drawer-root')
-    expect(drawerRoot.querySelector(`.${drawerClasses.backdrop}`)).toHaveClass(
-      slotProps.backdrop.className,
-    )
   })
 
   it('should hide backdrop when hideBackdrop=true', async () => {

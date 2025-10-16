@@ -5,7 +5,7 @@ import {
   testRefForwarding,
   testRootClassName,
 } from '~/tests/shared'
-import { cardClasses, cardDataAttrs } from './constants'
+import { cardClasses } from './classes'
 import { Card } from '../index'
 
 describe('Card', () => {
@@ -28,10 +28,10 @@ describe('Card', () => {
     const card = container.firstElementChild
 
     expect(card).toHaveClass(cardClasses.root)
-    expect(card).toHaveAttribute(...cardDataAttrs['shadow-md'])
-    expect(card).toHaveAttribute(...cardDataAttrs['radius-md'])
-    expect(card).toHaveAttribute(...cardDataAttrs['hoverable-false'])
-    expect(card).toHaveAttribute(...cardDataAttrs['blurred-false'])
+    expect(card).toHaveAttribute('data-shadow', 'md')
+    expect(card).toHaveAttribute('data-radius', 'md')
+    expect(card).toHaveAttribute('data-hoverable', 'false')
+    expect(card).toHaveAttribute('data-blurred', 'false')
 
     expect(card).toMatchSnapshot()
   })

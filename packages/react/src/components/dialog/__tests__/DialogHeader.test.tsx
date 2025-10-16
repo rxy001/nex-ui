@@ -1,6 +1,5 @@
-import { createRef } from 'react'
-import { renderWithNexUIProvider } from '~/tests/shared'
-import { dialogHeaderClasses } from './constants'
+import { renderWithNexUIProvider, testRefForwarding } from '~/tests/shared'
+import { dialogHeaderClasses } from './classes'
 import {
   Dialog,
   DialogContent,
@@ -25,6 +24,10 @@ function TestDialog(props: DialogHeaderProps) {
 }
 
 describe('DialogHeader', () => {
+  testRefForwarding(<TestDialog />, {
+    useAct: true,
+  })
+
   it('should render with header class on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
       useAct: true,
@@ -32,18 +35,5 @@ describe('DialogHeader', () => {
 
     const dialogHeader = getByTestId('dialog-header')
     expect(dialogHeader).toHaveClass(dialogHeaderClasses.root)
-  })
-
-  it("should forward ref to DialogHeader's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogHeader = getByTestId('dialog-header')
-    expect(dialogHeader).toBe(ref.current)
   })
 })

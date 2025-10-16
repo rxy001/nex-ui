@@ -1,6 +1,5 @@
-import { createRef } from 'react'
-import { renderWithNexUIProvider } from '~/tests/shared'
-import { drawerBodyClasses } from './constants'
+import { renderWithNexUIProvider, testRefForwarding } from '~/tests/shared'
+import { drawerBodyClasses } from './classes'
 import {
   Drawer,
   DrawerContent,
@@ -25,6 +24,10 @@ function TestDrawer(props: DrawerBodyProps) {
 }
 
 describe('DrawerBody', () => {
+  testRefForwarding(<TestDrawer />, {
+    useAct: true,
+  })
+
   it('should render with body class on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDrawer />, {
       useAct: true,
@@ -32,18 +35,5 @@ describe('DrawerBody', () => {
 
     const drawerBody = getByTestId('drawer-body')
     expect(drawerBody).toHaveClass(drawerBodyClasses.root)
-  })
-
-  it("should forward ref to DrawerBody's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerBody = getByTestId('drawer-body')
-    expect(drawerBody).toBe(ref.current)
   })
 })

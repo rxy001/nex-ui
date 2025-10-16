@@ -5,7 +5,7 @@ import {
   testRootClassName,
 } from '~/tests/shared'
 import { CardFooter } from '../index'
-import { cardFooterClasses } from './constants'
+import { cardFooterClasses } from './classes'
 
 describe('CardFooter', () => {
   testComponentStability(<CardFooter />)

@@ -6,7 +6,7 @@ import {
   testRefForwarding,
 } from '~/tests/shared'
 import { Icon } from '../Icon'
-import { iconDataAttrs, iconClasses } from './constants'
+import { iconClasses } from './classes'
 
 const HeartSvg = forwardRef<SVGSVGElement>((props, ref) => (
   <svg
@@ -37,8 +37,8 @@ describe('Icon', () => {
     const iconRoot = container.firstElementChild
 
     expect(iconRoot).toHaveClass(iconClasses.root)
-    expect(iconRoot).toHaveAttribute(...iconDataAttrs['size-md'])
-    expect(iconRoot).toHaveAttribute(...iconDataAttrs['spin-false'])
+    expect(iconRoot).toHaveAttribute('data-size', 'md')
+    expect(iconRoot).toHaveAttribute('data-spin', 'false')
 
     expect(iconRoot).toMatchSnapshot()
   })
@@ -46,9 +46,7 @@ describe('Icon', () => {
   it('should add the data-spin="true" to root element when spin=true', () => {
     const { container } = renderWithNexUIProvider(<Icon as={HeartSvg} spin />)
 
-    expect(container.firstElementChild).toHaveAttribute(
-      ...iconDataAttrs['spin-true'],
-    )
+    expect(container.firstElementChild).toHaveAttribute('data-spin', 'true')
   })
 
   it('should warn when `as` prop is not provided', () => {

@@ -76,7 +76,7 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'root' | 'dot' | 'label'>
+  classNames?: ComponentSlotClasses<keyof RadioSlotProps>
 
   /**
    * The props used for each slot.

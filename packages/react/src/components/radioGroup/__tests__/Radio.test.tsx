@@ -8,9 +8,10 @@ import {
   testSlotPropsForwarding,
   testColorDataAttrs,
   testSizeDataAttrs,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { Radio, RadioGroup } from '../index'
-import { radioClasses, radioDataAttrs } from './constants'
+import { radioClasses } from './classes'
 
 const slots = ['root', 'dot', 'label'] as const
 
@@ -24,6 +25,10 @@ describe('Radio', () => {
   testColorDataAttrs(<Radio>Radio</Radio>)
 
   testSizeDataAttrs(<Radio>Radio</Radio>)
+
+  testVariantDataAttrs(<Radio>Radio</Radio>, ['checked', [true, false]])
+
+  testVariantDataAttrs(<Radio>Radio</Radio>, ['disabled', [true, false]])
 
   testClassNamesForwarding(
     <Radio>Radio</Radio>,
@@ -54,10 +59,10 @@ describe('Radio', () => {
 
     const radioRoot = container.firstElementChild
     expect(radioRoot).toHaveClass(radioClasses.root)
-    expect(radioRoot).toHaveAttribute(...radioDataAttrs['size-md'])
-    expect(radioRoot).toHaveAttribute(...radioDataAttrs['color-blue'])
-    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
-    expect(radioRoot).toHaveAttribute(...radioDataAttrs['disabled-false'])
+    expect(radioRoot).toHaveAttribute('data-size', 'md')
+    expect(radioRoot).toHaveAttribute('data-color', 'blue')
+    expect(radioRoot).toHaveAttribute('data-checked', 'false')
+    expect(radioRoot).toHaveAttribute('data-disabled', 'false')
     expect(radioRoot).toMatchSnapshot()
 
     const radio = getByRole('radio')
@@ -77,23 +82,15 @@ describe('Radio', () => {
   })
 
   it('should render checked radio by defaultChecked prop', () => {
-    const { getByRole, container } = renderWithNexUIProvider(
-      <Radio defaultChecked />,
-    )
+    const { getByRole } = renderWithNexUIProvider(<Radio defaultChecked />)
 
     expect(getByRole('radio')).toBeChecked()
-    expect(container.firstElementChild).toHaveAttribute(
-      ...radioDataAttrs['checked-true'],
-    )
   })
 
   it('should render checked radio when checked prop is true', () => {
-    const { getByRole, container } = renderWithNexUIProvider(<Radio checked />)
+    const { getByRole } = renderWithNexUIProvider(<Radio checked />)
 
     expect(getByRole('radio')).toBeChecked()
-    expect(container.firstElementChild).toHaveAttribute(
-      ...radioDataAttrs['checked-true'],
-    )
   })
 
   it('should switch checked state and call onCheckedChange when clicked', async () => {
@@ -120,7 +117,6 @@ describe('Radio', () => {
     const radioRoot = container.firstElementChild
 
     expect(radio).toBeDisabled()
-    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
     expect(radioRoot).toHaveStyleRule('pointer-events', 'none')
   })
 
@@ -296,20 +292,18 @@ describe('Radio', () => {
     })
 
     it('should check non-input elements when clicked', async () => {
-      const { container, getByRole } = renderWithNexUIProvider(
+      const { getByRole } = renderWithNexUIProvider(
         <Radio as='div'>Radio</Radio>,
       )
-      const radioRoot = container.firstElementChild!
+
       const radio = getByRole('radio')
 
-      expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
       expect(radio).toHaveAttribute('aria-checked', 'false')
 
       await act(async () => {
         fireEvent.click(radio)
       })
 
-      expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-true'])
       expect(radio).toHaveAttribute('aria-checked', 'true')
     })
 

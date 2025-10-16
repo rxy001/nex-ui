@@ -11,11 +11,7 @@ import {
 import { fireEvent } from '@testing-library/react'
 import { Checkbox } from '../Checkbox'
 import { CheckboxGroup } from '../CheckboxGroup'
-import {
-  checkboxGroupClasses,
-  checkboxDataAttrs,
-  checkboxGroupDataAttrs,
-} from './constants'
+import { checkboxGroupClasses } from './classes'
 
 const children = [
   <Checkbox value='orange' key='orange'>
@@ -92,9 +88,7 @@ describe('CheckboxGroup', () => {
     const root = container.firstElementChild
 
     expect(root).toHaveClass(checkboxGroupClasses.root)
-    expect(root).toHaveAttribute(
-      ...checkboxGroupDataAttrs['orientation-horizontal'],
-    )
+    expect(root).toHaveAttribute('data-orientation', 'horizontal')
 
     expect(root).toMatchSnapshot()
   })
@@ -247,15 +241,9 @@ describe('CheckboxGroup', () => {
     const checkboxes = getAllByRole('checkbox')
 
     checkboxes.forEach((checkbox) => {
-      expect(checkbox.parentElement).toHaveAttribute(
-        ...checkboxDataAttrs['color-green'],
-      )
-      expect(checkbox.parentElement).toHaveAttribute(
-        ...checkboxDataAttrs['size-lg'],
-      )
-      expect(checkbox.parentElement).toHaveAttribute(
-        ...checkboxDataAttrs['radius-lg'],
-      )
+      expect(checkbox.parentElement).toHaveAttribute('data-color', 'green')
+      expect(checkbox.parentElement).toHaveAttribute('data-size', 'lg')
+      expect(checkbox.parentElement).toHaveAttribute('data-radius', 'lg')
     })
   })
 

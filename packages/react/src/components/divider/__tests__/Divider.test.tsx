@@ -6,7 +6,7 @@ import {
   testVariantDataAttrs,
 } from '~/tests/shared'
 import { Divider } from '../index'
-import { dividerClasses, dividerDataAttrs } from './constants'
+import { dividerClasses } from './classes'
 
 describe('Divider', () => {
   testComponentStability(<Divider />)
@@ -22,9 +22,7 @@ describe('Divider', () => {
     const dividerRoot = container.firstElementChild
 
     expect(dividerRoot).toHaveClass(dividerClasses.root)
-    expect(dividerRoot).toHaveAttribute(
-      ...dividerDataAttrs['orientation-horizontal'],
-    )
+    expect(dividerRoot).toHaveAttribute('data-orientation', 'horizontal')
 
     expect(dividerRoot).toMatchSnapshot()
   })

@@ -7,7 +7,7 @@ import {
   testRootClassName,
 } from '~/tests/shared'
 import { CardHeader } from '../index'
-import { cardHeaderClasses } from './constants'
+import { cardHeaderClasses } from './classes'
 
 const slots = ['content', 'title', 'subtitle'] as const
 

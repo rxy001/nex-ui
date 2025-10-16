@@ -9,12 +9,7 @@ import {
 } from '~/tests/shared'
 import { Accordion, AccordionItem } from '../index'
 import { Button } from '../../button'
-import {
-  accordionSlotClasses,
-  accordionItemSlotClasses,
-  accordionDataAttrs,
-  accordionItemDataAttrs,
-} from './constants'
+import { accordionSlotClasses, accordionItemSlotClasses } from './classes'
 import type { Key } from 'react'
 import type { AccordionItemProps } from '../index'
 
@@ -63,6 +58,26 @@ describe('Accordion', () => {
     },
   )
 
+  testVariantDataAttrs(
+    <Accordion>
+      <TestAccordionItem />
+    </Accordion>,
+    ['multiple', [true, false]],
+    {
+      useAct: true,
+    },
+  )
+
+  testVariantDataAttrs(
+    <Accordion>
+      <TestAccordionItem />
+    </Accordion>,
+    ['variant', ['outlined', 'underlined']],
+    {
+      useAct: true,
+    },
+  )
+
   it('should render with default props', async () => {
     const { container } = await renderWithNexUIProvider(
       <Accordion>
@@ -77,12 +92,9 @@ describe('Accordion', () => {
     expect(accordionRoot).toMatchSnapshot()
 
     expect(accordionRoot).toHaveClass(accordionSlotClasses.root)
-    expect(accordionRoot).toHaveAttribute(
-      ...accordionDataAttrs['variant-underlined'],
-    )
-    expect(accordionRoot).toHaveAttribute(
-      ...accordionDataAttrs['multiple-false'],
-    )
+
+    expect(accordionRoot).toHaveAttribute('data-variant', 'underlined')
+    expect(accordionRoot).toHaveAttribute('data-multiple', 'false')
   })
 
   it('should render expanded items when defaultExpandedKeys is provided', async () => {
@@ -95,7 +107,8 @@ describe('Accordion', () => {
       },
     )
     expect(getByTestId('accordion-item')).toHaveAttribute(
-      ...accordionItemDataAttrs['state-expanded'],
+      'data-state',
+      'expanded',
     )
   })
 
@@ -125,9 +138,7 @@ describe('Accordion', () => {
       },
     )
     const accordionItemRoot = getByTestId('accordion-item')
-    expect(accordionItemRoot).toHaveAttribute(
-      ...accordionItemDataAttrs['state-collapsed'],
-    )
+    expect(accordionItemRoot).toHaveAttribute('data-state', 'collapsed')
 
     const button = getByTestId('button')
 
@@ -135,9 +146,7 @@ describe('Accordion', () => {
       fireEvent.click(button)
     })
 
-    expect(accordionItemRoot).toHaveAttribute(
-      ...accordionItemDataAttrs['state-expanded'],
-    )
+    expect(accordionItemRoot).toHaveAttribute('data-state', 'expanded')
   })
 
   it('should render multiple expanded AccordionItems when multiple=true', async () => {
@@ -146,18 +155,13 @@ describe('Accordion', () => {
       <TestAccordionItem key='2' itemKey='2' />,
       <TestAccordionItem key='3' itemKey='3' />,
     ]
-    const { rerender, queryAllByClassName, queryByClassName } =
-      await renderWithNexUIProvider(
-        <Accordion multiple expandedKeys={['1']}>
-          {arrayChildren}
-        </Accordion>,
-        {
-          useAct: true,
-        },
-      )
-
-    expect(queryByClassName(accordionSlotClasses.root)).toHaveAttribute(
-      ...accordionDataAttrs['multiple-true'],
+    const { rerender, queryAllByClassName } = await renderWithNexUIProvider(
+      <Accordion multiple expandedKeys={['1']}>
+        {arrayChildren}
+      </Accordion>,
+      {
+        useAct: true,
+      },
     )
 
     const selector = `${accordionItemSlotClasses['root']}[data-state="expanded"]`
@@ -184,15 +188,9 @@ describe('Accordion', () => {
       },
     )
     const accordionItemRoot1 = getByTestId('accordion-item-1')
-    expect(accordionItemRoot1).toHaveAttribute(
-      ...accordionItemDataAttrs['disabled-true'],
-    )
     expect(accordionItemRoot1).toHaveStyleRule('pointer-events', 'none')
 
     const accordionItemRoot2 = getByTestId('accordion-item-2')
-    expect(accordionItemRoot2).toHaveAttribute(
-      ...accordionItemDataAttrs['disabled-true'],
-    )
     expect(accordionItemRoot2).toHaveStyleRule('pointer-events', 'none')
   })
 
@@ -207,11 +205,7 @@ describe('Accordion', () => {
     )
 
     const indicator = queryByClassName(accordionItemSlotClasses.indicator)
-    const root = queryByClassName(accordionItemSlotClasses.root)
     expect(indicator).not.toBeInTheDocument()
-    expect(root).toHaveAttribute(
-      ...accordionItemDataAttrs['hideIndicator-true'],
-    )
   })
 
   it('should customize indicator', async () => {
@@ -278,12 +272,8 @@ describe('Accordion', () => {
     const accordionItem1 = getByTestId('accordion-item-1')
     const accordionItem2 = getByTestId('accordion-item-2')
 
-    expect(accordionItem1).toHaveAttribute(
-      ...accordionItemDataAttrs['disabled-true'],
-    )
-    expect(accordionItem2).toHaveAttribute(
-      ...accordionItemDataAttrs['disabled-false'],
-    )
+    expect(accordionItem1).toHaveAttribute('data-disabled', 'true')
+    expect(accordionItem2).toHaveAttribute('data-disabled', 'false')
   })
 
   it('should apply custom motionProps to content animation', async () => {
@@ -339,13 +329,6 @@ describe('Accordion', () => {
     const accordionItem1 = getByTestId('accordion-item-1')
     const accordionItem2 = getByTestId('accordion-item-2')
 
-    expect(accordionItem1).toHaveAttribute(
-      ...accordionItemDataAttrs['state-expanded'],
-    )
-    expect(accordionItem2).toHaveAttribute(
-      ...accordionItemDataAttrs['state-collapsed'],
-    )
-
     // Click second item - should close first and open second
     const trigger2 = accordionItem2.querySelector(
       `.${accordionItemSlotClasses.trigger}`,
@@ -355,11 +338,7 @@ describe('Accordion', () => {
       fireEvent.click(trigger2!)
     })
 
-    expect(accordionItem1).toHaveAttribute(
-      ...accordionItemDataAttrs['state-collapsed'],
-    )
-    expect(accordionItem2).toHaveAttribute(
-      ...accordionItemDataAttrs['state-expanded'],
-    )
+    expect(accordionItem1).toHaveAttribute('data-state', 'collapsed')
+    expect(accordionItem2).toHaveAttribute('data-state', 'expanded')
   })
 })

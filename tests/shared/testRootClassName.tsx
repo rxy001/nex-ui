@@ -7,7 +7,6 @@ import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
  * Test the root class name of a component.
  *
  * @param component The component to test.
- * @param className The expected root class name.
  * @param options Options to pass to the renderWithNexUIProvider function.
  *
  * @example

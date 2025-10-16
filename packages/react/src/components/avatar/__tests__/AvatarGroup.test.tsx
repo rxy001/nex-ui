@@ -7,11 +7,7 @@ import {
   testSlotPropsForwarding,
 } from '~/tests/shared'
 import { AvatarGroup, Avatar } from '../index'
-import {
-  avatarSlotClasses,
-  avatarGroupSlotClasses,
-  avatarDataAttrs,
-} from './constants'
+import { avatarSlotClasses, avatarGroupSlotClasses } from './classes'
 
 const slots = ['surplus'] as const
 
@@ -79,11 +75,11 @@ describe('AvatarGroup', () => {
 
     const avatarRoot = queryByTestId('avatar')
 
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['inGroup-true'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['size-md'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['radius-md'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['color-gray'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['outlined-false'])
+    expect(avatarRoot).toHaveAttribute('data-in-group', 'true')
+    expect(avatarRoot).toHaveAttribute('data-size', 'md')
+    expect(avatarRoot).toHaveAttribute('data-radius', 'md')
+    expect(avatarRoot).toHaveAttribute('data-color', 'gray')
+    expect(avatarRoot).toHaveAttribute('data-outlined', 'false')
   })
 
   it('should render group when multiple avatars are passed', () => {
@@ -210,9 +206,9 @@ describe('AvatarGroup', () => {
 
     const avatarRoot = container.firstElementChild?.firstElementChild
 
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['size-lg'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['color-blue'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['outlined-true'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['radius-full'])
+    expect(avatarRoot).toHaveAttribute('data-size', 'lg')
+    expect(avatarRoot).toHaveAttribute('data-color', 'blue')
+    expect(avatarRoot).toHaveAttribute('data-outlined', 'true')
+    expect(avatarRoot).toHaveAttribute('data-radius', 'full')
   })
 })

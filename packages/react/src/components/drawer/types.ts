@@ -1,6 +1,7 @@
 import type { DOMMotionComponents } from 'motion/react'
 import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
+import type { ModalProps } from '../modal'
 import type { DrawerContentVariants } from '../../theme/recipes'
 import type {
   OverrideProps,
@@ -50,64 +51,14 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'backdrop'>
-
-  /**
-   * If true, the drawer is open.
-   */
-  open?: boolean
-
-  /**
-   * If true, the drawer is shown by default.
-   */
-  defaultOpen?: boolean
-
-  /**
-   * Handler that is called when the drawer is opened or closed.
-   */
-  onOpenChange?: (open: boolean) => void
-
-  /**
-   * The container element in which the drawer will be placed.
-   * @default document.body
-   */
-  container?: HTMLElement | null | (() => HTMLElement | null)
-
-  /**
-   * If true, always keep the children in the DOM.
-   * @default false
-   */
-  keepMounted?: boolean
+  classNames?: ComponentSlotClasses<keyof DrawerSlotProps>
 
   /**
    * If true, close the drawer when the backdrop is clicked.
    * @default true
    */
   closeOnInteractBackdrop?: boolean
-
-  /**
-   * If true, the drawer prevents page scrolling.
-   * @default false
-   */
-  preventScroll?: boolean
-
-  /**
-   * If true, close the drawer when the escape key is pressed.
-   * @default true
-   */
-  closeOnEscape?: boolean
-
-  /**
-   * If true, the drawer will restore focus to previously focused element once the drawer is hidden or unmounted.
-   * @default true
-   */
-  restoreFocus?: boolean
-
-  /**
-   * Callback function that is called when the drawer is closed.
-   */
-  onClose?: () => void
-}
+} & Omit<ModalProps, 'closeOnInteractOutside'>
 
 export type DrawerOwnerState<
   RootComponent extends ElementType = DOMMotionComponents['div'],
