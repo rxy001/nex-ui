@@ -24,9 +24,10 @@ export const getOverflowAncestors = (
   let body: HTMLElement | null = null
 
   while (ancestor) {
-    if (getElementName(ancestor) === 'body') {
+    const elementName = getElementName(ancestor)
+    if (elementName === 'body') {
       body = ancestor as HTMLElement
-    } else if (getElementName(ancestor) === 'html' && body) {
+    } else if (elementName === 'html' && body) {
       scrollableAncestors.push(body)
     } else {
       scrollableAncestors.push(ancestor)

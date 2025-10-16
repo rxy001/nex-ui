@@ -20,4 +20,21 @@ describe('useDebounce', () => {
 
     jest.useRealTimers()
   })
+
+  it('should have default wait time of 1000ms', () => {
+    jest.useFakeTimers()
+    const fn = jest.fn()
+    const { result } = renderHook(() => useDebounce(fn))
+
+    result.current('call')
+
+    jest.advanceTimersByTime(900)
+    expect(fn).not.toHaveBeenCalled()
+
+    jest.advanceTimersByTime(200)
+    expect(fn).toHaveBeenCalledTimes(1)
+    expect(fn).toHaveBeenCalledWith('call')
+
+    jest.useRealTimers()
+  })
 })

@@ -53,6 +53,12 @@ type CardOwnProps<RootComponent extends ElementType> = {
 export type CardProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<RootComponent, CardOwnProps<RootComponent>, CardPropsOverrides>
 
+type CardHeaderSlotProps = {
+  content?: ComponentPropsWithCommonProps<'div'>
+  title?: ComponentPropsWithCommonProps<'div'>
+  subtitle?: ComponentPropsWithCommonProps<'div'>
+}
+
 type CardHeaderOwnProps<RootComponent extends ElementType> = {
   /**
    * The component used for the root element.
@@ -88,16 +94,12 @@ type CardHeaderOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'root' | 'content' | 'title' | 'subtitle'>
+  classNames?: ComponentSlotClasses<keyof CardHeaderSlotProps>
 
   /**
    * The props used for each slot.
    */
-  slotProps?: {
-    content?: ComponentPropsWithCommonProps<'div'>
-    title?: ComponentPropsWithCommonProps<'div'>
-    subtitle?: ComponentPropsWithCommonProps<'div'>
-  }
+  slotProps?: CardHeaderSlotProps
 }
 
 export interface CardHeaderPropsOverrides {}

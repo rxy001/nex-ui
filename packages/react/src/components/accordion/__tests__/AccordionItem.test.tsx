@@ -1,8 +1,13 @@
-import { createRef } from 'react'
 import { fireEvent, act, waitFor } from '@testing-library/react'
-import { renderWithNexUIProvider } from '~/tests/shared'
+import {
+  renderWithNexUIProvider,
+  testClassNamesForwarding,
+  testRefForwarding,
+  testSlotPropsForwarding,
+  testVariantDataAttrs,
+} from '~/tests/shared'
 import { Accordion, AccordionItem } from '../index'
-import { accordionItemSlotClasses, accordionItemDataAttrs } from './constants'
+import { accordionItemSlotClasses } from './classes'
 import type { AccordionItemProps } from '../index'
 
 const TestAccordionItem = (props: AccordionItemProps) => (
@@ -17,70 +22,70 @@ const TestAccordionItem = (props: AccordionItemProps) => (
   </AccordionItem>
 )
 
+const TestAccordion = (props: AccordionItemProps) => {
+  return (
+    <Accordion defaultExpandedKeys={['1']}>
+      <TestAccordionItem {...props} />
+    </Accordion>
+  )
+}
+
+const slots = ['heading', 'trigger', 'content', 'indicator'] as const
+
 describe('AccordionItem', () => {
-  it("should forward ref to AccordionItem's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <Accordion>
-        <TestAccordionItem ref={ref} />
-      </Accordion>,
-      {
-        useAct: true,
-      },
-    )
-    expect(getByTestId('accordion-item')).toBe(ref.current)
+  testVariantDataAttrs(<TestAccordion />, ['keepMounted', [true, false]], {
+    useAct: true,
   })
 
-  it('should forward slotProps to heading, indicator, trigger and content slots', async () => {
-    const slotProps = {
+  testVariantDataAttrs(<TestAccordion />, ['hideIndicator', [true, false]], {
+    useAct: true,
+  })
+
+  testVariantDataAttrs(<TestAccordion />, ['disabled', [true, false]], {
+    useAct: true,
+  })
+
+  testRefForwarding(<TestAccordion />, {
+    useAct: true,
+  })
+
+  testClassNamesForwarding(
+    <TestAccordion />,
+    slots,
+    {
+      content: 'test-content',
+      heading: 'test-heading',
+      indicator: 'test-indicator',
+      trigger: 'test-trigger',
+    },
+    accordionItemSlotClasses,
+    { useAct: true },
+  )
+
+  testSlotPropsForwarding(
+    <TestAccordion />,
+    slots,
+    {
       heading: { className: 'test-heading' },
       indicator: { className: 'test-indicator' },
       trigger: { className: 'test-trigger' },
       content: { className: 'test-content' },
-    }
-    const { queryByClassName } = await renderWithNexUIProvider(
-      <Accordion expandedKeys={['1']}>
-        <TestAccordionItem slotProps={slotProps} />
-      </Accordion>,
+    },
+    accordionItemSlotClasses,
+    { useAct: true },
+  )
+
+  it('should have the correct root class name', async () => {
+    const className = 'test-class'
+    const { getByTestId } = await renderWithNexUIProvider(
+      <TestAccordion className={className} />,
       {
         useAct: true,
       },
     )
 
-    expect(queryByClassName(accordionItemSlotClasses.heading)).toHaveClass(
-      slotProps.heading.className,
-    )
-    expect(queryByClassName(accordionItemSlotClasses.indicator)).toHaveClass(
-      slotProps.indicator.className,
-    )
-    expect(queryByClassName(accordionItemSlotClasses.trigger)).toHaveClass(
-      slotProps.trigger.className,
-    )
-    expect(queryByClassName(accordionItemSlotClasses.content)).toHaveClass(
-      slotProps.content.className,
-    )
-  })
-
-  it('should forward classNames to heading, indicator, trigger and content slots', async () => {
-    const classNames = {
-      heading: 'test-heading',
-      indicator: 'test-indicator',
-      trigger: 'test-trigger',
-      content: 'test-content',
-    }
-    const { queryByClassName } = await renderWithNexUIProvider(
-      <Accordion expandedKeys={['1']}>
-        <TestAccordionItem classNames={classNames} />
-      </Accordion>,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(queryByClassName(classNames.heading)).toBeInTheDocument()
-    expect(queryByClassName(classNames.indicator)).toBeInTheDocument()
-    expect(queryByClassName(classNames.trigger)).toBeInTheDocument()
-    expect(queryByClassName(classNames.content)).toBeInTheDocument()
+    const rootElement = getByTestId('accordion-item')
+    expect(rootElement).toHaveClass(className)
   })
 
   it('should have default itemKey on AccordionItem', async () => {
@@ -103,9 +108,7 @@ describe('AccordionItem', () => {
       fireEvent.click(trigger)
     })
 
-    expect(accordionItemRoot).toHaveAttribute(
-      ...accordionItemDataAttrs['state-expanded'],
-    )
+    expect(accordionItemRoot).toHaveAttribute('data-state', 'expanded')
   })
 
   it('should always render the AccordionItem content when keepMounted=true', async () => {
@@ -119,10 +122,8 @@ describe('AccordionItem', () => {
     )
 
     const content = queryByClassName(accordionItemSlotClasses.content)
-    const root = queryByClassName(accordionItemSlotClasses.root)
 
     expect(content).toBeInTheDocument()
-    expect(root).toHaveAttribute(...accordionItemDataAttrs['keepMounted-true'])
 
     await act(async () => {
       rerender(
@@ -145,9 +146,7 @@ describe('AccordionItem', () => {
     )
 
     const content = queryByClassName(accordionItemSlotClasses.content)
-    const root = queryByClassName(accordionItemSlotClasses.root)
     expect(content).toBeInTheDocument()
-    expect(root).toHaveAttribute(...accordionItemDataAttrs['keepMounted-false'])
 
     await act(async () => {
       rerender(
@@ -175,43 +174,34 @@ describe('AccordionItem', () => {
       },
     )
     const accordionItemRoot1 = getByTestId('accordion-item-1')
-    expect(accordionItemRoot1).toHaveAttribute(
-      ...accordionItemDataAttrs['state-expanded'],
-    )
+    expect(accordionItemRoot1).toHaveAttribute('data-state', 'expanded')
     const trigger1 = accordionItemRoot1.querySelector(
       `.${accordionItemSlotClasses.trigger}`,
     )
     await act(async () => {
       fireEvent.click(trigger1!)
     })
-    expect(accordionItemRoot1).toHaveAttribute(
-      ...accordionItemDataAttrs['state-collapsed'],
-    )
+    expect(accordionItemRoot1).toHaveAttribute('data-state', 'collapsed')
 
     const accordionItemRoot2 = getByTestId('accordion-item-2')
-    expect(accordionItemRoot2).toHaveAttribute(
-      ...accordionItemDataAttrs['state-collapsed'],
-    )
+    expect(accordionItemRoot2).toHaveAttribute('data-state', 'collapsed')
     const trigger2 = accordionItemRoot2.querySelector(
       `.${accordionItemSlotClasses.trigger}`,
     )
     await act(async () => {
       fireEvent.click(trigger2!)
     })
-    expect(accordionItemRoot2).toHaveAttribute(
-      ...accordionItemDataAttrs['state-expanded'],
-    )
+
+    expect(accordionItemRoot2).toHaveAttribute('data-state', 'expanded')
 
     await act(async () => {
       fireEvent.click(trigger2!)
     })
-    expect(accordionItemRoot2).toHaveAttribute(
-      ...accordionItemDataAttrs['state-collapsed'],
-    )
+    expect(accordionItemRoot2).toHaveAttribute('data-state', 'collapsed')
   })
 
   it('should hide indicator when hideIndicator=true', async () => {
-    const { getByTestId, queryByClassName } = await renderWithNexUIProvider(
+    const { queryByClassName } = await renderWithNexUIProvider(
       <Accordion>
         <TestAccordionItem hideIndicator={true} />
       </Accordion>,
@@ -219,12 +209,8 @@ describe('AccordionItem', () => {
         useAct: true,
       },
     )
-    const accordionItem = getByTestId('accordion-item')
     const indicator = queryByClassName(accordionItemSlotClasses.indicator)
 
-    expect(accordionItem).toHaveAttribute(
-      ...accordionItemDataAttrs['hideIndicator-true'],
-    )
     expect(indicator).not.toBeInTheDocument()
   })
 

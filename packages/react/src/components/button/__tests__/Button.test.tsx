@@ -13,7 +13,7 @@ import {
   testRefForwarding,
 } from '~/tests/shared'
 import { Button } from '../index'
-import { buttonSlotClasses, buttonDataAttrs } from './constants'
+import { buttonSlotClasses } from './classes'
 import type { ButtonProps } from '../index'
 
 const slots = ['startIcon', 'endIcon'] as const
@@ -38,8 +38,6 @@ describe('Button', () => {
     'disableRipple',
     [true, false],
   ])
-
-  testVariantDataAttrs(<Button>Button</Button>, ['disabled', [true, false]])
 
   testVariantDataAttrs(<Button>Button</Button>, ['loading', [true, false]])
 
@@ -81,15 +79,15 @@ describe('Button', () => {
     const button = container.firstElementChild
 
     expect(button).toHaveClass(buttonSlotClasses.root)
-    expect(button).toHaveAttribute(...buttonDataAttrs['loading-false'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['disabled-false'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['variant-solid'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['size-md'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['radius-md'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-blue'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['iconOnly-false'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['fullWidth-false'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['disableRipple-false'])
+    expect(button).toHaveAttribute('data-loading', 'false')
+    expect(button).toHaveAttribute('data-loading', 'false')
+    expect(button).toHaveAttribute('data-variant', 'solid')
+    expect(button).toHaveAttribute('data-size', 'md')
+    expect(button).toHaveAttribute('data-radius', 'md')
+    expect(button).toHaveAttribute('data-color', 'blue')
+    expect(button).toHaveAttribute('data-icon-only', 'false')
+    expect(button).toHaveAttribute('data-full-width', 'false')
+    expect(button).toHaveAttribute('data-disable-ripple', 'false')
 
     expect(button).toMatchSnapshot()
   })
@@ -159,13 +157,12 @@ describe('Button', () => {
     }
     const { getByRole } = renderWithNexUIProvider(<DefaultButton />)
     const button = getByRole('button')
-    expect(button).toHaveAttribute(...buttonDataAttrs['loading-false'])
+    expect(button).toHaveAttribute('data-loading', 'false')
 
     await act(async () => {
       fireEvent.click(button)
     })
-
-    expect(button).toHaveAttribute(...buttonDataAttrs['loading-true'])
+    expect(button).toHaveAttribute('data-loading', 'true')
   })
 
   it('should support customized spinner', () => {

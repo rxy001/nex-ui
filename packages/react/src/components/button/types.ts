@@ -76,7 +76,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'startIcon' | 'endIcon'>
+  classNames?: ComponentSlotClasses<keyof ButtonSlotProps>
 
   /**
    * The button appearance style.

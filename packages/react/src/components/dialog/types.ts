@@ -8,6 +8,7 @@ import type {
 } from '../../types/utils'
 import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants } from '../../theme/recipes'
+import type { ModalProps } from '../modal'
 
 // ------------- Dialog --------------
 type DialogSlotProps = {
@@ -44,46 +45,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'backdrop'>
-
-  /**
-   * If true, the dialog is open.
-   */
-  open?: boolean
-
-  /**
-   * If true, the dialog is shown by default.
-   */
-  defaultOpen?: boolean
-
-  /**
-   * Handler that is called when the dialog is opened or closed.
-   */
-  onOpenChange?: (open: boolean) => void
-
-  /**
-   * The container element in which the dialog will be placed.
-   * @default document.body
-   */
-  container?: HTMLElement | null | (() => HTMLElement | null)
-
-  /**
-   * If true, always keep the children in the DOM.
-   * @default false
-   */
-  keepMounted?: boolean
-
-  /**
-   * If true, close the dialog when the escape key is pressed.
-   * @default true
-   */
-  closeOnEscape?: boolean
-
-  /**
-   * If true, the dialog will restore focus to previously focused element once the dialog is hidden or unmounted.
-   * @default true
-   */
-  restoreFocus?: boolean
+  classNames?: ComponentSlotClasses<keyof DialogSlotProps>
 
   /**
    * If true, the backdrop is not rendered.
@@ -92,22 +54,11 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   hideBackdrop?: boolean
 
   /**
-   * If true, the dialog prevents page scrolling.
-   * @default false
-   */
-  preventScroll?: boolean
-
-  /**
    * If true, close the dialog when the backdrop is clicked.
    * @default true
    */
   closeOnInteractBackdrop?: boolean
-
-  /**
-   * Callback function that is called when the dialog is closed.
-   */
-  onClose?: () => void
-}
+} & Omit<ModalProps, 'closeOnInteractOutside'>
 
 export interface DialogPropsOverrides {}
 

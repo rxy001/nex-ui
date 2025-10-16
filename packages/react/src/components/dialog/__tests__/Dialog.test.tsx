@@ -1,5 +1,12 @@
-import { createRef, useState } from 'react'
-import { renderWithNexUIProvider, testComponentStability } from '~/tests/shared'
+import { useState } from 'react'
+import {
+  renderWithNexUIProvider,
+  testClassNamesForwarding,
+  testComponentStability,
+  testRefForwarding,
+  testSlotPropsForwarding,
+  testVariantDataAttrs,
+} from '~/tests/shared'
 import {
   Dialog,
   DialogContent,
@@ -7,7 +14,7 @@ import {
   DialogFooter,
   DialogBody,
 } from '../index'
-import { dialogClasses, dialogDataAttrs } from './constants'
+import { dialogClasses } from './classes'
 import type { DialogProps } from '../index'
 
 function TestDialog(props: DialogProps) {
@@ -38,31 +45,52 @@ const ControlledDialog = ({ defaultOpen = false, ...props }: DialogProps) => {
   )
 }
 
-describe('Dialog', () => {
-  testComponentStability(<TestDialog open />)
+const slots = ['backdrop'] as const
 
-  it('should render with root class, data-state="open" on root element', async () => {
+describe('Dialog', () => {
+  testComponentStability(<TestDialog open />, {
+    useAct: true,
+  })
+
+  testRefForwarding(<TestDialog open />, {
+    useAct: true,
+  })
+
+  testClassNamesForwarding(
+    <TestDialog open />,
+    slots,
+    {
+      backdrop: 'test-dialog-backdrop',
+    },
+    dialogClasses,
+    { useAct: true },
+  )
+
+  testSlotPropsForwarding(
+    <TestDialog open />,
+    slots,
+    {
+      backdrop: {
+        className: 'test-dialog-backdrop',
+      },
+    },
+    dialogClasses,
+    {
+      useAct: true,
+    },
+  )
+
+  testVariantDataAttrs(<TestDialog open />, ['hideBackdrop', [true, false]], {
+    useAct: true,
+  })
+
+  it('should render with root class on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog open />, {
       useAct: true,
     })
     const dialogRoot = getByTestId('dialog-root')
 
     expect(dialogRoot).toHaveClass(dialogClasses.root)
-
-    expect(dialogRoot).toHaveAttribute(...dialogDataAttrs['open-true'])
-  })
-
-  it("should forward ref to Dialog's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog open ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogRoot = getByTestId('dialog-root')
-    expect(dialogRoot).toBe(ref.current)
   })
 
   it('should not render children by default', async () => {
@@ -85,42 +113,6 @@ describe('Dialog', () => {
     expect(queryByText('Dialog Footer')).toBeInTheDocument()
   })
 
-  it('should forward classNames to backdrop slot', async () => {
-    const classNames = {
-      backdrop: 'test-dialog-backdrop',
-    }
-
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog open classNames={classNames} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogRoot = getByTestId('dialog-root')
-
-    expect(dialogRoot.querySelector(`.${dialogClasses.backdrop}`)).toHaveClass(
-      classNames.backdrop,
-    )
-  })
-
-  it('should forward slotProps to backdrop slot', async () => {
-    const slotProps = {
-      backdrop: { className: 'test-dialog-backdrop' },
-    }
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog open slotProps={slotProps} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogRoot = getByTestId('dialog-root')
-    expect(dialogRoot.querySelector(`.${dialogClasses.backdrop}`)).toHaveClass(
-      slotProps.backdrop.className,
-    )
-  })
-
   it('should hide backdrop when hideBackdrop=true', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
       <TestDialog open hideBackdrop />,
@@ -133,7 +125,6 @@ describe('Dialog', () => {
     expect(
       dialogRoot.querySelector(`.${dialogClasses.backdrop}`),
     ).not.toBeInTheDocument()
-    expect(dialogRoot).toHaveAttribute(...dialogDataAttrs['hideBackdrop-true'])
   })
 
   it('should be controlled via open prop', async () => {

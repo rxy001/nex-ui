@@ -65,7 +65,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'img'>
+  classNames?: ComponentSlotClasses<keyof AvatarSlotProps>
 
   /**
    * The size of the avatar.

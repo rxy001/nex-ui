@@ -12,7 +12,7 @@ import {
 } from '~/tests/shared'
 import { UserOutlined } from '@nex-ui/icons'
 import { Avatar } from '../index'
-import { avatarSlotClasses, avatarDataAttrs } from './constants'
+import { avatarSlotClasses } from './classes'
 
 afterAll(() => {
   restoreGlobalImage()
@@ -44,11 +44,11 @@ describe('Avatar', () => {
 
     const avatarRoot = container.firstElementChild
     expect(avatarRoot).toHaveClass(avatarSlotClasses.root)
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['inGroup-false'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['size-md'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['radius-md'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['color-gray'])
-    expect(avatarRoot).toHaveAttribute(...avatarDataAttrs['outlined-false'])
+    expect(avatarRoot).toHaveAttribute('data-in-group', 'false')
+    expect(avatarRoot).toHaveAttribute('data-size', 'md')
+    expect(avatarRoot).toHaveAttribute('data-radius', 'md')
+    expect(avatarRoot).toHaveAttribute('data-color', 'gray')
+    expect(avatarRoot).toHaveAttribute('data-outlined', 'false')
 
     expect(avatarRoot).toMatchSnapshot()
   })
@@ -73,7 +73,6 @@ describe('Avatar', () => {
       )
       const avatarRoot = container.firstElementChild
       expect(avatarRoot?.firstElementChild).toHaveClass(classNames.img)
-      restoreGlobalImage()
     })
 
     it('should forward slotProps to img slot', () => {

@@ -1,6 +1,5 @@
-import { createRef } from 'react'
-import { renderWithNexUIProvider } from '~/tests/shared'
-import { dialogBodyClasses } from './constants'
+import { renderWithNexUIProvider, testRefForwarding } from '~/tests/shared'
+import { dialogBodyClasses } from './classes'
 import {
   Dialog,
   DialogContent,
@@ -25,6 +24,10 @@ function TestDialog(props: DialogBodyProps) {
 }
 
 describe('DialogBody', () => {
+  testRefForwarding(<TestDialog />, {
+    useAct: true,
+  })
+
   it('should render with body class on root element', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
       useAct: true,
@@ -32,18 +35,5 @@ describe('DialogBody', () => {
 
     const dialogBody = getByTestId('dialog-body')
     expect(dialogBody).toHaveClass(dialogBodyClasses.root)
-  })
-
-  it("should forward ref to DialogBody's root element", async () => {
-    const ref = createRef<HTMLDivElement>()
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog ref={ref} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogBody = getByTestId('dialog-body')
-    expect(dialogBody).toBe(ref.current)
   })
 })

@@ -146,7 +146,6 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     externalForwardedProps: remainingProps,
     additionalProps: {
       as: rootElement,
-      'data-focus-visible': focusVisible || undefined,
       ...focusProps,
     },
     a11y: {
@@ -154,6 +153,10 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
       onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
       onClick: handleClick,
+    },
+    dataAttrs: {
+      disabled,
+      focusVisible: focusVisible || undefined,
     },
   })
 

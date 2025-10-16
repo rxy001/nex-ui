@@ -2,7 +2,6 @@ import { render } from '@testing-library/react'
 import { NexUIProvider } from '../index'
 import { Button } from '../../button'
 import { Divider } from '../../divider'
-import { buttonDataAttrs } from '../../button/__tests__/constants'
 import type { Theme } from '../../../types/theme'
 
 describe('NexUIProvider', () => {
@@ -16,7 +15,7 @@ describe('NexUIProvider', () => {
     const button = getByRole('button')
 
     expect(button).toHaveClass('nui-button-root')
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-blue'])
+    expect(button).toHaveAttribute('data-color', 'blue')
   })
 
   it('should use custom prefix', () => {
@@ -46,21 +45,21 @@ describe('NexUIProvider', () => {
     )
 
     const button = getByRole('button')
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-blue'])
+    expect(button).toHaveAttribute('data-color', 'blue')
 
     rerender(
       <NexUIProvider theme={{ primaryThemeColor: 'red' }}>
         <Button>Button</Button>
       </NexUIProvider>,
     )
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-red'])
+    expect(button).toHaveAttribute('data-color', 'red')
 
     rerender(
       <NexUIProvider theme={{ primaryThemeColor: 'orange' }}>
         <Button>Button</Button>
       </NexUIProvider>,
     )
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-orange'])
+    expect(button).toHaveAttribute('data-color', 'orange')
   })
 
   it('should customize component styles by the styleOverrides object', () => {
@@ -120,8 +119,8 @@ describe('NexUIProvider', () => {
 
     const button = getByRole('button')
 
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-blue'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['size-md'])
+    expect(button).toHaveAttribute('data-color', 'blue')
+    expect(button).toHaveAttribute('data-size', 'md')
 
     const theme: Theme = {
       components: {
@@ -137,8 +136,8 @@ describe('NexUIProvider', () => {
       </NexUIProvider>,
     )
 
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-red'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['size-lg'])
+    expect(button).toHaveAttribute('data-size', 'lg')
+    expect(button).toHaveAttribute('data-color', 'red')
 
     rerender(
       <NexUIProvider theme={theme}>
@@ -148,8 +147,8 @@ describe('NexUIProvider', () => {
       </NexUIProvider>,
     )
 
-    expect(button).toHaveAttribute(...buttonDataAttrs['color-green'])
-    expect(button).toHaveAttribute(...buttonDataAttrs['size-sm'])
+    expect(button).toHaveAttribute('data-color', 'green')
+    expect(button).toHaveAttribute('data-size', 'sm')
   })
 })
 
@@ -193,14 +192,15 @@ describe('Nested NexUIProvider', () => {
     const outerButton = getByTestId('outer-button')
     expect(outerButton).toHaveStyleRule('width', '100px')
 
-    expect(outerButton).toHaveAttribute(...buttonDataAttrs['color-red'])
-    expect(outerButton).toHaveAttribute(...buttonDataAttrs['size-sm'])
+    expect(outerButton).toHaveAttribute('data-size', 'sm')
+    expect(outerButton).toHaveAttribute('data-color', 'red')
 
     const innerButton = getByTestId('inner-button')
     expect(innerButton).toHaveStyleRule('width', '200px')
     expect(innerButton).toHaveStyleRule('margin', '10px')
-    expect(innerButton).toHaveAttribute(...buttonDataAttrs['color-orange'])
-    expect(innerButton).toHaveAttribute(...buttonDataAttrs['size-sm'])
+
+    expect(innerButton).toHaveAttribute('data-size', 'sm')
+    expect(innerButton).toHaveAttribute('data-color', 'orange')
   })
 
   it('should override primaryThemeColor', () => {
@@ -217,12 +217,12 @@ describe('Nested NexUIProvider', () => {
     )
 
     const outerButton = getByTestId('outer-button')
-    expect(outerButton).toHaveAttribute(...buttonDataAttrs['color-blue'])
+    expect(outerButton).toHaveAttribute('data-color', 'blue')
 
     const innerButton = getByTestId('inner-button')
-    expect(innerButton).toHaveAttribute(...buttonDataAttrs['color-red'])
+    expect(innerButton).toHaveAttribute('data-color', 'red')
 
     const innermostButton = getByTestId('innermost-button')
-    expect(innermostButton).toHaveAttribute(...buttonDataAttrs['color-orange'])
+    expect(innermostButton).toHaveAttribute('data-color', 'orange')
   })
 })

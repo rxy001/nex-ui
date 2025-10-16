@@ -1,3 +1,5 @@
+'use client'
+
 import { Popper, PopperContent, PopperRoot, PopperTrigger } from '../popper'
 import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
@@ -25,19 +27,19 @@ export const Tooltip = <
     container,
     classNames,
     slotProps,
+    offset,
+    openDelay,
+    closeDelay,
+    shift,
+    flip,
+    keepMounted,
+    defaultOpen,
+    closeOnEscape,
     color = 'default',
     action = 'hover',
     placement = 'bottom',
     size = 'md',
     radius = 'md',
-    offset = true,
-    openDelay = 100,
-    closeDelay = 100,
-    shift = true,
-    flip = true,
-    keepMounted = false,
-    defaultOpen = false,
-    closeOnEscape = true,
     ...remainingProps
   } = props
 

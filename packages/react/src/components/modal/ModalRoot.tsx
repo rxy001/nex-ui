@@ -73,6 +73,9 @@ export const ModalRoot = <
       // Ignore the user's settings to ensure proper access for assistive technologies.
       'aria-hidden': open ? undefined : 'true',
     },
+    dataAttrs: {
+      state: open ? 'open' : 'closed',
+    },
   })
 
   const isTopmostModal = useEvent(() => modalManager.isTopmostModal(modalId))

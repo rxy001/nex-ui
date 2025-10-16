@@ -6,7 +6,7 @@ import {
   testVariantDataAttrs,
 } from '~/tests/shared'
 import { CardActionArea } from '../index'
-import { cardActionAreaClasses } from './constants'
+import { cardActionAreaClasses } from './classes'
 
 describe('CardActionArea', () => {
   testComponentStability(<CardActionArea />)

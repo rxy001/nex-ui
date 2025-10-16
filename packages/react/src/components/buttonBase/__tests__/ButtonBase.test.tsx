@@ -2,6 +2,7 @@ import {
   testComponentStability,
   renderWithNexUIProvider,
   testRefForwarding,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { ButtonBase } from '../index'
@@ -11,6 +12,11 @@ describe('ButtonBase', () => {
   testComponentStability(<ButtonBase />)
 
   testRefForwarding(<ButtonBase />)
+
+  testVariantDataAttrs(<ButtonBase>Button</ButtonBase>, [
+    'disabled',
+    [true, false],
+  ])
 
   it('should render with default props', () => {
     const { container } = renderWithNexUIProvider(

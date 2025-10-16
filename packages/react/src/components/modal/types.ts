@@ -16,12 +16,12 @@ export type ModalProps = {
   children?: ReactNode
 
   /**
-   * If true, the component is shown.(controlled)
+   * If true, the modal is shown. (controlled)
    */
   open?: boolean
 
   /**
-   * If true, the component is shown by default
+   * If true, the modal is shown by default. (uncontrolled)
    */
   defaultOpen?: boolean
 

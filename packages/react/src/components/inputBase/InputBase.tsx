@@ -264,8 +264,10 @@ export const InputBase = (props: InputBaseProps) => {
       disabled,
       autoFocus,
       checked: currentChecked,
-      'data-focus-visible': focusVisible || undefined,
       ...focusProps,
+    },
+    dataAttrs: {
+      focusVisible: focusVisible || undefined,
     },
   })
 
