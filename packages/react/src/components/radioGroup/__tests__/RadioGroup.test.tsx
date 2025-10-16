@@ -10,11 +10,7 @@ import {
 } from '~/tests/shared'
 import { act, fireEvent } from '@testing-library/react'
 import { RadioGroup, Radio } from '../index'
-import {
-  radioGroupClasses,
-  radioGroupDataAttrs,
-  radioDataAttrs,
-} from './constants'
+import { radioGroupClasses } from './classes'
 import type { ElementType } from 'react'
 import type { RadioGroupProps } from '../index'
 
@@ -71,9 +67,7 @@ describe('RadioGroup', () => {
     const root = container.firstElementChild
 
     expect(root).toHaveClass(radioGroupClasses.root)
-    expect(root).toHaveAttribute(
-      ...radioGroupDataAttrs['orientation-horizontal'],
-    )
+    expect(root).toHaveAttribute('data-orientation', 'horizontal')
 
     expect(root).toMatchSnapshot()
   })
@@ -164,10 +158,8 @@ describe('RadioGroup', () => {
     const radios = getAllByRole('radio')
 
     radios.forEach((radio) => {
-      expect(radio.parentElement).toHaveAttribute(
-        ...radioDataAttrs['color-green'],
-      )
-      expect(radio.parentElement).toHaveAttribute(...radioDataAttrs['size-lg'])
+      expect(radio.parentElement).toHaveAttribute('data-color', 'green')
+      expect(radio.parentElement).toHaveAttribute('data-size', 'lg')
     })
   })
 
@@ -201,14 +193,11 @@ describe('RadioGroup', () => {
       </RadioGroup>,
     )
     const radio = getByRole('radio')
-    const radioRoot = radio.parentElement!
 
-    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-false'])
     expect(radio).not.toBeChecked()
     await act(async () => {
       fireEvent.click(radio)
     })
-    expect(radioRoot).toHaveAttribute(...radioDataAttrs['checked-true'])
     expect(radio).toBeChecked()
   })
 

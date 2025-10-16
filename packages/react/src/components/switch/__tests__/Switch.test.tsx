@@ -9,9 +9,10 @@ import {
   testSlotPropsForwarding,
   testColorDataAttrs,
   testSizeDataAttrs,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { Switch } from '../index'
-import { switchClasses, switchDataAttrs } from './constants'
+import { switchClasses } from './classes'
 
 const slots = [
   'root',
@@ -30,6 +31,10 @@ describe('Switch', () => {
   testColorDataAttrs(<Switch />)
 
   testSizeDataAttrs(<Switch />)
+
+  testVariantDataAttrs(<Switch />, ['disabled', [true, false]])
+
+  testVariantDataAttrs(<Switch />, ['checked', [true, false]])
 
   testRefForwarding(<Switch />, HTMLInputElement)
 
@@ -84,10 +89,10 @@ describe('Switch', () => {
 
     expect(root).toMatchSnapshot()
     expect(root).toHaveClass(switchClasses.root)
-    expect(root).toHaveAttribute(...switchDataAttrs['disabled-false'])
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
-    expect(root).toHaveAttribute(...switchDataAttrs['size-md'])
-    expect(root).toHaveAttribute(...switchDataAttrs['color-blue'])
+    expect(root).toHaveAttribute('data-disabled', 'false')
+    expect(root).toHaveAttribute('data-checked', 'false')
+    expect(root).toHaveAttribute('data-size', 'md')
+    expect(root).toHaveAttribute('data-color', 'blue')
   })
 
   it('should render label with children', () => {
@@ -97,21 +102,15 @@ describe('Switch', () => {
   })
 
   it('should support defaultChecked prop', async () => {
-    const { container, getByRole } = renderWithNexUIProvider(
-      <Switch defaultChecked />,
-    )
+    const { getByRole } = renderWithNexUIProvider(<Switch defaultChecked />)
 
-    const root = container.firstElementChild
     const input = getByRole('switch')
 
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
     expect(input).toBeChecked()
 
     await act(async () => {
       fireEvent.click(input)
     })
-
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
 
     expect(input).not.toBeChecked()
 
@@ -119,7 +118,6 @@ describe('Switch', () => {
       fireEvent.click(input)
     })
 
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
     expect(input).toBeChecked()
   })
 
@@ -129,22 +127,18 @@ describe('Switch', () => {
     const root = container.firstElementChild!
     const input = getByRole('switch')
 
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
-
     expect(input).not.toBeChecked()
 
     await act(async () => {
       fireEvent.click(root)
     })
 
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
     expect(input).toBeChecked()
 
     await act(async () => {
       fireEvent.click(root)
     })
 
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
     expect(input).not.toBeChecked()
   })
 
@@ -162,29 +156,23 @@ describe('Switch', () => {
       )
     }
 
-    const { getByRole, container } = renderWithNexUIProvider(
-      <ControlledSwitch />,
-    )
+    const { getByRole } = renderWithNexUIProvider(<ControlledSwitch />)
 
     const input = getByRole('switch')
-    const root = container.firstElementChild
 
     expect(input).not.toBeChecked()
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
 
     await act(async () => {
       fireEvent.click(input)
     })
 
     expect(input).toBeChecked()
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-true'])
 
     await act(async () => {
       fireEvent.click(input)
     })
 
     expect(input).not.toBeChecked()
-    expect(root).toHaveAttribute(...switchDataAttrs['checked-false'])
   })
 
   it('should call onCheckedChange when checked state changes', async () => {
@@ -217,7 +205,6 @@ describe('Switch', () => {
     const input = getByRole('switch')
 
     expect(input).toBeDisabled()
-    expect(root).toHaveAttribute(...switchDataAttrs['disabled-true'])
     expect(root).toHaveStyle('pointer-events: none')
   })
 

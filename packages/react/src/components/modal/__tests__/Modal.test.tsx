@@ -1,4 +1,8 @@
-import { renderWithNexUIProvider, testComponentStability } from '~/tests/shared'
+import {
+  renderWithNexUIProvider,
+  testComponentStability,
+  testStateDataAttrs,
+} from '~/tests/shared'
 import { useState } from 'react'
 import { fireEvent, act, waitFor } from '@testing-library/react'
 import {
@@ -14,10 +18,10 @@ import {
 import { getScrollBarWidth } from '../ModalRoot'
 import type { ModalProps } from '../index'
 
-function TestModal(props: ModalProps) {
+function TestModal(props: ModalProps & { className?: string }) {
   return (
     <Modal {...props}>
-      <ModalRoot data-testid='modal-root'>
+      <ModalRoot data-testid='modal-root' className={props.className}>
         <ModalBackdrop data-testid='modal-backdrop' />
         <ModalPanel data-testid='modal-panel'>
           <ModalContent data-testid='modal-content'>
@@ -53,6 +57,10 @@ const ControlledModal = ({ defaultOpen = false, ...props }: ModalProps) => {
 
 describe('Modal', () => {
   testComponentStability(<TestModal open />, {
+    useAct: true,
+  })
+
+  testStateDataAttrs(<TestModal keepMounted />, {
     useAct: true,
   })
 

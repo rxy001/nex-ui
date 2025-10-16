@@ -15,7 +15,6 @@ export type PopperContextValue = {
   PopperProps,
   | 'flip'
   | 'shift'
-  | 'open'
   | 'container'
   | 'offset'
   | 'placement'

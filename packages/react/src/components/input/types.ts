@@ -143,9 +143,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<
-    'root' | 'label' | 'clearButton' | 'prefix' | 'suffix'
-  >
+  classNames?: ComponentSlotClasses<keyof InputSlotProps>
 
   /**
    * The props used for each slot.

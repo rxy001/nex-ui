@@ -19,7 +19,7 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     slotProps,
     hideBackdrop,
     classNames,
-    open,
+    open: _open,
     onOpenChange: _onOpenChange,
     container: _container,
     setOpen: _setOpen,
@@ -51,7 +51,6 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     shouldForwardComponent: false,
     classNames: slotClasses.root,
     dataAttrs: {
-      state: open ? 'open' : 'closed',
       hideBackdrop,
     },
   })

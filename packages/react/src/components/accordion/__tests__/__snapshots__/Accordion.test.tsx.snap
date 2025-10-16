@@ -84,7 +84,8 @@ exports[`Accordion should render with default props 1`] = `
         aria-controls="panel-1-content"
         aria-expanded="false"
         class="nui-accordion-item-trigger emotion-3"
-        id="«r9»"
+        data-disabled="false"
+        id="«rh»"
         tabindex="0"
         type="button"
       >
