@@ -77,7 +77,7 @@ export function isValidTokenCategory(category: any): category is TokenCategory {
     case 'shadows':
     case 'transitions':
     case 'borderWidths':
-    case 'zIndexes':
+    case 'zIndices':
       return true
     default:
       return false

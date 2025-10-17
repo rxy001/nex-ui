@@ -4,8 +4,8 @@ import colorsCode from './Colors.demo?raw'
 import ColorsDemo from './Colors.demo'
 import variantsCode from './Variants.demo?raw'
 import VariantsDemo from './Variants.demo'
-import radiusCode from './Radius.demo?raw'
-import RadiusDemo from './Radius.demo'
+import radiiCode from './Radii.demo?raw'
+import RadiiDemo from './Radii.demo'
 import statusCode from './Status.demo?raw'
 import StatusDemo from './Status.demo'
 import customIconCode from './CustomIcon.demo?raw'
@@ -30,9 +30,9 @@ export const alert = {
     code: variantsCode,
     demo: <VariantsDemo />,
   },
-  radius: {
-    code: radiusCode,
-    demo: <RadiusDemo />,
+  radii: {
+    code: radiiCode,
+    demo: <RadiiDemo />,
   },
   status: {
     code: statusCode,
