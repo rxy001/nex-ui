@@ -13,7 +13,7 @@ import type {
   BreakpointsDefinition,
   SelectorsDefinition,
   ShadowsDefinition,
-  ZIndexesDefinition,
+  ZIndicesDefinition,
   BorderWidthsDefinition,
   TransitionsDefinition,
   SemanticTokensDefinition,
@@ -32,7 +32,7 @@ import type {
   BordersToken,
   LineHeightsToken,
   ShadowsToken,
-  ZIndexesToken,
+  ZIndicesToken,
   BorderWidthsToken,
   TransitionsToken,
 } from './generated/tokens'
@@ -59,7 +59,7 @@ export type Theme = {
     lineHeights?: LineHeightsDefinition & LineHeightsToken
     radii?: RadiiDefinition & RadiiToken
     shadows?: ShadowsDefinition & ShadowsToken
-    zIndexes?: ZIndexesDefinition & ZIndexesToken
+    zIndices?: ZIndicesDefinition & ZIndicesToken
     borderWidths?: BorderWidthsDefinition & BorderWidthsToken
     transitions?: TransitionsDefinition & TransitionsToken
   }

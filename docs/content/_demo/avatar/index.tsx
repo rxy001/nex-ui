@@ -1,6 +1,6 @@
 import usageCode from './Usage.demo?raw'
 import sizesCode from './Sizes.demo?raw'
-import radiusCode from './Radius.demo?raw'
+import radiiCode from './Radii.demo?raw'
 import colorsCode from './Colors.demo?raw'
 import fallbackCode from './Fallback.demo?raw'
 import outlinedCode from './Outlined.demo?raw'
@@ -10,7 +10,7 @@ import groupSpacingCode from './GroupSpacing.demo?raw'
 import groupCustomSurplusCode from './GroupCustomSurplus.demo?raw'
 import UsageDemo from './Usage.demo'
 import SizesDemo from './Sizes.demo'
-import RadiusDemo from './Radius.demo'
+import RadiiDemo from './Radii.demo'
 import ColorsDemo from './Colors.demo'
 import FallbackDemo from './Fallback.demo'
 import OutlinedDemo from './Outlined.demo'
@@ -28,9 +28,9 @@ export const avatar = {
     code: sizesCode,
     demo: <SizesDemo />,
   },
-  radius: {
-    code: radiusCode,
-    demo: <RadiusDemo />,
+  radii: {
+    code: radiiCode,
+    demo: <RadiiDemo />,
   },
   colors: {
     code: colorsCode,

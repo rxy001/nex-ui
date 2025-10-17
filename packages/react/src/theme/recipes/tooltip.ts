@@ -14,6 +14,7 @@ export const tooltipRecipe = defineSlotRecipe({
       boxShadow: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
+      maxW: '360px',
     },
   },
   variants: {

@@ -1,6 +1,6 @@
 ---
-title: Z-Indexes
-description: Z-Indexes tokens are a collection of preset layer numerical values, ensuring that the global stacking order is controllable and consistent.
+title: Z-Indices
+description: Z-Indices tokens are a collection of preset layer numerical values, ensuring that the global stacking order is controllable and consistent.
 ---
 
 import { Callout } from 'nextra/components'
@@ -8,7 +8,7 @@ import { AvailableProps, TokensTable } from '@/components/docs'
 import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
-# Z-Indexes
+# Z-Indices
 
 Z-Index tokens are a collection of preset layer numerical values, ensuring that the global stacking order is controllable and consistent.
 
@@ -17,15 +17,15 @@ Z-Index tokens are a collection of preset layer numerical values, ensuring that 
     By default, zIndex tokens can be directly applied to the following
     properties&nbsp;
   </span>
-  <AvailableProps.ZIndexes />
+  <AvailableProps.ZIndices />
   <span>.</span>
 </Callout>
 
 Nex UI supports the following tokens out of the box.
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.zIndexes, (value, key) => ({
-    token: `zIndexes.${key}`,
+  dataSource={map(defaultConfig.tokens.zIndices, (value, key) => ({
+    token: `zIndices.${key}`,
     value,
   }))}
 />

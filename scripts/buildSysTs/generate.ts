@@ -111,7 +111,7 @@ export async function generateTokens(sys: any) {
     borderWidths: 'string | number',
     transitions: 'string',
     shadows: 'string',
-    zIndexes: 'string | number',
+    zIndices: 'string | number',
   }
 
   result += tokenCategories

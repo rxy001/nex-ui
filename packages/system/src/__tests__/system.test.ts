@@ -73,7 +73,7 @@ describe('css', () => {
       fontFamilies: {
         body: 'system',
       },
-      zIndexes: {
+      zIndices: {
         min: 1,
       },
       transitions: {
@@ -103,7 +103,7 @@ describe('css', () => {
       paddingRight: 'spaces',
       borderRadius: 'radii',
       border: 'borders',
-      zIndex: 'zIndexes',
+      zIndex: 'zIndices',
       transition: 'transitions',
       boxShadow: 'shadows',
     },
@@ -180,7 +180,7 @@ describe('css', () => {
       fontWeight: getCssVar('fontWeights.medium'),
       lineHeight: getCssVar('lineHeights.base'),
       fontFamily: getCssVar('fontFamilies.body'),
-      zIndex: getCssVar('zIndexes.min'),
+      zIndex: getCssVar('zIndices.min'),
       transition: getCssVar('transitions.all'),
       boxShadow: getCssVar('shadows.sm'),
       margin: getCssVar('spaces.1'),

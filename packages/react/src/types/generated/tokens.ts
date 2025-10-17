@@ -206,7 +206,7 @@ export interface DefaultTokens {
     | 'transform'
     | 'margin'
     | 'scale'
-  zIndexes: 'modal' | 'tooltip'
+  zIndices: 'modal' | 'tooltip'
 }
 
 export interface ColorsToken {
@@ -462,7 +462,7 @@ export interface TransitionsToken {
   scale?: string
 }
 
-export interface ZIndexesToken {
+export interface ZIndicesToken {
   modal?: string | number
   tooltip?: string | number
 }

@@ -25,5 +25,5 @@ export default {
   'border-widths': 'BorderWidths',
   transitions: 'Transitions',
   typography: 'Typography',
-  'z-indexes': 'Z-Indexes',
+  'z-indices': 'Z-Indices',
 }

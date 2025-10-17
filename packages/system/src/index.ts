@@ -65,7 +65,7 @@ export type {
   TokensDefinition,
   TransitionsDefinition,
   ShadowsDefinition,
-  ZIndexesDefinition,
+  ZIndicesDefinition,
   BorderWidthsDefinition,
   SemanticShadowsDefinition,
   SemanticBordersDefinition,
@@ -79,7 +79,7 @@ export type {
   SemanticSpacesDefinition,
   SemanticBorderWidthsDefinition,
   SemanticTransitionsDefinition,
-  SemanticZIndexesDefinition,
+  SemanticZIndicesDefinition,
   TokenCategory,
 } from './tokens'
 

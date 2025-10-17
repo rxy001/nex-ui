@@ -23,7 +23,7 @@ export type TokenCategory =
   | 'radii'
   | 'borderWidths'
   | 'shadows'
-  | 'zIndexes'
+  | 'zIndices'
   | 'transitions'
 
 export type ColorsDefinition = Dictionary<
@@ -64,7 +64,7 @@ export type ShadowsDefinition = Dictionary<string>
 
 export type BorderWidthsDefinition = Dictionary<string | number>
 
-export type ZIndexesDefinition = Dictionary<number>
+export type ZIndicesDefinition = Dictionary<number>
 
 type NestedColor =
   | CSSProperties['color']
@@ -124,7 +124,7 @@ export type SemanticTransitionsDefinition =
 export type SemanticBorderWidthsDefinition =
   Dictionary<StringAndNumberForNestedSemanticTokenValue>
 
-export type SemanticZIndexesDefinition =
+export type SemanticZIndicesDefinition =
   Dictionary<StringAndNumberForNestedSemanticTokenValue>
 
 export type SemanticShadowsDefinition =
@@ -143,7 +143,7 @@ export type SemanticTokensDefinition = {
   transitions?: SemanticTransitionsDefinition
   shadows?: SemanticShadowsDefinition
   borderWidths?: SemanticBorderWidthsDefinition
-  zIndexes?: SemanticZIndexesDefinition
+  zIndices?: SemanticZIndicesDefinition
 }
 
 export type TokensDefinition = {
@@ -159,7 +159,7 @@ export type TokensDefinition = {
   shadows?: ShadowsDefinition
   transitions?: TransitionsDefinition
   borderWidths?: BorderWidthsDefinition
-  zIndexes?: ZIndexesDefinition
+  zIndices?: ZIndicesDefinition
 }
 
 export type CreateTokensConfig = {

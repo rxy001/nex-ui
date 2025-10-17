@@ -8,7 +8,7 @@ import { radii } from './radii'
 import { borderWidths } from './borderWidths'
 import { shadows } from './shadows'
 import { transitions } from './transitions'
-import { zIndexes } from './zIndexes'
+import { zIndices } from './zIndices'
 
 export const tokens = defineTokens({
   colors,
@@ -23,5 +23,5 @@ export const tokens = defineTokens({
   borderWidths,
   shadows,
   transitions,
-  zIndexes,
+  zIndices,
 })

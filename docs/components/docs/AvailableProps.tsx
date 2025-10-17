@@ -35,7 +35,7 @@ const tokenCategories: TokenCategory[] = [
   'radii',
   'shadows',
   'transitions',
-  'zIndexes',
+  'zIndices',
 ]
 
 function factory(props: string[]) {
