@@ -1,6 +1,6 @@
 import usageCode from './Usage.demo?raw'
 import disabledCode from './Disabled.demo?raw'
-import radiusCode from './Radius.demo?raw'
+import radiiCode from './Radii.demo?raw'
 import sizesCode from './Sizes.demo?raw'
 import colorsCode from './Colors.demo?raw'
 import variantsCode from './Variants.demo?raw'
@@ -9,7 +9,7 @@ import withIconsCode from './WithIcons.demo?raw'
 import iconOnlyCode from './IconOnly.demo?raw'
 import UsageDemo from './Usage.demo'
 import DisabledDemo from './Disabled.demo'
-import RadiusDemo from './Radius.demo'
+import RadiiDemo from './Radii.demo'
 import SizesDemo from './Sizes.demo'
 import ColorsDemo from './Colors.demo'
 import VariantsDemo from './Variants.demo'
@@ -26,9 +26,9 @@ export const button = {
     code: disabledCode,
     demo: <DisabledDemo />,
   },
-  radius: {
-    code: radiusCode,
-    demo: <RadiusDemo />,
+  radii: {
+    code: radiiCode,
+    demo: <RadiiDemo />,
   },
   sizes: {
     code: sizesCode,

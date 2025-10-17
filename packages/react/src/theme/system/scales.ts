@@ -88,5 +88,5 @@ export const scales = defineConfig.scales({
 
   transition: 'transitions',
 
-  zIndex: 'zIndexes',
+  zIndex: 'zIndices',
 })

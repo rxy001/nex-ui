@@ -47,7 +47,7 @@ describe('createTokens', () => {
         transitions: {
           all: 'all 0.2s',
         },
-        zIndexes: {
+        zIndices: {
           min: 0,
         },
       },
@@ -170,7 +170,7 @@ describe('createTokens', () => {
         // @ts-expect-error
         transitions: testToken,
         // @ts-expect-error
-        zIndexes: testToken,
+        zIndices: testToken,
       },
       semanticTokens: {},
       prefix: PREFIX,

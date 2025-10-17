@@ -22,7 +22,7 @@ defineTokens.radii = (v: TokensDefinition['radii']) => v
 defineTokens.shadows = (v: TokensDefinition['shadows']) => v
 defineTokens.transitions = (v: TokensDefinition['transitions']) => v
 defineTokens.borderWidths = (v: TokensDefinition['borderWidths']) => v
-defineTokens.zIndexes = (v: TokensDefinition['zIndexes']) => v
+defineTokens.zIndices = (v: TokensDefinition['zIndices']) => v
 
 export const defineSemanticTokens = (v: SemanticTokensDefinition) => v
 defineSemanticTokens.colors = (v: SemanticTokensDefinition['colors']) => v
@@ -47,4 +47,4 @@ defineSemanticTokens.transitions = (
 defineSemanticTokens.borderWidths = (
   v: SemanticTokensDefinition['borderWidths'],
 ) => v
-defineSemanticTokens.zIndexes = (v: SemanticTokensDefinition['zIndexes']) => v
+defineSemanticTokens.zIndices = (v: SemanticTokensDefinition['zIndices']) => v

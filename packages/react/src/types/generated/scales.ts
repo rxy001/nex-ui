@@ -83,5 +83,5 @@ export interface DefaultScales {
   outline?: 'borders'
   boxShadow?: 'shadows'
   transition?: 'transitions'
-  zIndex?: 'zIndexes'
+  zIndex?: 'zIndices'
 }

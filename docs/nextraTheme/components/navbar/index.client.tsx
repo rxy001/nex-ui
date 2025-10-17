@@ -16,10 +16,10 @@ import type { FC, ReactNode } from 'react'
 
 const classes = {
   link: cn(
-    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
-    'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-100 x:dark:hover:text-gray-300',
+    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap x:font-medium',
+    'x:text-gray-600 x:hover:text-black x:dark:text-gray-100 x:dark:hover:text-gray-300',
     'x:ring-inset x:transition-colors',
-    'x:font-medium',
+    'x:aria-[current="true"]:text-blue-600 x:dark:aria-[current="true"]:text-blue-600 x:aria-[current="true"]:subpixel-antialiased',
   ),
 }
 
@@ -128,10 +128,7 @@ export const ClientNavbar: FC<{
             <Anchor
               href={href}
               key={href}
-              className={cn(
-                classes.link,
-                'x:aria-[current="true"]:text-blue-600 x:aria-[current="true"]:subpixel-antialiased',
-              )}
+              className={classes.link}
               aria-current={isCurrentPage}
             >
               {page.title}
