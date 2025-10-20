@@ -54,7 +54,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   hideBackdrop?: boolean
 
   /**
-   * If true, close the dialog when the backdrop is clicked.
+   * If true, closes the dialog when the backdrop is clicked.
    * @default true
    */
   closeOnInteractBackdrop?: boolean
