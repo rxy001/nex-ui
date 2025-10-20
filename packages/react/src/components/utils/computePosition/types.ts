@@ -60,8 +60,8 @@ export type MiddlewareData = {
 
 export type ComputePositionOptions = {
   placement?: Placement
-  offset?: OffsetOptions | boolean
-  flip?: FlipOptions | boolean
+  offset?: OffsetOptions | false
+  flip?: FlipOptions | false
   shift?: boolean
   arrow?: ArrowOptions | false
 }

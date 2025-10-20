@@ -1,6 +1,6 @@
 import { isPlainObject } from '@nex-ui/utils'
 import { getElementRects } from './getElementRects'
-import { flip, arrow, offset, shift } from './middlewares'
+import { flip, arrow, offset, shift } from './middleware'
 import { computeCoordinatesByPlacement } from './computeCoordinatesByPlacement'
 import type {
   Placement,
@@ -17,9 +17,9 @@ export function computePosition(
 ) {
   const {
     placement = 'bottom',
-    shift: shiftOption = false,
-    offset: offsetOption = false,
-    flip: flipOption = false,
+    shift: shiftOption,
+    offset: offsetOption,
+    flip: flipOption,
     arrow: arrowOption = false,
   } = options ?? {}
 
@@ -30,9 +30,9 @@ export function computePosition(
     [offsetOption, offset],
   ]
 
-  const middlewares = middlewareOptions
+  const middlewareList = middlewareOptions
     .filter(([option]) => option !== false)
-    .map(([option, fn]) => fn(typeof option === 'boolean' ? undefined : option))
+    .map(([option, fn]) => fn(option))
 
   const rects = getElementRects(reference, popper)
 
@@ -58,8 +58,8 @@ export function computePosition(
     initialPlacement: placement,
   }
 
-  for (let i = 0; i < middlewares.length; i++) {
-    const middleware = middlewares[i]
+  for (let i = 0; i < middlewareList.length; i++) {
+    const middleware = middlewareList[i]
 
     let nextX, nextY
 
