@@ -120,10 +120,17 @@ describe('computePosition', () => {
     defineWindowScroll(0, 0)
   })
 
-  it('should return correct coordinates with default options', () => {
+  it('Should return the correct coordinates when not using middleware', () => {
     const { x, y, placement, middlewareData } = computePosition(
       reference,
       popper,
+      {
+        arrow: false,
+        flip: false,
+        offset: false,
+        shift: false,
+        placement: 'bottom',
+      },
     )
 
     appendToBody(reference, popper)
@@ -160,6 +167,10 @@ describe('computePosition', () => {
       popper,
       {
         placement: 'top',
+        arrow: false,
+        flip: false,
+        offset: false,
+        shift: false,
       },
     )
 
@@ -182,6 +193,9 @@ describe('computePosition', () => {
           flip: {
             mainAxis: true,
           },
+          arrow: false,
+          offset: false,
+          shift: false,
         },
       )
       expect(x).toBe(0)
@@ -206,6 +220,9 @@ describe('computePosition', () => {
           flip: {
             mainAxis: true,
           },
+          arrow: false,
+          offset: false,
+          shift: false,
         },
       ))
       expect(x).toBe(-50)
@@ -236,6 +253,9 @@ describe('computePosition', () => {
           flip: {
             crossAxis: true,
           },
+          arrow: false,
+          offset: false,
+          shift: false,
         },
       )
       expect(x).toBe(0)
@@ -263,7 +283,13 @@ describe('computePosition', () => {
         popper,
         {
           placement: 'top-end',
-          flip: true,
+          flip: {
+            crossAxis: true,
+            mainAxis: true,
+          },
+          arrow: false,
+          offset: false,
+          shift: false,
         },
       )
       expect(x).toBe(0)
@@ -319,7 +345,9 @@ describe('computePosition', () => {
 
       const { x, y, placement } = computePosition(reference, popper, {
         placement: 'top',
-        flip: true,
+        arrow: false,
+        offset: false,
+        shift: false,
       })
 
       expect(x).toBe(-50)
@@ -340,7 +368,9 @@ describe('computePosition', () => {
 
       const { x, y, placement } = computePosition(reference, popper, {
         placement: 'top',
-        flip: true,
+        arrow: false,
+        offset: false,
+        shift: false,
       })
 
       expect(x).toBe(-50)
@@ -366,7 +396,9 @@ describe('computePosition', () => {
 
       const { x, y, placement } = computePosition(reference, popper, {
         placement: 'top-start',
-        flip: true,
+        arrow: false,
+        offset: false,
+        shift: false,
       })
 
       expect(x).toBe(0)
@@ -402,7 +434,9 @@ describe('computePosition', () => {
 
       const { x, y, placement } = computePosition(reference, popper, {
         placement: 'left-start',
-        flip: true,
+        arrow: false,
+        offset: false,
+        shift: false,
       })
 
       expect(x).toBe(-50)
@@ -438,6 +472,9 @@ describe('computePosition', () => {
         {
           placement: 'bottom-start',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       )
 
@@ -465,6 +502,9 @@ describe('computePosition', () => {
         {
           placement: 'right-start',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       )
 
@@ -494,6 +534,9 @@ describe('computePosition', () => {
         {
           placement: 'bottom-start',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       )
 
@@ -512,6 +555,9 @@ describe('computePosition', () => {
         {
           placement: 'bottom',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       ))
       expect(x).toBe(50)
@@ -529,6 +575,9 @@ describe('computePosition', () => {
         {
           placement: 'bottom-end',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       ))
       expect(x).toBe(50)
@@ -549,6 +598,9 @@ describe('computePosition', () => {
         {
           placement: 'bottom-start',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       ))
 
@@ -567,6 +619,9 @@ describe('computePosition', () => {
         {
           placement: 'bottom',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       ))
       expect(x).toBe(350)
@@ -584,6 +639,9 @@ describe('computePosition', () => {
         {
           placement: 'bottom-end',
           shift: true,
+          arrow: false,
+          offset: false,
+          flip: false,
         },
       ))
       expect(x).toBe(350)
@@ -607,7 +665,9 @@ describe('computePosition', () => {
         popper,
         {
           placement: 'top',
-          offset: true,
+          arrow: false,
+          flip: false,
+          shift: false,
         },
       )
 
@@ -631,6 +691,9 @@ describe('computePosition', () => {
         {
           placement: 'top',
           offset: 10,
+          arrow: false,
+          flip: false,
+          shift: false,
         },
       )
 
@@ -651,6 +714,9 @@ describe('computePosition', () => {
           offset: {
             mainAxis: 20,
           },
+          arrow: false,
+          flip: false,
+          shift: false,
         },
       ))
 
@@ -676,6 +742,9 @@ describe('computePosition', () => {
           offset: {
             crossAxis: 10,
           },
+          arrow: false,
+          flip: false,
+          shift: false,
         },
       )
       expect(x).toBe(10)
@@ -695,6 +764,9 @@ describe('computePosition', () => {
           offset: {
             crossAxis: 10,
           },
+          arrow: false,
+          flip: false,
+          shift: false,
         },
       ))
       expect(x).toBe(-110)
@@ -728,6 +800,9 @@ describe('computePosition', () => {
         arrow: {
           element: arrow,
         },
+        flip: false,
+        shift: false,
+        offset: false,
       })
       expect(middlewareData.arrow).toEqual({
         x: 20,
@@ -739,6 +814,9 @@ describe('computePosition', () => {
         arrow: {
           element: arrow,
         },
+        flip: false,
+        shift: false,
+        offset: false,
       }))
       expect(middlewareData.arrow).toEqual({
         x: 95,
@@ -750,6 +828,9 @@ describe('computePosition', () => {
         arrow: {
           element: arrow,
         },
+        flip: false,
+        shift: false,
+        offset: false,
       }))
       expect(middlewareData.arrow).toEqual({
         x: 170,
@@ -761,6 +842,9 @@ describe('computePosition', () => {
         arrow: {
           element: arrow,
         },
+        flip: false,
+        shift: false,
+        offset: false,
       }))
       expect(middlewareData.arrow).toEqual({
         x: 195,
@@ -772,6 +856,9 @@ describe('computePosition', () => {
         arrow: {
           element: arrow,
         },
+        flip: false,
+        shift: false,
+        offset: false,
       }))
       expect(middlewareData.arrow).toEqual({
         x: 195,
@@ -783,6 +870,9 @@ describe('computePosition', () => {
         arrow: {
           element: arrow,
         },
+        flip: false,
+        shift: false,
+        offset: false,
       }))
       expect(middlewareData.arrow).toEqual({
         x: 195,
@@ -796,6 +886,9 @@ describe('computePosition', () => {
       const { middlewareData } = computePosition(reference, popper, {
         placement: 'bottom-start',
         arrow: {},
+        flip: false,
+        shift: false,
+        offset: false,
       })
       expect(middlewareData).toEqual({})
     })

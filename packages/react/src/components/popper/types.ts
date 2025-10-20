@@ -42,9 +42,9 @@ export type PopperProps = {
   /**
    * Changes the placement of the popper element to keep it in view.
    *
-   * @default true
+   * @default { mainAxis: true, crossAxis: true }
    */
-  flip?: FlipOptions | boolean
+  flip?: FlipOptions | false
 
   /**
    * Shifts the popper element to keep it in view.
@@ -56,9 +56,9 @@ export type PopperProps = {
   /**
    * Translates the popper element along the specified axes.
    *
-   * @default true
+   * @default 5
    */
-  offset?: OffsetOptions | boolean
+  offset?: OffsetOptions | false
 
   /**
    * If true, always keep the children in the DOM.
