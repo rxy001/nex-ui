@@ -1,0 +1,246 @@
+---
+title: Tooltip
+description: Tooltip 在用户与元素交互时显示一条简短的信息。
+---
+
+import { tooltip } from '@/content/_demo'
+
+# Tooltip
+
+Tooltip 在用户与元素交互时显示一条简短的信息。
+
+<ComponentLinks component='tooltip' ariaCompatible />
+
+## Usage
+
+<Example {...tooltip.usage} />
+
+### Colors
+
+<Example {...tooltip.colors} />
+
+### Placements
+
+<Example {...tooltip.placements} />
+
+### Sizes
+
+<Example {...tooltip.sizes} />
+
+### Offset
+
+使用 `offset` 属性可以设置 Tooltip 的偏移量，包括主轴和交叉轴的偏移。设置 `false` 可禁用偏移。
+
+<Example {...tooltip.offset} />
+
+### Interactive
+
+使用 `interactive` 属性可以使内容在交互式时保持可见。 默认为 `true`。
+
+<Example {...tooltip.interactive} />
+
+### Delay
+
+使用 `openDelay` 和 `closeDelay` 属性可以设置显示和隐藏 Tooltip 的延迟时间（以毫秒为单位）。
+
+<Example {...tooltip.delay} />
+
+### Controlled
+
+<Example {...tooltip.controlled} />
+
+### Custom Motion
+
+Tooltip 根元素默认为 motion 组件，可以通过 `variants` 属性自定义 `visible` / `hidden` 的动画效果。
+
+<Example {...tooltip.customMotion} />
+
+## API
+
+### Tooltip Props
+
+Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'content',
+      type: 'ReactNode',
+      description: 'Tooltip 显示的内容。',
+    },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'Tooltip 的触发元素。',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement | null', '() => HTMLElement | null'],
+      description: '放置 Portal 的容器元素。',
+      default: 'document.body',
+    },
+    {
+      prop: 'open',
+      type: 'boolean',
+      description: '控制 Tooltip 的打开状态。(受控)',
+    },
+    {
+      prop: 'defaultOpen',
+      type: 'boolean',
+      description: 'Tooltip 的默认打开状态。(非受控)',
+    },
+    {
+      prop: 'onOpenChange',
+      type: '(open: boolean) => void',
+      description: '当 Tooltip 打开/关闭时触发回调函数。',
+    },
+    {
+      prop: 'placement',
+      type: [
+        `'top'`,
+        `'top-start'`,
+        `'top-end'`,
+        `'bottom'`,
+        `'bottom-start'`,
+        `'bottom-end'`,
+        `'left'`,
+        `'left-start'`,
+        `'left-end'`,
+        `'right'`,
+        `'right-start'`,
+        `'right-end'`,
+      ],
+      default: `'top'`,
+      description: 'Tooltip 出现的位置。',
+    },
+    {
+      prop: 'size',
+      type: `'sm' | 'md' | 'lg'`,
+      default: `'md'`,
+      description: 'Tooltip 的大小。',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'default'`,
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: `'default'`,
+      description: 'Tooltip 的颜色主题。',
+    },
+    {
+      prop: 'radius',
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      default: `'md'`,
+      description: 'Tooltip 的圆角大小。',
+    },
+    {
+      prop: 'offset',
+      type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
+      default: '5',
+      description: '设置 Tooltip 的偏移量，或禁用偏移。',
+    },
+    {
+      prop: 'flip',
+      type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
+      default: '{ mainAxis: true, crossAxis: true }',
+      description: '更改 Tooltip 的位置，使其保持在视图中。',
+    },
+    {
+      prop: 'shift',
+      type: 'boolean',
+      default: 'true',
+      description: '移动popper元素以使其保持在可见范围内。',
+    },
+    {
+      prop: 'interactive',
+      type: 'boolean',
+      default: 'true',
+      description: '是否在交互式时保持内容可见。',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      default: 'false',
+      description: '即使 Tooltip 未打开也保持其挂载状态。',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: '按下 Escape 键时是否关闭 Tooltip。',
+    },
+    {
+      prop: 'closeOnClick',
+      type: 'boolean',
+      default: 'true',
+      description: '点击触发元素时是否关闭 Tooltip。',
+    },
+    {
+      prop: 'openDelay',
+      type: 'number',
+      default: '100',
+      description: '显示 Tooltip 前的延迟时间（毫秒）。',
+    },
+    {
+      prop: 'closeDelay',
+      type: 'number',
+      default: '100',
+      description: '隐藏 Tooltip 前的延迟时间（毫秒）。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Tooltip 根元素的 ref。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: 'm.div',
+      description:
+        '用于 Tooltip 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Tooltip Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Tooltip Slots 的 props。',
+    },
+
+]}
+/>
+
+### Tooltip Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'content',
+      description: 'Tooltip 的内容容器。',
+      class: '.nui-tooltip-content',
+      component: "'div'",
+    },
+  ]}
+/>

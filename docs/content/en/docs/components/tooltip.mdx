@@ -1,0 +1,251 @@
+---
+title: Tooltip
+description: Tooltips display a brief, informative message that appears when a user interacts with an element.
+---
+
+import { tooltip } from '@/content/_demo'
+
+# Tooltip
+
+Tooltips display a brief, informative message that appears when a user interacts with an element.
+
+<ComponentLinks component='tooltip' ariaCompatible />
+
+## Usage
+
+<Example {...tooltip.usage} />
+
+### Colors
+
+<Example {...tooltip.colors} />
+
+### Placements
+
+<Example {...tooltip.placements} />
+
+### Sizes
+
+<Example {...tooltip.sizes} />
+
+### Offset
+
+Use the `offset` prop to set the tooltip's offset, including the main axis and cross axis offsets. Setting it to `false` disables the offset.
+
+<Example {...tooltip.offset} />
+
+### Interactive
+
+Use the `interactive` prop to keep the tooltip open when interacting with its content. Defaults to `true`.
+
+<Example {...tooltip.interactive} />
+
+### Delay
+
+Use the `openDelay` and `closeDelay` props to set the delay time (in milliseconds) for showing and hiding the tooltip.
+
+<Example {...tooltip.delay} />
+
+### Controlled
+
+<Example {...tooltip.controlled} />
+
+### Custom Motion
+
+The Tooltip root element is by default a motion component, and the animation effects for visible / hidden can be customized via the variants property.
+
+<Example {...tooltip.customMotion} />
+
+## API
+
+### Tooltip Props
+
+Tooltip inherit the props of `as` (by default, `m.div`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'content',
+      type: 'ReactNode',
+      description: 'The content to render inside the tooltip.',
+    },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The children to render. Usually a trigger element.',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement | null', '() => HTMLElement | null'],
+      description:
+        'The container element in which the overlay portal will be placed.',
+      default: 'document.body',
+    },
+    {
+      prop: 'open',
+      type: 'boolean',
+      description: 'If true, the popper is shown. (controlled)',
+    },
+    {
+      prop: 'defaultOpen',
+      type: 'boolean',
+      description: 'If true, the popper is shown by default. (uncontrolled)',
+    },
+    {
+      prop: 'onOpenChange',
+      type: '(open: boolean) => void',
+      description:
+        'Handler that is called when the popper is opened or closed.',
+    },
+    {
+      prop: 'placement',
+      type: [
+        `'top'`,
+        `'top-start'`,
+        `'top-end'`,
+        `'bottom'`,
+        `'bottom-start'`,
+        `'bottom-end'`,
+        `'left'`,
+        `'left-start'`,
+        `'left-end'`,
+        `'right'`,
+        `'right-start'`,
+        `'right-end'`,
+      ],
+      default: `'top'`,
+      description:
+        'The placement of the popper relative to the trigger element.',
+    },
+    {
+      prop: 'size',
+      type: `'sm' | 'md' | 'lg'`,
+      default: `'md'`,
+      description: 'The size of the tooltip.',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'default'`,
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: `'default'`,
+      description: 'The color of the tooltip.',
+    },
+    {
+      prop: 'radius',
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      default: `'md'`,
+      description: 'The border radius of the tooltip.',
+    },
+    {
+      prop: 'offset',
+      type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
+      default: '5',
+      description: 'Translates the popper element along the specified axes.',
+    },
+    {
+      prop: 'flip',
+      type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
+      default: '{ mainAxis: true, crossAxis: true }',
+      description:
+        'Changes the placement of the popper element to keep it in view.',
+    },
+    {
+      prop: 'shift',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shifts the popper element to keep it in view.',
+    },
+    {
+      prop: 'interactive',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'If true, keeps the tooltip open when interacting with its content.',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, always keep the children in the DOM.',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'If true, closes the popper when the escape key is pressed.',
+    },
+    {
+      prop: 'closeOnClick',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'If true, closes the tooltip when clicking the trigger element.',
+    },
+    {
+      prop: 'openDelay',
+      type: 'number',
+      default: '100',
+      description: 'The delay in milliseconds before the popper opens.',
+    },
+    {
+      prop: 'closeDelay',
+      type: 'number',
+      default: '100',
+      description: 'The delay in milliseconds before the popper closes.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root element.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: 'm.div',
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### Tooltip Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'content',
+      description: 'The content container of the Tooltip.',
+      class: '.nui-tooltip-content',
+      component: "'div'",
+    },
+  ]}
+/>

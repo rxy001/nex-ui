@@ -54,7 +54,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   classNames?: ComponentSlotClasses<keyof DrawerSlotProps>
 
   /**
-   * If true, close the drawer when the backdrop is clicked.
+   * If true, closes the drawer when the backdrop is clicked.
    * @default true
    */
   closeOnInteractBackdrop?: boolean

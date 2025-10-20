@@ -43,7 +43,7 @@ export type ModalProps = {
   keepMounted?: boolean
 
   /**
-   * If true, close the modal when the outside is clicked.
+   * If true, closes the modal when the outside is clicked.
    * @default true
    */
   closeOnInteractOutside?: boolean
@@ -55,7 +55,7 @@ export type ModalProps = {
   preventScroll?: boolean
 
   /**
-   * If true, close the modal when the escape key is pressed.
+   * If true, closes the modal when the escape key is pressed.
    * @default true
    */
   closeOnEscape?: boolean

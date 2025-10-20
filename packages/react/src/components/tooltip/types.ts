@@ -45,7 +45,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = {
   interactive?: boolean
 
   /**
-   * If true, closes the toolip when clicking the trigger element.
+   * If true, closes the tooltip when clicking the trigger element.
    *
    * @default true
    */

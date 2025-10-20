@@ -5,8 +5,12 @@ export default {
   button: 'Button',
   card: 'Card',
   checkbox: 'Checkbox',
+  dialog: 'Dialog',
   divider: 'Divider',
+  drawer: 'Drawer',
   flex: 'Flex',
   input: 'Input',
+  radioGroup: 'RadioGroup',
   switch: 'Switch',
+  tooltip: 'Tooltip',
 }
