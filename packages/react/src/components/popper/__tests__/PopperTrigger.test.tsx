@@ -86,9 +86,9 @@ describe('PopperTrigger', () => {
     expect(queryByTestId('popper-root')).toBeNull()
   })
 
-  it('should support focus action', async () => {
+  it('should close when clicking the trigger if closeOnClick is true', async () => {
     const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-      <TestPopper action='focus' />,
+      <TestPopper action='hover' closeOnClick />,
       {
         useAct: true,
       },
@@ -98,16 +98,80 @@ describe('PopperTrigger', () => {
 
     expect(queryByTestId('popper-root')).toBeNull()
 
-    await user.tab()
+    await user.hover(trigger)
 
-    expect(document.activeElement).toBe(trigger)
     expect(queryByTestId('popper-root')).toBeInTheDocument()
 
-    await user.tab()
+    await user.click(trigger)
 
-    expect(document.activeElement).not.toBe(trigger)
+    expect(queryByTestId('popper-root')).toBeNull()
+  })
 
-    await waitForElementToBeRemoved(() => queryByTestId('popper-root'))
+  it('should not close when clicking the trigger if closeOnClick is false', async () => {
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
+      <TestPopper action='hover' closeOnClick={false} />,
+      {
+        useAct: true,
+      },
+    )
+
+    const trigger = getByTestId('popper-trigger')
+
+    expect(queryByTestId('popper-root')).toBeNull()
+
+    await user.hover(trigger)
+
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
+
+    await user.click(trigger)
+
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
+  })
+
+  it('should keep the popper open when interacting with its content if interactive is true', async () => {
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
+      <TestPopper action='hover' interactive />,
+      {
+        useAct: true,
+      },
+    )
+
+    const trigger = getByTestId('popper-trigger')
+
+    expect(queryByTestId('popper-root')).toBeNull()
+
+    await user.hover(trigger)
+
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
+
+    const content = getByTestId('popper-content')
+
+    await user.hover(content)
+    await user.unhover(trigger)
+
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
+  })
+
+  it('should close the popper when interacting with its content if interactive is false', async () => {
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
+      <TestPopper action='hover' interactive={false} />,
+      {
+        useAct: true,
+      },
+    )
+
+    const trigger = getByTestId('popper-trigger')
+
+    expect(queryByTestId('popper-root')).toBeNull()
+
+    await user.hover(trigger)
+
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
+
+    const content = getByTestId('popper-content')
+
+    await user.hover(content)
+    await user.unhover(trigger)
 
     expect(queryByTestId('popper-root')).toBeNull()
   })

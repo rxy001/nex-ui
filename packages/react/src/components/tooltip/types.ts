@@ -1,7 +1,7 @@
 import type { ReactNode, ElementType } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { DOMMotionComponents } from 'motion/react'
-import type { PopperProps, PopperTriggerProps } from '../popper'
+import type { PopperProps } from '../popper'
 import type { TooltipRecipeVariants } from '../../theme/recipes'
 import type {
   ComponentSlotClasses,
@@ -38,11 +38,18 @@ export type TooltipOwnProps<RootComponent extends ElementType> = {
   as?: RootComponent
 
   /**
-   * The action that triggers the tooltip.
+   * If true, keeps the tooltip open when interacting with its content.
    *
-   * @default 'hover'
+   * @default true
    */
-  action?: PopperTriggerProps['action']
+  interactive?: boolean
+
+  /**
+   * If true, closes the toolip when clicking the trigger element.
+   *
+   * @default true
+   */
+  closeOnClick?: boolean
 
   /**
    * The color of the tooltip.

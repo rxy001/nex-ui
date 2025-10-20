@@ -13,14 +13,20 @@ import type { PopperTriggerProps } from './types'
 
 export const PopperTrigger = (props: PopperTriggerProps) => {
   const {
+    open,
+    setOpen,
     hidePopper,
     showPopper,
     referenceRef,
-    open,
     popperRootRef,
     popperRootId,
   } = usePopper()
-  const { children, action = 'hover' } = props
+  const {
+    children,
+    interactive = true,
+    action = 'hover',
+    closeOnClick = true,
+  } = props
 
   useEffect(() => {
     if (open && action === 'click') {
@@ -29,18 +35,21 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
         // istanbul ignore next
         if (!open) return
 
+        const target = e.target as Node
+
         if (
-          !popperRootRef?.current?.contains(e.target as Node) &&
-          !referenceRef?.current?.contains(e.target as Node)
+          !interactive ||
+          (!popperRootRef?.current?.contains(target) &&
+            !referenceRef?.current?.contains(target))
         ) {
           hidePopper()
         }
       })
     }
-  }, [action, hidePopper, open, popperRootRef, referenceRef])
+  }, [action, hidePopper, interactive, open, popperRootRef, referenceRef])
 
   useEffect(() => {
-    if (open && action === 'hover' && popperRootRef.current) {
+    if (open && interactive && action === 'hover' && popperRootRef.current) {
       const removeMouseenter = addEventListener(
         popperRootRef.current,
         'mouseenter',
@@ -56,7 +65,7 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
         removeMouseleave()
       }
     }
-  }, [action, hidePopper, open, popperRootRef, showPopper])
+  }, [action, hidePopper, interactive, open, popperRootRef, showPopper])
 
   const renderChildren = () => {
     const element = children as React.ReactElement<any>
@@ -65,8 +74,6 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
       onClick,
       onMouseEnter,
       onMouseLeave,
-      onBlur,
-      onFocus,
       'aria-describedby': ariaDescribedby,
     } = element.props
 
@@ -77,10 +84,10 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
 
     if (action === 'click') {
       const handleClick = chain(() => {
-        if (open) {
-          hidePopper()
-        } else {
+        if (!open) {
           showPopper()
+        } else if (closeOnClick) {
+          hidePopper()
         }
       }, onClick)
 
@@ -88,15 +95,13 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
     } else if (action === 'hover') {
       const handleMouseEnter = chain(showPopper, onMouseEnter)
       const handleMouseLeave = chain(hidePopper, onMouseLeave)
+      const handleClick = chain(() => {
+        if (closeOnClick && open) setOpen(false)
+      }, onClick)
 
       props.onMouseEnter = handleMouseEnter
       props.onMouseLeave = handleMouseLeave
-    } else if (action === 'focus') {
-      const handleFocus = chain(showPopper, onFocus)
-      const handleBlur = chain(hidePopper, onBlur)
-
-      props.onFocus = handleFocus
-      props.onBlur = handleBlur
+      props.onClick = handleClick
     }
 
     return cloneElement(element, {

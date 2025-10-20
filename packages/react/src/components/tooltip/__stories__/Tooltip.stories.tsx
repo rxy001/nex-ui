@@ -85,10 +85,6 @@ const meta = {
       options: placements,
       control: 'select',
     },
-    action: {
-      options: ['hover', 'click', 'focus'],
-      control: 'select',
-    },
     closeOnEscape: {
       control: 'boolean',
     },
@@ -98,12 +94,15 @@ const meta = {
     openDelay: {
       control: 'number',
     },
+    interactive: {
+      control: 'boolean',
+    },
   },
   args: {
     size: 'md',
     radius: 'md',
     placement: 'bottom',
-    action: 'hover',
+    interactive: true,
     closeOnEscape: true,
   },
   render: (props) => {

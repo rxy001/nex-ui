@@ -35,8 +35,9 @@ export const Tooltip = <
     keepMounted,
     defaultOpen,
     closeOnEscape,
+    closeOnClick = true,
     color = 'default',
-    action = 'hover',
+    interactive = true,
     placement = 'bottom',
     size = 'md',
     radius = 'md',
@@ -46,10 +47,11 @@ export const Tooltip = <
   const ownerState = {
     ...props,
     placement,
-    action,
     size,
     radius,
     color,
+    interactive,
+    closeOnClick,
   }
 
   const styles = useStyles({
@@ -100,7 +102,9 @@ export const Tooltip = <
     elementType: PopperTrigger,
     shouldForwardComponent: false,
     externalForwardedProps: {
-      action,
+      interactive,
+      closeOnClick,
+      action: 'hover',
     },
   })
 
@@ -112,7 +116,7 @@ export const Tooltip = <
     externalForwardedProps: slotProps?.content,
   })
 
-  if (content == null) {
+  if (content == null || content === '') {
     return children
   }
 
