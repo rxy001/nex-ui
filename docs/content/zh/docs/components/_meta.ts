@@ -12,4 +12,5 @@ export default {
   input: 'Input',
   radioGroup: 'RadioGroup',
   switch: 'Switch',
+  tooltip: 'Tooltip',
 }
