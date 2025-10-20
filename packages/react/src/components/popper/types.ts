@@ -68,7 +68,7 @@ export type PopperProps = {
   keepMounted?: boolean
 
   /**
-   * If true, close the popper when the escape key is pressed.
+   * If true, closes the popper when the escape key is pressed.
    *
    * @default true
    */
@@ -100,7 +100,21 @@ export type PopperTriggerProps = {
    *
    * @default 'hover'
    */
-  action?: 'click' | 'hover' | 'focus'
+  action?: 'click' | 'hover'
+
+  /**
+   * If true, keeps the popper open when interacting with its content.
+   *
+   * @default true
+   */
+  interactive?: boolean
+
+  /**
+   * If true, closes the popper when clicking the trigger element.
+   *
+   * @default true
+   */
+  closeOnClick?: boolean
 }
 
 type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
