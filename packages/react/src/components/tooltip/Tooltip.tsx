@@ -32,6 +32,7 @@ export const Tooltip = <
     closeDelay,
     shift,
     flip,
+    motionProps,
     keepMounted,
     defaultOpen,
     closeOnEscape,
@@ -90,7 +91,10 @@ export const Tooltip = <
     elementType: PopperRoot,
     classNames: slotClasses.root,
     shouldForwardComponent: false,
-    externalForwardedProps: remainingProps,
+    externalForwardedProps: {
+      ...remainingProps,
+      ...motionProps,
+    },
     dataAttrs: {
       color,
       size,

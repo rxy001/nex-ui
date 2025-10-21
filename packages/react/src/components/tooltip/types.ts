@@ -7,6 +7,7 @@ import type {
   ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
+  HTMLMotionProps,
 } from '../../types/utils'
 
 export interface TooltipPropsOverrides {}
@@ -50,6 +51,11 @@ export type TooltipOwnProps<RootComponent extends ElementType> = {
    * @default true
    */
   closeOnClick?: boolean
+
+  /**
+   * The motion properties of the tooltip.
+   */
+  motionProps?: HTMLMotionProps<'div'>
 
   /**
    * The color of the tooltip.
