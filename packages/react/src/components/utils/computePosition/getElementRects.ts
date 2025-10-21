@@ -1,4 +1,4 @@
-import { getRectRelativeToOffsetParent } from './dom'
+import { getRectRelativeToOffsetParent, getDimensions } from './dom'
 import { getOffsetParent } from './getOffsetParent'
 import type { Rect } from './types'
 
@@ -6,7 +6,7 @@ export const getElementRects = (
   reference: Element,
   popper: Element,
 ): { popper: Rect; reference: Rect } => {
-  const popperRect = popper.getBoundingClientRect()
+  const popperRect = getDimensions(popper)
   const offsetParent = getOffsetParent(popper)
 
   const referenceRect = getRectRelativeToOffsetParent(reference, offsetParent)
