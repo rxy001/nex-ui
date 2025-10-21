@@ -51,7 +51,7 @@ Use the `openDelay` and `closeDelay` props to set the delay time (in millisecond
 
 ### Custom Motion
 
-The Tooltip root element is by default a motion component, and the animation effects for visible / hidden can be customized via the variants property.
+Use the `motionProps` prop to customize the animation effects for `visible` / `hidden`.
 
 <Example {...tooltip.customMotion} />
 
@@ -144,6 +144,11 @@ Tooltip inherit the props of `as` (by default, `m.div`).
       type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
       default: `'md'`,
       description: 'The border radius of the tooltip.',
+    },
+    {
+      prop: 'motionProps',
+      type: 'HTMLMotionProps',
+      description: ' The motion properties of the tooltip.',
     },
     {
       prop: 'offset',
