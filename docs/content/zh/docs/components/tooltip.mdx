@@ -51,7 +51,7 @@ Tooltip 在用户与元素交互时显示一条简短的信息。
 
 ### Custom Motion
 
-Tooltip 根元素默认为 motion 组件，可以通过 `variants` 属性自定义 `visible` / `hidden` 的动画效果。
+使用 `motionProps` 属性自定义 `visible` / `hidden` 的动画效果。
 
 <Example {...tooltip.customMotion} />
 
@@ -141,6 +141,11 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
       type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
       default: `'md'`,
       description: 'Tooltip 的圆角大小。',
+    },
+    {
+      prop: 'motionProps',
+      type: 'HTMLMotionProps',
+      description: '自定义 Tooltip 动画的属性。',
     },
     {
       prop: 'offset',

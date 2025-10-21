@@ -4,21 +4,23 @@ export default function App() {
   return (
     <Tooltip
       content='Hello, I am a tooltip.'
-      variants={{
-        visible: {
-          opacity: 1,
-          scale: 1,
-          transition: {
-            duration: 0.1,
-            ease: 'easeIn',
+      motionProps={{
+        variants: {
+          visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+              duration: 0.1,
+              ease: 'easeIn',
+            },
           },
-        },
-        hidden: {
-          opacity: 0,
-          scale: 0.85,
-          transition: {
-            duration: 0.1,
-            ease: 'easeOut',
+          hidden: {
+            opacity: 0,
+            scale: 0.9,
+            transition: {
+              duration: 0.1,
+              ease: 'easeOut',
+            },
           },
         },
       }}
