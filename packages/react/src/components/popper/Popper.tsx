@@ -1,10 +1,13 @@
 'use client'
 
 import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
-import { useCallback, useMemo, useRef, useId } from 'react'
+import { useCallback, useMemo, useRef, useId, useEffect } from 'react'
 import { PopperProvider } from './PopperContext'
+import { PopperManager } from './PopperManager'
 import type { PopperProps } from './types'
 import type { PopperContextValue } from './PopperContext'
+
+const popperManager = new PopperManager()
 
 export const Popper = (props: PopperProps) => {
   const {
@@ -55,7 +58,8 @@ export const Popper = (props: PopperProps) => {
   const showPopper = useCallback(() => {
     debouncedHidePopper.cancel()
     debouncedShowPopper()
-  }, [debouncedHidePopper, debouncedShowPopper])
+    popperManager.flush(id)
+  }, [debouncedHidePopper, debouncedShowPopper, id])
 
   const hidePopper = useCallback(() => {
     debouncedShowPopper.cancel()
@@ -103,6 +107,14 @@ export const Popper = (props: PopperProps) => {
       popperRootId,
     ],
   )
+
+  useEffect(() => {
+    if (open) {
+      popperManager.register(id, debouncedHidePopper.flush)
+
+      return () => popperManager.unregister(id)
+    }
+  }, [debouncedHidePopper.flush, id, open])
 
   return <PopperProvider value={ctx}>{children}</PopperProvider>
 }

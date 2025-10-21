@@ -20,9 +20,8 @@ const recipe = defineRecipe({
   base: {
     pos: 'absolute',
     w: 'max-content',
-    insetBlockStart: 0,
-    insetInlineStart: 0,
-    transform: 'translate(var(--popper-x), var(--popper-y))',
+    left: 'var(--popper-x)',
+    top: 'var(--popper-y)',
   },
 })
 

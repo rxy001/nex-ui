@@ -10,24 +10,46 @@ const createElement = ({ width, height, x, y }: Rect): CustomHTMLElement => {
 
   const rect: Rect = { width, height, x, y }
 
-  element.getBoundingClientRect = () => ({
-    width,
-    height,
-    x: rect.x,
-    y: rect.y,
-    top: rect.y,
-    left: rect.x,
-    right: rect.x + rect.width,
-    bottom: rect.y + rect.height,
-    toJSON: () => {},
+  element.style.width = `${width}px`
+  element.style.height = `${height}px`
+
+  Object.defineProperties(element, {
+    offsetWidth: {
+      get() {
+        return rect.width
+      },
+      configurable: true,
+    },
+    offsetHeight: {
+      get() {
+        return rect.height
+      },
+      configurable: true,
+    },
+    getBoundingClientRect: {
+      value: () => ({
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y,
+        top: rect.y,
+        left: rect.x,
+        right: rect.x + rect.width,
+        bottom: rect.y + rect.height,
+        toJSON: () => {},
+      }),
+    },
+    set: {
+      value: (property: keyof Rect, value: number) => {
+        rect[property] = value
+        if (property === 'width') {
+          element.style.width = `${value}px`
+        } else if (property === 'height') {
+          element.style.height = `${value}px`
+        }
+      },
+    },
   })
-
-  const set = (property: keyof Rect, value: number) => {
-    rect[property] = value
-  }
-
-  // @ts-expect-error
-  element.set = set
 
   return element as unknown as CustomHTMLElement
 }

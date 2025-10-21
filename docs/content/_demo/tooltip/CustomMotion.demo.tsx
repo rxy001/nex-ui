@@ -7,6 +7,7 @@ export default function App() {
       variants={{
         visible: {
           opacity: 1,
+          scale: 1,
           transition: {
             duration: 0.1,
             ease: 'easeIn',
@@ -14,8 +15,9 @@ export default function App() {
         },
         hidden: {
           opacity: 0,
+          scale: 0.85,
           transition: {
-            duration: 0.15,
+            duration: 0.1,
             ease: 'easeOut',
           },
         },
