@@ -30,6 +30,9 @@ const style = recipe()
 type StyleVariables = {
   '--popper-x': string
   '--popper-y': string
+  '--popper-arrow-x'?: string
+  '--popper-arrow-y'?: string
+  '--popper-arrow-rotation'?: string
 }
 
 export const PopperRoot = <
@@ -45,11 +48,13 @@ export const PopperRoot = <
     placement,
     flip,
     shift,
+    showArrow,
     keepMounted,
     container,
     closeOnEscape,
     popperRootRef,
     popperRootId,
+    arrowRef,
   } = usePopper()
 
   const {
@@ -96,22 +101,52 @@ export const PopperRoot = <
     // istanbul ignore if
     if (!referenceRef.current || !popperRootRef.current) return
 
-    const { x, y } = computePosition(
-      referenceRef.current,
-      popperRootRef.current,
-      {
-        placement,
-        offset,
-        flip,
-        shift,
-      },
-    )
+    const {
+      x,
+      y,
+      placement: resolvedPlacement,
+      middlewareData,
+    } = computePosition(referenceRef.current, popperRootRef.current, {
+      placement,
+      offset,
+      flip,
+      shift,
+      arrow: showArrow
+        ? {
+            element: arrowRef.current,
+          }
+        : undefined,
+    })
 
-    const newStyleVars = {
+    const newStyleVars: StyleVariables = {
       '--popper-x': x + 'px',
       '--popper-y': y + 'px',
     }
 
+    if (middlewareData.arrow) {
+      const { x: arrowX, y: arrowY } = middlewareData.arrow
+      newStyleVars['--popper-arrow-x'] = arrowX + 'px'
+      newStyleVars['--popper-arrow-y'] = arrowY + 'px'
+
+      const side = resolvedPlacement.split('-')[0] ?? resolvedPlacement
+
+      switch (side) {
+        case 'top':
+          newStyleVars['--popper-arrow-rotation'] = '225deg'
+          break
+        case 'bottom':
+          newStyleVars['--popper-arrow-rotation'] = '45deg'
+          break
+        case 'left':
+          newStyleVars['--popper-arrow-rotation'] = '135deg'
+          break
+        case 'right':
+          newStyleVars['--popper-arrow-rotation'] = '315deg'
+          break
+        default:
+          newStyleVars['--popper-arrow-rotation'] = '45deg'
+      }
+    }
     setStyleVariables(newStyleVars)
   })
 

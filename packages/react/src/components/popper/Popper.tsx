@@ -17,6 +17,7 @@ export const Popper = (props: PopperProps) => {
     shift,
     flip,
     offset,
+    showArrow,
     open: openProp,
     openDelay = 100,
     closeDelay = 100,
@@ -27,6 +28,7 @@ export const Popper = (props: PopperProps) => {
   } = props
   const referenceRef = useRef<HTMLDivElement>(null)
   const popperRootRef = useRef<HTMLDivElement>(null)
+  const arrowRef = useRef<HTMLDivElement>(null)
   const id = useId()
 
   const popperRootId = `nui-popper-${id}`
@@ -74,9 +76,11 @@ export const Popper = (props: PopperProps) => {
   const ctx = useMemo<PopperContextValue>(
     () => ({
       open,
+      showArrow,
       setOpen,
       referenceRef,
       popperRootRef,
+      arrowRef,
       container,
       offset,
       placement,
@@ -92,6 +96,7 @@ export const Popper = (props: PopperProps) => {
     }),
     [
       open,
+      showArrow,
       setOpen,
       container,
       offset,

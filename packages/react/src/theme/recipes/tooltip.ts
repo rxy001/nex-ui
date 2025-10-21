@@ -11,10 +11,14 @@ export const tooltipRecipe = defineSlotRecipe({
       px: '2.5',
       py: '1',
       fs: 'md',
-      boxShadow: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
       maxW: '360px',
+    },
+    arrow: {
+      '::before': {
+        bg: 'colorPalette.primary',
+      },
     },
   },
   variants: {
@@ -37,11 +41,28 @@ export const tooltipRecipe = defineSlotRecipe({
     },
     radius: toSlots(radiusVariant, 'content'),
     color: {
-      ...toSlots(colorVariant, 'content'),
+      ...toSlots(colorVariant, 'content', 'arrow'),
       default: {
         content: {
           bg: 'content',
           color: 'inherit',
+          boxShadow:
+            '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
+        },
+        arrow: {
+          '::before': {
+            borderTop: 'sm',
+            borderLeft: 'sm',
+            bg: 'content',
+            borderTopColor: {
+              _DEFAULT: '#e8e8e8',
+              _dark: 'content',
+            },
+            borderLeftColor: {
+              _DEFAULT: '#e8e8e8',
+              _dark: 'content',
+            },
+          },
         },
       },
     },

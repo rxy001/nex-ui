@@ -61,6 +61,12 @@ export type PopperProps = {
   offset?: OffsetOptions | false
 
   /**
+   * If true, displays an arrow pointing to the trigger element.
+   * @default false
+   */
+  showArrow?: boolean
+
+  /**
    * If true, always keep the children in the DOM.
    *
    * @default false
@@ -130,4 +136,7 @@ export type PopperRootProps<
 > = PopperSlotProps<RootComponent>
 
 export type PopperContentProps<RootComponent extends ElementType = 'div'> =
+  PopperSlotProps<RootComponent>
+
+export type PopperArrowProps<RootComponent extends ElementType = 'div'> =
   PopperSlotProps<RootComponent>

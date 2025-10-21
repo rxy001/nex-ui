@@ -1,13 +1,19 @@
 'use client'
 
-import { Popper, PopperContent, PopperRoot, PopperTrigger } from '../popper'
+import {
+  Popper,
+  PopperContent,
+  PopperRoot,
+  PopperTrigger,
+  PopperArrow,
+} from '../popper'
 import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { DOMMotionComponents } from 'motion/react'
 import type { TooltipProps } from './types'
 
-const slots = ['root', 'content']
+const slots = ['root', 'content', 'arrow']
 
 export const Tooltip = <
   RootComponent extends ElementType = DOMMotionComponents['div'],
@@ -36,6 +42,7 @@ export const Tooltip = <
     keepMounted,
     defaultOpen,
     closeOnEscape,
+    showArrow,
     closeOnClick = true,
     color = 'default',
     interactive = true,
@@ -83,6 +90,7 @@ export const Tooltip = <
       defaultOpen,
       closeOnEscape,
       placement,
+      showArrow,
     },
   })
 
@@ -108,7 +116,7 @@ export const Tooltip = <
     externalForwardedProps: {
       interactive,
       closeOnClick,
-      action: 'hover',
+      action: 'click',
     },
   })
 
@@ -120,6 +128,14 @@ export const Tooltip = <
     externalForwardedProps: slotProps?.content,
   })
 
+  const [TooltipArrow, getTooltipArrowProps] = useSlot({
+    style: styles.arrow,
+    elementType: PopperArrow,
+    classNames: slotClasses.arrow,
+    shouldForwardComponent: false,
+    externalForwardedProps: slotProps?.arrow,
+  })
+
   if (content == null || content === '') {
     return children
   }
@@ -128,7 +144,10 @@ export const Tooltip = <
     <TooltipWrapper {...getTooltipWrapperProps()}>
       <TooltipTrigger {...getTooltipTriggerProps()}>{children}</TooltipTrigger>
       <TooltipRoot {...getTooltipRootProps()}>
-        <TooltipContent {...getTooltipContentProps()}>{content}</TooltipContent>
+        <TooltipContent {...getTooltipContentProps()}>
+          {showArrow && <TooltipArrow {...getTooltipArrowProps()} />}
+          {content}
+        </TooltipContent>
       </TooltipRoot>
     </TooltipWrapper>
   )

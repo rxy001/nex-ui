@@ -97,6 +97,9 @@ const meta = {
     interactive: {
       control: 'boolean',
     },
+    showArrow: {
+      control: 'boolean',
+    },
   },
   args: {
     size: 'md',
@@ -104,6 +107,7 @@ const meta = {
     placement: 'bottom',
     interactive: true,
     closeOnEscape: true,
+    showArrow: false,
   },
   render: (props) => {
     return (

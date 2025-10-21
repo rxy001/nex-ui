@@ -8,6 +8,7 @@ export type PopperContextValue = {
   setOpen: (open: boolean) => void
   referenceRef: RefObject<HTMLDivElement | null>
   popperRootRef: RefObject<HTMLDivElement | null>
+  arrowRef: RefObject<HTMLDivElement | null>
   showPopper: () => void
   hidePopper: () => void
   popperRootId: string
@@ -23,6 +24,7 @@ export type PopperContextValue = {
   | 'keepMounted'
   | 'openDelay'
   | 'closeDelay'
+  | 'showArrow'
 >
 
 export const [PopperProvider, usePopper] = createContext<PopperContextValue>({

@@ -14,6 +14,7 @@ export interface TooltipPropsOverrides {}
 
 type TooltipSlotProps = {
   content?: ComponentPropsWithCommonProps<'div'>
+  arrow?: ComponentPropsWithCommonProps<'div'>
 }
 
 export type TooltipOwnProps<RootComponent extends ElementType> = {
