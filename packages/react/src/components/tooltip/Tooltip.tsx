@@ -39,7 +39,7 @@ export const Tooltip = <
     closeOnClick = true,
     color = 'default',
     interactive = true,
-    placement = 'bottom',
+    placement = 'top',
     size = 'md',
     radius = 'md',
     ...remainingProps

@@ -1,12 +1,22 @@
 'use client'
 
-import { Avatar, Button, Input, Switch, useColorScheme } from '@nex-ui/react'
+import {
+  Avatar,
+  Button,
+  Input,
+  Switch,
+  Tooltip,
+  useColorScheme,
+} from '@nex-ui/react'
 import { useEvent } from '@nex-ui/hooks'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
+import { useRef } from 'react'
 import type { ChangeEvent } from 'react'
 
 export const ClientGallery = () => {
   const { mode, systemColorScheme, setMode } = useColorScheme()
+
+  const ref = useRef<HTMLDivElement>(null)
 
   const toggleMode = useEvent((e: ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target
@@ -18,9 +28,21 @@ export const ClientGallery = () => {
 
   return (
     <section className='x:w-1/2 x:relative x:max-[970px]:hidden'>
-      <Button className='x:absolute x:top-[200px] x:left-[200px] x:animate-[levitate_14s_ease_infinite_0.5s]'>
-        Button
-      </Button>
+      <div
+        ref={ref}
+        className='x:absolute x:top-[200px] x:left-[200px] x:animate-[levitate_14s_ease_infinite_0.5s]'
+      >
+        <Tooltip
+          content='Build beautiful apps faster'
+          color='blue'
+          container={() => ref.current}
+          flip={false}
+          shift={false}
+          open
+        >
+          <Button color='blue'>Button</Button>
+        </Tooltip>
+      </div>
       <Switch
         className='x:absolute! x:-top-[30px] x:-right-[20px] x:animate-[levitate_13s_ease_infinite_1s_reverse]'
         key='switch'
