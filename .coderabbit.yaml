@@ -5,7 +5,15 @@ early_access: false
 reviews:
   profile: "chill"
   high_level_summary: true
-  high_level_summary_placeholder: "<!-- This is an auto-generated comment: release notes by coderabbit.ai -->"
+
+  collapse_walkthrough: true
+  changed_files_summary: false
+  sequence_diagrams: false
+  estimate_code_review_effort: false
+  assess_linked_issues: false
+  suggested_labels: false
+  suggested_reviewers: false
+  poem: false
   
   # Auto review settings
   auto_review:
