@@ -8,8 +8,8 @@ export type PopperContextValue = {
   setOpen: (open: boolean) => void
   referenceRef: RefObject<HTMLDivElement | null>
   popperRootRef: RefObject<HTMLDivElement | null>
-  showPopper: () => void
-  hidePopper: () => void
+  handleOpen: () => void
+  handleClose: () => void
   popperRootId: string
 } & Pick<
   PopperProps,

@@ -16,3 +16,14 @@ export const isUndefined = (value?: any): value is undefined =>
   typeof value === 'undefined'
 
 export const isArray = (value: any): value is Array<any> => Array.isArray(value)
+
+export const isFocusVisible = (element: Element): boolean => {
+  try {
+    return element.matches(':focus-visible')
+  } catch {
+    /* empty */
+  }
+
+  // istanbul ignore next
+  return false
+}

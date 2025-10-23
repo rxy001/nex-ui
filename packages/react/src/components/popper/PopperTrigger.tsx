@@ -5,18 +5,19 @@ import {
   mergeRefs,
   addEventListener,
   ownerDocument,
+  isFocusVisible,
 } from '@nex-ui/utils'
 import { cloneElement, isValidElement, useEffect } from 'react'
 import { usePopper } from './PopperContext'
-import type { DetailedHTMLProps, HTMLAttributes } from 'react'
+import type { DetailedHTMLProps, HTMLAttributes, FocusEvent } from 'react'
 import type { PopperTriggerProps } from './types'
 
 export const PopperTrigger = (props: PopperTriggerProps) => {
   const {
     open,
     setOpen,
-    hidePopper,
-    showPopper,
+    handleClose,
+    handleOpen,
     referenceRef,
     popperRootRef,
     popperRootId,
@@ -42,30 +43,30 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
           (!popperRootRef?.current?.contains(target) &&
             !referenceRef?.current?.contains(target))
         ) {
-          hidePopper()
+          handleClose()
         }
       })
     }
-  }, [action, hidePopper, interactive, open, popperRootRef, referenceRef])
+  }, [action, handleClose, interactive, open, popperRootRef, referenceRef])
 
   useEffect(() => {
     if (open && interactive && action === 'hover' && popperRootRef.current) {
       const removeMouseenter = addEventListener(
         popperRootRef.current,
         'mouseenter',
-        showPopper,
+        handleOpen,
       )
       const removeMouseleave = addEventListener(
         popperRootRef.current,
         'mouseleave',
-        hidePopper,
+        handleClose,
       )
       return () => {
         removeMouseenter()
         removeMouseleave()
       }
     }
-  }, [action, hidePopper, interactive, open, popperRootRef, showPopper])
+  }, [action, handleClose, interactive, open, popperRootRef, handleOpen])
 
   const renderChildren = () => {
     const element = children as React.ReactElement<any>
@@ -74,27 +75,39 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
       onClick,
       onMouseEnter,
       onMouseLeave,
+      onFocus,
+      onBlur,
       'aria-describedby': ariaDescribedby,
     } = element.props
 
     const props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
       ref: mergeRefs(ref, referenceRef),
       'aria-describedby': ariaDescribedby ?? (open ? popperRootId : undefined),
+      onFocus: chain(onFocus, (event: FocusEvent<HTMLElement>) => {
+        if (isFocusVisible(event.currentTarget)) {
+          handleOpen()
+        }
+      }),
+      onBlur: chain(onBlur, (event: FocusEvent<HTMLElement>) => {
+        if (!isFocusVisible(event.currentTarget)) {
+          handleClose()
+        }
+      }),
     }
 
     if (action === 'click') {
       const handleClick = chain(() => {
         if (!open) {
-          showPopper()
+          handleOpen()
         } else if (closeOnClick) {
-          hidePopper()
+          handleClose()
         }
       }, onClick)
 
       props.onClick = handleClick
     } else if (action === 'hover') {
-      const handleMouseEnter = chain(showPopper, onMouseEnter)
-      const handleMouseLeave = chain(hidePopper, onMouseLeave)
+      const handleMouseEnter = chain(handleOpen, onMouseEnter)
+      const handleMouseLeave = chain(handleClose, onMouseLeave)
       const handleClick = chain(() => {
         if (closeOnClick && open) setOpen(false)
       }, onClick)

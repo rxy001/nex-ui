@@ -1,5 +1,5 @@
 import { renderWithNexUIProvider } from '~/tests/shared'
-import { waitForElementToBeRemoved } from '@testing-library/react'
+import { fireEvent, waitForElementToBeRemoved } from '@testing-library/react'
 import { Popper, PopperRoot, PopperContent, PopperTrigger } from '../index'
 import { Button } from '../../button'
 import type { PopperTriggerProps } from '../index'
@@ -102,6 +102,10 @@ describe('PopperTrigger', () => {
 
     expect(queryByTestId('popper-root')).toBeInTheDocument()
 
+    Object.defineProperty(trigger, 'matches', {
+      value: () => false,
+    })
+
     await user.click(trigger)
 
     expect(queryByTestId('popper-root')).toBeNull()
@@ -172,6 +176,59 @@ describe('PopperTrigger', () => {
 
     await user.hover(content)
     await user.unhover(trigger)
+
+    expect(queryByTestId('popper-root')).toBeNull()
+  })
+
+  it('should open the popper when tabbing to the trigger', async () => {
+    const { queryByTestId, user } = await renderWithNexUIProvider(
+      <TestPopper />,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(queryByTestId('popper-root')).toBeNull()
+
+    await user.tab()
+
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
+  })
+
+  it('should close the popper when tabbing away from the trigger', async () => {
+    const { queryByTestId, user } = await renderWithNexUIProvider(
+      <>
+        <TestPopper />
+        <Button data-testid='after-button'>After</Button>
+      </>,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(queryByTestId('popper-root')).toBeNull()
+
+    await user.tab()
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
+
+    await user.tab()
+    await waitForElementToBeRemoved(() => queryByTestId('popper-root'))
+    expect(queryByTestId('popper-root')).toBeNull()
+  })
+
+  it('should not respond when manually focusing the trigger', async () => {
+    const { getByTestId, queryByTestId } = await renderWithNexUIProvider(
+      <TestPopper />,
+      {
+        useAct: true,
+      },
+    )
+
+    const trigger = getByTestId('popper-trigger')
+
+    expect(queryByTestId('popper-root')).toBeNull()
+
+    fireEvent.focus(trigger)
 
     expect(queryByTestId('popper-root')).toBeNull()
   })

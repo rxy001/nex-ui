@@ -37,7 +37,7 @@ export const Popper = (props: PopperProps) => {
     onOpenChange,
   )
 
-  const debouncedShowPopper = useDebounce(
+  const debouncedOpenPopper = useDebounce(
     () => {
       if (!open) setOpen(true)
     },
@@ -46,7 +46,7 @@ export const Popper = (props: PopperProps) => {
     },
   )
 
-  const debouncedHidePopper = useDebounce(
+  const debouncedClosePopper = useDebounce(
     () => {
       if (open) setOpen(false)
     },
@@ -55,20 +55,20 @@ export const Popper = (props: PopperProps) => {
     },
   )
 
-  const showPopper = useCallback(() => {
-    debouncedHidePopper.cancel()
-    debouncedShowPopper()
+  const handleOpen = useCallback(() => {
+    debouncedClosePopper.cancel()
+    debouncedOpenPopper()
     popperManager.flush(id)
-  }, [debouncedHidePopper, debouncedShowPopper, id])
+  }, [debouncedClosePopper, debouncedOpenPopper, id])
 
-  const hidePopper = useCallback(() => {
-    debouncedShowPopper.cancel()
-    debouncedHidePopper()
-  }, [debouncedHidePopper, debouncedShowPopper])
+  const handleClose = useCallback(() => {
+    debouncedOpenPopper.cancel()
+    debouncedClosePopper()
+  }, [debouncedClosePopper, debouncedOpenPopper])
 
   useUnmount(() => {
-    debouncedHidePopper.cancel()
-    debouncedShowPopper.cancel()
+    debouncedClosePopper.cancel()
+    debouncedOpenPopper.cancel()
   })
 
   const ctx = useMemo<PopperContextValue>(
@@ -86,8 +86,8 @@ export const Popper = (props: PopperProps) => {
       closeOnEscape,
       openDelay,
       closeDelay,
-      showPopper,
-      hidePopper,
+      handleOpen,
+      handleClose,
       popperRootId,
     }),
     [
@@ -102,19 +102,19 @@ export const Popper = (props: PopperProps) => {
       closeOnEscape,
       openDelay,
       closeDelay,
-      showPopper,
-      hidePopper,
+      handleOpen,
+      handleClose,
       popperRootId,
     ],
   )
 
   useEffect(() => {
     if (open) {
-      popperManager.register(id, debouncedHidePopper.flush)
+      popperManager.register(id, debouncedClosePopper.flush)
 
       return () => popperManager.unregister(id)
     }
-  }, [debouncedHidePopper.flush, id, open])
+  }, [debouncedClosePopper.flush, id, open])
 
   return <PopperProvider value={ctx}>{children}</PopperProvider>
 }
