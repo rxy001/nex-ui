@@ -11,7 +11,6 @@ export const tooltipRecipe = defineSlotRecipe({
       px: '2.5',
       py: '1',
       fs: 'md',
-      boxShadow: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
       maxW: '360px',
@@ -42,6 +41,8 @@ export const tooltipRecipe = defineSlotRecipe({
         content: {
           bg: 'content',
           color: 'inherit',
+          boxShadow:
+            '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
         },
       },
     },
