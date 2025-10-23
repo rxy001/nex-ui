@@ -42,9 +42,9 @@ export function renderWithNexUIProvider(
       ...result,
       user: userEvent.setup(userEventOptions),
       queryByClassName: (className: string) =>
-        document.body.querySelector(`.${className}`),
+        result.baseElement.querySelector(`.${className}`),
       queryAllByClassName: (className: string) =>
-        document.body.querySelectorAll(`.${className}`),
+        result.baseElement.querySelectorAll(`.${className}`),
     }
   }
 
