@@ -58,6 +58,7 @@ const ButtonLink = (props: ButtonProps) => {
 
 const ariaPatternMap: Record<string, string> = {
   dialog: 'dialog-modal',
+  radioGroup: 'radio',
 }
 
 export const ComponentLinks = ({
