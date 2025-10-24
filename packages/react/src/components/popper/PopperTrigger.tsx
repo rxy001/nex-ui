@@ -7,12 +7,14 @@ import {
   ownerDocument,
   isFocusVisible,
 } from '@nex-ui/utils'
-import { cloneElement, isValidElement, useEffect } from 'react'
+import { cloneElement, isValidElement, useEffect, useRef } from 'react'
 import { usePopper } from './PopperContext'
 import type { DetailedHTMLProps, HTMLAttributes, FocusEvent } from 'react'
 import type { PopperTriggerProps } from './types'
 
 export const PopperTrigger = (props: PopperTriggerProps) => {
+  const focusVisibleRef = useRef(false)
+
   const {
     open,
     setOpen,
@@ -24,8 +26,8 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
 
   const {
     children,
-    interactive = true,
     action = 'hover',
+    interactive = true,
     closeOnClick = true,
     ...remainingProps
   } = props
@@ -81,11 +83,13 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
       onFocus: chain(onFocus, (event: FocusEvent<HTMLElement>) => {
         if (isFocusVisible(event.currentTarget)) {
           handleOpen()
+          focusVisibleRef.current = true
         }
       }),
       onBlur: chain(onBlur, (event: FocusEvent<HTMLElement>) => {
-        if (!isFocusVisible(event.currentTarget)) {
+        if (focusVisibleRef.current && !isFocusVisible(event.currentTarget)) {
           handleClose()
+          focusVisibleRef.current = false
         }
       }),
     }
