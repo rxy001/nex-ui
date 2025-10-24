@@ -108,8 +108,8 @@ Dialog 继承 `as` (默认为 `m.div`) 的 Props。
     },
     {
       prop: 'className',
-      type: 'string',
-      description: 'Dialog 根元素的类名。',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
     },
     {
       prop: 'hideBackdrop',
@@ -258,6 +258,11 @@ DialogContent 继承 `as` (默认为 `'div'`) 的 Props。
       description: 'Dialog 描述的 ARIA 标签。',
     },
     {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
       prop: 'as',
       type: 'ElementType',
       description:
@@ -324,6 +329,11 @@ DialogHeader 继承 `as` (默认为 `'h2'`) 的 Props。
       type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
   ]}
 />
 
@@ -350,6 +360,11 @@ DialogBody 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
   ]}
 />
 
@@ -375,6 +390,11 @@ DialogFooter 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'sx',
       type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
     },
   ]}
 />

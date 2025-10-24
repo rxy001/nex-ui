@@ -93,7 +93,7 @@ Drawer inherit the props of `as` (by default, `m.div`).
     },
     {
       prop: 'className',
-      type: 'string',
+      type: 'ClassValue',
       description: 'Additional class names to apply to the root element.',
     },
     {
@@ -245,6 +245,11 @@ DrawerContent inherit the props of `as` (by default, `'div'`).
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
       prop: 'classNames',
       type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
@@ -299,6 +304,11 @@ DrawerHeader inherit the props of `as` (by default, `'h2'`).
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
   ]}
 />
 
@@ -325,6 +335,11 @@ DrawerBody inherit the props of `as` (by default, `'div'`).
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
   ]}
 />
 
@@ -350,6 +365,11 @@ DrawerFooter inherit the props of `as` (by default,`'div'`).
       type: 'Interpolation',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
     },
   ]}
 />
