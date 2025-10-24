@@ -49,7 +49,6 @@ export const PopperRoot = <
     keepMounted = false,
     closeOnEscape = true,
     placement = 'top',
-    role = 'tooltip',
     id = popperRootId,
     ...props
   } = inProps as PopperRootProps
@@ -78,7 +77,7 @@ export const PopperRoot = <
       ref: popperRootRef,
       style: styleVariables as CSSProperties,
     },
-    a11y: { role, 'aria-hidden': open ? undefined : true },
+    a11y: { 'aria-hidden': open ? undefined : true },
     dataAttrs: {
       placement,
       keepMounted,

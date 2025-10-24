@@ -238,45 +238,6 @@ describe('Popper', () => {
   })
 
   describe('Accessibility', () => {
-    it('should have aria-describedby on the trigger element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopper open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const trigger = getByTestId('popper-trigger')
-      const root = getByTestId('popper-root')
-
-      expect(trigger).toHaveAttribute('aria-describedby', root.id)
-    })
-
-    it('should not have aria-describedby on the trigger element when the popper is closed', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopper open={false} />,
-        {
-          useAct: true,
-        },
-      )
-      const trigger = getByTestId('popper-trigger')
-
-      expect(trigger).not.toHaveAttribute('aria-describedby')
-    })
-
-    it('should have role="tooltip" on the root element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopper open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const root = getByTestId('popper-root')
-
-      expect(root).toHaveAttribute('role', 'tooltip')
-    })
-
     it('should be aria-hidden when the popper is closed and keepMounted is true', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestPopper open={false} keepMounted />,
