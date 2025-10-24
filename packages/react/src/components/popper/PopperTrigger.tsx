@@ -20,13 +20,14 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
     handleOpen,
     referenceRef,
     popperRootRef,
-    popperRootId,
   } = usePopper()
+
   const {
     children,
     interactive = true,
     action = 'hover',
     closeOnClick = true,
+    ...remainingProps
   } = props
 
   useEffect(() => {
@@ -70,19 +71,13 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
 
   const renderChildren = () => {
     const element = children as React.ReactElement<any>
-    const {
-      ref,
-      onClick,
-      onMouseEnter,
-      onMouseLeave,
-      onFocus,
-      onBlur,
-      'aria-describedby': ariaDescribedby,
-    } = element.props
+    const { ref, onClick, onMouseEnter, onMouseLeave, onFocus, onBlur } =
+      element.props
 
     const props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
+      ...remainingProps,
+      ...element.props,
       ref: mergeRefs(ref, referenceRef),
-      'aria-describedby': ariaDescribedby ?? (open ? popperRootId : undefined),
       onFocus: chain(onFocus, (event: FocusEvent<HTMLElement>) => {
         if (isFocusVisible(event.currentTarget)) {
           handleOpen()

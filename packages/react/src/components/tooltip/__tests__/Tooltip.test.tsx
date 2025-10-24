@@ -120,4 +120,49 @@ describe('Tooltip', () => {
 
     expect(queryByTestId('tooltip-root')).toBeNull()
   })
+
+  describe('Accessibility', () => {
+    it('should have aria-describedby on the trigger element', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(
+        <Tooltip open data-testid='popper-root' content='Content'>
+          <button data-testid='popper-trigger'>Trigger</button>
+        </Tooltip>,
+        {
+          useAct: true,
+        },
+      )
+
+      const trigger = getByTestId('popper-trigger')
+      const root = getByTestId('popper-root')
+
+      expect(trigger).toHaveAttribute('aria-describedby', root.id)
+    })
+
+    it('should not have aria-describedby on the trigger element when the popper is closed', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(
+        <Tooltip data-testid='popper-root' content='Content'>
+          <button data-testid='popper-trigger'>Trigger</button>
+        </Tooltip>,
+        {
+          useAct: true,
+        },
+      )
+      const trigger = getByTestId('popper-trigger')
+
+      expect(trigger).not.toHaveAttribute('aria-describedby')
+    })
+
+    it('should have role="tooltip" on the root element', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(
+        <Tooltip open data-testid='popper-root' content='Content' />,
+        {
+          useAct: true,
+        },
+      )
+
+      const root = getByTestId('popper-root')
+
+      expect(root).toHaveAttribute('role', 'tooltip')
+    })
+  })
 })
