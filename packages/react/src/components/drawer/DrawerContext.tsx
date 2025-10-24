@@ -1,12 +1,27 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { DrawerOwnerState } from './types'
+import type { DrawerProps } from './types'
 
-export const [DrawerProvider, useDrawer] = createContext<DrawerOwnerState>({
+type DrawerContextValue = Omit<
+  DrawerProps,
+  | 'open'
+  | 'children'
+  | 'restoreFocus'
+  | 'container'
+  | 'onOpenChange'
+  | 'defaultOpen'
+  | 'keepMounted'
+  | 'preventScroll'
+  | 'closeOnEscape'
+  | 'onClose'
+  | 'closeOnInteractBackdrop'
+>
+
+export const [DrawerProvider, useDrawer] = createContext<DrawerContextValue>({
   contextName: 'DrawerContext',
   hookName: 'useDrawer',
   providerName: 'DrawerProvider',
   strict: true,
-  defaultValue: null as unknown as DrawerOwnerState,
+  defaultValue: null as unknown as DrawerContextValue,
 })

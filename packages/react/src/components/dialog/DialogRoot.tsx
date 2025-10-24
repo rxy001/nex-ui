@@ -13,24 +13,9 @@ type DialogRootProps = {
 const slots = ['root', 'backdrop']
 
 export const DialogRoot = ({ children }: DialogRootProps) => {
-  const ownerState = useDialog()
+  const props = useDialog()
 
-  const {
-    slotProps,
-    hideBackdrop,
-    classNames,
-    open: _open,
-    onOpenChange: _onOpenChange,
-    container: _container,
-    setOpen: _setOpen,
-    restoreFocus: _restoreFocus,
-    closeOnEscape: _closeOnEscape,
-    preventScroll: _preventScroll,
-    defaultOpen: _defaultOpen,
-    keepMounted: _keepMounted,
-    closeOnInteractBackdrop: _closeOnInteractBackdrop,
-    ...remainingProps
-  } = ownerState
+  const { slotProps, hideBackdrop, classNames, ...remainingProps } = props
 
   const slotClasses = useSlotClasses({
     name: 'Dialog',
@@ -39,12 +24,12 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
   })
 
   const styles = useStyles({
-    ownerState,
+    ownerState: props,
     name: 'Dialog',
     recipe: dialogRootRecipe,
   })
 
-  const [Root, getRootProps] = useSlot({
+  const [DialogRootRoot, getDialogRootRootProps] = useSlot({
     elementType: ModalRoot,
     style: styles.root,
     externalForwardedProps: remainingProps,
@@ -64,10 +49,10 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
   })
 
   return (
-    <Root {...getRootProps()}>
+    <DialogRootRoot {...getDialogRootRootProps()}>
       {!hideBackdrop && <DialogBackdrop {...getDialogBackdropProps()} />}
       {children}
-    </Root>
+    </DialogRootRoot>
   )
 }
 

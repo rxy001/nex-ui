@@ -66,7 +66,7 @@ export const PopperRoot = <
   // Portal renders asynchronously. Use this variable to avoid multiple handler registrations.
   const initialized = useRef(false)
 
-  const [Motion, getMotionProps] = useSlot({
+  const [PopperMotion, getPopperMotionProps] = useSlot({
     style,
     elementType: PresenceMotion,
     externalForwardedProps: props,
@@ -251,7 +251,7 @@ export const PopperRoot = <
 
   return (
     <Portal onMount={onMount} onUnmount={onUnmount} container={container}>
-      <Motion {...getMotionProps()}>{children}</Motion>
+      <PopperMotion {...getPopperMotionProps()}>{children}</PopperMotion>
     </Portal>
   )
 }
