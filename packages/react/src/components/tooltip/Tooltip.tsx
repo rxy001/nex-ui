@@ -24,18 +24,12 @@ export const Tooltip = <
     content,
     open,
     onOpenChange,
-    container,
     classNames,
     slotProps,
-    offset,
     openDelay,
     closeDelay,
-    shift,
-    flip,
     motionProps,
-    keepMounted,
     defaultOpen,
-    closeOnEscape,
     closeOnClick = true,
     color = 'default',
     interactive = true,
@@ -73,16 +67,9 @@ export const Tooltip = <
     externalForwardedProps: {
       open,
       onOpenChange,
-      container,
-      offset,
       openDelay,
       closeDelay,
-      shift,
-      flip,
-      keepMounted,
       defaultOpen,
-      closeOnEscape,
-      placement,
     },
   })
 
@@ -92,6 +79,7 @@ export const Tooltip = <
     classNames: slotClasses.root,
     shouldForwardComponent: false,
     externalForwardedProps: {
+      placement,
       ...remainingProps,
       ...motionProps,
     },
@@ -117,7 +105,7 @@ export const Tooltip = <
     elementType: PopperContent,
     classNames: slotClasses.content,
     shouldForwardComponent: false,
-    externalForwardedProps: slotProps?.content,
+    externalSlotProps: slotProps?.content,
   })
 
   if (content == null || content === '') {

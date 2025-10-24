@@ -1,7 +1,8 @@
 import type { ReactNode, ElementType } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { DOMMotionComponents } from 'motion/react'
-import type { PopperProps } from '../popper'
+import type { ClassValue } from 'clsx'
+import type { PopperProps, PopperRootProps } from '../popper'
 import type { TooltipRecipeVariants } from '../../theme/recipes'
 import type {
   ComponentSlotClasses,
@@ -21,6 +22,11 @@ export type TooltipOwnProps<RootComponent extends ElementType> = {
    * The children to render. Usually a trigger element.
    */
   children?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
@@ -87,7 +93,17 @@ export type TooltipOwnProps<RootComponent extends ElementType> = {
    * The props used for each slot.
    */
   slotProps?: TooltipSlotProps
-} & PopperProps
+} & PopperProps &
+  Pick<
+    PopperRootProps,
+    | 'placement'
+    | 'offset'
+    | 'shift'
+    | 'flip'
+    | 'keepMounted'
+    | 'closeOnEscape'
+    | 'container'
+  >
 
 export type TooltipProps<
   RootComponent extends ElementType = DOMMotionComponents['div'],
