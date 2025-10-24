@@ -61,18 +61,6 @@ export const Tooltip = <
     classNames,
   })
 
-  const [TooltipWrapper, getTooltipWrapperProps] = useSlot({
-    elementType: Popper,
-    shouldForwardComponent: false,
-    externalForwardedProps: {
-      open,
-      onOpenChange,
-      openDelay,
-      closeDelay,
-      defaultOpen,
-    },
-  })
-
   const [TooltipRoot, getTooltipRootProps] = useSlot({
     style: styles.root,
     elementType: PopperRoot,
@@ -113,12 +101,18 @@ export const Tooltip = <
   }
 
   return (
-    <TooltipWrapper {...getTooltipWrapperProps()}>
+    <Popper
+      open={open}
+      onOpenChange={onOpenChange}
+      openDelay={openDelay}
+      closeDelay={closeDelay}
+      defaultOpen={defaultOpen}
+    >
       <TooltipTrigger {...getTooltipTriggerProps()}>{children}</TooltipTrigger>
       <TooltipRoot {...getTooltipRootProps()}>
         <TooltipContent {...getTooltipContentProps()}>{content}</TooltipContent>
       </TooltipRoot>
-    </TooltipWrapper>
+    </Popper>
   )
 }
 

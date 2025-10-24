@@ -71,12 +71,6 @@ export type DialogProps<
   DialogPropsOverrides
 >
 
-export type DialogOwnerState<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = DialogProps<RootComponent> & {
-  setOpen: (open: boolean) => void
-}
-
 // ------------- DialogContent -------------
 type DialogContentSlotProps = {
   closeButton?: ComponentPropsWithCommonProps<'button'>

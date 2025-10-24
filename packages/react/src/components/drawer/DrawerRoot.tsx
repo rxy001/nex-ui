@@ -15,22 +15,7 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     ownerState,
   })
 
-  const {
-    slotProps,
-    classNames,
-    hideBackdrop,
-    open: _open,
-    onOpenChange: _onOpenChange,
-    container: _container,
-    restoreFocus: _restoreFocus,
-    closeOnEscape: _closeOnEscape,
-    preventScroll: _preventScroll,
-    closeOnInteractBackdrop: _closeOnInteractBackdrop,
-    defaultOpen: _defaultOpen,
-    keepMounted: _keepMounted,
-    setOpen: _setOpen,
-    ...remainingProps
-  } = ownerState
+  const { slotProps, classNames, hideBackdrop, ...remainingProps } = ownerState
 
   const slotClasses = useSlotClasses({
     name: 'Drawer',
@@ -38,7 +23,7 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     classNames,
   })
 
-  const [Root, getRootProps] = useSlot({
+  const [DrawerRootRoot, getDrawerRootRootProps] = useSlot({
     elementType: ModalRoot,
     style: styles.root,
     externalForwardedProps: remainingProps,
@@ -55,10 +40,10 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
   })
 
   return (
-    <Root {...getRootProps()}>
+    <DrawerRootRoot {...getDrawerRootRootProps()}>
       {!hideBackdrop && <DrawerBackdrop {...getDrawerBackdropProps()} />}
       {children}
-    </Root>
+    </DrawerRootRoot>
   )
 }
 
