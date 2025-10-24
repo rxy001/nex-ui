@@ -1,40 +1,11 @@
 'use client'
 
 import { useDefaultProps } from '../utils'
-import { Modal, useModal } from '../modal'
+import { Modal } from '../modal'
 import { DialogProvider } from './DialogContext'
 import type { ElementType } from 'react'
 import type { DOMMotionComponents } from 'motion/react'
-import type { DialogProps, DialogOwnerState } from './types'
-
-const Provider = (props: DialogProps) => {
-  const { children, hideBackdrop = false } = props
-  const {
-    open,
-    preventScroll,
-    keepMounted,
-    restoreFocus,
-    defaultOpen,
-    closeOnEscape,
-    closeOnInteractOutside,
-    setOpen,
-  } = useModal()
-
-  const ownerState: DialogOwnerState = {
-    ...props,
-    closeOnEscape,
-    hideBackdrop,
-    preventScroll,
-    open,
-    setOpen,
-    keepMounted,
-    restoreFocus,
-    defaultOpen,
-    closeOnInteractBackdrop: closeOnInteractOutside,
-  }
-
-  return <DialogProvider value={ownerState}>{children}</DialogProvider>
-}
+import type { DialogProps } from './types'
 
 export const Dialog = <
   RootComponent extends ElementType = DOMMotionComponents['div'],
@@ -58,7 +29,7 @@ export const Dialog = <
     closeOnInteractBackdrop,
     preventScroll,
     onClose,
-    hideBackdrop,
+    hideBackdrop = false,
     ...remainingProps
   } = props
 
@@ -75,12 +46,16 @@ export const Dialog = <
       onClose={onClose}
       closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
-      <Provider hideBackdrop={hideBackdrop} {...remainingProps}>
+      <DialogProvider
+        value={{
+          hideBackdrop,
+          ...remainingProps,
+        }}
+      >
         {children}
-      </Provider>
+      </DialogProvider>
     </Modal>
   )
 }
 
 Dialog.displayName = 'Dialog'
-Provider.displayName = 'DialogInnerProvider'

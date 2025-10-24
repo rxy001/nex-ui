@@ -61,12 +61,6 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   closeOnInteractBackdrop?: boolean
 } & Omit<ModalProps, 'closeOnInteractOutside'>
 
-export type DrawerOwnerState<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = DrawerOwnProps<RootComponent> & {
-  setOpen: (open: boolean) => void
-}
-
 export interface DrawerPropsOverrides {}
 
 export type DrawerProps<

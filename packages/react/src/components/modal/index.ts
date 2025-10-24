@@ -9,8 +9,6 @@ export { ModalPanel } from './ModalPanel'
 export { ModalBackdrop } from './ModalBackdrop'
 export { ModalRoot } from './ModalRoot'
 
-export { useModal } from './ModalContext'
-
 export type {
   ModalProps,
   ModalBackdropProps,
