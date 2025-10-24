@@ -6,15 +6,30 @@ import {
 } from '~/tests/shared'
 import { Button } from '../../button'
 import { Popper, PopperRoot, PopperContent, PopperTrigger } from '../index'
-import type { PopperProps } from '../index'
+import type { PopperProps, PopperRootProps } from '../index'
 
-function TestPopper(props: PopperProps & { className?: string }) {
+type TestPopperProps = PopperProps & PopperRootProps
+
+function TestPopper({
+  open,
+  defaultOpen,
+  openDelay = 0,
+  closeDelay = 0,
+  onOpenChange,
+  ...props
+}: TestPopperProps) {
   return (
-    <Popper openDelay={0} closeDelay={0} {...props}>
+    <Popper
+      open={open}
+      onOpenChange={onOpenChange}
+      defaultOpen={defaultOpen}
+      openDelay={openDelay}
+      closeDelay={closeDelay}
+    >
       <PopperTrigger>
         <Button data-testid='popper-trigger'>Trigger</Button>
       </PopperTrigger>
-      <PopperRoot data-testid='popper-root' className={props.className}>
+      <PopperRoot data-testid='popper-root' {...props}>
         <PopperContent data-testid='popper-content'>
           Popper Content
         </PopperContent>

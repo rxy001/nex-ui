@@ -37,23 +37,18 @@ export const PopperRoot = <
 >(
   inProps: PopperRootProps<RootComponent>,
 ) => {
-  const {
-    open,
-    referenceRef,
-    setOpen,
-    offset,
-    placement,
-    flip,
-    shift,
-    keepMounted,
-    container,
-    closeOnEscape,
-    popperRootRef,
-    popperRootId,
-  } = usePopper()
+  const { open, referenceRef, setOpen, popperRootRef, popperRootId } =
+    usePopper()
 
   const {
     children,
+    container,
+    flip = { mainAxis: true, crossAxis: true },
+    offset = 5,
+    shift = true,
+    keepMounted = false,
+    closeOnEscape = true,
+    placement = 'top',
     role = 'tooltip',
     id = popperRootId,
     ...props
