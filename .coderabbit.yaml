@@ -14,6 +14,12 @@ reviews:
   suggested_labels: false
   suggested_reviewers: false
   poem: false
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: false
   
   # Auto review settings
   auto_review:

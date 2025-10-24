@@ -1,6 +1,12 @@
 'use client'
 
-import { Popper, PopperContent, PopperRoot, PopperTrigger } from '../popper'
+import {
+  Popper,
+  PopperContent,
+  PopperRoot,
+  PopperTrigger,
+  usePopper,
+} from '../popper'
 import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
@@ -9,27 +15,28 @@ import type { TooltipProps } from './types'
 
 const slots = ['root', 'content']
 
-export const Tooltip = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
-  inProps: TooltipProps<RootComponent>,
-) => {
-  const props = useDefaultProps<TooltipProps>({
-    name: 'Tooltip',
-    props: inProps,
-  })
+const useSlotAriaProps = (ownerState: TooltipProps) => {
+  const { open, popperRootId } = usePopper()
 
+  const { role = 'tooltip' } = ownerState
+
+  return {
+    root: {
+      role,
+    },
+    trigger: {
+      'aria-describedby': open ? popperRootId : undefined,
+    },
+  }
+}
+
+const TooltipRoot = (props: TooltipProps) => {
   const {
     children,
     content,
-    open,
-    onOpenChange,
     classNames,
     slotProps,
-    openDelay,
-    closeDelay,
     motionProps,
-    defaultOpen,
     closeOnClick = true,
     color = 'default',
     interactive = true,
@@ -49,6 +56,8 @@ export const Tooltip = <
     closeOnClick,
   }
 
+  const slotAriaProps = useSlotAriaProps(ownerState)
+
   const styles = useStyles({
     ownerState,
     name: 'Tooltip',
@@ -61,7 +70,7 @@ export const Tooltip = <
     classNames,
   })
 
-  const [TooltipRoot, getTooltipRootProps] = useSlot({
+  const [TooltipRootRoot, getTooltipRootRootProps] = useSlot({
     style: styles.root,
     elementType: PopperRoot,
     classNames: slotClasses.root,
@@ -76,25 +85,56 @@ export const Tooltip = <
       size,
       radius,
     },
+    a11y: slotAriaProps.root,
   })
 
-  const [TooltipTrigger, getTooltipTriggerProps] = useSlot({
-    elementType: PopperTrigger,
-    shouldForwardComponent: false,
-    externalForwardedProps: {
-      interactive,
-      closeOnClick,
-      action: 'hover',
-    },
-  })
-
-  const [TooltipContent, getTooltipContentProps] = useSlot({
+  const [TooltipRootContent, getTooltipRootContentProps] = useSlot({
     style: styles.content,
     elementType: PopperContent,
     classNames: slotClasses.content,
     shouldForwardComponent: false,
     externalSlotProps: slotProps?.content,
   })
+
+  return (
+    <>
+      <PopperTrigger
+        interactive={interactive}
+        closeOnClick={closeOnClick}
+        action='hover'
+        elementProps={slotAriaProps.trigger}
+      >
+        {children}
+      </PopperTrigger>
+      <TooltipRootRoot {...getTooltipRootRootProps()}>
+        <TooltipRootContent {...getTooltipRootContentProps()}>
+          {content}
+        </TooltipRootContent>
+      </TooltipRootRoot>
+    </>
+  )
+}
+
+export const Tooltip = <
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+>(
+  inProps: TooltipProps<RootComponent>,
+) => {
+  const props = useDefaultProps<TooltipProps>({
+    name: 'Tooltip',
+    props: inProps,
+  })
+
+  const {
+    children,
+    content,
+    open,
+    onOpenChange,
+    openDelay,
+    closeDelay,
+    defaultOpen,
+    ...remainingProps
+  } = props
 
   if (content == null || content === '') {
     return children
@@ -108,12 +148,13 @@ export const Tooltip = <
       closeDelay={closeDelay}
       defaultOpen={defaultOpen}
     >
-      <TooltipTrigger {...getTooltipTriggerProps()}>{children}</TooltipTrigger>
-      <TooltipRoot {...getTooltipRootProps()}>
-        <TooltipContent {...getTooltipContentProps()}>{content}</TooltipContent>
+      <TooltipRoot content={content} {...remainingProps}>
+        {children}
       </TooltipRoot>
     </Popper>
   )
 }
 
 Tooltip.displayName = 'Tooltip'
+
+TooltipRoot.displayName = 'TooltipRoot'

@@ -1,18 +1,20 @@
 'use client'
 
 import {
-  chain,
   mergeRefs,
   addEventListener,
   ownerDocument,
   isFocusVisible,
+  mergeProps,
 } from '@nex-ui/utils'
-import { cloneElement, isValidElement, useEffect } from 'react'
+import { cloneElement, isValidElement, useEffect, useRef } from 'react'
 import { usePopper } from './PopperContext'
 import type { DetailedHTMLProps, HTMLAttributes, FocusEvent } from 'react'
 import type { PopperTriggerProps } from './types'
 
 export const PopperTrigger = (props: PopperTriggerProps) => {
+  const focusVisibleRef = useRef(false)
+
   const {
     open,
     setOpen,
@@ -20,12 +22,13 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
     handleOpen,
     referenceRef,
     popperRootRef,
-    popperRootId,
   } = usePopper()
+
   const {
     children,
-    interactive = true,
+    elementProps,
     action = 'hover',
+    interactive = true,
     closeOnClick = true,
   } = props
 
@@ -70,47 +73,39 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
 
   const renderChildren = () => {
     const element = children as React.ReactElement<any>
-    const {
-      ref,
-      onClick,
-      onMouseEnter,
-      onMouseLeave,
-      onFocus,
-      onBlur,
-      'aria-describedby': ariaDescribedby,
-    } = element.props
 
     const props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
-      ref: mergeRefs(ref, referenceRef),
-      'aria-describedby': ariaDescribedby ?? (open ? popperRootId : undefined),
-      onFocus: chain(onFocus, (event: FocusEvent<HTMLElement>) => {
+      ref: referenceRef,
+      onFocus: (event: FocusEvent<HTMLElement>) => {
         if (isFocusVisible(event.currentTarget)) {
           handleOpen()
+          focusVisibleRef.current = true
         }
-      }),
-      onBlur: chain(onBlur, (event: FocusEvent<HTMLElement>) => {
-        if (!isFocusVisible(event.currentTarget)) {
+      },
+      onBlur: (event: FocusEvent<HTMLElement>) => {
+        if (focusVisibleRef.current && !isFocusVisible(event.currentTarget)) {
           handleClose()
+          focusVisibleRef.current = false
         }
-      }),
+      },
     }
 
     if (action === 'click') {
-      const handleClick = chain(() => {
+      const handleClick = () => {
         if (!open) {
           handleOpen()
         } else if (closeOnClick) {
           handleClose()
         }
-      }, onClick)
+      }
 
       props.onClick = handleClick
     } else if (action === 'hover') {
-      const handleMouseEnter = chain(handleOpen, onMouseEnter)
-      const handleMouseLeave = chain(handleClose, onMouseLeave)
-      const handleClick = chain(() => {
+      const handleMouseEnter = handleOpen
+      const handleMouseLeave = handleClose
+      const handleClick = () => {
         if (closeOnClick && open) setOpen(false)
-      }, onClick)
+      }
 
       props.onMouseEnter = handleMouseEnter
       props.onMouseLeave = handleMouseLeave
@@ -118,7 +113,8 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
     }
 
     return cloneElement(element, {
-      ...props,
+      ...mergeProps(elementProps, element.props, props),
+      ref: mergeRefs(elementProps?.ref, element.props.ref, props.ref),
     })
   }
 
