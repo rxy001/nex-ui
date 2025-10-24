@@ -26,55 +26,6 @@ export type PopperProps = {
   onOpenChange?: (open: boolean) => void
 
   /**
-   * The placement of the popper relative to the trigger element.
-   *
-   * @default 'top'
-   */
-  placement?: Placement
-
-  /**
-   * The container element in which the overlay portal will be placed.
-   *
-   * @default document.body
-   */
-  container?: HTMLElement | null | (() => HTMLElement | null)
-
-  /**
-   * Changes the placement of the popper element to keep it in view.
-   *
-   * @default { mainAxis: true, crossAxis: true }
-   */
-  flip?: FlipOptions | false
-
-  /**
-   * Shifts the popper element to keep it in view.
-   *
-   * @default true
-   */
-  shift?: boolean
-
-  /**
-   * Translates the popper element along the specified axes.
-   *
-   * @default 5
-   */
-  offset?: OffsetOptions | false
-
-  /**
-   * If true, always keep the children in the DOM.
-   *
-   * @default false
-   */
-  keepMounted?: boolean
-
-  /**
-   * If true, closes the popper when the escape key is pressed.
-   *
-   * @default true
-   */
-  closeOnEscape?: boolean
-
-  /**
    * The delay in milliseconds before the popper opens.
    *
    * @default 100
@@ -125,9 +76,60 @@ type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
   }
 >
 
+type PopperRootOwnProps = {
+  /**
+   * The placement of the popper relative to the trigger element.
+   *
+   * @default 'top'
+   */
+  placement?: Placement
+
+  /**
+   * The container element in which the overlay portal will be placed.
+   *
+   * @default document.body
+   */
+  container?: HTMLElement | null | (() => HTMLElement | null)
+
+  /**
+   * Changes the placement of the popper element to keep it in view.
+   *
+   * @default { mainAxis: true, crossAxis: true }
+   */
+  flip?: FlipOptions | false
+
+  /**
+   * Shifts the popper element to keep it in view.
+   *
+   * @default true
+   */
+  shift?: boolean
+
+  /**
+   * Translates the popper element along the specified axes.
+   *
+   * @default 5
+   */
+  offset?: OffsetOptions | false
+
+  /**
+   * If true, always keep the children in the DOM.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
+
+  /**
+   * If true, closes the popper when the escape key is pressed.
+   *
+   * @default true
+   */
+  closeOnEscape?: boolean
+}
+
 export type PopperRootProps<
   RootComponent extends ElementType = DOMMotionComponents['div'],
-> = PopperSlotProps<RootComponent>
+> = PopperSlotProps<RootComponent> & PopperRootOwnProps
 
 export type PopperContentProps<RootComponent extends ElementType = 'div'> =
   PopperSlotProps<RootComponent>
