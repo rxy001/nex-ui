@@ -211,6 +211,11 @@ type CheckboxGroupOwnProps<
    * The label of the checkbox group.
    */
   label?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type CheckboxGroupProps<
