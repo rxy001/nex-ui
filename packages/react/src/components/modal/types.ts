@@ -1,4 +1,5 @@
 import type { Interpolation } from '@nex-ui/system'
+import type { ClassValue } from 'clsx'
 import type { Overwrite } from '../../types/utils'
 import type { ComponentProps, ElementType, ReactNode } from 'react'
 import type { DOMMotionComponents } from 'motion/react'
@@ -8,6 +9,7 @@ type ModalSlotProps<RootComponent extends ElementType> = Overwrite<
   {
     as?: RootComponent
     sx?: Interpolation
+    className?: ClassValue
   }
 >
 

@@ -1,4 +1,5 @@
 import type { ReactNode, ElementType, ComponentProps } from 'react'
+import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type { Placement, FlipOptions, OffsetOptions } from '../utils'
 import type { Overwrite } from '../../types/utils'
@@ -73,6 +74,7 @@ type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
   {
     as?: RootComponent
     sx?: Interpolation
+    className?: ClassValue
   }
 >
 
@@ -125,6 +127,11 @@ type PopperRootOwnProps = {
    * @default true
    */
   closeOnEscape?: boolean
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type PopperRootProps<

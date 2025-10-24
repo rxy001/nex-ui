@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode } from 'react'
+import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
@@ -28,7 +29,7 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   /**
    * Additional class names to apply to the root element.
    */
-  className?: string
+  className?: ClassValue
 
   /**
    * The label of the radio.
@@ -117,6 +118,11 @@ type RadioGroupOwnProps<
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx?: Interpolation
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 
   /**
    * The props used for each slot.

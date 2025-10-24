@@ -93,8 +93,8 @@ Drawer 继承 `as` (默认为 `m.div`) 的 Props。
     },
     {
       prop: 'className',
-      type: 'string',
-      description: 'Drawer 根元素的类名。',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
     },
     {
       prop: 'hideBackdrop',
@@ -243,6 +243,11 @@ DrawerContent 继承 `as` (默认为 `'div'`) 的 Props。
       description: '用于根元素的 sx 属性。',
     },
     {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
       prop: 'classNames',
       type: 'Partial<Record<Slots, ClassValue>>',
       description: 'DrawerContent Slots 的 className。',
@@ -297,6 +302,11 @@ DrawerHeader 继承 `as` (默认为 `'h2'`) 的 Props。
       type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
   ]}
 />
 
@@ -323,6 +333,11 @@ DrawerBody 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
   ]}
 />
 
@@ -348,6 +363,11 @@ DrawerFooter 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'sx',
       type: 'Interpolation',
       description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
     },
   ]}
 />

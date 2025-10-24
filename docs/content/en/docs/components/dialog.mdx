@@ -108,7 +108,7 @@ Dialog inherit the props of `as` (by default, `m.div`).
     },
     {
       prop: 'className',
-      type: 'string',
+      type: 'ClassValue',
       description: 'Additional class names to apply to the root element.',
     },
     {
@@ -245,6 +245,11 @@ DialogContent inherit the props of `as` (by default, `'div'`).
       default: 'false',
     },
     {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+    {
       prop: 'motionProps',
       type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
       description: 'The props to modify the framer motion animation.',
@@ -326,6 +331,11 @@ DialogHeader inherit the props of `as` (by default, `'h2'`).
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
   ]}
 />
 
@@ -352,6 +362,11 @@ DialogBody inherit the props of `as` (by default, `'div'`).
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
   ]}
 />
 
@@ -377,6 +392,11 @@ DialogFooter inherit the props of `as` (by default,`'div'`).
       type: 'Interpolation',
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
     },
   ]}
 />

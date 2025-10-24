@@ -178,6 +178,11 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
    * Custom renderer of extraAvatars.
    */
   renderSurplus?: (surplus: number) => ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type AvatarGroupProps<RootComponent extends ElementType = 'div'> =

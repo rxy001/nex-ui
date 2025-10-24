@@ -1,6 +1,7 @@
 import type { DOMMotionComponents } from 'motion/react'
 import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
+import type { ClassValue } from 'clsx'
 import type { ModalProps } from '../modal'
 import type { DrawerContentVariants } from '../../theme/recipes'
 import type {
@@ -35,7 +36,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   /**
    * Additional class names to apply to the root element.
    */
-  className?: string
+  className?: ClassValue
 
   /**
    * If true, the backdrop is not rendered.
@@ -95,6 +96,11 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx?: Interpolation
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 
   /**
    * The className used for each slot.
@@ -181,6 +187,11 @@ type DrawerHeaderOwnProps<RootComponent extends ElementType> = {
    * The content of the drawer header.
    */
   children?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type DrawerHeaderProps<RootComponent extends ElementType = 'h2'> =
@@ -209,6 +220,11 @@ type DrawerBodyOwnProps<RootComponent extends ElementType> = {
    * The content of the drawer body.
    */
   children?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type DrawerBodyProps<RootComponent extends ElementType = 'div'> =
@@ -237,6 +253,11 @@ type DrawerFooterOwnProps<RootComponent extends ElementType> = {
    * The content of the drawer footer.
    */
   children?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type DrawerFooterProps<RootComponent extends ElementType = 'div'> =

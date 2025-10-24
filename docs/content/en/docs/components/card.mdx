@@ -69,7 +69,7 @@ Card inherit the props of `as` (by default, `'div'`).
     {
       prop: 'shadow',
       type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
-      default:"'md'",
+      default: "'md'",
       description: 'The shadow of the card.',
     },
     {
@@ -85,17 +85,21 @@ Card inherit the props of `as` (by default, `'div'`).
     {
       prop: 'sx',
       type: 'Interpolation',
-      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description:
-        'The component used for the root element.',
+      description: 'The component used for the root element.',
     },
-
-]}
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
+  ]}
 />
 
 ### CardHeader Props
@@ -141,6 +145,11 @@ CardHeader inherit the props of `as` (by default, `'div'`).
       type: 'ElementType',
       default: "'div'",
       description: 'The component used for the root element.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
     },
     {
       prop: 'classNames',
@@ -198,6 +207,11 @@ CardBody inherit the props of `as` (by default, `'div'`).
       default: "'div'",
       description: 'The component used for the root element.',
     },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
+    },
   ]}
 />
 
@@ -218,6 +232,11 @@ CardFooter inherit the props of `as` (by default, `'div'`).
       type: 'ElementType',
       default: "'div'",
       description: 'The component used for the root element.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root element.',
     },
   ]}
 />

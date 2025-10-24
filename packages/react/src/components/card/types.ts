@@ -92,6 +92,11 @@ type CardHeaderOwnProps<RootComponent extends ElementType> = {
   action?: ReactNode
 
   /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
+
+  /**
    * The className used for each slot.
    */
   classNames?: ComponentSlotClasses<keyof CardHeaderSlotProps>
@@ -122,6 +127,11 @@ type CardBodyOwnProps<RootComponent extends ElementType> = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx?: Interpolation
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export interface CardBodyPropsOverrides {}
@@ -144,6 +154,11 @@ type CardFooterOwnProps<RootComponent extends ElementType> = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx?: Interpolation
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export interface CardFooterPropsOverrides {}
@@ -173,6 +188,11 @@ type CardActionAreaOwnProps<RootComponent extends ElementType> = {
    * If `true`, the component is disabled.
    */
   disabled?: boolean
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type CardActionAreaProps<RootComponent extends ElementType = 'button'> =

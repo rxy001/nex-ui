@@ -1,5 +1,6 @@
 import type { DOMMotionComponents } from 'motion/react'
 import type { Interpolation } from '@nex-ui/system'
+import type { ClassValue } from 'clsx'
 import type {
   OverrideProps,
   ComponentPropsWithCommonProps,
@@ -30,7 +31,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * Additional class names to apply to the root element.
    */
-  className?: string
+  className?: ClassValue
 
   /**
    * The content of the dialog. It's usually the `DialogContent` component.
@@ -165,6 +166,11 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
         placement: DialogContentVariants['placement'],
       ) => HTMLMotionProps<'section'>)
     | HTMLMotionProps<'section'>
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type DialogContentProps<RootComponent extends ElementType = 'div'> =
@@ -193,6 +199,11 @@ type DialogHeaderOwnProps<RootComponent extends ElementType> = {
    * The content of the dialog header.
    */
   children?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type DialogHeaderProps<RootComponent extends ElementType = 'h2'> =
@@ -221,6 +232,11 @@ type DialogBodyOwnProps<RootComponent extends ElementType> = {
    * The content of the dialog body.
    */
   children?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type DialogBodyProps<RootComponent extends ElementType = 'div'> =
@@ -249,6 +265,11 @@ type DialogFooterOwnProps<RootComponent extends ElementType> = {
    * The content of the dialog footer.
    */
   children?: ReactNode
+
+  /**
+   * Additional class names to apply to the root element.
+   */
+  className?: ClassValue
 }
 
 export type DialogFooterProps<RootComponent extends ElementType = 'div'> =
