@@ -67,6 +67,10 @@ export type PopperTriggerProps = {
    * @default true
    */
   closeOnClick?: boolean
+
+  elementProps?: {
+    [key: string]: any
+  }
 }
 
 type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
