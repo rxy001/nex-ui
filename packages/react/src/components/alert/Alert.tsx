@@ -16,16 +16,20 @@ import type { ElementType } from 'react'
 import type { AlertProps } from './types'
 
 const useSlotAriaProps = (ownerState: AlertProps) => {
-  const { role = 'alert' } = ownerState
+  const { role = 'alert', slotProps } = ownerState
 
-  return {
-    root: {
-      role,
-    },
-    closeButton: {
-      'aria-label': 'Close alert',
-    },
-  }
+  const ariaLabel = slotProps?.closeButton?.['aria-label']
+
+  return useMemo(() => {
+    return {
+      root: {
+        role,
+      },
+      closeButton: {
+        'aria-label': ariaLabel ?? 'Close alert',
+      },
+    }
+  }, [ariaLabel, role])
 }
 
 const slots = ['root', 'icon', 'content', 'title', 'description', 'closeButton']

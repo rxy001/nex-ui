@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import {
   Popper,
   PopperContent,
@@ -20,14 +21,16 @@ const useSlotAriaProps = (ownerState: TooltipProps) => {
 
   const { role = 'tooltip' } = ownerState
 
-  return {
-    root: {
-      role,
-    },
-    trigger: {
-      'aria-describedby': open ? popperRootId : undefined,
-    },
-  }
+  return useMemo(() => {
+    return {
+      root: {
+        role,
+      },
+      trigger: {
+        'aria-describedby': open ? popperRootId : undefined,
+      },
+    }
+  }, [open, popperRootId, role])
 }
 
 const TooltipRoot = (props: TooltipProps) => {
