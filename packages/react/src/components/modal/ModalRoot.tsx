@@ -75,6 +75,7 @@ export const ModalRoot = <
     },
     dataAttrs: {
       state: open ? 'open' : 'closed',
+      keepMounted,
     },
   })
 
