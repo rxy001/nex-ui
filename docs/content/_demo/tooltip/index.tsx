@@ -16,6 +16,10 @@ import InteractiveDemo from './Interactive.demo'
 import interactiveCode from './Interactive.demo?raw'
 import CustomMotionDemo from './CustomMotion.demo'
 import customMotionCode from './CustomMotion.demo?raw'
+import FlipDemo from './Flip.demo'
+import flipCode from './Flip.demo?raw'
+import ShiftDemo from './Shift.demo'
+import shiftCode from './Shift.demo?raw'
 
 export const tooltip = {
   usage: {
@@ -53,5 +57,13 @@ export const tooltip = {
   customMotion: {
     code: customMotionCode,
     demo: <CustomMotionDemo />,
+  },
+  flip: {
+    code: flipCode,
+    demo: <FlipDemo />,
+  },
+  shift: {
+    code: shiftCode,
+    demo: <ShiftDemo />,
   },
 }
