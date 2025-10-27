@@ -95,7 +95,7 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
         if (!open) {
           handleOpen()
         } else if (closeOnClick) {
-          handleClose()
+          setOpen(false)
         }
       }
 

@@ -37,8 +37,7 @@ export const PopperRoot = <
 >(
   inProps: PopperRootProps<RootComponent>,
 ) => {
-  const { open, referenceRef, setOpen, popperRootRef, popperRootId } =
-    usePopper()
+  const { open, referenceRef, setOpen, popperRootRef } = usePopper()
 
   const {
     children,
@@ -49,7 +48,6 @@ export const PopperRoot = <
     keepMounted = false,
     closeOnEscape = true,
     placement = 'top',
-    id = popperRootId,
     ...props
   } = inProps as PopperRootProps
 
@@ -72,7 +70,6 @@ export const PopperRoot = <
     shouldForwardComponent: false,
     additionalProps: {
       open,
-      id,
       keepMounted,
       ref: popperRootRef,
       style: styleVariables as CSSProperties,

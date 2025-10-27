@@ -22,8 +22,6 @@ export const Popper = (props: PopperProps) => {
   const popperRootRef = useRef<HTMLDivElement>(null)
   const id = useId()
 
-  const popperRootId = `nui-popper-${id}`
-
   const [open, setOpen] = useControlledState(
     openProp,
     defaultOpen,
@@ -72,9 +70,8 @@ export const Popper = (props: PopperProps) => {
       popperRootRef,
       handleOpen,
       handleClose,
-      popperRootId,
     }),
-    [handleClose, handleOpen, open, popperRootId, setOpen],
+    [handleClose, handleOpen, open, setOpen],
   )
 
   useEffect(() => {

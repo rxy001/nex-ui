@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useId, useMemo } from 'react'
 import {
   Popper,
   PopperContent,
@@ -17,7 +17,11 @@ import type { TooltipProps } from './types'
 const slots = ['root', 'content']
 
 const useSlotAriaProps = (ownerState: TooltipProps) => {
-  const { open, popperRootId } = usePopper()
+  const id = useId()
+
+  const rootId = ownerState.id ?? `nui-tooltip-${id}`
+
+  const { open } = usePopper()
 
   const { role = 'tooltip' } = ownerState
 
@@ -25,12 +29,13 @@ const useSlotAriaProps = (ownerState: TooltipProps) => {
     return {
       root: {
         role,
+        id: rootId,
       },
       trigger: {
-        'aria-describedby': open ? popperRootId : undefined,
+        'aria-describedby': open ? rootId : undefined,
       },
     }
-  }, [open, popperRootId, role])
+  }, [open, rootId, role])
 }
 
 const TooltipRoot = (props: TooltipProps) => {

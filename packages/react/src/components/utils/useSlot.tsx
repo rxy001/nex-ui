@@ -134,7 +134,7 @@ export const useSlot = <
     return {
       ...props,
       ref,
-      className,
+      className: className === '' ? undefined : className,
       sx: mergedSx,
     }
   }
