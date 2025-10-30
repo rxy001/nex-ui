@@ -52,7 +52,7 @@ exports[`Accordion should render with default props 1`] = `
   font-weight: var(--nui-font-weights-normal);
 }
 
-.emotion-3[data-focus-visible=true]:not(:disabled, [data-disabled=true]) {
+.emotion-3:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
   outline: var(--nui-borders-focus-visible-outline);
 }
 

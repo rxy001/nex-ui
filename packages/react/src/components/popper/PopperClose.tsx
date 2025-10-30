@@ -1,12 +1,12 @@
 'use client'
 
 import { cloneElement, isValidElement } from 'react'
-import { useModal } from './ModalContext'
+import { usePopper } from './PopperContext'
 import type { ReactElement } from 'react'
-import type { ModalCloseProps } from './types'
+import type { PopperCloseProps } from './types'
 
-export const ModalClose = ({ children }: ModalCloseProps) => {
-  const { setOpen } = useModal()
+export const PopperClose = ({ children }: PopperCloseProps) => {
+  const { handleClose } = usePopper()
 
   if (!isValidElement(children)) {
     return children
@@ -28,12 +28,12 @@ export const ModalClose = ({ children }: ModalCloseProps) => {
           result instanceof Promise &&
           typeof result.then === 'function'
         ) {
-          result.then(() => setOpen(false)).catch(() => {})
+          result.then(() => handleClose()).catch(() => {})
 
           return
         }
       }
-      setOpen(false)
+      handleClose()
     },
   })
 }

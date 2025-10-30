@@ -30,6 +30,8 @@ import type {
   CardFooterRecipe,
   CardActionAreaRecipe,
   TooltipRecipe,
+  PopoverRecipe,
+  PopoverContentRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -62,6 +64,8 @@ import type {
   CardFooterProps,
   CardActionAreaProps,
   TooltipProps,
+  PopoverContentProps,
+  PopoverProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
@@ -190,6 +194,14 @@ export type ComponentThemes = {
   Tooltip?: {
     styleOverrides?: ComponentThemeObject<TooltipRecipe>
     defaultProps?: TooltipProps
+  }
+  Popover?: {
+    styleOverrides?: ComponentThemeObject<PopoverRecipe>
+    defaultProps?: PopoverProps
+  }
+  PopoverContent?: {
+    styleOverrides?: ComponentThemeObject<PopoverContentRecipe>
+    defaultProps?: PopoverContentProps
   }
 }
 

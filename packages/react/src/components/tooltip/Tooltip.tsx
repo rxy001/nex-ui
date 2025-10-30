@@ -45,10 +45,9 @@ const TooltipRoot = (props: TooltipProps) => {
     classNames,
     slotProps,
     motionProps,
-    closeOnClick = true,
+    interactive,
+    closeOnClick,
     color = 'default',
-    interactive = true,
-    placement = 'top',
     size = 'md',
     radius = 'md',
     ...remainingProps
@@ -56,7 +55,6 @@ const TooltipRoot = (props: TooltipProps) => {
 
   const ownerState = {
     ...props,
-    placement,
     size,
     radius,
     color,
@@ -84,7 +82,6 @@ const TooltipRoot = (props: TooltipProps) => {
     classNames: slotClasses.root,
     shouldForwardComponent: false,
     externalForwardedProps: {
-      placement,
       ...remainingProps,
       ...motionProps,
     },

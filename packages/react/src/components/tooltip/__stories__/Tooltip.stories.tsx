@@ -101,7 +101,7 @@ const meta = {
   args: {
     size: 'md',
     radius: 'md',
-    placement: 'bottom',
+    placement: 'top',
     interactive: true,
     closeOnEscape: true,
   },
@@ -109,7 +109,7 @@ const meta = {
     return (
       <Container>
         <Tooltip content='This is a tooltip' {...props}>
-          <Trigger>trigger</Trigger>
+          <Trigger>hover me</Trigger>
         </Tooltip>
       </Container>
     )
@@ -189,16 +189,17 @@ function ControlledTooltip(props: TooltipProps) {
   const [open, setOpen] = useState(false)
 
   return (
-    <Tooltip
-      content='This is a tooltip'
-      open={open}
-      onOpenChange={(isOpen) => setOpen(isOpen)}
-      {...props}
-    >
-      <Trigger onClick={() => setOpen(!open)}>
-        {open ? 'close' : 'open'}
-      </Trigger>
-    </Tooltip>
+    <>
+      <Tooltip
+        content='This is a tooltip'
+        open={open}
+        onOpenChange={(isOpen) => setOpen(isOpen)}
+        {...props}
+      >
+        <Trigger>hover me</Trigger>
+      </Tooltip>
+      <p>Open: {open ? 'open' : 'closed'}</p>
+    </>
   )
 }
 
@@ -217,7 +218,15 @@ export const WithOffset: Story = {
     offset: 0,
     placement: 'top',
     defaultOpen: true,
-    content: 'Offset is 0',
+  },
+  render: (props) => {
+    return (
+      <Container>
+        <Tooltip content='This is a tooltip' {...props}>
+          <Trigger>offset is 0</Trigger>
+        </Tooltip>
+      </Container>
+    )
   },
 }
 
@@ -246,7 +255,7 @@ const FlipTemplate = (props: TooltipProps) => {
           content='This is a tooltip'
           {...props}
         >
-          <Trigger>Scroll down</Trigger>
+          <Trigger>scroll the window</Trigger>
         </Tooltip>
       </Box>
     </Box>
