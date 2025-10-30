@@ -44,12 +44,16 @@ exports[`Button should render with default props 1`] = `
   border-radius: var(--nui-radii-lg);
 }
 
-.emotion-0[data-focus-visible=true]:not(:disabled, [data-disabled=true]) {
+.emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
   outline: var(--nui-borders-md) var(--nui-colors-blue-primary);
   outline-offset: var(--nui-spaces-0-5);
 }
 
 .emotion-0:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
+  background-color: var(--nui-colors-blue-secondary);
+}
+
+.emotion-0:is([aria-expanded="true"], [data-expanded=true]) {
   background-color: var(--nui-colors-blue-secondary);
 }
 

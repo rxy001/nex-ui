@@ -46,6 +46,7 @@ export const PopperRoot = <
     offset = 5,
     shift = true,
     keepMounted = false,
+    closeOnDetached = true,
     closeOnEscape = true,
     placement = 'top',
     ...props
@@ -119,7 +120,7 @@ export const PopperRoot = <
   // istanbul ignore next
   const observeReferenceIntersection = useEvent(() => {
     // istanbul ignore if
-    if (!referenceRef.current) return
+    if (!referenceRef.current || !closeOnDetached) return
 
     function handleIntersect(entries: IntersectionObserverEntry[]) {
       entries.forEach((entry) => {

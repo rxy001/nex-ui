@@ -52,7 +52,7 @@ exports[`Switch should render with default props 1`] = `
   transition: background-color 50000s ease-in-out 0s;
 }
 
-.emotion-1[data-focus-visible=true]:not(:disabled, [data-disabled=true])+* {
+.emotion-1:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])+* {
   outline: var(--nui-borders-md) var(--nui-colors-blue-primary);
   outline-offset: var(--nui-spaces-0-5);
 }
