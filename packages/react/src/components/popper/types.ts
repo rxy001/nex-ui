@@ -136,6 +136,13 @@ type PopperRootOwnProps = {
    * Additional class names to apply to the root element.
    */
   className?: ClassValue
+
+  /**
+   * If true, closes the popper when the reference element is detached from the viewport.
+   *
+   * @default true
+   */
+  closeOnDetached?: boolean
 }
 
 export type PopperRootProps<
@@ -144,3 +151,7 @@ export type PopperRootProps<
 
 export type PopperContentProps<RootComponent extends ElementType = 'div'> =
   PopperSlotProps<RootComponent>
+
+export type PopperCloseProps = {
+  children?: ReactNode
+}

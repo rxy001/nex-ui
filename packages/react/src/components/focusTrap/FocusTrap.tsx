@@ -6,7 +6,7 @@ import {
   useEffect,
   useRef,
 } from 'react'
-import { useLatest, useMergeRefs } from '@nex-ui/hooks'
+import { useEvent, useLatest, useMergeRefs } from '@nex-ui/hooks'
 import { getTabbable } from './getTabbable'
 import type { FocusEvent } from 'react'
 import type { FocusTrapProps } from './types'
@@ -26,6 +26,17 @@ export const FocusTrap = ({
   const pausedRef = useLatest(paused)
   const mergedRefs = useMergeRefs(rootRef, children?.props.ref)
 
+  const handleFocus = useEvent((e: FocusEvent) => {
+    if (restoredNode.current === null) {
+      restoredNode.current = e.relatedTarget
+    }
+
+    const childrenPropsHandler = children.props.onFocus
+    if (childrenPropsHandler) {
+      childrenPropsHandler(e)
+    }
+  })
+
   useEffect(() => {
     if (!active || !rootRef.current) {
       return
@@ -35,14 +46,18 @@ export const FocusTrap = ({
 
     if (!rootRef.current.contains(doc.activeElement)) {
       // If the focus is not inside the focus trap, focus the root element
-      rootRef.current?.focus()
+      rootRef.current?.focus({
+        preventScroll: true,
+      })
     }
 
     return () => {
       const node = restoredNode.current as HTMLElement
       if (restoreFocus && node) {
         ignoreNextFocus.current = true
-        node.focus()
+        node.focus({
+          preventScroll: true,
+        })
       }
     }
   }, [active, restoreFocus])
@@ -129,17 +144,6 @@ export const FocusTrap = ({
       '[Nex UI] FocusTrap: FocusTrap cannot use a Fragment as its child container.',
     )
     return null
-  }
-
-  const handleFocus = (e: FocusEvent) => {
-    if (restoredNode.current === null) {
-      restoredNode.current = e.relatedTarget
-    }
-
-    const childrenPropsHandler = children.props.onFocus
-    if (childrenPropsHandler) {
-      childrenPropsHandler(e)
-    }
   }
 
   return (

@@ -1,4 +1,4 @@
-import { fireEvent, waitFor, act } from '@testing-library/react'
+import { waitForElementToBeRemoved } from '@testing-library/react'
 import { renderWithNexUIProvider } from '~/tests/shared'
 import { Modal, ModalPanel, ModalRoot, ModalClose } from '../index'
 
@@ -41,7 +41,7 @@ describe('ModalClose', () => {
   it("should async close when the children's onClick returns a resolved Promise", async () => {
     jest.useFakeTimers()
 
-    const { getByTestId, queryByTestId } = await renderWithNexUIProvider(
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
       <Modal defaultOpen>
         <ModalClose>
           <button
@@ -63,19 +63,26 @@ describe('ModalClose', () => {
       </Modal>,
       {
         useAct: true,
+        userEventOptions: {
+          advanceTimers: jest.advanceTimersByTime,
+        },
       },
     )
 
     expect(queryByTestId('modal-root')).toBeInTheDocument()
     const closeButton = getByTestId('close-button')
 
-    fireEvent.click(closeButton)
+    await user.click(closeButton)
 
-    jest.runAllTimers()
+    jest.advanceTimersByTime(1000)
 
-    await waitFor(() => {
-      expect(queryByTestId('modal-root')).toBeNull()
-    })
+    expect(queryByTestId('modal-root')).toBeInTheDocument()
+
+    jest.advanceTimersByTime(2000)
+
+    await waitForElementToBeRemoved(() => queryByTestId('modal-root'))
+
+    expect(queryByTestId('modal-root')).toBeNull()
 
     jest.useRealTimers()
   })
@@ -105,10 +112,29 @@ describe('ModalClose', () => {
     expect(queryByTestId('modal-root')).toBeInTheDocument()
     const closeButton = getByTestId('close-button')
 
-    await act(() => user.click(closeButton))
+    await user.click(closeButton)
 
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     expect(queryByTestId('modal-root')).toBeInTheDocument()
+  })
+
+  describe('Accessibility', () => {
+    it('should have aria-label="Close" by default', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(
+        <Modal>
+          <ModalClose>
+            <button data-testid='close-button'>Close Modal</button>
+          </ModalClose>
+        </Modal>,
+        {
+          useAct: true,
+        },
+      )
+
+      const closeButton = getByTestId('close-button')
+
+      expect(closeButton).toHaveAttribute('aria-label', 'Close')
+    })
   })
 })

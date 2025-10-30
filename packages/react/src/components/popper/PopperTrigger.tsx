@@ -76,18 +76,6 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
 
     const props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
       ref: referenceRef,
-      onFocus: (event: FocusEvent<HTMLElement>) => {
-        if (isFocusVisible(event.currentTarget)) {
-          handleOpen()
-          focusVisibleRef.current = true
-        }
-      },
-      onBlur: (event: FocusEvent<HTMLElement>) => {
-        if (focusVisibleRef.current && !isFocusVisible(event.currentTarget)) {
-          handleClose()
-          focusVisibleRef.current = false
-        }
-      },
     }
 
     if (action === 'click') {
@@ -106,10 +94,24 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
       const handleClick = () => {
         if (closeOnClick && open) setOpen(false)
       }
+      const handleFocus = (event: FocusEvent<HTMLElement>) => {
+        if (isFocusVisible(event.currentTarget)) {
+          handleOpen()
+          focusVisibleRef.current = true
+        }
+      }
+      const handleBlur = (event: FocusEvent<HTMLElement>) => {
+        if (focusVisibleRef.current && !isFocusVisible(event.currentTarget)) {
+          handleClose()
+          focusVisibleRef.current = false
+        }
+      }
 
       props.onMouseEnter = handleMouseEnter
       props.onMouseLeave = handleMouseLeave
       props.onClick = handleClick
+      props.onFocus = handleFocus
+      props.onBlur = handleBlur
     }
 
     return cloneElement(element, {

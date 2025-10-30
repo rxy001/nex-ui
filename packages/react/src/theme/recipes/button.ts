@@ -46,10 +46,12 @@ export const buttonRecipe = defineSlotRecipe({
           borderColor: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
+            _expanded: 'colorPalette.secondary',
           },
           color: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
+            _expanded: 'colorPalette.secondary',
           },
         },
       },
@@ -58,6 +60,7 @@ export const buttonRecipe = defineSlotRecipe({
           bg: {
             _DEFAULT: 'colorPalette.primary',
             _hover: 'colorPalette.secondary',
+            _expanded: 'colorPalette.secondary',
           },
           color: 'colorPalette.contrastText',
         },
@@ -68,6 +71,7 @@ export const buttonRecipe = defineSlotRecipe({
           bg: {
             _DEFAULT: 'transparent',
             _hover: 'colorPalette.500/10',
+            _expanded: 'colorPalette.500/10',
           },
         },
       },
@@ -76,9 +80,11 @@ export const buttonRecipe = defineSlotRecipe({
           bg: {
             _DEFAULT: 'colorPalette.100',
             _hover: 'colorPalette.50',
+            _expanded: 'colorPalette.50',
             _dark: {
               _DEFAULT: 'colorPalette.800/50',
               _hover: 'colorPalette.900/50',
+              _expanded: 'colorPalette.900/50',
             },
           },
           color: {

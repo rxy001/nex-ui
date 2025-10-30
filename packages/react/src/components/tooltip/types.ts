@@ -17,83 +17,7 @@ type TooltipSlotProps = {
   content?: ComponentPropsWithCommonProps<'div'>
 }
 
-export type TooltipOwnProps<RootComponent extends ElementType> = {
-  /**
-   * The children to render. Usually a trigger element.
-   */
-  children?: ReactNode
-
-  /**
-   * Additional class names to apply to the root element.
-   */
-  className?: ClassValue
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: Interpolation
-
-  /**
-   * The content to render inside the tooltip.
-   */
-  content?: ReactNode
-
-  /**
-   * The component used for the root element.
-   * @default m.div
-   */
-  as?: RootComponent
-
-  /**
-   * If true, keeps the tooltip open when interacting with its content.
-   *
-   * @default true
-   */
-  interactive?: boolean
-
-  /**
-   * If true, closes the tooltip when clicking the trigger element.
-   *
-   * @default true
-   */
-  closeOnClick?: boolean
-
-  /**
-   * The motion properties of the tooltip.
-   */
-  motionProps?: HTMLMotionProps<'div'>
-
-  /**
-   * The color of the tooltip.
-   *
-   * @default 'default'
-   */
-  color?: TooltipRecipeVariants['color']
-
-  /**
-   * The size of the tooltip.
-   *
-   * @default 'md'
-   */
-  size?: TooltipRecipeVariants['size']
-
-  /**
-   * The radius of the tooltip.
-   *
-   * @default 'md'
-   */
-  radius?: TooltipRecipeVariants['radius']
-
-  /**
-   * The className used for each slot.
-   */
-  classNames?: ComponentSlotClasses<keyof TooltipSlotProps>
-
-  /**
-   * The props used for each slot.
-   */
-  slotProps?: TooltipSlotProps
-} & PopperProps &
+export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
   Pick<
     PopperRootProps,
     | 'placement'
@@ -101,9 +25,86 @@ export type TooltipOwnProps<RootComponent extends ElementType> = {
     | 'shift'
     | 'flip'
     | 'keepMounted'
-    | 'closeOnEscape'
     | 'container'
-  >
+    | 'closeOnEscape'
+    | 'closeOnDetached'
+  > & {
+    /**
+     * The children to render. Usually a trigger element.
+     */
+    children?: ReactNode
+
+    /**
+     * Additional class names to apply to the root element.
+     */
+    className?: ClassValue
+
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx?: Interpolation
+
+    /**
+     * The content to render inside the tooltip.
+     */
+    content?: ReactNode
+
+    /**
+     * The component used for the root element.
+     * @default m.div
+     */
+    as?: RootComponent
+
+    /**
+     * If true, keeps the tooltip open when interacting with its content.
+     *
+     * @default true
+     */
+    interactive?: boolean
+
+    /**
+     * If true, closes the tooltip when clicking the trigger element.
+     *
+     * @default true
+     */
+    closeOnClick?: boolean
+
+    /**
+     * The motion properties of the tooltip.
+     */
+    motionProps?: HTMLMotionProps<'div'>
+
+    /**
+     * The color of the tooltip.
+     *
+     * @default 'default'
+     */
+    color?: TooltipRecipeVariants['color']
+
+    /**
+     * The size of the tooltip.
+     *
+     * @default 'md'
+     */
+    size?: TooltipRecipeVariants['size']
+
+    /**
+     * The radius of the tooltip.
+     *
+     * @default 'md'
+     */
+    radius?: TooltipRecipeVariants['radius']
+
+    /**
+     * The className used for each slot.
+     */
+    classNames?: ComponentSlotClasses<keyof TooltipSlotProps>
+
+    /**
+     * The props used for each slot.
+     */
+    slotProps?: TooltipSlotProps
+  }
 
 export type TooltipProps<
   RootComponent extends ElementType = DOMMotionComponents['div'],

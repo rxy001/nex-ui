@@ -4,7 +4,6 @@ import {
   testComponentStability,
   testVariantDataAttrs,
 } from '~/tests/shared'
-import { Button } from '../../button'
 import { Popper, PopperRoot, PopperContent, PopperTrigger } from '../index'
 import type { PopperProps, PopperRootProps } from '../index'
 
@@ -27,7 +26,7 @@ function TestPopper({
       closeDelay={closeDelay}
     >
       <PopperTrigger>
-        <Button data-testid='popper-trigger'>Trigger</Button>
+        <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
       <PopperRoot data-testid='popper-root' {...props}>
         <PopperContent data-testid='popper-content'>
@@ -194,7 +193,7 @@ describe('Popper', () => {
     const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
       <Popper>
         <PopperTrigger>
-          <Button data-testid='popper-trigger'>Trigger</Button>
+          <button data-testid='popper-trigger'>Trigger</button>
         </PopperTrigger>
         <PopperRoot data-testid='popper-root'>
           <PopperContent data-testid='popper-content'>

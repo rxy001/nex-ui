@@ -11,5 +11,6 @@ export interface DefaultSelectors {
   focus?: '&:is(:focus, [data-focus=true]):not(:disabled, [data-disabled=true])'
   focusWithin?: '&:is(:focus-within, [data-focus-within=true]):not(:disabled, [data-disabled=true])'
   disabled?: '&:is(:disabled, [data-disabled=true])'
-  focusVisibleRing?: '&[data-focus-visible=true]:not(:disabled, [data-disabled=true])'
+  focusVisibleRing?: '&:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true])'
+  expanded?: '&:is([aria-expanded="true"], [data-expanded=true])'
 }

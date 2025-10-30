@@ -1,14 +1,13 @@
 import { renderWithNexUIProvider } from '~/tests/shared'
 import { fireEvent, waitForElementToBeRemoved } from '@testing-library/react'
 import { Popper, PopperRoot, PopperContent, PopperTrigger } from '../index'
-import { Button } from '../../button'
 import type { PopperTriggerProps } from '../index'
 
 function TestPopper(props: PopperTriggerProps) {
   return (
     <Popper openDelay={0} closeDelay={0}>
       <PopperTrigger {...props}>
-        <Button data-testid='popper-trigger'>Trigger</Button>
+        <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
       <PopperRoot data-testid='popper-root'>
         <PopperContent data-testid='popper-content'>
@@ -199,7 +198,7 @@ describe('PopperTrigger', () => {
     const { queryByTestId, user } = await renderWithNexUIProvider(
       <>
         <TestPopper />
-        <Button data-testid='after-button'>After</Button>
+        <button data-testid='after-button'>After</button>
       </>,
       {
         useAct: true,
