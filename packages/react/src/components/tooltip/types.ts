@@ -2,7 +2,11 @@ import type { ReactNode, ElementType } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { DOMMotionComponents } from 'motion/react'
 import type { ClassValue } from 'clsx'
-import type { PopperProps, PopperRootProps } from '../popper'
+import type {
+  PopperContentProps,
+  PopperProps,
+  PopperRootProps,
+} from '../popper'
 import type { TooltipRecipeVariants } from '../../theme/recipes'
 import type {
   ComponentSlotClasses,
@@ -104,6 +108,17 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
      * The props used for each slot.
      */
     slotProps?: TooltipSlotProps
+
+    /**
+     * The maximum width of the tooltip.
+     * @default 360
+     */
+    maxWidth?: PopperContentProps['maxWidth']
+
+    /**
+     * The maximum height of the tooltip.
+     */
+    maxHeight?: PopperContentProps['maxHeight']
   }
 
 export type TooltipProps<

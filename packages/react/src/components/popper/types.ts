@@ -1,6 +1,6 @@
 import type { ReactNode, ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
-import type { Interpolation } from '@nex-ui/system'
+import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { Placement, FlipOptions, OffsetOptions } from '../utils'
 import type { Overwrite } from '../../types/utils'
 import type { DOMMotionComponents } from 'motion/react'
@@ -149,8 +149,20 @@ export type PopperRootProps<
   RootComponent extends ElementType = DOMMotionComponents['div'],
 > = PopperSlotProps<RootComponent> & PopperRootOwnProps
 
+type PopperContentOwnProps = {
+  /**
+   * The maximum width of the popper content.
+   */
+  maxWidth?: CSSObject['maxWidth']
+
+  /**
+   * The maximum height of the popper content.
+   */
+  maxHeight?: CSSObject['maxHeight']
+}
+
 export type PopperContentProps<RootComponent extends ElementType = 'div'> =
-  PopperSlotProps<RootComponent>
+  PopperSlotProps<RootComponent> & PopperContentOwnProps
 
 export type PopperCloseProps = {
   children?: ReactNode

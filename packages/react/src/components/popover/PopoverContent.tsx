@@ -23,7 +23,13 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
 
   const { restoreFocus } = usePopover()
 
-  const { color = 'default', radius = 'md', ...remainingProps } = props
+  const {
+    maxHeight,
+    maxWidth = 480,
+    color = 'default',
+    radius = 'md',
+    ...remainingProps
+  } = props
 
   const ownerState = {
     ...props,
@@ -53,6 +59,8 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
       radius,
     },
     additionalProps: {
+      maxWidth,
+      maxHeight,
       tabIndex: -1,
     },
   })

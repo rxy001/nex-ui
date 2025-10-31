@@ -25,29 +25,31 @@ Popover is a non-modal dialog that floats around its disclosure. It's commonly u
 
 ### Offset
 
-Use the `offset` prop to set the Popover's offset, including the main axis and cross axis offsets. Setting it to `false` disables the offset.
+Use the `offset` prop to set the Popover offset, including the main-axis and cross-axis offsets. Set to `false` to disable the offset.
 
 <Example {...popover.offset} />
 
 ### Flip
 
-Use the `flip` prop to change the placement of the popover to keep it in view. `{ mainAxis: true, crossAxis: true }` by default. Setting it to `false` disables the flip behavior.
+Use the `flip` prop to change the Popover placement to keep it in view. Defaults to `{ mainAxis: true, crossAxis: true }`. Set to `false` to disable the flip behavior.
 
 <Example {...popover.flip} />
 
 ### Shift
 
-Use the `shift` prop to shift the popover to keep it in view. Defaults to `true`.
+Use the `shift` prop to shift the Popover to keep it in view. Defaults to `true`.
 
 <Example {...popover.shift} />
 
 ### With Form
 
-The Popover handles the focus within the popover content. It means that you can use the popover with form elements without any problem. the focus returns to the trigger when the popover closes.
+The Popover handles the focus within the Popover content. It means that you can use the Popover with form elements without any problem. The focus returns to the trigger when the Popover closes.
 
 <Example {...popover.withForm} />
 
 ### Controlled
+
+Popover supports controlled mode via the `open` and `onOpenChange` props.
 
 <Example {...popover.controlled} />
 
@@ -59,7 +61,7 @@ Use the `motionProps` prop to customize the animation effects for `visible` / `h
 
 ## API
 
-Popover inherit the props of `as` (by default, `m.div`).
+Popover inherits the props of `as` (by default, `m.div`).
 
 ### Popover Props
 
@@ -81,18 +83,18 @@ Popover inherit the props of `as` (by default, `m.div`).
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the popover is shown. (controlled)',
+      description: 'If true, the Popover is shown. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the popover is shown by default. (uncontrolled)',
+      description: 'If true, the Popover is shown by default. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
       description:
-        'Handler that is called when the popover is opened or closed.',
+        'Handler that is called when the Popover is opened or closed.',
     },
     {
       prop: 'placement',
@@ -112,30 +114,30 @@ Popover inherit the props of `as` (by default, `m.div`).
       ],
       default: `'top'`,
       description:
-        'The placement of the popover relative to the trigger element.',
+        'The placement of the Popover relative to the trigger element.',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: 'The motion properties of the popover.',
+      description: 'The motion properties of the Popover.',
     },
     {
       prop: 'offset',
       type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
       default: '5',
-      description: 'Translates the popover along the specified axes.',
+      description: 'Translates the Popover along the specified axes.',
     },
     {
       prop: 'flip',
       type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
       default: '{ mainAxis: true, crossAxis: true }',
-      description: 'Changes the placement of the popover to keep it in view.',
+      description: 'Changes the placement of the Popover to keep it in view.',
     },
     {
       prop: 'shift',
       type: 'boolean',
       default: 'true',
-      description: 'Shifts the popover to keep it in view.',
+      description: 'Shifts the Popover to keep it in view.',
     },
     {
       prop: 'keepMounted',
@@ -148,26 +150,26 @@ Popover inherit the props of `as` (by default, `m.div`).
       type: 'boolean',
       default: 'true',
       description:
-        'If true, closes the popover when the escape key is pressed.',
+        'If true, closes the Popover when the Escape key is pressed.',
     },
     {
       prop: 'closeOnDetached',
       type: 'boolean',
       default: 'true',
       description:
-        'If true, closes the tooltip when the trigger element is completely obscured.',
+        'If true, closes the Popover when the trigger element is completely obscured.',
     },
     {
       prop: 'openDelay',
       type: 'number',
       default: '0',
-      description: 'The delay in milliseconds before the popover opens.',
+      description: 'The delay in milliseconds before the Popover opens.',
     },
     {
       prop: 'closeDelay',
       type: 'number',
       default: '0',
-      description: 'The delay in milliseconds before the popover closes.',
+      description: 'The delay in milliseconds before the Popover closes.',
     },
     {
       prop: 'ref',
@@ -218,13 +220,25 @@ Popover inherit the props of `as` (by default, `m.div`).
         `'gray'`,
       ],
       default: `'default'`,
-      description: 'The color of the PopoverContent.',
+      description: 'The color of the Popover content.',
+    },
+    {
+      prop: 'maxWidth',
+      type: "CSSObject['maxWidth']",
+      default: '480',
+      description: 'The maximum width of the Popover content.',
+    },
+    {
+      prop: 'maxHeight',
+      type: "CSSObject['maxHeight']",
+      default: '480',
+      description: 'The maximum height of the Popover content.',
     },
     {
       prop: 'radius',
       type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
       default: `'md'`,
-      description: 'The border radius of the PopoverContent.',
+      description: 'The border radius of the Popover content.',
     },
     {
       prop: 'ref',
@@ -265,7 +279,7 @@ Popover inherit the props of `as` (by default, `m.div`).
       type: 'boolean',
       default: 'true',
       description:
-        'If true, closes the tooltip when clicking the trigger element.',
+        'If true, closes the Popover when clicking the trigger element.',
     },
   ]}
 />
@@ -277,7 +291,7 @@ Popover inherit the props of `as` (by default, `m.div`).
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The trigger closes the Popover when clicked.',
+      description: 'The element closes the Popover when clicked.',
     },
   ]}
 />
