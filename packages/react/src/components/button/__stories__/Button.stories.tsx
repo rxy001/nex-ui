@@ -146,6 +146,15 @@ export const IconButton: Story = {
   },
 }
 
+export const LoadingIconButton: Story = {
+  args: {
+    iconOnly: true,
+    loading: true,
+    'aria-label': 'Loading',
+    children: <HeartFilled />,
+  },
+}
+
 export const WithIcons: Story = {
   args: {
     children: 'Button',
