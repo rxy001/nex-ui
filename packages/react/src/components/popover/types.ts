@@ -5,6 +5,7 @@ import type { DOMMotionComponents } from 'motion/react'
 import type { FocusTrapProps } from '../focusTrap'
 import type {
   PopperCloseProps,
+  PopperContentProps,
   PopperProps,
   PopperRootProps,
   PopperTriggerProps,
@@ -101,6 +102,18 @@ type PopoverContentOwnProps<RootComponent extends ElementType> = {
    * @default 'default'
    */
   color?: PopoverContentVariants['color']
+
+  /**
+   * The maximum width of the popover.
+   *
+   * @default 480
+   */
+  maxWidth?: PopperContentProps['maxWidth']
+
+  /**
+   * The maximum height of the popover.
+   */
+  maxHeight?: PopperContentProps['maxHeight']
 }
 
 export interface PopoverContentPropsOverrides {}

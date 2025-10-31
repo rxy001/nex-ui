@@ -47,6 +47,8 @@ const TooltipRoot = (props: TooltipProps) => {
     motionProps,
     interactive,
     closeOnClick,
+    maxHeight,
+    maxWidth = 360,
     color = 'default',
     size = 'md',
     radius = 'md',
@@ -99,6 +101,10 @@ const TooltipRoot = (props: TooltipProps) => {
     classNames: slotClasses.content,
     shouldForwardComponent: false,
     externalSlotProps: slotProps?.content,
+    externalForwardedProps: {
+      maxWidth,
+      maxHeight,
+    },
   })
 
   return (
