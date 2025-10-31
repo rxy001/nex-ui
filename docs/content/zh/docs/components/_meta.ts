@@ -10,6 +10,7 @@ export default {
   drawer: 'Drawer',
   flex: 'Flex',
   input: 'Input',
+  popover: 'Popover',
   radioGroup: 'RadioGroup',
   switch: 'Switch',
   tooltip: 'Tooltip',

@@ -4,6 +4,7 @@ import type { ClassValue } from 'clsx'
 import type { DOMMotionComponents } from 'motion/react'
 import type { FocusTrapProps } from '../focusTrap'
 import type {
+  PopperCloseProps,
   PopperProps,
   PopperRootProps,
   PopperTriggerProps,
@@ -113,5 +114,7 @@ export type PopoverContentProps<RootComponent extends ElementType = 'div'> =
 
 export type PopoverTriggerProps = Omit<
   PopperTriggerProps,
-  'action' | 'elementProps'
+  'action' | 'elementProps' | 'interactive'
 >
+
+export type PopoverCloseProps = PopperCloseProps

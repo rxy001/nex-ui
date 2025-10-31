@@ -9,4 +9,5 @@ export type {
   PopoverContentProps,
   PopoverContentPropsOverrides,
   PopoverTriggerProps,
+  PopoverCloseProps,
 } from './types'
