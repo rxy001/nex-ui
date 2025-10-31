@@ -146,13 +146,25 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
         `'gray'`,
       ],
       default: `'default'`,
-      description: 'Tooltip 的颜色主题。',
+      description: 'Tooltip 的颜色。',
     },
     {
       prop: 'radius',
       type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
       default: `'md'`,
       description: 'Tooltip 的圆角大小。',
+    },
+    {
+      prop: 'maxWidth',
+      type: "CSSObject['maxWidth']",
+      default: '360',
+      description: 'Tooltip 的最大宽度。',
+    },
+    {
+      prop: 'maxHeight',
+      type: "CSSObject['maxHeight']",
+      default: '480',
+      description: 'Tooltip 的最大高度。',
     },
     {
       prop: 'motionProps',

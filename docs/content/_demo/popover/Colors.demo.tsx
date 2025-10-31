@@ -25,7 +25,7 @@ export default function App() {
     <Flex gap='4' wrap='wrap'>
       {colors.map((color) => {
         return (
-          <Popover key={color} content='Hello, I am a tooltip.'>
+          <Popover key={color}>
             <PopoverTrigger>
               <Button
                 color={color === 'default' ? 'gray' : color}

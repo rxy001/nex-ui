@@ -213,7 +213,19 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
         `'gray'`,
       ],
       default: `'default'`,
-      description: 'PopoverContent 的颜色主题。',
+      description: 'PopoverContent 的颜色。',
+    },
+    {
+      prop: 'maxWidth',
+      type: "CSSObject['maxWidth']",
+      default: '480',
+      description: 'PopoverContent 的最大宽度。',
+    },
+    {
+      prop: 'maxHeight',
+      type: "CSSObject['maxHeight']",
+      default: '480',
+      description: 'PopoverContent 的最大高度。',
     },
     {
       prop: 'radius',

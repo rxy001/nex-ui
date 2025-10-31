@@ -13,7 +13,6 @@ export const tooltipRecipe = defineSlotRecipe({
       fs: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
-      maxW: '360px',
     },
   },
   variants: {
