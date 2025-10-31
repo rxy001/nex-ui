@@ -149,6 +149,22 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
+    {
+      iconOnly: true,
+      loading: true,
+      css: {
+        startIcon: {
+          ml: 0,
+          mr: 0,
+          fs: '1em',
+        },
+        endIcon: {
+          ml: 0,
+          mr: 0,
+          fs: '1em',
+        },
+      },
+    },
   ],
   defaultVariants: {
     variant: 'solid',

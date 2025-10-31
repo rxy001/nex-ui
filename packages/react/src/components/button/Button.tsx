@@ -120,7 +120,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
             {loading ? loadingIcon : startIconProp}
           </ButtonStartIcon>
         )}
-        {children}
+        {!loading || !iconOnly ? children : null}
         {((spinnerPlacement === 'end' && loading) || endIconProp) && (
           <ButtonEndIcon {...getButtonEndIconProps()}>
             {loading ? loadingIcon : endIconProp}
