@@ -13,8 +13,8 @@ export const popoverRecipe = defineRecipe({
 
 export const popoverContentRecipe = defineRecipe({
   base: {
-    px: '2.5',
-    py: '1',
+    px: '3',
+    py: '1.5',
     fs: 'md',
     bg: 'colorPalette.primary',
     color: 'colorPalette.contrastText',

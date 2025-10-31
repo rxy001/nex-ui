@@ -1,6 +1,12 @@
 'use client'
 
-import { Tooltip, Button, Box } from '@nex-ui/react'
+import {
+  Button,
+  Box,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@nex-ui/react'
 import { useLayoutEffect, useRef } from 'react'
 
 export default function App() {
@@ -35,9 +41,8 @@ export default function App() {
         }}
         ref={innerRef}
       >
-        <Tooltip
+        <Popover
           open
-          content='The floating element that shifts along the x-axis.'
           shift
           container={() => innerRef.current}
           placement='top'
@@ -46,8 +51,13 @@ export default function App() {
             crossAxis: true,
           }}
         >
-          <Button variant='faded'>Scroll the window</Button>
-        </Tooltip>
+          <PopoverTrigger>
+            <Button>Scroll the window</Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            The floating element that shifts along the x-axis.
+          </PopoverContent>
+        </Popover>
       </Box>
     </Box>
   )

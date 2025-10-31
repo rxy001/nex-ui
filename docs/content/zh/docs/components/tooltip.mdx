@@ -202,6 +202,12 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
       description: '点击触发元素时是否关闭 Tooltip。',
     },
     {
+      prop: 'closeOnDetached',
+      type: 'boolean',
+      default: 'true',
+      description: '当触发元素被完全遮挡时是否关闭 Tooltip。',
+    },
+    {
       prop: 'openDelay',
       type: 'number',
       default: '100',
@@ -245,8 +251,7 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'Tooltip Slots 的 props。',
     },
-
-]}
+  ]}
 />
 
 ### Tooltip Slots

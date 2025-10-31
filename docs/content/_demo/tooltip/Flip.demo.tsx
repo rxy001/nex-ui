@@ -31,6 +31,7 @@ export default function App() {
           pos: 'relative',
           justifyContent: 'center',
           alignItems: 'center',
+          zIndex: 1,
         }}
         ref={innerRef}
       >
@@ -45,7 +46,7 @@ export default function App() {
             crossAxis: true,
           }}
         >
-          <Button variant='faded'>Scroll The Window</Button>
+          <Button variant='faded'>Scroll the window</Button>
         </Tooltip>
       </Box>
     </Box>

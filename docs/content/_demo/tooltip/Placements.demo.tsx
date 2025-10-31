@@ -1,126 +1,51 @@
 import { Tooltip, Button, Flex } from '@nex-ui/react'
+import type { TooltipProps } from '@nex-ui/react'
 
 export default function App() {
+  const renderTooltip = (placement: TooltipProps['placement']) => {
+    return (
+      <Tooltip
+        color='default'
+        placement={placement}
+        content='Hello, I am a tooltip.'
+      >
+        <Button
+          size='sm'
+          variant='faded'
+          sx={{
+            textTransform: 'capitalize',
+          }}
+        >
+          {placement}
+        </Button>
+      </Tooltip>
+    )
+  }
+
   return (
     <Flex justify='center'>
       <Flex direction='column' gap='3' sx={{ maxW: 500, flex: 1 }}>
         <Flex gap='3' justify='center'>
-          <Tooltip
-            color='default'
-            placement='top-start'
-            content='Hello, I am a tooltip.'
-          >
-            <Button size='sm' variant='faded'>
-              Top-Start
-            </Button>
-          </Tooltip>
-          <Tooltip
-            color='default'
-            placement='top'
-            content='Hello, I am a tooltip.'
-          >
-            <Button size='sm' variant='faded'>
-              Top
-            </Button>
-          </Tooltip>
-          <Tooltip
-            color='default'
-            placement='top-end'
-            content='Hello, I am a tooltip.'
-          >
-            <Button size='sm' variant='faded'>
-              Top-End
-            </Button>
-          </Tooltip>
+          {renderTooltip('top-start')}
+          {renderTooltip('top')}
+          {renderTooltip('top-end')}
         </Flex>
         <Flex justify='space-between'>
           <Flex direction='column' gap='3'>
-            <Tooltip
-              color='default'
-              placement='left-start'
-              content='Hello, I am a tooltip.'
-            >
-              <Button size='sm' variant='faded'>
-                Left-Start
-              </Button>
-            </Tooltip>
-            <Tooltip
-              color='default'
-              placement='left'
-              content='Hello, I am a tooltip.'
-            >
-              <Button size='sm' variant='faded'>
-                Left
-              </Button>
-            </Tooltip>
-            <Tooltip
-              color='default'
-              placement='left-end'
-              content='Hello, I am a tooltip.'
-            >
-              <Button size='sm' variant='faded'>
-                Left-End
-              </Button>
-            </Tooltip>
+            {renderTooltip('left-start')}
+            {renderTooltip('left')}
+            {renderTooltip('left-end')}
           </Flex>
           <Flex direction='column' gap='3'>
-            <Tooltip
-              color='default'
-              placement='right-start'
-              content='Hello, I am a tooltip.'
-            >
-              <Button size='sm' variant='faded'>
-                Right-Start
-              </Button>
-            </Tooltip>
-            <Tooltip
-              color='default'
-              placement='right'
-              content='Hello, I am a tooltip.'
-            >
-              <Button size='sm' variant='faded'>
-                Right
-              </Button>
-            </Tooltip>
-            <Tooltip
-              color='default'
-              placement='right-end'
-              content='Hello, I am a tooltip.'
-            >
-              <Button size='sm' variant='faded'>
-                Right-End
-              </Button>
-            </Tooltip>
+            {renderTooltip('right-start')}
+            {renderTooltip('right')}
+            {renderTooltip('right-end')}
           </Flex>
         </Flex>
         <Flex gap='3' justify='center'>
-          <Tooltip
-            color='default'
-            placement='bottom-start'
-            content='Hello, I am a tooltip.'
-          >
-            <Button size='sm' variant='faded'>
-              Bottom-Start
-            </Button>
-          </Tooltip>
-          <Tooltip
-            color='default'
-            placement='bottom'
-            content='Hello, I am a tooltip.'
-          >
-            <Button size='sm' variant='faded'>
-              Bottom
-            </Button>
-          </Tooltip>
-          <Tooltip
-            color='default'
-            placement='bottom-end'
-            content='Hello, I am a tooltip.'
-          >
-            <Button size='sm' variant='faded'>
-              Bottom-End
-            </Button>
-          </Tooltip>
+          {renderTooltip('bottom-start')}
+          {renderTooltip('bottom')}
+          {renderTooltip('bottom-end')}
         </Flex>
       </Flex>
     </Flex>

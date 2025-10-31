@@ -1,0 +1,277 @@
+---
+title: Popover
+description: Popover 是一种非模态对话框，会悬浮在其触发元素周围。它通常用于在某个元素之上叠加展示额外的丰富内容。
+---
+
+import { popover } from '@/content/_demo'
+
+# Popover
+
+Popover 是一种非模态对话框，会悬浮在其触发元素周围。它通常用于在某个元素之上叠加展示额外的丰富内容。
+
+<ComponentLinks component='popover' />
+
+## Usage
+
+<Example {...popover.usage} />
+
+### Colors
+
+<Example {...popover.colors} />
+
+### Placements
+
+<Example {...popover.placements} />
+
+### Offset
+
+使用 `offset` 属性可以设置 Popover 的偏移量，包括主轴和交叉轴的偏移。设置 false 可禁用偏移。
+
+<Example {...popover.offset} />
+
+### Flip
+
+使用 `flip` 属性可以更改 Popover 的位置，使其保持在视图中。默认值为 `{ mainAxis: true, crossAxis: true }`。设置 `false` 可禁用翻转行为。
+
+<Example {...popover.flip} />
+
+### Shift
+
+使用 `shift` 属性可以移动 Popover 以保持其在视图中。 默认为 true。
+
+<Example {...popover.shift} />
+
+### With Form
+
+Popover 会处理其弹窗内容内的焦点。这意味着您可以将 Popover 与表单元素搭配使用，完全没有问题。当 Popover 关闭时，焦点会返回至触发元素。
+
+<Example {...popover.withForm} />
+
+### Controlled
+
+<Example {...popover.controlled} />
+
+### Custom Motion
+
+使用 `motionProps` 属性自定义 `visible` / `hidden` 的动画效果。
+
+<Example {...popover.customMotion} />
+
+## API
+
+Popover 继承 `as` (默认为 `m.div`) 的 Props。
+
+### Popover Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        'Popover 的内容，通常为 PopoverTrigger 和 PopoverContent 组件。',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement | null', '() => HTMLElement | null'],
+      description: '放置 Portal 的容器元素。',
+      default: 'document.body',
+    },
+    {
+      prop: 'open',
+      type: 'boolean',
+      description: '控制 Popover 的打开状态。(受控)',
+    },
+    {
+      prop: 'defaultOpen',
+      type: 'boolean',
+      description: 'Popover 的默认打开状态。(非受控)',
+    },
+    {
+      prop: 'onOpenChange',
+      type: '(open: boolean) => void',
+      description: '当 Popover 打开/关闭时触发回调函数。',
+    },
+    {
+      prop: 'placement',
+      type: [
+        `'top'`,
+        `'top-start'`,
+        `'top-end'`,
+        `'bottom'`,
+        `'bottom-start'`,
+        `'bottom-end'`,
+        `'left'`,
+        `'left-start'`,
+        `'left-end'`,
+        `'right'`,
+        `'right-start'`,
+        `'right-end'`,
+      ],
+      default: `'top'`,
+      description: 'Popover 出现的位置。',
+    },
+    {
+      prop: 'motionProps',
+      type: 'HTMLMotionProps',
+      description: '自定义 Popover 动画的属性。',
+    },
+    {
+      prop: 'offset',
+      type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
+      default: '5',
+      description: '设置 Popover 的偏移量，或禁用偏移。',
+    },
+    {
+      prop: 'flip',
+      type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
+      default: '{ mainAxis: true, crossAxis: true }',
+      description: '更改 Popover 的位置，使其保持在视图中。',
+    },
+    {
+      prop: 'shift',
+      type: 'boolean',
+      default: 'true',
+      description: '移动popper元素以使其保持在可见范围内。',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      default: 'false',
+      description: '即使 Popover 未打开也保持其挂载状态。',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: '按下 Escape 键时是否关闭 Popover 。',
+    },
+    {
+      prop: 'closeOnDetached',
+      type: 'boolean',
+      default: 'true',
+      description: '当触发元素被完全遮挡时是否关闭 Popover 。',
+    },
+    {
+      prop: 'openDelay',
+      type: 'number',
+      default: '0',
+      description: '显示 Popover 前的延迟时间（毫秒）。',
+    },
+    {
+      prop: 'closeDelay',
+      type: 'number',
+      default: '0',
+      description: '隐藏 Popover 前的延迟时间（毫秒）。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Popover 根元素的 ref。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className 。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: 'm.div',
+      description:
+        '用于 Popover 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### PopoverContent Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'PopoverContent 的内容。',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'default'`,
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: `'default'`,
+      description: 'PopoverContent 的颜色主题。',
+    },
+    {
+      prop: 'radius',
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      default: `'md'`,
+      description: 'PopoverContent 的圆角大小。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 PopoverContent 根元素的 ref。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: 'div',
+      description:
+        '用于 PopoverContent 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### PopoverTrigger Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '触发元素，点击时显示 Popover 。',
+    },
+    {
+      prop: 'closeOnClick',
+      type: 'boolean',
+      default: 'true',
+      description: '点击触发元素时是否关闭 Popover 。',
+    },
+  ]}
+/>
+
+### PopoverClose Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '触发元素，点击时关闭 Popover 。',
+    },
+  ]}
+/>
