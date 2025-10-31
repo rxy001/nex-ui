@@ -19,23 +19,13 @@ export default function App() {
       {colors.map((color) => {
         return (
           <Tooltip key={color} color={color} content='Hello, I am a tooltip.'>
-            {color === 'default' ? (
-              <Button
-                variant='faded'
-                color='gray'
-                sx={{ textTransform: 'capitalize' }}
-              >
-                {color}
-              </Button>
-            ) : (
-              <Button
-                variant='faded'
-                color={color}
-                sx={{ textTransform: 'capitalize' }}
-              >
-                {color}
-              </Button>
-            )}
+            <Button
+              variant='faded'
+              color={color === 'default' ? 'gray' : color}
+              sx={{ textTransform: 'capitalize' }}
+            >
+              {color}
+            </Button>
           </Tooltip>
         )
       })}

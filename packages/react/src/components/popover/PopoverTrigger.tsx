@@ -22,14 +22,13 @@ const useAriaProps = () => {
 export const PopoverTrigger = ({
   children,
   closeOnClick,
-  interactive,
 }: PopoverTriggerProps) => {
   const ariaProps = useAriaProps()
 
   return (
     <PopperTrigger
+      interactive
       action='click'
-      interactive={interactive}
       closeOnClick={closeOnClick}
       elementProps={ariaProps}
     >

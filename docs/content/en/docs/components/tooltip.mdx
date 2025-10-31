@@ -95,18 +95,18 @@ Tooltip inherit the props of `as` (by default, `m.div`).
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the popper is shown. (controlled)',
+      description: 'If true, the tooltip is shown. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the popper is shown by default. (uncontrolled)',
+      description: 'If true, the tooltip is shown by default. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
       description:
-        'Handler that is called when the popper is opened or closed.',
+        'Handler that is called when the tooltip is opened or closed.',
     },
     {
       prop: 'placement',
@@ -126,7 +126,7 @@ Tooltip inherit the props of `as` (by default, `m.div`).
       ],
       default: `'top'`,
       description:
-        'The placement of the popper relative to the trigger element.',
+        'The placement of the tooltip relative to the trigger element.',
     },
     {
       prop: 'size',
@@ -160,26 +160,25 @@ Tooltip inherit the props of `as` (by default, `m.div`).
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: ' The motion properties of the tooltip.',
+      description: 'The motion properties of the tooltip.',
     },
     {
       prop: 'offset',
       type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
       default: '5',
-      description: 'Translates the popper element along the specified axes.',
+      description: 'Translates the tooltip along the specified axes.',
     },
     {
       prop: 'flip',
       type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
       default: '{ mainAxis: true, crossAxis: true }',
-      description:
-        'Changes the placement of the popper element to keep it in view.',
+      description: 'Changes the placement of the tooltip to keep it in view.',
     },
     {
       prop: 'shift',
       type: 'boolean',
       default: 'true',
-      description: 'Shifts the popper element to keep it in view.',
+      description: 'Shifts the tooltip to keep it in view.',
     },
     {
       prop: 'interactive',
@@ -198,7 +197,8 @@ Tooltip inherit the props of `as` (by default, `m.div`).
       prop: 'closeOnEscape',
       type: 'boolean',
       default: 'true',
-      description: 'If true, closes the popper when the escape key is pressed.',
+      description:
+        'If true, closes the tooltip when the escape key is pressed.',
     },
     {
       prop: 'closeOnClick',
@@ -208,16 +208,23 @@ Tooltip inherit the props of `as` (by default, `m.div`).
         'If true, closes the tooltip when clicking the trigger element.',
     },
     {
+      prop: 'closeOnDetached',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'If true, closes the tooltip when the trigger element is completely obscured.',
+    },
+    {
       prop: 'openDelay',
       type: 'number',
       default: '100',
-      description: 'The delay in milliseconds before the popper opens.',
+      description: 'The delay in milliseconds before the tooltip opens.',
     },
     {
       prop: 'closeDelay',
       type: 'number',
       default: '100',
-      description: 'The delay in milliseconds before the popper closes.',
+      description: 'The delay in milliseconds before the tooltip closes.',
     },
     {
       prop: 'ref',

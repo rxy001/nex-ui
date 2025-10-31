@@ -7,7 +7,7 @@ import { Input } from '../../input'
 import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { DOMMotionComponents } from 'motion/react'
-import type { PopoverProps } from '../types'
+import type { PopoverContentProps, PopoverProps } from '../types'
 import type { ButtonProps } from '../../button'
 
 function Container({ children }: { children: ReactNode }) {
@@ -53,6 +53,25 @@ const placements = [
   'left-end',
 ] as const
 
+const Content = (props: PopoverContentProps) => (
+  <PopoverContent {...props}>
+    <Box
+      sx={{
+        fontWeight: 'bold',
+      }}
+    >
+      Popover Content
+    </Box>
+    <Box
+      sx={{
+        fs: 'sm',
+      }}
+    >
+      This is the popover content
+    </Box>
+  </PopoverContent>
+)
+
 const meta = {
   title: 'Components/Popover',
   component: Popover<DOMMotionComponents['div']>,
@@ -86,7 +105,7 @@ const meta = {
           <PopoverTrigger>
             <Trigger>click me</Trigger>
           </PopoverTrigger>
-          <PopoverContent>This is the content of the popover.</PopoverContent>
+          <Content />
         </Popover>
       </Container>
     )
@@ -117,9 +136,7 @@ export const Placements: Story = {
               <PopoverTrigger>
                 <Trigger>{placement}</Trigger>
               </PopoverTrigger>
-              <PopoverContent>
-                This is the content of the popover.
-              </PopoverContent>
+              <Content />
             </Popover>
           ))}
         </Box>
@@ -158,9 +175,7 @@ export const Colors: Story = {
             <PopoverTrigger>
               <Trigger>{color}</Trigger>
             </PopoverTrigger>
-            <PopoverContent color={color}>
-              This is the content of the popover.
-            </PopoverContent>
+            <Content color={color} />
           </Popover>
         ))}
       </Flex>
@@ -187,7 +202,7 @@ function ControlledPopover(props: PopoverProps) {
         <PopoverTrigger>
           <Trigger>click me</Trigger>
         </PopoverTrigger>
-        <PopoverContent>This is the content of the popover.</PopoverContent>
+        <Content />
       </Popover>
       <p>Open: {open ? 'open' : 'closed'}</p>
     </>
@@ -217,7 +232,7 @@ export const WithOffset: Story = {
           <PopoverTrigger>
             <Trigger>offset is 0</Trigger>
           </PopoverTrigger>
-          <PopoverContent>This is the content of the popover.</PopoverContent>
+          <Content />
         </Popover>
       </Container>
     )
@@ -248,7 +263,7 @@ const FlipTemplate = (props: PopoverProps) => {
           <PopoverTrigger>
             <Trigger>scroll the window</Trigger>
           </PopoverTrigger>
-          <PopoverContent>This is the content of the popover.</PopoverContent>
+          <Content />
         </Popover>
       </Box>
     </Box>
