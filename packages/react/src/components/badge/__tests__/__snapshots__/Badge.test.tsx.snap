@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge should render with default props 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  gap: var(--nui-spaces-1);
+  line-height: 1rem;
+  font-size: var(--nui-font-sizes-md);
+  -webkit-padding-start: var(--nui-spaces-2-5);
+  padding-inline-start: var(--nui-spaces-2-5);
+  -webkit-padding-end: var(--nui-spaces-2-5);
+  padding-inline-end: var(--nui-spaces-2-5);
+  height: var(--nui-sizes-6);
+  border-radius: var(--nui-radii-md);
+  background-color: var(--nui-colors-blue-primary);
+  color: var(--nui-colors-blue-contrast-text);
+}
+
+.emotion-0 svg {
+  font-size: 1.25em;
+}
+
+<span
+  class="nui-badge-root emotion-0"
+  data-closable="false"
+  data-color="blue"
+  data-disabled="false"
+  data-radius="md"
+  data-size="md"
+  data-variant="solid"
+>
+  Badge
+</span>
+`;
