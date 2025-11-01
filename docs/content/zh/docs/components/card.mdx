@@ -99,6 +99,11 @@ Card 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'ClassValue',
       description: '用于根元素的 className。',
     },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
   ]}
 />
 
@@ -161,6 +166,11 @@ CardHeader 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'CardHeader Slots 的 props。',
     },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
   ]}
 />
 
@@ -212,6 +222,16 @@ CardBody 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'ClassValue',
       description: '用于根元素的 className。',
     },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'CardBody 的内容。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
   ]}
 />
 
@@ -237,6 +257,16 @@ CardFooter 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'className',
       type: 'ClassValue',
       description: '用于根元素的 className。',
+    },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'CardFooter 的内容。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
     },
   ]}
 />

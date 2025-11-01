@@ -72,7 +72,7 @@ Use the `spacing` prop to set the spacing between Avatars in the AvatarGroup. It
 
 ### Avatar Props
 
-Avatar inherit the props of `as` (by default, `'div'`).
+Avatar inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -80,13 +80,13 @@ Avatar inherit the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'Used to render icon or text elements inside the avatar if src is not set. This can be an element, or just a string.',
+        'Used to render icon or text elements inside the Avatar if src is not set. This can be an element, or just a string.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'", "'xl'"],
       default: "'md'",
-      description: 'The size of the avatar.',
+      description: 'The size of the Avatar.',
     },
     {
       prop: 'color',
@@ -102,18 +102,18 @@ Avatar inherit the props of `as` (by default, `'div'`).
         "'gray'",
       ],
       default: "'gray'",
-      description: 'The color of the avatar.',
+      description: 'The color of the Avatar.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
       default: 'size',
-      description: 'The border radius of the avatar.',
+      description: 'The border radius of the Avatar.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'src',
@@ -134,13 +134,13 @@ Avatar inherit the props of `as` (by default, `'div'`).
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'outlined',
       type: 'boolean',
       default: 'false',
-      description: 'If true, adds an outline around the avatar.',
+      description: 'If true, adds an outline around the Avatar.',
     },
     {
       prop: 'as',
@@ -175,14 +175,14 @@ Avatar inherit the props of `as` (by default, `'div'`).
       slot: 'img',
       class: '.nui-avatar-img',
       component: "'img'",
-      description: 'Image element slot.',
+      description: 'The image element slot.',
     },
   ]}
 />
 
 ### AvatarGroup Props
 
-AvatarGroup inherit the props of `as` (by default, `'div'`).
+AvatarGroup inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -214,17 +214,17 @@ AvatarGroup inherit the props of `as` (by default, `'div'`).
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
-      description: 'The borderRadius of all Avatars.',
+      description: 'The border radius of all Avatars.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'outlined',
@@ -235,24 +235,25 @@ AvatarGroup inherit the props of `as` (by default, `'div'`).
       prop: 'max',
       type: 'number',
       default: '5',
-      description: 'Max avatars to show before +x.',
+      description:
+        'Maximum number of Avatars to show before displaying the +x surplus indicator.',
     },
     {
       prop: 'total',
       type: 'number',
-      description: 'The total number of avatars.',
+      description: 'The total number of Avatars.',
     },
     {
       prop: 'spacing',
       type: 'string | number',
-      description: 'Spacing between avatars.',
+      description: 'Spacing between Avatars.',
     },
     {
       prop: 'renderSurplus',
       type: '(surplus: number) => ReactNode',
       default: '',
       description:
-        'Custom renderer of extraAvatars. Receives surplus count based on children and max.',
+        'Custom renderer for surplus Avatars. Receives the surplus count based on children and max.',
     },
     {
       prop: 'as',
@@ -268,7 +269,7 @@ AvatarGroup inherit the props of `as` (by default, `'div'`).
     },
     {
       prop: 'classNames',
-      type: "Partial<Record<Slots, ClassValue>>",
+      type: 'Partial<Record<Slots, ClassValue>>',
       description: 'The className used for each slot.',
     },
     {
@@ -276,8 +277,7 @@ AvatarGroup inherit the props of `as` (by default, `'div'`).
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
     },
-
-]}
+  ]}
 />
 
 ### AvatarGroup Slots

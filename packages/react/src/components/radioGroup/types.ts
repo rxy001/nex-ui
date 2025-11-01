@@ -16,7 +16,8 @@ type RadioSlotProps = {
 
 type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   /**
-   * The component used for the input element.
+   * The component or element to render as the input.
+   *
    * @default 'input'
    */
   as?: RadioComponent
@@ -27,33 +28,34 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * The label of the radio.
+   * The label of the Radio.
    */
   children?: ReactNode
 
   /**
-   * If true, the radio is disabled.
+   * If true, the Radio is disabled.
+   *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * The value of the radio.
+   * The value of the Radio.
    */
   value?: string | number
 
   /**
-   * If true, the radio is checked.(controlled)
+   * If true, the Radio is checked. (controlled)
    */
   checked?: boolean
 
   /**
-   * If true, the radio is checked by default.
+   * If true, the Radio is checked by default. (uncontrolled)
    */
   defaultChecked?: boolean
 
@@ -63,13 +65,15 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   onCheckedChange?: (checked: boolean) => void
 
   /**
-   * The size of the radio.
+   * The size of the Radio.
+   *
    * @default 'md'
    */
   size?: RadioVariants['size']
 
   /**
-   * The color of the radio.
+   * The color of the Radio.
+   *
    * @default primaryThemeColor
    */
   color?: RadioVariants['color']
@@ -109,7 +113,8 @@ type RadioGroupOwnProps<
   RootComponent extends ElementType,
 > = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -120,7 +125,7 @@ type RadioGroupOwnProps<
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -135,13 +140,14 @@ type RadioGroupOwnProps<
   classNames?: ComponentSlotClasses<'label' | 'wrapper'>
 
   /**
-   * If true, the radios are disabled.
+   * If true, all radios are disabled.
+   *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * The name of the radio group, used when submitting an HTML form.
+   * The name of the RadioGroup, used when submitting an HTML form.
    */
   name?: string
 
@@ -161,23 +167,24 @@ type RadioGroupOwnProps<
   onValueChange?: (value: T) => void
 
   /**
-   * The size of the radios.
+   * The size of all radios.
    */
   size?: RadioVariants['size']
 
   /**
-   * The color of the radios.
+   * The color of all radios.
    */
   color?: RadioVariants['color']
 
   /**
-   * The orientation of the radio group.
+   * The orientation of the RadioGroup.
+   *
    * @default 'horizontal'
    */
   orientation?: RadioGroupVariants['orientation']
 
   /**
-   * The label of the radio group.
+   * The label of the RadioGroup.
    */
   label?: ReactNode
 }

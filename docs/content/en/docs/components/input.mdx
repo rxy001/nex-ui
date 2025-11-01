@@ -37,19 +37,19 @@ Input allows users to enter text.
 
 ### Label Placements
 
-The `labelPlacement` property can be set to `inside`, `outside`, `float-outside` or `float-inside` to change the position of the label.
+The `labelPlacement` prop can be set to `inside`, `outside`, `float-outside`, or `float-inside` to change the label position.
 
 <Example {...input.labelPlacements} />
 
 ### Clear Button
 
-If the `clearable` property is passed, there will be a clear button at the end of the input, which is only visible when there is a value.
+If the `clearable` prop is set to `true`, a clear button appears at the end of the Input and is only visible when there is a value.
 
 <Example {...input.clearable} />
 
 ### Prefix & Suffix
 
-The `prefix` and `suffix` properties can be set to add a prefix and a suffix.
+Use the `prefix` and `suffix` props to add a prefix and suffix.
 
 <Example {...input.icons} />
 
@@ -57,7 +57,7 @@ The `prefix` and `suffix` properties can be set to add a prefix and a suffix.
 
 ### Input Props
 
-Input inherit the props of `as` (by default, `'input'`).
+Input inherits the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
@@ -75,30 +75,30 @@ Input inherit the props of `as` (by default, `'input'`).
         "'gray'",
       ],
       default: "'blue'",
-      description: 'The color of the input.',
+      description: 'The color of the Input.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'The size of the input.',
+      description: 'The size of the Input.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
       default: 'size',
-      description: 'The border radius of the input.',
+      description: 'The border radius of the Input.',
     },
     {
       prop: 'variant',
       type: ["'faded'", "'outlined'", "'underlined'"],
       default: "'outlined'",
-      description: 'The input appearance style.',
+      description: 'The Input appearance style.',
     },
     {
       prop: 'placeholder',
       type: 'string',
-      description: 'The placeholder of the input.',
+      description: 'The placeholder of the Input.',
     },
     {
       prop: 'type',
@@ -122,54 +122,54 @@ Input inherit the props of `as` (by default, `'input'`).
     {
       prop: 'value',
       type: 'string',
-      description: 'The value of the input. (controlled)',
+      description: 'The value of the Input. (controlled)',
     },
     {
       prop: 'defaultValue',
       type: 'string',
-      description: 'The default value of the input. (uncontrolled)',
+      description: 'The default value of the Input. (uncontrolled)',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the input is disabled.',
+      description: 'If true, the Input is disabled.',
     },
     {
       prop: 'name',
       type: 'string',
-      description: 'The name of the input.',
+      description: 'The name of the Input.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'prefix',
       type: 'ReactNode',
-      description: 'The element is placed before the input.',
+      description: 'The element placed before the input.',
     },
     {
       prop: 'suffix',
       type: 'ReactNode',
-      description: 'The element is placed after the input.',
+      description: 'The element placed after the input.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the input inside the Input.',
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the input takes the full width of its parent.',
+      description: 'If true, the Input takes the full width of its parent.',
     },
     {
       prop: 'label',
       type: 'ReactNode',
-      description: 'The label of the input.',
+      description: 'The label of the Input.',
     },
     {
       prop: 'labelPlacement',
@@ -181,13 +181,13 @@ Input inherit the props of `as` (by default, `'input'`).
       prop: 'invalid',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the input is invalid.',
+      description: 'If true, the Input is invalid.',
     },
     {
       prop: 'clearable',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the input has a clear button.',
+      description: 'If true, the Input has a clear button.',
     },
     {
       prop: 'onChange',
@@ -208,7 +208,7 @@ Input inherit the props of `as` (by default, `'input'`).
       prop: 'as',
       type: 'ElementType',
       default: "'input'",
-      description: 'The component used for the root node.',
+      description: 'The component or element to render as the input.',
     },
     {
       prop: 'sx',
@@ -237,31 +237,31 @@ Input inherit the props of `as` (by default, `'input'`).
       slot: 'root',
       class: '.nui-input-root',
       component: "'div'",
-      description: 'The root element of the input.',
+      description: 'The root element of the Input.',
     },
     {
       slot: 'label',
       class: '.nui-input-label',
       component: "'label'",
-      description: 'The label element of the input.',
+      description: 'The label element of the Input.',
     },
     {
       slot: 'clearButton',
       class: '.nui-input-clear-btn',
       component: "'button'",
-      description: 'The clear button of the input.',
+      description: 'The clear button of the Input.',
     },
     {
       slot: 'prefix',
       class: '.nui-input-prefix',
       component: "'span'",
-      description: 'The prefix element of the input.',
+      description: 'The prefix element of the Input.',
     },
     {
       slot: 'suffix',
       class: '.nui-input-suffix',
       component: "'span'",
-      description: 'The suffix element of the input.',
+      description: 'The suffix element of the Input.',
     },
   ]}
 />

@@ -18,7 +18,7 @@ type DialogSlotProps = {
 
 type DialogOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default m.div
    */
   as?: RootComponent
@@ -29,12 +29,12 @@ type DialogOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * The content of the dialog. It's usually the `DialogContent` component.
+   * Usually, DialogContent, DialogTrigger, etc.
    */
   children?: ReactNode
 
@@ -50,12 +50,14 @@ type DialogOwnProps<RootComponent extends ElementType> = {
 
   /**
    * If true, the backdrop is not rendered.
+   *
    * @default false
    */
   hideBackdrop?: boolean
 
   /**
-   * If true, closes the dialog when the backdrop is clicked.
+   * If true, closes the Dialog when the backdrop is clicked.
+   *
    * @default true
    */
   closeOnInteractBackdrop?: boolean
@@ -81,7 +83,7 @@ export interface DialogContentPropsOverrides {}
 
 type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -162,7 +164,7 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
     | HTMLMotionProps<'section'>
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }
@@ -179,7 +181,7 @@ export interface DialogHeaderPropsOverrides {}
 
 type DialogHeaderOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'h2'
    */
 
@@ -190,12 +192,12 @@ type DialogHeaderOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The content of the dialog header.
+   * The content of the DialogHeader.
    */
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }
@@ -212,7 +214,7 @@ export interface DialogBodyPropsOverrides {}
 
 type DialogBodyOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -223,12 +225,12 @@ type DialogBodyOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The content of the dialog body.
+   * The content of the DialogBody.
    */
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }
@@ -245,7 +247,7 @@ export interface DialogFooterPropsOverrides {}
 
 type DialogFooterOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -256,12 +258,12 @@ type DialogFooterOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The content of the dialog footer.
+   * The content of the DialogFooter.
    */
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }
