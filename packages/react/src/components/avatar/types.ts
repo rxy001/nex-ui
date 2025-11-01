@@ -17,6 +17,7 @@ type AvatarSlotProps = {
 type AvatarOwnProps<RootComponent extends ElementType> = {
   /**
    * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -32,7 +33,8 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   alt?: string
 
   /**
-   * If true, adds an outline around the avatar.
+   * If true, adds an outline around the Avatar.
+   *
    * @default false
    */
   outlined?: boolean
@@ -48,12 +50,12 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   srcSet?: string
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * Used to render icon or text elements inside the avatar if src is not set. This can be an element, or just a string.
+   * Used to render icon or text elements inside the Avatar if src is not set. This can be an element, or just a string.
    */
   children?: ReactNode
 
@@ -68,19 +70,22 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   classNames?: ComponentSlotClasses<keyof AvatarSlotProps>
 
   /**
-   * The size of the avatar.
+   * The size of the Avatar.
+   *
    * @default 'md'
    */
   size?: AvatarVariants['size']
 
   /**
-   * The border radius of the avatar.
+   * The border radius of the Avatar.
+   *
    * @default size
    */
   radius?: AvatarVariants['radius']
 
   /**
-   * The color of the avatar.
+   * The color of the Avatar.
+   *
    * @default 'gray'
    */
   color?: AvatarVariants['color']
@@ -115,6 +120,7 @@ type AvatarGroupSlotProps = {
 type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -136,51 +142,56 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
 
   /**
    * The size of all Avatars.
+   *
    * @default 'md'
    */
   size?: AvatarVariants['size']
 
   /**
    * The border radius of all Avatars
+   *
    * @default size
    */
   radius?: AvatarVariants['radius']
 
   /**
    * The color of all Avatars
+   *
    * @default 'gray'
    */
   color?: AvatarVariants['color']
 
   /**
-   * If true, adds an outline around all avatars.
+   * If true, adds an outline around all Avatars.
+   *
    * @default false
    */
   outlined?: boolean
 
   /**
-   * Max avatars to show before +x.
+   * Maximum number of Avatars to show before displaying the +x surplus indicator.
+   *
    * @default 5
    */
   max?: number
 
   /**
-   * The total number of avatars.
+   * The total number of Avatars.
    */
   total?: number
 
   /**
-   * Spacing between avatars.
+   * Spacing between Avatars.
    */
   spacing?: number
 
   /**
-   * Custom renderer of extraAvatars.
+   * Custom renderer for surplus Avatars. Receives the surplus count based on children and max.
    */
   renderSurplus?: (surplus: number) => ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }

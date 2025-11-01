@@ -33,13 +33,13 @@ Switch is used to toggle between the selected and unselected states.
 
 ### With Icons
 
-You can also add icons at the start and end of the switch by using the `startIcon` and `endIcon` properties.
+You can also add icons at the start and end of the Switch by using the `startIcon` and `endIcon` props.
 
 <Example {...$switch.withIcons} />
 
 ### Controlled
 
-You can use `checked` and `onCheckedChange` props to control the switch's checked state.
+You can use the `checked` and `onCheckedChange` props to control the Switch's checked state.
 
 <Example {...$switch.controlled} />
 
@@ -47,7 +47,7 @@ You can use `checked` and `onCheckedChange` props to control the switch's checke
 
 ### Switch Props
 
-Switch inherit the props of `as` (by default, `'input'`).
+Switch inherits the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
@@ -55,7 +55,7 @@ Switch inherit the props of `as` (by default, `'input'`).
       prop: 'children',
       type: 'ReactNode',
       default: '',
-      description: 'The label of the switch.',
+      description: 'The label of the Switch.',
     },
     {
       prop: 'color',
@@ -71,58 +71,58 @@ Switch inherit the props of `as` (by default, `'input'`).
         "'gray'",
       ],
       default: "'blue'",
-      description: 'The color of the switch.',
+      description: 'The color of the Switch.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'The size of the switch.',
+      description: 'The size of the Switch.',
     },
     {
       prop: 'checked',
       type: 'boolean',
-      description: 'If true, the switch is checked.(controlled)',
+      description: 'If true, the Switch is checked. (controlled)',
     },
     {
       prop: 'defaultChecked',
       type: 'boolean',
-      description: 'The default checked state.(uncontrolled)',
+      description: 'The default checked state. (uncontrolled)',
     },
     {
       prop: 'disabled',
       type: 'boolean',
-      description: 'If true, the switch is disabled.',
+      description: 'If true, the Switch is disabled.',
     },
     {
       prop: 'name',
       type: 'string',
-      description: 'The name of the switch.',
+      description: 'The name of the Switch.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'startIcon',
       type: 'ReactNode',
-      description: 'The element is placed before the children.',
+      description: 'The element placed before the children.',
     },
     {
       prop: 'endIcon',
       type: 'ReactNode',
-      description: 'The element is placed after the children.',
+      description: 'The element placed after the children.',
     },
     {
       prop: 'thumbIcon',
       type: ['ReactNode', '(state: SwitchProps) => ReactNode'],
-      description: 'The icon to be displayed when the switch is checked.',
+      description: 'The icon to display when the Switch is checked.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the input element inside the switch.',
+      description: 'Ref for forwarding to the input inside the Switch.',
     },
     {
       prop: 'onChange',
@@ -140,7 +140,7 @@ Switch inherit the props of `as` (by default, `'input'`).
       prop: 'as',
       type: 'ElementType',
       default: "'input'",
-      description: 'The component used for the input element.',
+      description: 'The component or element to render as the input.',
     },
     {
       prop: 'sx',
@@ -169,37 +169,37 @@ Switch inherit the props of `as` (by default, `'input'`).
       slot: 'root',
       class: '.nui-switch-root',
       component: "'label'",
-      description: 'The root element of the switch.',
+      description: 'The root element of the Switch.',
     },
     {
       slot: 'track',
       class: '.nui-switch-track',
       component: "'span'",
-      description: 'The container for the startIcon, endIcon and thumb.',
+      description: 'The container for the startIcon, endIcon, and thumb.',
     },
     {
       slot: 'startIcon',
       class: '.nui-switch-start-icon',
       component: "'span'",
-      description: 'The container for the start icon inside the switch.',
+      description: 'The container for the start icon inside the Switch.',
     },
     {
       slot: 'endIcon',
       class: '.nui-switch-end-icon',
       component: "'span'",
-      description: 'The container for the end icon inside the switch.',
+      description: 'The container for the end icon inside the Switch.',
     },
     {
       slot: 'thumb',
       class: '.nui-switch-thumb',
       component: "'span'",
-      description: 'The slider inside the switch.',
+      description: 'The slider inside the Switch.',
     },
     {
       slot: 'label',
       class: '.nui-switch-label',
       component: "'span'",
-      description: 'The label of the switch.',
+      description: 'The label of the Switch.',
     },
   ]}
 />

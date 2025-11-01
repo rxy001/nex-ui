@@ -19,24 +19,24 @@ Divider is used to separate content on the page.
 
 ### Divider Props
 
-Divider inherit the props of `as` (by default, `'div'`).
+Divider inherits the props of `as` (by default, `'hr'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'orientation',
-      description: 'The orientation of the divider.',
+      description: 'The orientation of the Divider.',
       type: ["'horizontal'", "'vertical'"],
       default: "'horizontal'",
     },
     {
       prop: 'className',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
       type: 'ClassValue',
     },
     {
       prop: 'ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
       type: 'Ref',
     },
     {
@@ -48,8 +48,8 @@ Divider inherit the props of `as` (by default, `'div'`).
     {
       prop: 'as',
       type: 'ElementType',
-      default: "'div'",
-      description: 'The component used for the root node.',
+      default: "'hr'",
+      description: 'The component or element to render as the root.',
     },
   ]}
 />

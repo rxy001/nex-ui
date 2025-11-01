@@ -17,49 +17,49 @@ Drawer is a component that slides in from the side of the screen.
 
 ### Hide Backdrop
 
-Set the `hideBackdrop` property of Drawer to `true` to hide the background overlay.
+Set the `hideBackdrop` property of Drawer to `true` to hide the Drawer background overlay.
 
 <Example {...drawer.hideBackdrop} />
 
 ### Prevent Scroll
 
-Set the `preventScroll` property of Drawer to `true` to prevent page scrolling when the drawer is open.
+Set the `preventScroll` property of Drawer to `true` to prevent page scrolling when the Drawer is open.
 
 <Example {...drawer.preventScroll} />
 
 ### Keep Mounted
 
-Set the `keepMounted` property of Drawer to `true` to keep the drawer content mounted when closed.
+Set the `keepMounted` property of Drawer to `true` to keep the Drawer content mounted when closed.
 
 <Example {...drawer.keepMounted} />
 
 ### Sizes
 
-Use the `size` property of DrawerContent to set the size of the drawer, defaults to `md`.
+Use the `size` property of DrawerContent to set the size of the Drawer. Defaults to `md`.
 
 <Example {...drawer.sizes} />
 
 ### Placements
 
-Use the `placement` property of DrawerContent to set the display position of the drawer, defaults to `right`.
+Use the `placement` property of DrawerContent to set the display position of the Drawer. Defaults to `right`.
 
 <Example {...drawer.placements} />
 
 ### Custom Motion
 
-Use the `motionProps` property of DrawerContent to customize the animation effects for showing/hiding the drawer.
+Use the `motionProps` property of DrawerContent to customize the animation effects for showing/hiding the Drawer.
 
 <Example {...drawer.customMotion} />
 
 ### Asynchronously Close
 
-DrawerClose supports asynchronously closing the drawer. The `onClick` event of its `children` can return a `Promise`, and the drawer will close after the `Promise` is resolved.
+DrawerClose supports asynchronously closing the Drawer. The `onClick` event of its `children` can return a `Promise`, and the Drawer will close after the `Promise` is resolved.
 
 <Example {...drawer.asynchronouslyClose} />
 
 ### Controlled Drawer
 
-Use the `open` and `onOpenChange` props of Drawer to control the drawer's open state.
+Use the `open` and `onOpenChange` props of Drawer to control the open state of the Drawer.
 
 <Example {...drawer.controlled} />
 
@@ -67,34 +67,35 @@ Use the `open` and `onOpenChange` props of Drawer to control the drawer's open s
 
 ### Drawer Props
 
-Drawer inherit the props of `as` (by default, `m.div`).
+Drawer inherits the props of `as` (by default, `m.div`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: "It's usually DrawerContent, DrawerTrigger, etc.",
+      description: 'Usually, DrawerContent, DrawerTrigger, etc.',
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the drawer is shown.(controlled)',
+      description: 'If true, the Drawer is shown. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the drawer is shown by default.(uncontrolled)',
+      description: 'If true, the Drawer is shown by default. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
-      description: 'Handler that is called when the drawer is opened or closed',
+      description:
+        'Handler that is called when the Drawer is opened or closed.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'hideBackdrop',
@@ -117,33 +118,33 @@ Drawer inherit the props of `as` (by default, `m.div`).
     {
       prop: 'preventScroll',
       type: 'boolean',
-      description: 'If true, the drawer prevents page scrolling.',
+      description: 'If true, the Drawer prevents page scrolling.',
       default: 'false',
     },
     {
       prop: 'closeOnInteractBackdrop',
       type: 'boolean',
-      description: 'If true, closes the drawer when the backdrop is clicked.',
+      description: 'If true, closes the Drawer when the backdrop is clicked.',
       default: 'true',
     },
     {
       prop: 'closeOnEscape',
       type: 'boolean',
-      description: 'If true, closes the drawer when the escape key is pressed.',
+      description: 'If true, closes the Drawer when the Escape key is pressed.',
       default: 'true',
     },
     {
       prop: 'restoreFocus',
       type: 'boolean',
       description:
-        'If true, the drawer will restore focus to previously focused element once the modal is hidden or unmounted.',
+        'If true, the Drawer restores focus to the previously focused element once the Drawer is hidden or unmounted.',
       default: 'true',
     },
     {
       prop: 'onClose',
       type: '() => void',
       description:
-        'Callback function that is called when the drawer is closed.',
+        'Callback function that is called when the Drawer is closed.',
     },
     {
       prop: 'as',
@@ -167,6 +168,11 @@ Drawer inherit the props of `as` (by default, `m.div`).
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
     },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
   ]}
 />
 
@@ -178,37 +184,37 @@ Drawer inherit the props of `as` (by default, `m.div`).
       slot: 'backdrop',
       class: '.nui-drawer-backdrop',
       component: "'div'",
-      description: 'The backdrop element of the drawer.',
+      description: 'The backdrop element of the Drawer.',
     },
   ]}
 />
 
 ### DrawerContent Props
 
-DrawerContent inherit the props of `as` (by default, `'div'`).
+DrawerContent inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: "It's usually DrawerHeader, DrawerBody, DrawerFooter, etc.",
+      description: 'Usually, DrawerHeader, DrawerBody, DrawerFooter, etc.',
     },
     {
       prop: 'closeIcon',
       type: 'ReactNode',
-      description: 'Custom close button to display on top right corner.',
+      description: 'Custom close button to display on the top-right corner.',
     },
     {
       prop: 'size',
       type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: 'The size of the drawer.',
+      description: 'The size of the Drawer.',
       default: "'md'",
     },
     {
       prop: 'placement',
       type: ["'top'", "'bottom'", "'left'", "'right'"],
-      description: 'The display position of the drawer.',
+      description: 'The display position of the Drawer.',
       default: "'right'",
     },
     {
@@ -225,12 +231,13 @@ DrawerContent inherit the props of `as` (by default, `'div'`).
     {
       prop: 'aria-labelledby',
       type: 'string',
-      description: 'The id(s) of the element(s) that label the modal.',
+      description: 'The id(s) of the element(s) that label the DrawerContent.',
     },
     {
       prop: 'aria-describedby',
       type: 'string',
-      description: 'The id(s) of the element(s) that describe the modal.',
+      description:
+        'The id(s) of the element(s) that describe the DrawerContent.',
     },
     {
       prop: 'as',
@@ -247,7 +254,7 @@ DrawerContent inherit the props of `as` (by default, `'div'`).
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'classNames',
@@ -258,6 +265,11 @@ DrawerContent inherit the props of `as` (by default, `'div'`).
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />
@@ -270,27 +282,27 @@ DrawerContent inherit the props of `as` (by default, `'div'`).
       slot: 'closeButton',
       class: '.nui-drawer-content-close-button',
       component: "'button'",
-      description: 'The close button element of the drawer content.',
+      description: 'The close button element of the DrawerContent.',
     },
     {
       slot: 'paper',
       class: '.nui-drawer-content-paper',
       component: 'm.section',
-      description: 'The paper element of the drawer.',
+      description: 'The paper element of the DrawerContent.',
     },
   ]}
 />
 
 ### DrawerHeader Props
 
-DrawerHeader inherit the props of `as` (by default, `'h2'`).
+DrawerHeader inherits the props of `as` (by default, `'h2'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the drawer header.',
+      description: 'The content of the DrawerHeader.',
     },
     {
       prop: 'as',
@@ -307,21 +319,26 @@ DrawerHeader inherit the props of `as` (by default, `'h2'`).
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />
 
 ### DrawerBody Props
 
-DrawerBody inherit the props of `as` (by default, `'div'`).
+DrawerBody inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the drawer body.',
+      description: 'The content of the DrawerBody.',
     },
     {
       prop: 'as',
@@ -338,21 +355,26 @@ DrawerBody inherit the props of `as` (by default, `'div'`).
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />
 
 ### DrawerFooter Props
 
-DrawerFooter inherit the props of `as` (by default,`'div'`).
+DrawerFooter inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the drawer footer.',
+      description: 'The content of the DrawerFooter.',
     },
     {
       prop: 'as',
@@ -369,7 +391,12 @@ DrawerFooter inherit the props of `as` (by default,`'div'`).
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />
@@ -382,7 +409,7 @@ DrawerFooter inherit the props of `as` (by default,`'div'`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'The element that triggers the drawer to open, must support `onClick` event.',
+        'The element that triggers the Drawer to open; must support the `onClick` event.',
     },
   ]}
 />
@@ -395,7 +422,7 @@ DrawerFooter inherit the props of `as` (by default,`'div'`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'The element that triggers the drawer to close, must support `onClick` event.',
+        'The element that triggers the Drawer to close; must support the `onClick` event.',
     },
   ]}
 />

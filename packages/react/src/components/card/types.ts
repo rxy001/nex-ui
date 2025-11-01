@@ -12,13 +12,19 @@ export interface CardPropsOverrides {}
 
 type CardOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * Usually, CardHeader, CardBody, CardFooter, and other custom content.
+   */
+  children?: ReactNode
+
+  /**
+   * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -28,24 +34,26 @@ type CardOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The shadow of the card.
+   * The shadow of the Card.
+   *
    * @default 'md'
    */
   shadow?: CardVariants['shadow']
 
   /**
-   * The border radius of the card.
+   * The border radius of the Card.
+   *
    * @default 'md'
    */
   radius?: CardVariants['radius']
 
   /**
-   * If true, applies a backdrop filter to the card.
+   * If true, applies a backdrop filter to the Card.
    */
   blurred?: boolean
 
   /**
-   * If true, the card will have a hover effect.
+   * If true, the Card will have a hover effect.
    */
   hoverable?: boolean
 }
@@ -61,7 +69,12 @@ type CardHeaderSlotProps = {
 
 type CardHeaderOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The content of the CardHeader, which disables the avatar, action, title, and subtitle props.
+   */
+  children?: ReactNode
+
+  /**
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -72,27 +85,27 @@ type CardHeaderOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The title of the card header.
+   * The title of the CardHeader.
    */
   title?: ReactNode
 
   /**
-   * The subtitle of the card header.
+   * The subtitle of the CardHeader.
    */
   subtitle?: ReactNode
 
   /**
-   * The avatar of the card header.
+   * The avatar of the CardHeader.
    */
   avatar?: ReactNode
 
   /**
-   * The action element of the card header.
+   * The action area of the CardHeader.
    */
   action?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -118,7 +131,7 @@ export type CardHeaderProps<RootComponent extends ElementType = 'div'> =
 
 type CardBodyOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -129,9 +142,14 @@ type CardBodyOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
+
+  /**
+   * The content of the CardBody.
+   */
+  children?: ReactNode
 }
 
 export interface CardBodyPropsOverrides {}
@@ -145,7 +163,7 @@ export type CardBodyProps<RootComponent extends ElementType = 'div'> =
 
 type CardFooterOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -156,9 +174,14 @@ type CardFooterOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
+
+  /**
+   * The content of the CardFooter.
+   */
+  children?: ReactNode
 }
 
 export interface CardFooterPropsOverrides {}
@@ -174,7 +197,7 @@ export interface CardActionAreaPropsOverrides {}
 
 type CardActionAreaOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'button'
    */
   as?: RootComponent
@@ -190,7 +213,7 @@ type CardActionAreaOwnProps<RootComponent extends ElementType> = {
   disabled?: boolean
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }

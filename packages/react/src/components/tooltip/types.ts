@@ -39,7 +39,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     children?: ReactNode
 
     /**
-     * Additional class names to apply to the root element.
+     * Additional class names to apply to the root.
      */
     className?: ClassValue
 
@@ -49,51 +49,52 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     sx?: Interpolation
 
     /**
-     * The content to render inside the tooltip.
+     * The content to render inside the Tooltip.
      */
     content?: ReactNode
 
     /**
-     * The component used for the root element.
+     * The component or element to render as the root.
+     *
      * @default m.div
      */
     as?: RootComponent
 
     /**
-     * If true, keeps the tooltip open when interacting with its content.
+     * If true, keeps the Tooltip open when interacting with its content.
      *
      * @default true
      */
     interactive?: boolean
 
     /**
-     * If true, closes the tooltip when clicking the trigger element.
+     * If true, closes the Tooltip when clicking the trigger element.
      *
      * @default true
      */
     closeOnClick?: boolean
 
     /**
-     * The motion properties of the tooltip.
+     * The props to modify the framer motion animation.
      */
     motionProps?: HTMLMotionProps<'div'>
 
     /**
-     * The color of the tooltip.
+     * The color of the Tooltip.
      *
      * @default 'default'
      */
     color?: TooltipRecipeVariants['color']
 
     /**
-     * The size of the tooltip.
+     * The size of the Tooltip.
      *
      * @default 'md'
      */
     size?: TooltipRecipeVariants['size']
 
     /**
-     * The radius of the tooltip.
+     * The border radius of the Tooltip.
      *
      * @default 'md'
      */
@@ -110,13 +111,13 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     slotProps?: TooltipSlotProps
 
     /**
-     * The maximum width of the tooltip.
+     * The maximum width of the Tooltip.
      * @default 360
      */
     maxWidth?: PopperContentProps['maxWidth']
 
     /**
-     * The maximum height of the tooltip.
+     * The maximum height of the Tooltip.
      */
     maxHeight?: PopperContentProps['maxHeight']
   }

@@ -40,7 +40,7 @@ appearance and maintaining it until set to `false`, regardless of user interacti
 
 ### Controlled
 
-Use the `checked` and `onCheckedChange` props to control the checked state of the checkbox.
+Use the `checked` and `onCheckedChange` props to control the checked state of the Checkbox.
 
 <Example {...checkbox.controlled} />
 
@@ -62,14 +62,14 @@ Set the `orientation` prop to `vertical` to display checkboxes in a vertical lay
 
 ### Checkbox Props
 
-Checkbox inherit the props of `as` (by default, `'input'`).
+Checkbox inherits the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The label of the checkbox.',
+      description: 'The label of the Checkbox.',
     },
     {
       prop: 'color',
@@ -85,52 +85,52 @@ Checkbox inherit the props of `as` (by default, `'input'`).
         "'gray'",
       ],
       default: "'blue'",
-      description: 'The color of the checkbox.',
+      description: 'The color of the Checkbox.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'The size of the checkbox.',
+      description: 'The size of the Checkbox.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'none'", "'full'"],
       default: 'size',
-      description: 'The border radius of the checkbox.',
+      description: 'The border radius of the Checkbox.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the checkbox is disabled.',
+      description: 'If true, the Checkbox is disabled.',
     },
     {
       prop: 'indeterminate',
       type: 'boolean',
       default: 'false',
       description:
-        'Indeterminism is presentational only. The indeterminate visual representation remains regardless of user interaction.',
+        'Indeterminate is presentational only. The indeterminate visual state remains regardless of user interaction.',
     },
     {
       prop: 'checked',
       type: 'boolean',
-      description: 'If true, the checkbox is checked.(controlled)',
+      description: 'If true, the Checkbox is checked. (controlled)',
     },
     {
       prop: 'defaultChecked',
       type: 'boolean',
-      description: 'The default checked state.(uncontrolled)',
+      description: 'The default checked state. (uncontrolled)',
     },
     {
       prop: 'icon',
       type: ['ReactNode', '(ownerState: CheckboxProps) => ReactNode'],
-      description: 'The icon to be displayed when the checkbox is checked.',
+      description: 'The icon to display when the Checkbox is checked.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'name',
@@ -141,13 +141,12 @@ Checkbox inherit the props of `as` (by default, `'input'`).
     {
       prop: 'value',
       type: ['string', 'number'],
-      description: 'The value of the checkbox.',
+      description: 'The value of the Checkbox.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description:
-        'Ref for forwarding to the input element inside the checkbox.',
+      description: 'Ref for forwarding to the input inside the Checkbox.',
     },
     {
       prop: 'onChange',
@@ -165,7 +164,7 @@ Checkbox inherit the props of `as` (by default, `'input'`).
       prop: 'as',
       type: 'ElementType',
       default: "'input'",
-      description: 'The component used for the input element.',
+      description: 'The component or element to render as the input.',
     },
     {
       prop: 'sx',
@@ -194,49 +193,49 @@ Checkbox inherit the props of `as` (by default, `'input'`).
       slot: 'root',
       class: '.nui-checkbox-root',
       component: "'label'",
-      description: 'The root element of the checkbox.',
+      description: 'The root element of the Checkbox.',
     },
     {
       slot: 'icon',
       class: '.nui-checkbox-icon',
       component: "'span'",
-      description: 'The container of the icon inside the checkbox.',
+      description: 'The container for the icon inside the Checkbox.',
     },
     {
       slot: 'label',
       class: '.nui-checkbox-label',
       component: "'span'",
-      description: 'The label element of the checkbox.',
+      description: 'The label element of the Checkbox.',
     },
   ]}
 />
 
 ### CheckboxGroup Props
 
-CheckboxGroup inherit the props of `as` (by default, `'div'`).
+CheckboxGroup inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The checkboxes items.',
+      description: 'The list of Checkbox items.',
     },
     {
       prop: 'label',
       type: 'ReactNode',
-      description: 'The label of the checkbox group.',
+      description: 'The label of the CheckboxGroup.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
-      description: 'If true, the checkboxes are disabled.',
+      description: 'If true, all checkboxes are disabled.',
     },
     {
       prop: 'name',
       type: 'string',
       description:
-        'The name of the checkbox group, used when submitting an HTML form.',
+        'The name of the CheckboxGroup, used when submitting an HTML form.',
     },
     {
       prop: 'color',
@@ -251,22 +250,22 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
         "'purple'",
         "'gray'",
       ],
-      description: 'The color of the checkboxes.',
+      description: 'The color of all checkboxes.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
-      description: 'The size of the checkboxes.',
+      description: 'The size of all checkboxes.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
-      description: 'The border radius of the checkboxes.',
+      description: 'The border radius of all checkboxes.',
     },
     {
       prop: 'value',
       type: 'T extends (string | number)[]',
-      description: 'The current selected values. (controlled)',
+      description: 'The currently selected values. (controlled)',
     },
     {
       prop: 'defaultValue',
@@ -282,23 +281,23 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
       prop: 'orientation',
       type: ["'horizontal'", "'vertical'"],
       default: "'horizontal'",
-      description: 'The axis the checkbox group items should align with.',
+      description: 'The axis the CheckboxGroup items should align with.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description: 'The component used for the root element.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'sx',
@@ -327,13 +326,13 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
       slot: 'label',
       class: '.nui-checkbox-group-label',
       component: "'h3'",
-      description: 'The label element of the checkbox group.',
+      description: 'The label element of the CheckboxGroup.',
     },
     {
       slot: 'wrapper',
       class: '.nui-checkbox-group-wrapper',
       component: "'div'",
-      description: 'The container for all checkboxes in the checkbox group.',
+      description: 'The container for all checkboxes in the CheckboxGroup.',
     },
   ]}
 />

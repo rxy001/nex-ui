@@ -13,7 +13,7 @@ export type IconOwnProps = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -35,7 +35,7 @@ export type IconOwnProps = {
   color?: CSSObject['color']
 
   /**
-   * The component used for the root node.
+   * The component or element to render as the root.
    */
   as?: ComponentType<any>
 

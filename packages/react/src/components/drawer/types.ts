@@ -18,7 +18,8 @@ type DrawerSlotProps = {
 
 type DrawerOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -34,7 +35,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -81,7 +82,7 @@ export interface DrawerContentPropsOverrides {}
 
 type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -92,7 +93,7 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -167,7 +168,7 @@ export interface DrawerHeaderPropsOverrides {}
 
 type DrawerHeaderOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'h2'
    */
 
@@ -183,7 +184,7 @@ type DrawerHeaderOwnProps<RootComponent extends ElementType> = {
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }
@@ -200,7 +201,7 @@ export interface DrawerBodyPropsOverrides {}
 
 type DrawerBodyOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -216,7 +217,7 @@ type DrawerBodyOwnProps<RootComponent extends ElementType> = {
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }
@@ -233,7 +234,7 @@ export interface DrawerFooterPropsOverrides {}
 
 type DrawerFooterOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
    * @default 'div'
    */
   as?: RootComponent
@@ -249,7 +250,7 @@ type DrawerFooterOwnProps<RootComponent extends ElementType> = {
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }

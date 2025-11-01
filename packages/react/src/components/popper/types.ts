@@ -7,34 +7,34 @@ import type { DOMMotionComponents } from 'motion/react'
 
 export type PopperProps = {
   /**
-   * The content of the popper.
+   * The content of the Popper.
    */
   children?: ReactNode
 
   /**
-   * If true, the popper is shown. (controlled)
+   * If true, the Popper is shown. (controlled)
    */
   open?: boolean
 
   /**
-   * If true, the popper is shown by default. (uncontrolled)
+   * If true, the Popper is shown by default. (uncontrolled)
    */
   defaultOpen?: boolean
 
   /**
-   * Handler that is called when the popper is opened or closed.
+   * Handler that is called when the Popper is opened or closed.
    */
   onOpenChange?: (open: boolean) => void
 
   /**
-   * The delay in milliseconds before the popper opens.
+   * The delay in milliseconds before the Popper opens.
    *
    * @default 100
    */
   openDelay?: number
 
   /**
-   * The delay in milliseconds before the popper closes.
+   * The delay in milliseconds before the Popper closes.
    *
    * @default 100
    */
@@ -48,21 +48,21 @@ export type PopperTriggerProps = {
   children?: ReactNode
 
   /**
-   * The action that triggers the popper.
+   * The action that triggers the Popper.
    *
    * @default 'hover'
    */
   action?: 'click' | 'hover'
 
   /**
-   * If true, keeps the popper open when interacting with its content.
+   * If true, keeps the Popper open when interacting with its content.
    *
    * @default true
    */
   interactive?: boolean
 
   /**
-   * If true, closes the popper when clicking the trigger element.
+   * If true, closes the Popper when clicking the trigger element.
    *
    * @default true
    */
@@ -84,7 +84,7 @@ type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
 
 type PopperRootOwnProps = {
   /**
-   * The placement of the popper relative to the trigger element.
+   * The placement of the Popper relative to the trigger element.
    *
    * @default 'top'
    */
@@ -98,21 +98,21 @@ type PopperRootOwnProps = {
   container?: HTMLElement | null | (() => HTMLElement | null)
 
   /**
-   * Changes the placement of the popper element to keep it in view.
+   * Changes the placement of the Popper to keep it in view.
    *
    * @default { mainAxis: true, crossAxis: true }
    */
   flip?: FlipOptions | false
 
   /**
-   * Shifts the popper element to keep it in view.
+   * Shifts the Popper to keep it in view.
    *
    * @default true
    */
   shift?: boolean
 
   /**
-   * Translates the popper element along the specified axes.
+   * Translates the Popper along the specified axes.
    *
    * @default 5
    */
@@ -126,19 +126,19 @@ type PopperRootOwnProps = {
   keepMounted?: boolean
 
   /**
-   * If true, closes the popper when the escape key is pressed.
+   * If true, closes the Popper when the escape key is pressed.
    *
    * @default true
    */
   closeOnEscape?: boolean
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * If true, closes the popper when the reference element is detached from the viewport.
+   * If true, closes the Popper when the reference element is detached from the viewport.
    *
    * @default true
    */
@@ -151,12 +151,12 @@ export type PopperRootProps<
 
 type PopperContentOwnProps = {
   /**
-   * The maximum width of the popper content.
+   * The maximum width of the Popper content.
    */
   maxWidth?: CSSObject['maxWidth']
 
   /**
-   * The maximum height of the popper content.
+   * The maximum height of the Popper content.
    */
   maxHeight?: CSSObject['maxHeight']
 }
