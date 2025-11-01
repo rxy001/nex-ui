@@ -55,28 +55,19 @@ export const alertRecipe = defineSlotRecipe({
           bg: 'transparent',
           border: 'sm',
           borderColor: 'colorPalette.primary',
-          color: {
-            _DEFAULT: 'colorPalette.600',
-            _dark: 'colorPalette.400',
-          },
+          color: 'colorPalette.tertiary',
         },
       },
       faded: {
         root: {
           bg: 'colorPalette.subtle',
-          color: {
-            _DEFAULT: 'colorPalette.600',
-            _dark: 'colorPalette.400',
-          },
+          color: 'colorPalette.tertiary',
         },
       },
       subtle: {
         root: {
           bg: 'colorPalette.subtle',
-          color: {
-            _DEFAULT: 'colorPalette.600',
-            _dark: 'colorPalette.400',
-          },
+          color: 'colorPalette.tertiary',
           border: 'sm',
           borderColor: 'colorPalette.highlight',
         },

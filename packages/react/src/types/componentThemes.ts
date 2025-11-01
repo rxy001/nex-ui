@@ -32,6 +32,7 @@ import type {
   TooltipRecipe,
   PopoverRecipe,
   PopoverContentRecipe,
+  BadgeRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -66,6 +67,7 @@ import type {
   TooltipProps,
   PopoverContentProps,
   PopoverProps,
+  BadgeProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
@@ -202,6 +204,10 @@ export type ComponentThemes = {
   PopoverContent?: {
     styleOverrides?: ComponentThemeObject<PopoverContentRecipe>
     defaultProps?: PopoverContentProps
+  }
+  Badge?: {
+    styleOverrides?: ComponentThemeObject<BadgeRecipe>
+    defaultProps?: BadgeProps
   }
 }
 
