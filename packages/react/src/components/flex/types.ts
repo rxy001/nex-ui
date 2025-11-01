@@ -7,7 +7,8 @@ export interface FlexPropsOverrides {}
 
 type FlexOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root node.
+   * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -23,7 +24,7 @@ type FlexOwnProps<RootComponent extends ElementType> = {
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 

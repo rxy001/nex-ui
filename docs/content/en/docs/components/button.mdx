@@ -39,7 +39,7 @@ Button allows users to perform actions and make choices with a single click.
 
 ### Loading
 
-Enable the `loading` prop to display a spinner indicator within the button.
+Enable the `loading` prop to display a spinner indicator within the Button.
 
 <Example {...button.loading} />
 
@@ -47,13 +47,13 @@ Customize the loading indicator using the `spinner` prop.
 
 ### With Icons
 
-Add icons to the button using `startIcon` or `endIcon` props.
+Add icons to the Button using the `startIcon` or `endIcon` props.
 
 <Example {...button.withIcons} />
 
 ### Icon Only
 
-Enable `iconOnly` prop for square-shaped icon-only buttons without text.
+Enable the `iconOnly` prop for square-shaped, icon-only Buttons.
 
 <Example {...button.iconOnly} />
 
@@ -61,14 +61,14 @@ Enable `iconOnly` prop for square-shaped icon-only buttons without text.
 
 ### Button Props
 
-Button inherit the props of `as` (by default, `'button'`).
+Button inherits the props of `as` (by default, `'button'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the button.',
+      description: 'The content of the Button.',
     },
     {
       prop: 'color',
@@ -84,60 +84,60 @@ Button inherit the props of `as` (by default, `'button'`).
         "'gray'",
       ],
       default: "'blue'",
-      description: 'The color of the button.',
+      description: 'The color of the Button.',
     },
     {
       prop: 'variant',
       type: ["'solid'", "'outlined'", "'ghost'", "'faded'"],
       default: "'solid'",
-      description: 'The button appearance style.',
+      description: 'The Button appearance style.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'The size of the button.',
+      description: 'The size of the Button.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
       default: 'size',
-      description: 'The border radius of the button.',
+      description: 'The border radius of the Button.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the button is disabled.',
+      description: 'If true, the Button is disabled.',
     },
     {
       prop: 'loading',
       type: 'boolean',
       default: 'false',
       description:
-        'If true, the loading indicator is visible and the button is disabled.',
+        'If true, the loading indicator is visible and the Button is disabled.',
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the button takes the full width of its parent.',
+      description: 'If true, the Button takes the full width of its parent.',
     },
     {
       prop: 'iconOnly',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the button has the same width and height.',
+      description: 'If true, makes the Button square (equal width and height).',
     },
     {
       prop: 'startIcon',
       type: 'ReactNode',
-      description: 'The element is placed before the children.',
+      description: 'The element placed before the children.',
     },
     {
       prop: 'endIcon',
       type: 'ReactNode',
-      description: 'The element is placed after the children.',
+      description: 'The element placed after the children.',
     },
     {
       prop: 'spinner',
@@ -160,7 +160,7 @@ Button inherit the props of `as` (by default, `'button'`).
       prop: 'href',
       type: 'string',
       description:
-        'The URL to link to when the button is clicked. If defined, an a element will be used as the root node.',
+        'The URL to link to when the Button is clicked. If defined, an anchor element will be used as the root node.',
     },
     {
       prop: 'target',
@@ -170,12 +170,12 @@ Button inherit the props of `as` (by default, `'button'`).
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'as',
@@ -211,14 +211,14 @@ Button inherit the props of `as` (by default, `'button'`).
       class: '.nui-btn-start-icon',
       component: "'span'",
       description:
-        'The container for the icon before the child element of the button.',
+        'The container for the icon before the child element of the Button.',
     },
     {
       slot: 'endIcon',
       class: '.nui-btn-end-icon',
       component: "'span'",
       description:
-        'The container for the icon after the child element of the button.',
+        'The container for the icon after the child element of the Button.',
     },
   ]}
 />

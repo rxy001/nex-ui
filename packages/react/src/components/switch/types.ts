@@ -21,7 +21,8 @@ type SwitchSlotProps = {
 
 export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   /**
-   * The component used for the input element.
+   * The component or element to render as the input.
+   *
    * @default 'input'
    */
   as?: SwitchComponent
@@ -32,22 +33,22 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The label of the switch.
+   * The label of the Switch.
    */
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * The element is placed before the switch.
+   * The element placed before the children.
    */
   startIcon?: ReactNode
 
   /**
-   * The element is placed after the switch.
+   * The element placed after the children.
    */
   endIcon?: ReactNode
 
@@ -62,8 +63,7 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   classNames?: ComponentSlotClasses<keyof SwitchSlotProps>
 
   /**
-   * The icon displayed inside the thumb.
-   * Can be a ReactNode or a function that returns a ReactNode.
+   * The icon to display when the Switch is checked.
    */
   thumbIcon?:
     | ReactNode
@@ -75,30 +75,34 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   onCheckedChange?: (checked: boolean) => void
 
   /**
-   * If true, the switch is checked.(controlled)
+   * If true, the Switch is checked.(controlled)
    */
   checked?: boolean
 
   /**
-   * If true, the switch is disabled.
+   * If true, the Switch is disabled.
+   *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * The size of the switch.
+   * The size of the Switch.
+   *
    * @default 'md'
    */
   size?: SwitchVariants['size']
 
   /**
-   * The color of the switch.
+   * The color of the Switch.
+   *
    * @default primaryThemeColor
    */
   color?: SwitchVariants['color']
 
   /**
-   * The default checked state.(uncontrolled)
+   * The default checked state. (uncontrolled)
+   *
    * @default false
    */
   defaultChecked?: boolean

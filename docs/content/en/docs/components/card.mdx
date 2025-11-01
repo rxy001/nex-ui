@@ -19,7 +19,7 @@ Cards contain content and actions about a single subject.
 
 ### Composition
 
-You can use other NexUI components inside the card to compose a more complex card.
+You can use other NexUI components inside the Card to compose a more complex Card.
 
 <Example {...card.composition} />
 
@@ -29,20 +29,20 @@ You can use other NexUI components inside the card to compose a more complex car
 
 ### Primary Action
 
-Often a card allow users to interact with the entirety of its surface to trigger its main action.
-The action area of the card can be specified by wrapping its contents in a `CardActionArea` component.
+Often, a Card allows users to interact with the entirety of its surface to trigger its main action.
+The action area of the Card can be specified by wrapping its contents in a `CardActionArea` component.
 
 <Example {...card.primaryAction} />
 
 ### Hover Effect
 
-Set the `hoverable` property to `true` enables the hover effect, giving the card visual feedback when the mouse hovers over it.
+Set the `hoverable` prop to `true` to enable the hover effect, giving the Card visual feedback on hover.
 
 <Example {...card.hoverEffect} />
 
 ### Blurred Card
 
-Set the `blurred` property to `true` enables the blur effect on the card.
+Set the `blurred` prop to `true` to enable the blur effect on the Card.
 
 <Example {...card.blurredCard} />
 
@@ -50,7 +50,7 @@ Set the `blurred` property to `true` enables the blur effect on the card.
 
 ### Card Props
 
-Card inherit the props of `as` (by default, `'div'`).
+Card inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -58,29 +58,29 @@ Card inherit the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'CardHeader、CardBody、CardFooter, and other custom content.',
+        'Usually, CardHeader, CardBody, CardFooter, and other custom content.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'none'"],
       default: "'md'",
-      description: 'The border radius of the card.',
+      description: 'The border radius of the Card.',
     },
     {
       prop: 'shadow',
       type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
       default: "'md'",
-      description: 'The shadow of the card.',
+      description: 'The shadow of the Card.',
     },
     {
       prop: 'blurred',
       type: 'boolean',
-      description: 'If true, applies a backdrop filter to the card.',
+      description: 'If true, applies a backdrop filter to the Card.',
     },
     {
       prop: 'hoverable',
       type: 'boolean',
-      description: 'If true, the card will have a hover effect.',
+      description: 'If true, the Card will have a hover effect.',
     },
     {
       prop: 'sx',
@@ -92,19 +92,24 @@ Card inherit the props of `as` (by default, `'div'`).
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description: 'The component used for the root element.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />
 
 ### CardHeader Props
 
-CardHeader inherit the props of `as` (by default, `'div'`).
+CardHeader inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -112,27 +117,27 @@ CardHeader inherit the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'The content of the card header, which will disable the avatar, action, title, and subtitle props.',
+        'The content of the CardHeader, which disables the avatar, action, title, and subtitle props.',
     },
     {
       prop: 'title',
       type: 'ReactNode',
-      description: 'The title of the card header.',
+      description: 'The title of the CardHeader.',
     },
     {
       prop: 'subtitle',
       type: 'ReactNode',
-      description: 'The subtitle of the card header.',
+      description: 'The subtitle of the CardHeader.',
     },
     {
       prop: 'avatar',
       type: 'ReactNode',
-      description: 'The avatar of the card header.',
+      description: 'The avatar of the CardHeader.',
     },
     {
       prop: 'action',
       type: 'ReactNode',
-      description: 'The action area of the card header.',
+      description: 'The action area of the CardHeader.',
     },
     {
       prop: 'sx',
@@ -144,12 +149,12 @@ CardHeader inherit the props of `as` (by default, `'div'`).
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description: 'The component used for the root element.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'classNames',
@@ -160,6 +165,11 @@ CardHeader inherit the props of `as` (by default, `'div'`).
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />
@@ -172,26 +182,26 @@ CardHeader inherit the props of `as` (by default, `'div'`).
       slot: 'content',
       class: '.nui-card-header-content',
       component: "'div'",
-      description: 'The content container of the card header.',
+      description: 'The content container of the CardHeader.',
     },
     {
       slot: 'title',
       class: '.nui-card-header-title',
       component: "'div'",
-      description: 'The title container of the card header.',
+      description: 'The title container of the CardHeader.',
     },
     {
       slot: 'subtitle',
       class: '.nui-card-header-subtitle',
       component: "'div'",
-      description: 'The subtitle container of the card header.',
+      description: 'The subtitle container of the CardHeader.',
     },
   ]}
 />
 
 ### CardBody Props
 
-CardBody inherit the props of `as` (by default, `'div'`).
+CardBody inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -205,19 +215,29 @@ CardBody inherit the props of `as` (by default, `'div'`).
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description: 'The component used for the root element.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the CardBody.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />
 
 ### CardFooter Props
 
-CardFooter inherit the props of `as` (by default, `'div'`).
+CardFooter inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -231,12 +251,22 @@ CardFooter inherit the props of `as` (by default, `'div'`).
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description: 'The component used for the root element.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the CardFooter.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
     },
   ]}
 />

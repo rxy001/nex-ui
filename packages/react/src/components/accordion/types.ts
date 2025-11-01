@@ -15,7 +15,13 @@ export interface AccordionPropsOverrides {}
 
 type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
+   * The contents of the collection. Usually the array of AccordionItem.
+   */
+  children?: ReactNode
+
+  /**
    * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -26,7 +32,8 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   sx?: Interpolation
 
   /**
-   * If true, the accordion items can be expanded at the same time.
+   * If true, the Accordion items can be expanded at the same time.
+   *
    * @default false
    */
   multiple?: boolean
@@ -47,55 +54,54 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   onExpandedKeysChange?: (keys: Key[]) => void
 
   /**
-   * The contents of the collection. Usually the array of AccordionItem.
-   */
-  chidlren?: ReactNode
-
-  /**
-   * If true, the accordion items content should always be mounted.
+   * If true, the content for all Accordion items is always mounted.
+   *
    * @default false
    */
   keepMounted?: boolean
 
   /**
-   * If true, the accordion items indicator is hidden.
+   * If true, the indicator is hidden for all Accordion items.
+   *
    * @default false
    */
   hideIndicator?: boolean
 
   /**
-   * The accordion item expanded indicator, usually an arrow icon.
+   * The expanded indicator for all Accordion items, usually an arrow icon.
    */
   indicator?: ReactNode
 
   /**
-   * The motion properties of the accordion.
+   * The props to modify the framer motion animation.
    */
   motionProps?: HTMLMotionProps<'div'>
 
   /**
-   * The motion properties of the accordion indicator.
+   * The props to modify the framer motion animation.
    */
   indicatorMotionProps?: HTMLMotionProps<'span'>
 
   /**
-   * The item keys that are disabled.
+   * The keys of Accordion items that are disabled.
    */
   disabledKeys?: Key[]
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * If true, the accordion items are disabled
+   * If true, all Accordion items are disabled.
+   *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * The accordion appearance style.
+   * The Accordion appearance style.
+   *
    * @default 'underlined'
    */
   variant?: AccordionVariants['variant']
@@ -133,50 +139,50 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The content of the component.
    */
-  chidlren?: ReactNode
+  children?: ReactNode
 
   /**
-   * The accordion item key.
+   * The key of the Accordion item.
    */
   itemKey?: Key
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * The accordion item title.
+   * The title of the Accordion item.
    */
   title?: ReactNode
 
   /**
-   * The props to modify the framer-motion animation. Use the variants API to create your own animation.
+   * The props to modify the framer motion animation.
    */
   motionProps?: HTMLMotionProps<'div'>
 
   /**
-   * If true, the accordion item is disabled.
+   * If true, the Accordion item is disabled.
    */
   disabled?: boolean
 
   /**
-   * If true, the accordion item content should always be mounted.
+   * If true, the Accordion item content is always mounted.
    */
   keepMounted?: boolean
 
   /**
-   * If true, the accordion item indicator is hidden.
+   * If true, the Accordion item indicator is hidden.
    */
   hideIndicator?: boolean
 
   /**
-   * The accordion item expanded indicator.
+   * The expanded indicator for the Accordion item, usually an arrow icon.
    */
   indicator?: ReactNode
 
   /**
-   * The props to modify the framer-motion animation. Use the variants API to create your own animation.
+   * The props to modify the framer motion animation.
    */
   indicatorMotionProps?: HTMLMotionProps<'span'>
 

@@ -20,7 +20,8 @@ type InputSlotProps = {
 
 type InputOwnProps<InputComponent extends ElementType> = {
   /**
-   * The component used for the input element.
+   * The component or element to render as the input.
+   *
    * @default 'input'
    */
   as?: InputComponent
@@ -31,17 +32,17 @@ type InputOwnProps<InputComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The label of the input.
+   * The label of the Input.
    */
   label?: ReactNode
 
   /**
-   * The element is placed before the input.
+   * The element placed before the input.
    */
   prefix?: ReactNode
 
   /**
-   * The element is placed after the input.
+   * The element placed after the input.
    */
   suffix?: ReactNode
 
@@ -51,7 +52,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   onClear?: () => void
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -62,43 +63,50 @@ type InputOwnProps<InputComponent extends ElementType> = {
   disabled?: boolean
 
   /**
-   * If true, the input takes the full width of its parent.
+   * If true, the Input takes the full width of its parent.
+   *
    * @default false
    */
   fullWidth?: boolean
 
   /**
-   * If true, the input is invalid.
+   * If true, the Input is invalid.
+   *
    * @default false
    */
   invalid?: boolean
 
   /**
-   * If true, the input is clearable.
+   * If true, the Input is clearable.
+   *
    * @default false
    */
   clearable?: boolean
 
   /**
-   * The size of the input.
+   * The size of the Input.
+   *
    * @default 'md'
    */
   size?: InputVariants['size']
 
   /**
-   * The color of the input.
+   * The color of the Input.
+   *
    * @default primaryThemeColor
    */
   color?: InputVariants['color']
 
   /**
-   * The border radius of the input.
+   * The border radius of the Input.
+   *
    * @default size
    */
   radius?: InputVariants['radius']
 
   /**
-   * The input appearance style.
+   * The Input appearance style.
+   *
    * @default 'outlined'
    */
   variant?: InputVariants['variant']
@@ -114,12 +122,12 @@ type InputOwnProps<InputComponent extends ElementType> = {
   onValueChange?: (value: string) => void
 
   /**
-   * The value of the input. (controlled)
+   * The value of the Input. (controlled)
    */
   value?: string
 
   /**
-   * The default value of the input. (uncontrolled)
+   * The default value of the Input. (uncontrolled)
    */
   defaultValue?: string
 

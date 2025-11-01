@@ -191,6 +191,8 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
 
 ### PopoverContent Props
 
+PopoverContent 继承 `as` (默认为 `'div'`) 的 Props。
+
 <PropsTable
   dataSource={[
     {
@@ -224,7 +226,6 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
     {
       prop: 'maxHeight',
       type: "CSSObject['maxHeight']",
-      default: '480',
       description: 'PopoverContent 的最大高度。',
     },
     {
@@ -246,7 +247,7 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
     {
       prop: 'as',
       type: 'ElementType',
-      default: 'div',
+      default: "'div'",
       description:
         '用于 PopoverContent 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
     },

@@ -24,6 +24,7 @@ type AlertStatus = 'info' | 'success' | 'warning' | 'error'
 type AlertOwnProps<RootComponent extends ElementType> = {
   /**
    * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -34,7 +35,7 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
@@ -49,44 +50,46 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   classNames?: ComponentSlotClasses<keyof AlertSlotProps>
 
   /**
-   * The variant of the alert.
+   * The Alert appearance style.
+   *
    * @default 'faded'
    */
   variant?: AlertVariants['variant']
 
   /**
-   * The color of the alert. It overrides the status color.
+   * The color of the Alert. It overrides the status color.
    */
   color?: AlertVariants['color']
 
   /**
-   * The border radius of the alert.
+   * The border radius of the Alert.
+   *
    * @default 'md'
    */
   radius?: AlertVariants['radius']
 
   /**
-   * The icon of the alert.
+   * The icon element of the Alert.
    */
   icon?: ReactNode
 
   /**
-   * The action to display. It renders after the message, at the end of the alert.
+   * The action element to display. Renders after the message, at the end of the Alert.
    */
   action?: ReactNode
 
   /**
-   * The title of the alert.
+   * The title of the Alert.
    */
   title?: ReactNode
 
   /**
-   * The description of the alert.
+   * The description of the Alert.
    */
   description?: ReactNode
 
   /**
-   * If true, the alert end will show a close button.
+   * If true, shows a close button at the end of the Alert.
    */
   closable?: boolean
 
@@ -96,13 +99,14 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   onClose?: MouseEventHandler<HTMLButtonElement>
 
   /**
-   * The status of the alert.
+   * The status of the Alert.
+   *
    * @default 'info'
    */
   status?: AlertStatus
 
   /**
-   * If true, the alert will not display the icon.
+   * If true, the Alert does not display the icon.
    */
   hideIcon?: boolean
 }

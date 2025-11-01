@@ -21,7 +21,8 @@ type CheckboxSlotProps = {
 
 type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   /**
-   * The component used for the input element.
+   * The component or element to render as the input.
+   *
    * @default 'input'
    */
   as?: CheckboxComponent
@@ -32,17 +33,17 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The label of the checkbox.
+   * The label of the Checkbox.
    */
   children?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * The icon to be displayed when the checkbox is checked.
+   * The icon to display when the Checkbox is checked.
    */
   icon?:
     | ReactNode
@@ -59,13 +60,14 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   classNames?: ComponentSlotClasses<keyof CheckboxSlotProps>
 
   /**
-   * The default checked state.(uncontrolled)
+   * The default checked state. (uncontrolled)
+   *
    * @default false
    */
   defaultChecked?: boolean
 
   /**
-   * The value of the checkbox.
+   * The value of the Checkbox.
    */
   value?: string | number
 
@@ -75,36 +77,41 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   onCheckedChange?: (checked: boolean) => void
 
   /**
-   * If true, the checkbox is checked.(controlled)
+   * If true, the Checkbox is checked. (controlled)
    */
   checked?: boolean
 
   /**
-   * If true, the checkbox is disabled.
+   * If true, the Checkbox is disabled.
+   *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * The color of the checkbox.
+   * The color of the Checkbox.
+   *
    * @default primaryThemeColor
    */
   color?: CheckboxVariants['color']
 
   /**
-   * The size of the checkbox.
+   * The size of the Checkbox.
+   *
    * @default 'md'
    */
   size?: CheckboxVariants['size']
 
   /**
-   * The border radius of the checkbox.
+   * The border radius of the Checkbox.
+   *
    * @default size
    */
   radius?: CheckboxVariants['radius']
 
   /**
-   * If true, the checkbox appears indeterminate.
+   * Indeterminate is presentational only. The indeterminate visual state remains regardless of user interaction.
+   *
    * @default false
    */
   indeterminate?: boolean
@@ -135,7 +142,8 @@ type CheckboxGroupOwnProps<
   RootComponent extends ElementType = 'div',
 > = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -156,17 +164,17 @@ type CheckboxGroupOwnProps<
   classNames?: ComponentSlotClasses<'label' | 'wrapper'>
 
   /**
-   * The current selected values. (controlled)
+   * The currently selected values. (controlled)
    */
   value?: T[]
 
   /**
-   * The name of the checkbox group, used when submitting an HTML form.
+   * The name of the CheckboxGroup, used when submitting an HTML form.
    */
   name?: string
 
   /**
-   * The checkboxes items.
+   * The list of Checkbox items.
    */
   children?: ReactNode
 
@@ -181,39 +189,41 @@ type CheckboxGroupOwnProps<
   onValueChange?: (value: T[]) => void
 
   /**
-   * If true, the checkboxes are disabled.
+   * If true, all checkboxes are disabled.
+   *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * The color of the checkboxes.
+   * The color of all checkboxes.
    */
   color?: CheckboxVariants['color']
 
   /**
-   * The size of the checkboxes.
+   * The size of all checkboxes.
    */
   size?: CheckboxVariants['size']
 
   /**
-   * The border radius of the checkboxes.
+   * The border radius of all checkboxes.
    */
   radius?: CheckboxVariants['radius']
 
   /**
-   * The axis the checkbox group items should align with.
+   * The axis the CheckboxGroup items should align with.
+   *
    * @default 'horizontal'
    */
   orientation?: CheckboxGroupVariants['orientation']
 
   /**
-   * The label of the checkbox group.
+   * The label of the CheckboxGroup.
    */
   label?: ReactNode
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 }

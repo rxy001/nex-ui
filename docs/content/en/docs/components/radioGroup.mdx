@@ -7,7 +7,7 @@ import { radioGroup } from '@/content/_demo'
 
 # RadioGroup
 
-RadioGroup allow users to select a single option from a list of mutually exclusive options.
+RadioGroup allows users to select a single option from a list of mutually exclusive options.
 
 <ComponentLinks component='radioGroup' ariaCompatible />
 
@@ -25,7 +25,7 @@ RadioGroup allow users to select a single option from a list of mutually exclusi
 
 ### Sizes
 
-Use the `size` prop to set the size of the RadioGroup, default is `md`.
+Use the `size` prop to set the size of the RadioGroup. Defaults to `md`.
 
 <Example {...radioGroup.sizes} />
 
@@ -37,7 +37,7 @@ Use the `defaultValue` prop to set the default selected option of the RadioGroup
 
 ### Vertical
 
-Use the `orientation` prop to set the layout direction of the RadioGroup, default is `horizontal`.
+Use the `orientation` prop to set the layout direction of the RadioGroup. Defaults to `horizontal`.
 
 <Example {...radioGroup.vertical} />
 
@@ -51,14 +51,14 @@ Use the `value` and `onValueChange` props to control the radio input value.
 
 ### Radio Props
 
-Radio inherit the props of `as` (by default, `'input'`).
+Radio inherits the props of `as` (by default, `'input'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The label of the radio.',
+  description: 'The label of the Radio.',
     },
     {
       prop: 'color',
@@ -74,85 +74,86 @@ Radio inherit the props of `as` (by default, `'input'`).
         "'gray'",
       ],
       default: "'blue'",
-      description: 'The color of the radio.',
+  description: 'The color of the Radio.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-      description: 'The size of the radio.',
+  description: 'The size of the Radio.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the radio is disabled.',
+  description: 'If true, the Radio is disabled.',
     },
     {
       prop: 'checked',
       type: 'boolean',
-      description: 'If true, the radio is checked.(controlled)',
+  description: 'If true, the Radio is checked. (controlled)',
 
     },
     {
       prop: 'defaultChecked',
       type: 'boolean',
-      description: 'If true, the radio is checked by default.(uncontrolled)',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
-      },
-    {
-      prop: 'name',
-      type: 'string',
-      description: 'The name of the radio.',
-    },
-    {
-      prop: 'value',
-      type: ['string', 'number'],
-      description: 'The value of the radio.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the input element inside the radio.',
-    },
-    {
-      prop: 'onChange',
-      type: '(event: ChangeEvent<HTMLInputElement>) => void',
-      description:
-        "Handler that is called when the element's checked state changes.",
-    },
-    {
-      prop: 'onCheckedChange',
-      type: '(checked: boolean) => void',
-       description:
-        "Handler that is called when the element's checked state changes.",
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'input'",
-      description: 'The component used for the input element.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: "Partial<Record<Slots, ClassValue>>",
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
-    },
+
+description: 'If true, the Radio is checked by default. (uncontrolled)',
+},
+{
+prop: 'className',
+type: 'ClassValue',
+description: 'Additional class names to apply to the root.',
+},
+{
+prop: 'name',
+type: 'string',
+description: 'The name of the Radio.',
+},
+{
+prop: 'value',
+type: ['string', 'number'],
+description: 'The value of the Radio.',
+},
+{
+prop: 'ref',
+type: 'Ref',
+description: 'Ref for forwarding to the input inside the Radio.',
+},
+{
+prop: 'onChange',
+type: '(event: ChangeEvent<HTMLInputElement>) => void',
+description:
+"Handler that is called when the element's checked state changes.",
+},
+{
+prop: 'onCheckedChange',
+type: '(checked: boolean) => void',
+description:
+"Handler that is called when the element's checked state changes.",
+},
+{
+prop: 'as',
+type: 'ElementType',
+default: "'input'",
+description: 'The component or element to render as the input.',
+},
+{
+prop: 'sx',
+type: 'Interpolation',
+description:
+'The system prop that allows defining system overrides as well as additional CSS styles.',
+},
+{
+prop: 'classNames',
+type: "Partial<Record<Slots, ClassValue>>",
+description: 'The className used for each slot.',
+},
+{
+prop: 'slotProps',
+type: 'Partial<Record<Slots, ComponentProps>>',
+description: 'The props used for each slot.',
+},
 
 ]}
 />
@@ -165,13 +166,13 @@ Radio inherit the props of `as` (by default, `'input'`).
       slot: 'root',
       class: '.nui-radio-root',
       component: "'label'",
-      description: 'The root element of the radio.',
+  description: 'The root element of the Radio.',
     },
     {
       slot: 'dot',
       class: '.nui-radio-dot',
       component: "'span'",
-      description: 'The container of the circle inside the checkbox.',
+  description: 'The container of the circle inside the Radio.',
     },
     {
       slot: 'label',
@@ -185,7 +186,7 @@ Radio inherit the props of `as` (by default, `'input'`).
 
 ### RadioGroup Props
 
-CheckboxGroup inherit the props of `as` (by default, `'div'`).
+RadioGroup inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -197,18 +198,18 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
     {
       prop: 'label',
       type: 'ReactNode',
-      description: 'The label of the radio group.',
+  description: 'The label of the RadioGroup.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
-      description: 'If true, the radios are disabled.',
+  description: 'If true, the Radios are disabled.',
     },
     {
       prop: 'name',
       type: 'string',
       description:
-        'The name of the radio group, used when submitting an HTML form.',
+        'The name of the RadioGroup, used when submitting an HTML form.',
     },
     {
       prop: 'color',
@@ -223,22 +224,22 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
         "'purple'",
         "'gray'",
       ],
-      description: 'The color of the radios',
+  description: 'The color of the Radios.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
-      description: 'The size of the radios',
+  description: 'The size of the Radios.',
     },
     {
       prop: 'value',
       type: ['T extends string | number'],
-      description: 'The current selected values. (controlled)',
+  description: 'The currently selected value. (controlled)',
     },
     {
       prop: 'defaultValue',
       type: ['T extends string | number'],
-      description: 'The default checked values. (uncontrolled)',
+  description: 'The default selected value. (uncontrolled)',
     },
     {
       prop: 'onValueChange',
@@ -249,23 +250,23 @@ CheckboxGroup inherit the props of `as` (by default, `'div'`).
       prop: 'orientation',
       type: ["'horizontal'", "'vertical'"],
       default: "'horizontal'",
-      description: 'The axis the radio group items should align with.',
+  description: 'The axis the RadioGroup items should align with.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description: 'The component used for the root element.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'sx',

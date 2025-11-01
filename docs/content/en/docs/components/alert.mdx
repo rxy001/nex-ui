@@ -31,9 +31,9 @@ Alerts are temporary notifications that provide concise feedback about an action
 
 ### Status
 
-Change the `status` of the alerts by passing the status prop. This affects the color scheme and icon used. Alert supports `error`, `success`, `warning`, and `info` statuses.
+Change the `status` of the Alert by passing the `status` prop. This affects the color scheme and icon. Alert supports `error`, `success`, `warning`, and `info` statuses.
 
-Note: `color` prop can override the default color of the status.
+Note: The `color` prop can override the default status color.
 
 <Example {...alert.status} />
 
@@ -45,7 +45,7 @@ By default, Alert displays an appropriate icon based on the `status` prop. You c
 
 ### Without Icon
 
-You can hide the icon by setting the `hideIcon` prop to true.
+You can hide the icon by setting the `hideIcon` prop to `true`.
 
 <Example {...alert.hideIcon} />
 
@@ -57,7 +57,7 @@ Alert supports an `action` prop for additional actions.
 
 ### Closable
 
-Setting the `closable` property to true will display a close button, and `onClose` will be triggered when the button is clicked.
+Set the `closable` prop to `true` to display a close button. `onClose` is called when the button is clicked.
 
 <Example {...alert.closable} />
 
@@ -65,7 +65,7 @@ Setting the `closable` property to true will display a close button, and `onClos
 
 ### Alert Props
 
-Alert inherit the props of `as` (by default, `'div'`).
+Alert inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -82,65 +82,66 @@ Alert inherit the props of `as` (by default, `'div'`).
         "'purple'",
         "'gray'",
       ],
-      description: 'The color of the alert.',
+      description: 'The color of the Alert. It overrides the status color.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
       default: "'md'",
-      description: 'The border radius of the alert.',
+      description: 'The border radius of the Alert.',
     },
     {
       prop: 'variant',
       type: ["'outlined'", "'faded'", "'solid'", "'subtle'"],
-      default: "'solid'",
-      description: 'The alert appearance style.',
+      default: "'faded'",
+      description: 'The Alert appearance style.',
     },
     {
       prop: 'icon',
       type: 'ReactNode',
-      description: 'The alert icon',
+      description: 'The icon element of the Alert.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'action',
       type: 'ReactNode',
-      description: 'The action to display. It renders after the message, at the end of the alert.',
+      description:
+        'The action element to display. Renders after the message, at the end of the Alert.',
     },
     {
       prop: 'title',
       type: 'ReactNode',
-      description: 'The title of the alert.',
+      description: 'The title of the Alert.',
     },
     {
       prop: 'description',
       type: 'ReactNode',
-      description: 'The description of the alert.',
+      description: 'The description of the Alert.',
     },
     {
       prop: 'closable',
       type: 'boolean',
-      description: 'If true, the alert end will show a close button.',
+      description: 'If true, shows a close button at the end of the Alert.',
     },
     {
       prop: 'status',
       type: ["'error'", "'info'", "'success'", "'warning'"],
       default: "'info'",
-      description: 'The status of the alert.',
+      description: 'The status of the Alert.',
     },
     {
       prop: 'hideIcon',
       type: 'boolean',
-      description: 'If true, the alert will not display the icon.',
+      description: 'If true, the Alert does not display the icon.',
     },
     {
       prop: 'onClose',
@@ -151,13 +152,13 @@ Alert inherit the props of `as` (by default, `'div'`).
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description:
-        'The component or element to render as the root.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'sx',
       type: 'Interpolation',
-      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     {
       prop: 'classNames',
@@ -169,8 +170,7 @@ Alert inherit the props of `as` (by default, `'div'`).
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
     },
-
-]}
+  ]}
 />
 
 ### Alert Slots
@@ -181,31 +181,31 @@ Alert inherit the props of `as` (by default, `'div'`).
       slot: 'icon',
       class: '.nui-alert-icon',
       component: "'div'",
-      description: 'The icon container of the alert.',
+      description: 'The icon container of the Alert.',
     },
     {
       slot: 'content',
       class: '.nui-alert-content',
       component: "'div'",
-      description: 'The alert container of the alert.',
+      description: 'The content container of the Alert.',
     },
     {
       slot: 'title',
       class: '.nui-alert-title',
       component: "'div'",
-      description: 'The title container of the alert.',
+      description: 'The title container of the Alert.',
     },
     {
       slot: 'description',
       class: '.nui-alert-description',
       component: "'div'",
-      description: 'The icon description of the alert.',
+      description: 'The description container of the Alert.',
     },
     {
       slot: 'closeButton',
       class: '.nui-alert-close-button',
       component: 'Button',
-      description: 'The close button of the alert.',
+      description: 'The close button of the Alert.',
     },
   ]}
 />

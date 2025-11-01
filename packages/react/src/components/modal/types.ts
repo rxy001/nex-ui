@@ -18,17 +18,17 @@ export type ModalProps = {
   children?: ReactNode
 
   /**
-   * If true, the modal is shown. (controlled)
+   * If true, the Modal is shown. (controlled)
    */
   open?: boolean
 
   /**
-   * If true, the modal is shown by default. (uncontrolled)
+   * If true, the Modal is shown by default. (uncontrolled)
    */
   defaultOpen?: boolean
 
   /**
-   * Handler that is called when the modal is opened or closed
+   * Handler that is called when the Modal is opened or closed
    */
   onOpenChange?: (open: boolean) => void
 
@@ -45,31 +45,31 @@ export type ModalProps = {
   keepMounted?: boolean
 
   /**
-   * If true, closes the modal when the outside is clicked.
+   * If true, closes the Modal when the outside is clicked.
    * @default true
    */
   closeOnInteractOutside?: boolean
 
   /**
-   * If true, the modal prevents page scrolling.
+   * If true, the Modal prevents page scrolling.
    * @default false
    */
   preventScroll?: boolean
 
   /**
-   * If true, closes the modal when the escape key is pressed.
+   * If true, closes the Modal when the escape key is pressed.
    * @default true
    */
   closeOnEscape?: boolean
 
   /**
-   * If true, the modal will restore focus to previously focused element once the modal is hidden or unmounted.
+   * If true, the Modal will restore focus to previously focused element once the Modal is hidden or unmounted.
    * @default true
    */
   restoreFocus?: boolean
 
   /**
-   * Callback function that is called when the modal is closed.
+   * Callback function that is called when the Modal is closed.
    */
   onClose?: () => void
 }

@@ -21,19 +21,19 @@ Flex is an elastic container component used to arrange elements vertically or ho
 
 ### Gap
 
-The `gap` property is used to set the spacing between child elements, and you can use spaces's tokens and semantic tokens for it.
+The `gap` prop sets the spacing between child elements; you can use space tokens and semantic tokens for it.
 
 <Example {...flex.gap} />
 
 ### Justify
 
-The `align` property is used to control the alignment of child elements on the main axis.
+The `justify` prop controls the alignment of child elements on the main axis.
 
 <Example {...flex.justify} />
 
 ### Align
 
-The `align` property is used to control the alignment of child elements on the cross-axis.
+The `align` prop controls the alignment of child elements on the cross-axis.
 
 <Example {...flex.align} />
 
@@ -41,46 +41,50 @@ The `align` property is used to control the alignment of child elements on the c
 
 ### Flex Props
 
-Flex inherit the props of `as` (by default, `'div'`).
+Flex inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'The content of the flex.',
+      description: 'The content of the Flex.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'inline',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the flex container is displayed as an inline flex container.',
+      description:
+        'If true, the flex container is displayed as an inline flex container.',
     },
     {
       prop: 'justify',
       type: "CSSProperties['justifyContent']",
-      description: 'Set the alignment of elements in the direction of the main axis.',
+      description:
+        'Set the alignment of elements in the direction of the main axis.',
     },
     {
       prop: 'align',
       type: "CSSProperties['alignItems']",
-      description: 'Set the alignment of elements in the direction of the cross axis.',
+      description:
+        'Set the alignment of elements in the direction of the cross axis.',
     },
     {
       prop: 'wrap',
-      type: "CSSProperties['wrap']",
+      type: "CSSProperties['flexWrap']",
       description:
         'Set whether the element is displayed in a single line or in multiple lines.',
     },
     {
       prop: 'direction',
       type: "CSSProperties['flexDirection']",
-      description: 'Set how flex items are placed in the flex container that defines the main axis and the direction.',
+      description:
+        'Set how flex items are placed in the flex container that defines the main axis and the direction.',
     },
     {
       prop: 'gap',
@@ -90,19 +94,19 @@ Flex inherit the props of `as` (by default, `'div'`).
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'as',
       type: 'ElementType',
       default: "'div'",
-      description: 'The component used for the root node.',
+      description: 'The component or element to render as the root.',
     },
     {
       prop: 'sx',
       type: 'Interpolation',
-      description:'The system prop that allows defining system overrides as well as additional CSS styles.'
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
-
-]}
+  ]}
 />

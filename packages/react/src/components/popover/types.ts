@@ -27,7 +27,8 @@ type PopoverOwnProps<RootComponent extends ElementType> = Pick<
   Omit<PopperProps, 'openDelay' | 'closeDelay'> &
   Pick<FocusTrapProps, 'restoreFocus'> & {
     /**
-     * The component used for the root element.
+     * The component or element to render as the root.
+     *
      * @default m.div
      */
     as?: RootComponent
@@ -38,12 +39,12 @@ type PopoverOwnProps<RootComponent extends ElementType> = Pick<
     sx?: Interpolation
 
     /**
-     * Additional class names to apply to the root element.
+     * Additional class names to apply to the root.
      */
     className?: ClassValue
 
     /**
-     * The motion properties of the popover.
+     * The props to modify the framer motion animation.
      */
     motionProps?: HTMLMotionProps<'div'>
 
@@ -74,7 +75,8 @@ export type PopoverProps<
 
 type PopoverContentOwnProps<RootComponent extends ElementType> = {
   /**
-   * The component used for the root element.
+   * The component or element to render as the root.
+   *
    * @default 'div'
    */
   as?: RootComponent
@@ -85,33 +87,33 @@ type PopoverContentOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * Additional class names to apply to the root element.
+   * Additional class names to apply to the root.
    */
   className?: ClassValue
 
   /**
-   * The radius of the popover.
+   * The radius of the Popover content.
    *
    * @default 'md'
    */
   radius?: PopoverContentVariants['radius']
 
   /**
-   * The color of the popover.
+   * The color of the Popover content.
    *
    * @default 'default'
    */
   color?: PopoverContentVariants['color']
 
   /**
-   * The maximum width of the popover.
+   * The maximum width of the popover content.
    *
    * @default 480
    */
   maxWidth?: PopperContentProps['maxWidth']
 
   /**
-   * The maximum height of the popover.
+   * The maximum height of the popover content.
    */
   maxHeight?: PopperContentProps['maxHeight']
 }

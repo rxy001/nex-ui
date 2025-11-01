@@ -29,7 +29,7 @@ Set the `multiple` prop to `true` to allow expanding multiple items simultaneous
 
 ### Default Expanded Keys
 
-Use the `defaultExpandedKeys` prop to set initially expanded items by default.
+Use the `defaultExpandedKeys` prop to set which items are expanded by default.
 
 <Example {...accordion.defaultExpandedKeys} />
 
@@ -67,7 +67,7 @@ Accordion supports controlled mode through the `expandedKeys` and `onExpandedKey
 
 ### Accordion Props
 
-Accordion inherit the props of `as` (by default, `'div'`).
+Accordion inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -75,24 +75,24 @@ Accordion inherit the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'The contents of the collection. Usually the array of AccordionItem.',
+        'The contents of the collection, usually the array of AccordionItem.',
     },
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'multiple',
       type: 'boolean',
       default: 'false',
       description:
-        'If true, the accordion items can be expanded at the same time.',
+        'If true, the Accordion items can be expanded at the same time.',
     },
     {
       prop: 'defaultExpandedKeys',
@@ -114,47 +114,48 @@ Accordion inherit the props of `as` (by default, `'div'`).
     {
       prop: 'disabledKeys',
       type: 'Key[]',
-      description: 'The item keys that are disabled.',
+      description: 'The keys of Accordion items that are disabled.',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: 'The motion properties of the accordion.',
+      description: 'The props to modify the framer motion animation.',
     },
     {
       prop: 'indicator',
       type: 'ReactNode',
       description:
-        'The accordion item expanded indicator, usually an arrow icon.',
+        'The expanded indicator for all Accordion items, usually an arrow icon.',
     },
     {
       prop: 'hideIndicator',
       type: 'boolean',
-      description: 'If true, the accordion items indicator is hidden.',
+      default: 'false',
+      description: 'If true, the indicator is hidden for all Accordion items.',
     },
     {
       prop: 'indicatorMotionProps',
       type: 'HTMLMotionProps',
-      description: 'The motion properties of the accordion indicator.',
+      description: 'The props to modify the framer motion animation.',
     },
     {
       prop: 'variant',
       type: ["'outlined'", "'underlined'"],
       default: "'underlined'",
-      description: 'The accordion appearance style.',
+      description: 'The Accordion appearance style.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the accordion items are disabled',
+      description: 'If true, all Accordion items are disabled.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'false',
       description:
-        'If true, the accordion item content should always be mounted.',
+        'If true, the content for all Accordion items is always mounted.',
     },
     {
       prop: 'as',
@@ -173,7 +174,7 @@ Accordion inherit the props of `as` (by default, `'div'`).
 
 ### AccordionItem Props
 
-AccordionItem inherit the props of `as` (by default, `'div'`).
+AccordionItem inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
@@ -185,57 +186,55 @@ AccordionItem inherit the props of `as` (by default, `'div'`).
     {
       prop: 'className',
       type: 'ClassValue',
-      description: 'Additional class names to apply to the root element.',
+      description: 'Additional class names to apply to the root.',
     },
     {
       prop: 'ref',
       type: 'Ref',
-      description: 'Ref for forwarding to the root element.',
+      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'indicator',
       type: 'ReactNode',
-      description: 'The accordion item expanded indicator.',
+      description:
+        'The expanded indicator for the Accordion item, usually an arrow icon.',
     },
     {
       prop: 'hideIndicator',
       type: 'boolean',
-      description: 'If true, the accordion item indicator is hidden.',
+      description: 'If true, the Accordion item indicator is hidden.',
     },
     {
       prop: 'indicatorMotionProps',
       type: 'HTMLMotionProps',
-      description:
-        'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
+      description: 'The props to modify the framer motion animation.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: ' If true, the accordion item is disabled.',
+      description: 'If true, the Accordion item is disabled.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'false',
-      description:
-        'If true, the accordion item content should always be mounted.',
+      description: 'If true, the Accordion item content is always mounted.',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description:
-        'The props to modify the framer-motion animation. Use the variants API to create your own animation.',
+      description: 'The props to modify the framer motion animation.',
     },
     {
       prop: 'itemKey',
       type: 'Key',
-      description: 'The accordion item key.',
+      description: 'The key of the Accordion item.',
     },
     {
       prop: 'title',
       type: 'ReactNode',
-      description: 'The accordion item title.',
+      description: 'The title of the Accordion item.',
     },
     {
       prop: 'as',
