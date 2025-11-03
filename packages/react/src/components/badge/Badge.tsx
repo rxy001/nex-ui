@@ -1,3 +1,5 @@
+'use client'
+
 import { CloseCircleFilled } from '@nex-ui/icons'
 import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
 import { badgeRecipe } from '../../theme/recipes'
@@ -6,7 +8,7 @@ import { ButtonBase } from '../buttonBase'
 import type { ElementType } from 'react'
 import type { BadgeProps } from './types'
 
-const slots = ['root', 'closeButton']
+const slots = ['root', 'closeButton', 'startIcon', 'endIcon']
 
 export const Badge = <RootComponent extends ElementType = 'span'>(
   inProps: BadgeProps<RootComponent>,
@@ -23,6 +25,8 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
     onClose,
     classNames,
     slotProps,
+    startIcon,
+    endIcon,
     disabled = false,
     closable = false,
     color = primaryThemeColor,
@@ -82,9 +86,31 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
     },
   })
 
+  const [BadgeStartIcon, getBadgeStartIconProps] = useSlot({
+    elementType: 'span',
+    style: styles.startIcon,
+    externalSlotProps: slotProps?.startIcon,
+    classNames: slotClasses.startIcon,
+  })
+
+  const [BadgeEndIcon, getBadgeEndIconProps] = useSlot({
+    elementType: 'span',
+    style: styles.endIcon,
+    externalSlotProps: slotProps?.endIcon,
+    classNames: slotClasses.endIcon,
+  })
+
   return (
     <BadgeRoot {...getBadgeRootProps()}>
+      {startIcon && (
+        <BadgeStartIcon {...getBadgeStartIconProps()}>
+          {startIcon}
+        </BadgeStartIcon>
+      )}
       {children}
+      {endIcon && (
+        <BadgeEndIcon {...getBadgeEndIconProps()}>{endIcon}</BadgeEndIcon>
+      )}
       {closable && (
         <BadgeCloseButton {...getBadgeCloseButtonProps()}>
           <CloseCircleFilled />

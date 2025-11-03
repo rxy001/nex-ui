@@ -1,4 +1,4 @@
-import type { ElementType, MouseEvent } from 'react'
+import type { ElementType, MouseEvent, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type {
@@ -10,6 +10,8 @@ import type { BadgeVariants } from '../../theme/recipes'
 
 type BadgeSlotProps = {
   closeButton: ComponentPropsWithCommonProps<'button'>
+  startIcon: ComponentPropsWithCommonProps<'span'>
+  endIcon: ComponentPropsWithCommonProps<'span'>
 }
 
 type BadgeOwnProps<RootComponent extends ElementType> = {
@@ -74,6 +76,16 @@ type BadgeOwnProps<RootComponent extends ElementType> = {
    * If true, the Badge is disabled.
    */
   disabled?: boolean
+
+  /**
+   * The element is placed before the children.
+   */
+  startIcon?: ReactNode
+
+  /**
+   * The element is placed after the children.
+   */
+  endIcon?: ReactNode
 
   /**
    * The className used for each slot.

@@ -182,7 +182,7 @@ export interface DefaultTokens {
     | '-8.5'
     | '-9.5'
   fontFamilies: 'sans' | 'serif' | 'mono'
-  fontSizes: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  fontSizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   fontWeights:
     | 'hairline'
     | 'thin'
@@ -194,7 +194,7 @@ export interface DefaultTokens {
     | 'extrabold'
     | 'black'
   borders: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  radii: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
+  radii: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'none'
   lineHeights: 'normal' | 'none' | 'shorter' | 'short' | 'base' | 'tall'
   borderWidths: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   shadows: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -389,6 +389,7 @@ export interface FontFamiliesToken {
 }
 
 export interface FontSizesToken {
+  xs?: string | number
   sm?: string | number
   md?: string | number
   lg?: string | number
@@ -425,6 +426,7 @@ export interface RadiiToken {
   '2xl'?: string | number
   '3xl'?: string | number
   full?: string | number
+  none?: string | number
 }
 
 export interface LineHeightsToken {
