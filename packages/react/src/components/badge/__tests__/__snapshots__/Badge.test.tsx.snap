@@ -19,7 +19,6 @@ exports[`Badge should render with default props 1`] = `
   -ms-user-select: none;
   user-select: none;
   white-space: nowrap;
-  gap: var(--nui-spaces-1);
   line-height: 1rem;
   font-size: var(--nui-font-sizes-md);
   -webkit-padding-start: var(--nui-spaces-2-5);
@@ -30,10 +29,6 @@ exports[`Badge should render with default props 1`] = `
   border-radius: var(--nui-radii-md);
   background-color: var(--nui-colors-blue-primary);
   color: var(--nui-colors-blue-contrast-text);
-}
-
-.emotion-0 svg {
-  font-size: 1.25em;
 }
 
 <span

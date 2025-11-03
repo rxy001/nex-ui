@@ -3,8 +3,8 @@ import { Badge } from '../Badge'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react'
 
-const sizes = ['sm', 'md', 'lg', 'xl'] as const
-const radii = ['none', 'sm', 'md', 'lg', 'full'] as const
+const sizes = ['xs', 'sm', 'md', 'lg'] as const
+const radii = ['none', 'xs', 'sm', 'md', 'lg', 'full'] as const
 const colors = [
   'blue',
   'orange',
@@ -81,10 +81,10 @@ export const Colors: Story = {
 }
 
 const sizeText = {
+  xs: 'Extra Small',
   sm: 'Small',
   md: 'Medium',
   lg: 'Large',
-  xl: 'Extra Large',
 }
 
 export const Sizes: Story = {
@@ -132,11 +132,15 @@ export const Disabled: Story = {
   },
 }
 
-export const WithIcon: Story = {
+export const WithIcons: Story = {
   render: (args) => (
-    <Badge {...args}>
-      <GithubOutlined />
-      Github
-    </Badge>
+    <Flex gap='4'>
+      <Badge startIcon={<GithubOutlined />} {...args}>
+        Github
+      </Badge>
+      <Badge endIcon={<GithubOutlined />} {...args}>
+        Github
+      </Badge>
+    </Flex>
   ),
 }

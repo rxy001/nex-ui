@@ -84,4 +84,21 @@ describe('Badge', () => {
 
     expect(badgeRoot).toHaveStyleRule('pointer-events', 'none')
   })
+
+  it('should display startIcon and endIcon correctly', () => {
+    const { getByTestId } = renderWithNexUIProvider(
+      <Badge
+        startIcon={<span data-testid='start-icon'>S</span>}
+        endIcon={<span data-testid='end-icon'>E</span>}
+      >
+        Badge
+      </Badge>,
+    )
+
+    const startIcon = getByTestId('start-icon')
+    const endIcon = getByTestId('end-icon')
+
+    expect(startIcon).toBeInTheDocument()
+    expect(endIcon).toBeInTheDocument()
+  })
 })

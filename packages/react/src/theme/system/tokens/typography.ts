@@ -7,6 +7,7 @@ export const fontFamilies = defineTokens.fontFamilies({
 })
 
 export const fontSizes = defineTokens.fontSizes({
+  xs: '10px',
   sm: '12px',
   md: '14px',
   lg: '16px',

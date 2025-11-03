@@ -9,4 +9,5 @@ export const radii = defineTokens.radii({
   '2xl': '16px',
   '3xl': '18px',
   full: '9999px',
+  none: '0px',
 })

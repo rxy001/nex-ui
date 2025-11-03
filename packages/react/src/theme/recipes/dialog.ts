@@ -94,7 +94,7 @@ export const dialogContentRecipe = defineSlotRecipe({
           maxHeight: undefined,
           maxWidth: 'full',
           m: 0,
-          borderRadius: 0,
+          borderRadius: 'none',
         },
       },
     },
