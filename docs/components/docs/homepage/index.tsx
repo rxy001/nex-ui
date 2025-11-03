@@ -38,6 +38,7 @@ function LinkButton(props: ButtonProps<ElementType>) {
       size='sm'
       className='x:w-[110px]'
       color='blue'
+      variant='faded'
       {...props}
     />
   )
