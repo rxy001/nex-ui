@@ -1,0 +1,186 @@
+---
+title: Badge
+description: Badge is a short text component used to represent statuses or categories.
+---
+
+import { badge } from '@/content/_demo'
+
+# Badge
+
+Badge is a short text component used to represent statuses or categories.
+
+<ComponentLinks component='badge' />
+
+---
+
+## Usage
+
+<Example {...badge.usage} />
+
+### Disabled
+
+<Example {...badge.disabled} />
+
+### Sizes
+
+<Example {...badge.sizes} />
+
+### Radii
+
+<Example {...badge.radii} />
+
+### Colors
+
+<Example {...badge.colors} />
+
+### Variants
+
+<Example {...badge.variants} />
+
+### With Close Button
+
+Add `closable` prop to display a close button on the Badge. The `onClose` callback function is triggered when the close button is clicked.
+
+<Example {...badge.withCloseButton} />
+
+### With Icons
+
+<Example {...badge.withIcons} />
+
+### List of Badges
+
+<Example {...badge.listOfBadges} />
+
+## API
+
+### Badge Props
+
+Badge inherits the props of `as` (by default, `'span'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the Badge.',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'cyan'",
+        "'red'",
+        "'green'",
+        "'pink'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'The color of the Badge.',
+    },
+    {
+      prop: 'variant',
+      type: ["'solid'", "'outlined'", "'subtle'", "'faded'"],
+      default: "'solid'",
+      description: 'The Badge appearance style.',
+    },
+    {
+      prop: 'size',
+      type: ["'xs'", "'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'The size of the Badge.',
+    },
+    {
+      prop: 'radius',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'full'", "'none'"],
+      default: 'size',
+      description: 'The border radius of the Badge.',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, the Badge is disabled.',
+    },
+    {
+      prop: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, shows a close button at the end of the Badge.',
+    },
+    {
+      prop: 'onClose',
+      type: '(event: React.MouseEvent<HTMLButtonElement>) => void',
+      description: 'Callback fired when the close button is clicked.',
+    },
+    {
+      prop: 'startIcon',
+      type: 'ReactNode',
+      description: 'The element placed before the children.',
+    },
+    {
+      prop: 'endIcon',
+      type: 'ReactNode',
+      description: 'The element placed after the children.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'span'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+  ]}
+/>
+
+### Badge Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'closeButton',
+      class: '.nui-badge-close-button',
+      component: "'span'",
+      description: 'The close button element of the Badge.',
+    },
+    {
+      slot: 'startIcon',
+      class: '.nui-badge-start-icon',
+      component: "'span'",
+      description: 'The container for the starting icon inside the Badge.',
+    },
+    {
+      slot: 'endIcon',
+      class: '.nui-badge-end-icon',
+      component: "'span'",
+      description: 'The container for the ending icon inside the Badge.',
+    },
+  ]}
+/>

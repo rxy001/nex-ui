@@ -2,6 +2,7 @@ export default {
   accordion: 'Accordion',
   alert: 'Alert',
   avatar: 'Avatar',
+  badge: 'Badge',
   button: 'Button',
   card: 'Card',
   checkbox: 'Checkbox',
