@@ -28,13 +28,17 @@ export const buttonRecipe = defineSlotRecipe({
       display: 'inherit',
       ml: '-1',
       mr: '2',
-      fs: '1.25em',
+      '& svg': {
+        fs: '1.25em',
+      },
     },
     endIcon: {
       display: 'inherit',
       ml: '2',
       mr: '-1',
-      fs: '1.25em',
+      '& svg': {
+        fs: '1.25em',
+      },
     },
   },
   variants: {

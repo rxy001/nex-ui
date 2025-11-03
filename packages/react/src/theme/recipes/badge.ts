@@ -10,11 +10,7 @@ export const badgeRecipe = defineSlotRecipe({
       justifyContent: 'center',
       userSelect: 'none',
       whiteSpace: 'nowrap',
-      gap: '1',
       lh: '1rem',
-      '& svg': {
-        fs: '1.25em',
-      },
     },
     closeButton: {
       display: 'inline-flex',
@@ -33,10 +29,37 @@ export const badgeRecipe = defineSlotRecipe({
         outline: '{borders.md} {colors.colorPalette.primary}',
       },
       mr: '-1',
+      ml: '1',
+      '& svg': {
+        fs: '1.25em',
+      },
+    },
+    startIcon: {
+      display: 'inherit',
+      ml: '-1',
+      mr: '1',
+      '& svg': {
+        fs: '1.25em',
+      },
+    },
+    endIcon: {
+      display: 'inherit',
+      ml: '1',
+      mr: '-1',
+      '& svg': {
+        fs: '1.25em',
+      },
     },
   },
   variants: {
     size: {
+      xs: {
+        root: {
+          fs: 'xs',
+          h: '4',
+          px: '1.5',
+        },
+      },
       sm: {
         root: {
           fs: 'sm',
@@ -50,15 +73,15 @@ export const badgeRecipe = defineSlotRecipe({
       lg: {
         root: { fs: 'md', px: '3', h: '7' },
       },
-      xl: {
-        root: { fs: 'lg', px: '3.5', h: '8', gap: '1.5' },
-      },
     },
     radius: {
       none: {
         root: {
           borderRadius: 'none',
         },
+      },
+      xs: {
+        root: { borderRadius: 'xs' },
       },
       sm: {
         root: { borderRadius: 'sm' },
@@ -67,9 +90,6 @@ export const badgeRecipe = defineSlotRecipe({
         root: { borderRadius: 'md' },
       },
       lg: {
-        root: { borderRadius: 'lg' },
-      },
-      xl: {
         root: { borderRadius: 'lg' },
       },
       full: {
