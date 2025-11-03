@@ -1,0 +1,186 @@
+---
+title: Badge
+description: Badge 表示状态或类别的短文本。
+---
+
+import { badge } from '@/content/_demo'
+
+# Badge
+
+Badge 表示状态或类别的短文本。
+
+<ComponentLinks component='badge' />
+
+---
+
+## Usage
+
+<Example {...badge.usage} />
+
+### Disabled
+
+<Example {...badge.disabled} />
+
+### Sizes
+
+<Example {...badge.sizes} />
+
+### Radii
+
+<Example {...badge.radii} />
+
+### Colors
+
+<Example {...badge.colors} />
+
+### Variants
+
+<Example {...badge.variants} />
+
+### With Close Button
+
+添加 `closable` 属性，可以在 Badge 上显示一个关闭按钮。 `onClose` 回调函数会在关闭按钮被点击时触发。
+
+<Example {...badge.withCloseButton} />
+
+### With Icons
+
+<Example {...badge.withIcons} />
+
+### List of Badges
+
+<Example {...badge.listOfBadges} />
+
+## API
+
+### Badge Props
+
+Badge 继承 `as` (默认为 `'span'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'Badge 的内容。',
+    },
+    {
+      prop: 'color',
+      type: [
+        "'blue'",
+        "'orange'",
+        "'yellow'",
+        "'cyan'",
+        "'red'",
+        "'green'",
+        "'pink'",
+        "'purple'",
+        "'gray'",
+      ],
+      default: "'blue'",
+      description: 'Badge 的颜色。',
+    },
+    {
+      prop: 'variant',
+      type: ["'solid'", "'outlined'", "'subtle'", "'faded'"],
+      default: "'solid'",
+      description: 'Badge 的外观样式。',
+    },
+    {
+      prop: 'size',
+      type: ["'xs'", "'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'Badge 的大小。',
+    },
+    {
+      prop: 'radius',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'full'", "'none'"],
+      default: 'size',
+      description: 'Badge 的 BorderRadius。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Badge 是否禁用。',
+    },
+    {
+      prop: 'closable',
+      type: 'boolean',
+      default: 'false',
+      description: '是否显示关闭按钮。',
+    },
+    {
+      prop: 'onClose',
+      type: '(event: React.MouseEvent<HTMLButtonElement>) => void',
+      description: '关闭按钮被点击时触发的回调函数。',
+    },
+    {
+      prop: 'startIcon',
+      type: 'ReactNode',
+      description: '放置在子元素之前的元素。',
+    },
+    {
+      prop: 'endIcon',
+      type: 'ReactNode',
+      description: '放置在子元素之后的元素。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'span'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Badge Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Badge Slots 的 props。',
+    },
+  ]}
+/>
+
+### Badge Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'closeButton',
+      class: '.nui-badge-close-button',
+      component: "'span'",
+      description: 'Badge 的关闭按钮。',
+    },
+    {
+      slot: 'startIcon',
+      class: '.nui-badge-start-icon',
+      component: "'span'",
+      description: 'Badge 内开头图标的容器。',
+    },
+    {
+      slot: 'endIcon',
+      class: '.nui-badge-end-icon',
+      component: "'span'",
+      description: 'Badge 内结尾图标的容器。',
+    },
+  ]}
+/>

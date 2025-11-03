@@ -19,12 +19,8 @@ exports[`Alert should render with default props 1`] = `
   gap: var(--nui-spaces-3);
   overflow: hidden;
   background-color: var(--nui-colors-blue-subtle);
-  color: var(--nui-colors-blue-600);
+  color: var(--nui-colors-blue-tertiary);
   border-radius: var(--nui-radii-lg);
-}
-
-[data-nui-color-scheme="dark"] .emotion-0 {
-  color: var(--nui-colors-blue-400);
 }
 
 .emotion-1 {
