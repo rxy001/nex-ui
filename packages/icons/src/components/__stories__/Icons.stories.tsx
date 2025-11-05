@@ -1,6 +1,6 @@
 import { map } from '@nex-ui/utils'
 import * as Icon from '../index'
-import type { StoryObj } from '@storybook/react'
+import type { StoryObj } from '@storybook/react-vite'
 
 const meta = {
   title: 'Components/Icon',
@@ -11,12 +11,14 @@ const meta = {
         style={{
           display: 'flex',
           fontSize: '30px',
-          gap: '10px',
+          gap: '15px',
           flexWrap: 'wrap',
         }}
       >
         {map(Icon, (Component, index) => (
-          <Component key={index} />
+          <span title={`${Component.displayName}`}>
+            <Component key={index} />
+          </span>
         ))}
       </div>
     )

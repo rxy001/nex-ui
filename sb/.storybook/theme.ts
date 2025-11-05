@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming'
+import { create } from 'storybook/theming'
 // @ts-ignore
 import logo from './logo.png'
 

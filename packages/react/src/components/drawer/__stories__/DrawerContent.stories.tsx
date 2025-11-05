@@ -7,7 +7,7 @@ import { Button } from '../../button'
 import { DrawerFooter } from '../DrawerFooter'
 import { DrawerClose } from '../DrawerClose'
 import { Flex } from '../../flex'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { DOMMotionComponents } from 'motion/react'
 import type { DrawerContentProps } from '../types'
 

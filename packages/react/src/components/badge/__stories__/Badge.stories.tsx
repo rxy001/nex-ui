@@ -1,7 +1,7 @@
 import { GithubOutlined } from '@nex-ui/icons'
 import { Badge } from '../Badge'
 import { Flex } from '../../flex'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const sizes = ['xs', 'sm', 'md', 'lg'] as const
 const radii = ['none', 'xs', 'sm', 'md', 'lg', 'full'] as const

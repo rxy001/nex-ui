@@ -29,9 +29,6 @@
     "dist"
   ],
   "main": "src/index.ts",
-  "devDependencies": {
-    "@storybook/react": "8.6.12"
-  },
   "dependencies": {
     "@nex-ui/hooks": "workspace:*",
     "@nex-ui/icons": "workspace:*",

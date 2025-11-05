@@ -2,8 +2,11 @@ import { useState } from 'react'
 import { Accordion } from '../Accordion'
 import { AccordionItem } from '../AccordionItem'
 import { Flex } from '../../flex'
-import { Button } from '../../button'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Key } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const Text =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.'
 
 const meta = {
   title: 'Components/Accordion',
@@ -37,16 +40,13 @@ const meta = {
     return (
       <Accordion {...props}>
         <AccordionItem itemKey='1' title='Accordion 1'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
+          {Text}
         </AccordionItem>
         <AccordionItem itemKey='2' title='Accordion 2'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
+          {Text}
         </AccordionItem>
         <AccordionItem itemKey='3' title='Accordion 3'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
+          {Text}
         </AccordionItem>
       </Accordion>
     )
@@ -62,6 +62,7 @@ export const Default: Story = {}
 export const Multiple: Story = {
   args: {
     multiple: true,
+    defaultExpandedKeys: ['1', '2'],
   },
 }
 
@@ -89,49 +90,54 @@ export const DisabledKeys: Story = {
   },
 }
 
+export const hideIndicator: Story = {
+  args: {
+    hideIndicator: true,
+  },
+}
+
+export const Variants: Story = {
+  render: (props) => (
+    <Flex direction='column' gap='6'>
+      <Accordion {...props} variant='underlined' defaultExpandedKeys={['1']}>
+        <AccordionItem itemKey='1' title='Underlined Accordion'>
+          {Text}
+        </AccordionItem>
+      </Accordion>
+      <Accordion {...props} variant='outlined' defaultExpandedKeys={['1']}>
+        <AccordionItem itemKey='1' title='Outlined Accordion'>
+          {Text}
+        </AccordionItem>
+      </Accordion>
+    </Flex>
+  ),
+}
+
 export const Controlled: Story = {
   render: (props) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [expandedKeys, setExpandedKeys] = useState<string[]>([])
+    const [expandedKeys, setExpandedKeys] = useState<Key[]>(['1'])
     return (
       <>
-        <Accordion expandedKeys={expandedKeys} {...props}>
+        <Accordion
+          expandedKeys={expandedKeys}
+          onExpandedKeysChange={setExpandedKeys}
+          {...props}
+        >
           <AccordionItem itemKey='1' title='Accordion 1'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            {Text}
           </AccordionItem>
           <AccordionItem itemKey='2' title='Accordion 2'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            {Text}
           </AccordionItem>
           <AccordionItem itemKey='3' title='Accordion 3'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            {Text}
           </AccordionItem>
         </Accordion>
-        <Flex sx={{ mt: '5' }} gap='4'>
-          <Button
-            onClick={() => {
-              setExpandedKeys(['1'])
-            }}
-          >
-            Open1
-          </Button>
-          <Button
-            onClick={() => {
-              setExpandedKeys(['2'])
-            }}
-          >
-            Open2
-          </Button>
-          <Button
-            onClick={() => {
-              setExpandedKeys(['3'])
-            }}
-          >
-            Open3
-          </Button>
-        </Flex>
+        <p>
+          Current Expanded Keys:
+          {expandedKeys.length > 0 ? expandedKeys.join(', ') : 'None'}
+        </p>
       </>
     )
   },

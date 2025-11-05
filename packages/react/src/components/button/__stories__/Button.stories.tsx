@@ -1,7 +1,7 @@
 import { HeartFilled, LikeFilled, DislikeFilled } from '@nex-ui/icons'
 import { Button } from '../Button'
 import { Flex } from '../../flex'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   title: 'Components/Button',

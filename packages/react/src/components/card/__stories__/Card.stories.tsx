@@ -7,7 +7,7 @@ import {
 } from '../index'
 import { Avatar, Button, Box, Flex } from '../../index'
 import type { CardHeaderProps } from '../index'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 function CardHeaderTemplate(props: CardHeaderProps) {
   return (
