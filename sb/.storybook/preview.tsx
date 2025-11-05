@@ -1,6 +1,7 @@
 import { NexUIProvider } from '@nex-ui/react'
 import { withTheme } from './withTheme.decorator'
-import type { ReactRenderer, Preview } from '@storybook/react'
+import { allModes } from './modes'
+import type { ReactRenderer, Preview } from '@storybook/react-vite'
 
 const preview: Preview = {
   parameters: {
@@ -23,6 +24,12 @@ const preview: Preview = {
     options: {
       storySort: {
         method: 'alphabetical',
+      },
+    },
+    chromatic: {
+      modes: {
+        light: allModes['light'],
+        dark: allModes['dark'],
       },
     },
   },

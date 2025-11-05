@@ -3,5 +3,6 @@
   "projectId": "Project:68511fa4aae3e68f491ff937",
   "storybookBaseDir": "sb",
   "zip": true,
-  "exitZeroOnChanges": false
+  "exitZeroOnChanges": false,
+  "buildScriptName": "build"
 }

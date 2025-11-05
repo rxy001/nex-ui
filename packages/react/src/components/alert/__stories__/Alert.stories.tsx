@@ -1,7 +1,7 @@
 import { Alert } from '../Alert'
 import { Flex } from '../../flex'
 import { Button } from '../../button'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   title: 'Components/Alert',

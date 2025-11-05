@@ -1,7 +1,7 @@
 import { UserOutlined } from '@nex-ui/icons'
 import { Avatar } from '../Avatar'
 import { Flex } from '../../flex'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   title: 'Components/Avatar',
