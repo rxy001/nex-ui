@@ -4,7 +4,7 @@ import { Input } from '../Input'
 import { Flex } from '../../flex'
 import { Icon } from '../../icon'
 import type { InputProps } from '../types'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
   title: 'Components/Input',

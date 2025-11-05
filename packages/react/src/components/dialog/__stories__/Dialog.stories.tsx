@@ -6,7 +6,7 @@ import { DialogBody } from '../DialogBody'
 import { Button } from '../../button'
 import { DialogFooter } from '../DialogFooter'
 import { DialogClose } from '../DialogClose'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { DOMMotionComponents } from 'motion/react'
 
 const meta = {
