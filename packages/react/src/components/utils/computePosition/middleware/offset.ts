@@ -1,17 +1,17 @@
-import { isNumber } from '@nex-ui/utils'
 import { getSideAxis, getSide, getAlignment, getAlignmentAxis } from '../utils'
 import type { OffsetOptions, MiddlewareState, Middleware } from '../types'
 
 export const offset = (options: OffsetOptions = 5): Middleware => {
-  const offsetValue = isNumber(options)
-    ? {
-        mainAxis: options,
-        crossAxis: 0,
-      }
-    : {
-        mainAxis: options.mainAxis ?? 0,
-        crossAxis: options.crossAxis ?? 0,
-      }
+  const offsetValue =
+    typeof options === 'number'
+      ? {
+          mainAxis: options,
+          crossAxis: 0,
+        }
+      : {
+          mainAxis: options.mainAxis ?? 0,
+          crossAxis: options.crossAxis ?? 0,
+        }
 
   return {
     name: 'offset',

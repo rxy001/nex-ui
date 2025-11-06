@@ -1,4 +1,4 @@
-import { forEach, isString, walkObject, reduce, __DEV__ } from '@nex-ui/utils'
+import { walkObject, __DEV__, isString } from '@nex-ui/utils'
 import { createToken } from './createToken'
 import {
   pathToTokenName,
@@ -37,24 +37,20 @@ export function createTokens(config: CreateTokensConfig) {
     if (isString(value)) {
       const matches = extractTokenPlaceholders(value)
 
-      return reduce(
-        matches,
-        (acc: string, match: RegExpExecArray) => {
-          const [placeholder, tokenName] = match
+      return matches.reduce((acc: string, match: RegExpExecArray) => {
+        const [placeholder, tokenName] = match
 
-          const token = tokenMap.get(tokenName)
+        const token = tokenMap.get(tokenName)
 
-          if (token) {
-            return acc.replace(placeholder, token.value)
-          }
-          console.error(
-            '[Nex UI] system: An unknown token %s exists in the token reference syntax.',
-            tokenName,
-          )
-          return acc.replace(placeholder, tokenName)
-        },
-        value,
-      )
+        if (token) {
+          return acc.replace(placeholder, token.value)
+        }
+        console.error(
+          '[Nex UI] system: An unknown token %s exists in the token reference syntax.',
+          tokenName,
+        )
+        return acc.replace(placeholder, tokenName)
+      }, value)
     }
 
     return value
@@ -120,23 +116,22 @@ export function createTokens(config: CreateTokensConfig) {
 
   function registerCssVars(workInProgress: Token) {
     const { conditions, cssVar } = workInProgress
-    if (cssVar) {
+    if (cssVar && conditions) {
       const variableName = cssVar.var
-      forEach(
-        conditions,
-        // @ts-expect-error
-        (value: string | number | undefined, condition: ConditionKey) => {
-          if (!value) {
-            return
-          }
+      const conditionKeys = Object.keys(conditions) as ConditionKey[]
 
-          if (!cssVarMap.has(condition)) {
-            cssVarMap.set(condition, new Map())
-          }
+      conditionKeys.forEach((condition: ConditionKey) => {
+        const value = conditions[condition]
+        if (!value) {
+          return
+        }
 
-          cssVarMap.get(condition)!.set(variableName, value)
-        },
-      )
+        if (!cssVarMap.has(condition)) {
+          cssVarMap.set(condition, new Map())
+        }
+
+        cssVarMap.get(condition)!.set(variableName, value)
+      })
     }
 
     return workInProgress

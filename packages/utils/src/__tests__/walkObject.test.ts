@@ -1,4 +1,4 @@
-import { walkObject } from '../walkObject'
+import { walkObject } from '../index'
 
 describe('walkObject', () => {
   const sampleObject = {

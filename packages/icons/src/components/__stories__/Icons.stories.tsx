@@ -1,6 +1,6 @@
-import { map } from '@nex-ui/utils'
-import * as Icon from '../index'
+import * as AllIcons from '../index'
 import type { StoryObj } from '@storybook/react-vite'
+import type { ComponentType } from 'react'
 
 const meta = {
   title: 'Components/Icon',
@@ -15,11 +15,13 @@ const meta = {
           flexWrap: 'wrap',
         }}
       >
-        {map(Icon, (Component, index) => (
-          <span title={`${Component.displayName}`}>
-            <Component key={index} />
-          </span>
-        ))}
+        {Object.entries(AllIcons as Record<string, ComponentType<any>>).map(
+          ([name, Component]) => (
+            <span key={name} title={(Component as any).displayName || name}>
+              <Component />
+            </span>
+          ),
+        )}
       </div>
     )
   },

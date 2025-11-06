@@ -1,15 +1,15 @@
-import { forEach, merge, isArray } from '@nex-ui/utils'
+import { merge } from '@nex-ui/utils'
 import { memoizeFn } from '../utils'
 
 function shouldApplyCompound(compoundCheck: any, selections: any) {
   for (const key in compoundCheck) {
     if (Object.prototype.hasOwnProperty.call(compoundCheck, key)) {
-      const variantValue = selections[key]
+      const variantSection = selections[key]
       if (
         !(
-          (isArray(compoundCheck[key]) &&
-            compoundCheck[key]?.includes(variantValue)) ||
-          compoundCheck[key] === variantValue
+          (Array.isArray(compoundCheck[key]) &&
+            compoundCheck[key]?.includes(variantSection)) ||
+          compoundCheck[key] === variantSection
         )
       ) {
         return false
@@ -32,7 +32,7 @@ export function createRuntimeFn(options: any) {
     const variantKeys = Object.keys(variants)
     const result: any = {}
 
-    forEach(variantKeys, (key: any) => {
+    variantKeys.forEach((key: any) => {
       if (props[key] !== undefined) result[key] = props[key]
     })
 
@@ -49,29 +49,35 @@ export function createRuntimeFn(options: any) {
       ...variantsProps,
     }
 
-    forEach(selections, (variantSelection: any, variantName: any) => {
-      if (variantSelection !== null) {
-        let selection = variantSelection as string | boolean
+    for (const variantKey in selections) {
+      // istanbul ignore if
+      if (!Object.hasOwn(selections, variantKey)) continue
+
+      const variantSection = selections[variantKey]
+
+      if (variantSection !== null) {
+        let selection = variantSection
 
         if (typeof selection === 'boolean') {
           selection = selection === true ? 'true' : 'false'
         }
 
-        mergedStyles = merge(
-          {},
-          mergedStyles,
-          variants?.[variantName]?.[selection],
-        )
+        mergedStyles = merge({}, mergedStyles, variants[variantKey][selection])
       }
-    })
+    }
 
-    forEach(compoundVariants, (compoundVariant: any) => {
-      const { css: compoundVariantCSS, ...compoundCheck } = compoundVariant
+    for (const compoundVariantKey in compoundVariants) {
+      // istanbul ignore if
+      if (!Object.hasOwn(compoundVariants, compoundVariantKey)) continue
 
-      if (shouldApplyCompound(compoundCheck as any, selections)) {
+      const compoundVariantValue = compoundVariants[compoundVariantKey]
+
+      const { css: compoundVariantCSS, ...compoundCheck } = compoundVariantValue
+
+      if (shouldApplyCompound(compoundCheck, selections)) {
         mergedStyles = merge({}, mergedStyles, compoundVariantCSS)
       }
-    })
+    }
 
     return mergedStyles
   }

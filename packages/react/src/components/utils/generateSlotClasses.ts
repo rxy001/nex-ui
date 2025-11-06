@@ -1,4 +1,3 @@
-import { forEach } from '@nex-ui/utils'
 import { generateSlotClass } from './generateSlotClass'
 
 export function generateSlotClasses<T extends string>(
@@ -7,7 +6,7 @@ export function generateSlotClasses<T extends string>(
 ): Record<T, string> {
   const result: Record<string, string> = {}
 
-  forEach(classNames, (className) => {
+  classNames.forEach((className: T) => {
     result[className] = generateSlotClass(componentName, className)
   })
 

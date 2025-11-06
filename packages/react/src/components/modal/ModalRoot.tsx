@@ -2,9 +2,9 @@
 
 import {
   addEventListener,
-  isFunction,
   ownerDocument,
   ownerWindow,
+  isFunction,
 } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useMemo, useRef, useId } from 'react'

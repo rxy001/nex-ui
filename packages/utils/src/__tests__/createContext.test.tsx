@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { createContext } from '../craeteContext'
+import { createContext } from '../index'
 
 describe('createContext', () => {
   const defaultValue = 'Test Value'

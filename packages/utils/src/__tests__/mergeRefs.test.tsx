@@ -1,6 +1,6 @@
 import { createRef } from 'react'
 import { render } from '@testing-library/react'
-import { mergeRefs } from '../mergeRefs'
+import { mergeRefs } from '../index'
 import type { RefObject } from 'react'
 
 describe('mergeRefs', () => {

@@ -6,7 +6,6 @@ description: Shadow tokens are a collection of preset shadow styles, which unifo
 import { Box } from '@nex-ui/react'
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Shadows
@@ -44,8 +43,10 @@ Shadow tokens are a collection of preset shadow styles, which uniformly manage t
 Nex UI supports the following tokens out of the box.
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.shadows, (value, key) => ({
-    token: `shadows.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.shadows ?? {}).map(
+    ([key, value]) => ({
+      token: `shadows.${key}`,
+      value,
+    }),
+  )}
 />

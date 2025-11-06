@@ -430,21 +430,9 @@ importers:
       lodash.debounce:
         specifier: 4.0.8
         version: 4.0.8
-      lodash.every:
-        specifier: 4.6.0
-        version: 4.6.0
-      lodash.filter:
-        specifier: 4.6.0
-        version: 4.6.0
-      lodash.foreach:
-        specifier: 4.5.0
-        version: 4.5.0
       lodash.get:
         specifier: 4.4.2
         version: 4.4.2
-      lodash.map:
-        specifier: 4.6.0
-        version: 4.6.0
       lodash.memoize:
         specifier: 4.1.2
         version: 4.1.2
@@ -454,12 +442,6 @@ importers:
       lodash.mergewith:
         specifier: 4.6.2
         version: 4.6.2
-      lodash.reduce:
-        specifier: 4.6.0
-        version: 4.6.0
-      lodash.some:
-        specifier: 4.6.0
-        version: 4.6.0
       react:
         specifier: '>=19'
         version: 19.1.0
@@ -476,21 +458,9 @@ importers:
       '@types/lodash.debounce':
         specifier: 4.0.9
         version: 4.0.9
-      '@types/lodash.every':
-        specifier: 4.6.9
-        version: 4.6.9
-      '@types/lodash.filter':
-        specifier: 4.6.9
-        version: 4.6.9
-      '@types/lodash.foreach':
-        specifier: 4.5.9
-        version: 4.5.9
       '@types/lodash.get':
         specifier: 4.4.9
         version: 4.4.9
-      '@types/lodash.map':
-        specifier: 4.6.13
-        version: 4.6.13
       '@types/lodash.memoize':
         specifier: 4.1.9
         version: 4.1.9
@@ -498,12 +468,6 @@ importers:
         specifier: 4.6.9
         version: 4.6.9
       '@types/lodash.mergewith':
-        specifier: 4.6.9
-        version: 4.6.9
-      '@types/lodash.reduce':
-        specifier: 4.6.9
-        version: 4.6.9
-      '@types/lodash.some':
         specifier: 4.6.9
         version: 4.6.9
       '@types/react-is':
@@ -3467,20 +3431,8 @@ packages:
   '@types/lodash.debounce@4.0.9':
     resolution: {integrity: sha512-Ma5JcgTREwpLRwMM+XwBR7DaWe96nC38uCBDFKZWbNKD+osjVzdpnUSwBcqCptrp16sSOLBAUb50Car5I0TCsQ==}
 
-  '@types/lodash.every@4.6.9':
-    resolution: {integrity: sha512-nBxOUJCteXcxYOoDkjM3dbBRsXrTr+UC5yvcDYV7ykmHslF6pL/KvN9r1w91HwlSRTBsT+0pE5RTaXiiPthlxw==}
-
-  '@types/lodash.filter@4.6.9':
-    resolution: {integrity: sha512-5e9JoILIQ6b30IFwHqWeGTDeEe9obQd5QD98UY9NAhMm3S2S94KOT4ist3+VtzemDnxaGY9b9kVJADI41YNlsw==}
-
-  '@types/lodash.foreach@4.5.9':
-    resolution: {integrity: sha512-vmq0p/FK66PsALXRmK/qsnlLlCpnudvozWYrxJImHujHhXMADdeoPEY10zwmu26437w85wCvdxUqpFi+ALtkiQ==}
-
   '@types/lodash.get@4.4.9':
     resolution: {integrity: sha512-J5dvW98sxmGnamqf+/aLP87PYXyrha9xIgc2ZlHl6OHMFR2Ejdxep50QfU0abO1+CH6+ugx+8wEUN1toImAinA==}
-
-  '@types/lodash.map@4.6.13':
-    resolution: {integrity: sha512-kppRBzlpuvQQsr7R2nv/DDDZds8fglRFNAK70WUOkOC18KOcuQ22oQF9Kgy5Z2v/eDNkBm0ltrT6FThSkuWwow==}
 
   '@types/lodash.memoize@4.1.9':
     resolution: {integrity: sha512-glY1nQuoqX4Ft8Uk+KfJudOD7DQbbEDF6k9XpGncaohW3RW4eSWBlx6AA0fZCrh40tZcQNH4jS/Oc59J6Eq+aw==}
@@ -3491,14 +3443,8 @@ packages:
   '@types/lodash.mergewith@4.6.9':
     resolution: {integrity: sha512-fgkoCAOF47K7sxrQ7Mlud2TH023itugZs2bUg8h/KzT+BnZNrR2jAOmaokbLunHNnobXVWOezAeNn/lZqwxkcw==}
 
-  '@types/lodash.reduce@4.6.9':
-    resolution: {integrity: sha512-bzG9dQQzkBmeJSosF8EIQ9G9F3buYj6Ny7w2/BT8MelmA8mB3e0Cm0Km0RfyxhT8JWHpIh+G2fqU0I25HMU0hw==}
-
-  '@types/lodash.some@4.6.9':
-    resolution: {integrity: sha512-ns1kdADcRQeqVCgmbFs4cMSsfRisSpg0YGgTg9A3UsRcS30UbqQZ2cDKDkMqwP4qPaO3FAakobGnU+clulhnlA==}
-
-  '@types/lodash@4.17.16':
-    resolution: {integrity: sha512-HX7Em5NYQAXKW+1T+FiuG27NGwzJfCX3s1GjOa7ujxZa52kjJLOr4FUxT+giF6Tgxv1e+/czV/iTtBw27WTU9g==}
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -6316,15 +6262,6 @@ packages:
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
-  lodash.every@4.6.0:
-    resolution: {integrity: sha512-isF82d+65/sNvQ3aaQAW7LLHnnTxSN/2fm4rhYyuufLzA4VtHz6y6S5vFwe6PQVr2xdqUOyxBbTNKDpnmeu50w==}
-
-  lodash.filter@4.6.0:
-    resolution: {integrity: sha512-pXYUy7PR8BCLwX5mgJ/aNtyOvuJTdZAo9EQFUvMIYugqmJxnrYaANvTbgndOzHSCSR0wnlBBfRXJL5SbWxo3FQ==}
-
-  lodash.foreach@4.5.0:
-    resolution: {integrity: sha512-aEXTF4d+m05rVOAUG3z4vZZ4xVexLKZGF0lIxuHZ1Hplpk/3B6Z1+/ICICYRLm7c41Z2xiejbkCkJoTlypoXhQ==}
-
   lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
     deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
@@ -6335,9 +6272,6 @@ packages:
   lodash.kebabcase@4.1.1:
     resolution: {integrity: sha512-N8XRTIMMqqDgSy4VLKPnJ/+hpGZN+PHQiJnSenYqPaVV/NCqEogTnAdZLQiGKhxX+JCs8waWq2t1XHWKOmlY8g==}
 
-  lodash.map@4.6.0:
-    resolution: {integrity: sha512-worNHGKLDetmcEYDvh2stPCrrQRkP20E4l0iIS7F8EvzMqBBi7ltvFN5m1HvTf1P7Jk1txKhvFcmYsCr8O2F1Q==}
-
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
 
@@ -6347,14 +6281,8 @@ packages:
   lodash.mergewith@4.6.2:
     resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
 
-  lodash.reduce@4.6.0:
-    resolution: {integrity: sha512-6raRe2vxCYBhpBu+B+TtNGUzah+hQjVdu3E17wfusjyrXBka2nBS8OH/gjVZ5PvHOhWmIZTYri09Z6n/QfnNMw==}
-
   lodash.snakecase@4.1.1:
     resolution: {integrity: sha512-QZ1d4xoBHYUeuouhEq3lk3Uq7ldgyFXGBhg04+oRLnIz8o9T65Eh+8YdroUwn846zchkA9yDsDl5CVVaV2nqYw==}
-
-  lodash.some@4.6.0:
-    resolution: {integrity: sha512-j7MJE+TuT51q9ggt4fSgVqro163BEFjAt3u97IqU+JA2DkWl80nFTrowzLpZ/BnpN7rrl0JA/593NAdd8p/scQ==}
 
   lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
@@ -7429,11 +7357,6 @@ packages:
 
   semver@7.7.2:
     resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
-  semver@7.7.3:
-    resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -11527,53 +11450,29 @@ snapshots:
 
   '@types/lodash.clamp@4.0.9':
     dependencies:
-      '@types/lodash': 4.17.16
+      '@types/lodash': 4.17.20
 
   '@types/lodash.debounce@4.0.9':
     dependencies:
-      '@types/lodash': 4.17.16
-
-  '@types/lodash.every@4.6.9':
-    dependencies:
-      '@types/lodash': 4.17.16
-
-  '@types/lodash.filter@4.6.9':
-    dependencies:
-      '@types/lodash': 4.17.16
-
-  '@types/lodash.foreach@4.5.9':
-    dependencies:
-      '@types/lodash': 4.17.16
+      '@types/lodash': 4.17.20
 
   '@types/lodash.get@4.4.9':
     dependencies:
-      '@types/lodash': 4.17.16
-
-  '@types/lodash.map@4.6.13':
-    dependencies:
-      '@types/lodash': 4.17.16
+      '@types/lodash': 4.17.20
 
   '@types/lodash.memoize@4.1.9':
     dependencies:
-      '@types/lodash': 4.17.16
+      '@types/lodash': 4.17.20
 
   '@types/lodash.merge@4.6.9':
     dependencies:
-      '@types/lodash': 4.17.16
+      '@types/lodash': 4.17.20
 
   '@types/lodash.mergewith@4.6.9':
     dependencies:
-      '@types/lodash': 4.17.16
+      '@types/lodash': 4.17.20
 
-  '@types/lodash.reduce@4.6.9':
-    dependencies:
-      '@types/lodash': 4.17.16
-
-  '@types/lodash.some@4.6.9':
-    dependencies:
-      '@types/lodash': 4.17.16
-
-  '@types/lodash@4.17.16': {}
+  '@types/lodash@4.17.20': {}
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -11596,6 +11495,7 @@ snapshots:
   '@types/node@24.10.0':
     dependencies:
       undici-types: 7.16.0
+    optional: true
 
   '@types/parse-json@4.0.2': {}
 
@@ -11731,7 +11631,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.3
+      semver: 7.7.2
       ts-api-utils: 2.1.0(typescript@5.8.3)
       typescript: 5.8.3
     transitivePeerDependencies:
@@ -13334,7 +13234,7 @@ snapshots:
       get-tsconfig: 4.13.0
       is-glob: 4.0.3
       minimatch: 10.1.1
-      semver: 7.7.3
+      semver: 7.7.2
       stable-hash: 0.0.5
       tslib: 2.8.1
       unrs-resolver: 1.11.1
@@ -14721,7 +14621,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.10.0
+      '@types/node': 20.14.12
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -14986,19 +14886,11 @@ snapshots:
 
   lodash.debounce@4.0.8: {}
 
-  lodash.every@4.6.0: {}
-
-  lodash.filter@4.6.0: {}
-
-  lodash.foreach@4.5.0: {}
-
   lodash.get@4.4.2: {}
 
   lodash.isplainobject@4.0.6: {}
 
   lodash.kebabcase@4.1.1: {}
-
-  lodash.map@4.6.0: {}
 
   lodash.memoize@4.1.2: {}
 
@@ -15006,11 +14898,7 @@ snapshots:
 
   lodash.mergewith@4.6.2: {}
 
-  lodash.reduce@4.6.0: {}
-
   lodash.snakecase@4.1.1: {}
-
-  lodash.some@4.6.0: {}
 
   lodash.startcase@4.4.0: {}
 
@@ -16577,9 +16465,6 @@ snapshots:
 
   semver@7.7.2: {}
 
-  semver@7.7.3:
-    optional: true
-
   serialize-javascript@6.0.2:
     dependencies:
       randombytes: 2.1.0
@@ -17212,7 +17097,8 @@ snapshots:
 
   undici-types@5.26.5: {}
 
-  undici-types@7.16.0: {}
+  undici-types@7.16.0:
+    optional: true
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 

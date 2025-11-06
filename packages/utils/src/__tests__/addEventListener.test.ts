@@ -1,5 +1,5 @@
 import { fireEvent } from '@testing-library/dom'
-import { addEventListener } from '../addEventListener'
+import { addEventListener } from '../dom/index'
 
 describe('addEventListener', () => {
   it('should add event listener to body', () => {
