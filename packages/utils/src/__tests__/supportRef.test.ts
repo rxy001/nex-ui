@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { createElement, forwardRef, memo } from 'react'
-import { supportRef } from '../supportRef'
+import { supportRef } from '../index'
 
 describe('supportRef', () => {
   it('should work correctly', () => {

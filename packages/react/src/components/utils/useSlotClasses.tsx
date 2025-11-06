@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
-import { camelToKebab, forEach } from '@nex-ui/utils'
+import { kebabCase } from '@nex-ui/utils'
 import { generateSlotClass } from './generateSlotClass'
 import { useNexUI } from '../provider'
 import type { ClassValue } from 'clsx'
@@ -19,7 +19,7 @@ export const useSlotClasses = ({
   const { prefix } = useNexUI()
 
   return useMemo(() => {
-    const root = `${prefix}-${camelToKebab(name)}`
+    const root = `${prefix}-${kebabCase(name)}`
 
     return composeClasses(slots, root, classNames)
   }, [classNames, name, prefix, slots])
@@ -32,13 +32,10 @@ function composeClasses<K extends string>(
 ) {
   const output = {} as Record<K, ClassValue>
 
-  forEach(slots, (slot: K) => {
+  slots.forEach((slot: K) => {
     const className = classes?.[slot]
 
-    output[slot] = clsx([
-      className,
-      generateSlotClass(prefix, camelToKebab(slot)),
-    ])
+    output[slot] = clsx([className, generateSlotClass(prefix, kebabCase(slot))])
   })
 
   return output

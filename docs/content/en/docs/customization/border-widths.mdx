@@ -5,7 +5,6 @@ description: BorderWidth tokens are a set of preset border widths.
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # BorderWidths
@@ -24,8 +23,10 @@ BorderWidth tokens are a set of preset border widths.
 Nex UI supports the following tokens out of the box.
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.borderWidths, (value, key) => ({
-    token: `borderWidths.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.borderWidths ?? {}).map(
+    ([key, value]) => ({
+      token: `borderWidths.${key}`,
+      value,
+    }),
+  )}
 />

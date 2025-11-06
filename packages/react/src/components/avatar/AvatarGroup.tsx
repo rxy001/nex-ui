@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import { isArray } from '@nex-ui/utils'
 import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { AvatarGroupProvider } from './AvatarGroupContext'
 import { avatarGroupRecipe } from '../../theme/recipes'
@@ -87,7 +86,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     [color, outlined, radius, size],
   )
 
-  const childrenLength = isArray(children) ? children.length : 1
+  const childrenLength = Array.isArray(children) ? children.length : 1
 
   if (childrenLength === 1 && (total === undefined || total < 2)) {
     return children
@@ -102,7 +101,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
   return (
     <AvatarGroupRoot {...getAvatarGroupRootProps()}>
       <AvatarGroupProvider value={ctx}>
-        {isArray(children) ? children.slice(0, lastAvatar) : children}
+        {Array.isArray(children) ? children.slice(0, lastAvatar) : children}
         {!!extraAvatars &&
           (renderSurplus ? (
             renderSurplus(extraAvatars)

@@ -6,7 +6,6 @@ description: Shadow Tokens 是预设的阴影样式集合，统一管理 UI 元�
 import { Box } from '@nex-ui/react'
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Shadows
@@ -43,8 +42,10 @@ Shadow Tokens 是预设的阴影样式集合，统一管理 UI 元素的阴影�
 Nex UI 开箱即支持以下 Tokens。
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.shadows, (value, key) => ({
-    token: `shadows.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.shadows ?? {}).map(
+    ([key, value]) => ({
+      token: `shadows.${key}`,
+      value,
+    }),
+  )}
 />

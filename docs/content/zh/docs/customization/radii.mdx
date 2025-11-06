@@ -5,7 +5,6 @@ description: Radius Tokens 是一组预设的圆角半径值，确保 UI 元素�
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Radii
@@ -23,8 +22,10 @@ Radius Tokens 是一组预设的圆角半径值，确保 UI 元素（如按钮�
 Nex UI 开箱即支持以下 Tokens。
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.radii, (value, key) => ({
-    token: `radii.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.radii ?? {}).map(
+    ([key, value]) => ({
+      token: `radii.${key}`,
+      value,
+    }),
+  )}
 />

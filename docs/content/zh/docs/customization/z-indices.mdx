@@ -5,7 +5,6 @@ description: Z-Indices Tokens 是预设的层级数值集合，确保全局层�
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Z-Indices
@@ -23,8 +22,10 @@ Z-Index Tokens 是预设的层级数值集合，确保全局层叠顺序可控�
 Nex UI 开箱即支持以下 Tokens。
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.zIndices, (value, key) => ({
-    token: `zIndices.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.zIndices ?? {}).map(
+    ([key, value]) => ({
+      token: `zIndices.${key}`,
+      value,
+    }),
+  )}
 />

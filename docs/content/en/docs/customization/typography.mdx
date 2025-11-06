@@ -5,7 +5,6 @@ description: Typography tokens are used to manage and standardize typography sty
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Typography
@@ -26,10 +25,12 @@ FontSize tokens are a set of preset font sizes.
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.fontSizes, (value, key) => ({
-    token: `fontSizes.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.fontSizes ?? {}).map(
+    ([key, value]) => ({
+      token: `fontSizes.${key}`,
+      value,
+    }),
+  )}
 />
 
 ## FontFamilies
@@ -46,10 +47,12 @@ FontFamily tokens are a set of preset fonts.
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.fontFamilies, (value, key) => ({
-    token: `fontFamilies.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.fontFamilies ?? {}).map(
+    ([key, value]) => ({
+      token: `fontFamilies.${key}`,
+      value,
+    }),
+  )}
 />
 
 ## FontWeights
@@ -66,10 +69,12 @@ FontWeight tokens are a set of preset font weights.
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.fontWeights, (value, key) => ({
-    token: `fontWeights.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.fontWeights ?? {}).map(
+    ([key, value]) => ({
+      token: `fontWeights.${key}`,
+      value,
+    }),
+  )}
 />
 
 ## LineHeights
@@ -86,8 +91,10 @@ LineHeight tokens are a set of preset line heights.
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.lineHeights, (value, key) => ({
-    token: `lineHeights.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.lineHeights ?? {}).map(
+    ([key, value]) => ({
+      token: `lineHeights.${key}`,
+      value,
+    }),
+  )}
 />

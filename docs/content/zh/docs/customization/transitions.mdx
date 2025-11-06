@@ -5,7 +5,6 @@ description: Transition Tokens 是预设的过渡效果的集合，确保 UI 元
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Transitions
@@ -23,8 +22,10 @@ Transition Tokens 是预设的过渡效果的集合，确保 UI 元素不同状�
 Nex UI 开箱即支持以下 Tokens。
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.transitions, (value, key) => ({
-    token: `transitions.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.transitions ?? {}).map(
+    ([key, value]) => ({
+      token: `transitions.${key}`,
+      value,
+    }),
+  )}
 />

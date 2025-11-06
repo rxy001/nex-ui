@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { some } from '@nex-ui/utils'
 import { useColorScheme } from '@nex-ui/react'
 import { rootFile, getHtmlFile } from './entries'
 import type {
@@ -26,8 +25,7 @@ export const useSandpack = ({
 
   const hasTypescript = useMemo(
     () =>
-      some(
-        Object.keys(files),
+      Object.keys(files).some(
         (file) => file.includes('.ts') || file.includes('.tsx'),
       ),
     [files],

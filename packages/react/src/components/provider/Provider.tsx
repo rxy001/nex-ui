@@ -2,7 +2,7 @@
 
 import { useSystem, SystemProvider, mergeRecipeConfigs } from '@nex-ui/system'
 import { useMemo } from 'react'
-import { merge, mergeProps, mergeWith } from '@nex-ui/utils'
+import { mergeProps, merge, mergeWith } from '@nex-ui/utils'
 import { defaultConfig } from '../../theme'
 import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
 import type { NexUIProviderProps, InnerProviderProps } from './types'

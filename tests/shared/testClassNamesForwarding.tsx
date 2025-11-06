@@ -1,15 +1,15 @@
 import { cloneElement } from 'react'
 import { renderWithNexUIProvider } from './renderWithProvider'
-import { camelToKebab } from './utils'
+import { kebabCase } from './utils'
 import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
-import type { CamelToKebab } from './utils'
+import type { KebabCase } from './utils'
 
 export const testClassNamesForwarding = <S extends string>(
   Component: ReactElement<{ classNames?: Record<S, any> }>,
   slots: readonly S[],
   testClasses: Record<S, string>,
-  classes: Record<CamelToKebab<S>, string>,
+  classes: Record<KebabCase<S>, string>,
   options?: RenderWithNexUIProviderOptions,
 ) => {
   it(`should forward classNames to ${slots.join(', ')} slots`, async () => {
@@ -20,7 +20,7 @@ export const testClassNamesForwarding = <S extends string>(
 
     slots.forEach((slot: S) => {
       const slotElement = queryByClassName(
-        classes[camelToKebab(slot) as CamelToKebab<S>],
+        classes[kebabCase(slot) as KebabCase<S>],
       )
       expect(slotElement).toHaveClass(testClasses[slot])
     })

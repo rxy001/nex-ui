@@ -5,7 +5,6 @@ description: Z-Indices tokens are a collection of preset layer numerical values,
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Z-Indices
@@ -24,8 +23,10 @@ Z-Index tokens are a collection of preset layer numerical values, ensuring that 
 Nex UI supports the following tokens out of the box.
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.zIndices, (value, key) => ({
-    token: `zIndices.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.zIndices ?? {}).map(
+    ([key, value]) => ({
+      token: `zIndices.${key}`,
+      value,
+    }),
+  )}
 />

@@ -1,7 +1,7 @@
 'use client'
 
 import { withEmotionCache } from '@emotion/react'
-import { __DEV__, forEach } from '@nex-ui/utils'
+import { __DEV__ } from '@nex-ui/utils'
 import { useSystem } from '@nex-ui/system'
 import { serializeStyles } from '@emotion/serialize'
 import { getRegisteredStyles } from '@emotion/utils'
@@ -24,11 +24,14 @@ const createNexComponent = (tag: any) => {
       const finalShouldForwardProp = getDefaultShouldForwardProp(FinalTag)
       const newProps: any = ref ? { ref } : {}
 
-      forEach(props, (prop: any, key: string) => {
+      for (const key in props) {
+        if (!Object.hasOwn(props, key)) continue
+
+        const prop = props[key]
         if (!(key === 'as') && finalShouldForwardProp(key)) {
           newProps[key] = prop
         }
-      })
+      }
 
       if (sx == null) {
         return <FinalTag {...newProps} />

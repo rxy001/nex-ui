@@ -1,6 +1,6 @@
 import { cloneElement } from 'react'
 import { renderWithNexUIProvider } from './renderWithProvider'
-import { camelToKebab } from './utils'
+import { kebabCase } from './utils'
 import type { ReactElement } from 'react'
 import type { RenderWithNexUIProviderOptions } from './renderWithProvider'
 
@@ -52,7 +52,7 @@ export function testVariantDataAttrs(
       options,
     )
 
-    const kebabVariantName = camelToKebab(variantName)
+    const kebabVariantName = kebabCase(variantName)
 
     variantValues.forEach((value) => {
       const attrKey = `data-${kebabVariantName}`

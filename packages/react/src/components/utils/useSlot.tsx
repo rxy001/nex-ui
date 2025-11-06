@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { mergeProps, mergeRefs, camelToKebab } from '@nex-ui/utils'
+import { mergeProps, mergeRefs, kebabCase } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { ElementType as ReactElementType } from 'react'
@@ -158,7 +158,7 @@ export const useSlot = <
 function generateDataAttrs(dataAttrs: DataAttrs) {
   return Object.entries(dataAttrs).reduce((acc, [key, value]) => {
     if (value !== undefined) {
-      acc[`data-${camelToKebab(key)}`] = value
+      acc[`data-${kebabCase(key)}`] = value
     }
 
     return acc

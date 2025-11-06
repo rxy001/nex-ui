@@ -1,10 +1,11 @@
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 import { TwoColumnTable } from './TwoColumnTable'
 
-const dataSource = map(
-  defaultConfig.selectors,
-  (value: string, selector: string) => ({ selector, value }),
+const dataSource = Object.entries(defaultConfig.selectors ?? {}).map(
+  ([selector, value]) => ({
+    selector,
+    value,
+  }),
 )
 
 const columns = [
