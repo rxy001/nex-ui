@@ -1,12 +1,10 @@
-import { isArray, map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 import { TwoColumnTable } from './TwoColumnTable'
 
-const dataSource = map(
-  defaultConfig.aliases,
-  (prop: string | string[], alias: string) => ({
-    prop: isArray(prop) ? prop.join('、') : prop,
+const dataSource = Object.entries(defaultConfig.aliases ?? {}).map(
+  ([alias, prop]) => ({
     alias,
+    prop: Array.isArray(prop) ? prop.join('、') : prop,
   }),
 )
 

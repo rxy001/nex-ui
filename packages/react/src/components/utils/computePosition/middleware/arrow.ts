@@ -1,4 +1,4 @@
-import { clamp, ownerWindow } from '@nex-ui/utils'
+import { ownerWindow, clamp } from '@nex-ui/utils'
 import {
   getAlignmentAxis,
   getAlignment,

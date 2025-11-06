@@ -5,7 +5,6 @@ description: Typography Tokens 用于管理和规范排版样式，确保文本�
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Typography
@@ -25,10 +24,12 @@ FontSize Tokens 是一组预设的字体大小。
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.fontSizes, (value, key) => ({
-    token: `fontSizes.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.fontSizes ?? {}).map(
+    ([key, value]) => ({
+      token: `fontSizes.${key}`,
+      value,
+    }),
+  )}
 />
 
 ## FontFamilies
@@ -44,10 +45,12 @@ FontFamily Tokens 是一组预设的字体。
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.fontFamilies, (value, key) => ({
-    token: `fontFamilies.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.fontFamilies ?? {}).map(
+    ([key, value]) => ({
+      token: `fontFamilies.${key}`,
+      value,
+    }),
+  )}
 />
 
 ## FontWeights
@@ -63,10 +66,12 @@ FontWeight Tokens 是一组预设的字重。
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.fontWeights, (value, key) => ({
-    token: `fontWeights.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.fontWeights ?? {}).map(
+    ([key, value]) => ({
+      token: `fontWeights.${key}`,
+      value,
+    }),
+  )}
 />
 
 ## LineHeights
@@ -82,8 +87,10 @@ LineHeight Tokens 是一组预设的行高。
 </Callout>
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.lineHeights, (value, key) => ({
-    token: `lineHeights.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.lineHeights ?? {}).map(
+    ([key, value]) => ({
+      token: `lineHeights.${key}`,
+      value,
+    }),
+  )}
 />

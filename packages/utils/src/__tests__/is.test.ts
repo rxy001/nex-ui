@@ -4,8 +4,7 @@ import {
   isPlainObject,
   isString,
   isUndefined,
-  isArray,
-} from '../is'
+} from '../index'
 
 describe('is utils', () => {
   it('isNumber', () => {
@@ -46,13 +45,5 @@ describe('is utils', () => {
     expect(isUndefined(void 0)).toBe(true)
     expect(isUndefined(null)).toBe(false)
     expect(isUndefined(0)).toBe(false)
-  })
-
-  it('isArray', () => {
-    expect(isArray([])).toBe(true)
-    expect(isArray([1, 2, 3])).toBe(true)
-    expect(isArray('abc')).toBe(false)
-    expect(isArray({})).toBe(false)
-    expect(isArray(undefined)).toBe(false)
   })
 })

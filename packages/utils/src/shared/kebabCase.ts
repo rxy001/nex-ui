@@ -1,4 +1,4 @@
-export function camelToKebab(str: string): string {
+export function kebabCase(str: string): string {
   if (typeof str !== 'string' || str.trim() === '') {
     return str
   }

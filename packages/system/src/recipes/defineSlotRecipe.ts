@@ -1,4 +1,4 @@
-import { isArray, __DEV__ } from '@nex-ui/utils'
+import { __DEV__ } from '@nex-ui/utils'
 import { createRuntimeFn } from './createRuntimeFn'
 import { mergeRecipeConfigs } from '../utils'
 import type {
@@ -23,7 +23,7 @@ export function defineSlotRecipe<
   MergeVariants<Variants, RuntimeFn>
 > {
   if (__DEV__) {
-    if (config.compoundVariants && !isArray(config.compoundVariants)) {
+    if (config.compoundVariants && !Array.isArray(config.compoundVariants)) {
       throw new TypeError(
         `[Nex UI] system: The "compoundVariants" prop must be an array. Received: ${typeof config.compoundVariants}`,
       )

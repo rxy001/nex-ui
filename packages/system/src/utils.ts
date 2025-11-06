@@ -1,14 +1,11 @@
 import {
-  __DEV__,
-  isArray,
-  isNumber,
   isString,
   memoize,
-  mergeWith,
+  kebabCase,
+  camelCase,
   isPlainObject,
-  every,
-  camelToKebab,
-  kebabToCamel,
+  mergeWith,
+  __DEV__,
 } from '@nex-ui/utils'
 import serialize from '@x1ngyu/serialize-javascript'
 import { all as CSSProperties } from 'known-css-properties'
@@ -33,7 +30,7 @@ export function createCssVarName(prefix: string, path: string[]) {
       if (isDecimalString(k)) {
         return k.split('.').join('-')
       }
-      return camelToKebab(k)
+      return kebabCase(k)
     })
     .join('-')}`
 }
@@ -43,7 +40,7 @@ export function isResponsiveColor(value: any): value is ResponsiveColor {
 }
 
 export function isValidTokenValue(value: any): value is TokenValue {
-  if (!isString(value) && !isNumber(value)) {
+  if (!isString(value) && typeof value !== 'number') {
     return false
   }
   return true
@@ -52,7 +49,11 @@ export function isValidTokenValue(value: any): value is TokenValue {
 export function isValidSemanticTokenValue(
   value: any,
 ): value is SemanticTokenValue {
-  if (!isString(value) && !isNumber(value) && !isResponsiveColor(value)) {
+  if (
+    !isString(value) &&
+    typeof value !== 'number' &&
+    !isResponsiveColor(value)
+  ) {
     return false
   }
   return true
@@ -85,7 +86,7 @@ export function isValidTokenCategory(category: any): category is TokenCategory {
 }
 
 export function isValidAliasValue(value: any) {
-  if (isString(value) || (isArray(value) && every(value, isString))) {
+  if (isString(value) || (Array.isArray(value) && value.every(isString))) {
     return true
   }
   return false
@@ -121,14 +122,14 @@ export function mergeRecipeConfigs<T, B>(...args: [T, B]) {
         if (targetValue === undefined) {
           return srcValue
         }
-        if (isArray(targetValue) && isArray(srcValue)) {
+        if (Array.isArray(targetValue) && Array.isArray(srcValue)) {
           return [...targetValue, ...srcValue]
         }
       }
 
       if (
         typeof targetValue !== typeof srcValue ||
-        isArray(targetValue) !== isArray(srcValue) ||
+        Array.isArray(targetValue) !== Array.isArray(srcValue) ||
         isPlainObject(targetValue) !== isPlainObject(srcValue)
       ) {
         return srcValue
@@ -170,7 +171,7 @@ export const negate = (x: number | string) => {
   return multiply(value, -1)
 }
 
-const ALL_CSS_PROPERTIES = new Set(CSSProperties.map(kebabToCamel))
+const ALL_CSS_PROPERTIES = new Set(CSSProperties.map(camelCase))
 
 const isCSSProperty = (key: string) => {
   // CSS variable

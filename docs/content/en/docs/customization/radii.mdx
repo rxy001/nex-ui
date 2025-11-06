@@ -5,7 +5,6 @@ description: Radius tokens are a set of preset corner radius values, ensuring co
 
 import { Callout } from 'nextra/components'
 import { AvailableProps, TokensTable } from '@/components/docs'
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 
 # Radii
@@ -24,8 +23,10 @@ Radius tokens are a set of preset corner radius values, ensuring consistent roun
 Nex UI supports the following tokens out of the box.
 
 <TokensTable
-  dataSource={map(defaultConfig.tokens.radii, (value, key) => ({
-    token: `radii.${key}`,
-    value,
-  }))}
+  dataSource={Object.entries(defaultConfig.tokens.radii ?? {}).map(
+    ([key, value]) => ({
+      token: `radii.${key}`,
+      value,
+    }),
+  )}
 />

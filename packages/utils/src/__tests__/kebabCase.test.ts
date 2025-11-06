@@ -1,4 +1,4 @@
-import { camelToKebab } from '../index'
+import { kebabCase } from '../index'
 
 const testCases = [
   ['backgroundColor', 'background-color'],
@@ -24,10 +24,10 @@ const testCases = [
   ['webkit2D', 'webkit2-d'],
 ]
 
-describe('camelToKebab', () => {
+describe('kebabCase', () => {
   it('should convert camelCase to kebab-case', () => {
     testCases.forEach(([input, expected]) => {
-      const result = camelToKebab(input)
+      const result = kebabCase(input)
       expect(result).toBe(expected)
     })
   })

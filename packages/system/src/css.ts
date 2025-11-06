@@ -1,13 +1,4 @@
-import {
-  forEach,
-  merge,
-  walkObject,
-  get,
-  isArray,
-  __DEV__,
-  map,
-  isPlainObject,
-} from '@nex-ui/utils'
+import { walkObject, __DEV__, isPlainObject, get, merge } from '@nex-ui/utils'
 import { memoizeFn, isSelector } from './utils'
 import type {
   ComponentSelector,
@@ -51,9 +42,9 @@ export const createCssFn = ({
       return componentSelector
     }
 
-    if (isArray(interpolation)) {
+    if (Array.isArray(interpolation)) {
       const arrayInterpolation = interpolation as ArrayInterpolation
-      return map(arrayInterpolation, (v: Interpolation) => css(v))
+      return arrayInterpolation.map((v: Interpolation) => css(v))
     }
 
     if (isPlainObject(interpolation)) {
@@ -92,7 +83,7 @@ export const createCssFn = ({
               const prevValue = get(cssOjbect, part)
               const index = Number(p)
 
-              if (!Number.isNaN(index) && isArray(prevValue)) {
+              if (!Number.isNaN(index) && Array.isArray(prevValue)) {
                 // Handle array breakpoints
                 return getCustomizedSelector(`_${index}`) ?? ''
               }
@@ -120,7 +111,7 @@ export const createCssFn = ({
       walkObject(
         cssOjbect,
         (propValue: string | number, path: string[]) => {
-          if (isArray(propValue)) {
+          if (Array.isArray(propValue)) {
             const selectors = path.map((p) =>
               isCustomSelector(p) ? (getCustomizedSelector(p) ?? p) : p,
             )
@@ -153,7 +144,7 @@ export const createCssFn = ({
             const key = path[path.length - 2]
 
             return (
-              isArray(v) &&
+              Array.isArray(v) &&
               !isAlias(key) &&
               (isCustomSelector(key) || isSelector(key))
             )
@@ -178,7 +169,7 @@ function mergeByPath(
 ) {
   let acc = target
 
-  forEach(path, (k: string) => {
+  path.forEach((k: string) => {
     if (!k) return
     if (!acc[k]) acc[k] = customizer ? customizer(k) : {}
     acc = acc[k]

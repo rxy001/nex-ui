@@ -10,7 +10,6 @@ import {
 } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve, basename } from 'node:path'
-import { forEach, map } from 'packages/utils/src'
 import { pretty } from './utils'
 
 function upperFirst(string: string) {
@@ -62,7 +61,7 @@ async function run() {
     const parentDir = basename(dirPath)
 
     await Promise.all(
-      map(files, async (file: string) => {
+      files.map(async (file: string) => {
         const filePath = resolve(dirPath, file)
         if (statSync(filePath).isDirectory()) {
           if (skipDirs?.includes(file)) {
@@ -201,14 +200,13 @@ async function run() {
 
     let tsx = ''
 
-    forEach(tsxFiles, (tsxs: string[], category: string) => {
+    Object.entries(tsxFiles).map(([category, tsxs]) => {
       tsx =
         tsx +
         '\n' +
-        map(
-          tsxs,
-          (name: string) => `export * from './${category}/${name}'`,
-        ).join('\n')
+        tsxs
+          .map((name: string) => `export * from './${category}/${name}'`)
+          .join('\n')
     })
 
     writeFileSync(indexPath, await pretty(tsx))

@@ -1,4 +1,4 @@
-import { __DEV__, forEach } from '@nex-ui/utils'
+import { __DEV__ } from '@nex-ui/utils'
 import { isValidBreakpointValue } from './utils'
 import type { Dictionary } from './types'
 
@@ -12,21 +12,25 @@ export const createBreakpoints = (breakpoints: BreakpointsDefinition) => {
 
   let index = 0
 
-  forEach(breakpoints, (value: string, key: string) => {
-    if (__DEV__ && !isValidBreakpointValue(value)) {
+  for (const breakpointKey in breakpoints) {
+    // istanbul ignore if
+    if (!Object.hasOwn(breakpoints, breakpointKey)) continue
+
+    const breakpointValue = breakpoints[breakpointKey]
+    if (__DEV__ && !isValidBreakpointValue(breakpointValue)) {
       console.error(
-        `[Nex UI] system: Expect the breakpoints value to be a string, but what is currently received is %o.`,
-        value,
+        `[Nex UI] system: Expect the breakpoint value to be a string, but what is currently received is %o.`,
+        breakpointValue,
       )
-      return
+      continue
     }
 
-    breakpointMap.set(key, value)
-    breakpointMap.set(index, value)
-    selectorMap.set(key, toMediaKey(value))
-    selectorMap.set(index, toMediaKey(value))
+    breakpointMap.set(breakpointKey, breakpointValue)
+    breakpointMap.set(index, breakpointValue)
+    selectorMap.set(breakpointKey, toMediaKey(breakpointValue))
+    selectorMap.set(index, toMediaKey(breakpointValue))
     index += 1
-  })
+  }
 
   return {
     getMediaSelectors: () => Object.fromEntries(selectorMap.entries()),

@@ -4,11 +4,11 @@ import {
   mergeRefs,
   addEventListener,
   ownerDocument,
-  isFocusVisible,
   mergeProps,
 } from '@nex-ui/utils'
 import { cloneElement, isValidElement, useEffect, useRef } from 'react'
 import { usePopper } from './PopperContext'
+import { isFocusVisible } from '../utils'
 import type { DetailedHTMLProps, HTMLAttributes, FocusEvent } from 'react'
 import type { PopperTriggerProps } from './types'
 

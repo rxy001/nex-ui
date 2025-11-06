@@ -1,7 +1,7 @@
 'use client'
 
 import { cloneElement, isValidElement, useId, useMemo } from 'react'
-import { isFunction, __DEV__, isString } from '@nex-ui/utils'
+import { __DEV__, isFunction, isString } from '@nex-ui/utils'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'

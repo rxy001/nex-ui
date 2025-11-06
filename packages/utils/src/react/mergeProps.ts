@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import mergeWith from 'lodash.mergewith'
-import { chain } from './chain'
+import { chain } from '../shared/chain'
 import type { ClassValue } from 'clsx'
 
 interface Props {

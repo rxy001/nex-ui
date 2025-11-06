@@ -1,4 +1,4 @@
-import { forEach, isString, reduce } from '@nex-ui/utils'
+import { isString } from '@nex-ui/utils'
 import {
   extractTokenPlaceholders,
   isValidTokenCategory,
@@ -96,14 +96,13 @@ export const createNormalize = ({
 
     const properties = getPropertiesByAlias(propKey) ?? [propKey]
 
-    forEach(properties, (property: string) => {
+    properties.forEach((property: string) => {
       if (isString(propValue) && !propValue.startsWith('_EMO_animation')) {
         // Only string values are supported. Avoid using numbers, as they may inadvertently map to tokens.
         const matches = extractTokenPlaceholders(propValue)
         if (matches.length) {
           // Handle token reference syntax replacements
-          result[property] = reduce(
-            matches,
+          result[property] = matches.reduce(
             (acc: string, match: RegExpExecArray) => {
               const [placeholder] = match
               const [category, ...rest] = match[1].split('.')

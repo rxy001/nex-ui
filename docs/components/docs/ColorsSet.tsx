@@ -1,7 +1,7 @@
 'use client'
 
 import { defaultConfig } from '@nex-ui/react'
-import { forEach, get, isString, map, walkObject } from '@nex-ui/utils'
+import { get, isString, walkObject } from '@nex-ui/utils'
 import { useClipboard } from '@nex-ui/hooks'
 import clsx from 'clsx'
 import type { ComponentProps } from 'react'
@@ -16,26 +16,26 @@ const commonColors = (() => {
   const colors: CommonColor[] = []
   const combinedTokens: CommonColor['tokens'] = []
 
-  forEach(defaultConfig.tokens?.colors, (items, color) => {
-    if (isString(items)) {
-      combinedTitle =
-        combinedTitle === '' ? color : `${combinedTitle} & ${color}`
-      combinedTokens.push({
-        color: items,
-        token: color,
+  Object.entries(defaultConfig.tokens?.colors ?? {}).forEach(
+    ([color, items]) => {
+      if (isString(items)) {
+        combinedTitle =
+          combinedTitle === '' ? color : `${combinedTitle} & ${color}`
+        combinedTokens.push({
+          color: items,
+          token: color,
+        })
+        return
+      }
+      colors.push({
+        title: color,
+        tokens: Object.entries(items ?? {}).map(([variant, value]) => ({
+          color: value,
+          token: `${color}.${variant}`,
+        })),
       })
-      return
-    }
-    colors.push({
-      title: color,
-      tokens: map(items, (item, key) => {
-        return {
-          color: item!,
-          token: `${color}.${key}`,
-        }
-      }),
-    })
-  })
+    },
+  )
 
   return [
     {
@@ -62,7 +62,7 @@ function Button({ className, ...props }: ComponentProps<'button'>) {
 export function CommonColors() {
   const { copy } = useClipboard()
 
-  return map(commonColors, ({ title, tokens }) => (
+  return commonColors.map(({ title, tokens }) => (
     <div className='x:overflow-hidden' key={title}>
       <h3 className='x:mt-8 x:mb-4 x:font-bold x:text-2xl x:capitalize'>
         {title}
@@ -103,35 +103,37 @@ const semanticColors = (() => {
     return str?.replace('{', '').replace('}', '').replace('colors.', '')
   }
 
-  forEach(defaultConfig.semanticTokens?.colors, (items, color: string) => {
-    const tokens: SemanticColor['tokens'] = []
-    const title = color
+  Object.entries(defaultConfig.semanticTokens?.colors ?? {}).forEach(
+    ([color, items]) => {
+      const tokens: SemanticColor['tokens'] = []
+      const title = color
 
-    walkObject(
-      items,
-      (value, path) => {
-        tokens.push({
-          token: `${color}.${path.join('.')}`,
-          colors: {
-            default: handleColorReference(value._DEFAULT),
-            light: handleColorReference(value._light),
-            dark: handleColorReference(value._dark),
-          },
-        })
-      },
-      {
-        predicate: (_, path) => {
-          const last = [...path].pop()
-          return last!.includes('_')
+      walkObject(
+        items,
+        (value, path) => {
+          tokens.push({
+            token: `${color}.${path.join('.')}`,
+            colors: {
+              default: handleColorReference(value._DEFAULT),
+              light: handleColorReference(value._light),
+              dark: handleColorReference(value._dark),
+            },
+          })
         },
-      },
-    )
+        {
+          predicate: (_, path) => {
+            const last = [...path].pop()
+            return last!.includes('_')
+          },
+        },
+      )
 
-    colors.push({
-      title,
-      tokens,
-    })
-  })
+      colors.push({
+        title,
+        tokens,
+      })
+    },
+  )
 
   return colors
 })()
@@ -139,16 +141,16 @@ const semanticColors = (() => {
 export function SemanticColors() {
   const { copy } = useClipboard()
 
-  return map(semanticColors, ({ title, tokens }) => (
+  return semanticColors.map(({ title, tokens }) => (
     <div className='x:overflow-hidden' key={title}>
       <h3 className='x:mt-8 x:mb-4 x:font-bold x:text-2xl x:capitalize'>
         {title}
       </h3>
       <div className='x:flex x:gap-8 x:flex-wrap'>
-        {map(tokens, ({ colors, token }) => (
+        {Object.entries(tokens).map(([_, { colors, token }]) => (
           <div key={token}>
             <Button key={token} onClick={() => copy(token)}>
-              {map(colors, (color, key) => {
+              {Object.entries(colors).map(([key, color]) => {
                 if (!color) {
                   return
                 }

@@ -1,10 +1,8 @@
-import { map } from '@nex-ui/utils'
 import { defaultConfig } from '@nex-ui/react'
 import { TwoColumnTable } from './TwoColumnTable'
 
-const dataSource = map(
-  defaultConfig.breakpoints,
-  (width: string, breakpoint: string) => ({
+const dataSource = Object.entries(defaultConfig.breakpoints ?? {}).map(
+  ([breakpoint, width]) => ({
     breakpoint,
     width,
   }),

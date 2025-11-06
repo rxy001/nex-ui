@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
-import { __DEV__, filter } from '@nex-ui/utils'
+import { __DEV__ } from '@nex-ui/utils'
 import { AccordionGroupProvider } from './AccordionContext'
 import { useDefaultProps, useStyles, useSlotClasses, useSlot } from '../utils'
 import { accordionRecipe } from '../../theme/recipes'
@@ -84,7 +84,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
 
   const toggleExpandedKey = useEvent((key: Key) => {
     if (expandedKeys.includes(key)) {
-      setExpandedKeys(filter(expandedKeys, (k: Key) => k !== key))
+      setExpandedKeys(expandedKeys.filter((k: Key) => k !== key))
     } else {
       if (multiple) {
         setExpandedKeys([...expandedKeys, key])

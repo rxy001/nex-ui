@@ -1,15 +1,5 @@
 import clsx from 'clsx'
-import { mergeProps } from '../mergeProps'
-
-// Mock chain to test event handler chaining
-jest.mock('../chain', () => ({
-  chain:
-    (a: any, b: any) =>
-    (...args: any[]) => {
-      a(...args)
-      b(...args)
-    },
-}))
+import { mergeProps } from '../index'
 
 describe('mergeProps', () => {
   it('merges simple props', () => {

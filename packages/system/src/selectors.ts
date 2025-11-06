@@ -1,4 +1,4 @@
-import { forEach, isString } from '@nex-ui/utils'
+import { isString } from '@nex-ui/utils'
 import type { Breakpoints } from './breakpoints'
 import type { Dictionary } from './types'
 
@@ -12,32 +12,41 @@ type Config = {
 export function createSelectors({ selectors, getMediaSelectors }: Config) {
   const selectorMap: Map<string, string> = new Map()
 
-  forEach(selectors, (value: string, key: string) => {
-    if (!isString(value)) {
+  for (const selectorKey in selectors) {
+    // istanbul ignore if
+    if (!Object.hasOwn(selectors, selectorKey)) continue
+
+    const selectorValue = selectors[selectorKey]
+
+    if (!isString(selectorValue)) {
       console.error(
         `[Nex UI] system: Expect the selector value to be a string, but what is currently received is %o.`,
-        value,
+        selectorValue,
       )
-      return
+      continue
     }
-    selectorMap.set(`_${key}`, value)
-  })
+    selectorMap.set(`_${selectorKey}`, selectorValue)
+  }
 
   const mediaSelectors = getMediaSelectors()
 
-  forEach(mediaSelectors, (selector: string, key: string) => {
-    const k = `_${key}`
+  for (const selectorKey in mediaSelectors) {
+    // istanbul ignore if
+    if (!Object.hasOwn(mediaSelectors, selectorKey)) continue
 
-    if (selectorMap.get(k)) {
+    const selectorValue = mediaSelectors[selectorKey]
+
+    const key = `_${selectorKey}`
+
+    if (selectorMap.get(key)) {
       console.error(
         '[Nex UI] system: The selector %s has already been defined in the breakpoint.',
-        selector,
+        selectorValue,
       )
-      return
+      continue
     }
-
-    selectorMap.set(k, selector)
-  })
+    selectorMap.set(key, selectorValue)
+  }
 
   return {
     getCustomizedSelector: (key: string) => selectorMap.get(key),

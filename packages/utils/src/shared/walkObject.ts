@@ -1,4 +1,4 @@
-import { isPlainObject } from './is'
+import { isPlainObject } from '../shared/is'
 
 type Callback<R = any> = (value: any, path: string[]) => R
 
