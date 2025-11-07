@@ -1,4 +1,4 @@
-import { walkObject, __DEV__, isPlainObject, get, merge } from '@nex-ui/utils'
+import { walkObject, isPlainObject, get, merge } from '@nex-ui/utils'
 import { memoizeFn, isSelector } from './utils'
 import type {
   ComponentSelector,

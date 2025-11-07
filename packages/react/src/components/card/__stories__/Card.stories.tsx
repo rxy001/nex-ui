@@ -1,3 +1,4 @@
+import { RADII as DEFAULT_RADII } from '~/sb/utils'
 import {
   Card,
   CardBody,
@@ -27,17 +28,21 @@ function CardHeaderTemplate(props: CardHeaderProps) {
   )
 }
 
+const RADII = [...DEFAULT_RADII].filter((radius) => radius !== 'full')
+
+const SHADOWS = ['xs', 'sm', 'md', 'lg', 'xl'] as const
+
 const meta = {
   title: 'Components/Card',
   component: Card<'div'>,
   argTypes: {
     shadow: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: SHADOWS,
     },
     radius: {
       control: 'select',
-      options: ['none', 'sm', 'md', 'lg'],
+      options: RADII,
     },
     blurred: {
       control: 'boolean',
@@ -65,9 +70,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 export const WithBodyAndFooter: Story = {
   render: (props) => {
@@ -142,6 +145,38 @@ export const BlurredCard: Story = {
           </CardFooter>
         </Card>
       </Box>
+    )
+  },
+}
+
+export const Radius: Story = {
+  render: (props) => {
+    return (
+      <Flex gap='4'>
+        {RADII.map((radius) => (
+          <Card {...props} key={radius} radius={radius} shadow='lg'>
+            <CardBody>
+              <div>Radius: {radius}</div>
+            </CardBody>
+          </Card>
+        ))}
+      </Flex>
+    )
+  },
+}
+
+export const Shadow: Story = {
+  render: (props) => {
+    return (
+      <Flex gap='4'>
+        {SHADOWS.map((shadow) => (
+          <Card {...props} key={shadow} shadow={shadow}>
+            <CardBody>
+              <div>Shadow: {shadow}</div>
+            </CardBody>
+          </Card>
+        ))}
+      </Flex>
     )
   },
 }

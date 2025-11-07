@@ -1,4 +1,9 @@
 {
   "extends": "../tsconfig.json",
-  "include": [".storybook/*.ts", ".storybook/*.tsx", "./vite.config.ts"]
+  "include": [
+    ".storybook/*.ts",
+    ".storybook/*.tsx",
+    "./vite.config.ts",
+    "./utils/*.ts"
+  ]
 }

@@ -15,6 +15,12 @@ export default defineConfig(() => {
         '.json',
         '.css',
       ],
+      alias: [
+        {
+          find: '~/sb/utils',
+          replacement: `${import.meta.dirname}/utils/index.ts`,
+        },
+      ],
     },
   }
 })

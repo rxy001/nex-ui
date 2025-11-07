@@ -5,7 +5,6 @@ import {
   camelCase,
   isPlainObject,
   mergeWith,
-  __DEV__,
 } from '@nex-ui/utils'
 import serialize from '@x1ngyu/serialize-javascript'
 import { all as CSSProperties } from 'known-css-properties'

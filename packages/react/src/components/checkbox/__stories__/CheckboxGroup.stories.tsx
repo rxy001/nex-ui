@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { COLORS, SIZES, RADII } from '~/sb/utils'
 import { CheckboxGroup } from '../CheckboxGroup'
 import { Checkbox } from '../Checkbox'
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -9,25 +10,15 @@ const meta = {
   component: CheckboxGroup<string, 'div'>,
   argTypes: {
     color: {
-      options: [
-        'blue',
-        'orange',
-        'cyan',
-        'gray',
-        'red',
-        'green',
-        'pink',
-        'purple',
-        'yellow',
-      ],
+      options: COLORS,
       control: 'select',
     },
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: SIZES,
       control: 'select',
     },
     radius: {
-      options: ['sm', 'md', 'lg', 'full', 'none'],
+      options: RADII,
       control: 'select',
     },
     disabled: {
@@ -38,12 +29,6 @@ const meta = {
       control: 'select',
     },
   },
-  args: {
-    color: 'blue',
-    size: 'md',
-    disabled: false,
-  },
-
   render: (props) => (
     <CheckboxGroup {...props}>
       <Checkbox value='apple'>Apple</Checkbox>

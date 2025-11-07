@@ -17,11 +17,14 @@ export const createBreakpoints = (breakpoints: BreakpointsDefinition) => {
     if (!Object.hasOwn(breakpoints, breakpointKey)) continue
 
     const breakpointValue = breakpoints[breakpointKey]
-    if (__DEV__ && !isValidBreakpointValue(breakpointValue)) {
-      console.error(
-        `[Nex UI] system: Expect the breakpoint value to be a string, but what is currently received is %o.`,
-        breakpointValue,
-      )
+    if (!isValidBreakpointValue(breakpointValue)) {
+      if (__DEV__) {
+        console.error(
+          `[Nex UI] system: Expect the breakpoint value to be a string, but what is currently received is %o.`,
+          breakpointValue,
+        )
+      }
+
       continue
     }
 

@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react'
+import { COLORS as DEFAULT_COLORS } from '~/sb/utils'
+import { upperFirst } from '@nex-ui/utils'
 import { Box } from '../../box'
 import { Popover, PopoverTrigger, PopoverContent } from '../index'
 import { Button } from '../../button'
@@ -8,7 +10,6 @@ import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { DOMMotionComponents } from 'motion/react'
 import type { PopoverContentProps, PopoverProps } from '../types'
-import type { ButtonProps } from '../../button'
 
 function Container({ children }: { children: ReactNode }) {
   return (
@@ -20,21 +21,10 @@ function Container({ children }: { children: ReactNode }) {
       justify='center'
       align='center'
       wrap='wrap'
-      gap='4'
+      gap='5'
     >
       {children}
     </Flex>
-  )
-}
-
-function Trigger(props: ButtonProps) {
-  return (
-    <Button
-      sx={{
-        textTransform: 'capitalize',
-      }}
-      {...props}
-    />
   )
 }
 
@@ -93,17 +83,12 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    placement: 'top',
-    closeOnEscape: true,
-    closeOnDetached: true,
-  },
   render: (props) => {
     return (
       <Container>
         <Popover {...props}>
           <PopoverTrigger>
-            <Trigger>click me</Trigger>
+            <Button>Click me</Button>
           </PopoverTrigger>
           <Content />
         </Popover>
@@ -116,9 +101,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 export const Placements: Story = {
   render: (props) => {
@@ -134,7 +117,13 @@ export const Placements: Story = {
           {placements.map((placement) => (
             <Popover {...props} key={placement} placement={placement}>
               <PopoverTrigger>
-                <Trigger>{placement}</Trigger>
+                <Button
+                  sx={{
+                    textTransform: 'capitalize',
+                  }}
+                >
+                  {placement}
+                </Button>
               </PopoverTrigger>
               <Content />
             </Popover>
@@ -145,40 +134,20 @@ export const Placements: Story = {
   },
 }
 
-const colors = [
-  'default',
-  'blue',
-  'orange',
-  'cyan',
-  'gray',
-  'red',
-  'green',
-  'pink',
-  'purple',
-  'yellow',
-] as const
+const COLORS = ['default', ...DEFAULT_COLORS] as const
 export const Colors: Story = {
   render: (props) => {
     return (
-      <Flex
-        sx={{
-          w: '100vw',
-          h: '100vh',
-        }}
-        justify='center'
-        align='center'
-        gap='5'
-        wrap='wrap'
-      >
-        {colors.map((color) => (
+      <Container>
+        {COLORS.map((color) => (
           <Popover key={color} {...props}>
             <PopoverTrigger>
-              <Trigger>{color}</Trigger>
+              <Button>{upperFirst(color)}</Button>
             </PopoverTrigger>
             <Content color={color} />
           </Popover>
         ))}
-      </Flex>
+      </Container>
     )
   },
 }
@@ -200,7 +169,7 @@ function ControlledPopover(props: PopoverProps) {
         {...props}
       >
         <PopoverTrigger>
-          <Trigger>click me</Trigger>
+          <Button>Click me</Button>
         </PopoverTrigger>
         <Content />
       </Popover>
@@ -230,7 +199,7 @@ export const WithOffset: Story = {
       <Container>
         <Popover {...props}>
           <PopoverTrigger>
-            <Trigger>offset is 0</Trigger>
+            <Button>Offset is 0</Button>
           </PopoverTrigger>
           <Content />
         </Popover>
@@ -261,7 +230,7 @@ const FlipTemplate = (props: PopoverProps) => {
       >
         <Popover container={() => ref.current} {...props}>
           <PopoverTrigger>
-            <Trigger>scroll the window</Trigger>
+            <Button>Scroll the window</Button>
           </PopoverTrigger>
           <Content />
         </Popover>
@@ -290,13 +259,13 @@ export const WithDelay: Story = {
       <Container>
         <Popover openDelay={500} closeDelay={0} {...props}>
           <PopoverTrigger>
-            <Trigger>Delay Open 500ms</Trigger>
+            <Button>Delay open 500ms</Button>
           </PopoverTrigger>
           <PopoverContent>This is the content of the popover.</PopoverContent>
         </Popover>
         <Popover openDelay={0} closeDelay={500} {...props}>
           <PopoverTrigger>
-            <Trigger>Delay Close 500ms</Trigger>
+            <Button>Delay close 500ms</Button>
           </PopoverTrigger>
           <PopoverContent>This is the content of the popover.</PopoverContent>
         </Popover>
@@ -311,7 +280,7 @@ export const WithForm: Story = {
       <Container>
         <Popover {...props}>
           <PopoverTrigger>
-            <Trigger>click me</Trigger>
+            <Button>Click me</Button>
           </PopoverTrigger>
           <PopoverContent>
             <Box as='form'>

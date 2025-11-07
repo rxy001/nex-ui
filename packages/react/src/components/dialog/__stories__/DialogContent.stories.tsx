@@ -32,13 +32,6 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    size: 'md',
-    scroll: 'outside',
-    placement: 'top',
-    hideCloseButton: false,
-    fullScreen: false,
-  },
   render: (props) => {
     return (
       <Dialog>
@@ -82,9 +75,7 @@ type Story = StoryObj<typeof meta>
 
 export default meta
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 function ScrollTemplate(props: DialogContentProps) {
   return (
