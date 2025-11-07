@@ -4,9 +4,28 @@ import { AccordionItem } from '../AccordionItem'
 import { Flex } from '../../flex'
 import type { Key } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { AccordionProps } from '../types'
 
 const Text =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.'
+
+const AccordionTemplate = (props: AccordionProps) => {
+  return (
+    <Accordion {...props}>
+      <AccordionItem itemKey='1' title='Accordion 1'>
+        {Text}
+      </AccordionItem>
+      <AccordionItem itemKey='2' title='Accordion 2'>
+        {Text}
+      </AccordionItem>
+      <AccordionItem itemKey='3' title='Accordion 3'>
+        {Text}
+      </AccordionItem>
+    </Accordion>
+  )
+}
+
+const variants = ['outlined', 'underlined'] as const
 
 const meta = {
   title: 'Components/Accordion',
@@ -25,32 +44,11 @@ const meta = {
       control: 'boolean',
     },
     variant: {
-      options: ['underlined', 'outlined'],
+      options: variants,
       control: 'select',
     },
   },
-  args: {
-    disabled: false,
-    multiple: false,
-    hideIndicator: false,
-    keepMounted: true,
-    variant: 'underlined',
-  },
-  render: (props) => {
-    return (
-      <Accordion {...props}>
-        <AccordionItem itemKey='1' title='Accordion 1'>
-          {Text}
-        </AccordionItem>
-        <AccordionItem itemKey='2' title='Accordion 2'>
-          {Text}
-        </AccordionItem>
-        <AccordionItem itemKey='3' title='Accordion 3'>
-          {Text}
-        </AccordionItem>
-      </Accordion>
-    )
-  },
+  render: (props) => <AccordionTemplate {...props} />,
 } satisfies Meta<typeof Accordion<'div'>>
 
 export default meta
@@ -99,16 +97,14 @@ export const hideIndicator: Story = {
 export const Variants: Story = {
   render: (props) => (
     <Flex direction='column' gap='6'>
-      <Accordion {...props} variant='underlined' defaultExpandedKeys={['1']}>
-        <AccordionItem itemKey='1' title='Underlined Accordion'>
-          {Text}
-        </AccordionItem>
-      </Accordion>
-      <Accordion {...props} variant='outlined' defaultExpandedKeys={['1']}>
-        <AccordionItem itemKey='1' title='Outlined Accordion'>
-          {Text}
-        </AccordionItem>
-      </Accordion>
+      {variants.map((variant) => (
+        <AccordionTemplate
+          key={variant}
+          {...props}
+          variant={variant}
+          defaultExpandedKeys={['1']}
+        />
+      ))}
     </Flex>
   ),
 }
@@ -119,21 +115,11 @@ export const Controlled: Story = {
     const [expandedKeys, setExpandedKeys] = useState<Key[]>(['1'])
     return (
       <>
-        <Accordion
+        <AccordionTemplate
           expandedKeys={expandedKeys}
           onExpandedKeysChange={setExpandedKeys}
           {...props}
-        >
-          <AccordionItem itemKey='1' title='Accordion 1'>
-            {Text}
-          </AccordionItem>
-          <AccordionItem itemKey='2' title='Accordion 2'>
-            {Text}
-          </AccordionItem>
-          <AccordionItem itemKey='3' title='Accordion 3'>
-            {Text}
-          </AccordionItem>
-        </Accordion>
+        />
         <p>
           Current Expanded Keys:
           {expandedKeys.length > 0 ? expandedKeys.join(', ') : 'None'}

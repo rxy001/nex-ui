@@ -1,3 +1,4 @@
+import { COLORS, SIZES } from '~/sb/utils'
 import { AvatarGroup } from '../AvatarGroup'
 import { Avatar } from '../Avatar'
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -8,24 +9,14 @@ const meta = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: SIZES,
     },
     radius: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'full'],
     },
     color: {
-      options: [
-        'blue',
-        'orange',
-        'cyan',
-        'gray',
-        'red',
-        'green',
-        'pink',
-        'purple',
-        'yellow',
-      ],
+      options: COLORS,
       control: 'select',
     },
     outlined: {
@@ -37,13 +28,6 @@ const meta = {
     spacing: {
       control: 'number',
     },
-  },
-  args: {
-    color: 'orange',
-    size: 'md',
-    outlined: true,
-    radius: 'full',
-    max: 5,
   },
   render: (props) => {
     return (
@@ -62,9 +46,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 export const WithMaxCount: Story = {
   args: {

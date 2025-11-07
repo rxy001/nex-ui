@@ -149,16 +149,23 @@ export function createTokens(config: CreateTokensConfig) {
     walkObject(
       tokens,
       (value: TokenValue, path: string[]) => {
-        if (__DEV__ && !isValidTokenCategory(path[0])) {
-          console.error('[Nex-UI] system: Unknown token category: %s.', path[0])
+        if (!isValidTokenCategory(path[0])) {
+          if (__DEV__) {
+            console.error(
+              '[Nex-UI] system: Unknown token category: %s.',
+              path[0],
+            )
+          }
           return
         }
 
-        if (__DEV__ && !isValidTokenValue(value)) {
-          console.error(
-            '[Nex-UI] system: Expect the token value to be a string or a number. but what is currently received is %o.',
-            value,
-          )
+        if (!isValidTokenValue(value)) {
+          if (__DEV__) {
+            console.error(
+              '[Nex-UI] system: Expect the token value to be a string or a number. but what is currently received is %o.',
+              value,
+            )
+          }
           return
         }
 
@@ -190,15 +197,23 @@ export function createTokens(config: CreateTokensConfig) {
     walkObject(
       semanticTokens,
       (value: SemanticTokenValue, path: string[]) => {
-        if (__DEV__ && !isValidTokenCategory(path[0])) {
-          console.error('[Nex-UI] system: Unknown token category: %s.', path[0])
+        if (!isValidTokenCategory(path[0])) {
+          if (__DEV__) {
+            console.error(
+              '[Nex-UI] system: Unknown token category: %s.',
+              path[0],
+            )
+          }
           return
         }
-        if (__DEV__ && !isValidSemanticTokenValue(value)) {
-          console.error(
-            '[Nex-UI] system: Expect the semanticToken value to be a string, a number, or a responsive color. but what is currently received is %o.',
-            value,
-          )
+        if (!isValidSemanticTokenValue(value)) {
+          if (__DEV__) {
+            console.error(
+              '[Nex-UI] system: Expect the semanticToken value to be a string, a number, or a responsive color. but what is currently received is %o.',
+              value,
+            )
+          }
+
           return
         }
 

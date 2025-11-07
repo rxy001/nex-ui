@@ -1,22 +1,18 @@
 import { GithubOutlined } from '@nex-ui/icons'
+import { upperFirst } from '@nex-ui/utils'
+import {
+  COLORS,
+  SIZES as DEFAULT_SIZES,
+  RADII as DEFAULT_RADII,
+  toReadableSize,
+} from '~/sb/utils'
 import { Badge } from '../Badge'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-const sizes = ['xs', 'sm', 'md', 'lg'] as const
-const radii = ['none', 'xs', 'sm', 'md', 'lg', 'full'] as const
-const colors = [
-  'blue',
-  'orange',
-  'cyan',
-  'gray',
-  'red',
-  'green',
-  'pink',
-  'purple',
-  'yellow',
-] as const
-const variants = ['solid', 'subtle', 'outlined', 'faded'] as const
+const SIZES = ['xs', ...DEFAULT_SIZES] as const
+const RADII = ['xs', ...DEFAULT_RADII] as const
+const VARIANTS = ['solid', 'subtle', 'outlined', 'faded'] as const
 
 const meta = {
   title: 'Components/Badge',
@@ -24,19 +20,19 @@ const meta = {
   argTypes: {
     size: {
       control: 'select',
-      options: sizes,
+      options: SIZES,
     },
     radius: {
       control: 'select',
-      options: radii,
+      options: RADII,
     },
     color: {
-      options: colors,
+      options: COLORS,
       control: 'select',
     },
     variant: {
       control: 'select',
-      options: variants,
+      options: VARIANTS,
     },
     closable: {
       control: 'boolean',
@@ -46,9 +42,6 @@ const meta = {
     },
   },
   args: {
-    color: 'blue',
-    size: 'lg',
-    radius: 'md',
     children: 'Badge',
   },
 } satisfies Meta<typeof Badge<'span'>>
@@ -57,42 +50,38 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 export const Colors: Story = {
   render: (args) => (
     <Flex gap='5'>
-      {colors.map((color) => (
-        <Badge
-          {...args}
-          key={color}
-          color={color}
-          sx={{
-            textTransform: 'capitalize',
-          }}
-        >
-          {color}
+      {COLORS.map((color) => (
+        <Badge {...args} key={color} color={color}>
+          {upperFirst(color)}
         </Badge>
       ))}
     </Flex>
   ),
 }
 
-const sizeText = {
-  xs: 'Extra Small',
-  sm: 'Small',
-  md: 'Medium',
-  lg: 'Large',
-}
-
 export const Sizes: Story = {
   render: (args) => (
     <Flex gap='5' align='center'>
-      {sizes.map((size) => (
+      {SIZES.map((size) => (
         <Badge {...args} key={size} size={size}>
-          {sizeText[size]}
+          {toReadableSize(size)}
+        </Badge>
+      ))}
+    </Flex>
+  ),
+}
+
+export const Radius: Story = {
+  render: (args) => (
+    <Flex gap='5' align='center'>
+      {RADII.map((radius) => (
+        <Badge {...args} key={radius} radius={radius}>
+          {toReadableSize(radius)}
         </Badge>
       ))}
     </Flex>
@@ -102,16 +91,9 @@ export const Sizes: Story = {
 export const Variants: Story = {
   render: (args) => (
     <Flex gap='5' align='center'>
-      {variants.map((variant) => (
-        <Badge
-          key={variant}
-          variant={variant}
-          sx={{
-            textTransform: 'capitalize',
-          }}
-          {...args}
-        >
-          {variant}
+      {VARIANTS.map((variant) => (
+        <Badge {...args} key={variant} variant={variant}>
+          {upperFirst(variant)}
         </Badge>
       ))}
     </Flex>

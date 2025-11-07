@@ -1,55 +1,26 @@
 import { useState } from 'react'
+import { HeartFilled } from '@nex-ui/icons'
+import { COLORS, SIZES, RADII, toReadableSize } from '~/sb/utils'
+import { upperFirst } from '@nex-ui/utils'
 import { Checkbox } from '../Checkbox'
+import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { CheckboxProps } from '../types'
-
-const HeartIcon = (props: any) => {
-  return (
-    <svg
-      fill='currentColor'
-      height='1em'
-      viewBox='0 0 24 24'
-      width='1em'
-      xmlns='http://www.w3.org/2000/svg'
-      aria-hidden
-      focusable={false}
-      {...props}
-    >
-      <path
-        d='M12.62 20.81c-.34.12-.9.12-1.24 0C8.48 19.82 2 15.69 2 8.69 2 5.6 4.49 3.1 7.56 3.1c1.82 0 3.43.88 4.44 2.24a5.53 5.53 0 0 1 4.44-2.24C19.51 3.1 22 5.6 22 8.69c0 7-6.48 11.13-9.38 12.12Z'
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth={1.5}
-      />
-    </svg>
-  )
-}
 
 const meta = {
   title: 'Components/Checkbox',
   component: Checkbox<'input'>,
   argTypes: {
     color: {
-      options: [
-        'blue',
-        'orange',
-        'cyan',
-        'gray',
-        'red',
-        'green',
-        'pink',
-        'purple',
-        'yellow',
-      ],
+      options: COLORS,
       control: 'select',
     },
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: SIZES,
       control: 'select',
     },
     radius: {
-      options: ['sm', 'md', 'lg', 'full', 'none'],
+      options: RADII,
       control: 'select',
     },
     disabled: {
@@ -60,11 +31,7 @@ const meta = {
     },
   },
   args: {
-    color: 'blue',
-    size: 'md',
-    disabled: false,
     children: 'Checkbox',
-    defaultChecked: false,
   },
 } satisfies Meta<typeof Checkbox<'input'>>
 
@@ -72,8 +39,48 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
+export const Default: Story = {}
+
+export const Colors: Story = {
+  render: (props) => {
+    return (
+      <Flex gap='50' wrap='wrap'>
+        {COLORS.map((color) => (
+          <Checkbox defaultChecked {...props} key={color} color={color}>
+            {upperFirst(color)}
+          </Checkbox>
+        ))}
+      </Flex>
+    )
+  },
+}
+
+export const Sizes: Story = {
+  render: (props) => {
+    return (
+      <Flex gap='5' align='center'>
+        {SIZES.map((size) => (
+          <Checkbox {...props} key={size} size={size}>
+            {toReadableSize(size)}
+          </Checkbox>
+        ))}
+      </Flex>
+    )
+  },
+}
+
+export const Radius: Story = {
+  render: (props) => {
+    return (
+      <Flex gap='5'>
+        {RADII.map((radius) => (
+          <Checkbox {...props} key={radius} radius={radius}>
+            {toReadableSize(radius)}
+          </Checkbox>
+        ))}
+      </Flex>
+    )
+  },
 }
 
 export const Disabled: Story = {
@@ -96,7 +103,7 @@ export const DefaultChecked: Story = {
 
 export const CustomCheckIcon: Story = {
   args: {
-    icon: <HeartIcon />,
+    icon: <HeartFilled />,
   },
 }
 

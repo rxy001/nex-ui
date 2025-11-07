@@ -32,14 +32,6 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    keepMounted: false,
-    closeOnInteractBackdrop: true,
-    hideBackdrop: false,
-    preventScroll: false,
-    closeOnEscape: true,
-    restoreFocus: true,
-  },
   render: (props) => {
     return (
       <Dialog {...props}>
@@ -83,9 +75,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 export const DefaultOpen: Story = {
   args: {

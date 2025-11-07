@@ -1,7 +1,17 @@
 import { HeartFilled, LikeFilled, DislikeFilled } from '@nex-ui/icons'
+import { upperFirst } from '@nex-ui/utils'
+import {
+  SIZES,
+  COLORS,
+  RADII,
+  toReadableSize,
+  toReadableRadius,
+} from '~/sb/utils'
 import { Button } from '../Button'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const VARIANTS = ['solid', 'outlined', 'ghost', 'faded'] as const
 
 const meta = {
   title: 'Components/Button',
@@ -17,19 +27,23 @@ const meta = {
       control: 'boolean',
     },
     variant: {
-      options: ['solid', 'outlined', 'ghost', 'faded'],
+      options: VARIANTS,
       control: 'select',
     },
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: SIZES,
       control: 'select',
     },
     radius: {
-      options: ['sm', 'md', 'lg', 'full'],
+      options: RADII,
       control: 'select',
     },
     href: {
       control: 'text',
+    },
+    color: {
+      options: COLORS,
+      control: 'select',
     },
     loading: {
       control: 'boolean',
@@ -44,13 +58,6 @@ const meta = {
   },
   args: {
     children: 'Button',
-    size: 'md',
-    variant: 'solid',
-    disabled: false,
-    fullWidth: false,
-    iconOnly: false,
-    loading: false,
-    spinnerPlacement: 'start',
   },
 } satisfies Meta<typeof Button<'button'>>
 
@@ -58,9 +65,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 export const FullWidthButton: Story = {
   args: {
@@ -71,19 +76,12 @@ export const FullWidthButton: Story = {
 export const Variants: Story = {
   render: (props) => {
     return (
-      <Flex gap={30} wrap='wrap'>
-        <Button {...props} variant='solid'>
-          Solid
-        </Button>
-        <Button {...props} variant='outlined'>
-          Outlined
-        </Button>
-        <Button {...props} variant='ghost'>
-          Ghost
-        </Button>
-        <Button {...props} variant='faded'>
-          Faded
-        </Button>
+      <Flex gap='5' wrap='wrap'>
+        {VARIANTS.map((variant) => (
+          <Button {...props} key={variant} variant={variant}>
+            {upperFirst(variant)}
+          </Button>
+        ))}
       </Flex>
     )
   },
@@ -92,34 +90,40 @@ export const Variants: Story = {
 export const Colors: Story = {
   render: (props) => {
     return (
-      <Flex gap={30} wrap='wrap'>
-        <Button {...props} key='blue'>
-          Blue
-        </Button>
-        <Button {...props} key='purple' color='purple'>
-          Purple
-        </Button>
-        <Button {...props} key='gray' color='gray'>
-          Gray
-        </Button>
-        <Button {...props} key='red' color='red'>
-          Red
-        </Button>
-        <Button {...props} key='cyan' color='cyan'>
-          Cyan
-        </Button>
-        <Button {...props} key='pink' color='pink'>
-          Pink
-        </Button>
-        <Button {...props} key='yellow' color='yellow'>
-          Yellow
-        </Button>
-        <Button {...props} key='green' color='green'>
-          Green
-        </Button>
-        <Button {...props} key='orange' color='orange'>
-          Orange
-        </Button>
+      <Flex gap='5' wrap='wrap'>
+        {COLORS.map((color) => (
+          <Button {...props} key={color} color={color}>
+            {upperFirst(color)}
+          </Button>
+        ))}
+      </Flex>
+    )
+  },
+}
+
+export const Sizes: Story = {
+  render: (props) => {
+    return (
+      <Flex gap='5' align='center'>
+        {SIZES.map((size) => (
+          <Button {...props} key={size} size={size}>
+            {toReadableSize(size)}
+          </Button>
+        ))}
+      </Flex>
+    )
+  },
+}
+
+export const Radius: Story = {
+  render: (props) => {
+    return (
+      <Flex gap='5' align='center'>
+        {RADII.map((radius) => (
+          <Button {...props} key={radius} radius={radius}>
+            {toReadableRadius(radius)}
+          </Button>
+        ))}
       </Flex>
     )
   },

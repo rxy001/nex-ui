@@ -223,6 +223,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
       invalid,
       type,
       value,
+      placeholder,
       ref: inputRef,
       onChange: handleChange,
     },
