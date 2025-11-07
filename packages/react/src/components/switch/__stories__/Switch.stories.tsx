@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
+import { COLORS, SIZES, toReadableSize } from '~/sb/utils'
+import { upperFirst } from '@nex-ui/utils'
 import { Switch } from '../Switch'
+import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { SwitchProps } from '../types'
 
@@ -9,31 +12,16 @@ const meta = {
   component: Switch<'input'>,
   argTypes: {
     color: {
-      options: [
-        'blue',
-        'orange',
-        'cyan',
-        'gray',
-        'red',
-        'green',
-        'pink',
-        'purple',
-        'yellow',
-      ],
+      options: COLORS,
       control: 'select',
     },
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: SIZES,
       control: 'select',
     },
     disabled: {
       control: 'boolean',
     },
-  },
-  args: {
-    disabled: false,
-    color: 'blue',
-    size: 'md',
   },
 } satisfies Meta<typeof Switch<'input'>>
 
@@ -45,6 +33,30 @@ export const Default: Story = {
   args: {
     'aria-label': 'Default Switch',
   },
+}
+
+export const Sizes: Story = {
+  render: (props) => (
+    <Flex gap='5'>
+      {SIZES.map((size) => (
+        <Switch {...props} key={size} size={size}>
+          {toReadableSize(size)}
+        </Switch>
+      ))}
+    </Flex>
+  ),
+}
+
+export const Colors: Story = {
+  render: (props) => (
+    <Flex gap='5'>
+      {COLORS.map((color) => (
+        <Switch {...props} key={color} color={color} defaultChecked>
+          {upperFirst(color)}
+        </Switch>
+      ))}
+    </Flex>
+  ),
 }
 
 export const WithLabel: Story = {

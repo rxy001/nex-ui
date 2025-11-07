@@ -1,4 +1,4 @@
-import { isString } from '@nex-ui/utils'
+import { __DEV__, isString } from '@nex-ui/utils'
 import type { Breakpoints } from './breakpoints'
 import type { Dictionary } from './types'
 
@@ -39,10 +39,12 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
     const key = `_${selectorKey}`
 
     if (selectorMap.get(key)) {
-      console.error(
-        '[Nex UI] system: The selector %s has already been defined in the breakpoint.',
-        selectorValue,
-      )
+      if (__DEV__) {
+        console.error(
+          '[Nex UI] system: The selector %s has already been defined in the breakpoint.',
+          selectorValue,
+        )
+      }
       continue
     }
     selectorMap.set(key, selectorValue)

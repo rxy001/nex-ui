@@ -27,11 +27,6 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    placement: 'right',
-    size: 'md',
-    hideCloseButton: false,
-  },
   render: (props) => {
     return (
       <Drawer>
@@ -91,9 +86,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = {}
 
 function PlacementTemplate({ placement }: DrawerContentProps) {
   return (

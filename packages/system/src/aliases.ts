@@ -15,11 +15,14 @@ export function createAliases(aliases: AliasesDefinition) {
 
     const value = aliases[key]
 
-    if (__DEV__ && !isValidAliasValue(value)) {
-      console.error(
-        '[Nex UI] system: Expect the alias value to be a CSSProperty or CSSProperty[], but what is currently received is %o.',
-        value,
-      )
+    if (!isValidAliasValue(value)) {
+      if (__DEV__) {
+        console.error(
+          '[Nex UI] system: Expect the alias value to be a CSSProperty or CSSProperty[], but what is currently received is %o.',
+          value,
+        )
+      }
+
       continue
     }
 

@@ -1,17 +1,27 @@
 import { SearchOutlined } from '@nex-ui/icons'
+import {
+  COLORS,
+  SIZES,
+  RADII,
+  toReadableSize,
+  toReadableRadius,
+} from '~/sb/utils'
 import { useState } from 'react'
+import { upperFirst } from '@nex-ui/utils'
 import { Input } from '../Input'
 import { Flex } from '../../flex'
 import { Icon } from '../../icon'
 import type { InputProps } from '../types'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+const VARIANTS = ['faded', 'outlined', 'underlined'] as const
+
 const meta = {
   title: 'Components/Input',
   component: Input<'input'>,
   argTypes: {
     variant: {
-      options: ['faded', 'outlined', 'underlined'],
+      options: VARIANTS,
       control: 'select',
     },
     disabled: {
@@ -21,25 +31,15 @@ const meta = {
       control: 'boolean',
     },
     color: {
-      options: [
-        'blue',
-        'orange',
-        'cyan',
-        'gray',
-        'red',
-        'green',
-        'pink',
-        'purple',
-        'yellow',
-      ],
+      options: COLORS,
       control: 'select',
     },
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: SIZES,
       control: 'select',
     },
     radius: {
-      options: ['sm', 'md', 'lg', 'full', 'none'],
+      options: RADII,
       control: 'select',
     },
     clearable: {
@@ -67,16 +67,6 @@ const meta = {
       control: 'select',
     },
   },
-  args: {
-    variant: 'outlined',
-    disabled: false,
-    size: 'md',
-    color: 'blue',
-    invalid: false,
-    clearable: false,
-    labelPlacement: 'float-outside',
-    type: 'text',
-  },
 } satisfies Meta<typeof Input<'input'>>
 
 export default meta
@@ -99,33 +89,17 @@ export const Disabled: Story = {
 export const Variants: Story = {
   render: (props) => {
     return (
-      <>
-        <Flex gap='5'>
-          <Input {...props} variant='outlined' label='Outlined' />
-          <Input {...props} variant='faded' label='Faded' />
-          <Input {...props} variant='underlined' label='Underlined' />
-        </Flex>
-        <Flex gap='5' sx={{ mt: '10' }}>
+      <Flex gap='5'>
+        {VARIANTS.map((variant) => (
           <Input
             {...props}
-            placeholder='Placeholder'
-            variant='outlined'
-            label='Outlined'
+            key={variant}
+            variant={variant}
+            label='Variant'
+            defaultValue={upperFirst(variant)}
           />
-          <Input
-            {...props}
-            placeholder='Placeholder'
-            variant='faded'
-            label='Faded'
-          />
-          <Input
-            {...props}
-            placeholder='Placeholder'
-            variant='underlined'
-            label='Underlined'
-          />
-        </Flex>
-      </>
+        ))}
+      </Flex>
     )
   },
 }
@@ -133,15 +107,47 @@ export const Variants: Story = {
 export const Colors: Story = {
   render: (props) => (
     <Flex gap='5' wrap='wrap'>
-      <Input {...props} label='Color' color='blue' defaultValue='blue' />
-      <Input {...props} label='Color' color='cyan' defaultValue='cyan' />
-      <Input {...props} label='Color' color='gray' defaultValue='gray' />
-      <Input {...props} label='Color' color='green' defaultValue='green' />
-      <Input {...props} label='Color' color='orange' defaultValue='orange' />
-      <Input {...props} label='Color' color='pink' defaultValue='pink' />
-      <Input {...props} label='Color' color='purple' defaultValue='purple' />
-      <Input {...props} label='Color' color='yellow' defaultValue='yellow' />
-      <Input {...props} label='Color' color='red' defaultValue='red' />
+      {COLORS.map((color) => (
+        <Input
+          {...props}
+          key={color}
+          label='Color'
+          defaultValue={upperFirst(color)}
+          color={color}
+        />
+      ))}
+    </Flex>
+  ),
+}
+
+export const Sizes: Story = {
+  render: (props) => (
+    <Flex gap='5' align='end'>
+      {SIZES.map((size) => (
+        <Input
+          {...props}
+          label='Size'
+          key={size}
+          size={size}
+          defaultValue={toReadableSize(size)}
+        />
+      ))}
+    </Flex>
+  ),
+}
+
+export const Radius: Story = {
+  render: (props) => (
+    <Flex gap='5' align='end'>
+      {RADII.map((radius) => (
+        <Input
+          {...props}
+          key={radius}
+          label='Radius'
+          radius={radius}
+          defaultValue={toReadableRadius(radius)}
+        />
+      ))}
     </Flex>
   ),
 }
