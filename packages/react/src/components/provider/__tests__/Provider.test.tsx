@@ -96,6 +96,7 @@ describe('NexUIProvider', () => {
             },
           },
         }}
+        cssCascadeLayersDisabled
       >
         <Button>Button</Button>
         <Divider />
@@ -168,6 +169,7 @@ describe('Nested NexUIProvider', () => {
             },
           },
         }}
+        cssCascadeLayersDisabled
       >
         <Button data-testid='outer-button'>Button</Button>
         <NexUIProvider
@@ -205,7 +207,7 @@ describe('Nested NexUIProvider', () => {
 
   it('should override primaryThemeColor', () => {
     const { getByTestId } = render(
-      <NexUIProvider>
+      <NexUIProvider cssCascadeLayersDisabled>
         <Button data-testid='outer-button'>Button</Button>
         <NexUIProvider theme={{ primaryThemeColor: 'red' }}>
           <Button data-testid='inner-button'>Button</Button>
