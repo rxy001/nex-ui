@@ -35,7 +35,7 @@ describe('Button', () => {
   testVariantDataAttrs(<Button>Button</Button>, ['fullWidth', [true, false]])
 
   testVariantDataAttrs(<Button>Button</Button>, [
-    'disableRipple',
+    'rippleDisabled',
     [true, false],
   ])
 
@@ -87,7 +87,7 @@ describe('Button', () => {
     expect(button).toHaveAttribute('data-color', 'blue')
     expect(button).toHaveAttribute('data-icon-only', 'false')
     expect(button).toHaveAttribute('data-full-width', 'false')
-    expect(button).toHaveAttribute('data-disable-ripple', 'false')
+    expect(button).toHaveAttribute('data-ripple-disabled', 'false')
 
     expect(button).toMatchSnapshot()
   })
