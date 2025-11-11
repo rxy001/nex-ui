@@ -43,6 +43,8 @@ export type {
 
 export type { CssFn } from './css'
 
+export type { Layers, CascadeLayer } from './layers'
+
 export type { BreakpointsDefinition } from './breakpoints'
 
 export type { AliasesDefinition } from './aliases'

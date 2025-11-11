@@ -8,18 +8,19 @@ const SELECTOR_HOVER = '&:not(:disabled):not([data-disabled=true]):hover'
 const SELECTOR_ACTIVE = '&:not(:disabled):not([data-disabled=true]):active'
 const SELECTOR_DARK = '[data-nui-color-scheme="dark"] &'
 const SELECTOR_LIGHT = '[data-nui-color-scheme="light"] &'
-const CSS_VARS_PREFIX = 'test'
+const PREFIX = 'test'
 
 describe('createSystem', () => {
   it('should call with default config', () => {
-    const system = createSystem({ cssVarsPrefix: CSS_VARS_PREFIX })
+    const system = createSystem({ prefix: PREFIX })
     expect(system).toBeDefined()
   })
 })
 
 describe('css', () => {
   const sysConfig = defineConfig({
-    cssVarsPrefix: CSS_VARS_PREFIX,
+    cssCascadeLayersDisabled: false,
+    prefix: PREFIX,
     aliases: {
       w: 'width',
       h: 'height',
@@ -124,7 +125,7 @@ describe('css', () => {
     },
   })
 
-  const { css, getGlobalCssVars, getToken } = createSystem(sysConfig)
+  const { css, getGlobalCssVars, getToken, layers } = createSystem(sysConfig)
 
   const getCssVar = (token: string) => getToken(token)?.value
 
@@ -146,6 +147,34 @@ describe('css', () => {
       width: getCssVar('sizes.1'),
       height: getCssVar('sizes.1.5'),
     })
+  })
+
+  it('should support cascade layers', () => {
+    expect(layers.atRules).toBe(`@layer ${PREFIX}.global, ${PREFIX}.css;`)
+
+    const objectStyle = {
+      color: 'red',
+    }
+
+    expect(layers.wrapWithLayer('global', objectStyle)).toEqual({
+      [`@layer ${PREFIX}.global`]: objectStyle,
+    })
+
+    const arrayStyle = [
+      {
+        color: 'red',
+      },
+    ]
+
+    expect(layers.wrapWithLayer('css', arrayStyle)).toEqual({
+      [`@layer ${PREFIX}.css`]: arrayStyle,
+    })
+
+    expect(layers.wrapWithLayer('css', null)).toEqual(null)
+    expect(layers.wrapWithLayer('css', [])).toEqual([])
+    expect(layers.wrapWithLayer('css', {})).toEqual({})
+    expect(layers.wrapWithLayer('css', '')).toEqual('')
+    expect(layers.wrapWithLayer('css', 1)).toEqual(1)
   })
 
   it('should convert tokens into corresponding CSS variables', () => {
