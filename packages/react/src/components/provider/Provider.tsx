@@ -14,11 +14,11 @@ function InnerProvider({
   children,
   primaryThemeColor = 'blue',
 }: InnerProviderProps) {
-  const { css } = useSystem()
+  const { css, layers } = useSystem()
 
   const contextValue = useMemo(
-    () => ({ components, prefix, css, primaryThemeColor }),
-    [components, css, prefix, primaryThemeColor],
+    () => ({ components, prefix, css, layers, primaryThemeColor }),
+    [components, css, layers, prefix, primaryThemeColor],
   )
   return (
     <NexContextProvider value={contextValue}>{children}</NexContextProvider>
@@ -28,11 +28,18 @@ function InnerProvider({
 InnerProvider.displayName = 'InnerProvider'
 
 function TopLevelProvider(props: NexUIProviderProps) {
-  const { theme, children, colorScheme, prefix = 'nui' } = props
+  const {
+    theme,
+    children,
+    colorScheme,
+    cssCascadeLayersDisabled,
+    prefix = 'nui',
+  } = props
 
   const systemProviderProps = useMemo<SystemProviderProps>(() => {
     return {
-      cssVarsPrefix: prefix,
+      cssCascadeLayersDisabled,
+      prefix,
       scales: {
         ...theme?.scales,
         ...defaultConfig.scales,
@@ -63,14 +70,19 @@ function TopLevelProvider(props: NexUIProviderProps) {
       defaultMode: colorScheme?.defaultMode ?? 'system',
     }
   }, [
+    cssCascadeLayersDisabled,
     prefix,
     theme?.scales,
     theme?.selectors,
     theme?.aliases,
+    theme?.breakpoints,
     theme?.tokens,
     theme?.semanticTokens,
-    theme?.breakpoints,
-    colorScheme,
+    colorScheme?.colorSchemeNode,
+    colorScheme?.modeStorageKey,
+    colorScheme?.colorSchemeSelector,
+    colorScheme?.forcedMode,
+    colorScheme?.defaultMode,
   ])
 
   return (

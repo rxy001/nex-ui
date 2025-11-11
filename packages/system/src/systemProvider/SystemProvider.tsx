@@ -8,12 +8,13 @@ import {
   createGetColorSchemeSelector,
 } from '../colorScheme'
 import type { ConditionKey } from '../tokens'
-import type { Dictionary } from '../types'
+import type { Dictionary, Interpolation } from '../types'
 import type { SystemProviderProps } from './types'
 
 export const SystemProvider = ({
   children,
-  cssVarsPrefix,
+  prefix,
+  cssCascadeLayersDisabled,
   aliases,
   tokens,
   semanticTokens,
@@ -31,14 +32,15 @@ export const SystemProvider = ({
     [colorSchemeSelector],
   )
 
-  const { css, getGlobalCssVars } = useMemo(() => {
+  const { css, getGlobalCssVars, layers } = useMemo(() => {
     return createSystem({
-      cssVarsPrefix,
+      prefix,
       aliases,
       tokens,
       semanticTokens,
       scales,
       breakpoints,
+      cssCascadeLayersDisabled,
       selectors: {
         ...selectors,
         dark: getColorSchemeSelector('dark'),
@@ -48,7 +50,8 @@ export const SystemProvider = ({
   }, [
     aliases,
     breakpoints,
-    cssVarsPrefix,
+    prefix,
+    cssCascadeLayersDisabled,
     getColorSchemeSelector,
     scales,
     selectors,
@@ -58,32 +61,46 @@ export const SystemProvider = ({
 
   const globalStyles = useMemo(() => {
     const cssVarMap = getGlobalCssVars()
-    const result: Dictionary = {}
+    const result: Dictionary = {
+      [layers.atRules]: {},
+    }
 
     cssVarMap.forEach((value, key: ConditionKey) => {
       const cssVar = Object.fromEntries(value.entries())
 
       if (key === 'base') {
-        merge(result, {
-          ':root': cssVar,
-        })
+        merge(
+          result,
+          layers.wrapWithLayer('global', {
+            ':root': cssVar,
+          }),
+        )
         return
       }
 
-      merge(result, {
-        [getColorSchemeSelector(key)]: {
-          ':root': {
-            colorScheme: key,
-            ...cssVar,
+      merge(
+        result,
+        layers.wrapWithLayer('global', {
+          [getColorSchemeSelector(key)]: {
+            ':root': {
+              colorScheme: key,
+              ...cssVar,
+            },
           },
-        },
-      })
+        }),
+      )
     })
 
     return result
-  }, [getColorSchemeSelector, getGlobalCssVars])
+  }, [getColorSchemeSelector, getGlobalCssVars, layers])
 
-  const methods = useMemo(() => ({ css }), [css])
+  const methods = useMemo(
+    () => ({
+      css: (styles: Interpolation) => css(layers.wrapWithLayer('css', styles)),
+      layers,
+    }),
+    [css, layers],
+  )
 
   return (
     <InnerSystemProvider value={methods}>
