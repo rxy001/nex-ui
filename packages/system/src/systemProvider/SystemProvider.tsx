@@ -14,7 +14,6 @@ import type { SystemProviderProps } from './types'
 export const SystemProvider = ({
   children,
   prefix,
-  cssCascadeLayersDisabled,
   aliases,
   tokens,
   semanticTokens,
@@ -23,6 +22,7 @@ export const SystemProvider = ({
   selectors,
   colorSchemeNode,
   forcedMode,
+  cssCascadeLayersDisabled = false,
   defaultMode = 'system',
   modeStorageKey = 'color-scheme',
   colorSchemeSelector = 'data',
@@ -61,9 +61,11 @@ export const SystemProvider = ({
 
   const globalStyles = useMemo(() => {
     const cssVarMap = getGlobalCssVars()
-    const result: Dictionary = {
-      [layers.atRules]: {},
-    }
+    const result: Dictionary = cssCascadeLayersDisabled
+      ? {}
+      : {
+          [layers.atRules]: {},
+        }
 
     cssVarMap.forEach((value, key: ConditionKey) => {
       const cssVar = Object.fromEntries(value.entries())
@@ -92,7 +94,12 @@ export const SystemProvider = ({
     })
 
     return result
-  }, [getColorSchemeSelector, getGlobalCssVars, layers])
+  }, [
+    cssCascadeLayersDisabled,
+    getColorSchemeSelector,
+    getGlobalCssVars,
+    layers,
+  ])
 
   const methods = useMemo(
     () => ({

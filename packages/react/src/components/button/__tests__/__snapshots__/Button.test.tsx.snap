@@ -60,12 +60,12 @@ exports[`Button should render with default props 1`] = `
 <button
   class="nui-button-root emotion-0"
   data-color="blue"
-  data-disable-ripple="false"
   data-disabled="false"
   data-full-width="false"
   data-icon-only="false"
   data-loading="false"
   data-radius="md"
+  data-ripple-disabled="false"
   data-size="md"
   data-variant="solid"
   tabindex="0"
