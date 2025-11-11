@@ -111,7 +111,7 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     color: toSlots(colorVariant, 'root'),
-    disableRipple: {
+    rippleDisabled: {
       true: {
         root: {
           transition: 'scale',
