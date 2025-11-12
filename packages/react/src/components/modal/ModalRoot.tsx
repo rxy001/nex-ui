@@ -62,7 +62,6 @@ export const ModalRoot = <
       open,
       keepMounted,
       ref: rootRef,
-      tabIndex: -1,
       onAnimationComplete: (animation: string) => {
         if (animation === 'hidden') {
           resolver.current?.()
