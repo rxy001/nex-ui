@@ -33,7 +33,7 @@ jobs:
         continue-on-error: false
         # Custom turbo build failure information
         run: |
-          pnpm build || {
+          pnpm build & pnpm build:cli || {
             echo "Turbo build failed with exit code $?"
             exit 1
           }
