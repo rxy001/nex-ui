@@ -1,6 +1,6 @@
 {
   "name": "@nex-ui/system",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "private": false,
   "author": "X1ng Yu",
   "description": "A lightweight and performant styling library based on Emotion, focusing on component architecture and developer experience.",
