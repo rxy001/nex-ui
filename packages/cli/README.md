@@ -8,7 +8,7 @@ To get started, use the following command:
 
 ```bash copy
 
-npx nex-ui@latest init
+npx @nex-ui/cli init
 
 ```
 
