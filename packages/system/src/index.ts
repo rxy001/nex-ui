@@ -71,7 +71,7 @@ export type {
   BorderWidthsDefinition,
   SemanticShadowsDefinition,
   SemanticBordersDefinition,
-  SemanticColorDefinition,
+  SemanticColorsDefinition,
   SemanticFontFamiliesDefinition,
   SemanticFontSizesDefinition,
   SemanticFontWeightsDefinition,
