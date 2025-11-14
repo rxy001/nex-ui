@@ -1,0 +1,48 @@
+{
+  "name": "@nex-ui/primitives",
+  "version": "0.0.18",
+  "author": "X1ng Yu",
+  "description": "🎉 A beautiful, modern, and reliable React component library.",
+  "homepage": "https://nex-ui-docs.vercel.app/",
+  "private": false,
+  "keywords": [
+    "react",
+    "react-component",
+    "nui",
+    "nex-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rxy001/nex-ui.git",
+    "directory": "packages/react"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsx ../../scripts/build.ts --dts",
+    "build:fast": "tsx ../../scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "src/index.ts",
+  "dependencies": {
+    "@nex-ui/hooks": "workspace:*",
+    "@nex-ui/icons": "workspace:*",
+    "@nex-ui/styled": "workspace:*",
+    "@nex-ui/system": "workspace:*",
+    "@nex-ui/utils": "workspace:*",
+    "clsx": "2.1.1"
+  },
+  "peerDependencies": {
+    "@emotion/react": ">=11",
+    "motion": "^12.7.2",
+    "react": ">=19",
+    "react-dom": ">=19"
+  },
+  "sideEffects": false,
+  "clean-package": "../../clean-package.config.json"
+}
