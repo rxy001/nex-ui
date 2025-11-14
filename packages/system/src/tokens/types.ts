@@ -78,7 +78,7 @@ type NestedColor =
       [key: string]: NestedColor
     })
 
-export type SemanticColorDefinition = Dictionary<NestedColor>
+export type SemanticColorsDefinition = Dictionary<NestedColor>
 
 // 将其改为泛性就会出现无法深层嵌套 ？？？
 type StringAndNumberForNestedSemanticTokenValue =
@@ -131,7 +131,7 @@ export type SemanticShadowsDefinition =
   Dictionary<StringForNestedSemanticTokenValue>
 
 export type SemanticTokensDefinition = {
-  colors?: SemanticColorDefinition
+  colors?: SemanticColorsDefinition
   spaces?: SemanticSpacesDefinition
   sizes?: SemanticSizesDefinition
   fontFamilies?: SemanticFontFamiliesDefinition
