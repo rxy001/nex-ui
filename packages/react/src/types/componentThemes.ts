@@ -33,6 +33,8 @@ import type {
   PopoverRecipe,
   PopoverContentRecipe,
   BadgeRecipe,
+  BreadcrumbRecipe,
+  BreadcrumbItemRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -68,6 +70,8 @@ import type {
   PopoverContentProps,
   PopoverProps,
   BadgeProps,
+  BreadcrumbProps,
+  BreadcrumbItemProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
@@ -208,6 +212,14 @@ export type ComponentThemes = {
   Badge?: {
     styleOverrides?: ComponentThemeObject<BadgeRecipe>
     defaultProps?: BadgeProps
+  }
+  Breadcrumb?: {
+    styleOverrides?: ComponentThemeObject<BreadcrumbRecipe>
+    defaultProps?: BreadcrumbProps
+  }
+  BreadcrumbItem?: {
+    styleOverrides?: ComponentThemeObject<BreadcrumbItemRecipe>
+    defaultProps?: BreadcrumbItemProps
   }
 }
 

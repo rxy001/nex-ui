@@ -183,7 +183,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * Spacing between Avatars.
    */
-  spacing?: number
+  spacing?: number | string
 
   /**
    * Custom renderer for surplus Avatars. Receives the surplus count based on children and max.

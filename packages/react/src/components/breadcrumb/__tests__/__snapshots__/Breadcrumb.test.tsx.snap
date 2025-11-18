@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb should render with default props 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  word-break: break-word;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+  gap: var(--nui-spaces-1);
+  color: color-mix(in oklab, var(--nui-colors-text) 50%, transparent);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  font-size: var(--nui-font-sizes-md);
+}
+
+.emotion-1:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
+  opacity: 0.6;
+}
+
+.emotion-1:is(:active, [data-active=true]):not(:disabled, [data-disabled=true]) {
+  opacity: 0.95;
+}
+
+.emotion-2 {
+  -webkit-margin-start: var(--breadcrumb-separator-gap, var(--nui-spaces-2));
+  margin-inline-start: var(--breadcrumb-separator-gap, var(--nui-spaces-2));
+  -webkit-margin-end: var(--breadcrumb-separator-gap, var(--nui-spaces-2));
+  margin-inline-end: var(--breadcrumb-separator-gap, var(--nui-spaces-2));
+  cursor: default;
+  color: color-mix(in oklab, var(--nui-colors-text) 50%, transparent);
+  font-size: var(--nui-font-sizes-md);
+}
+
+.emotion-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: default;
+  gap: var(--nui-spaces-1);
+  color: var(--nui-colors-text);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
+  font-size: var(--nui-font-sizes-md);
+}
+
+<nav
+  aria-label="breadcrumb"
+  class="nui-breadcrumb-root"
+  data-color="default"
+  data-size="md"
+>
+  <ol
+    class="nui-breadcrumb-list emotion-0"
+  >
+    <li
+      class="nui-breadcrumb-item-root"
+      data-color="default"
+      data-size="md"
+    >
+      <a
+        class="nui-breadcrumb-item-link emotion-1"
+      >
+        Home
+      </a>
+    </li>
+    <li
+      aria-hidden="true"
+      class="nui-breadcrumb-separator emotion-2"
+    >
+      /
+    </li>
+    <li
+      class="nui-breadcrumb-item-root"
+      data-color="default"
+      data-size="md"
+    >
+      <a
+        class="nui-breadcrumb-item-link emotion-1"
+      >
+        Category
+      </a>
+    </li>
+    <li
+      aria-hidden="true"
+      class="nui-breadcrumb-separator emotion-2"
+    >
+      /
+    </li>
+    <li
+      class="nui-breadcrumb-item-root"
+      data-color="default"
+      data-size="md"
+    >
+      <a
+        aria-current="page"
+        class="nui-breadcrumb-item-link emotion-5"
+      >
+        Product
+      </a>
+    </li>
+  </ol>
+</nav>
+`;

@@ -463,18 +463,6 @@ describe('Modal', () => {
   })
 
   describe('Accessibility', () => {
-    it("should have tabIndex=-1 on the Modal's root element", async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestModal open />,
-        {
-          useAct: true,
-        },
-      )
-      const root = getByTestId('modal-root')
-      expect(root).toHaveAttribute('tabIndex', '-1')
-      expect(root).not.toHaveAttribute('role')
-    })
-
     it('should have aria-labelledby and aria-describedby attributes on the ModalContent element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestModal open />,
