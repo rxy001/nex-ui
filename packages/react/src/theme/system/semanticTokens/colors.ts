@@ -248,4 +248,8 @@ export const colors = defineSemanticTokens.colors({
     _DEFAULT: 'white',
     _dark: '{colors.gray.900}',
   },
+  text: {
+    _DEFAULT: 'black',
+    _dark: 'white',
+  },
 })

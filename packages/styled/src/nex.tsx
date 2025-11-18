@@ -33,7 +33,10 @@ const createNexComponent = (tag: any) => {
         }
       }
 
-      if (sx == null) {
+      if (
+        sx == null ||
+        (typeof sx === 'object' && Object.keys(sx).length === 0)
+      ) {
         return <FinalTag {...newProps} />
       }
 
