@@ -1,6 +1,5 @@
 import type { ReactNode, ElementType } from 'react'
 import type { Interpolation } from '@nex-ui/system'
-import type { DOMMotionComponents } from 'motion/react'
 import type { ClassValue } from 'clsx'
 import type {
   PopperContentProps,
@@ -14,6 +13,7 @@ import type {
   ComponentPropsWithCommonProps,
   HTMLMotionProps,
 } from '../../types/utils'
+import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
 
 export interface TooltipPropsOverrides {}
 
@@ -28,11 +28,11 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     | 'offset'
     | 'shift'
     | 'flip'
-    | 'keepMounted'
-    | 'container'
     | 'closeOnEscape'
     | 'closeOnDetached'
-  > & {
+  > &
+  Pick<PopperPortalProps, 'container'> &
+  Pick<PopperMotionProps, 'keepMounted'> & {
     /**
      * The children to render. Usually a trigger element.
      */
@@ -122,10 +122,9 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     maxHeight?: PopperContentProps['maxHeight']
   }
 
-export type TooltipProps<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = OverrideProps<
-  RootComponent,
-  TooltipOwnProps<RootComponent>,
-  TooltipPropsOverrides
->
+export type TooltipProps<RootComponent extends ElementType = 'div'> =
+  OverrideProps<
+    RootComponent,
+    TooltipOwnProps<RootComponent>,
+    TooltipPropsOverrides
+  >

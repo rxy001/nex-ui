@@ -6,7 +6,7 @@ import {
 } from '~/tests/shared'
 import { Popover, PopoverTrigger, PopoverContent } from '../index'
 import { Button } from '../../button'
-import { popoverSlotClasses } from './classes'
+import { popoverContentSlotClasses } from './classes'
 import type { PopoverContentProps } from '../index'
 
 function TestPopover(props: PopoverContentProps) {
@@ -57,7 +57,7 @@ describe('PopoverContent', () => {
     })
 
     const content = getByTestId('popover-content')
-    expect(content).toHaveClass(popoverSlotClasses['content-root'])
+    expect(content).toHaveClass(popoverContentSlotClasses.root)
   })
 
   it('should render with default props', async () => {

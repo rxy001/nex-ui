@@ -7,7 +7,6 @@ import { Button } from '../../button'
 import { Flex } from '../../flex'
 import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { DOMMotionComponents } from 'motion/react'
 import type { TooltipProps } from '../types'
 
 function Container({ children }: { children: ReactNode }) {
@@ -46,7 +45,7 @@ const PLACEMENTS = [
 
 const meta = {
   title: 'Components/Tooltip',
-  component: Tooltip<DOMMotionComponents['div']>,
+  component: Tooltip<'div'>,
   argTypes: {
     color: {
       options: COLORS,
@@ -89,7 +88,7 @@ const meta = {
       </Container>
     )
   },
-} satisfies Meta<typeof Tooltip<DOMMotionComponents['div']>>
+} satisfies Meta<typeof Tooltip<'div'>>
 
 export default meta
 

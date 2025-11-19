@@ -4,7 +4,14 @@ import {
   testComponentStability,
   testVariantDataAttrs,
 } from '~/tests/shared'
-import { Popper, PopperRoot, PopperContent, PopperTrigger } from '../index'
+import {
+  Popper,
+  PopperRoot,
+  PopperContent,
+  PopperTrigger,
+  PopperPortal,
+  PopperMotion,
+} from '../index'
 import type { PopperProps, PopperRootProps } from '../index'
 
 type TestPopperProps = PopperProps & PopperRootProps
@@ -28,11 +35,15 @@ function TestPopper({
       <PopperTrigger>
         <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
-      <PopperRoot data-testid='popper-root' {...props}>
-        <PopperContent data-testid='popper-content'>
-          Popper Content
-        </PopperContent>
-      </PopperRoot>
+      <PopperPortal>
+        <PopperMotion>
+          <PopperRoot data-testid='popper-root' {...props}>
+            <PopperContent data-testid='popper-content'>
+              Popper Content
+            </PopperContent>
+          </PopperRoot>
+        </PopperMotion>
+      </PopperPortal>
     </Popper>
   )
 }
@@ -43,10 +54,6 @@ describe('Popper', () => {
   })
 
   testVariantDataAttrs(<TestPopper open />, ['closeOnEscape', [true, false]], {
-    useAct: true,
-  })
-
-  testVariantDataAttrs(<TestPopper open />, ['keepMounted', [true, false]], {
     useAct: true,
   })
 
@@ -93,8 +100,8 @@ describe('Popper', () => {
     expect(container.firstChild).toHaveTextContent('Trigger')
 
     const popperRoot = getByTestId('popper-root')
-    expect(popperRoot.parentElement).toBe(document.body)
 
+    expect(popperRoot.parentElement?.parentElement).toBe(document.body)
     const popperContent = getByTestId('popper-content')
     expect(popperRoot).toContainElement(popperContent)
   })
@@ -106,12 +113,9 @@ describe('Popper', () => {
         useAct: true,
       },
     )
-
     expect(container.children).toHaveLength(1)
-
     const popperRoot = getByTestId('popper-root')
-    expect(popperRoot.parentElement).toBe(document.body)
-
+    expect(popperRoot.parentElement?.parentElement).toBe(document.body)
     const popperContent = getByTestId('popper-content')
     expect(popperRoot).toContainElement(popperContent)
   })
@@ -131,32 +135,6 @@ describe('Popper', () => {
     })
 
     expect(queryByTestId('popper-root')).toBeInTheDocument()
-  })
-
-  it('should always keep the children in the DOM when keepMounted=true', async () => {
-    const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestPopper keepMounted open={false} />,
-      {
-        useAct: true,
-      },
-    )
-
-    let popperRoot = getByTestId('popper-root')
-    expect(popperRoot).toHaveStyle({
-      display: 'none',
-      opacity: '0',
-    })
-
-    await act(async () => {
-      rerender(<TestPopper keepMounted open />)
-    })
-
-    popperRoot = getByTestId('popper-root')
-
-    expect(popperRoot).toHaveStyle({
-      display: 'block',
-      opacity: '1',
-    })
   })
 
   it('should close when pressing Escape key if closeOnEscape=true', async () => {
@@ -191,16 +169,7 @@ describe('Popper', () => {
     jest.useFakeTimers()
 
     const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-      <Popper>
-        <PopperTrigger>
-          <button data-testid='popper-trigger'>Trigger</button>
-        </PopperTrigger>
-        <PopperRoot data-testid='popper-root'>
-          <PopperContent data-testid='popper-content'>
-            Popper Content
-          </PopperContent>
-        </PopperRoot>
-      </Popper>,
+      <TestPopper openDelay={100} closeDelay={100} />,
       {
         useAct: true,
         userEventOptions: { advanceTimers: jest.advanceTimersByTime },
@@ -234,20 +203,5 @@ describe('Popper', () => {
     expect(queryByTestId('popper-root')).toBeNull()
 
     jest.useRealTimers()
-  })
-
-  describe('Accessibility', () => {
-    it('should be aria-hidden when the popper is closed and keepMounted is true', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopper open={false} keepMounted />,
-        {
-          useAct: true,
-        },
-      )
-
-      const root = getByTestId('popper-root')
-
-      expect(root).toHaveAttribute('aria-hidden', 'true')
-    })
   })
 })

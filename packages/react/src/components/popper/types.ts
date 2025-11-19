@@ -1,10 +1,16 @@
 import type { ReactNode, ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
-import type { Placement, FlipOptions, OffsetOptions } from '../utils'
+import type {
+  Placement,
+  FlipOptions,
+  OffsetOptions,
+  PortalProps,
+} from '../utils'
 import type { Overwrite } from '../../types/utils'
 import type { DOMMotionComponents } from 'motion/react'
 
+// ----------------- PopperProps -----------------
 export type PopperProps = {
   /**
    * The content of the Popper.
@@ -41,6 +47,7 @@ export type PopperProps = {
   closeDelay?: number
 }
 
+// ----------------- PopperTriggerProps -----------------
 export type PopperTriggerProps = {
   /**
    * The content of the trigger element.
@@ -68,9 +75,7 @@ export type PopperTriggerProps = {
    */
   closeOnClick?: boolean
 
-  elementProps?: {
-    [key: string]: any
-  }
+  elementProps?: Record<string, any>
 }
 
 type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
@@ -82,6 +87,7 @@ type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
   }
 >
 
+// ----------------- PopperRootProps -----------------
 type PopperRootOwnProps = {
   /**
    * The placement of the Popper relative to the trigger element.
@@ -89,13 +95,6 @@ type PopperRootOwnProps = {
    * @default 'top'
    */
   placement?: Placement
-
-  /**
-   * The container element in which the overlay portal will be placed.
-   *
-   * @default document.body
-   */
-  container?: HTMLElement | null | (() => HTMLElement | null)
 
   /**
    * Changes the placement of the Popper to keep it in view.
@@ -119,13 +118,6 @@ type PopperRootOwnProps = {
   offset?: OffsetOptions | false
 
   /**
-   * If true, always keep the children in the DOM.
-   *
-   * @default false
-   */
-  keepMounted?: boolean
-
-  /**
    * If true, closes the Popper when the escape key is pressed.
    *
    * @default true
@@ -145,10 +137,26 @@ type PopperRootOwnProps = {
   closeOnDetached?: boolean
 }
 
-export type PopperRootProps<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = PopperSlotProps<RootComponent> & PopperRootOwnProps
+export type PopperRootProps<RootComponent extends ElementType = 'div'> =
+  PopperSlotProps<RootComponent> & PopperRootOwnProps
 
+// ----------------- PopperMotionProps -----------------
+type PopperMotionOwnProps = {
+  /**
+   * If true, always keep the children in the DOM.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
+}
+
+export type PopperMotionProps<
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+> = PopperSlotProps<RootComponent> & PopperMotionOwnProps
+
+export type PopperPortalProps = PortalProps
+
+// ----------------- PopperContentProps -----------------
 type PopperContentOwnProps = {
   /**
    * The maximum width of the Popper content.
@@ -164,6 +172,7 @@ type PopperContentOwnProps = {
 export type PopperContentProps<RootComponent extends ElementType = 'div'> =
   PopperSlotProps<RootComponent> & PopperContentOwnProps
 
+// ----------------- PopperCloseProps -----------------
 export type PopperCloseProps = {
   children?: ReactNode
 }

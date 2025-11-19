@@ -19,6 +19,7 @@ export const Portal = (props: PortalProps) => {
     if (isFunction(node)) {
       node = node()
     }
+
     setMountNode(node || document.body)
   }, [container])
 

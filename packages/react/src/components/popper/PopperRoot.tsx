@@ -4,16 +4,9 @@ import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef, useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { addEventListener, ownerWindow } from '@nex-ui/utils'
-import {
-  Portal,
-  PresenceMotion,
-  useSlot,
-  getOverflowAncestors,
-  computePosition,
-} from '../utils'
+import { useSlot, getOverflowAncestors, computePosition } from '../utils'
 import { usePopper } from './PopperContext'
 import type { CSSProperties, ElementType } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { PopperRootProps } from './types'
 
 const recipe = defineRecipe({
@@ -32,53 +25,40 @@ type StyleVariables = {
   '--popper-y': string
 }
 
-export const PopperRoot = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
-  inProps: PopperRootProps<RootComponent>,
+export const PopperRoot = <RootComponent extends ElementType = 'div'>(
+  props: PopperRootProps<RootComponent>,
 ) => {
   const { open, referenceRef, setOpen, popperRootRef } = usePopper()
 
   const {
     children,
-    container,
     flip = { mainAxis: true, crossAxis: true },
     offset = 5,
     shift = true,
-    keepMounted = false,
     closeOnDetached = true,
     closeOnEscape = true,
     placement = 'top',
-    ...props
-  } = inProps as PopperRootProps
+    ...remainingProps
+  } = props
 
   const [styleVariables, setStyleVariables] = useState<
     StyleVariables | undefined
   >(undefined)
-  const unsubscribeRef = useRef<(() => void) | undefined>(undefined)
 
   // To avoid multiple calculations on the initial render,
   // because ResizeObserver is triggered when observing starts.
   const initialRender = useRef(true)
 
-  // Portal renders asynchronously. Use this variable to avoid multiple handler registrations.
-  const initialized = useRef(false)
-
   const [PopperMotion, getPopperMotionProps] = useSlot({
     style,
-    elementType: PresenceMotion,
-    externalForwardedProps: props,
-    shouldForwardComponent: false,
+    elementType: 'div',
+    externalForwardedProps: remainingProps,
     additionalProps: {
-      open,
-      keepMounted,
       ref: popperRootRef,
       style: styleVariables as CSSProperties,
     },
-    a11y: { 'aria-hidden': open ? undefined : true },
     dataAttrs: {
       placement,
-      keepMounted,
       closeOnEscape,
       state: open ? 'open' : 'closed',
     },
@@ -198,9 +178,8 @@ export const PopperRoot = <
     })
   })
 
-  const handleMount = useEvent(() => {
-    // istanbul ignore if
-    if (initialized.current) return
+  useEffect(() => {
+    if (!open || !popperRootRef.current) return
 
     setPosition()
 
@@ -210,47 +189,25 @@ export const PopperRoot = <
     const unobserveReferenceIntersection = observeReferenceIntersection()
     const unsubscribeEscapeEvent = subscribeEscapeEvent()
 
-    unsubscribeRef.current = () => {
+    return () => {
       unobserveElementResizeChanges?.()
       unsubscribeAncestorScrollEvents?.()
       unsubscribeWindowResizeEvent?.()
       unobserveReferenceIntersection?.()
       unsubscribeEscapeEvent?.()
     }
+  }, [
+    open,
+    popperRootRef,
+    setPosition,
+    observeElementResizeChanges,
+    observeReferenceIntersection,
+    subscribeAncestorScrollEvents,
+    subscribeEscapeEvent,
+    subscribeWindowResizeEvent,
+  ])
 
-    initialized.current = true
-  })
-
-  const handleUnmount = useEvent(() => {
-    if (initialized.current === false) return
-
-    unsubscribeRef.current?.()
-
-    initialized.current = false
-  })
-
-  const onMount = useEvent(() => {
-    // Mainly handle the case where open defaults to true.
-    if (open) handleMount()
-  })
-
-  const onUnmount = useEvent(() => {
-    handleUnmount()
-  })
-
-  useEffect(() => {
-    if (!open || !popperRootRef.current) return
-
-    handleMount()
-
-    return handleUnmount
-  }, [handleMount, handleUnmount, open, popperRootRef])
-
-  return (
-    <Portal onMount={onMount} onUnmount={onUnmount} container={container}>
-      <PopperMotion {...getPopperMotionProps()}>{children}</PopperMotion>
-    </Portal>
-  )
+  return <PopperMotion {...getPopperMotionProps()}>{children}</PopperMotion>
 }
 
 PopperRoot.displayName = 'PopperRoot'
