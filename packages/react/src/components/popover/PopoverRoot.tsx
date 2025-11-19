@@ -1,16 +1,16 @@
 'use client'
 
 import { useMemo } from 'react'
-import { PopperRoot } from '../popper'
+import { PopperMotion, PopperPortal, PopperRoot } from '../popper'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
 import { usePopover } from './PopoverContext'
 import { popoverRecipe } from '../../theme/recipes'
 import type { ReactNode } from 'react'
-import type { PopperRootProps } from '../popper'
+import type { PopoverContextValue } from './PopoverContext'
 
 const slots = ['root']
 
-const useAriaProps = (ownerState: PopperRootProps) => {
+const useAriaProps = (ownerState: PopoverContextValue) => {
   const { id, 'aria-modal': ariaModal, role = 'dialog' } = ownerState
 
   return useMemo(
@@ -24,14 +24,12 @@ const useAriaProps = (ownerState: PopperRootProps) => {
 }
 
 export const PopoverRoot = ({ children }: { children: ReactNode }) => {
-  const { motionProps, ...props } = usePopover()
+  const { motionProps, keepMounted, container, ...props } = usePopover()
 
   const slotClasses = useSlotClasses({
     name: 'Popover',
     slots,
   })
-
-  const ariaProps = useAriaProps(props)
 
   const style = useStyles({
     ownerState: props,
@@ -39,20 +37,34 @@ export const PopoverRoot = ({ children }: { children: ReactNode }) => {
     recipe: popoverRecipe,
   })
 
+  const [PopoverRootMotion, getPopoverRootMotionProps] = useSlot({
+    elementType: PopperMotion,
+    shouldForwardComponent: false,
+    externalSlotProps: motionProps,
+    additionalProps: {
+      keepMounted,
+    },
+  })
+
+  const ariaProps = useAriaProps(props)
+
   const [PopoverRootRoot, getPopoverRootRootProps] = useSlot({
     style,
     elementType: PopperRoot,
     shouldForwardComponent: false,
-    externalForwardedProps: {
-      ...props,
-      ...motionProps,
-    },
+    externalForwardedProps: props,
     classNames: slotClasses.root,
     a11y: ariaProps,
   })
 
   return (
-    <PopoverRootRoot {...getPopoverRootRootProps()}>{children}</PopoverRootRoot>
+    <PopperPortal container={container}>
+      <PopoverRootMotion {...getPopoverRootMotionProps()}>
+        <PopoverRootRoot {...getPopoverRootRootProps()}>
+          {children}
+        </PopoverRootRoot>
+      </PopoverRootMotion>
+    </PopperPortal>
   )
 }
 

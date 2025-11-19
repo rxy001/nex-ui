@@ -8,7 +8,6 @@ import { Flex } from '../../flex'
 import { Input } from '../../input'
 import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { DOMMotionComponents } from 'motion/react'
 import type { PopoverContentProps, PopoverProps } from '../types'
 
 function Container({ children }: { children: ReactNode }) {
@@ -64,7 +63,7 @@ const Content = (props: PopoverContentProps) => (
 
 const meta = {
   title: 'Components/Popover',
-  component: Popover<DOMMotionComponents['div']>,
+  component: Popover<'div'>,
   argTypes: {
     placement: {
       options: placements,
@@ -95,7 +94,7 @@ const meta = {
       </Container>
     )
   },
-} satisfies Meta<typeof Popover<DOMMotionComponents['div']>>
+} satisfies Meta<typeof Popover<'div'>>
 
 export default meta
 

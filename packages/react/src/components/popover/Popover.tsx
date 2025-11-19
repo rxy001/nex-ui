@@ -5,12 +5,9 @@ import { Popper } from '../popper'
 import { useDefaultProps } from '../utils'
 import { PopoverProvider } from './PopoverContext'
 import type { ElementType } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { PopoverProps } from './types'
 
-export const Popover = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
+export const Popover = <RootComponent extends ElementType = 'div'>(
   inProps: PopoverProps<RootComponent>,
 ) => {
   const props = useDefaultProps<PopoverProps>({

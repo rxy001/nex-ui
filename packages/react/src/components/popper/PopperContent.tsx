@@ -19,14 +19,14 @@ const recipe = defineRecipe({
 const style = recipe()
 
 export const PopperContent = <RootElement extends ElementType = 'div'>(
-  inProps: PopperContentProps<RootElement>,
+  props: PopperContentProps<RootElement>,
 ) => {
-  const { children, maxWidth, maxHeight, ...props } =
-    inProps as PopperContentProps
+  const { children, maxWidth, maxHeight, ...remainingProps } = props
+
   const [PopperContentRoot, getPopperContentRootProps] = useSlot({
     style,
     elementType: 'div',
-    externalForwardedProps: props,
+    externalForwardedProps: remainingProps,
     additionalProps: {
       sx: {
         maxWidth,
