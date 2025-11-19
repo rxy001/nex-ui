@@ -5,6 +5,7 @@ export const breadcrumbSlotClasses = generateSlotClasses('nui-breadcrumb', [
   'list',
   'separator',
   'collapse',
+  'expand-button',
 ])
 
 export const breadcrumbItemSlotClasses = generateSlotClasses(

@@ -1,6 +1,8 @@
 'use client'
 
 import { useMemo } from 'react'
+import { useFocusRing } from '@nex-ui/hooks'
+import { isFunction } from '@nex-ui/utils'
 import { breadcrumbItemRecipe } from '../../theme/recipes'
 import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
 import type { ElementType } from 'react'
@@ -9,14 +11,19 @@ import type { BreadcrumbItemProps } from './types'
 const slots = ['root', 'link']
 
 const useAriaProps = (props: BreadcrumbItemProps) => {
-  const ariaCurrent =
-    props['aria-current'] ?? (props.isLast ? 'page' : undefined)
+  const {
+    isLast,
+    as,
+    role,
+    'aria-current': ariaCurrent = isLast ? 'page' : undefined,
+  } = props
 
   return useMemo(
     () => ({
       'aria-current': ariaCurrent,
+      role: role ?? (as && as !== 'a' && !isFunction(as) ? 'link' : undefined),
     }),
-    [ariaCurrent],
+    [ariaCurrent, as, role],
   )
 }
 
@@ -35,10 +42,13 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
     classNames,
     color,
     size,
+    isLast,
+    href,
     ...remainingProps
   } = props
 
   const ariaProps = useAriaProps(props)
+  const { focusVisible, focusProps } = useFocusRing()
 
   const styles = useStyles({
     ownerState: props,
@@ -66,12 +76,22 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
     },
   })
 
+  let additionalProps = {}
+  let dataAttrs = {}
+
+  if (!isLast && href) {
+    additionalProps = { href, ...focusProps }
+    dataAttrs = { focusVisible }
+  }
+
   const [BreadcrumbItemLink, getBreadcrumbItemLinkProps] = useSlot({
     elementType: 'a',
     style: styles.link,
     classNames: slotClasses.link,
     externalForwardedProps: remainingProps,
     a11y: ariaProps,
+    additionalProps,
+    dataAttrs,
   })
 
   return (
