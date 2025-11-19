@@ -154,7 +154,7 @@ describe('DrawerContent', () => {
     const drawerContentRoot = queryByTestId('drawer-content')
     expect(drawerContentRoot).toBeInTheDocument()
     const closeButton = drawerContentRoot?.querySelector(
-      `.${drawerContentClasses['close-button']}`,
+      `.${drawerContentClasses.closeButton}`,
     )
 
     await user.click(closeButton!)

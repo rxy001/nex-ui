@@ -1,13 +1,14 @@
+import { kebabCase } from '@nex-ui/utils'
 import { generateSlotClass } from './generateSlotClass'
 
 export function generateSlotClasses<T extends string>(
   componentName: string,
-  classNames: T[],
+  slots: T[],
 ): Record<T, string> {
   const result: Record<string, string> = {}
 
-  classNames.forEach((className: T) => {
-    result[className] = generateSlotClass(componentName, className)
+  slots.forEach((slot: T) => {
+    result[slot] = generateSlotClass(componentName, kebabCase(slot))
   })
 
   return result

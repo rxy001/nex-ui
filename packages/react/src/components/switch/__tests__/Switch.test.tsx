@@ -213,8 +213,8 @@ describe('Switch', () => {
       <Switch startIcon={<span>Start</span>} endIcon={<span>End</span>} />,
     )
 
-    const startIcon = queryByClassName(switchClasses['start-icon'])
-    const endIcon = queryByClassName(switchClasses['end-icon'])
+    const startIcon = queryByClassName(switchClasses.startIcon)
+    const endIcon = queryByClassName(switchClasses.endIcon)
 
     expect(startIcon).toBeInTheDocument()
     expect(endIcon).toBeInTheDocument()

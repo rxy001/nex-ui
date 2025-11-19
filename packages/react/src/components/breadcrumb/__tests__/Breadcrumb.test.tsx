@@ -101,9 +101,7 @@ describe('Breadcrumb', () => {
         />,
       )
 
-    const expandButton = queryByClassName(
-      breadcrumbSlotClasses['expand-button'],
-    )
+    const expandButton = queryByClassName(breadcrumbSlotClasses.expandButton)
 
     expect(getByText('Home')).toBeInTheDocument()
     expect(getByText('Product')).toBeInTheDocument()
@@ -178,9 +176,7 @@ describe('Breadcrumb', () => {
         <TestBreadcrumb maxItems={3} />,
       )
 
-      const expandButton = queryByClassName(
-        breadcrumbSlotClasses['expand-button'],
-      )
+      const expandButton = queryByClassName(breadcrumbSlotClasses.expandButton)
 
       expect(expandButton).toHaveAttribute(
         'aria-label',
