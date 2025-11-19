@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip should render with default props 1`] = `
+.emotion-0 {
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  left: var(--popper-x);
+  top: var(--popper-y);
+  z-index: var(--nui-z-indices-tooltip);
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  outline: none;
+  position: relative;
+  box-sizing: border-box;
+  overflow: auto;
+  max-width: 360px;
+  -webkit-padding-start: var(--nui-spaces-2-5);
+  padding-inline-start: var(--nui-spaces-2-5);
+  -webkit-padding-end: var(--nui-spaces-2-5);
+  padding-inline-end: var(--nui-spaces-2-5);
+  padding-block-start: var(--nui-spaces-1);
+  padding-block-end: var(--nui-spaces-1);
+  font-size: var(--nui-font-sizes-md);
+  background-color: var(--nui-colors-content);
+  color: inherit;
+  border-radius: var(--nui-radii-lg);
+  box-shadow: 0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d;
+}
+
+<div
+  data-keep-mounted="false"
+  style="opacity: 1;"
+>
+  <div
+    class="nui-tooltip-root emotion-0"
+    data-close-on-escape="true"
+    data-color="default"
+    data-placement="top"
+    data-radius="md"
+    data-size="md"
+    data-state="open"
+    data-testid="tooltip-root"
+    id="nui-tooltip-«r26»"
+    role="tooltip"
+  >
+    <div
+      class="nui-tooltip-content emotion-1"
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;

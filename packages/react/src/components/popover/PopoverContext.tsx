@@ -1,11 +1,10 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { PopperRootProps } from '../popper'
 import type { PopoverProps } from './types'
+import type { PopperProps } from '../popper'
 
-export type PopoverContextValue = PopperRootProps &
-  Pick<PopoverProps, 'motionProps' | 'restoreFocus'>
+export type PopoverContextValue = Omit<PopoverProps, keyof PopperProps>
 
 export const [PopoverProvider, usePopover] = createContext<PopoverContextValue>(
   {

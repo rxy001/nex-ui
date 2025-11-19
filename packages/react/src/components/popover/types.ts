@@ -1,7 +1,6 @@
 import type { ElementType } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
-import type { DOMMotionComponents } from 'motion/react'
 import type { FocusTrapProps } from '../focusTrap'
 import type {
   PopperCloseProps,
@@ -12,19 +11,23 @@ import type {
 } from '../popper'
 import type { OverrideProps, HTMLMotionProps } from '../../types/utils'
 import type { PopoverContentVariants } from '../../theme/recipes'
+import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
 
-type PopoverOwnProps<RootComponent extends ElementType> = Pick<
-  PopperRootProps,
-  | 'container'
-  | 'keepMounted'
-  | 'closeOnEscape'
-  | 'placement'
-  | 'offset'
-  | 'flip'
-  | 'shift'
-  | 'closeOnDetached'
+type PopoverOwnProps<RootComponent extends ElementType> = Omit<
+  PopperProps,
+  'openDelay' | 'closeDelay'
 > &
-  Omit<PopperProps, 'openDelay' | 'closeDelay'> &
+  Pick<
+    PopperRootProps,
+    | 'closeOnEscape'
+    | 'placement'
+    | 'offset'
+    | 'flip'
+    | 'shift'
+    | 'closeOnDetached'
+  > &
+  Pick<PopperPortalProps, 'container'> &
+  Pick<PopperMotionProps, 'keepMounted'> &
   Pick<FocusTrapProps, 'restoreFocus'> & {
     /**
      * The component or element to render as the root.
@@ -65,13 +68,12 @@ type PopoverOwnProps<RootComponent extends ElementType> = Pick<
 
 export interface PopoverPropsOverrides {}
 
-export type PopoverProps<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = OverrideProps<
-  RootComponent,
-  PopoverOwnProps<RootComponent>,
-  PopoverPropsOverrides
->
+export type PopoverProps<RootComponent extends ElementType = 'div'> =
+  OverrideProps<
+    RootComponent,
+    PopoverOwnProps<RootComponent>,
+    PopoverPropsOverrides
+  >
 
 type PopoverContentOwnProps<RootComponent extends ElementType> = {
   /**

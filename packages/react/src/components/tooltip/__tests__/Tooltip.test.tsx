@@ -7,7 +7,6 @@ import {
   testRefForwarding,
   testClassNamesForwarding,
   testSlotPropsForwarding,
-  testRootClassName,
 } from '~/tests/shared'
 import { Tooltip } from '../index'
 import { tooltipSlotClasses } from './classes'
@@ -75,9 +74,16 @@ describe('Tooltip', () => {
     },
   )
 
-  testRootClassName(<Tooltip open content='Content' />, {
-    useAct: true,
-    container: document.body,
+  it('should have the correct root class name', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(
+      <Tooltip open content='Content' data-testid='tooltip-root' />,
+      {
+        useAct: true,
+      },
+    )
+
+    const tooltipRoot = getByTestId('tooltip-root')
+    expect(tooltipRoot).toHaveClass(tooltipSlotClasses.root)
   })
 
   it('should render with default props', async () => {
@@ -92,6 +98,8 @@ describe('Tooltip', () => {
     expect(tooltipRoot).toHaveAttribute('data-color', 'default')
     expect(tooltipRoot).toHaveAttribute('data-size', 'md')
     expect(tooltipRoot).toHaveAttribute('data-radius', 'md')
+
+    expect(tooltipRoot.parentElement).toMatchSnapshot()
   })
 
   it('should render with root, content class', async () => {

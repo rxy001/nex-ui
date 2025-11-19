@@ -3,7 +3,6 @@ import {
   renderWithNexUIProvider,
   testComponentStability,
   testRefForwarding,
-  testRootClassName,
 } from '~/tests/shared'
 import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from '../index'
 import { popoverSlotClasses } from './classes'
@@ -30,16 +29,11 @@ describe('Popover', () => {
     useAct: true,
   })
 
-  testRootClassName(<TestPopover open />, {
-    useAct: true,
-    container: document.body,
-  })
-
   testRefForwarding(<TestPopover open />, {
     useAct: true,
   })
 
-  it('should render with root class', async () => {
+  it('should have the correct root class name', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
       <TestPopover open />,
       {
@@ -47,8 +41,8 @@ describe('Popover', () => {
       },
     )
 
-    const root = getByTestId('popover-root')
-    expect(root).toHaveClass(popoverSlotClasses.root)
+    const popoverRoot = getByTestId('popover-root')
+    expect(popoverRoot).toHaveClass(popoverSlotClasses.root)
   })
 
   it('should render with default props', async () => {
@@ -61,7 +55,7 @@ describe('Popover', () => {
 
     const root = getByTestId('popover-root')
     expect(root).toHaveAttribute('data-placement', 'top')
-    expect(root).toHaveAttribute('data-keep-mounted', 'false')
+    expect(root.parentElement).toHaveAttribute('data-keep-mounted', 'false')
     expect(root).toHaveAttribute('data-close-on-escape', 'true')
     expect(root).toHaveAttribute('data-state', 'open')
   })

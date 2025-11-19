@@ -1,16 +1,27 @@
 import { waitForElementToBeRemoved } from '@testing-library/react'
 import { renderWithNexUIProvider } from '~/tests/shared'
-import { Popper, PopperClose, PopperContent, PopperRoot } from '../index'
+import {
+  Popper,
+  PopperClose,
+  PopperContent,
+  PopperMotion,
+  PopperPortal,
+  PopperRoot,
+} from '../index'
 import type { ReactNode } from 'react'
 
 function TestPopper({ children }: { children?: ReactNode }) {
   return (
     <Popper defaultOpen openDelay={0} closeDelay={0}>
-      <PopperRoot data-testid='popper-root'>
-        <PopperContent data-testid='popper-content'>
-          <PopperClose>{children}</PopperClose>
-        </PopperContent>
-      </PopperRoot>
+      <PopperPortal>
+        <PopperMotion>
+          <PopperRoot data-testid='popper-root'>
+            <PopperContent data-testid='popper-content'>
+              <PopperClose>{children}</PopperClose>
+            </PopperContent>
+          </PopperRoot>
+        </PopperMotion>
+      </PopperPortal>
     </Popper>
   )
 }
@@ -38,9 +49,7 @@ describe('PopperClose', () => {
 
   it("should return children as-is when PopperClose's children is not a valid React element", async () => {
     const { getByTestId } = await renderWithNexUIProvider(
-      <TestPopper>
-        <PopperClose>Close</PopperClose>
-      </TestPopper>,
+      <TestPopper>Close</TestPopper>,
       {
         useAct: true,
       },
@@ -122,9 +131,7 @@ describe('PopperClose', () => {
     it('should have aria-label="Close" by default', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestPopper>
-          <PopperClose>
-            <button data-testid='close-button'>Close Popper</button>
-          </PopperClose>
+          <button data-testid='close-button'>Close Popper</button>
         </TestPopper>,
         {
           useAct: true,
