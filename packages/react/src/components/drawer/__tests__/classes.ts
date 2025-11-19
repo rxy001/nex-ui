@@ -8,7 +8,7 @@ export const drawerClasses = generateSlotClasses('nui-drawer', [
 export const drawerContentClasses = generateSlotClasses('nui-drawer-content', [
   'root',
   'paper',
-  'close-button',
+  'closeButton',
 ])
 
 export const drawerHeaderClasses = generateSlotClasses('nui-drawer-header', [

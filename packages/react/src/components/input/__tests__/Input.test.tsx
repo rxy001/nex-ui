@@ -224,7 +224,7 @@ describe('Input', () => {
       <ClearableInput />,
     )
     const input = getByTestId('clearable-input')
-    const clearButton = queryByClassName(inputClasses['clear-button'])
+    const clearButton = queryByClassName(inputClasses.clearButton)
 
     expect(input).toHaveAttribute('value', 'default')
     expect(clearButton).toBeInTheDocument()
@@ -247,7 +247,7 @@ describe('Input', () => {
       <Input data-testid='input' clearable defaultValue='test' disabled />,
     )
 
-    const clearButton = queryByClassName(inputClasses['clear-button'])
+    const clearButton = queryByClassName(inputClasses.clearButton)
     const input = getByTestId('input')
 
     expect(clearButton).toBeInTheDocument()
@@ -458,7 +458,7 @@ describe('Input', () => {
         <Input clearable data-testid='input' />,
       )
 
-      const clearButton = queryByClassName(inputClasses['clear-button'])
+      const clearButton = queryByClassName(inputClasses.clearButton)
 
       expect(clearButton).toHaveAttribute('aria-label', 'Clear input')
     })

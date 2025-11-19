@@ -96,14 +96,12 @@ describe('Alert', () => {
     const { queryByClassName, rerender } = renderWithNexUIProvider(<Alert />)
 
     expect(
-      queryByClassName(alertSlotClasses['close-button']),
+      queryByClassName(alertSlotClasses.closeButton),
     ).not.toBeInTheDocument()
 
     rerender(<Alert closable />)
 
-    expect(
-      queryByClassName(alertSlotClasses['close-button']),
-    ).toBeInTheDocument()
+    expect(queryByClassName(alertSlotClasses.closeButton)).toBeInTheDocument()
   })
 
   it('should hide icon when hideIcon is true', () => {
@@ -213,7 +211,7 @@ describe('Alert', () => {
 
     expect(queryByTestId('custom-action')).toBeInTheDocument()
     expect(
-      queryByClassName(alertSlotClasses['close-button']),
+      queryByClassName(alertSlotClasses.closeButton),
     ).not.toBeInTheDocument()
   })
 
@@ -222,7 +220,7 @@ describe('Alert', () => {
     const { queryByClassName, user } = renderWithNexUIProvider(
       <Alert closable onClose={onClose} />,
     )
-    await user.click(queryByClassName(alertSlotClasses['close-button'])!)
+    await user.click(queryByClassName(alertSlotClasses.closeButton)!)
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
@@ -236,9 +234,10 @@ describe('Alert', () => {
     it('should have aria-label on close button', () => {
       const { queryByClassName } = renderWithNexUIProvider(<Alert closable />)
 
-      expect(
-        queryByClassName(alertSlotClasses['close-button']),
-      ).toHaveAttribute('aria-label', 'Close alert')
+      expect(queryByClassName(alertSlotClasses.closeButton)).toHaveAttribute(
+        'aria-label',
+        'Close alert',
+      )
     })
   })
 })
