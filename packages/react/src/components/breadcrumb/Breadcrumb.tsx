@@ -11,25 +11,31 @@ import { EllipsisFilled } from '@nex-ui/icons'
 import { __DEV__ } from '@nex-ui/utils'
 import { breadcrumbRecipe } from '../../theme/recipes'
 import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
+import { ButtonBase } from '../buttonBase'
 import type { ElementType, ReactElement, ReactNode } from 'react'
 import type { BreadcrumbProps } from './types'
 
-const slots = ['root', 'list', 'separator', 'collapse']
+const slots = ['root', 'list', 'separator', 'collapse', 'expandButton']
 
 const useSlotAriaProps = (props: BreadcrumbProps) => {
-  const ariaLabel = props['aria-label'] || 'breadcrumb'
-  const ariaHidden = props.slotProps?.separator?.['aria-hidden'] ?? true
+  const { 'aria-label': rootAriaLabel = 'breadcrumb', slotProps } = props
+  const separatorAriaHidden = slotProps?.separator?.['aria-hidden'] ?? true
+  const expandButtonAriaLabel =
+    slotProps?.expandButton?.['aria-label'] ?? 'Expand breadcrumb items'
 
   return useMemo(() => {
     return {
       root: {
-        'aria-label': ariaLabel,
+        'aria-label': rootAriaLabel,
       },
       separator: {
-        'aria-hidden': ariaHidden,
+        'aria-hidden': separatorAriaHidden,
+      },
+      expandButton: {
+        'aria-label': expandButtonAriaLabel,
       },
     }
-  }, [ariaHidden, ariaLabel])
+  }, [rootAriaLabel, separatorAriaHidden, expandButtonAriaLabel])
 }
 
 export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
@@ -110,6 +116,14 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     style: styles.collapse,
     externalSlotProps: slotProps?.collapse,
     classNames: slotClasses.collapse,
+  })
+
+  const [BreadcrumbExpandButton, getBreadcrumbExpandButtonProps] = useSlot({
+    elementType: ButtonBase,
+    style: styles.expandButton,
+    externalSlotProps: slotProps?.expandButton,
+    classNames: slotClasses.expandButton,
+    a11y: slotAriaProps.expandButton,
     additionalProps: {
       onClick: () => setExpanded(true),
     },
@@ -138,7 +152,9 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     return [
       ...allItems.slice(0, itemsBeforeCollapse),
       <BreadcrumbCollapse key='collapse' {...getBreadcrumbCollapseProps()}>
-        <EllipsisFilled />
+        <BreadcrumbExpandButton {...getBreadcrumbExpandButtonProps()}>
+          <EllipsisFilled />
+        </BreadcrumbExpandButton>
       </BreadcrumbCollapse>,
       ...allItems.slice(allItems.length - itemsAfterCollapse, allItems.length),
     ]
