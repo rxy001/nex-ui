@@ -10,10 +10,10 @@ const COLORS = [...DEFAULT_COLORS, 'default'] as const
 function Template(props: BreadcrumbProps) {
   return (
     <Breadcrumb {...props}>
-      <BreadcrumbItem>Home</BreadcrumbItem>
-      <BreadcrumbItem>Category</BreadcrumbItem>
-      <BreadcrumbItem>Subcategory</BreadcrumbItem>
-      <BreadcrumbItem>Product</BreadcrumbItem>
+      <BreadcrumbItem href='#'>Home</BreadcrumbItem>
+      <BreadcrumbItem href='#'>Category</BreadcrumbItem>
+      <BreadcrumbItem href='#'>Subcategory</BreadcrumbItem>
+      <BreadcrumbItem href='#'>Product</BreadcrumbItem>
     </Breadcrumb>
   )
 }
@@ -68,9 +68,9 @@ export const Colors: Story = {
 export const WithIcons: Story = {
   render: (props) => (
     <Breadcrumb {...props}>
-      <BreadcrumbItem>🏠 Home</BreadcrumbItem>
-      <BreadcrumbItem>📁 Components</BreadcrumbItem>
-      <BreadcrumbItem>📦 Breadcrumb</BreadcrumbItem>
+      <BreadcrumbItem href='#'>🏠 Home</BreadcrumbItem>
+      <BreadcrumbItem href='#'>📁 Components</BreadcrumbItem>
+      <BreadcrumbItem href='#'>📦 Breadcrumb</BreadcrumbItem>
     </Breadcrumb>
   ),
 }

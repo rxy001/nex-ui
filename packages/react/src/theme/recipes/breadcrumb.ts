@@ -12,6 +12,7 @@ export const breadcrumbRecipe = defineSlotRecipe({
       listStyle: 'none',
       margin: 0,
       padding: 0,
+      lh: 'short',
     },
     separator: {
       mx: 'var(--breadcrumb-separator-gap, {spaces.2})',
@@ -21,6 +22,14 @@ export const breadcrumbRecipe = defineSlotRecipe({
     collapse: {
       display: 'inline-flex',
       alignItems: 'center',
+    },
+    expandButton: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      fs: 'lg',
+      borderRadius: 2,
+      cursor: 'pointer',
+      transition: 'colors',
       color: {
         _DEFAULT: 'colorPalette.primary/70',
         _hover: {
@@ -32,8 +41,10 @@ export const breadcrumbRecipe = defineSlotRecipe({
           _dark: 'colorPalette.primary/60',
         },
       },
-      cursor: 'pointer',
-      transition: 'colors',
+      _focusVisibleRing: {
+        outline: '{borders.md} {colors.colorPalette.primary}',
+        outlineOffset: '2px',
+      },
     },
   },
   variants: {
@@ -55,12 +66,12 @@ export const breadcrumbRecipe = defineSlotRecipe({
       },
     },
     color: {
-      ...toSlots(colorVariant, 'separator', 'collapse'),
+      ...toSlots(colorVariant, 'separator', 'expandButton'),
       default: {
         separator: {
           color: 'text/50',
         },
-        collapse: {
+        expandButton: {
           color: {
             _DEFAULT: 'text/50',
             _hover: {
@@ -71,6 +82,9 @@ export const breadcrumbRecipe = defineSlotRecipe({
               _DEFAULT: 'text/60',
               _dark: 'text/40',
             },
+          },
+          _focusVisibleRing: {
+            outline: '{borders.md} {colors.text}',
           },
         },
       },
@@ -93,6 +107,11 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
       color: 'colorPalette.primary/70',
       userSelect: 'none',
       transition: 'colors',
+      borderRadius: 2,
+      _focusVisibleRing: {
+        outline: '{borders.md} {colors.colorPalette.primary}',
+        outlineOffset: '2px',
+      },
     },
   },
   variants: {
@@ -135,6 +154,9 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
               _DEFAULT: 'text/60',
               _dark: 'text/40',
             },
+          },
+          _focusVisibleRing: {
+            outline: '{borders.md} {colors.text}',
           },
         },
       },

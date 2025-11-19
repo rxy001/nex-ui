@@ -81,6 +81,20 @@ describe('BreadcrumbItem', () => {
     expect(root).toHaveAttribute('data-color', 'default')
   })
 
+  it('should not have href attribute on the last item', () => {
+    const { getByText } = renderWithNexUIProvider(
+      <Breadcrumb>
+        <BreadcrumbItem href='https://example.com'>Dashboard</BreadcrumbItem>
+        <BreadcrumbItem href='https://example.com/home'>Home</BreadcrumbItem>
+      </Breadcrumb>,
+    )
+
+    const firstItem = getByText('Dashboard')
+    expect(firstItem).toHaveAttribute('href', 'https://example.com')
+    const lastItem = getByText('Home')
+    expect(lastItem).not.toHaveAttribute('href')
+  })
+
   describe('Accessibility', () => {
     it('should have correct aria-current on the last item', () => {
       const { getByText } = renderWithNexUIProvider(<TestBreadcrumb />)

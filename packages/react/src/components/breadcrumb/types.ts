@@ -16,6 +16,7 @@ type BreadcrumbSlotProps = {
   list?: ComponentPropsWithCommonProps<'ol'>
   separator?: ComponentPropsWithCommonProps<'li'>
   collapse?: ComponentPropsWithCommonProps<'li'>
+  expandButton?: ComponentPropsWithCommonProps<'button'>
 }
 
 type BreadcrumbOwnProps<RootComponent extends ElementType> = {

@@ -22,7 +22,7 @@ function TestBreadcrumb(props: BreadcrumbProps) {
   )
 }
 
-const slots = ['list', 'separator', 'collapse'] as const
+const slots = ['list', 'separator', 'collapse', 'expandButton'] as const
 
 describe('Breadcrumb', () => {
   testComponentStability(<TestBreadcrumb />)
@@ -56,6 +56,7 @@ describe('Breadcrumb', () => {
       list: 'test-list',
       separator: 'test-separator',
       collapse: 'test-collapse',
+      expandButton: 'test-expandButton',
     },
     breadcrumbSlotClasses,
   )
@@ -72,6 +73,9 @@ describe('Breadcrumb', () => {
       },
       collapse: {
         className: 'slot-props-collapse',
+      },
+      expandButton: {
+        className: 'slot-props-expandButton',
       },
     },
     breadcrumbSlotClasses,
@@ -97,17 +101,19 @@ describe('Breadcrumb', () => {
         />,
       )
 
-    const collapseElement = queryByClassName(breadcrumbSlotClasses.collapse)
+    const expandButton = queryByClassName(
+      breadcrumbSlotClasses['expand-button'],
+    )
 
     expect(getByText('Home')).toBeInTheDocument()
     expect(getByText('Product')).toBeInTheDocument()
     expect(queryByText('Category')).not.toBeInTheDocument()
-    expect(collapseElement).toBeInTheDocument()
+    expect(expandButton).toBeInTheDocument()
 
-    await user.click(collapseElement!)
+    await user.click(expandButton!)
 
     expect(getByText('Category')).toBeInTheDocument()
-    expect(collapseElement).not.toBeInTheDocument()
+    expect(expandButton).not.toBeInTheDocument()
   })
 
   it('should render custom separator', () => {
@@ -165,6 +171,21 @@ describe('Breadcrumb', () => {
       separators.forEach((separator) => {
         expect(separator).toHaveAttribute('aria-hidden', 'true')
       })
+    })
+
+    it('should have aria-label on the expand button', () => {
+      const { queryByClassName } = renderWithNexUIProvider(
+        <TestBreadcrumb maxItems={3} />,
+      )
+
+      const expandButton = queryByClassName(
+        breadcrumbSlotClasses['expand-button'],
+      )
+
+      expect(expandButton).toHaveAttribute(
+        'aria-label',
+        'Expand breadcrumb items',
+      )
     })
   })
 })
