@@ -5,7 +5,7 @@ export const switchClasses = generateSlotClasses('nui-switch', [
   'input',
   'track',
   'thumb',
-  'start-icon',
-  'end-icon',
+  'startIcon',
+  'endIcon',
   'label',
 ])

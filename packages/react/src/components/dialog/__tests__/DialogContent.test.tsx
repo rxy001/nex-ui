@@ -164,7 +164,7 @@ describe('DialogContent', () => {
     const dialogContentRoot = queryByTestId('dialog-content')
     expect(dialogContentRoot).toBeInTheDocument()
     const closeButton = dialogContentRoot?.querySelector(
-      `.${dialogContentClasses['close-button']}`,
+      `.${dialogContentClasses.closeButton}`,
     )
 
     await user.click(closeButton!)

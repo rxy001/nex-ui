@@ -133,7 +133,7 @@ describe('Button', () => {
     )
 
     const startIcon = getByTestId('start-icon')
-    expect(startIcon.parentElement).toHaveClass(buttonSlotClasses['start-icon'])
+    expect(startIcon.parentElement).toHaveClass(buttonSlotClasses.startIcon)
   })
 
   it('should render with end icon', () => {
@@ -143,7 +143,7 @@ describe('Button', () => {
       </Button>,
     )
     const endIcon = getByTestId('end-icon')
-    expect(endIcon.parentElement).toHaveClass(buttonSlotClasses['end-icon'])
+    expect(endIcon.parentElement).toHaveClass(buttonSlotClasses.endIcon)
   })
 
   it('should support to change loading', async () => {
@@ -175,7 +175,7 @@ describe('Button', () => {
       </Button>,
     )
 
-    const spinner = queryByClassName(buttonSlotClasses['start-icon'])
+    const spinner = queryByClassName(buttonSlotClasses.startIcon)
 
     expect(spinner).toBeInTheDocument()
     expect(spinner).toHaveTextContent('Custom Spinner')
@@ -188,7 +188,7 @@ describe('Button', () => {
       </Button>,
     )
 
-    const startSpinner = queryByClassName(buttonSlotClasses['start-icon'])
+    const startSpinner = queryByClassName(buttonSlotClasses.startIcon)
 
     expect(startSpinner).toBeInTheDocument()
 
@@ -198,7 +198,7 @@ describe('Button', () => {
       </Button>,
     )
 
-    const endSpinner = queryByClassName(buttonSlotClasses['end-icon'])
+    const endSpinner = queryByClassName(buttonSlotClasses.endIcon)
     expect(endSpinner).toBeInTheDocument()
   })
 })

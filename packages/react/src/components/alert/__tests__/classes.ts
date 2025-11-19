@@ -6,5 +6,5 @@ export const alertSlotClasses = generateSlotClasses('nui-alert', [
   'content',
   'title',
   'description',
-  'close-button',
+  'closeButton',
 ])
