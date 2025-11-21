@@ -52,7 +52,10 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
 
   const modalManager = useModalManager()
 
-  const { isTopmostModal } = ctx
+  const isTopmostModal = useMemo(
+    () => () => modalManager.isTopmostModal(ctx.modalId),
+    [ctx.modalId, modalManager],
+  )
 
   const ariaProps = useAriaProps(props)
 

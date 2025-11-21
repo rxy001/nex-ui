@@ -4,7 +4,7 @@ import { useEffect, useId, useMemo, useRef } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { ModalProvider } from './ModalContext'
 import { MODAL_INTERNAL_ID_PREFIX } from './constants'
-import type { ModalProps } from './types'
+import type { ModalPortalProps, ModalProps } from './types'
 
 /**
  * Modal is a lower-level construct that is leveraged by the following components:
@@ -19,10 +19,11 @@ export const Modal = (props: ModalProps) => {
   const modalContentId = `${MODAL_INTERNAL_ID_PREFIX}${id}-content`
   const modalHeaderId = `${MODAL_INTERNAL_ID_PREFIX}${id}-header`
   const modalBodyId = `${MODAL_INTERNAL_ID_PREFIX}${id}-body`
+  const modalId = `${MODAL_INTERNAL_ID_PREFIX}${id}`
+  const containerRef = useRef<ModalPortalProps['container']>(null)
 
   const {
     children,
-    container,
     onClose,
     onOpenChange,
     open: openProp,
@@ -30,7 +31,6 @@ export const Modal = (props: ModalProps) => {
     closeOnEscape = true,
     preventScroll = false,
     defaultOpen = false,
-    keepMounted = false,
     closeOnInteractOutside = true,
   } = props
 
@@ -48,30 +48,25 @@ export const Modal = (props: ModalProps) => {
       restoreFocus,
       closeOnEscape,
       open,
-      keepMounted,
-      defaultOpen,
       closeOnInteractOutside,
-      onOpenChange,
       preventScroll,
-      container,
       modalContentId,
       modalHeaderId,
       modalBodyId,
+      modalId,
+      containerRef,
     }),
     [
       setOpen,
       restoreFocus,
       closeOnEscape,
       open,
-      keepMounted,
-      defaultOpen,
       closeOnInteractOutside,
-      onOpenChange,
       preventScroll,
-      container,
       modalContentId,
       modalHeaderId,
       modalBodyId,
+      modalId,
     ],
   )
 

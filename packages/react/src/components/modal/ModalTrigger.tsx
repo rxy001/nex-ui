@@ -7,7 +7,7 @@ import type { ReactElement } from 'react'
 import type { ModalTriggerProps } from './types'
 
 export const ModalTrigger = (props: ModalTriggerProps) => {
-  const { setOpen, open, keepMounted, modalContentId } = useModal()
+  const { setOpen, open, modalContentId } = useModal()
   const { children } = props
 
   const renderChildren = () => {
@@ -24,8 +24,7 @@ export const ModalTrigger = (props: ModalTriggerProps) => {
       onClick: chain(() => setOpen(true), onClick),
       'aria-haspopup': ariaHaspopup || 'dialog',
       'aria-expanded': ariaExpanded || open,
-      'aria-controls':
-        ariaControls || (keepMounted || open ? modalContentId : undefined),
+      'aria-controls': ariaControls || (open ? modalContentId : undefined),
     })
   }
 

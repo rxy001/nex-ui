@@ -7,13 +7,12 @@ import {
   isFunction,
 } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
-import { useEffect, useMemo, useRef, useId } from 'react'
+import { useEffect, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
-import { Portal, useSlot, PresenceMotion } from '../utils'
-import { ModalProvider, useModal } from './ModalContext'
+import { useSlot } from '../utils'
+import { useModal } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { ModalRootProps } from './types'
 
 const recipe = defineRecipe({
@@ -26,74 +25,35 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalRoot = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
-  inProps: ModalRootProps<RootComponent>,
+export const ModalRoot = <RootComponent extends ElementType = 'div'>(
+  props: ModalRootProps<RootComponent>,
 ) => {
-  const { children, ...props } = inProps as ModalRootProps
+  const { children, container, ...remainingProps } = props
   const rootRef = useRef<HTMLDivElement>(null)
-  const modalId = useId()
   const modalState = useModal()
   const modalManager = useModalManager()
   const registeredRef = useRef(false)
-  const resolver = useRef<() => void>(undefined)
 
-  const {
-    open,
-    container,
-    keepMounted,
-    setOpen,
-    closeOnEscape,
-    preventScroll,
-  } = modalState
+  const { open, setOpen, closeOnEscape, preventScroll, modalId } = modalState
 
   if (registeredRef.current === false && open) {
     modalManager.register(modalId)
     registeredRef.current = true
   }
 
-  const [Motion, getMotionProps] = useSlot({
+  const [ModalRootRoot, getgetModalRootRootProps] = useSlot({
     style,
-    elementType: PresenceMotion,
-    externalForwardedProps: props,
-    shouldForwardComponent: false,
+    elementType: 'div',
+    externalForwardedProps: remainingProps,
     additionalProps: {
-      open,
-      keepMounted,
       ref: rootRef,
-      onAnimationComplete: (animation: string) => {
-        if (animation === 'hidden') {
-          resolver.current?.()
-        }
-      },
-    },
-    a11y: {
-      // Ignore the user's settings to ensure proper access for assistive technologies.
-      'aria-hidden': open ? undefined : 'true',
     },
     dataAttrs: {
       state: open ? 'open' : 'closed',
-      keepMounted,
     },
   })
 
   const isTopmostModal = useEvent(() => modalManager.isTopmostModal(modalId))
-
-  // Portal renders asynchronously.
-  const handlePortalMount = () => {
-    if (open && rootRef.current && isTopmostModal()) {
-      modalManager.mount(modalId)
-    }
-  }
-
-  const ctx = useMemo(
-    () => ({
-      ...modalState,
-      isTopmostModal: isTopmostModal,
-    }),
-    [modalState, isTopmostModal],
-  )
 
   useEffect(() => {
     if (!open || !closeOnEscape) {
@@ -165,18 +125,14 @@ export const ModalRoot = <
       })
 
       return () => {
-        const { promise, resolve } = Promise.withResolvers<void>()
-        resolver.current = resolve
-        promise.then(() => {
-          if (prevOverflow !== null) {
-            resolvedContainer.style.overflow = prevOverflow
-            resolvedContainer.style.overflowX = prevOverflowX!
-            resolvedContainer.style.overflowY = prevOverflowY!
-          }
-          if (prevPaddingRight !== null) {
-            resolvedContainer.style.paddingRight = prevPaddingRight
-          }
-        })
+        if (prevOverflow !== null) {
+          resolvedContainer.style.overflow = prevOverflow
+          resolvedContainer.style.overflowX = prevOverflowX!
+          resolvedContainer.style.overflowY = prevOverflowY!
+        }
+        if (prevPaddingRight !== null) {
+          resolvedContainer.style.paddingRight = prevPaddingRight
+        }
         unsubscribe()
       }
     }
@@ -196,11 +152,7 @@ export const ModalRoot = <
   }, [isTopmostModal, modalId, modalManager, open])
 
   return (
-    <Portal container={container} onMount={handlePortalMount}>
-      <ModalProvider value={ctx}>
-        <Motion {...getMotionProps()}>{children}</Motion>
-      </ModalProvider>
-    </Portal>
+    <ModalRootRoot {...getgetModalRootRootProps()}>{children}</ModalRootRoot>
   )
 }
 
