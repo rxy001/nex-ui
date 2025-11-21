@@ -37,27 +37,30 @@ exports[`Tooltip should render with default props 1`] = `
   box-shadow: 0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d;
 }
 
-<div
-  data-keep-mounted="false"
-  style="opacity: 1;"
->
+<body>
+  <div />
   <div
     class="nui-tooltip-root emotion-0"
     data-close-on-escape="true"
     data-color="default"
+    data-keep-mounted="false"
     data-placement="top"
     data-radius="md"
     data-size="md"
     data-state="open"
     data-testid="tooltip-root"
-    id="nui-tooltip-«r26»"
+    id="nui-tooltip-«r3k»"
     role="tooltip"
   >
     <div
-      class="nui-tooltip-content emotion-1"
+      style="opacity: 1;"
     >
-      Content
+      <div
+        class="nui-tooltip-content emotion-1"
+      >
+        Content
+      </div>
     </div>
   </div>
-</div>
+</body>
 `;

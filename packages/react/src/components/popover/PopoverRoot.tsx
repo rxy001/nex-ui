@@ -41,9 +41,6 @@ export const PopoverRoot = ({ children }: { children: ReactNode }) => {
     elementType: PopperMotion,
     shouldForwardComponent: false,
     externalSlotProps: motionProps,
-    additionalProps: {
-      keepMounted,
-    },
   })
 
   const ariaProps = useAriaProps(props)
@@ -58,12 +55,12 @@ export const PopoverRoot = ({ children }: { children: ReactNode }) => {
   })
 
   return (
-    <PopperPortal container={container}>
-      <PopoverRootMotion {...getPopoverRootMotionProps()}>
-        <PopoverRootRoot {...getPopoverRootRootProps()}>
+    <PopperPortal container={container} keepMounted={keepMounted}>
+      <PopoverRootRoot {...getPopoverRootRootProps()}>
+        <PopoverRootMotion {...getPopoverRootMotionProps()}>
           {children}
-        </PopoverRootRoot>
-      </PopoverRootMotion>
+        </PopoverRootMotion>
+      </PopoverRootRoot>
     </PopperPortal>
   )
 }

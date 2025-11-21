@@ -14,13 +14,13 @@ function TestPopper({ children }: { children?: ReactNode }) {
   return (
     <Popper defaultOpen openDelay={0} closeDelay={0}>
       <PopperPortal>
-        <PopperMotion>
-          <PopperRoot data-testid='popper-root'>
+        <PopperRoot data-testid='popper-root'>
+          <PopperMotion>
             <PopperContent data-testid='popper-content'>
               <PopperClose>{children}</PopperClose>
             </PopperContent>
-          </PopperRoot>
-        </PopperMotion>
+          </PopperMotion>
+        </PopperRoot>
       </PopperPortal>
     </Popper>
   )

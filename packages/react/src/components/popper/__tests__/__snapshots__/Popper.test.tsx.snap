@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popper should render with default props 1`] = `
+.emotion-0 {
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  left: var(--popper-x);
+  top: var(--popper-y);
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  outline: none;
+  position: relative;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+<div
+  class="emotion-0"
+  data-close-on-escape="true"
+  data-keep-mounted="false"
+  data-placement="top"
+  data-state="open"
+  data-testid="popper-root"
+  style="--popper-x: 0px; --popper-y: -5px;"
+>
+  <div
+    style="opacity: 1;"
+  >
+    <div
+      class="emotion-1"
+      data-testid="popper-content"
+    >
+      Popper Content
+    </div>
+  </div>
+</div>
+`;

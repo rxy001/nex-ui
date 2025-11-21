@@ -43,21 +43,8 @@ describe('Popover', () => {
 
     const popoverRoot = getByTestId('popover-root')
     expect(popoverRoot).toHaveClass(popoverSlotClasses.root)
-  })
 
-  it('should render with default props', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestPopover open />,
-      {
-        useAct: true,
-      },
-    )
-
-    const root = getByTestId('popover-root')
-    expect(root).toHaveAttribute('data-placement', 'top')
-    expect(root.parentElement).toHaveAttribute('data-keep-mounted', 'false')
-    expect(root).toHaveAttribute('data-close-on-escape', 'true')
-    expect(root).toHaveAttribute('data-state', 'open')
+    expect(popoverRoot).toMatchSnapshot()
   })
 
   it('should close when PopoverClose is clicked', async () => {

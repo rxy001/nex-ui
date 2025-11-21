@@ -20,6 +20,7 @@ export const Popper = (props: PopperProps) => {
   } = props
   const referenceRef = useRef<HTMLDivElement>(null)
   const popperRootRef = useRef<HTMLDivElement>(null)
+  const keepMountedRef = useRef<boolean>(false)
   const id = useId()
 
   const [open, setOpen] = useControlledState(
@@ -68,6 +69,7 @@ export const Popper = (props: PopperProps) => {
       setOpen,
       referenceRef,
       popperRootRef,
+      keepMountedRef,
       handleOpen,
       handleClose,
     }),
