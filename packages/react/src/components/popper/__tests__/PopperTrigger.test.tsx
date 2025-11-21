@@ -17,13 +17,13 @@ function TestPopper(props: PopperTriggerProps) {
         <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
       <PopperPortal>
-        <PopperMotion>
-          <PopperRoot data-testid='popper-root'>
+        <PopperRoot data-testid='popper-root'>
+          <PopperMotion>
             <PopperContent data-testid='popper-content'>
               Popper Content
             </PopperContent>
-          </PopperRoot>
-        </PopperMotion>
+          </PopperMotion>
+        </PopperRoot>
       </PopperPortal>
     </Popper>
   )

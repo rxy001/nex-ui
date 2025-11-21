@@ -13,7 +13,7 @@ import type {
   ComponentPropsWithCommonProps,
   HTMLMotionProps,
 } from '../../types/utils'
-import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
+import type { PopperPortalProps } from '../popper/types'
 
 export interface TooltipPropsOverrides {}
 
@@ -31,8 +31,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     | 'closeOnEscape'
     | 'closeOnDetached'
   > &
-  Pick<PopperPortalProps, 'container'> &
-  Pick<PopperMotionProps, 'keepMounted'> & {
+  Pick<PopperPortalProps, 'container' | 'keepMounted'> & {
     /**
      * The children to render. Usually a trigger element.
      */

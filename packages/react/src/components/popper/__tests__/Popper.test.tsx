@@ -14,7 +14,10 @@ import {
 } from '../index'
 import type { PopperProps, PopperRootProps } from '../index'
 
-type TestPopperProps = PopperProps & PopperRootProps
+type TestPopperProps = PopperProps &
+  PopperRootProps & {
+    keepMounted?: boolean
+  }
 
 function TestPopper({
   open,
@@ -22,6 +25,7 @@ function TestPopper({
   openDelay = 0,
   closeDelay = 0,
   onOpenChange,
+  keepMounted,
   ...props
 }: TestPopperProps) {
   return (
@@ -35,14 +39,14 @@ function TestPopper({
       <PopperTrigger>
         <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
-      <PopperPortal>
-        <PopperMotion>
-          <PopperRoot data-testid='popper-root' {...props}>
+      <PopperPortal keepMounted={keepMounted}>
+        <PopperRoot data-testid='popper-root' {...props}>
+          <PopperMotion>
             <PopperContent data-testid='popper-content'>
               Popper Content
             </PopperContent>
-          </PopperRoot>
-        </PopperMotion>
+          </PopperMotion>
+        </PopperRoot>
       </PopperPortal>
     </Popper>
   )
@@ -54,6 +58,10 @@ describe('Popper', () => {
   })
 
   testVariantDataAttrs(<TestPopper open />, ['closeOnEscape', [true, false]], {
+    useAct: true,
+  })
+
+  testVariantDataAttrs(<TestPopper open />, ['keepMounted', [true, false]], {
     useAct: true,
   })
 
@@ -81,6 +89,20 @@ describe('Popper', () => {
     },
   )
 
+  it('should render with default props', async () => {
+    const { getByTestId } = await renderWithNexUIProvider(<TestPopper open />, {
+      useAct: true,
+    })
+
+    const root = getByTestId('popper-root')
+    expect(root).toHaveAttribute('data-placement', 'top')
+    expect(root).toHaveAttribute('data-keep-mounted', 'false')
+    expect(root).toHaveAttribute('data-close-on-escape', 'true')
+    expect(root).toHaveAttribute('data-state', 'open')
+
+    expect(root).toMatchSnapshot()
+  })
+
   it('should not render children by default', async () => {
     const { queryByTestId } = await renderWithNexUIProvider(<TestPopper />, {
       useAct: true,
@@ -101,7 +123,7 @@ describe('Popper', () => {
 
     const popperRoot = getByTestId('popper-root')
 
-    expect(popperRoot.parentElement?.parentElement).toBe(document.body)
+    expect(popperRoot.parentElement).toBe(document.body)
     const popperContent = getByTestId('popper-content')
     expect(popperRoot).toContainElement(popperContent)
   })
@@ -115,7 +137,7 @@ describe('Popper', () => {
     )
     expect(container.children).toHaveLength(1)
     const popperRoot = getByTestId('popper-root')
-    expect(popperRoot.parentElement?.parentElement).toBe(document.body)
+    expect(popperRoot.parentElement).toBe(document.body)
     const popperContent = getByTestId('popper-content')
     expect(popperRoot).toContainElement(popperContent)
   })
@@ -165,6 +187,24 @@ describe('Popper', () => {
     expect(queryByTestId('popper-root')).toBeInTheDocument()
   })
 
+  it('should always keep the children in the DOM when keepMounted=true', async () => {
+    const { getByTestId, rerender } = await renderWithNexUIProvider(
+      <TestPopper keepMounted open={false} />,
+      {
+        useAct: true,
+      },
+    )
+
+    const popperRoot = getByTestId('popper-root')
+    expect(popperRoot).toBeInTheDocument()
+
+    await act(async () => {
+      rerender(<TestPopper keepMounted open />)
+    })
+
+    expect(popperRoot).toBeInTheDocument()
+  })
+
   it('should delay opening and closing by default', async () => {
     jest.useFakeTimers()
 
@@ -203,5 +243,18 @@ describe('Popper', () => {
     expect(queryByTestId('popper-root')).toBeNull()
 
     jest.useRealTimers()
+  })
+
+  describe('Accessibility', () => {
+    it('should be aria-hidden when the popper is closed and keepMounted is true', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(
+        <TestPopper open={false} keepMounted />,
+        {
+          useAct: true,
+        },
+      )
+      const popperRoot = getByTestId('popper-root')
+      expect(popperRoot).toHaveAttribute('aria-hidden', 'true')
+    })
   })
 })

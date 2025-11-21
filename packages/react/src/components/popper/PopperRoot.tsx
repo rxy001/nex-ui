@@ -28,7 +28,8 @@ type StyleVariables = {
 export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   props: PopperRootProps<RootComponent>,
 ) => {
-  const { open, referenceRef, setOpen, popperRootRef } = usePopper()
+  const { open, referenceRef, setOpen, popperRootRef, keepMountedRef } =
+    usePopper()
 
   const {
     children,
@@ -49,7 +50,7 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   // because ResizeObserver is triggered when observing starts.
   const initialRender = useRef(true)
 
-  const [PopperMotion, getPopperMotionProps] = useSlot({
+  const [PopperRootRoot, getPopperRootRootProps] = useSlot({
     style,
     elementType: 'div',
     externalForwardedProps: remainingProps,
@@ -57,9 +58,11 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
       ref: popperRootRef,
       style: styleVariables as CSSProperties,
     },
+    a11y: { 'aria-hidden': open ? undefined : true },
     dataAttrs: {
       placement,
       closeOnEscape,
+      keepMounted: keepMountedRef.current,
       state: open ? 'open' : 'closed',
     },
   })
@@ -207,7 +210,9 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     subscribeWindowResizeEvent,
   ])
 
-  return <PopperMotion {...getPopperMotionProps()}>{children}</PopperMotion>
+  return (
+    <PopperRootRoot {...getPopperRootRootProps()}>{children}</PopperRootRoot>
+  )
 }
 
 PopperRoot.displayName = 'PopperRoot'

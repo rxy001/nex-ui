@@ -11,7 +11,7 @@ import type {
 } from '../popper'
 import type { OverrideProps, HTMLMotionProps } from '../../types/utils'
 import type { PopoverContentVariants } from '../../theme/recipes'
-import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
+import type { PopperPortalProps } from '../popper/types'
 
 type PopoverOwnProps<RootComponent extends ElementType> = Omit<
   PopperProps,
@@ -26,8 +26,7 @@ type PopoverOwnProps<RootComponent extends ElementType> = Omit<
     | 'shift'
     | 'closeOnDetached'
   > &
-  Pick<PopperPortalProps, 'container'> &
-  Pick<PopperMotionProps, 'keepMounted'> &
+  Pick<PopperPortalProps, 'container' | 'keepMounted'> &
   Pick<FocusTrapProps, 'restoreFocus'> & {
     /**
      * The component or element to render as the root.
