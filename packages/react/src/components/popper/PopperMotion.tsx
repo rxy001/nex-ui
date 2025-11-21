@@ -1,3 +1,5 @@
+'use client'
+
 import { usePopper } from './PopperContext'
 import { useSlot, PresenceMotion } from '../utils'
 import type { ElementType } from 'react'
@@ -9,8 +11,8 @@ export const PopperMotion = <
 >(
   props: PopperMotionProps<RootComponent>,
 ) => {
-  const { open } = usePopper()
-  const { children, keepMounted = false, ...remainingProps } = props
+  const { open, keepMountedRef } = usePopper()
+  const { children, ...remainingProps } = props
 
   const [PopperMotionRoot, getPopperMotionRootProps] = useSlot({
     elementType: PresenceMotion,
@@ -18,12 +20,8 @@ export const PopperMotion = <
     externalForwardedProps: remainingProps,
     additionalProps: {
       open,
-      keepMounted,
+      keepMounted: keepMountedRef.current,
     },
-    dataAttrs: {
-      keepMounted,
-    },
-    a11y: { 'aria-hidden': open ? undefined : true },
   })
 
   return (

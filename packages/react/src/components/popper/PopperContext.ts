@@ -10,6 +10,7 @@ export type PopperContextValue = {
   popperRootRef: RefObject<HTMLDivElement | null>
   handleOpen: () => void
   handleClose: () => void
+  keepMountedRef: RefObject<boolean>
 }
 
 export const [PopperProvider, usePopper] = createContext<PopperContextValue>({

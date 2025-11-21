@@ -1,6 +1,5 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { AnimatePresence, LazyMotion } from 'motion/react'
@@ -52,8 +51,7 @@ export const PresenceMotion = ({
   return (
     <LazyMotion features={motionFeatures}>
       {keepMounted ? (
-        <nex.div
-          as={m.div}
+        <m.div
           initial='hidden'
           animate={open ? 'visible' : 'hidden'}
           transition={transition}
@@ -63,12 +61,11 @@ export const PresenceMotion = ({
           onAnimationComplete={onAnimationComplete}
         >
           {children}
-        </nex.div>
+        </m.div>
       ) : (
-        <AnimatePresence>
+        <AnimatePresence propagate>
           {open ? (
-            <nex.div
-              as={m.div}
+            <m.div
               initial='hidden'
               animate='visible'
               exit='hidden'
@@ -78,7 +75,7 @@ export const PresenceMotion = ({
               onAnimationComplete={onAnimationComplete}
             >
               {children}
-            </nex.div>
+            </m.div>
           ) : null}
         </AnimatePresence>
       )}

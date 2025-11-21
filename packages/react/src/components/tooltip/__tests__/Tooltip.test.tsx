@@ -113,7 +113,7 @@ describe('Tooltip', () => {
     const tooltipRoot = getByTestId('tooltip-root')
     expect(tooltipRoot).toHaveClass(tooltipSlotClasses.root)
 
-    expect(tooltipRoot.firstElementChild).toHaveClass(
+    expect(tooltipRoot.firstElementChild?.firstElementChild).toHaveClass(
       tooltipSlotClasses.content,
     )
   })
