@@ -141,20 +141,14 @@ export type PopperRootProps<RootComponent extends ElementType = 'div'> =
   PopperSlotProps<RootComponent> & PopperRootOwnProps
 
 // ----------------- PopperMotionProps -----------------
-type PopperMotionOwnProps = {
-  /**
-   * If true, always keep the children in the DOM.
-   *
-   * @default false
-   */
-  keepMounted?: boolean
-}
-
 export type PopperMotionProps<
   RootComponent extends ElementType = DOMMotionComponents['div'],
-> = PopperSlotProps<RootComponent> & PopperMotionOwnProps
+> = PopperSlotProps<RootComponent>
 
-export type PopperPortalProps = PortalProps
+// ----------------- PopperPortalProps -----------------
+export type PopperPortalProps = PortalProps & {
+  keepMounted?: boolean
+}
 
 // ----------------- PopperContentProps -----------------
 type PopperContentOwnProps = {

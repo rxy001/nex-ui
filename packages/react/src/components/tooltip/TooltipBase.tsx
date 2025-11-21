@@ -93,9 +93,6 @@ export const TooltipBase = (props: TooltipProps) => {
     elementType: PopperMotion,
     shouldForwardComponent: false,
     externalSlotProps: motionProps,
-    additionalProps: {
-      keepMounted,
-    },
   })
 
   const [TooltipRoot, getTooltipRootProps] = useSlot({
@@ -127,14 +124,14 @@ export const TooltipBase = (props: TooltipProps) => {
   return (
     <>
       <TooltipTrigger {...getTooltipTriggerProps()}>{children}</TooltipTrigger>
-      <PopperPortal container={container}>
-        <TooltipMotion {...getTooltipMotionProps()}>
-          <TooltipRoot {...getTooltipRootProps()}>
+      <PopperPortal container={container} keepMounted={keepMounted}>
+        <TooltipRoot {...getTooltipRootProps()}>
+          <TooltipMotion {...getTooltipMotionProps()}>
             <TooltipContent {...getTooltipContentProps()}>
               {content}
             </TooltipContent>
-          </TooltipRoot>
-        </TooltipMotion>
+          </TooltipMotion>
+        </TooltipRoot>
       </PopperPortal>
     </>
   )
