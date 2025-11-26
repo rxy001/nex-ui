@@ -43,6 +43,8 @@ exports[`Popover should have the correct root class name 1`] = `
 
 <div
   class="nui-popover-root emotion-0"
+  data-animate-disabled="false"
+  data-close-on-detached="true"
   data-close-on-escape="true"
   data-keep-mounted="false"
   data-placement="top"

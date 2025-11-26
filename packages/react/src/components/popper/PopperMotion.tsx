@@ -11,7 +11,7 @@ export const PopperMotion = <
 >(
   props: PopperMotionProps<RootComponent>,
 ) => {
-  const { open, keepMountedRef } = usePopper()
+  const { open, keepMounted } = usePopper()
   const { children, ...remainingProps } = props
 
   const [PopperMotionRoot, getPopperMotionRootProps] = useSlot({
@@ -20,7 +20,7 @@ export const PopperMotion = <
     externalForwardedProps: remainingProps,
     additionalProps: {
       open,
-      keepMounted: keepMountedRef.current,
+      keepMounted,
     },
   })
 

@@ -75,6 +75,12 @@ const meta = {
     interactive: {
       control: 'boolean',
     },
+    animateDisabled: {
+      control: 'boolean',
+    },
+    keepMounted: {
+      control: 'boolean',
+    },
   },
   args: {
     content: 'This is a tooltip',

@@ -41,6 +41,8 @@ exports[`Tooltip should render with default props 1`] = `
   <div />
   <div
     class="nui-tooltip-root emotion-0"
+    data-animate-disabled="false"
+    data-close-on-detached="true"
     data-close-on-escape="true"
     data-color="default"
     data-keep-mounted="false"

@@ -28,8 +28,14 @@ type StyleVariables = {
 export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   props: PopperRootProps<RootComponent>,
 ) => {
-  const { open, referenceRef, setOpen, popperRootRef, keepMountedRef } =
-    usePopper()
+  const {
+    open,
+    referenceRef,
+    setOpen,
+    popperRootRef,
+    keepMounted,
+    animateDisabled,
+  } = usePopper()
 
   const {
     children,
@@ -56,13 +62,23 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     externalForwardedProps: remainingProps,
     additionalProps: {
       ref: popperRootRef,
-      style: styleVariables as CSSProperties,
+      style: {
+        ...styleVariables,
+        display:
+          animateDisabled && keepMounted
+            ? open
+              ? 'block'
+              : 'none'
+            : undefined,
+      } as CSSProperties,
     },
     a11y: { 'aria-hidden': open ? undefined : true },
     dataAttrs: {
       placement,
       closeOnEscape,
-      keepMounted: keepMountedRef.current,
+      keepMounted,
+      closeOnDetached,
+      animateDisabled,
       state: open ? 'open' : 'closed',
     },
   })
