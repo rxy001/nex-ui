@@ -140,15 +140,27 @@ type PopperRootOwnProps = {
 export type PopperRootProps<RootComponent extends ElementType = 'div'> =
   PopperSlotProps<RootComponent> & PopperRootOwnProps
 
+// ----------------- PopperPortalProps -----------------
+export type PopperPortalProps = Pick<PortalProps, 'container' | 'children'> & {
+  /**
+   * If true, keeps the popper mounted in the DOM when it's closed.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
+
+  /**
+   * If true, disables the animation for the Popper.
+   *
+   * @default false
+   */
+  animateDisabled?: boolean
+}
+
 // ----------------- PopperMotionProps -----------------
 export type PopperMotionProps<
   RootComponent extends ElementType = DOMMotionComponents['div'],
 > = PopperSlotProps<RootComponent>
-
-// ----------------- PopperPortalProps -----------------
-export type PopperPortalProps = PortalProps & {
-  keepMounted?: boolean
-}
 
 // ----------------- PopperContentProps -----------------
 type PopperContentOwnProps = {

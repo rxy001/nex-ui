@@ -53,20 +53,49 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
   }, [action, handleClose, interactive, open, popperRootRef, referenceRef])
 
   useEffect(() => {
-    if (open && interactive && action === 'hover' && popperRootRef.current) {
-      const removeMouseenter = addEventListener(
-        popperRootRef.current,
-        'mouseenter',
-        handleOpen,
-      )
-      const removeMouseleave = addEventListener(
-        popperRootRef.current,
-        'mouseleave',
-        handleClose,
-      )
+    let attempts = 0
+    let timer: number | null = null
+    let removeListeners: (() => void) | null = null
+
+    function tryAddListeners() {
+      if (popperRootRef.current) {
+        const removeMouseenter = addEventListener(
+          popperRootRef.current,
+          'mouseenter',
+          handleOpen,
+        )
+        const removeMouseleave = addEventListener(
+          popperRootRef.current,
+          'mouseleave',
+          handleClose,
+        )
+        removeListeners = () => {
+          removeMouseenter()
+          removeMouseleave()
+        }
+        return
+      }
+
+      if (attempts >= 30) return
+      attempts += 1
+
+      timer = window.setTimeout(() => {
+        timer = null
+        tryAddListeners()
+      }, 100)
+    }
+    // The PopperPortal is rendered asynchronously.
+    if (open && interactive && action === 'hover') {
+      tryAddListeners()
       return () => {
-        removeMouseenter()
-        removeMouseleave()
+        if (timer !== null) {
+          clearTimeout(timer)
+          timer = null
+        }
+        if (removeListeners) {
+          removeListeners()
+          removeListeners = null
+        }
       }
     }
   }, [action, handleClose, interactive, open, popperRootRef, handleOpen])

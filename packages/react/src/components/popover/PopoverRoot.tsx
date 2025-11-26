@@ -1,11 +1,12 @@
 'use client'
 
 import { useMemo } from 'react'
-import { PopperMotion, PopperPortal, PopperRoot } from '../popper'
+import { PopperMotion, PopperPortal, PopperRoot, usePopper } from '../popper'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
 import { usePopover } from './PopoverContext'
+import { FocusTrap } from '../focusTrap'
 import { popoverRecipe } from '../../theme/recipes'
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import type { PopoverContextValue } from './PopoverContext'
 
 const slots = ['root']
@@ -23,8 +24,17 @@ const useAriaProps = (ownerState: PopoverContextValue) => {
   )
 }
 
-export const PopoverRoot = ({ children }: { children: ReactNode }) => {
-  const { motionProps, keepMounted, container, ...props } = usePopover()
+export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
+  const {
+    motionProps,
+    keepMounted,
+    container,
+    restoreFocus,
+    animateDisabled,
+    ...props
+  } = usePopover()
+
+  const { open } = usePopper()
 
   const slotClasses = useSlotClasses({
     name: 'Popover',
@@ -35,12 +45,6 @@ export const PopoverRoot = ({ children }: { children: ReactNode }) => {
     ownerState: props,
     name: 'Popover',
     recipe: popoverRecipe,
-  })
-
-  const [PopoverRootMotion, getPopoverRootMotionProps] = useSlot({
-    elementType: PopperMotion,
-    shouldForwardComponent: false,
-    externalSlotProps: motionProps,
   })
 
   const ariaProps = useAriaProps(props)
@@ -54,12 +58,24 @@ export const PopoverRoot = ({ children }: { children: ReactNode }) => {
     a11y: ariaProps,
   })
 
+  const renderChildren = () => (
+    <FocusTrap active={open} restoreFocus={restoreFocus}>
+      {children}
+    </FocusTrap>
+  )
+
   return (
-    <PopperPortal container={container} keepMounted={keepMounted}>
+    <PopperPortal
+      container={container}
+      keepMounted={keepMounted}
+      animateDisabled={animateDisabled}
+    >
       <PopoverRootRoot {...getPopoverRootRootProps()}>
-        <PopoverRootMotion {...getPopoverRootMotionProps()}>
-          {children}
-        </PopoverRootMotion>
+        {animateDisabled ? (
+          renderChildren()
+        ) : (
+          <PopperMotion {...motionProps}>{renderChildren()}</PopperMotion>
+        )}
       </PopoverRootRoot>
     </PopperPortal>
   )

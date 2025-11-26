@@ -49,6 +49,7 @@ export const TooltipBase = (props: TooltipProps) => {
     interactive,
     closeOnClick,
     maxHeight,
+    animateDisabled = false,
     maxWidth = 360,
     color = 'default',
     size = 'md',
@@ -89,12 +90,6 @@ export const TooltipBase = (props: TooltipProps) => {
     },
   })
 
-  const [TooltipMotion, getTooltipMotionProps] = useSlot({
-    elementType: PopperMotion,
-    shouldForwardComponent: false,
-    externalSlotProps: motionProps,
-  })
-
   const [TooltipRoot, getTooltipRootProps] = useSlot({
     style: styles.root,
     elementType: PopperRoot,
@@ -121,16 +116,24 @@ export const TooltipBase = (props: TooltipProps) => {
     },
   })
 
+  const renderChildren = () => (
+    <TooltipContent {...getTooltipContentProps()}>{content}</TooltipContent>
+  )
+
   return (
     <>
       <TooltipTrigger {...getTooltipTriggerProps()}>{children}</TooltipTrigger>
-      <PopperPortal container={container} keepMounted={keepMounted}>
+      <PopperPortal
+        animateDisabled={animateDisabled}
+        container={container}
+        keepMounted={keepMounted}
+      >
         <TooltipRoot {...getTooltipRootProps()}>
-          <TooltipMotion {...getTooltipMotionProps()}>
-            <TooltipContent {...getTooltipContentProps()}>
-              {content}
-            </TooltipContent>
-          </TooltipMotion>
+          {animateDisabled ? (
+            renderChildren()
+          ) : (
+            <PopperMotion {...motionProps}>{renderChildren()}</PopperMotion>
+          )}
         </TooltipRoot>
       </PopperPortal>
     </>

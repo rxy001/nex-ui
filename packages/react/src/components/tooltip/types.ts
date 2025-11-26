@@ -31,7 +31,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     | 'closeOnEscape'
     | 'closeOnDetached'
   > &
-  Pick<PopperPortalProps, 'container' | 'keepMounted'> & {
+  Omit<PopperPortalProps, 'children'> & {
     /**
      * The children to render. Usually a trigger element.
      */
@@ -55,7 +55,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     /**
      * The component or element to render as the root.
      *
-     * @default m.div
+     * @default 'div'
      */
     as?: RootComponent
 

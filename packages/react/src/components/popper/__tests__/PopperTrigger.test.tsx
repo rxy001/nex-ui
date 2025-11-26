@@ -1,5 +1,5 @@
 import { renderWithNexUIProvider } from '~/tests/shared'
-import { fireEvent, waitForElementToBeRemoved } from '@testing-library/react'
+import { waitFor, fireEvent } from '@testing-library/react'
 import {
   Popper,
   PopperRoot,
@@ -12,7 +12,7 @@ import type { PopperTriggerProps } from '../index'
 
 function TestPopper(props: PopperTriggerProps) {
   return (
-    <Popper openDelay={0} closeDelay={0}>
+    <Popper>
       <PopperTrigger {...props}>
         <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
@@ -40,15 +40,19 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.click(trigger)
 
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     await user.click(trigger)
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).not.toBeInTheDocument(),
+    )
   })
 
   it('should close when clicking popper outside', async () => {
@@ -61,17 +65,17 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.click(trigger)
-
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     await user.click(document.body)
-
-    await waitForElementToBeRemoved(() => queryByTestId('popper-root'))
-
-    expect(queryByTestId('popper-root')).toBeNull()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).not.toBeInTheDocument(),
+    )
   })
 
   it('should support hover action', async () => {
@@ -84,16 +88,18 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.hover(trigger)
 
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     await user.unhover(trigger)
-    await waitForElementToBeRemoved(() => queryByTestId('popper-root'))
-
-    expect(queryByTestId('popper-root')).toBeNull()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).not.toBeInTheDocument(),
+    )
   })
 
   it('should close when clicking the trigger if closeOnClick is true', async () => {
@@ -106,19 +112,21 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.hover(trigger)
-
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     Object.defineProperty(trigger, 'matches', {
       value: () => false,
     })
 
     await user.click(trigger)
-
-    expect(queryByTestId('popper-root')).toBeNull()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).not.toBeInTheDocument(),
+    )
   })
 
   it('should not close when clicking the trigger if closeOnClick is false', async () => {
@@ -131,15 +139,17 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.hover(trigger)
-
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     await user.click(trigger)
-
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
   })
 
   it('should keep the popper open when interacting with its content if interactive is true', async () => {
@@ -152,11 +162,12 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.hover(trigger)
-
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     const content = getByTestId('popper-content')
 
@@ -176,18 +187,21 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.hover(trigger)
-
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     const content = getByTestId('popper-content')
 
     await user.hover(content)
     await user.unhover(trigger)
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).not.toBeInTheDocument(),
+    )
   })
 
   it('should open the popper when tabbing to the trigger', async () => {
@@ -198,11 +212,13 @@ describe('PopperTrigger', () => {
       },
     )
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.tab()
 
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
   })
 
   it('should close the popper when tabbing away from the trigger', async () => {
@@ -216,14 +232,17 @@ describe('PopperTrigger', () => {
       },
     )
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     await user.tab()
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
     await user.tab()
-    await waitForElementToBeRemoved(() => queryByTestId('popper-root'))
-    expect(queryByTestId('popper-root')).toBeNull()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).not.toBeInTheDocument(),
+    )
   })
 
   it('should not respond when manually focusing the trigger', async () => {
@@ -236,10 +255,10 @@ describe('PopperTrigger', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
 
     fireEvent.focus(trigger)
 
-    expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).not.toBeInTheDocument()
   })
 })

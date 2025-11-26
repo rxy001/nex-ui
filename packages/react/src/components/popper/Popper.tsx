@@ -9,6 +9,14 @@ import type { PopperContextValue } from './PopperContext'
 
 const popperManager = new PopperManager()
 
+/**
+ * Popper is a lower-level construct that is leveraged by the following components:
+ *
+ * - Tooltip
+ * - Popover
+ * - Dropdown
+ */
+
 export const Popper = (props: PopperProps) => {
   const {
     children,
@@ -20,7 +28,6 @@ export const Popper = (props: PopperProps) => {
   } = props
   const referenceRef = useRef<HTMLDivElement>(null)
   const popperRootRef = useRef<HTMLDivElement>(null)
-  const keepMountedRef = useRef<boolean>(false)
   const id = useId()
 
   const [open, setOpen] = useControlledState(
@@ -69,7 +76,6 @@ export const Popper = (props: PopperProps) => {
       setOpen,
       referenceRef,
       popperRootRef,
-      keepMountedRef,
       handleOpen,
       handleClose,
     }),
