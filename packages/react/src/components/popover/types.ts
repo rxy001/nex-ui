@@ -26,12 +26,12 @@ type PopoverOwnProps<RootComponent extends ElementType> = Omit<
     | 'shift'
     | 'closeOnDetached'
   > &
-  Pick<PopperPortalProps, 'container' | 'keepMounted'> &
+  Omit<PopperPortalProps, 'children'> &
   Pick<FocusTrapProps, 'restoreFocus'> & {
     /**
      * The component or element to render as the root.
      *
-     * @default m.div
+     * @default 'div'
      */
     as?: RootComponent
 

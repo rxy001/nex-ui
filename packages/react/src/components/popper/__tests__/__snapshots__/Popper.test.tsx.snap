@@ -26,6 +26,8 @@ exports[`Popper should render with default props 1`] = `
 
 <div
   class="emotion-0"
+  data-animate-disabled="false"
+  data-close-on-detached="true"
   data-close-on-escape="true"
   data-keep-mounted="false"
   data-placement="top"

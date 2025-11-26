@@ -13,11 +13,9 @@ import {
   PopperMotion,
 } from '../index'
 import type { PopperProps, PopperRootProps } from '../index'
+import type { PopperPortalProps } from '../types'
 
-type TestPopperProps = PopperProps &
-  PopperRootProps & {
-    keepMounted?: boolean
-  }
+type TestPopperProps = PopperProps & PopperRootProps & PopperPortalProps
 
 function TestPopper({
   open,
@@ -26,6 +24,7 @@ function TestPopper({
   closeDelay = 0,
   onOpenChange,
   keepMounted,
+  animateDisabled,
   ...props
 }: TestPopperProps) {
   return (
@@ -39,7 +38,7 @@ function TestPopper({
       <PopperTrigger>
         <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
-      <PopperPortal keepMounted={keepMounted}>
+      <PopperPortal keepMounted={keepMounted} animateDisabled={animateDisabled}>
         <PopperRoot data-testid='popper-root' {...props}>
           <PopperMotion>
             <PopperContent data-testid='popper-content'>
@@ -84,6 +83,22 @@ describe('Popper', () => {
         'left-end',
       ],
     ],
+    {
+      useAct: true,
+    },
+  )
+
+  testVariantDataAttrs(
+    <TestPopper open />,
+    ['closeOnDetached', [true, false]],
+    {
+      useAct: true,
+    },
+  )
+
+  testVariantDataAttrs(
+    <TestPopper open />,
+    ['animateDisabled', [true, false]],
     {
       useAct: true,
     },

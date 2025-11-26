@@ -10,7 +10,8 @@ export type PopperContextValue = {
   popperRootRef: RefObject<HTMLDivElement | null>
   handleOpen: () => void
   handleClose: () => void
-  keepMountedRef: RefObject<boolean>
+  keepMounted?: boolean
+  animateDisabled?: boolean
 }
 
 export const [PopperProvider, usePopper] = createContext<PopperContextValue>({

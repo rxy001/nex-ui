@@ -1,22 +1,40 @@
 'use client'
 
 import { AnimatePresence } from 'motion/react'
+import { useMemo } from 'react'
 import { Portal } from '../utils'
-import { usePopper } from './PopperContext'
+import { PopperProvider, usePopper } from './PopperContext'
 import type { PopperPortalProps } from './types'
 
 export const PopperPortal = ({
   children,
+  container,
   keepMounted = false,
-  ...props
+  animateDisabled = false,
 }: PopperPortalProps) => {
-  const { open, keepMountedRef } = usePopper()
+  const popperState = usePopper()
 
-  keepMountedRef.current = keepMounted
+  const ctx = useMemo(
+    () => ({
+      ...popperState,
+      keepMounted,
+      animateDisabled,
+    }),
+    [popperState, keepMounted, animateDisabled],
+  )
+
+  const renderChildren = () =>
+    popperState.open || keepMounted ? (
+      <PopperProvider value={ctx}>{children}</PopperProvider>
+    ) : null
 
   return (
-    <Portal {...props}>
-      <AnimatePresence>{open || keepMounted ? children : null}</AnimatePresence>
+    <Portal container={container}>
+      {animateDisabled ? (
+        renderChildren()
+      ) : (
+        <AnimatePresence>{renderChildren()}</AnimatePresence>
+      )}
     </Portal>
   )
 }

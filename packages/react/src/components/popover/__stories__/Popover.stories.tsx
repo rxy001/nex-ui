@@ -81,6 +81,12 @@ const meta = {
     closeOnDetached: {
       control: 'boolean',
     },
+    animateDisabled: {
+      control: 'boolean',
+    },
+    keepMounted: {
+      control: 'boolean',
+    },
   },
   render: (props) => {
     return (
