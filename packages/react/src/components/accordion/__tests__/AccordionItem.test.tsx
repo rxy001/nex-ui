@@ -156,11 +156,11 @@ describe('AccordionItem', () => {
       )
     })
 
-    await waitFor(() => {
+    await waitFor(() =>
       expect(
         queryByClassName(accordionItemSlotClasses.content),
-      ).not.toBeInTheDocument()
-    })
+      ).not.toBeInTheDocument(),
+    )
   })
 
   it('should toggle between expanded and collapsed states when clicking the trigger', async () => {

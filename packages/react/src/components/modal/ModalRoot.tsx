@@ -7,45 +7,41 @@ import {
   isFunction,
 } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
-import { useEffect, useMemo, useRef, useId } from 'react'
+import { useEffect, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
-import { Portal, useSlot, PresenceMotion } from '../utils'
-import { ModalProvider, useModal } from './ModalContext'
+import { useSlot } from '../utils'
+import { useModal } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { ModalRootProps } from './types'
 
 const recipe = defineRecipe({
   base: {
     position: 'fixed',
-    inset: 0,
     zIndex: 'modal',
   },
 })
 
 const style = recipe()
 
-export const ModalRoot = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
-  inProps: ModalRootProps<RootComponent>,
+export const ModalRoot = <RootComponent extends ElementType = 'div'>(
+  props: ModalRootProps<RootComponent>,
 ) => {
-  const { children, ...props } = inProps as ModalRootProps
+  const { children, ...remainingProps } = props
   const rootRef = useRef<HTMLDivElement>(null)
-  const modalId = useId()
   const modalState = useModal()
   const modalManager = useModalManager()
   const registeredRef = useRef(false)
-  const resolver = useRef<() => void>(undefined)
 
   const {
     open,
-    container,
-    keepMounted,
     setOpen,
     closeOnEscape,
     preventScroll,
+    modalId,
+    container,
+    keepMounted,
+    animateDisabled,
   } = modalState
 
   if (registeredRef.current === false && open) {
@@ -53,19 +49,19 @@ export const ModalRoot = <
     registeredRef.current = true
   }
 
-  const [Motion, getMotionProps] = useSlot({
+  const [ModalRootRoot, getModalRootRootProps] = useSlot({
     style,
-    elementType: PresenceMotion,
-    externalForwardedProps: props,
-    shouldForwardComponent: false,
+    elementType: 'div',
+    externalForwardedProps: remainingProps,
     additionalProps: {
-      open,
-      keepMounted,
       ref: rootRef,
-      onAnimationComplete: (animation: string) => {
-        if (animation === 'hidden') {
-          resolver.current?.()
-        }
+      style: {
+        display:
+          animateDisabled && keepMounted
+            ? open
+              ? 'block'
+              : 'none'
+            : undefined,
       },
     },
     a11y: {
@@ -73,27 +69,15 @@ export const ModalRoot = <
       'aria-hidden': open ? undefined : 'true',
     },
     dataAttrs: {
-      state: open ? 'open' : 'closed',
+      closeOnEscape,
+      preventScroll,
       keepMounted,
+      animateDisabled,
+      state: open ? 'open' : 'closed',
     },
   })
 
   const isTopmostModal = useEvent(() => modalManager.isTopmostModal(modalId))
-
-  // Portal renders asynchronously.
-  const handlePortalMount = () => {
-    if (open && rootRef.current && isTopmostModal()) {
-      modalManager.mount(modalId)
-    }
-  }
-
-  const ctx = useMemo(
-    () => ({
-      ...modalState,
-      isTopmostModal: isTopmostModal,
-    }),
-    [modalState, isTopmostModal],
-  )
 
   useEffect(() => {
     if (!open || !closeOnEscape) {
@@ -165,18 +149,14 @@ export const ModalRoot = <
       })
 
       return () => {
-        const { promise, resolve } = Promise.withResolvers<void>()
-        resolver.current = resolve
-        promise.then(() => {
-          if (prevOverflow !== null) {
-            resolvedContainer.style.overflow = prevOverflow
-            resolvedContainer.style.overflowX = prevOverflowX!
-            resolvedContainer.style.overflowY = prevOverflowY!
-          }
-          if (prevPaddingRight !== null) {
-            resolvedContainer.style.paddingRight = prevPaddingRight
-          }
-        })
+        if (prevOverflow !== null) {
+          resolvedContainer.style.overflow = prevOverflow
+          resolvedContainer.style.overflowX = prevOverflowX!
+          resolvedContainer.style.overflowY = prevOverflowY!
+        }
+        if (prevPaddingRight !== null) {
+          resolvedContainer.style.paddingRight = prevPaddingRight
+        }
         unsubscribe()
       }
     }
@@ -195,13 +175,7 @@ export const ModalRoot = <
     }
   }, [isTopmostModal, modalId, modalManager, open])
 
-  return (
-    <Portal container={container} onMount={handlePortalMount}>
-      <ModalProvider value={ctx}>
-        <Motion {...getMotionProps()}>{children}</Motion>
-      </ModalProvider>
-    </Portal>
-  )
+  return <ModalRootRoot {...getModalRootRootProps()}>{children}</ModalRootRoot>
 }
 
 // Is a vertical scrollbar displayed?

@@ -14,7 +14,7 @@ import {
   DialogFooter,
   DialogBody,
 } from '../index'
-import { dialogClasses } from './classes'
+import { dialogClasses, dialogContentClasses } from './classes'
 import type { DialogProps } from '../index'
 
 function TestDialog(props: DialogProps) {
@@ -144,5 +144,22 @@ describe('Dialog', () => {
 
     await user.click(toggleButton)
     expect(queryByTestId('dialog-root')).not.toBeInTheDocument()
+  })
+
+  it('should disable animations when animateDisabled=true', () => {
+    const { queryByClassName } = renderWithNexUIProvider(
+      <TestDialog
+        open
+        animateDisabled={true}
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+    )
+    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
+
+    expect(queryByClassName(dialogContentClasses.paper)).not.toHaveStyle(
+      'transform: scale(1)',
+    )
   })
 })

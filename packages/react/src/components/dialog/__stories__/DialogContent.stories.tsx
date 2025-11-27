@@ -34,7 +34,7 @@ const meta = {
   },
   render: (props) => {
     return (
-      <Dialog>
+      <Dialog defaultOpen>
         <DialogTrigger>
           <Button>Open Dialog</Button>
         </DialogTrigger>
@@ -79,7 +79,7 @@ export const Default: Story = {}
 
 function ScrollTemplate(props: DialogContentProps) {
   return (
-    <Dialog>
+    <Dialog defaultOpen>
       <DialogTrigger>
         <Button>Open Dialog</Button>
       </DialogTrigger>

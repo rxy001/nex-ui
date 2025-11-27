@@ -31,10 +31,7 @@ export const FocusTrap = ({
       restoredNode.current = e.relatedTarget
     }
 
-    const childrenPropsHandler = children.props.onFocus
-    if (childrenPropsHandler) {
-      childrenPropsHandler(e)
-    }
+    children.props.onFocus?.(e)
   })
 
   useEffect(() => {
@@ -46,6 +43,7 @@ export const FocusTrap = ({
 
     if (!rootRef.current.contains(doc.activeElement)) {
       // If the focus is not inside the focus trap, focus the root element
+
       rootRef.current?.focus({
         preventScroll: true,
       })

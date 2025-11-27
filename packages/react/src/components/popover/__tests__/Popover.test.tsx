@@ -65,6 +65,19 @@ describe('Popover', () => {
     expect(queryByTestId('popover-content')).not.toBeInTheDocument()
   })
 
+  it('should disable animations when animateDisabled=true', () => {
+    const { queryByClassName } = renderWithNexUIProvider(
+      <TestPopover
+        open
+        animateDisabled
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+    )
+    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
+  })
+
   describe('Accessibility', () => {
     it('should have role="dialog" on the root element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(

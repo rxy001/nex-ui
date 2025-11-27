@@ -8,6 +8,10 @@ export { ModalClose } from './ModalClose'
 export { ModalPanel } from './ModalPanel'
 export { ModalBackdrop } from './ModalBackdrop'
 export { ModalRoot } from './ModalRoot'
+export { ModalPortal } from './ModalPortal'
+export { ModalMotion } from './ModalMotion'
+
+export { useModal } from './ModalContext'
 
 export type {
   ModalProps,

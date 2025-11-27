@@ -1,4 +1,4 @@
-import { ModalBackdrop, ModalRoot } from '../modal'
+import { ModalBackdrop, ModalMotion, ModalPortal, ModalRoot } from '../modal'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
 import { useDrawer } from './DrawerContext'
 import { drawerRootRecipe } from '../../theme/recipes'
@@ -7,15 +7,24 @@ import type { DrawerProps } from './types'
 const slots = ['root', 'backdrop']
 
 export const DrawerRoot = ({ children }: DrawerProps) => {
-  const ownerState = useDrawer()
+  const props = useDrawer()
 
   const styles = useStyles({
     name: 'Drawer',
     recipe: drawerRootRecipe,
-    ownerState,
+    ownerState: props,
   })
 
-  const { slotProps, classNames, hideBackdrop, ...remainingProps } = ownerState
+  const {
+    slotProps,
+    classNames,
+    hideBackdrop,
+    container,
+    keepMounted,
+    motionProps,
+    animateDisabled,
+    ...remainingProps
+  } = props
 
   const slotClasses = useSlotClasses({
     name: 'Drawer',
@@ -39,11 +48,27 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     classNames: slotClasses.backdrop,
   })
 
-  return (
-    <DrawerRootRoot {...getDrawerRootRootProps()}>
+  const renderChildren = () => (
+    <>
       {!hideBackdrop && <DrawerBackdrop {...getDrawerBackdropProps()} />}
       {children}
-    </DrawerRootRoot>
+    </>
+  )
+
+  return (
+    <ModalPortal
+      animateDisabled={animateDisabled}
+      container={container}
+      keepMounted={keepMounted}
+    >
+      <DrawerRootRoot {...getDrawerRootRootProps()}>
+        {animateDisabled ? (
+          renderChildren()
+        ) : (
+          <ModalMotion {...motionProps}>{renderChildren()}</ModalMotion>
+        )}
+      </DrawerRootRoot>
+    </ModalPortal>
   )
 }
 

@@ -142,4 +142,17 @@ describe('Drawer', () => {
     await user.click(toggleButton)
     expect(queryByTestId('drawer-root')).not.toBeInTheDocument()
   })
+
+  it('should disable animations when animateDisabled=true', () => {
+    const { queryByClassName } = renderWithNexUIProvider(
+      <TestDrawer
+        open
+        animateDisabled={true}
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+    )
+    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
+  })
 })

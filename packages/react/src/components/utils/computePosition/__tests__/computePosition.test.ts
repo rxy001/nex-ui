@@ -151,7 +151,6 @@ describe('computePosition', () => {
         flip: false,
         offset: false,
         shift: false,
-        placement: 'bottom',
       },
     )
 

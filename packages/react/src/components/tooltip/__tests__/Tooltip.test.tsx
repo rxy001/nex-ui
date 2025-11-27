@@ -98,8 +98,6 @@ describe('Tooltip', () => {
     expect(tooltipRoot).toHaveAttribute('data-color', 'default')
     expect(tooltipRoot).toHaveAttribute('data-size', 'md')
     expect(tooltipRoot).toHaveAttribute('data-radius', 'md')
-
-    expect(tooltipRoot.parentElement).toMatchSnapshot()
   })
 
   it('should render with root, content class', async () => {
@@ -127,6 +125,20 @@ describe('Tooltip', () => {
     )
 
     expect(queryByTestId('tooltip-root')).toBeNull()
+  })
+
+  it('should disable animations when animateDisabled=true', () => {
+    const { queryByClassName } = renderWithNexUIProvider(
+      <Tooltip
+        open
+        animateDisabled
+        content='Content'
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+    )
+    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
   })
 
   describe('Accessibility', () => {

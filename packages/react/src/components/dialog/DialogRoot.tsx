@@ -1,6 +1,6 @@
 'use client'
 
-import { ModalBackdrop, ModalRoot } from '../modal'
+import { ModalBackdrop, ModalRoot, ModalPortal, ModalMotion } from '../modal'
 import { useStyles, useSlot, useSlotClasses } from '../utils'
 import { useDialog } from './DialogContext'
 import { dialogRootRecipe } from '../../theme/recipes'
@@ -15,7 +15,16 @@ const slots = ['root', 'backdrop']
 export const DialogRoot = ({ children }: DialogRootProps) => {
   const props = useDialog()
 
-  const { slotProps, hideBackdrop, classNames, ...remainingProps } = props
+  const {
+    slotProps,
+    hideBackdrop,
+    classNames,
+    container,
+    keepMounted,
+    motionProps,
+    animateDisabled,
+    ...remainingProps
+  } = props
 
   const slotClasses = useSlotClasses({
     name: 'Dialog',
@@ -48,11 +57,27 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     classNames: slotClasses.backdrop,
   })
 
-  return (
-    <DialogRootRoot {...getDialogRootRootProps()}>
+  const renderChildren = () => (
+    <>
       {!hideBackdrop && <DialogBackdrop {...getDialogBackdropProps()} />}
       {children}
-    </DialogRootRoot>
+    </>
+  )
+
+  return (
+    <ModalPortal
+      animateDisabled={animateDisabled}
+      container={container}
+      keepMounted={keepMounted}
+    >
+      <DialogRootRoot {...getDialogRootRootProps()}>
+        {animateDisabled ? (
+          renderChildren()
+        ) : (
+          <ModalMotion {...motionProps}>{renderChildren()}</ModalMotion>
+        )}
+      </DialogRootRoot>
+    </ModalPortal>
   )
 }
 

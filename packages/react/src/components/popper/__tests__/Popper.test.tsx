@@ -260,6 +260,31 @@ describe('Popper', () => {
     jest.useRealTimers()
   })
 
+  it('should render correct styles based on animateDisabled and keepMounted', async () => {
+    const { getByTestId, rerender } = await renderWithNexUIProvider(
+      <TestPopper animateDisabled={true} keepMounted open={false} />,
+      {
+        useAct: true,
+      },
+    )
+
+    const popperRoot = getByTestId('popper-root')
+
+    expect(popperRoot).toHaveStyle('display: none')
+
+    await act(async () => {
+      rerender(<TestPopper animateDisabled={true} keepMounted open />)
+    })
+
+    expect(popperRoot).toHaveStyle('display: block')
+
+    await act(async () => {
+      rerender(<TestPopper animateDisabled={false} keepMounted />)
+    })
+
+    expect(popperRoot).not.toHaveStyle('display: none')
+  })
+
   describe('Accessibility', () => {
     it('should be aria-hidden when the popper is closed and keepMounted is true', async () => {
       const { getByTestId } = await renderWithNexUIProvider(

@@ -15,7 +15,7 @@ import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
-import { DialogContentProvider } from './DialogContext'
+import { DialogContentProvider, useDialog } from './DialogContext'
 import type { ElementType } from 'react'
 import type { DialogContentProps } from './types'
 
@@ -32,8 +32,6 @@ const useSlotAriaProps = (ownerState: DialogContentProps) => {
   const { 'aria-label': closeButtonAriaLabel = 'Close dialog' } = closeButton
 
   const {
-    role = 'dialog',
-    'aria-modal': modal = true,
     'aria-labelledby': ariaLabelledBy = defaultAriaLabelledBy,
     'aria-describedby': ariaDescribedBy = defaultAriaDescribedBy,
   } = paper
@@ -41,8 +39,6 @@ const useSlotAriaProps = (ownerState: DialogContentProps) => {
   return useMemo(
     () => ({
       paper: {
-        role,
-        'aria-modal': modal,
         'aria-labelledby': ariaLabelledBy,
         'aria-describedby': ariaDescribedBy,
       },
@@ -50,7 +46,7 @@ const useSlotAriaProps = (ownerState: DialogContentProps) => {
         'aria-label': closeButtonAriaLabel,
       },
     }),
-    [role, modal, ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
+    [ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
   )
 }
 
@@ -62,12 +58,14 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
+  const { animateDisabled } = useDialog()
+
   const {
     children,
     slotProps,
     closeIcon,
     classNames,
-    motionProps: motionPropsProp,
+    motionProps,
     placement = 'top',
     scroll = 'outside',
     fullScreen = false,
@@ -99,25 +97,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     classNames,
   })
 
-  const motionProps = useMemo(() => {
-    const mProps =
-      typeof motionPropsProp === 'function'
-        ? motionPropsProp(placement)
-        : motionPropsProp
-
-    return {
-      variants: {
-        visible: {
-          transform: 'scale(1)',
-        },
-        hidden: {
-          transform: 'scale(1.04)',
-        },
-      },
-      ...mProps,
-    }
-  }, [motionPropsProp, placement])
-
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
     elementType: ModalPanel,
     style: styles.root,
@@ -133,6 +112,23 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     },
   })
 
+  const mergedMotionProps = useMemo(() => {
+    const mProps =
+      typeof motionProps === 'function' ? motionProps(placement) : motionProps
+
+    return {
+      variants: {
+        visible: {
+          transform: 'scale(1)',
+        },
+        hidden: {
+          transform: 'scale(1.04)',
+        },
+      },
+      ...mProps,
+    }
+  }, [motionProps, placement])
+
   const [DialogContentPaper, getDialogContentPaperProps] = useSlot({
     elementType: ModalContent,
     style: styles.paper,
@@ -140,10 +136,12 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
     a11y: slotAriaProps.paper,
-    additionalProps: {
-      as: m.section,
-      ...motionProps,
-    },
+    additionalProps: !animateDisabled
+      ? {
+          as: m.section,
+          ...mergedMotionProps,
+        }
+      : undefined,
   })
 
   const [DialogContentCloseButton, getDialogContentCloseButtonProps] = useSlot({

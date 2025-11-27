@@ -15,6 +15,7 @@ import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
+import { useDrawer } from './DrawerContext'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DrawerContentProps } from './types'
@@ -32,8 +33,6 @@ const useSlotAriaProps = (ownerState: DrawerContentProps) => {
   const { 'aria-label': closeButtonAriaLabel = 'Close drawer' } = closeButton
 
   const {
-    role = 'dialog',
-    'aria-modal': ariaModal = true,
     'aria-labelledby': ariaLabelledBy = defaultAriaLabelledBy,
     'aria-describedby': ariaDescribedBy = defaultAriaDescribedBy,
   } = paper
@@ -41,8 +40,6 @@ const useSlotAriaProps = (ownerState: DrawerContentProps) => {
   return useMemo(
     () => ({
       paper: {
-        role,
-        'aria-modal': ariaModal,
         'aria-labelledby': ariaLabelledBy,
         'aria-describedby': ariaDescribedBy,
       },
@@ -50,7 +47,7 @@ const useSlotAriaProps = (ownerState: DrawerContentProps) => {
         'aria-label': closeButtonAriaLabel,
       },
     }),
-    [role, ariaModal, ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
+    [ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
   )
 }
 
@@ -62,12 +59,14 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
+  const { animateDisabled } = useDrawer()
+
   const {
     classNames,
     children,
     slotProps,
     closeIcon,
-    motionProps: motionPropsProp,
+    motionProps,
     placement = 'right',
     hideCloseButton = false,
     size = 'md',
@@ -96,11 +95,9 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     classNames,
   })
 
-  const motionProps = useMemo(() => {
+  const mergedMotionProps = useMemo(() => {
     const mProps =
-      typeof motionPropsProp === 'function'
-        ? motionPropsProp(placement)
-        : motionPropsProp
+      typeof motionProps === 'function' ? motionProps(placement) : motionProps
 
     let variants: Variants
     switch (placement) {
@@ -153,7 +150,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
       variants,
       ...mProps,
     }
-  }, [motionPropsProp, placement])
+  }, [motionProps, placement])
 
   const [DrawerContentRoot, getDrawerContentRootProps] = useSlot({
     elementType: ModalPanel,
@@ -175,10 +172,12 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
     a11y: slotAriaProps.paper,
-    additionalProps: {
-      as: m.div,
-      ...motionProps,
-    },
+    additionalProps: !animateDisabled
+      ? {
+          as: m.div,
+          ...mergedMotionProps,
+        }
+      : undefined,
   })
 
   const [DrawerContentCloseButton, getDrawerContentCloseButtonProps] = useSlot({
