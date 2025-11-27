@@ -4,12 +4,9 @@ import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
 import { DialogProvider } from './DialogContext'
 import type { ElementType } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { DialogProps } from './types'
 
-export const Dialog = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
+export const Dialog = <RootComponent extends ElementType = 'div'>(
   inProps: DialogProps<RootComponent>,
 ) => {
   const props = useDefaultProps<DialogProps>({
@@ -23,8 +20,6 @@ export const Dialog = <
     restoreFocus,
     onOpenChange,
     defaultOpen,
-    container,
-    keepMounted,
     closeOnEscape,
     closeOnInteractBackdrop,
     preventScroll,
@@ -33,27 +28,23 @@ export const Dialog = <
     ...remainingProps
   } = props
 
+  const ctx = {
+    ...remainingProps,
+    hideBackdrop,
+  }
+
   return (
     <Modal
       open={open}
-      container={container}
       restoreFocus={restoreFocus}
       onOpenChange={onOpenChange}
       defaultOpen={defaultOpen}
-      keepMounted={keepMounted}
       preventScroll={preventScroll}
       closeOnEscape={closeOnEscape}
       onClose={onClose}
       closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
-      <DialogProvider
-        value={{
-          hideBackdrop,
-          ...remainingProps,
-        }}
-      >
-        {children}
-      </DialogProvider>
+      <DialogProvider value={ctx}>{children}</DialogProvider>
     </Modal>
   )
 }

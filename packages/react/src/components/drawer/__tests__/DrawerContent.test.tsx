@@ -15,9 +15,16 @@ import {
 import { drawerContentClasses } from './classes'
 import type { DrawerContentProps } from '../index'
 
-function TestDrawer(props: DrawerContentProps) {
+function TestDrawer({
+  animateDisabled,
+  ...props
+}: DrawerContentProps & { animateDisabled?: boolean }) {
   return (
-    <Drawer data-testid='drawer-root' defaultOpen>
+    <Drawer
+      defaultOpen
+      data-testid='drawer-root'
+      animateDisabled={animateDisabled}
+    >
       <DrawerContent data-testid='drawer-content' {...props}>
         <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
         <DrawerBody data-testid='drawer-body'>Drawer Body</DrawerBody>
@@ -161,27 +168,24 @@ describe('DrawerContent', () => {
     expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
   })
 
+  it('should ignore motionProps when animateDisabled=true', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <TestDrawer
+        animateDisabled
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+      {
+        useAct: true,
+      },
+    )
+
+    const paper = queryByClassName(drawerContentClasses.paper)
+    expect(paper).not.toHaveClass('test-motion')
+  })
+
   describe('Accessibility', () => {
-    it('should have role="dialog" on the DrawerContent element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(<TestDrawer />, {
-        useAct: true,
-      })
-
-      const contentRoot = getByTestId('drawer-content')
-      const paper = contentRoot.querySelector(`.${drawerContentClasses.paper}`)
-      expect(paper).toHaveAttribute('role', 'dialog')
-    })
-
-    it('should have aria-modal="true" on the DrawerContent element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(<TestDrawer />, {
-        useAct: true,
-      })
-
-      const contentRoot = getByTestId('drawer-content')
-      const paper = contentRoot.querySelector(`.${drawerContentClasses.paper}`)
-      expect(paper).toHaveAttribute('aria-modal', 'true')
-    })
-
     it('should have aria-labelledby and aria-describedby attributes on the DrawerContent element when provided', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestDrawer

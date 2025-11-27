@@ -3,13 +3,10 @@
 import { useDefaultProps, useSlot } from '../utils'
 import { Modal } from '../modal'
 import { DrawerProvider } from './DrawerContext'
-import type { DOMMotionComponents } from 'motion/react'
 import type { ElementType } from 'react'
 import type { DrawerProps } from './types'
 
-export const Drawer = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
+export const Drawer = <RootComponent extends ElementType = 'div'>(
   inProps: DrawerProps<RootComponent>,
 ) => {
   const props = useDefaultProps<DrawerProps>({
@@ -23,8 +20,6 @@ export const Drawer = <
     restoreFocus,
     onOpenChange,
     defaultOpen,
-    container,
-    keepMounted,
     closeOnEscape,
     closeOnInteractBackdrop,
     preventScroll,
@@ -33,16 +28,19 @@ export const Drawer = <
     ...remainingProps
   } = props
 
-  const [RootSlot, getRootSlotProps] = useSlot({
+  const ctx = {
+    ...remainingProps,
+    hideBackdrop,
+  }
+
+  const [DrawerRoot, getDrawerRootProps] = useSlot({
     elementType: Modal,
     shouldForwardComponent: false,
     externalForwardedProps: {
       open,
-      container,
       restoreFocus,
       onOpenChange,
       defaultOpen,
-      keepMounted,
       preventScroll,
       closeOnEscape,
       onClose,
@@ -51,16 +49,9 @@ export const Drawer = <
   })
 
   return (
-    <RootSlot {...getRootSlotProps()}>
-      <DrawerProvider
-        value={{
-          ...remainingProps,
-          hideBackdrop,
-        }}
-      >
-        {children}
-      </DrawerProvider>
-    </RootSlot>
+    <DrawerRoot {...getDrawerRootProps()}>
+      <DrawerProvider value={ctx}>{children}</DrawerProvider>
+    </DrawerRoot>
   )
 }
 

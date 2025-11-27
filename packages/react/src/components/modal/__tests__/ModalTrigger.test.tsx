@@ -5,22 +5,31 @@ import {
   ModalPanel,
   ModalRoot,
   ModalTrigger,
+  ModalPortal,
 } from '../index'
+import type { ModalTriggerProps } from '../types'
+
+function TestModal(props: ModalTriggerProps) {
+  return (
+    <Modal>
+      <ModalTrigger {...props} />
+      <ModalPortal animateDisabled>
+        <ModalRoot data-testid='modal-root'>
+          <ModalPanel>
+            <ModalContent data-testid='modal-content'>Content</ModalContent>
+          </ModalPanel>
+        </ModalRoot>
+      </ModalPortal>
+    </Modal>
+  )
+}
 
 describe('ModalTrigger', () => {
   it('should open when the ModalTrigger is clicked', async () => {
-    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-      <Modal>
-        <ModalTrigger>
-          <button data-testid='open-button'>Open Modal</button>
-        </ModalTrigger>
-        <ModalRoot data-testid='modal-root'>
-          <ModalPanel />
-        </ModalRoot>
-      </Modal>,
-      {
-        useAct: true,
-      },
+    const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
+      <TestModal>
+        <button data-testid='open-button'>Open Modal</button>
+      </TestModal>,
     )
 
     expect(queryByTestId('modal-root')).toBeNull()
@@ -30,30 +39,18 @@ describe('ModalTrigger', () => {
     expect(queryByTestId('modal-root')).toBeInTheDocument()
   })
 
-  it("should return children as-is when ModalTrigger's children is not a valid React element", async () => {
-    const { container } = await renderWithNexUIProvider(
-      <Modal>
-        <ModalTrigger>Child</ModalTrigger>
-      </Modal>,
-      {
-        useAct: true,
-      },
-    )
+  it("should return children as-is when ModalTrigger's children is not a valid React element", () => {
+    const { container } = renderWithNexUIProvider(<TestModal>Child</TestModal>)
 
     expect(container.textContent).toBe('Child')
   })
 
   describe('Accessibility', () => {
-    it('should have aria-haspopup attribute', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <Modal>
-          <ModalTrigger>
-            <button data-testid='open-button'>Open Modal</button>
-          </ModalTrigger>
-        </Modal>,
-        {
-          useAct: true,
-        },
+    it('should have aria-haspopup attribute', () => {
+      const { getByTestId } = renderWithNexUIProvider(
+        <TestModal>
+          <button data-testid='open-button'>Open Modal</button>
+        </TestModal>,
       )
 
       const openButton = getByTestId('open-button')
@@ -61,18 +58,10 @@ describe('ModalTrigger', () => {
     })
 
     it('should have aria-expanded={open} attribute', async () => {
-      const { getByTestId, user } = await renderWithNexUIProvider(
-        <Modal>
-          <ModalTrigger>
-            <button data-testid='open-button'>Open Modal</button>
-          </ModalTrigger>
-          <ModalRoot data-testid='modal-root'>
-            <ModalPanel />
-          </ModalRoot>
-        </Modal>,
-        {
-          useAct: true,
-        },
+      const { getByTestId, user } = renderWithNexUIProvider(
+        <TestModal>
+          <button data-testid='open-button'>Open Modal</button>
+        </TestModal>,
       )
 
       const openButton = getByTestId('open-button')
@@ -82,50 +71,12 @@ describe('ModalTrigger', () => {
       expect(openButton).toHaveAttribute('aria-expanded', 'true')
     })
 
-    it('should always have aria-controls={modalContentId} attribute when the keepMounted is true', async () => {
-      const { getByTestId, user } = await renderWithNexUIProvider(
-        <Modal keepMounted>
-          <ModalTrigger>
-            <button data-testid='open-button'>Open Modal</button>
-          </ModalTrigger>
-          <ModalRoot>
-            <ModalPanel>
-              <ModalContent data-testid='modal-content'>Content</ModalContent>
-            </ModalPanel>
-          </ModalRoot>
-        </Modal>,
-        {
-          useAct: true,
-        },
+    it('should have aria-controls={modalContentId} attribute when the modal is open', async () => {
+      const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
+        <TestModal>
+          <button data-testid='open-button'>Open Modal</button>
+        </TestModal>,
       )
-
-      const openButton = getByTestId('open-button')
-      const modalContent = getByTestId('modal-content')
-
-      expect(openButton).toHaveAttribute('aria-controls', modalContent.id)
-      expect(modalContent).toBeInTheDocument()
-
-      await user.click(openButton)
-      expect(openButton).toHaveAttribute('aria-controls', modalContent.id)
-    })
-
-    it('should have aria-controls={modalContentId} attribute when the keepMounted is false and the modal is open', async () => {
-      const { getByTestId, queryByTestId, user } =
-        await renderWithNexUIProvider(
-          <Modal keepMounted={false}>
-            <ModalTrigger>
-              <button data-testid='open-button'>Open Modal</button>
-            </ModalTrigger>
-            <ModalRoot>
-              <ModalPanel>
-                <ModalContent data-testid='modal-content'>Content</ModalContent>
-              </ModalPanel>
-            </ModalRoot>
-          </Modal>,
-          {
-            useAct: true,
-          },
-        )
 
       const openButton = getByTestId('open-button')
 

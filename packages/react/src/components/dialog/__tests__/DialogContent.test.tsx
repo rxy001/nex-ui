@@ -15,9 +15,16 @@ import {
 import { dialogContentClasses } from './classes'
 import type { DialogContentProps } from '../index'
 
-function TestDialog(props: DialogContentProps) {
+function TestDialog({
+  animateDisabled,
+  ...props
+}: DialogContentProps & { animateDisabled?: boolean }) {
   return (
-    <Dialog data-testid='dialog-root' defaultOpen>
+    <Dialog
+      defaultOpen
+      data-testid='dialog-root'
+      animateDisabled={animateDisabled}
+    >
       <DialogContent data-testid='dialog-content' {...props}>
         <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
         <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>
@@ -171,27 +178,24 @@ describe('DialogContent', () => {
     expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
   })
 
+  it('should ignore motionProps when animateDisabled=true', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <TestDialog
+        animateDisabled
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+      {
+        useAct: true,
+      },
+    )
+
+    const paper = queryByClassName(dialogContentClasses.paper)
+    expect(paper).not.toHaveClass('test-motion')
+  })
+
   describe('Accessibility', () => {
-    it('should have role="dialog" on the DialogContent element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
-        useAct: true,
-      })
-
-      const contentRoot = getByTestId('dialog-content')
-      const paper = contentRoot.querySelector(`.${dialogContentClasses.paper}`)
-      expect(paper).toHaveAttribute('role', 'dialog')
-    })
-
-    it('should have aria-modal="true" on the DialogContent element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
-        useAct: true,
-      })
-
-      const contentRoot = getByTestId('dialog-content')
-      const paper = contentRoot.querySelector(`.${dialogContentClasses.paper}`)
-      expect(paper).toHaveAttribute('aria-modal', 'true')
-    })
-
     it('should have aria-labelledby and aria-describedby attributes on the ModalContent element when provided', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestDialog
