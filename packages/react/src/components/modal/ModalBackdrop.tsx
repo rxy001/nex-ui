@@ -16,10 +16,8 @@ const recipe = defineRecipe({
 const style = recipe()
 
 export const ModalBackdrop = <RootComponent extends ElementType = 'div'>(
-  inProps: ModalBackdropProps<RootComponent>,
+  props: ModalBackdropProps<RootComponent>,
 ) => {
-  const props = inProps as ModalBackdropProps
-
   const [ModalBackdropRoot, getModalBackdropRootProps] = useSlot({
     style,
     elementType: 'div',

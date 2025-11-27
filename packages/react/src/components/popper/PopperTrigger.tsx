@@ -76,6 +76,7 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
         return
       }
 
+      // istanbul ignore next
       if (attempts >= 30) return
       attempts += 1
 

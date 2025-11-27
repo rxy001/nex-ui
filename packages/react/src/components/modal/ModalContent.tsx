@@ -28,6 +28,8 @@ const useAriaProps = (props: ModalContentProps) => {
   const {
     tabIndex = -1,
     id = modalContentId,
+    role = 'dialog',
+    'aria-modal': ariaModal = true,
     'aria-labelledby': labelledBy = modalHeaderId,
     'aria-describedby': describedBy = modalBodyId,
   } = props
@@ -36,23 +38,28 @@ const useAriaProps = (props: ModalContentProps) => {
     return {
       tabIndex,
       id,
+      role,
+      'aria-modal': ariaModal,
       'aria-labelledby': labelledBy,
       'aria-describedby': describedBy,
     }
-  }, [describedBy, id, labelledBy, tabIndex])
+  }, [ariaModal, describedBy, id, labelledBy, role, tabIndex])
 }
 
 export const ModalContent = <RootComponent extends ElementType = 'section'>(
   inProps: ModalContentProps<RootComponent>,
 ) => {
   const props = inProps as ModalContentProps
-  const ctx = useModal()
+  const modalState = useModal()
 
   const [paused, setPaused] = useState(false)
 
   const modalManager = useModalManager()
 
-  const { isTopmostModal } = ctx
+  const isTopmostModal = useMemo(
+    () => () => modalManager.isTopmostModal(modalState.modalId),
+    [modalState.modalId, modalManager],
+  )
 
   const ariaProps = useAriaProps(props)
 
@@ -73,8 +80,8 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
 
   return (
     <FocusTrap
-      active={ctx.open}
-      restoreFocus={ctx.restoreFocus}
+      active={modalState.open}
+      restoreFocus={modalState.restoreFocus}
       paused={paused}
     >
       <ModalContentRoot {...getModalContentRootProps()} />

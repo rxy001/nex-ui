@@ -7,11 +7,10 @@ import { Button } from '../../button'
 import { DrawerFooter } from '../DrawerFooter'
 import { DrawerClose } from '../DrawerClose'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { DOMMotionComponents } from 'motion/react'
 
 const meta = {
   title: 'Components/Drawer',
-  component: Drawer<DOMMotionComponents['div']>,
+  component: Drawer<'div'>,
   argTypes: {
     keepMounted: {
       control: 'boolean',
@@ -29,6 +28,9 @@ const meta = {
       control: 'boolean',
     },
     restoreFocus: {
+      control: 'boolean',
+    },
+    animateDisabled: {
       control: 'boolean',
     },
   },
@@ -85,7 +87,7 @@ const meta = {
       </Drawer>
     )
   },
-} satisfies Meta<typeof Drawer<DOMMotionComponents['div']>>
+} satisfies Meta<typeof Drawer<'div'>>
 
 export default meta
 
@@ -108,5 +110,6 @@ export const keepMounted: Story = {
 export const WithoutBackdrop: Story = {
   args: {
     hideBackdrop: true,
+    defaultOpen: true,
   },
 }

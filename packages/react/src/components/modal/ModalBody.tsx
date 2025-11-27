@@ -1,6 +1,5 @@
 'use client'
 
-import { useMemo } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { useModal } from './ModalContext'
@@ -18,29 +17,19 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-const useAriaProps = (props: ModalBodyProps) => {
+export const ModalBody = <RootComponent extends ElementType = 'div'>(
+  props: ModalBodyProps<RootComponent>,
+) => {
   const { modalBodyId } = useModal()
   const bodyId = props.id ?? modalBodyId
-
-  return useMemo(() => {
-    return {
-      id: bodyId,
-    }
-  }, [bodyId])
-}
-
-export const ModalBody = <RootComponent extends ElementType = 'div'>(
-  inProps: ModalBodyProps<RootComponent>,
-) => {
-  const props = inProps as ModalBodyProps
-
-  const ariaProps = useAriaProps(props)
 
   const [ModalBodyRoot, getModalBodyRootProps] = useSlot({
     style,
     elementType: 'div',
-    a11y: ariaProps,
     externalForwardedProps: props,
+    a11y: {
+      id: bodyId,
+    },
   })
 
   return <ModalBodyRoot {...getModalBodyRootProps()} />

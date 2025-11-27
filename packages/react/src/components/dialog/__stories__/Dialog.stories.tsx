@@ -7,11 +7,10 @@ import { Button } from '../../button'
 import { DialogFooter } from '../DialogFooter'
 import { DialogClose } from '../DialogClose'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { DOMMotionComponents } from 'motion/react'
 
 const meta = {
   title: 'Components/Dialog',
-  component: Dialog<DOMMotionComponents['div']>,
+  component: Dialog<'div'>,
   argTypes: {
     keepMounted: {
       control: 'boolean',
@@ -29,6 +28,9 @@ const meta = {
       control: 'boolean',
     },
     restoreFocus: {
+      control: 'boolean',
+    },
+    animateDisabled: {
       control: 'boolean',
     },
   },
@@ -69,7 +71,7 @@ const meta = {
       </Dialog>
     )
   },
-} satisfies Meta<typeof Dialog<DOMMotionComponents['div']>>
+} satisfies Meta<typeof Dialog<'div'>>
 
 export default meta
 
@@ -79,6 +81,19 @@ export const Default: Story = {}
 
 export const DefaultOpen: Story = {
   args: {
+    defaultOpen: true,
+  },
+}
+
+export const keepMounted: Story = {
+  args: {
+    keepMounted: true,
+  },
+}
+
+export const WithoutBackdrop: Story = {
+  args: {
+    hideBackdrop: true,
     defaultOpen: true,
   },
 }

@@ -1,6 +1,5 @@
 'use client'
 
-import { useMemo } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { useModal } from './ModalContext'
@@ -15,31 +14,20 @@ const recipe = defineRecipe({
   },
 })
 
-const useAriaProps = (props: ModalHeaderProps) => {
-  const { modalHeaderId } = useModal()
-  const labelId = props.id ?? modalHeaderId
-
-  return useMemo(() => {
-    return {
-      id: labelId,
-    }
-  }, [labelId])
-}
-
 const style = recipe()
 
 export const ModalHeader = <RootComponent extends ElementType = 'h2'>(
-  inProps: ModalHeaderProps<RootComponent>,
+  props: ModalHeaderProps<RootComponent>,
 ) => {
-  const props = inProps as ModalHeaderProps
-
-  const ariaProps = useAriaProps(props)
-
+  const { modalHeaderId } = useModal()
+  const labelId = props.id ?? modalHeaderId
   const [ModalHeaderRoot, getModalHeaderRootProps] = useSlot({
     style,
-    a11y: ariaProps,
     externalForwardedProps: props,
     elementType: 'h2',
+    a11y: {
+      id: labelId,
+    },
   })
 
   return <ModalHeaderRoot {...getModalHeaderRootProps()} />

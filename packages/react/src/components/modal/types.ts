@@ -1,8 +1,9 @@
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
+import type { DOMMotionComponents } from 'motion/react'
 import type { Overwrite } from '../../types/utils'
 import type { ComponentProps, ElementType, ReactNode } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
+import type { PortalProps } from '../utils'
 
 type ModalSlotProps<RootComponent extends ElementType> = Overwrite<
   ComponentProps<RootComponent>,
@@ -31,18 +32,6 @@ export type ModalProps = {
    * Handler that is called when the Modal is opened or closed
    */
   onOpenChange?: (open: boolean) => void
-
-  /**
-   * The container element in which the overlay portal will be placed.
-   * @default document.body
-   */
-  container?: HTMLElement | null | (() => HTMLElement | null)
-
-  /**
-   * If true, always keep the children in the DOM.
-   * @default false
-   */
-  keepMounted?: boolean
 
   /**
    * If true, closes the Modal when the outside is clicked.
@@ -100,15 +89,36 @@ export type ModalBodyProps<RootComponent extends ElementType = 'div'> =
 export type ModalFooterProps<RootComponent extends ElementType = 'div'> =
   ModalSlotProps<RootComponent>
 
-// ModalRoot
-export type ModalRootProps<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = ModalSlotProps<RootComponent>
+// ------------- ModalRoot -------------
+export type ModalRootProps<RootComponent extends ElementType = 'div'> =
+  ModalSlotProps<RootComponent>
 
-// ModalBackdrop
+// ------------- ModalBackdrop -------------
 export type ModalBackdropProps<RootComponent extends ElementType = 'div'> =
   ModalSlotProps<RootComponent>
 
-// ModalPanel
+// ------------- ModalPanel -------------
 export type ModalPanelProps<RootComponent extends ElementType = 'div'> =
   ModalSlotProps<RootComponent>
+
+// ------------- ModalPortal -------------
+export type ModalPortalProps = Pick<PortalProps, 'container' | 'children'> & {
+  /**
+   * If true, keeps the Modal mounted in the DOM when it's closed.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
+
+  /**
+   * If true, disables the animation for the Modal.
+   *
+   * @default false
+   */
+  animateDisabled?: boolean
+}
+
+// ------------- ModalMotion -------------
+export type ModalMotionProps<
+  RootComponent extends ElementType = DOMMotionComponents['div'],
+> = ModalSlotProps<RootComponent>
