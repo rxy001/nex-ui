@@ -47,6 +47,9 @@ const meta = {
       options: variants,
       control: 'select',
     },
+    animateDisabled: {
+      control: 'boolean',
+    },
   },
   render: (props) => <AccordionTemplate {...props} />,
 } satisfies Meta<typeof Accordion<'div'>>

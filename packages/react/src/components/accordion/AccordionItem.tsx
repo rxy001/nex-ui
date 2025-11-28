@@ -3,7 +3,7 @@
 import * as m from 'motion/react-m'
 import { useEvent } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
-import { LazyMotion, AnimatePresence } from 'motion/react'
+import { LazyMotion } from 'motion/react'
 import { useId, useMemo, useRef } from 'react'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
@@ -11,6 +11,7 @@ import {
   useDefaultProps,
   useStyles,
   motionFeatures,
+  PresenceMotion,
   useSlot,
   useSlotClasses,
 } from '../utils'
@@ -116,6 +117,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     toggleExpandedKey,
     expandedKeys,
     disabledKeys,
+    animateDisabled: defaultAnimateDisabled,
     disabled: defaultDisabled,
     indicator: defaultIndicator,
     motionProps: defaultMotionProps,
@@ -129,6 +131,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     title,
     slotProps,
     classNames,
+    animateDisabled = defaultAnimateDisabled,
     indicatorMotionProps = defaultIndicatorMotionProps,
     motionProps = defaultMotionProps,
     hideIndicator = defaultHideIndicator,
@@ -239,46 +242,84 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     style: styles.content,
     classNames: slotClasses.content,
     a11y: slotAriaProps.content,
+    additionalProps: animateDisabled
+      ? {
+          style: {
+            display: keepMounted ? (expanded ? 'block' : 'none') : undefined,
+          },
+        }
+      : undefined,
   })
 
   const [AccordionItemIndicator, getAccordionItemIndicatorProps] = useSlot({
-    elementType: m.span,
+    elementType: 'span',
     externalSlotProps: slotProps?.indicator,
     style: styles.indicator,
     classNames: slotClasses.indicator,
     a11y: slotAriaProps.indicator,
-    additionalProps: {
-      animate,
-      variants: indicatorMotionVariants,
-      initial: animate,
-      ...indicatorMotionProps,
-    },
+    additionalProps: animateDisabled
+      ? {
+          style: {
+            transform: expanded ? 'rotate(180deg)' : 'none',
+          },
+        }
+      : undefined,
   })
 
-  return (
-    <LazyMotion features={motionFeatures}>
-      <AccordionItemRoot {...getAccordionItemRootProps()}>
-        <AccordionItemHeading {...getAccordionItemHeadingProps()}>
-          <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
-            <span>{title}</span>
-            {!hideIndicator && (
-              <AccordionItemIndicator {...getAccordionItemIndicatorProps()}>
-                {indicator ?? <ChevronDownOutlined />}
-              </AccordionItemIndicator>
-            )}
-          </AccordionItemTrigger>
-        </AccordionItemHeading>
-        <AnimatePresence>
-          {(keepMounted || expanded) && (
-            <m.div {...contentMotionProps} {...motionProps}>
-              <AccordionItemContent {...getAccordionItemContentProps()}>
-                {children}
-              </AccordionItemContent>
-            </m.div>
-          )}
-        </AnimatePresence>
-      </AccordionItemRoot>
-    </LazyMotion>
+  const renderIndicator = () => (
+    <AccordionItemIndicator {...getAccordionItemIndicatorProps()}>
+      {indicator ?? <ChevronDownOutlined />}
+    </AccordionItemIndicator>
+  )
+
+  const renderContent = () => (
+    <AccordionItemContent {...getAccordionItemContentProps()}>
+      {children}
+    </AccordionItemContent>
+  )
+
+  const renderRoot = () => (
+    <AccordionItemRoot {...getAccordionItemRootProps()}>
+      <AccordionItemHeading {...getAccordionItemHeadingProps()}>
+        <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
+          <span>{title}</span>
+          {!hideIndicator &&
+            (animateDisabled ? (
+              renderIndicator()
+            ) : (
+              <m.span
+                animate={animate}
+                initial={animate}
+                variants={indicatorMotionVariants}
+                {...indicatorMotionProps}
+              >
+                {renderIndicator()}
+              </m.span>
+            ))}
+        </AccordionItemTrigger>
+      </AccordionItemHeading>
+      {animateDisabled ? (
+        keepMounted || expanded ? (
+          renderContent()
+        ) : null
+      ) : (
+        <PresenceMotion
+          open={expanded}
+          keepMounted={keepMounted}
+          {...contentMotionProps}
+          {...motionProps}
+        >
+          {renderContent()}
+        </PresenceMotion>
+      )}
+      <PresenceMotion></PresenceMotion>
+    </AccordionItemRoot>
+  )
+
+  return animateDisabled ? (
+    renderRoot()
+  ) : (
+    <LazyMotion features={motionFeatures}>{renderRoot()}</LazyMotion>
   )
 }
 
