@@ -1,6 +1,5 @@
 import type { ClassValue } from 'clsx'
 import type { ElementType, Key, ReactNode } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { Interpolation } from '@nex-ui/system'
 import type {
   ComponentSlotClasses,
@@ -105,6 +104,14 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
    * @default 'underlined'
    */
   variant?: AccordionVariants['variant']
+
+  /**
+   *
+   * If true, disables the animation for the AccordionItems.
+   *
+   * @default false
+   */
+  animateDisabled?: boolean
 }
 
 export type AccordionProps<RootComponent extends ElementType = 'div'> =
@@ -119,7 +126,7 @@ export interface AccordionItemPropsOverrides {}
 
 export interface AccordionItemSlotProps {
   heading?: ComponentPropsWithCommonProps<'h3'>
-  indicator?: ComponentPropsWithCommonProps<DOMMotionComponents['span']>
+  indicator?: ComponentPropsWithCommonProps<'span'>
   content?: ComponentPropsWithCommonProps<'div'>
   trigger?: ComponentPropsWithCommonProps<'button'>
 }
@@ -142,7 +149,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   children?: ReactNode
 
   /**
-   * The key of the Accordion item.
+   * The key of the AccordionItem.
    */
   itemKey?: Key
 
@@ -152,7 +159,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   className?: ClassValue
 
   /**
-   * The title of the Accordion item.
+   * The title of the AccordionItem.
    */
   title?: ReactNode
 
@@ -162,22 +169,22 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   motionProps?: HTMLMotionProps<'div'>
 
   /**
-   * If true, the Accordion item is disabled.
+   * If true, the AccordionItem is disabled.
    */
   disabled?: boolean
 
   /**
-   * If true, the Accordion item content is always mounted.
+   * If true, the AccordionItem content is always mounted.
    */
   keepMounted?: boolean
 
   /**
-   * If true, the Accordion item indicator is hidden.
+   * If true, the AccordionItem indicator is hidden.
    */
   hideIndicator?: boolean
 
   /**
-   * The expanded indicator for the Accordion item, usually an arrow icon.
+   * The expanded indicator for the AccordionItem, usually an arrow icon.
    */
   indicator?: ReactNode
 
@@ -195,6 +202,11 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
    * The className used for each slot.
    */
   classNames?: ComponentSlotClasses<keyof AccordionItemSlotProps>
+
+  /**
+   * If true, disables the animation for the AccordionItem.
+   */
+  animateDisabled?: boolean
 }
 
 export type AccordionItemProps<RootComponent extends ElementType = 'div'> =
@@ -216,6 +228,7 @@ export type AccordionGroupContextValue = {
   hideIndicator: boolean
   disabledKeys: Key[]
   disabled: boolean
+  animateDisabled: boolean
   indicator?: ReactNode
   motionProps?: HTMLMotionProps<'div'>
   variant: AccordionVariants['variant']

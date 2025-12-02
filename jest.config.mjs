@@ -47,6 +47,7 @@ const jestConfig = {
 
     '<rootDir>/packages/react/src/index.ts',
     '<rootDir>/packages/utils/src/index.ts',
+    '<rootDir>/packages/react/src/components/modal/index.ts',
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
   watchman: true,

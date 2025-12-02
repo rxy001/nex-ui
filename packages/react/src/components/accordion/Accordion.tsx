@@ -25,6 +25,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     motionProps,
     indicatorMotionProps,
     onExpandedKeysChange,
+    animateDisabled = false,
     hideIndicator = false,
     variant = 'underlined',
     multiple = false,
@@ -106,6 +107,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
       indicator,
       variant,
       indicatorMotionProps,
+      animateDisabled,
     }),
     [
       disabled,
@@ -118,6 +120,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
       toggleExpandedKey,
       variant,
       indicatorMotionProps,
+      animateDisabled,
     ],
   )
 
