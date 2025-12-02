@@ -95,37 +95,6 @@ describe('DrawerContent', () => {
     expect(drawerContent).toHaveAttribute('data-hide-close-button', 'false')
   })
 
-  it('should forward motionProps to paper slot', async () => {
-    const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestDrawer
-        motionProps={{
-          className: 'test-drawer-content-paper-1',
-        }}
-      />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerContentRoot = getByTestId('drawer-content')
-
-    const paper = drawerContentRoot.querySelector(
-      `.${drawerContentClasses.paper}`,
-    )
-
-    expect(paper).toHaveClass('test-drawer-content-paper-1')
-
-    rerender(
-      <TestDrawer
-        motionProps={() => ({
-          className: 'test-drawer-content-paper-2',
-        })}
-      />,
-    )
-
-    expect(paper).toHaveClass('test-drawer-content-paper-2')
-  })
-
   it('should not render close button when hideCloseButton=true', async () => {
     const { queryByRole } = await renderWithNexUIProvider(
       <TestDrawer hideCloseButton />,
@@ -183,6 +152,22 @@ describe('DrawerContent', () => {
 
     const paper = queryByClassName(drawerContentClasses.paper)
     expect(paper).not.toHaveClass('test-motion')
+  })
+
+  it('should apply motionProps to the motion component when animateDisabled=false', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <TestDrawer
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+      {
+        useAct: true,
+      },
+    )
+
+    const paper = queryByClassName(drawerContentClasses.paper)
+    expect(paper?.parentElement).toHaveClass('test-motion')
   })
 
   describe('Accessibility', () => {

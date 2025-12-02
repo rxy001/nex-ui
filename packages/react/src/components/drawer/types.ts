@@ -1,4 +1,3 @@
-import type { DOMMotionComponents } from 'motion/react'
 import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
@@ -82,7 +81,7 @@ export type DrawerProps<RootComponent extends ElementType = 'div'> =
 // ----------------DrawerContent----------------
 type DrawerContentSlotProps = {
   closeButton?: ComponentPropsWithCommonProps<'button'>
-  paper?: ComponentPropsWithCommonProps<DOMMotionComponents['section']>
+  paper?: ComponentPropsWithCommonProps<'section'>
 }
 
 export interface DrawerContentPropsOverrides {}

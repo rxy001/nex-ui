@@ -21,6 +21,8 @@ export const Modal = (props: ModalProps) => {
   const modalBodyId = `${MODAL_INTERNAL_ID_PREFIX}${id}-body`
   const modalId = `${MODAL_INTERNAL_ID_PREFIX}${id}`
 
+  const modalContentRef = useRef<HTMLElement | null>(null)
+
   const {
     children,
     onClose,
@@ -53,6 +55,7 @@ export const Modal = (props: ModalProps) => {
       modalHeaderId,
       modalBodyId,
       modalId,
+      modalContentRef,
     }),
     [
       setOpen,
