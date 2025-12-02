@@ -45,6 +45,10 @@ describe('AccordionItem', () => {
     useAct: true,
   })
 
+  testVariantDataAttrs(<TestAccordion />, ['animateDisabled', [true, false]], {
+    useAct: true,
+  })
+
   testRefForwarding(<TestAccordion />, {
     useAct: true,
   })
@@ -268,9 +272,9 @@ describe('AccordionItem', () => {
   })
 
   describe('Accessibility', () => {
-    it('should have role="button", aria-expanded and aria-controls in AccordionItem heading', async () => {
-      const { getByRole } = await renderWithNexUIProvider(
-        <Accordion keepMounted>
+    it('should have role="button", aria-expanded and aria-controls in AccordionItem heading (keepMounted=true)', async () => {
+      const { queryByClassName, rerender } = await renderWithNexUIProvider(
+        <Accordion keepMounted expandedKeys={[]}>
           <TestAccordionItem />
         </Accordion>,
         {
@@ -278,16 +282,52 @@ describe('AccordionItem', () => {
         },
       )
 
-      const trigger = getByRole('button')
-      const content = getByRole('region')
+      const trigger = queryByClassName(accordionItemSlotClasses.trigger)
+      const content = queryByClassName(accordionItemSlotClasses.content)
 
+      expect(trigger).toHaveRole('button')
       expect(trigger).toHaveAttribute('aria-expanded', 'false')
-      expect(trigger).toHaveAttribute('aria-controls', content.id)
+      expect(trigger).toHaveAttribute('aria-controls', content!.id)
+
+      rerender(
+        <Accordion keepMounted expandedKeys={['1']}>
+          <TestAccordionItem />
+        </Accordion>,
+      )
+
+      expect(trigger).toHaveAttribute('aria-expanded', 'true')
+      expect(trigger).toHaveAttribute('aria-controls', content!.id)
+    })
+
+    it('should have role="button", aria-expanded and aria-controls in AccordionItem heading (keepMounted=false)', async () => {
+      const { queryByClassName, rerender } = await renderWithNexUIProvider(
+        <Accordion keepMounted={false} expandedKeys={[]}>
+          <TestAccordionItem />
+        </Accordion>,
+        {
+          useAct: true,
+        },
+      )
+
+      const trigger = queryByClassName(accordionItemSlotClasses.trigger)
+      expect(trigger).toHaveRole('button')
+      expect(trigger).toHaveAttribute('aria-expanded', 'false')
+      expect(trigger).not.toHaveAttribute('aria-controls')
+
+      rerender(
+        <Accordion keepMounted={false} expandedKeys={['1']}>
+          <TestAccordionItem />
+        </Accordion>,
+      )
+
+      const content = queryByClassName(accordionItemSlotClasses.content)
+      expect(trigger).toHaveAttribute('aria-expanded', 'true')
+      expect(trigger).toHaveAttribute('aria-controls', content!.id)
     })
 
     it('should have aria-labelledby and role="region" in AccordionItem content', async () => {
-      const { getByRole } = await renderWithNexUIProvider(
-        <Accordion keepMounted>
+      const { queryByClassName, rerender } = await renderWithNexUIProvider(
+        <Accordion keepMounted expandedKeys={[]}>
           <TestAccordionItem />
         </Accordion>,
         {
@@ -295,10 +335,65 @@ describe('AccordionItem', () => {
         },
       )
 
-      const content = getByRole('region')
-      const trigger = getByRole('button')
+      const trigger = queryByClassName(accordionItemSlotClasses.trigger)
+      const content = queryByClassName(accordionItemSlotClasses.content)
 
-      expect(content).toHaveAttribute('aria-labelledby', trigger.id)
+      expect(content).toHaveRole('region')
+      expect(content).toHaveAttribute('aria-labelledby', trigger!.id)
+
+      rerender(
+        <Accordion keepMounted={false} expandedKeys={['1']}>
+          <TestAccordionItem />
+        </Accordion>,
+      )
+      expect(content).toHaveRole('region')
+      expect(content).toHaveAttribute('aria-labelledby', trigger!.id)
+    })
+
+    it('should have aria-hidden in AccordionItem content when keepMounted=true', async () => {
+      const { queryByClassName, rerender } = await renderWithNexUIProvider(
+        <Accordion keepMounted expandedKeys={[]}>
+          <TestAccordionItem />
+        </Accordion>,
+        {
+          useAct: true,
+        },
+      )
+
+      const content = queryByClassName(accordionItemSlotClasses.content)
+      expect(content).toHaveAttribute('aria-hidden', 'true')
+
+      rerender(
+        <Accordion keepMounted expandedKeys={['1']}>
+          <TestAccordionItem />
+        </Accordion>,
+      )
+
+      expect(content).toHaveAttribute('aria-hidden', 'false')
+    })
+
+    it('should not have aria-hidden in AccordionItem content when keepMounted=false', async () => {
+      const { queryByClassName, rerender } = await renderWithNexUIProvider(
+        <Accordion keepMounted={false} expandedKeys={[]}>
+          <TestAccordionItem />
+        </Accordion>,
+        {
+          useAct: true,
+        },
+      )
+
+      let content = queryByClassName(accordionItemSlotClasses.content)
+      expect(content).not.toBeInTheDocument()
+
+      rerender(
+        <Accordion keepMounted={false} expandedKeys={['1']}>
+          <TestAccordionItem />
+        </Accordion>,
+      )
+
+      content = queryByClassName(accordionItemSlotClasses.content)
+      expect(content).toBeInTheDocument()
+      expect(content).not.toHaveAttribute('aria-hidden')
     })
 
     it('should toggle aria-expanded attribute on trigger when clicked', async () => {

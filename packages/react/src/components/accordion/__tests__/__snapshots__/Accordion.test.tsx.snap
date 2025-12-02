@@ -71,6 +71,7 @@ exports[`Accordion should render with default props 1`] = `
 >
   <div
     class="nui-accordion-item-root emotion-1"
+    data-animate-disabled="false"
     data-disabled="false"
     data-hide-indicator="false"
     data-keep-mounted="false"
@@ -81,7 +82,6 @@ exports[`Accordion should render with default props 1`] = `
       class="nui-accordion-item-heading emotion-2"
     >
       <button
-        aria-controls="panel-1-content"
         aria-expanded="false"
         class="nui-accordion-item-trigger emotion-3"
         data-disabled="false"
@@ -93,25 +93,28 @@ exports[`Accordion should render with default props 1`] = `
           Accordion 1
         </span>
         <span
-          aria-hidden="true"
-          class="nui-accordion-item-indicator emotion-4"
           style="transform: none;"
         >
-          <svg
+          <span
             aria-hidden="true"
-            focusable="false"
-            height="1em"
-            viewBox="0 0 24 24"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+            class="nui-accordion-item-indicator emotion-4"
           >
-            <path
-              clip-rule="evenodd"
-              d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              height="1em"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </span>
         </span>
       </button>
     </h3>
