@@ -50,15 +50,15 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
   inProps: ModalContentProps<RootComponent>,
 ) => {
   const props = inProps as ModalContentProps
-  const modalState = useModal()
+  const { modalId, modalContentRef, open, restoreFocus } = useModal()
 
   const [paused, setPaused] = useState(false)
 
   const modalManager = useModalManager()
 
   const isTopmostModal = useMemo(
-    () => () => modalManager.isTopmostModal(modalState.modalId),
-    [modalState.modalId, modalManager],
+    () => () => modalManager.isTopmostModal(modalId),
+    [modalId, modalManager],
   )
 
   const ariaProps = useAriaProps(props)
@@ -68,6 +68,9 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     elementType: 'section',
     externalForwardedProps: props,
     a11y: ariaProps,
+    additionalProps: {
+      ref: modalContentRef,
+    },
   })
 
   useEffect(() => {
@@ -79,11 +82,7 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
   }, [isTopmostModal, modalManager])
 
   return (
-    <FocusTrap
-      active={modalState.open}
-      restoreFocus={modalState.restoreFocus}
-      paused={paused}
-    >
+    <FocusTrap active={open} restoreFocus={restoreFocus} paused={paused}>
       <ModalContentRoot {...getModalContentRootProps()} />
     </FocusTrap>
   )

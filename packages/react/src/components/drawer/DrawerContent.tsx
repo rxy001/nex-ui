@@ -95,6 +95,37 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     classNames,
   })
 
+  const [DrawerContentRoot, getDrawerContentRootProps] = useSlot({
+    elementType: ModalPanel,
+    style: styles.root,
+    externalForwardedProps: remainingProps,
+    shouldForwardComponent: false,
+    classNames: slotClasses.root,
+    dataAttrs: {
+      size,
+      placement,
+      hideCloseButton,
+    },
+  })
+
+  const [DrawerContentPaper, getDrawerContentPaperProps] = useSlot({
+    elementType: ModalContent,
+    style: styles.paper,
+    classNames: slotClasses.paper,
+    externalSlotProps: slotProps?.paper,
+    shouldForwardComponent: false,
+    a11y: slotAriaProps.paper,
+  })
+
+  const [DrawerContentCloseButton, getDrawerContentCloseButtonProps] = useSlot({
+    elementType: ButtonBase,
+    externalSlotProps: slotProps?.closeButton,
+    style: styles.closeButton,
+    classNames: slotClasses.closeButton,
+    shouldForwardComponent: false,
+    a11y: slotAriaProps.closeButton,
+  })
+
   const mergedMotionProps = useMemo(() => {
     const mProps =
       typeof motionProps === 'function' ? motionProps(placement) : motionProps
@@ -152,60 +183,29 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     }
   }, [motionProps, placement])
 
-  const [DrawerContentRoot, getDrawerContentRootProps] = useSlot({
-    elementType: ModalPanel,
-    style: styles.root,
-    externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
-    classNames: slotClasses.root,
-    dataAttrs: {
-      size,
-      placement,
-      hideCloseButton,
-    },
-  })
-
-  const [DrawerContentPaper, getDrawerContentPaperProps] = useSlot({
-    elementType: ModalContent,
-    style: styles.paper,
-    classNames: slotClasses.paper,
-    externalSlotProps: slotProps?.paper,
-    shouldForwardComponent: false,
-    a11y: slotAriaProps.paper,
-    additionalProps: !animateDisabled
-      ? {
-          as: m.div,
-          ...mergedMotionProps,
-        }
-      : undefined,
-  })
-
-  const [DrawerContentCloseButton, getDrawerContentCloseButtonProps] = useSlot({
-    elementType: ButtonBase,
-    externalSlotProps: slotProps?.closeButton,
-    style: styles.closeButton,
-    classNames: slotClasses.closeButton,
-    shouldForwardComponent: false,
-    a11y: slotAriaProps.closeButton,
-  })
+  const renderPaper = () => (
+    <DrawerContentPaper {...getDrawerContentPaperProps()}>
+      {!hideCloseButton && (
+        <DrawerClose>
+          <Ripple>
+            <DrawerContentCloseButton {...getDrawerContentCloseButtonProps()}>
+              {closeIcon ?? <CloseOutlined />}
+            </DrawerContentCloseButton>
+          </Ripple>
+        </DrawerClose>
+      )}
+      {children}
+    </DrawerContentPaper>
+  )
 
   return (
     <DrawerRoot>
       <DrawerContentRoot {...getDrawerContentRootProps()}>
-        <DrawerContentPaper {...getDrawerContentPaperProps()}>
-          {!hideCloseButton && (
-            <DrawerClose>
-              <Ripple>
-                <DrawerContentCloseButton
-                  {...getDrawerContentCloseButtonProps()}
-                >
-                  {closeIcon ?? <CloseOutlined />}
-                </DrawerContentCloseButton>
-              </Ripple>
-            </DrawerClose>
-          )}
-          {children}
-        </DrawerContentPaper>
+        {animateDisabled ? (
+          renderPaper()
+        ) : (
+          <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
+        )}
       </DrawerContentRoot>
     </DrawerRoot>
   )

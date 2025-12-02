@@ -105,37 +105,6 @@ describe('DialogContent', () => {
     expect(dialogContentRoot).toHaveAttribute('data-hide-close-button', 'false')
   })
 
-  it('should forward motionProps to paper slot', async () => {
-    const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestDialog
-        motionProps={{
-          className: 'test-dialog-content-paper-1',
-        }}
-      />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogContentRoot = getByTestId('dialog-content')
-
-    const paper = dialogContentRoot.querySelector(
-      `.${dialogContentClasses.paper}`,
-    )
-
-    expect(paper).toHaveClass('test-dialog-content-paper-1')
-
-    rerender(
-      <TestDialog
-        motionProps={() => ({
-          className: 'test-dialog-content-paper-2',
-        })}
-      />,
-    )
-
-    expect(paper).toHaveClass('test-dialog-content-paper-2')
-  })
-
   it('should not render close button when hideCloseButton=true', async () => {
     const { queryByRole } = await renderWithNexUIProvider(
       <TestDialog hideCloseButton />,
@@ -193,6 +162,22 @@ describe('DialogContent', () => {
 
     const paper = queryByClassName(dialogContentClasses.paper)
     expect(paper).not.toHaveClass('test-motion')
+  })
+
+  it('should apply motionProps to the motion component when animateDisabled=false', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <TestDialog
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+      {
+        useAct: true,
+      },
+    )
+
+    const paper = queryByClassName(dialogContentClasses.paper)
+    expect(paper?.parentElement).toHaveClass('test-motion')
   })
 
   describe('Accessibility', () => {

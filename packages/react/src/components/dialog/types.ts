@@ -1,4 +1,3 @@
-import type { DOMMotionComponents } from 'motion/react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type {
@@ -83,7 +82,7 @@ export type DialogProps<RootComponent extends ElementType = 'div'> =
 // ------------- DialogContent -------------
 type DialogContentSlotProps = {
   closeButton?: ComponentPropsWithCommonProps<'button'>
-  paper?: ComponentPropsWithCommonProps<DOMMotionComponents['section']>
+  paper?: ComponentPropsWithCommonProps<'section'>
 }
 
 export interface DialogContentPropsOverrides {}
@@ -167,8 +166,8 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   motionProps?:
     | ((
         placement: DialogContentVariants['placement'],
-      ) => HTMLMotionProps<'section'>)
-    | HTMLMotionProps<'section'>
+      ) => HTMLMotionProps<'div'>)
+    | HTMLMotionProps<'div'>
 
   /**
    * Additional class names to apply to the root.

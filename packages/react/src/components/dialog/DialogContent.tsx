@@ -17,6 +17,7 @@ import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
 import { DialogContentProvider, useDialog } from './DialogContext'
 import type { ElementType } from 'react'
+import type { Variants } from 'motion/react'
 import type { DialogContentProps } from './types'
 
 const slots = ['root', 'paper', 'closeButton']
@@ -112,23 +113,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     },
   })
 
-  const mergedMotionProps = useMemo(() => {
-    const mProps =
-      typeof motionProps === 'function' ? motionProps(placement) : motionProps
-
-    return {
-      variants: {
-        visible: {
-          transform: 'scale(1)',
-        },
-        hidden: {
-          transform: 'scale(1.04)',
-        },
-      },
-      ...mProps,
-    }
-  }, [motionProps, placement])
-
   const [DialogContentPaper, getDialogContentPaperProps] = useSlot({
     elementType: ModalContent,
     style: styles.paper,
@@ -136,12 +120,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
     a11y: slotAriaProps.paper,
-    additionalProps: !animateDisabled
-      ? {
-          as: m.section,
-          ...mergedMotionProps,
-        }
-      : undefined,
   })
 
   const [DialogContentCloseButton, getDialogContentCloseButtonProps] = useSlot({
@@ -153,25 +131,50 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     a11y: slotAriaProps.closeButton,
   })
 
+  const mergedMotionProps = useMemo(() => {
+    const mProps =
+      typeof motionProps === 'function' ? motionProps(placement) : motionProps
+
+    const variants: Variants = {
+      visible: {
+        transform: 'scale(1)',
+      },
+      hidden: {
+        transform: 'scale(1.04)',
+      },
+    }
+
+    return {
+      variants,
+      ...mProps,
+    }
+  }, [motionProps, placement])
+
+  const renderPaper = () => (
+    <DialogContentPaper {...getDialogContentPaperProps()}>
+      <DialogContentProvider value={ownerState}>
+        {!hideCloseButton && (
+          <DialogClose>
+            <Ripple>
+              <DialogContentCloseButton {...getDialogContentCloseButtonProps()}>
+                {closeIcon ?? <CloseOutlined />}
+              </DialogContentCloseButton>
+            </Ripple>
+          </DialogClose>
+        )}
+        {children}
+      </DialogContentProvider>
+    </DialogContentPaper>
+  )
+
   return (
     <DialogRoot>
       <DialogContentRoot {...getDialogContentRootProps()}>
-        <DialogContentPaper {...getDialogContentPaperProps()}>
-          <DialogContentProvider value={ownerState}>
-            {!hideCloseButton && (
-              <DialogClose>
-                <Ripple>
-                  <DialogContentCloseButton
-                    {...getDialogContentCloseButtonProps()}
-                  >
-                    {closeIcon ?? <CloseOutlined />}
-                  </DialogContentCloseButton>
-                </Ripple>
-              </DialogClose>
-            )}
-            {children}
-          </DialogContentProvider>
-        </DialogContentPaper>
+        {animateDisabled ? (
+          renderPaper()
+        ) : (
+          <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
+        )}
       </DialogContentRoot>
     </DialogRoot>
   )

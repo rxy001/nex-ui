@@ -2,6 +2,7 @@
 
 import { createContext } from '@nex-ui/utils'
 import type { ModalPortalProps } from './types'
+import type { RefObject } from 'react'
 
 interface ModalContextValue {
   open: boolean
@@ -14,6 +15,7 @@ interface ModalContextValue {
   modalHeaderId: string
   modalBodyId: string
   modalId: string
+  modalContentRef: RefObject<HTMLElement | null>
   container?: ModalPortalProps['container']
   keepMounted?: boolean
   animateDisabled?: boolean

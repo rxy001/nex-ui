@@ -272,60 +272,73 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       : undefined,
   })
 
-  const renderIndicator = () => (
-    <AccordionItemIndicator {...getAccordionItemIndicatorProps()}>
-      {indicator ?? <ChevronDownOutlined />}
-    </AccordionItemIndicator>
-  )
+  const renderIndicator = () => {
+    const indicatorElement = (
+      <AccordionItemIndicator {...getAccordionItemIndicatorProps()}>
+        {indicator ?? <ChevronDownOutlined />}
+      </AccordionItemIndicator>
+    )
 
-  const renderContent = () => (
-    <AccordionItemContent {...getAccordionItemContentProps()}>
-      {children}
-    </AccordionItemContent>
-  )
+    if (animateDisabled) {
+      return indicatorElement
+    }
 
-  const renderRoot = () => (
-    <AccordionItemRoot {...getAccordionItemRootProps()}>
-      <AccordionItemHeading {...getAccordionItemHeadingProps()}>
-        <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
-          <span>{title}</span>
-          {!hideIndicator &&
-            (animateDisabled ? (
-              renderIndicator()
-            ) : (
-              <m.span
-                animate={animate}
-                initial={animate}
-                variants={indicatorMotionVariants}
-                {...indicatorMotionProps}
-              >
-                {renderIndicator()}
-              </m.span>
-            ))}
-        </AccordionItemTrigger>
-      </AccordionItemHeading>
-      {animateDisabled ? (
-        keepMounted || expanded ? (
-          renderContent()
-        ) : null
-      ) : (
-        <PresenceMotion
-          open={expanded}
-          keepMounted={keepMounted}
-          {...contentMotionProps}
-          {...motionProps}
-        >
-          {renderContent()}
-        </PresenceMotion>
-      )}
-    </AccordionItemRoot>
-  )
+    return (
+      <m.span
+        animate={animate}
+        initial={animate}
+        variants={indicatorMotionVariants}
+        {...indicatorMotionProps}
+      >
+        {indicatorElement}
+      </m.span>
+    )
+  }
 
-  return animateDisabled ? (
-    renderRoot()
-  ) : (
-    <LazyMotion features={motionFeatures}>{renderRoot()}</LazyMotion>
-  )
+  const renderContent = () => {
+    const contentElement = (
+      <AccordionItemContent {...getAccordionItemContentProps()}>
+        {children}
+      </AccordionItemContent>
+    )
+
+    if (animateDisabled) {
+      return keepMounted || expanded ? contentElement : null
+    }
+
+    return (
+      <PresenceMotion
+        open={expanded}
+        keepMounted={keepMounted}
+        {...contentMotionProps}
+        {...motionProps}
+      >
+        {contentElement}
+      </PresenceMotion>
+    )
+  }
+
+  const renderRoot = () => {
+    const rootElement = (
+      <AccordionItemRoot {...getAccordionItemRootProps()}>
+        <AccordionItemHeading {...getAccordionItemHeadingProps()}>
+          <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
+            <span>{title}</span>
+            {!hideIndicator && renderIndicator()}
+          </AccordionItemTrigger>
+        </AccordionItemHeading>
+        {renderContent()}
+      </AccordionItemRoot>
+    )
+
+    if (animateDisabled) {
+      return rootElement
+    }
+
+    return <LazyMotion features={motionFeatures}>{rootElement}</LazyMotion>
+  }
+
+  return renderRoot()
 }
 
 AccordionItem.displayName = 'AccordionItem'
