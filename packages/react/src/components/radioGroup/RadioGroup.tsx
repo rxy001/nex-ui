@@ -75,6 +75,7 @@ export const RadioGroup = <
     role,
     size,
     classNames,
+    disableAnimation = false,
     value: valueProp,
     name = defaultName,
     orientation = 'horizontal',
@@ -245,8 +246,9 @@ export const RadioGroup = <
       isChecked,
       isTabbable,
       setGroupState,
+      disableAnimation,
     }
-  }, [setValue, size, color, disabled, name, value])
+  }, [size, color, disabled, name, setValue, disableAnimation, value])
 
   return (
     <RadioGroupRoot {...getRadioGroupRootProps()}>

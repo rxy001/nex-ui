@@ -35,6 +35,9 @@ const meta = {
       control: 'select',
       options: ['horizontal', 'vertical'],
     },
+    disableAnimation: {
+      control: 'boolean',
+    },
   },
   args: {
     children: 'Radio',

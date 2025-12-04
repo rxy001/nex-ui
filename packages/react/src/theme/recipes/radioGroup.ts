@@ -128,6 +128,16 @@ export const radioRecipe = defineSlotRecipe({
     inGroup: {
       true: {},
     },
+    disableAnimation: {
+      true: {
+        dot: {
+          transition: 'none',
+          '::before': {
+            transition: 'none',
+          },
+        },
+      },
+    },
   },
   compoundVariants: [
     {
