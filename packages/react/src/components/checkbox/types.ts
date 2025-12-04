@@ -115,6 +115,13 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
    * @default false
    */
   indeterminate?: boolean
+
+  /**
+   * If true, disables the animation for the Checkbox.
+   *
+   * @default false
+   */
+  animateDisabled?: boolean
 }
 
 export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
@@ -226,6 +233,13 @@ type CheckboxGroupOwnProps<
    * Additional class names to apply to the root.
    */
   className?: ClassValue
+
+  /**
+   * If true, disables the animation for all checkboxes.
+   *
+   * @default false
+   */
+  animateDisabled?: boolean
 }
 
 export type CheckboxGroupProps<
@@ -247,4 +261,5 @@ export type CheckboxGroupContextValue<
   color?: CheckboxVariants['color']
   size?: CheckboxVariants['size']
   radius?: CheckboxVariants['radius']
+  animateDisabled?: boolean
 }

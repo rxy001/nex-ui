@@ -205,6 +205,8 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
 
   /**
    * If true, disables the animation for the AccordionItem.
+   *
+   * @default false
    */
   animateDisabled?: boolean
 }

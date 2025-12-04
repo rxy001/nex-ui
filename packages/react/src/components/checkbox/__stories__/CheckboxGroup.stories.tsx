@@ -28,6 +28,9 @@ const meta = {
       options: ['vertical', 'horziontal'],
       control: 'select',
     },
+    animateDisabled: {
+      control: 'boolean',
+    },
   },
   render: (props) => (
     <CheckboxGroup {...props}>
