@@ -87,6 +87,13 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
    * The props used for each slot.
    */
   slotProps?: RadioSlotProps
+
+  /**
+   * If true, disables the Radio animation.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 }
 
 export interface RadioPropsOverrides {}
@@ -187,6 +194,13 @@ type RadioGroupOwnProps<
    * The label of the RadioGroup.
    */
   label?: ReactNode
+
+  /**
+   * If true, disables all radio animation.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 }
 
 export interface RadioGroupPropsOverrides {}
@@ -213,4 +227,5 @@ export interface RadioGroupContextValue<
   color?: RadioVariants['color']
   size?: RadioVariants['size']
   setGroupState: (radio: RadioState) => void
+  disableAnimation: boolean
 }
