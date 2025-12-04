@@ -76,6 +76,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     className,
     classNames,
     slotProps,
+    disableAnimation = groupCtx?.disableAnimation ?? false,
     checked: checkedProp,
     tabIndex: tabIndexProp = 0,
     as = 'input',
@@ -142,6 +143,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     size,
     checked,
     defaultChecked,
+    disableAnimation,
   }
 
   const styles = useStyles({
@@ -182,6 +184,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
       size,
       checked,
       disabled,
+      disableAnimation,
     },
   })
 

@@ -30,6 +30,11 @@ describe('Radio', () => {
 
   testVariantDataAttrs(<Radio>Radio</Radio>, ['disabled', [true, false]])
 
+  testVariantDataAttrs(<Radio>Radio</Radio>, [
+    'disableAnimation',
+    [true, false],
+  ])
+
   testClassNamesForwarding(
     <Radio>Radio</Radio>,
     slots,
