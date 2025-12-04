@@ -28,7 +28,7 @@ const meta = {
       options: ['vertical', 'horziontal'],
       control: 'select',
     },
-    animateDisabled: {
+    disableAnimation: {
       control: 'boolean',
     },
   },

@@ -94,7 +94,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     type = 'checkbox',
     defaultChecked = false,
     name = groupCtx?.name,
-    animateDisabled = groupCtx?.animateDisabled ?? false,
+    disableAnimation = groupCtx?.disableAnimation ?? false,
     color = groupCtx?.color ?? primaryThemeColor,
     disabled = groupCtx?.disabled ?? false,
     size = groupCtx?.size ?? 'md',
@@ -123,7 +123,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     radius,
     inGroup,
     indeterminate,
-    animateDisabled,
+    disableAnimation,
   }
 
   const handleChange = useEvent((newChecked: boolean) => {
@@ -167,7 +167,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
       checked,
       indeterminate,
       inGroup,
-      animateDisabled,
+      disableAnimation,
     },
   })
 
@@ -216,7 +216,9 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
       : null
 
     if (!customIcon) {
-      return <CheckedIcon checked={checked} animateDisabled={animateDisabled} />
+      return (
+        <CheckedIcon checked={checked} disableAnimation={disableAnimation} />
+      )
     }
 
     if (isValidElement(customIcon)) {

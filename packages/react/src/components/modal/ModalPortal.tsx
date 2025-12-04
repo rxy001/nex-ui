@@ -8,7 +8,7 @@ export const ModalPortal = ({
   children,
   container,
   keepMounted = false,
-  animateDisabled = false,
+  disableAnimation = false,
 }: ModalPortalProps) => {
   const modalState = useModal()
 
@@ -17,9 +17,9 @@ export const ModalPortal = ({
       ...modalState,
       container,
       keepMounted,
-      animateDisabled,
+      disableAnimation,
     }),
-    [modalState, container, keepMounted, animateDisabled],
+    [modalState, container, keepMounted, disableAnimation],
   )
 
   const renderChildren = () =>
@@ -29,7 +29,7 @@ export const ModalPortal = ({
 
   return (
     <Portal container={container}>
-      {animateDisabled ? (
+      {disableAnimation ? (
         renderChildren()
       ) : (
         <AnimatePresence>{renderChildren()}</AnimatePresence>

@@ -13,7 +13,7 @@ function TestModal(props: ModalTriggerProps) {
   return (
     <Modal>
       <ModalTrigger {...props} />
-      <ModalPortal animateDisabled>
+      <ModalPortal disableAnimation>
         <ModalRoot data-testid='modal-root'>
           <ModalPanel>
             <ModalContent data-testid='modal-content'>Content</ModalContent>

@@ -65,11 +65,11 @@ describe('Popover', () => {
     expect(queryByTestId('popover-content')).not.toBeInTheDocument()
   })
 
-  it('should disable animations when animateDisabled=true', () => {
+  it('should disable animations when disableAnimation=true', () => {
     const { queryByClassName } = renderWithNexUIProvider(
       <TestPopover
         open
-        animateDisabled
+        disableAnimation
         motionProps={{
           className: 'test-motion',
         }}

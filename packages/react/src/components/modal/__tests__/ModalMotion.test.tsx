@@ -15,7 +15,7 @@ import {
 } from '../index'
 import type { ModalPortalProps } from '../types'
 
-function TestModal({ keepMounted, animateDisabled }: ModalPortalProps) {
+function TestModal({ keepMounted, disableAnimation }: ModalPortalProps) {
   const renderChildren = () => (
     <>
       <ModalBackdrop data-testid='modal-backdrop' />
@@ -37,9 +37,12 @@ function TestModal({ keepMounted, animateDisabled }: ModalPortalProps) {
 
   return (
     <Modal defaultOpen>
-      <ModalPortal keepMounted={keepMounted} animateDisabled={animateDisabled}>
+      <ModalPortal
+        keepMounted={keepMounted}
+        disableAnimation={disableAnimation}
+      >
         <ModalRoot data-testid='modal-root'>
-          {animateDisabled ? (
+          {disableAnimation ? (
             renderChildren()
           ) : (
             <ModalMotion data-testid='modal-motion'>
@@ -55,7 +58,7 @@ function TestModal({ keepMounted, animateDisabled }: ModalPortalProps) {
 describe('ModalMotion', () => {
   it('should render ModalMotion component', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
-      <TestModal animateDisabled={false} />,
+      <TestModal disableAnimation={false} />,
       {
         useAct: true,
       },
@@ -63,9 +66,9 @@ describe('ModalMotion', () => {
     expect(getByTestId('modal-motion')).toBeInTheDocument()
   })
 
-  it('should not render ModalMotion when animateDisabled=true', async () => {
+  it('should not render ModalMotion when disableAnimation=true', async () => {
     const { queryByTestId } = await renderWithNexUIProvider(
-      <TestModal animateDisabled />,
+      <TestModal disableAnimation />,
       {
         useAct: true,
       },
@@ -75,7 +78,7 @@ describe('ModalMotion', () => {
 
   it('should render correct styles on ModalMotion', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
-      <TestModal animateDisabled={false} />,
+      <TestModal disableAnimation={false} />,
       {
         useAct: true,
       },
@@ -87,7 +90,7 @@ describe('ModalMotion', () => {
 
   it('should render correct styles on ModalMotion when keepMounted=true', async () => {
     const { getByTestId, user } = await renderWithNexUIProvider(
-      <TestModal animateDisabled={false} keepMounted />,
+      <TestModal disableAnimation={false} keepMounted />,
       {
         useAct: true,
       },

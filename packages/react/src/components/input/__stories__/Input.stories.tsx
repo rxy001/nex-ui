@@ -66,7 +66,7 @@ const meta = {
       ],
       control: 'select',
     },
-    animateDisabled: {
+    disableAnimation: {
       control: 'boolean',
     },
   },

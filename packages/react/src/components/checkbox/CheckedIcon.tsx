@@ -27,11 +27,14 @@ const tickVariants: Variants = {
 
 export type CheckedIconProps = {
   checked: boolean
-  animateDisabled: boolean
+  disableAnimation: boolean
 }
 
-export const CheckedIcon = ({ checked, animateDisabled }: CheckedIconProps) => {
-  if (animateDisabled) {
+export const CheckedIcon = ({
+  checked,
+  disableAnimation,
+}: CheckedIconProps) => {
+  if (disableAnimation) {
     if (!checked) {
       return null
     }

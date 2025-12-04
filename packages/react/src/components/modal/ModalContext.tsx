@@ -18,7 +18,7 @@ interface ModalContextValue {
   modalContentRef: RefObject<HTMLElement | null>
   container?: ModalPortalProps['container']
   keepMounted?: boolean
-  animateDisabled?: boolean
+  disableAnimation?: boolean
 }
 
 export const [ModalProvider, useModal] = createContext<ModalContextValue>({

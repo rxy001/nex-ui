@@ -80,7 +80,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     onValueChange,
     placeholder,
     classNames,
-    animateDisabled = false,
+    disableAnimation = false,
     defaultValue = '',
     as = 'input',
     value: valueProp,
@@ -147,7 +147,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     value,
     labelPlacement,
     as,
-    animateDisabled,
+    disableAnimation,
   }
 
   const styles = useStyles({
@@ -201,7 +201,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
       invalid,
       clearable,
       labelPlacement,
-      animateDisabled,
+      disableAnimation,
     },
   })
 

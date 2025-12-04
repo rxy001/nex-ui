@@ -222,7 +222,7 @@ export const inputRecipe = defineSlotRecipe({
         },
       },
     },
-    animateDisabled: {
+    disableAnimation: {
       true: {
         root: {
           transition: 'none',

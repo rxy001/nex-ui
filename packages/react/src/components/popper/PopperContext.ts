@@ -11,7 +11,7 @@ export type PopperContextValue = {
   handleOpen: () => void
   handleClose: () => void
   keepMounted?: boolean
-  animateDisabled?: boolean
+  disableAnimation?: boolean
 }
 
 export const [PopperProvider, usePopper] = createContext<PopperContextValue>({

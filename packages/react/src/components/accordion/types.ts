@@ -111,7 +111,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
    *
    * @default false
    */
-  animateDisabled?: boolean
+  disableAnimation?: boolean
 }
 
 export type AccordionProps<RootComponent extends ElementType = 'div'> =
@@ -208,7 +208,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
    *
    * @default false
    */
-  animateDisabled?: boolean
+  disableAnimation?: boolean
 }
 
 export type AccordionItemProps<RootComponent extends ElementType = 'div'> =
@@ -230,7 +230,7 @@ export type AccordionGroupContextValue = {
   hideIndicator: boolean
   disabledKeys: Key[]
   disabled: boolean
-  animateDisabled: boolean
+  disableAnimation: boolean
   indicator?: ReactNode
   motionProps?: HTMLMotionProps<'div'>
   variant: AccordionVariants['variant']

@@ -41,7 +41,7 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
     modalId,
     container,
     keepMounted,
-    animateDisabled,
+    disableAnimation,
   } = modalState
 
   if (registeredRef.current === false && open) {
@@ -57,7 +57,7 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
       ref: rootRef,
       style: {
         display:
-          animateDisabled && keepMounted
+          disableAnimation && keepMounted
             ? open
               ? 'block'
               : 'none'
@@ -72,7 +72,7 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
       closeOnEscape,
       preventScroll,
       keepMounted,
-      animateDisabled,
+      disableAnimation,
       state: open ? 'open' : 'closed',
     },
   })

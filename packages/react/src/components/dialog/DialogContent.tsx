@@ -59,7 +59,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { animateDisabled } = useDialog()
+  const { disableAnimation } = useDialog()
 
   const {
     children,
@@ -178,7 +178,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     <DialogRoot>
       <DialogContentRoot {...getDialogContentRootProps()}>
         <DialogContentWrapper {...getDialogContentWrapperProps()}>
-          {animateDisabled ? (
+          {disableAnimation ? (
             renderPaper()
           ) : (
             <m.div {...mergedMotionProps}>{renderPaper()}</m.div>

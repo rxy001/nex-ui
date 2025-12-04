@@ -22,7 +22,7 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     container,
     keepMounted,
     motionProps,
-    animateDisabled,
+    disableAnimation,
     ...remainingProps
   } = props
 
@@ -57,12 +57,12 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
 
   return (
     <ModalPortal
-      animateDisabled={animateDisabled}
+      disableAnimation={disableAnimation}
       container={container}
       keepMounted={keepMounted}
     >
       <DrawerRootRoot {...getDrawerRootRootProps()}>
-        {animateDisabled ? (
+        {disableAnimation ? (
           renderChildren()
         ) : (
           <ModalMotion {...motionProps}>{renderChildren()}</ModalMotion>
