@@ -34,7 +34,7 @@ function TestDialog({
   )
 }
 
-const slots = ['paper', 'closeButton'] as const
+const slots = ['paper', 'wrapper', 'closeButton'] as const
 
 describe('DialogContent', () => {
   testRefForwarding(<TestDialog />, {
@@ -70,6 +70,7 @@ describe('DialogContent', () => {
     slots,
     {
       paper: 'test-paper',
+      wrapper: 'test-wrapper',
       closeButton: 'test-close-button',
     },
     dialogContentClasses,
@@ -83,6 +84,7 @@ describe('DialogContent', () => {
     slots,
     {
       paper: { className: 'test-paper' },
+      wrapper: { className: 'test-wrapper' },
       closeButton: { className: 'test-close-button' },
     },
     dialogContentClasses,

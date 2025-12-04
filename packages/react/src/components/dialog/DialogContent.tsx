@@ -20,7 +20,7 @@ import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DialogContentProps } from './types'
 
-const slots = ['root', 'paper', 'closeButton']
+const slots = ['root', 'paper', 'wrapper', 'closeButton']
 
 const useSlotAriaProps = (ownerState: DialogContentProps) => {
   const {
@@ -113,6 +113,13 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     },
   })
 
+  const [DialogContentWrapper, getDialogContentWrapperProps] = useSlot({
+    elementType: 'div',
+    style: styles.wrapper,
+    classNames: slotClasses.wrapper,
+    externalSlotProps: slotProps?.wrapper,
+  })
+
   const [DialogContentPaper, getDialogContentPaperProps] = useSlot({
     elementType: ModalContent,
     style: styles.paper,
@@ -170,11 +177,13 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   return (
     <DialogRoot>
       <DialogContentRoot {...getDialogContentRootProps()}>
-        {animateDisabled ? (
-          renderPaper()
-        ) : (
-          <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
-        )}
+        <DialogContentWrapper {...getDialogContentWrapperProps()}>
+          {animateDisabled ? (
+            renderPaper()
+          ) : (
+            <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
+          )}
+        </DialogContentWrapper>
       </DialogContentRoot>
     </DialogRoot>
   )
