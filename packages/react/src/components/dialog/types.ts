@@ -83,6 +83,7 @@ export type DialogProps<RootComponent extends ElementType = 'div'> =
 type DialogContentSlotProps = {
   closeButton?: ComponentPropsWithCommonProps<'button'>
   paper?: ComponentPropsWithCommonProps<'section'>
+  wrapper?: ComponentPropsWithCommonProps<'div'>
 }
 
 export interface DialogContentPropsOverrides {}

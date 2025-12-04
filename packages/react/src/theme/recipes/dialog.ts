@@ -15,8 +15,6 @@ export const dialogContentRecipe = defineSlotRecipe({
       justifyContent: 'center',
     },
     paper: {
-      my: '15',
-      mx: '6',
       borderRadius: 'lg',
       boxShadow: 'lg',
     },
@@ -39,6 +37,10 @@ export const dialogContentRecipe = defineSlotRecipe({
       _focusVisibleRing: {
         outline: 'focusVisibleOutline',
       },
+    },
+    wrapper: {
+      mx: '6',
+      my: '15',
     },
   },
   variants: {
