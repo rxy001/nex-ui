@@ -35,6 +35,8 @@ describe('Input', () => {
     ['outlined', 'faded', 'underlined'],
   ])
 
+  testVariantDataAttrs(<Input />, ['animateDisabled', [true, false]])
+
   testVariantDataAttrs(<Input label='Label' />, [
     'labelPlacement',
     ['inside', 'outside', 'float-inside', 'float-outside'],

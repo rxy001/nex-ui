@@ -157,6 +157,13 @@ type InputOwnProps<InputComponent extends ElementType> = {
    * The props used for each slot.
    */
   slotProps?: InputSlotProps
+
+  /**
+   * If true, disables the animation for the Input.
+   *
+   * @default false
+   */
+  animateDisabled?: boolean
 }
 
 export type InputProps<InputComponent extends ElementType = 'input'> =

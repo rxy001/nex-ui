@@ -66,6 +66,9 @@ const meta = {
       ],
       control: 'select',
     },
+    animateDisabled: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof Input<'input'>>
 
