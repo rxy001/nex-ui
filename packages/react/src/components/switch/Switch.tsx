@@ -26,7 +26,7 @@ const useSlotAriaProps = (
   const {
     children,
     slotProps,
-    role,
+    role = 'switch',
     'aria-labelledby': labelledBy,
     'aria-label': ariaLabel,
   } = ownerState
@@ -74,7 +74,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     thumbIcon: thumbIconProp,
     checked: checkedProp,
     disableAnimation = false,
-    role = 'switch',
     disabled = false,
     as = 'input',
     size = 'md',
@@ -99,7 +98,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     disabled,
     size,
     defaultChecked,
-    role,
     disableAnimation,
   }
 
@@ -145,7 +143,6 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     additionalProps: {
       as,
       type,
-      role,
       checked,
       disabled,
       onCheckedChange: setChecked,

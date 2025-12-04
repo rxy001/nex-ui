@@ -1,7 +1,6 @@
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
-import type { DOMMotionComponents } from 'motion/react'
-import type { Overwrite } from '../../types/utils'
+import type { HTMLMotionProps, Overwrite } from '../../types/utils'
 import type { ComponentProps, ElementType, ReactNode } from 'react'
 import type { PortalProps } from '../utils'
 
@@ -119,6 +118,4 @@ export type ModalPortalProps = Pick<PortalProps, 'container' | 'children'> & {
 }
 
 // ------------- ModalMotion -------------
-export type ModalMotionProps<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = ModalSlotProps<RootComponent>
+export type ModalMotionProps = HTMLMotionProps<'div'>

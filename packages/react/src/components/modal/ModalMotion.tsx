@@ -2,15 +2,9 @@
 
 import { useSlot, PresenceMotion } from '../utils'
 import { useModal } from './ModalContext'
-import type { ElementType } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { ModalMotionProps } from './types'
 
-export const ModalMotion = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
-  props: ModalMotionProps<RootComponent>,
-) => {
+export const ModalMotion = (props: ModalMotionProps) => {
   const { open, keepMounted } = useModal()
   const { children, ...remainingProps } = props
 

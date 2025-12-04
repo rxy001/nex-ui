@@ -9,9 +9,9 @@ import type {
   PopperRootProps,
   PopperTriggerProps,
 } from '../popper'
-import type { OverrideProps, HTMLMotionProps } from '../../types/utils'
+import type { OverrideProps } from '../../types/utils'
 import type { PopoverContentVariants } from '../../theme/recipes'
-import type { PopperPortalProps } from '../popper/types'
+import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
 
 type PopoverOwnProps<RootComponent extends ElementType> = Omit<
   PopperProps,
@@ -48,7 +48,7 @@ type PopoverOwnProps<RootComponent extends ElementType> = Omit<
     /**
      * The props to modify the framer motion animation.
      */
-    motionProps?: HTMLMotionProps<'div'>
+    motionProps?: PopperMotionProps
 
     /**
      * The delay in milliseconds before the popover opens.
