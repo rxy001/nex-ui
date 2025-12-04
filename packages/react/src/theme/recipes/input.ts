@@ -47,7 +47,6 @@ export const inputRecipe = defineSlotRecipe({
     label: {
       position: 'absolute',
       transformOrigin: 'top left',
-      transition: 'colors',
       pointerEvents: 'none',
       transitionProperty: 'inset, color, transform',
       transitionDuration: '0.2s',
@@ -220,6 +219,22 @@ export const inputRecipe = defineSlotRecipe({
         label: {
           insetBlockStart: '50%',
           transform: 'translateY(-90%) scale(0.8)',
+        },
+      },
+    },
+    animateDisabled: {
+      true: {
+        root: {
+          transition: 'none',
+          '::before': {
+            transition: 'none',
+          },
+          '::after': {
+            transition: 'none',
+          },
+        },
+        label: {
+          transition: 'none',
         },
       },
     },
