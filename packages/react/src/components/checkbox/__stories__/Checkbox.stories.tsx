@@ -29,6 +29,9 @@ const meta = {
     defaultChecked: {
       control: 'boolean',
     },
+    animateDisabled: {
+      control: 'boolean',
+    },
   },
   args: {
     children: 'Checkbox',

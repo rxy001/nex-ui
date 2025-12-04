@@ -27,9 +27,34 @@ const tickVariants: Variants = {
 
 export type CheckedIconProps = {
   checked: boolean
+  animateDisabled: boolean
 }
 
-export const CheckedIcon = ({ checked }: CheckedIconProps) => {
+export const CheckedIcon = ({ checked, animateDisabled }: CheckedIconProps) => {
+  if (animateDisabled) {
+    if (!checked) {
+      return null
+    }
+    return (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        viewBox='0 0 24 24'
+        strokeWidth='1.5'
+        stroke='currentColor'
+        aria-hidden
+        focusable={false}
+      >
+        <path
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          d='m7 12.9l3.143 3.6L18 7.5'
+          pathLength={1}
+        />
+      </svg>
+    )
+  }
+
   return (
     <LazyMotion features={motionFeatures}>
       <m.svg
