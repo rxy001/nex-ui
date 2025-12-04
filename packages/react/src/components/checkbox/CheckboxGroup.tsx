@@ -61,6 +61,7 @@ export const CheckboxGroup = <
     label,
     size,
     classNames,
+    animateDisabled,
     orientation = 'horizontal',
     defaultValue = [],
     ...remainingProps
@@ -125,6 +126,7 @@ export const CheckboxGroup = <
       size,
       color,
       radius,
+      animateDisabled,
       toggleValue: (value: number | string) => {
         // istanbul ignore next
         if (disabled) {
@@ -143,7 +145,7 @@ export const CheckboxGroup = <
         return value !== undefined ? values.includes(value) : false
       },
     }),
-    [color, disabled, name, radius, setValues, size, values],
+    [animateDisabled, color, disabled, name, radius, setValues, size, values],
   )
 
   return (

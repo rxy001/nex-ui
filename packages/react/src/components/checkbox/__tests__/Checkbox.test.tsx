@@ -9,6 +9,7 @@ import {
   testColorDataAttrs,
   testSizeDataAttrs,
   testRadiusDataAttrs,
+  testVariantDataAttrs,
 } from '~/tests/shared'
 import { Checkbox, CheckboxGroup } from '../index'
 import { checkboxClasses } from './classes'
@@ -39,6 +40,14 @@ describe('Checkbox', () => {
   testRefForwarding(<Checkbox />, HTMLInputElement, {
     useAct: true,
   })
+
+  testVariantDataAttrs(
+    <Checkbox>Checkbox</Checkbox>,
+    ['animateDisabled', [true, false]],
+    {
+      useAct: true,
+    },
+  )
 
   testClassNamesForwarding(
     <Checkbox>Checkbox</Checkbox>,
@@ -230,6 +239,7 @@ describe('Checkbox', () => {
       as: 'input',
       classNames: undefined,
       indeterminate: false,
+      animateDisabled: false,
     })
     expect(getByTestId('custom-icon')).toBeInTheDocument()
 
@@ -314,6 +324,26 @@ describe('Checkbox', () => {
     await user.tab()
     expect(document.activeElement).toBe(checkbox)
     expect(checkbox).toHaveAttribute('data-focus-visible', 'true')
+  })
+
+  it('should disable animations when animateDisabled=true', () => {
+    const { container, rerender } = renderWithNexUIProvider(
+      <Checkbox animateDisabled checked={false}>
+        Checkbox
+      </Checkbox>,
+    )
+
+    const root = container.firstElementChild
+
+    expect(root).toMatchSnapshot()
+
+    rerender(
+      <Checkbox animateDisabled checked>
+        Checkbox
+      </Checkbox>,
+    )
+
+    expect(root).toMatchSnapshot()
   })
 
   describe('Accessibility', () => {

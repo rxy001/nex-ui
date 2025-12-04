@@ -227,6 +227,23 @@ export const checkboxRecipe = defineSlotRecipe({
         root: {},
       },
     },
+    animateDisabled: {
+      true: {
+        checkedIcon: {
+          transition: 'none',
+          transform: 'none',
+        },
+        icon: {
+          '::before': {
+            transition: 'none',
+          },
+          '::after': {
+            transition: 'none',
+            transform: 'none',
+          },
+        },
+      },
+    },
   },
   compoundVariants: [
     {
