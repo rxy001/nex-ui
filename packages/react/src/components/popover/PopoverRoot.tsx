@@ -30,7 +30,7 @@ export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
     keepMounted,
     container,
     restoreFocus,
-    animateDisabled,
+    disableAnimation,
     ...props
   } = usePopover()
 
@@ -68,10 +68,10 @@ export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
     <PopperPortal
       container={container}
       keepMounted={keepMounted}
-      animateDisabled={animateDisabled}
+      disableAnimation={disableAnimation}
     >
       <PopoverRootRoot {...getPopoverRootRootProps()}>
-        {animateDisabled ? (
+        {disableAnimation ? (
           renderChildren()
         ) : (
           <PopperMotion {...motionProps}>{renderChildren()}</PopperMotion>

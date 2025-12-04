@@ -49,7 +49,7 @@ export const TooltipBase = (props: TooltipProps) => {
     interactive,
     closeOnClick,
     maxHeight,
-    animateDisabled = false,
+    disableAnimation = false,
     maxWidth = 360,
     color = 'default',
     size = 'md',
@@ -124,12 +124,12 @@ export const TooltipBase = (props: TooltipProps) => {
     <>
       <TooltipTrigger {...getTooltipTriggerProps()}>{children}</TooltipTrigger>
       <PopperPortal
-        animateDisabled={animateDisabled}
+        disableAnimation={disableAnimation}
         container={container}
         keepMounted={keepMounted}
       >
         <TooltipRoot {...getTooltipRootProps()}>
-          {animateDisabled ? (
+          {disableAnimation ? (
             renderChildren()
           ) : (
             <PopperMotion {...motionProps}>{renderChildren()}</PopperMotion>

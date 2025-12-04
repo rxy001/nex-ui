@@ -163,7 +163,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
    *
    * @default false
    */
-  animateDisabled?: boolean
+  disableAnimation?: boolean
 }
 
 export type InputProps<InputComponent extends ElementType = 'input'> =

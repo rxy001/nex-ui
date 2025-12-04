@@ -134,7 +134,7 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
    *
    * @default false
    */
-  rippleDisabled?: boolean
+  disableRipple?: boolean
 
   /**
    * If true, the loading indicator is visible and the Button is disabled.

@@ -10,7 +10,7 @@ export const PopperPortal = ({
   children,
   container,
   keepMounted = false,
-  animateDisabled = false,
+  disableAnimation = false,
 }: PopperPortalProps) => {
   const popperState = usePopper()
 
@@ -18,9 +18,9 @@ export const PopperPortal = ({
     () => ({
       ...popperState,
       keepMounted,
-      animateDisabled,
+      disableAnimation,
     }),
-    [popperState, keepMounted, animateDisabled],
+    [popperState, keepMounted, disableAnimation],
   )
 
   const renderChildren = () =>
@@ -30,7 +30,7 @@ export const PopperPortal = ({
 
   return (
     <Portal container={container}>
-      {animateDisabled ? (
+      {disableAnimation ? (
         renderChildren()
       ) : (
         <AnimatePresence>{renderChildren()}</AnimatePresence>

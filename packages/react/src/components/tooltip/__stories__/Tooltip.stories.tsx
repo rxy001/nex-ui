@@ -75,7 +75,7 @@ const meta = {
     interactive: {
       control: 'boolean',
     },
-    animateDisabled: {
+    disableAnimation: {
       control: 'boolean',
     },
     keepMounted: {

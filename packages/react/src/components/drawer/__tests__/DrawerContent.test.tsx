@@ -16,14 +16,14 @@ import { drawerContentClasses } from './classes'
 import type { DrawerContentProps } from '../index'
 
 function TestDrawer({
-  animateDisabled,
+  disableAnimation,
   ...props
-}: DrawerContentProps & { animateDisabled?: boolean }) {
+}: DrawerContentProps & { disableAnimation?: boolean }) {
   return (
     <Drawer
       defaultOpen
       data-testid='drawer-root'
-      animateDisabled={animateDisabled}
+      disableAnimation={disableAnimation}
     >
       <DrawerContent data-testid='drawer-content' {...props}>
         <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
@@ -137,10 +137,10 @@ describe('DrawerContent', () => {
     expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
   })
 
-  it('should ignore motionProps when animateDisabled=true', async () => {
+  it('should ignore motionProps when disableAnimation=true', async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
       <TestDrawer
-        animateDisabled
+        disableAnimation
         motionProps={{
           className: 'test-motion',
         }}
@@ -154,7 +154,7 @@ describe('DrawerContent', () => {
     expect(paper).not.toHaveClass('test-motion')
   })
 
-  it('should apply motionProps to the motion component when animateDisabled=false', async () => {
+  it('should apply motionProps to the motion component when disableAnimation=false', async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
       <TestDrawer
         motionProps={{

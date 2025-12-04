@@ -93,6 +93,7 @@ exports[`Input should render with default props 1`] = `
   class="nui-input-root emotion-0"
   data-clearable="false"
   data-color="blue"
+  data-disable-animation="false"
   data-disabled="false"
   data-full-width="false"
   data-invalid="false"

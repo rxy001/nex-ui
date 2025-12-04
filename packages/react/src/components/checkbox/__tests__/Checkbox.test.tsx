@@ -43,7 +43,7 @@ describe('Checkbox', () => {
 
   testVariantDataAttrs(
     <Checkbox>Checkbox</Checkbox>,
-    ['animateDisabled', [true, false]],
+    ['disableAnimation', [true, false]],
     {
       useAct: true,
     },
@@ -239,7 +239,7 @@ describe('Checkbox', () => {
       as: 'input',
       classNames: undefined,
       indeterminate: false,
-      animateDisabled: false,
+      disableAnimation: false,
     })
     expect(getByTestId('custom-icon')).toBeInTheDocument()
 
@@ -326,9 +326,9 @@ describe('Checkbox', () => {
     expect(checkbox).toHaveAttribute('data-focus-visible', 'true')
   })
 
-  it('should disable animations when animateDisabled=true', () => {
+  it('should disable animations when disableAnimation=true', () => {
     const { container, rerender } = renderWithNexUIProvider(
-      <Checkbox animateDisabled checked={false}>
+      <Checkbox disableAnimation checked={false}>
         Checkbox
       </Checkbox>,
     )
@@ -338,7 +338,7 @@ describe('Checkbox', () => {
     expect(root).toMatchSnapshot()
 
     rerender(
-      <Checkbox animateDisabled checked>
+      <Checkbox disableAnimation checked>
         Checkbox
       </Checkbox>,
     )

@@ -30,7 +30,7 @@ const meta = {
     restoreFocus: {
       control: 'boolean',
     },
-    animateDisabled: {
+    disableAnimation: {
       control: 'boolean',
     },
   },

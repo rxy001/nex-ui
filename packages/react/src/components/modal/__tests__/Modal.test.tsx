@@ -24,7 +24,7 @@ function TestModal({
   container,
   keepMounted,
   children,
-  animateDisabled = true,
+  disableAnimation = true,
   'data-testid': testid = 'modal-root',
   ...props
 }: ModalProps &
@@ -37,7 +37,7 @@ function TestModal({
       <ModalPortal
         keepMounted={keepMounted}
         container={container}
-        animateDisabled={animateDisabled}
+        disableAnimation={disableAnimation}
       >
         <ModalRoot data-testid={testid} className={props.className}>
           <ModalBackdrop data-testid='modal-backdrop' />
@@ -83,7 +83,7 @@ describe('Modal', () => {
 
   testVariantDataAttrs(<TestModal open />, ['keepMounted', [true, false]])
 
-  testVariantDataAttrs(<TestModal open />, ['animateDisabled', [true, false]])
+  testVariantDataAttrs(<TestModal open />, ['disableAnimation', [true, false]])
 
   it('should not render children by default', () => {
     const { queryByTestId } = renderWithNexUIProvider(<TestModal />)

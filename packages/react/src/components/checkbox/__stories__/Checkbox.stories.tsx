@@ -29,7 +29,7 @@ const meta = {
     defaultChecked: {
       control: 'boolean',
     },
-    animateDisabled: {
+    disableAnimation: {
       control: 'boolean',
     },
   },

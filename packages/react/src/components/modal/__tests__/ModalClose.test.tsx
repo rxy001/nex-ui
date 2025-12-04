@@ -7,7 +7,7 @@ function TestModal(props: ModalCloseProps) {
   return (
     <Modal defaultOpen>
       <ModalClose {...props} />
-      <ModalPortal animateDisabled>
+      <ModalPortal disableAnimation>
         <ModalRoot data-testid='modal-root'>
           <ModalPanel />
         </ModalRoot>

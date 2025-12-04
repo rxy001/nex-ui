@@ -34,7 +34,7 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     setOpen,
     popperRootRef,
     keepMounted,
-    animateDisabled,
+    disableAnimation,
   } = usePopper()
 
   const {
@@ -65,7 +65,7 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
       style: {
         ...styleVariables,
         display:
-          animateDisabled && keepMounted
+          disableAnimation && keepMounted
             ? open
               ? 'block'
               : 'none'
@@ -78,7 +78,7 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
       closeOnEscape,
       keepMounted,
       closeOnDetached,
-      animateDisabled,
+      disableAnimation,
       state: open ? 'open' : 'closed',
     },
   })
