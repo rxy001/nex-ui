@@ -9,7 +9,7 @@ import type {
   ComponentSlotClasses,
   HTMLMotionProps,
 } from '../../types/utils'
-import type { ModalPortalProps } from '../modal/types'
+import type { ModalMotionProps, ModalPortalProps } from '../modal/types'
 
 // ----------------Drawer----------------
 type DrawerSlotProps = {
@@ -65,7 +65,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
    * The props to modify the framer motion animation.
    * Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<'div'>
+  motionProps?: ModalMotionProps
 } & Omit<ModalProps, 'closeOnInteractOutside'> &
   Omit<ModalPortalProps, 'children'>
 

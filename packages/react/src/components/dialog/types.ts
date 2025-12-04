@@ -9,7 +9,7 @@ import type {
 import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants } from '../../theme/recipes'
 import type { ModalProps } from '../modal'
-import type { ModalPortalProps } from '../modal/types'
+import type { ModalMotionProps, ModalPortalProps } from '../modal/types'
 
 // ------------- Dialog --------------
 type DialogSlotProps = {
@@ -66,7 +66,7 @@ type DialogOwnProps<RootComponent extends ElementType> = {
    * The props to modify the framer motion animation.
    * Use the `variants` API to create your own animation.
    */
-  motionProps?: HTMLMotionProps<'div'>
+  motionProps?: ModalMotionProps
 } & Omit<ModalProps, 'closeOnInteractOutside'> &
   Omit<ModalPortalProps, 'children'>
 

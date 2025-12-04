@@ -7,8 +7,7 @@ import type {
   OffsetOptions,
   PortalProps,
 } from '../utils'
-import type { Overwrite } from '../../types/utils'
-import type { DOMMotionComponents } from 'motion/react'
+import type { HTMLMotionProps, Overwrite } from '../../types/utils'
 
 // ----------------- PopperProps -----------------
 export type PopperProps = {
@@ -158,9 +157,7 @@ export type PopperPortalProps = Pick<PortalProps, 'container' | 'children'> & {
 }
 
 // ----------------- PopperMotionProps -----------------
-export type PopperMotionProps<
-  RootComponent extends ElementType = DOMMotionComponents['div'],
-> = PopperSlotProps<RootComponent>
+export type PopperMotionProps = HTMLMotionProps<'div'>
 
 // ----------------- PopperContentProps -----------------
 type PopperContentOwnProps = {

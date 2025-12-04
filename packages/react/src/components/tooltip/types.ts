@@ -11,9 +11,8 @@ import type {
   ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
-  HTMLMotionProps,
 } from '../../types/utils'
-import type { PopperPortalProps } from '../popper/types'
+import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
 
 export interface TooltipPropsOverrides {}
 
@@ -76,7 +75,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     /**
      * The props to modify the framer motion animation.
      */
-    motionProps?: HTMLMotionProps<'div'>
+    motionProps?: PopperMotionProps
 
     /**
      * The color of the Tooltip.
