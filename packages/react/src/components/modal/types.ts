@@ -115,7 +115,7 @@ export type ModalPortalProps = Pick<PortalProps, 'container' | 'children'> & {
    *
    * @default false
    */
-  animateDisabled?: boolean
+  disableAnimation?: boolean
 }
 
 // ------------- ModalMotion -------------

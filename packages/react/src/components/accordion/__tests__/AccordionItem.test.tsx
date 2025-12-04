@@ -45,7 +45,7 @@ describe('AccordionItem', () => {
     useAct: true,
   })
 
-  testVariantDataAttrs(<TestAccordion />, ['animateDisabled', [true, false]], {
+  testVariantDataAttrs(<TestAccordion />, ['disableAnimation', [true, false]], {
     useAct: true,
   })
 

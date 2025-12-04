@@ -22,7 +22,7 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     container,
     keepMounted,
     motionProps,
-    animateDisabled,
+    disableAnimation,
     ...remainingProps
   } = props
 
@@ -66,12 +66,12 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
 
   return (
     <ModalPortal
-      animateDisabled={animateDisabled}
+      disableAnimation={disableAnimation}
       container={container}
       keepMounted={keepMounted}
     >
       <DialogRootRoot {...getDialogRootRootProps()}>
-        {animateDisabled ? (
+        {disableAnimation ? (
           renderChildren()
         ) : (
           <ModalMotion {...motionProps}>{renderChildren()}</ModalMotion>

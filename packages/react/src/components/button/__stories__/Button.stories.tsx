@@ -48,7 +48,7 @@ const meta = {
     loading: {
       control: 'boolean',
     },
-    rippleDisabled: {
+    disableRipple: {
       control: 'boolean',
     },
     spinnerPlacement: {
@@ -167,8 +167,8 @@ export const WithIcons: Story = {
   },
 }
 
-export const rippleDisabled: Story = {
+export const disableRipple: Story = {
   args: {
-    rippleDisabled: true,
+    disableRipple: true,
   },
 }

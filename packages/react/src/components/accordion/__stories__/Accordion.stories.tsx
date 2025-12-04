@@ -47,7 +47,7 @@ const meta = {
       options: variants,
       control: 'select',
     },
-    animateDisabled: {
+    disableAnimation: {
       control: 'boolean',
     },
   },

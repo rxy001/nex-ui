@@ -16,14 +16,14 @@ import { dialogContentClasses } from './classes'
 import type { DialogContentProps } from '../index'
 
 function TestDialog({
-  animateDisabled,
+  disableAnimation,
   ...props
-}: DialogContentProps & { animateDisabled?: boolean }) {
+}: DialogContentProps & { disableAnimation?: boolean }) {
   return (
     <Dialog
       defaultOpen
       data-testid='dialog-root'
-      animateDisabled={animateDisabled}
+      disableAnimation={disableAnimation}
     >
       <DialogContent data-testid='dialog-content' {...props}>
         <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
@@ -149,10 +149,10 @@ describe('DialogContent', () => {
     expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
   })
 
-  it('should ignore motionProps when animateDisabled=true', async () => {
+  it('should ignore motionProps when disableAnimation=true', async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
       <TestDialog
-        animateDisabled
+        disableAnimation
         motionProps={{
           className: 'test-motion',
         }}
@@ -166,7 +166,7 @@ describe('DialogContent', () => {
     expect(paper).not.toHaveClass('test-motion')
   })
 
-  it('should apply motionProps to the motion component when animateDisabled=false', async () => {
+  it('should apply motionProps to the motion component when disableAnimation=false', async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
       <TestDialog
         motionProps={{

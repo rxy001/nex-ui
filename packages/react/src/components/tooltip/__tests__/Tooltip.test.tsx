@@ -127,11 +127,11 @@ describe('Tooltip', () => {
     expect(queryByTestId('tooltip-root')).toBeNull()
   })
 
-  it('should disable animations when animateDisabled=true', () => {
+  it('should disable animations when disableAnimation=true', () => {
     const { queryByClassName } = renderWithNexUIProvider(
       <Tooltip
         open
-        animateDisabled
+        disableAnimation
         content='Content'
         motionProps={{
           className: 'test-motion',

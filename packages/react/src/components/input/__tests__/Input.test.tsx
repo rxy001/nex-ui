@@ -35,7 +35,7 @@ describe('Input', () => {
     ['outlined', 'faded', 'underlined'],
   ])
 
-  testVariantDataAttrs(<Input />, ['animateDisabled', [true, false]])
+  testVariantDataAttrs(<Input />, ['disableAnimation', [true, false]])
 
   testVariantDataAttrs(<Input label='Label' />, [
     'labelPlacement',

@@ -59,7 +59,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { animateDisabled } = useDrawer()
+  const { disableAnimation } = useDrawer()
 
   const {
     classNames,
@@ -201,7 +201,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   return (
     <DrawerRoot>
       <DrawerContentRoot {...getDrawerContentRootProps()}>
-        {animateDisabled ? (
+        {disableAnimation ? (
           renderPaper()
         ) : (
           <m.div {...mergedMotionProps}>{renderPaper()}</m.div>

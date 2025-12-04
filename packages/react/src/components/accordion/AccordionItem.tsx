@@ -122,7 +122,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     toggleExpandedKey,
     expandedKeys,
     disabledKeys,
-    animateDisabled: defaultAnimateDisabled,
+    disableAnimation: defaultDisableAnimation,
     disabled: defaultDisabled,
     indicator: defaultIndicator,
     motionProps: defaultMotionProps,
@@ -136,7 +136,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     title,
     slotProps,
     classNames,
-    animateDisabled = defaultAnimateDisabled,
+    disableAnimation = defaultDisableAnimation,
     indicatorMotionProps = defaultIndicatorMotionProps,
     motionProps = defaultMotionProps,
     hideIndicator = defaultHideIndicator,
@@ -213,7 +213,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       keepMounted,
       hideIndicator,
       disabled,
-      animateDisabled,
+      disableAnimation,
       state: animate,
     },
   })
@@ -248,7 +248,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     style: styles.content,
     classNames: slotClasses.content,
     a11y: slotAriaProps.content,
-    additionalProps: animateDisabled
+    additionalProps: disableAnimation
       ? {
           style: {
             display: keepMounted ? (expanded ? 'block' : 'none') : undefined,
@@ -263,7 +263,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     style: styles.indicator,
     classNames: slotClasses.indicator,
     a11y: slotAriaProps.indicator,
-    additionalProps: animateDisabled
+    additionalProps: disableAnimation
       ? {
           style: {
             transform: expanded ? 'rotate(180deg)' : 'none',
@@ -279,7 +279,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       </AccordionItemIndicator>
     )
 
-    if (animateDisabled) {
+    if (disableAnimation) {
       return indicatorElement
     }
 
@@ -302,7 +302,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       </AccordionItemContent>
     )
 
-    if (animateDisabled) {
+    if (disableAnimation) {
       return keepMounted || expanded ? contentElement : null
     }
 
@@ -331,7 +331,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       </AccordionItemRoot>
     )
 
-    if (animateDisabled) {
+    if (disableAnimation) {
       return rootElement
     }
 

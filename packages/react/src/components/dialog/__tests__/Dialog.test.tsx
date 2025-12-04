@@ -146,11 +146,11 @@ describe('Dialog', () => {
     expect(queryByTestId('dialog-root')).not.toBeInTheDocument()
   })
 
-  it('should disable animations when animateDisabled=true', () => {
+  it('should disable animations when disableAnimation=true', () => {
     const { queryByClassName } = renderWithNexUIProvider(
       <TestDialog
         open
-        animateDisabled={true}
+        disableAnimation={true}
         motionProps={{
           className: 'test-motion',
         }}

@@ -156,9 +156,9 @@ exports[`CheckboxGroup should render with default props 1`] = `
   >
     <label
       class="nui-checkbox-root emotion-2"
-      data-animate-disabled="false"
       data-checked="false"
       data-color="blue"
+      data-disable-animation="false"
       data-disabled="false"
       data-in-group="true"
       data-indeterminate="false"
@@ -205,9 +205,9 @@ exports[`CheckboxGroup should render with default props 1`] = `
     </label>
     <label
       class="nui-checkbox-root emotion-2"
-      data-animate-disabled="false"
       data-checked="false"
       data-color="blue"
+      data-disable-animation="false"
       data-disabled="false"
       data-in-group="true"
       data-indeterminate="false"
@@ -254,9 +254,9 @@ exports[`CheckboxGroup should render with default props 1`] = `
     </label>
     <label
       class="nui-checkbox-root emotion-2"
-      data-animate-disabled="false"
       data-checked="false"
       data-color="blue"
+      data-disable-animation="false"
       data-disabled="false"
       data-in-group="true"
       data-indeterminate="false"

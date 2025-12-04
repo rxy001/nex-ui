@@ -154,7 +154,7 @@ export type PopperPortalProps = Pick<PortalProps, 'container' | 'children'> & {
    *
    * @default false
    */
-  animateDisabled?: boolean
+  disableAnimation?: boolean
 }
 
 // ----------------- PopperMotionProps -----------------

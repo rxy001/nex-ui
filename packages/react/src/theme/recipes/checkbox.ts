@@ -227,7 +227,7 @@ export const checkboxRecipe = defineSlotRecipe({
         root: {},
       },
     },
-    animateDisabled: {
+    disableAnimation: {
       true: {
         checkedIcon: {
           transition: 'none',

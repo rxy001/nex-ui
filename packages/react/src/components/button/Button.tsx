@@ -39,7 +39,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     loading = false,
     disabled: disabledProp = false,
     fullWidth = false,
-    rippleDisabled = false,
+    disableRipple = false,
     startIcon: startIconProp,
     endIcon: endIconProp,
     spinnerPlacement = 'start',
@@ -58,7 +58,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     loading,
     fullWidth,
     color,
-    rippleDisabled,
+    disableRipple,
     disabled: disabledProp,
   }
 
@@ -92,7 +92,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
       loading,
       disabled,
       fullWidth,
-      rippleDisabled,
+      disableRipple,
     },
   })
 
@@ -113,7 +113,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   const loadingIcon = spinner ?? <LoadingOutlined />
 
   return (
-    <Ripple disabled={rippleDisabled || disabled}>
+    <Ripple disabled={disableRipple || disabled}>
       <ButtonRoot {...getButtonRootProps()}>
         {((spinnerPlacement === 'start' && loading) || startIconProp) && (
           <ButtonStartIcon {...getButtonStartIconProps()}>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Checkbox should disable animations when animateDisabled=true 1`] = `
+exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
 .emotion-0 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -123,9 +123,9 @@ exports[`Checkbox should disable animations when animateDisabled=true 1`] = `
 
 <label
   class="nui-checkbox-root emotion-0"
-  data-animate-disabled="true"
   data-checked="false"
   data-color="blue"
+  data-disable-animation="true"
   data-disabled="false"
   data-in-group="false"
   data-indeterminate="false"
@@ -151,7 +151,7 @@ exports[`Checkbox should disable animations when animateDisabled=true 1`] = `
 </label>
 `;
 
-exports[`Checkbox should disable animations when animateDisabled=true 2`] = `
+exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
 .emotion-0 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -274,9 +274,9 @@ exports[`Checkbox should disable animations when animateDisabled=true 2`] = `
 
 <label
   class="nui-checkbox-root emotion-0"
-  data-animate-disabled="true"
   data-checked="true"
   data-color="blue"
+  data-disable-animation="true"
   data-disabled="false"
   data-in-group="false"
   data-indeterminate="false"
@@ -442,9 +442,9 @@ exports[`Checkbox should render with default props 1`] = `
 
 <label
   class="nui-checkbox-root emotion-0"
-  data-animate-disabled="false"
   data-checked="false"
   data-color="blue"
+  data-disable-animation="false"
   data-disabled="false"
   data-in-group="false"
   data-indeterminate="false"

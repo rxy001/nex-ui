@@ -24,7 +24,7 @@ function TestPopper({
   closeDelay = 0,
   onOpenChange,
   keepMounted,
-  animateDisabled,
+  disableAnimation,
   ...props
 }: TestPopperProps) {
   return (
@@ -38,7 +38,10 @@ function TestPopper({
       <PopperTrigger>
         <button data-testid='popper-trigger'>Trigger</button>
       </PopperTrigger>
-      <PopperPortal keepMounted={keepMounted} animateDisabled={animateDisabled}>
+      <PopperPortal
+        keepMounted={keepMounted}
+        disableAnimation={disableAnimation}
+      >
         <PopperRoot data-testid='popper-root' {...props}>
           <PopperMotion>
             <PopperContent data-testid='popper-content'>
@@ -98,7 +101,7 @@ describe('Popper', () => {
 
   testVariantDataAttrs(
     <TestPopper open />,
-    ['animateDisabled', [true, false]],
+    ['disableAnimation', [true, false]],
     {
       useAct: true,
     },
@@ -260,9 +263,9 @@ describe('Popper', () => {
     jest.useRealTimers()
   })
 
-  it('should render correct styles based on animateDisabled and keepMounted', async () => {
+  it('should render correct styles based on disableAnimation and keepMounted', async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestPopper animateDisabled={true} keepMounted open={false} />,
+      <TestPopper disableAnimation={true} keepMounted open={false} />,
       {
         useAct: true,
       },
@@ -273,13 +276,13 @@ describe('Popper', () => {
     expect(popperRoot).toHaveStyle('display: none')
 
     await act(async () => {
-      rerender(<TestPopper animateDisabled={true} keepMounted open />)
+      rerender(<TestPopper disableAnimation={true} keepMounted open />)
     })
 
     expect(popperRoot).toHaveStyle('display: block')
 
     await act(async () => {
-      rerender(<TestPopper animateDisabled={false} keepMounted />)
+      rerender(<TestPopper disableAnimation={false} keepMounted />)
     })
 
     expect(popperRoot).not.toHaveStyle('display: none')
