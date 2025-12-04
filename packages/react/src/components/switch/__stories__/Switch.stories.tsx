@@ -22,6 +22,9 @@ const meta = {
     disabled: {
       control: 'boolean',
     },
+    disableAnimation: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof Switch<'input'>>
 

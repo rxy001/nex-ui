@@ -73,6 +73,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     onCheckedChange,
     thumbIcon: thumbIconProp,
     checked: checkedProp,
+    disableAnimation = false,
     role = 'switch',
     disabled = false,
     as = 'input',
@@ -99,6 +100,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     size,
     defaultChecked,
     role,
+    disableAnimation,
   }
 
   const slotClasses = useSlotClasses({
@@ -129,6 +131,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
       size,
       disabled,
       checked,
+      disableAnimation,
     },
   })
 

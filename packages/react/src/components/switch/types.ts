@@ -106,6 +106,13 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
    * @default false
    */
   defaultChecked?: boolean
+
+  /**
+   * If true, disables the Switch animation.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 }
 
 export type SwitchProps<SwitchComponent extends ElementType = 'input'> =
