@@ -25,7 +25,7 @@ const meta = {
       control: 'boolean',
     },
     orientation: {
-      options: ['vertical', 'horziontal'],
+      options: ['vertical', 'horizontal'],
       control: 'select',
     },
     disableAnimation: {

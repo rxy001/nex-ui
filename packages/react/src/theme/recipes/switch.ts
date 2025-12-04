@@ -158,6 +158,22 @@ export const switchRecipe = defineSlotRecipe({
       },
     },
     disabled: toSlots(disabledVariant, 'root'),
+    disableAnimation: {
+      true: {
+        track: {
+          transition: 'none',
+        },
+        thumb: {
+          transition: 'none',
+        },
+        startIcon: {
+          transition: 'none',
+        },
+        endIcon: {
+          transition: 'none',
+        },
+      },
+    },
   },
   defaultVariants: {
     color: 'blue',

@@ -36,6 +36,8 @@ describe('Switch', () => {
 
   testVariantDataAttrs(<Switch />, ['checked', [true, false]])
 
+  testVariantDataAttrs(<Switch />, ['disableAnimation', [true, false]])
+
   testRefForwarding(<Switch />, HTMLInputElement)
 
   testClassNamesForwarding(
@@ -251,6 +253,7 @@ describe('Switch', () => {
       as: 'input',
       type: 'checkbox',
       role: 'switch',
+      disableAnimation: false,
     })
   })
 

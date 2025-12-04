@@ -111,6 +111,7 @@ exports[`Switch should render with default props 1`] = `
   class="nui-switch-root emotion-0"
   data-checked="false"
   data-color="blue"
+  data-disable-animation="false"
   data-disabled="false"
   data-size="md"
 >
