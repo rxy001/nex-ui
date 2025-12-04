@@ -2,15 +2,9 @@
 
 import { usePopper } from './PopperContext'
 import { useSlot, PresenceMotion } from '../utils'
-import type { ElementType } from 'react'
-import type { DOMMotionComponents } from 'motion/react'
 import type { PopperMotionProps } from './types'
 
-export const PopperMotion = <
-  RootComponent extends ElementType = DOMMotionComponents['div'],
->(
-  props: PopperMotionProps<RootComponent>,
-) => {
+export const PopperMotion = (props: PopperMotionProps) => {
   const { open, keepMounted } = usePopper()
   const { children, ...remainingProps } = props
 

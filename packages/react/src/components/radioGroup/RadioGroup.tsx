@@ -72,7 +72,6 @@ export const RadioGroup = <
     children,
     label,
     slotProps,
-    role,
     size,
     classNames,
     disableAnimation = false,
@@ -90,10 +89,10 @@ export const RadioGroup = <
 
   const ownerState: RadioGroupProps = {
     ...props,
-    role,
     orientation,
     value,
     name,
+    disableAnimation,
   }
 
   const styles = useStyles({
