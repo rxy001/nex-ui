@@ -1,13 +1,13 @@
 import { ModalBackdrop, ModalMotion, ModalPortal, ModalRoot } from '../modal'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
-import { useDrawer } from './DrawerContext'
+import { useDrawerRootProps } from './DrawerContext'
 import { drawerRootRecipe } from '../../theme/recipes'
 import type { DrawerProps } from './types'
 
 const slots = ['root', 'backdrop']
 
 export const DrawerRoot = ({ children }: DrawerProps) => {
-  const props = useDrawer()
+  const props = useDrawerRootProps()
 
   const styles = useStyles({
     name: 'Drawer',

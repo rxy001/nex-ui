@@ -19,7 +19,7 @@ type DialogSlotProps = {
 type DialogOwnProps<RootComponent extends ElementType> = {
   /**
    * The component or element to render as the root.
-   * @default m.div
+   * @default 'div'
    */
   as?: RootComponent
 

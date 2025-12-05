@@ -4,21 +4,14 @@ import { createContext } from '@nex-ui/utils'
 import type { ModalPortalProps } from './types'
 import type { RefObject } from 'react'
 
-interface ModalContextValue {
+export interface ModalContextValue {
   open: boolean
-  closeOnInteractOutside: boolean
   setOpen: (open: boolean) => void
-  preventScroll: boolean
-  closeOnEscape: boolean
-  restoreFocus: boolean
+  modalId: string
   modalContentId: string
   modalHeaderId: string
   modalBodyId: string
-  modalId: string
   modalContentRef: RefObject<HTMLElement | null>
-  container?: ModalPortalProps['container']
-  keepMounted?: boolean
-  disableAnimation?: boolean
 }
 
 export const [ModalProvider, useModal] = createContext<ModalContextValue>({
@@ -28,3 +21,34 @@ export const [ModalProvider, useModal] = createContext<ModalContextValue>({
   strict: true,
   defaultValue: null as unknown as ModalContextValue,
 })
+
+export interface ModalPropsContextValue {
+  preventScroll: boolean
+  closeOnEscape: boolean
+  restoreFocus: boolean
+  closeOnInteractOutside: boolean
+}
+
+export const [ModalPropsProvider, useModalProps] =
+  createContext<ModalPropsContextValue>({
+    contextName: 'ModalPropsContext',
+    hookName: 'useModalProps',
+    providerName: 'ModalPropsProvider',
+    strict: true,
+    defaultValue: null as unknown as ModalPropsContextValue,
+  })
+
+export interface ModalPortalPropsContextValue {
+  container: ModalPortalProps['container']
+  keepMounted: boolean
+  disableAnimation: boolean
+}
+
+export const [ModalPortalPropsProvider, useModalPortalProps] =
+  createContext<ModalPortalPropsContextValue>({
+    contextName: 'ModalPortalPropsContext',
+    hookName: 'useModalPortalProps',
+    providerName: 'ModalPortalPropsProvider',
+    strict: true,
+    defaultValue: null as unknown as ModalPortalPropsContextValue,
+  })

@@ -2,9 +2,10 @@
 
 import { useEffect, useId, useMemo, useRef } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
-import { ModalProvider } from './ModalContext'
+import { ModalPropsProvider, ModalProvider } from './ModalContext'
 import { MODAL_INTERNAL_ID_PREFIX } from './constants'
 import type { ModalProps } from './types'
+import type { ModalContextValue, ModalPropsContextValue } from './ModalContext'
 
 /**
  * Modal is a lower-level construct that is leveraged by the following components:
@@ -43,32 +44,27 @@ export const Modal = (props: ModalProps) => {
 
   const prevOpenRef = useRef(open)
 
-  const ctx = useMemo(
+  const modalContextValue = useMemo<ModalContextValue>(
     () => ({
-      setOpen,
-      restoreFocus,
-      closeOnEscape,
       open,
-      closeOnInteractOutside,
-      preventScroll,
+      setOpen,
       modalContentId,
       modalHeaderId,
       modalBodyId,
       modalId,
       modalContentRef,
     }),
-    [
-      setOpen,
+    [setOpen, open, modalContentId, modalHeaderId, modalBodyId, modalId],
+  )
+
+  const modalPropsContentValue = useMemo<ModalPropsContextValue>(
+    () => ({
       restoreFocus,
       closeOnEscape,
-      open,
       closeOnInteractOutside,
       preventScroll,
-      modalContentId,
-      modalHeaderId,
-      modalBodyId,
-      modalId,
-    ],
+    }),
+    [restoreFocus, closeOnEscape, closeOnInteractOutside, preventScroll],
   )
 
   useEffect(() => {
@@ -78,7 +74,13 @@ export const Modal = (props: ModalProps) => {
     prevOpenRef.current = open
   }, [onClose, open])
 
-  return <ModalProvider value={ctx}>{children}</ModalProvider>
+  return (
+    <ModalProvider value={modalContextValue}>
+      <ModalPropsProvider value={modalPropsContentValue}>
+        {children}
+      </ModalPropsProvider>
+    </ModalProvider>
+  )
 }
 
 Modal.displayName = 'Modal'

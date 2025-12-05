@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { addEventListener, ownerWindow } from '@nex-ui/utils'
 import { useSlot, getOverflowAncestors, computePosition } from '../utils'
-import { usePopper } from './PopperContext'
+import { usePopper, usePopperPortalProps } from './PopperContext'
 import type { CSSProperties, ElementType } from 'react'
 import type { PopperRootProps } from './types'
 
@@ -28,14 +28,9 @@ type StyleVariables = {
 export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   props: PopperRootProps<RootComponent>,
 ) => {
-  const {
-    open,
-    referenceRef,
-    setOpen,
-    popperRootRef,
-    keepMounted,
-    disableAnimation,
-  } = usePopper()
+  const { open, referenceRef, setOpen, popperRootRef } = usePopper()
+
+  const { keepMounted, disableAnimation } = usePopperPortalProps()
 
   const {
     children,

@@ -2,7 +2,7 @@
 
 import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
-import { DialogProvider } from './DialogContext'
+import { DialogRootPropsProvider } from './DialogContext'
 import type { ElementType } from 'react'
 import type { DialogProps } from './types'
 
@@ -44,7 +44,7 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
       onClose={onClose}
       closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
-      <DialogProvider value={ctx}>{children}</DialogProvider>
+      <DialogRootPropsProvider value={ctx}>{children}</DialogRootPropsProvider>
     </Modal>
   )
 }

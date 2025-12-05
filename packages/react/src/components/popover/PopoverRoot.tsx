@@ -3,15 +3,15 @@
 import { useMemo } from 'react'
 import { PopperMotion, PopperPortal, PopperRoot, usePopper } from '../popper'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
-import { usePopover } from './PopoverContext'
+import { usePopoverRootProps } from './PopoverContext'
 import { FocusTrap } from '../focusTrap'
 import { popoverRecipe } from '../../theme/recipes'
 import type { ReactElement } from 'react'
-import type { PopoverContextValue } from './PopoverContext'
+import type { PopoverRootPropsContextValue } from './PopoverContext'
 
 const slots = ['root']
 
-const useAriaProps = (ownerState: PopoverContextValue) => {
+const useAriaProps = (ownerState: PopoverRootPropsContextValue) => {
   const { id, 'aria-modal': ariaModal, role = 'dialog' } = ownerState
 
   return useMemo(
@@ -32,7 +32,7 @@ export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
     restoreFocus,
     disableAnimation,
     ...props
-  } = usePopover()
+  } = usePopoverRootProps()
 
   const { open } = usePopper()
 
