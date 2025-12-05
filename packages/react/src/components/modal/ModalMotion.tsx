@@ -1,11 +1,12 @@
 'use client'
 
 import { useSlot, PresenceMotion } from '../utils'
-import { useModal } from './ModalContext'
+import { useModal, useModalPortalProps } from './ModalContext'
 import type { ModalMotionProps } from './types'
 
 export const ModalMotion = (props: ModalMotionProps) => {
-  const { open, keepMounted } = useModal()
+  const { open } = useModal()
+  const { keepMounted } = useModalPortalProps()
   const { children, ...remainingProps } = props
 
   const [ModalMotionRoot, getModalMotionRootProps] = useSlot({

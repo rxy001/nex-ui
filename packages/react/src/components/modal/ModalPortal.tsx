@@ -1,30 +1,32 @@
 import { AnimatePresence } from 'motion/react'
 import { useMemo } from 'react'
 import { Portal } from '../utils'
-import { ModalProvider, useModal } from './ModalContext'
+import { ModalPortalPropsProvider, useModal } from './ModalContext'
+import type { ModalPortalPropsContextValue } from './ModalContext'
 import type { ModalPortalProps } from './types'
 
 export const ModalPortal = ({
   children,
-  container,
+  container = document.body,
   keepMounted = false,
   disableAnimation = false,
 }: ModalPortalProps) => {
-  const modalState = useModal()
+  const { open } = useModal()
 
-  const ctx = useMemo(
+  const ctx = useMemo<ModalPortalPropsContextValue>(
     () => ({
-      ...modalState,
       container,
       keepMounted,
       disableAnimation,
     }),
-    [modalState, container, keepMounted, disableAnimation],
+    [container, keepMounted, disableAnimation],
   )
 
   const renderChildren = () =>
-    modalState.open || keepMounted ? (
-      <ModalProvider value={ctx}>{children}</ModalProvider>
+    open || keepMounted ? (
+      <ModalPortalPropsProvider value={ctx}>
+        {children}
+      </ModalPortalPropsProvider>
     ) : null
 
   return (

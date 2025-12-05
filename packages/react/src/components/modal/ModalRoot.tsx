@@ -10,7 +10,7 @@ import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { useSlot } from '../utils'
-import { useModal } from './ModalContext'
+import { useModal, useModalProps, useModalPortalProps } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
 import type { ModalRootProps } from './types'
@@ -29,20 +29,12 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
 ) => {
   const { children, ...remainingProps } = props
   const rootRef = useRef<HTMLDivElement>(null)
-  const modalState = useModal()
+  const { open, setOpen, modalId, modalContentRef } = useModal()
+  const { closeOnEscape, preventScroll, closeOnInteractOutside } =
+    useModalProps()
+  const { container, keepMounted, disableAnimation } = useModalPortalProps()
   const modalManager = useModalManager()
   const registeredRef = useRef(false)
-
-  const {
-    open,
-    setOpen,
-    closeOnEscape,
-    preventScroll,
-    modalId,
-    container,
-    keepMounted,
-    disableAnimation,
-  } = modalState
 
   if (registeredRef.current === false && open) {
     modalManager.register(modalId)
@@ -55,6 +47,16 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
     externalForwardedProps: remainingProps,
     additionalProps: {
       ref: rootRef,
+      onClick: (event) => {
+        if (
+          open &&
+          closeOnInteractOutside &&
+          modalContentRef.current &&
+          !modalContentRef.current.contains(event.target as Node)
+        ) {
+          setOpen(false)
+        }
+      },
       style: {
         display:
           disableAnimation && keepMounted

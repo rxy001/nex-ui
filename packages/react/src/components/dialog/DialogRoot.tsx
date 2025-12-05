@@ -2,7 +2,7 @@
 
 import { ModalBackdrop, ModalRoot, ModalPortal, ModalMotion } from '../modal'
 import { useStyles, useSlot, useSlotClasses } from '../utils'
-import { useDialog } from './DialogContext'
+import { useDialogRootProps } from './DialogContext'
 import { dialogRootRecipe } from '../../theme/recipes'
 import type { ReactNode } from 'react'
 
@@ -13,7 +13,7 @@ type DialogRootProps = {
 const slots = ['root', 'backdrop']
 
 export const DialogRoot = ({ children }: DialogRootProps) => {
-  const props = useDialog()
+  const props = useDialogRootProps()
 
   const {
     slotProps,

@@ -2,11 +2,11 @@
 
 import { useMemo } from 'react'
 import { PopperTrigger, usePopper } from '../popper'
-import { usePopover } from './PopoverContext'
+import { usePopoverRootProps } from './PopoverContext'
 import type { PopoverTriggerProps } from './types'
 
 const useAriaProps = () => {
-  const { id, keepMounted } = usePopover()
+  const { id, keepMounted } = usePopoverRootProps()
   const { open } = usePopper()
 
   return useMemo(
