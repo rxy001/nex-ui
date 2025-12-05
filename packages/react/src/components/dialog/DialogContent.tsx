@@ -15,7 +15,7 @@ import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
-import { DialogContentProvider, useDialog } from './DialogContext'
+import { DialogContentPropsProvider, useDialogRootProps } from './DialogContext'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DialogContentProps } from './types'
@@ -59,7 +59,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { disableAnimation } = useDialog()
+  const { disableAnimation } = useDialogRootProps()
 
   const {
     children,
@@ -159,7 +159,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
 
   const renderPaper = () => (
     <DialogContentPaper {...getDialogContentPaperProps()}>
-      <DialogContentProvider value={ownerState}>
+      <DialogContentPropsProvider value={ownerState}>
         {!hideCloseButton && (
           <DialogClose>
             <Ripple>
@@ -170,7 +170,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
           </DialogClose>
         )}
         {children}
-      </DialogContentProvider>
+      </DialogContentPropsProvider>
     </DialogContentPaper>
   )
 

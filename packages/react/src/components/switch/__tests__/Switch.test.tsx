@@ -252,7 +252,6 @@ describe('Switch', () => {
       thumbIcon: mockFn,
       as: 'input',
       type: 'checkbox',
-      role: 'switch',
       disableAnimation: false,
     })
   })

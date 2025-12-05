@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import { useModal } from './ModalContext'
+import { useModal, useModalProps } from './ModalContext'
 import { FocusTrap } from '../focusTrap'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
@@ -50,7 +50,9 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
   inProps: ModalContentProps<RootComponent>,
 ) => {
   const props = inProps as ModalContentProps
-  const { modalId, modalContentRef, open, restoreFocus } = useModal()
+  const { modalId, modalContentRef, open } = useModal()
+
+  const { restoreFocus } = useModalProps()
 
   const [paused, setPaused] = useState(false)
 

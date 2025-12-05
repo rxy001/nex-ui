@@ -1,8 +1,8 @@
 'use client'
 
-import { useDefaultProps, useSlot } from '../utils'
+import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
-import { DrawerProvider } from './DrawerContext'
+import { DrawerRootPropsProvider } from './DrawerContext'
 import type { ElementType } from 'react'
 import type { DrawerProps } from './types'
 
@@ -33,25 +33,19 @@ export const Drawer = <RootComponent extends ElementType = 'div'>(
     hideBackdrop,
   }
 
-  const [DrawerRoot, getDrawerRootProps] = useSlot({
-    elementType: Modal,
-    shouldForwardComponent: false,
-    externalForwardedProps: {
-      open,
-      restoreFocus,
-      onOpenChange,
-      defaultOpen,
-      preventScroll,
-      closeOnEscape,
-      onClose,
-      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
-    },
-  })
-
   return (
-    <DrawerRoot {...getDrawerRootProps()}>
-      <DrawerProvider value={ctx}>{children}</DrawerProvider>
-    </DrawerRoot>
+    <Modal
+      open={open}
+      defaultOpen={defaultOpen}
+      restoreFocus={restoreFocus}
+      onOpenChange={onOpenChange}
+      preventScroll={preventScroll}
+      closeOnEscape={closeOnEscape}
+      onClose={onClose}
+      closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
+    >
+      <DrawerRootPropsProvider value={ctx}>{children}</DrawerRootPropsProvider>
+    </Modal>
   )
 }
 

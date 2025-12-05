@@ -1,9 +1,9 @@
 'use client'
 
-import { useId, useMemo } from 'react'
+import { useId } from 'react'
 import { Popper } from '../popper'
 import { useDefaultProps } from '../utils'
-import { PopoverProvider } from './PopoverContext'
+import { PopoverRootPropsProvider } from './PopoverContext'
 import type { ElementType } from 'react'
 import type { PopoverProps } from './types'
 
@@ -30,13 +30,10 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
 
   const rootId = idProp ?? `nui-popover-${id}`
 
-  const ctx = useMemo(
-    () => ({
-      id: rootId,
-      ...remainingProps,
-    }),
-    [remainingProps, rootId],
-  )
+  const ctx = {
+    id: rootId,
+    ...remainingProps,
+  }
 
   return (
     <Popper
@@ -46,7 +43,9 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
       defaultOpen={defaultOpen}
       onOpenChange={onOpenChange}
     >
-      <PopoverProvider value={ctx}>{children}</PopoverProvider>
+      <PopoverRootPropsProvider value={ctx}>
+        {children}
+      </PopoverRootPropsProvider>
     </Popper>
   )
 }

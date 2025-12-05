@@ -15,7 +15,7 @@ import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
-import { useDrawer } from './DrawerContext'
+import { useDrawerRootProps } from './DrawerContext'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DrawerContentProps } from './types'
@@ -59,7 +59,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { disableAnimation } = useDrawer()
+  const { disableAnimation } = useDrawerRootProps()
 
   const {
     classNames,
