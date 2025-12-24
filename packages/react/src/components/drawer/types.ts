@@ -9,7 +9,12 @@ import type {
   ComponentSlotClasses,
   HTMLMotionProps,
 } from '../../types/utils'
-import type { ModalMotionProps, ModalPortalProps } from '../modal/types'
+import type {
+  ModalContentProps,
+  ModalMotionProps,
+  ModalPortalProps,
+  ModalRootProps,
+} from '../modal/types'
 
 // ----------------Drawer----------------
 type DrawerSlotProps = {
@@ -57,6 +62,7 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
 
   /**
    * If true, closes the drawer when the backdrop is clicked.
+   *
    * @default true
    */
   closeOnInteractBackdrop?: boolean
@@ -66,8 +72,10 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
    * Use the `variants` API to create your own animation.
    */
   motionProps?: ModalMotionProps
-} & Omit<ModalProps, 'closeOnInteractOutside'> &
-  Omit<ModalPortalProps, 'children'>
+} & ModalProps &
+  Omit<ModalPortalProps, 'children'> &
+  Pick<ModalRootProps, 'preventScroll' | 'closeOnEscape'> &
+  Pick<ModalContentProps, 'restoreFocus'>
 
 export interface DrawerPropsOverrides {}
 

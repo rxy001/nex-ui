@@ -5,15 +5,7 @@ import type { DialogProps, DialogContentProps } from './types'
 
 type DialogRootPropsContextValue = Omit<
   DialogProps,
-  | 'open'
-  | 'children'
-  | 'restoreFocus'
-  | 'onOpenChange'
-  | 'defaultOpen'
-  | 'preventScroll'
-  | 'closeOnEscape'
-  | 'onClose'
-  | 'closeOnInteractBackdrop'
+  'open' | 'children' | 'onOpenChange' | 'defaultOpen' | 'onClose'
 >
 
 export const [DialogRootPropsProvider, useDialogRootProps] =

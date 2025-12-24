@@ -23,6 +23,9 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     keepMounted,
     motionProps,
     disableAnimation,
+    closeOnEscape,
+    closeOnInteractBackdrop,
+    preventScroll,
     ...remainingProps
   } = props
 
@@ -46,6 +49,11 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     classNames: slotClasses.root,
     dataAttrs: {
       hideBackdrop,
+    },
+    additionalProps: {
+      closeOnEscape,
+      preventScroll,
+      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
     },
   })
 

@@ -3,7 +3,7 @@
 import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef, useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
-import { addEventListener, ownerWindow } from '@nex-ui/utils'
+import { addEventListener, ownerWindow, ownerDocument } from '@nex-ui/utils'
 import { useSlot, getOverflowAncestors, computePosition } from '../utils'
 import { usePopper, usePopperPortalProps } from './PopperContext'
 import type { CSSProperties, ElementType } from 'react'
@@ -183,10 +183,10 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   const subscribeEscapeEvent = useEvent(() => {
     if (!closeOnEscape || !open) return
 
-    const win = ownerWindow(referenceRef.current)
+    const doc = ownerDocument(referenceRef.current)
 
-    return addEventListener(win, 'keydown', (e) => {
-      if (e.key === 'Escape') {
+    return addEventListener(doc.body, 'keyup', (e) => {
+      if (open && e.key === 'Escape') {
         setOpen(false)
       }
     })

@@ -15,14 +15,8 @@ import type { PopperTriggerProps } from './types'
 export const PopperTrigger = (props: PopperTriggerProps) => {
   const focusVisibleRef = useRef(false)
 
-  const {
-    open,
-    setOpen,
-    handleClose,
-    handleOpen,
-    referenceRef,
-    popperRootRef,
-  } = usePopper()
+  const { open, setOpen, delayClose, delayOpen, referenceRef, popperRootRef } =
+    usePopper()
 
   const {
     children,
@@ -37,20 +31,26 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
       const doc = ownerDocument(referenceRef.current)
       return addEventListener(doc.body, 'click', (e) => {
         // istanbul ignore next
-        if (!open) return
-
         const target = e.target as Node
 
-        if (
-          !interactive ||
-          (!popperRootRef?.current?.contains(target) &&
-            !referenceRef?.current?.contains(target))
-        ) {
-          handleClose()
-        }
+        if (!open) return
+
+        if (interactive && popperRootRef?.current?.contains(target)) return
+
+        if (referenceRef?.current?.contains(target)) return
+
+        delayClose()
       })
     }
-  }, [action, handleClose, interactive, open, popperRootRef, referenceRef])
+  }, [
+    action,
+    closeOnClick,
+    delayClose,
+    interactive,
+    open,
+    popperRootRef,
+    referenceRef,
+  ])
 
   useEffect(() => {
     let attempts = 0
@@ -62,12 +62,12 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
         const removeMouseenter = addEventListener(
           popperRootRef.current,
           'mouseenter',
-          handleOpen,
+          delayOpen,
         )
         const removeMouseleave = addEventListener(
           popperRootRef.current,
           'mouseleave',
-          handleClose,
+          delayClose,
         )
         removeListeners = () => {
           removeMouseenter()
@@ -99,7 +99,7 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
         }
       }
     }
-  }, [action, handleClose, interactive, open, popperRootRef, handleOpen])
+  }, [action, delayClose, interactive, open, popperRootRef, delayOpen])
 
   const renderChildren = () => {
     const element = children as React.ReactElement<any>
@@ -111,7 +111,7 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
     if (action === 'click') {
       const handleClick = () => {
         if (!open) {
-          handleOpen()
+          delayOpen()
         } else if (closeOnClick) {
           setOpen(false)
         }
@@ -119,20 +119,20 @@ export const PopperTrigger = (props: PopperTriggerProps) => {
 
       props.onClick = handleClick
     } else if (action === 'hover') {
-      const handleMouseEnter = handleOpen
-      const handleMouseLeave = handleClose
+      const handleMouseEnter = delayOpen
+      const handleMouseLeave = delayClose
       const handleClick = () => {
         if (closeOnClick && open) setOpen(false)
       }
       const handleFocus = (event: FocusEvent<HTMLElement>) => {
         if (isFocusVisible(event.currentTarget)) {
-          handleOpen()
+          delayOpen()
           focusVisibleRef.current = true
         }
       }
       const handleBlur = (event: FocusEvent<HTMLElement>) => {
         if (focusVisibleRef.current && !isFocusVisible(event.currentTarget)) {
-          handleClose()
+          delayClose()
           focusVisibleRef.current = false
         }
       }

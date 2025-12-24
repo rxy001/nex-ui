@@ -18,20 +18,31 @@ import {
 } from '../index'
 import { getScrollBarWidth } from '../ModalRoot'
 import type { ModalProps } from '../index'
-import type { ModalPortalProps } from '../types'
+import type { ModalPortalProps, ModalRootProps } from '../types'
+
+type TestModalProps = ModalProps &
+  Pick<
+    ModalRootProps,
+    'closeOnInteractOutside' | 'preventScroll' | 'closeOnEscape'
+  > &
+  ModalPortalProps & {
+    className?: string
+    'data-testid'?: string
+    restoreFocus?: boolean
+  }
 
 function TestModal({
   container,
   keepMounted,
   children,
+  closeOnInteractOutside,
+  preventScroll,
+  closeOnEscape,
+  restoreFocus,
   disableAnimation = true,
   'data-testid': testid = 'modal-root',
   ...props
-}: ModalProps &
-  ModalPortalProps & {
-    className?: string
-    'data-testid'?: string
-  }) {
+}: TestModalProps) {
   return (
     <Modal {...props}>
       <ModalPortal
@@ -39,10 +50,19 @@ function TestModal({
         container={container}
         disableAnimation={disableAnimation}
       >
-        <ModalRoot data-testid={testid} className={props.className}>
+        <ModalRoot
+          closeOnInteractOutside={closeOnInteractOutside}
+          preventScroll={preventScroll}
+          closeOnEscape={closeOnEscape}
+          data-testid={testid}
+          className={props.className}
+        >
           <ModalBackdrop data-testid='modal-backdrop' />
           <ModalPanel data-testid='modal-panel'>
-            <ModalContent data-testid='modal-content'>
+            <ModalContent
+              restoreFocus={restoreFocus}
+              data-testid='modal-content'
+            >
               <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
               <ModalBody data-testid='modal-body'>{children}</ModalBody>
               <ModalFooter data-testid='modal-footer'>
@@ -56,7 +76,7 @@ function TestModal({
   )
 }
 
-const ControlledModal = ({ defaultOpen = false, ...props }: ModalProps) => {
+const ControlledModal = ({ defaultOpen = false, ...props }: TestModalProps) => {
   const [open, setOpen] = useState(defaultOpen)
 
   return (

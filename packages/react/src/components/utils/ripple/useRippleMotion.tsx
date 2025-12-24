@@ -8,6 +8,7 @@ import { LazyMotion, AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
 import { useRef } from 'react'
 import { createRoot } from 'react-dom/client'
+import { useNexUI } from '../../provider'
 import { motionFeatures } from '../motionFeatures'
 import type { CSSProperties, MouseEvent } from 'react'
 import type { Root } from 'react-dom/client'
@@ -29,6 +30,7 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
   const { motionProps, motionStyle } = props ?? {}
   const rootRef = useRef<Root | null>(null)
   const ripplesRef = useRef<Ripples[]>([])
+  const { prefix } = useNexUI()
 
   return useEvent((event: MouseEvent) => {
     const trigger = event.currentTarget as HTMLDivElement
@@ -79,7 +81,7 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
             <AnimatePresence mode='popLayout' key={ripple.key}>
               <m.span
                 animate={{ transform: 'scale(2)', opacity: 0 }}
-                className='nui-ripple'
+                className={`${prefix}-ripple`}
                 exit={{ opacity: 0 }}
                 initial={{ transform: 'scale(0)', opacity: 0.35 }}
                 style={{

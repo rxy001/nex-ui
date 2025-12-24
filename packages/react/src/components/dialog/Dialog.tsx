@@ -17,12 +17,8 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
   const {
     open,
     children,
-    restoreFocus,
     onOpenChange,
     defaultOpen,
-    closeOnEscape,
-    closeOnInteractBackdrop,
-    preventScroll,
     onClose,
     hideBackdrop = false,
     ...remainingProps
@@ -36,13 +32,9 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
   return (
     <Modal
       open={open}
-      restoreFocus={restoreFocus}
       onOpenChange={onOpenChange}
       defaultOpen={defaultOpen}
-      preventScroll={preventScroll}
-      closeOnEscape={closeOnEscape}
       onClose={onClose}
-      closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
       <DialogRootPropsProvider value={ctx}>{children}</DialogRootPropsProvider>
     </Modal>

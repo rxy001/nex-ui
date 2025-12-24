@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import { useModal, useModalProps } from './ModalContext'
+import { useModal } from './ModalContext'
 import { FocusTrap } from '../focusTrap'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
@@ -49,10 +49,9 @@ const useAriaProps = (props: ModalContentProps) => {
 export const ModalContent = <RootComponent extends ElementType = 'section'>(
   inProps: ModalContentProps<RootComponent>,
 ) => {
-  const props = inProps as ModalContentProps
+  const { restoreFocus = true, ...remainingProps } =
+    inProps as ModalContentProps
   const { modalId, modalContentRef, open } = useModal()
-
-  const { restoreFocus } = useModalProps()
 
   const [paused, setPaused] = useState(false)
 
@@ -63,12 +62,12 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     [modalId, modalManager],
   )
 
-  const ariaProps = useAriaProps(props)
+  const ariaProps = useAriaProps(remainingProps)
 
   const [ModalContentRoot, getModalContentRootProps] = useSlot({
     style,
     elementType: 'section',
-    externalForwardedProps: props,
+    externalForwardedProps: remainingProps,
     a11y: ariaProps,
     additionalProps: {
       ref: modalContentRef,

@@ -20,7 +20,7 @@ const slots = ['root', 'content']
 const useSlotAriaProps = (ownerState: TooltipProps) => {
   const id = useId()
 
-  const rootId = ownerState.id ?? `nui-tooltip-${id}`
+  const rootId = ownerState.id ?? `tooltip-${id}-root`
 
   const { open } = usePopper()
 
