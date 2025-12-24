@@ -17,12 +17,8 @@ export const Drawer = <RootComponent extends ElementType = 'div'>(
   const {
     open,
     children,
-    restoreFocus,
     onOpenChange,
     defaultOpen,
-    closeOnEscape,
-    closeOnInteractBackdrop,
-    preventScroll,
     onClose,
     hideBackdrop = false,
     ...remainingProps
@@ -37,12 +33,8 @@ export const Drawer = <RootComponent extends ElementType = 'div'>(
     <Modal
       open={open}
       defaultOpen={defaultOpen}
-      restoreFocus={restoreFocus}
       onOpenChange={onOpenChange}
-      preventScroll={preventScroll}
-      closeOnEscape={closeOnEscape}
       onClose={onClose}
-      closeOnInteractOutside={!hideBackdrop && closeOnInteractBackdrop}
     >
       <DrawerRootPropsProvider value={ctx}>{children}</DrawerRootPropsProvider>
     </Modal>

@@ -124,7 +124,7 @@ exports[`Radio should render with default props 1`] = `
 >
   <input
     aria-label="Radio"
-    aria-labelledby="«rn»"
+    aria-labelledby="radio-«rn»-label"
     class="nui-radio-input emotion-1"
     tabindex="0"
     type="radio"
@@ -134,7 +134,7 @@ exports[`Radio should render with default props 1`] = `
   />
   <span
     class="nui-radio-label emotion-3"
-    id="«rn»"
+    id="radio-«rn»-label"
   >
     Radio
   </span>

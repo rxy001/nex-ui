@@ -59,7 +59,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { disableAnimation } = useDialogRootProps()
+  const { disableAnimation, restoreFocus } = useDialogRootProps()
 
   const {
     children,
@@ -127,6 +127,9 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
     a11y: slotAriaProps.paper,
+    additionalProps: {
+      restoreFocus,
+    },
   })
 
   const [DialogContentCloseButton, getDialogContentCloseButtonProps] = useSlot({

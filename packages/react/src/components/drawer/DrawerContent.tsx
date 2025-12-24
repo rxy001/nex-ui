@@ -59,7 +59,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { disableAnimation } = useDrawerRootProps()
+  const { disableAnimation, restoreFocus } = useDrawerRootProps()
 
   const {
     classNames,
@@ -115,6 +115,9 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
     a11y: slotAriaProps.paper,
+    additionalProps: {
+      restoreFocus,
+    },
   })
 
   const [DrawerContentCloseButton, getDrawerContentCloseButtonProps] = useSlot({

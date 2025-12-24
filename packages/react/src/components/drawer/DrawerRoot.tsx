@@ -16,6 +16,9 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
   })
 
   const {
+    closeOnEscape,
+    closeOnInteractBackdrop,
+    preventScroll,
     slotProps,
     classNames,
     hideBackdrop,
@@ -38,6 +41,11 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
     classNames: slotClasses.root,
+    additionalProps: {
+      closeOnEscape,
+      preventScroll,
+      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
+    },
   })
 
   const [DrawerBackdrop, getDrawerBackdropProps] = useSlot({

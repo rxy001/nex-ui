@@ -15,28 +15,12 @@ export interface ModalContextValue {
 }
 
 export const [ModalProvider, useModal] = createContext<ModalContextValue>({
-  contextName: 'ModalPropsContext',
+  contextName: 'ModalContext',
   hookName: 'useModal',
   providerName: 'ModalProvider',
   strict: true,
   defaultValue: null as unknown as ModalContextValue,
 })
-
-export interface ModalPropsContextValue {
-  preventScroll: boolean
-  closeOnEscape: boolean
-  restoreFocus: boolean
-  closeOnInteractOutside: boolean
-}
-
-export const [ModalPropsProvider, useModalProps] =
-  createContext<ModalPropsContextValue>({
-    contextName: 'ModalPropsContext',
-    hookName: 'useModalProps',
-    providerName: 'ModalPropsProvider',
-    strict: true,
-    defaultValue: null as unknown as ModalPropsContextValue,
-  })
 
 export interface ModalPortalPropsContextValue {
   container: ModalPortalProps['container']

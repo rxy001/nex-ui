@@ -32,3 +32,9 @@
 7. 添加 css cascade layer
 
 8. recipes 部分属性值改为 css 变量
+
+9. 重命名 popper 的 handleOpen 为 delayOpen, handleClose 为 delayClose
+
+10. PopperTrigger 的 interactive 是否应该移入到 Popper
+
+11. 重构基础组件的 API，尽量减少 Context 的使用

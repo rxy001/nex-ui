@@ -9,7 +9,12 @@ import type {
 import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants } from '../../theme/recipes'
 import type { ModalProps } from '../modal'
-import type { ModalMotionProps, ModalPortalProps } from '../modal/types'
+import type {
+  ModalContentProps,
+  ModalMotionProps,
+  ModalPortalProps,
+  ModalRootProps,
+} from '../modal/types'
 
 // ------------- Dialog --------------
 type DialogSlotProps = {
@@ -67,8 +72,10 @@ type DialogOwnProps<RootComponent extends ElementType> = {
    * Use the `variants` API to create your own animation.
    */
   motionProps?: ModalMotionProps
-} & Omit<ModalProps, 'closeOnInteractOutside'> &
-  Omit<ModalPortalProps, 'children'>
+} & ModalProps &
+  Omit<ModalPortalProps, 'children'> &
+  Pick<ModalRootProps, 'preventScroll' | 'closeOnEscape'> &
+  Pick<ModalContentProps, 'restoreFocus'>
 
 export interface DialogPropsOverrides {}
 

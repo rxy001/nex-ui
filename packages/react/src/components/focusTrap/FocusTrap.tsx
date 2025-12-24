@@ -21,14 +21,14 @@ export const FocusTrap = ({
   const sentinelStartRef = useRef<HTMLDivElement>(null)
   const sentinelEndRef = useRef<HTMLDivElement>(null)
   const lastKeydownRef = useRef<KeyboardEvent>(null)
-  const restoredNode = useRef<EventTarget>(null)
-  const ignoreNextFocus = useRef<boolean>(false)
+  const restoredNodeRef = useRef<EventTarget>(null)
+  const ignoreNextFocusRef = useRef<boolean>(false)
   const pausedRef = useLatest(paused)
   const mergedRefs = useMergeRefs(rootRef, children?.props.ref)
 
   const handleFocus = useEvent((e: FocusEvent) => {
-    if (restoredNode.current === null) {
-      restoredNode.current = e.relatedTarget
+    if (restoredNodeRef.current === null) {
+      restoredNodeRef.current = e.relatedTarget
     }
 
     children.props.onFocus?.(e)
@@ -44,15 +44,15 @@ export const FocusTrap = ({
     if (!rootRef.current.contains(doc.activeElement)) {
       // If the focus is not inside the focus trap, focus the root element
 
-      rootRef.current?.focus({
+      rootRef.current.focus({
         preventScroll: true,
       })
     }
 
     return () => {
-      const node = restoredNode.current as HTMLElement
+      const node = restoredNodeRef.current as HTMLElement
       if (restoreFocus && node) {
-        ignoreNextFocus.current = true
+        ignoreNextFocusRef.current = true
         node.focus({
           preventScroll: true,
         })
@@ -72,8 +72,8 @@ export const FocusTrap = ({
 
       if (!rootElement || pausedRef.current) return
 
-      if (ignoreNextFocus.current) {
-        ignoreNextFocus.current = false
+      if (ignoreNextFocusRef.current) {
+        ignoreNextFocusRef.current = false
         return
       }
 

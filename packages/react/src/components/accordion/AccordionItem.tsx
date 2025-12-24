@@ -61,15 +61,15 @@ const slots = ['root', 'heading', 'trigger', 'content', 'indicator']
 const useSlotAriaProps = (
   ownerState: AccordionItemOwnerState,
 ): Record<'trigger' | 'content' | 'indicator', HTMLAttributes<HTMLElement>> => {
-  const { itemKey, expanded, slotProps, keepMounted } = ownerState
+  const { expanded, slotProps, keepMounted } = ownerState
   const id = useId()
 
   return useMemo(() => {
     const triggerProps = slotProps?.trigger || {}
     const contentProps = slotProps?.content || {}
     const indicatorProps = slotProps?.indicator || {}
-    const triggerId = triggerProps.id ?? id
-    const contentId = contentProps.id ?? `panel-${itemKey}-content`
+    const triggerId = triggerProps.id ?? `accordion-${id}-trigger`
+    const contentId = contentProps.id ?? `accordion-${id}-content`
 
     const trigger = {
       id: triggerId,
@@ -97,9 +97,8 @@ const useSlotAriaProps = (
       indicator,
     }
   }, [
-    expanded,
     id,
-    itemKey,
+    expanded,
     keepMounted,
     slotProps?.content,
     slotProps?.indicator,

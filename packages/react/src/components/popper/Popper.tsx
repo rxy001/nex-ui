@@ -14,7 +14,7 @@ const popperManager = new PopperManager()
  *
  * - Tooltip
  * - Popover
- * - Dropdown
+ * - Menu
  */
 
 export const Popper = (props: PopperProps) => {
@@ -54,13 +54,13 @@ export const Popper = (props: PopperProps) => {
     },
   )
 
-  const handleOpen = useCallback(() => {
+  const delayOpen = useCallback(() => {
     debouncedClosePopper.cancel()
     debouncedOpenPopper()
     popperManager.flush(id)
   }, [debouncedClosePopper, debouncedOpenPopper, id])
 
-  const handleClose = useCallback(() => {
+  const delayClose = useCallback(() => {
     debouncedOpenPopper.cancel()
     debouncedClosePopper()
   }, [debouncedClosePopper, debouncedOpenPopper])
@@ -76,10 +76,10 @@ export const Popper = (props: PopperProps) => {
       setOpen,
       referenceRef,
       popperRootRef,
-      handleOpen,
-      handleClose,
+      delayOpen,
+      delayClose,
     }),
-    [handleClose, handleOpen, open, setOpen],
+    [delayClose, delayOpen, open, setOpen],
   )
 
   useEffect(() => {
