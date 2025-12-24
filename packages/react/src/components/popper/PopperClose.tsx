@@ -6,7 +6,7 @@ import type { ReactElement } from 'react'
 import type { PopperCloseProps } from './types'
 
 export const PopperClose = ({ children }: PopperCloseProps) => {
-  const { handleClose } = usePopper()
+  const { delayClose } = usePopper()
 
   if (!isValidElement(children)) {
     return children
@@ -28,12 +28,12 @@ export const PopperClose = ({ children }: PopperCloseProps) => {
           result instanceof Promise &&
           typeof result.then === 'function'
         ) {
-          result.then(() => handleClose()).catch(() => {})
+          result.then(() => delayClose()).catch(() => {})
 
           return
         }
       }
-      handleClose()
+      delayClose()
     },
   })
 }

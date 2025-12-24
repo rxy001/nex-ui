@@ -28,7 +28,7 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
     ...remainingProps
   } = props
 
-  const rootId = idProp ?? `nui-popover-${id}`
+  const rootId = idProp ?? `popover-${id}-root`
 
   const ctx = {
     id: rootId,

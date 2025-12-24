@@ -30,8 +30,9 @@ const useSlotAriaProps = (ownerState: InputProps) => {
     const stringLabel = isString(label)
     const labelProps = slotProps?.label ?? {}
     const clearButtonProps = slotProps?.clearButton ?? {}
-    const inputId = idProp ?? (hasLabel ? `input-${id}` : undefined)
-    const labelId = labelProps['id'] ?? (hasLabel ? `label-${id}` : undefined)
+    const inputId = idProp ?? (hasLabel ? `input-${id}-control` : undefined)
+    const labelId =
+      labelProps['id'] ?? (hasLabel ? `input-${id}-label` : undefined)
 
     return {
       input: {

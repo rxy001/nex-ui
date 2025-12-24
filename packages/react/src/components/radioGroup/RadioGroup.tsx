@@ -27,7 +27,9 @@ const useSlotAriaProps = (ownerState: RadioGroupProps) => {
 
   const stringLabel = isString(label)
 
-  const labelId = slotProps?.label?.id || (stringLabel ? id : undefined)
+  const labelId =
+    slotProps?.label?.id ||
+    (stringLabel ? `radio-group-${id}-label` : undefined)
 
   return useMemo(
     () => ({

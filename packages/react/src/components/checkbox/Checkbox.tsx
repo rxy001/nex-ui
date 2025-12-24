@@ -32,7 +32,8 @@ const useSlotAriaProps = (
     const labelProps = slotProps?.label
     const stringChildren = isString(children)
     const hasLabel = !!children
-    const labelId = labelProps?.id ?? (hasLabel ? id : undefined)
+    const labelId =
+      labelProps?.id ?? (hasLabel ? `checkbox-${id}-label` : undefined)
 
     return {
       input: {

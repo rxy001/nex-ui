@@ -9,12 +9,12 @@ export interface PopperContextValue {
   open: boolean
   referenceRef: RefObject<HTMLDivElement | null>
   popperRootRef: RefObject<HTMLDivElement | null>
-  handleOpen: () => void
-  handleClose: () => void
+  delayOpen: () => void
+  delayClose: () => void
 }
 
 export const [PopperProvider, usePopper] = createContext<PopperContextValue>({
-  contextName: 'PopperPropsContext',
+  contextName: 'PopperContext',
   hookName: 'usePopper',
   providerName: 'PopperProvider',
   strict: true,

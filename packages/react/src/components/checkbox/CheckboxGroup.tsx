@@ -22,7 +22,9 @@ const useSlotAriaProps = (ownerState: CheckboxGroupProps) => {
   } = ownerState
   const stringLabel = isString(label)
 
-  const labelId = slotProps?.label?.id || (stringLabel ? id : undefined)
+  const labelId =
+    slotProps?.label?.id ||
+    (stringLabel ? `checkbox-group-${id}-label` : undefined)
 
   return useMemo(
     () => ({

@@ -1,9 +1,9 @@
 'use client'
 
-import { chain } from '@nex-ui/utils'
+import { mergeProps } from '@nex-ui/utils'
 import { cloneElement, isValidElement } from 'react'
 import { useModal } from './ModalContext'
-import type { ReactElement } from 'react'
+import type { DetailedHTMLProps, HTMLAttributes, ReactElement } from 'react'
 import type { ModalTriggerProps } from './types'
 
 export const ModalTrigger = (props: ModalTriggerProps) => {
@@ -13,19 +13,14 @@ export const ModalTrigger = (props: ModalTriggerProps) => {
   const renderChildren = () => {
     const element = children as ReactElement<any>
 
-    const {
-      onClick,
-      'aria-haspopup': ariaHaspopup,
-      'aria-expanded': ariaExpanded,
-      'aria-controls': ariaControls,
-    } = element.props
+    const props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
+      onClick: () => setOpen(true),
+      'aria-haspopup': 'dialog',
+      'aria-expanded': open,
+      'aria-controls': open ? modalContentId : undefined,
+    }
 
-    return cloneElement<any>(element, {
-      onClick: chain(() => setOpen(true), onClick),
-      'aria-haspopup': ariaHaspopup || 'dialog',
-      'aria-expanded': ariaExpanded || open,
-      'aria-controls': ariaControls || (open ? modalContentId : undefined),
-    })
+    return cloneElement<any>(element, mergeProps(props, element.props))
   }
 
   return isValidElement(children) ? renderChildren() : children

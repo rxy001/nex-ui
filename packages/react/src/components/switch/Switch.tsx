@@ -37,7 +37,8 @@ const useSlotAriaProps = (
     const hasLabel = !!children
     const stringChildren = isString(children)
     const labelProps = slotProps?.label ?? {}
-    const labelId = labelProps.id ?? (hasLabel ? id : undefined)
+    const labelId =
+      labelProps.id ?? (hasLabel ? `switch-${id}-label` : undefined)
 
     return {
       input: {

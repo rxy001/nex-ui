@@ -5,15 +5,7 @@ import type { DrawerProps } from './types'
 
 type DrawerRootPropsContextValue = Omit<
   DrawerProps,
-  | 'open'
-  | 'children'
-  | 'restoreFocus'
-  | 'onOpenChange'
-  | 'defaultOpen'
-  | 'preventScroll'
-  | 'closeOnEscape'
-  | 'onClose'
-  | 'closeOnInteractBackdrop'
+  'open' | 'children' | 'onOpenChange' | 'defaultOpen' | 'onClose'
 >
 
 export const [DrawerRootPropsProvider, useDrawerRootProps] =

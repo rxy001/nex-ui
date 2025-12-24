@@ -30,7 +30,8 @@ const useSlotAriaProps = (ownerState: RadioOwnerState) => {
     const hasLabel = !!children
     const stringChildren = typeof children === 'string'
     const labelSlotProps = slotProps?.label || {}
-    const labelId = labelSlotProps.id ?? (hasLabel ? id : undefined)
+    const labelId =
+      labelSlotProps.id ?? (hasLabel ? `radio-${id}-label` : undefined)
 
     return {
       input: {
