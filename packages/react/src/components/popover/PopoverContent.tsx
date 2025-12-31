@@ -1,9 +1,17 @@
 'use client'
 
-import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
-import { PopperContent } from '../popper'
+import { useRef } from 'react'
+import {
+  useFocusTrap,
+  useDefaultProps,
+  useSlot,
+  useStyles,
+  useSlotClasses,
+} from '../utils'
+import { PopperContent, usePopper } from '../popper'
 import { popoverContentRecipe } from '../../theme/recipes'
 import { PopoverRoot } from './PopoverRoot'
+import { usePopoverProps } from './PopoverContext'
 import type { ElementType } from 'react'
 import type { PopoverContentProps } from './types'
 
@@ -16,6 +24,12 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     name: 'PopoverContent',
     props: inProps,
   })
+
+  const { restoreFocus } = usePopoverProps()
+
+  const { open } = usePopper()
+
+  const ref = useRef<HTMLDivElement>(null)
 
   const {
     maxHeight,
@@ -42,6 +56,12 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     slots,
   })
 
+  const focusTrapHandlers = useFocusTrap({
+    ref,
+    active: open,
+    restoreFocus,
+  })
+
   const [PopoverContentRoot, getPopoverContentRootProps] = useSlot({
     style,
     elementType: PopperContent,
@@ -55,7 +75,8 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     additionalProps: {
       maxWidth,
       maxHeight,
-      tabIndex: -1,
+      ref,
+      ...focusTrapHandlers,
     },
   })
 

@@ -2,10 +2,12 @@ type EventMapFor<N> = N extends Window
   ? WindowEventMap
   : N extends HTMLElement
     ? HTMLElementEventMap
-    : never
+    : N extends Document
+      ? DocumentEventMap
+      : never
 
 export function addEventListener<
-  N extends Window | HTMLElement,
+  N extends Window | HTMLElement | Document,
   K extends keyof EventMapFor<N>,
 >(
   node: N,

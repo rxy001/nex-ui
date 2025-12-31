@@ -1,11 +1,12 @@
 import type { ReactNode, ElementType, ComponentProps } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
+import type { PortalProps } from '@nex-ui/utils'
 import type {
   Placement,
   FlipOptions,
   OffsetOptions,
-  PortalProps,
+  UseDismissHandlersProps,
 } from '../utils'
 import type { HTMLMotionProps, Overwrite } from '../../types/utils'
 
@@ -44,6 +45,11 @@ export type PopperProps = {
    * @default 100
    */
   closeDelay?: number
+
+  /**
+   * Callback function that is called when the Popper is closed.
+   */
+  onClose?: () => void
 }
 
 // ----------------- PopperTriggerProps -----------------
@@ -52,20 +58,6 @@ export type PopperTriggerProps = {
    * The content of the trigger element.
    */
   children?: ReactNode
-
-  /**
-   * The action that triggers the Popper.
-   *
-   * @default 'hover'
-   */
-  action?: 'click' | 'hover'
-
-  /**
-   * If true, keeps the Popper open when interacting with its content.
-   *
-   * @default true
-   */
-  interactive?: boolean
 
   /**
    * If true, closes the Popper when clicking the trigger element.
@@ -87,7 +79,7 @@ type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
 >
 
 // ----------------- PopperRootProps -----------------
-type PopperRootOwnProps = {
+type PopperRootOwnProps = UseDismissHandlersProps & {
   /**
    * The placement of the Popper relative to the trigger element.
    *
@@ -117,16 +109,16 @@ type PopperRootOwnProps = {
   offset?: OffsetOptions | false
 
   /**
+   * Additional class names to apply to the root.
+   */
+  className?: ClassValue
+
+  /**
    * If true, closes the Popper when the escape key is pressed.
    *
    * @default true
    */
   closeOnEscape?: boolean
-
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
 
   /**
    * If true, closes the Popper when the reference element is detached from the viewport.

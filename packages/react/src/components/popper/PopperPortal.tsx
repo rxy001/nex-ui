@@ -2,7 +2,7 @@
 
 import { AnimatePresence } from 'motion/react'
 import { useMemo } from 'react'
-import { Portal } from '../utils'
+import { Portal } from '@nex-ui/utils'
 import { PopperPortalPropsProvider, usePopper } from './PopperContext'
 import type { PopperPortalPropsContextValue } from './PopperContext'
 import type { PopperPortalProps } from './types'

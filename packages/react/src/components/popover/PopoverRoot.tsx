@@ -3,15 +3,14 @@
 import { useMemo } from 'react'
 import { PopperMotion, PopperPortal, PopperRoot, usePopper } from '../popper'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
-import { usePopoverRootProps } from './PopoverContext'
-import { FocusTrap } from '../focusTrap'
+import { usePopoverProps } from './PopoverContext'
 import { popoverRecipe } from '../../theme/recipes'
 import type { ReactElement } from 'react'
-import type { PopoverRootPropsContextValue } from './PopoverContext'
+import type { PopoverPropsContextValue } from './PopoverContext'
 
 const slots = ['root']
 
-const useAriaProps = (ownerState: PopoverRootPropsContextValue) => {
+const useAriaProps = (ownerState: PopoverPropsContextValue) => {
   const { id, 'aria-modal': ariaModal, role = 'dialog' } = ownerState
 
   return useMemo(
@@ -25,16 +24,10 @@ const useAriaProps = (ownerState: PopoverRootPropsContextValue) => {
 }
 
 export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
-  const {
-    motionProps,
-    keepMounted,
-    container,
-    restoreFocus,
-    disableAnimation,
-    ...props
-  } = usePopoverRootProps()
+  const { motionProps, keepMounted, container, disableAnimation, ...props } =
+    usePopoverProps()
 
-  const { open } = usePopper()
+  const { open, setOpen, referenceRef } = usePopper()
 
   const slotClasses = useSlotClasses({
     name: 'Popover',
@@ -56,13 +49,15 @@ export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
     externalForwardedProps: props,
     classNames: slotClasses.root,
     a11y: ariaProps,
+    additionalProps: {
+      onPointerDownOutside: (event: PointerEvent) => {
+        const target = event.target as HTMLElement
+        // istanbul ignore next
+        if (referenceRef.current?.contains(target)) return
+        if (open) setOpen(false)
+      },
+    },
   })
-
-  const renderChildren = () => (
-    <FocusTrap active={open} restoreFocus={restoreFocus}>
-      {children}
-    </FocusTrap>
-  )
 
   return (
     <PopperPortal
@@ -72,9 +67,9 @@ export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
     >
       <PopoverRootRoot {...getPopoverRootRootProps()}>
         {disableAnimation ? (
-          renderChildren()
+          children
         ) : (
-          <PopperMotion {...motionProps}>{renderChildren()}</PopperMotion>
+          <PopperMotion {...motionProps}>{children}</PopperMotion>
         )}
       </PopoverRootRoot>
     </PopperPortal>

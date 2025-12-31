@@ -1,13 +1,15 @@
+'use client'
+
 import { AnimatePresence } from 'motion/react'
 import { useMemo } from 'react'
-import { Portal } from '../utils'
+import { Portal } from '@nex-ui/utils'
 import { ModalPortalPropsProvider, useModal } from './ModalContext'
 import type { ModalPortalPropsContextValue } from './ModalContext'
 import type { ModalPortalProps } from './types'
 
 export const ModalPortal = ({
   children,
-  container = document.body,
+  container,
   keepMounted = false,
   disableAnimation = false,
 }: ModalPortalProps) => {

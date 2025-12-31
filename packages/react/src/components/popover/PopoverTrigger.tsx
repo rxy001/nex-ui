@@ -2,11 +2,11 @@
 
 import { useMemo } from 'react'
 import { PopperTrigger, usePopper } from '../popper'
-import { usePopoverRootProps } from './PopoverContext'
+import { usePopoverProps } from './PopoverContext'
 import type { PopoverTriggerProps } from './types'
 
 const useAriaProps = () => {
-  const { id, keepMounted } = usePopoverRootProps()
+  const { id, keepMounted } = usePopoverProps()
   const { open } = usePopper()
 
   return useMemo(
@@ -26,12 +26,7 @@ export const PopoverTrigger = ({
   const ariaProps = useAriaProps()
 
   return (
-    <PopperTrigger
-      interactive
-      action='click'
-      closeOnClick={closeOnClick}
-      elementProps={ariaProps}
-    >
+    <PopperTrigger closeOnClick={closeOnClick} elementProps={ariaProps}>
       {children}
     </PopperTrigger>
   )

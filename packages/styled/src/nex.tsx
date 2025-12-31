@@ -78,6 +78,7 @@ const createNexComponent = (tag: any) => {
 }
 
 const nex = createNexComponent as NexFactory
+
 tags.forEach((tag) => {
   nex[tag] = nex(tag)
 })

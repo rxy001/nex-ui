@@ -3,18 +3,18 @@
 import { createContext } from '@nex-ui/utils'
 import type { DialogProps, DialogContentProps } from './types'
 
-type DialogRootPropsContextValue = Omit<
+type DialogPropsContextValue = Omit<
   DialogProps,
   'open' | 'children' | 'onOpenChange' | 'defaultOpen' | 'onClose'
 >
 
-export const [DialogRootPropsProvider, useDialogRootProps] =
-  createContext<DialogRootPropsContextValue>({
-    contextName: 'DialogRootPropsContext',
-    hookName: 'useDialogRootProps',
-    providerName: 'DialogRootPropsProvider',
+export const [DialogPropsProvider, useDialogProps] =
+  createContext<DialogPropsContextValue>({
+    contextName: 'DialogPropsContext',
+    hookName: 'useDialogProps',
+    providerName: 'DialogPropsProvider',
     strict: true,
-    defaultValue: null as unknown as DialogRootPropsContextValue,
+    defaultValue: null as unknown as DialogPropsContextValue,
   })
 
 export const [DialogContentPropsProvider, useDialogContentProps] =

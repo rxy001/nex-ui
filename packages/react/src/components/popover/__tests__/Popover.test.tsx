@@ -78,6 +78,18 @@ describe('Popover', () => {
     expect(queryByClassName('test-motion')).not.toBeInTheDocument()
   })
 
+  it('should pointer outside to close the popover', async () => {
+    const { queryByTestId, user } = await renderWithNexUIProvider(
+      <TestPopover defaultOpen />,
+      {
+        useAct: true,
+      },
+    )
+
+    await user.pointer({ keys: '[MouseLeft]', target: document.body })
+    expect(queryByTestId('popover-content')).not.toBeInTheDocument()
+  })
+
   describe('Accessibility', () => {
     it('should have role="dialog" on the root element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(

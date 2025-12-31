@@ -3,8 +3,14 @@
 import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef, useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
-import { addEventListener, ownerWindow, ownerDocument } from '@nex-ui/utils'
-import { useSlot, getOverflowAncestors, computePosition } from '../utils'
+import { addEventListener, ownerWindow } from '@nex-ui/utils'
+import {
+  useSlot,
+  getOverflowAncestors,
+  computePosition,
+  useDismissHandlers,
+} from '../utils'
+
 import { usePopper, usePopperPortalProps } from './PopperContext'
 import type { CSSProperties, ElementType } from 'react'
 import type { PopperRootProps } from './types'
@@ -26,19 +32,24 @@ type StyleVariables = {
 }
 
 export const PopperRoot = <RootComponent extends ElementType = 'div'>(
-  props: PopperRootProps<RootComponent>,
+  inProps: PopperRootProps<RootComponent>,
 ) => {
-  const { open, referenceRef, setOpen, popperRootRef } = usePopper()
+  const props = inProps as PopperRootProps<'div'>
+  const { open, referenceRef, popperRootRef, setOpen } = usePopper()
 
   const { keepMounted, disableAnimation } = usePopperPortalProps()
 
   const {
     children,
+    onEscapeKeyDown,
+    onFocusOutside,
+    onInteractOutside,
+    onPointerDownOutside,
+    closeOnDetached = true,
+    closeOnEscape = true,
     flip = { mainAxis: true, crossAxis: true },
     offset = 5,
     shift = true,
-    closeOnDetached = true,
-    closeOnEscape = true,
     placement = 'top',
     ...remainingProps
   } = props
@@ -50,6 +61,18 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   // To avoid multiple calculations on the initial render,
   // because ResizeObserver is triggered when observing starts.
   const initialRender = useRef(true)
+
+  const dismissHandlers = useDismissHandlers({
+    onEscapeKeyDown: (event: KeyboardEvent) => {
+      if (closeOnEscape && open) {
+        setOpen(false)
+      }
+      onEscapeKeyDown?.(event)
+    },
+    onFocusOutside,
+    onInteractOutside,
+    onPointerDownOutside,
+  })
 
   const [PopperRootRoot, getPopperRootRootProps] = useSlot({
     style,
@@ -66,14 +89,15 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
               : 'none'
             : undefined,
       } as CSSProperties,
+      ...dismissHandlers,
     },
     a11y: { 'aria-hidden': open ? undefined : true },
     dataAttrs: {
       placement,
-      closeOnEscape,
       keepMounted,
-      closeOnDetached,
       disableAnimation,
+      closeOnDetached,
+      closeOnEscape,
       state: open ? 'open' : 'closed',
     },
   })
@@ -109,26 +133,6 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     }
 
     setPosition()
-  })
-
-  // istanbul ignore next
-  const observeReferenceIntersection = useEvent(() => {
-    // istanbul ignore if
-    if (!referenceRef.current || !closeOnDetached) return
-
-    function handleIntersect(entries: IntersectionObserverEntry[]) {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          setOpen(false)
-        }
-      })
-    }
-    const observer = new IntersectionObserver(handleIntersect)
-
-    observer.observe(referenceRef.current)
-    return () => {
-      observer.disconnect()
-    }
   })
 
   // istanbul ignore next
@@ -174,22 +178,30 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     }
   })
 
+  // istanbul ignore next
+  const observeReferenceIntersection = useEvent(() => {
+    // istanbul ignore if
+    if (!referenceRef.current || !closeOnDetached) return
+
+    function handleIntersect(entries: IntersectionObserverEntry[]) {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          setOpen(false)
+        }
+      })
+    }
+    const observer = new IntersectionObserver(handleIntersect)
+
+    observer.observe(referenceRef.current)
+    return () => {
+      observer.disconnect()
+    }
+  })
+
   const subscribeWindowResizeEvent = useEvent(() => {
     const win = ownerWindow(referenceRef.current)
 
     return addEventListener(win, 'resize', resetPosition)
-  })
-
-  const subscribeEscapeEvent = useEvent(() => {
-    if (!closeOnEscape || !open) return
-
-    const doc = ownerDocument(referenceRef.current)
-
-    return addEventListener(doc.body, 'keyup', (e) => {
-      if (open && e.key === 'Escape') {
-        setOpen(false)
-      }
-    })
   })
 
   useEffect(() => {
@@ -201,24 +213,21 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     const unsubscribeAncestorScrollEvents = subscribeAncestorScrollEvents()
     const unsubscribeWindowResizeEvent = subscribeWindowResizeEvent()
     const unobserveReferenceIntersection = observeReferenceIntersection()
-    const unsubscribeEscapeEvent = subscribeEscapeEvent()
 
     return () => {
       unobserveElementResizeChanges?.()
       unsubscribeAncestorScrollEvents?.()
       unsubscribeWindowResizeEvent?.()
       unobserveReferenceIntersection?.()
-      unsubscribeEscapeEvent?.()
     }
   }, [
     open,
     popperRootRef,
     setPosition,
     observeElementResizeChanges,
-    observeReferenceIntersection,
     subscribeAncestorScrollEvents,
-    subscribeEscapeEvent,
     subscribeWindowResizeEvent,
+    observeReferenceIntersection,
   ])
 
   return (
