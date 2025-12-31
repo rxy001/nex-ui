@@ -2,7 +2,7 @@
 
 import { ModalBackdrop, ModalRoot, ModalPortal, ModalMotion } from '../modal'
 import { useStyles, useSlot, useSlotClasses } from '../utils'
-import { useDialogRootProps } from './DialogContext'
+import { useDialogProps } from './DialogContext'
 import { dialogRootRecipe } from '../../theme/recipes'
 import type { ReactNode } from 'react'
 
@@ -13,7 +13,7 @@ type DialogRootProps = {
 const slots = ['root', 'backdrop']
 
 export const DialogRoot = ({ children }: DialogRootProps) => {
-  const props = useDialogRootProps()
+  const props = useDialogProps()
 
   const {
     slotProps,
@@ -23,8 +23,6 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     keepMounted,
     motionProps,
     disableAnimation,
-    closeOnEscape,
-    closeOnInteractBackdrop,
     preventScroll,
     ...remainingProps
   } = props
@@ -51,9 +49,7 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
       hideBackdrop,
     },
     additionalProps: {
-      closeOnEscape,
       preventScroll,
-      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
     },
   })
 

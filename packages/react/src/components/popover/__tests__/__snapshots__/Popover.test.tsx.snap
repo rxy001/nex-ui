@@ -58,9 +58,6 @@ exports[`Popover should have the correct root class name 1`] = `
     style="opacity: 1;"
   >
     <div
-      tabindex="0"
-    />
-    <div
       class="nui-popover-content-root emotion-1"
       data-color="default"
       data-radius="md"
@@ -75,9 +72,6 @@ exports[`Popover should have the correct root class name 1`] = `
         Close
       </button>
     </div>
-    <div
-      tabindex="0"
-    />
   </div>
 </div>
 `;

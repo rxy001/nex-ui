@@ -15,7 +15,7 @@ import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
-import { DialogContentPropsProvider, useDialogRootProps } from './DialogContext'
+import { DialogContentPropsProvider, useDialogProps } from './DialogContext'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DialogContentProps } from './types'
@@ -59,7 +59,13 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { disableAnimation, restoreFocus } = useDialogRootProps()
+  const {
+    disableAnimation,
+    restoreFocus,
+    closeOnEscape,
+    closeOnInteractBackdrop,
+    hideBackdrop,
+  } = useDialogProps()
 
   const {
     children,
@@ -129,6 +135,8 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     a11y: slotAriaProps.paper,
     additionalProps: {
       restoreFocus,
+      closeOnEscape,
+      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
     },
   })
 

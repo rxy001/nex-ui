@@ -21,61 +21,61 @@ type DialogSlotProps = {
   backdrop?: ComponentPropsWithCommonProps<'div'>
 }
 
-type DialogOwnProps<RootComponent extends ElementType> = {
-  /**
-   * The component or element to render as the root.
-   * @default 'div'
-   */
-  as?: RootComponent
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: Interpolation
-
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
-
-  /**
-   * Usually, DialogContent, DialogTrigger, etc.
-   */
-  children?: ReactNode
-
-  /**
-   * The props used for each slot.
-   */
-  slotProps?: DialogSlotProps
-
-  /**
-   * The className used for each slot.
-   */
-  classNames?: ComponentSlotClasses<keyof DialogSlotProps>
-
-  /**
-   * If true, the backdrop is not rendered.
-   *
-   * @default false
-   */
-  hideBackdrop?: boolean
-
-  /**
-   * If true, closes the Dialog when the backdrop is clicked.
-   *
-   * @default true
-   */
-  closeOnInteractBackdrop?: boolean
-
-  /**
-   * The props to modify the framer motion animation.
-   * Use the `variants` API to create your own animation.
-   */
-  motionProps?: ModalMotionProps
-} & ModalProps &
+type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
   Omit<ModalPortalProps, 'children'> &
-  Pick<ModalRootProps, 'preventScroll' | 'closeOnEscape'> &
-  Pick<ModalContentProps, 'restoreFocus'>
+  Pick<ModalRootProps, 'preventScroll'> &
+  Pick<ModalContentProps, 'restoreFocus' | 'closeOnEscape'> & {
+    /**
+     * The component or element to render as the root.
+     * @default 'div'
+     */
+    as?: RootComponent
+
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx?: Interpolation
+
+    /**
+     * Additional class names to apply to the root.
+     */
+    className?: ClassValue
+
+    /**
+     * Usually, DialogContent, DialogTrigger, etc.
+     */
+    children?: ReactNode
+
+    /**
+     * The props used for each slot.
+     */
+    slotProps?: DialogSlotProps
+
+    /**
+     * The className used for each slot.
+     */
+    classNames?: ComponentSlotClasses<keyof DialogSlotProps>
+
+    /**
+     * If true, the backdrop is not rendered.
+     *
+     * @default false
+     */
+    hideBackdrop?: boolean
+
+    /**
+     * If true, closes the Dialog when the backdrop is clicked.
+     *
+     * @default true
+     */
+    closeOnInteractBackdrop?: boolean
+
+    /**
+     * The props to modify the framer motion animation.
+     * Use the `variants` API to create your own animation.
+     */
+    motionProps?: ModalMotionProps
+  }
 
 export interface DialogPropsOverrides {}
 

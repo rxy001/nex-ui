@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { useRef } from 'react'
-import { Portal } from '../Portal'
+import { Portal } from '../react/Portal'
 
 describe('Portal', () => {
   it('render nothing on the server', () => {

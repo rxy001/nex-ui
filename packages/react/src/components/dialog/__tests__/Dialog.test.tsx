@@ -7,6 +7,7 @@ import {
   testSlotPropsForwarding,
   testVariantDataAttrs,
 } from '~/tests/shared'
+import { act, fireEvent } from '@testing-library/react'
 import {
   Dialog,
   DialogContent,
@@ -128,7 +129,7 @@ describe('Dialog', () => {
   })
 
   it('should be controlled via open prop', async () => {
-    const { queryByTestId, getByTestId, user } = await renderWithNexUIProvider(
+    const { queryByTestId, getByTestId } = await renderWithNexUIProvider(
       <ControlledDialog />,
       {
         useAct: true,
@@ -139,10 +140,14 @@ describe('Dialog', () => {
 
     expect(queryByTestId('dialog-root')).not.toBeInTheDocument()
 
-    await user.click(toggleButton)
+    await act(async () => {
+      fireEvent.click(toggleButton)
+    })
     expect(queryByTestId('dialog-root')).toBeInTheDocument()
 
-    await user.click(toggleButton)
+    await act(async () => {
+      fireEvent.click(toggleButton)
+    })
     expect(queryByTestId('dialog-root')).not.toBeInTheDocument()
   })
 

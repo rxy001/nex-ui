@@ -1,8 +1,6 @@
 import type { ComponentProps, ComponentType, JSX, ElementType, FC } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 
-type Overwrite<K, T> = Omit<K, keyof T> & T
-
 export interface NexStyled {
   <C extends ComponentType<ComponentProps<C>>>(
     component: C,
@@ -10,7 +8,9 @@ export interface NexStyled {
   ): (interpolation?: Interpolation) => C
 }
 
-export interface NexComponent<T extends ElementType>
+type Overwrite<K, T> = Omit<K, keyof T> & T
+
+export interface NexElementConstructor<T extends ElementType>
   extends FC<
     Overwrite<
       ComponentProps<T>,
@@ -31,15 +31,21 @@ export interface NexComponent<T extends ElementType>
   ): JSX.Element
 }
 
-export type HTMLNexComponents = {
-  [Tag in keyof JSX.IntrinsicElements]: NexComponent<Tag>
+export type NexIntrinsicElements = {
+  [Tag in keyof JSX.IntrinsicElements]: NexElementConstructor<Tag>
+}
+
+export type NexIntrinsicElementsProps = {
+  [Tag in keyof JSX.IntrinsicElements]: ComponentProps<
+    NexElementConstructor<Tag>
+  >
 }
 
 export interface CreateNexComponent {
-  <C extends ElementType>(component: C): NexComponent<C>
+  <C extends ElementType>(component: C): NexElementConstructor<C>
 }
 
-export interface NexFactory extends HTMLNexComponents, CreateNexComponent {}
+export interface NexFactory extends NexIntrinsicElements, CreateNexComponent {}
 
 export interface StyledOptions {
   shouldForwardProp?: (propName: string) => boolean

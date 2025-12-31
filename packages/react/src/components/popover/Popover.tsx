@@ -3,7 +3,7 @@
 import { useId } from 'react'
 import { Popper } from '../popper'
 import { useDefaultProps } from '../utils'
-import { PopoverRootPropsProvider } from './PopoverContext'
+import { PopoverPropsProvider } from './PopoverContext'
 import type { ElementType } from 'react'
 import type { PopoverProps } from './types'
 
@@ -43,9 +43,7 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
       defaultOpen={defaultOpen}
       onOpenChange={onOpenChange}
     >
-      <PopoverRootPropsProvider value={ctx}>
-        {children}
-      </PopoverRootPropsProvider>
+      <PopoverPropsProvider value={ctx}>{children}</PopoverPropsProvider>
     </Popper>
   )
 }

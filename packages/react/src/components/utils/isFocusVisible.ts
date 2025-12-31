@@ -5,6 +5,5 @@ export const isFocusVisible = (element: Element): boolean => {
     /* empty */
   }
 
-  // istanbul ignore next
   return false
 }

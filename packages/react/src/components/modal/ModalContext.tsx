@@ -2,7 +2,6 @@
 
 import { createContext } from '@nex-ui/utils'
 import type { ModalPortalProps } from './types'
-import type { RefObject } from 'react'
 
 export interface ModalContextValue {
   open: boolean
@@ -11,7 +10,6 @@ export interface ModalContextValue {
   modalContentId: string
   modalHeaderId: string
   modalBodyId: string
-  modalContentRef: RefObject<HTMLElement | null>
 }
 
 export const [ModalProvider, useModal] = createContext<ModalContextValue>({

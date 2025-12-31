@@ -2,7 +2,7 @@
 
 import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
-import { DialogRootPropsProvider } from './DialogContext'
+import { DialogPropsProvider } from './DialogContext'
 import type { ElementType } from 'react'
 import type { DialogProps } from './types'
 
@@ -36,7 +36,7 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
       defaultOpen={defaultOpen}
       onClose={onClose}
     >
-      <DialogRootPropsProvider value={ctx}>{children}</DialogRootPropsProvider>
+      <DialogPropsProvider value={ctx}>{children}</DialogPropsProvider>
     </Modal>
   )
 }

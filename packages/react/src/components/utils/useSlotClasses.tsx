@@ -5,7 +5,7 @@ import { generateSlotClass } from './generateSlotClass'
 import { useNexUI } from '../provider'
 import type { ClassValue } from 'clsx'
 
-type UseSlotClassesArgs = {
+type UseSlotClassesProps = {
   name: string
   slots: string[]
   classNames?: Record<string, ClassValue>
@@ -15,7 +15,7 @@ export const useSlotClasses = ({
   name,
   slots,
   classNames,
-}: UseSlotClassesArgs) => {
+}: UseSlotClassesProps) => {
   const { prefix } = useNexUI()
 
   return useMemo(() => {

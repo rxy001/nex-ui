@@ -1,154 +1,35 @@
 'use client'
 
-import {
-  mergeRefs,
-  addEventListener,
-  ownerDocument,
-  mergeProps,
-} from '@nex-ui/utils'
-import { cloneElement, isValidElement, useEffect, useRef } from 'react'
+import { chain, isValidNonFragmentElement, mergeRefs } from '@nex-ui/utils'
+import { cloneElement } from 'react'
 import { usePopper } from './PopperContext'
-import { isFocusVisible } from '../utils'
-import type { DetailedHTMLProps, HTMLAttributes, FocusEvent } from 'react'
+import type { ReactElement } from 'react'
 import type { PopperTriggerProps } from './types'
 
-export const PopperTrigger = (props: PopperTriggerProps) => {
-  const focusVisibleRef = useRef(false)
+export const PopperTrigger = ({
+  children,
+  elementProps,
+  closeOnClick = true,
+}: PopperTriggerProps) => {
+  const { open, setOpen, delayOpen, referenceRef } = usePopper()
 
-  const { open, setOpen, delayClose, delayOpen, referenceRef, popperRootRef } =
-    usePopper()
-
-  const {
-    children,
-    elementProps,
-    action = 'hover',
-    interactive = true,
-    closeOnClick = true,
-  } = props
-
-  useEffect(() => {
-    if (open && action === 'click') {
-      const doc = ownerDocument(referenceRef.current)
-      return addEventListener(doc.body, 'click', (e) => {
-        // istanbul ignore next
-        const target = e.target as Node
-
-        if (!open) return
-
-        if (interactive && popperRootRef?.current?.contains(target)) return
-
-        if (referenceRef?.current?.contains(target)) return
-
-        delayClose()
-      })
-    }
-  }, [
-    action,
-    closeOnClick,
-    delayClose,
-    interactive,
-    open,
-    popperRootRef,
-    referenceRef,
-  ])
-
-  useEffect(() => {
-    let attempts = 0
-    let timer: number | null = null
-    let removeListeners: (() => void) | null = null
-
-    function tryAddListeners() {
-      if (popperRootRef.current) {
-        const removeMouseenter = addEventListener(
-          popperRootRef.current,
-          'mouseenter',
-          delayOpen,
-        )
-        const removeMouseleave = addEventListener(
-          popperRootRef.current,
-          'mouseleave',
-          delayClose,
-        )
-        removeListeners = () => {
-          removeMouseenter()
-          removeMouseleave()
-        }
-        return
-      }
-
-      // istanbul ignore next
-      if (attempts >= 30) return
-      attempts += 1
-
-      timer = window.setTimeout(() => {
-        timer = null
-        tryAddListeners()
-      }, 100)
-    }
-    // The PopperPortal is rendered asynchronously.
-    if (open && interactive && action === 'hover') {
-      tryAddListeners()
-      return () => {
-        if (timer !== null) {
-          clearTimeout(timer)
-          timer = null
-        }
-        if (removeListeners) {
-          removeListeners()
-          removeListeners = null
-        }
-      }
-    }
-  }, [action, delayClose, interactive, open, popperRootRef, delayOpen])
-
-  const renderChildren = () => {
-    const element = children as React.ReactElement<any>
-
-    const props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> = {
-      ref: referenceRef,
-    }
-
-    if (action === 'click') {
-      const handleClick = () => {
-        if (!open) {
-          delayOpen()
-        } else if (closeOnClick) {
-          setOpen(false)
-        }
-      }
-
-      props.onClick = handleClick
-    } else if (action === 'hover') {
-      const handleMouseEnter = delayOpen
-      const handleMouseLeave = delayClose
-      const handleClick = () => {
-        if (closeOnClick && open) setOpen(false)
-      }
-      const handleFocus = (event: FocusEvent<HTMLElement>) => {
-        if (isFocusVisible(event.currentTarget)) {
-          delayOpen()
-          focusVisibleRef.current = true
-        }
-      }
-      const handleBlur = (event: FocusEvent<HTMLElement>) => {
-        if (focusVisibleRef.current && !isFocusVisible(event.currentTarget)) {
-          delayClose()
-          focusVisibleRef.current = false
-        }
-      }
-
-      props.onMouseEnter = handleMouseEnter
-      props.onMouseLeave = handleMouseLeave
-      props.onClick = handleClick
-      props.onFocus = handleFocus
-      props.onBlur = handleBlur
-    }
-
-    return cloneElement(element, {
-      ...mergeProps(elementProps, element.props, props),
-      ref: mergeRefs(elementProps?.ref, element.props.ref, props.ref),
-    })
+  if (!isValidNonFragmentElement(children)) {
+    return children
   }
 
-  return isValidElement(children) ? renderChildren() : children
+  const element = children as ReactElement<any>
+
+  const handleClick = () => {
+    if (!open) {
+      delayOpen()
+    } else if (closeOnClick) {
+      setOpen(false)
+    }
+  }
+
+  return cloneElement(element, {
+    ...elementProps,
+    onClick: chain(handleClick, element.props.onClick, elementProps?.onClick),
+    ref: mergeRefs(referenceRef, element.props.ref, elementProps?.ref),
+  })
 }

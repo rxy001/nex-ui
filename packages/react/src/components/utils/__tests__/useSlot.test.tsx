@@ -2,7 +2,7 @@ import { createRef } from 'react'
 import { renderHook } from '@testing-library/react'
 import { nex } from '@nex-ui/styled'
 import { useSlot } from '../useSlot'
-import type { UseSlotArgs } from '../useSlot'
+import type { UseSlotProps } from '../useSlot'
 
 describe('useSlot', () => {
   it('should return component and getProps function', () => {
@@ -26,7 +26,7 @@ describe('useSlot', () => {
       initialProps: {
         elementType: 'div',
         additionalProps,
-      } as UseSlotArgs<'div'>,
+      } as UseSlotProps<'div'>,
     })
 
     expect(result.current[1]()).toMatchObject({
@@ -96,7 +96,7 @@ describe('useSlot', () => {
         elementType: 'div',
         style,
         externalSlotProps: { sx: [mockSx1, mockSx2] },
-      } as UseSlotArgs<'div'>,
+      } as UseSlotProps<'div'>,
     })
 
     expect(result.current[1]().sx).toEqual([style, [mockSx1, mockSx2]])
@@ -118,7 +118,7 @@ describe('useSlot', () => {
         elementType: 'div',
         style,
         externalSlotProps: { sx: sxObject },
-      } as UseSlotArgs<'div'>,
+      } as UseSlotProps<'div'>,
     })
 
     expect(result.current[1]().sx).toEqual([style, sxObject])
@@ -136,7 +136,7 @@ describe('useSlot', () => {
       initialProps: {
         elementType: 'div',
         shouldForwardComponent: true,
-      } as UseSlotArgs<'div'>,
+      } as UseSlotProps<'div', {}, {}, {}, boolean>,
     })
 
     expect(result.current[0]).toBe(nex.div)
@@ -166,7 +166,7 @@ describe('useSlot', () => {
     expect(ref).toBeInstanceOf(Function)
 
     // @ts-expect-error
-    ref(1)
+    ref?.(1)
 
     expect(ref1.current).toBe(1)
     expect(ref2.current).toBe(1)
