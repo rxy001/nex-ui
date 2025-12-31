@@ -66,6 +66,9 @@ const meta = {
     closeOnEscape: {
       control: 'boolean',
     },
+    closeOnDetached: {
+      control: 'boolean',
+    },
     closeDelay: {
       control: 'number',
     },

@@ -29,6 +29,10 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     | 'flip'
     | 'closeOnEscape'
     | 'closeOnDetached'
+    | 'onEscapeKeyDown'
+    | 'onPointerDownOutside'
+    | 'onFocusOutside'
+    | 'onInteractOutside'
   > &
   Omit<PopperPortalProps, 'children'> & {
     /**
@@ -64,13 +68,6 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
      * @default true
      */
     interactive?: boolean
-
-    /**
-     * If true, closes the Tooltip when clicking the trigger element.
-     *
-     * @default true
-     */
-    closeOnClick?: boolean
 
     /**
      * The props to modify the framer motion animation.

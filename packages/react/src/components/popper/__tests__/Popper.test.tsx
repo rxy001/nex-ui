@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react'
+import { act, waitForElementToBeRemoved } from '@testing-library/react'
 import {
   renderWithNexUIProvider,
   testComponentStability,
@@ -13,9 +13,12 @@ import {
   PopperMotion,
 } from '../index'
 import type { PopperProps, PopperRootProps } from '../index'
-import type { PopperPortalProps } from '../types'
+import type { PopperContentProps, PopperPortalProps } from '../types'
 
-type TestPopperProps = PopperProps & PopperRootProps & PopperPortalProps
+type TestPopperProps = PopperProps &
+  PopperRootProps &
+  PopperPortalProps &
+  PopperContentProps
 
 function TestPopper({
   open,
@@ -236,9 +239,9 @@ describe('Popper', () => {
 
     const trigger = getByTestId('popper-trigger')
 
-    await user.hover(trigger)
+    await user.click(trigger)
 
-    jest.advanceTimersByTime(30)
+    jest.advanceTimersByTime(50)
 
     expect(queryByTestId('popper-root')).toBeNull()
 
@@ -248,18 +251,18 @@ describe('Popper', () => {
 
     expect(queryByTestId('popper-root')).toBeInTheDocument()
 
-    await user.unhover(trigger)
+    await user.keyboard('[Escape]')
 
-    jest.advanceTimersByTime(30)
+    jest.advanceTimersByTime(50)
 
     expect(queryByTestId('popper-root')).toBeInTheDocument()
 
     await act(async () => {
-      jest.advanceTimersByTime(80)
+      jest.advanceTimersByTime(400)
     })
 
+    await waitForElementToBeRemoved(() => queryByTestId('popper-root'))
     expect(queryByTestId('popper-root')).toBeNull()
-
     jest.useRealTimers()
   })
 
@@ -282,7 +285,7 @@ describe('Popper', () => {
     expect(popperRoot).toHaveStyle('display: block')
 
     await act(async () => {
-      rerender(<TestPopper disableAnimation={false} keepMounted />)
+      rerender(<TestPopper disableAnimation={false} keepMounted open={false} />)
     })
 
     expect(popperRoot).not.toHaveStyle('display: none')

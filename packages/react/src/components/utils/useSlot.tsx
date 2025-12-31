@@ -2,23 +2,20 @@ import clsx from 'clsx'
 import { mergeProps, mergeRefs, kebabCase } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
-import type { ElementType as ReactElementType } from 'react'
+import type { ComponentProps, ElementType as ReactElementType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { NexComponent } from '@nex-ui/styled'
+import type { NexElementConstructor } from '@nex-ui/styled'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
-import type {
-  Overwrite,
-  ComponentPropsWithCommonProps,
-} from '../../types/utils'
+import type { ComponentPropsWithCommonProps } from '../../types/utils'
 
 type DataAttrs = Record<string, string | number | boolean | undefined>
 
-export type UseSlotArgs<
+export type UseSlotProps<
   ElementType extends ReactElementType,
   SlotProps extends {} = {},
   ForwardedProps extends {} = {},
   AdditonalProps extends {} = {},
-  ShouldForwardComponent extends boolean = boolean,
+  ShouldForwardComponent extends boolean = true,
 > = {
   /**
    * The slot's default component
@@ -68,14 +65,6 @@ export type UseSlotArgs<
   dataAttrs?: DataAttrs
 }
 
-type SlotComponentProps<SlotProps, ForwardedProps> = Overwrite<
-  SlotProps & ForwardedProps,
-  {
-    className: string
-    sx: Interpolation
-  }
->
-
 export const useSlot = <
   ElementType extends ReactElementType,
   SlotProps extends ComponentPropsWithCommonProps<ElementType>,
@@ -83,7 +72,7 @@ export const useSlot = <
   AdditonalProps extends ComponentPropsWithCommonProps<ElementType>,
   ShouldForwardComponent extends boolean = true,
 >(
-  args: UseSlotArgs<
+  args: UseSlotProps<
     ElementType,
     SlotProps,
     ForwardedProps,
@@ -147,12 +136,12 @@ export const useSlot = <
     [elementType, shouldForwardComponent],
   )
 
-  return [Component, getProps] as unknown as [
-    ShouldForwardComponent extends true
-      ? NexComponent<ElementType>
-      : ElementType,
-    () => SlotComponentProps<SlotProps, ForwardedProps>,
-  ]
+  return [Component, getProps] as unknown as ShouldForwardComponent extends true
+    ? [
+        NexElementConstructor<ElementType>,
+        () => ComponentProps<NexElementConstructor<ElementType>>,
+      ]
+    : [ElementType, () => ComponentProps<ElementType>]
 }
 
 function generateDataAttrs(dataAttrs: DataAttrs) {

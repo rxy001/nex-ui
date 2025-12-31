@@ -33,9 +33,12 @@ describe('ModalClose', () => {
   })
 
   it("should return children as-is when ModalClose's children is not a valid React element", () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { container } = renderWithNexUIProvider(<TestModal>Child</TestModal>)
 
     expect(container.textContent).toBe('Child')
+    expect(consoleSpy).toHaveBeenCalled()
+    consoleSpy.mockRestore()
   })
 
   it("should async close when the children's onClick returns a resolved Promise", async () => {

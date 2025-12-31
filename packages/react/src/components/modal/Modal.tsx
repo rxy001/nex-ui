@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef } from 'react'
-import { useControlledState } from '@nex-ui/hooks'
+import { useId, useMemo, useRef } from 'react'
+import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { ModalProvider } from './ModalContext'
 import type { ModalProps } from './types'
 import type { ModalContextValue } from './ModalContext'
@@ -15,13 +15,10 @@ import type { ModalContextValue } from './ModalContext'
 
 export const Modal = (props: ModalProps) => {
   const id = useId()
-
   const modalContentId = `modal-${id}-content`
   const modalHeaderId = `modal-${id}-header`
   const modalBodyId = `modal-${id}-body`
   const modalId = `modal-${id}`
-
-  const modalContentRef = useRef<HTMLElement | null>(null)
 
   const {
     children,
@@ -31,33 +28,33 @@ export const Modal = (props: ModalProps) => {
     defaultOpen = false,
   } = props
 
-  const [open, setOpen] = useControlledState(
+  const [open, setOpenImpl] = useControlledState(
     openProp,
     defaultOpen,
     onOpenChange,
   )
 
-  const prevOpenRef = useRef(open)
+  const previousOpenRef = useRef(open)
+
+  const setOpen = useEvent((value: boolean) => {
+    setOpenImpl(value)
+    if (previousOpenRef.current && value === false) {
+      onClose?.()
+    }
+    previousOpenRef.current = value
+  })
 
   const modalContextValue = useMemo<ModalContextValue>(
     () => ({
       open,
-      setOpen,
       modalContentId,
       modalHeaderId,
       modalBodyId,
       modalId,
-      modalContentRef,
+      setOpen,
     }),
-    [setOpen, open, modalContentId, modalHeaderId, modalBodyId, modalId],
+    [open, modalContentId, modalHeaderId, modalBodyId, modalId, setOpen],
   )
-
-  useEffect(() => {
-    if (prevOpenRef.current && !open) {
-      onClose?.()
-    }
-    prevOpenRef.current = open
-  }, [onClose, open])
 
   return <ModalProvider value={modalContextValue}>{children}</ModalProvider>
 }

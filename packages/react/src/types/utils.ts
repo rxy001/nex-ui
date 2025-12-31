@@ -12,20 +12,16 @@ export type UniteTokens<T extends {}, U extends {}> = {
   [K in keyof T]: K extends keyof U ? T[K] | U[K] : T[K]
 }
 
+export type Overwrite<K, T> = Omit<K, keyof T> & T
+
 export type ComponentPropsWithCommonProps<T extends ElementType> = Overwrite<
   ComponentProps<T>,
-  {
-    sx?: Interpolation
-    as?: ElementType
-    className?: ClassValue
-  }
+  { className?: ClassValue; as?: ElementType; sx?: Interpolation }
 >
 
 export type ComponentSlotClasses<T extends string> = Partial<
   Record<T, ClassValue>
 >
-
-export type Overwrite<K, T> = Omit<K, keyof T> & T
 
 export type OverrideProps<
   Component extends ElementType,

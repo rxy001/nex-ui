@@ -74,8 +74,8 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
   motionProps?: ModalMotionProps
 } & ModalProps &
   Omit<ModalPortalProps, 'children'> &
-  Pick<ModalRootProps, 'preventScroll' | 'closeOnEscape'> &
-  Pick<ModalContentProps, 'restoreFocus'>
+  Pick<ModalRootProps, 'preventScroll'> &
+  Pick<ModalContentProps, 'restoreFocus' | 'closeOnEscape'>
 
 export interface DrawerPropsOverrides {}
 

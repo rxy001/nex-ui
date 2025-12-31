@@ -8,9 +8,9 @@ import {
   PopperPortal,
   PopperRoot,
 } from '../index'
-import type { ReactNode } from 'react'
+import type { PopperCloseProps } from '../index'
 
-function TestPopper({ children }: { children?: ReactNode }) {
+function TestPopper({ children }: PopperCloseProps) {
   return (
     <Popper defaultOpen openDelay={0} closeDelay={0}>
       <PopperPortal>
@@ -48,14 +48,16 @@ describe('PopperClose', () => {
   })
 
   it("should return children as-is when PopperClose's children is not a valid React element", async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { getByTestId } = await renderWithNexUIProvider(
       <TestPopper>Close</TestPopper>,
       {
         useAct: true,
       },
     )
-
+    expect(consoleSpy).toHaveBeenCalled()
     expect(getByTestId('popper-content').textContent).toBe('Close')
+    consoleSpy.mockRestore()
   })
 
   it("should async close when the children's onClick returns a resolved Promise", async () => {
