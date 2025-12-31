@@ -85,7 +85,6 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
   const { focusVisible, focusProps } = useFocusRing()
 
   const handleKeyDown = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
-    // Limit the repeated triggering of the click event when the Enter key is pressed.
     if (disabled) {
       event.preventDefault()
       event.stopPropagation()
@@ -95,11 +94,14 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     if (
       focusVisible &&
       event.target === event.currentTarget &&
-      (event.key === ' ' || event.key === 'Enter') &&
-      (event.currentTarget.tagName === 'BUTTON' ||
-        event.currentTarget.tagName === 'A')
+      event.currentTarget.tagName !== 'BUTTON'
     ) {
-      event.preventDefault()
+      if (event.key === 'Enter' && event.currentTarget.tagName !== 'A') {
+        event.currentTarget.click()
+      } else if (event.key === ' ') {
+        // Prevent scrolling when space is pressed
+        event.preventDefault()
+      }
     }
 
     onKeyDown?.(event)
@@ -115,7 +117,8 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     if (
       focusVisible &&
       event.target === event.currentTarget &&
-      (event.key === ' ' || event.key === 'Enter')
+      event.key === ' ' &&
+      event.currentTarget.tagName !== 'BUTTON'
     ) {
       event.currentTarget.click()
     }
@@ -129,7 +132,6 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
       event.stopPropagation()
       return
     }
-
     onClick?.(event)
   })
 
@@ -146,14 +148,12 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     externalForwardedProps: remainingProps,
     additionalProps: {
       as: rootElement,
-      ...focusProps,
-    },
-    a11y: {
-      ...ariaProps,
       onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
       onClick: handleClick,
+      ...focusProps,
     },
+    a11y: ariaProps,
     dataAttrs: {
       disabled,
       focusVisible: focusVisible || undefined,

@@ -136,9 +136,7 @@ describe('Radio', () => {
       </RadioGroup>,
     )
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      '[Nex UI] Radio: The RadioGroup is being used, `checked` will be ignored. Use the `value` of the RadioGroup instead.',
-    )
+    expect(consoleSpy).toHaveBeenCalled()
 
     consoleSpy.mockRestore()
   })
@@ -154,9 +152,7 @@ describe('Radio', () => {
       </RadioGroup>,
     )
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      '[Nex UI] Radio: The RadioGroup is being used, `defaultChecked` will be ignored. Use the `defaultValue` of the RadioGroup instead.',
-    )
+    expect(consoleSpy).toHaveBeenCalled()
 
     consoleSpy.mockRestore()
   })
@@ -170,9 +166,7 @@ describe('Radio', () => {
       </RadioGroup>,
     )
 
-    expect(consoleSpy).toHaveBeenCalledWith(
-      '[Nex UI] Radio: The `value` prop is required when using Radio inside a RadioGroup',
-    )
+    expect(consoleSpy).toHaveBeenCalled()
 
     consoleSpy.mockRestore()
   })

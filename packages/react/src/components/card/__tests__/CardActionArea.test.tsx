@@ -25,28 +25,30 @@ describe('CardActionArea', () => {
     expect(cardActionAreaRoot?.tagName).toBe('BUTTON')
   })
 
-  it('should handle click events when not disabled', () => {
+  it('should handle click events when not disabled', async () => {
     const handleClick = jest.fn()
-    const { getByRole } = renderWithNexUIProvider(
+    const { getByRole, user } = await renderWithNexUIProvider(
       <CardActionArea onClick={handleClick}>Click me</CardActionArea>,
+      {
+        useAct: true,
+      },
     )
 
     const button = getByRole('button')
-    button.click()
-
+    await user.click(button)
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
-  it('should not handle click events when disabled', () => {
+  it('should not handle click events when disabled', async () => {
     const handleClick = jest.fn()
-    const { getByRole } = renderWithNexUIProvider(
+    const { getByRole, user } = renderWithNexUIProvider(
       <CardActionArea onClick={handleClick} disabled>
         Click me
       </CardActionArea>,
     )
 
     const button = getByRole('button')
-    button.click()
+    await user.click(button)
 
     expect(handleClick).not.toHaveBeenCalled()
   })

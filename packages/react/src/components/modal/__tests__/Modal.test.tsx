@@ -221,7 +221,7 @@ describe('Modal', () => {
     let modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
     expect(modalRoot).not.toBeInTheDocument()
 
     // test uncontrolled behavior
@@ -229,7 +229,7 @@ describe('Modal', () => {
     modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
     expect(modalRoot).not.toBeInTheDocument()
   })
 
@@ -241,7 +241,7 @@ describe('Modal', () => {
     let modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
     expect(modalRoot).toBeInTheDocument()
 
     // test uncontrolled behavior
@@ -249,7 +249,7 @@ describe('Modal', () => {
     modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
     expect(modalRoot).toBeInTheDocument()
   })
 
@@ -284,7 +284,7 @@ describe('Modal', () => {
     const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
 
     expect(modalRoot).not.toBeInTheDocument()
     expect(onClose).toHaveBeenCalledTimes(1)
@@ -480,7 +480,7 @@ describe('Modal', () => {
       const toggleButton = getByTestId('toggle-button')
 
       await user.click(toggleButton)
-      await user.keyboard('[Escape]')
+      await user.keyboard('{Escape}')
       expect(document.activeElement).toBe(toggleButton)
     })
 
@@ -492,7 +492,7 @@ describe('Modal', () => {
       const toggleButton = getByTestId('toggle-button')
 
       await user.click(toggleButton)
-      await user.keyboard('[Escape]')
+      await user.keyboard('{Escape}')
       expect(document.activeElement).not.toBe(toggleButton)
     })
 
