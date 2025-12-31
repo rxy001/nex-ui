@@ -21,14 +21,13 @@ import type { ModalProps } from '../index'
 import type { ModalPortalProps, ModalRootProps } from '../types'
 
 type TestModalProps = ModalProps &
-  Pick<
-    ModalRootProps,
-    'closeOnInteractOutside' | 'preventScroll' | 'closeOnEscape'
-  > &
+  Pick<ModalRootProps, 'preventScroll'> &
   ModalPortalProps & {
     className?: string
     'data-testid'?: string
     restoreFocus?: boolean
+    closeOnInteractOutside?: boolean
+    closeOnEscape?: boolean
   }
 
 function TestModal({
@@ -51,9 +50,7 @@ function TestModal({
         disableAnimation={disableAnimation}
       >
         <ModalRoot
-          closeOnInteractOutside={closeOnInteractOutside}
           preventScroll={preventScroll}
-          closeOnEscape={closeOnEscape}
           data-testid={testid}
           className={props.className}
         >
@@ -61,6 +58,8 @@ function TestModal({
           <ModalPanel data-testid='modal-panel'>
             <ModalContent
               restoreFocus={restoreFocus}
+              closeOnInteractOutside={closeOnInteractOutside}
+              closeOnEscape={closeOnEscape}
               data-testid='modal-content'
             >
               <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
@@ -96,8 +95,6 @@ describe('Modal', () => {
   testComponentStability(<TestModal open />)
 
   testStateDataAttrs(<TestModal keepMounted />)
-
-  testVariantDataAttrs(<TestModal open />, ['closeOnEscape', [true, false]])
 
   testVariantDataAttrs(<TestModal open />, ['preventScroll', [true, false]])
 
@@ -278,16 +275,16 @@ describe('Modal', () => {
     expect(modalRoot).toHaveStyle('display: block')
   })
 
-  it('should onClose callback be called when modal is closed', () => {
+  it('should onClose callback be called when modal is closed', async () => {
     const onClose = jest.fn()
-    const { queryByTestId, rerender } = renderWithNexUIProvider(
-      <TestModal open onClose={onClose} />,
+    const { queryByTestId, user } = renderWithNexUIProvider(
+      <TestModal defaultOpen onClose={onClose} />,
     )
 
     const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    rerender(<TestModal open={false} onClose={onClose} />)
+    await user.keyboard('[Escape]')
 
     expect(modalRoot).not.toBeInTheDocument()
     expect(onClose).toHaveBeenCalledTimes(1)

@@ -2,7 +2,7 @@
 
 import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
-import { DrawerRootPropsProvider } from './DrawerContext'
+import { DrawerPropsProvider } from './DrawerContext'
 import type { ElementType } from 'react'
 import type { DrawerProps } from './types'
 
@@ -36,7 +36,7 @@ export const Drawer = <RootComponent extends ElementType = 'div'>(
       onOpenChange={onOpenChange}
       onClose={onClose}
     >
-      <DrawerRootPropsProvider value={ctx}>{children}</DrawerRootPropsProvider>
+      <DrawerPropsProvider value={ctx}>{children}</DrawerPropsProvider>
     </Modal>
   )
 }

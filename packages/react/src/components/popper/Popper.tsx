@@ -1,6 +1,11 @@
 'use client'
 
-import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
+import {
+  useControlledState,
+  useDebounce,
+  useEvent,
+  useUnmount,
+} from '@nex-ui/hooks'
 import { useCallback, useMemo, useRef, useId, useEffect } from 'react'
 import { PopperProvider } from './PopperContext'
 import { PopperManager } from './PopperManager'
@@ -21,6 +26,7 @@ export const Popper = (props: PopperProps) => {
   const {
     children,
     onOpenChange,
+    onClose,
     open: openProp,
     openDelay = 100,
     closeDelay = 100,
@@ -30,11 +36,20 @@ export const Popper = (props: PopperProps) => {
   const popperRootRef = useRef<HTMLDivElement>(null)
   const id = useId()
 
-  const [open, setOpen] = useControlledState(
+  const [open, setOpenImpl] = useControlledState(
     openProp,
     defaultOpen,
     onOpenChange,
   )
+  const previousOpenRef = useRef(open)
+
+  const setOpen = useEvent((value: boolean) => {
+    setOpenImpl(value)
+    if (previousOpenRef.current && !value) {
+      onClose?.()
+    }
+    previousOpenRef.current = value
+  })
 
   const debouncedOpenPopper = useDebounce(
     () => {
@@ -56,8 +71,8 @@ export const Popper = (props: PopperProps) => {
 
   const delayOpen = useCallback(() => {
     debouncedClosePopper.cancel()
-    debouncedOpenPopper()
     popperManager.flush(id)
+    debouncedOpenPopper()
   }, [debouncedClosePopper, debouncedOpenPopper, id])
 
   const delayClose = useCallback(() => {
@@ -70,16 +85,22 @@ export const Popper = (props: PopperProps) => {
     debouncedOpenPopper.cancel()
   })
 
+  const handleOpen = useEvent((value: boolean) => {
+    debouncedClosePopper.cancel()
+    debouncedOpenPopper.cancel()
+    setOpen(value)
+  })
+
   const ctx = useMemo<PopperContextValue>(
     () => ({
       open,
-      setOpen,
       referenceRef,
       popperRootRef,
       delayOpen,
       delayClose,
+      setOpen: handleOpen,
     }),
-    [delayClose, delayOpen, open, setOpen],
+    [delayClose, delayOpen, open, handleOpen],
   )
 
   useEffect(() => {

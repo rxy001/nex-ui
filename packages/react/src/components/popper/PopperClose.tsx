@@ -1,6 +1,7 @@
 'use client'
 
-import { cloneElement, isValidElement } from 'react'
+import { cloneElement } from 'react'
+import { isValidNonFragmentElement } from '@nex-ui/utils'
 import { usePopper } from './PopperContext'
 import type { ReactElement } from 'react'
 import type { PopperCloseProps } from './types'
@@ -8,7 +9,7 @@ import type { PopperCloseProps } from './types'
 export const PopperClose = ({ children }: PopperCloseProps) => {
   const { delayClose } = usePopper()
 
-  if (!isValidElement(children)) {
+  if (!isValidNonFragmentElement(children)) {
     return children
   }
 

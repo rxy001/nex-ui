@@ -3,16 +3,16 @@
 import { createContext } from '@nex-ui/utils'
 import type { DrawerProps } from './types'
 
-type DrawerRootPropsContextValue = Omit<
+type DrawerPropsContextValue = Omit<
   DrawerProps,
   'open' | 'children' | 'onOpenChange' | 'defaultOpen' | 'onClose'
 >
 
-export const [DrawerRootPropsProvider, useDrawerRootProps] =
-  createContext<DrawerRootPropsContextValue>({
-    contextName: 'DrawerRootPropsContext',
-    hookName: 'useDrawerRootProps',
-    providerName: 'DrawerRootPropsProvider',
+export const [DrawerPropsProvider, useDrawerProps] =
+  createContext<DrawerPropsContextValue>({
+    contextName: 'DrawerPropsContext',
+    hookName: 'useDrawerProps',
+    providerName: 'DrawerPropsProvider',
     strict: true,
-    defaultValue: null as unknown as DrawerRootPropsContextValue,
+    defaultValue: null as unknown as DrawerPropsContextValue,
   })

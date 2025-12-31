@@ -1,10 +1,9 @@
-// export * from './styled'
-
 export * from './nex'
 
 export type {
-  // NexStyled,
   NexFactory,
-  NexComponent,
+  NexElementConstructor,
   CreateNexComponent,
+  NexIntrinsicElements,
+  NexIntrinsicElementsProps,
 } from './types'

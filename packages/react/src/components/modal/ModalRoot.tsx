@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  addEventListener,
-  ownerDocument,
-  ownerWindow,
-  isFunction,
-} from '@nex-ui/utils'
+import { ownerDocument, ownerWindow, isFunction } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
@@ -27,15 +22,9 @@ const style = recipe()
 export const ModalRoot = <RootComponent extends ElementType = 'div'>(
   props: ModalRootProps<RootComponent>,
 ) => {
-  const {
-    children,
-    closeOnInteractOutside = true,
-    closeOnEscape = true,
-    preventScroll = false,
-    ...remainingProps
-  } = props
+  const { children, preventScroll = false, ...remainingProps } = props
   const rootRef = useRef<HTMLDivElement>(null)
-  const { open, setOpen, modalId, modalContentRef } = useModal()
+  const { open, modalId } = useModal()
   const { container, keepMounted, disableAnimation } = useModalPortalProps()
   const modalManager = useModalManager()
   const registeredRef = useRef(false)
@@ -51,16 +40,6 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
     externalForwardedProps: remainingProps,
     additionalProps: {
       ref: rootRef,
-      onClick: (event) => {
-        if (
-          open &&
-          closeOnInteractOutside &&
-          modalContentRef.current &&
-          !modalContentRef.current.contains(event.target as Node)
-        ) {
-          setOpen(false)
-        }
-      },
       style: {
         display:
           disableAnimation && keepMounted
@@ -75,7 +54,6 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
       'aria-hidden': open ? undefined : 'true',
     },
     dataAttrs: {
-      closeOnEscape,
       preventScroll,
       keepMounted,
       disableAnimation,
@@ -84,23 +62,6 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
   })
 
   const isTopmostModal = useEvent(() => modalManager.isTopmostModal(modalId))
-
-  useEffect(() => {
-    if (!open || !closeOnEscape) {
-      return
-    }
-
-    const doc = ownerDocument(rootRef.current)
-
-    const removeListener = addEventListener(doc.body, 'keyup', (e) => {
-      if (open && e.key === 'Escape' && isTopmostModal()) {
-        setOpen(false)
-        e.stopPropagation()
-      }
-    })
-
-    return removeListener
-  }, [closeOnEscape, isTopmostModal, open, setOpen])
 
   useEffect(() => {
     if (open) {

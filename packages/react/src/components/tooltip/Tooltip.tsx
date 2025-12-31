@@ -7,13 +7,13 @@ import {
   PopperMotion,
   PopperPortal,
   PopperRoot,
-  PopperTrigger,
   usePopper,
 } from '../popper'
 import { useSlot, useStyles, useSlotClasses, useDefaultProps } from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
-import type { TooltipProps } from './types'
+import { TooltipTrigger as TooltipTriggerImpl } from './TooltipTrigger'
 import type { ElementType } from 'react'
+import type { TooltipProps } from './types'
 
 const slots = ['root', 'content']
 
@@ -40,7 +40,8 @@ const useSlotAriaProps = (ownerState: TooltipProps) => {
 }
 
 // eslint-disable-next-line react/display-name
-export const TooltipImpl = (props: TooltipProps) => {
+const TooltipImpl = (props: TooltipProps) => {
+  const { delayOpen, delayClose, setOpen } = usePopper()
   const {
     children,
     container,
@@ -49,9 +50,8 @@ export const TooltipImpl = (props: TooltipProps) => {
     keepMounted,
     slotProps,
     motionProps,
-    interactive,
-    closeOnClick,
     maxHeight,
+    interactive = true,
     disableAnimation = false,
     maxWidth = 360,
     color = 'default',
@@ -84,14 +84,9 @@ export const TooltipImpl = (props: TooltipProps) => {
   })
 
   const [TooltipTrigger, getTooltipTriggerProps] = useSlot({
-    elementType: PopperTrigger,
+    elementType: TooltipTriggerImpl,
     shouldForwardComponent: false,
-    additionalProps: {
-      interactive,
-      closeOnClick,
-      action: 'hover',
-      elementProps: slotAriaProps.trigger,
-    },
+    additionalProps: slotAriaProps.trigger,
   })
 
   const [TooltipRoot, getTooltipRootProps] = useSlot({
@@ -100,10 +95,18 @@ export const TooltipImpl = (props: TooltipProps) => {
     classNames: slotClasses.root,
     shouldForwardComponent: false,
     externalForwardedProps: remainingProps,
+    additionalProps: {
+      onMouseEnter: interactive ? delayOpen : undefined,
+      onMouseLeave: interactive ? delayClose : undefined,
+      onPointerDownOutside: () => {
+        setOpen(false)
+      },
+    },
     dataAttrs: {
       color,
       size,
       radius,
+      interactive,
     },
     a11y: slotAriaProps.root,
   })

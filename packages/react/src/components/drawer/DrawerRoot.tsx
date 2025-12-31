@@ -1,13 +1,13 @@
 import { ModalBackdrop, ModalMotion, ModalPortal, ModalRoot } from '../modal'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
-import { useDrawerRootProps } from './DrawerContext'
+import { useDrawerProps } from './DrawerContext'
 import { drawerRootRecipe } from '../../theme/recipes'
 import type { DrawerProps } from './types'
 
 const slots = ['root', 'backdrop']
 
 export const DrawerRoot = ({ children }: DrawerProps) => {
-  const props = useDrawerRootProps()
+  const props = useDrawerProps()
 
   const styles = useStyles({
     name: 'Drawer',
@@ -16,8 +16,6 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
   })
 
   const {
-    closeOnEscape,
-    closeOnInteractBackdrop,
     preventScroll,
     slotProps,
     classNames,
@@ -42,9 +40,10 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     shouldForwardComponent: false,
     classNames: slotClasses.root,
     additionalProps: {
-      closeOnEscape,
       preventScroll,
-      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
+    },
+    dataAttrs: {
+      hideBackdrop,
     },
   })
 

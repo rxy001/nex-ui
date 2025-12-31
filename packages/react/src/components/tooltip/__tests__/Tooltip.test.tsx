@@ -8,16 +8,26 @@ import {
   testClassNamesForwarding,
   testSlotPropsForwarding,
 } from '~/tests/shared'
+import { waitFor } from '@testing-library/react'
 import { Tooltip } from '../index'
 import { tooltipSlotClasses } from './classes'
+import type { TooltipProps } from '../index'
 
 const slots = ['content'] as const
 
+const TestTooltip = (props: TooltipProps) => {
+  return (
+    <Tooltip content='content' data-testid='tooltip-root' {...props}>
+      <button data-testid='tooltip-trigger'>Trigger</button>
+    </Tooltip>
+  )
+}
+
 describe('Tooltip', () => {
-  testComponentStability(<Tooltip open content='Content' />)
+  testComponentStability(<TestTooltip open />)
 
   testVariantDataAttrs(
-    <Tooltip open content='Content' />,
+    <TestTooltip open />,
     [
       'color',
       [
@@ -38,20 +48,20 @@ describe('Tooltip', () => {
     },
   )
 
-  testSizeDataAttrs(<Tooltip open content='Content' />, {
+  testSizeDataAttrs(<TestTooltip open />, {
     useAct: true,
   })
 
-  testRadiusDataAttrs(<Tooltip open content='Content' />, {
+  testRadiusDataAttrs(<TestTooltip open />, {
     useAct: true,
   })
 
-  testRefForwarding(<Tooltip open content='Content' />, {
+  testRefForwarding(<TestTooltip open />, {
     useAct: true,
   })
 
   testClassNamesForwarding(
-    <Tooltip open content='Content' />,
+    <TestTooltip open />,
     slots,
     { content: 'test-content' },
     tooltipSlotClasses,
@@ -61,7 +71,7 @@ describe('Tooltip', () => {
   )
 
   testSlotPropsForwarding(
-    <Tooltip open content='Content' />,
+    <TestTooltip open />,
     slots,
     {
       content: {
@@ -76,7 +86,7 @@ describe('Tooltip', () => {
 
   it('should have the correct root class name', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
-      <Tooltip open content='Content' data-testid='tooltip-root' />,
+      <TestTooltip open />,
       {
         useAct: true,
       },
@@ -88,7 +98,7 @@ describe('Tooltip', () => {
 
   it('should render with default props', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
-      <Tooltip open content='Content' data-testid='tooltip-root' />,
+      <TestTooltip open />,
       {
         useAct: true,
       },
@@ -102,7 +112,7 @@ describe('Tooltip', () => {
 
   it('should render with root, content class', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
-      <Tooltip open content='Content' data-testid='tooltip-root' />,
+      <TestTooltip open />,
       {
         useAct: true,
       },
@@ -118,7 +128,7 @@ describe('Tooltip', () => {
 
   it('should render null when content={null}', async () => {
     const { queryByTestId } = await renderWithNexUIProvider(
-      <Tooltip open content={null} />,
+      <TestTooltip open content={null} />,
       {
         useAct: true,
       },
@@ -129,10 +139,9 @@ describe('Tooltip', () => {
 
   it('should disable animations when disableAnimation=true', () => {
     const { queryByClassName } = renderWithNexUIProvider(
-      <Tooltip
+      <TestTooltip
         open
         disableAnimation
-        content='Content'
         motionProps={{
           className: 'test-motion',
         }}
@@ -141,46 +150,98 @@ describe('Tooltip', () => {
     expect(queryByClassName('test-motion')).not.toBeInTheDocument()
   })
 
+  it('should keep the tooltip open when interacting with its content if interactive is true', async () => {
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
+      <TestTooltip interactive />,
+      {
+        useAct: true,
+      },
+    )
+
+    const trigger = getByTestId('tooltip-trigger')
+
+    expect(queryByTestId('tooltip-root')).not.toBeInTheDocument()
+
+    await user.hover(trigger)
+    await waitFor(() =>
+      expect(queryByTestId('tooltip-root')).toBeInTheDocument(),
+    )
+
+    const root = getByTestId('tooltip-root')
+
+    await user.hover(root)
+    await user.unhover(trigger)
+
+    expect(root).toBeInTheDocument()
+
+    await user.click(root)
+
+    expect(root).toBeInTheDocument()
+
+    await user.click(document.body)
+
+    await expect(root).not.toBeInTheDocument()
+  })
+
+  it('should close the tooltip when interacting with its content if interactive is false', async () => {
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
+      <TestTooltip interactive={false} />,
+      {
+        useAct: true,
+      },
+    )
+
+    const trigger = getByTestId('tooltip-trigger')
+
+    expect(queryByTestId('tooltip-root')).not.toBeInTheDocument()
+    await user.hover(trigger)
+
+    await waitFor(async () =>
+      expect(queryByTestId('tooltip-root')).toBeInTheDocument(),
+    )
+
+    const root = getByTestId('tooltip-root')
+
+    await user.hover(root)
+    await user.unhover(trigger)
+
+    await waitFor(async () => expect(root).not.toBeInTheDocument())
+  })
+
   describe('Accessibility', () => {
     it('should have aria-describedby on the trigger element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
-        <Tooltip open data-testid='popper-root' content='Content'>
-          <button data-testid='popper-trigger'>Trigger</button>
-        </Tooltip>,
+        <TestTooltip open />,
+
         {
           useAct: true,
         },
       )
 
-      const trigger = getByTestId('popper-trigger')
-      const root = getByTestId('popper-root')
+      const trigger = getByTestId('tooltip-trigger')
+      const root = getByTestId('tooltip-root')
 
       expect(trigger).toHaveAttribute('aria-describedby', root.id)
     })
 
-    it('should not have aria-describedby on the trigger element when the popper is closed', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <Tooltip data-testid='popper-root' content='Content'>
-          <button data-testid='popper-trigger'>Trigger</button>
-        </Tooltip>,
-        {
-          useAct: true,
-        },
-      )
-      const trigger = getByTestId('popper-trigger')
+    it('should not have aria-describedby on the trigger element when the tooltip is closed', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(<TestTooltip />, {
+        useAct: true,
+      })
+      const trigger = getByTestId('tooltip-trigger')
 
       expect(trigger).not.toHaveAttribute('aria-describedby')
     })
 
     it('should have role="tooltip" on the root element', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
-        <Tooltip open data-testid='popper-root' content='Content' />,
+        <TestTooltip open />,
         {
           useAct: true,
         },
       )
 
-      const root = getByTestId('popper-root')
+      const root = getByTestId('tooltip-root')
 
       expect(root).toHaveAttribute('role', 'tooltip')
     })
