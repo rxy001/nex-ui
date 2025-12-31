@@ -215,7 +215,7 @@ describe('ButtonBase', () => {
     expect(onClick).toHaveBeenCalledTimes(2)
   })
 
-  it('should prevent repeated click event triggering when the Enter key is pressed', async () => {
+  it('should trigger repeated click events when the Enter key is pressed', async () => {
     const onClick = jest.fn()
 
     const { getByRole, user } = renderWithNexUIProvider(
@@ -228,7 +228,7 @@ describe('ButtonBase', () => {
     expect(document.activeElement).toBe(button)
 
     await user.keyboard('{Enter>5/}')
-    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(5)
   })
 
   describe('disabled', () => {

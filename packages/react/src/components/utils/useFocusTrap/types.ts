@@ -6,8 +6,6 @@ export interface UseFocusTrapProps<
   /**
    * When `true`, focus cannot escape the focus scope via keyboard,
    * pointer, or a programmatic focus.
-   *
-   * @default true
    */
   active?: boolean
 
@@ -25,7 +23,7 @@ export interface UseFocusTrapProps<
 
   /**
    * When `true`, tabbing from last item will focus first tabbable
-   * and shift+tab from first item will focus last tababble.
+   * and shift+tab from first item will focus last tabbable.
    *
    * @default true
    */

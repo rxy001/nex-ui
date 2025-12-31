@@ -38,3 +38,7 @@
 10. PopperTrigger 的 interactive 是否应该移入到 Popper
 
 11. 重构基础组件的 API，尽量减少 Context 的使用
+
+12. 统一键盘和鼠标事件已仿效 OS 实现， 例如: 在按下 escape 时关闭 Popper，Space 触发按钮事件
+
+13. useDismissHandlers 实现 ModalManager、PopperManager 的功能

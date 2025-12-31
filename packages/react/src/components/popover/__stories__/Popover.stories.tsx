@@ -69,22 +69,22 @@ const meta = {
       options: placements,
       control: 'select',
     },
-    closeOnEscape: {
-      control: 'boolean',
-    },
     closeDelay: {
       control: 'number',
     },
     openDelay: {
       control: 'number',
     },
-    closeOnDetached: {
-      control: 'boolean',
-    },
     disableAnimation: {
       control: 'boolean',
     },
     keepMounted: {
+      control: 'boolean',
+    },
+    closeOnEscape: {
+      control: 'boolean',
+    },
+    closeOnDetached: {
       control: 'boolean',
     },
   },

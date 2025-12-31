@@ -106,6 +106,7 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     },
     dataAttrs: {
       closeOnEscape,
+      restoreFocus,
     },
   })
 

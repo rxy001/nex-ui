@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react'
+import { act, waitFor } from '@testing-library/react'
 import {
   renderWithNexUIProvider,
   testComponentStability,
@@ -190,7 +190,7 @@ describe('Popper', () => {
 
     expect(queryByTestId('popper-root')).toBeInTheDocument()
 
-    await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
     expect(queryByTestId('popper-root')).toBeNull()
   })
 
@@ -204,7 +204,7 @@ describe('Popper', () => {
 
     expect(queryByTestId('popper-root')).toBeInTheDocument()
 
-    await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
     expect(queryByTestId('popper-root')).toBeInTheDocument()
   })
 
@@ -226,46 +226,48 @@ describe('Popper', () => {
     expect(popperRoot).toBeInTheDocument()
   })
 
-  // FIXME
-  // it('should delay opening and closing by default', async () => {
-  //   jest.useFakeTimers()
+  it('should delay opening and closing by default', async () => {
+    jest.useFakeTimers()
 
-  //   const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-  //     <TestPopper openDelay={100} closeDelay={100} />,
-  //     {
-  //       useAct: true,
-  //       userEventOptions: { advanceTimers: jest.advanceTimersByTime },
-  //     },
-  //   )
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
+      <TestPopper openDelay={100} closeDelay={100} />,
+      {
+        useAct: true,
+        userEventOptions: { advanceTimers: jest.advanceTimersByTime },
+      },
+    )
 
-  //   const trigger = getByTestId('popper-trigger')
+    const trigger = getByTestId('popper-trigger')
 
-  //   await user.click(trigger)
+    await user.click(trigger)
 
-  //   jest.advanceTimersByTime(50)
+    await act(async () => {
+      jest.advanceTimersByTime(50)
+    })
 
-  //   expect(queryByTestId('popper-root')).toBeNull()
+    expect(queryByTestId('popper-root')).toBeNull()
 
-  //   await act(async () => {
-  //     jest.advanceTimersByTime(80)
-  //   })
+    await act(async () => {
+      jest.advanceTimersByTime(80)
+    })
 
-  //   expect(queryByTestId('popper-root')).toBeInTheDocument()
+    await waitFor(() =>
+      expect(queryByTestId('popper-root')).toBeInTheDocument(),
+    )
 
-  //   await user.keyboard('[Escape]')
+    await user.keyboard('{Escape}')
 
-  //   jest.advanceTimersByTime(50)
+    jest.advanceTimersByTime(30)
 
-  //   expect(queryByTestId('popper-root')).toBeInTheDocument()
+    expect(queryByTestId('popper-root')).toBeInTheDocument()
 
-  //   await act(async () => {
-  //     jest.advanceTimersByTime(400)
-  //   })
+    await act(async () => {
+      jest.advanceTimersByTime(100)
+    })
 
-  //   await waitForElementToBeRemoved(() => queryByTestId('popper-root'))
-  //   expect(queryByTestId('popper-root')).toBeNull()
-  //   jest.useRealTimers()
-  // })
+    await waitFor(() => expect(queryByTestId('popper-root')).toBeNull())
+    jest.useRealTimers()
+  })
 
   it('should render correct styles based on disableAnimation and keepMounted', async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(

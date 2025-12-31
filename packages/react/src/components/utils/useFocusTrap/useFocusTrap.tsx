@@ -73,9 +73,8 @@ export const useFocusTrap = <
       doc,
       'focusout',
       (event: FocusEvent) => {
-        if (pausedRef.current || !ref.current) return
-
-        if (ignoreNextFocusRef.current) return
+        if (pausedRef.current || !ref.current || ignoreNextFocusRef.current)
+          return
 
         const relatedTarget = event.relatedTarget as HTMLElement | null
         // istanbul ignore next
@@ -120,7 +119,7 @@ export const useFocusTrap = <
 
   const handleKeydown = useEvent((event: KeyboardEvent) => {
     // istanbul ignore next
-    if (!active && !loop) return
+    if (!active) return
     if (pausedRef.current) return
 
     const isTabKey =

@@ -120,15 +120,12 @@ describe('useFocusTrap', () => {
     expect(document.activeElement).not.toBe(openButton)
   })
 
-  it('should trap focus within the component when active', async () => {
+  it('should trap focus within the component when active=true and loop=false', async () => {
     const { getByTestId } = render(
-      <div>
-        <button data-testid='outside-button'>Outside Button</button>
-        <TestFocusTrap active>
-          <button data-testid='first-button'>First</button>
-          <button data-testid='second-button'>Second</button>
-        </TestFocusTrap>
-      </div>,
+      <TestFocusTrap active loop={false}>
+        <button data-testid='first-button'>First</button>
+        <button data-testid='second-button'>Second</button>
+      </TestFocusTrap>,
     )
 
     const firstButton = getByTestId('first-button')
@@ -138,16 +135,30 @@ describe('useFocusTrap', () => {
     expect(document.activeElement).toBe(firstButton)
 
     await user.tab()
-    expect(document.activeElement).toBe(secondButton)
-
     await user.tab()
-    expect(document.activeElement).toBe(firstButton)
-
     await user.tab()
     expect(document.activeElement).toBe(secondButton)
   })
 
-  it('should handle shift+tab to move focus backwards within trap', async () => {
+  it('should focus the last element in the trap on shift+tab from the first element in trap', async () => {
+    const { getByTestId } = render(
+      <TestFocusTrap active>
+        <button data-testid='first-button'>First</button>
+        <button data-testid='second-button'>Second</button>
+      </TestFocusTrap>,
+    )
+
+    const firstButton = getByTestId('first-button')
+    const secondButton = getByTestId('second-button')
+
+    firstButton.focus()
+    expect(document.activeElement).toBe(firstButton)
+
+    await user.tab({ shift: true })
+    expect(document.activeElement).toBe(secondButton)
+  })
+
+  it('should focus the first element in trap on tab from the last element in trap', async () => {
     const { getByTestId } = render(
       <TestFocusTrap active>
         <button data-testid='first-button'>First</button>
@@ -161,11 +172,7 @@ describe('useFocusTrap', () => {
     secondButton.focus()
     expect(document.activeElement).toBe(secondButton)
 
-    await user.tab({ shift: true })
-    expect(document.activeElement).toBe(firstButton)
-
-    await user.tab({ shift: true })
-    await user.tab({ shift: true })
+    await user.tab()
     expect(document.activeElement).toBe(firstButton)
   })
 
