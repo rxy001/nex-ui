@@ -70,7 +70,7 @@ describe('TooltipTrigger', () => {
     expect(queryByTestId('tooltip-root')).not.toBeInTheDocument()
   })
 
-  it("should return children as-is when ModalTrigger's children is not a valid React element", async () => {
+  it("should return children as-is when TooltipTrigger's children is not a valid React element", async () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { container } = await renderWithNexUIProvider(
       <Tooltip content='content'>Trigger</Tooltip>,

@@ -3,7 +3,7 @@
 import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef, useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
-import { addEventListener, ownerWindow } from '@nex-ui/utils'
+import { addEventListener, chain, ownerWindow } from '@nex-ui/utils'
 import {
   useSlot,
   getOverflowAncestors,
@@ -63,12 +63,11 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   const initialRender = useRef(true)
 
   const dismissHandlers = useDismissHandlers({
-    onEscapeKeyDown: (event: KeyboardEvent) => {
+    onEscapeKeyDown: chain((_event: KeyboardEvent) => {
       if (closeOnEscape && open) {
         setOpen(false)
       }
-      onEscapeKeyDown?.(event)
-    },
+    }, onEscapeKeyDown),
     onFocusOutside,
     onInteractOutside,
     onPointerDownOutside,

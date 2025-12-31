@@ -164,6 +164,8 @@ describe('RadioGroup', () => {
   })
 
   it('should do nothing when a radio without a value is clicked', async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
+
     const { getAllByRole } = renderWithNexUIProvider(
       <RadioGroup>
         <Radio>Orange</Radio>
@@ -182,6 +184,9 @@ describe('RadioGroup', () => {
       fireEvent.click(secondRadio)
     })
     expect(secondRadio).toBeChecked()
+    expect(consoleSpy).toHaveBeenCalled()
+
+    consoleSpy.mockRestore()
   })
 
   it('should check non-input elements within RadioGroup when clicked', async () => {
