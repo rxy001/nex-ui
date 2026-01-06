@@ -1,11 +1,14 @@
 import { waitForElementToBeRemoved } from '@testing-library/react'
+import { useState } from 'react'
 import { renderWithNexUIProvider } from '~/tests/shared'
 import { Modal, ModalPanel, ModalRoot, ModalClose, ModalPortal } from '../index'
 import type { ModalCloseProps } from '../index'
 
 function TestModal(props: ModalCloseProps) {
+  const [open, setOpen] = useState(true)
+
   return (
-    <Modal defaultOpen>
+    <Modal open={open} onOpenChange={setOpen}>
       <ModalClose {...props} />
       <ModalPortal disableAnimation>
         <ModalRoot data-testid='modal-root'>
@@ -34,9 +37,11 @@ describe('ModalClose', () => {
 
   it("should return children as-is when ModalClose's children is not a valid React element", () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
-    const { container } = renderWithNexUIProvider(<TestModal>Child</TestModal>)
+    const { container } = renderWithNexUIProvider(
+      <TestModal>Invalid Element</TestModal>,
+    )
 
-    expect(container.textContent).toBe('Child')
+    expect(container.textContent).toBe('Invalid Element')
     expect(consoleSpy).toHaveBeenCalled()
     consoleSpy.mockRestore()
   })

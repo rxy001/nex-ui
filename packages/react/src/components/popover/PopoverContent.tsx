@@ -8,10 +8,10 @@ import {
   useStyles,
   useSlotClasses,
 } from '../utils'
-import { PopperContent, usePopper } from '../popper'
+import { PopperContent } from '../popper'
 import { popoverContentRecipe } from '../../theme/recipes'
 import { PopoverRoot } from './PopoverRoot'
-import { usePopoverProps } from './PopoverContext'
+import { usePopoverProps, usePopover } from './PopoverContext'
 import type { ElementType } from 'react'
 import type { PopoverContentProps } from './types'
 
@@ -25,9 +25,9 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { restoreFocus } = usePopoverProps()
+  const { restoreFocus, loop } = usePopoverProps()
 
-  const { open } = usePopper()
+  const { open } = usePopover()
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -52,14 +52,15 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const slotClasses = useSlotClasses({
-    name: 'PopoverContent',
     slots,
+    name: 'PopoverContent',
   })
 
   const focusTrapHandlers = useFocusTrap({
     ref,
-    active: open,
+    loop,
     restoreFocus,
+    active: open,
   })
 
   const [PopoverContentRoot, getPopoverContentRootProps] = useSlot({

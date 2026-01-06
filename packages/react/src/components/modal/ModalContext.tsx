@@ -4,7 +4,7 @@ import { createContext } from '@nex-ui/utils'
 import type { ModalPortalProps } from './types'
 
 export interface ModalContextValue {
-  open: boolean
+  open?: boolean
   setOpen: (open: boolean) => void
   modalId: string
   modalContentId: string

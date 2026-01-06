@@ -115,6 +115,25 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
      * The maximum height of the Tooltip.
      */
     maxHeight?: PopperContentProps['maxHeight']
+
+    /**
+     * If true, the Tooltip is shown by default. (uncontrolled)
+     */
+    defaultOpen?: boolean
+
+    /**
+     * The delay in milliseconds before the Tooltip opens.
+     *
+     * @default 100
+     */
+    openDelay?: number
+
+    /**
+     * The delay in milliseconds before the Tooltip closes.
+     *
+     * @default 100
+     */
+    closeDelay?: number
   }
 
 export type TooltipProps<RootComponent extends ElementType = 'div'> =

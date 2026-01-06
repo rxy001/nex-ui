@@ -1,4 +1,5 @@
 import { renderWithNexUIProvider } from '~/tests/shared'
+import { useState } from 'react'
 import {
   Modal,
   ModalContent,
@@ -10,8 +11,10 @@ import {
 import type { ModalTriggerProps } from '../types'
 
 function TestModal(props: ModalTriggerProps) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Modal>
+    <Modal open={open} onOpenChange={setOpen}>
       <ModalTrigger {...props} />
       <ModalPortal disableAnimation>
         <ModalRoot data-testid='modal-root'>
@@ -41,8 +44,10 @@ describe('ModalTrigger', () => {
 
   it("should return children as-is when ModalTrigger's children is not a valid React element", () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
-    const { container } = renderWithNexUIProvider(<TestModal>Child</TestModal>)
-    expect(container.textContent).toBe('Child')
+    const { container } = renderWithNexUIProvider(
+      <TestModal>Invalid Element</TestModal>,
+    )
+    expect(container.textContent).toBe('Invalid Element')
     expect(consoleSpy).toHaveBeenCalled()
     consoleSpy.mockRestore()
   })

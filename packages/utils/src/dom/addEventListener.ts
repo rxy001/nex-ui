@@ -11,7 +11,7 @@ export function addEventListener<
   K extends keyof EventMapFor<N>,
 >(
   node: N,
-  event: K,
+  event: K | (string & {}),
   cb: (this: N, ev: EventMapFor<N>[K]) => any,
   options?: AddEventListenerOptions | boolean,
 ): () => void {

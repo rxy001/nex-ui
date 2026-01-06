@@ -24,11 +24,6 @@ export type ModalProps = {
   open?: boolean
 
   /**
-   * If true, the Modal is shown by default. (uncontrolled)
-   */
-  defaultOpen?: boolean
-
-  /**
    * Handler that is called when the Modal is opened or closed
    */
   onOpenChange?: (open: boolean) => void

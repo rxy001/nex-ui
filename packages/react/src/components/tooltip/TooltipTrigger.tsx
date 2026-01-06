@@ -1,7 +1,8 @@
 import { useRef, cloneElement } from 'react'
-import { isValidNonFragmentElement, chain, mergeRefs } from '@nex-ui/utils'
-import { usePopper } from '../popper'
+import { isValidNonFragmentElement, chain } from '@nex-ui/utils'
+import { useTooltip } from './TooltipContext'
 import { isFocusVisible } from '../utils'
+import { PopperAnchor } from '../popper'
 import type { ReactNode, FocusEvent, ReactElement } from 'react'
 
 export const TooltipTrigger = ({
@@ -11,7 +12,7 @@ export const TooltipTrigger = ({
   children?: ReactNode
   'aria-describedby'?: string
 }) => {
-  const { delayOpen, delayClose, referenceRef } = usePopper()
+  const { delayOpen, delayClose } = useTooltip()
 
   const focusVisibleRef = useRef(false)
 
@@ -37,14 +38,18 @@ export const TooltipTrigger = ({
 
   const element = children as ReactElement<any>
 
-  return cloneElement(element, {
-    onMouseEnter: chain(handleMouseEnter, element.props.onMouseEnter),
-    onMouseLeave: chain(handleMouseLeave, element.props.onMouseLeave),
-    onFocus: chain(handleFocus, element.props.onFocus),
-    onBlur: chain(handleBlur, element.props.onBlur),
-    'aria-describedby': element.props['aria-describedby'] || ariaDescribedby,
-    ref: mergeRefs(referenceRef, element.props.ref),
-  })
+  return (
+    <PopperAnchor>
+      {cloneElement(element, {
+        onMouseEnter: chain(handleMouseEnter, element.props.onMouseEnter),
+        onMouseLeave: chain(handleMouseLeave, element.props.onMouseLeave),
+        onFocus: chain(handleFocus, element.props.onFocus),
+        onBlur: chain(handleBlur, element.props.onBlur),
+        'aria-describedby':
+          element.props['aria-describedby'] || ariaDescribedby,
+      })}
+    </PopperAnchor>
+  )
 }
 
 TooltipTrigger.displayName = 'TooltipTrigger'

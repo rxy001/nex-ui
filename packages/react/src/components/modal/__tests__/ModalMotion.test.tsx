@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { renderWithNexUIProvider } from '~/tests/shared'
 import { waitFor } from '@testing-library/react'
 import {
@@ -16,6 +17,8 @@ import {
 import type { ModalPortalProps } from '../types'
 
 function TestModal({ keepMounted, disableAnimation }: ModalPortalProps) {
+  const [open, setOpen] = useState(true)
+
   const renderChildren = () => (
     <>
       <ModalBackdrop data-testid='modal-backdrop' />
@@ -36,7 +39,7 @@ function TestModal({ keepMounted, disableAnimation }: ModalPortalProps) {
   )
 
   return (
-    <Modal defaultOpen>
+    <Modal open={open} onOpenChange={setOpen}>
       <ModalPortal
         keepMounted={keepMounted}
         disableAnimation={disableAnimation}

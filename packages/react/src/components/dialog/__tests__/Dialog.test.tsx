@@ -167,4 +167,15 @@ describe('Dialog', () => {
       'transform: scale(1)',
     )
   })
+
+  it('should render into document.body via Portal when defaultOpen', () => {
+    const { container, getByTestId } = renderWithNexUIProvider(
+      <TestDialog defaultOpen />,
+    )
+
+    expect(container.firstChild).toBeNull()
+
+    const modalRoot = getByTestId('dialog-root')
+    expect(modalRoot.parentElement).toBe(document.body)
+  })
 })

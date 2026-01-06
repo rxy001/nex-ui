@@ -10,10 +10,12 @@ import type {
   HTMLMotionProps,
 } from '../../types/utils'
 import type {
+  ModalCloseProps,
   ModalContentProps,
   ModalMotionProps,
   ModalPortalProps,
   ModalRootProps,
+  ModalTriggerProps,
 } from '../modal/types'
 
 // ----------------Drawer----------------
@@ -72,6 +74,11 @@ type DrawerOwnProps<RootComponent extends ElementType> = {
    * Use the `variants` API to create your own animation.
    */
   motionProps?: ModalMotionProps
+
+  /**
+   * If true, the Dialog is shown by default. (uncontrolled)
+   */
+  defaultOpen?: boolean
 } & ModalProps &
   Omit<ModalPortalProps, 'children'> &
   Pick<ModalRootProps, 'preventScroll'> &
@@ -275,3 +282,7 @@ export type DrawerFooterProps<RootComponent extends ElementType = 'div'> =
     DrawerFooterOwnProps<RootComponent>,
     DrawerFooterPropsOverrides
   >
+
+export interface DrawerTriggerProps extends ModalTriggerProps {}
+
+export interface DrawerCloseProps extends ModalCloseProps {}
