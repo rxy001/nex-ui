@@ -50,7 +50,7 @@ exports[`Popover should have the correct root class name 1`] = `
   data-placement="top"
   data-state="open"
   data-testid="popover-root"
-  id="popover-«ra»-root"
+  id="popover-«r8»-root"
   role="dialog"
   style="--popper-x: 0px; --popper-y: -5px;"
 >

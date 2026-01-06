@@ -92,9 +92,12 @@ describe('computeCoordinatesByPlacement', () => {
   })
 
   it('should use default bottom placement instead of invalid placement', () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     expect(
       // @ts-expect-error
       computeCoordinatesByPlacement({ reference, popper }, 'invalid-placement'),
     ).toEqual({ x: 25, y: 100 })
+    expect(consoleSpy).toHaveBeenCalled()
+    consoleSpy.mockRestore()
   })
 })

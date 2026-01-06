@@ -23,28 +23,9 @@ export type PopperProps = {
   open?: boolean
 
   /**
-   * If true, the Popper is shown by default. (uncontrolled)
-   */
-  defaultOpen?: boolean
-
-  /**
    * Handler that is called when the Popper is opened or closed.
    */
   onOpenChange?: (open: boolean) => void
-
-  /**
-   * The delay in milliseconds before the Popper opens.
-   *
-   * @default 100
-   */
-  openDelay?: number
-
-  /**
-   * The delay in milliseconds before the Popper closes.
-   *
-   * @default 100
-   */
-  closeDelay?: number
 
   /**
    * Callback function that is called when the Popper is closed.
@@ -52,21 +33,12 @@ export type PopperProps = {
   onClose?: () => void
 }
 
-// ----------------- PopperTriggerProps -----------------
-export type PopperTriggerProps = {
+// ----------------- PopperAnchorProps -----------------
+export type PopperAnchorProps = {
   /**
    * The content of the trigger element.
    */
   children?: ReactNode
-
-  /**
-   * If true, closes the Popper when clicking the trigger element.
-   *
-   * @default true
-   */
-  closeOnClick?: boolean
-
-  elementProps?: Record<string, any>
 }
 
 type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
@@ -166,8 +138,3 @@ type PopperContentOwnProps = {
 
 export type PopperContentProps<RootComponent extends ElementType = 'div'> =
   PopperSlotProps<RootComponent> & PopperContentOwnProps
-
-// ----------------- PopperCloseProps -----------------
-export type PopperCloseProps = {
-  children?: ReactNode
-}

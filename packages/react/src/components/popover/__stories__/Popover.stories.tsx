@@ -69,12 +69,6 @@ const meta = {
       options: placements,
       control: 'select',
     },
-    closeDelay: {
-      control: 'number',
-    },
-    openDelay: {
-      control: 'number',
-    },
     disableAnimation: {
       control: 'boolean',
     },
@@ -255,27 +249,6 @@ export const WithFlip: Story = {
   args: {
     placement: 'top-start',
     defaultOpen: true,
-  },
-}
-
-export const WithDelay: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <Popover openDelay={500} closeDelay={0} {...props}>
-          <PopoverTrigger>
-            <Button>Delay open 500ms</Button>
-          </PopoverTrigger>
-          <PopoverContent>This is the content of the popover.</PopoverContent>
-        </Popover>
-        <Popover openDelay={0} closeDelay={500} {...props}>
-          <PopoverTrigger>
-            <Button>Delay close 500ms</Button>
-          </PopoverTrigger>
-          <PopoverContent>This is the content of the popover.</PopoverContent>
-        </Popover>
-      </Container>
-    )
   },
 }
 

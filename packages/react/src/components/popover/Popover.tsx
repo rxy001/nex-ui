@@ -1,9 +1,10 @@
 'use client'
 
-import { useId } from 'react'
+import { useId, useMemo, useRef } from 'react'
+import { useControlledState } from '@nex-ui/hooks'
 import { Popper } from '../popper'
 import { useDefaultProps } from '../utils'
-import { PopoverPropsProvider } from './PopoverContext'
+import { PopoverPropsProvider, PopoverProvider } from './PopoverContext'
 import type { ElementType } from 'react'
 import type { PopoverProps } from './types'
 
@@ -17,33 +18,38 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
 
   const id = useId()
 
+  const triggerRef = useRef<HTMLElement>(null)
+
   const {
     children,
-    open,
-    defaultOpen,
     onOpenChange,
-    openDelay = 0,
-    closeDelay = 0,
+    onClose,
     id: idProp,
+    open: openProp,
+    defaultOpen = false,
     ...remainingProps
   } = props
 
+  const [open, setOpen] = useControlledState(
+    openProp,
+    defaultOpen,
+    onOpenChange,
+  )
+
   const rootId = idProp ?? `popover-${id}-root`
 
-  const ctx = {
-    id: rootId,
-    ...remainingProps,
-  }
+  const popoverCtx = useMemo(
+    () => ({ open, setOpen, triggerRef, rootId }),
+    [open, rootId, setOpen],
+  )
 
   return (
-    <Popper
-      open={open}
-      openDelay={openDelay}
-      closeDelay={closeDelay}
-      defaultOpen={defaultOpen}
-      onOpenChange={onOpenChange}
-    >
-      <PopoverPropsProvider value={ctx}>{children}</PopoverPropsProvider>
+    <Popper open={open} onOpenChange={setOpen} onClose={onClose}>
+      <PopoverProvider value={popoverCtx}>
+        <PopoverPropsProvider value={remainingProps}>
+          {children}
+        </PopoverPropsProvider>
+      </PopoverProvider>
     </Popper>
   )
 }

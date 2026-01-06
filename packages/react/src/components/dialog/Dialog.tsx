@@ -1,5 +1,6 @@
 'use client'
 
+import { useControlledState } from '@nex-ui/hooks'
 import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
 import { DialogPropsProvider } from './DialogContext'
@@ -15,14 +16,20 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
   })
 
   const {
-    open,
     children,
     onOpenChange,
     defaultOpen,
     onClose,
+    open: openProp,
     hideBackdrop = false,
     ...remainingProps
   } = props
+
+  const [open, setOpen] = useControlledState(
+    openProp,
+    defaultOpen,
+    onOpenChange,
+  )
 
   const ctx = {
     ...remainingProps,
@@ -30,12 +37,7 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
   }
 
   return (
-    <Modal
-      open={open}
-      onOpenChange={onOpenChange}
-      defaultOpen={defaultOpen}
-      onClose={onClose}
-    >
+    <Modal open={open} onOpenChange={setOpen} onClose={onClose}>
       <DialogPropsProvider value={ctx}>{children}</DialogPropsProvider>
     </Modal>
   )

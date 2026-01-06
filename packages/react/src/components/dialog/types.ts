@@ -10,10 +10,12 @@ import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants } from '../../theme/recipes'
 import type { ModalProps } from '../modal'
 import type {
+  ModalCloseProps,
   ModalContentProps,
   ModalMotionProps,
   ModalPortalProps,
   ModalRootProps,
+  ModalTriggerProps,
 } from '../modal/types'
 
 // ------------- Dialog --------------
@@ -75,6 +77,11 @@ type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
      * Use the `variants` API to create your own animation.
      */
     motionProps?: ModalMotionProps
+
+    /**
+     * If true, the Dialog is shown by default. (uncontrolled)
+     */
+    defaultOpen?: boolean
   }
 
 export interface DialogPropsOverrides {}
@@ -290,11 +297,7 @@ export type DialogFooterProps<RootComponent extends ElementType = 'div'> =
   >
 
 // ------------- DialogTrigger -------------
-export interface DialogTriggerProps {
-  children?: ReactNode
-}
+export interface DialogTriggerProps extends ModalTriggerProps {}
 
 // ------------- DialogClose -------------
-export interface DialogCloseProps {
-  children?: ReactNode
-}
+export interface DialogCloseProps extends ModalCloseProps {}

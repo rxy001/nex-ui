@@ -1,9 +1,9 @@
 'use client'
 
 import { useMemo } from 'react'
-import { PopperMotion, PopperPortal, PopperRoot, usePopper } from '../popper'
+import { PopperMotion, PopperPortal, PopperRoot } from '../popper'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
-import { usePopoverProps } from './PopoverContext'
+import { usePopover, usePopoverProps } from './PopoverContext'
 import { popoverRecipe } from '../../theme/recipes'
 import type { ReactElement } from 'react'
 import type { PopoverPropsContextValue } from './PopoverContext'
@@ -11,15 +11,17 @@ import type { PopoverPropsContextValue } from './PopoverContext'
 const slots = ['root']
 
 const useAriaProps = (ownerState: PopoverPropsContextValue) => {
-  const { id, 'aria-modal': ariaModal, role = 'dialog' } = ownerState
+  const { 'aria-modal': ariaModal, role = 'dialog' } = ownerState
+
+  const { rootId } = usePopover()
 
   return useMemo(
     () => ({
-      id,
       role,
+      id: rootId,
       'aria-modal': ariaModal,
     }),
-    [ariaModal, id, role],
+    [ariaModal, rootId, role],
   )
 }
 
@@ -27,7 +29,7 @@ export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
   const { motionProps, keepMounted, container, disableAnimation, ...props } =
     usePopoverProps()
 
-  const { open, setOpen, referenceRef } = usePopper()
+  const { open, setOpen, triggerRef } = usePopover()
 
   const slotClasses = useSlotClasses({
     name: 'Popover',
@@ -53,7 +55,7 @@ export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
       onPointerDownOutside: (event: PointerEvent) => {
         const target = event.target as HTMLElement
         // istanbul ignore next
-        if (referenceRef.current?.contains(target)) return
+        if (triggerRef.current?.contains(target)) return
         if (open) setOpen(false)
       },
     },

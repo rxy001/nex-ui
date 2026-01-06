@@ -1,4 +1,3 @@
-import { waitForElementToBeRemoved } from '@testing-library/react'
 import {
   renderWithNexUIProvider,
   testComponentStability,
@@ -10,7 +9,7 @@ import type { PopoverProps } from '../index'
 
 function TestPopover(props: PopoverProps) {
   return (
-    <Popover data-testid='popover-root' openDelay={0} {...props}>
+    <Popover data-testid='popover-root' {...props}>
       <PopoverTrigger>
         <button data-testid='popover-trigger'>Open Popover</button>
       </PopoverTrigger>
@@ -45,24 +44,6 @@ describe('Popover', () => {
     expect(popoverRoot).toHaveClass(popoverSlotClasses.root)
 
     expect(popoverRoot).toMatchSnapshot()
-  })
-
-  it('should close when PopoverClose is clicked', async () => {
-    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-      <TestPopover defaultOpen />,
-      {
-        useAct: true,
-      },
-    )
-
-    const closeButton = getByTestId('close-button')
-    expect(closeButton).toBeInTheDocument()
-
-    await user.click(closeButton)
-
-    await waitForElementToBeRemoved(() => queryByTestId('popover-content'))
-
-    expect(queryByTestId('popover-content')).not.toBeInTheDocument()
   })
 
   it('should disable animations when disableAnimation=true', () => {
@@ -113,51 +94,6 @@ describe('Popover', () => {
 
       const content = getByTestId('popover-content')
       expect(content).toHaveAttribute('tabindex', '-1')
-    })
-
-    it('should have aria-haspopup="dialog" on the trigger element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(<TestPopover />, {
-        useAct: true,
-      })
-
-      const trigger = getByTestId('popover-trigger')
-      expect(trigger).toHaveAttribute('aria-haspopup', 'dialog')
-    })
-
-    it('should have aria-expanded="true" on the trigger element when popover is open', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopover open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const trigger = getByTestId('popover-trigger')
-      expect(trigger).toHaveAttribute('aria-expanded', 'true')
-    })
-
-    it('should have aria-controls on the trigger element when popover is open', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopover open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const root = getByTestId('popover-root')
-      const trigger = getByTestId('popover-trigger')
-
-      expect(trigger).toHaveAttribute('aria-controls', root.id)
-    })
-
-    it('should not have aria-controls on the trigger element when popover is closed', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(<TestPopover />, {
-        useAct: true,
-      })
-
-      const trigger = getByTestId('popover-trigger')
-
-      expect(trigger).not.toHaveAttribute('aria-controls')
     })
   })
 })

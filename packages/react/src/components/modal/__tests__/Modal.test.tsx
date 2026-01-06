@@ -15,19 +15,26 @@ import {
   ModalPanel,
   ModalPortal,
   ModalRoot,
+  ModalTrigger,
 } from '../index'
 import { getScrollBarWidth } from '../ModalRoot'
 import type { ModalProps } from '../index'
-import type { ModalPortalProps, ModalRootProps } from '../types'
+import type {
+  ModalPortalProps,
+  ModalRootProps,
+  ModalContentProps,
+} from '../types'
 
 type TestModalProps = ModalProps &
   Pick<ModalRootProps, 'preventScroll'> &
-  ModalPortalProps & {
+  ModalPortalProps &
+  Pick<
+    ModalContentProps,
+    'closeOnEscape' | 'restoreFocus' | 'closeOnInteractOutside'
+  > & {
+    defaultOpen?: boolean
     className?: string
     'data-testid'?: string
-    restoreFocus?: boolean
-    closeOnInteractOutside?: boolean
-    closeOnEscape?: boolean
   }
 
 function TestModal({
@@ -38,12 +45,18 @@ function TestModal({
   preventScroll,
   closeOnEscape,
   restoreFocus,
+  defaultOpen = false,
   disableAnimation = true,
   'data-testid': testid = 'modal-root',
   ...props
 }: TestModalProps) {
+  const [open, setOpen] = useState(defaultOpen)
+
   return (
-    <Modal {...props}>
+    <Modal open={open} onOpenChange={setOpen} {...props}>
+      <ModalTrigger>
+        <button data-testid='toggle-button'>Toggle Modal</button>
+      </ModalTrigger>
       <ModalPortal
         keepMounted={keepMounted}
         container={container}
@@ -75,22 +88,6 @@ function TestModal({
   )
 }
 
-const ControlledModal = ({ defaultOpen = false, ...props }: TestModalProps) => {
-  const [open, setOpen] = useState(defaultOpen)
-
-  return (
-    <>
-      <TestModal open={open} onOpenChange={setOpen} {...props} />
-      <button
-        data-testid='toggle-button'
-        onClick={() => setOpen((prev) => !prev)}
-      >
-        Toggle Modal
-      </button>
-    </>
-  )
-}
-
 describe('Modal', () => {
   testComponentStability(<TestModal open />)
 
@@ -108,11 +105,7 @@ describe('Modal', () => {
   })
 
   it('should render into document.body via Portal when open', () => {
-    const { container, getByTestId } = renderWithNexUIProvider(
-      <TestModal open />,
-    )
-
-    expect(container.firstChild).toBeNull()
+    const { getByTestId } = renderWithNexUIProvider(<TestModal open />)
 
     const modalRoot = getByTestId('modal-root')
     expect(modalRoot.parentElement).toBe(document.body)
@@ -125,17 +118,6 @@ describe('Modal', () => {
 
     const modalFooter = getByTestId('modal-footer')
     expect(modalRoot).toContainElement(modalFooter)
-  })
-
-  it('should render into document.body via Portal when defaultOpen', () => {
-    const { container, getByTestId } = renderWithNexUIProvider(
-      <TestModal defaultOpen />,
-    )
-
-    expect(container.firstChild).toBeNull()
-
-    const modalRoot = getByTestId('modal-root')
-    expect(modalRoot.parentElement).toBe(document.body)
   })
 
   it('should render into custom container when container prop is provided', () => {
@@ -156,7 +138,7 @@ describe('Modal', () => {
 
   it('should be controlled by open prop', async () => {
     const { queryByTestId, getByTestId, user } = renderWithNexUIProvider(
-      <ControlledModal defaultOpen={false} />,
+      <TestModal defaultOpen={false} />,
     )
 
     expect(queryByTestId('modal-root')).toBeNull()
@@ -174,39 +156,23 @@ describe('Modal', () => {
   })
 
   it('should close when clicking outside the modal', async () => {
-    const { getByTestId, queryByTestId, rerender, user } =
-      renderWithNexUIProvider(<ControlledModal defaultOpen />)
+    const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
+      <TestModal defaultOpen />,
+    )
 
-    let modalRoot = queryByTestId('modal-root')
+    const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
     await user.click(getByTestId('modal-panel'))
 
-    expect(modalRoot).not.toBeInTheDocument()
-
-    // test uncontrolled behavior
-    rerender(<TestModal defaultOpen />)
-    modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
-
-    await user.click(getByTestId('modal-panel'))
     expect(modalRoot).not.toBeInTheDocument()
   })
 
   it('should not close when clicking its panel and closeOnInteractOutside=false', async () => {
-    const { getByTestId, queryByTestId, rerender, user } =
-      renderWithNexUIProvider(
-        <ControlledModal closeOnInteractOutside={false} defaultOpen />,
-      )
-    let modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
-
-    await user.click(getByTestId('modal-panel'))
-    expect(modalRoot).toBeInTheDocument()
-
-    // test uncontrolled behavior
-    rerender(<TestModal defaultOpen closeOnInteractOutside={false} />)
-    modalRoot = queryByTestId('modal-root')
+    const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
+      <TestModal closeOnInteractOutside={false} defaultOpen />,
+    )
+    const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
     await user.click(getByTestId('modal-panel'))
@@ -214,19 +180,11 @@ describe('Modal', () => {
   })
 
   it('should close when pressing Escape key', async () => {
-    const { queryByTestId, rerender, user } = renderWithNexUIProvider(
-      <ControlledModal defaultOpen />,
+    const { queryByTestId, user } = renderWithNexUIProvider(
+      <TestModal defaultOpen />,
     )
 
-    let modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
-
-    await user.keyboard('{Escape}')
-    expect(modalRoot).not.toBeInTheDocument()
-
-    // test uncontrolled behavior
-    rerender(<TestModal defaultOpen />)
-    modalRoot = queryByTestId('modal-root')
+    const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
     await user.keyboard('{Escape}')
@@ -234,19 +192,11 @@ describe('Modal', () => {
   })
 
   it('should not close when pressing Escape key if closeOnEscape=false', async () => {
-    const { queryByTestId, rerender, user } = renderWithNexUIProvider(
-      <ControlledModal closeOnEscape={false} defaultOpen />,
+    const { queryByTestId, user } = renderWithNexUIProvider(
+      <TestModal closeOnEscape={false} defaultOpen />,
     )
 
-    let modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
-
-    await user.keyboard('{Escape}')
-    expect(modalRoot).toBeInTheDocument()
-
-    // test uncontrolled behavior
-    rerender(<TestModal defaultOpen closeOnEscape={false} />)
-    modalRoot = queryByTestId('modal-root')
+    const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
     await user.keyboard('{Escape}')
@@ -275,7 +225,7 @@ describe('Modal', () => {
     expect(modalRoot).toHaveStyle('display: block')
   })
 
-  it('should onClose callback be called when modal is closed', async () => {
+  it('should call onClose when the modal is closed', async () => {
     const onClose = jest.fn()
     const { queryByTestId, user } = renderWithNexUIProvider(
       <TestModal defaultOpen onClose={onClose} />,
@@ -474,7 +424,7 @@ describe('Modal', () => {
 
     it('should restore focus to previously focused element when closed with restoreFocus=true', async () => {
       const { getByTestId, user } = renderWithNexUIProvider(
-        <ControlledModal restoreFocus />,
+        <TestModal restoreFocus />,
       )
 
       const toggleButton = getByTestId('toggle-button')
@@ -486,7 +436,7 @@ describe('Modal', () => {
 
     it('should not restore focus when restoreFocus=false', async () => {
       const { getByTestId, user } = renderWithNexUIProvider(
-        <ControlledModal restoreFocus={false} />,
+        <TestModal restoreFocus={false} />,
       )
 
       const toggleButton = getByTestId('toggle-button')

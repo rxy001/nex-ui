@@ -148,8 +148,8 @@ describe('Drawer', () => {
     expect(queryByTestId('drawer-root')).not.toBeInTheDocument()
   })
 
-  it('should disable animations when disableAnimation=true', () => {
-    const { queryByClassName } = renderWithNexUIProvider(
+  it('should disable animations when disableAnimation=true', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
       <TestDrawer
         open
         disableAnimation={true}
@@ -157,7 +157,24 @@ describe('Drawer', () => {
           className: 'test-motion',
         }}
       />,
+      {
+        useAct: true,
+      },
     )
     expect(queryByClassName('test-motion')).not.toBeInTheDocument()
+  })
+
+  it('should render into document.body via Portal when defaultOpen', async () => {
+    const { container, getByTestId } = await renderWithNexUIProvider(
+      <TestDrawer defaultOpen />,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(container.firstChild).toBeNull()
+
+    const modalRoot = getByTestId('drawer-root')
+    expect(modalRoot.parentElement).toBe(document.body)
   })
 })

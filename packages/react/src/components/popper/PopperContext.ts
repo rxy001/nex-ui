@@ -5,12 +5,10 @@ import type { RefObject } from 'react'
 import type { PopperPortalProps } from './types'
 
 export interface PopperContextValue {
+  open?: boolean
   setOpen: (open: boolean) => void
-  open: boolean
   referenceRef: RefObject<HTMLDivElement | null>
   popperRootRef: RefObject<HTMLDivElement | null>
-  delayOpen: () => void
-  delayClose: () => void
 }
 
 export const [PopperProvider, usePopper] = createContext<PopperContextValue>({
