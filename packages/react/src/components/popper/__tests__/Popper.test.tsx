@@ -1,4 +1,5 @@
-import { act, waitFor } from '@testing-library/react'
+import { act } from '@testing-library/react'
+import { useState } from 'react'
 import {
   renderWithNexUIProvider,
   testComponentStability,
@@ -8,44 +9,57 @@ import {
   Popper,
   PopperRoot,
   PopperContent,
-  PopperTrigger,
+  PopperAnchor,
   PopperPortal,
   PopperMotion,
 } from '../index'
 import type { PopperProps, PopperRootProps } from '../index'
-import type { PopperContentProps, PopperPortalProps } from '../types'
+import type { PopperPortalProps } from '../types'
 
 type TestPopperProps = PopperProps &
-  PopperRootProps &
-  PopperPortalProps &
-  PopperContentProps
+  Pick<PopperRootProps, 'closeOnEscape' | 'closeOnDetached' | 'placement'> &
+  PopperPortalProps & {
+    defaultOpen?: boolean
+    className?: string
+    'data-testid'?: string
+  }
 
 function TestPopper({
-  open,
-  defaultOpen,
-  openDelay = 0,
-  closeDelay = 0,
-  onOpenChange,
   keepMounted,
   disableAnimation,
+  closeOnDetached,
+  placement,
+  closeOnEscape,
+  className,
+  defaultOpen = false,
+  'data-testid': testid = 'popper-root',
   ...props
 }: TestPopperProps) {
+  const [open, setOpen] = useState(defaultOpen)
+
   return (
-    <Popper
-      open={open}
-      onOpenChange={onOpenChange}
-      defaultOpen={defaultOpen}
-      openDelay={openDelay}
-      closeDelay={closeDelay}
-    >
-      <PopperTrigger>
-        <button data-testid='popper-trigger'>Trigger</button>
-      </PopperTrigger>
+    <Popper open={open} onOpenChange={setOpen} {...props}>
+      <PopperAnchor>
+        <button
+          onClick={() => {
+            setOpen(true)
+          }}
+          data-testid='popper-trigger'
+        >
+          Trigger
+        </button>
+      </PopperAnchor>
       <PopperPortal
         keepMounted={keepMounted}
         disableAnimation={disableAnimation}
       >
-        <PopperRoot data-testid='popper-root' {...props}>
+        <PopperRoot
+          closeOnEscape={closeOnEscape}
+          className={className}
+          data-testid={testid}
+          closeOnDetached={closeOnDetached}
+          placement={placement}
+        >
           <PopperMotion>
             <PopperContent data-testid='popper-content'>
               Popper Content
@@ -226,49 +240,6 @@ describe('Popper', () => {
     expect(popperRoot).toBeInTheDocument()
   })
 
-  it('should delay opening and closing by default', async () => {
-    jest.useFakeTimers()
-
-    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
-      <TestPopper openDelay={100} closeDelay={100} />,
-      {
-        useAct: true,
-        userEventOptions: { advanceTimers: jest.advanceTimersByTime },
-      },
-    )
-
-    const trigger = getByTestId('popper-trigger')
-
-    await user.click(trigger)
-
-    await act(async () => {
-      jest.advanceTimersByTime(50)
-    })
-
-    expect(queryByTestId('popper-root')).toBeNull()
-
-    await act(async () => {
-      jest.advanceTimersByTime(80)
-    })
-
-    await waitFor(() =>
-      expect(queryByTestId('popper-root')).toBeInTheDocument(),
-    )
-
-    await user.keyboard('{Escape}')
-
-    jest.advanceTimersByTime(30)
-
-    expect(queryByTestId('popper-root')).toBeInTheDocument()
-
-    await act(async () => {
-      jest.advanceTimersByTime(100)
-    })
-
-    await waitFor(() => expect(queryByTestId('popper-root')).toBeNull())
-    jest.useRealTimers()
-  })
-
   it('should render correct styles based on disableAnimation and keepMounted', async () => {
     const { getByTestId, rerender } = await renderWithNexUIProvider(
       <TestPopper disableAnimation={true} keepMounted open={false} />,
@@ -292,6 +263,23 @@ describe('Popper', () => {
     })
 
     expect(popperRoot).not.toHaveStyle('display: none')
+  })
+
+  it('should call onClose when the popepr is closed', async () => {
+    const onClose = jest.fn()
+    const { queryByTestId, user } = await renderWithNexUIProvider(
+      <TestPopper defaultOpen onClose={onClose} />,
+      {
+        useAct: true,
+      },
+    )
+
+    const popperRoot = queryByTestId('popper-root')
+    expect(popperRoot).toBeInTheDocument()
+    await user.keyboard('{Escape}')
+
+    expect(popperRoot).not.toBeInTheDocument()
+    expect(onClose).toHaveBeenCalledTimes(1)
   })
 
   describe('Accessibility', () => {

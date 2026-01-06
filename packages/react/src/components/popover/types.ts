@@ -1,22 +1,18 @@
-import type { ElementType } from 'react'
+import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { UseFocusTrapProps } from '../utils/useFocusTrap'
 import type {
-  PopperCloseProps,
   PopperContentProps,
   PopperProps,
   PopperRootProps,
-  PopperTriggerProps,
 } from '../popper'
 import type { OverrideProps } from '../../types/utils'
 import type { PopoverContentVariants } from '../../theme/recipes'
 import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
 
-type PopoverOwnProps<RootComponent extends ElementType> = Omit<
-  PopperProps,
-  'openDelay' | 'closeDelay'
-> &
+// ------------------- PopoverProps -------------------
+type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
   Pick<
     PopperRootProps,
     | 'placement'
@@ -31,7 +27,7 @@ type PopoverOwnProps<RootComponent extends ElementType> = Omit<
     | 'closeOnEscape'
   > &
   Omit<PopperPortalProps, 'children'> &
-  Pick<UseFocusTrapProps, 'restoreFocus'> & {
+  Pick<UseFocusTrapProps, 'restoreFocus' | 'loop'> & {
     /**
      * The component or element to render as the root.
      *
@@ -55,18 +51,9 @@ type PopoverOwnProps<RootComponent extends ElementType> = Omit<
     motionProps?: PopperMotionProps
 
     /**
-     * The delay in milliseconds before the popover opens.
-     *
-     * @default 0
+     * If true, the Popover is shown by default. (uncontrolled)
      */
-    openDelay?: number
-
-    /**
-     * The delay in milliseconds before the popover closes.
-     *
-     * @default 0
-     */
-    closeDelay?: number
+    defaultOpen?: boolean
   }
 
 export interface PopoverPropsOverrides {}
@@ -78,6 +65,7 @@ export type PopoverProps<RootComponent extends ElementType = 'div'> =
     PopoverPropsOverrides
   >
 
+// ------------------- PopoverContentProps -------------------
 type PopoverContentOwnProps<RootComponent extends ElementType> = {
   /**
    * The component or element to render as the root.
@@ -132,6 +120,22 @@ export type PopoverContentProps<RootComponent extends ElementType = 'div'> =
     PopoverContentPropsOverrides
   >
 
-export type PopoverTriggerProps = Omit<PopperTriggerProps, 'elementProps'>
+// ------------------- PopoverTriggerProps -------------------
+export interface PopoverTriggerProps {
+  /**
+   * The content of the trigger element.
+   */
+  children?: ReactNode
 
-export type PopoverCloseProps = PopperCloseProps
+  /**
+   * If true, closes the Popper when clicking the trigger element.
+   *
+   * @default true
+   */
+  closeOnClick?: boolean
+}
+
+// ------------------- PopoverCloseProps -------------------
+export interface PopoverCloseProps {
+  children?: ReactNode
+}
