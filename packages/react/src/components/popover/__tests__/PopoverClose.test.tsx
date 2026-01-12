@@ -35,6 +35,7 @@ describe('PopoverClose', () => {
   it("should return children as-is when PopoverClose's children is not a valid React element", async () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { container } = await renderWithNexUIProvider(
+      // @ts-expect-error
       <TestPopover>Close Popover</TestPopover>,
       {
         container: document.body,

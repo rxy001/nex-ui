@@ -7,9 +7,9 @@ export { motionFeatures } from './motionFeatures'
 export { useSlotClasses } from './useSlotClasses'
 export { PresenceMotion } from './PresenceMotion'
 export { computePosition, getOverflowAncestors } from './computePosition'
+export * from './focusTrap'
 export { isFocusVisible } from './isFocusVisible'
-export * from './useDismissHandlers'
-export * from './useFocusTrap'
+export * from './DismissibleLayer'
 
 export type { PresenceMotionProps } from './PresenceMotion'
 export type {

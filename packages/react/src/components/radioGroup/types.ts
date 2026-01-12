@@ -215,17 +215,3 @@ export type RadioGroupProps<
 >
 
 export type RadioState = { value?: string | number; disabled?: boolean }
-
-export interface RadioGroupContextValue<
-  T extends string | number = string | number,
-> {
-  setValue: (value: T) => void
-  isChecked: (value?: T) => boolean
-  isTabbable: (value?: T) => boolean
-  name?: string
-  disabled?: boolean
-  color?: RadioVariants['color']
-  size?: RadioVariants['size']
-  setGroupState: (radio: RadioState) => void
-  disableAnimation: boolean
-}

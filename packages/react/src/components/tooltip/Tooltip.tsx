@@ -12,8 +12,8 @@ import {
 } from '../popper'
 import { useSlot, useStyles, useSlotClasses, useDefaultProps } from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
-import { TooltipTrigger as TooltipTriggerImpl } from './TooltipTrigger'
-import { TooltipProvider, useTooltip } from './TooltipContext'
+import { TooltipTrigger } from './TooltipTrigger'
+import { TooltipProvider, useTooltipContext } from './TooltipContext'
 import type { ElementType } from 'react'
 import type { TooltipProps } from './types'
 
@@ -22,11 +22,7 @@ const slots = ['root', 'content']
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
 const useSlotAriaProps = (ownerState: TooltipProps) => {
-  const id = useId()
-
-  const rootId = ownerState.id ?? `tooltip-${id}-root`
-
-  const { open } = useTooltip()
+  const { rootId } = useTooltipContext()
 
   const { role = 'tooltip' } = ownerState
 
@@ -36,16 +32,13 @@ const useSlotAriaProps = (ownerState: TooltipProps) => {
         role,
         id: rootId,
       },
-      trigger: {
-        'aria-describedby': open ? rootId : undefined,
-      },
     }
-  }, [open, rootId, role])
+  }, [rootId, role])
 }
 
 // eslint-disable-next-line react/display-name
 const TooltipImpl = (props: TooltipProps) => {
-  const { delayOpen, delayClose, setOpen } = useTooltip()
+  const { delayOpen, delayClose, setOpen } = useTooltipContext()
   const {
     children,
     container,
@@ -87,12 +80,6 @@ const TooltipImpl = (props: TooltipProps) => {
     classNames,
   })
 
-  const [TooltipTrigger, getTooltipTriggerProps] = useSlot({
-    elementType: TooltipTriggerImpl,
-    shouldForwardComponent: false,
-    additionalProps: slotAriaProps.trigger,
-  })
-
   const [TooltipRoot, getTooltipRootProps] = useSlot({
     style: styles.root,
     elementType: PopperRoot,
@@ -100,8 +87,8 @@ const TooltipImpl = (props: TooltipProps) => {
     shouldForwardComponent: false,
     externalForwardedProps: remainingProps,
     additionalProps: {
-      onMouseEnter: interactive ? delayOpen : undefined,
-      onMouseLeave: interactive ? delayClose : undefined,
+      onPointerEnter: interactive ? delayOpen : undefined,
+      onPointerLeave: interactive ? delayClose : undefined,
       onPointerDownOutside: () => {
         setOpen(false)
       },
@@ -133,7 +120,7 @@ const TooltipImpl = (props: TooltipProps) => {
 
   return (
     <>
-      <TooltipTrigger {...getTooltipTriggerProps()}>{children}</TooltipTrigger>
+      <TooltipTrigger>{children}</TooltipTrigger>
       <PopperPortal
         disableAnimation={disableAnimation}
         container={container}
@@ -170,6 +157,9 @@ export const Tooltip = <RootComponent extends ElementType = 'div'>(
     closeDelay = 100,
     ...remainingProps
   } = props
+
+  const id = useId()
+  const rootId = `tooltip-${id}-root`
 
   const [open, setOpen] = useControlledState(
     openProp,
@@ -212,8 +202,8 @@ export const Tooltip = <RootComponent extends ElementType = 'div'>(
   }, [debouncedClosePopper, debouncedOpenPopper])
 
   const ctx = useMemo(
-    () => ({ open, setOpen, delayOpen, delayClose }),
-    [delayClose, delayOpen, open, setOpen],
+    () => ({ open, setOpen, delayOpen, delayClose, rootId }),
+    [delayClose, delayOpen, open, setOpen, rootId],
   )
 
   useEffect(() => {

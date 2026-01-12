@@ -1,18 +1,16 @@
 import { useRef, cloneElement } from 'react'
-import { isValidNonFragmentElement, chain } from '@nex-ui/utils'
-import { useTooltip } from './TooltipContext'
+import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
+import { useTooltipContext } from './TooltipContext'
 import { isFocusVisible } from '../utils'
 import { PopperAnchor } from '../popper'
-import type { ReactNode, FocusEvent, ReactElement } from 'react'
+import type { FocusEvent, ReactElement } from 'react'
 
 export const TooltipTrigger = ({
   children,
-  'aria-describedby': ariaDescribedby,
 }: {
-  children?: ReactNode
-  'aria-describedby'?: string
+  children?: ReactElement<any>
 }) => {
-  const { delayOpen, delayClose } = useTooltip()
+  const { delayOpen, delayClose, rootId, open } = useTooltipContext()
 
   const focusVisibleRef = useRef(false)
 
@@ -20,8 +18,8 @@ export const TooltipTrigger = ({
     return children
   }
 
-  const handleMouseEnter = delayOpen
-  const handleMouseLeave = delayClose
+  const handlePointerEnter = delayOpen
+  const handlePointerLeave = delayClose
   const handleFocus = (event: FocusEvent<HTMLElement>) => {
     if (isFocusVisible(event.currentTarget)) {
       delayOpen()
@@ -36,18 +34,21 @@ export const TooltipTrigger = ({
     }
   }
 
-  const element = children as ReactElement<any>
-
   return (
     <PopperAnchor>
-      {cloneElement(element, {
-        onMouseEnter: chain(handleMouseEnter, element.props.onMouseEnter),
-        onMouseLeave: chain(handleMouseLeave, element.props.onMouseLeave),
-        onFocus: chain(handleFocus, element.props.onFocus),
-        onBlur: chain(handleBlur, element.props.onBlur),
-        'aria-describedby':
-          element.props['aria-describedby'] || ariaDescribedby,
-      })}
+      {cloneElement(
+        children,
+        mergeProps(
+          {
+            onPointerEnter: handlePointerEnter,
+            onPointerLeave: handlePointerLeave,
+            onFocus: handleFocus,
+            onBlur: handleBlur,
+            'aria-describedby': open ? rootId : undefined,
+          },
+          children.props,
+        ),
+      )}
     </PopperAnchor>
   )
 }

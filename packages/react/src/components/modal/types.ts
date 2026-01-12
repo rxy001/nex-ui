@@ -2,8 +2,13 @@ import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { PortalProps } from '@nex-ui/utils'
 import type { HTMLMotionProps, Overwrite } from '../../types/utils'
-import type { ComponentProps, ElementType, ReactNode } from 'react'
-import type { UseDismissHandlersProps } from '../utils'
+import type {
+  ComponentProps,
+  ElementType,
+  ReactNode,
+  ReactElement,
+} from 'react'
+import type { DismissibleLayerProps } from '../utils'
 
 type ModalSlotProps<RootComponent extends ElementType> = Overwrite<
   ComponentProps<RootComponent>,
@@ -36,18 +41,18 @@ export type ModalProps = {
 
 // ------------- ModalTrigger -------------
 export interface ModalTriggerProps {
-  children?: ReactNode
+  children?: ReactElement<any>
 }
 
 // ------------- ModalClose -------------
 export interface ModalCloseProps {
-  children?: ReactNode
+  children?: ReactElement<any>
 }
 
 // ------------- ModalContent -------------
 export type ModalContentProps<RootComponent extends ElementType = 'section'> =
   ModalSlotProps<RootComponent> &
-    UseDismissHandlersProps & {
+    Omit<DismissibleLayerProps, 'children'> & {
       /**
        * If true, the Modal will restore focus to previously focused element once the Modal is hidden or unmounted.
        * @default true

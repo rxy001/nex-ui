@@ -1,4 +1,9 @@
-import type { ReactNode, ElementType, ComponentProps } from 'react'
+import type {
+  ReactNode,
+  ElementType,
+  ComponentProps,
+  ReactElement,
+} from 'react'
 import type { ClassValue } from 'clsx'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { PortalProps } from '@nex-ui/utils'
@@ -6,7 +11,7 @@ import type {
   Placement,
   FlipOptions,
   OffsetOptions,
-  UseDismissHandlersProps,
+  DismissibleLayerProps,
 } from '../utils'
 import type { HTMLMotionProps, Overwrite } from '../../types/utils'
 
@@ -38,7 +43,7 @@ export type PopperAnchorProps = {
   /**
    * The content of the trigger element.
    */
-  children?: ReactNode
+  children?: ReactElement<any>
 }
 
 type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
@@ -51,7 +56,7 @@ type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
 >
 
 // ----------------- PopperRootProps -----------------
-type PopperRootOwnProps = UseDismissHandlersProps & {
+type PopperRootOwnProps = Omit<DismissibleLayerProps, 'children'> & {
   /**
    * The placement of the Popper relative to the trigger element.
    *

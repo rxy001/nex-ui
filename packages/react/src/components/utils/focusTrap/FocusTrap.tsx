@@ -1,19 +1,25 @@
-import { __DEV__, addEventListener, ownerDocument } from '@nex-ui/utils'
-import { useEffect, useRef } from 'react'
+import {
+  __DEV__,
+  addEventListener,
+  isValidNonFragmentElement,
+  mergeProps,
+  ownerDocument,
+} from '@nex-ui/utils'
+import { cloneElement, useEffect, useRef } from 'react'
 import { useEvent, useLatest } from '@nex-ui/hooks'
 import { getTabbable } from './getTabbable'
 import type { KeyboardEvent, FocusEvent as ReactFocusEvent } from 'react'
-import type { UseFocusTrapProps } from './types'
+import type { FocusTrapProps } from './types'
 
-export const useFocusTrap = <
-  R extends HTMLElement | null = HTMLElement | null,
->({
-  ref,
+export const FocusTrap = ({
   active,
   paused,
+  children,
   loop = true,
   restoreFocus = true,
-}: UseFocusTrapProps<R>) => {
+  ...remainingProps
+}: FocusTrapProps) => {
+  const ref = useRef<HTMLElement>(null)
   const restoredNodeRef = useRef<EventTarget>(null)
   const ignoreNextFocusRef = useRef<boolean>(false)
   const pausedRef = useLatest(paused)
@@ -44,7 +50,7 @@ export const useFocusTrap = <
         focus(node)
       }
     }
-  }, [active, ref, restoreFocus])
+  }, [active, restoreFocus])
 
   useEffect(() => {
     if (!active || !ref.current) return
@@ -115,7 +121,7 @@ export const useFocusTrap = <
       lastFocusedElementRef.current = null
       ignoreNextFocusRef.current = false
     }
-  }, [active, pausedRef, ref])
+  }, [active, pausedRef])
 
   const handleKeydown = useEvent((event: KeyboardEvent) => {
     // istanbul ignore next
@@ -149,12 +155,26 @@ export const useFocusTrap = <
     }
   })
 
-  return {
-    tabIndex: -1,
-    onFocus: handleFocus,
-    onKeyDown: handleKeydown,
+  if (!isValidNonFragmentElement(children)) {
+    return children
   }
+
+  return cloneElement(
+    children,
+    mergeProps(
+      {
+        tabIndex: -1,
+        ref: ref,
+        onFocus: handleFocus,
+        onKeyDown: handleKeydown,
+      },
+      remainingProps,
+      children.props,
+    ),
+  )
 }
+
+FocusTrap.displayName = 'FocusTrap'
 
 function focus(element: HTMLElement) {
   if (element && typeof element.focus === 'function') {

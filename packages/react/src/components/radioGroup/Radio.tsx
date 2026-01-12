@@ -5,7 +5,7 @@ import { __DEV__ } from '@nex-ui/utils'
 import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
-import { useRadioGroup } from './RadioGroupContext'
+import { useRadioGroupContext } from './RadioGroupContext'
 import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { radioRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
@@ -63,7 +63,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     props: inProps,
   })
 
-  const groupCtx = useRadioGroup()
+  const groupCtx = useRadioGroupContext()
 
   const inGroup = !!groupCtx
 

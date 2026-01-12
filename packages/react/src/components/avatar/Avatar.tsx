@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
 import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
-import { useAvatarGroup } from './AvatarGroupContext'
+import { useAvatarGroupContext } from './AvatarGroupContext'
 import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 import type {
   AvatarOwnerState,
@@ -96,7 +96,7 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const groupCtx = useAvatarGroup()
+  const groupCtx = useAvatarGroupContext()
 
   const inGroup = !!groupCtx
 

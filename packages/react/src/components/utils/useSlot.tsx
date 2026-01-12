@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { mergeProps, mergeRefs, kebabCase } from '@nex-ui/utils'
+import { mergeProps, kebabCase } from '@nex-ui/utils'
 import { useMemo } from 'react'
 import { nex } from '@nex-ui/styled'
 import type { ComponentProps, ElementType as ReactElementType } from 'react'
@@ -102,12 +102,6 @@ export const useSlot = <
       a11y,
     )
 
-    const ref = mergeRefs(
-      additionalProps?.ref,
-      externalForwardedProps?.ref,
-      externalSlotProps?.ref,
-    )
-
     const className = clsx(classNames, props?.className)
 
     let mergedSx: Interpolation = null
@@ -122,7 +116,6 @@ export const useSlot = <
 
     return {
       ...props,
-      ref,
       className: className === '' ? undefined : className,
       sx: mergedSx,
     }

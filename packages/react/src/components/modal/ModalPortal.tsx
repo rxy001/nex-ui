@@ -3,7 +3,7 @@
 import { AnimatePresence } from 'motion/react'
 import { useMemo } from 'react'
 import { Portal } from '@nex-ui/utils'
-import { ModalPortalPropsProvider, useModal } from './ModalContext'
+import { ModalPortalPropsProvider, useModalContext } from './ModalContext'
 import type { ModalPortalPropsContextValue } from './ModalContext'
 import type { ModalPortalProps } from './types'
 
@@ -13,7 +13,7 @@ export const ModalPortal = ({
   keepMounted = false,
   disableAnimation = false,
 }: ModalPortalProps) => {
-  const { open } = useModal()
+  const { open } = useModalContext()
 
   const ctx = useMemo<ModalPortalPropsContextValue>(
     () => ({

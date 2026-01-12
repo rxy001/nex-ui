@@ -12,13 +12,14 @@ export interface ModalContextValue {
   modalBodyId: string
 }
 
-export const [ModalProvider, useModal] = createContext<ModalContextValue>({
-  contextName: 'ModalContext',
-  hookName: 'useModal',
-  providerName: 'ModalProvider',
-  strict: true,
-  defaultValue: null as unknown as ModalContextValue,
-})
+export const [ModalProvider, useModalContext] =
+  createContext<ModalContextValue>({
+    contextName: 'ModalContext',
+    hookName: 'useModalContext',
+    providerName: 'ModalProvider',
+    strict: true,
+    defaultValue: null as unknown as ModalContextValue,
+  })
 
 export interface ModalPortalPropsContextValue {
   container: ModalPortalProps['container']
@@ -26,10 +27,10 @@ export interface ModalPortalPropsContextValue {
   disableAnimation: boolean
 }
 
-export const [ModalPortalPropsProvider, useModalPortalProps] =
+export const [ModalPortalPropsProvider, useModalPortalPropsContext] =
   createContext<ModalPortalPropsContextValue>({
     contextName: 'ModalPortalPropsContext',
-    hookName: 'useModalPortalProps',
+    hookName: 'useModalPortalPropsContext',
     providerName: 'ModalPortalPropsProvider',
     strict: true,
     defaultValue: null as unknown as ModalPortalPropsContextValue,

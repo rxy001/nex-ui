@@ -1,13 +1,20 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { AvatarGroupContextValue } from './types'
+import type { AvatarVariants } from '../../theme/recipes'
 
-export const [AvatarGroupProvider, useAvatarGroup] =
+export interface AvatarGroupContextValue {
+  outlined: boolean
+  color: AvatarVariants['color']
+  radius: AvatarVariants['radius']
+  size: AvatarVariants['size']
+}
+
+export const [AvatarGroupProvider, useAvatarGroupContext] =
   createContext<AvatarGroupContextValue | null>({
     contextName: 'AvatarGroupContext',
     providerName: 'AvatarGroupProvider',
-    hookName: 'useAvatarGroup',
+    hookName: 'useAvatarGroupContext',
     strict: false,
     defaultValue: null,
   })

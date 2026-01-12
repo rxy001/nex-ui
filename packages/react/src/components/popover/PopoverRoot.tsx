@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { PopperMotion, PopperPortal, PopperRoot } from '../popper'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
-import { usePopover, usePopoverProps } from './PopoverContext'
+import { usePopoverContext, usePopoverPropsContext } from './PopoverContext'
 import { popoverRecipe } from '../../theme/recipes'
 import type { ReactElement } from 'react'
 import type { PopoverPropsContextValue } from './PopoverContext'
@@ -13,7 +13,7 @@ const slots = ['root']
 const useAriaProps = (ownerState: PopoverPropsContextValue) => {
   const { 'aria-modal': ariaModal, role = 'dialog' } = ownerState
 
-  const { rootId } = usePopover()
+  const { rootId } = usePopoverContext()
 
   return useMemo(
     () => ({
@@ -27,9 +27,9 @@ const useAriaProps = (ownerState: PopoverPropsContextValue) => {
 
 export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
   const { motionProps, keepMounted, container, disableAnimation, ...props } =
-    usePopoverProps()
+    usePopoverPropsContext()
 
-  const { open, setOpen, triggerRef } = usePopover()
+  const { open, setOpen, triggerRef } = usePopoverContext()
 
   const slotClasses = useSlotClasses({
     name: 'Popover',

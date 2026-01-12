@@ -1,8 +1,8 @@
-import type { RefObject } from 'react'
+import type { ReactElement } from 'react'
 
-export interface UseFocusTrapProps<
-  R extends HTMLElement | null = HTMLElement | null,
-> {
+export interface FocusTrapProps {
+  children: ReactElement<any>
+
   /**
    * When `true`, focus cannot escape the focus scope via keyboard,
    * pointer, or a programmatic focus.
@@ -28,6 +28,4 @@ export interface UseFocusTrapProps<
    * @default true
    */
   loop?: boolean
-
-  ref: RefObject<R>
 }
