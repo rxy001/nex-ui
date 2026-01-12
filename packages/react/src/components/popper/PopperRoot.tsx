@@ -8,10 +8,10 @@ import {
   useSlot,
   getOverflowAncestors,
   computePosition,
-  useDismissHandlers,
+  DismissibleLayer,
 } from '../utils'
 
-import { usePopper, usePopperPortalProps } from './PopperContext'
+import { usePopperContext, usePopperPortalPropsContext } from './PopperContext'
 import type { CSSProperties, ElementType } from 'react'
 import type { PopperRootProps } from './types'
 
@@ -35,9 +35,9 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   inProps: PopperRootProps<RootComponent>,
 ) => {
   const props = inProps as PopperRootProps<'div'>
-  const { open, referenceRef, popperRootRef, setOpen } = usePopper()
+  const { open, referenceRef, popperRootRef, setOpen } = usePopperContext()
 
-  const { keepMounted, disableAnimation } = usePopperPortalProps()
+  const { keepMounted, disableAnimation } = usePopperPortalPropsContext()
 
   const {
     children,
@@ -62,17 +62,6 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   // because ResizeObserver is triggered when observing starts.
   const initialRender = useRef(true)
 
-  const dismissHandlers = useDismissHandlers({
-    onEscapeKeyDown: chain((_event: KeyboardEvent) => {
-      if (closeOnEscape && open) {
-        setOpen(false)
-      }
-    }, onEscapeKeyDown),
-    onFocusOutside,
-    onInteractOutside,
-    onPointerDownOutside,
-  })
-
   const [PopperRootRoot, getPopperRootRootProps] = useSlot({
     style,
     elementType: 'div',
@@ -88,7 +77,6 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
               : 'none'
             : undefined,
       } as CSSProperties,
-      ...dismissHandlers,
     },
     a11y: { 'aria-hidden': open ? undefined : true },
     dataAttrs: {
@@ -230,7 +218,18 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
   ])
 
   return (
-    <PopperRootRoot {...getPopperRootRootProps()}>{children}</PopperRootRoot>
+    <DismissibleLayer
+      onEscapeKeyDown={chain((_event: KeyboardEvent) => {
+        if (closeOnEscape && open) {
+          setOpen(false)
+        }
+      }, onEscapeKeyDown)}
+      onFocusOutside={onFocusOutside}
+      onInteractOutside={onInteractOutside}
+      onPointerDownOutside={onPointerDownOutside}
+    >
+      <PopperRootRoot {...getPopperRootRootProps()}>{children}</PopperRootRoot>
+    </DismissibleLayer>
   )
 }
 

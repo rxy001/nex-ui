@@ -7,6 +7,7 @@ import { avatarGroupRecipe } from '../../theme/recipes'
 import { Avatar } from './Avatar'
 import type { ElementType } from 'react'
 import type { AvatarGroupProps } from './types'
+import type { AvatarGroupContextValue } from './AvatarGroupContext'
 
 const slots = ['root', 'surplus']
 
@@ -76,7 +77,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     shouldForwardComponent: false,
   })
 
-  const ctx = useMemo(
+  const ctx = useMemo<AvatarGroupContextValue>(
     () => ({
       size,
       color,

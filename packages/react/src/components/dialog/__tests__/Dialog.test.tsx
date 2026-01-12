@@ -168,9 +168,12 @@ describe('Dialog', () => {
     )
   })
 
-  it('should render into document.body via Portal when defaultOpen', () => {
-    const { container, getByTestId } = renderWithNexUIProvider(
+  it('should render into document.body via Portal when defaultOpen', async () => {
+    const { container, getByTestId } = await renderWithNexUIProvider(
       <TestDialog defaultOpen />,
+      {
+        useAct: true,
+      },
     )
 
     expect(container.firstChild).toBeNull()

@@ -1,56 +1,48 @@
-import { createRef, useRef, useState } from 'react'
+import { useState } from 'react'
 import userEvent from '@testing-library/user-event'
-import { render, renderHook } from '@testing-library/react'
-import { useFocusTrap } from '../index'
-import type { ReactNode } from 'react'
+import { render } from '@testing-library/react'
+import { FocusTrap } from '../index'
 import type { UserEvent } from '@testing-library/user-event'
-import type { UseFocusTrapProps } from '../index'
 
-type TestFocusTrap = Omit<UseFocusTrapProps, 'ref'> & {
-  children?: ReactNode
-}
-
-function TestFocusTrap(props: TestFocusTrap) {
-  const ref = useRef<HTMLDivElement>(null)
-  const focusTrapProps = useFocusTrap({ ...props, ref })
-
-  return (
-    <div role='dialog' ref={ref} {...focusTrapProps}>
-      {props.children ?? 'content'}
-    </div>
-  )
-}
-
-describe('useFocusTrap', () => {
+describe('FocusTrap', () => {
   let user: UserEvent
 
   beforeEach(() => {
     user = userEvent.setup()
   })
 
-  it('should return correct props', () => {
-    const ref = createRef<null>()
-    const { result } = renderHook(() => useFocusTrap({ active: true, ref }))
+  it('should render children as-is if children is not a valid React element', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
 
-    expect(result.current).toEqual({
-      tabIndex: -1,
-      onFocus: expect.any(Function),
-      onKeyDown: expect.any(Function),
-    })
+    // @ts-expect-error
+    const { container } = render(<FocusTrap active>{null}</FocusTrap>)
+    expect(container.firstChild).toBeNull()
+    expect(consoleErrorSpy).toHaveBeenCalled()
+    consoleErrorSpy.mockRestore()
+  })
+
+  it('should render children as-is and warn if children is a Fragment', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+
+    const { container } = render(
+      <FocusTrap active>
+        <></>
+      </FocusTrap>,
+    )
+    expect(container.firstChild).toBeNull()
+    expect(consoleErrorSpy).toHaveBeenCalled()
+    consoleErrorSpy.mockRestore()
   })
 
   it('should automatically focus children when focus is outside <FocusTrap> after the component mounts', () => {
-    const { getByRole } = render(<TestFocusTrap active />)
+    const { getByRole } = render(
+      <FocusTrap active>
+        <div role='dialog'>Dialog</div>
+      </FocusTrap>,
+    )
 
     const dialog = getByRole('dialog')
     expect(document.activeElement).toBe(dialog)
-  })
-
-  it('should not focus children when inactive', () => {
-    const { getByRole } = render(<TestFocusTrap />)
-
-    const dialog = getByRole('dialog')
-    expect(document.activeElement).not.toBe(dialog)
   })
 
   it('should restore focus to previously focused element on unmount when restoreFocus=true', async () => {
@@ -62,11 +54,16 @@ describe('useFocusTrap', () => {
           <button data-testid='open-button' onClick={() => setActive(true)}>
             Button
           </button>
-          <TestFocusTrap active={active}>
-            <button data-testid='close-button' onClick={() => setActive(false)}>
-              Button
-            </button>
-          </TestFocusTrap>
+          <FocusTrap active={active}>
+            <div role='dialog'>
+              <button
+                data-testid='close-button'
+                onClick={() => setActive(false)}
+              >
+                Button
+              </button>
+            </div>
+          </FocusTrap>
         </>
       )
     }
@@ -96,11 +93,16 @@ describe('useFocusTrap', () => {
           <button data-testid='open-button' onClick={() => setActive(true)}>
             Button
           </button>
-          <TestFocusTrap active={active} restoreFocus={false}>
-            <button data-testid='close-button' onClick={() => setActive(false)}>
-              Button
-            </button>
-          </TestFocusTrap>
+          <FocusTrap active={active} restoreFocus={false}>
+            <div role='dialog'>
+              <button
+                data-testid='close-button'
+                onClick={() => setActive(false)}
+              >
+                Button
+              </button>
+            </div>
+          </FocusTrap>
         </>
       )
     }
@@ -122,10 +124,12 @@ describe('useFocusTrap', () => {
 
   it('should trap focus within the component when active=true and loop=false', async () => {
     const { getByTestId } = render(
-      <TestFocusTrap active loop={false}>
-        <button data-testid='first-button'>First</button>
-        <button data-testid='second-button'>Second</button>
-      </TestFocusTrap>,
+      <FocusTrap active loop={false}>
+        <div>
+          <button data-testid='first-button'>First</button>
+          <button data-testid='second-button'>Second</button>
+        </div>
+      </FocusTrap>,
     )
 
     const firstButton = getByTestId('first-button')
@@ -142,10 +146,12 @@ describe('useFocusTrap', () => {
 
   it('should focus the last element in the trap on shift+tab from the first element in trap', async () => {
     const { getByTestId } = render(
-      <TestFocusTrap active>
-        <button data-testid='first-button'>First</button>
-        <button data-testid='second-button'>Second</button>
-      </TestFocusTrap>,
+      <FocusTrap active>
+        <div>
+          <button data-testid='first-button'>First</button>
+          <button data-testid='second-button'>Second</button>
+        </div>
+      </FocusTrap>,
     )
 
     const firstButton = getByTestId('first-button')
@@ -160,10 +166,12 @@ describe('useFocusTrap', () => {
 
   it('should focus the first element in trap on tab from the last element in trap', async () => {
     const { getByTestId } = render(
-      <TestFocusTrap active>
-        <button data-testid='first-button'>First</button>
-        <button data-testid='second-button'>Second</button>
-      </TestFocusTrap>,
+      <FocusTrap active>
+        <div>
+          <button data-testid='first-button'>First</button>
+          <button data-testid='second-button'>Second</button>
+        </div>
+      </FocusTrap>,
     )
 
     const firstButton = getByTestId('first-button')
@@ -179,10 +187,12 @@ describe('useFocusTrap', () => {
   it('should not trap focus when paused', async () => {
     const { getByTestId, getByRole } = render(
       <div>
-        <TestFocusTrap active paused>
-          <button data-testid='inside-button'>Inside</button>
-        </TestFocusTrap>
         <button data-testid='outside-button'>Outside Button</button>
+        <FocusTrap active paused>
+          <div role='dialog'>
+            <button data-testid='inside-button'>Inside</button>
+          </div>
+        </FocusTrap>
       </div>,
     )
 
@@ -196,6 +206,8 @@ describe('useFocusTrap', () => {
     expect(document.activeElement).toBe(insideButton)
 
     await user.tab()
+    await user.tab()
+
     expect(document.activeElement).toBe(outsideButton)
   })
 
@@ -203,9 +215,11 @@ describe('useFocusTrap', () => {
     const { getByTestId } = render(
       <>
         <button data-testid='outside-button'>Outside Button</button>
-        <TestFocusTrap active>
-          <button data-testid='inside-button'>Inside</button>
-        </TestFocusTrap>
+        <FocusTrap active>
+          <div>
+            <button data-testid='inside-button'>Inside</button>
+          </div>
+        </FocusTrap>
       </>,
     )
 
@@ -221,9 +235,11 @@ describe('useFocusTrap', () => {
 
   it('should handle focus when no tabbable elements exist', async () => {
     const { getByRole } = render(
-      <TestFocusTrap active>
-        <span>No tabbable content</span>
-      </TestFocusTrap>,
+      <FocusTrap active>
+        <div role='dialog'>
+          <span>No tabbable content</span>
+        </div>
+      </FocusTrap>,
     )
 
     const container = getByRole('dialog')

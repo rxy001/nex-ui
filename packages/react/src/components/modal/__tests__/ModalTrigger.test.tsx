@@ -45,6 +45,7 @@ describe('ModalTrigger', () => {
   it("should return children as-is when ModalTrigger's children is not a valid React element", () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { container } = renderWithNexUIProvider(
+      // @ts-expect-error
       <TestModal>Invalid Element</TestModal>,
     )
     expect(container.textContent).toBe('Invalid Element')

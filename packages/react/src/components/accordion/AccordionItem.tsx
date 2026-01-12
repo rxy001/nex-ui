@@ -15,7 +15,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
-import { useAccordionGroup } from './AccordionContext'
+import { useAccordionGroupContext } from './AccordionContext'
 import type { ElementType, HTMLAttributes } from 'react'
 import type { Variants } from 'motion/react'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
@@ -128,7 +128,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     keepMounted: defaultKeepMounted,
     hideIndicator: defaultHideIndicator,
     indicatorMotionProps: defaultIndicatorMotionProps,
-  } = useAccordionGroup()
+  } = useAccordionGroupContext()
 
   const {
     children,

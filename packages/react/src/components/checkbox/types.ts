@@ -250,16 +250,3 @@ export type CheckboxGroupProps<
   CheckboxGroupOwnProps<T, RootComponent>,
   CheckboxGroupPropsOverrides
 >
-
-export type CheckboxGroupContextValue<
-  T extends number | string = number | string,
-> = {
-  toggleValue: (value: T) => void
-  isChecked: (value?: T) => boolean
-  name?: string
-  disabled?: boolean
-  color?: CheckboxVariants['color']
-  size?: CheckboxVariants['size']
-  radius?: CheckboxVariants['radius']
-  disableAnimation?: boolean
-}

@@ -7,10 +7,10 @@ import type { RefObject } from 'react'
 
 export type PopoverPropsContextValue = Omit<PopoverProps, keyof PopperProps>
 
-export const [PopoverPropsProvider, usePopoverProps] =
+export const [PopoverPropsProvider, usePopoverPropsContext] =
   createContext<PopoverPropsContextValue>({
     contextName: 'PopoverPropsContext',
-    hookName: 'usePopoverProps',
+    hookName: 'usePopoverPropsContext',
     providerName: 'PopoverPropsProvider',
     strict: true,
     defaultValue: null as unknown as PopoverPropsContextValue,
@@ -23,9 +23,9 @@ interface PopoverContextValue {
   rootId: string
 }
 
-export const [PopoverProvider, usePopover] = createContext({
+export const [PopoverProvider, usePopoverContext] = createContext({
   contextName: 'PopoverContext',
-  hookName: 'usePopover',
+  hookName: 'usePopoverContext',
   providerName: 'PopoverProvider',
   strict: true,
   defaultValue: null as unknown as PopoverContextValue,

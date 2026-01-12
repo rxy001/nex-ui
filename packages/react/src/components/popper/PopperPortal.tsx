@@ -3,7 +3,7 @@
 import { AnimatePresence } from 'motion/react'
 import { useMemo } from 'react'
 import { Portal } from '@nex-ui/utils'
-import { PopperPortalPropsProvider, usePopper } from './PopperContext'
+import { PopperPortalPropsProvider, usePopperContext } from './PopperContext'
 import type { PopperPortalPropsContextValue } from './PopperContext'
 import type { PopperPortalProps } from './types'
 
@@ -13,7 +13,7 @@ export const PopperPortal = ({
   keepMounted = false,
   disableAnimation = false,
 }: PopperPortalProps) => {
-  const { open } = usePopper()
+  const { open } = usePopperContext()
 
   const ctx = useMemo<PopperPortalPropsContextValue>(
     () => ({

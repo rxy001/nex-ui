@@ -1,4 +1,4 @@
-import type { ReactNode, ElementType } from 'react'
+import type { ReactNode, ElementType, ReactElement } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type {
@@ -38,7 +38,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     /**
      * The children to render. Usually a trigger element.
      */
-    children?: ReactNode
+    children?: ReactElement<any>
 
     /**
      * Additional class names to apply to the root.

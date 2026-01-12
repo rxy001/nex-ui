@@ -8,6 +8,7 @@ import { useDefaultProps, useStyles, useSlotClasses, useSlot } from '../utils'
 import { accordionRecipe } from '../../theme/recipes'
 import type { ElementType, Key } from 'react'
 import type { AccordionProps } from './types'
+import type { AccordionGroupContextValue } from './AccordionContext'
 
 const slots = ['root']
 
@@ -95,7 +96,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     }
   })
 
-  const ctx = useMemo(
+  const ctx = useMemo<AccordionGroupContextValue>(
     () => ({
       expandedKeys,
       toggleExpandedKey,

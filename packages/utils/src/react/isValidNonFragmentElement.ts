@@ -1,8 +1,10 @@
 import { Fragment, isValidElement } from 'react'
 import { __DEV__ } from '../shared'
-import type { ReactNode } from 'react'
+import type { ReactNode, ReactElement } from 'react'
 
-export const isValidNonFragmentElement = (node: ReactNode) => {
+export const isValidNonFragmentElement = (
+  node: ReactNode,
+): node is ReactElement<any> => {
   if (!isValidElement(node)) {
     if (__DEV__) {
       console.error('[Nex UI]: The provided node is not a valid React element.')

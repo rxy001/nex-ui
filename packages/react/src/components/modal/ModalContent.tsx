@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { chain } from '@nex-ui/utils'
-import { useSlot, useDismissHandlers, useFocusTrap } from '../utils'
-import { useModal } from './ModalContext'
+import { useSlot, DismissibleLayer, FocusTrap } from '../utils'
+import { useModalContext } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
 import type { ModalContentProps } from './types'
@@ -23,7 +23,7 @@ const recipe = defineRecipe({
 const style = recipe()
 
 const useAriaProps = (props: ModalContentProps) => {
-  const { modalContentId, modalHeaderId, modalBodyId } = useModal()
+  const { modalContentId, modalHeaderId, modalBodyId } = useModalContext()
 
   const {
     id = modalContentId,
@@ -58,10 +58,9 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     closeOnEscape = true,
     ...remainingProps
   } = inProps as ModalContentProps
-  const { modalId, open, setOpen } = useModal()
+  const { modalId, open, setOpen } = useModalContext()
 
   const [paused, setPaused] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
 
   const modalManager = useModalManager()
 
@@ -72,38 +71,11 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
 
   const ariaProps = useAriaProps(remainingProps)
 
-  const dismissHandlers = useDismissHandlers({
-    onFocusOutside,
-    onInteractOutside,
-    onEscapeKeyDown: chain((_event: KeyboardEvent) => {
-      if (closeOnEscape && open && isTopmostModal()) {
-        setOpen(false)
-      }
-    }, onEscapeKeyDown),
-    onPointerDownOutside: chain((_event: PointerEvent) => {
-      if (closeOnInteractOutside && open && isTopmostModal()) {
-        setOpen(false)
-      }
-    }, onPointerDownOutside),
-  })
-
-  const focusTrapHandlers = useFocusTrap({
-    active: open,
-    restoreFocus,
-    paused,
-    ref,
-  })
-
   const [ModalContentRoot, getModalContentRootProps] = useSlot({
     style,
     elementType: 'section',
     externalForwardedProps: remainingProps,
     a11y: ariaProps,
-    additionalProps: {
-      ref,
-      ...focusTrapHandlers,
-      ...dismissHandlers,
-    },
     dataAttrs: {
       closeOnEscape,
       restoreFocus,
@@ -119,9 +91,26 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
   }, [isTopmostModal, modalManager])
 
   return (
-    <ModalContentRoot {...getModalContentRootProps()}>
-      {children}
-    </ModalContentRoot>
+    <DismissibleLayer
+      onFocusOutside={onFocusOutside}
+      onInteractOutside={onInteractOutside}
+      onEscapeKeyDown={chain((_event: KeyboardEvent) => {
+        if (closeOnEscape && open && isTopmostModal()) {
+          setOpen(false)
+        }
+      }, onEscapeKeyDown)}
+      onPointerDownOutside={chain((_event: PointerEvent) => {
+        if (closeOnInteractOutside && open && isTopmostModal()) {
+          setOpen(false)
+        }
+      }, onPointerDownOutside)}
+    >
+      <FocusTrap active={open} restoreFocus={restoreFocus} paused={paused}>
+        <ModalContentRoot {...getModalContentRootProps()}>
+          {children}
+        </ModalContentRoot>
+      </FocusTrap>
+    </DismissibleLayer>
   )
 }
 

@@ -222,17 +222,3 @@ export type AccordionItemOwnerState<RootComponent extends ElementType = 'div'> =
     expanded: boolean
     variant: AccordionVariants['variant']
   }
-
-export type AccordionGroupContextValue = {
-  expandedKeys: Key[]
-  toggleExpandedKey: (key: Key) => void
-  keepMounted: boolean
-  hideIndicator: boolean
-  disabledKeys: Key[]
-  disabled: boolean
-  disableAnimation: boolean
-  indicator?: ReactNode
-  motionProps?: HTMLMotionProps<'div'>
-  variant: AccordionVariants['variant']
-  indicatorMotionProps?: HTMLMotionProps<'span'>
-}

@@ -8,10 +8,10 @@ type DrawerPropsContextValue = Omit<
   'open' | 'children' | 'onOpenChange' | 'defaultOpen' | 'onClose'
 >
 
-export const [DrawerPropsProvider, useDrawerProps] =
+export const [DrawerPropsProvider, useDrawerPropsContext] =
   createContext<DrawerPropsContextValue>({
     contextName: 'DrawerPropsContext',
-    hookName: 'useDrawerProps',
+    hookName: 'useDrawerPropsContext',
     providerName: 'DrawerPropsProvider',
     strict: true,
     defaultValue: null as unknown as DrawerPropsContextValue,

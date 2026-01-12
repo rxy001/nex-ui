@@ -1,7 +1,7 @@
-import type { ElementType, ReactNode } from 'react'
+import type { ElementType, ReactElement } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
-import type { UseFocusTrapProps } from '../utils/useFocusTrap'
+import type { FocusTrapProps } from '../utils'
 import type {
   PopperContentProps,
   PopperProps,
@@ -27,7 +27,7 @@ type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
     | 'closeOnEscape'
   > &
   Omit<PopperPortalProps, 'children'> &
-  Pick<UseFocusTrapProps, 'restoreFocus' | 'loop'> & {
+  Pick<FocusTrapProps, 'restoreFocus' | 'loop'> & {
     /**
      * The component or element to render as the root.
      *
@@ -125,7 +125,7 @@ export interface PopoverTriggerProps {
   /**
    * The content of the trigger element.
    */
-  children?: ReactNode
+  children?: ReactElement<any>
 
   /**
    * If true, closes the Popper when clicking the trigger element.
@@ -137,5 +137,5 @@ export interface PopoverTriggerProps {
 
 // ------------------- PopoverCloseProps -------------------
 export interface PopoverCloseProps {
-  children?: ReactNode
+  children?: ReactElement<any>
 }

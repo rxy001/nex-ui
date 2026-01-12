@@ -11,13 +11,14 @@ export interface PopperContextValue {
   popperRootRef: RefObject<HTMLDivElement | null>
 }
 
-export const [PopperProvider, usePopper] = createContext<PopperContextValue>({
-  contextName: 'PopperContext',
-  hookName: 'usePopper',
-  providerName: 'PopperProvider',
-  strict: true,
-  defaultValue: null as unknown as PopperContextValue,
-})
+export const [PopperProvider, usePopperContext] =
+  createContext<PopperContextValue>({
+    contextName: 'PopperContext',
+    hookName: 'usePopperContext',
+    providerName: 'PopperProvider',
+    strict: true,
+    defaultValue: null as unknown as PopperContextValue,
+  })
 
 export interface PopperPortalPropsContextValue {
   container: PopperPortalProps['container']
@@ -25,10 +26,10 @@ export interface PopperPortalPropsContextValue {
   disableAnimation: boolean
 }
 
-export const [PopperPortalPropsProvider, usePopperPortalProps] =
+export const [PopperPortalPropsProvider, usePopperPortalPropsContext] =
   createContext<PopperPortalPropsContextValue>({
     contextName: 'PopperPortalPropsContext',
-    hookName: 'usePopperPortalProps',
+    hookName: 'usePopperPortalPropsContext',
     providerName: 'PopperPortalPropsProvider',
     strict: true,
     defaultValue: null as unknown as PopperPortalPropsContextValue,

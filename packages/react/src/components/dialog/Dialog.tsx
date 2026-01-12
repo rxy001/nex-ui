@@ -6,6 +6,7 @@ import { Modal } from '../modal'
 import { DialogPropsProvider } from './DialogContext'
 import type { ElementType } from 'react'
 import type { DialogProps } from './types'
+import type { DialogPropsContextValue } from './DialogContext'
 
 export const Dialog = <RootComponent extends ElementType = 'div'>(
   inProps: DialogProps<RootComponent>,
@@ -31,7 +32,7 @@ export const Dialog = <RootComponent extends ElementType = 'div'>(
     onOpenChange,
   )
 
-  const ctx = {
+  const ctx: DialogPropsContextValue = {
     ...remainingProps,
     hideBackdrop,
   }
