@@ -3,25 +3,29 @@
 import { createContext } from '@nex-ui/utils'
 import type { DialogProps, DialogContentProps } from './types'
 
-type DialogPropsContextValue = Omit<
+export type DialogPropsContextValue = Omit<
   DialogProps,
   'open' | 'children' | 'onOpenChange' | 'defaultOpen' | 'onClose'
 >
 
-export const [DialogPropsProvider, useDialogProps] =
+export const [DialogPropsProvider, useDialogPropsContext] =
   createContext<DialogPropsContextValue>({
     contextName: 'DialogPropsContext',
-    hookName: 'useDialogProps',
+    hookName: 'useDialogPropsContext',
     providerName: 'DialogPropsProvider',
     strict: true,
     defaultValue: null as unknown as DialogPropsContextValue,
   })
 
-export const [DialogContentPropsProvider, useDialogContentProps] =
-  createContext<DialogContentProps>({
+export interface DialogContentPropsContextValue {
+  scroll: DialogContentProps['scroll']
+}
+
+export const [DialogContentPropsProvider, useDialogContentPropsContext] =
+  createContext<DialogContentPropsContextValue>({
     contextName: 'DialogContentPropsContext',
-    hookName: 'useDialogContentProps',
+    hookName: 'useDialogContentPropsContext',
     providerName: 'DialogContentPropsProvider',
     strict: true,
-    defaultValue: null as unknown as DialogContentProps,
+    defaultValue: null as unknown as DialogContentPropsContextValue,
   })

@@ -1,13 +1,13 @@
 'use client'
 
-import { usePopper, usePopperPortalProps } from './PopperContext'
+import { usePopperContext, usePopperPortalPropsContext } from './PopperContext'
 import { useSlot, PresenceMotion } from '../utils'
 import type { PopperMotionProps } from './types'
 
 export const PopperMotion = (props: PopperMotionProps) => {
-  const { open } = usePopper()
+  const { open } = usePopperContext()
   const { children, ...remainingProps } = props
-  const { keepMounted } = usePopperPortalProps()
+  const { keepMounted } = usePopperPortalPropsContext()
 
   const [PopperMotionRoot, getPopperMotionRootProps] = useSlot({
     elementType: PresenceMotion,

@@ -5,7 +5,7 @@ import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { useSlot } from '../utils'
-import { useModal, useModalPortalProps } from './ModalContext'
+import { useModalContext, useModalPortalPropsContext } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
 import type { ModalRootProps } from './types'
@@ -24,8 +24,9 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
 ) => {
   const { children, preventScroll = false, ...remainingProps } = props
   const rootRef = useRef<HTMLDivElement>(null)
-  const { open, modalId } = useModal()
-  const { container, keepMounted, disableAnimation } = useModalPortalProps()
+  const { open, modalId } = useModalContext()
+  const { container, keepMounted, disableAnimation } =
+    useModalPortalPropsContext()
   const modalManager = useModalManager()
   const registeredRef = useRef(false)
 

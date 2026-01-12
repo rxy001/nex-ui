@@ -45,6 +45,7 @@ describe('PopoverTrigger', () => {
   it("should return children as-is when PopoverTrigger's children is not a valid React element", async () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { container } = await renderWithNexUIProvider(
+      // @ts-expect-error
       <TestPopover>Invalid Element</TestPopover>,
       {
         useAct: true,

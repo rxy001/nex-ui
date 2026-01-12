@@ -202,10 +202,3 @@ export type AvatarGroupProps<RootComponent extends ElementType = 'div'> =
     AvatarGroupOwnProps<RootComponent>,
     AvatarGroupPropsOverrides
   >
-
-export type AvatarGroupContextValue = {
-  outlined: boolean
-  color: AvatarVariants['color']
-  radius: AvatarVariants['radius']
-  size: AvatarVariants['size']
-}

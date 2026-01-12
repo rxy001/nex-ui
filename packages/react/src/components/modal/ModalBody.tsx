@@ -2,7 +2,7 @@
 
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import { useModal } from './ModalContext'
+import { useModalContext } from './ModalContext'
 import type { ElementType } from 'react'
 import type { ModalBodyProps } from './types'
 
@@ -20,7 +20,7 @@ const style = recipe()
 export const ModalBody = <RootComponent extends ElementType = 'div'>(
   props: ModalBodyProps<RootComponent>,
 ) => {
-  const { modalBodyId } = useModal()
+  const { modalBodyId } = useModalContext()
   const bodyId = props.id ?? modalBodyId
 
   const [ModalBodyRoot, getModalBodyRootProps] = useSlot({

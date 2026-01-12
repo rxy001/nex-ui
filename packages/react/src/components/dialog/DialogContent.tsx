@@ -15,10 +15,14 @@ import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPanel } from '../modal'
-import { DialogContentPropsProvider, useDialogProps } from './DialogContext'
+import {
+  DialogContentPropsProvider,
+  useDialogPropsContext,
+} from './DialogContext'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DialogContentProps } from './types'
+import type { DialogContentPropsContextValue } from './DialogContext'
 
 const slots = ['root', 'paper', 'wrapper', 'closeButton']
 
@@ -65,7 +69,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     closeOnEscape,
     closeOnInteractBackdrop,
     hideBackdrop,
-  } = useDialogProps()
+  } = useDialogPropsContext()
 
   const {
     children,
@@ -168,9 +172,16 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     }
   }, [motionProps, placement])
 
+  const ctx = useMemo<DialogContentPropsContextValue>(
+    () => ({
+      scroll,
+    }),
+    [scroll],
+  )
+
   const renderPaper = () => (
     <DialogContentPaper {...getDialogContentPaperProps()}>
-      <DialogContentPropsProvider value={ownerState}>
+      <DialogContentPropsProvider value={ctx}>
         {!hideCloseButton && (
           <DialogClose>
             <Ripple>

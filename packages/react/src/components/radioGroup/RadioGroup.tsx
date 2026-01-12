@@ -7,11 +7,8 @@ import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
 import { radioGroupRecipe } from '../../theme/recipes'
 import { RadioGroupProvider } from './RadioGroupContext'
 import type { ElementType, KeyboardEvent } from 'react'
-import type {
-  RadioGroupProps,
-  RadioGroupContextValue,
-  RadioState,
-} from './types'
+import type { RadioGroupProps, RadioState } from './types'
+import type { RadioGroupContextValue } from './RadioGroupContext'
 
 const slots = ['root', 'label', 'wrapper']
 

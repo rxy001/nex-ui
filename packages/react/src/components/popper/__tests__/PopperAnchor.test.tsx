@@ -6,7 +6,10 @@ describe('PopperAnchor', () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { container } = renderWithNexUIProvider(
       <Popper>
-        <PopperAnchor>Invalid Element</PopperAnchor>
+        {
+          // @ts-expect-error
+          <PopperAnchor>Invalid Element</PopperAnchor>
+        }
       </Popper>,
     )
 

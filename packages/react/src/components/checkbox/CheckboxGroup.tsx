@@ -7,7 +7,8 @@ import { CheckboxGroupProvider } from './CheckboxGroupContext'
 import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { checkboxGroupRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
-import type { CheckboxGroupContextValue, CheckboxGroupProps } from './types'
+import type { CheckboxGroupProps } from './types'
+import type { CheckboxGroupContextValue } from './CheckboxGroupContext'
 
 const slots = ['root', 'label', 'wrapper']
 

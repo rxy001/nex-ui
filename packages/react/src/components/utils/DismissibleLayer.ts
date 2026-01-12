@@ -1,19 +1,24 @@
-import { useEffect, useRef } from 'react'
+import { cloneElement, useEffect, useRef } from 'react'
 import { useEscapeKeydown, useLatest } from '@nex-ui/hooks'
+import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
+import type { ReactElement, HTMLAttributes } from 'react'
 
-export interface UseDismissHandlersProps {
+export interface DismissibleLayerProps extends HTMLAttributes<HTMLElement> {
+  children: ReactElement<any>
   onEscapeKeyDown?: (event: KeyboardEvent) => void
   onPointerDownOutside?: (event: PointerEvent) => void
   onFocusOutside?: (event: FocusEvent) => void
   onInteractOutside?: (event: PointerEvent | FocusEvent) => void
 }
 
-export const useDismissHandlers = (props: UseDismissHandlersProps) => {
+export const DismissibleLayer = (props: DismissibleLayerProps) => {
   const {
     onPointerDownOutside,
     onEscapeKeyDown,
     onFocusOutside,
     onInteractOutside,
+    children,
+    ...remainingProps
   } = props
 
   const pointerDownOutside = usePointerDownOutside((event) => {
@@ -30,10 +35,22 @@ export const useDismissHandlers = (props: UseDismissHandlersProps) => {
     onEscapeKeyDown?.(event)
   })
 
-  return {
-    ...pointerDownOutside,
-    ...focusOutside,
+  // istanbul ignore if
+  if (!isValidNonFragmentElement(children)) {
+    return children
   }
+
+  return cloneElement(
+    children,
+    mergeProps(
+      {
+        ...pointerDownOutside,
+        ...focusOutside,
+      },
+      remainingProps,
+      children.props,
+    ),
+  )
 }
 
 function usePointerDownOutside(

@@ -2,7 +2,7 @@
 
 import { useDefaultProps, useSlotClasses, useStyles, useSlot } from '../utils'
 import { dialogBodyRecipe } from '../../theme/recipes'
-import { useDialogContentProps } from './DialogContext'
+import { useDialogContentPropsContext } from './DialogContext'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogBodyProps } from './types'
@@ -12,7 +12,7 @@ const slots = ['root']
 export const DialogBody = <RootComponent extends ElementType = 'div'>(
   inProps: DialogBodyProps<RootComponent>,
 ) => {
-  const { scroll } = useDialogContentProps()
+  const { scroll } = useDialogContentPropsContext()
 
   const props = useDefaultProps<DialogBodyProps>({
     name: 'DialogBody',

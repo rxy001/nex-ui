@@ -269,6 +269,7 @@ describe('Tooltip', () => {
   it("should return children as-is when Tooltip's children is not a valid React element", async () => {
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
     const { container } = await renderWithNexUIProvider(
+      // @ts-expect-error
       <Tooltip content='content'>Trigger</Tooltip>,
       {
         useAct: true,

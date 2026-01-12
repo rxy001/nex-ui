@@ -2,23 +2,20 @@
 
 import { cloneElement } from 'react'
 import { isValidNonFragmentElement } from '@nex-ui/utils'
-import { useModal } from './ModalContext'
-import type { ReactElement } from 'react'
+import { useModalContext } from './ModalContext'
 import type { ModalCloseProps } from './types'
 
 export const ModalClose = ({ children }: ModalCloseProps) => {
-  const { setOpen } = useModal()
+  const { setOpen } = useModalContext()
 
   if (!isValidNonFragmentElement(children)) {
     return children
   }
 
-  const element = children as ReactElement<any>
-
-  return cloneElement(element, {
-    'aria-label': element.props?.['aria-label'] || 'Close',
+  return cloneElement(children, {
+    'aria-label': children.props?.['aria-label'] || 'Close',
     onClick: () => {
-      const { onClick } = element.props
+      const { onClick } = children.props
 
       if (onClick) {
         const result = onClick()

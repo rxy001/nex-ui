@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import mergeWith from 'lodash.mergewith'
+import { mergeRefs } from './mergeRefs'
 import { chain } from '../shared/chain'
 import type { ClassValue } from 'clsx'
 
@@ -44,6 +45,8 @@ export function mergeProps<T extends PropsArg[]>(...args: T) {
         )
       } else if (key === 'sx' && a && b) {
         result[key] = [a, b].flat(1)
+      } else if (key === 'ref' && a && b) {
+        result[key] = mergeRefs(a, b)
       } else {
         result[key] = b !== undefined ? b : a
       }
