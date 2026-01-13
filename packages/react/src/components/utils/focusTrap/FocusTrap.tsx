@@ -4,6 +4,7 @@ import {
   isValidNonFragmentElement,
   mergeProps,
   ownerDocument,
+  focus,
 } from '@nex-ui/utils'
 import { cloneElement, useEffect, useRef } from 'react'
 import { useEvent, useLatest } from '@nex-ui/hooks'
@@ -23,6 +24,7 @@ export const FocusTrap = ({
   const restoredNodeRef = useRef<EventTarget>(null)
   const ignoreNextFocusRef = useRef<boolean>(false)
   const pausedRef = useLatest(paused)
+  const restoreFocusRef = useLatest(restoreFocus)
   const lastFocusedElementRef = useRef<HTMLElement | null>(null)
 
   const handleFocus = useEvent((e: ReactFocusEvent<HTMLDivElement>) => {
@@ -45,12 +47,14 @@ export const FocusTrap = ({
 
     return () => {
       const node = restoredNodeRef.current as HTMLElement
-      if (restoreFocus && node) {
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      if (restoreFocusRef.current && node) {
         ignoreNextFocusRef.current = true
         focus(node)
       }
     }
-  }, [active, restoreFocus])
+  }, [active, restoreFocusRef])
 
   useEffect(() => {
     if (!active || !ref.current) return
@@ -169,15 +173,10 @@ export const FocusTrap = ({
         onKeyDown: handleKeydown,
       },
       remainingProps,
+      // @ts-ignore
       children.props,
     ),
   )
 }
 
 FocusTrap.displayName = 'FocusTrap'
-
-function focus(element: HTMLElement) {
-  if (element && typeof element.focus === 'function') {
-    element.focus({ preventScroll: true })
-  }
-}

@@ -3,6 +3,7 @@ import type {
   ElementType,
   ComponentProps,
   ReactElement,
+  Ref,
 } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
@@ -43,7 +44,9 @@ export type PopperAnchorProps = {
   /**
    * The content of the trigger element.
    */
-  children?: ReactElement<any>
+  children?: ReactElement<{
+    ref?: Ref<HTMLElement>
+  }>
 }
 
 type PopperSlotProps<RootComponent extends ElementType> = Overwrite<

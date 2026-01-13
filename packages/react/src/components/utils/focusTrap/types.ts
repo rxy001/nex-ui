@@ -1,8 +1,7 @@
 import type { ReactElement } from 'react'
 
 export interface FocusTrapProps {
-  children: ReactElement<any>
-
+  children: ReactElement
   /**
    * When `true`, focus cannot escape the focus scope via keyboard,
    * pointer, or a programmatic focus.

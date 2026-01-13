@@ -10,10 +10,10 @@ import {
   computePosition,
   DismissibleLayer,
 } from '../utils'
-
 import { usePopperContext, usePopperPortalPropsContext } from './PopperContext'
 import type { CSSProperties, ElementType } from 'react'
 import type { PopperRootProps } from './types'
+import type { Placement } from '../utils'
 
 const recipe = defineRecipe({
   base: {
@@ -36,7 +36,6 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
 ) => {
   const props = inProps as PopperRootProps<'div'>
   const { open, referenceRef, popperRootRef, setOpen } = usePopperContext()
-
   const { keepMounted, disableAnimation } = usePopperPortalPropsContext()
 
   const {
@@ -50,13 +49,15 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     flip = { mainAxis: true, crossAxis: true },
     offset = 5,
     shift = true,
-    placement = 'top',
+    placement: placementProp = 'top',
     ...remainingProps
   } = props
 
   const [styleVariables, setStyleVariables] = useState<
     StyleVariables | undefined
   >(undefined)
+
+  const [placement, setPlacement] = useState<Placement>(placementProp)
 
   // To avoid multiple calculations on the initial render,
   // because ResizeObserver is triggered when observing starts.
@@ -93,22 +94,22 @@ export const PopperRoot = <RootComponent extends ElementType = 'div'>(
     // istanbul ignore if
     if (!referenceRef.current || !popperRootRef.current) return
 
-    const { x, y } = computePosition(
-      referenceRef.current,
-      popperRootRef.current,
-      {
-        placement,
-        offset,
-        flip,
-        shift,
-      },
-    )
+    const {
+      x,
+      y,
+      placement: computedPlacement,
+    } = computePosition(referenceRef.current, popperRootRef.current, {
+      placement,
+      offset,
+      flip,
+      shift,
+    })
 
     const newStyleVars = {
       '--popper-x': x + 'px',
       '--popper-y': y + 'px',
     }
-
+    setPlacement(computedPlacement)
     setStyleVariables(newStyleVars)
   })
 

@@ -38,7 +38,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     /**
      * The children to render. Usually a trigger element.
      */
-    children?: ReactElement<any>
+    children?: ReactElement
 
     /**
      * Additional class names to apply to the root.

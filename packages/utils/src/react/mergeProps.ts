@@ -27,7 +27,7 @@ export function mergeProps<T extends PropsArg[]>(...args: T) {
         key.charCodeAt(2) >= /* 'A' */ 65 &&
         key.charCodeAt(2) <= /* 'Z' */ 90
       ) {
-        result[key] = chain(a, b)
+        result[key] = chain(b, a)
       } else if (key === 'className') {
         result[key] = clsx(a, b)
       } else if (key === 'style') {

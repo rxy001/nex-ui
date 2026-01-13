@@ -22,6 +22,7 @@ export const ModalTrigger = (props: ModalTriggerProps) => {
         'aria-expanded': open,
         'aria-controls': open ? modalContentId : undefined,
       },
+      // @ts-ignore
       children.props,
     ),
   )
