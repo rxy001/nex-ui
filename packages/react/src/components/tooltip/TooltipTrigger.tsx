@@ -3,13 +3,10 @@ import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
 import { useTooltipContext } from './TooltipContext'
 import { isFocusVisible } from '../utils'
 import { PopperAnchor } from '../popper'
-import type { FocusEvent, ReactElement } from 'react'
+import type { FocusEvent } from 'react'
+import type { PopperAnchorProps } from '../popper'
 
-export const TooltipTrigger = ({
-  children,
-}: {
-  children?: ReactElement<any>
-}) => {
+export const TooltipTrigger = ({ children }: PopperAnchorProps) => {
   const { delayOpen, delayClose, rootId, open } = useTooltipContext()
 
   const focusVisibleRef = useRef(false)

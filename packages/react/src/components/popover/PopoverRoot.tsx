@@ -25,7 +25,7 @@ const useAriaProps = (ownerState: PopoverPropsContextValue) => {
   )
 }
 
-export const PopoverRoot = ({ children }: { children: ReactElement<any> }) => {
+export const PopoverRoot = ({ children }: { children: ReactElement }) => {
   const { motionProps, keepMounted, container, disableAnimation, ...props } =
     usePopoverPropsContext()
 

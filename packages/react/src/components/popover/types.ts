@@ -1,4 +1,4 @@
-import type { ElementType, ReactElement } from 'react'
+import type { ElementType, ReactElement, Ref } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { FocusTrapProps } from '../utils'
@@ -125,7 +125,9 @@ export interface PopoverTriggerProps {
   /**
    * The content of the trigger element.
    */
-  children?: ReactElement<any>
+  children?: ReactElement<{
+    ref?: Ref<HTMLElement>
+  }>
 
   /**
    * If true, closes the Popper when clicking the trigger element.
@@ -137,5 +139,5 @@ export interface PopoverTriggerProps {
 
 // ------------------- PopoverCloseProps -------------------
 export interface PopoverCloseProps {
-  children?: ReactElement<any>
+  children?: ReactElement
 }

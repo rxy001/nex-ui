@@ -41,12 +41,15 @@ export type ModalProps = {
 
 // ------------- ModalTrigger -------------
 export interface ModalTriggerProps {
-  children?: ReactElement<any>
+  children?: ReactElement
 }
 
 // ------------- ModalClose -------------
 export interface ModalCloseProps {
-  children?: ReactElement<any>
+  children?: ReactElement<{
+    onClick?: () => void | Promise<void>
+    'aria-label'?: string
+  }>
 }
 
 // ------------- ModalContent -------------

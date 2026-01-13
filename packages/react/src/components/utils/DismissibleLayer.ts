@@ -1,10 +1,14 @@
 import { cloneElement, useEffect, useRef } from 'react'
 import { useEscapeKeydown, useLatest } from '@nex-ui/hooks'
-import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
-import type { ReactElement, HTMLAttributes } from 'react'
+import {
+  isValidNonFragmentElement,
+  mergeProps,
+  addEventListener,
+} from '@nex-ui/utils'
+import type { ReactElement } from 'react'
 
-export interface DismissibleLayerProps extends HTMLAttributes<HTMLElement> {
-  children: ReactElement<any>
+export interface DismissibleLayerProps {
+  children: ReactElement
   onEscapeKeyDown?: (event: KeyboardEvent) => void
   onPointerDownOutside?: (event: PointerEvent) => void
   onFocusOutside?: (event: FocusEvent) => void
@@ -48,6 +52,7 @@ export const DismissibleLayer = (props: DismissibleLayerProps) => {
         ...focusOutside,
       },
       remainingProps,
+      // @ts-ignore
       children.props,
     ),
   )
@@ -55,7 +60,7 @@ export const DismissibleLayer = (props: DismissibleLayerProps) => {
 
 function usePointerDownOutside(
   callback: (event: PointerEvent) => void,
-  ownerDocument: Document = document,
+  ownerDocument: Document = globalThis?.document,
 ) {
   const latestCallback = useLatest(callback)
   const isPointerInsideReactTreeRef = useRef(false)
@@ -69,12 +74,8 @@ function usePointerDownOutside(
       isPointerInsideReactTreeRef.current = false
     }
 
-    ownerDocument.addEventListener('pointerdown', handlePointerDown)
-
-    return () => {
-      ownerDocument.removeEventListener('pointerdown', handlePointerDown)
-    }
-  }, [callback, latestCallback, ownerDocument])
+    return addEventListener(ownerDocument, 'pointerdown', handlePointerDown)
+  }, [latestCallback, ownerDocument])
 
   return {
     onPointerDownCapture: () => {
@@ -101,7 +102,11 @@ function useFocusOutside(
   }, [ownerDocument, handleFocusOutside])
 
   return {
-    onFocusCapture: () => (isFocusInsideReactTreeRef.current = true),
-    onBlurCapture: () => (isFocusInsideReactTreeRef.current = false),
+    onFocusCapture: () => {
+      isFocusInsideReactTreeRef.current = true
+    },
+    onBlurCapture: () => {
+      isFocusInsideReactTreeRef.current = false
+    },
   }
 }

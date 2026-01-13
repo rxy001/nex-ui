@@ -19,6 +19,7 @@ export const PopoverClose = ({ children }: PopoverCloseProps) => {
         'aria-label': 'Close',
         onClick: () => setOpen(false),
       },
+      // @ts-ignore
       children.props,
     ),
   )
