@@ -36,6 +36,7 @@ export const PopoverTrigger = ({
             onClick: handleClick,
             ref: triggerRef,
           },
+          // @ts-ignore
           children.props,
         ),
       )}
