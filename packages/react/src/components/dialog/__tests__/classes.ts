@@ -9,7 +9,6 @@ export const dialogContentClasses = generateSlotClasses('nui-dialog-content', [
   'root',
   'paper',
   'closeButton',
-  'wrapper',
 ])
 
 export const dialogHeaderClasses = generateSlotClasses('nui-dialog-header', [

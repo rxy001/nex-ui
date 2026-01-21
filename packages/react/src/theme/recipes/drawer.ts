@@ -12,9 +12,12 @@ export const drawerContentRecipe = defineSlotRecipe({
   slots: {
     root: {
       display: 'flex',
+      pos: 'fixed',
+      inset: '0',
     },
     paper: {
       boxShadow: 'lg',
+      w: '100vw',
     },
     closeButton: {
       display: 'inline-flex',
@@ -38,14 +41,6 @@ export const drawerContentRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    size: {
-      xs: {},
-      sm: {},
-      md: {},
-      lg: {},
-      xl: {},
-      full: {},
-    },
     placement: {
       left: {
         root: {
@@ -85,6 +80,21 @@ export const drawerContentRecipe = defineSlotRecipe({
         paper: {
           borderTopLeftRadius: 'lg',
           borderTopRightRadius: 'lg',
+        },
+      },
+    },
+    size: {
+      xs: {},
+      sm: {},
+      md: {},
+      lg: {},
+      xl: {},
+      full: {
+        paper: {
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0,
         },
       },
     },

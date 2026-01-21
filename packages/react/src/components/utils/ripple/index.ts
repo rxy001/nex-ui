@@ -1,1 +1,3 @@
-export * from './Ripple'
+export { Ripple } from './Ripple'
+
+export type { RippleProps } from './Ripple'

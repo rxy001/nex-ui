@@ -10,40 +10,16 @@ exports[`Popper should render with default props 1`] = `
   top: var(--popper-y);
 }
 
-.emotion-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  outline: none;
-  position: relative;
-  box-sizing: border-box;
-  overflow: auto;
-}
-
 <div
   class="emotion-0"
   data-close-on-detached="true"
   data-close-on-escape="true"
-  data-disable-animation="false"
   data-keep-mounted="false"
   data-placement="top"
   data-state="open"
-  data-testid="popper-root"
+  data-testid="popper-content"
   style="--popper-x: 0px; --popper-y: -5px;"
 >
-  <div
-    style="opacity: 1;"
-  >
-    <div
-      class="emotion-1"
-      data-testid="popper-content"
-    >
-      Popper Content
-    </div>
-  </div>
+  Popper Content
 </div>
 `;

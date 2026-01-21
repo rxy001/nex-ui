@@ -1,3 +1,5 @@
+'use client'
+
 import {
   __DEV__,
   addEventListener,
@@ -9,52 +11,27 @@ import {
 import { cloneElement, useEffect, useRef } from 'react'
 import { useEvent, useLatest } from '@nex-ui/hooks'
 import { getTabbable } from './getTabbable'
-import type { KeyboardEvent, FocusEvent as ReactFocusEvent } from 'react'
+import { FocusTrapScope, FocusTrapManager } from './focusTrapManager'
+import type { KeyboardEvent } from 'react'
 import type { FocusTrapProps } from './types'
 
+const focusTrapManager = new FocusTrapManager()
+
 export const FocusTrap = ({
-  active,
-  paused,
   children,
+  active = false,
   loop = true,
+  autoFocus = false,
   restoreFocus = true,
+  paused = false,
   ...remainingProps
 }: FocusTrapProps) => {
   const ref = useRef<HTMLElement>(null)
-  const restoredNodeRef = useRef<EventTarget>(null)
-  const ignoreNextFocusRef = useRef<boolean>(false)
-  const pausedRef = useLatest(paused)
+  const focusTrapScopeRef = useRef(new FocusTrapScope())
   const restoreFocusRef = useLatest(restoreFocus)
+  const autoFocusRef = useLatest(autoFocus)
+  const pausedRef = useLatest(paused)
   const lastFocusedElementRef = useRef<HTMLElement | null>(null)
-
-  const handleFocus = useEvent((e: ReactFocusEvent<HTMLDivElement>) => {
-    if (restoredNodeRef.current === null) {
-      restoredNodeRef.current = e.relatedTarget
-    }
-  })
-
-  useEffect(() => {
-    if (!active || !ref.current) {
-      return
-    }
-
-    const doc = ownerDocument(ref.current)
-
-    if (!ref.current.contains(doc.activeElement)) {
-      // If the focus is not inside the focus trap, focus the root element
-      focus(ref.current)
-    }
-
-    return () => {
-      const node = restoredNodeRef.current as HTMLElement
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      if (restoreFocusRef.current && node) {
-        ignoreNextFocusRef.current = true
-        focus(node)
-      }
-    }
-  }, [active, restoreFocusRef])
 
   useEffect(() => {
     if (!active || !ref.current) return
@@ -65,16 +42,19 @@ export const FocusTrap = ({
       doc,
       'focusin',
       (event: FocusEvent) => {
-        if (pausedRef.current || !ref.current) return
-
-        if (ignoreNextFocusRef.current) {
-          ignoreNextFocusRef.current = false
+        if (
+          focusTrapScopeRef.current.paused ||
+          pausedRef.current ||
+          !ref.current
+        )
           return
-        }
 
         const target = event.target as HTMLElement
         if (ref.current.contains(target)) {
           lastFocusedElementRef.current = target
+        } else if (lastFocusedElementRef.current) {
+          // When focus moves outside the focus trap, bring it back
+          focus(lastFocusedElementRef.current)
         }
       },
     )
@@ -83,7 +63,11 @@ export const FocusTrap = ({
       doc,
       'focusout',
       (event: FocusEvent) => {
-        if (pausedRef.current || !ref.current || ignoreNextFocusRef.current)
+        if (
+          focusTrapScopeRef.current.paused ||
+          pausedRef.current ||
+          !ref.current
+        )
           return
 
         const relatedTarget = event.relatedTarget as HTMLElement | null
@@ -94,6 +78,7 @@ export const FocusTrap = ({
           !ref.current.contains(relatedTarget) &&
           lastFocusedElementRef.current
         ) {
+          // Prevent focus from moving outside the focus trap
           focus(lastFocusedElementRef.current)
         }
       },
@@ -123,21 +108,49 @@ export const FocusTrap = ({
       removeFocusoutEventListener()
       mutationObserver.disconnect()
       lastFocusedElementRef.current = null
-      ignoreNextFocusRef.current = false
     }
   }, [active, pausedRef])
 
+  useEffect(() => {
+    if (ref.current && active) {
+      const focusTrapScope = focusTrapScopeRef.current
+      focusTrapManager.register(focusTrapScope)
+
+      const doc = ownerDocument(ref.current)
+      const previouslyFocusedElement = doc.activeElement as HTMLElement | null
+      const focusInside = ref.current.contains(previouslyFocusedElement)
+
+      if (!focusInside) {
+        if (autoFocusRef.current) {
+          const [first] = getTabbable(ref.current)
+          focus(first)
+        }
+        if (doc.activeElement === previouslyFocusedElement) {
+          focus(ref.current)
+        }
+      }
+
+      return () => {
+        // const node = restoredNodeRef.current as HTMLElement
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        if (restoreFocusRef.current && previouslyFocusedElement) {
+          focus(previouslyFocusedElement)
+        }
+        focusTrapManager.unregister(focusTrapScope)
+      }
+    }
+  }, [active, autoFocusRef, restoreFocusRef])
+
   const handleKeydown = useEvent((event: KeyboardEvent) => {
     // istanbul ignore next
-    if (!active) return
-    if (pausedRef.current) return
+    if (!active || focusTrapScopeRef.current.paused || pausedRef.current) return
 
-    const isTabKey =
+    const tabKey =
       event.key === 'Tab' && !event.altKey && !event.ctrlKey && !event.metaKey
 
     const focusedElement = document.activeElement as HTMLElement | null
 
-    if (isTabKey && focusedElement) {
+    if (tabKey && focusedElement) {
       const container = event.currentTarget as HTMLElement
       const tabbable: ReadonlyArray<HTMLElement> = getTabbable(container)
       const hasTabbableElementsInside = tabbable.length > 0
@@ -169,7 +182,6 @@ export const FocusTrap = ({
       {
         tabIndex: -1,
         ref: ref,
-        onFocus: handleFocus,
         onKeyDown: handleKeydown,
       },
       remainingProps,

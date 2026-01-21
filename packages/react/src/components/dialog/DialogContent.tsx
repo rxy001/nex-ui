@@ -14,7 +14,7 @@ import {
 import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
-import { ModalContent, ModalPanel } from '../modal'
+import { ModalContent } from '../modal'
 import {
   DialogContentPropsProvider,
   useDialogPropsContext,
@@ -24,7 +24,7 @@ import type { Variants } from 'motion/react'
 import type { DialogContentProps } from './types'
 import type { DialogContentPropsContextValue } from './DialogContext'
 
-const slots = ['root', 'paper', 'wrapper', 'closeButton']
+const slots = ['root', 'paper', 'closeButton']
 
 const useSlotAriaProps = (ownerState: DialogContentProps) => {
   const {
@@ -79,7 +79,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     motionProps,
     placement = 'top',
     scroll = 'outside',
-    fullScreen = false,
     hideCloseButton = false,
     size = 'md',
     ...remainingProps
@@ -90,7 +89,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     placement,
     scroll,
     size,
-    fullScreen,
     hideCloseButton,
   }
 
@@ -109,25 +107,16 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
-    elementType: ModalPanel,
+    elementType: 'div',
     style: styles.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     classNames: slotClasses.root,
     dataAttrs: {
       size,
       placement,
       scroll,
-      fullScreen,
       hideCloseButton,
     },
-  })
-
-  const [DialogContentWrapper, getDialogContentWrapperProps] = useSlot({
-    elementType: 'div',
-    style: styles.wrapper,
-    classNames: slotClasses.wrapper,
-    externalSlotProps: slotProps?.wrapper,
   })
 
   const [DialogContentPaper, getDialogContentPaperProps] = useSlot({
@@ -199,13 +188,11 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   return (
     <DialogRoot>
       <DialogContentRoot {...getDialogContentRootProps()}>
-        <DialogContentWrapper {...getDialogContentWrapperProps()}>
-          {disableAnimation ? (
-            renderPaper()
-          ) : (
-            <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
-          )}
-        </DialogContentWrapper>
+        {disableAnimation ? (
+          renderPaper()
+        ) : (
+          <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
+        )}
       </DialogContentRoot>
     </DialogRoot>
   )

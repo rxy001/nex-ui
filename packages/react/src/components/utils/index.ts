@@ -5,17 +5,6 @@ export { Ripple } from './ripple'
 export { useSlot } from './useSlot'
 export { motionFeatures } from './motionFeatures'
 export { useSlotClasses } from './useSlotClasses'
-export { PresenceMotion } from './PresenceMotion'
-export { computePosition, getOverflowAncestors } from './computePosition'
-export * from './focusTrap'
 export { isFocusVisible } from './isFocusVisible'
-export * from './DismissibleLayer'
-
-export type { PresenceMotionProps } from './PresenceMotion'
-export type {
-  Placement,
-  ComputePositionOptions,
-  MiddlewareData,
-  FlipOptions,
-  OffsetOptions,
-} from './computePosition'
+export * from './computePosition'
+export * from './PresenceMotion'

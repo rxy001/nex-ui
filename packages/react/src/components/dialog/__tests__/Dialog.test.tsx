@@ -170,7 +170,7 @@ describe('Dialog', () => {
 
   it('should render into document.body via Portal when defaultOpen', async () => {
     const { container, getByTestId } = await renderWithNexUIProvider(
-      <TestDialog defaultOpen />,
+      <TestDialog defaultOpen disableAnimation />,
       {
         useAct: true,
       },

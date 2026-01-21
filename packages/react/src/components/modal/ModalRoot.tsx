@@ -14,6 +14,8 @@ const recipe = defineRecipe({
   base: {
     position: 'fixed',
     zIndex: 'modal',
+    left: 0,
+    top: 0,
   },
 })
 
@@ -25,8 +27,7 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
   const { children, preventScroll = false, ...remainingProps } = props
   const rootRef = useRef<HTMLDivElement>(null)
   const { open, modalId } = useModalContext()
-  const { container, keepMounted, disableAnimation } =
-    useModalPortalPropsContext()
+  const modalPortalPropsCtx = useModalPortalPropsContext()
   const modalManager = useModalManager()
   const registeredRef = useRef(false)
 
@@ -43,7 +44,8 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
       ref: rootRef,
       style: {
         display:
-          disableAnimation && keepMounted
+          modalPortalPropsCtx?.disablePresence &&
+          modalPortalPropsCtx?.keepMounted
             ? open
               ? 'block'
               : 'none'
@@ -52,12 +54,12 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
     },
     a11y: {
       // Ignore the user's settings to ensure proper access for assistive technologies.
-      'aria-hidden': open ? undefined : 'true',
+      'aria-hidden':
+        modalPortalPropsCtx?.keepMounted && !open ? true : undefined,
     },
     dataAttrs: {
       preventScroll,
-      keepMounted,
-      disableAnimation,
+      keepMounted: modalPortalPropsCtx?.keepMounted,
       state: open ? 'open' : 'closed',
     },
   })
@@ -97,7 +99,9 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
       let prevPaddingRight: string | null = null
 
       const resolvedContainer =
-        (isFunction(container) ? container() : container) || doc.body
+        (isFunction(modalPortalPropsCtx?.container)
+          ? modalPortalPropsCtx.container()
+          : modalPortalPropsCtx?.container) || doc.body
 
       const unsubscribe = modalManager.subscribe(() => {
         // Store overflow and paddingRight only if the modal first mounts.
@@ -128,7 +132,14 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
         unsubscribe()
       }
     }
-  }, [container, isTopmostModal, modalManager, open, preventScroll])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    isTopmostModal,
+    modalManager,
+    open,
+    preventScroll,
+    modalPortalPropsCtx?.container,
+  ])
 
   useEffect(() => {
     if (open) {

@@ -152,7 +152,7 @@ export const getDimensions = (element: Element) => {
   const shouldFallback =
     Math.round(width) !== offsetWidth || Math.round(height) !== offsetHeight
 
-  /* istanbul ignore next */
+  // istanbul ignore next
   if (shouldFallback) {
     width = offsetWidth
     height = offsetHeight
@@ -164,23 +164,16 @@ export const getDimensions = (element: Element) => {
   }
 }
 
-const getBoundingClientRect = (element: Element) => {
-  const clientRect = element.getBoundingClientRect()
+// const getBoundingClientRect = (element: Element) => {
+//   const clientRect = element.getBoundingClientRect()
 
-  const { width, height } = getDimensions(element)
-
-  const rawX = width ? Math.round(clientRect.width) / width : 1
-  const rawY = height ? Math.round(clientRect.height) / height : 1
-  const scaleX = Number.isFinite(rawX) && rawX >= 0 ? rawX : 1
-  const scaleY = Number.isFinite(rawY) && rawY >= 0 ? rawY : 1
-
-  return toClientRect({
-    width: clientRect.width / scaleX,
-    height: clientRect.height / scaleY,
-    x: clientRect.left / scaleX,
-    y: clientRect.top / scaleY,
-  })
-}
+//   return toClientRect({
+//     width: clientRect.width,
+//     height: clientRect.height,
+//     x: clientRect.left,
+//     y: clientRect.top,
+//   })
+// }
 
 export const getRectRelativeToViewport = (
   elementRect: Rect,
@@ -206,7 +199,7 @@ export const getRectRelativeToViewport = (
   }
 
   if (isHTMLElement(offsetParent)) {
-    ;({ x: offset.x, y: offset.y } = getBoundingClientRect(offsetParent))
+    ;({ x: offset.x, y: offset.y } = offsetParent.getBoundingClientRect())
   } else if (!isStaticPositioned(documentElement)) {
     // Handle element positioned within the html element.
     ;({ x: offset.x, y: offset.y } = documentElement.getBoundingClientRect())
@@ -229,7 +222,7 @@ export const getRectRelativeToOffsetParent = (
   offsetParent: Element | Window,
 ): Rect => {
   const { documentElement } = ownerDocument(element)
-  const elementRect = getBoundingClientRect(element)
+  const elementRect = element.getBoundingClientRect()
 
   let scroll = { scrollLeft: 0, scrollTop: 0 }
 
@@ -246,7 +239,7 @@ export const getRectRelativeToOffsetParent = (
   }
 
   if (isHTMLElement(offsetParent)) {
-    ;({ x: offset.x, y: offset.y } = getBoundingClientRect(offsetParent))
+    ;({ x: offset.x, y: offset.y } = offsetParent.getBoundingClientRect())
   } else if (!isStaticPositioned(documentElement)) {
     // Handle element positioned within the html element.
     ;({ x: offset.x, y: offset.y } = documentElement.getBoundingClientRect())

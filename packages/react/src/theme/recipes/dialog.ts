@@ -11,12 +11,17 @@ export const dialogRootRecipe = defineSlotRecipe({
 export const dialogContentRecipe = defineSlotRecipe({
   slots: {
     root: {
+      pos: 'fixed',
+      inset: 0,
       display: 'flex',
       justifyContent: 'center',
+      px: '6',
+      py: '15',
     },
     paper: {
       borderRadius: 'lg',
       boxShadow: 'lg',
+      width: 'calc(100vw - {spaces.6} * 2)',
     },
     closeButton: {
       display: 'inline-flex',
@@ -38,12 +43,20 @@ export const dialogContentRecipe = defineSlotRecipe({
         outline: 'focusVisibleOutline',
       },
     },
-    wrapper: {
-      mx: '6',
-      my: '15',
-    },
   },
   variants: {
+    scroll: {
+      outside: {
+        root: {
+          overflow: 'hidden auto',
+        },
+      },
+      inside: {
+        paper: {
+          maxHeight: 'calc(100vh - {spaces.15} * 2)',
+        },
+      },
+    },
     size: {
       xs: {
         paper: {
@@ -71,32 +84,14 @@ export const dialogContentRecipe = defineSlotRecipe({
         },
       },
       full: {
-        paper: {
-          maxWidth: '100vw',
-        },
-      },
-    },
-    scroll: {
-      outside: {
         root: {
-          overflow: 'hidden auto',
+          px: 0,
+          py: 0,
         },
-      },
-      inside: {
         paper: {
-          maxHeight: 'calc(100% - {spaces.15} * 2)',
-        },
-      },
-    },
-    fullScreen: {
-      true: {
-        paper: {
-          w: 'full',
-          h: 'full',
-          maxHeight: undefined,
-          maxWidth: 'full',
-          m: 0,
-          borderRadius: 'none',
+          width: '100vw',
+          minHeight: '100vh',
+          borderRadius: 0,
         },
       },
     },
@@ -118,6 +113,17 @@ export const dialogContentRecipe = defineSlotRecipe({
       },
     },
   },
+  compoundVariants: [
+    {
+      size: 'full',
+      scroll: 'inside',
+      css: {
+        paper: {
+          maxHeight: '100vh',
+        },
+      },
+    },
+  ],
 })
 
 export const dialogHeaderRecipe = defineRecipe({

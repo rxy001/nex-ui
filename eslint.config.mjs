@@ -119,6 +119,7 @@ export default tseslint.config(
       '@typescript-eslint/ban-ts-comment': 'off',
 
       'jsx-a11y/alt-text': 'error',
+      'jsx-a11y/no-autofocus': 'off',
 
       'react/void-dom-elements-no-children': 'error',
       'react/jsx-pascal-case': 'error',

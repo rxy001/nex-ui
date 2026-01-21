@@ -3,7 +3,11 @@
 import { AnimatePresence } from 'motion/react'
 import { useMemo } from 'react'
 import { Portal } from '@nex-ui/utils'
-import { ModalPortalPropsProvider, useModalContext } from './ModalContext'
+import {
+  ModalPortalPropsProvider,
+  useModalContext,
+  useModalPortalPropsContext,
+} from './ModalContext'
 import type { ModalPortalPropsContextValue } from './ModalContext'
 import type { ModalPortalProps } from './types'
 
@@ -11,34 +15,37 @@ export const ModalPortal = ({
   children,
   container,
   keepMounted = false,
-  disableAnimation = false,
+  disablePresence = false,
 }: ModalPortalProps) => {
   const { open } = useModalContext()
+  const subModalPortal = !!useModalPortalPropsContext()
 
   const ctx = useMemo<ModalPortalPropsContextValue>(
     () => ({
       container,
       keepMounted,
-      disableAnimation,
+      disablePresence,
     }),
-    [container, keepMounted, disableAnimation],
+    [container, keepMounted, disablePresence],
   )
 
   const renderChildren = () =>
     open || keepMounted ? (
-      <ModalPortalPropsProvider value={ctx}>
-        {children}
-      </ModalPortalPropsProvider>
+      <Portal container={container}>
+        <ModalPortalPropsProvider value={ctx}>
+          {children}
+        </ModalPortalPropsProvider>
+      </Portal>
     ) : null
 
+  if (disablePresence) {
+    return renderChildren()
+  }
+
   return (
-    <Portal container={container}>
-      {disableAnimation ? (
-        renderChildren()
-      ) : (
-        <AnimatePresence>{renderChildren()}</AnimatePresence>
-      )}
-    </Portal>
+    <AnimatePresence propagate={open && subModalPortal}>
+      {renderChildren()}
+    </AnimatePresence>
   )
 }
 

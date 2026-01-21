@@ -27,12 +27,14 @@ export interface PresenceMotionProps extends HTMLMotionProps<'div'> {
   keepMounted?: boolean
   children?: ReactNode | MotionValue<string> | MotionValue<number>
   open?: boolean
+  propagate?: boolean
 }
 
 export const PresenceMotion = ({
   keepMounted,
   children,
   open,
+  propagate,
   ...props
 }: PresenceMotionProps) => {
   const [display, setDisplay] = useState<'block' | 'none'>(() =>
@@ -63,7 +65,7 @@ export const PresenceMotion = ({
           {children}
         </m.div>
       ) : (
-        <AnimatePresence propagate>
+        <AnimatePresence propagate={propagate}>
           {open ? (
             <m.div
               initial='hidden'

@@ -14,7 +14,7 @@ import {
 import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
-import { ModalContent, ModalPanel } from '../modal'
+import { ModalContent } from '../modal'
 import { useDrawerPropsContext } from './DrawerContext'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
@@ -102,10 +102,9 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DrawerContentRoot, getDrawerContentRootProps] = useSlot({
-    elementType: ModalPanel,
+    elementType: 'div',
     style: styles.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     classNames: slotClasses.root,
     dataAttrs: {
       size,

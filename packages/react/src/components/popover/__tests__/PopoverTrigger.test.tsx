@@ -132,7 +132,7 @@ describe('PopoverTrigger', () => {
 
       await user.click(trigger)
 
-      const popover = getByTestId('popover-root')
+      const popover = getByTestId('popover-content')
       expect(trigger).toHaveAttribute(
         'aria-controls',
         popover.getAttribute('id') || '',

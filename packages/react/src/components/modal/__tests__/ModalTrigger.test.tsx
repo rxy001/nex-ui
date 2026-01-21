@@ -3,7 +3,6 @@ import { useState } from 'react'
 import {
   Modal,
   ModalContent,
-  ModalPanel,
   ModalRoot,
   ModalTrigger,
   ModalPortal,
@@ -16,11 +15,9 @@ function TestModal(props: ModalTriggerProps) {
   return (
     <Modal open={open} onOpenChange={setOpen}>
       <ModalTrigger {...props} />
-      <ModalPortal disableAnimation>
+      <ModalPortal disablePresence>
         <ModalRoot data-testid='modal-root'>
-          <ModalPanel>
-            <ModalContent data-testid='modal-content'>Content</ModalContent>
-          </ModalPanel>
+          <ModalContent data-testid='modal-content'>Content</ModalContent>
         </ModalRoot>
       </ModalPortal>
     </Modal>
