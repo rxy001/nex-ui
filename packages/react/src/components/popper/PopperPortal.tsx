@@ -3,7 +3,11 @@
 import { AnimatePresence } from 'motion/react'
 import { useMemo } from 'react'
 import { Portal } from '@nex-ui/utils'
-import { PopperPortalPropsProvider, usePopperContext } from './PopperContext'
+import {
+  PopperPortalPropsProvider,
+  usePopperContext,
+  usePopperPortalPropsContext,
+} from './PopperContext'
 import type { PopperPortalPropsContextValue } from './PopperContext'
 import type { PopperPortalProps } from './types'
 
@@ -11,34 +15,36 @@ export const PopperPortal = ({
   children,
   container,
   keepMounted = false,
-  disableAnimation = false,
+  disablePresence = false,
 }: PopperPortalProps) => {
   const { open } = usePopperContext()
+  const subPopperPortal = !!usePopperPortalPropsContext()
 
   const ctx = useMemo<PopperPortalPropsContextValue>(
     () => ({
-      container,
       keepMounted,
-      disableAnimation,
+      disablePresence,
     }),
-    [container, keepMounted, disableAnimation],
+    [keepMounted, disablePresence],
   )
 
   const renderChildren = () =>
     open || keepMounted ? (
-      <PopperPortalPropsProvider value={ctx}>
-        {children}
-      </PopperPortalPropsProvider>
+      <Portal container={container}>
+        <PopperPortalPropsProvider value={ctx}>
+          {children}
+        </PopperPortalPropsProvider>
+      </Portal>
     ) : null
 
+  if (disablePresence) {
+    return renderChildren()
+  }
+
   return (
-    <Portal container={container}>
-      {disableAnimation ? (
-        renderChildren()
-      ) : (
-        <AnimatePresence>{renderChildren()}</AnimatePresence>
-      )}
-    </Portal>
+    <AnimatePresence propagate={open && subPopperPortal}>
+      {renderChildren()}
+    </AnimatePresence>
   )
 }
 

@@ -33,12 +33,14 @@
 
 8. recipes 部分属性值改为 css 变量
 
-9. 重命名 popper 的 handleOpen 为 delayOpen, handleClose 为 delayClose
-
-10. PopperTrigger 的 interactive 是否应该移入到 Popper
-
 11. 重构基础组件的 API，尽量减少 Context 的使用
 
-12. 统一键盘和鼠标事件已仿效 OS 实现， 例如: 在按下 escape 时关闭 Popper，Space 触发按钮事件
+12. 统一键盘和鼠标事件已仿效 OS 实现， 例如: 在按下 escape 时关闭 Popper，Space 触发按钮事件. RadioGroup
 
-13. useDismissHandlers 实现 ModalManager、PopperManager 的功能
+13. computePosition 处理 scale
+
+14. 统一 type、interface 使用场景
+
+15. 将 isValidElement 统一改为 isValidNonFragmentElement
+
+16. 为每个组件单独添加一个 story 用于 storybook 视觉回归测试

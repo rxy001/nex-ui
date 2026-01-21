@@ -4,7 +4,7 @@ import { useLatest } from './useLatest'
 
 function useEscapeKeydown(
   onEscapeKeyDownProp: (event: KeyboardEvent) => void,
-  ownerDocument: Document = document,
+  ownerDocument: Document = globalThis.document,
 ) {
   const onEscapeKeyDown = useLatest(onEscapeKeyDownProp)
 

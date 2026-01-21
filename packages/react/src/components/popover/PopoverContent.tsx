@@ -1,20 +1,30 @@
 'use client'
 
-import {
-  FocusTrap,
-  useDefaultProps,
-  useSlot,
-  useStyles,
-  useSlotClasses,
-} from '../utils'
-import { PopperContent } from '../popper'
+import { useMemo } from 'react'
+import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
+import { FocusTrap } from '../focusTrap'
 import { popoverContentRecipe } from '../../theme/recipes'
 import { PopoverRoot } from './PopoverRoot'
-import { usePopoverPropsContext, usePopoverContext } from './PopoverContext'
+import { usePopoverContext } from './PopoverContext'
 import type { ElementType } from 'react'
 import type { PopoverContentProps } from './types'
 
 const slots = ['root']
+
+const useAriaProps = (ownerState: PopoverContentProps) => {
+  const { 'aria-modal': ariaModal, role = 'dialog' } = ownerState
+
+  const { rootId } = usePopoverContext()
+
+  return useMemo(
+    () => ({
+      role,
+      id: rootId,
+      'aria-modal': ariaModal,
+    }),
+    [ariaModal, rootId, role],
+  )
+}
 
 export const PopoverContent = <RootComponent extends ElementType = 'div'>(
   inProps: PopoverContentProps<RootComponent>,
@@ -24,12 +34,13 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { restoreFocus, loop } = usePopoverPropsContext()
-
   const { open } = usePopoverContext()
 
   const {
+    loop,
     maxHeight,
+    autoFocus,
+    restoreFocus,
     maxWidth = 480,
     color = 'default',
     radius = 'md',
@@ -40,6 +51,7 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     ...props,
     color,
     radius,
+    maxWidth,
   }
 
   const style = useStyles({
@@ -53,25 +65,34 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     name: 'PopoverContent',
   })
 
+  const ariaProps = useAriaProps(ownerState)
+
   const [PopoverContentRoot, getPopoverContentRootProps] = useSlot({
     style,
-    elementType: PopperContent,
-    shouldForwardComponent: false,
+    elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     dataAttrs: {
       color,
       radius,
     },
+    a11y: ariaProps,
     additionalProps: {
-      maxWidth,
-      maxHeight,
+      sx: {
+        maxWidth,
+        maxHeight,
+      },
     },
   })
 
   return (
     <PopoverRoot>
-      <FocusTrap loop={loop} restoreFocus={restoreFocus} active={open}>
+      <FocusTrap
+        loop={loop}
+        restoreFocus={restoreFocus}
+        active={open}
+        autoFocus={autoFocus}
+      >
         <PopoverContentRoot {...getPopoverContentRootProps()} />
       </FocusTrap>
     </PopoverRoot>

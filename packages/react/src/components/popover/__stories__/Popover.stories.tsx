@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
-import { COLORS as DEFAULT_COLORS } from '~/sb/utils'
-import { upperFirst } from '@nex-ui/utils'
+import { COLORS as DEFAULT_COLORS, RADII } from '~/sb/utils'
 import { Box } from '../../box'
 import { Popover, PopoverTrigger, PopoverContent } from '../index'
 import { Button } from '../../button'
@@ -14,8 +13,8 @@ function Container({ children }: { children: ReactNode }) {
   return (
     <Flex
       sx={{
-        w: '100vw',
-        h: '100vh',
+        w: '100%',
+        h: '100%',
       }}
       justify='center'
       align='center'
@@ -27,7 +26,7 @@ function Container({ children }: { children: ReactNode }) {
   )
 }
 
-const placements = [
+const PLACEMENTS = [
   'top-start',
   'top',
   'top-end',
@@ -42,31 +41,72 @@ const placements = [
   'left-end',
 ] as const
 
-const Content = (props: PopoverContentProps) => (
-  <PopoverContent {...props}>
-    <Box
-      sx={{
-        fontWeight: 'bold',
-      }}
-    >
-      Popover Content
-    </Box>
-    <Box
-      sx={{
-        fs: 'sm',
-      }}
-    >
-      This is the popover content
-    </Box>
-  </PopoverContent>
-)
+const COLORS = ['default', ...DEFAULT_COLORS] as const
+
+type PopoverTemplateProps = PopoverProps &
+  Pick<
+    PopoverContentProps,
+    'restoreFocus' | 'loop' | 'maxHeight' | 'maxWidth' | 'color' | 'radius'
+  > & {
+    triggerText?: ReactNode
+  }
+
+function PopoverTemplate(props: PopoverTemplateProps) {
+  const {
+    triggerText,
+    restoreFocus,
+    loop,
+    maxHeight,
+    maxWidth,
+    color,
+    radius,
+    ...other
+  } = props
+
+  return (
+    <Popover {...other}>
+      <PopoverTrigger>
+        <Button
+          sx={{
+            textTransform: 'capitalize',
+          }}
+        >
+          {triggerText ?? 'Click me'}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent
+        restoreFocus={restoreFocus}
+        loop={loop}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
+        color={color}
+        radius={radius}
+      >
+        <Box
+          sx={{
+            fontWeight: 'bold',
+          }}
+        >
+          Popover Content
+        </Box>
+        <Box
+          sx={{
+            fs: 'sm',
+          }}
+        >
+          This is the popover content
+        </Box>
+      </PopoverContent>
+    </Popover>
+  )
+}
 
 const meta = {
   title: 'Components/Popover',
-  component: Popover<'div'>,
+  component: PopoverTemplate,
   argTypes: {
     placement: {
-      options: placements,
+      options: PLACEMENTS,
       control: 'select',
     },
     disableAnimation: {
@@ -81,20 +121,39 @@ const meta = {
     closeOnDetached: {
       control: 'boolean',
     },
+    color: {
+      options: COLORS,
+      control: 'select',
+    },
+    radius: {
+      options: RADII,
+      control: 'select',
+    },
+    loop: {
+      control: 'boolean',
+    },
+    restoreFocus: {
+      control: 'boolean',
+    },
+    maxWidth: {
+      control: 'number',
+    },
+    maxHeight: {
+      control: 'number',
+    },
+    offset: {
+      control: 'number',
+    },
+    shift: {
+      control: 'boolean',
+    },
   },
-  render: (props) => {
-    return (
-      <Container>
-        <Popover {...props}>
-          <PopoverTrigger>
-            <Button>Click me</Button>
-          </PopoverTrigger>
-          <Content />
-        </Popover>
-      </Container>
-    )
-  },
-} satisfies Meta<typeof Popover<'div'>>
+  render: (props) => (
+    <Container>
+      <PopoverTemplate {...props} />
+    </Container>
+  ),
+} satisfies Meta<PopoverTemplateProps>
 
 export default meta
 
@@ -113,19 +172,13 @@ export const Placements: Story = {
             gridTemplateColumns: 'repeat(3, max-content)',
           }}
         >
-          {placements.map((placement) => (
-            <Popover {...props} key={placement} placement={placement}>
-              <PopoverTrigger>
-                <Button
-                  sx={{
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  {placement}
-                </Button>
-              </PopoverTrigger>
-              <Content />
-            </Popover>
+          {PLACEMENTS.map((placement) => (
+            <PopoverTemplate
+              key={placement}
+              placement={placement}
+              triggerText={placement}
+              {...props}
+            />
           ))}
         </Box>
       </Container>
@@ -133,18 +186,17 @@ export const Placements: Story = {
   },
 }
 
-const COLORS = ['default', ...DEFAULT_COLORS] as const
 export const Colors: Story = {
   render: (props) => {
     return (
       <Container>
         {COLORS.map((color) => (
-          <Popover key={color} {...props}>
-            <PopoverTrigger>
-              <Button>{upperFirst(color)}</Button>
-            </PopoverTrigger>
-            <Content color={color} />
-          </Popover>
+          <PopoverTemplate
+            key={color}
+            color={color}
+            triggerText={color}
+            {...props}
+          />
         ))}
       </Container>
     )
@@ -157,21 +209,12 @@ export const DefaultOpen: Story = {
   },
 }
 
-function ControlledPopover(props: PopoverProps) {
+function ControlledPopover(props: PopoverTemplateProps) {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-      <Popover
-        open={open}
-        onOpenChange={(isOpen) => setOpen(isOpen)}
-        {...props}
-      >
-        <PopoverTrigger>
-          <Button>Click me</Button>
-        </PopoverTrigger>
-        <Content />
-      </Popover>
+      <PopoverTemplate {...props} open={open} onOpenChange={setOpen} />
       <p>Open: {open ? 'open' : 'closed'}</p>
     </>
   )
@@ -196,18 +239,13 @@ export const WithOffset: Story = {
   render: (props) => {
     return (
       <Container>
-        <Popover {...props}>
-          <PopoverTrigger>
-            <Button>Offset is 0</Button>
-          </PopoverTrigger>
-          <Content />
-        </Popover>
+        <PopoverTemplate {...props} triggerText='Offset is 0' />
       </Container>
     )
   },
 }
 
-const FlipTemplate = (props: PopoverProps) => {
+const FlipTemplate = (props: PopoverTemplateProps) => {
   const ref = useRef<HTMLDivElement>(null)
 
   return (
@@ -216,6 +254,7 @@ const FlipTemplate = (props: PopoverProps) => {
         w: 300,
         h: 200,
         overflow: 'auto',
+        border: '1px solid #000',
       }}
     >
       <Box
@@ -227,12 +266,11 @@ const FlipTemplate = (props: PopoverProps) => {
         }}
         ref={ref}
       >
-        <Popover container={() => ref.current} {...props}>
-          <PopoverTrigger>
-            <Button>Scroll the window</Button>
-          </PopoverTrigger>
-          <Content />
-        </Popover>
+        <PopoverTemplate
+          container={() => ref.current}
+          triggerText='Scroll the window'
+          {...props}
+        />
       </Box>
     </Box>
   )
@@ -254,13 +292,29 @@ export const WithFlip: Story = {
 
 export const WithForm: Story = {
   render: (props) => {
+    const { restoreFocus, loop, maxHeight, maxWidth, color, radius, ...other } =
+      props
+
     return (
       <Container>
-        <Popover {...props}>
+        <Popover {...other}>
           <PopoverTrigger>
-            <Button>Click me</Button>
+            <Button
+              sx={{
+                textTransform: 'capitalize',
+              }}
+            >
+              Click me
+            </Button>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent
+            restoreFocus={restoreFocus}
+            loop={loop}
+            maxHeight={maxHeight}
+            maxWidth={maxWidth}
+            color={color}
+            radius={radius}
+          >
             <Box as='form'>
               <Flex
                 direction='column'

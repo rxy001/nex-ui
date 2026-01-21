@@ -1,7 +1,13 @@
 import { waitForElementToBeRemoved } from '@testing-library/react'
 import { useState } from 'react'
 import { renderWithNexUIProvider } from '~/tests/shared'
-import { Modal, ModalPanel, ModalRoot, ModalClose, ModalPortal } from '../index'
+import {
+  Modal,
+  ModalRoot,
+  ModalClose,
+  ModalPortal,
+  ModalContent,
+} from '../index'
 import type { ModalCloseProps } from '../index'
 
 function TestModal(props: ModalCloseProps) {
@@ -9,10 +15,11 @@ function TestModal(props: ModalCloseProps) {
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
-      <ModalClose {...props} />
-      <ModalPortal disableAnimation>
+      <ModalPortal disablePresence>
         <ModalRoot data-testid='modal-root'>
-          <ModalPanel />
+          <ModalContent>
+            <ModalClose {...props} />
+          </ModalContent>
         </ModalRoot>
       </ModalPortal>
     </Modal>
@@ -40,6 +47,9 @@ describe('ModalClose', () => {
     const { container } = renderWithNexUIProvider(
       // @ts-expect-error
       <TestModal>Invalid Element</TestModal>,
+      {
+        container: document.body,
+      },
     )
 
     expect(container.textContent).toBe('Invalid Element')

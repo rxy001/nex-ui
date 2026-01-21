@@ -1,18 +1,18 @@
-import type { ReactNode, ElementType, ReactElement } from 'react'
-import type { Interpolation } from '@nex-ui/system'
+import type { ReactNode, ElementType } from 'react'
+import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
-import type {
-  PopperContentProps,
-  PopperProps,
-  PopperRootProps,
-} from '../popper'
+import type { PopperContentProps, PopperProps } from '../popper'
 import type { TooltipRecipeVariants } from '../../theme/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,
   ComponentPropsWithCommonProps,
 } from '../../types/utils'
-import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
+import type {
+  PopperAnchorProps,
+  PopperMotionProps,
+  PopperPortalProps,
+} from '../popper/types'
 
 export interface TooltipPropsOverrides {}
 
@@ -21,24 +21,24 @@ type TooltipSlotProps = {
 }
 
 export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
+  Pick<PopperPortalProps, 'container' | 'keepMounted'> &
   Pick<
-    PopperRootProps,
-    | 'placement'
-    | 'offset'
-    | 'shift'
-    | 'flip'
+    PopperContentProps,
     | 'closeOnEscape'
     | 'closeOnDetached'
     | 'onEscapeKeyDown'
     | 'onPointerDownOutside'
     | 'onFocusOutside'
     | 'onInteractOutside'
-  > &
-  Omit<PopperPortalProps, 'children'> & {
+    | 'placement'
+    | 'offset'
+    | 'shift'
+    | 'flip'
+  > & {
     /**
      * The children to render. Usually a trigger element.
      */
-    children?: ReactElement
+    children?: PopperAnchorProps['children']
 
     /**
      * Additional class names to apply to the root.
@@ -109,12 +109,12 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
      * The maximum width of the Tooltip.
      * @default 360
      */
-    maxWidth?: PopperContentProps['maxWidth']
+    maxWidth?: CSSObject['maxWidth']
 
     /**
      * The maximum height of the Tooltip.
      */
-    maxHeight?: PopperContentProps['maxHeight']
+    maxHeight?: CSSObject['maxHeight']
 
     /**
      * If true, the Tooltip is shown by default. (uncontrolled)
@@ -134,6 +134,11 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
      * @default 100
      */
     closeDelay?: number
+
+    /**
+     * If true, disables the animation for the Tooltip.
+     */
+    disableAnimation?: boolean
   }
 
 export type TooltipProps<RootComponent extends ElementType = 'div'> =

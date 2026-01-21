@@ -1,9 +1,11 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { chain } from '@nex-ui/utils'
-import { useSlot, DismissibleLayer, FocusTrap } from '../utils'
+import { DismissibleLayer } from '../dismissibleLayer'
+import { useSlot } from '../utils'
+import { FocusTrap } from '../focusTrap'
 import { useModalContext } from './ModalContext'
 import { useModalManager } from './ModalManager'
 import type { ElementType } from 'react'
@@ -11,12 +13,11 @@ import type { ModalContentProps } from './types'
 
 const recipe = defineRecipe({
   base: {
-    width: 'full',
-    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     outline: 'none',
     bg: 'content',
+    position: 'relative',
   },
 })
 
@@ -53,14 +54,14 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     onInteractOutside,
     onFocusOutside,
     children,
-    restoreFocus = true,
+    restoreFocus,
+    loop,
+    autoFocus,
     closeOnInteractOutside = true,
     closeOnEscape = true,
     ...remainingProps
   } = inProps as ModalContentProps
   const { modalId, open, setOpen } = useModalContext()
-
-  const [paused, setPaused] = useState(false)
 
   const modalManager = useModalManager()
 
@@ -82,30 +83,28 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     },
   })
 
-  useEffect(() => {
-    const unsubscribe = modalManager.subscribe(() => {
-      setPaused(!isTopmostModal())
-    })
-
-    return unsubscribe
-  }, [isTopmostModal, modalManager])
-
   return (
     <DismissibleLayer
-      onFocusOutside={onFocusOutside}
       onInteractOutside={onInteractOutside}
-      onEscapeKeyDown={chain((_event: KeyboardEvent) => {
-        if (closeOnEscape && open && isTopmostModal()) {
-          setOpen(false)
-        }
-      }, onEscapeKeyDown)}
-      onPointerDownOutside={chain((_event: PointerEvent) => {
-        if (closeOnInteractOutside && open && isTopmostModal()) {
-          setOpen(false)
-        }
-      }, onPointerDownOutside)}
+      onFocusOutside={chain(onFocusOutside, (event) => {
+        event.preventDefault()
+      })}
+      onEscapeKeyDown={chain(onEscapeKeyDown, (event) => {
+        if (!closeOnEscape || !isTopmostModal()) event.preventDefault()
+      })}
+      onPointerDownOutside={chain(onPointerDownOutside, (event) => {
+        if (!closeOnInteractOutside || !isTopmostModal()) event.preventDefault()
+      })}
+      onDismiss={() => {
+        setOpen(false)
+      }}
     >
-      <FocusTrap active={open} restoreFocus={restoreFocus} paused={paused}>
+      <FocusTrap
+        active={open}
+        restoreFocus={restoreFocus}
+        autoFocus={autoFocus}
+        loop={loop}
+      >
         <ModalContentRoot {...getModalContentRootProps()}>
           {children}
         </ModalContentRoot>

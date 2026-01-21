@@ -24,14 +24,14 @@ export const [ModalProvider, useModalContext] =
 export interface ModalPortalPropsContextValue {
   container: ModalPortalProps['container']
   keepMounted: boolean
-  disableAnimation: boolean
+  disablePresence: boolean
 }
 
 export const [ModalPortalPropsProvider, useModalPortalPropsContext] =
-  createContext<ModalPortalPropsContextValue>({
+  createContext<ModalPortalPropsContextValue | null>({
     contextName: 'ModalPortalPropsContext',
     hookName: 'useModalPortalPropsContext',
     providerName: 'ModalPortalPropsProvider',
-    strict: true,
-    defaultValue: null as unknown as ModalPortalPropsContextValue,
+    strict: false,
+    defaultValue: null,
   })

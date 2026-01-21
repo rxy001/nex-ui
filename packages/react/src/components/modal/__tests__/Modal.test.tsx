@@ -12,7 +12,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalPanel,
   ModalPortal,
   ModalRoot,
   ModalTrigger,
@@ -46,7 +45,6 @@ function TestModal({
   closeOnEscape,
   restoreFocus,
   defaultOpen = false,
-  disableAnimation = true,
   'data-testid': testid = 'modal-root',
   ...props
 }: TestModalProps) {
@@ -58,9 +56,9 @@ function TestModal({
         <button data-testid='toggle-button'>Toggle Modal</button>
       </ModalTrigger>
       <ModalPortal
+        disablePresence
         keepMounted={keepMounted}
         container={container}
-        disableAnimation={disableAnimation}
       >
         <ModalRoot
           preventScroll={preventScroll}
@@ -68,20 +66,18 @@ function TestModal({
           className={props.className}
         >
           <ModalBackdrop data-testid='modal-backdrop' />
-          <ModalPanel data-testid='modal-panel'>
-            <ModalContent
-              restoreFocus={restoreFocus}
-              closeOnInteractOutside={closeOnInteractOutside}
-              closeOnEscape={closeOnEscape}
-              data-testid='modal-content'
-            >
-              <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
-              <ModalBody data-testid='modal-body'>{children}</ModalBody>
-              <ModalFooter data-testid='modal-footer'>
-                Test Modal Footer
-              </ModalFooter>
-            </ModalContent>
-          </ModalPanel>
+          <ModalContent
+            restoreFocus={restoreFocus}
+            closeOnInteractOutside={closeOnInteractOutside}
+            closeOnEscape={closeOnEscape}
+            data-testid='modal-content'
+          >
+            <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
+            <ModalBody data-testid='modal-body'>{children}</ModalBody>
+            <ModalFooter data-testid='modal-footer'>
+              Test Modal Footer
+            </ModalFooter>
+          </ModalContent>
         </ModalRoot>
       </ModalPortal>
     </Modal>
@@ -96,8 +92,6 @@ describe('Modal', () => {
   testVariantDataAttrs(<TestModal open />, ['preventScroll', [true, false]])
 
   testVariantDataAttrs(<TestModal open />, ['keepMounted', [true, false]])
-
-  testVariantDataAttrs(<TestModal open />, ['disableAnimation', [true, false]])
 
   it('should not render children by default', () => {
     const { queryByTestId } = renderWithNexUIProvider(<TestModal />)
@@ -156,14 +150,14 @@ describe('Modal', () => {
   })
 
   it('should close when clicking outside the modal', async () => {
-    const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
+    const { queryByTestId, user } = renderWithNexUIProvider(
       <TestModal defaultOpen />,
     )
 
     const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    await user.click(getByTestId('modal-panel'))
+    await user.click(document.body)
 
     expect(modalRoot).not.toBeInTheDocument()
   })
@@ -175,7 +169,7 @@ describe('Modal', () => {
     const modalRoot = queryByTestId('modal-root')
     expect(modalRoot).toBeInTheDocument()
 
-    await user.click(getByTestId('modal-panel'))
+    await user.click(getByTestId('modal-backdrop'))
     expect(modalRoot).toBeInTheDocument()
   })
 

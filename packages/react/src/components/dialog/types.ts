@@ -8,7 +8,6 @@ import type {
 } from '../../types/utils'
 import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants } from '../../theme/recipes'
-import type { ModalProps } from '../modal'
 import type {
   ModalCloseProps,
   ModalContentProps,
@@ -16,7 +15,8 @@ import type {
   ModalPortalProps,
   ModalRootProps,
   ModalTriggerProps,
-} from '../modal/types'
+  ModalProps,
+} from '../modal'
 
 // ------------- Dialog --------------
 type DialogSlotProps = {
@@ -24,8 +24,8 @@ type DialogSlotProps = {
 }
 
 type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
-  Omit<ModalPortalProps, 'children'> &
   Pick<ModalRootProps, 'preventScroll'> &
+  Pick<ModalPortalProps, 'container' | 'keepMounted'> &
   Pick<ModalContentProps, 'restoreFocus' | 'closeOnEscape'> & {
     /**
      * The component or element to render as the root.
@@ -82,6 +82,13 @@ type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
      * If true, the Dialog is shown by default. (uncontrolled)
      */
     defaultOpen?: boolean
+
+    /**
+     * If true, disables the animation for the Dialog.
+     *
+     * @default false
+     */
+    disableAnimation?: boolean
   }
 
 export interface DialogPropsOverrides {}
@@ -97,7 +104,6 @@ export type DialogProps<RootComponent extends ElementType = 'div'> =
 type DialogContentSlotProps = {
   closeButton?: ComponentPropsWithCommonProps<'button'>
   paper?: ComponentPropsWithCommonProps<'section'>
-  wrapper?: ComponentPropsWithCommonProps<'div'>
 }
 
 export interface DialogContentPropsOverrides {}
@@ -115,7 +121,7 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   sx?: Interpolation
 
   /**
-   * It's usually the DialogHeader、DialogBody andd DialogFooter component.
+   * It's usually the DialogHeader、DialogBody and DialogFooter component.
    */
   children?: ReactNode
 
@@ -142,15 +148,9 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
   hideCloseButton?: boolean
 
   /**
-   * If true, the dialog is full-screen.
-   * @default false
-   */
-  fullScreen?: boolean
-
-  /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'paper' | 'closeButton'>
+  classNames?: ComponentSlotClasses<keyof DialogContentSlotProps>
 
   /**
    * The dialog scroll behavior.

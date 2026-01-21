@@ -1,7 +1,6 @@
 import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
-import type { ModalProps } from '../modal'
 import type { DrawerContentVariants } from '../../theme/recipes'
 import type {
   OverrideProps,
@@ -16,73 +15,81 @@ import type {
   ModalPortalProps,
   ModalRootProps,
   ModalTriggerProps,
-} from '../modal/types'
+  ModalProps,
+} from '../modal'
 
 // ----------------Drawer----------------
 type DrawerSlotProps = {
   backdrop?: ComponentPropsWithCommonProps<'div'>
 }
 
-type DrawerOwnProps<RootComponent extends ElementType> = {
-  /**
-   * The component or element to render as the root.
-   *
-   * @default 'div'
-   */
-  as?: RootComponent
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: Interpolation
-
-  /**
-   * The content of the drawer. It's usually the `DrawerContent` component.
-   */
-  children?: ReactNode
-
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
-
-  /**
-   * If true, the backdrop is not rendered.
-   * @default false
-   */
-  hideBackdrop?: boolean
-
-  /**
-   * The props used for each slot.
-   */
-  slotProps?: DrawerSlotProps
-
-  /**
-   * The className used for each slot.
-   */
-  classNames?: ComponentSlotClasses<keyof DrawerSlotProps>
-
-  /**
-   * If true, closes the drawer when the backdrop is clicked.
-   *
-   * @default true
-   */
-  closeOnInteractBackdrop?: boolean
-
-  /**
-   * The props to modify the framer motion animation.
-   * Use the `variants` API to create your own animation.
-   */
-  motionProps?: ModalMotionProps
-
-  /**
-   * If true, the Dialog is shown by default. (uncontrolled)
-   */
-  defaultOpen?: boolean
-} & ModalProps &
-  Omit<ModalPortalProps, 'children'> &
+type DrawerOwnProps<RootComponent extends ElementType> = ModalProps &
+  Pick<ModalPortalProps, 'container' | 'keepMounted'> &
   Pick<ModalRootProps, 'preventScroll'> &
-  Pick<ModalContentProps, 'restoreFocus' | 'closeOnEscape'>
+  Pick<ModalContentProps, 'restoreFocus' | 'closeOnEscape'> & {
+    /**
+     * The component or element to render as the root.
+     *
+     * @default 'div'
+     */
+    as?: RootComponent
+
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx?: Interpolation
+
+    /**
+     * The content of the drawer. It's usually the `DrawerContent` component.
+     */
+    children?: ReactNode
+
+    /**
+     * Additional class names to apply to the root.
+     */
+    className?: ClassValue
+
+    /**
+     * If true, the backdrop is not rendered.
+     * @default false
+     */
+    hideBackdrop?: boolean
+
+    /**
+     * The props used for each slot.
+     */
+    slotProps?: DrawerSlotProps
+
+    /**
+     * The className used for each slot.
+     */
+    classNames?: ComponentSlotClasses<keyof DrawerSlotProps>
+
+    /**
+     * If true, closes the drawer when the backdrop is clicked.
+     *
+     * @default true
+     */
+    closeOnInteractBackdrop?: boolean
+
+    /**
+     * The props to modify the framer motion animation.
+     * Use the `variants` API to create your own animation.
+     */
+    motionProps?: ModalMotionProps
+
+    /**
+     * If true, the Drawer is shown by default. (uncontrolled)
+     */
+    defaultOpen?: boolean
+
+    /**
+     * If true, disables the animation for the Drawer.
+     *
+     * @default false
+     */
+    disableAnimation?: boolean
+  }
 
 export interface DrawerPropsOverrides {}
 
@@ -121,10 +128,10 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'paper' | 'closeButton'>
+  classNames?: ComponentSlotClasses<keyof DrawerContentSlotProps>
 
   /**
-   * It's usually the DrawerHeader、DrawerBody andd DrawerFooter component.
+   * It's usually the DrawerHeader、DrawerBody and DrawerFooter component.
    */
   children?: ReactNode
 

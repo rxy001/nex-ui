@@ -1,35 +1,19 @@
 'use client'
 
-import { useMemo } from 'react'
-import { PopperMotion, PopperPortal, PopperRoot } from '../popper'
+import { PopperContent, PopperMotion, PopperPortal } from '../popper'
 import { useSlot, useSlotClasses, useStyles } from '../utils'
 import { usePopoverContext, usePopoverPropsContext } from './PopoverContext'
 import { popoverRecipe } from '../../theme/recipes'
 import type { ReactElement } from 'react'
-import type { PopoverPropsContextValue } from './PopoverContext'
+import type { PointerDownOutsideEvent } from '../dismissibleLayer'
 
 const slots = ['root']
-
-const useAriaProps = (ownerState: PopoverPropsContextValue) => {
-  const { 'aria-modal': ariaModal, role = 'dialog' } = ownerState
-
-  const { rootId } = usePopoverContext()
-
-  return useMemo(
-    () => ({
-      role,
-      id: rootId,
-      'aria-modal': ariaModal,
-    }),
-    [ariaModal, rootId, role],
-  )
-}
 
 export const PopoverRoot = ({ children }: { children: ReactElement }) => {
   const { motionProps, keepMounted, container, disableAnimation, ...props } =
     usePopoverPropsContext()
 
-  const { open, setOpen, triggerRef } = usePopoverContext()
+  const { triggerRef } = usePopoverContext()
 
   const slotClasses = useSlotClasses({
     name: 'Popover',
@@ -42,38 +26,45 @@ export const PopoverRoot = ({ children }: { children: ReactElement }) => {
     recipe: popoverRecipe,
   })
 
-  const ariaProps = useAriaProps(props)
-
   const [PopoverRootRoot, getPopoverRootRootProps] = useSlot({
     style,
-    elementType: PopperRoot,
+    elementType: PopperContent,
     shouldForwardComponent: false,
     externalForwardedProps: props,
     classNames: slotClasses.root,
-    a11y: ariaProps,
     additionalProps: {
-      onPointerDownOutside: (event: PointerEvent) => {
+      onPointerDownOutside: (event: PointerDownOutsideEvent) => {
         const target = event.target as HTMLElement
         // istanbul ignore next
-        if (triggerRef.current?.contains(target)) return
-        if (open) setOpen(false)
+        if (triggerRef.current?.contains(target)) {
+          event.preventDefault()
+        }
       },
     },
+    dataAttrs: {
+      disableAnimation,
+    },
   })
+
+  const renderPopoverRootRoot = () => {
+    return (
+      <PopoverRootRoot {...getPopoverRootRootProps()}>
+        {children}
+      </PopoverRootRoot>
+    )
+  }
 
   return (
     <PopperPortal
       container={container}
       keepMounted={keepMounted}
-      disableAnimation={disableAnimation}
+      disablePresence={disableAnimation}
     >
-      <PopoverRootRoot {...getPopoverRootRootProps()}>
-        {disableAnimation ? (
-          children
-        ) : (
-          <PopperMotion {...motionProps}>{children}</PopperMotion>
-        )}
-      </PopoverRootRoot>
+      {disableAnimation ? (
+        renderPopoverRootRoot()
+      ) : (
+        <PopperMotion {...motionProps}>{renderPopoverRootRoot()}</PopperMotion>
+      )}
     </PopperPortal>
   )
 }

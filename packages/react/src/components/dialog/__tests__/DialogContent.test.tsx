@@ -34,7 +34,7 @@ function TestDialog({
   )
 }
 
-const slots = ['paper', 'wrapper', 'closeButton'] as const
+const slots = ['paper', 'closeButton'] as const
 
 describe('DialogContent', () => {
   testRefForwarding(<TestDialog />, {
@@ -48,10 +48,6 @@ describe('DialogContent', () => {
       useAct: true,
     },
   )
-
-  testVariantDataAttrs(<TestDialog />, ['fullScreen', [true, false]], {
-    useAct: true,
-  })
 
   testVariantDataAttrs(<TestDialog />, ['scroll', ['inside', 'outside']], {
     useAct: true,
@@ -70,7 +66,6 @@ describe('DialogContent', () => {
     slots,
     {
       paper: 'test-paper',
-      wrapper: 'test-wrapper',
       closeButton: 'test-close-button',
     },
     dialogContentClasses,
@@ -84,7 +79,6 @@ describe('DialogContent', () => {
     slots,
     {
       paper: { className: 'test-paper' },
-      wrapper: { className: 'test-wrapper' },
       closeButton: { className: 'test-close-button' },
     },
     dialogContentClasses,
@@ -102,7 +96,6 @@ describe('DialogContent', () => {
 
     expect(dialogContentRoot).toHaveAttribute('data-size', 'md')
     expect(dialogContentRoot).toHaveAttribute('data-placement', 'top')
-    expect(dialogContentRoot).toHaveAttribute('data-full-screen', 'false')
     expect(dialogContentRoot).toHaveAttribute('data-scroll', 'outside')
     expect(dialogContentRoot).toHaveAttribute('data-hide-close-button', 'false')
   })

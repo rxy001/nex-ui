@@ -3,14 +3,12 @@
 import * as m from 'motion/react-m'
 import { useEvent } from '@nex-ui/hooks'
 import { ChevronDownOutlined } from '@nex-ui/icons'
-import { LazyMotion } from 'motion/react'
 import { useId, useMemo, useRef } from 'react'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import {
   useDefaultProps,
   useStyles,
-  motionFeatures,
   PresenceMotion,
   useSlot,
   useSlotClasses,
@@ -317,27 +315,17 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     )
   }
 
-  const renderRoot = () => {
-    const rootElement = (
-      <AccordionItemRoot {...getAccordionItemRootProps()}>
-        <AccordionItemHeading {...getAccordionItemHeadingProps()}>
-          <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
-            <span>{title}</span>
-            {!hideIndicator && renderIndicator()}
-          </AccordionItemTrigger>
-        </AccordionItemHeading>
-        {renderContent()}
-      </AccordionItemRoot>
-    )
-
-    if (disableAnimation) {
-      return rootElement
-    }
-
-    return <LazyMotion features={motionFeatures}>{rootElement}</LazyMotion>
-  }
-
-  return renderRoot()
+  return (
+    <AccordionItemRoot {...getAccordionItemRootProps()}>
+      <AccordionItemHeading {...getAccordionItemHeadingProps()}>
+        <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
+          <span>{title}</span>
+          {!hideIndicator && renderIndicator()}
+        </AccordionItemTrigger>
+      </AccordionItemHeading>
+      {renderContent()}
+    </AccordionItemRoot>
+  )
 }
 
 AccordionItem.displayName = 'AccordionItem'

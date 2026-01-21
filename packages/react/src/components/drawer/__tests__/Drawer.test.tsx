@@ -166,7 +166,7 @@ describe('Drawer', () => {
 
   it('should render into document.body via Portal when defaultOpen', async () => {
     const { container, getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer defaultOpen />,
+      <TestDrawer defaultOpen disableAnimation />,
       {
         useAct: true,
       },

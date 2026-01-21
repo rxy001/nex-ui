@@ -80,7 +80,7 @@ describe('Popover', () => {
         },
       )
 
-      const root = getByTestId('popover-root')
+      const root = getByTestId('popover-content')
       expect(root).toHaveRole('dialog')
     })
 

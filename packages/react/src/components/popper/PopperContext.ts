@@ -2,7 +2,6 @@
 
 import { createContext } from '@nex-ui/utils'
 import type { RefObject } from 'react'
-import type { PopperPortalProps } from './types'
 
 export interface PopperContextValue {
   open?: boolean
@@ -21,16 +20,15 @@ export const [PopperProvider, usePopperContext] =
   })
 
 export interface PopperPortalPropsContextValue {
-  container: PopperPortalProps['container']
   keepMounted: boolean
-  disableAnimation: boolean
+  disablePresence: boolean
 }
 
 export const [PopperPortalPropsProvider, usePopperPortalPropsContext] =
-  createContext<PopperPortalPropsContextValue>({
+  createContext<PopperPortalPropsContextValue | null>({
     contextName: 'PopperPortalPropsContext',
     hookName: 'usePopperPortalPropsContext',
     providerName: 'PopperPortalPropsProvider',
-    strict: true,
-    defaultValue: null as unknown as PopperPortalPropsContextValue,
+    strict: false,
+    defaultValue: null,
   })
