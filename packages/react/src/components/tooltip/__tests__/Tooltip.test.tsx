@@ -17,7 +17,34 @@ const slots = ['content'] as const
 
 const TestTooltip = (props: TooltipProps) => {
   return (
-    <Tooltip content='content' data-testid='tooltip-root' {...props}>
+    <Tooltip
+      content='content'
+      data-testid='tooltip-root'
+      slotProps={{
+        content: {
+          // @ts-ignore
+          'data-testid': 'tooltip-content',
+        },
+      }}
+      {...props}
+    >
+      <button data-testid='tooltip-trigger'>Trigger</button>
+    </Tooltip>
+  )
+}
+
+const TestTooltipVariant = ({ className, ...props }: TooltipProps) => {
+  return (
+    <Tooltip
+      content='content'
+      data-testid='tooltip-root'
+      slotProps={{
+        content: {
+          className,
+        },
+      }}
+      {...props}
+    >
       <button data-testid='tooltip-trigger'>Trigger</button>
     </Tooltip>
   )
@@ -27,7 +54,7 @@ describe('Tooltip', () => {
   testComponentStability(<TestTooltip open />)
 
   testVariantDataAttrs(
-    <TestTooltip open />,
+    <TestTooltipVariant open />,
     [
       'color',
       [
@@ -48,15 +75,15 @@ describe('Tooltip', () => {
     },
   )
 
-  testSizeDataAttrs(<TestTooltip open />, {
-    useAct: true,
-  })
-
-  testRadiusDataAttrs(<TestTooltip open />, {
-    useAct: true,
-  })
-
   testRefForwarding(<TestTooltip open />, {
+    useAct: true,
+  })
+
+  testSizeDataAttrs(<TestTooltipVariant open />, {
+    useAct: true,
+  })
+
+  testRadiusDataAttrs(<TestTooltipVariant open />, {
     useAct: true,
   })
 
@@ -104,10 +131,10 @@ describe('Tooltip', () => {
       },
     )
 
-    const tooltipRoot = getByTestId('tooltip-root')
-    expect(tooltipRoot).toHaveAttribute('data-color', 'default')
-    expect(tooltipRoot).toHaveAttribute('data-size', 'md')
-    expect(tooltipRoot).toHaveAttribute('data-radius', 'md')
+    const content = getByTestId('tooltip-content')
+    expect(content).toHaveAttribute('data-color', 'default')
+    expect(content).toHaveAttribute('data-size', 'md')
+    expect(content).toHaveAttribute('data-radius', 'md')
   })
 
   it('should render with root, content class', async () => {
@@ -121,7 +148,7 @@ describe('Tooltip', () => {
     const tooltipRoot = getByTestId('tooltip-root')
     expect(tooltipRoot).toHaveClass(tooltipSlotClasses.root)
 
-    expect(tooltipRoot.firstElementChild?.firstElementChild).toHaveClass(
+    expect(tooltipRoot.firstElementChild).toHaveClass(
       tooltipSlotClasses.content,
     )
   })
@@ -169,12 +196,12 @@ describe('Tooltip', () => {
 
     const root = getByTestId('tooltip-root')
 
-    await user.hover(root)
     await user.unhover(trigger)
 
     expect(root).toBeInTheDocument()
 
-    await user.click(root)
+    // content element
+    await user.click(root.firstElementChild!)
 
     expect(root).toBeInTheDocument()
 
@@ -325,7 +352,7 @@ describe('Tooltip', () => {
   })
 
   it('should close immediately previous tooltip when open other tooltip', async () => {
-    const { getByTestId, user } = await renderWithNexUIProvider(
+    const { getByTestId, queryByTestId, user } = await renderWithNexUIProvider(
       <>
         <Tooltip
           openDelay={0}
@@ -352,15 +379,13 @@ describe('Tooltip', () => {
     const trigger2 = getByTestId('tooltip-trigger-2')
 
     await user.hover(trigger1)
-    const tooltip1 = getByTestId('tooltip-1')
-    expect(tooltip1).toBeInTheDocument()
+    await waitFor(() => expect(queryByTestId('tooltip-1')).toBeInTheDocument())
 
     await user.unhover(trigger1)
     await user.hover(trigger2)
 
-    const tooltip2 = getByTestId('tooltip-2')
-    expect(tooltip2).toBeInTheDocument()
-    expect(tooltip1).not.toBeInTheDocument()
+    await waitFor(() => expect(queryByTestId('tooltip-2')).toBeInTheDocument())
+    expect(queryByTestId('tooltip-1')).not.toBeInTheDocument()
   })
 
   describe('Accessibility', () => {
@@ -374,9 +399,9 @@ describe('Tooltip', () => {
       )
 
       const trigger = getByTestId('tooltip-trigger')
-      const root = getByTestId('tooltip-root')
+      const content = getByTestId('tooltip-content')
 
-      expect(trigger).toHaveAttribute('aria-describedby', root.id)
+      expect(trigger).toHaveAttribute('aria-describedby', content.id)
     })
 
     it('should not have aria-describedby on the trigger element when the tooltip is closed', async () => {
@@ -396,9 +421,9 @@ describe('Tooltip', () => {
         },
       )
 
-      const root = getByTestId('tooltip-root')
+      const content = getByTestId('tooltip-content')
 
-      expect(root).toHaveAttribute('role', 'tooltip')
+      expect(content).toHaveAttribute('role', 'tooltip')
     })
   })
 })

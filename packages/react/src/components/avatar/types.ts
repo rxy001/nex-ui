@@ -138,7 +138,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'surplus'>
+  classNames?: ComponentSlotClasses<keyof AvatarGroupSlotProps>
 
   /**
    * The size of all Avatars.

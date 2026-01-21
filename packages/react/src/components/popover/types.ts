@@ -1,33 +1,15 @@
-import type { ElementType, ReactElement, Ref } from 'react'
-import type { Interpolation } from '@nex-ui/system'
+import type { ElementType, ReactElement } from 'react'
+import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
-import type { FocusTrapProps } from '../utils'
-import type {
-  PopperContentProps,
-  PopperProps,
-  PopperRootProps,
-} from '../popper'
-import type { OverrideProps } from '../../types/utils'
+import type { FocusTrapProps } from '../focusTrap'
+import type { PopperContentProps, PopperProps } from '../popper'
+import type { HTMLMotionProps, OverrideProps } from '../../types/utils'
 import type { PopoverContentVariants } from '../../theme/recipes'
-import type { PopperMotionProps, PopperPortalProps } from '../popper/types'
+import type { PopperAnchorProps, PopperPortalProps } from '../popper/types'
 
 // ------------------- PopoverProps -------------------
 type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
-  Pick<
-    PopperRootProps,
-    | 'placement'
-    | 'offset'
-    | 'flip'
-    | 'shift'
-    | 'onEscapeKeyDown'
-    | 'onFocusOutside'
-    | 'onInteractOutside'
-    | 'onPointerDownOutside'
-    | 'closeOnDetached'
-    | 'closeOnEscape'
-  > &
-  Omit<PopperPortalProps, 'children'> &
-  Pick<FocusTrapProps, 'restoreFocus' | 'loop'> & {
+  Pick<PopperPortalProps, 'keepMounted' | 'container'> & {
     /**
      * The component or element to render as the root.
      *
@@ -48,13 +30,30 @@ type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
     /**
      * The props to modify the framer motion animation.
      */
-    motionProps?: PopperMotionProps
+    motionProps?: HTMLMotionProps<'div'>
 
     /**
      * If true, the Popover is shown by default. (uncontrolled)
      */
     defaultOpen?: boolean
-  }
+
+    /**
+     * If true, disables the animation for the Popover.
+     */
+    disableAnimation?: boolean
+  } & Pick<
+    PopperContentProps,
+    | 'closeOnEscape'
+    | 'closeOnDetached'
+    | 'onPointerDownOutside'
+    | 'onEscapeKeyDown'
+    | 'onFocusOutside'
+    | 'onInteractOutside'
+    | 'placement'
+    | 'offset'
+    | 'flip'
+    | 'shift'
+  >
 
 export interface PopoverPropsOverrides {}
 
@@ -66,7 +65,10 @@ export type PopoverProps<RootComponent extends ElementType = 'div'> =
   >
 
 // ------------------- PopoverContentProps -------------------
-type PopoverContentOwnProps<RootComponent extends ElementType> = {
+type PopoverContentOwnProps<RootComponent extends ElementType> = Pick<
+  FocusTrapProps,
+  'restoreFocus' | 'loop' | 'autoFocus'
+> & {
   /**
    * The component or element to render as the root.
    *
@@ -103,12 +105,12 @@ type PopoverContentOwnProps<RootComponent extends ElementType> = {
    *
    * @default 480
    */
-  maxWidth?: PopperContentProps['maxWidth']
+  maxWidth?: CSSObject['maxWidth']
 
   /**
    * The maximum height of the popover content.
    */
-  maxHeight?: PopperContentProps['maxHeight']
+  maxHeight?: CSSObject['maxHeight']
 }
 
 export interface PopoverContentPropsOverrides {}
@@ -125,9 +127,7 @@ export interface PopoverTriggerProps {
   /**
    * The content of the trigger element.
    */
-  children?: ReactElement<{
-    ref?: Ref<HTMLElement>
-  }>
+  children?: PopperAnchorProps['children']
 
   /**
    * If true, closes the Popper when clicking the trigger element.

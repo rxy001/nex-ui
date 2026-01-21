@@ -168,7 +168,7 @@ type CheckboxGroupOwnProps<
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'label' | 'wrapper'>
+  classNames?: ComponentSlotClasses<keyof CheckboxGroupSlotProps>
 
   /**
    * The currently selected values. (controlled)

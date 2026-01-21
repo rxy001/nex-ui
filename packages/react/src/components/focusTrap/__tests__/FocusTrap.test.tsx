@@ -184,34 +184,7 @@ describe('FocusTrap', () => {
     expect(document.activeElement).toBe(firstButton)
   })
 
-  it('should not trap focus when paused', async () => {
-    const { getByTestId, getByRole } = render(
-      <div>
-        <button data-testid='outside-button'>Outside Button</button>
-        <FocusTrap active paused>
-          <div role='dialog'>
-            <button data-testid='inside-button'>Inside</button>
-          </div>
-        </FocusTrap>
-      </div>,
-    )
-
-    const outsideButton = getByTestId('outside-button')
-    const insideButton = getByTestId('inside-button')
-    const dialog = getByRole('dialog')
-
-    expect(document.activeElement).toBe(dialog)
-
-    await user.tab()
-    expect(document.activeElement).toBe(insideButton)
-
-    await user.tab()
-    await user.tab()
-
-    expect(document.activeElement).toBe(outsideButton)
-  })
-
-  it('should not be trapped when focus is outside elements', async () => {
+  it('should trap focus inside when focus is outside elements', async () => {
     const { getByTestId } = render(
       <>
         <button data-testid='outside-button'>Outside Button</button>
@@ -230,7 +203,7 @@ describe('FocusTrap', () => {
     expect(document.activeElement).toBe(insideButton)
 
     outsideButton.focus()
-    expect(document.activeElement).toBe(outsideButton)
+    expect(document.activeElement).toBe(insideButton)
   })
 
   it('should handle focus when no tabbable elements exist', async () => {
@@ -249,6 +222,98 @@ describe('FocusTrap', () => {
     expect(document.activeElement).toBe(container)
 
     await user.tab({ shift: true })
+    expect(document.activeElement).toBe(container)
+  })
+
+  it('should keep focus only in the latest FocusTrap (multiple exist)', async () => {
+    const { getByTestId, rerender } = render(
+      <>
+        <FocusTrap active>
+          <button data-testid='first-trap-button'>First Trap Button</button>
+        </FocusTrap>
+      </>,
+    )
+
+    const firstTrapButton = getByTestId('first-trap-button')
+    expect(document.activeElement).toBe(firstTrapButton)
+
+    rerender(
+      <>
+        <FocusTrap active>
+          <button data-testid='first-trap-button'>First Trap Button</button>
+        </FocusTrap>
+        <FocusTrap active>
+          <button data-testid='second-trap-button'>Second Trap Button</button>
+        </FocusTrap>
+      </>,
+    )
+
+    const secondTrapButton = getByTestId('second-trap-button')
+    expect(document.activeElement).toBe(secondTrapButton)
+
+    await user.tab()
+    expect(document.activeElement).toBe(secondTrapButton)
+  })
+
+  it('should not trap focus when active=false and allow normal tabbing', async () => {
+    const { getByTestId } = render(
+      <>
+        <FocusTrap>
+          <div>
+            <button data-testid='first-button'>First</button>
+          </div>
+        </FocusTrap>
+        <button data-testid='second-button'>Second</button>
+      </>,
+    )
+
+    const firstButton = getByTestId('first-button')
+    const secondButton = getByTestId('second-button')
+
+    await user.tab()
+    expect(document.activeElement).toBe(firstButton)
+
+    await user.tab()
+    expect(document.activeElement).toBe(secondButton)
+  })
+
+  it('should auto focus the first tabbable element when autoFocus=true', async () => {
+    const { getByTestId } = render(
+      <FocusTrap active autoFocus>
+        <div>
+          <button data-testid='first-button'>First</button>
+          <button data-testid='second-button'>Second</button>
+        </div>
+      </FocusTrap>,
+    )
+
+    const firstButton = getByTestId('first-button')
+    expect(document.activeElement).toBe(firstButton)
+  })
+
+  it('should auto focus the container when no tabbable elements and autoFocus=true', async () => {
+    const { getByRole } = render(
+      <FocusTrap active autoFocus>
+        <div role='dialog'>
+          <span>No tabbable content</span>
+        </div>
+      </FocusTrap>,
+    )
+
+    const container = getByRole('dialog')
+    expect(document.activeElement).toBe(container)
+  })
+
+  it('should auto focus the container when autoFocus=false', () => {
+    const { getByRole } = render(
+      <FocusTrap active autoFocus={false}>
+        <div role='dialog'>
+          <span>No tabbable content</span>
+        </div>
+      </FocusTrap>,
+    )
+
+    const container = getByRole('dialog')
     expect(document.activeElement).toBe(container)
   })
 })

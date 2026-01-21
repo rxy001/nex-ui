@@ -3,19 +3,14 @@
 import { useCallback, useEffect, useId, useMemo } from 'react'
 import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
 import { addEventListener } from '@nex-ui/utils'
-import {
-  Popper,
-  PopperContent,
-  PopperMotion,
-  PopperPortal,
-  PopperRoot,
-} from '../popper'
+import { Popper, PopperContent, PopperPortal, PopperMotion } from '../popper'
 import { useSlot, useStyles, useSlotClasses, useDefaultProps } from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
 import { TooltipTrigger } from './TooltipTrigger'
 import { TooltipProvider, useTooltipContext } from './TooltipContext'
 import type { ElementType } from 'react'
 import type { TooltipProps } from './types'
+import type { FocusOutsideEvent } from '../dismissibleLayer'
 
 const slots = ['root', 'content']
 
@@ -38,7 +33,7 @@ const useSlotAriaProps = (ownerState: TooltipProps) => {
 
 // eslint-disable-next-line react/display-name
 const TooltipImpl = (props: TooltipProps) => {
-  const { delayOpen, delayClose, setOpen } = useTooltipContext()
+  const { delayOpen, delayClose } = useTooltipContext()
   const {
     children,
     container,
@@ -48,6 +43,12 @@ const TooltipImpl = (props: TooltipProps) => {
     slotProps,
     motionProps,
     maxHeight,
+    closeOnEscape,
+    closeOnDetached,
+    onEscapeKeyDown,
+    onFocusOutside,
+    onInteractOutside,
+    onPointerDownOutside,
     interactive = true,
     disableAnimation = false,
     maxWidth = 360,
@@ -64,6 +65,7 @@ const TooltipImpl = (props: TooltipProps) => {
     radius,
     color,
     disableAnimation,
+    interactive,
   }
 
   const slotAriaProps = useSlotAriaProps(ownerState)
@@ -82,57 +84,67 @@ const TooltipImpl = (props: TooltipProps) => {
 
   const [TooltipRoot, getTooltipRootProps] = useSlot({
     style: styles.root,
-    elementType: PopperRoot,
+    elementType: PopperContent,
     classNames: slotClasses.root,
     shouldForwardComponent: false,
     externalForwardedProps: remainingProps,
     additionalProps: {
+      closeOnEscape,
+      closeOnDetached,
+      onEscapeKeyDown,
+      onInteractOutside,
+      onPointerDownOutside,
       onPointerEnter: interactive ? delayOpen : undefined,
       onPointerLeave: interactive ? delayClose : undefined,
-      onPointerDownOutside: () => {
-        setOpen(false)
+      onFocusOutside: (event: FocusOutsideEvent) => {
+        onFocusOutside?.(event)
+        event.preventDefault()
       },
     },
+    dataAttrs: {
+      disableAnimation,
+    },
+  })
+
+  const [TooltipContent, getTooltipContentProps] = useSlot({
+    style: styles.content,
+    elementType: 'div',
+    classNames: slotClasses.content,
+    externalSlotProps: slotProps?.content,
+    a11y: slotAriaProps.root,
     dataAttrs: {
       color,
       size,
       radius,
       interactive,
     },
-    a11y: slotAriaProps.root,
-  })
-
-  const [TooltipContent, getTooltipContentProps] = useSlot({
-    style: styles.content,
-    elementType: PopperContent,
-    classNames: slotClasses.content,
-    shouldForwardComponent: false,
-    externalSlotProps: slotProps?.content,
     additionalProps: {
-      maxWidth,
-      maxHeight,
+      sx: {
+        maxWidth,
+        maxHeight,
+      },
     },
   })
 
-  const renderChildren = () => (
-    <TooltipContent {...getTooltipContentProps()}>{content}</TooltipContent>
+  const renderTooltipRoot = () => (
+    <TooltipRoot {...getTooltipRootProps()}>
+      <TooltipContent {...getTooltipContentProps()}>{content}</TooltipContent>
+    </TooltipRoot>
   )
 
   return (
     <>
-      <TooltipTrigger>{children as any}</TooltipTrigger>
+      <TooltipTrigger>{children}</TooltipTrigger>
       <PopperPortal
-        disableAnimation={disableAnimation}
+        disablePresence={disableAnimation}
         container={container}
         keepMounted={keepMounted}
       >
-        <TooltipRoot {...getTooltipRootProps()}>
-          {disableAnimation ? (
-            renderChildren()
-          ) : (
-            <PopperMotion {...motionProps}>{renderChildren()}</PopperMotion>
-          )}
-        </TooltipRoot>
+        {disableAnimation ? (
+          renderTooltipRoot()
+        ) : (
+          <PopperMotion {...motionProps}>{renderTooltipRoot()}</PopperMotion>
+        )}
       </PopperPortal>
     </>
   )
@@ -209,7 +221,8 @@ export const Tooltip = <RootComponent extends ElementType = 'div'>(
   useEffect(() => {
     if (open) {
       return addEventListener(document, TOOLTIP_OPEN_EVENT, () => {
-        debouncedClosePopper.flush()
+        debouncedClosePopper.cancel()
+        setOpen(false)
       })
     }
   }, [debouncedClosePopper, open, setOpen])

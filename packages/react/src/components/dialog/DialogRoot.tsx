@@ -47,6 +47,7 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     classNames: slotClasses.root,
     dataAttrs: {
       hideBackdrop,
+      disableAnimation,
     },
     additionalProps: {
       preventScroll,
@@ -61,26 +62,24 @@ export const DialogRoot = ({ children }: DialogRootProps) => {
     classNames: slotClasses.backdrop,
   })
 
-  const renderChildren = () => (
-    <>
+  const renderDialogRootRoot = () => (
+    <DialogRootRoot {...getDialogRootRootProps()}>
       {!hideBackdrop && <DialogBackdrop {...getDialogBackdropProps()} />}
       {children}
-    </>
+    </DialogRootRoot>
   )
 
   return (
     <ModalPortal
-      disableAnimation={disableAnimation}
+      disablePresence={disableAnimation}
       container={container}
       keepMounted={keepMounted}
     >
-      <DialogRootRoot {...getDialogRootRootProps()}>
-        {disableAnimation ? (
-          renderChildren()
-        ) : (
-          <ModalMotion {...motionProps}>{renderChildren()}</ModalMotion>
-        )}
-      </DialogRootRoot>
+      {disableAnimation ? (
+        renderDialogRootRoot()
+      ) : (
+        <ModalMotion {...motionProps}>{renderDialogRootRoot()}</ModalMotion>
+      )}
     </ModalPortal>
   )
 }

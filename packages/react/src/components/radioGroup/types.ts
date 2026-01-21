@@ -144,7 +144,7 @@ type RadioGroupOwnProps<
   /**
    * The className used for each slot.
    */
-  classNames?: ComponentSlotClasses<'label' | 'wrapper'>
+  classNames?: ComponentSlotClasses<keyof RadioGroupSlotProps>
 
   /**
    * If true, all radios are disabled.

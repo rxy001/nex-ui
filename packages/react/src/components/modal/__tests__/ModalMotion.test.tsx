@@ -8,7 +8,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalPanel,
   ModalPortal,
   ModalRoot,
   ModalMotion,
@@ -16,34 +15,33 @@ import {
 } from '../index'
 import type { ModalPortalProps } from '../types'
 
-function TestModal({ keepMounted, disableAnimation }: ModalPortalProps) {
+function TestModal({
+  keepMounted,
+  disableAnimation,
+}: {
+  keepMounted?: ModalPortalProps['keepMounted']
+  disableAnimation?: ModalPortalProps['disablePresence']
+}) {
   const [open, setOpen] = useState(true)
 
   const renderChildren = () => (
     <>
       <ModalBackdrop data-testid='modal-backdrop' />
-      <ModalPanel data-testid='modal-panel'>
-        <ModalContent data-testid='modal-content'>
-          <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
-          <ModalBody data-testid='modal-body'>
-            <ModalClose>
-              <button data-testid='close-button'>close</button>
-            </ModalClose>
-          </ModalBody>
-          <ModalFooter data-testid='modal-footer'>
-            Test Modal Footer
-          </ModalFooter>
-        </ModalContent>
-      </ModalPanel>
+      <ModalContent data-testid='modal-content'>
+        <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
+        <ModalBody data-testid='modal-body'>
+          <ModalClose>
+            <button data-testid='close-button'>close</button>
+          </ModalClose>
+        </ModalBody>
+        <ModalFooter data-testid='modal-footer'>Test Modal Footer</ModalFooter>
+      </ModalContent>
     </>
   )
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
-      <ModalPortal
-        keepMounted={keepMounted}
-        disableAnimation={disableAnimation}
-      >
+      <ModalPortal keepMounted={keepMounted} disablePresence={disableAnimation}>
         <ModalRoot data-testid='modal-root'>
           {disableAnimation ? (
             renderChildren()

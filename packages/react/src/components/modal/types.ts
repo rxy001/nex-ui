@@ -8,7 +8,8 @@ import type {
   ReactNode,
   ReactElement,
 } from 'react'
-import type { DismissibleLayerProps } from '../utils'
+import type { DismissibleLayerProps } from '../dismissibleLayer'
+import type { FocusTrapProps } from '../focusTrap'
 
 type ModalSlotProps<RootComponent extends ElementType> = Overwrite<
   ComponentProps<RootComponent>,
@@ -55,13 +56,8 @@ export interface ModalCloseProps {
 // ------------- ModalContent -------------
 export type ModalContentProps<RootComponent extends ElementType = 'section'> =
   ModalSlotProps<RootComponent> &
-    Omit<DismissibleLayerProps, 'children'> & {
-      /**
-       * If true, the Modal will restore focus to previously focused element once the Modal is hidden or unmounted.
-       * @default true
-       */
-      restoreFocus?: boolean
-
+    Omit<FocusTrapProps, 'children' | 'active'> &
+    Omit<DismissibleLayerProps, 'children' | 'onDismiss'> & {
       /**
        * If true, closes the Modal when the escape key is pressed.
        * @default true
@@ -106,7 +102,7 @@ export type ModalPanelProps<RootComponent extends ElementType = 'div'> =
   ModalSlotProps<RootComponent>
 
 // ------------- ModalPortal -------------
-export type ModalPortalProps = Pick<PortalProps, 'container' | 'children'> & {
+export type ModalPortalProps = PortalProps & {
   /**
    * If true, keeps the Modal mounted in the DOM when it's closed.
    *
@@ -119,7 +115,7 @@ export type ModalPortalProps = Pick<PortalProps, 'container' | 'children'> & {
    *
    * @default false
    */
-  disableAnimation?: boolean
+  disablePresence?: boolean
 }
 
 // ------------- ModalMotion -------------

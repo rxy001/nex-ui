@@ -7,7 +7,7 @@ import type { FocusEvent } from 'react'
 import type { PopperAnchorProps } from '../popper'
 
 export const TooltipTrigger = ({ children }: PopperAnchorProps) => {
-  const { delayOpen, delayClose, rootId, open } = useTooltipContext()
+  const { delayOpen, delayClose, rootId, open, setOpen } = useTooltipContext()
 
   const focusVisibleRef = useRef(false)
 
@@ -15,18 +15,16 @@ export const TooltipTrigger = ({ children }: PopperAnchorProps) => {
     return children
   }
 
-  const handlePointerEnter = delayOpen
-  const handlePointerLeave = delayClose
   const handleFocus = (event: FocusEvent<HTMLElement>) => {
     if (isFocusVisible(event.currentTarget)) {
-      delayOpen()
+      setOpen(true)
       focusVisibleRef.current = true
     }
   }
 
   const handleBlur = (event: FocusEvent<HTMLElement>) => {
     if (focusVisibleRef.current && !isFocusVisible(event.currentTarget)) {
-      delayClose()
+      setOpen(false)
       focusVisibleRef.current = false
     }
   }
@@ -37,8 +35,8 @@ export const TooltipTrigger = ({ children }: PopperAnchorProps) => {
         children,
         mergeProps(
           {
-            onPointerEnter: handlePointerEnter,
-            onPointerLeave: handlePointerLeave,
+            onPointerEnter: delayOpen,
+            onPointerLeave: delayClose,
             onFocus: handleFocus,
             onBlur: handleBlur,
             'aria-describedby': open ? rootId : undefined,

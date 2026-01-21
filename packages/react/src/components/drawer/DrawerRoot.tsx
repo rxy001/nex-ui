@@ -44,6 +44,7 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     },
     dataAttrs: {
       hideBackdrop,
+      disableAnimation,
     },
   })
 
@@ -55,26 +56,24 @@ export const DrawerRoot = ({ children }: DrawerProps) => {
     classNames: slotClasses.backdrop,
   })
 
-  const renderChildren = () => (
-    <>
+  const renderDrawerRootRoot = () => (
+    <DrawerRootRoot {...getDrawerRootRootProps()}>
       {!hideBackdrop && <DrawerBackdrop {...getDrawerBackdropProps()} />}
       {children}
-    </>
+    </DrawerRootRoot>
   )
 
   return (
     <ModalPortal
-      disableAnimation={disableAnimation}
+      disablePresence={disableAnimation}
       container={container}
       keepMounted={keepMounted}
     >
-      <DrawerRootRoot {...getDrawerRootRootProps()}>
-        {disableAnimation ? (
-          renderChildren()
-        ) : (
-          <ModalMotion {...motionProps}>{renderChildren()}</ModalMotion>
-        )}
-      </DrawerRootRoot>
+      {disableAnimation ? (
+        renderDrawerRootRoot()
+      ) : (
+        <ModalMotion {...motionProps}>{renderDrawerRootRoot()}</ModalMotion>
+      )}
     </ModalPortal>
   )
 }

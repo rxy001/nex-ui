@@ -6,14 +6,10 @@ import type {
   Ref,
 } from 'react'
 import type { ClassValue } from 'clsx'
-import type { CSSObject, Interpolation } from '@nex-ui/system'
+import type { Interpolation } from '@nex-ui/system'
 import type { PortalProps } from '@nex-ui/utils'
-import type {
-  Placement,
-  FlipOptions,
-  OffsetOptions,
-  DismissibleLayerProps,
-} from '../utils'
+import type { DismissibleLayerProps } from '../dismissibleLayer'
+import type { Placement, FlipOptions, OffsetOptions } from '../utils'
 import type { HTMLMotionProps, Overwrite } from '../../types/utils'
 
 // ----------------- PopperProps -----------------
@@ -58,8 +54,25 @@ type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
   }
 >
 
-// ----------------- PopperRootProps -----------------
-type PopperRootOwnProps = Omit<DismissibleLayerProps, 'children'> & {
+// ----------------- PopperContentProps -----------------
+type PopperContentOwnProps = Omit<
+  DismissibleLayerProps,
+  'children' | 'onDismiss'
+> & {
+  /**
+   * If true, closes the Popper when the escape key is pressed.
+   *
+   * @default true
+   */
+  closeOnEscape?: boolean
+
+  /**
+   * If true, closes the Popper when the reference element is detached from the viewport.
+   *
+   * @default true
+   */
+  closeOnDetached?: boolean
+
   /**
    * The placement of the Popper relative to the trigger element.
    *
@@ -87,32 +100,13 @@ type PopperRootOwnProps = Omit<DismissibleLayerProps, 'children'> & {
    * @default 5
    */
   offset?: OffsetOptions | false
-
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
-
-  /**
-   * If true, closes the Popper when the escape key is pressed.
-   *
-   * @default true
-   */
-  closeOnEscape?: boolean
-
-  /**
-   * If true, closes the Popper when the reference element is detached from the viewport.
-   *
-   * @default true
-   */
-  closeOnDetached?: boolean
 }
 
-export type PopperRootProps<RootComponent extends ElementType = 'div'> =
-  PopperSlotProps<RootComponent> & PopperRootOwnProps
+export type PopperContentProps<RootComponent extends ElementType = 'div'> =
+  PopperSlotProps<RootComponent> & PopperContentOwnProps
 
 // ----------------- PopperPortalProps -----------------
-export type PopperPortalProps = Pick<PortalProps, 'container' | 'children'> & {
+export type PopperPortalProps = PortalProps & {
   /**
    * If true, keeps the popper mounted in the DOM when it's closed.
    *
@@ -121,28 +115,12 @@ export type PopperPortalProps = Pick<PortalProps, 'container' | 'children'> & {
   keepMounted?: boolean
 
   /**
-   * If true, disables the animation for the Popper.
+   * If true, disables AnimatePresence for the popper.
    *
    * @default false
    */
-  disableAnimation?: boolean
+  disablePresence?: boolean
 }
 
 // ----------------- PopperMotionProps -----------------
 export type PopperMotionProps = HTMLMotionProps<'div'>
-
-// ----------------- PopperContentProps -----------------
-type PopperContentOwnProps = {
-  /**
-   * The maximum width of the Popper content.
-   */
-  maxWidth?: CSSObject['maxWidth']
-
-  /**
-   * The maximum height of the Popper content.
-   */
-  maxHeight?: CSSObject['maxHeight']
-}
-
-export type PopperContentProps<RootComponent extends ElementType = 'div'> =
-  PopperSlotProps<RootComponent> & PopperContentOwnProps

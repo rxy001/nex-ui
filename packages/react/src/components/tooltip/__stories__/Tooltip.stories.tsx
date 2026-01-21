@@ -13,8 +13,8 @@ function Container({ children }: { children: ReactNode }) {
   return (
     <Flex
       sx={{
-        w: '100vw',
-        h: '100vh',
+        w: '100%',
+        h: '100%',
         columnGap: 60,
       }}
       justify='center'
@@ -228,6 +228,7 @@ const FlipTemplate = (props: TooltipProps) => {
         w: 300,
         h: 200,
         overflow: 'auto',
+        border: '1px solid #000',
       }}
     >
       <Box
