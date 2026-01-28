@@ -4,10 +4,9 @@ import { useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { AnimatePresence, LazyMotion } from 'motion/react'
 import * as m from 'motion/react-m'
-import { motionFeatures } from './motionFeatures'
-import type { MotionValue, Variants } from 'motion/react'
-import type { ReactNode } from 'react'
-import type { HTMLMotionProps } from '../../types/utils'
+import { motionFeatures } from '../utils/motionFeatures'
+import type { Variants } from 'motion/react'
+import type { PresenceMotionProps } from './types'
 
 const transition = {
   ease: 'easeInOut',
@@ -21,13 +20,6 @@ const variants: Variants = {
   hidden: {
     opacity: 0,
   },
-}
-
-export interface PresenceMotionProps extends HTMLMotionProps<'div'> {
-  keepMounted?: boolean
-  children?: ReactNode | MotionValue<string> | MotionValue<number>
-  open?: boolean
-  propagate?: boolean
 }
 
 export const PresenceMotion = ({
