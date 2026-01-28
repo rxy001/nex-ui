@@ -1,12 +1,7 @@
 'use client'
 
-import {
-  useSlot,
-  Ripple,
-  useDefaultProps,
-  useStyles,
-  useSlotClasses,
-} from '../utils'
+import { useSlot, useDefaultProps, useStyles, useSlotClasses } from '../utils'
+import { Ripple } from '../ripple'
 import { ButtonBase } from '../buttonBase'
 import { cardActionArea } from '../../theme/recipes'
 import type { ElementType } from 'react'

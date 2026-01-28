@@ -4,13 +4,8 @@ import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
 import { DrawerRoot } from './DrawerRoot'
-import {
-  useStyles,
-  useDefaultProps,
-  useSlot,
-  Ripple,
-  useSlotClasses,
-} from '../utils'
+import { useStyles, useDefaultProps, useSlot, useSlotClasses } from '../utils'
+import { Ripple } from '../ripple'
 import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'

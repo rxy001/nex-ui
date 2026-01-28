@@ -1,6 +1,6 @@
 'use client'
 
-import { PresenceMotion } from '../utils'
+import { PresenceMotion } from '../presenceMotion'
 import { useModalContext, useModalPortalPropsContext } from './ModalContext'
 import type { ModalMotionProps } from './types'
 

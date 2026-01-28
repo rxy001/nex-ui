@@ -1,7 +1,7 @@
 'use client'
 
 import { usePopperContext, usePopperPortalPropsContext } from './PopperContext'
-import { PresenceMotion } from '../utils'
+import { PresenceMotion } from '../presenceMotion'
 import type { PopperMotionProps } from './types'
 
 export const PopperMotion = (props: PopperMotionProps) => {

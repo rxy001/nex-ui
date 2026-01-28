@@ -124,7 +124,7 @@ export type AccordionProps<RootComponent extends ElementType = 'div'> =
 // AccordionItem
 export interface AccordionItemPropsOverrides {}
 
-export interface AccordionItemSlotProps {
+export type AccordionItemSlotProps = {
   heading?: ComponentPropsWithCommonProps<'h3'>
   indicator?: ComponentPropsWithCommonProps<'span'>
   content?: ComponentPropsWithCommonProps<'div'>
@@ -217,8 +217,8 @@ export type AccordionItemProps<RootComponent extends ElementType = 'div'> =
     AccordionItemOwnProps<RootComponent>,
     AccordionItemPropsOverrides
   >
-export type AccordionItemOwnerState<RootComponent extends ElementType = 'div'> =
-  AccordionItemProps<RootComponent> & {
-    expanded: boolean
-    variant: AccordionVariants['variant']
-  }
+
+export type AccordionItemOwnerState = AccordionItemProps & {
+  expanded: boolean
+  variant: AccordionVariants['variant']
+}

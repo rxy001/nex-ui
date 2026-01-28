@@ -6,14 +6,9 @@ import { ChevronDownOutlined } from '@nex-ui/icons'
 import { useId, useMemo, useRef } from 'react'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
-import {
-  useDefaultProps,
-  useStyles,
-  PresenceMotion,
-  useSlot,
-  useSlotClasses,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { useAccordionGroupContext } from './AccordionContext'
+import { PresenceMotion } from '../presenceMotion'
 import type { ElementType, HTMLAttributes } from 'react'
 import type { Variants } from 'motion/react'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'

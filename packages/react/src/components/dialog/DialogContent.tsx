@@ -4,13 +4,8 @@ import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
 import { DialogRoot } from './DialogRoot'
-import {
-  useStyles,
-  useDefaultProps,
-  useSlot,
-  Ripple,
-  useSlotClasses,
-} from '../utils'
+import { useStyles, useDefaultProps, useSlot, useSlotClasses } from '../utils'
+import { Ripple } from '../ripple'
 import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
