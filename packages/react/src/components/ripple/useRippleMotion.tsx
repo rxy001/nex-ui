@@ -8,11 +8,11 @@ import { LazyMotion, AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
 import { useRef } from 'react'
 import { createRoot } from 'react-dom/client'
-import { useNexUI } from '../../provider'
-import { motionFeatures } from '../motionFeatures'
+import { useNexUI } from '../provider'
+import { motionFeatures } from '../utils/motionFeatures'
 import type { CSSProperties, MouseEvent } from 'react'
 import type { Root } from 'react-dom/client'
-import type { HTMLMotionProps } from '../../../types/utils'
+import type { HTMLMotionProps } from '../../types/utils'
 
 type Ripples = {
   size: number

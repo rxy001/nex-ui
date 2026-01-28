@@ -1,3 +1,5 @@
+'use client'
+
 import { cloneElement, isValidElement } from 'react'
 import { chain } from '@nex-ui/utils'
 import { useRippleMotion } from './useRippleMotion'

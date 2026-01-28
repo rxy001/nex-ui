@@ -1,5 +1,5 @@
 import { render, act, waitFor } from '@testing-library/react'
-import { PresenceMotion } from '../PresenceMotion'
+import { PresenceMotion } from '../../presenceMotion/PresenceMotion'
 
 describe('PresenceMotion', () => {
   it('should render children when open=true', async () => {

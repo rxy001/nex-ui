@@ -4,13 +4,8 @@ import { LoadingOutlined } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { ButtonBase } from '../buttonBase'
 import { buttonRecipe } from '../../theme/recipes'
-import {
-  useDefaultProps,
-  Ripple,
-  useStyles,
-  useSlot,
-  useSlotClasses,
-} from '../utils'
+import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import { Ripple } from '../ripple'
 import type { ElementType } from 'react'
 import type { ButtonProps } from './types'
 
