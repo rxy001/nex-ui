@@ -5,13 +5,13 @@ import type { AvatarVariants } from '../../theme/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
 } from '../../types/utils'
 
 export interface AvatarPropsOverrides {}
 
 type AvatarSlotProps = {
-  img?: ComponentPropsWithCommonProps<'img'>
+  img?: SlotProps<'img'>
 }
 
 type AvatarOwnProps<RootComponent extends ElementType> = {

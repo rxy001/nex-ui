@@ -4,7 +4,7 @@ import type { ClassValue } from 'clsx'
 import type {
   ComponentSlotClasses,
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
 } from '../../types/utils'
 import type { ButtonProps } from '../button'
 import type { AlertVariants } from '../../theme/recipes'
@@ -12,10 +12,10 @@ import type { AlertVariants } from '../../theme/recipes'
 export interface AlertPropsOverrides {}
 
 type AlertSlotProps = {
-  icon: ComponentPropsWithCommonProps<'div'>
-  content: ComponentPropsWithCommonProps<'div'>
-  title: ComponentPropsWithCommonProps<'div'>
-  description: ComponentPropsWithCommonProps<'div'>
+  icon: SlotProps<'div'>
+  content: SlotProps<'div'>
+  title: SlotProps<'div'>
+  description: SlotProps<'div'>
   closeButton: ButtonProps
 }
 

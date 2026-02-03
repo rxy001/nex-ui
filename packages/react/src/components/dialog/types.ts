@@ -2,7 +2,7 @@ import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type {
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
   ComponentSlotClasses,
   HTMLMotionProps,
 } from '../../types/utils'
@@ -20,7 +20,7 @@ import type {
 
 // ------------- Dialog --------------
 type DialogSlotProps = {
-  backdrop?: ComponentPropsWithCommonProps<'div'>
+  backdrop?: SlotProps<'div'>
 }
 
 type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
@@ -102,8 +102,8 @@ export type DialogProps<RootComponent extends ElementType = 'div'> =
 
 // ------------- DialogContent -------------
 type DialogContentSlotProps = {
-  closeButton?: ComponentPropsWithCommonProps<'button'>
-  paper?: ComponentPropsWithCommonProps<'section'>
+  closeButton?: SlotProps<'button'>
+  paper?: SlotProps<'section'>
 }
 
 export interface DialogContentPropsOverrides {}

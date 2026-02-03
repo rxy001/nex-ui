@@ -4,7 +4,7 @@ import type { Interpolation } from '@nex-ui/system'
 import type {
   ComponentSlotClasses,
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
   HTMLMotionProps,
 } from '../../types/utils'
 import type { AccordionVariants } from '../../theme/recipes'
@@ -125,10 +125,10 @@ export type AccordionProps<RootComponent extends ElementType = 'div'> =
 export interface AccordionItemPropsOverrides {}
 
 export type AccordionItemSlotProps = {
-  heading?: ComponentPropsWithCommonProps<'h3'>
-  indicator?: ComponentPropsWithCommonProps<'span'>
-  content?: ComponentPropsWithCommonProps<'div'>
-  trigger?: ComponentPropsWithCommonProps<'button'>
+  heading?: SlotProps<'h3'>
+  indicator?: SlotProps<'span'>
+  content?: SlotProps<'div'>
+  trigger?: SlotProps<'button'>
 }
 
 type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {

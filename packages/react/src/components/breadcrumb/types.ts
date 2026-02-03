@@ -2,7 +2,7 @@ import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
   ComponentSlotClasses,
 } from '../../types/utils'
 import type {
@@ -13,10 +13,10 @@ import type {
 export interface BreadcrumbPropsOverrides {}
 
 type BreadcrumbSlotProps = {
-  list?: ComponentPropsWithCommonProps<'ol'>
-  separator?: ComponentPropsWithCommonProps<'li'>
-  collapse?: ComponentPropsWithCommonProps<'li'>
-  expandButton?: ComponentPropsWithCommonProps<'button'>
+  list?: SlotProps<'ol'>
+  separator?: SlotProps<'li'>
+  collapse?: SlotProps<'li'>
+  expandButton?: SlotProps<'button'>
 }
 
 type BreadcrumbOwnProps<RootComponent extends ElementType> = {
@@ -105,7 +105,7 @@ export type BreadcrumbProps<RootComponent extends ElementType = 'nav'> =
 export interface BreadcrumbItemPropsOverrides {}
 
 type BreadcrumbItemSlotProps = {
-  root?: ComponentPropsWithCommonProps<'li'>
+  root?: SlotProps<'li'>
 }
 
 type BreadcrumbItemOwnProps<LinkComponent extends ElementType> = {

@@ -4,7 +4,7 @@ import type { ClassValue } from 'clsx'
 import type { DrawerContentVariants } from '../../theme/recipes'
 import type {
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
   ComponentSlotClasses,
   HTMLMotionProps,
 } from '../../types/utils'
@@ -20,7 +20,7 @@ import type {
 
 // ----------------Drawer----------------
 type DrawerSlotProps = {
-  backdrop?: ComponentPropsWithCommonProps<'div'>
+  backdrop?: SlotProps<'div'>
 }
 
 type DrawerOwnProps<RootComponent extends ElementType> = ModalProps &
@@ -102,8 +102,8 @@ export type DrawerProps<RootComponent extends ElementType = 'div'> =
 
 // ----------------DrawerContent----------------
 type DrawerContentSlotProps = {
-  closeButton?: ComponentPropsWithCommonProps<'button'>
-  paper?: ComponentPropsWithCommonProps<'section'>
+  closeButton?: SlotProps<'button'>
+  paper?: SlotProps<'section'>
 }
 
 export interface DrawerContentPropsOverrides {}

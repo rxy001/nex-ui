@@ -6,7 +6,7 @@ import type { TooltipRecipeVariants } from '../../theme/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
 } from '../../types/utils'
 import type {
   PopperAnchorProps,
@@ -17,7 +17,7 @@ import type {
 export interface TooltipPropsOverrides {}
 
 type TooltipSlotProps = {
-  content?: ComponentPropsWithCommonProps<'div'>
+  content?: SlotProps<'div'>
 }
 
 export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
