@@ -5,14 +5,14 @@ import type { ButtonVariants } from '../../theme/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
 } from '../../types/utils'
 
 export interface ButtonPropsOverrides {}
 
 type ButtonSlotProps = {
-  startIcon?: ComponentPropsWithCommonProps<'span'>
-  endIcon?: ComponentPropsWithCommonProps<'span'>
+  startIcon?: SlotProps<'span'>
+  endIcon?: SlotProps<'span'>
 }
 
 type ButtonOwnProps<RootComponent extends ElementType> = {

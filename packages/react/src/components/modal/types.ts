@@ -1,24 +1,8 @@
-import type { Interpolation } from '@nex-ui/system'
-import type { ClassValue } from 'clsx'
 import type { PortalProps } from '@nex-ui/utils'
-import type { HTMLMotionProps, Overwrite } from '../../types/utils'
-import type {
-  ComponentProps,
-  ElementType,
-  ReactNode,
-  ReactElement,
-} from 'react'
+import type { HTMLMotionProps, SlotProps } from '../../types/utils'
+import type { ElementType, ReactNode, ReactElement } from 'react'
 import type { DismissibleLayerProps } from '../dismissibleLayer'
 import type { FocusTrapProps } from '../focusTrap'
-
-type ModalSlotProps<RootComponent extends ElementType> = Overwrite<
-  ComponentProps<RootComponent>,
-  {
-    as?: RootComponent
-    sx?: Interpolation
-    className?: ClassValue
-  }
->
 
 // ------------- Modal --------------
 export type ModalProps = {
@@ -54,52 +38,51 @@ export interface ModalCloseProps {
 }
 
 // ------------- ModalContent -------------
-export type ModalContentProps<RootComponent extends ElementType = 'section'> =
-  ModalSlotProps<RootComponent> &
-    Omit<FocusTrapProps, 'children' | 'active'> &
-    Omit<DismissibleLayerProps, 'children' | 'onDismiss'> & {
-      /**
-       * If true, closes the Modal when the escape key is pressed.
-       * @default true
-       */
-      closeOnEscape?: boolean
+type ModalContentOwnProps = Omit<FocusTrapProps, 'children' | 'active'> &
+  Omit<DismissibleLayerProps, 'children' | 'onDismiss'> & {
+    /**
+     * If true, closes the Modal when the escape key is pressed.
+     * @default true
+     */
+    closeOnEscape?: boolean
 
-      /**
-       * If true, closes the Modal when the outside is clicked.
-       * @default true
-       */
-      closeOnInteractOutside?: boolean
-    }
+    /**
+     * If true, closes the Modal when the outside is clicked.
+     * @default true
+     */
+    closeOnInteractOutside?: boolean
+  }
+
+export type ModalContentProps<RootComponent extends ElementType = 'section'> =
+  SlotProps<RootComponent, ModalContentOwnProps>
 
 // ------------- ModalHeader -------------
 export type ModalHeaderProps<RootComponent extends ElementType = 'h2'> =
-  ModalSlotProps<RootComponent>
+  SlotProps<RootComponent>
 
 // ------------- ModalBody -------------
 export type ModalBodyProps<RootComponent extends ElementType = 'div'> =
-  ModalSlotProps<RootComponent>
+  SlotProps<RootComponent>
 
 // ------------- ModalFooter -------------
 export type ModalFooterProps<RootComponent extends ElementType = 'div'> =
-  ModalSlotProps<RootComponent>
+  SlotProps<RootComponent>
 
 // ------------- ModalRoot -------------
+type ModalRootOwnProps = {
+  /**
+   * If true, the Modal prevents page scrolling.
+   * @default false
+   */
+  preventScroll?: boolean
+}
+
 export type ModalRootProps<RootComponent extends ElementType = 'div'> =
-  ModalSlotProps<RootComponent> & {
-    /**
-     * If true, the Modal prevents page scrolling.
-     * @default false
-     */
-    preventScroll?: boolean
-  }
+  SlotProps<RootComponent, ModalRootOwnProps>
 
 // ------------- ModalBackdrop -------------
 export type ModalBackdropProps<RootComponent extends ElementType = 'div'> =
-  ModalSlotProps<RootComponent>
-
-// ------------- ModalPanel -------------
-export type ModalPanelProps<RootComponent extends ElementType = 'div'> =
-  ModalSlotProps<RootComponent>
+  SlotProps<RootComponent>
 
 // ------------- ModalPortal -------------
 export type ModalPortalProps = PortalProps & {

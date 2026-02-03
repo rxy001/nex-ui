@@ -2,7 +2,7 @@ import type { ElementType, ReactNode } from 'react'
 import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type {
-  ComponentPropsWithCommonProps,
+  SlotProps,
   ComponentSlotClasses,
   OverrideProps,
 } from '../../types/utils'
@@ -11,12 +11,12 @@ import type { SwitchVariants } from '../../theme/recipes'
 export interface SwitchPropsOverrides {}
 
 type SwitchSlotProps = {
-  root?: ComponentPropsWithCommonProps<'label'>
-  track?: ComponentPropsWithCommonProps<'span'>
-  startIcon?: ComponentPropsWithCommonProps<'span'>
-  endIcon?: ComponentPropsWithCommonProps<'span'>
-  thumb?: ComponentPropsWithCommonProps<'span'>
-  label?: ComponentPropsWithCommonProps<'span'>
+  root?: SlotProps<'label'>
+  track?: SlotProps<'span'>
+  startIcon?: SlotProps<'span'>
+  endIcon?: SlotProps<'span'>
+  thumb?: SlotProps<'span'>
+  label?: SlotProps<'span'>
 }
 
 export type SwitchOwnProps<SwitchComponent extends ElementType> = {
