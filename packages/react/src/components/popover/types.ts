@@ -139,5 +139,5 @@ export interface PopoverTriggerProps {
 
 // ------------------- PopoverCloseProps -------------------
 export interface PopoverCloseProps {
-  children?: ReactElement
+  children?: ReactElement<{}>
 }

@@ -184,9 +184,8 @@ export const FocusTrap = ({
         ref: ref,
         onKeyDown: handleKeydown,
       },
-      remainingProps,
-      // @ts-ignore
       children.props,
+      remainingProps,
     ),
   )
 }

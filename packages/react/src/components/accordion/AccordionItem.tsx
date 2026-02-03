@@ -2,11 +2,18 @@
 
 import * as m from 'motion/react-m'
 import { useEvent } from '@nex-ui/hooks'
+import { LazyMotion } from 'motion/react'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { useId, useMemo, useRef } from 'react'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useStyles,
+  useSlot,
+  useSlotClasses,
+  motionFeatures,
+} from '../utils'
 import { useAccordionGroupContext } from './AccordionContext'
 import { PresenceMotion } from '../presenceMotion'
 import type { ElementType, HTMLAttributes } from 'react'
@@ -276,14 +283,16 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     }
 
     return (
-      <m.span
-        animate={animate}
-        initial={animate}
-        variants={indicatorMotionVariants}
-        {...indicatorMotionProps}
-      >
-        {indicatorElement}
-      </m.span>
+      <LazyMotion features={motionFeatures}>
+        <m.span
+          animate={animate}
+          initial={animate}
+          variants={indicatorMotionVariants}
+          {...indicatorMotionProps}
+        >
+          {indicatorElement}
+        </m.span>
+      </LazyMotion>
     )
   }
 

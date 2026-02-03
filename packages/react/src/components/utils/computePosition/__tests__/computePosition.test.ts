@@ -142,7 +142,7 @@ describe('computePosition', () => {
     defineWindowScroll(0, 0)
   })
 
-  it('Should return the correct coordinates when not using middleware', () => {
+  it('should return the correct coordinates when not using middleware', () => {
     const { x, y, placement, middlewareData } = computePosition(
       reference,
       popper,
