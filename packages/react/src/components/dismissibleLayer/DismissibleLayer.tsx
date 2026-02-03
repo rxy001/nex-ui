@@ -77,9 +77,8 @@ export const DismissibleLayer = (props: DismissibleLayerProps) => {
         ...pointerDownOutside,
         ...focusOutside,
       },
-      remainingProps,
-      // @ts-ignore
       children.props,
+      remainingProps,
     ),
   )
 }
