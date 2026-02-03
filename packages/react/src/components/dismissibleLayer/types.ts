@@ -13,7 +13,7 @@ export type EscapeKeyDownEvent = CustomEvent<{
 }>
 
 export interface DismissibleLayerProps {
-  children: ReactElement
+  children: ReactElement<{}>
   onEscapeKeyDown?: (event: EscapeKeyDownEvent) => void
   onPointerDownOutside?: (event: PointerDownOutsideEvent) => void
   onFocusOutside?: (event: FocusOutsideEvent) => void

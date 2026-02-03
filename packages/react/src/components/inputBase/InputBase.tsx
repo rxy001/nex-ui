@@ -61,7 +61,7 @@ const useAriaProps = (props: InputBaseProps) => {
       ariaProps = {
         ...ariaProps,
         role: role ?? getRole(type),
-        'aria-disabled': ariaDisabled ?? disabled,
+        'aria-disabled': ariaDisabled ?? (disabled || undefined),
         'aria-checked': ariaChecked ?? checked,
         'aria-required': ariaRequired ?? required,
         'aria-readonly': ariaReadOnly ?? readOnly,

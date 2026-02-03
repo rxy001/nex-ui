@@ -69,3 +69,7 @@ export type ComponentThemeObject<T> = T extends RecipeRuntimeFn
 
 type Motion = typeof m
 export type HTMLMotionProps<T extends keyof Motion> = ComponentProps<Motion[T]>
+
+export type Simplify<T> = {
+  [K in keyof T]: T[K]
+} & {}

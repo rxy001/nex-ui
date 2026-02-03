@@ -42,7 +42,7 @@ export type ModalProps = {
 
 // ------------- ModalTrigger -------------
 export interface ModalTriggerProps {
-  children?: ReactElement
+  children?: ReactElement<{}>
 }
 
 // ------------- ModalClose -------------
