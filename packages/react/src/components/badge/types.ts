@@ -3,15 +3,15 @@ import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
   ComponentSlotClasses,
 } from '../../types/utils'
 import type { BadgeVariants } from '../../theme/recipes'
 
 type BadgeSlotProps = {
-  closeButton: ComponentPropsWithCommonProps<'button'>
-  startIcon: ComponentPropsWithCommonProps<'span'>
-  endIcon: ComponentPropsWithCommonProps<'span'>
+  closeButton: SlotProps<'button'>
+  startIcon: SlotProps<'span'>
+  endIcon: SlotProps<'span'>
 }
 
 type BadgeOwnProps<RootComponent extends ElementType> = {

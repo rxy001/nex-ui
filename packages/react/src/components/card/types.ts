@@ -3,7 +3,7 @@ import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type {
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
   ComponentSlotClasses,
 } from '../../types/utils'
 import type { CardVariants } from '../../theme/recipes'
@@ -62,9 +62,9 @@ export type CardProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<RootComponent, CardOwnProps<RootComponent>, CardPropsOverrides>
 
 type CardHeaderSlotProps = {
-  content?: ComponentPropsWithCommonProps<'div'>
-  title?: ComponentPropsWithCommonProps<'div'>
-  subtitle?: ComponentPropsWithCommonProps<'div'>
+  content?: SlotProps<'div'>
+  title?: SlotProps<'div'>
+  subtitle?: SlotProps<'div'>
 }
 
 type CardHeaderOwnProps<RootComponent extends ElementType> = {

@@ -3,7 +3,7 @@ import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type { InputVariants } from '../../theme/recipes'
 import type {
-  ComponentPropsWithCommonProps,
+  SlotProps,
   ComponentSlotClasses,
   OverrideProps,
 } from '../../types/utils'
@@ -11,11 +11,11 @@ import type {
 export interface InputPropsOverrides {}
 
 type InputSlotProps = {
-  root?: ComponentPropsWithCommonProps<'div'>
-  clearButton?: ComponentPropsWithCommonProps<'button'>
-  prefix?: ComponentPropsWithCommonProps<'span'>
-  suffix?: ComponentPropsWithCommonProps<'span'>
-  label?: ComponentPropsWithCommonProps<'label'>
+  root?: SlotProps<'div'>
+  clearButton?: SlotProps<'button'>
+  prefix?: SlotProps<'span'>
+  suffix?: SlotProps<'span'>
+  label?: SlotProps<'label'>
 }
 
 type InputOwnProps<InputComponent extends ElementType> = {

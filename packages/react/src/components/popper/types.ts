@@ -1,16 +1,8 @@
-import type {
-  ReactNode,
-  ElementType,
-  ComponentProps,
-  ReactElement,
-  Ref,
-} from 'react'
-import type { ClassValue } from 'clsx'
-import type { Interpolation } from '@nex-ui/system'
+import type { ReactNode, ElementType, ReactElement, Ref } from 'react'
 import type { PortalProps } from '@nex-ui/utils'
 import type { DismissibleLayerProps } from '../dismissibleLayer'
 import type { Placement, FlipOptions, OffsetOptions } from '../utils'
-import type { HTMLMotionProps, Overwrite } from '../../types/utils'
+import type { HTMLMotionProps, SlotProps } from '../../types/utils'
 
 // ----------------- PopperProps -----------------
 export type PopperProps = {
@@ -44,15 +36,6 @@ export type PopperAnchorProps = {
     ref?: Ref<HTMLElement>
   }>
 }
-
-type PopperSlotProps<RootComponent extends ElementType> = Overwrite<
-  ComponentProps<RootComponent>,
-  {
-    as?: RootComponent
-    sx?: Interpolation
-    className?: ClassValue
-  }
->
 
 // ----------------- PopperContentProps -----------------
 type PopperContentOwnProps = Omit<
@@ -103,7 +86,7 @@ type PopperContentOwnProps = Omit<
 }
 
 export type PopperContentProps<RootComponent extends ElementType = 'div'> =
-  PopperSlotProps<RootComponent> & PopperContentOwnProps
+  SlotProps<RootComponent, PopperContentOwnProps>
 
 // ----------------- PopperPortalProps -----------------
 export type PopperPortalProps = PortalProps & {

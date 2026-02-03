@@ -8,15 +8,15 @@ import type {
 import type {
   ComponentSlotClasses,
   OverrideProps,
-  ComponentPropsWithCommonProps,
+  SlotProps,
 } from '../../types/utils'
 
 export interface CheckboxPropsOverrides {}
 
 type CheckboxSlotProps = {
-  root?: ComponentPropsWithCommonProps<'label'>
-  label?: ComponentPropsWithCommonProps<'span'>
-  icon?: ComponentPropsWithCommonProps<'span'>
+  root?: SlotProps<'label'>
+  label?: SlotProps<'span'>
+  icon?: SlotProps<'span'>
 }
 
 type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
@@ -140,8 +140,8 @@ export type CheckboxOwnerState<
 export interface CheckboxGroupPropsOverrides {}
 
 type CheckboxGroupSlotProps = {
-  label?: ComponentPropsWithCommonProps<'h3'>
-  wrapper?: ComponentPropsWithCommonProps<'div'>
+  label?: SlotProps<'h3'>
+  wrapper?: SlotProps<'div'>
 }
 
 type CheckboxGroupOwnProps<

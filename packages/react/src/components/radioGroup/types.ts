@@ -4,14 +4,14 @@ import type { Interpolation } from '@nex-ui/system'
 import type {
   OverrideProps,
   ComponentSlotClasses,
-  ComponentPropsWithCommonProps,
+  SlotProps,
 } from '../../types/utils'
 import type { RadioGroupVariants, RadioVariants } from '../../theme/recipes'
 
 type RadioSlotProps = {
-  root?: ComponentPropsWithCommonProps<'label'>
-  dot?: ComponentPropsWithCommonProps<'span'>
-  label?: ComponentPropsWithCommonProps<'span'>
+  root?: SlotProps<'label'>
+  dot?: SlotProps<'span'>
+  label?: SlotProps<'span'>
 }
 
 type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
@@ -111,8 +111,8 @@ export type RadioOwnerState<RadioComponent extends ElementType = 'input'> =
   }
 
 type RadioGroupSlotProps = {
-  label?: ComponentPropsWithCommonProps<'h3'>
-  wrapper?: ComponentPropsWithCommonProps<'div'>
+  label?: SlotProps<'h3'>
+  wrapper?: SlotProps<'div'>
 }
 
 type RadioGroupOwnProps<
