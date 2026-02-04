@@ -10,7 +10,6 @@ import {
 } from './dom'
 
 function _getOffsetParent(element: Element): Element | null {
-  // istanbul ignore if
   if (!isHTMLElement(element)) {
     return null
   }

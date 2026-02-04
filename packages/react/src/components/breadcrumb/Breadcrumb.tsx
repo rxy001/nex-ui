@@ -185,7 +185,6 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
           ) : null,
         ]
       }
-      // istanbul ignore next
       return child
     })
   }

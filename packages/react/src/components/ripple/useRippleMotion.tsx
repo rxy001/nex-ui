@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 'use client'
 
 import { useEvent } from '@nex-ui/hooks'

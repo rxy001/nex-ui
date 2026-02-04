@@ -70,7 +70,6 @@ function getTabIndex(node: HTMLElement): number {
 
   if (
     // jest not support contentEditable
-    // istanbul ignore next
     node.contentEditable === 'true' ||
     ((node.nodeName === 'AUDIO' ||
       node.nodeName === 'VIDEO' ||

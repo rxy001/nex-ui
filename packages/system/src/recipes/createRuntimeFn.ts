@@ -50,7 +50,6 @@ export function createRuntimeFn(options: any) {
     }
 
     for (const variantKey in selections) {
-      // istanbul ignore if
       if (!Object.hasOwn(selections, variantKey)) continue
 
       const variantSection = selections[variantKey]
@@ -67,7 +66,6 @@ export function createRuntimeFn(options: any) {
     }
 
     for (const compoundVariantKey in compoundVariants) {
-      // istanbul ignore if
       if (!Object.hasOwn(compoundVariants, compoundVariantKey)) continue
 
       const compoundVariantValue = compoundVariants[compoundVariantKey]

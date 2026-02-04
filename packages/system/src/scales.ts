@@ -11,7 +11,6 @@ export function createScales(scales: ScalesDefinition) {
   const scaleMap = new Map<string, TokenCategory>()
 
   for (const property in scales) {
-    // istanbul ignore if
     if (!Object.hasOwn(scales, property)) continue
 
     const category = scales[property as keyof CSSProperties]

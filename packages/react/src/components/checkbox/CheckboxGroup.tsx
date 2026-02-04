@@ -131,7 +131,6 @@ export const CheckboxGroup = <
       radius,
       disableAnimation,
       toggleValue: (value: number | string) => {
-        // istanbul ignore next
         if (disabled) {
           return
         }
