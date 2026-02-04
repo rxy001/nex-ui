@@ -14,12 +14,11 @@ import type { ModalContextValue } from './ModalContext'
  */
 
 export const Modal = (props: ModalProps) => {
-  const id = useId()
-  const modalContentId = `modal-${id}-content`
-  const modalHeaderId = `modal-${id}-header`
-  const modalBodyId = `modal-${id}-body`
-  const modalId = `modal-${id}`
-
+  const ariaId = useId()
+  const modalContentId = `modal-${ariaId}-content`
+  const modalHeaderId = `modal-${ariaId}-header`
+  const modalBodyId = `modal-${ariaId}-body`
+  const modalId = `modal-${ariaId}`
   const { children, onOpenChange, open, onClose } = props
 
   const previousOpenRef = useRef(open)

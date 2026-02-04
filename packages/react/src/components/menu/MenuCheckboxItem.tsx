@@ -58,13 +58,15 @@ export const MenuCheckboxItem = <
     shouldForwardComponent: false,
     additionalProps: {
       disabled,
-      role: 'menuitemcheckbox',
-      'aria-checked': checked,
       onClick: handleClick,
     },
     dataAttrs: {
       checked,
       value,
+    },
+    ariaProps: {
+      role: 'menuitemcheckbox',
+      'aria-checked': checked,
     },
   })
 

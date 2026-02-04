@@ -14,52 +14,6 @@ import type { InputProps } from './types'
 
 const slots = ['root', 'input', 'clearButton', 'suffix', 'prefix', 'label']
 
-const useSlotAriaProps = (ownerState: InputProps) => {
-  const {
-    label,
-    slotProps,
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-    id: idProp,
-  } = ownerState
-
-  const id = useId()
-
-  return useMemo(() => {
-    const hasLabel = !!label
-    const stringLabel = isString(label)
-    const labelProps = slotProps?.label ?? {}
-    const clearButtonProps = slotProps?.clearButton ?? {}
-    const inputId = idProp ?? (hasLabel ? `input-${id}-control` : undefined)
-    const labelId =
-      labelProps['id'] ?? (hasLabel ? `input-${id}-label` : undefined)
-
-    return {
-      input: {
-        id: inputId,
-        'aria-labelledby': ariaLabelledBy ?? labelId,
-        'aria-label': ariaLabel ?? (stringLabel ? label : undefined),
-      },
-      label: {
-        id: labelId,
-        htmlFor: inputId,
-      },
-      clearButton: {
-        'aria-label': clearButtonProps['aria-label'] ?? 'Clear input',
-        tabIndex: -1,
-      },
-    }
-  }, [
-    ariaLabel,
-    ariaLabelledBy,
-    id,
-    idProp,
-    label,
-    slotProps?.clearButton,
-    slotProps?.label,
-  ])
-}
-
 export const Input = <InputComponent extends ElementType = 'input'>(
   inProps: InputProps<InputComponent>,
 ) => {
@@ -163,7 +117,30 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     classNames,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const ariaId = useId()
+
+  const slotAriaProps = useMemo(() => {
+    const hasLabel = !!label
+    const stringLabel = isString(label)
+    const inputId = hasLabel ? `input-${ariaId}-control` : undefined
+    const labelId = hasLabel ? `input-${ariaId}-label` : undefined
+
+    return {
+      input: {
+        id: inputId,
+        'aria-labelledby': labelId,
+        'aria-label': stringLabel ? label : undefined,
+      },
+      label: {
+        id: labelId,
+        htmlFor: inputId,
+      },
+      clearButton: {
+        tabIndex: -1,
+        'aria-label': 'Clear input',
+      },
+    }
+  }, [ariaId, label])
 
   const handleClearValue = useEvent(() => {
     setValue('')
@@ -211,7 +188,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     externalSlotProps: slotProps?.label,
     style: styles.label,
     classNames: slotClasses.label,
-    a11y: slotAriaProps.label,
+    ariaProps: slotAriaProps.label,
   })
 
   const [InputControl, getInputControlProps] = useSlot({
@@ -219,7 +196,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
-    a11y: slotAriaProps.input,
+    ariaProps: slotAriaProps.input,
     shouldForwardComponent: false,
     additionalProps: {
       as,
@@ -238,7 +215,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     style: styles.clearButton,
     externalSlotProps: slotProps?.clearButton,
     classNames: slotClasses.clearButton,
-    a11y: slotAriaProps.clearButton,
+    ariaProps: slotAriaProps.clearButton,
     shouldForwardComponent: false,
     additionalProps: {
       onClick: handleClearValue,

@@ -86,14 +86,16 @@ export const MenuTriggerItem = <RootComponent extends ElementType = 'div'>(
     additionalProps: {
       closeOnClick: false,
       ref: menuCtx.triggerRef,
-      'aria-haspopup': 'menu',
-      'aria-expanded': menuCtx.open,
-      'aria-controls': menuCtx.open ? menuCtx.contentId : undefined,
-      id: menuCtx.triggerId,
       onPointerMove: handleOpen,
       onPointerLeave: handlePointerLeave,
       onClick: handleOpen,
       onKeyDown: handleKeyDown,
+    },
+    ariaProps: {
+      'aria-haspopup': 'menu',
+      'aria-expanded': menuCtx.open,
+      'aria-controls': menuCtx.open ? menuCtx.contentId : undefined,
+      id: menuCtx.triggerId,
     },
   })
 

@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
 import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { useAvatarGroupContext } from './AvatarGroupContext'
-import type { ElementType, HTMLAttributes, ReactNode } from 'react'
+import type { ElementType, ReactNode } from 'react'
 import type {
   AvatarOwnerState,
   AvatarProps,
@@ -55,39 +55,6 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
   return loaded
 }
 
-const useSlotAriaProps = (
-  ownerState: AvatarOwnerState,
-): Record<'root', HTMLAttributes<HTMLElement>> => {
-  const {
-    alt,
-    children,
-    loaded,
-    'aria-label': ariaLabel,
-    role = 'img',
-  } = ownerState
-
-  return useMemo(() => {
-    let root = {}
-
-    if (loaded === false || loaded === 'error') {
-      if (typeof children === 'string') {
-        root = {
-          role,
-          'aria-label': ariaLabel ?? children,
-        }
-      } else if (typeof alt === 'string') {
-        root = {
-          role,
-          'aria-label': ariaLabel ?? alt,
-        }
-      }
-    }
-    return {
-      root,
-    }
-  }, [alt, ariaLabel, children, loaded, role])
-}
-
 export const Avatar = <RootComponent extends ElementType = 'div'>(
   inProps: AvatarProps<RootComponent>,
 ) => {
@@ -123,7 +90,6 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     color,
     outlined,
     inGroup,
-    loaded,
   }
 
   const styles = useStyles({
@@ -138,14 +104,33 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     classNames,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const slotAriaProps = useMemo(() => {
+    let root = {}
+
+    if (loaded === false || loaded === 'error') {
+      if (typeof childrenProp === 'string') {
+        root = {
+          role: 'img',
+          'aria-label': childrenProp,
+        }
+      } else if (typeof alt === 'string') {
+        root = {
+          role: 'img',
+          'aria-label': alt,
+        }
+      }
+    }
+    return {
+      root,
+    }
+  }, [alt, childrenProp, loaded])
 
   const [AvatarRoot, getAvatarRootProps] = useSlot({
     elementType: 'div',
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     style: styles.root,
-    a11y: slotAriaProps.root,
+    ariaProps: slotAriaProps.root,
     dataAttrs: {
       radius,
       size,

@@ -16,7 +16,7 @@ import {
 } from '../utils'
 import { useAccordionGroupContext } from './AccordionContext'
 import { PresenceMotion } from '../presenceMotion'
-import type { ElementType, HTMLAttributes } from 'react'
+import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
 
@@ -57,54 +57,6 @@ const indicatorMotionVariants: Variants = {
 }
 
 const slots = ['root', 'heading', 'trigger', 'content', 'indicator']
-
-const useSlotAriaProps = (
-  ownerState: AccordionItemOwnerState,
-): Record<'trigger' | 'content' | 'indicator', HTMLAttributes<HTMLElement>> => {
-  const { expanded, slotProps, keepMounted } = ownerState
-  const id = useId()
-
-  return useMemo(() => {
-    const triggerProps = slotProps?.trigger || {}
-    const contentProps = slotProps?.content || {}
-    const indicatorProps = slotProps?.indicator || {}
-    const triggerId = triggerProps.id ?? `accordion-${id}-trigger`
-    const contentId = contentProps.id ?? `accordion-${id}-content`
-
-    const trigger = {
-      id: triggerId,
-      'aria-expanded': triggerProps['aria-expanded'] ?? expanded,
-      'aria-controls':
-        triggerProps['aria-controls'] ??
-        (expanded || keepMounted ? contentId : undefined),
-    }
-
-    const content = {
-      id: contentId,
-      role: contentProps.role ?? 'region',
-      'aria-labelledby': contentProps['aria-labelledby'] ?? triggerId,
-      'aria-hidden':
-        contentProps['aria-hidden'] ?? (keepMounted ? !expanded : undefined),
-    }
-
-    const indicator = {
-      'aria-hidden': indicatorProps['aria-hidden'] ?? true,
-    }
-
-    return {
-      trigger,
-      content,
-      indicator,
-    }
-  }, [
-    id,
-    expanded,
-    keepMounted,
-    slotProps?.content,
-    slotProps?.indicator,
-    slotProps?.trigger,
-  ])
-}
 
 export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   inProps: AccordionItemProps<RootComponent>,
@@ -172,7 +124,34 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     classNames,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const slotAriaProps = useMemo(() => {
+    const ariaId = defaultKey
+    const triggerId = `accordion-${ariaId}-trigger`
+    const contentId = `accordion-${ariaId}-content`
+
+    const trigger = {
+      id: triggerId,
+      'aria-expanded': expanded,
+      'aria-controls': expanded || keepMounted ? contentId : undefined,
+    }
+
+    const content = {
+      id: contentId,
+      role: 'region',
+      'aria-labelledby': triggerId,
+      'aria-hidden': keepMounted ? !expanded : undefined,
+    }
+
+    const indicator = {
+      'aria-hidden': true,
+    }
+
+    return {
+      trigger,
+      content,
+      indicator,
+    }
+  }, [defaultKey, expanded, keepMounted])
 
   const animate = expanded ? 'expanded' : 'collapsed'
 
@@ -233,7 +212,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.trigger,
     style: styles.trigger,
     classNames: slotClasses.trigger,
-    a11y: slotAriaProps.trigger,
+    ariaProps: slotAriaProps.trigger,
     shouldForwardComponent: false,
     additionalProps: {
       disabled,
@@ -246,7 +225,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.content,
     style: styles.content,
     classNames: slotClasses.content,
-    a11y: slotAriaProps.content,
+    ariaProps: slotAriaProps.content,
     additionalProps: disableAnimation
       ? {
           style: {
@@ -261,7 +240,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.indicator,
     style: styles.indicator,
     classNames: slotClasses.indicator,
-    a11y: slotAriaProps.indicator,
+    ariaProps: slotAriaProps.indicator,
     additionalProps: disableAnimation
       ? {
           style: {

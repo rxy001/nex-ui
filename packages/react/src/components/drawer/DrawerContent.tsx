@@ -17,35 +17,6 @@ import type { DrawerContentProps } from './types'
 
 const slots = ['root', 'paper', 'closeButton']
 
-const useSlotAriaProps = (ownerState: DrawerContentProps) => {
-  const {
-    'aria-labelledby': defaultAriaLabelledBy,
-    'aria-describedby': defaultAriaDescribedBy,
-  } = ownerState
-
-  const { paper = {}, closeButton = {} } = ownerState.slotProps ?? {}
-
-  const { 'aria-label': closeButtonAriaLabel = 'Close drawer' } = closeButton
-
-  const {
-    'aria-labelledby': ariaLabelledBy = defaultAriaLabelledBy,
-    'aria-describedby': ariaDescribedBy = defaultAriaDescribedBy,
-  } = paper
-
-  return useMemo(
-    () => ({
-      paper: {
-        'aria-labelledby': ariaLabelledBy,
-        'aria-describedby': ariaDescribedBy,
-      },
-      closeButton: {
-        'aria-label': closeButtonAriaLabel,
-      },
-    }),
-    [ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
-  )
-}
-
 export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   inProps: DrawerContentProps<RootComponent>,
 ) => {
@@ -88,7 +59,23 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     recipe: drawerContentRecipe,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const {
+    'aria-labelledby': ariaLabelledBy,
+    'aria-describedby': ariaDescribedBy,
+  } = ownerState
+
+  const slotAriaProps = useMemo(
+    () => ({
+      paper: {
+        'aria-labelledby': ariaLabelledBy,
+        'aria-describedby': ariaDescribedBy,
+      },
+      closeButton: {
+        'aria-label': 'Close drawer',
+      },
+    }),
+    [ariaLabelledBy, ariaDescribedBy],
+  )
 
   const slotClasses = useSlotClasses({
     name: 'DrawerContent',
@@ -114,7 +101,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     classNames: slotClasses.paper,
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
-    a11y: slotAriaProps.paper,
+    ariaProps: slotAriaProps.paper,
     additionalProps: {
       restoreFocus,
       closeOnEscape,
@@ -128,7 +115,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     style: styles.closeButton,
     classNames: slotClasses.closeButton,
     shouldForwardComponent: false,
-    a11y: slotAriaProps.closeButton,
+    ariaProps: slotAriaProps.closeButton,
   })
 
   const mergedMotionProps = useMemo(() => {

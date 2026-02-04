@@ -16,9 +16,9 @@ import type { MenuContextValue } from './MenuContext'
 const MenuImpl = (props: MenuProps) => {
   const { open, children, onOpenChange, onClose } = props
 
-  const id = useId()
-  const contentId = `menu-${id}-content`
-  const triggerId = `menu-${id}-trigger`
+  const ariaId = useId()
+  const contentId = `menu-${ariaId}-content`
+  const triggerId = `menu-${ariaId}-trigger`
   const triggerRef = useRef<HTMLElement>(null)
 
   const setOpen = useEvent((value: boolean) => {

@@ -16,17 +16,27 @@ describe('useSlot', () => {
     expect(typeof result.current[1]).toBe('function')
   })
 
-  it('should merge props correctly based on the order of additionalProps, externalForwardedProps, externalSlotProps and a11y', () => {
+  it('should merge props correctly based on the order of additionalProps, externalForwardedProps, externalSlotProps and ariaProps', () => {
+    const ariaProps = { 'aria-label': 'aria' }
     const additionalProps = { 'aria-label': 'additional' }
     const externalForwardedProps = { 'aria-label': 'forwarded' }
     const externalSlotProps = { 'aria-label': 'slot' }
-    const a11y = { 'aria-label': 'a11y' }
 
     const { result, rerender } = renderHook((args) => useSlot(args), {
       initialProps: {
         elementType: 'div',
-        additionalProps,
+        ariaProps,
       } as UseSlotProps<'div'>,
+    })
+
+    expect(result.current[1]()).toMatchObject({
+      'aria-label': 'aria',
+    })
+
+    rerender({
+      elementType: 'div',
+      ariaProps,
+      additionalProps,
     })
 
     expect(result.current[1]()).toMatchObject({
@@ -35,6 +45,7 @@ describe('useSlot', () => {
 
     rerender({
       elementType: 'div',
+      ariaProps,
       additionalProps,
       externalForwardedProps,
     })
@@ -45,6 +56,7 @@ describe('useSlot', () => {
 
     rerender({
       elementType: 'div',
+      ariaProps,
       additionalProps,
       externalForwardedProps,
       externalSlotProps,
@@ -52,18 +64,6 @@ describe('useSlot', () => {
 
     expect(result.current[1]()).toMatchObject({
       'aria-label': 'slot',
-    })
-
-    rerender({
-      elementType: 'div',
-      additionalProps,
-      externalForwardedProps,
-      externalSlotProps,
-      a11y,
-    })
-
-    expect(result.current[1]()).toMatchObject({
-      'aria-label': 'a11y',
     })
   })
 

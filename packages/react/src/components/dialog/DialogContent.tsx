@@ -21,35 +21,6 @@ import type { DialogContentPropsContextValue } from './DialogContext'
 
 const slots = ['root', 'paper', 'closeButton']
 
-const useSlotAriaProps = (ownerState: DialogContentProps) => {
-  const {
-    'aria-labelledby': defaultAriaLabelledBy,
-    'aria-describedby': defaultAriaDescribedBy,
-  } = ownerState
-
-  const { paper = {}, closeButton = {} } = ownerState.slotProps ?? {}
-
-  const { 'aria-label': closeButtonAriaLabel = 'Close dialog' } = closeButton
-
-  const {
-    'aria-labelledby': ariaLabelledBy = defaultAriaLabelledBy,
-    'aria-describedby': ariaDescribedBy = defaultAriaDescribedBy,
-  } = paper
-
-  return useMemo(
-    () => ({
-      paper: {
-        'aria-labelledby': ariaLabelledBy,
-        'aria-describedby': ariaDescribedBy,
-      },
-      closeButton: {
-        'aria-label': closeButtonAriaLabel,
-      },
-    }),
-    [ariaLabelledBy, ariaDescribedBy, closeButtonAriaLabel],
-  )
-}
-
 export const DialogContent = <RootComponent extends ElementType = 'div'>(
   inProps: DialogContentProps<RootComponent>,
 ) => {
@@ -93,7 +64,23 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     recipe: dialogContentRecipe,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const {
+    'aria-labelledby': ariaLabelledBy,
+    'aria-describedby': ariaDescribedBy,
+  } = ownerState
+
+  const slotAriaProps = useMemo(
+    () => ({
+      paper: {
+        'aria-labelledby': ariaLabelledBy,
+        'aria-describedby': ariaDescribedBy,
+      },
+      closeButton: {
+        'aria-label': 'Close dialog',
+      },
+    }),
+    [ariaLabelledBy, ariaDescribedBy],
+  )
 
   const slotClasses = useSlotClasses({
     name: 'DialogContent',
@@ -120,7 +107,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     classNames: slotClasses.paper,
     externalSlotProps: slotProps?.paper,
     shouldForwardComponent: false,
-    a11y: slotAriaProps.paper,
+    ariaProps: slotAriaProps.paper,
     additionalProps: {
       restoreFocus,
       closeOnEscape,
@@ -134,7 +121,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     style: styles.closeButton,
     classNames: slotClasses.closeButton,
     shouldForwardComponent: false,
-    a11y: slotAriaProps.closeButton,
+    ariaProps: slotAriaProps.closeButton,
   })
 
   const mergedMotionProps = useMemo(() => {

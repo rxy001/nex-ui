@@ -103,7 +103,6 @@ export type LoadedState = false | 'error' | 'loaded'
 export type AvatarOwnerState<RootComponent extends ElementType = 'div'> =
   AvatarProps<RootComponent> & {
     inGroup: boolean
-    loaded: LoadedState
   }
 
 export type UseLoadedOptions = {

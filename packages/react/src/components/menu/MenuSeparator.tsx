@@ -23,7 +23,7 @@ export const MenuSeparator = <RootComponent extends ElementType = 'hr'>(
     style,
     elementType: 'hr',
     externalForwardedProps: props,
-    additionalProps: {
+    ariaProps: {
       role: 'separator',
     },
   })

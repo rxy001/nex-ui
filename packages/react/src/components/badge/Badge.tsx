@@ -36,7 +36,7 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
     ...remainningProps
   } = props
 
-  const ownerState = {
+  const ownerState: BadgeProps = {
     ...props,
     color,
     size,
@@ -82,6 +82,8 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
     additionalProps: {
       disabled,
       onClick: onClose,
+    },
+    ariaProps: {
       'aria-label': 'Close Badge',
     },
   })
