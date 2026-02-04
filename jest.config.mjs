@@ -39,11 +39,6 @@ const jestConfig = {
   coveragePathIgnorePatterns: [
     '__stories__/',
     'dist/',
-    '<rootDir>/packages/icons/',
-    // TODO: remove
-    '<rootDir>/packages/styled/',
-    // TODO: remove
-    '<rootDir>/packages/cli/',
     '<rootDir>/packages/react/src/index.ts',
     '<rootDir>/packages/utils/src/index.ts',
   ],
