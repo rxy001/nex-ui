@@ -19,7 +19,6 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
   const {
     as,
     color,
-    focusable = false,
     spin = false,
     size = 'md',
     width = '1em',
@@ -57,9 +56,9 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
     elementType: 'svg',
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
-    a11y: {
-      focusable,
-      'aria-hidden': props['aria-hidden'] ?? true,
+    ariaProps: {
+      focusable: false,
+      'aria-hidden': true,
     },
     additionalProps: {
       as,

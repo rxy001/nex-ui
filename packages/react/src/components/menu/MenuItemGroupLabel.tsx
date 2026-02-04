@@ -9,13 +9,13 @@ export const MenuItemGroupLabel = <RootComponent extends ElementType = 'div'>(
   props: MenuItemGroupLabelProps<RootComponent>,
 ) => {
   const { children, ...remainingProps } = props
-  const { labelId } = useMenuItemGroupContext()
+  const { groupLabelId } = useMenuItemGroupContext()
 
   const [MenuItemGroupLabelRoot, getMenuItemGroupLabelRootProps] = useSlot({
     elementType: 'div',
     externalForwardedProps: remainingProps,
-    additionalProps: {
-      id: labelId,
+    ariaProps: {
+      id: groupLabelId,
     },
   })
 

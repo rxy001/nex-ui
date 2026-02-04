@@ -20,13 +20,12 @@ export const ModalHeader = <RootComponent extends ElementType = 'h2'>(
   props: ModalHeaderProps<RootComponent>,
 ) => {
   const { modalHeaderId } = useModalContext()
-  const labelId = props.id ?? modalHeaderId
   const [ModalHeaderRoot, getModalHeaderRootProps] = useSlot({
     style,
     externalForwardedProps: props,
     elementType: 'h2',
-    a11y: {
-      id: labelId,
+    ariaProps: {
+      id: modalHeaderId,
     },
   })
 

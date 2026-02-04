@@ -16,24 +16,9 @@ const slots = ['root', 'content']
 
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
-const useSlotAriaProps = (ownerState: TooltipProps) => {
-  const { rootId } = useTooltipContext()
-
-  const { role = 'tooltip' } = ownerState
-
-  return useMemo(() => {
-    return {
-      root: {
-        role,
-        id: rootId,
-      },
-    }
-  }, [rootId, role])
-}
-
 // eslint-disable-next-line react/display-name
 const TooltipImpl = (props: TooltipProps) => {
-  const { delayOpen, delayClose } = useTooltipContext()
+  const { delayOpen, delayClose, rootId } = useTooltipContext()
   const {
     children,
     container,
@@ -67,8 +52,6 @@ const TooltipImpl = (props: TooltipProps) => {
     disableAnimation,
     interactive,
   }
-
-  const slotAriaProps = useSlotAriaProps(ownerState)
 
   const styles = useStyles({
     ownerState,
@@ -111,7 +94,10 @@ const TooltipImpl = (props: TooltipProps) => {
     elementType: 'div',
     classNames: slotClasses.content,
     externalSlotProps: slotProps?.content,
-    a11y: slotAriaProps.root,
+    ariaProps: {
+      role: 'tooltip',
+      id: rootId,
+    },
     dataAttrs: {
       color,
       size,
@@ -170,8 +156,8 @@ export const Tooltip = <RootComponent extends ElementType = 'div'>(
     ...remainingProps
   } = props
 
-  const id = useId()
-  const rootId = `tooltip-${id}-root`
+  const ariaId = useId()
+  const rootId = `tooltip-${ariaId}-root`
 
   const [open, setOpen] = useControlledState(
     openProp,

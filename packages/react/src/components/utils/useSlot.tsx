@@ -12,9 +12,9 @@ type DataAttrs = Record<string, string | number | boolean | undefined>
 
 export type UseSlotProps<
   ElementType extends ReactElementType,
-  SlotProps extends {} = {},
-  ForwardedProps extends {} = {},
-  AdditonalProps extends {} = {},
+  SlotProps extends object = {},
+  ForwardedProps extends object = {},
+  AdditonalProps extends object = {},
   ShouldForwardComponent extends boolean = true,
 > = {
   /**
@@ -50,7 +50,7 @@ export type UseSlotProps<
   /**
    * The accessibility props of the slot.
    */
-  a11y?: {}
+  ariaProps?: object
 
   /**
    * If true, the component will be resolved from the `nex` styled factory.
@@ -81,7 +81,7 @@ export const useSlot = <
   >,
 ) => {
   const {
-    a11y,
+    ariaProps,
     style,
     elementType,
     classNames,
@@ -92,14 +92,14 @@ export const useSlot = <
     dataAttrs = {},
   } = args
   const getProps = () => {
-    const propsDataAttrs = generateDataAttrs(dataAttrs)
+    const dataAttrsProps = generateDataAttrs(dataAttrs)
 
     const props = mergeProps(
-      propsDataAttrs,
+      dataAttrsProps,
+      ariaProps,
       additionalProps,
       externalForwardedProps,
       externalSlotProps,
-      a11y,
     )
 
     const className = clsx(classNames, props?.className)

@@ -23,28 +23,6 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-const useAriaProps = (props: ModalContentProps) => {
-  const { modalContentId, modalHeaderId, modalBodyId } = useModalContext()
-
-  const {
-    id = modalContentId,
-    role = 'dialog',
-    'aria-modal': ariaModal = true,
-    'aria-labelledby': labelledBy = modalHeaderId,
-    'aria-describedby': describedBy = modalBodyId,
-  } = props
-
-  return useMemo(() => {
-    return {
-      id,
-      role,
-      'aria-modal': ariaModal,
-      'aria-labelledby': labelledBy,
-      'aria-describedby': describedBy,
-    }
-  }, [ariaModal, describedBy, id, labelledBy, role])
-}
-
 export const ModalContent = <RootComponent extends ElementType = 'section'>(
   inProps: ModalContentProps<RootComponent>,
 ) => {
@@ -61,8 +39,8 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     closeOnEscape = true,
     ...remainingProps
   } = inProps as ModalContentProps
-  const { modalId, open, setOpen } = useModalContext()
-
+  const { modalId, open, setOpen, modalContentId, modalHeaderId, modalBodyId } =
+    useModalContext()
   const modalManager = useModalManager()
 
   const isTopmostModal = useMemo(
@@ -70,13 +48,17 @@ export const ModalContent = <RootComponent extends ElementType = 'section'>(
     [modalId, modalManager],
   )
 
-  const ariaProps = useAriaProps(remainingProps)
-
   const [ModalContentRoot, getModalContentRootProps] = useSlot({
     style,
     elementType: 'section',
     externalForwardedProps: remainingProps,
-    a11y: ariaProps,
+    ariaProps: {
+      id: modalContentId,
+      role: 'dialog',
+      'aria-modal': true,
+      'aria-labelledby': modalHeaderId,
+      'aria-describedby': modalBodyId,
+    },
     dataAttrs: {
       closeOnEscape,
       restoreFocus,

@@ -7,7 +7,7 @@ import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { switchRecipe } from '../../theme/recipes'
 import { useDefaultProps, useStyles, useSlotClasses, useSlot } from '../utils'
-import type { ElementType, HTMLAttributes } from 'react'
+import type { ElementType } from 'react'
 import type { SwitchProps } from './types'
 
 const slots = [
@@ -19,39 +19,6 @@ const slots = [
   'endIcon',
   'label',
 ]
-
-const useSlotAriaProps = (
-  ownerState: SwitchProps,
-): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
-  const {
-    children,
-    slotProps,
-    role = 'switch',
-    'aria-labelledby': labelledBy,
-    'aria-label': ariaLabel,
-  } = ownerState
-
-  const id = useId()
-
-  return useMemo(() => {
-    const hasLabel = !!children
-    const stringChildren = isString(children)
-    const labelProps = slotProps?.label ?? {}
-    const labelId =
-      labelProps.id ?? (hasLabel ? `switch-${id}-label` : undefined)
-
-    return {
-      input: {
-        role,
-        'aria-labelledby': labelledBy ?? labelId,
-        'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
-      },
-      label: {
-        id: labelId,
-      },
-    }
-  }, [ariaLabel, children, id, labelledBy, role, slotProps?.label])
-}
 
 export const Switch = <SwitchComponent extends ElementType = 'input'>(
   inProps: SwitchProps<SwitchComponent>,
@@ -114,7 +81,23 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     recipe: switchRecipe,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const ariaId = useId()
+  const slotAriaProps = useMemo(() => {
+    const hasLabel = !!children
+    const stringChildren = isString(children)
+    const labelId = hasLabel ? `switch-${ariaId}-label` : undefined
+
+    return {
+      input: {
+        role: 'switch',
+        'aria-labelledby': labelId,
+        'aria-label': stringChildren ? children : undefined,
+      },
+      label: {
+        id: labelId,
+      },
+    }
+  }, [ariaId, children])
 
   const [SwitchRoot, getSwitchRootProps] = useSlot({
     elementType: 'label',
@@ -139,7 +122,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
-    a11y: slotAriaProps.input,
+    ariaProps: slotAriaProps.input,
     shouldForwardComponent: false,
     additionalProps: {
       as,
@@ -183,7 +166,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     externalSlotProps: slotProps?.label,
     style: styles.label,
     classNames: slotClasses.label,
-    a11y: slotAriaProps.label,
+    ariaProps: slotAriaProps.label,
   })
 
   const thumbIcon = isFunction(thumbIconProp)

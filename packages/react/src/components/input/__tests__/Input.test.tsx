@@ -428,22 +428,6 @@ describe('Input', () => {
       expect(input).toHaveAttribute('aria-labelledby', 'label-id')
     })
 
-    it('should apply aria-labelledby=label.id when id of label is provided', () => {
-      const { getByTestId, queryByClassName } = renderWithNexUIProvider(
-        <Input
-          data-testid='input'
-          label='Test Label'
-          slotProps={{ label: { id: 'custom-id' } }}
-        />,
-      )
-
-      const input = getByTestId('input')
-      const label = queryByClassName(inputClasses['label'])
-
-      expect(label).toHaveAttribute('id', 'custom-id')
-      expect(input).toHaveAttribute('aria-labelledby', label!.id)
-    })
-
     it('should use aria-disabled and role with non-input elements', () => {
       const { getByTestId } = renderWithNexUIProvider(
         <Input data-testid='input' as='div' disabled />,

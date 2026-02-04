@@ -77,10 +77,6 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
     shouldForwardComponent: false,
     additionalProps: {
       ref,
-      role: 'menu',
-      id: menuCtx.contentId,
-      'aria-orientation': 'vertical',
-      'aria-labelledby': menuCtx.triggerId,
       onPointerMove: handlePointerMove,
       onKeyDown: handleKeyDown,
       onFocus: handleFocus,
@@ -97,6 +93,12 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
           event.preventDefault()
         }
       },
+    },
+    ariaProps: {
+      role: 'menu',
+      id: menuCtx.contentId,
+      'aria-orientation': 'vertical',
+      'aria-labelledby': menuCtx.triggerId,
     },
   })
 

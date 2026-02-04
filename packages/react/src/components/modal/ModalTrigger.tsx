@@ -26,3 +26,5 @@ export const ModalTrigger = (props: ModalTriggerProps) => {
     ),
   )
 }
+
+ModalTrigger.displayName = 'ModalTrigger'

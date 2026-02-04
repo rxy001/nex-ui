@@ -12,40 +12,9 @@ import { CheckedIcon } from './CheckedIcon'
 import { IndeterminateIcon } from './IndeterminateIcon'
 import type { CSSObject } from '@emotion/react'
 import type { CheckboxOwnerState, CheckboxProps } from './types'
-import type { ElementType, HTMLAttributes, ReactElement } from 'react'
+import type { ElementType, ReactElement } from 'react'
 
 const slots = ['root', 'input', 'label', 'icon']
-
-const useSlotAriaProps = (
-  ownerState: CheckboxOwnerState,
-): Record<'input' | 'label', HTMLAttributes<HTMLElement>> => {
-  const {
-    children,
-    slotProps,
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  } = ownerState
-
-  const id = useId()
-
-  return useMemo(() => {
-    const labelProps = slotProps?.label
-    const stringChildren = isString(children)
-    const hasLabel = !!children
-    const labelId =
-      labelProps?.id ?? (hasLabel ? `checkbox-${id}-label` : undefined)
-
-    return {
-      input: {
-        'aria-labelledby': ariaLabelledBy ?? labelId,
-        'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
-      },
-      label: {
-        id: labelId,
-      },
-    }
-  }, [ariaLabel, ariaLabelledBy, children, id, slotProps?.label])
-}
 
 export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
   inProps: CheckboxProps<CheckboxComponent>,
@@ -149,7 +118,23 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     recipe: checkboxRecipe,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const ariaId = useId()
+
+  const slotAriaProps = useMemo(() => {
+    const stringChildren = isString(children)
+    const hasLabel = !!children
+    const labelId = hasLabel ? `checkbox-${ariaId}-label` : undefined
+
+    return {
+      input: {
+        'aria-labelledby': labelId,
+        'aria-label': stringChildren ? children : undefined,
+      },
+      label: {
+        id: labelId,
+      },
+    }
+  }, [children, ariaId])
 
   const [CheckboxRoot, getCheckboxRootProps] = useSlot({
     elementType: 'label',
@@ -177,7 +162,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     externalForwardedProps: remainingProps,
     classNames: slotClasses.input,
     style: styles.input,
-    a11y: slotAriaProps.input,
+    ariaProps: slotAriaProps.input,
     shouldForwardComponent: false,
     additionalProps: {
       as,
@@ -202,7 +187,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     externalSlotProps: slotProps?.label,
     style: styles.label,
     classNames: slotClasses.label,
-    a11y: slotAriaProps.label,
+    ariaProps: slotAriaProps.label,
   })
 
   const renderCheckedIcon = () => {

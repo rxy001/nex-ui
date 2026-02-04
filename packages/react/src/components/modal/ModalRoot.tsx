@@ -52,7 +52,7 @@ export const ModalRoot = <RootComponent extends ElementType = 'div'>(
             : undefined,
       },
     },
-    a11y: {
+    ariaProps: {
       // Ignore the user's settings to ensure proper access for assistive technologies.
       'aria-hidden':
         modalPortalPropsCtx?.keepMounted && !open ? true : undefined,

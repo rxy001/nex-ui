@@ -17,27 +17,6 @@ import type { BreadcrumbProps } from './types'
 
 const slots = ['root', 'list', 'separator', 'collapse', 'expandButton']
 
-const useSlotAriaProps = (props: BreadcrumbProps) => {
-  const { 'aria-label': rootAriaLabel = 'breadcrumb', slotProps } = props
-  const separatorAriaHidden = slotProps?.separator?.['aria-hidden'] ?? true
-  const expandButtonAriaLabel =
-    slotProps?.expandButton?.['aria-label'] ?? 'Expand breadcrumb items'
-
-  return useMemo(() => {
-    return {
-      root: {
-        'aria-label': rootAriaLabel,
-      },
-      separator: {
-        'aria-hidden': separatorAriaHidden,
-      },
-      expandButton: {
-        'aria-label': expandButtonAriaLabel,
-      },
-    }
-  }, [rootAriaLabel, separatorAriaHidden, expandButtonAriaLabel])
-}
-
 export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
   inProps: BreadcrumbProps<RootComponent>,
 ) => {
@@ -69,7 +48,20 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     recipe: breadcrumbRecipe,
   })
 
-  const slotAriaProps = useSlotAriaProps(props)
+  const slotAriaProps = useMemo(
+    () => ({
+      root: {
+        'aria-label': 'breadcrumb',
+      },
+      separator: {
+        'aria-hidden': true,
+      },
+      expandButton: {
+        'aria-label': 'Expand breadcrumb items',
+      },
+    }),
+    [],
+  )
 
   const slotClasses = useSlotClasses({
     name: 'Breadcrumb',
@@ -82,7 +74,7 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     style: styles.root,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
-    a11y: slotAriaProps.root,
+    ariaProps: slotAriaProps.root,
     dataAttrs: {
       size,
       color,
@@ -101,7 +93,7 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     style: styles.separator,
     externalSlotProps: slotProps?.separator,
     classNames: slotClasses.separator,
-    a11y: slotAriaProps.separator,
+    ariaProps: slotAriaProps.separator,
     additionalProps: {
       style: {
         // @ts-ignore
@@ -123,7 +115,7 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     style: styles.expandButton,
     externalSlotProps: slotProps?.expandButton,
     classNames: slotClasses.expandButton,
-    a11y: slotAriaProps.expandButton,
+    ariaProps: slotAriaProps.expandButton,
     additionalProps: {
       onClick: () => setExpanded(true),
     },

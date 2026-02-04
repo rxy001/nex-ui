@@ -1,6 +1,5 @@
 'use client'
 
-import { useMemo } from 'react'
 import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { FocusTrap } from '../focusTrap'
 import { popoverContentRecipe } from '../../theme/recipes'
@@ -11,21 +10,6 @@ import type { PopoverContentProps } from './types'
 
 const slots = ['root']
 
-const useAriaProps = (ownerState: PopoverContentProps) => {
-  const { 'aria-modal': ariaModal, role = 'dialog' } = ownerState
-
-  const { rootId } = usePopoverContext()
-
-  return useMemo(
-    () => ({
-      role,
-      id: rootId,
-      'aria-modal': ariaModal,
-    }),
-    [ariaModal, rootId, role],
-  )
-}
-
 export const PopoverContent = <RootComponent extends ElementType = 'div'>(
   inProps: PopoverContentProps<RootComponent>,
 ) => {
@@ -34,8 +18,7 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const { open } = usePopoverContext()
-
+  const { open, rootId } = usePopoverContext()
   const {
     loop,
     maxHeight,
@@ -65,8 +48,6 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     name: 'PopoverContent',
   })
 
-  const ariaProps = useAriaProps(ownerState)
-
   const [PopoverContentRoot, getPopoverContentRootProps] = useSlot({
     style,
     elementType: 'div',
@@ -76,7 +57,10 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
       color,
       radius,
     },
-    a11y: ariaProps,
+    ariaProps: {
+      id: rootId,
+      role: 'dialog',
+    },
     additionalProps: {
       sx: {
         maxWidth,

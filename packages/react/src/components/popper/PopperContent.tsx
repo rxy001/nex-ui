@@ -83,7 +83,7 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
             : undefined,
       } as CSSProperties,
     },
-    a11y: {
+    ariaProps: {
       'aria-hidden':
         popperPortalPropsCtx?.keepMounted && !open ? true : undefined,
     },

@@ -25,67 +25,6 @@ const getRole = (type?: HTMLInputTypeAttribute) => {
   }
 }
 
-const useAriaProps = (props: InputBaseProps) => {
-  const {
-    disabled,
-    invalid,
-    checked,
-    required,
-    readOnly,
-    role,
-    type,
-    as,
-    tabIndex,
-    'aria-disabled': ariaDisabled,
-    'aria-checked': ariaChecked,
-    'aria-required': ariaRequired,
-    'aria-readonly': ariaReadOnly,
-  } = props
-
-  return useMemo(() => {
-    if (isFunction(as)) {
-      return {}
-    }
-
-    let ariaProps: InputHTMLAttributes<HTMLInputElement> = {
-      tabIndex: disabled ? -1 : tabIndex,
-      'aria-invalid': invalid || undefined,
-    }
-
-    if (as === 'input') {
-      ariaProps = {
-        ...ariaProps,
-        role,
-      }
-    } else {
-      ariaProps = {
-        ...ariaProps,
-        role: role ?? getRole(type),
-        'aria-disabled': ariaDisabled ?? (disabled || undefined),
-        'aria-checked': ariaChecked ?? checked,
-        'aria-required': ariaRequired ?? required,
-        'aria-readonly': ariaReadOnly ?? readOnly,
-      }
-    }
-
-    return ariaProps
-  }, [
-    as,
-    disabled,
-    tabIndex,
-    invalid,
-    type,
-    checked,
-    required,
-    readOnly,
-    role,
-    ariaDisabled,
-    ariaChecked,
-    ariaRequired,
-    ariaReadOnly,
-  ])
-}
-
 const isCheckableControl = (element: HTMLInputElement) => {
   const role = element.getAttribute('role')
   const type = element.getAttribute('type')
@@ -240,23 +179,43 @@ export const InputBase = (props: InputBaseProps) => {
     onChange?.(event)
   })
 
-  const ariaProps = useAriaProps({
-    ...props,
+  const ariaProps = useMemo(() => {
+    if (isFunction(as)) {
+      return {}
+    }
+
+    let ariaProps: InputHTMLAttributes<HTMLInputElement> = {
+      tabIndex: disabled ? -1 : tabIndex,
+      'aria-invalid': props.invalid || undefined,
+    }
+
+    if (as !== 'input') {
+      ariaProps = {
+        ...ariaProps,
+        role: getRole(type),
+        'aria-disabled': disabled || undefined,
+        'aria-checked': currentChecked,
+        'aria-required': props.required,
+        'aria-readonly': props.readOnly,
+      }
+    }
+
+    return ariaProps
+  }, [
     as,
-    type,
+    disabled,
     tabIndex,
-    checked: currentChecked,
-  })
+    type,
+    props.invalid,
+    props.required,
+    props.readOnly,
+    currentChecked,
+  ])
 
   const [InputRoot, getInputRootProps] = useSlot({
     style,
     elementType: 'input',
-    a11y: {
-      ...ariaProps,
-      onKeyUp: handleKeyUp,
-      onClick: handleClick,
-      onChange: handleChange,
-    },
+    ariaProps,
     externalForwardedProps: remainingProps,
     additionalProps: {
       as,
@@ -264,6 +223,9 @@ export const InputBase = (props: InputBaseProps) => {
       disabled,
       autoFocus,
       checked: currentChecked,
+      onKeyUp: handleKeyUp,
+      onClick: handleClick,
+      onChange: handleChange,
       ...focusProps,
     },
     dataAttrs: {

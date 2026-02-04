@@ -57,9 +57,6 @@ export const CardHeader = <RootComponent extends ElementType>(
     elementType: 'div',
     externalSlotProps: slotProps?.title,
     classNames: slotClasses.title,
-    additionalProps: {
-      children: title,
-    },
   })
 
   const [CardSubtitle, getCardSubtitleProps] = useSlot({
@@ -67,9 +64,6 @@ export const CardHeader = <RootComponent extends ElementType>(
     elementType: 'div',
     classNames: slotClasses.subtitle,
     externalSlotProps: slotProps?.subtitle,
-    additionalProps: {
-      children: subtitle,
-    },
   })
 
   let node = children
@@ -80,13 +74,13 @@ export const CardHeader = <RootComponent extends ElementType>(
         {avatar}
         {title && subtitle ? (
           <CardContent {...getCardContentProps()}>
-            <CardTitle {...getCardTitleProps()} />
-            <CardSubtitle {...getCardSubtitleProps()} />
+            <CardTitle {...getCardTitleProps()}>{title}</CardTitle>
+            <CardSubtitle {...getCardSubtitleProps()}>{subtitle}</CardSubtitle>
           </CardContent>
         ) : title ? (
-          <CardTitle {...getCardTitleProps()} />
+          <CardTitle {...getCardTitleProps()}>{title}</CardTitle>
         ) : subtitle ? (
-          <CardSubtitle {...getCardSubtitleProps()} />
+          <CardSubtitle {...getCardSubtitleProps()}>{subtitle}</CardSubtitle>
         ) : null}
         {action}
       </>

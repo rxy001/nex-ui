@@ -15,11 +15,7 @@ export const Divider = <RootComponent extends ElementType = 'hr'>(
     props: inProps,
   })
 
-  const {
-    role = 'separator',
-    orientation = 'horizontal',
-    ...remainingProps
-  } = props
+  const { orientation = 'horizontal', ...remainingProps } = props
 
   const ownerState: DividerProps = { ...props, orientation }
 
@@ -39,8 +35,9 @@ export const Divider = <RootComponent extends ElementType = 'hr'>(
     elementType: 'hr',
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
-    a11y: {
-      role,
+    ariaProps: {
+      role: 'separator',
+      'aria-orientation': orientation === 'vertical' ? 'vertical' : undefined,
     },
     dataAttrs: {
       orientation,
