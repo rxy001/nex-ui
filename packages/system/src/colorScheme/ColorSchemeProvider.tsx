@@ -13,7 +13,6 @@ import type {
 
 function initializeValue(key: string, defaultValue: string) {
   // FIXME: mock ssr environment
-  /* istanbul ignore if */
   if (typeof window === 'undefined') {
     return undefined
   }
@@ -59,7 +58,6 @@ function getColorScheme(state: State) {
     return 'dark'
   }
   // FIXME: mock ssr environment
-  /* istanbul ignore next */
   return undefined
 }
 
@@ -79,7 +77,6 @@ export function createGetColorSchemeSelector(
       }
       return `${selector.replace('%s', colorScheme)}`
     }
-    /* istanbul ignore next */
     return '&'
   }
 }

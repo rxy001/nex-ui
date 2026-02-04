@@ -10,7 +10,6 @@ export const getAlignment = (placement: Placement): Alignment | undefined => {
 
 export const isWebKit = (): boolean => {
   if (typeof CSS === 'undefined' || !CSS.supports) return false
-  /* istanbul ignore next */
   return CSS.supports('-webkit-backdrop-filter', 'none')
 }
 

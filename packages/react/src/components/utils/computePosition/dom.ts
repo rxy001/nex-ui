@@ -5,7 +5,6 @@ import type { Rect } from './types'
 export const isHTMLElement = (
   element: Element | Window,
 ): element is HTMLElement => {
-  /* istanbul ignore next */
   if (typeof window === 'undefined') {
     return false
   }
@@ -14,7 +13,6 @@ export const isHTMLElement = (
 }
 
 export const isSVGElement = (element: Element): element is SVGElement => {
-  /* istanbul ignore next */
   if (typeof window === 'undefined') {
     return false
   }
@@ -67,7 +65,6 @@ export const isContainingBlock = (element: Element): boolean => {
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
   // https://drafts.csswg.org/css-transforms-2/#individual-transforms
-  // istanbul ignore next
   return (
     transformProperties.some((value) =>
       css[value as keyof CSSStyleDeclaration]
@@ -152,7 +149,6 @@ export const getDimensions = (element: Element) => {
   const shouldFallback =
     Math.round(width) !== offsetWidth || Math.round(height) !== offsetHeight
 
-  // istanbul ignore next
   if (shouldFallback) {
     width = offsetWidth
     height = offsetHeight
@@ -192,7 +188,6 @@ export const getRectRelativeToViewport = (
 
   if (
     getElementName(offsetParent) !== 'body' ||
-    // istanbul ignore next
     isOverflowElement(documentElement)
   ) {
     scroll = getElementScroll(offsetParent)
@@ -232,7 +227,6 @@ export const getRectRelativeToOffsetParent = (
   // Only when both <body> and <html> have their overflow set to auto will <body> have a scrollbar.
   if (
     getElementName(offsetParent) !== 'body' ||
-    // istanbul ignore next
     isOverflowElement(documentElement)
   ) {
     scroll = getElementScroll(offsetParent)

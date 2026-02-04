@@ -141,7 +141,6 @@ export const RadioGroup = <
 
     const rootElement = rootRef.current
 
-    // istanbul ignore if
     if (!rootElement) return
 
     const radioNodes = Array.from(

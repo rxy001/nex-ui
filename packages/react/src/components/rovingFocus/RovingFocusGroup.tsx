@@ -79,7 +79,6 @@ export const RovingFocusGroup = (props: RovingFocusGroupProps) => {
 
     const target = event.target as HTMLElement
 
-    // istanbul ignore next
     if (!event.currentTarget.contains(target)) return
 
     const items = collection.getItems().filter((item) => item.focusable)

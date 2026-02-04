@@ -71,7 +71,6 @@ export const FocusTrap = ({
           return
 
         const relatedTarget = event.relatedTarget as HTMLElement | null
-        // istanbul ignore next
         if (relatedTarget === null) return
 
         if (
@@ -87,7 +86,6 @@ export const FocusTrap = ({
     // When the focused element gets removed from the DOM, browsers move focus
     // back to the document.body. In this case, we move focus to the container
     // to keep focus trapped correctly.
-    // istanbul ignore next
     const handleMutations = (mutations: MutationRecord[]) => {
       const focusedElement = document.activeElement as HTMLElement | null
       if (focusedElement !== document.body) return
@@ -142,7 +140,6 @@ export const FocusTrap = ({
   }, [active, autoFocusRef, restoreFocusRef])
 
   const handleKeydown = useEvent((event: KeyboardEvent) => {
-    // istanbul ignore next
     if (!active || focusTrapScopeRef.current.paused || pausedRef.current) return
 
     const tabKey =

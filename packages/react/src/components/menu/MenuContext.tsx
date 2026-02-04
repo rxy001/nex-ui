@@ -114,3 +114,16 @@ export const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] =
     strict: true,
     defaultValue: null as unknown as MenuItemIndicatorContextValue,
   })
+
+export interface MenuItemGroupContextValue {
+  labelId: string
+}
+
+export const [MenuItemGroupProvider, useMenuItemGroupContext] =
+  createContext<MenuItemGroupContextValue>({
+    contextName: 'MenuItemGroupContext',
+    hookName: 'useMenuItemGroupContext',
+    providerName: 'MenuItemGroupProvider',
+    strict: true,
+    defaultValue: null as unknown as MenuItemGroupContextValue,
+  })

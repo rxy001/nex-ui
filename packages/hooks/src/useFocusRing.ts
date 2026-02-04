@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 'use client'
 
 import { useFocusRing as useFocus } from '@react-aria/focus'
