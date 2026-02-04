@@ -97,7 +97,6 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const setPosition = useCallback(() => {
-    // istanbul ignore if
     if (!referenceRef.current || !popperRootRef.current) return
 
     const {
@@ -119,7 +118,6 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
     setStyleVariables(newStyleVars)
   }, [referenceRef, popperRootRef, placement, offset, flip, shift])
 
-  // istanbul ignore next
   const resetPosition = useEvent(() => {
     if (!referenceRef.current || !popperRootRef.current) {
       setStyleVariables(DEFAULT_VARS)
@@ -129,9 +127,7 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
     setPosition()
   })
 
-  // istanbul ignore next
   const observeElementResizeChanges = useEvent(() => {
-    // istanbul ignore if
     if (!referenceRef.current || !popperRootRef.current) return
 
     const resizeObserver = new ResizeObserver((entries) => {
@@ -157,7 +153,6 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
     }
   })
 
-  // istanbul ignore next
   const subscribeAncestorScrollEvents = useEvent(() => {
     if (!popperRootRef.current) return
 
@@ -187,10 +182,8 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
   }, [setPosition, open])
 
   useEffect(() => {
-    // istanbul ignore next
     if (!referenceRef.current || !closeOnDetached || !open) return
 
-    // istanbul ignore next
     function handleIntersect(entries: IntersectionObserverEntry[]) {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {

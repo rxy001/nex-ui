@@ -13,7 +13,6 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
   const selectorMap: Map<string, string> = new Map()
 
   for (const selectorKey in selectors) {
-    // istanbul ignore if
     if (!Object.hasOwn(selectors, selectorKey)) continue
 
     const selectorValue = selectors[selectorKey]
@@ -31,7 +30,6 @@ export function createSelectors({ selectors, getMediaSelectors }: Config) {
   const mediaSelectors = getMediaSelectors()
 
   for (const selectorKey in mediaSelectors) {
-    // istanbul ignore if
     if (!Object.hasOwn(mediaSelectors, selectorKey)) continue
 
     const selectorValue = mediaSelectors[selectorKey]
