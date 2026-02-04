@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 // fork from http://github.com/emotion-js/emotion/blob/main/packages/react/src/emotion-element.tsx
 
 import { registerStyles, insertStyles } from '@emotion/utils'

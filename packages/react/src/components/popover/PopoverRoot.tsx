@@ -35,7 +35,6 @@ export const PopoverRoot = ({ children }: { children: ReactElement }) => {
     additionalProps: {
       onPointerDownOutside: (event: PointerDownOutsideEvent) => {
         const target = event.target as HTMLElement
-        // istanbul ignore next
         if (triggerRef.current?.contains(target)) {
           event.preventDefault()
         }

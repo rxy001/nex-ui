@@ -13,7 +13,6 @@ export const createBreakpoints = (breakpoints: BreakpointsDefinition) => {
   let index = 0
 
   for (const breakpointKey in breakpoints) {
-    // istanbul ignore if
     if (!Object.hasOwn(breakpoints, breakpointKey)) continue
 
     const breakpointValue = breakpoints[breakpointKey]

@@ -1,5 +1,3 @@
-// istanbul ignore file
-
 import { ownerDocument } from './ownerDocument'
 
 export function ownerWindow(node: Node | undefined | null): Window {

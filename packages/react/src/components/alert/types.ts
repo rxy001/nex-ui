@@ -12,11 +12,11 @@ import type { AlertVariants } from '../../theme/recipes'
 export interface AlertPropsOverrides {}
 
 type AlertSlotProps = {
-  icon: SlotProps<'div'>
-  content: SlotProps<'div'>
-  title: SlotProps<'div'>
-  description: SlotProps<'div'>
-  closeButton: ButtonProps
+  icon?: SlotProps<'div'>
+  content?: SlotProps<'div'>
+  title?: SlotProps<'div'>
+  description?: SlotProps<'div'>
+  closeButton?: ButtonProps
 }
 
 type AlertStatus = 'info' | 'success' | 'warning' | 'error'

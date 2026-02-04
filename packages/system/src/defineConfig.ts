@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 import type {
   SemanticTokensDefinition,
   TokensDefinition,

@@ -1,12 +1,16 @@
 'use client'
 
+import { useId, useMemo } from 'react'
 import { useSlot } from '../utils'
-import type { ElementType } from 'react'
+import { MenuItemGroupProvider } from './MenuContext'
 import type { MenuItemGroupProps } from './types'
+import type { ElementType } from 'react'
 
 export const MenuItemGroup = <RootComponent extends ElementType = 'div'>(
   props: MenuItemGroupProps<RootComponent>,
 ) => {
+  const id = useId()
+  const labelId = `menu-${id}-group-label`
   const { children, ...remainingProps } = props
 
   const [MenuItemGroupRoot, getMenuItemRootProps] = useSlot({
@@ -14,12 +18,15 @@ export const MenuItemGroup = <RootComponent extends ElementType = 'div'>(
     externalForwardedProps: remainingProps,
     additionalProps: {
       role: 'group',
+      'aria-labelledby': labelId,
     },
   })
 
+  const ctx = useMemo(() => ({ labelId }), [labelId])
+
   return (
     <MenuItemGroupRoot {...getMenuItemRootProps()}>
-      {children}
+      <MenuItemGroupProvider value={ctx}>{children}</MenuItemGroupProvider>
     </MenuItemGroupRoot>
   )
 }

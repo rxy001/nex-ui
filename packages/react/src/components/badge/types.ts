@@ -9,9 +9,9 @@ import type {
 import type { BadgeVariants } from '../../theme/recipes'
 
 type BadgeSlotProps = {
-  closeButton: SlotProps<'button'>
-  startIcon: SlotProps<'span'>
-  endIcon: SlotProps<'span'>
+  closeButton?: SlotProps<'button'>
+  startIcon?: SlotProps<'span'>
+  endIcon?: SlotProps<'span'>
 }
 
 type BadgeOwnProps<RootComponent extends ElementType> = {

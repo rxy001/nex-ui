@@ -10,7 +10,6 @@ export function createAliases(aliases: AliasesDefinition) {
   const aliasMap: Map<string, string[]> = new Map()
 
   for (const key in aliases) {
-    // istanbul ignore if
     if (!Object.hasOwn(aliases, key)) continue
 
     const value = aliases[key]

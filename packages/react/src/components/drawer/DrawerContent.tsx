@@ -177,7 +177,6 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
           },
         }
         break
-      // istanbul ignore next
       default:
         variants = {}
     }
