@@ -70,8 +70,6 @@ export const MenuItem = <RootElement extends ElementType = 'div'>(
     elementType: 'div',
     externalForwardedProps: remainingProps,
     additionalProps: {
-      role: 'menuitem',
-      'aria-disabled': disabled || undefined,
       onClick: handleClick,
       onFocus: handleFocus,
       onBlur: handleBlur,
@@ -86,6 +84,10 @@ export const MenuItem = <RootElement extends ElementType = 'div'>(
     dataAttrs: {
       disabled,
       highlighted: focused,
+    },
+    ariaProps: {
+      role: 'menuitem',
+      'aria-disabled': disabled || undefined,
     },
   })
 

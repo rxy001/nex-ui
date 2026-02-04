@@ -46,8 +46,6 @@ export const MenuRadioItem = <
     shouldForwardComponent: false,
     additionalProps: {
       disabled,
-      role: 'menuitemradio',
-      'aria-checked': checked,
       onClick: () => {
         if (disabled) return
         radioGroupCtx.setValue(value)
@@ -56,6 +54,10 @@ export const MenuRadioItem = <
     dataAttrs: {
       checked,
       value,
+    },
+    ariaProps: {
+      role: 'menuitemradio',
+      'aria-checked': checked,
     },
   })
 

@@ -15,23 +15,6 @@ import { Button } from '../button'
 import type { ElementType } from 'react'
 import type { AlertProps } from './types'
 
-const useSlotAriaProps = (ownerState: AlertProps) => {
-  const { role = 'alert', slotProps } = ownerState
-
-  const ariaLabel = slotProps?.closeButton?.['aria-label']
-
-  return useMemo(() => {
-    return {
-      root: {
-        role,
-      },
-      closeButton: {
-        'aria-label': ariaLabel ?? 'Close alert',
-      },
-    }
-  }, [ariaLabel, role])
-}
-
 const slots = ['root', 'icon', 'content', 'title', 'description', 'closeButton']
 
 export const Alert = <RootComponent extends ElementType = 'div'>(
@@ -51,16 +34,16 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     slotProps,
     hideIcon,
     classNames,
-    icon: iconProp,
-    color: colorProp,
+    icon,
+    color,
     status = 'info',
     variant = 'faded',
     radius = 'md',
     ...remainingProps
   } = props
 
-  const icon = useMemo(() => {
-    if (iconProp) return iconProp
+  const computedIcon = useMemo(() => {
+    if (icon) return icon
 
     switch (status) {
       case 'info':
@@ -77,10 +60,10 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
         }
         return null
     }
-  }, [iconProp, status])
+  }, [icon, status])
 
-  const color = useMemo(() => {
-    if (colorProp) return colorProp
+  const computedColor = useMemo(() => {
+    if (color) return color
 
     switch (status) {
       case 'info':
@@ -92,15 +75,15 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
       case 'error':
         return 'red'
     }
-  }, [colorProp, status])
+  }, [color, status])
 
   const ownerState: AlertProps = {
     ...props,
     status,
     variant,
-    icon,
-    color,
     radius,
+    icon: computedIcon,
+    color: computedColor,
   }
 
   const slotClasses = useSlotClasses({
@@ -109,7 +92,17 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     classNames,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const slotAriaProps = useMemo(
+    () => ({
+      root: {
+        role: 'alert',
+      },
+      closeButton: {
+        'aria-label': 'Close alert',
+      },
+    }),
+    [],
+  )
 
   const styles = useStyles({
     ownerState,
@@ -122,11 +115,11 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     externalForwardedProps: remainingProps,
     style: styles.root,
     classNames: slotClasses.root,
-    a11y: slotAriaProps.root,
+    ariaProps: slotAriaProps.root,
     dataAttrs: {
       radius,
       variant,
-      color,
+      color: computedColor,
       status,
     },
   })
@@ -165,9 +158,9 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     shouldForwardComponent: false,
     externalSlotProps: slotProps?.closeButton,
     classNames: slotClasses.closeButton,
-    a11y: slotAriaProps.closeButton,
+    ariaProps: slotAriaProps.closeButton,
     additionalProps: {
-      color,
+      color: computedColor,
       variant: 'ghost',
       size: 'sm',
       iconOnly: true,
@@ -178,8 +171,8 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
 
   return (
     <AlertRoot {...getAlertRootProps()}>
-      {icon && !hideIcon && (
-        <AlertIcon {...getAlertIconProps()}>{icon}</AlertIcon>
+      {computedIcon && !hideIcon && (
+        <AlertIcon {...getAlertIconProps()}>{computedIcon}</AlertIcon>
       )}
       <AlertContent {...getAlertContentProps()}>
         {title && <AlertTitle {...getAlertTitleProps()}>{title}</AlertTitle>}

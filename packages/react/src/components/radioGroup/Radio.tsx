@@ -13,48 +13,6 @@ import type { RadioOwnerState, RadioProps } from './types'
 
 const slots = ['root', 'input', 'dot', 'label']
 
-const useSlotAriaProps = (ownerState: RadioOwnerState) => {
-  const {
-    children,
-    slotProps,
-    role,
-    as,
-    type,
-    'aria-label': ariaLabel,
-    'aria-labelledby': ariaLabelledBy,
-  } = ownerState
-
-  const id = useId()
-
-  return useMemo(() => {
-    const hasLabel = !!children
-    const stringChildren = typeof children === 'string'
-    const labelSlotProps = slotProps?.label || {}
-    const labelId =
-      labelSlotProps.id ?? (hasLabel ? `radio-${id}-label` : undefined)
-
-    return {
-      input: {
-        'aria-label': ariaLabel ?? (stringChildren ? children : undefined),
-        'aria-labelledby': ariaLabelledBy ?? labelId,
-        role: !role && as !== 'input' && type === 'radio' ? 'radio' : role,
-      },
-      label: {
-        id: labelId,
-      },
-    }
-  }, [
-    children,
-    slotProps?.label,
-    id,
-    ariaLabel,
-    ariaLabelledBy,
-    role,
-    as,
-    type,
-  ])
-}
-
 export const Radio = <InputComponent extends ElementType = 'input'>(
   inProps: RadioProps<InputComponent>,
 ) => {
@@ -159,7 +117,24 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     classNames,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const ariaId = useId()
+
+  const slotAriaProps = useMemo(() => {
+    const hasLabel = !!children
+    const stringChildren = typeof children === 'string'
+    const labelId = hasLabel ? `radio-${ariaId}-label` : undefined
+
+    return {
+      input: {
+        'aria-label': stringChildren ? children : undefined,
+        'aria-labelledby': labelId,
+        role: as !== 'input' && type === 'radio' ? 'radio' : undefined,
+      },
+      label: {
+        id: labelId,
+      },
+    }
+  }, [children, as, type, ariaId])
 
   const handleChange = useEvent((newChecked: boolean) => {
     if (inGroup && value !== undefined) {
@@ -194,7 +169,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
-    a11y: slotAriaProps.input,
+    ariaProps: slotAriaProps.input,
     shouldForwardComponent: false,
     additionalProps: {
       tabIndex,
@@ -213,7 +188,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     style: styles.label,
     externalSlotProps: slotProps?.label,
     classNames: slotClasses.label,
-    a11y: slotAriaProps.label,
+    ariaProps: slotAriaProps.label,
   })
 
   const [RadioDot, getRadioDotProps] = useSlot({

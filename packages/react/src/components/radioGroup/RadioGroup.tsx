@@ -2,7 +2,6 @@
 
 import { useId, useMemo, useRef } from 'react'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
-import { isString } from '@nex-ui/utils'
 import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
 import { radioGroupRecipe } from '../../theme/recipes'
 import { RadioGroupProvider } from './RadioGroupContext'
@@ -11,36 +10,6 @@ import type { RadioGroupProps, RadioState } from './types'
 import type { RadioGroupContextValue } from './RadioGroupContext'
 
 const slots = ['root', 'label', 'wrapper']
-
-const useSlotAriaProps = (ownerState: RadioGroupProps) => {
-  const id = useId()
-
-  const {
-    slotProps,
-    label,
-    role = 'radiogroup',
-    'aria-labelledby': labelledBy,
-  } = ownerState
-
-  const stringLabel = isString(label)
-
-  const labelId =
-    slotProps?.label?.id ||
-    (stringLabel ? `radio-group-${id}-label` : undefined)
-
-  return useMemo(
-    () => ({
-      root: {
-        role,
-        'aria-labelledby': labelledBy ?? labelId,
-      },
-      label: {
-        id: labelId,
-      },
-    }),
-    [role, labelledBy, labelId],
-  )
-}
 
 export const RadioGroup = <
   T extends string | number = string | number,
@@ -106,7 +75,21 @@ export const RadioGroup = <
     classNames,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const ariaId = useId()
+
+  const slotAriaProps = useMemo(() => {
+    const labelId = label ? `radio-group-${ariaId}-label` : undefined
+
+    return {
+      root: {
+        role: 'radiogroup',
+        'aria-labelledby': labelId,
+      },
+      label: {
+        id: labelId,
+      },
+    }
+  }, [ariaId, label])
 
   const handleKeyDown = useEvent((e: KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
@@ -189,7 +172,7 @@ export const RadioGroup = <
       onKeyUp: handleKeyUp,
       onKeyDown: handleKeyDown,
     },
-    a11y: slotAriaProps.root,
+    ariaProps: slotAriaProps.root,
     dataAttrs: {
       orientation,
     },
@@ -200,7 +183,7 @@ export const RadioGroup = <
     style: styles.label,
     classNames: slotClasses.label,
     externalSlotProps: slotProps?.label,
-    a11y: slotAriaProps.label,
+    ariaProps: slotAriaProps.label,
   })
 
   const [RadioGroupWrapper, getRadioGroupWrapperProps] = useSlot({

@@ -16,7 +16,7 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
     props: inProps,
   })
 
-  const id = useId()
+  const ariaId = useId()
 
   const triggerRef = useRef<HTMLElement>(null)
 
@@ -24,7 +24,6 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
     children,
     onOpenChange,
     onClose,
-    id: idProp,
     open: openProp,
     defaultOpen = false,
     ...remainingProps
@@ -36,7 +35,7 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
     onOpenChange,
   )
 
-  const rootId = idProp ?? `popover-${id}-root`
+  const rootId = `popover-${ariaId}-root`
 
   const popoverCtx = useMemo(
     () => ({ open, setOpen, triggerRef, rootId }),

@@ -1,3 +1,8 @@
 import { ModalTrigger } from '../modal'
+import type { DialogTriggerProps } from './types'
 
-export const DialogTrigger = ModalTrigger
+export const DialogTrigger = (props: DialogTriggerProps) => (
+  <ModalTrigger {...props} />
+)
+
+DialogTrigger.displayName = 'DialogTrigger'

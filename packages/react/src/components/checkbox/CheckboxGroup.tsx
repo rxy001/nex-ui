@@ -2,7 +2,6 @@
 
 import { useMemo, useId } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
-import { isString } from '@nex-ui/utils'
 import { CheckboxGroupProvider } from './CheckboxGroupContext'
 import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
 import { checkboxGroupRecipe } from '../../theme/recipes'
@@ -11,35 +10,6 @@ import type { CheckboxGroupProps } from './types'
 import type { CheckboxGroupContextValue } from './CheckboxGroupContext'
 
 const slots = ['root', 'label', 'wrapper']
-
-const useSlotAriaProps = (ownerState: CheckboxGroupProps) => {
-  const id = useId()
-
-  const {
-    slotProps,
-    label,
-    role = 'group',
-    'aria-labelledby': labelledBy,
-  } = ownerState
-  const stringLabel = isString(label)
-
-  const labelId =
-    slotProps?.label?.id ||
-    (stringLabel ? `checkbox-group-${id}-label` : undefined)
-
-  return useMemo(
-    () => ({
-      root: {
-        role,
-        'aria-labelledby': labelledBy ?? labelId,
-      },
-      label: {
-        id: labelId,
-      },
-    }),
-    [role, labelledBy, labelId],
-  )
-}
 
 export const CheckboxGroup = <
   T extends number | string = number | string,
@@ -88,7 +58,20 @@ export const CheckboxGroup = <
     classNames,
   })
 
-  const slotAriaProps = useSlotAriaProps(ownerState)
+  const ariaId = useId()
+
+  const slotAriaProps = useMemo(() => {
+    const labelId = label ? `checkbox-group-${ariaId}-label` : undefined
+    return {
+      root: {
+        role: 'group',
+        'aria-labelledby': labelId,
+      },
+      label: {
+        id: labelId,
+      },
+    }
+  }, [label, ariaId])
 
   const styles = useStyles({
     name: 'CheckboxGroup',
@@ -101,7 +84,7 @@ export const CheckboxGroup = <
     style: styles.root,
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
-    a11y: slotAriaProps.root,
+    ariaProps: slotAriaProps.root,
     dataAttrs: {
       orientation,
     },
@@ -112,7 +95,7 @@ export const CheckboxGroup = <
     classNames: slotClasses.label,
     style: styles.label,
     externalSlotProps: slotProps?.label,
-    a11y: slotAriaProps.label,
+    ariaProps: slotAriaProps.label,
   })
 
   const [CheckboxGroupWrapper, getCheckboxGroupWrapperProps] = useSlot({

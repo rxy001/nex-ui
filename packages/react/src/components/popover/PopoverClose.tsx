@@ -23,3 +23,5 @@ export const PopoverClose = ({ children }: PopoverCloseProps) => {
     ),
   )
 }
+
+PopoverClose.displayName = 'PopoverClose'

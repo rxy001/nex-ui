@@ -116,7 +116,7 @@ export const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] =
   })
 
 export interface MenuItemGroupContextValue {
-  labelId: string
+  groupLabelId: string
 }
 
 export const [MenuItemGroupProvider, useMenuItemGroupContext] =

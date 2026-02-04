@@ -35,3 +35,5 @@ export const ModalClose = ({ children }: ModalCloseProps) => {
     },
   })
 }
+
+ModalClose.displayName = 'ModalClose'

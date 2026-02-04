@@ -41,7 +41,7 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
-    a11y: {
+    ariaProps: {
       // https://dequeuniversity.com/rules/axe/4.10/scrollable-region-focusable?application=axeAPI
       tabIndex: tabIndex ?? (scroll === 'inside' ? 0 : undefined),
     },

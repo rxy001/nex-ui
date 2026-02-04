@@ -21,14 +21,13 @@ export const ModalBody = <RootComponent extends ElementType = 'div'>(
   props: ModalBodyProps<RootComponent>,
 ) => {
   const { modalBodyId } = useModalContext()
-  const bodyId = props.id ?? modalBodyId
 
   const [ModalBodyRoot, getModalBodyRootProps] = useSlot({
     style,
     elementType: 'div',
     externalForwardedProps: props,
-    a11y: {
-      id: bodyId,
+    ariaProps: {
+      id: modalBodyId,
     },
   })
 

@@ -22,7 +22,7 @@ export const ModalBackdrop = <RootComponent extends ElementType = 'div'>(
     style,
     elementType: 'div',
     externalForwardedProps: props,
-    a11y: {
+    ariaProps: {
       'aria-hidden': true,
     },
   })

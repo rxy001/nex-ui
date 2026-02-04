@@ -9,20 +9,25 @@ import type { ElementType } from 'react'
 export const MenuItemGroup = <RootComponent extends ElementType = 'div'>(
   props: MenuItemGroupProps<RootComponent>,
 ) => {
-  const id = useId()
-  const labelId = `menu-${id}-group-label`
   const { children, ...remainingProps } = props
+  const ariaId = useId()
+  const groupLabelId = `menu-${ariaId}-group-label`
 
   const [MenuItemGroupRoot, getMenuItemRootProps] = useSlot({
     elementType: 'div',
     externalForwardedProps: remainingProps,
-    additionalProps: {
+    ariaProps: {
       role: 'group',
-      'aria-labelledby': labelId,
+      'aria-labelledby': groupLabelId,
     },
   })
 
-  const ctx = useMemo(() => ({ labelId }), [labelId])
+  const ctx = useMemo(
+    () => ({
+      groupLabelId,
+    }),
+    [groupLabelId],
+  )
 
   return (
     <MenuItemGroupRoot {...getMenuItemRootProps()}>

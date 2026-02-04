@@ -10,23 +10,6 @@ import type { BreadcrumbItemProps } from './types'
 
 const slots = ['root', 'link']
 
-const useAriaProps = (props: BreadcrumbItemProps) => {
-  const {
-    isLast,
-    as,
-    role,
-    'aria-current': ariaCurrent = isLast ? 'page' : undefined,
-  } = props
-
-  return useMemo(
-    () => ({
-      'aria-current': ariaCurrent,
-      role: role ?? (as && as !== 'a' && !isFunction(as) ? 'link' : undefined),
-    }),
-    [ariaCurrent, as, role],
-  )
-}
-
 export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
   inProps: BreadcrumbItemProps<LinkComponent>,
 ) => {
@@ -47,7 +30,16 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
     ...remainingProps
   } = props
 
-  const ariaProps = useAriaProps(props)
+  const ariaProps = useMemo(
+    () => ({
+      'aria-current': isLast ? 'page' : undefined,
+      role:
+        props.as && props.as !== 'a' && !isFunction(props.as)
+          ? 'link'
+          : undefined,
+    }),
+    [props.as, isLast],
+  )
   const { focusVisible, focusProps } = useFocusRing()
 
   const styles = useStyles({
@@ -89,7 +81,7 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
     style: styles.link,
     classNames: slotClasses.link,
     externalForwardedProps: remainingProps,
-    a11y: ariaProps,
+    ariaProps,
     additionalProps,
     dataAttrs,
   })
