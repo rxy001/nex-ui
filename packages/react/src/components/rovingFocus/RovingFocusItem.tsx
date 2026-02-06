@@ -20,7 +20,7 @@ export const RovingFocusItem = (props: RovingFocusItemProps) => {
   const id = idProp ?? defaultId
 
   const handleFocus = () => {
-    ctx.onItemFocus(id)
+    ctx?.onItemFocus(id)
   }
 
   const handleMouseDown = (event: MouseEvent) => {
@@ -29,11 +29,11 @@ export const RovingFocusItem = (props: RovingFocusItemProps) => {
 
   useEffect(() => {
     if (focusable) {
-      ctx.onFocusableItemMount()
-      return ctx.onFocusableItemUnmount
+      ctx?.onFocusableItemMount()
+      return ctx?.onFocusableItemUnmount
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [focusable, ctx.onFocusableItemMount, ctx.onFocusableItemUnmount])
+  }, [focusable, ctx?.onFocusableItemMount, ctx?.onFocusableItemUnmount])
 
   if (!isValidNonFragmentElement(children)) {
     return children
@@ -46,9 +46,9 @@ export const RovingFocusItem = (props: RovingFocusItemProps) => {
         mergeProps(
           {
             onFocus: handleFocus,
-            onBlur: ctx.onItemBlur,
+            onBlur: ctx?.onItemBlur,
             onMouseDown: handleMouseDown,
-            tabIndex: ctx.focusItemId === id || active ? 0 : -1,
+            tabIndex: ctx?.focusItemId === id || active ? 0 : -1,
           },
           children.props,
           remainingProps,

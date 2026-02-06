@@ -9,7 +9,9 @@ import type { KeyboardEvent, FocusEvent } from 'react'
 import type { RovingFocusContextValue } from './RovingFocusContext'
 import type { RovingFocusGroupProps, RovingFocusItemData } from './types'
 
-export const RovingFocusGroup = (props: RovingFocusGroupProps) => {
+export const RovingFocusGroup = <T extends string | number = string>(
+  props: RovingFocusGroupProps<T>,
+) => {
   const {
     children,
     defaultFocusItemId,
@@ -33,14 +35,14 @@ export const RovingFocusGroup = (props: RovingFocusGroupProps) => {
   const collection = useCollection<RovingFocusItemData>()
 
   const onItemFocus = useCallback(
-    (id: string) => {
-      setFocusItemId(id)
+    (id: string | number) => {
+      setFocusItemId(id as T)
     },
     [setFocusItemId],
   )
 
   const onItemBlur = useCallback(() => {
-    setFocusItemId('')
+    setFocusItemId('' as T)
   }, [setFocusItemId])
 
   const handleFocus = (event: FocusEvent<HTMLElement>) => {

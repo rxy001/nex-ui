@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { RadioState } from './types'
 import type { RadioVariants } from '../../theme/recipes'
 
 export interface RadioGroupContextValue<
@@ -9,12 +8,10 @@ export interface RadioGroupContextValue<
 > {
   setValue: (value: T) => void
   isChecked: (value?: T) => boolean
-  isTabbable: (value?: T) => boolean
   name?: string
   disabled?: boolean
   color?: RadioVariants['color']
   size?: RadioVariants['size']
-  setGroupState: (radio: RadioState) => void
   disableAnimation: boolean
 }
 
