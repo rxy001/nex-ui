@@ -10,7 +10,7 @@ export const CollectionItem = <ItemData extends {} = {}>({
   children,
   ...itemData
 }: CollectionItemProps<ItemData>) => {
-  const { register, unregister } = useCollectionContext()
+  const { register, unregister } = useCollectionContext() ?? {}
   const ref = useRef<HTMLElement>(null)
   const itemDataRef = useLatest({
     element: ref,
@@ -20,9 +20,9 @@ export const CollectionItem = <ItemData extends {} = {}>({
   const mergedRefs = useMergeRefs(ref, children?.props?.ref)
 
   useEffect(() => {
-    register(itemDataRef)
+    register?.(itemDataRef)
     return () => {
-      unregister(itemDataRef)
+      unregister?.(itemDataRef)
     }
   }, [itemDataRef, register, unregister])
 

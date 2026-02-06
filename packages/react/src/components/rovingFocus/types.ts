@@ -1,10 +1,10 @@
 import type { ReactElement, Ref } from 'react'
 
-export interface RovingFocusGroupProps {
+export interface RovingFocusGroupProps<T extends string | number = string> {
   children?: ReactElement<{}>
-  focusItemId?: string
-  defaultFocusItemId?: string
-  onFocusItemIdChange?: (id: string) => void
+  focusItemId?: T
+  defaultFocusItemId?: T
+  onFocusItemIdChange?: (id: T) => void
 
   /**
    * The orientation of the group.
@@ -21,7 +21,7 @@ export interface RovingFocusGroupProps {
 }
 
 export interface RovingFocusItemData {
-  id?: string
+  id?: string | number
   focusable?: boolean
   active?: boolean
 }
