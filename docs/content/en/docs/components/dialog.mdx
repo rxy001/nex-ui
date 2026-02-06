@@ -41,12 +41,6 @@ Use the `size` property of DialogContent to set the maximum width of the Dialog.
 
 <Example {...dialog.sizes} />
 
-### FullScreen
-
-Set the `fullScreen` property of DialogContent to `true` to make the Dialog full-screen.
-
-<Example {...dialog.fullScreen} />
-
 ### Placements
 
 Use the `placement` property of DialogContent to set the display position of the Dialog. Defaults to `top`.
@@ -239,12 +233,6 @@ DialogContent inherits the props of `as` (by default, `'div'`).
       type: ["'inside'", "'outside'"],
       description: 'The Dialog scroll behavior.',
       default: "'outside'",
-    },
-    {
-      prop: 'fullScreen',
-      type: 'boolean',
-      description: 'If true, the Dialog is full-screen.',
-      default: 'false',
     },
     {
       prop: 'hideCloseButton',

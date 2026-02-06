@@ -161,9 +161,9 @@ exports[`RadioGroup should render with default props 1`] = `
     >
       <input
         aria-label="Orange"
-        aria-labelledby="radio-«r15»-label"
+        aria-labelledby="radio-_r_15_-label"
         class="nui-radio-input emotion-3"
-        name="«r13»"
+        name="_r_13_"
         tabindex="0"
         type="radio"
         value="orange"
@@ -173,7 +173,7 @@ exports[`RadioGroup should render with default props 1`] = `
       />
       <span
         class="nui-radio-label emotion-5"
-        id="radio-«r15»-label"
+        id="radio-_r_15_-label"
       >
         Orange
       </span>
@@ -188,9 +188,9 @@ exports[`RadioGroup should render with default props 1`] = `
     >
       <input
         aria-label="Pear"
-        aria-labelledby="radio-«r16»-label"
+        aria-labelledby="radio-_r_16_-label"
         class="nui-radio-input emotion-3"
-        name="«r13»"
+        name="_r_13_"
         tabindex="-1"
         type="radio"
         value="pear"
@@ -200,7 +200,7 @@ exports[`RadioGroup should render with default props 1`] = `
       />
       <span
         class="nui-radio-label emotion-5"
-        id="radio-«r16»-label"
+        id="radio-_r_16_-label"
       >
         Pear
       </span>
@@ -215,9 +215,9 @@ exports[`RadioGroup should render with default props 1`] = `
     >
       <input
         aria-label="Apple"
-        aria-labelledby="radio-«r17»-label"
+        aria-labelledby="radio-_r_17_-label"
         class="nui-radio-input emotion-3"
-        name="«r13»"
+        name="_r_13_"
         tabindex="-1"
         type="radio"
         value="apple"
@@ -227,7 +227,7 @@ exports[`RadioGroup should render with default props 1`] = `
       />
       <span
         class="nui-radio-label emotion-5"
-        id="radio-«r17»-label"
+        id="radio-_r_17_-label"
       >
         Apple
       </span>
