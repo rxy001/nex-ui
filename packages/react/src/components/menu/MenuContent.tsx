@@ -1,7 +1,7 @@
 'use client'
 
-import { useMemo, useRef } from 'react'
-import { useEvent, useMergeRefs } from '@nex-ui/hooks'
+import { useCallback, useMemo, useRef } from 'react'
+import { useMergeRefs } from '@nex-ui/hooks'
 import { chain, focus } from '@nex-ui/utils'
 import { PopperContent } from '../popper'
 import { useSlot } from '../utils'
@@ -45,41 +45,36 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
   const pointerDirRef = useRef<Side>('right')
   const lastPointerXRef = useRef(0)
 
-  const handlePointerMove = useEvent((event: PointerEvent<HTMLElement>) => {
-    const target = event.target as HTMLElement
-    const pointerXHasChanged = lastPointerXRef.current !== event.clientX
-
-    // We don't use `event.movementX` for this check because Safari will
-    // always return `0` on a pointer event.
-    if (event.currentTarget.contains(target) && pointerXHasChanged) {
-      const newDir = event.clientX > lastPointerXRef.current ? 'right' : 'left'
-      pointerDirRef.current = newDir
-      lastPointerXRef.current = event.clientX
-    }
-  })
-
-  const handleKeyDown = useEvent((event: KeyboardEvent<HTMLElement>) => {
-    if (event.currentTarget.contains(event.target as HTMLElement)) {
-      if (event.key === 'Tab') event.preventDefault()
-    }
-  })
-
-  const handleFocus = useEvent((event: FocusEvent<HTMLElement>) => {
-    // onItemLeave refocuses on content, blocking RovingFocusGroup's onFocus logic.
-    if (!rootMenuCtx.usingKeyboardRef.current) {
-      event.preventDefault()
-    }
-  })
-
   const [MenuContentRoot, getMenuContentRootProps] = useSlot({
     elementType: PopperContent,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
     additionalProps: {
       ref,
-      onPointerMove: handlePointerMove,
-      onKeyDown: handleKeyDown,
-      onFocus: handleFocus,
+      onPointerMove: (event: PointerEvent<HTMLElement>) => {
+        const target = event.target as HTMLElement
+        const pointerXHasChanged = lastPointerXRef.current !== event.clientX
+
+        // We don't use `event.movementX` for this check because Safari will
+        // always return `0` on a pointer event.
+        if (event.currentTarget.contains(target) && pointerXHasChanged) {
+          const newDir =
+            event.clientX > lastPointerXRef.current ? 'right' : 'left'
+          pointerDirRef.current = newDir
+          lastPointerXRef.current = event.clientX
+        }
+      },
+      onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
+        if (event.currentTarget.contains(event.target as HTMLElement)) {
+          if (event.key === 'Tab') event.preventDefault()
+        }
+      },
+      onFocus: (event: FocusEvent<HTMLElement>) => {
+        // onItemLeave refocuses on content, blocking RovingFocusGroup's onFocus logic.
+        if (!rootMenuCtx.usingKeyboardRef.current) {
+          event.preventDefault()
+        }
+      },
       onPointerDownOutside: (event: PointerDownOutsideEvent) => {
         const target = event.target as HTMLElement
         if (menuCtx.triggerRef.current?.contains(target)) {
@@ -102,7 +97,7 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
     },
   })
 
-  const isPointerMovingToSubMenu = useEvent(
+  const isPointerMovingToSubMenu = useCallback(
     (event: PointerEvent<HTMLElement>) => {
       if (!pointerGraceIntentRef.current) return false
 
@@ -121,6 +116,7 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
 
       return true
     },
+    [],
   )
 
   const ctx = useMemo<MenuContentContextValue>(

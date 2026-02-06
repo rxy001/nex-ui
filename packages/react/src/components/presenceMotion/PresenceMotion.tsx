@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useEvent } from '@nex-ui/hooks'
 import { AnimatePresence, LazyMotion } from 'motion/react'
 import * as m from 'motion/react-m'
 import { motionFeatures } from '../utils/motionFeatures'
@@ -37,10 +36,10 @@ export const PresenceMotion = ({
     setDisplay('block')
   }
 
-  const onAnimationComplete = useEvent((animation: string) => {
+  const onAnimationComplete = (animation: string) => {
     if (animation === 'hidden' && keepMounted) setDisplay('none')
     props.onAnimationComplete?.(animation)
-  })
+  }
 
   return (
     <LazyMotion features={motionFeatures}>

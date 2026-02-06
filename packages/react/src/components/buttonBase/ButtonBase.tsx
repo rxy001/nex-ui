@@ -1,6 +1,6 @@
 'use client'
 
-import { useEvent, useFocusRing } from '@nex-ui/hooks'
+import { useFocusRing } from '@nex-ui/hooks'
 import { useMemo } from 'react'
 import { isFunction } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
@@ -51,7 +51,7 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
 
   const { focusVisible, focusProps } = useFocusRing()
 
-  const handleKeyDown = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (disabled) {
       event.preventDefault()
       event.stopPropagation()
@@ -72,9 +72,9 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     }
 
     onKeyDown?.(event)
-  })
+  }
 
-  const handleKeyUp = useEvent((event: KeyboardEvent<HTMLButtonElement>) => {
+  const handleKeyUp = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (disabled) {
       event.preventDefault()
       event.stopPropagation()
@@ -91,16 +91,16 @@ export const ButtonBase = <RootComponent extends ElementType = 'button'>(
     }
 
     onKeyUp?.(event)
-  })
+  }
 
-  const handleClick = useEvent((event: MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (disabled) {
       event.preventDefault()
       event.stopPropagation()
       return
     }
     onClick?.(event)
-  })
+  }
 
   const ariaProps = useMemo(() => {
     if (isFunction(rootElement)) {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { useControlledState } from '@nex-ui/hooks'
 import { __DEV__ } from '@nex-ui/utils'
 import { useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
@@ -136,7 +136,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     }
   }, [children, as, type, ariaId])
 
-  const handleChange = useEvent((newChecked: boolean) => {
+  const handleChange = (newChecked: boolean) => {
     if (inGroup && value !== undefined) {
       groupCtx.setValue(value)
     }
@@ -144,7 +144,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     if (!inGroup) {
       setRawChecked(newChecked)
     }
-  })
+  }
 
   const [RadioRoot, getRadioRootProps] = useSlot({
     elementType: 'label',

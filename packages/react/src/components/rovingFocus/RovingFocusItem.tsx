@@ -1,7 +1,6 @@
 'use client'
 
 import { cloneElement, useEffect, useId } from 'react'
-import { useEvent } from '@nex-ui/hooks'
 import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
 import { CollectionItem } from '../collection'
 import { useRovingFocusContext } from './RovingFocusContext'
@@ -20,13 +19,13 @@ export const RovingFocusItem = (props: RovingFocusItemProps) => {
   const defaultId = useId()
   const id = idProp ?? defaultId
 
-  const handleFocus = useEvent(() => {
+  const handleFocus = () => {
     ctx.onItemFocus(id)
-  })
+  }
 
-  const handleMouseDown = useEvent((event: MouseEvent) => {
+  const handleMouseDown = (event: MouseEvent) => {
     if (!focusable) event.preventDefault()
-  })
+  }
 
   useEffect(() => {
     if (focusable) {
