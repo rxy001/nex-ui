@@ -2,7 +2,7 @@
 
 import { cloneElement, isValidElement, useId, useMemo } from 'react'
 import { __DEV__, isFunction, isString } from '@nex-ui/utils'
-import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { useControlledState } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { useCheckboxGroupContext } from './CheckboxGroupContext'
@@ -96,7 +96,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     disableAnimation,
   }
 
-  const handleChange = useEvent((newChecked: boolean) => {
+  const handleChange = (newChecked: boolean) => {
     if (inGroup && value !== undefined) {
       groupCtx.toggleValue(value)
     }
@@ -104,7 +104,7 @@ export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
     if (!inGroup) {
       setRawChecked(newChecked)
     }
-  })
+  }
 
   const slotClasses = useSlotClasses({
     name: 'Checkbox',

@@ -1,7 +1,7 @@
 'use client'
 
-import { cloneElement, useMemo, useState } from 'react'
-import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { cloneElement, useCallback, useMemo, useState } from 'react'
+import { useControlledState } from '@nex-ui/hooks'
 import { isValidNonFragmentElement, mergeProps, focus } from '@nex-ui/utils'
 import { RovingFocusProvider } from './RovingFocusContext'
 import { Collection, useCollection } from '../collection'
@@ -32,15 +32,18 @@ export const RovingFocusGroup = (props: RovingFocusGroupProps) => {
 
   const collection = useCollection<RovingFocusItemData>()
 
-  const onItemFocus = useEvent((id: string) => {
-    setFocusItemId(id)
-  })
+  const onItemFocus = useCallback(
+    (id: string) => {
+      setFocusItemId(id)
+    },
+    [setFocusItemId],
+  )
 
-  const onItemBlur = useEvent(() => {
+  const onItemBlur = useCallback(() => {
     setFocusItemId('')
-  })
+  }, [setFocusItemId])
 
-  const handleFocus = useEvent((event: FocusEvent<HTMLElement>) => {
+  const handleFocus = (event: FocusEvent<HTMLElement>) => {
     if (
       event.currentTarget === event.target &&
       !usingShiftTab &&
@@ -61,9 +64,9 @@ export const RovingFocusGroup = (props: RovingFocusGroupProps) => {
 
       focus(focusItem?.element ?? items[0].element)
     }
-  })
+  }
 
-  const handleKeyDown = useEvent((event: KeyboardEvent<HTMLElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Tab' && event.shiftKey) {
       // The focus timing of tabbing backwards is later than React render.
       setUsingShiftTab(true)
@@ -109,19 +112,19 @@ export const RovingFocusGroup = (props: RovingFocusGroupProps) => {
     }
 
     if (nextItemElement) focus(nextItemElement)
-  })
+  }
 
-  const handleBlur = useEvent(() => {
+  const handleBlur = () => {
     setUsingShiftTab(false)
-  })
+  }
 
-  const onFocusableItemMount = useEvent(() => {
+  const onFocusableItemMount = useCallback(() => {
     setFocusableItemsCount((count) => count + 1)
-  })
+  }, [])
 
-  const onFocusableItemUnmount = useEvent(() => {
+  const onFocusableItemUnmount = useCallback(() => {
     setFocusableItemsCount((count) => count - 1)
-  })
+  }, [])
 
   const ctx = useMemo<RovingFocusContextValue>(
     () => ({

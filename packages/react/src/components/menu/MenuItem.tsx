@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useEvent } from '@nex-ui/hooks'
 import { focus } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
@@ -28,22 +27,22 @@ export const MenuItem = <RootElement extends ElementType = 'div'>(
   const { disabled, children, closeOnClick = true, ...remainingProps } = props
   const [focused, setFocused] = useState(false)
 
-  const handleClick = useEvent(() => {
+  const handleClick = () => {
     if (disabled) return
     if (closeOnClick) {
       rootMenuCtx.close()
     }
-  })
+  }
 
-  const handleFocus = useEvent(() => {
+  const handleFocus = () => {
     setFocused(true)
-  })
+  }
 
-  const handleBlur = useEvent(() => {
+  const handleBlur = () => {
     setFocused(false)
-  })
+  }
 
-  const handlePointerMove = useEvent((event: PointerEvent<HTMLDivElement>) => {
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (disabled) {
       menuContentCtx.onItemLeave(event)
       event.preventDefault()
@@ -51,19 +50,19 @@ export const MenuItem = <RootElement extends ElementType = 'div'>(
     }
     menuContentCtx.onItemEnter(event)
     focus(event.currentTarget)
-  })
+  }
 
-  const handlePointerLeave = useEvent((event: PointerEvent<HTMLDivElement>) => {
+  const handlePointerLeave = (event: PointerEvent<HTMLDivElement>) => {
     menuContentCtx.onItemLeave(event)
-  })
+  }
 
-  const handleKeyDown = useEvent((event: KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (disabled) return
     if (event.key === 'Enter' || event.key === ' ') {
       event.currentTarget.click()
       event.preventDefault()
     }
-  })
+  }
 
   const [MenuItemRoot, getMenuItemRootProps] = useSlot({
     style,

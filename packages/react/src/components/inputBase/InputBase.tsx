@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useEvent, useFocusRing } from '@nex-ui/hooks'
+import { useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
@@ -109,7 +109,7 @@ export const InputBase = (props: InputBaseProps) => {
     input: as === 'input',
   })
 
-  const toggleCheckableState = useEvent((element: HTMLInputElement) => {
+  const toggleCheckableState = (element: HTMLInputElement) => {
     const role = element.getAttribute('role')
     const ariaChecked = element.getAttribute('aria-checked')
     const newChecked = role === 'radio' ? true : !(ariaChecked === 'true')
@@ -119,9 +119,9 @@ export const InputBase = (props: InputBaseProps) => {
     if (!controlled) {
       setInternalChecked(newChecked)
     }
-  })
+  }
 
-  const handleClick = useEvent((event: MouseEvent<HTMLInputElement>) => {
+  const handleClick = (event: MouseEvent<HTMLInputElement>) => {
     if (disabled) {
       event.preventDefault()
       event.stopPropagation()
@@ -138,9 +138,9 @@ export const InputBase = (props: InputBaseProps) => {
     }
 
     onClick?.(event)
-  })
+  }
 
-  const handleKeyUp = useEvent((event: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
     if (disabled) {
       event.preventDefault()
       event.stopPropagation()
@@ -160,9 +160,9 @@ export const InputBase = (props: InputBaseProps) => {
     }
 
     onKeyUp?.(event)
-  })
+  }
 
-  const handleChange = useEvent((event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
       event.preventDefault()
       event.stopPropagation()
@@ -177,7 +177,7 @@ export const InputBase = (props: InputBaseProps) => {
     }
 
     onChange?.(event)
-  })
+  }
 
   const ariaProps = useMemo(() => {
     if (isFunction(as)) {

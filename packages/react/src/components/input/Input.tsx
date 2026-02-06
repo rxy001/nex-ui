@@ -2,7 +2,7 @@
 
 import { useId, useMemo, useRef } from 'react'
 import { isString } from '@nex-ui/utils'
-import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { useControlledState } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
@@ -142,22 +142,22 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     }
   }, [ariaId, label])
 
-  const handleClearValue = useEvent(() => {
+  const handleClearValue = () => {
     setValue('')
     onClear?.()
     inputRef.current?.focus()
-  })
+  }
 
-  const handleChange = useEvent((e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
-  })
+  }
 
-  const handleFocusInput = useEvent((e: MouseEvent<HTMLDivElement>) => {
+  const handleFocusInput = (e: MouseEvent<HTMLDivElement>) => {
     if (inputRef.current && e.target === e.currentTarget) {
       inputRef.current.focus()
       e.preventDefault()
     }
-  })
+  }
 
   const [InputRoot, getInputRootProps] = useSlot({
     elementType: 'div',
