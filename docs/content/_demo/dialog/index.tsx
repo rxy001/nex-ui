@@ -2,8 +2,6 @@ import usageCode from './Usage.demo?raw'
 import UsageDemo from './Usage.demo'
 import sizesCode from './Sizes.demo?raw'
 import SizesDemo from './Sizes.demo'
-import fullScreenCode from './FullScreen.demo?raw'
-import FullScreenDemo from './FullScreen.demo'
 import placementsCode from './Placements.demo?raw'
 import PlacementsDemo from './Placements.demo'
 import hideBackdropCode from './HideBackdrop.demo?raw'
@@ -29,10 +27,6 @@ export const dialog = {
   sizes: {
     code: sizesCode,
     demo: <SizesDemo />,
-  },
-  fullScreen: {
-    code: fullScreenCode,
-    demo: <FullScreenDemo />,
   },
   placements: {
     code: placementsCode,

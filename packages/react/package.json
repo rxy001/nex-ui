@@ -40,9 +40,13 @@
   "peerDependencies": {
     "@emotion/react": ">=11",
     "motion": "^12.7.2",
-    "react": ">=19",
-    "react-dom": ">=19"
+    "react": "^19.0",
+    "react-dom": "^19.0"
   },
   "sideEffects": false,
-  "clean-package": "../../clean-package.config.json"
+  "clean-package": "../../clean-package.config.json",
+  "devDependencies": {
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  }
 }

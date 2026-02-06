@@ -39,12 +39,14 @@
     "@nex-ui/utils": "workspace:*"
   },
   "peerDependencies": {
-    "@emotion/react": ">=11",
-    "react": ">=19",
-    "react-dom": ">=19"
+    "@emotion/react": "^11.14",
+    "react": "^19.0",
+    "react-dom": "^19.0"
   },
   "devDependencies": {
-    "@emotion/cache": "11.13.1"
+    "@emotion/cache": "11.13.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "clean-package": "../../clean-package.config.json"
 }

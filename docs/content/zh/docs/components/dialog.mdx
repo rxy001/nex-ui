@@ -41,12 +41,6 @@ DialogContent 的 `size` 属性可以设置 Dialog 的大小，默认为 `md`。
 
 <Example {...dialog.sizes} />
 
-### FullScreen
-
-设置 DialogContent 的 `fullScreen` 属性为 `true` 可以使 Dialog 全屏显示。
-
-<Example {...dialog.fullScreen} />
-
 ### Placements
 
 DialogContent 的 `placement` 属性可以设置 Dialog 的显示位置，默认为 `top`。
@@ -224,12 +218,6 @@ DialogContent 继承 `as` (默认为 `'div'`) 的 Props。
       type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
       description: 'Dialog 的尺寸。',
       default: "'md'",
-    },
-    {
-      prop: 'fullScreen',
-      type: 'boolean',
-      description: '是否使 Dialog 全屏显示。',
-      default: 'false',
     },
     {
       prop: 'hideCloseButton',

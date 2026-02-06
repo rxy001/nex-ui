@@ -30,12 +30,14 @@
   "type": "module",
   "main": "src/index.ts",
   "peerDependencies": {
-    "react": ">=19",
-    "react-dom": ">=19"
+    "react": "^19.0",
+    "react-dom": "^19.0"
   },
   "sideEffects": false,
   "devDependencies": {
-    "@nex-ui/system": "workspace:*"
+    "@nex-ui/system": "workspace:*",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "dependencies": {
     "@nex-ui/styled": "workspace:*",
