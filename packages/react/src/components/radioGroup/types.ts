@@ -213,5 +213,3 @@ export type RadioGroupProps<
   RadioGroupOwnProps<T, RootComponent>,
   RadioGroupPropsOverrides
 >
-
-export type RadioState = { value?: string | number; disabled?: boolean }

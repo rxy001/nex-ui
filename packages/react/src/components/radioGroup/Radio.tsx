@@ -2,12 +2,13 @@
 
 import { useControlledState } from '@nex-ui/hooks'
 import { __DEV__ } from '@nex-ui/utils'
-import { useId, useMemo, useRef } from 'react'
+import { useId, useMemo } from 'react'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { useRadioGroupContext } from './RadioGroupContext'
 import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { radioRecipe } from '../../theme/recipes'
+import { RovingFocusItem } from '../rovingFocus'
 import type { ElementType } from 'react'
 import type { RadioOwnerState, RadioProps } from './types'
 
@@ -37,7 +38,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     slotProps,
     disableAnimation = groupCtx?.disableAnimation ?? false,
     checked: checkedProp,
-    tabIndex: tabIndexProp = 0,
     as = 'input',
     type = 'radio',
     disabled = groupCtx?.disabled ?? false,
@@ -76,23 +76,8 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
 
   const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
 
-  // Use ref to avoid repeated adding in strict mode.
-  const radioStateRef = useRef({
-    value,
-    disabled,
-  })
-
-  if (inGroup) {
-    radioStateRef.current.value = value
-    radioStateRef.current.disabled = disabled
-    groupCtx.setGroupState(radioStateRef.current)
-  }
-
-  const tabIndex = (groupCtx?.isTabbable(value) ?? true) ? tabIndexProp : -1
-
   const ownerState: RadioOwnerState = {
     ...props,
-    tabIndex,
     as,
     inGroup,
     disabled,
@@ -172,7 +157,6 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     ariaProps: slotAriaProps.input,
     shouldForwardComponent: false,
     additionalProps: {
-      tabIndex,
       as,
       disabled,
       type,
@@ -180,6 +164,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
       checked,
       value,
       onCheckedChange: handleChange,
+      onFocus: () => handleChange(true),
     },
   })
 
@@ -200,7 +185,13 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
 
   return (
     <RadioRoot {...getRadioRootProps()}>
-      <RadioInput {...getRadioInputProps()} />
+      <RovingFocusItem
+        focusable={!disabled}
+        id={value}
+        active={inGroup ? checked : true}
+      >
+        <RadioInput {...getRadioInputProps()} />
+      </RovingFocusItem>
       <RadioDot {...getRadioDotProps()} />
       {children && (
         <RadioLabel {...getRadioLabelProps()}>{children}</RadioLabel>

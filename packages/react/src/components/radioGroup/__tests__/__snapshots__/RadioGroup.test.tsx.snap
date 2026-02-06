@@ -150,6 +150,7 @@ exports[`RadioGroup should render with default props 1`] = `
 >
   <div
     class="nui-radio-group-wrapper emotion-1"
+    tabindex="0"
   >
     <label
       class="nui-radio-root emotion-2"
@@ -161,10 +162,10 @@ exports[`RadioGroup should render with default props 1`] = `
     >
       <input
         aria-label="Orange"
-        aria-labelledby="radio-_r_15_-label"
+        aria-labelledby="radio-_r_1q_-label"
         class="nui-radio-input emotion-3"
-        name="_r_13_"
-        tabindex="0"
+        name="_r_1o_"
+        tabindex="-1"
         type="radio"
         value="orange"
       />
@@ -173,7 +174,7 @@ exports[`RadioGroup should render with default props 1`] = `
       />
       <span
         class="nui-radio-label emotion-5"
-        id="radio-_r_15_-label"
+        id="radio-_r_1q_-label"
       >
         Orange
       </span>
@@ -188,9 +189,9 @@ exports[`RadioGroup should render with default props 1`] = `
     >
       <input
         aria-label="Pear"
-        aria-labelledby="radio-_r_16_-label"
+        aria-labelledby="radio-_r_1s_-label"
         class="nui-radio-input emotion-3"
-        name="_r_13_"
+        name="_r_1o_"
         tabindex="-1"
         type="radio"
         value="pear"
@@ -200,7 +201,7 @@ exports[`RadioGroup should render with default props 1`] = `
       />
       <span
         class="nui-radio-label emotion-5"
-        id="radio-_r_16_-label"
+        id="radio-_r_1s_-label"
       >
         Pear
       </span>
@@ -215,9 +216,9 @@ exports[`RadioGroup should render with default props 1`] = `
     >
       <input
         aria-label="Apple"
-        aria-labelledby="radio-_r_17_-label"
+        aria-labelledby="radio-_r_1u_-label"
         class="nui-radio-input emotion-3"
-        name="_r_13_"
+        name="_r_1o_"
         tabindex="-1"
         type="radio"
         value="apple"
@@ -227,7 +228,7 @@ exports[`RadioGroup should render with default props 1`] = `
       />
       <span
         class="nui-radio-label emotion-5"
-        id="radio-_r_17_-label"
+        id="radio-_r_1u_-label"
       >
         Apple
       </span>

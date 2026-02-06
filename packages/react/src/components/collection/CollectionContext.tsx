@@ -14,12 +14,11 @@ export interface CollectionContextValue<ItemData extends {} = {}> {
   unregister: (item: Item<ItemData>) => void
 }
 
-export const [CollectionProvider, useCollectionContext] = createContext<
-  CollectionContextValue<any>
->({
-  contextName: 'CollectionContext',
-  hookName: 'useCollectionContext',
-  providerName: 'CollectionProvider',
-  strict: true,
-  defaultValue: null as unknown as CollectionContextValue,
-})
+export const [CollectionProvider, useCollectionContext] =
+  createContext<CollectionContextValue<any> | null>({
+    contextName: 'CollectionContext',
+    hookName: 'useCollectionContext',
+    providerName: 'CollectionProvider',
+    strict: false,
+    defaultValue: null,
+  })
