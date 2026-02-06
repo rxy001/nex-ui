@@ -134,7 +134,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
 >
   <input
     aria-label="Checkbox"
-    aria-labelledby="checkbox-«r19»-label"
+    aria-labelledby="checkbox-_r_19_-label"
     class="nui-checkbox-input emotion-1"
     tabindex="0"
     type="checkbox"
@@ -144,7 +144,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
   />
   <span
     class="nui-checkbox-label emotion-3"
-    id="checkbox-«r19»-label"
+    id="checkbox-_r_19_-label"
   >
     Checkbox
   </span>
@@ -285,7 +285,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
 >
   <input
     aria-label="Checkbox"
-    aria-labelledby="checkbox-«r19»-label"
+    aria-labelledby="checkbox-_r_19_-label"
     class="nui-checkbox-input emotion-1"
     tabindex="0"
     type="checkbox"
@@ -312,7 +312,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
   </span>
   <span
     class="nui-checkbox-label emotion-3"
-    id="checkbox-«r19»-label"
+    id="checkbox-_r_19_-label"
   >
     Checkbox
   </span>
@@ -453,7 +453,7 @@ exports[`Checkbox should render with default props 1`] = `
 >
   <input
     aria-label="Checkbox"
-    aria-labelledby="checkbox-«ro»-label"
+    aria-labelledby="checkbox-_r_o_-label"
     class="nui-checkbox-input emotion-1"
     tabindex="0"
     type="checkbox"
@@ -483,7 +483,7 @@ exports[`Checkbox should render with default props 1`] = `
   </span>
   <span
     class="nui-checkbox-label emotion-3"
-    id="checkbox-«ro»-label"
+    id="checkbox-_r_o_-label"
   >
     Checkbox
   </span>

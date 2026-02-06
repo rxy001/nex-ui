@@ -45,7 +45,7 @@ exports[`Popover should have the correct root class name 1`] = `
     data-color="default"
     data-radius="md"
     data-testid="popover-content"
-    id="popover-«r8»-root"
+    id="popover-_r_8_-root"
     role="dialog"
     tabindex="-1"
   >
