@@ -9,7 +9,7 @@ import {
   focus,
 } from '@nex-ui/utils'
 import { cloneElement, useEffect, useRef } from 'react'
-import { useEvent, useLatest } from '@nex-ui/hooks'
+import { useLatest } from '@nex-ui/hooks'
 import { getTabbable } from './getTabbable'
 import { FocusTrapScope, FocusTrapManager } from './focusTrapManager'
 import type { KeyboardEvent } from 'react'
@@ -139,7 +139,7 @@ export const FocusTrap = ({
     }
   }, [active, autoFocusRef, restoreFocusRef])
 
-  const handleKeydown = useEvent((event: KeyboardEvent) => {
+  const handleKeydown = (event: KeyboardEvent) => {
     if (!active || focusTrapScopeRef.current.paused || pausedRef.current) return
 
     const tabKey =
@@ -167,7 +167,7 @@ export const FocusTrap = ({
         }
       }
     }
-  })
+  }
 
   if (!isValidNonFragmentElement(children)) {
     return children

@@ -1,7 +1,6 @@
 'use client'
 
 import * as m from 'motion/react-m'
-import { useEvent } from '@nex-ui/hooks'
 import { LazyMotion } from 'motion/react'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { useId, useMemo, useRef } from 'react'
@@ -203,10 +202,6 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     classNames: slotClasses.heading,
   })
 
-  const handleClick = useEvent(() => {
-    toggleExpandedKey(itemKey)
-  })
-
   const [AccordionItemTrigger, getAccordionItemTriggerProps] = useSlot({
     elementType: ButtonBase,
     externalSlotProps: slotProps?.trigger,
@@ -216,7 +211,9 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     shouldForwardComponent: false,
     additionalProps: {
       disabled,
-      onClick: handleClick,
+      onClick: () => {
+        toggleExpandedKey(itemKey)
+      },
     },
   })
 

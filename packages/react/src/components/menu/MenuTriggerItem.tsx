@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useEvent } from '@nex-ui/hooks'
 import { MenuItem } from './MenuItem'
 import { useSlot } from '../utils'
 import {
@@ -31,13 +30,13 @@ export const MenuTriggerItem = <RootComponent extends ElementType = 'div'>(
   const subMenuCtx = useSubMenuContext()
   const menuContentCtx = useMenuContentContext()
 
-  const handleOpen = useEvent(() => {
+  const handleOpen = () => {
     if (!menuCtx.open && !disabled) {
       menuCtx.setOpen(true)
     }
-  })
+  }
 
-  const handlePointerLeave = useEvent(() => {
+  const handlePointerLeave = () => {
     if (!subMenuCtx.menuRootRef.current) return
 
     const rect = subMenuCtx.menuRootRef.current.getBoundingClientRect()
@@ -57,9 +56,9 @@ export const MenuTriggerItem = <RootComponent extends ElementType = 'div'>(
       area,
       side,
     })
-  })
+  }
 
-  const handleKeyDown = useEvent((event: KeyboardEvent<HTMLElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     // if (!subMenuCtx.menuRootRef.current) return
 
     // const { placement } = subMenuCtx.menuRootRef.current.dataset
@@ -70,7 +69,7 @@ export const MenuTriggerItem = <RootComponent extends ElementType = 'div'>(
       handleOpen()
       event.preventDefault()
     }
-  })
+  }
 
   useEffect(() => {
     return () => {

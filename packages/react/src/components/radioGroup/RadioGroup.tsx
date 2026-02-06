@@ -1,7 +1,7 @@
 'use client'
 
 import { useId, useMemo, useRef } from 'react'
-import { useControlledState, useEvent } from '@nex-ui/hooks'
+import { useControlledState } from '@nex-ui/hooks'
 import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
 import { radioGroupRecipe } from '../../theme/recipes'
 import { RadioGroupProvider } from './RadioGroupContext'
@@ -91,7 +91,7 @@ export const RadioGroup = <
     }
   }, [ariaId, label])
 
-  const handleKeyDown = useEvent((e: KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
       case 'ArrowUp':
       case 'ArrowLeft':
@@ -101,9 +101,9 @@ export const RadioGroup = <
         e.preventDefault()
         break
     }
-  })
+  }
 
-  const handleKeyUp = useEvent((e: KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyUp = (e: KeyboardEvent<HTMLDivElement>) => {
     let nextDirection: 'next' | 'prev' | null = null
     switch (e.key) {
       case 'ArrowUp':
@@ -160,7 +160,7 @@ export const RadioGroup = <
       nextElement.focus()
       setValue(value)
     }
-  })
+  }
 
   const [RadioGroupRoot, getRadioGroupRootProps] = useSlot({
     elementType: 'div',

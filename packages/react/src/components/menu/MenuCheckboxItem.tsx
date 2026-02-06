@@ -1,7 +1,6 @@
 'use client'
 
 import { useId, useMemo } from 'react'
-import { useEvent } from '@nex-ui/hooks'
 import { __DEV__ } from '@nex-ui/utils'
 import {
   useMenuCheckboxItemGroupContext,
@@ -41,7 +40,7 @@ export const MenuCheckboxItem = <
 
   const checked = checkboxGroupCtx.value.includes(value)
 
-  const handleClick = useEvent(() => {
+  const handleClick = () => {
     if (disabled) {
       return
     }
@@ -50,7 +49,7 @@ export const MenuCheckboxItem = <
         ? checkboxGroupCtx.value.filter((val) => val !== value)
         : [...checkboxGroupCtx.value, value],
     )
-  })
+  }
 
   const [MenuCheckboxItemRoot, getMenuCheckboxItemProps] = useSlot({
     elementType: MenuItem,
