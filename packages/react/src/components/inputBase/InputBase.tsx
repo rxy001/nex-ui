@@ -37,6 +37,8 @@ const isCheckableControl = (element: HTMLInputElement) => {
   if (tagName === 'INPUT' && type) {
     return ['radio', 'checkbox'].includes(type)
   }
+
+  return false
 }
 
 /**
@@ -197,6 +199,10 @@ export const InputBase = (props: InputBaseProps) => {
         'aria-checked': currentChecked,
         'aria-required': props.required,
         'aria-readonly': props.readOnly,
+        // @ts-ignore
+        'data-checked': currentChecked,
+        // @ts-ignore
+        'aria-disabled': disabled || undefined,
       }
     }
 

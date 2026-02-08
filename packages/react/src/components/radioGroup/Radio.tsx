@@ -1,15 +1,15 @@
 'use client'
 
 import { useControlledState } from '@nex-ui/hooks'
-import { __DEV__ } from '@nex-ui/utils'
-import { useId, useMemo } from 'react'
+import { __DEV__, addEventListener } from '@nex-ui/utils'
+import { useId, useEffect, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { useRadioGroupContext } from './RadioGroupContext'
 import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
 import { radioRecipe } from '../../theme/recipes'
 import { RovingFocusItem } from '../rovingFocus'
-import type { ElementType } from 'react'
+import type { ElementType, FocusEvent } from 'react'
 import type { RadioOwnerState, RadioProps } from './types'
 
 const slots = ['root', 'input', 'dot', 'label']
@@ -73,6 +73,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     defaultChecked,
     onCheckedChange,
   )
+  const arrowKeyPressedRef = useRef(false)
 
   const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
 
@@ -164,7 +165,16 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
       checked,
       value,
       onCheckedChange: handleChange,
-      onFocus: () => handleChange(true),
+      onFocus: (event: FocusEvent<HTMLInputElement>) => {
+        /**
+         * Our `RovingFocusGroup` will focus the radio when navigating with arrow keys
+         * and we need to "check" it in that case. We click it to "check" it (instead
+         * of updating `context.value`) so that the radio change event fires.
+         */
+        if (arrowKeyPressedRef.current) {
+          event.currentTarget.click()
+        }
+      },
     },
   })
 
@@ -182,6 +192,37 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     style: styles.dot,
     classNames: slotClasses.dot,
   })
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)
+      ) {
+        arrowKeyPressedRef.current = true
+      }
+    }
+    const handleKeyUp = () => (arrowKeyPressedRef.current = false)
+    const removeKeyDownListener = addEventListener(
+      document,
+      'keydown',
+      handleKeyDown,
+      {
+        capture: true,
+      },
+    )
+    const removeKeyUpListener = addEventListener(
+      document,
+      'keyup',
+      handleKeyUp,
+      {
+        capture: true,
+      },
+    )
+    return () => {
+      removeKeyDownListener()
+      removeKeyUpListener()
+    }
+  }, [])
 
   return (
     <RadioRoot {...getRadioRootProps()}>
