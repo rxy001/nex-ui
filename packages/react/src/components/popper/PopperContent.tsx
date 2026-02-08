@@ -118,14 +118,14 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
     setStyleVariables(newStyleVars)
   }, [referenceRef, popperRootRef, placement, offset, flip, shift])
 
-  const resetPosition = () => {
+  const resetPosition = useEvent(() => {
     if (!referenceRef.current || !popperRootRef.current) {
       setStyleVariables(DEFAULT_VARS)
       return
     }
 
     setPosition()
-  }
+  })
 
   const observeElementResizeChanges = useEvent(() => {
     if (!referenceRef.current || !popperRootRef.current) return
