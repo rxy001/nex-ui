@@ -1,12 +1,17 @@
 import { UserOutlined } from '@nex-ui/icons'
+import { upperFirst } from '@nex-ui/utils'
 import {
   RADII as DEFAULT_RADII,
   SIZES as DEFAULT_SIZES,
   COLORS,
+  toReadableRadius,
+  toReadableSize,
+  WithLabel,
 } from '~/sb/utils'
 import { Avatar } from '../Avatar'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { AvatarProps } from '../types'
 
 const RADII = [...DEFAULT_RADII, 'xl'] as const
 
@@ -42,14 +47,14 @@ export const Default: Story = {}
 
 export const LetterAvatar: Story = {
   args: {
-    children: 'XY',
+    children: 'X',
   },
 }
 
 export const ImageAvatar: Story = {
   args: {
     src: 'https://avatars.githubusercontent.com/u/25546323?v=4',
-    alt: 'XY',
+    alt: 'X',
   },
 }
 
@@ -59,60 +64,97 @@ export const IconAvatar: Story = {
   },
 }
 
-export const Fallbacks: Story = {
-  args: {
-    src: 'https://xxx.com',
-    alt: 'XY',
-  },
-  render: (args) => (
+export function Fallbacks(props: AvatarProps) {
+  return (
     <Flex gap='5'>
-      <Avatar {...args}>
+      <Avatar {...props} src='https://xxx.com' alt='X'>
         <UserOutlined />
       </Avatar>
-      <Avatar {...args} />
+      <Avatar {...props} src='https://xxx.com' alt='X' />
     </Flex>
-  ),
+  )
 }
 
-export const Sizes: Story = {
-  render: (props) => (
-    <Flex gap='5' align='center'>
+export function Sizes(props: AvatarProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {SIZES.map((size) => (
-        <Avatar {...props} key={size} size={size}>
-          {size.toUpperCase()}
-        </Avatar>
+        <WithLabel key={size} label={`${toReadableSize(size)}Size`}>
+          <Avatar {...props} size={size}>
+            X
+          </Avatar>
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Radii: Story = {
-  render: (props) => (
-    <Flex gap='5'>
+export function Radii(props: AvatarProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {RADII.map((radius) => (
-        <Avatar {...props} key={radius} radius={radius}>
-          {radius}
-        </Avatar>
+        <WithLabel key={radius} label={`${toReadableRadius(radius)}Radius`}>
+          <Avatar {...props} radius={radius}>
+            X
+          </Avatar>
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Colors: Story = {
-  render: (props) => (
-    <Flex gap='5'>
+export function Colors(props: AvatarProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {COLORS.map((color) => (
-        <Avatar {...props} key={color} color={color}>
-          {color.at(0)?.toUpperCase()}
-        </Avatar>
+        <WithLabel key={color} label={`${upperFirst(color)}Color`}>
+          <Avatar {...props} color={color}>
+            X
+          </Avatar>
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
 export const Outlined: Story = {
   args: {
     outlined: true,
-    children: 'XY',
+    children: 'X',
+  },
+}
+
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      <Flex gap='5' wrap='wrap'>
+        <WithLabel label='LetterAvatar'>
+          <Avatar {...LetterAvatar.args} />
+        </WithLabel>
+        <WithLabel label='ImageAvatar'>
+          <Avatar {...ImageAvatar.args} />
+        </WithLabel>
+        <WithLabel label='IconAvatar'>
+          <Avatar {...IconAvatar.args} />
+        </WithLabel>
+        <WithLabel label='Outlined'>
+          <Avatar {...Outlined.args} />
+        </WithLabel>
+        <WithLabel label='Fallbacks'>
+          <Fallbacks />
+        </WithLabel>
+      </Flex>
+      <Sizes />
+      <Radii />
+      <Colors />
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
   },
 }

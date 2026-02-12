@@ -34,7 +34,7 @@ const TooltipImpl = (props: TooltipProps) => {
     onFocusOutside,
     onInteractOutside,
     onPointerDownOutside,
-    interactive = true,
+    interactive = false,
     disableAnimation = false,
     maxWidth = 360,
     color = 'default',

@@ -10,7 +10,7 @@ const meta = {
   argTypes: {},
   args: {
     children: (
-      <Flex gap='4'>
+      <Flex gap='5'>
         <button>Button 1</button>
         <button>Button 2</button>
         <button>Button 3</button>

@@ -1,4 +1,10 @@
-import { SIZES, COLORS as DEFAULT_COLORS } from '~/sb/utils'
+import { upperFirst } from '@nex-ui/utils'
+import {
+  SIZES,
+  COLORS as DEFAULT_COLORS,
+  WithLabel,
+  toReadableSize,
+} from '~/sb/utils'
 import { Breadcrumb } from '../Breadcrumb'
 import { BreadcrumbItem } from '../BreadcrumbItem'
 import { Flex } from '../../flex'
@@ -7,7 +13,7 @@ import type { BreadcrumbProps } from '../types'
 
 const COLORS = [...DEFAULT_COLORS, 'default'] as const
 
-function Template(props: BreadcrumbProps) {
+function BreadcrumbTemplate(props: BreadcrumbProps) {
   return (
     <Breadcrumb {...props}>
       <BreadcrumbItem href='#'>Home</BreadcrumbItem>
@@ -20,7 +26,7 @@ function Template(props: BreadcrumbProps) {
 
 const meta = {
   title: 'Components/Breadcrumb',
-  component: Breadcrumb<'nav'>,
+  component: BreadcrumbTemplate,
   argTypes: {
     size: {
       control: 'select',
@@ -34,10 +40,7 @@ const meta = {
       control: 'number',
     },
   },
-  render: (props) => {
-    return <Template {...props} />
-  },
-} satisfies Meta<typeof Breadcrumb<'nav'>>
+} satisfies Meta<typeof BreadcrumbTemplate>
 
 export default meta
 
@@ -45,34 +48,38 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const Sizes: Story = {
-  render: (props) => (
-    <Flex direction='column' gap='4'>
+export function Sizes(props: BreadcrumbProps) {
+  return (
+    <Flex direction='column' gap='5'>
       {SIZES.map((size) => (
-        <Template key={size} {...props} size={size} />
+        <WithLabel key={size} label={`${toReadableSize(size)}Size`}>
+          <BreadcrumbTemplate {...props} size={size} />
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Colors: Story = {
-  render: (props) => (
-    <Flex direction='column' gap='4'>
+export function Colors(props: BreadcrumbProps) {
+  return (
+    <Flex direction='column' gap='5'>
       {COLORS.map((color) => (
-        <Template key={color} {...props} color={color} />
+        <WithLabel key={color} label={`${upperFirst(color)}Color`}>
+          <BreadcrumbTemplate {...props} color={color} />
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const WithIcons: Story = {
-  render: (props) => (
+export function WithIcons(props: BreadcrumbProps) {
+  return (
     <Breadcrumb {...props}>
       <BreadcrumbItem href='#'>🏠 Home</BreadcrumbItem>
       <BreadcrumbItem href='#'>📁 Components</BreadcrumbItem>
       <BreadcrumbItem href='#'>📦 Breadcrumb</BreadcrumbItem>
     </Breadcrumb>
-  ),
+  )
 }
 
 export const Collapsed: Story = {
@@ -92,5 +99,34 @@ export const CustomSeparator: Story = {
 export const CustomSeparatorGap: Story = {
   args: {
     separatorGap: 15,
+  },
+}
+
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      <WithLabel label='Collapsed'>
+        <BreadcrumbTemplate {...Collapsed.args} />
+      </WithLabel>
+      <WithLabel label='CustomSeparator'>
+        <BreadcrumbTemplate {...CustomSeparator.args} />
+      </WithLabel>
+      <WithLabel label='CustomSeparatorGap'>
+        <BreadcrumbTemplate {...CustomSeparatorGap.args} />
+      </WithLabel>
+      <WithLabel label='WithIcons'>
+        <WithIcons />
+      </WithLabel>
+      <Sizes />
+      <Colors />
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
   },
 }

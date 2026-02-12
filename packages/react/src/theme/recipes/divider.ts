@@ -17,6 +17,7 @@ export const dividerRecipe = defineRecipe({
       horizontal: {
         height: 'px',
         my: '6',
+        width: '100%',
       },
     },
   },

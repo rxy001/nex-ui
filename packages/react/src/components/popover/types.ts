@@ -39,6 +39,8 @@ type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
 
     /**
      * If true, disables the animation for the Popover.
+     *
+     * @default false
      */
     disableAnimation?: boolean
   } & Pick<
