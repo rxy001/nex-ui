@@ -1,14 +1,20 @@
 import { useState } from 'react'
-import { COLORS, SIZES } from '~/sb/utils'
+import { upperFirst } from '@nex-ui/utils'
+import {
+  COLORS,
+  SIZES,
+  toReadableSize,
+  WithLabel as WithLabelUtil,
+} from '~/sb/utils'
 import { Radio } from '../Radio'
 import { RadioGroup } from '../RadioGroup'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { RadioGroupProps } from '../types'
 
-function RadioGroupTemplate(props: RadioGroupProps<string, 'div'>) {
+function RadioGroupTemplate(props: RadioGroupProps) {
   return (
-    <RadioGroup defaultValue='apple' {...props}>
+    <RadioGroup {...props}>
       <Radio value='apple'>Apple</Radio>
       <Radio value='banana'>Banana</Radio>
       <Radio value='cherry'>Cherry</Radio>
@@ -18,7 +24,7 @@ function RadioGroupTemplate(props: RadioGroupProps<string, 'div'>) {
 
 const meta = {
   title: 'Components/RadioGroup',
-  component: RadioGroup<string, 'div'>,
+  component: RadioGroupTemplate,
   argTypes: {
     size: {
       control: 'select',
@@ -39,13 +45,7 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    children: 'Radio',
-  },
-  render: (props) => {
-    return <RadioGroupTemplate {...props} />
-  },
-} satisfies Meta<typeof RadioGroup<string, 'div'>>
+} satisfies Meta<typeof RadioGroupTemplate>
 
 export default meta
 
@@ -53,24 +53,28 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const Colors: Story = {
-  render: (props) => (
+export function Colors(props: RadioGroupProps) {
+  return (
     <Flex gap='5' wrap='wrap'>
       {COLORS.map((color) => (
-        <RadioGroupTemplate {...props} key={color} color={color} />
+        <WithLabelUtil key={color} label={`${upperFirst(color)}Color`}>
+          <RadioGroupTemplate {...props} defaultValue='apple' color={color} />
+        </WithLabelUtil>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Sizes: Story = {
-  render: (props) => (
-    <Flex gap='5' wrap='wrap' align='center'>
+export function Sizes(props: RadioGroupProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {SIZES.map((size) => (
-        <RadioGroupTemplate {...props} key={size} size={size} />
+        <WithLabelUtil key={size} label={`${toReadableSize(size)}Size`}>
+          <RadioGroupTemplate {...props} size={size} />
+        </WithLabelUtil>
       ))}
     </Flex>
-  ),
+  )
 }
 
 export const WithLabel: Story = {
@@ -97,17 +101,44 @@ export const DefaultValue: Story = {
   },
 }
 
-function ControlledTemplate() {
-  const [value, setValue] = useState('apple')
+export function Controlled(props: RadioGroupProps) {
+  const [value, setValue] = useState<string | number>('apple')
 
   return (
     <>
-      <RadioGroupTemplate value={value} onValueChange={setValue} />
+      <RadioGroupTemplate value={value} onValueChange={setValue} {...props} />
       <p>Selected value: {value}</p>
     </>
   )
 }
 
-export const Controlled: Story = {
-  render: ControlledTemplate,
+export const Chromatic: Story = {
+  render: () => {
+    return (
+      <>
+        <WithLabelUtil label='WithLabel'>
+          <RadioGroupTemplate {...WithLabel.args} />
+        </WithLabelUtil>
+        <WithLabelUtil label='Disabled'>
+          <RadioGroupTemplate {...Disabled.args} />
+        </WithLabelUtil>
+        <WithLabelUtil label='Vertical'>
+          <RadioGroupTemplate {...Vertical.args} />
+        </WithLabelUtil>
+        <WithLabelUtil label='DefaultValue'>
+          <RadioGroupTemplate {...DefaultValue.args} />
+        </WithLabelUtil>
+        <Colors />
+        <Sizes />
+      </>
+    )
+  },
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
+  },
 }

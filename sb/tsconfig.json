@@ -4,6 +4,7 @@
     ".storybook/*.ts",
     ".storybook/*.tsx",
     "./vite.config.ts",
-    "./utils/*.ts"
+    "./utils/*.ts",
+    "./utils/*.tsx"
   ]
 }

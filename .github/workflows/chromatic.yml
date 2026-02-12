@@ -1,4 +1,4 @@
-name: Visual Tests
+name: Chromatic
 
 on:
   pull_request:
@@ -33,4 +33,4 @@ jobs:
           workingDir: sb
           storybookBuildDir: './dist'
           configFile: './chromatic.config.json'
-          onlyChanged: true
+          exitOnceUploaded: true

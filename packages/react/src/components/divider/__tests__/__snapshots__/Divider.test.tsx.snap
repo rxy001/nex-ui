@@ -8,6 +8,7 @@ exports[`Divider should render with default props 1`] = `
   height: var(--nui-sizes-px);
   margin-block-start: var(--nui-spaces-6);
   margin-block-end: var(--nui-spaces-6);
+  width: 100%;
 }
 
 <hr

@@ -25,6 +25,7 @@ export const accordionItemRecipe = defineSlotRecipe({
       minHeight: '12',
     },
     trigger: {
+      color: 'inherit',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',

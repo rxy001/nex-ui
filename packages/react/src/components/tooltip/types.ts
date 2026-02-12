@@ -65,7 +65,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     /**
      * If true, keeps the Tooltip open when interacting with its content.
      *
-     * @default true
+     * @default false
      */
     interactive?: boolean
 
@@ -137,6 +137,8 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
 
     /**
      * If true, disables the animation for the Tooltip.
+     *
+     * @default false
      */
     disableAnimation?: boolean
   }

@@ -1,3 +1,5 @@
+import { upperFirst } from '@nex-ui/utils'
+import { toReadableSize } from '~/sb/utils'
 import {
   Drawer,
   DrawerTrigger,
@@ -61,6 +63,9 @@ function DrawerTemplate(props: DrawerTemplateProps) {
   )
 }
 
+const PLACEMENTS = ['left', 'right', 'top', 'bottom'] as const
+const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', 'full'] as const
+
 const meta = {
   title: 'Components/Drawer',
   component: DrawerTemplate,
@@ -88,11 +93,11 @@ const meta = {
     },
     placement: {
       control: 'select',
-      options: ['left', 'right', 'top', 'bottom'],
+      options: PLACEMENTS,
     },
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', 'full'],
+      options: SIZES,
     },
     hideCloseButton: {
       control: 'boolean',
@@ -128,48 +133,34 @@ export const WithoutBackdrop: Story = {
   },
 }
 
-export const Placements: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='4' wrap='wrap'>
+export function Placements(props: DrawerTemplateProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {PLACEMENTS.map((placement) => (
         <DrawerTemplate
           {...props}
-          placement='left'
-          triggerText='Left Placement'
+          key={placement}
+          placement={placement}
+          triggerText={`${upperFirst(placement)} Placement`}
         />
-        <DrawerTemplate
-          {...props}
-          placement='right'
-          triggerText='Right Placement'
-        />
-        <DrawerTemplate
-          {...props}
-          placement='top'
-          triggerText='Top Placement'
-        />
-        <DrawerTemplate
-          {...props}
-          placement='bottom'
-          triggerText='Bottom Placement'
-        />
-      </Flex>
-    )
-  },
+      ))}
+    </Flex>
+  )
 }
 
-export const Sizes: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='4' wrap='wrap'>
-        <DrawerTemplate {...props} size='xs' triggerText='XS Size' />
-        <DrawerTemplate {...props} size='sm' triggerText='SM Size' />
-        <DrawerTemplate {...props} size='md' triggerText='MD Size' />
-        <DrawerTemplate {...props} size='lg' triggerText='LG Size' />
-        <DrawerTemplate {...props} size='xl' triggerText='XL Size' />
-        <DrawerTemplate {...props} size='full' triggerText='Full Size' />
-      </Flex>
-    )
-  },
+export function Sizes(props: DrawerTemplateProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {SIZES.map((size) => (
+        <DrawerTemplate
+          {...props}
+          key={size}
+          size={size}
+          triggerText={`${toReadableSize(size)} Size`}
+        />
+      ))}
+    </Flex>
+  )
 }
 
 export const DisableAnimation: Story = {

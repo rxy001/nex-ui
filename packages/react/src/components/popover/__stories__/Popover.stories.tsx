@@ -9,23 +9,6 @@ import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { PopoverContentProps, PopoverProps } from '../types'
 
-function Container({ children }: { children: ReactNode }) {
-  return (
-    <Flex
-      sx={{
-        w: '100%',
-        h: '100%',
-      }}
-      justify='center'
-      align='center'
-      wrap='wrap'
-      gap='5'
-    >
-      {children}
-    </Flex>
-  )
-}
-
 const PLACEMENTS = [
   'top-start',
   'top',
@@ -53,13 +36,13 @@ type PopoverTemplateProps = PopoverProps &
 
 function PopoverTemplate(props: PopoverTemplateProps) {
   const {
-    triggerText,
     restoreFocus,
     loop,
     maxHeight,
     maxWidth,
     color,
     radius,
+    triggerText = 'Click me',
     ...other
   } = props
 
@@ -71,7 +54,7 @@ function PopoverTemplate(props: PopoverTemplateProps) {
             textTransform: 'capitalize',
           }}
         >
-          {triggerText ?? 'Click me'}
+          {triggerText}
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -148,11 +131,6 @@ const meta = {
       control: 'boolean',
     },
   },
-  render: (props) => (
-    <Container>
-      <PopoverTemplate {...props} />
-    </Container>
-  ),
 } satisfies Meta<PopoverTemplateProps>
 
 export default meta
@@ -161,46 +139,51 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const Placements: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <Box
-          sx={{
-            display: 'grid',
-            gap: '5',
-            gridTemplateColumns: 'repeat(3, max-content)',
-          }}
-        >
-          {PLACEMENTS.map((placement) => (
-            <PopoverTemplate
-              key={placement}
-              placement={placement}
-              triggerText={placement}
-              {...props}
-            />
-          ))}
-        </Box>
-      </Container>
-    )
-  },
-}
-
-export const Colors: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        {COLORS.map((color) => (
+export function Placements(props: PopoverTemplateProps) {
+  return (
+    <Flex
+      sx={{
+        w: '100%',
+        h: '100%',
+      }}
+      justify='center'
+      align='center'
+      wrap='wrap'
+      gap='5'
+    >
+      <Box
+        sx={{
+          display: 'grid',
+          gap: '5',
+          gridTemplateColumns: 'repeat(3, max-content)',
+        }}
+      >
+        {PLACEMENTS.map((placement) => (
           <PopoverTemplate
-            key={color}
-            color={color}
-            triggerText={color}
             {...props}
+            key={placement}
+            placement={placement}
+            triggerText={placement}
           />
         ))}
-      </Container>
-    )
-  },
+      </Box>
+    </Flex>
+  )
+}
+
+export function Colors(props: PopoverTemplateProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {COLORS.map((color) => (
+        <PopoverTemplate
+          {...props}
+          key={color}
+          color={color}
+          triggerText={color}
+        />
+      ))}
+    </Flex>
+  )
 }
 
 export const DefaultOpen: Story = {
@@ -209,43 +192,29 @@ export const DefaultOpen: Story = {
   },
 }
 
-function ControlledPopover(props: PopoverTemplateProps) {
+export function Controlled(props: PopoverTemplateProps) {
   const [open, setOpen] = useState(false)
 
   return (
-    <>
+    <Flex gap='5'>
       <PopoverTemplate {...props} open={open} onOpenChange={setOpen} />
       <p>Open: {open ? 'open' : 'closed'}</p>
-    </>
+    </Flex>
   )
 }
 
-export const Controlled: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <ControlledPopover {...props} />
-      </Container>
-    )
-  },
+export function WithOffset(props: PopoverTemplateProps) {
+  return (
+    <PopoverTemplate
+      {...props}
+      offset={0}
+      defaultOpen
+      triggerText='Offset is 0'
+    />
+  )
 }
 
-export const WithOffset: Story = {
-  args: {
-    offset: 0,
-    placement: 'top',
-    defaultOpen: true,
-  },
-  render: (props) => {
-    return (
-      <Container>
-        <PopoverTemplate {...props} triggerText='Offset is 0' />
-      </Container>
-    )
-  },
-}
-
-const FlipTemplate = (props: PopoverTemplateProps) => {
+export function WithFlip(props: PopoverTemplateProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   return (
@@ -276,84 +245,60 @@ const FlipTemplate = (props: PopoverTemplateProps) => {
   )
 }
 
-export const WithFlip: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <FlipTemplate {...props} />
-      </Container>
-    )
-  },
-  args: {
-    placement: 'top-start',
-    defaultOpen: true,
-  },
-}
+export function WithForm(props: PopoverTemplateProps) {
+  const { restoreFocus, loop, maxHeight, maxWidth, color, radius, ...other } =
+    props
 
-export const WithForm: Story = {
-  render: (props) => {
-    const { restoreFocus, loop, maxHeight, maxWidth, color, radius, ...other } =
-      props
-
-    return (
-      <Container>
-        <Popover {...other}>
-          <PopoverTrigger>
-            <Button
+  return (
+    <Popover {...other}>
+      <PopoverTrigger>
+        <Button>Click Me</Button>
+      </PopoverTrigger>
+      <PopoverContent
+        restoreFocus={restoreFocus}
+        loop={loop}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
+        color={color}
+        radius={radius}
+      >
+        <Box as='form'>
+          <Flex
+            direction='column'
+            gap='2'
+            sx={{
+              py: '2',
+            }}
+          >
+            <Box
               sx={{
-                textTransform: 'capitalize',
+                fs: 'md',
+                fontWeight: 'bold',
               }}
             >
-              Click me
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            restoreFocus={restoreFocus}
-            loop={loop}
-            maxHeight={maxHeight}
-            maxWidth={maxWidth}
-            color={color}
-            radius={radius}
-          >
-            <Box as='form'>
-              <Flex
-                direction='column'
-                gap='2'
-                sx={{
-                  py: '2',
-                }}
-              >
-                <Box
-                  sx={{
-                    fs: 'md',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  Profile
-                </Box>
-                <Input
-                  label='First Name'
-                  labelPlacement='float-inside'
-                  defaultValue='Ren'
-                  size='sm'
-                />
-                <Input
-                  label='Last Name'
-                  labelPlacement='float-inside'
-                  defaultValue='XY'
-                  size='sm'
-                />
-                <Input
-                  label='Country'
-                  labelPlacement='float-inside'
-                  defaultValue='China'
-                  size='sm'
-                />
-              </Flex>
+              Profile
             </Box>
-          </PopoverContent>
-        </Popover>
-      </Container>
-    )
-  },
+            <Input
+              label='First Name'
+              labelPlacement='float-inside'
+              defaultValue='Ren'
+              size='sm'
+            />
+            <Input
+              label='Last Name'
+              labelPlacement='float-inside'
+              defaultValue='XY'
+              size='sm'
+            />
+            <Input
+              label='Country'
+              labelPlacement='float-inside'
+              defaultValue='China'
+              size='sm'
+            />
+          </Flex>
+        </Box>
+      </PopoverContent>
+    </Popover>
+  )
 }
