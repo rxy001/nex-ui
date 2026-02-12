@@ -38,7 +38,7 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
   inProps: PopperContentProps<RootComponent>,
 ) => {
   const props = inProps as PopperContentProps<'div'>
-  const { open, referenceRef, popperRootRef, setOpen } = usePopperContext()
+  const { open, triggerRef, popperRootRef, setOpen } = usePopperContext()
   const popperPortalPropsCtx = usePopperPortalPropsContext()
 
   const {
@@ -97,13 +97,13 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const setPosition = useCallback(() => {
-    if (!referenceRef.current || !popperRootRef.current) return
+    if (!triggerRef.current || !popperRootRef.current) return
 
     const {
       x,
       y,
       placement: newComputedPlacement,
-    } = computePosition(referenceRef.current, popperRootRef.current, {
+    } = computePosition(triggerRef.current, popperRootRef.current, {
       placement,
       offset,
       flip,
@@ -116,10 +116,10 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
     }
     setComputedPlacement(newComputedPlacement)
     setStyleVariables(newStyleVars)
-  }, [referenceRef, popperRootRef, placement, offset, flip, shift])
+  }, [triggerRef, popperRootRef, placement, offset, flip, shift])
 
   const resetPosition = useEvent(() => {
-    if (!referenceRef.current || !popperRootRef.current) {
+    if (!triggerRef.current || !popperRootRef.current) {
       setStyleVariables(DEFAULT_VARS)
       return
     }
@@ -128,7 +128,7 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const observeElementResizeChanges = useEvent(() => {
-    if (!referenceRef.current || !popperRootRef.current) return
+    if (!triggerRef.current || !popperRootRef.current) return
 
     const resizeObserver = new ResizeObserver((entries) => {
       if (initialRender.current) {
@@ -137,7 +137,7 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
       }
       for (const entry of entries) {
         if (
-          entry.target === referenceRef.current ||
+          entry.target === triggerRef.current ||
           entry.target === popperRootRef.current
         ) {
           resetPosition()
@@ -145,7 +145,7 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
       }
     })
 
-    resizeObserver.observe(referenceRef.current)
+    resizeObserver.observe(triggerRef.current)
     resizeObserver.observe(popperRootRef.current)
     return () => {
       resizeObserver.disconnect()
@@ -168,9 +168,9 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const subscribeWindowResizeEvent = useEvent(() => {
-    if (!referenceRef.current) return
+    if (!triggerRef.current) return
 
-    const win = ownerWindow(referenceRef.current)
+    const win = ownerWindow(triggerRef.current)
 
     return addEventListener(win, 'resize', resetPosition)
   })
@@ -182,7 +182,7 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
   }, [setPosition, open])
 
   useEffect(() => {
-    if (!referenceRef.current || !closeOnDetached || !open) return
+    if (!triggerRef.current || !closeOnDetached || !open) return
 
     function handleIntersect(entries: IntersectionObserverEntry[]) {
       entries.forEach((entry) => {
@@ -192,11 +192,11 @@ export const PopperContent = <RootComponent extends ElementType = 'div'>(
       })
     }
     const observer = new IntersectionObserver(handleIntersect)
-    observer.observe(referenceRef.current)
+    observer.observe(triggerRef.current)
     return () => {
       observer.disconnect()
     }
-  }, [open, closeOnDetached, referenceRef, setOpen])
+  }, [open, closeOnDetached, triggerRef, setOpen])
 
   useEffect(() => {
     if (!open) return

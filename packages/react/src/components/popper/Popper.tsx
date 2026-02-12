@@ -16,7 +16,7 @@ import type { PopperContextValue } from './PopperContext'
 
 export const Popper = (props: PopperProps) => {
   const { open, children, onOpenChange, onClose } = props
-  const referenceRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLElement>(null)
   const popperRootRef = useRef<HTMLDivElement>(null)
 
   const previousOpenRef = useRef(open)
@@ -32,7 +32,7 @@ export const Popper = (props: PopperProps) => {
   const ctx = useMemo<PopperContextValue>(
     () => ({
       open,
-      referenceRef,
+      triggerRef,
       popperRootRef,
       setOpen,
     }),
