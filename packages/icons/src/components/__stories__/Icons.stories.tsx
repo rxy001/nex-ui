@@ -10,16 +10,31 @@ const meta = {
       <div
         style={{
           display: 'flex',
-          fontSize: '30px',
-          gap: '15px',
+          fontSize: 30,
+          gap: 20,
           flexWrap: 'wrap',
         }}
       >
         {Object.entries(AllIcons as Record<string, ComponentType<any>>).map(
           ([name, Component]) => (
-            <span key={name} title={(Component as any).displayName || name}>
+            <button
+              key={name}
+              title={(Component as any).displayName || name}
+              style={{
+                border: 'none',
+                background: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                display: 'flex',
+                fontSize: 30,
+              }}
+              onClick={async () => {
+                await window.navigator.clipboard.writeText(`<${name} />`)
+                alert(`Copied <${name} /> to clipboard`)
+              }}
+            >
               <Component />
-            </span>
+            </button>
           ),
         )}
       </div>

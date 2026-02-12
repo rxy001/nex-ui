@@ -1,15 +1,26 @@
 import { useState } from 'react'
 import { HeartFilled } from '@nex-ui/icons'
-import { COLORS, SIZES, RADII, toReadableSize } from '~/sb/utils'
+import {
+  COLORS,
+  SIZES,
+  RADII,
+  toReadableSize,
+  toReadableRadius,
+  withLabel,
+} from '~/sb/utils'
 import { upperFirst } from '@nex-ui/utils'
 import { Checkbox } from '../Checkbox'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { CheckboxProps } from '../types'
 
+function CheckboxTemplate(props: CheckboxProps) {
+  return <Checkbox {...props}>Checkbox</Checkbox>
+}
+
 const meta = {
   title: 'Components/Checkbox',
-  component: Checkbox<'input'>,
+  component: CheckboxTemplate,
   argTypes: {
     color: {
       options: COLORS,
@@ -29,14 +40,14 @@ const meta = {
     defaultChecked: {
       control: 'boolean',
     },
+    indeterminate: {
+      control: 'boolean',
+    },
     disableAnimation: {
       control: 'boolean',
     },
   },
-  args: {
-    children: 'Checkbox',
-  },
-} satisfies Meta<typeof Checkbox<'input'>>
+} satisfies Meta<typeof CheckboxTemplate>
 
 export default meta
 
@@ -44,46 +55,54 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
+function renderColors(props?: CheckboxProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {COLORS.map((color) =>
+        withLabel(`${upperFirst(color)}Color`)(
+          <CheckboxTemplate
+            defaultChecked
+            {...props}
+            key={color}
+            color={color}
+          />,
+        ),
+      )}
+    </Flex>
+  )
+}
 export const Colors: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='50' wrap='wrap'>
-        {COLORS.map((color) => (
-          <Checkbox defaultChecked {...props} key={color} color={color}>
-            {upperFirst(color)}
-          </Checkbox>
-        ))}
-      </Flex>
-    )
-  },
+  render: renderColors,
 }
 
+function renderSizes(props?: CheckboxProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {SIZES.map((size) =>
+        withLabel(`${toReadableSize(size)}Size`)(
+          <CheckboxTemplate {...props} key={size} size={size} />,
+        ),
+      )}
+    </Flex>
+  )
+}
 export const Sizes: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='5' align='center'>
-        {SIZES.map((size) => (
-          <Checkbox {...props} key={size} size={size}>
-            {toReadableSize(size)}
-          </Checkbox>
-        ))}
-      </Flex>
-    )
-  },
+  render: renderSizes,
 }
 
+function renderRadii(props?: CheckboxProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {RADII.map((radius) =>
+        withLabel(`${toReadableRadius(radius)}Radius`)(
+          <CheckboxTemplate {...props} key={radius} radius={radius} />,
+        ),
+      )}
+    </Flex>
+  )
+}
 export const Radius: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='5'>
-        {RADII.map((radius) => (
-          <Checkbox {...props} key={radius} radius={radius}>
-            {toReadableSize(radius)}
-          </Checkbox>
-        ))}
-      </Flex>
-    )
-  },
+  render: renderRadii,
 }
 
 export const Disabled: Story = {
@@ -92,7 +111,7 @@ export const Disabled: Story = {
   },
 }
 
-export const indeterminate: Story = {
+export const Indeterminate: Story = {
   args: {
     indeterminate: true,
   },
@@ -115,14 +134,48 @@ function ControlledTemplate(props: CheckboxProps) {
 
   return (
     <div>
-      <Checkbox {...props} checked={checked} onCheckedChange={setChecked}>
+      <CheckboxTemplate
+        {...props}
+        checked={checked}
+        onCheckedChange={setChecked}
+      >
         Controlled Checkbox
-      </Checkbox>
+      </CheckboxTemplate>
       <p>checked: {checked ? 'true' : 'false'}</p>
     </div>
   )
 }
 
 export const Controlled: Story = {
-  render: ControlledTemplate,
+  render: (props) => <ControlledTemplate {...props} />,
+}
+
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      <Flex gap='5' wrap='wrap'>
+        {withLabel('Disabled')(<CheckboxTemplate {...Disabled.args} />)}
+        {withLabel('DefaultChecked')(
+          <CheckboxTemplate {...DefaultChecked.args} />,
+        )}
+        {withLabel('Indeterminate')(
+          <CheckboxTemplate {...Indeterminate.args} defaultChecked />,
+        )}
+        {withLabel('CustomCheckIcon')(
+          <CheckboxTemplate {...CustomCheckIcon.args} defaultChecked />,
+        )}
+      </Flex>
+      {renderColors()}
+      {renderSizes()}
+      {renderRadii()}
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
+  },
 }

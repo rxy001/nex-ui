@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
-import { COLORS, SIZES, toReadableSize } from '~/sb/utils'
+import { COLORS, SIZES, toReadableSize, withLabel } from '~/sb/utils'
 import { upperFirst } from '@nex-ui/utils'
 import { Switch } from '../Switch'
 import { Flex } from '../../flex'
@@ -38,28 +38,34 @@ export const Default: Story = {
   },
 }
 
-export const Sizes: Story = {
-  render: (props) => (
+function renderSizes(props?: SwitchProps) {
+  return (
     <Flex gap='5'>
-      {SIZES.map((size) => (
-        <Switch {...props} key={size} size={size}>
-          {toReadableSize(size)}
-        </Switch>
-      ))}
+      {SIZES.map((size) =>
+        withLabel(`${toReadableSize(size)}Size`)(
+          <Switch {...props} key={size} size={size} />,
+        ),
+      )}
     </Flex>
-  ),
+  )
+}
+export const Sizes: Story = {
+  render: renderSizes,
 }
 
-export const Colors: Story = {
-  render: (props) => (
+function renderColors(props?: SwitchProps) {
+  return (
     <Flex gap='5'>
-      {COLORS.map((color) => (
-        <Switch {...props} key={color} color={color} defaultChecked>
-          {upperFirst(color)}
-        </Switch>
-      ))}
+      {COLORS.map((color) =>
+        withLabel(`${upperFirst(color)}Color`)(
+          <Switch {...props} key={color} color={color} defaultChecked />,
+        ),
+      )}
     </Flex>
-  ),
+  )
+}
+export const Colors: Story = {
+  render: renderColors,
 }
 
 export const WithLabel: Story = {
@@ -95,7 +101,14 @@ export const Disabled: Story = {
   },
 }
 
-function ControlledSwitch(props: SwitchProps<'input'>) {
+export const DefaultChecked: Story = {
+  args: {
+    defaultChecked: true,
+    children: 'Default Checked Switch',
+  },
+}
+
+function ControlledSwitch(props: SwitchProps) {
   const [checked, setChecked] = useState(false)
 
   return (
@@ -107,14 +120,28 @@ function ControlledSwitch(props: SwitchProps<'input'>) {
     </>
   )
 }
-
-export const DefaultChecked: Story = {
-  args: {
-    defaultChecked: true,
-    children: 'Default Checked Switch',
-  },
+export const Controlled: Story = {
+  render: (props) => <ControlledSwitch {...props} />,
 }
 
-export const Controlled: Story = {
-  render: ControlledSwitch,
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      {withLabel('WithLabel')(<Switch {...WithLabel.args} />)}
+      {withLabel('WithIcons')(<Switch {...WithIcons.args} />)}
+      {withLabel('WithThumbIcon')(<Switch {...WithThumbIcon.args} />)}
+      {withLabel('Disabled')(<Switch {...Disabled.args} />)}
+      {withLabel('DefaultChecked')(<Switch {...DefaultChecked.args} />)}
+      {renderColors()}
+      {renderSizes()}
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
+  },
 }

@@ -1,32 +1,33 @@
 import { useRef, useState } from 'react'
 import { COLORS as DEFAULT_COLORS, RADII, SIZES } from '~/sb/utils'
-import { upperFirst } from '@nex-ui/utils'
 import { Box } from '../../box'
 import { Tooltip } from '../Tooltip'
 import { Button } from '../../button'
 import { Flex } from '../../flex'
-import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { TooltipProps } from '../types'
 
-function Container({ children }: { children: ReactNode }) {
+const COLORS = ['default', ...DEFAULT_COLORS] as const
+
+type TooltipTemplateProps = TooltipProps & {
+  triggerText?: string
+}
+function TooltipTemplate({
+  triggerText = 'hover me',
+  ...props
+}: TooltipTemplateProps) {
   return (
-    <Flex
-      sx={{
-        w: '100%',
-        h: '100%',
-        columnGap: 60,
-      }}
-      justify='center'
-      align='center'
-      wrap='wrap'
-    >
-      {children}
-    </Flex>
+    <Tooltip content='This is a tooltip' {...props}>
+      <Button
+        sx={{
+          textTransform: 'capitalize',
+        }}
+      >
+        {triggerText}
+      </Button>
+    </Tooltip>
   )
 }
-
-const COLORS = ['default', ...DEFAULT_COLORS] as const
 
 const PLACEMENTS = [
   'top-start',
@@ -45,7 +46,7 @@ const PLACEMENTS = [
 
 const meta = {
   title: 'Components/Tooltip',
-  component: Tooltip<'div'>,
+  component: TooltipTemplate,
   argTypes: {
     color: {
       options: COLORS,
@@ -85,19 +86,7 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    content: 'This is a tooltip',
-  },
-  render: (props) => {
-    return (
-      <Container>
-        <Tooltip {...props}>
-          <Button>Hover me</Button>
-        </Tooltip>
-      </Container>
-    )
-  },
-} satisfies Meta<typeof Tooltip<'div'>>
+} satisfies Meta<typeof TooltipTemplate>
 
 export default meta
 
@@ -105,66 +94,54 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
+function renderColors(props?: TooltipProps) {
+  return (
+    <Flex wrap='wrap' gap='5'>
+      {COLORS.map((color) => (
+        <TooltipTemplate
+          {...props}
+          key={color}
+          color={color}
+          placement='bottom'
+          triggerText={color}
+        />
+      ))}
+    </Flex>
+  )
+}
 export const Colors: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        {COLORS.map((color) => (
-          <Tooltip key={color} {...props} open color={color}>
-            <Button>{upperFirst(color)}</Button>
-          </Tooltip>
-        ))}
-      </Container>
-    )
-  },
+  render: renderColors,
 }
 
 export const Placements: Story = {
   render: (props) => {
-    const renderTooltip = (placement: TooltipProps['placement']) => {
-      return (
-        <Tooltip {...props} placement={placement} open>
-          <Button
-            variant='faded'
-            sx={{
-              textTransform: 'capitalize',
-            }}
-          >
-            {placement}
-          </Button>
-        </Tooltip>
-      )
-    }
-
     return (
-      <Container>
-        <Flex justify='center'>
-          <Flex direction='column' gap='5' sx={{ maxW: 700, flex: 1 }}>
-            <Flex gap='80px' justify='space-between'>
-              {renderTooltip('top-start')}
-              {renderTooltip('top')}
-              {renderTooltip('top-end')}
-            </Flex>
-            <Flex justify='space-between'>
-              <Flex direction='column' gap='5'>
-                {renderTooltip('left-start')}
-                {renderTooltip('left')}
-                {renderTooltip('left-end')}
-              </Flex>
-              <Flex direction='column' gap='5'>
-                {renderTooltip('right-start')}
-                {renderTooltip('right')}
-                {renderTooltip('right-end')}
-              </Flex>
-            </Flex>
-            <Flex gap='80px' justify='space-between'>
-              {renderTooltip('bottom-start')}
-              {renderTooltip('bottom')}
-              {renderTooltip('bottom-end')}
-            </Flex>
-          </Flex>
-        </Flex>
-      </Container>
+      <Flex
+        sx={{
+          w: '100%',
+          h: '100%',
+        }}
+        justify='center'
+        align='center'
+        wrap='wrap'
+      >
+        <Box
+          sx={{
+            display: 'grid',
+            gap: '5',
+            gridTemplateColumns: 'repeat(3, max-content)',
+          }}
+        >
+          {PLACEMENTS.map((placement) => (
+            <TooltipTemplate
+              {...props}
+              key={placement}
+              placement={placement}
+              triggerText={placement}
+            />
+          ))}
+        </Box>
+      </Flex>
     )
   },
 }
@@ -179,42 +156,30 @@ function ControlledTooltip(props: TooltipProps) {
   const [open, setOpen] = useState(false)
 
   return (
-    <>
-      <Tooltip
+    <Flex gap='5'>
+      <TooltipTemplate
         open={open}
         onOpenChange={(isOpen) => setOpen(isOpen)}
         {...props}
-      >
-        <Button>Hover me</Button>
-      </Tooltip>
+      />
       <p>Open: {open ? 'open' : 'closed'}</p>
-    </>
+    </Flex>
   )
 }
 
 export const Controlled: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <ControlledTooltip {...props} />
-      </Container>
-    )
-  },
+  render: (props) => <ControlledTooltip {...props} />,
 }
 
 export const WithOffset: Story = {
-  args: {
-    offset: 0,
-    placement: 'top',
-    defaultOpen: true,
-  },
   render: (props) => {
     return (
-      <Container>
-        <Tooltip {...props}>
-          <Button>Offset is 0</Button>
-        </Tooltip>
-      </Container>
+      <TooltipTemplate
+        {...props}
+        defaultOpen
+        offset={0}
+        triggerText='Offset is 0'
+      />
     )
   },
 }
@@ -240,39 +205,37 @@ const FlipTemplate = (props: TooltipProps) => {
         }}
         ref={ref}
       >
-        <Tooltip container={() => ref.current} {...props}>
-          <Button>Scroll the window</Button>
-        </Tooltip>
+        <TooltipTemplate
+          {...props}
+          container={() => ref.current}
+          triggerText='Scroll the window'
+        />
       </Box>
     </Box>
   )
 }
 
 export const WithFlip: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <FlipTemplate {...props} />
-      </Container>
-    )
-  },
-  args: {
-    placement: 'top-start',
-    defaultOpen: true,
-  },
+  render: (props) => <FlipTemplate {...props} defaultOpen />,
 }
 
 export const WithDelay: Story = {
   render: (props) => {
     return (
-      <Container>
-        <Tooltip openDelay={500} closeDelay={0} {...props}>
-          <Button>Delay open 500ms</Button>
-        </Tooltip>
-        <Tooltip openDelay={0} closeDelay={500} {...props}>
-          <Button>Delay close 500ms</Button>
-        </Tooltip>
-      </Container>
+      <Flex gap='5'>
+        <TooltipTemplate
+          {...props}
+          openDelay={500}
+          closeDelay={0}
+          triggerText='Delay open 500ms'
+        />
+        <TooltipTemplate
+          {...props}
+          openDelay={0}
+          closeDelay={500}
+          triggerText='Delay close 500ms'
+        />
+      </Flex>
     )
   },
 }

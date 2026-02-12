@@ -18,6 +18,7 @@ export const popoverContentRecipe = defineRecipe({
     fs: 'md',
     bg: 'colorPalette.primary',
     color: 'colorPalette.contrastText',
+    outline: 'none',
   },
   variants: {
     radius: radiusVariant,

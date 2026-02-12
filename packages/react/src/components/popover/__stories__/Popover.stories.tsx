@@ -9,23 +9,6 @@ import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { PopoverContentProps, PopoverProps } from '../types'
 
-function Container({ children }: { children: ReactNode }) {
-  return (
-    <Flex
-      sx={{
-        w: '100%',
-        h: '100%',
-      }}
-      justify='center'
-      align='center'
-      wrap='wrap'
-      gap='5'
-    >
-      {children}
-    </Flex>
-  )
-}
-
 const PLACEMENTS = [
   'top-start',
   'top',
@@ -53,13 +36,13 @@ type PopoverTemplateProps = PopoverProps &
 
 function PopoverTemplate(props: PopoverTemplateProps) {
   const {
-    triggerText,
     restoreFocus,
     loop,
     maxHeight,
     maxWidth,
     color,
     radius,
+    triggerText = 'Click me',
     ...other
   } = props
 
@@ -71,7 +54,7 @@ function PopoverTemplate(props: PopoverTemplateProps) {
             textTransform: 'capitalize',
           }}
         >
-          {triggerText ?? 'Click me'}
+          {triggerText}
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -148,11 +131,6 @@ const meta = {
       control: 'boolean',
     },
   },
-  render: (props) => (
-    <Container>
-      <PopoverTemplate {...props} />
-    </Container>
-  ),
 } satisfies Meta<PopoverTemplateProps>
 
 export default meta
@@ -164,7 +142,16 @@ export const Default: Story = {}
 export const Placements: Story = {
   render: (props) => {
     return (
-      <Container>
+      <Flex
+        sx={{
+          w: '100%',
+          h: '100%',
+        }}
+        justify='center'
+        align='center'
+        wrap='wrap'
+        gap='5'
+      >
         <Box
           sx={{
             display: 'grid',
@@ -181,7 +168,7 @@ export const Placements: Story = {
             />
           ))}
         </Box>
-      </Container>
+      </Flex>
     )
   },
 }
@@ -189,7 +176,7 @@ export const Placements: Story = {
 export const Colors: Story = {
   render: (props) => {
     return (
-      <Container>
+      <Flex gap='5' wrap='wrap'>
         {COLORS.map((color) => (
           <PopoverTemplate
             key={color}
@@ -198,7 +185,7 @@ export const Colors: Story = {
             {...props}
           />
         ))}
-      </Container>
+      </Flex>
     )
   },
 }
@@ -213,36 +200,26 @@ function ControlledPopover(props: PopoverTemplateProps) {
   const [open, setOpen] = useState(false)
 
   return (
-    <>
+    <Flex gap='5'>
       <PopoverTemplate {...props} open={open} onOpenChange={setOpen} />
       <p>Open: {open ? 'open' : 'closed'}</p>
-    </>
+    </Flex>
   )
 }
 
 export const Controlled: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <ControlledPopover {...props} />
-      </Container>
-    )
-  },
+  render: (props) => <ControlledPopover {...props} />,
 }
 
 export const WithOffset: Story = {
-  args: {
-    offset: 0,
-    placement: 'top',
-    defaultOpen: true,
-  },
-  render: (props) => {
-    return (
-      <Container>
-        <PopoverTemplate {...props} triggerText='Offset is 0' />
-      </Container>
-    )
-  },
+  render: (props) => (
+    <PopoverTemplate
+      {...props}
+      offset={0}
+      defaultOpen
+      triggerText='Offset is 0'
+    />
+  ),
 }
 
 const FlipTemplate = (props: PopoverTemplateProps) => {
@@ -277,17 +254,7 @@ const FlipTemplate = (props: PopoverTemplateProps) => {
 }
 
 export const WithFlip: Story = {
-  render: (props) => {
-    return (
-      <Container>
-        <FlipTemplate {...props} />
-      </Container>
-    )
-  },
-  args: {
-    placement: 'top-start',
-    defaultOpen: true,
-  },
+  render: (props) => <FlipTemplate {...props} defaultOpen />,
 }
 
 export const WithForm: Story = {
@@ -296,64 +263,56 @@ export const WithForm: Story = {
       props
 
     return (
-      <Container>
-        <Popover {...other}>
-          <PopoverTrigger>
-            <Button
+      <Popover {...other}>
+        <PopoverTrigger>
+          <Button>Click Me</Button>
+        </PopoverTrigger>
+        <PopoverContent
+          restoreFocus={restoreFocus}
+          loop={loop}
+          maxHeight={maxHeight}
+          maxWidth={maxWidth}
+          color={color}
+          radius={radius}
+        >
+          <Box as='form'>
+            <Flex
+              direction='column'
+              gap='2'
               sx={{
-                textTransform: 'capitalize',
+                py: '2',
               }}
             >
-              Click me
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            restoreFocus={restoreFocus}
-            loop={loop}
-            maxHeight={maxHeight}
-            maxWidth={maxWidth}
-            color={color}
-            radius={radius}
-          >
-            <Box as='form'>
-              <Flex
-                direction='column'
-                gap='2'
+              <Box
                 sx={{
-                  py: '2',
+                  fs: 'md',
+                  fontWeight: 'bold',
                 }}
               >
-                <Box
-                  sx={{
-                    fs: 'md',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  Profile
-                </Box>
-                <Input
-                  label='First Name'
-                  labelPlacement='float-inside'
-                  defaultValue='Ren'
-                  size='sm'
-                />
-                <Input
-                  label='Last Name'
-                  labelPlacement='float-inside'
-                  defaultValue='XY'
-                  size='sm'
-                />
-                <Input
-                  label='Country'
-                  labelPlacement='float-inside'
-                  defaultValue='China'
-                  size='sm'
-                />
-              </Flex>
-            </Box>
-          </PopoverContent>
-        </Popover>
-      </Container>
+                Profile
+              </Box>
+              <Input
+                label='First Name'
+                labelPlacement='float-inside'
+                defaultValue='Ren'
+                size='sm'
+              />
+              <Input
+                label='Last Name'
+                labelPlacement='float-inside'
+                defaultValue='XY'
+                size='sm'
+              />
+              <Input
+                label='Country'
+                labelPlacement='float-inside'
+                defaultValue='China'
+                size='sm'
+              />
+            </Flex>
+          </Box>
+        </PopoverContent>
+      </Popover>
     )
   },
 }

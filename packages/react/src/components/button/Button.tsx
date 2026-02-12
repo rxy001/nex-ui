@@ -107,21 +107,31 @@ export const Button = <RootComponent extends ElementType = 'button'>(
 
   const loadingIcon = spinner ?? <LoadingOutlined />
 
-  return (
-    <Ripple disabled={disableRipple || disabled}>
-      <ButtonRoot {...getButtonRootProps()}>
+  const renderChilren = () => {
+    if (iconOnly) {
+      return loading ? loadingIcon : children
+    }
+
+    return (
+      <>
         {((spinnerPlacement === 'start' && loading) || startIconProp) && (
           <ButtonStartIcon {...getButtonStartIconProps()}>
             {loading ? loadingIcon : startIconProp}
           </ButtonStartIcon>
         )}
-        {!loading || !iconOnly ? children : null}
+        {children}
         {((spinnerPlacement === 'end' && loading) || endIconProp) && (
           <ButtonEndIcon {...getButtonEndIconProps()}>
             {loading ? loadingIcon : endIconProp}
           </ButtonEndIcon>
         )}
-      </ButtonRoot>
+      </>
+    )
+  }
+
+  return (
+    <Ripple disabled={disableRipple || disabled}>
+      <ButtonRoot {...getButtonRootProps()}>{renderChilren()}</ButtonRoot>
     </Ripple>
   )
 }

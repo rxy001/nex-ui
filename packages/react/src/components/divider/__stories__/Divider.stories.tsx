@@ -1,3 +1,4 @@
+import { withLabel } from '~/sb/utils'
 import { Divider } from '../Divider'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
@@ -25,4 +26,29 @@ export const Default: Story = {
       <Divider {...args} />
     </div>
   ),
+}
+
+export const Vertical: Story = {
+  args: {
+    orientation: 'vertical',
+  },
+}
+
+export const Chromatic: Story = {
+  render: () => {
+    return (
+      <div style={{ display: 'flex', gap: 20, height: 200, width: 200 }}>
+        {withLabel('Horizontal')(<Divider orientation='horizontal' />)}
+        {withLabel('Vertical')(<Divider orientation='vertical' />)}
+      </div>
+    )
+  },
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
+  },
 }

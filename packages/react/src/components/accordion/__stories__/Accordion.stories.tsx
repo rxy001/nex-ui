@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { upperFirst } from '@nex-ui/utils'
+import { withLabel } from '~/sb/utils'
 import { Accordion } from '../Accordion'
 import { AccordionItem } from '../AccordionItem'
-import { Flex } from '../../flex'
 import type { Key } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { AccordionProps } from '../types'
@@ -25,11 +26,11 @@ const AccordionTemplate = (props: AccordionProps) => {
   )
 }
 
-const variants = ['outlined', 'underlined'] as const
+const VARIANTS = ['outlined', 'underlined'] as const
 
 const meta = {
   title: 'Components/Accordion',
-  component: Accordion<'div'>,
+  component: AccordionTemplate,
   argTypes: {
     disabled: {
       control: 'boolean',
@@ -44,15 +45,14 @@ const meta = {
       control: 'boolean',
     },
     variant: {
-      options: variants,
+      options: VARIANTS,
       control: 'select',
     },
     disableAnimation: {
       control: 'boolean',
     },
   },
-  render: (props) => <AccordionTemplate {...props} />,
-} satisfies Meta<typeof Accordion<'div'>>
+} satisfies Meta<typeof AccordionTemplate>
 
 export default meta
 
@@ -70,6 +70,7 @@ export const Multiple: Story = {
 export const KeepMounted: Story = {
   args: {
     keepMounted: true,
+    defaultExpandedKeys: ['1'],
   },
 }
 
@@ -91,25 +92,43 @@ export const DisabledKeys: Story = {
   },
 }
 
-export const hideIndicator: Story = {
+export const WithoutIndicator: Story = {
   args: {
     hideIndicator: true,
   },
 }
 
-export const Variants: Story = {
-  render: (props) => (
-    <Flex direction='column' gap='6'>
-      {variants.map((variant) => (
+export const DisableAnimation: Story = {
+  args: {
+    disableAnimation: true,
+    defaultExpandedKeys: ['1'],
+  },
+}
+
+const renderVariants = (props?: AccordionProps) => (
+  <>
+    {VARIANTS.map((variant) =>
+      withLabel(`${upperFirst(variant)}Variant`)(
         <AccordionTemplate
           key={variant}
           {...props}
           variant={variant}
           defaultExpandedKeys={['1']}
-        />
-      ))}
-    </Flex>
-  ),
+        />,
+      ),
+    )}
+  </>
+)
+
+export const Variants: Story = {
+  render: renderVariants,
+}
+
+export const CustomIndicator: Story = {
+  args: {
+    indicator: '👇',
+    defaultExpandedKeys: ['1'],
+  },
 }
 
 export const Controlled: Story = {
@@ -129,5 +148,37 @@ export const Controlled: Story = {
         </p>
       </>
     )
+  },
+}
+
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      {withLabel('SingleOpen')(
+        <AccordionTemplate defaultExpandedKeys={['1']} />,
+      )}
+      {withLabel('MultipleOpen')(<AccordionTemplate {...Multiple.args} />)}
+      {withLabel('KeepMounted')(<AccordionTemplate {...KeepMounted.args} />)}
+      {withLabel('Disabled')(<AccordionTemplate {...Disabled.args} />)}
+      {withLabel('DisabledKeys')(<AccordionTemplate {...DisabledKeys.args} />)}
+      {withLabel('WithoutIndicator')(
+        <AccordionTemplate {...WithoutIndicator.args} />,
+      )}
+      {withLabel('DisableAnimation')(
+        <AccordionTemplate {...DisableAnimation.args} />,
+      )}
+      {withLabel('CustomIndicator')(
+        <AccordionTemplate {...CustomIndicator.args} />,
+      )}
+      {renderVariants()}
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
   },
 }

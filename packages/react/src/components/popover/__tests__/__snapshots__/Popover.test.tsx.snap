@@ -25,6 +25,7 @@ exports[`Popover should have the correct root class name 1`] = `
   font-size: var(--nui-font-sizes-md);
   background-color: var(--nui-colors-content);
   color: inherit;
+  outline: none;
   border-radius: var(--nui-radii-lg);
   box-shadow: 0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d;
   max-width: 480px;

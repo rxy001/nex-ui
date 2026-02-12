@@ -1,18 +1,28 @@
 import { BoltOutlined } from '@nex-ui/icons'
 import { upperFirst } from '@nex-ui/utils'
-import { RADII, COLORS, toReadableRadius } from '~/sb/utils'
+import { RADII, COLORS, toReadableRadius, withLabel } from '~/sb/utils'
 import { Alert } from '../Alert'
-import { Flex } from '../../flex'
 import { Button } from '../../button'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { AlertProps } from '../types'
 
 const VARIANTS = ['faded', 'outlined', 'solid', 'subtle'] as const
 
 const STATUSES = ['error', 'info', 'warning', 'success'] as const
 
+function AlertTemplate(props: AlertProps) {
+  return (
+    <Alert
+      title='This is an alert'
+      description='This is a description for the alert'
+      {...props}
+    />
+  )
+}
+
 const meta = {
   title: 'Components/Alert',
-  component: Alert<'div'>,
+  component: AlertTemplate,
   argTypes: {
     variant: {
       control: 'select',
@@ -37,90 +47,76 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    description: 'This is an example alert description.',
-  },
-  render: (props) => <Alert title='Example Alert' {...props} />,
-} satisfies Meta<typeof Alert<'div'>>
+} satisfies Meta<typeof AlertTemplate>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {
-    description: undefined,
-  },
+  render: (props) => <Alert {...props} title='This is an alert' />,
 }
 
 export const WithDescription: Story = {}
 
+function renderVariants(props?: AlertProps) {
+  return (
+    <>
+      {VARIANTS.map((variant) =>
+        withLabel(`${upperFirst(variant)}Variant`)(
+          <AlertTemplate key={variant} {...props} variant={variant} />,
+        ),
+      )}
+    </>
+  )
+}
 export const Variants: Story = {
-  render: (props) => {
-    return (
-      <Flex direction='column' gap='4'>
-        {VARIANTS.map((variant) => (
-          <Alert
-            key={variant}
-            {...props}
-            variant={variant}
-            title={`${upperFirst(variant)} Variant`}
-          />
-        ))}
-      </Flex>
-    )
-  },
+  render: renderVariants,
 }
 
+function renderColors(props?: AlertProps) {
+  return (
+    <>
+      {COLORS.map((color) =>
+        withLabel(`${upperFirst(color)}Color`)(
+          <AlertTemplate key={color} {...props} color={color} />,
+        ),
+      )}
+    </>
+  )
+}
 export const Colors: Story = {
-  render: (props) => {
-    return (
-      <Flex direction='column' gap='4'>
-        {COLORS.map((color) => (
-          <Alert
-            key={color}
-            {...props}
-            color={color}
-            title={`${upperFirst(color)} Color`}
-          />
-        ))}
-      </Flex>
-    )
-  },
+  render: renderColors,
 }
 
+function renderStatus(props?: AlertProps) {
+  return (
+    <>
+      {STATUSES.map((status) =>
+        withLabel(`${upperFirst(status)}Status`)(
+          <AlertTemplate key={status} {...props} status={status} />,
+        ),
+      )}
+    </>
+  )
+}
 export const Status: Story = {
-  render: (props) => {
-    return (
-      <Flex direction='column' gap='4'>
-        {STATUSES.map((status) => (
-          <Alert
-            key={status}
-            {...props}
-            status={status}
-            title={`${upperFirst(status)} Status`}
-          />
-        ))}
-      </Flex>
-    )
-  },
+  render: renderStatus,
 }
 
+function renderRadii(props?: AlertProps) {
+  return (
+    <>
+      {RADII.map((radius) =>
+        withLabel(`${toReadableRadius(radius)}Radius`)(
+          <AlertTemplate key={radius} {...props} radius={radius} />,
+        ),
+      )}
+    </>
+  )
+}
 export const Radii: Story = {
-  render: (props) => {
-    return (
-      <Flex direction='column' gap='4'>
-        {RADII.map((radius) => (
-          <Alert
-            key={radius}
-            {...props}
-            radius={radius}
-            title={`${toReadableRadius(radius)} Radius`}
-          />
-        ))}
-      </Flex>
-    )
-  },
+  render: renderRadii,
 }
 
 export const Closable: Story = {
@@ -144,5 +140,34 @@ export const WithoutIcon: Story = {
 export const WithCustomIcon: Story = {
   args: {
     icon: <BoltOutlined />,
+  },
+}
+
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      {withLabel('WithTitleAndDescription')(
+        <AlertTemplate {...WithDescription.args} />,
+      )}
+      {withLabel('CyanColorAndSuccessStatus')(
+        <AlertTemplate color='cyan' status='success' />,
+      )}
+      {withLabel('Closable')(<AlertTemplate {...Closable.args} />)}
+      {withLabel('WithAction')(<AlertTemplate {...WithAction.args} />)}
+      {withLabel('WithoutIcon')(<AlertTemplate {...WithoutIcon.args} />)}
+      {withLabel('WithCustomIcon')(<AlertTemplate {...WithCustomIcon.args} />)}
+      {renderColors()}
+      {renderVariants()}
+      {renderRadii()}
+      {renderStatus()}
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
   },
 }
