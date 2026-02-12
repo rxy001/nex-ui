@@ -1,11 +1,24 @@
-import { COLORS, SIZES } from '~/sb/utils'
+import { COLORS, SIZES, WithLabel } from '~/sb/utils'
 import { AvatarGroup } from '../AvatarGroup'
 import { Avatar } from '../Avatar'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { AvatarGroupProps } from '../types'
+
+function AvatarGroupTemplate(props: AvatarGroupProps) {
+  return (
+    <AvatarGroup {...props}>
+      <Avatar src='https://i.pravatar.cc/150?img=53' />
+      <Avatar src='https://i.pravatar.cc/150?img=54' />
+      <Avatar src='https://i.pravatar.cc/150?img=55' />
+      <Avatar src='https://i.pravatar.cc/150?img=56' />
+      <Avatar src='https://i.pravatar.cc/150?img=57' />
+    </AvatarGroup>
+  )
+}
 
 const meta = {
   title: 'Components/AvatarGroup',
-  component: AvatarGroup,
+  component: AvatarGroupTemplate,
   argTypes: {
     size: {
       control: 'select',
@@ -29,18 +42,7 @@ const meta = {
       control: 'number',
     },
   },
-  render: (props) => {
-    return (
-      <AvatarGroup {...props}>
-        <Avatar />
-        <Avatar />
-        <Avatar />
-        <Avatar />
-        <Avatar />
-      </AvatarGroup>
-    )
-  },
-} satisfies Meta<typeof AvatarGroup>
+} satisfies Meta<typeof AvatarGroupTemplate>
 
 export default meta
 
@@ -72,5 +74,32 @@ export const CustomSurplus: Story = {
 export const WithSpacing: Story = {
   args: {
     spacing: 10,
+  },
+}
+
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      <WithLabel label='WithMaxCount (max: 3)'>
+        <AvatarGroupTemplate {...WithMaxCount.args} />
+      </WithLabel>
+      <WithLabel label='WithTotal (total: 10)'>
+        <AvatarGroupTemplate {...WithTotal.args} />
+      </WithLabel>
+      <WithLabel label='CustomSurplus'>
+        <AvatarGroupTemplate {...CustomSurplus.args} />
+      </WithLabel>
+      <WithLabel label='WithSpacing (spacing: 10)'>
+        <AvatarGroupTemplate {...WithSpacing.args} />
+      </WithLabel>
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
   },
 }

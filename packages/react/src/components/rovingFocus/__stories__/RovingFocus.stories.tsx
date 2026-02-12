@@ -34,7 +34,7 @@ function ButtonGroup({
 
   return (
     <RovingFocusGroup {...props}>
-      <Flex gap='4' sx={{ mt: '2' }} inline>
+      <Flex gap='5' sx={{ mt: '2' }} inline>
         <ButtonGroupProvider value={ctx}>{children}</ButtonGroupProvider>
       </Flex>
     </RovingFocusGroup>

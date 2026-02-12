@@ -1,3 +1,5 @@
+import { SIZES as DEFAULT_SIZES, toReadableSize } from '~/sb/utils'
+import { upperFirst } from '@nex-ui/utils'
 import {
   Dialog,
   DialogTrigger,
@@ -21,6 +23,10 @@ type DialogTemplateProps = DialogProps &
     triggerText?: ReactNode
   }
 
+const SIZES = ['xs', ...DEFAULT_SIZES, 'xl', 'full'] as const
+
+const PLACEMENTS = ['top', 'center', 'bottom'] as const
+
 function DialogTemplate(props: DialogTemplateProps) {
   const {
     size,
@@ -28,14 +34,14 @@ function DialogTemplate(props: DialogTemplateProps) {
     placement,
     hideCloseButton,
     children,
-    triggerText,
+    triggerText = 'Open Dialog',
     ...other
   } = props
 
   return (
     <Dialog {...other}>
       <DialogTrigger>
-        <Button>{triggerText ?? 'Open Dialog'}</Button>
+        <Button>{triggerText}</Button>
       </DialogTrigger>
       <DialogContent
         size={size}
@@ -102,7 +108,7 @@ const meta = {
     },
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', 'full'],
+      options: SIZES,
     },
     scroll: {
       control: 'select',
@@ -110,7 +116,7 @@ const meta = {
     },
     placement: {
       control: 'select',
-      options: ['top', 'center', 'bottom'],
+      options: PLACEMENTS,
     },
     hideCloseButton: {
       control: 'boolean',
@@ -136,31 +142,34 @@ export const keepMounted: Story = {
   },
 }
 
-export const Sizes: Story = {
-  render: () => {
-    return (
-      <Flex gap='5'>
-        <DialogTemplate size='xs' triggerText='XS Size' />
-        <DialogTemplate size='sm' triggerText='SM Size' />
-        <DialogTemplate size='md' triggerText='MD Size' />
-        <DialogTemplate size='lg' triggerText='LG Size' />
-        <DialogTemplate size='xl' triggerText='XL Size' />
-        <DialogTemplate size='full' triggerText='Full Size' />
-      </Flex>
-    )
-  },
+export function Sizes(props: DialogTemplateProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {SIZES.map((size) => (
+        <DialogTemplate
+          {...props}
+          key={size}
+          size={size}
+          triggerText={`${toReadableSize(size)} Size`}
+        />
+      ))}
+    </Flex>
+  )
 }
 
-export const Placements: Story = {
-  render: () => {
-    return (
-      <Flex gap='5'>
-        <DialogTemplate placement='top' triggerText='Top Placement' />
-        <DialogTemplate placement='center' triggerText='Center Placement' />
-        <DialogTemplate placement='bottom' triggerText='Bottom Placement' />
-      </Flex>
-    )
-  },
+export function Placements(props: DialogTemplateProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {PLACEMENTS.map((placement) => (
+        <DialogTemplate
+          {...props}
+          key={placement}
+          placement={placement}
+          triggerText={`${upperFirst(placement)} Placement`}
+        />
+      ))}
+    </Flex>
+  )
 }
 
 export const DisableAnimation: Story = {
@@ -218,16 +227,10 @@ function ScrollTemplate(props: DialogTemplateProps) {
   )
 }
 
-export const InsideScroll: Story = {
-  args: {
-    scroll: 'inside',
-  },
-  render: ScrollTemplate,
+export function InsideScroll(props: DialogTemplateProps) {
+  return <ScrollTemplate {...props} scroll='inside' />
 }
 
-export const OutsideScroll: Story = {
-  args: {
-    scroll: 'outside',
-  },
-  render: ScrollTemplate,
+export function OutsideScroll(props: DialogTemplateProps) {
+  return <ScrollTemplate {...props} scroll='outside' />
 }

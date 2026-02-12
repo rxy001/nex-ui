@@ -6,16 +6,22 @@ import {
   RADII,
   toReadableSize,
   toReadableRadius,
+  WithLabel,
 } from '~/sb/utils'
 import { Button } from '../Button'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ButtonProps } from '../types'
 
 const VARIANTS = ['solid', 'outlined', 'ghost', 'faded'] as const
 
+function ButtonTemplate(props: ButtonProps) {
+  return <Button {...props}>{props.children ?? 'Button'}</Button>
+}
+
 const meta = {
   title: 'Components/Button',
-  component: Button<'button'>,
+  component: ButtonTemplate,
   argTypes: {
     disabled: {
       control: 'boolean',
@@ -56,16 +62,15 @@ const meta = {
       control: 'select',
     },
   },
-  args: {
-    children: 'Button',
-  },
-} satisfies Meta<typeof Button<'button'>>
+} satisfies Meta<typeof ButtonTemplate>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {},
+}
 
 export const FullWidthButton: Story = {
   args: {
@@ -73,66 +78,59 @@ export const FullWidthButton: Story = {
   },
 }
 
-export const Variants: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='5' wrap='wrap'>
-        {VARIANTS.map((variant) => (
-          <Button {...props} key={variant} variant={variant}>
-            {upperFirst(variant)}
-          </Button>
-        ))}
-      </Flex>
-    )
-  },
+export function Variants(props: ButtonProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {VARIANTS.map((variant) => (
+        <WithLabel key={variant} label={`${upperFirst(variant)}Variant`}>
+          <ButtonTemplate {...props} variant={variant} />
+        </WithLabel>
+      ))}
+    </Flex>
+  )
 }
 
-export const Colors: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='5' wrap='wrap'>
-        {COLORS.map((color) => (
-          <Button {...props} key={color} color={color}>
-            {upperFirst(color)}
-          </Button>
-        ))}
-      </Flex>
-    )
-  },
+export function Colors(props: ButtonProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {COLORS.map((color) => (
+        <WithLabel key={color} label={`${upperFirst(color)}Color`}>
+          <ButtonTemplate {...props} color={color} />
+        </WithLabel>
+      ))}
+    </Flex>
+  )
 }
 
-export const Sizes: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='5' align='center'>
-        {SIZES.map((size) => (
-          <Button {...props} key={size} size={size}>
-            {toReadableSize(size)}
-          </Button>
-        ))}
-      </Flex>
-    )
-  },
+export function Sizes(props: ButtonProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {SIZES.map((size) => (
+        <WithLabel key={size} label={`${toReadableSize(size)}Size`}>
+          <ButtonTemplate {...props} size={size} />
+        </WithLabel>
+      ))}
+    </Flex>
+  )
 }
 
-export const Radius: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='5' align='center'>
-        {RADII.map((radius) => (
-          <Button {...props} key={radius} radius={radius}>
-            {toReadableRadius(radius)}
+export function Radii(props: ButtonProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {RADII.map((radius) => (
+        <WithLabel key={radius} label={`${toReadableRadius(radius)}Radius`}>
+          <Button {...props} radius={radius}>
+            Button
           </Button>
-        ))}
-      </Flex>
-    )
-  },
+        </WithLabel>
+      ))}
+    </Flex>
+  )
 }
 
 export const LoadingButton: Story = {
   args: {
     loading: true,
-    onClick: () => {},
   },
 }
 
@@ -155,7 +153,6 @@ export const LoadingIconButton: Story = {
     iconOnly: true,
     loading: true,
     'aria-label': 'Loading',
-    children: <HeartFilled />,
   },
 }
 
@@ -167,8 +164,50 @@ export const WithIcons: Story = {
   },
 }
 
-export const disableRipple: Story = {
+export const DisableRipple: Story = {
   args: {
     disableRipple: true,
+    children: 'Button',
+  },
+}
+
+export const Chromatic: Story = {
+  render: () => {
+    return (
+      <>
+        <Flex gap='5' wrap='wrap'>
+          <WithLabel label='LoadingButton'>
+            <ButtonTemplate {...LoadingButton.args} />
+          </WithLabel>
+          <WithLabel label='Disabled'>
+            <ButtonTemplate {...Disabled.args} />
+          </WithLabel>
+          <WithLabel label='IconButton'>
+            <ButtonTemplate {...IconButton.args} />
+          </WithLabel>
+          <WithLabel label='LoadingIconButton'>
+            <ButtonTemplate {...LoadingIconButton.args} />
+          </WithLabel>
+          <WithLabel label='WithIcons'>
+            <ButtonTemplate {...WithIcons.args} />
+          </WithLabel>
+          <WithLabel label='DisableRipple'>
+            <ButtonTemplate {...DisableRipple.args} />
+          </WithLabel>
+        </Flex>
+        <Variants />
+        <Colors />
+        <Sizes />
+        <Radii />
+      </>
+    )
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    chromatic: {
+      disable: false,
+    },
   },
 }

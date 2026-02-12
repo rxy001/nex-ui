@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
-import { COLORS, SIZES, toReadableSize } from '~/sb/utils'
+import {
+  COLORS,
+  SIZES,
+  toReadableSize,
+  WithLabel as WithLabelUtil,
+} from '~/sb/utils'
 import { upperFirst } from '@nex-ui/utils'
 import { Switch } from '../Switch'
 import { Flex } from '../../flex'
@@ -38,28 +43,28 @@ export const Default: Story = {
   },
 }
 
-export const Sizes: Story = {
-  render: (props) => (
-    <Flex gap='5'>
+export function Sizes(props: SwitchProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {SIZES.map((size) => (
-        <Switch {...props} key={size} size={size}>
-          {toReadableSize(size)}
-        </Switch>
+        <WithLabelUtil key={size} label={`${toReadableSize(size)}Size`}>
+          <Switch {...props} aria-label='switch' size={size} />
+        </WithLabelUtil>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Colors: Story = {
-  render: (props) => (
-    <Flex gap='5'>
+export function Colors(props: SwitchProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {COLORS.map((color) => (
-        <Switch {...props} key={color} color={color} defaultChecked>
-          {upperFirst(color)}
-        </Switch>
+        <WithLabelUtil key={color} label={`${upperFirst(color)}Color`}>
+          <Switch {...props} aria-label='switch' color={color} defaultChecked />
+        </WithLabelUtil>
       ))}
     </Flex>
-  ),
+  )
 }
 
 export const WithLabel: Story = {
@@ -95,7 +100,14 @@ export const Disabled: Story = {
   },
 }
 
-function ControlledSwitch(props: SwitchProps<'input'>) {
+export const DefaultChecked: Story = {
+  args: {
+    defaultChecked: true,
+    children: 'Default Checked Switch',
+  },
+}
+
+export function Controlled(props: SwitchProps) {
   const [checked, setChecked] = useState(false)
 
   return (
@@ -108,13 +120,34 @@ function ControlledSwitch(props: SwitchProps<'input'>) {
   )
 }
 
-export const DefaultChecked: Story = {
-  args: {
-    defaultChecked: true,
-    children: 'Default Checked Switch',
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      <WithLabelUtil label='WithLabel'>
+        <Switch {...WithLabel.args} />
+      </WithLabelUtil>
+      <WithLabelUtil label='WithIcons'>
+        <Switch {...WithIcons.args} />
+      </WithLabelUtil>
+      <WithLabelUtil label='WithThumbIcon'>
+        <Switch {...WithThumbIcon.args} />
+      </WithLabelUtil>
+      <WithLabelUtil label='Disabled'>
+        <Switch {...Disabled.args} />
+      </WithLabelUtil>
+      <WithLabelUtil label='DefaultChecked'>
+        <Switch {...DefaultChecked.args} />
+      </WithLabelUtil>
+      <Colors />
+      <Sizes />
+    </>
+  ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
   },
-}
-
-export const Controlled: Story = {
-  render: ControlledSwitch,
 }

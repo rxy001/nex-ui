@@ -5,18 +5,25 @@ import {
   SIZES as DEFAULT_SIZES,
   RADII as DEFAULT_RADII,
   toReadableSize,
+  WithLabel,
+  toReadableRadius,
 } from '~/sb/utils'
 import { Badge } from '../Badge'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { BadgeProps } from '../types'
 
 const SIZES = ['xs', ...DEFAULT_SIZES] as const
 const RADII = ['xs', ...DEFAULT_RADII] as const
 const VARIANTS = ['solid', 'subtle', 'outlined', 'faded'] as const
 
+function BadgeTemplate(props: BadgeProps) {
+  return <Badge {...props}>Badge</Badge>
+}
+
 const meta = {
   title: 'Components/Badge',
-  component: Badge<'span'>,
+  component: BadgeTemplate,
   argTypes: {
     size: {
       control: 'select',
@@ -41,10 +48,7 @@ const meta = {
       control: 'boolean',
     },
   },
-  args: {
-    children: 'Badge',
-  },
-} satisfies Meta<typeof Badge<'span'>>
+} satisfies Meta<typeof BadgeTemplate>
 
 export default meta
 
@@ -52,60 +56,58 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const Colors: Story = {
-  render: (args) => (
-    <Flex gap='5'>
+export function Colors(props: BadgeProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {COLORS.map((color) => (
-        <Badge {...args} key={color} color={color}>
-          {upperFirst(color)}
-        </Badge>
+        <WithLabel key={color} label={`${upperFirst(color)}Color`}>
+          <BadgeTemplate {...props} color={color} />
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Sizes: Story = {
-  render: (args) => (
-    <Flex gap='5' align='center'>
+export function Sizes(props: BadgeProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {SIZES.map((size) => (
-        <Badge {...args} key={size} size={size}>
-          {toReadableSize(size)}
-        </Badge>
+        <WithLabel key={size} label={`${toReadableSize(size)}Size`}>
+          <BadgeTemplate {...props} size={size} />
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Radius: Story = {
-  render: (args) => (
-    <Flex gap='5' align='center'>
+export function Radii(props: BadgeProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {RADII.map((radius) => (
-        <Badge {...args} key={radius} radius={radius}>
-          {toReadableSize(radius)}
-        </Badge>
+        <WithLabel key={radius} label={`${toReadableRadius(radius)}Radius`}>
+          <BadgeTemplate {...props} radius={radius} />
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
-export const Variants: Story = {
-  render: (args) => (
-    <Flex gap='5' align='center'>
+export function Variants(props: BadgeProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
       {VARIANTS.map((variant) => (
-        <Badge {...args} key={variant} variant={variant}>
-          {upperFirst(variant)}
-        </Badge>
+        <WithLabel key={variant} label={`${upperFirst(variant)}Variant`}>
+          <BadgeTemplate {...props} variant={variant} />
+        </WithLabel>
       ))}
     </Flex>
-  ),
+  )
 }
 
 export const Closable: Story = {
-  render: (args) => (
-    <Badge {...args} closable>
-      Closable Badge
-    </Badge>
-  ),
+  args: {
+    closable: true,
+  },
 }
 
 export const Disabled: Story = {
@@ -114,15 +116,43 @@ export const Disabled: Story = {
   },
 }
 
-export const WithIcons: Story = {
-  render: (args) => (
-    <Flex gap='4'>
-      <Badge startIcon={<GithubOutlined />} {...args}>
+export function WithIcons(props: BadgeProps) {
+  return (
+    <Flex gap='5'>
+      <Badge startIcon={<GithubOutlined />} {...props}>
         Github
       </Badge>
-      <Badge endIcon={<GithubOutlined />} {...args}>
+      <Badge endIcon={<GithubOutlined />} {...props}>
         Github
       </Badge>
     </Flex>
+  )
+}
+
+export const Chromatic: Story = {
+  render: () => (
+    <>
+      <WithLabel label='ClosableBadge'>
+        <BadgeTemplate {...Closable.args} />
+      </WithLabel>
+      <WithLabel label='DisabledBadge'>
+        <BadgeTemplate {...Disabled.args} />
+      </WithLabel>
+      <WithLabel label='WithIcons'>
+        <WithIcons />
+      </WithLabel>
+      <Colors />
+      <Radii />
+      <Sizes />
+      <Variants />
+    </>
   ),
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
+  },
 }

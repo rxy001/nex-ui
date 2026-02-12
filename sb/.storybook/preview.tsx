@@ -31,6 +31,7 @@ const preview: Preview = {
         light: allModes['light'],
         dark: allModes['dark'],
       },
+      disable: true,
     },
   },
   decorators: [

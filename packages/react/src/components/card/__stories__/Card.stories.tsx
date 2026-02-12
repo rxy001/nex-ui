@@ -1,4 +1,9 @@
-import { RADII as DEFAULT_RADII } from '~/sb/utils'
+import {
+  RADII as DEFAULT_RADII,
+  toReadableRadius,
+  toReadableSize,
+  WithLabel,
+} from '~/sb/utils'
 import {
   Card,
   CardBody,
@@ -7,7 +12,7 @@ import {
   CardActionArea,
 } from '../index'
 import { Avatar, Button, Box, Flex } from '../../index'
-import type { CardHeaderProps } from '../index'
+import type { CardHeaderProps, CardProps } from '../index'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 function CardHeaderTemplate(props: CardHeaderProps) {
@@ -54,13 +59,7 @@ const meta = {
   render: (props) => {
     return (
       <Card {...props}>
-        <CardHeaderTemplate
-          action={
-            <Button variant='ghost' color='blue' size='sm'>
-              View
-            </Button>
-          }
-        />
+        <CardHeaderTemplate />
       </Card>
     )
   },
@@ -72,34 +71,45 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const WithBodyAndFooter: Story = {
-  render: (props) => {
-    return (
-      <Card {...props}>
-        <CardHeaderTemplate />
-        <CardBody>
-          <div>Make beautiful websites with ease and efficiency.</div>
-        </CardBody>
-        <CardFooter>
-          <Button color='blue' size='sm'>
-            Share
+export function WithAction(props: CardProps) {
+  return (
+    <Card {...props}>
+      <CardHeaderTemplate
+        action={
+          <Button variant='ghost' color='blue' size='sm'>
+            View
           </Button>
-        </CardFooter>
-      </Card>
-    )
-  },
+        }
+      />
+    </Card>
+  )
 }
 
-export const WithActionArea: Story = {
-  render: (props) => {
-    return (
-      <Card {...props}>
-        <CardActionArea>
-          <CardBody>This action area is clickable.</CardBody>
-        </CardActionArea>
-      </Card>
-    )
-  },
+export function WithBodyAndFooter(props: CardProps) {
+  return (
+    <Card {...props}>
+      <CardHeaderTemplate />
+      <CardBody>
+        <div>Make beautiful websites with ease and efficiency.</div>
+      </CardBody>
+      <CardFooter>
+        <Button color='blue' size='sm'>
+          Share
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
+
+export function WithActionArea(props: CardProps) {
+  return (
+    <Card {...props}>
+      <CardHeaderTemplate />
+      <CardActionArea>
+        <CardBody>This action area is clickable.</CardBody>
+      </CardActionArea>
+    </Card>
+  )
 }
 
 export const Hoverable: Story = {
@@ -108,75 +118,97 @@ export const Hoverable: Story = {
   },
 }
 
-export const BlurredCard: Story = {
-  args: {
-    blurred: true,
-  },
-  render: (props) => {
-    return (
-      <Box
+export function BlurredCard(props: CardProps) {
+  return (
+    <Box
+      sx={{
+        backgroundImage: 'linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%)',
+        maxW: '345px',
+        borderRadius: 'lg',
+      }}
+    >
+      <Card
+        {...props}
+        blurred
         sx={{
-          backgroundImage:
-            'linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%)',
-          maxW: '345px',
-          borderRadius: 'lg',
+          bg: {
+            _DEFAULT: 'white/50',
+            _dark: 'black/60',
+          },
         }}
       >
-        <Card
-          {...props}
-          sx={{
-            bg: {
-              _DEFAULT: 'white/50',
-              _dark: 'black/60',
-            },
-          }}
-        >
-          <CardHeaderTemplate />
-          <CardBody>
-            <div>Make beautiful websites with ease and efficiency.</div>
-          </CardBody>
-          <CardFooter as={Flex} gap='2'>
-            <Button color='blue' size='sm' variant='ghost'>
-              SHARE
-            </Button>
-            <Button color='blue' size='sm' variant='ghost'>
-              LEARN MORE
-            </Button>
-          </CardFooter>
-        </Card>
-      </Box>
-    )
-  },
+        <CardHeaderTemplate />
+        <CardBody>
+          <div>Make beautiful websites with ease and efficiency.</div>
+        </CardBody>
+        <CardFooter as={Flex} gap='2'>
+          <Button color='blue' size='sm' variant='ghost'>
+            SHARE
+          </Button>
+          <Button color='blue' size='sm' variant='ghost'>
+            LEARN MORE
+          </Button>
+        </CardFooter>
+      </Card>
+    </Box>
+  )
 }
 
-export const Radius: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='4'>
-        {RADII.map((radius) => (
-          <Card {...props} key={radius} radius={radius} shadow='lg'>
-            <CardBody>
-              <div>Radius: {radius}</div>
-            </CardBody>
+export function Radii(props: CardProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {RADII.map((radius) => (
+        <WithLabel key={radius} label={`${toReadableRadius(radius)}Radius`}>
+          <Card {...props} radius={radius} shadow='lg'>
+            <CardHeaderTemplate />
           </Card>
-        ))}
-      </Flex>
-    )
-  },
+        </WithLabel>
+      ))}
+    </Flex>
+  )
 }
 
-export const Shadow: Story = {
-  render: (props) => {
-    return (
-      <Flex gap='4'>
-        {SHADOWS.map((shadow) => (
-          <Card {...props} key={shadow} shadow={shadow}>
-            <CardBody>
-              <div>Shadow: {shadow}</div>
-            </CardBody>
+export function Shadows(props: CardProps) {
+  return (
+    <Flex gap='5' wrap='wrap'>
+      {SHADOWS.map((shadow) => (
+        <WithLabel key={shadow} label={`${toReadableSize(shadow)}Shadow`}>
+          <Card {...props} shadow={shadow}>
+            <CardHeaderTemplate />
           </Card>
-        ))}
-      </Flex>
+        </WithLabel>
+      ))}
+    </Flex>
+  )
+}
+
+export const Chromatic: Story = {
+  render: () => {
+    return (
+      <>
+        <WithLabel label='WithAction'>
+          <WithAction />
+        </WithLabel>
+        <WithLabel label='WithBodyAndFooter'>
+          <WithBodyAndFooter />
+        </WithLabel>
+        <WithLabel label='WithActionArea'>
+          <WithActionArea />
+        </WithLabel>
+        <WithLabel label='BlurredCard'>
+          <BlurredCard />
+        </WithLabel>
+        <Radii />
+        <Shadows />
+      </>
     )
+  },
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+    controls: {
+      disable: true,
+    },
   },
 }
