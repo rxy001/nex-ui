@@ -6,7 +6,7 @@ import type { RefObject } from 'react'
 export interface PopperContextValue {
   open?: boolean
   setOpen: (open: boolean) => void
-  referenceRef: RefObject<HTMLDivElement | null>
+  triggerRef: RefObject<HTMLElement | null>
   popperRootRef: RefObject<HTMLDivElement | null>
 }
 

@@ -6,13 +6,13 @@ import { usePopperContext } from './PopperContext'
 import type { PopperAnchorProps } from './types'
 
 export const PopperAnchor = ({ children }: PopperAnchorProps) => {
-  const { referenceRef } = usePopperContext()
+  const { triggerRef } = usePopperContext()
 
   if (!isValidNonFragmentElement(children)) {
     return children
   }
 
   return cloneElement(children, {
-    ref: mergeRefs(referenceRef, children.props.ref),
+    ref: mergeRefs(triggerRef, children.props.ref),
   })
 }
