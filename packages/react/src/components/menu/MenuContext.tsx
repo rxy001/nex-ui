@@ -19,7 +19,7 @@ export const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
 })
 
 export interface RootMenuContextValue {
-  usingKeyboardRef: RefObject<boolean>
+  useKeyboardRef: RefObject<boolean>
   close: () => void
 }
 

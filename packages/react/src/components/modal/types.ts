@@ -1,8 +1,8 @@
 import type { PortalProps } from '@nex-ui/utils'
-import type { HTMLMotionProps, SlotProps } from '../../types/utils'
-import type { ElementType, ReactNode, ReactElement } from 'react'
+import type { ElementType, ReactNode, ReactElement, MouseEvent } from 'react'
 import type { DismissibleLayerProps } from '../dismissibleLayer'
 import type { FocusTrapProps } from '../focusTrap'
+import type { HTMLMotionProps, SlotProps } from '../../types/utils'
 
 // ------------- Modal --------------
 export type ModalProps = {
@@ -32,7 +32,7 @@ export interface ModalTriggerProps {
 // ------------- ModalClose -------------
 export interface ModalCloseProps {
   children?: ReactElement<{
-    onClick?: () => void | Promise<void>
+    onClick?: (event: MouseEvent) => void | Promise<void>
     'aria-label'?: string
   }>
 }

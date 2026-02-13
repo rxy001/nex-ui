@@ -1,47 +1,113 @@
 import { useState } from 'react'
-import { Flex } from '../../flex'
 import { FocusTrap } from '../FocusTrap'
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { FocusTrapProps } from '../types'
+import type { Meta } from '@storybook/react-vite'
 
-const meta = {
+const meta: Meta = {
   title: 'Utilities/FocusTrap',
-  component: FocusTrap,
-  argTypes: {},
-  args: {
-    children: (
-      <Flex gap='5'>
-        <button>Button 1</button>
-        <button>Button 2</button>
-        <button>Button 3</button>
-      </Flex>
-    ),
-    active: true,
-  },
   parameters: {
     controls: {
       disable: true,
     },
   },
-} satisfies Meta<FocusTrapProps>
+}
 
 export default meta
 
-type Story = StoryObj<typeof meta>
+export const Default = () => {
+  const [trapped, setTrapped] = useState(false)
+  const [loop, setLoop] = useState(true)
+  const [autoFocus, setAutoFocus] = useState(false)
+  const [restoreFocus, setRestoreFocus] = useState(true)
+  const [paused, setPaused] = useState(false)
 
-export const Default: Story = {
-  args: {
-    loop: false,
-  },
+  return (
+    <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 10 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+        }}
+      >
+        <label>
+          <input
+            type='checkbox'
+            checked={loop}
+            onChange={(event) => setLoop(event.target.checked)}
+          />
+          &nbsp;Loop around?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={autoFocus}
+            onChange={(event) => setAutoFocus(event.target.checked)}
+          />
+          &nbsp;Auto focus on open?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={restoreFocus}
+            onChange={(event) => setRestoreFocus(event.target.checked)}
+          />
+          &nbsp;Restore focus to trigger on close?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={paused}
+            onChange={(event) => setPaused(event.target.checked)}
+          />
+          &nbsp;Paused?
+        </label>
+        <hr
+          style={{
+            width: '100%',
+          }}
+        />
+      </div>
+      <div>
+        <button type='button' onClick={() => setTrapped(true)}>
+          trap
+        </button>
+      </div>
+      {trapped && (
+        <FocusTrap
+          loop={loop}
+          active={trapped}
+          autoFocus={autoFocus}
+          restoreFocus={restoreFocus}
+          paused={paused}
+        >
+          <form
+            style={{
+              display: 'inline-flex',
+              flexDirection: 'column',
+              gap: 20,
+              padding: 20,
+              maxWidth: 500,
+              border: '2px solid',
+            }}
+          >
+            <h1>Focus Trap</h1>
+            <input type='text' placeholder='First name' />
+            <input type='text' placeholder='Last name' />
+            <input type='number' placeholder='Age' />
+            <button type='button' onClick={() => setTrapped(false)}>
+              Close
+            </button>
+          </form>
+        </FocusTrap>
+      )}
+      <label aria-label='input'>
+        <input />
+      </label>
+    </div>
+  )
 }
 
-export const LoopFocus: Story = {
-  args: {
-    loop: true,
-  },
-}
-
-const MultipleTemplate = () => {
+export const MultipleTraps = () => {
   const [trapped1, setTrapped1] = useState(false)
   const [trapped2, setTrapped2] = useState(false)
 
@@ -102,12 +168,10 @@ const MultipleTemplate = () => {
         </FocusTrap>
       ) : null}
       <div>
-        <input />
+        <label aria-label='input'>
+          <input />
+        </label>
       </div>
     </div>
   )
-}
-
-export const MultipleTraps: Story = {
-  render: () => <MultipleTemplate />,
 }

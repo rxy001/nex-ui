@@ -45,22 +45,22 @@ const MenuImpl = (props: MenuProps) => {
 
 // eslint-disable-next-line react/display-name
 const RootMenu = (props: MenuProps) => {
-  const usingKeyboardRef = useRef(false)
+  const useKeyboardRef = useRef(false)
   const close = useEvent(() => {
     props.onOpenChange?.(false)
   })
 
   const ctx = useMemo(
-    () => ({ usingKeyboardRef, close }),
-    [usingKeyboardRef, close],
+    () => ({ useKeyboardRef, close }),
+    [useKeyboardRef, close],
   )
 
   useEffect(() => {
     // Capture phase ensures we set the boolean before any side effects execute
     // in response to the key or pointer event as they might depend on this value.
-    const handlePointer = () => (usingKeyboardRef.current = false)
+    const handlePointer = () => (useKeyboardRef.current = false)
     const handleKeyDown = () => {
-      usingKeyboardRef.current = true
+      useKeyboardRef.current = true
       document.addEventListener('pointerdown', handlePointer, {
         capture: true,
         once: true,
