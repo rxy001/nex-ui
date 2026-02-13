@@ -3,14 +3,14 @@ import { Collection, CollectionItem, useCollection } from '../index'
 import type { Meta } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
 
-const meta = {
+const meta: Meta = {
   title: 'Utilities/Collection',
   parameters: {
     controls: {
       disable: true,
     },
   },
-} satisfies Meta
+}
 
 export default meta
 

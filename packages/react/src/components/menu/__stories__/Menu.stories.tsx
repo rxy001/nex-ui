@@ -43,14 +43,14 @@ function MenuWrapper({ children }: { children: ReactNode }) {
   )
 }
 
-const meta = {
+const meta: Meta = {
   title: 'Utilities/Menu',
   parameters: {
     controls: {
       disable: true,
     },
   },
-} satisfies Meta
+}
 
 export default meta
 

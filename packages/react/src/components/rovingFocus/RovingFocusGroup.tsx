@@ -30,7 +30,7 @@ export const RovingFocusGroup = <T extends string | number = string>(
 
   const [focusableItemsCount, setFocusableItemsCount] = useState(0)
 
-  const [usingShiftTab, setUsingShiftTab] = useState(false)
+  const [useShiftTab, setUseShiftTab] = useState(false)
 
   const collection = useCollection<RovingFocusItemData>()
 
@@ -48,7 +48,7 @@ export const RovingFocusGroup = <T extends string | number = string>(
   const handleFocus = (event: FocusEvent<HTMLElement>) => {
     if (
       event.currentTarget === event.target &&
-      !usingShiftTab &&
+      !useShiftTab &&
       !event.defaultPrevented
     ) {
       const items = collection.getItems().filter((item) => item.focusable)
@@ -71,7 +71,7 @@ export const RovingFocusGroup = <T extends string | number = string>(
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Tab' && event.shiftKey) {
       // The focus timing of tabbing backwards is later than React render.
-      setUsingShiftTab(true)
+      setUseShiftTab(true)
       return
     }
 
@@ -117,7 +117,7 @@ export const RovingFocusGroup = <T extends string | number = string>(
   }
 
   const handleBlur = () => {
-    setUsingShiftTab(false)
+    setUseShiftTab(false)
   }
 
   const onFocusableItemMount = useCallback(() => {
@@ -159,7 +159,7 @@ export const RovingFocusGroup = <T extends string | number = string>(
               onKeyDown: handleKeyDown,
               onFocus: handleFocus,
               onBlur: handleBlur,
-              tabIndex: usingShiftTab || !focusableItemsCount ? -1 : 0,
+              tabIndex: useShiftTab || !focusableItemsCount ? -1 : 0,
             },
             children.props,
             remainingProps,

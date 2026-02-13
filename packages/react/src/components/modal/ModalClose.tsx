@@ -3,6 +3,7 @@
 import { cloneElement } from 'react'
 import { isValidNonFragmentElement } from '@nex-ui/utils'
 import { useModalContext } from './ModalContext'
+import type { MouseEvent } from 'react'
 import type { ModalCloseProps } from './types'
 
 export const ModalClose = ({ children }: ModalCloseProps) => {
@@ -14,11 +15,11 @@ export const ModalClose = ({ children }: ModalCloseProps) => {
 
   return cloneElement(children, {
     'aria-label': children.props?.['aria-label'] || 'Close',
-    onClick: () => {
+    onClick: (event: MouseEvent) => {
       const { onClick } = children.props
 
       if (onClick) {
-        const result = onClick()
+        const result = onClick(event)
 
         // Check if the result is a Promise
         if (
@@ -26,12 +27,19 @@ export const ModalClose = ({ children }: ModalCloseProps) => {
           result instanceof Promise &&
           typeof result.then === 'function'
         ) {
-          result.then(() => setOpen(false)).catch(() => {})
-
+          result
+            .catch(() => {})
+            .finally(() => {
+              if (!event.defaultPrevented) {
+                setOpen(false)
+              }
+            })
           return
         }
       }
-      setOpen(false)
+      if (!event.defaultPrevented) {
+        setOpen(false)
+      }
     },
   })
 }

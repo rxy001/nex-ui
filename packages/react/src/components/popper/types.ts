@@ -50,7 +50,7 @@ type PopperContentOwnProps = Omit<
   closeOnEscape?: boolean
 
   /**
-   * If true, closes the Popper when the reference element is detached from the viewport.
+   * If true, closes the Popper when the trigger element is detached from the viewport.
    *
    * @default true
    */

@@ -71,7 +71,7 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
       },
       onFocus: (event: FocusEvent<HTMLElement>) => {
         // onItemLeave refocuses on content, blocking RovingFocusGroup's onFocus logic.
-        if (!rootMenuCtx.usingKeyboardRef.current) {
+        if (!rootMenuCtx.useKeyboardRef.current) {
           event.preventDefault()
         }
       },
