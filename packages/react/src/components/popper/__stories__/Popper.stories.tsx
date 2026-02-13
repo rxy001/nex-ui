@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { Box } from '../../box'
-import { Flex } from '../../flex'
 import {
   Popper,
   PopperAnchor,
@@ -8,56 +6,73 @@ import {
   PopperMotion,
   PopperPortal,
 } from '../index'
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { PopperPortalProps, PopperContentProps } from '../types'
+import type { Meta } from '@storybook/react-vite'
+import type { PopperContentProps } from '../types'
 
-type PopperTemplateProps = Pick<
-  PopperPortalProps,
-  'keepMounted' | 'container'
-> &
-  Pick<
-    PopperContentProps,
-    | 'closeOnDetached'
-    | 'closeOnEscape'
-    | 'placement'
-    | 'offset'
-    | 'flip'
-    | 'shift'
-  > & {
-    disableAnimation?: boolean
-  }
+const PLACEMENTS = [
+  'top-start',
+  'top',
+  'top-end',
+  'right-start',
+  'right',
+  'right-end',
+  'bottom-start',
+  'bottom',
+  'bottom-end',
+  'left-start',
+  'left',
+  'left-end',
+] as const
 
-function PopperTemplate(props: PopperTemplateProps) {
+const meta: Meta = {
+  title: 'Utilities/Popper',
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+}
+
+export default meta
+
+export const Default = () => {
   const [open, setOpen] = useState(false)
   const innerRef = useRef<HTMLDivElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)
-  const {
-    placement,
-    offset,
-    flip,
-    shift,
-    disableAnimation,
-    keepMounted,
-    closeOnDetached,
-    closeOnEscape,
-  } = props
+  const [shift, setShift] = useState(true)
+  const [placement, setPlacement] =
+    useState<PopperContentProps['placement']>('top')
+  const [offset, setOffset] = useState(5)
+  const [advancedOffset, setAdvancedOffset] = useState({
+    mainAxis: 5,
+    crossAxis: 5,
+  })
+  const [useAdvancedOffset, setUseAdvancedOffset] = useState(false)
+  const [flip, setFlip] = useState({
+    mainAxis: true,
+    crossAxis: true,
+  })
+  const [disableAnimation, setDisableAnimation] = useState(false)
+  const [keepMounted, setKeepMounted] = useState(false)
+  const [closeOnDetached, setCloseOnDetached] = useState(true)
+  const [closeOnEscape, setCloseOnEscape] = useState(true)
 
   const renderPopperContent = () => (
     <PopperContent
       closeOnDetached={closeOnDetached}
       closeOnEscape={closeOnEscape}
       placement={placement}
-      offset={offset}
+      offset={useAdvancedOffset ? advancedOffset : offset}
       flip={flip}
       shift={shift}
     >
-      <Box
-        sx={{
+      <div
+        style={{
           border: '1px solid #000',
         }}
       >
         This is the popper content.
-      </Box>
+      </div>
     </PopperContent>
   )
 
@@ -66,31 +81,163 @@ function PopperTemplate(props: PopperTemplateProps) {
   }, [])
 
   return (
-    <Flex
-      sx={{
-        w: '100%',
-        h: '100%',
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+        gap: 50,
       }}
-      justify='center'
-      align='center'
     >
-      <Box
-        sx={{
-          w: 400,
-          h: 400,
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+        }}
+      >
+        <label>
+          <input
+            type='checkbox'
+            checked={shift}
+            onChange={(e) => setShift(e.target.checked)}
+          />
+          &nbsp;Shift to keep in view?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={closeOnEscape}
+            onChange={(e) => setCloseOnEscape(e.target.checked)}
+          />
+          &nbsp;Dismiss on escape?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={closeOnDetached}
+            onChange={(e) => setCloseOnDetached(e.target.checked)}
+          />
+          &nbsp;Dismiss on detached from viewport?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={disableAnimation}
+            onChange={(e) => setDisableAnimation(e.target.checked)}
+          />
+          &nbsp;Disable animation?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={keepMounted}
+            onChange={(e) => setKeepMounted(e.target.checked)}
+          />
+          &nbsp;Keep mounted when closed?
+        </label>
+        <div>
+          Flip options:&nbsp;
+          <label>
+            <input
+              type='checkbox'
+              checked={flip.mainAxis}
+              onChange={(e) =>
+                setFlip((prev) => ({ ...prev, mainAxis: e.target.checked }))
+              }
+            />
+            &nbsp;Flip on main axis?
+          </label>
+          <label>
+            <input
+              type='checkbox'
+              checked={flip.crossAxis}
+              onChange={(e) =>
+                setFlip((prev) => ({ ...prev, crossAxis: e.target.checked }))
+              }
+            />
+            &nbsp;Flip on cross axis?
+          </label>
+        </div>
+        <label>
+          Placement:&nbsp;
+          <select
+            value={placement}
+            onChange={(e) => setPlacement(e.target.value as any)}
+          >
+            {PLACEMENTS.map((pl) => (
+              <option key={pl} value={pl}>
+                {pl}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={useAdvancedOffset}
+            onChange={(e) => setUseAdvancedOffset(e.target.checked)}
+          />
+          &nbsp;Use advanced offset options?
+        </label>
+        {useAdvancedOffset ? (
+          <>
+            <label>
+              Main Axis Offset:&nbsp;
+              <input
+                type='number'
+                value={advancedOffset.mainAxis}
+                onChange={(e) =>
+                  setAdvancedOffset((prev) => ({
+                    ...prev,
+                    mainAxis: Number(e.target.value),
+                  }))
+                }
+              />
+            </label>
+            <label>
+              Cross Axis Offset:&nbsp;
+              <input
+                type='number'
+                value={advancedOffset.crossAxis}
+                onChange={(e) =>
+                  setAdvancedOffset((prev) => ({
+                    ...prev,
+                    crossAxis: Number(e.target.value),
+                  }))
+                }
+              />
+            </label>
+          </>
+        ) : (
+          <label>
+            Offset:&nbsp;
+            <input
+              type='number'
+              value={offset as number}
+              onChange={(e) => setOffset(Number(e.target.value))}
+            />
+          </label>
+        )}
+      </div>
+      <div
+        style={{
+          width: 400,
+          height: 400,
           overflow: 'auto',
           border: '1px solid #000',
         }}
         ref={outerRef}
       >
-        <Flex
-          sx={{
-            h: 1200,
-            w: 1200,
+        <div
+          style={{
+            height: 1200,
+            width: 1200,
             position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
-          justify='center'
-          align='center'
           ref={innerRef}
         >
           <Popper open={open} onOpenChange={setOpen}>
@@ -115,64 +262,8 @@ function PopperTemplate(props: PopperTemplateProps) {
               )}
             </PopperPortal>
           </Popper>
-        </Flex>
-      </Box>
-    </Flex>
+        </div>
+      </div>
+    </div>
   )
-}
-
-const PLACEMENTS = [
-  'top-start',
-  'top',
-  'top-end',
-  'right-start',
-  'right',
-  'right-end',
-  'bottom-start',
-  'bottom',
-  'bottom-end',
-  'left-start',
-  'left',
-  'left-end',
-] as const
-
-const meta = {
-  title: 'Utilities/Popper',
-  component: PopperTemplate,
-  argTypes: {
-    placement: {
-      control: { type: 'select' },
-      options: PLACEMENTS,
-    },
-    offset: {
-      control: { type: 'number' },
-    },
-    flip: {
-      control: { type: 'boolean' },
-    },
-    shift: {
-      control: { type: 'boolean' },
-    },
-    keepMounted: {
-      control: { type: 'boolean' },
-    },
-    closeOnDetached: {
-      control: { type: 'boolean' },
-    },
-    closeOnEscape: {
-      control: { type: 'boolean' },
-    },
-  },
-} satisfies Meta<PopperTemplateProps>
-
-export default meta
-
-type Story = StoryObj<typeof meta>
-
-export const Default: Story = {}
-
-export const DisableAnimation: Story = {
-  args: {
-    disableAnimation: true,
-  },
 }

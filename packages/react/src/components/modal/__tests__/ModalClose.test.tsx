@@ -1,4 +1,3 @@
-import { waitForElementToBeRemoved } from '@testing-library/react'
 import { useState } from 'react'
 import { renderWithNexUIProvider } from '~/tests/shared'
 import {
@@ -57,56 +56,79 @@ describe('ModalClose', () => {
     consoleSpy.mockRestore()
   })
 
-  it("should async close when the children's onClick returns a resolved Promise", async () => {
-    jest.useFakeTimers()
+  it('should close when the children onClick does not prevent default', async () => {
+    const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
+      <TestModal>
+        <button data-testid='close-button' onClick={() => {}}>
+          Close Modal
+        </button>
+      </TestModal>,
+    )
 
+    const modalRoot = queryByTestId('modal-root')
+    const closeButton = getByTestId('close-button')
+
+    expect(modalRoot).toBeInTheDocument()
+
+    await user.click(closeButton)
+
+    expect(modalRoot).not.toBeInTheDocument()
+  })
+
+  it('should not close when the children onClick prevents default', async () => {
     const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
       <TestModal>
         <button
           data-testid='close-button'
-          onClick={() => {
-            return new Promise<void>((res) => {
-              setTimeout(() => {
-                res()
-              }, 2000)
-            })
+          onClick={(event) => {
+            event.preventDefault()
           }}
         >
           Close Modal
         </button>
       </TestModal>,
-      {
-        userEventOptions: {
-          advanceTimers: jest.advanceTimersByTime,
-        },
-      },
     )
 
     const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
     const closeButton = getByTestId('close-button')
+
+    expect(modalRoot).toBeInTheDocument()
 
     await user.click(closeButton)
 
-    jest.advanceTimersByTime(1000)
+    expect(modalRoot).toBeInTheDocument()
+  })
+
+  it('should not close when the children onClick is async and calls preventDefault', async () => {
+    const { getByTestId, queryByTestId, user, rerender } =
+      renderWithNexUIProvider(
+        <TestModal>
+          <button
+            data-testid='close-button'
+            onClick={async (event) => {
+              event.preventDefault()
+              return Promise.resolve()
+            }}
+          >
+            Close Modal
+          </button>
+        </TestModal>,
+      )
+
+    const modalRoot = queryByTestId('modal-root')
+    const closeButton = getByTestId('close-button')
+    expect(modalRoot).toBeInTheDocument()
+
+    await user.click(closeButton)
 
     expect(modalRoot).toBeInTheDocument()
 
-    jest.advanceTimersByTime(2100)
-
-    await waitForElementToBeRemoved(() => queryByTestId('modal-root'))
-
-    expect(modalRoot).not.toBeInTheDocument()
-
-    jest.useRealTimers()
-  })
-
-  it('should not close when the children onClick return a rejected Promise', async () => {
-    const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
+    rerender(
       <TestModal>
         <button
           data-testid='close-button'
-          onClick={() => {
+          onClick={async (event) => {
+            event.preventDefault()
             return Promise.reject()
           }}
         >
@@ -115,13 +137,7 @@ describe('ModalClose', () => {
       </TestModal>,
     )
 
-    const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
-    const closeButton = getByTestId('close-button')
-
     await user.click(closeButton)
-
-    await new Promise((resolve) => setTimeout(resolve, 500))
 
     expect(modalRoot).toBeInTheDocument()
   })

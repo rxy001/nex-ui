@@ -12,35 +12,27 @@ import {
   ModalHeader,
   ModalFooter,
 } from '../index'
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import type {
-  ModalContentProps,
-  ModalPortalProps,
-  ModalProps,
-  ModalRootProps,
-} from '../types'
+import type { Meta } from '@storybook/react-vite'
 
-type ModalTemplateProps = ModalProps &
-  Pick<ModalPortalProps, 'keepMounted'> &
-  Pick<ModalRootProps, 'preventScroll'> &
-  Pick<
-    ModalContentProps,
-    'restoreFocus' | 'closeOnEscape' | 'closeOnInteractOutside'
-  > & {
-    disableAnimation?: boolean
-  }
+const meta: Meta = {
+  title: 'Utilities/Modal',
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+}
 
-function ModalTemplate(props: ModalTemplateProps) {
-  const {
-    restoreFocus,
-    closeOnEscape,
-    closeOnInteractOutside,
-    preventScroll,
-    keepMounted,
-    disableAnimation,
-  } = props
+export default meta
 
+export function Default() {
   const [open, setOpen] = useState(false)
+  const [restoreFocus, setRestoreFocus] = useState(true)
+  const [closeOnEscape, setCloseOnEscape] = useState(true)
+  const [closeOnInteractOutside, setCloseOnInteractOutside] = useState(true)
+  const [preventScroll, setPreventScroll] = useState(false)
+  const [keepMounted, setKeepMounted] = useState(false)
+  const [disableAnimation, setDisableAnimation] = useState(false)
 
   const renderRoot = () => (
     <ModalRoot preventScroll={preventScroll}>
@@ -84,40 +76,90 @@ function ModalTemplate(props: ModalTemplateProps) {
   )
 
   return (
-    <Modal open={open} onOpenChange={setOpen}>
-      <ModalTrigger>
-        <button>Open Modal</button>
-      </ModalTrigger>
-      <ModalPortal keepMounted={keepMounted} disablePresence={disableAnimation}>
-        {disableAnimation ? (
-          renderRoot()
-        ) : (
-          <ModalMotion>{renderRoot()}</ModalMotion>
-        )}
-      </ModalPortal>
-    </Modal>
+    <div
+      style={{
+        height: 2000,
+      }}
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <label>
+          <input
+            type='checkbox'
+            checked={restoreFocus}
+            onChange={(event) => setRestoreFocus(event.target.checked)}
+          />
+          &nbsp;Restore focus on close?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={closeOnEscape}
+            onChange={(event) => setCloseOnEscape(event.target.checked)}
+          />
+          &nbsp;Dismiss on escape?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={closeOnInteractOutside}
+            onChange={(event) =>
+              setCloseOnInteractOutside(event.target.checked)
+            }
+          />
+          &nbsp;Dismiss on interact outside?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={keepMounted}
+            onChange={(event) => setKeepMounted(event.target.checked)}
+          />
+          &nbsp;Keep mounted when closed?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={disableAnimation}
+            onChange={(event) => setDisableAnimation(event.target.checked)}
+          />
+          &nbsp;Disable animation?
+        </label>
+        <label>
+          <input
+            type='checkbox'
+            checked={preventScroll}
+            onChange={(event) => setPreventScroll(event.target.checked)}
+          />
+          &nbsp;Prevent scroll when open?
+        </label>
+        <hr style={{ width: '100%' }} />
+        <Modal open={open} onOpenChange={setOpen}>
+          <ModalTrigger>
+            <button
+              style={{
+                width: 100,
+              }}
+            >
+              Open Modal
+            </button>
+          </ModalTrigger>
+          <ModalPortal
+            keepMounted={keepMounted}
+            disablePresence={disableAnimation}
+          >
+            {disableAnimation ? (
+              renderRoot()
+            ) : (
+              <ModalMotion>{renderRoot()}</ModalMotion>
+            )}
+          </ModalPortal>
+        </Modal>
+      </div>
+    </div>
   )
 }
 
-const meta = {
-  title: 'Utilities/Modal',
-  component: ModalTemplate,
-  argTypes: {
-    restoreFocus: { control: 'boolean' },
-    closeOnEscape: { control: 'boolean' },
-    closeOnInteractOutside: { control: 'boolean' },
-    preventScroll: { control: 'boolean' },
-    keepMounted: { control: 'boolean' },
-  },
-} satisfies Meta<ModalTemplateProps>
-
-export default meta
-
-type Story = StoryObj<typeof meta>
-
-export const Default: Story = {}
-
-function NestedModalTemplate() {
+export function NestedModals() {
   const [open, setOpen] = useState(false)
   const [nestedOpen, setNestedOpen] = useState(false)
   return (
@@ -186,37 +228,7 @@ function NestedModalTemplate() {
   )
 }
 
-export const NestedModals: Story = {
-  render: () => <NestedModalTemplate />,
-}
-
-export const DisableAnimations: Story = {
-  args: {
-    disableAnimation: true,
-  },
-}
-
-export const keepMounted: Story = {
-  args: {
-    keepMounted: true,
-  },
-}
-
-export const PreventScroll: Story = {
-  render: () => {
-    return (
-      <div
-        style={{
-          height: 2000,
-        }}
-      >
-        <ModalTemplate preventScroll />
-      </div>
-    )
-  },
-}
-
-function MultipleModalsTemplate() {
+export function MultipleModals() {
   const [openFirst, setOpenFirst] = useState(false)
   const [openSecond, setOpenSecond] = useState(false)
   return (
@@ -283,6 +295,82 @@ function MultipleModalsTemplate() {
   )
 }
 
-export const MultipleModals: Story = {
-  render: () => <MultipleModalsTemplate />,
+export function CloseModal() {
+  const [open, setOpen] = useState(false)
+  const [loading1, setLoading1] = useState(false)
+  const [loading2, setLoading2] = useState(false)
+
+  return (
+    <Modal open={open} onOpenChange={setOpen}>
+      <ModalTrigger>
+        <button>Open Modal</button>
+      </ModalTrigger>
+      <ModalPortal>
+        <ModalRoot>
+          <ModalMotion>
+            <ModalBackdrop />
+            <ModalContent
+              sx={{
+                width: '100vw',
+              }}
+            >
+              <ModalHeader>Async Close Modal</ModalHeader>
+              <ModalBody>
+                <p>
+                  This modal demonstrates the ability to handle asynchronous
+                  operations.
+                </p>
+                <p>Click the buttons in the footer to see the behavior.</p>
+              </ModalBody>
+              <ModalFooter>
+                <ModalClose>
+                  <button>Close Modal</button>
+                </ModalClose>
+                <ModalClose>
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault()
+                    }}
+                  >
+                    Prevent Close Modal
+                  </button>
+                </ModalClose>
+                <ModalClose>
+                  <button
+                    onClick={() => {
+                      setLoading1(true)
+                      return new Promise<void>((resolve) => {
+                        setTimeout(() => {
+                          setLoading1(false)
+                          resolve()
+                        }, 1000)
+                      })
+                    }}
+                  >
+                    {loading1 ? 'Requesting...' : 'Async Close Modal'}
+                  </button>
+                </ModalClose>
+                <ModalClose>
+                  <button
+                    onClick={(event) => {
+                      setLoading2(true)
+                      return new Promise<void>((resolve) => {
+                        setTimeout(() => {
+                          setLoading2(false)
+                          event.preventDefault()
+                          resolve()
+                        }, 1000)
+                      })
+                    }}
+                  >
+                    {loading2 ? 'Requesting...' : 'Async Prevent Close Modal'}
+                  </button>
+                </ModalClose>
+              </ModalFooter>
+            </ModalContent>
+          </ModalMotion>
+        </ModalRoot>
+      </ModalPortal>
+    </Modal>
+  )
 }
