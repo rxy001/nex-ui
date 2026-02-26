@@ -6,7 +6,7 @@ function TestCollection() {
   const collection = useCollection()
 
   return (
-    <Collection context={collection.context}>
+    <Collection collection={collection}>
       <CollectionItem>
         <button>Item 1</button>
       </CollectionItem>

@@ -18,7 +18,7 @@ function TestCollection({ getItems, children }: TestCollectionProps) {
     getItems(collection.getItems())
   }, [collection, getItems])
 
-  return <Collection context={collection.context}>{children}</Collection>
+  return <Collection collection={collection}>{children}</Collection>
 }
 
 describe('useCollection', () => {
