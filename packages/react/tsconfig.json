@@ -1,11 +1,10 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src", "../../sb/utils"],
+  "include": ["./src"],
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "~/*": ["../../*"],
-      "@storybook/react-vite": ["../../sb/node_modules/@storybook/react-vite"]
+      "~/*": ["../../*"]
     }
   }
 }
