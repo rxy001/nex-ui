@@ -39,6 +39,7 @@
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-swc": "0.4.0",
+    "@storybook/react-vite": "9.1.16",
     "@swc/core": "1.11.7",
     "@swc/jest": "0.2.37",
     "@testing-library/dom": "10.4.0",

@@ -29,18 +29,14 @@
 6. Checkbox 内 input element 无法添加 classname 和 sx.
     组件的 className 和 sx 都是用于 根元素。一般像控件组件内部的 input 都是隐藏的，所以感觉也不需要 classname 和 sx
 
-7. 添加 css cascade layer
-
 8. recipes 部分属性值改为 css 变量
 
 11. 重构基础组件的 API，尽量减少 Context 的使用
 
-12. 统一键盘和鼠标事件已仿效 OS 实现， 例如: 在按下 escape 时关闭 Popper，Space 触发按钮事件. RadioGroup
-
 13. computePosition 处理 scale
-
-14. 统一 type、interface 使用场景
 
 15. 将 isValidElement 统一改为 isValidNonFragmentElement
 
-16. 为每个组件单独添加一个 story 用于 storybook 视觉回归测试
+16. 修改 Radio 的 dot 为 indicator 
+
+17. Radio、Checkbox 是否应该使用泛性？
