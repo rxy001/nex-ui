@@ -10,7 +10,7 @@ export const CollectionItem = <ItemData extends {} = {}>({
   children,
   ...itemData
 }: CollectionItemProps<ItemData>) => {
-  const { register, unregister } = useCollectionContext() ?? {}
+  const ctx = useCollectionContext()
   const ref = useRef<HTMLElement>(null)
   const itemDataRef = useLatest({
     element: ref,
@@ -20,11 +20,11 @@ export const CollectionItem = <ItemData extends {} = {}>({
   const mergedRefs = useMergeRefs(ref, children?.props?.ref)
 
   useEffect(() => {
-    register?.(itemDataRef)
+    ctx?.context?.register(itemDataRef)
     return () => {
-      unregister?.(itemDataRef)
+      ctx?.context?.unregister(itemDataRef)
     }
-  }, [itemDataRef, register, unregister])
+  }, [ctx, itemDataRef])
 
   if (!isValidNonFragmentElement(children)) {
     return children

@@ -5,9 +5,9 @@ import type { CollectionProps } from './types'
 
 export const Collection = <ItemData extends {}>({
   children,
-  context,
+  collection,
 }: CollectionProps<ItemData>) => {
-  return <CollectionProvider value={context}>{children}</CollectionProvider>
+  return <CollectionProvider value={collection}>{children}</CollectionProvider>
 }
 
 Collection.displayName = 'Collection'
