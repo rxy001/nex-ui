@@ -7,7 +7,7 @@ function TestCollectionItem({ children }: CollectionItemProps) {
   const collection = useCollection()
 
   return (
-    <Collection context={collection.context}>
+    <Collection collection={collection}>
       <CollectionItem>{children}</CollectionItem>
     </Collection>
   )

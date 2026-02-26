@@ -5,7 +5,7 @@ import { RovingFocusGroup, RovingFocusItem } from '../index'
 import type { UserEvent } from '@testing-library/user-event'
 import type { RovingFocusGroupProps } from '../index'
 
-function TestRovingFocus(props: RovingFocusGroupProps) {
+function TestRovingFocus(props: RovingFocusGroupProps<string>) {
   const [focusItemId, setFocusItemId] = useState<string>('red')
 
   return (

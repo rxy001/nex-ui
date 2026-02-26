@@ -9,7 +9,7 @@ import type { KeyboardEvent, FocusEvent } from 'react'
 import type { RovingFocusContextValue } from './RovingFocusContext'
 import type { RovingFocusGroupProps, RovingFocusItemData } from './types'
 
-export const RovingFocusGroup = <T extends string | number = string>(
+export const RovingFocusGroup = <T extends string | number = string | number>(
   props: RovingFocusGroupProps<T>,
 ) => {
   const {
@@ -150,7 +150,7 @@ export const RovingFocusGroup = <T extends string | number = string>(
   }
 
   return (
-    <Collection context={collection.context}>
+    <Collection collection={collection}>
       <RovingFocusProvider value={ctx}>
         {cloneElement(
           children,

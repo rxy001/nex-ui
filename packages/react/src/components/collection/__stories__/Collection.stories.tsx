@@ -29,7 +29,7 @@ function CollectionWrapper({
   })
 
   return (
-    <Collection context={collection.context}>
+    <Collection collection={collection}>
       <ul>{children}</ul>
     </Collection>
   )
