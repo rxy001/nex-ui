@@ -16,7 +16,6 @@ export interface DefaultAliases {
   maxH?: 'maxHeight'
   minH?: 'minHeight'
   pos?: 'position'
-  d?: 'display'
   p?: 'padding'
   pt?: 'paddingBlockStart'
   pb?: 'paddingBlockEnd'

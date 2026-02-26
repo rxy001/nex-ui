@@ -17,8 +17,6 @@ export const aliases = defineConfig.aliases({
 
   pos: 'position',
 
-  d: 'display',
-
   p: 'padding',
   pt: 'paddingBlockStart',
   pb: 'paddingBlockEnd',
