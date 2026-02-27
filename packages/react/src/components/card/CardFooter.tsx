@@ -1,11 +1,17 @@
 'use client'
 
-import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
+import { nex } from '@nex-ui/styled'
+import {
+  useDefaultProps,
+  useSlot,
+  useRecipeStyles,
+  useSlotClasses,
+} from '../utils'
 import { cardFooterRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { CardFooterProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const CardFooter = <RootComponent extends ElementType>(
   inProps: CardFooterProps<RootComponent>,
@@ -15,7 +21,7 @@ export const CardFooter = <RootComponent extends ElementType>(
     props: inProps,
   })
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState: props,
     name: 'CardFooter',
     recipe: cardFooterRecipe,
@@ -29,7 +35,7 @@ export const CardFooter = <RootComponent extends ElementType>(
   const [CardFooterRoot, getCardFooterRootProps] = useSlot({
     style,
     classNames: slotClasses.root,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: props,
   })
 

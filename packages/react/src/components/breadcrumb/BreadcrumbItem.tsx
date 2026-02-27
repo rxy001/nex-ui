@@ -1,14 +1,20 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
 import { useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
 import { breadcrumbItemRecipe } from '../../theme/recipes'
-import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
+import {
+  useDefaultProps,
+  useSlot,
+  useSlotClasses,
+  useRecipeStyles,
+} from '../utils'
 import type { ElementType } from 'react'
 import type { BreadcrumbItemProps } from './types'
 
-const slots = ['root', 'link']
+const slots = ['root', 'link'] as const
 
 export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
   inProps: BreadcrumbItemProps<LinkComponent>,
@@ -42,7 +48,7 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
   )
   const { focusVisible, focusProps } = useFocusRing()
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState: props,
     name: 'BreadcrumbItem',
     recipe: breadcrumbItemRecipe,
@@ -55,7 +61,7 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
   })
 
   const [BreadcrumbItemRoot, getBreadcrumbItemRootProps] = useSlot({
-    elementType: 'li',
+    component: nex.li,
     style: styles.root,
     classNames: slotClasses.root,
     externalSlotProps: slotProps?.root,
@@ -77,7 +83,7 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
   }
 
   const [BreadcrumbItemLink, getBreadcrumbItemLinkProps] = useSlot({
-    elementType: 'a',
+    component: nex.a,
     style: styles.link,
     classNames: slotClasses.link,
     externalForwardedProps: remainingProps,

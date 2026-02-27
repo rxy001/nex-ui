@@ -170,7 +170,7 @@ exports[`RadioGroup should render with default props 1`] = `
         value="orange"
       />
       <span
-        class="nui-radio-dot emotion-4"
+        class="nui-radio-indicator emotion-4"
       />
       <span
         class="nui-radio-label emotion-5"
@@ -197,7 +197,7 @@ exports[`RadioGroup should render with default props 1`] = `
         value="pear"
       />
       <span
-        class="nui-radio-dot emotion-4"
+        class="nui-radio-indicator emotion-4"
       />
       <span
         class="nui-radio-label emotion-5"
@@ -224,7 +224,7 @@ exports[`RadioGroup should render with default props 1`] = `
         value="apple"
       />
       <span
-        class="nui-radio-dot emotion-4"
+        class="nui-radio-indicator emotion-4"
       />
       <span
         class="nui-radio-label emotion-5"

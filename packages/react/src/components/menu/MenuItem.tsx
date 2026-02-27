@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useState } from 'react'
 import { focus } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
@@ -66,7 +67,7 @@ export const MenuItem = (props: MenuItemProps) => {
 
   const [MenuItemRoot, getMenuItemRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     additionalProps: {
       onClick: handleClick,

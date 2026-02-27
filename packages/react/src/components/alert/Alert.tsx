@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import {
   CloseOutlined,
   ExclamationCircleFilled,
@@ -9,13 +10,25 @@ import {
 } from '@nex-ui/icons'
 import { useMemo } from 'react'
 import { __DEV__ } from '@nex-ui/utils'
-import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useSlot,
+  useRecipeStyles,
+  useSlotClasses,
+} from '../utils'
 import { alertRecipe } from '../../theme/recipes'
 import { Button } from '../button'
 import type { ElementType } from 'react'
 import type { AlertProps } from './types'
 
-const slots = ['root', 'icon', 'content', 'title', 'description', 'closeButton']
+const slots = [
+  'root',
+  'icon',
+  'content',
+  'title',
+  'description',
+  'closeButton',
+] as const
 
 export const Alert = <RootComponent extends ElementType = 'div'>(
   inProps: AlertProps<RootComponent>,
@@ -104,14 +117,14 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
     [],
   )
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'Alert',
     recipe: alertRecipe,
   })
 
   const [AlertRoot, getAlertRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     style: styles.root,
     classNames: slotClasses.root,
@@ -125,37 +138,36 @@ export const Alert = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AlertIcon, getAlertIconProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.icon,
     externalSlotProps: slotProps?.icon,
     classNames: slotClasses.icon,
   })
 
   const [AlertContent, getAlertContentProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.content,
     externalSlotProps: slotProps?.content,
     classNames: slotClasses.content,
   })
 
   const [AlertTitle, getAlertTitleProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.title,
     externalSlotProps: slotProps?.title,
     classNames: slotClasses.title,
   })
 
   const [AlertDescription, getAlertDescriptionProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.description,
     externalSlotProps: slotProps?.description,
     classNames: slotClasses.description,
   })
 
   const [AlertCloseButton, getAlertCloseButtonProps] = useSlot({
-    elementType: Button,
+    component: Button,
     style: styles.closeButton,
-    shouldForwardComponent: false,
     externalSlotProps: slotProps?.closeButton,
     classNames: slotClasses.closeButton,
     ariaProps: slotAriaProps.closeButton,

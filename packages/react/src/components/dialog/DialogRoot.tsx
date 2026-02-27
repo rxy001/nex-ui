@@ -1,12 +1,12 @@
 'use client'
 
 import { ModalBackdrop, ModalRoot, ModalPortal, ModalMotion } from '../modal'
-import { useStyles, useSlot, useSlotClasses } from '../utils'
+import { useRecipeStyles, useSlot, useSlotClasses } from '../utils'
 import { useDialogPropsContext } from './DialogContext'
 import { dialogRootRecipe } from '../../theme/recipes'
 import type { ReactNode } from 'react'
 
-const slots = ['root', 'backdrop']
+const slots = ['root', 'backdrop'] as const
 
 export const DialogRoot = ({ children }: { children?: ReactNode }) => {
   const props = useDialogPropsContext()
@@ -29,17 +29,16 @@ export const DialogRoot = ({ children }: { children?: ReactNode }) => {
     classNames,
   })
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState: props,
     name: 'Dialog',
     recipe: dialogRootRecipe,
   })
 
   const [DialogRootRoot, getDialogRootRootProps] = useSlot({
-    elementType: ModalRoot,
+    component: ModalRoot,
     style: styles.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     classNames: slotClasses.root,
     dataAttrs: {
       hideBackdrop,
@@ -51,10 +50,9 @@ export const DialogRoot = ({ children }: { children?: ReactNode }) => {
   })
 
   const [DialogBackdrop, getDialogBackdropProps] = useSlot({
-    elementType: ModalBackdrop,
+    component: ModalBackdrop,
     style: styles.backdrop,
     externalSlotProps: slotProps?.backdrop,
-    shouldForwardComponent: false,
     classNames: slotClasses.backdrop,
   })
 

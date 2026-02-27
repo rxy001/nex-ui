@@ -1,28 +1,20 @@
 import { useMemo } from 'react'
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
 import { useNexUI } from '../provider/Context'
-import type {
-  RecipeRuntimeFn,
-  CSSObject,
-  SlotRecipeRuntimeFn,
-} from '@nex-ui/system'
+import type { RecipeRuntimeFn, SlotRecipeRuntimeFn } from '@nex-ui/system'
 import type { ComponentNames } from '../../types/componentThemes'
 
-type UseStylesProps<S extends RecipeRuntimeFn | SlotRecipeRuntimeFn> = {
+type UseRecipeStylesProps<
+  Recipe extends RecipeRuntimeFn | SlotRecipeRuntimeFn,
+> = {
+  recipe: Recipe
   name: ComponentNames
-  ownerState: {}
-  recipe: S
+  ownerState: object
 }
 
-export const useStyles = <
+export function useRecipeStyles<
   Recipe extends RecipeRuntimeFn | SlotRecipeRuntimeFn,
->({
-  name,
-  ownerState,
-  recipe,
-}: UseStylesProps<Recipe>): Recipe extends SlotRecipeRuntimeFn
-  ? Record<Recipe['slots'][number], CSSObject>
-  : CSSObject => {
+>({ name, ownerState, recipe }: UseRecipeStylesProps<Recipe>) {
   const { components } = useNexUI()
 
   const styleOverrides = components?.[name]?.styleOverrides
@@ -36,13 +28,14 @@ export const useStyles = <
         ...styleOverrides,
       })
     }
+    // @ts-ignore
     return defineRecipe({
-      // @ts-ignore
-      extend: recipe,
+      extend: recipe as RecipeRuntimeFn,
       ...styleOverrides,
     })
-  }, [recipe, styleOverrides])
+  }, [recipe, styleOverrides]) as any
 
-  // @ts-ignore
-  return extendedRecipe(extendedRecipe.splitVariantProps(ownerState))
+  return extendedRecipe(
+    extendedRecipe.splitVariantProps(ownerState),
+  ) as ReturnType<Recipe>
 }

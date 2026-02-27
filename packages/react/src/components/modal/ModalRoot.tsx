@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { ownerDocument, ownerWindow, isFunction } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { useEffect, useRef } from 'react'
@@ -35,7 +36,7 @@ export const ModalRoot = (props: ModalRootProps) => {
 
   const [ModalRootRoot, getModalRootRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     additionalProps: {
       ref: rootRef,

@@ -1,10 +1,16 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
 import { DrawerRoot } from './DrawerRoot'
-import { useStyles, useDefaultProps, useSlot, useSlotClasses } from '../utils'
+import {
+  useRecipeStyles,
+  useDefaultProps,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { Ripple } from '../ripple'
 import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
@@ -15,7 +21,7 @@ import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DrawerContentProps } from './types'
 
-const slots = ['root', 'paper', 'closeButton']
+const slots = ['root', 'paper', 'closeButton'] as const
 
 export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   inProps: DrawerContentProps<RootComponent>,
@@ -53,7 +59,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     hideCloseButton,
   }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'DrawerContent',
     recipe: drawerContentRecipe,
@@ -84,7 +90,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DrawerContentRoot, getDrawerContentRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.root,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
@@ -96,11 +102,10 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DrawerContentPaper, getDrawerContentPaperProps] = useSlot({
-    elementType: ModalContent,
+    component: ModalContent,
     style: styles.paper,
     classNames: slotClasses.paper,
     externalSlotProps: slotProps?.paper,
-    shouldForwardComponent: false,
     ariaProps: slotAriaProps.paper,
     additionalProps: {
       restoreFocus,
@@ -110,11 +115,10 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DrawerContentCloseButton, getDrawerContentCloseButtonProps] = useSlot({
-    elementType: ButtonBase,
+    component: ButtonBase,
     externalSlotProps: slotProps?.closeButton,
     style: styles.closeButton,
     classNames: slotClasses.closeButton,
-    shouldForwardComponent: false,
     ariaProps: slotAriaProps.closeButton,
   })
 

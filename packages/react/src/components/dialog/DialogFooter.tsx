@@ -1,12 +1,17 @@
 'use client'
 
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { dialogFooterRecipe } from '../../theme/recipes'
 import { ModalFooter } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogFooterProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const DialogFooter = <RootComponent extends ElementType = 'div'>(
   inProps: DialogFooterProps<RootComponent>,
@@ -23,7 +28,7 @@ export const DialogFooter = <RootComponent extends ElementType = 'div'>(
     slots,
   })
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState: props,
     name: 'DialogFooter',
     recipe: dialogFooterRecipe,
@@ -31,10 +36,9 @@ export const DialogFooter = <RootComponent extends ElementType = 'div'>(
 
   const [DialogFooterRoot, getDialogFooterRootProps] = useSlot({
     style,
-    elementType: ModalFooter,
+    component: ModalFooter,
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
   })
 
   return (

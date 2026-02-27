@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useId, useMemo, useRef } from 'react'
 import { isString } from '@nex-ui/utils'
 import { useControlledState } from '@nex-ui/hooks'
@@ -8,11 +9,23 @@ import { useNexUI } from '../provider'
 import { inputRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import { InputBase } from '../inputBase'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import type { ElementType, ChangeEvent, MouseEvent } from 'react'
 import type { InputProps } from './types'
 
-const slots = ['root', 'input', 'clearButton', 'suffix', 'prefix', 'label']
+const slots = [
+  'root',
+  'input',
+  'clearButton',
+  'suffix',
+  'prefix',
+  'label',
+] as const
 
 export const Input = <InputComponent extends ElementType = 'input'>(
   inProps: InputProps<InputComponent>,
@@ -105,7 +118,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
     disableAnimation,
   }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'Input',
     recipe: inputRecipe,
@@ -160,7 +173,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   }
 
   const [InputRoot, getInputRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     externalSlotProps: slotProps?.root,
     style: styles.root,
     classNames: slotClasses.root,
@@ -184,7 +197,7 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputLabel, getInputLabelProps] = useSlot({
-    elementType: 'label',
+    component: nex.label,
     externalSlotProps: slotProps?.label,
     style: styles.label,
     classNames: slotClasses.label,
@@ -192,12 +205,11 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputControl, getInputControlProps] = useSlot({
-    elementType: InputBase,
+    component: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
     ariaProps: slotAriaProps.input,
-    shouldForwardComponent: false,
     additionalProps: {
       as,
       disabled,
@@ -211,12 +223,11 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputClearButton, getClearButtonProps] = useSlot({
-    elementType: ButtonBase,
+    component: ButtonBase,
     style: styles.clearButton,
     externalSlotProps: slotProps?.clearButton,
     classNames: slotClasses.clearButton,
     ariaProps: slotAriaProps.clearButton,
-    shouldForwardComponent: false,
     additionalProps: {
       onClick: handleClearValue,
       disabled: disabled,
@@ -227,14 +238,14 @@ export const Input = <InputComponent extends ElementType = 'input'>(
   })
 
   const [InputPrefix, getInputPrefixProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.prefix,
     style: styles.prefix,
     classNames: slotClasses.prefix,
   })
 
   const [InputSuffix, getInputSuffixProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.suffix,
     style: styles.suffix,
     classNames: slotClasses.suffix,
