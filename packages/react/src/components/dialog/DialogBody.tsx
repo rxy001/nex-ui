@@ -1,13 +1,18 @@
 'use client'
 
-import { useDefaultProps, useSlotClasses, useStyles, useSlot } from '../utils'
+import {
+  useDefaultProps,
+  useSlotClasses,
+  useRecipeStyles,
+  useSlot,
+} from '../utils'
 import { dialogBodyRecipe } from '../../theme/recipes'
 import { useDialogContentPropsContext } from './DialogContext'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogBodyProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const DialogBody = <RootComponent extends ElementType = 'div'>(
   inProps: DialogBodyProps<RootComponent>,
@@ -21,7 +26,7 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
 
   const { children, tabIndex, ...remainingProps } = props
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState: {
       ...props,
       scroll,
@@ -37,10 +42,9 @@ export const DialogBody = <RootComponent extends ElementType = 'div'>(
 
   const [DialogBodyRoot, getDialogBodyRootProps] = useSlot({
     style,
-    elementType: ModalBody,
+    component: ModalBody,
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     ariaProps: {
       // https://dequeuniversity.com/rules/axe/4.10/scrollable-region-focusable?application=axeAPI
       tabIndex: tabIndex ?? (scroll === 'inside' ? 0 : undefined),

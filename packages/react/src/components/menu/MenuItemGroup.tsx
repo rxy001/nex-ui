@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useId, useMemo, useState } from 'react'
 import { useSlot } from '../utils'
 import { MenuItemGroupProvider } from './MenuContext'
@@ -24,7 +25,7 @@ export const MenuItemGroup = (props: MenuItemGroupProps) => {
   )
 
   const [MenuItemGroupRoot, getMenuItemRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     ariaProps,
   })

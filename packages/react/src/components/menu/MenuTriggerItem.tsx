@@ -76,9 +76,8 @@ export const MenuTriggerItem = (props: MenuTriggerItemProps) => {
   }, [menuContentCtx.onPointerGraceIntentChange])
 
   const [MenuTriggerItemRoot, getMenuTriggerItemProps] = useSlot({
-    elementType: MenuItem,
+    component: MenuItem,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     additionalProps: {
       closeOnClick: false,
       ref: menuCtx.triggerRef,

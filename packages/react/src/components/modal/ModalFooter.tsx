@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import type { ModalFooterProps } from './types'
@@ -20,7 +21,7 @@ const style = recipe()
 export const ModalFooter = (props: ModalFooterProps) => {
   const [ModalFooterRoot, getModalFooterRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: props,
   })
 

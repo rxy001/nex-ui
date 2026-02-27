@@ -11,10 +11,6 @@ exports[`Popover should have the correct root class name 1`] = `
   z-index: var(--nui-z-indices-popover);
 }
 
-.emotion-0:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
-  outline: none;
-}
-
 .emotion-1 {
   -webkit-padding-start: var(--nui-spaces-3);
   padding-inline-start: var(--nui-spaces-3);

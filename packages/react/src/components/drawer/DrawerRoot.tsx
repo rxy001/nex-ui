@@ -1,15 +1,15 @@
 import { ModalBackdrop, ModalMotion, ModalPortal, ModalRoot } from '../modal'
-import { useSlot, useSlotClasses, useStyles } from '../utils'
+import { useSlot, useSlotClasses, useRecipeStyles } from '../utils'
 import { useDrawerPropsContext } from './DrawerContext'
 import { drawerRootRecipe } from '../../theme/recipes'
 import type { ReactNode } from 'react'
 
-const slots = ['root', 'backdrop']
+const slots = ['root', 'backdrop'] as const
 
 export const DrawerRoot = ({ children }: { children: ReactNode }) => {
   const props = useDrawerPropsContext()
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     name: 'Drawer',
     recipe: drawerRootRecipe,
     ownerState: props,
@@ -34,10 +34,9 @@ export const DrawerRoot = ({ children }: { children: ReactNode }) => {
   })
 
   const [DrawerRootRoot, getDrawerRootRootProps] = useSlot({
-    elementType: ModalRoot,
+    component: ModalRoot,
     style: styles.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     classNames: slotClasses.root,
     additionalProps: {
       preventScroll,
@@ -49,10 +48,9 @@ export const DrawerRoot = ({ children }: { children: ReactNode }) => {
   })
 
   const [DrawerBackdrop, getDrawerBackdropProps] = useSlot({
-    elementType: ModalBackdrop,
+    component: ModalBackdrop,
     style: styles.backdrop,
     externalSlotProps: slotProps?.backdrop,
-    shouldForwardComponent: false,
     classNames: slotClasses.backdrop,
   })
 

@@ -1,18 +1,24 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useControlledState } from '@nex-ui/hooks'
 import { __DEV__, addEventListener } from '@nex-ui/utils'
 import { useId, useEffect, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { useRadioGroupContext } from './RadioGroupContext'
-import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useSlot,
+  useRecipeStyles,
+  useSlotClasses,
+} from '../utils'
 import { radioRecipe } from '../../theme/recipes'
 import { RovingFocusItem } from '../rovingFocus'
 import type { ElementType, FocusEvent } from 'react'
 import type { RadioOwnerState, RadioProps } from './types'
 
-const slots = ['root', 'input', 'dot', 'label']
+const slots = ['root', 'input', 'indicator', 'label'] as const
 
 export const Radio = <InputComponent extends ElementType = 'input'>(
   inProps: RadioProps<InputComponent>,
@@ -91,7 +97,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
     disableAnimation,
   }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     name: 'Radio',
     recipe: radioRecipe,
     ownerState,
@@ -133,7 +139,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
   }
 
   const [RadioRoot, getRadioRootProps] = useSlot({
-    elementType: 'label',
+    component: nex.label,
     style: styles.root,
     externalSlotProps: slotProps?.root,
     classNames: slotClasses.root,
@@ -151,12 +157,11 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
   })
 
   const [RadioInput, getRadioInputProps] = useSlot({
-    elementType: InputBase,
+    component: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
     ariaProps: slotAriaProps.input,
-    shouldForwardComponent: false,
     additionalProps: {
       as,
       disabled,
@@ -179,18 +184,18 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
   })
 
   const [RadioLabel, getRadioLabelProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     style: styles.label,
     externalSlotProps: slotProps?.label,
     classNames: slotClasses.label,
     ariaProps: slotAriaProps.label,
   })
 
-  const [RadioDot, getRadioDotProps] = useSlot({
-    elementType: 'span',
-    externalSlotProps: slotProps?.dot,
-    style: styles.dot,
-    classNames: slotClasses.dot,
+  const [RadioIndicator, getRadioIndicatorProps] = useSlot({
+    component: nex.span,
+    externalSlotProps: slotProps?.indicator,
+    style: styles.indicator,
+    classNames: slotClasses.indicator,
   })
 
   useEffect(() => {
@@ -233,7 +238,7 @@ export const Radio = <InputComponent extends ElementType = 'input'>(
       >
         <RadioInput {...getRadioInputProps()} />
       </RovingFocusItem>
-      <RadioDot {...getRadioDotProps()} />
+      <RadioIndicator {...getRadioIndicatorProps()} />
       {children && (
         <RadioLabel {...getRadioLabelProps()}>{children}</RadioLabel>
       )}

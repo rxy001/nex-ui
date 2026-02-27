@@ -1,14 +1,19 @@
 import { createRef } from 'react'
 import { renderHook } from '@testing-library/react'
-import { nex } from '@nex-ui/styled'
 import { useSlot } from '../useSlot'
+import type { ButtonHTMLAttributes } from 'react'
+import type { Interpolation } from '@nex-ui/system'
 import type { UseSlotProps } from '../useSlot'
+
+const Component = (
+  props: ButtonHTMLAttributes<HTMLButtonElement> & { sx?: Interpolation },
+) => <button {...props} />
 
 describe('useSlot', () => {
   it('should return component and getProps function', () => {
     const { result } = renderHook(() =>
       useSlot({
-        elementType: 'div',
+        component: () => <div />,
       }),
     )
 
@@ -24,9 +29,9 @@ describe('useSlot', () => {
 
     const { result, rerender } = renderHook((args) => useSlot(args), {
       initialProps: {
-        elementType: 'div',
+        component: Component,
         ariaProps,
-      } as UseSlotProps<'div'>,
+      } as UseSlotProps<typeof Component>,
     })
 
     expect(result.current[1]()).toMatchObject({
@@ -34,7 +39,7 @@ describe('useSlot', () => {
     })
 
     rerender({
-      elementType: 'div',
+      component: Component,
       ariaProps,
       additionalProps,
     })
@@ -44,7 +49,7 @@ describe('useSlot', () => {
     })
 
     rerender({
-      elementType: 'div',
+      component: Component,
       ariaProps,
       additionalProps,
       externalForwardedProps,
@@ -55,7 +60,7 @@ describe('useSlot', () => {
     })
 
     rerender({
-      elementType: 'div',
+      component: Component,
       ariaProps,
       additionalProps,
       externalForwardedProps,
@@ -70,7 +75,7 @@ describe('useSlot', () => {
   it('should handle className merging', () => {
     const { result } = renderHook(() =>
       useSlot({
-        elementType: 'div',
+        component: Component,
         classNames: 'base-class',
         additionalProps: { className: 'additional-class' },
         externalForwardedProps: { className: 'forwarded-class' },
@@ -93,16 +98,16 @@ describe('useSlot', () => {
 
     const { result, rerender } = renderHook((args) => useSlot(args), {
       initialProps: {
-        elementType: 'div',
+        component: Component,
         style,
         externalSlotProps: { sx: [mockSx1, mockSx2] },
-      } as UseSlotProps<'div'>,
+      } as UseSlotProps<typeof Component>,
     })
 
     expect(result.current[1]().sx).toEqual([style, [mockSx1, mockSx2]])
 
     rerender({
-      elementType: 'div',
+      component: Component,
       externalSlotProps: { sx: [mockSx1, mockSx2] },
     })
 
@@ -115,37 +120,20 @@ describe('useSlot', () => {
 
     const { result, rerender } = renderHook((args) => useSlot(args), {
       initialProps: {
-        elementType: 'div',
+        component: Component,
         style,
         externalSlotProps: { sx: sxObject },
-      } as UseSlotProps<'div'>,
+      } as UseSlotProps<typeof Component>,
     })
 
     expect(result.current[1]().sx).toEqual([style, sxObject])
 
     rerender({
-      elementType: 'div',
+      component: Component,
       externalSlotProps: { sx: sxObject },
     })
 
     expect(result.current[1]().sx).toEqual(sxObject)
-  })
-
-  it('should handle shouldForwardComponent false', () => {
-    const { result, rerender } = renderHook((args) => useSlot(args), {
-      initialProps: {
-        elementType: 'div',
-        shouldForwardComponent: true,
-      } as UseSlotProps<'div', {}, {}, {}, boolean>,
-    })
-
-    expect(result.current[0]).toBe(nex.div)
-
-    rerender({
-      elementType: 'div',
-      shouldForwardComponent: false,
-    })
-    expect(result.current[0]).toBe('div')
   })
 
   it('should merge refs correctly', () => {
@@ -155,7 +143,7 @@ describe('useSlot', () => {
 
     const { result } = renderHook(() =>
       useSlot({
-        elementType: 'div',
+        component: Component,
         additionalProps: { ref: ref1 },
         externalForwardedProps: { ref: ref2 },
         externalSlotProps: { ref: ref3 },

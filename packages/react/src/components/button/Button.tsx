@@ -1,15 +1,21 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { LoadingOutlined } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { ButtonBase } from '../buttonBase'
 import { buttonRecipe } from '../../theme/recipes'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { Ripple } from '../ripple'
 import type { ElementType } from 'react'
 import type { ButtonProps } from './types'
 
-const slots = ['root', 'startIcon', 'endIcon']
+const slots = ['root', 'startIcon', 'endIcon'] as const
 
 export const Button = <RootComponent extends ElementType = 'button'>(
   inProps: ButtonProps<RootComponent>,
@@ -63,18 +69,17 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     classNames,
   })
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'Button',
     recipe: buttonRecipe,
   })
 
   const [ButtonRoot, getButtonRootProps] = useSlot({
-    elementType: ButtonBase,
+    component: ButtonBase,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     style: styles.root,
-    shouldForwardComponent: false,
     additionalProps: {
       disabled,
     },
@@ -92,14 +97,14 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   })
 
   const [ButtonStartIcon, getButtonStartIconProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.startIcon,
     classNames: slotClasses.startIcon,
     style: styles.startIcon,
   })
 
   const [ButtonEndIcon, getButtonEndIconProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.endIcon,
     classNames: slotClasses.endIcon,
     style: styles.endIcon,

@@ -1,6 +1,7 @@
 'use client'
 
 import * as m from 'motion/react-m'
+import { nex } from '@nex-ui/styled'
 import { LazyMotion } from 'motion/react'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { useId, useMemo, useRef } from 'react'
@@ -8,7 +9,7 @@ import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import {
   useDefaultProps,
-  useStyles,
+  useRecipeStyles,
   useSlot,
   useSlotClasses,
   motionFeatures,
@@ -55,7 +56,7 @@ const indicatorMotionVariants: Variants = {
   },
 }
 
-const slots = ['root', 'heading', 'trigger', 'content', 'indicator']
+const slots = ['root', 'heading', 'trigger', 'content', 'indicator'] as const
 
 export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   inProps: AccordionItemProps<RootComponent>,
@@ -111,7 +112,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     motionProps,
   }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     name: 'AccordionItem',
     ownerState,
     recipe: accordionItemRecipe,
@@ -182,7 +183,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       }
 
   const [AccordionItemRoot, getAccordionItemRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     style: styles.root,
     classNames: slotClasses.root,
@@ -196,19 +197,18 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AccordionItemHeading, getAccordionItemHeadingProps] = useSlot({
-    elementType: 'h3',
+    component: nex.h3,
     externalSlotProps: slotProps?.heading,
     style: styles.heading,
     classNames: slotClasses.heading,
   })
 
   const [AccordionItemTrigger, getAccordionItemTriggerProps] = useSlot({
-    elementType: ButtonBase,
+    component: ButtonBase,
     externalSlotProps: slotProps?.trigger,
     style: styles.trigger,
     classNames: slotClasses.trigger,
     ariaProps: slotAriaProps.trigger,
-    shouldForwardComponent: false,
     additionalProps: {
       disabled,
       onClick: () => {
@@ -218,7 +218,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AccordionItemContent, getAccordionItemContentProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     externalSlotProps: slotProps?.content,
     style: styles.content,
     classNames: slotClasses.content,
@@ -233,7 +233,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AccordionItemIndicator, getAccordionItemIndicatorProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.indicator,
     style: styles.indicator,
     classNames: slotClasses.indicator,

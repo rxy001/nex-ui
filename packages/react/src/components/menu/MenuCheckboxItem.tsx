@@ -45,9 +45,8 @@ export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
   }
 
   const [MenuCheckboxItemRoot, getMenuCheckboxItemProps] = useSlot({
-    elementType: MenuItem,
+    component: MenuItem,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     additionalProps: {
       disabled,
       onClick: handleClick,

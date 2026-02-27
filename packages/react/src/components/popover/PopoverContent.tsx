@@ -1,6 +1,12 @@
 'use client'
 
-import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
+import { nex } from '@nex-ui/styled'
+import {
+  useDefaultProps,
+  useSlot,
+  useRecipeStyles,
+  useSlotClasses,
+} from '../utils'
 import { FocusTrap } from '../focusTrap'
 import { popoverContentRecipe } from '../../theme/recipes'
 import { PopoverRoot } from './PopoverRoot'
@@ -8,7 +14,7 @@ import { usePopoverContext } from './PopoverContext'
 import type { ElementType } from 'react'
 import type { PopoverContentProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const PopoverContent = <RootComponent extends ElementType = 'div'>(
   inProps: PopoverContentProps<RootComponent>,
@@ -37,7 +43,7 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     maxWidth,
   }
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState,
     name: 'PopoverContent',
     recipe: popoverContentRecipe,
@@ -50,7 +56,7 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
 
   const [PopoverContentRoot, getPopoverContentRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     dataAttrs: {

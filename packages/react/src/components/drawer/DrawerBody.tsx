@@ -1,12 +1,17 @@
 'use client'
 
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { drawerBodyRecipe } from '../../theme/recipes'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
 import type { DrawerBodyProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const DrawerBody = <RootComponent extends ElementType = 'div'>(
   inProps: DrawerBodyProps<RootComponent>,
@@ -18,7 +23,7 @@ export const DrawerBody = <RootComponent extends ElementType = 'div'>(
 
   const { children, tabIndex = 0, ...remainingProps } = props
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState: props,
     name: 'DrawerBody',
     recipe: drawerBodyRecipe,
@@ -31,10 +36,9 @@ export const DrawerBody = <RootComponent extends ElementType = 'div'>(
 
   const [DrawerBodyRoot, getDrawerBodyRootProps] = useSlot({
     style,
-    elementType: ModalBody,
+    component: ModalBody,
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     ariaProps: {
       // https://dequeuniversity.com/rules/axe/4.10/scrollable-region-focusable?application=axeAPI
       tabIndex,

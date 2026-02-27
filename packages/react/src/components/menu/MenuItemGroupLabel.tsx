@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useEffect } from 'react'
 import { useSlot } from '../utils'
 import { useMenuItemGroupContext } from './MenuContext'
@@ -16,7 +17,7 @@ export const MenuItemGroupLabel = (props: MenuItemGroupLabelProps) => {
   }, [registerLabel, unregisterLabel])
 
   const [MenuItemGroupLabelRoot, getMenuItemGroupLabelRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     ariaProps: {
       id: groupLabelId,

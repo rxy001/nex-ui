@@ -13,7 +13,7 @@ import {
 import { Radio, RadioGroup } from '../index'
 import { radioClasses } from './classes'
 
-const slots = ['root', 'dot', 'label'] as const
+const slots = ['root', 'indicator', 'label'] as const
 
 describe('Radio', () => {
   testComponentStability(<Radio value='1'>Option 1</Radio>)
@@ -40,7 +40,7 @@ describe('Radio', () => {
     slots,
     {
       root: 'test-class-root',
-      dot: 'test-class-dot',
+      indicator: 'test-class-indicator',
       label: 'test-class-label',
     },
     radioClasses,
@@ -52,7 +52,7 @@ describe('Radio', () => {
     {
       root: { className: 'test-class-root' },
       label: { className: 'test-class-label' },
-      dot: { className: 'test-class-dot' },
+      indicator: { className: 'test-class-indicator' },
     },
     radioClasses,
   )
@@ -72,7 +72,7 @@ describe('Radio', () => {
 
     const radio = getByRole('radio')
     expect(radio).toHaveClass(radioClasses.input)
-    expect(radio.nextElementSibling).toHaveClass(radioClasses.dot)
+    expect(radio.nextElementSibling).toHaveClass(radioClasses.indicator)
   })
 
   it("should render Radio's label with text children", () => {

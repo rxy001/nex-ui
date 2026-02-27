@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import type { MenuSeparatorProps } from './types'
@@ -18,7 +19,7 @@ const style = recipe()
 export const MenuSeparator = (props: MenuSeparatorProps) => {
   const [MenuSeparatorRoot, getMenuSeparatorRootProps] = useSlot({
     style,
-    elementType: 'hr',
+    component: nex.hr,
     externalForwardedProps: props,
     ariaProps: {
       role: 'separator',

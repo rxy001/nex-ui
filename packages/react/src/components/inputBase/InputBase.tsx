@@ -1,3 +1,6 @@
+'use client'
+
+import { nex } from '@nex-ui/styled'
 import { useMemo, useState } from 'react'
 import { useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
@@ -220,7 +223,7 @@ export const InputBase = (props: InputBaseProps) => {
 
   const [InputRoot, getInputRootProps] = useSlot({
     style,
-    elementType: 'input',
+    component: nex.input,
     ariaProps,
     externalForwardedProps: remainingProps,
     additionalProps: {

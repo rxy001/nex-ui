@@ -1,8 +1,14 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useCallback, useId, useMemo } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
-import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
+import {
+  useDefaultProps,
+  useSlot,
+  useSlotClasses,
+  useRecipeStyles,
+} from '../utils'
 import { radioGroupRecipe } from '../../theme/recipes'
 import { RadioGroupProvider } from './RadioGroupContext'
 import { RovingFocusGroup } from '../rovingFocus'
@@ -10,7 +16,7 @@ import type { ElementType } from 'react'
 import type { RadioGroupProps } from './types'
 import type { RadioGroupContextValue } from './RadioGroupContext'
 
-const slots = ['root', 'label', 'wrapper']
+const slots = ['root', 'label', 'wrapper'] as const
 
 export const RadioGroup = <
   T extends string | number = string | number,
@@ -57,7 +63,7 @@ export const RadioGroup = <
     disableAnimation,
   }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     name: 'RadioGroup',
     recipe: radioGroupRecipe,
     ownerState,
@@ -86,7 +92,7 @@ export const RadioGroup = <
   }, [ariaId, label])
 
   const [RadioGroupRoot, getRadioGroupRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     style: styles.root,
@@ -97,7 +103,7 @@ export const RadioGroup = <
   })
 
   const [RadioGroupLabel, getRadioGroupLabelProps] = useSlot({
-    elementType: 'h3',
+    component: nex.h3,
     style: styles.label,
     classNames: slotClasses.label,
     externalSlotProps: slotProps?.label,
@@ -105,7 +111,7 @@ export const RadioGroup = <
   })
 
   const [RadioGroupWrapper, getRadioGroupWrapperProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.wrapper,
     classNames: slotClasses.wrapper,
     externalSlotProps: slotProps?.wrapper,

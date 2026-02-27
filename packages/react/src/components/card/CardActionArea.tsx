@@ -1,13 +1,18 @@
 'use client'
 
-import { useSlot, useDefaultProps, useStyles, useSlotClasses } from '../utils'
+import {
+  useSlot,
+  useDefaultProps,
+  useRecipeStyles,
+  useSlotClasses,
+} from '../utils'
 import { Ripple } from '../ripple'
 import { ButtonBase } from '../buttonBase'
 import { cardActionArea } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { CardActionAreaProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const CardActionArea = <RootComponent extends ElementType = 'button'>(
   inProps: CardActionAreaProps<RootComponent>,
@@ -19,7 +24,7 @@ export const CardActionArea = <RootComponent extends ElementType = 'button'>(
 
   const { children, disabled, ...remainingProps } = props
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState: props,
     name: 'CardActionArea',
     recipe: cardActionArea,
@@ -32,9 +37,8 @@ export const CardActionArea = <RootComponent extends ElementType = 'button'>(
 
   const [CardActionAreaRoot, getCardActionAreaProps] = useSlot({
     style,
-    elementType: ButtonBase,
+    component: ButtonBase,
     classNames: slotProps.root,
-    shouldForwardComponent: false,
     externalForwardedProps: remainingProps,
     additionalProps: {
       disabled,

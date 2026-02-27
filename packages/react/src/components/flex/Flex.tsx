@@ -1,11 +1,17 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { flexRecipe } from '../../theme/recipes'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import type { ElementType } from 'react'
 import type { FlexProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const Flex = <RootComponent extends ElementType = 'div'>(
   inProps: FlexProps<RootComponent>,
@@ -34,11 +40,15 @@ export const Flex = <RootComponent extends ElementType = 'div'>(
     slots,
   })
 
-  const style = useStyles({ ownerState, name: 'Flex', recipe: flexRecipe })
+  const style = useRecipeStyles({
+    ownerState,
+    name: 'Flex',
+    recipe: flexRecipe,
+  })
 
   const [FlexRoot, getFlexRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     additionalProps: {

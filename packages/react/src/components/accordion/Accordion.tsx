@@ -1,16 +1,22 @@
 'use client'
 
 import { useMemo } from 'react'
+import { nex } from '@nex-ui/styled'
 import { useControlledState, useEvent } from '@nex-ui/hooks'
 import { __DEV__ } from '@nex-ui/utils'
 import { AccordionGroupProvider } from './AccordionContext'
-import { useDefaultProps, useStyles, useSlotClasses, useSlot } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlotClasses,
+  useSlot,
+} from '../utils'
 import { accordionRecipe } from '../../theme/recipes'
 import type { ElementType, Key } from 'react'
 import type { AccordionProps } from './types'
 import type { AccordionGroupContextValue } from './AccordionContext'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const Accordion = <RootComponent extends ElementType = 'div'>(
   inProps: AccordionProps<RootComponent>,
@@ -67,7 +73,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
     slots,
   })
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState,
     name: 'Accordion',
     recipe: accordionRecipe,
@@ -75,7 +81,7 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
 
   const [AccordionRoot, getAccordionRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     dataAttrs: {

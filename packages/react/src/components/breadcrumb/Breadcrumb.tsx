@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import {
   Children,
   cloneElement,
@@ -10,12 +11,17 @@ import {
 import { EllipsisFilled } from '@nex-ui/icons'
 import { __DEV__ } from '@nex-ui/utils'
 import { breadcrumbRecipe } from '../../theme/recipes'
-import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
+import {
+  useDefaultProps,
+  useSlot,
+  useSlotClasses,
+  useRecipeStyles,
+} from '../utils'
 import { ButtonBase } from '../buttonBase'
 import type { ElementType, ReactElement, ReactNode } from 'react'
 import type { BreadcrumbProps } from './types'
 
-const slots = ['root', 'list', 'separator', 'collapse', 'expandButton']
+const slots = ['root', 'list', 'separator', 'collapse', 'expandButton'] as const
 
 export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
   inProps: BreadcrumbProps<RootComponent>,
@@ -42,7 +48,7 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
 
   const ownerState = { ...props, size, color }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'Breadcrumb',
     recipe: breadcrumbRecipe,
@@ -70,7 +76,7 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
   })
 
   const [BreadcrumbRoot, getBreadcrumbRootProps] = useSlot({
-    elementType: 'nav',
+    component: nex.nav,
     style: styles.root,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
@@ -82,14 +88,14 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
   })
 
   const [BreadcrumbList, getBreadcrumbListProps] = useSlot({
-    elementType: 'ol',
+    component: nex.ol,
     style: styles.list,
     externalSlotProps: slotProps?.list,
     classNames: slotClasses.list,
   })
 
   const [BreadcrumbSeparator, getBreadcrumbSeparatorProps] = useSlot({
-    elementType: 'li',
+    component: nex.li,
     style: styles.separator,
     externalSlotProps: slotProps?.separator,
     classNames: slotClasses.separator,
@@ -104,14 +110,14 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
   })
 
   const [BreadcrumbCollapse, getBreadcrumbCollapseProps] = useSlot({
-    elementType: 'li',
+    component: nex.li,
     style: styles.collapse,
     externalSlotProps: slotProps?.collapse,
     classNames: slotClasses.collapse,
   })
 
   const [BreadcrumbExpandButton, getBreadcrumbExpandButtonProps] = useSlot({
-    elementType: ButtonBase,
+    component: ButtonBase,
     style: styles.expandButton,
     externalSlotProps: slotProps?.expandButton,
     classNames: slotClasses.expandButton,

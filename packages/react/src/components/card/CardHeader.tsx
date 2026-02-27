@@ -1,11 +1,17 @@
 'use client'
 
-import { useDefaultProps, useSlot, useStyles, useSlotClasses } from '../utils'
+import { nex } from '@nex-ui/styled'
+import {
+  useDefaultProps,
+  useSlot,
+  useRecipeStyles,
+  useSlotClasses,
+} from '../utils'
 import { cardHeaderRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { CardHeaderProps } from './types'
 
-const slots = ['root', 'content', 'title', 'subtitle']
+const slots = ['root', 'content', 'title', 'subtitle'] as const
 
 export const CardHeader = <RootComponent extends ElementType>(
   inProps: CardHeaderProps<RootComponent>,
@@ -26,7 +32,7 @@ export const CardHeader = <RootComponent extends ElementType>(
     ...remainingProps
   } = props
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState: props,
     name: 'CardHeader',
     recipe: cardHeaderRecipe,
@@ -40,13 +46,13 @@ export const CardHeader = <RootComponent extends ElementType>(
 
   const [CardHeaderRoot, getCardHeaderRootProps] = useSlot({
     style: styles.root,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
   })
 
   const [CardContent, getCardContentProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.content,
     externalSlotProps: slotProps?.content,
     classNames: slotClasses.content,
@@ -54,14 +60,14 @@ export const CardHeader = <RootComponent extends ElementType>(
 
   const [CardTitle, getCardTitleProps] = useSlot({
     style: styles.title,
-    elementType: 'div',
+    component: nex.div,
     externalSlotProps: slotProps?.title,
     classNames: slotClasses.title,
   })
 
   const [CardSubtitle, getCardSubtitleProps] = useSlot({
     style: styles.subtitle,
-    elementType: 'div',
+    component: nex.div,
     classNames: slotClasses.subtitle,
     externalSlotProps: slotProps?.subtitle,
   })

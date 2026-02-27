@@ -1,8 +1,14 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useState, useEffect, useMemo } from 'react'
 import { avatarRecipe } from '../../theme/recipes'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { useAvatarGroupContext } from './AvatarGroupContext'
 import type { ElementType, ReactNode } from 'react'
 import type {
@@ -12,7 +18,7 @@ import type {
   LoadedState,
 } from './types'
 
-const slots = ['root', 'img']
+const slots = ['root', 'img'] as const
 
 const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
   const [loaded, setLoaded] = useState<LoadedState>(false)
@@ -92,7 +98,7 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     inGroup,
   }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'Avatar',
     recipe: avatarRecipe,
@@ -126,7 +132,7 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
   }, [alt, childrenProp, loaded])
 
   const [AvatarRoot, getAvatarRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     style: styles.root,
@@ -141,7 +147,7 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AvatarImg, getAvatarImgProps] = useSlot({
-    elementType: 'img',
+    component: nex.img,
     externalSlotProps: slotProps?.img,
     classNames: slotClasses.img,
     style: styles.img,

@@ -1,12 +1,18 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { __DEV__ } from '@nex-ui/utils'
 import { iconRecipe } from '../../theme/recipes'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import type { ElementType } from 'react'
 import type { IconProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const Icon = <RootComponent extends ElementType = 'svg'>(
   inProps: IconProps<RootComponent>,
@@ -40,7 +46,7 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
     height,
   }
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState,
     name: 'Icon',
     recipe: iconRecipe,
@@ -53,7 +59,7 @@ export const Icon = <RootComponent extends ElementType = 'svg'>(
 
   const [IconRoot, getIconRootProps] = useSlot({
     style,
-    elementType: 'svg',
+    component: nex.svg,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     ariaProps: {
