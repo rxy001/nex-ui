@@ -36,7 +36,7 @@ export const radioRecipe = defineSlotRecipe({
         },
       },
     },
-    dot: {
+    indicator: {
       borderRadius: 'full',
       border: 'md',
       borderColor: 'gray.highlight',
@@ -60,14 +60,14 @@ export const radioRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    color: toSlots(colorVariant, 'dot', 'input'),
+    color: toSlots(colorVariant, 'indicator', 'input'),
     size: {
       sm: {
         root: {
           p: '1',
           h: '6',
         },
-        dot: {
+        indicator: {
           w: '4',
           h: '4',
           '::before': {
@@ -84,7 +84,7 @@ export const radioRecipe = defineSlotRecipe({
           p: '1.5',
           h: '8',
         },
-        dot: {
+        indicator: {
           w: '5',
           h: '5',
           '::before': {
@@ -101,7 +101,7 @@ export const radioRecipe = defineSlotRecipe({
           p: '2',
           h: '10',
         },
-        dot: {
+        indicator: {
           w: '6',
           h: '6',
           '::before': {
@@ -116,7 +116,7 @@ export const radioRecipe = defineSlotRecipe({
     },
     checked: {
       true: {
-        dot: {
+        indicator: {
           borderColor: 'colorPalette.primary',
           '::before': {
             transform: 'scale(1)',
@@ -130,7 +130,7 @@ export const radioRecipe = defineSlotRecipe({
     },
     disableAnimation: {
       true: {
-        dot: {
+        indicator: {
           transition: 'none',
           '::before': {
             transition: 'none',

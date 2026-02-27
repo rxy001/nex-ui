@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { chain } from '@nex-ui/utils'
@@ -47,7 +48,7 @@ export const ModalContent = (inProps: ModalContentProps) => {
 
   const [ModalContentRoot, getModalContentRootProps] = useSlot({
     style,
-    elementType: 'section',
+    component: nex.section,
     externalForwardedProps: remainingProps,
     ariaProps: {
       id: modalContentId,

@@ -1,15 +1,21 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useMemo, useId } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { CheckboxGroupProvider } from './CheckboxGroupContext'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { checkboxGroupRecipe } from '../../theme/recipes'
 import type { ElementType } from 'react'
 import type { CheckboxGroupProps } from './types'
 import type { CheckboxGroupContextValue } from './CheckboxGroupContext'
 
-const slots = ['root', 'label', 'wrapper']
+const slots = ['root', 'label', 'wrapper'] as const
 
 export const CheckboxGroup = <
   T extends number | string = number | string,
@@ -73,14 +79,14 @@ export const CheckboxGroup = <
     }
   }, [label, ariaId])
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     name: 'CheckboxGroup',
     ownerState,
     recipe: checkboxGroupRecipe,
   })
 
   const [CheckboxGroupRoot, getCheckboxGroupRootProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     style: styles.root,
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
@@ -91,7 +97,7 @@ export const CheckboxGroup = <
   })
 
   const [CheckboxGroupLabel, getCheckboxGroupLabelProps] = useSlot({
-    elementType: 'h3',
+    component: nex.h3,
     classNames: slotClasses.label,
     style: styles.label,
     externalSlotProps: slotProps?.label,
@@ -99,7 +105,7 @@ export const CheckboxGroup = <
   })
 
   const [CheckboxGroupWrapper, getCheckboxGroupWrapperProps] = useSlot({
-    elementType: 'div',
+    component: nex.div,
     classNames: slotClasses.wrapper,
     style: styles.wrapper,
     externalSlotProps: slotProps?.wrapper,

@@ -46,9 +46,8 @@ const MenuContentImpl = (props: MenuContentImplProps) => {
 
   const [MenuContentRoot, getMenuContentRootProps] = useSlot({
     style,
-    elementType: PopperContent,
+    component: PopperContent,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     additionalProps: {
       ref,
       onPointerMove: (event: PointerEvent<HTMLElement>) => {

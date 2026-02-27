@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useFocusRing } from '@nex-ui/hooks'
 import { useMemo } from 'react'
 import { isFunction } from '@nex-ui/utils'
@@ -122,7 +123,7 @@ export const ButtonBase = (props: ButtonBaseProps) => {
 
   const [ButtonRoot, getButtonRootProps] = useSlot({
     style,
-    elementType: 'button',
+    component: nex.button,
     externalForwardedProps: remainingProps,
     ariaProps,
     additionalProps: {

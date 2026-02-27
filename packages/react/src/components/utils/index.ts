@@ -1,4 +1,4 @@
-export { useStyles } from './useStyles'
+export { useRecipeStyles } from './useRecipeStyles'
 export { useDefaultProps } from './useDefaultProps'
 export { generateSlotClasses } from './generateSlotClasses'
 export { useSlot } from './useSlot'

@@ -10,7 +10,7 @@ import type { RadioGroupVariants, RadioVariants } from '../../theme/recipes'
 
 type RadioSlotProps = {
   root?: SlotProps<'label'>
-  dot?: SlotProps<'span'>
+  indicator?: SlotProps<'span'>
   label?: SlotProps<'span'>
 }
 

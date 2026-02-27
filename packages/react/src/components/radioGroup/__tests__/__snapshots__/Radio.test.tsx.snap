@@ -130,7 +130,7 @@ exports[`Radio should render with default props 1`] = `
     type="radio"
   />
   <span
-    class="nui-radio-dot emotion-2"
+    class="nui-radio-indicator emotion-2"
   />
   <span
     class="nui-radio-label emotion-3"

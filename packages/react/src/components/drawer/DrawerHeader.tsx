@@ -1,12 +1,17 @@
 'use client'
 
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { drawerHeaderRecipe } from '../../theme/recipes'
 import { ModalHeader } from '../modal'
 import type { ElementType } from 'react'
 import type { DrawerHeaderProps } from './types'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const DrawerHeader = <RootComponent extends ElementType = 'h2'>(
   inProps: DrawerHeaderProps<RootComponent>,
@@ -23,7 +28,7 @@ export const DrawerHeader = <RootComponent extends ElementType = 'h2'>(
     slots,
   })
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState: props,
     name: 'DrawerHeader',
     recipe: drawerHeaderRecipe,
@@ -31,10 +36,9 @@ export const DrawerHeader = <RootComponent extends ElementType = 'h2'>(
 
   const [DrawerHeaderRoot, getDrawerHeaderRootProps] = useSlot({
     style,
-    elementType: ModalHeader,
+    component: ModalHeader,
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
   })
 
   return (

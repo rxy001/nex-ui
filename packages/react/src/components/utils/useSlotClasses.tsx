@@ -1,21 +1,20 @@
-import clsx from 'clsx'
 import { useMemo } from 'react'
 import { kebabCase } from '@nex-ui/utils'
 import { generateSlotClass } from './generateSlotClass'
 import { useNexUI } from '../provider'
 import type { ClassValue } from 'clsx'
 
-type UseSlotClassesProps = {
+type UseSlotClassesProps<S extends string> = {
   name: string
-  slots: string[]
-  classNames?: Record<string, ClassValue>
+  slots: S[] | readonly S[]
+  classNames?: Partial<Record<string, ClassValue>>
 }
 
-export const useSlotClasses = ({
+export const useSlotClasses = <S extends string>({
   name,
   slots,
   classNames,
-}: UseSlotClassesProps) => {
+}: UseSlotClassesProps<S>): Record<S, ClassValue> => {
   const { prefix } = useNexUI()
 
   return useMemo(() => {
@@ -25,17 +24,17 @@ export const useSlotClasses = ({
   }, [classNames, name, prefix, slots])
 }
 
-function composeClasses<K extends string>(
-  slots: K[],
+function composeClasses(
+  slots: string[] | readonly string[],
   prefix: string,
-  classes?: Partial<Record<K, ClassValue>>,
+  classes?: Partial<Record<string, ClassValue>>,
 ) {
-  const output = {} as Record<K, ClassValue>
+  const output = {} as Record<string, ClassValue>
 
-  slots.forEach((slot: K) => {
+  slots.forEach((slot: string) => {
     const className = classes?.[slot]
 
-    output[slot] = clsx([className, generateSlotClass(prefix, kebabCase(slot))])
+    output[slot] = [className, generateSlotClass(prefix, kebabCase(slot))]
   })
 
   return output

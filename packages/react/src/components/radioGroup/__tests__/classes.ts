@@ -4,7 +4,7 @@ export const radioClasses = generateSlotClasses('nui-radio', [
   'root',
   'input',
   'label',
-  'dot',
+  'indicator',
 ])
 
 export const radioGroupClasses = generateSlotClasses('nui-radio-group', [

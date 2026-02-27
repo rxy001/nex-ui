@@ -1,14 +1,20 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { CloseCircleFilled } from '@nex-ui/icons'
-import { useDefaultProps, useSlot, useSlotClasses, useStyles } from '../utils'
+import {
+  useDefaultProps,
+  useSlot,
+  useSlotClasses,
+  useRecipeStyles,
+} from '../utils'
 import { badgeRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
 import { ButtonBase } from '../buttonBase'
 import type { ElementType } from 'react'
 import type { BadgeProps } from './types'
 
-const slots = ['root', 'closeButton', 'startIcon', 'endIcon']
+const slots = ['root', 'closeButton', 'startIcon', 'endIcon'] as const
 
 export const Badge = <RootComponent extends ElementType = 'span'>(
   inProps: BadgeProps<RootComponent>,
@@ -52,7 +58,7 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
     classNames,
   })
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     name: 'Badge',
     ownerState: ownerState,
     recipe: badgeRecipe,
@@ -60,7 +66,7 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
 
   const [BadgeRoot, getBadgeRootProps] = useSlot({
     style: styles.root,
-    elementType: 'span',
+    component: nex.span,
     externalForwardedProps: remainningProps,
     classNames: slotClasses.root,
     dataAttrs: {
@@ -74,9 +80,8 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
   })
 
   const [BadgeCloseButton, getBadgeCloseButtonProps] = useSlot({
-    elementType: ButtonBase,
+    component: ButtonBase,
     style: styles.closeButton,
-    shouldForwardComponent: false,
     externalSlotProps: slotProps?.closeButton,
     classNames: slotClasses.closeButton,
     additionalProps: {
@@ -89,14 +94,14 @@ export const Badge = <RootComponent extends ElementType = 'span'>(
   })
 
   const [BadgeStartIcon, getBadgeStartIconProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     style: styles.startIcon,
     externalSlotProps: slotProps?.startIcon,
     classNames: slotClasses.startIcon,
   })
 
   const [BadgeEndIcon, getBadgeEndIconProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     style: styles.endIcon,
     externalSlotProps: slotProps?.endIcon,
     classNames: slotClasses.endIcon,

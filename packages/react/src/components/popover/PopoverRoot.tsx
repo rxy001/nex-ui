@@ -1,13 +1,13 @@
 'use client'
 
 import { PopperContent, PopperMotion, PopperPortal } from '../popper'
-import { useSlot, useSlotClasses, useStyles } from '../utils'
+import { useSlot, useSlotClasses, useRecipeStyles } from '../utils'
 import { usePopoverContext, usePopoverPropsContext } from './PopoverContext'
 import { popoverRecipe } from '../../theme/recipes'
 import type { ReactElement } from 'react'
 import type { PointerDownOutsideEvent } from '../dismissibleLayer'
 
-const slots = ['root']
+const slots = ['root'] as const
 
 export const PopoverRoot = ({ children }: { children: ReactElement }) => {
   const { motionProps, keepMounted, container, disableAnimation, ...props } =
@@ -20,7 +20,7 @@ export const PopoverRoot = ({ children }: { children: ReactElement }) => {
     slots,
   })
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState: props,
     name: 'Popover',
     recipe: popoverRecipe,
@@ -28,8 +28,7 @@ export const PopoverRoot = ({ children }: { children: ReactElement }) => {
 
   const [PopoverRootRoot, getPopoverRootRootProps] = useSlot({
     style,
-    elementType: PopperContent,
-    shouldForwardComponent: false,
+    component: PopperContent,
     externalForwardedProps: props,
     classNames: slotClasses.root,
     additionalProps: {

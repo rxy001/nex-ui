@@ -1,7 +1,13 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
-import { useDefaultProps, useStyles, useSlot, useSlotClasses } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlot,
+  useSlotClasses,
+} from '../utils'
 import { AvatarGroupProvider } from './AvatarGroupContext'
 import { avatarGroupRecipe } from '../../theme/recipes'
 import { Avatar } from './Avatar'
@@ -9,7 +15,7 @@ import type { ElementType } from 'react'
 import type { AvatarGroupProps } from './types'
 import type { AvatarGroupContextValue } from './AvatarGroupContext'
 
-const slots = ['root', 'surplus']
+const slots = ['root', 'surplus'] as const
 
 export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
   inProps: AvatarGroupProps<RootComponent>,
@@ -51,7 +57,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     classNames,
   })
 
-  const style = useStyles({
+  const style = useRecipeStyles({
     ownerState,
     name: 'AvatarGroup',
     recipe: avatarGroupRecipe,
@@ -59,7 +65,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
 
   const [AvatarGroupRoot, getAvatarGroupRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     additionalProps: {
@@ -71,10 +77,9 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
   })
 
   const [AvatarSurplus, getAvatarSurplusProps] = useSlot({
-    elementType: Avatar,
+    component: Avatar,
     externalSlotProps: slotProps?.surplus,
     classNames: slotClasses.surplus,
-    shouldForwardComponent: false,
   })
 
   const ctx = useMemo<AvatarGroupContextValue>(

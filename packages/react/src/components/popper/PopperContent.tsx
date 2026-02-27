@@ -1,5 +1,6 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { defineRecipe } from '@nex-ui/system'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
@@ -65,7 +66,7 @@ export const PopperContent = (props: PopperContentProps) => {
 
   const [PopperContentRoot, getPopperContentRootProps] = useSlot({
     style,
-    elementType: 'div',
+    component: nex.div,
     externalForwardedProps: remainingProps,
     additionalProps: {
       ref: popperRootRef,

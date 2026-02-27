@@ -1,25 +1,22 @@
 import clsx from 'clsx'
 import { mergeProps, kebabCase } from '@nex-ui/utils'
-import { useMemo } from 'react'
-import { nex } from '@nex-ui/styled'
-import type { ComponentProps, ElementType as ReactElementType } from 'react'
+import type { ComponentType } from 'react'
 import type { ClassValue } from 'clsx'
-import type { NexElementConstructor } from '@nex-ui/styled'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
 
 type DataAttrs = Record<string, string | number | boolean | undefined>
 
 export type UseSlotProps<
-  ElementType extends ReactElementType,
-  SlotProps extends object = {},
-  ForwardedProps extends object = {},
-  AdditonalProps extends object = {},
-  ShouldForwardComponent extends boolean = true,
+  Component,
+  SlotProps = {},
+  ForwardedProps = {},
+  AdditionalProps = {},
+  AriaProps = {},
 > = {
   /**
    * The slot's default component
    */
-  elementType: ElementType
+  component: Component
 
   /**
    * The slot's style.
@@ -44,19 +41,12 @@ export type UseSlotProps<
   /**
    * Additional props to be placed on the slot.
    */
-  additionalProps?: AdditonalProps
+  additionalProps?: AdditionalProps
 
   /**
    * The accessibility props of the slot.
    */
-  ariaProps?: object
-
-  /**
-   * If true, the component will be resolved from the `nex` styled factory.
-   *
-   * @default true
-   */
-  shouldForwardComponent?: ShouldForwardComponent
+  ariaProps?: AriaProps
 
   /**
    * Data attributes to be spread to the element.
@@ -65,29 +55,30 @@ export type UseSlotProps<
 }
 
 export const useSlot = <
-  ElementType extends ReactElementType,
-  SlotProps extends object,
-  ForwardedProps extends object,
-  AdditonalProps extends object,
-  ShouldForwardComponent extends boolean = true,
+  ElementType extends ComponentType<{
+    sx?: Interpolation
+  }>,
+  SlotProps extends object = {},
+  ForwardedProps extends object = {},
+  AdditionalProps extends object = {},
+  AriaProps extends object = {},
 >(
   args: UseSlotProps<
     ElementType,
     SlotProps,
     ForwardedProps,
-    AdditonalProps,
-    ShouldForwardComponent
+    AdditionalProps,
+    AriaProps
   >,
 ) => {
   const {
     ariaProps,
     style,
-    elementType,
+    component,
     classNames,
     externalSlotProps,
     additionalProps,
     externalForwardedProps,
-    shouldForwardComponent = true,
     dataAttrs = {},
   } = args
   const getProps = () => {
@@ -117,23 +108,16 @@ export const useSlot = <
       ...props,
       className: className === '' ? undefined : className,
       sx: mergedSx,
-    }
+    } as {
+      className?: string
+      sx?: Interpolation
+    } & AriaProps &
+      AdditionalProps &
+      ForwardedProps &
+      SlotProps
   }
 
-  const Component = useMemo(
-    () =>
-      shouldForwardComponent
-        ? (nex[elementType as keyof typeof nex] ?? nex(elementType))
-        : elementType,
-    [elementType, shouldForwardComponent],
-  )
-
-  return [Component, getProps] as unknown as ShouldForwardComponent extends true
-    ? [
-        NexElementConstructor<ElementType>,
-        () => ComponentProps<NexElementConstructor<ElementType>>,
-      ]
-    : [ElementType, () => ComponentProps<ElementType>]
+  return [component, getProps] as const
 }
 
 function generateDataAttrs(dataAttrs: DataAttrs) {

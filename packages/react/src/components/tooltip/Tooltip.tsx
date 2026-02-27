@@ -1,10 +1,16 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useCallback, useEffect, useId, useMemo } from 'react'
 import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
 import { addEventListener } from '@nex-ui/utils'
 import { Popper, PopperContent, PopperPortal, PopperMotion } from '../popper'
-import { useSlot, useStyles, useSlotClasses, useDefaultProps } from '../utils'
+import {
+  useSlot,
+  useRecipeStyles,
+  useSlotClasses,
+  useDefaultProps,
+} from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
 import { TooltipTrigger } from './TooltipTrigger'
 import { TooltipProvider, useTooltipContext } from './TooltipContext'
@@ -12,7 +18,7 @@ import type { ElementType } from 'react'
 import type { TooltipProps } from './types'
 import type { FocusOutsideEvent } from '../dismissibleLayer'
 
-const slots = ['root', 'content']
+const slots = ['root', 'content'] as const
 
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
@@ -53,7 +59,7 @@ const TooltipImpl = (props: TooltipProps) => {
     interactive,
   }
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'Tooltip',
     recipe: tooltipRecipe,
@@ -67,9 +73,8 @@ const TooltipImpl = (props: TooltipProps) => {
 
   const [TooltipRoot, getTooltipRootProps] = useSlot({
     style: styles.root,
-    elementType: PopperContent,
+    component: PopperContent,
     classNames: slotClasses.root,
-    shouldForwardComponent: false,
     externalForwardedProps: remainingProps,
     additionalProps: {
       closeOnEscape,
@@ -91,7 +96,7 @@ const TooltipImpl = (props: TooltipProps) => {
 
   const [TooltipContent, getTooltipContentProps] = useSlot({
     style: styles.content,
-    elementType: 'div',
+    component: nex.div,
     classNames: slotClasses.content,
     externalSlotProps: slotProps?.content,
     ariaProps: {

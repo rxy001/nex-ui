@@ -34,9 +34,8 @@ export const MenuRadioItem = (props: MenuRadioItemProps) => {
   const checked = radioGroupCtx.value === value
 
   const [MenuRadioItemRoot, getMenuRadioItemProps] = useSlot({
-    elementType: MenuItem,
+    component: MenuItem,
     externalForwardedProps: remainingProps,
-    shouldForwardComponent: false,
     additionalProps: {
       disabled,
       onClick: () => {

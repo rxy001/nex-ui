@@ -1,12 +1,18 @@
 'use client'
 
+import { nex } from '@nex-ui/styled'
 import { useId, useMemo } from 'react'
 import { isFunction, isString } from '@nex-ui/utils'
 import { useControlledState } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { switchRecipe } from '../../theme/recipes'
-import { useDefaultProps, useStyles, useSlotClasses, useSlot } from '../utils'
+import {
+  useDefaultProps,
+  useRecipeStyles,
+  useSlotClasses,
+  useSlot,
+} from '../utils'
 import type { ElementType } from 'react'
 import type { SwitchProps } from './types'
 
@@ -18,7 +24,7 @@ const slots = [
   'startIcon',
   'endIcon',
   'label',
-]
+] as const
 
 export const Switch = <SwitchComponent extends ElementType = 'input'>(
   inProps: SwitchProps<SwitchComponent>,
@@ -75,7 +81,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
     classNames,
   })
 
-  const styles = useStyles({
+  const styles = useRecipeStyles({
     ownerState,
     name: 'Switch',
     recipe: switchRecipe,
@@ -100,7 +106,7 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   }, [ariaId, children])
 
   const [SwitchRoot, getSwitchRootProps] = useSlot({
-    elementType: 'label',
+    component: nex.label,
     externalSlotProps: slotProps?.root,
     style: styles.root,
     classNames: slotClasses.root,
@@ -118,12 +124,11 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchInput, getSwitchInputProps] = useSlot({
-    elementType: InputBase,
+    component: InputBase,
     externalForwardedProps: remainingProps,
     style: styles.input,
     classNames: slotClasses.input,
     ariaProps: slotAriaProps.input,
-    shouldForwardComponent: false,
     additionalProps: {
       as,
       type,
@@ -134,35 +139,35 @@ export const Switch = <SwitchComponent extends ElementType = 'input'>(
   })
 
   const [SwitchTrack, getSwitchTrackProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.track,
     style: styles.track,
     classNames: slotClasses.track,
   })
 
   const [SwitchThumb, getSwitchThumbProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.thumb,
     style: styles.thumb,
     classNames: slotClasses.thumb,
   })
 
   const [SwitchStartIcon, getSwitchStartIconProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.startIcon,
     style: styles.startIcon,
     classNames: slotClasses.startIcon,
   })
 
   const [SwitchEndIcon, getSwitchEndIconProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.endIcon,
     style: styles.endIcon,
     classNames: slotClasses.endIcon,
   })
 
   const [SwitchLabel, getSwitchLabelProps] = useSlot({
-    elementType: 'span',
+    component: nex.span,
     externalSlotProps: slotProps?.label,
     style: styles.label,
     classNames: slotClasses.label,
