@@ -5,9 +5,6 @@ import type { RecipeVariants } from '@nex-ui/system'
 export const popoverRecipe = defineRecipe({
   base: {
     zIndex: 'popover',
-    _focusVisibleRing: {
-      outline: 'none',
-    },
   },
 })
 

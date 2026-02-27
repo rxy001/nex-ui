@@ -2,7 +2,6 @@
 
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import type { ElementType } from 'react'
 import type { ModalFooterProps } from './types'
 
 const recipe = defineRecipe({
@@ -18,9 +17,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalFooter = <RootComponent extends ElementType = 'div'>(
-  props: ModalFooterProps<RootComponent>,
-) => {
+export const ModalFooter = (props: ModalFooterProps) => {
   const [ModalFooterRoot, getModalFooterRootProps] = useSlot({
     style,
     elementType: 'div',

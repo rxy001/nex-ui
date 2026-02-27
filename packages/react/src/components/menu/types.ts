@@ -1,4 +1,4 @@
-import type { ReactNode, ElementType } from 'react'
+import type { ReactNode } from 'react'
 import type {
   PopperAnchorProps,
   PopperContentProps,
@@ -7,10 +7,13 @@ import type {
   PopperProps,
 } from '../popper'
 import type { SlotProps } from '../../types/utils'
-import type { DividerProps } from '../divider'
 
 // ----------------- MenuProps -----------------
-export interface MenuProps extends PopperProps {}
+export interface MenuImplProps extends PopperProps {}
+
+export interface MenuProps extends MenuImplProps {}
+
+export interface SubMenuProps extends MenuImplProps {}
 
 // ----------------- MenuPortalProps -----------------
 export interface MenuPortalProps extends PopperPortalProps {}
@@ -26,8 +29,14 @@ type MenuContentOwnProps = {
   loop?: boolean
 }
 
-export type MenuContentProps<ContentComponent extends ElementType = 'div'> =
-  PopperContentProps<ContentComponent> & MenuContentOwnProps
+export type MenuContentImplProps = PopperContentProps & MenuContentOwnProps
+
+export type MenuContentProps = MenuContentImplProps
+
+export type SubMenuContentProps = Omit<
+  MenuContentProps,
+  'restoreFocus' | 'placement' | 'closeOnEscape'
+>
 
 // ----------------- MenuItemProps -----------------
 type MenuItemOwnProps = {
@@ -35,55 +44,41 @@ type MenuItemOwnProps = {
   closeOnClick?: boolean
 }
 
-export type MenuItemProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent, MenuItemOwnProps>
+export type MenuItemProps = SlotProps<'div', MenuItemOwnProps>
 
 // ----------------- MenuSeparatorProps -----------------
-export type MenuSeparatorProps<RootComponent extends ElementType = 'hr'> =
-  DividerProps<RootComponent>
+export type MenuSeparatorProps = SlotProps<'hr'>
 
 // ----------------- MenuItemGroupProps -----------------
-export type MenuItemGroupProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent>
+export type MenuItemGroupProps = SlotProps<'div'>
 
 // ----------------- MenuRadioItemGroupProps -----------------
 export type MenuRadioItemGroupProps<
-  T extends string | number,
-  RootComponent extends ElementType = 'div',
-> = MenuItemGroupProps<RootComponent> & {
+  T extends string | number = string | number,
+> = MenuItemGroupProps & {
   value?: T
-  defaultValue?: T
   onValueChange?: (value: T) => void
 }
 
 // ----------------- MenuRadioItemProps -----------------
-export type MenuRadioItemProps<
-  T extends string | number,
-  RootComponent extends ElementType = 'div',
-> = MenuItemProps<RootComponent> & {
-  value?: T
+export type MenuRadioItemProps = MenuItemProps & {
+  value?: string | number
 }
 
 // ----------------- MenuCheckboxItemGroupProps -----------------
 export type MenuCheckboxItemGroupProps<
-  T extends string | number,
-  RootComponent extends ElementType = 'div',
-> = MenuItemGroupProps<RootComponent> & {
+  T extends string | number = string | number,
+> = MenuItemGroupProps & {
   value?: T[]
-  defaultValue?: T[]
   onValueChange?: (value: T[]) => void
 }
 
 // ----------------- MenuCheckboxItemProps -----------------
-export type MenuCheckboxItemProps<
-  T extends string | number,
-  RootComponent extends ElementType = 'div',
-> = MenuItemProps<RootComponent> & {
-  value?: T
+export type MenuCheckboxItemProps = MenuItemProps & {
+  value?: string | number
 }
 
-export type MenuItemGroupLabelProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent>
+export type MenuItemGroupLabelProps = SlotProps<'div'>
 
 // ----------------- MenuMotionProps -----------------
 export interface MenuMotionProps extends PopperMotionProps {}
@@ -93,8 +88,7 @@ interface MenuTriggerItemOwnProps {
   disabled?: boolean
 }
 
-export type MenuTriggerItemProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent, MenuTriggerItemOwnProps>
+export type MenuTriggerItemProps = SlotProps<'div', MenuTriggerItemOwnProps>
 
 // ----------------- MenuItemIndicatorProps -----------------
 export interface MenuItemIndicatorProps {

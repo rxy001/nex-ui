@@ -1,7 +1,7 @@
-export { Menu } from './Menu'
+export { Menu, SubMenu } from './Menu'
 export { MenuTrigger } from './MenuTrigger'
 export { MenuPortal } from './MenuPortal'
-export { MenuContent } from './MenuContent'
+export { MenuContent, SubMenuContent } from './MenuContent'
 export { MenuItem } from './MenuItem'
 export { MenuSeparator } from './MenuSeparator'
 export { MenuItemGroup } from './MenuItemGroup'
@@ -16,9 +16,11 @@ export { MenuItemIndicator } from './MenuItemIndicator'
 
 export type {
   MenuProps,
+  SubMenuProps,
   MenuPortalProps,
   MenuTriggerProps,
   MenuContentProps,
+  SubMenuContentProps,
   MenuItemProps,
   MenuSeparatorProps,
   MenuItemGroupProps,

@@ -2,7 +2,6 @@
 
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import type { ElementType } from 'react'
 import type { ModalBackdropProps } from './types'
 
 const recipe = defineRecipe({
@@ -15,9 +14,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalBackdrop = <RootComponent extends ElementType = 'div'>(
-  props: ModalBackdropProps<RootComponent>,
-) => {
+export const ModalBackdrop = (props: ModalBackdropProps) => {
   const [ModalBackdropRoot, getModalBackdropRootProps] = useSlot({
     style,
     elementType: 'div',

@@ -10,7 +10,7 @@ import {
 } from './MenuContext'
 import { PopperAnchor } from '../popper'
 import { getSide } from '../utils/computePosition/utils'
-import type { ElementType, KeyboardEvent } from 'react'
+import type { KeyboardEvent } from 'react'
 import type { MenuTriggerItemProps } from './types'
 import type { Placement } from '../utils'
 
@@ -21,10 +21,7 @@ const SUB_MENU_OPEN_KEYS = {
 
 const EDGE_OFFSET = 5
 
-export const MenuTriggerItem = <RootComponent extends ElementType = 'div'>(
-  inProps: MenuTriggerItemProps<RootComponent>,
-) => {
-  const props = inProps as MenuTriggerItemProps<'div'>
+export const MenuTriggerItem = (props: MenuTriggerItemProps) => {
   const { children, disabled, ...remainingProps } = props
   const menuCtx = useMenuContext()
   const subMenuCtx = useSubMenuContext()
@@ -37,11 +34,11 @@ export const MenuTriggerItem = <RootComponent extends ElementType = 'div'>(
   }
 
   const handlePointerLeave = () => {
-    if (!subMenuCtx.menuRootRef.current) return
+    if (!subMenuCtx.subMenuContentRef.current) return
 
-    const rect = subMenuCtx.menuRootRef.current.getBoundingClientRect()
+    const rect = subMenuCtx.subMenuContentRef.current.getBoundingClientRect()
 
-    const { placement } = subMenuCtx.menuRootRef.current.dataset
+    const { placement } = subMenuCtx.subMenuContentRef.current.dataset
 
     const side = getSide(placement as Placement)
 
@@ -59,9 +56,9 @@ export const MenuTriggerItem = <RootComponent extends ElementType = 'div'>(
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    // if (!subMenuCtx.menuRootRef.current) return
+    // if (!subMenuCtx.subMenuContentRef.current) return
 
-    // const { placement } = subMenuCtx.menuRootRef.current.dataset
+    // const { placement } = subMenuCtx.subMenuContentRef.current.dataset
 
     // const side = getSide(placement as Placement) as 'left' | 'right'
 

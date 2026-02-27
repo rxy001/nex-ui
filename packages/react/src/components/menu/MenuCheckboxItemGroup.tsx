@@ -1,33 +1,29 @@
 'use client'
 
 import { useMemo } from 'react'
-import { useControlledState } from '@nex-ui/hooks'
+import { useEvent } from '@nex-ui/hooks'
 import { MenuCheckboxItemGroupProvider } from './MenuContext'
 import { MenuItemGroup } from './MenuItemGroup'
-import type { ElementType } from 'react'
 import type { MenuCheckboxItemGroupProps } from './types'
 
+const DEFAULT_VALUE: (number | string)[] = []
 export const MenuCheckboxItemGroup = <
-  T extends string | number,
-  RootComponent extends ElementType = 'div',
+  T extends string | number = string | number,
 >(
-  inProps: MenuCheckboxItemGroupProps<T, RootComponent>,
+  inProps: MenuCheckboxItemGroupProps<T>,
 ) => {
-  const props = inProps as MenuCheckboxItemGroupProps<string | number, 'div'>
+  const props = inProps as MenuCheckboxItemGroupProps<number | string>
 
   const {
     children,
-    value: valueProp,
+    value = DEFAULT_VALUE,
     onValueChange,
-    defaultValue = [],
     ...remainingProps
   } = props
 
-  const [value, setValue] = useControlledState(
-    valueProp,
-    defaultValue,
-    onValueChange,
-  )
+  const setValue = useEvent((val: (number | string)[]) => {
+    onValueChange?.(val)
+  })
 
   const ctx = useMemo(
     () => ({

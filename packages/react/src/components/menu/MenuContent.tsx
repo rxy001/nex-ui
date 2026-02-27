@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useRef } from 'react'
 import { useMergeRefs } from '@nex-ui/hooks'
 import { chain, focus } from '@nex-ui/utils'
+import { defineRecipe } from '@nex-ui/system'
 import { PopperContent } from '../popper'
 import { useSlot } from '../utils'
 import { RovingFocusGroup } from '../rovingFocus'
@@ -13,13 +14,12 @@ import {
   useSubMenuContext,
   useRootMenuContext,
 } from './MenuContext'
+import type { KeyboardEvent, PointerEvent, FocusEvent } from 'react'
 import type {
-  ElementType,
-  KeyboardEvent,
-  PointerEvent,
-  FocusEvent,
-} from 'react'
-import type { MenuContentProps } from './types'
+  MenuContentImplProps,
+  MenuContentProps,
+  SubMenuContentProps,
+} from './types'
 import type { MenuContentContextValue, GraceIntent } from './MenuContext'
 import type { Side } from '../utils'
 import type {
@@ -27,17 +27,16 @@ import type {
   PointerDownOutsideEvent,
 } from '../dismissibleLayer'
 
-// eslint-disable-next-line react/display-name
-const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
-  inProps: MenuContentProps<RootComponent>,
-) => {
-  const props = inProps as MenuContentProps<'div'>
-  const {
-    children,
-    loop = true,
-    restoreFocus = true,
-    ...remainingProps
-  } = props
+const recipe = defineRecipe({
+  base: {
+    outline: 'none',
+  },
+})
+
+const style = recipe()
+
+const MenuContentImpl = (props: MenuContentImplProps) => {
+  const { children, loop, restoreFocus, ...remainingProps } = props
   const menuCtx = useMenuContext()
   const rootMenuCtx = useRootMenuContext()
   const ref = useRef<HTMLDivElement>(null)
@@ -46,6 +45,7 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
   const lastPointerXRef = useRef(0)
 
   const [MenuContentRoot, getMenuContentRootProps] = useSlot({
+    style,
     elementType: PopperContent,
     externalForwardedProps: remainingProps,
     shouldForwardComponent: false,
@@ -65,8 +65,9 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
         }
       },
       onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
-        if (event.currentTarget.contains(event.target as HTMLElement)) {
-          if (event.key === 'Tab') event.preventDefault()
+        const target = event.target as HTMLElement
+        if (event.currentTarget.contains(target) && event.key === 'Tab') {
+          event.preventDefault()
         }
       },
       onFocus: (event: FocusEvent<HTMLElement>) => {
@@ -137,9 +138,9 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
 
   return (
     <FocusTrap
+      paused
       loop={false}
       active={menuCtx.open}
-      paused={true}
       restoreFocus={restoreFocus}
     >
       <RovingFocusGroup orientation='vertical' loop={loop}>
@@ -151,17 +152,29 @@ const MenuContentImpl = <RootComponent extends ElementType = 'div'>(
   )
 }
 
-// eslint-disable-next-line react/display-name
-const SubMenuContent = <RootComponent extends ElementType = 'div'>(
-  inProps: MenuContentProps<RootComponent>,
-) => {
-  const props = inProps as MenuContentProps<'div'>
-  const menuCtx = useMenuContext()
-  const subMenuCtx = useSubMenuContext()
-  const mergedRef = useMergeRefs(subMenuCtx?.menuRootRef, props.ref)
+MenuContentImpl.displayName = 'MenuContentImpl'
+
+export const MenuContent = (props: MenuContentProps) => {
+  const { loop = true, restoreFocus = true, ...remainingProps } = props
 
   return (
     <MenuContentImpl
+      loop={loop}
+      restoreFocus={restoreFocus}
+      {...remainingProps}
+    />
+  )
+}
+
+MenuContent.displayName = 'MenuContent'
+
+export const SubMenuContent = (props: SubMenuContentProps) => {
+  const menuCtx = useMenuContext()
+  const subMenuCtx = useSubMenuContext()
+  const mergedRef = useMergeRefs(subMenuCtx?.subMenuContentRef, props.ref)
+
+  return (
+    <MenuContent
       {...props}
       ref={mergedRef}
       placement='right-start'
@@ -177,18 +190,4 @@ const SubMenuContent = <RootComponent extends ElementType = 'div'>(
   )
 }
 
-const RootMenuContent = MenuContentImpl
-
-export const MenuContent = <RootComponent extends ElementType = 'div'>(
-  props: MenuContentProps<RootComponent>,
-) => {
-  const rootMenu = !useSubMenuContext()
-
-  return rootMenu ? (
-    <RootMenuContent {...props} />
-  ) : (
-    <SubMenuContent {...props} />
-  )
-}
-
-MenuContent.displayName = 'MenuContent'
+SubMenuContent.displayName = 'SubMenuContent'
