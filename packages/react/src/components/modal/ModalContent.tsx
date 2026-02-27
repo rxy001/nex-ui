@@ -8,7 +8,6 @@ import { useSlot } from '../utils'
 import { FocusTrap } from '../focusTrap'
 import { useModalContext } from './ModalContext'
 import { useModalManager } from './ModalManager'
-import type { ElementType } from 'react'
 import type { ModalContentProps } from './types'
 
 const recipe = defineRecipe({
@@ -23,9 +22,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalContent = <RootComponent extends ElementType = 'section'>(
-  inProps: ModalContentProps<RootComponent>,
-) => {
+export const ModalContent = (inProps: ModalContentProps) => {
   const {
     onEscapeKeyDown,
     onPointerDownOutside,

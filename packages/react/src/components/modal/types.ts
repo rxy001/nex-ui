@@ -1,5 +1,5 @@
 import type { PortalProps } from '@nex-ui/utils'
-import type { ElementType, ReactNode, ReactElement, MouseEvent } from 'react'
+import type { ReactNode, ReactElement, MouseEvent } from 'react'
 import type { DismissibleLayerProps } from '../dismissibleLayer'
 import type { FocusTrapProps } from '../focusTrap'
 import type { HTMLMotionProps, SlotProps } from '../../types/utils'
@@ -53,20 +53,16 @@ type ModalContentOwnProps = Omit<FocusTrapProps, 'children' | 'active'> &
     closeOnInteractOutside?: boolean
   }
 
-export type ModalContentProps<RootComponent extends ElementType = 'section'> =
-  SlotProps<RootComponent, ModalContentOwnProps>
+export type ModalContentProps = SlotProps<'section', ModalContentOwnProps>
 
 // ------------- ModalHeader -------------
-export type ModalHeaderProps<RootComponent extends ElementType = 'h2'> =
-  SlotProps<RootComponent>
+export type ModalHeaderProps = SlotProps<'h2'>
 
 // ------------- ModalBody -------------
-export type ModalBodyProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent>
+export type ModalBodyProps = SlotProps<'div'>
 
 // ------------- ModalFooter -------------
-export type ModalFooterProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent>
+export type ModalFooterProps = SlotProps<'div'>
 
 // ------------- ModalRoot -------------
 type ModalRootOwnProps = {
@@ -77,12 +73,10 @@ type ModalRootOwnProps = {
   preventScroll?: boolean
 }
 
-export type ModalRootProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent, ModalRootOwnProps>
+export type ModalRootProps = SlotProps<'div', ModalRootOwnProps>
 
 // ------------- ModalBackdrop -------------
-export type ModalBackdropProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent>
+export type ModalBackdropProps = SlotProps<'div'>
 
 // ------------- ModalPortal -------------
 export type ModalPortalProps = PortalProps & {

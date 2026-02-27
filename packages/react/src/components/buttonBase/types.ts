@@ -1,14 +1,8 @@
 import type { Interpolation } from '@nex-ui/system'
-import type { ComponentProps, ElementType } from 'react'
-import type { Overwrite } from '../../types/utils'
+import type { JSX, ElementType } from 'react'
 
-export type ButtonBaseProps<RootComponent extends ElementType = 'button'> =
-  Overwrite<
-    ComponentProps<RootComponent>,
-    {
-      as?: RootComponent
-      sx?: Interpolation
-      href?: string
-      disabled?: boolean
-    }
-  >
+export type ButtonBaseProps = JSX.IntrinsicElements['button'] & {
+  as?: ElementType
+  sx?: Interpolation
+  href?: string
+}

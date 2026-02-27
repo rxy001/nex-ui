@@ -7,7 +7,6 @@ import { useEvent } from '@nex-ui/hooks'
 import { useSlot } from '../utils'
 import { useModalContext, useModalPortalPropsContext } from './ModalContext'
 import { useModalManager } from './ModalManager'
-import type { ElementType } from 'react'
 import type { ModalRootProps } from './types'
 
 const recipe = defineRecipe({
@@ -21,9 +20,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalRoot = <RootComponent extends ElementType = 'div'>(
-  props: ModalRootProps<RootComponent>,
-) => {
+export const ModalRoot = (props: ModalRootProps) => {
   const { children, preventScroll = false, ...remainingProps } = props
   const rootRef = useRef<HTMLDivElement>(null)
   const { open, modalId } = useModalContext()

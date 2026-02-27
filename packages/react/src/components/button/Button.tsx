@@ -70,7 +70,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   })
 
   const [ButtonRoot, getButtonRootProps] = useSlot({
-    elementType: ButtonBase<'button'>,
+    elementType: ButtonBase,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     style: styles.root,

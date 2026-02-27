@@ -6,7 +6,6 @@ import type { ComponentProps, ElementType as ReactElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { NexElementConstructor } from '@nex-ui/styled'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
-import type { SlotProps as SlotPropsType } from '../../types/utils'
 
 type DataAttrs = Record<string, string | number | boolean | undefined>
 
@@ -67,9 +66,9 @@ export type UseSlotProps<
 
 export const useSlot = <
   ElementType extends ReactElementType,
-  SlotProps extends SlotPropsType<ElementType>,
-  ForwardedProps extends SlotPropsType<ElementType>,
-  AdditonalProps extends SlotPropsType<ElementType>,
+  SlotProps extends object,
+  ForwardedProps extends object,
+  AdditonalProps extends object,
   ShouldForwardComponent extends boolean = true,
 >(
   args: UseSlotProps<

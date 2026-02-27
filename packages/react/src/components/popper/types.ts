@@ -1,4 +1,4 @@
-import type { ReactNode, ElementType, ReactElement, Ref } from 'react'
+import type { ReactNode, ReactElement, Ref } from 'react'
 import type { PortalProps } from '@nex-ui/utils'
 import type { DismissibleLayerProps } from '../dismissibleLayer'
 import type { Placement, FlipOptions, OffsetOptions } from '../utils'
@@ -85,8 +85,7 @@ type PopperContentOwnProps = Omit<
   offset?: OffsetOptions | false
 }
 
-export type PopperContentProps<RootComponent extends ElementType = 'div'> =
-  SlotProps<RootComponent, PopperContentOwnProps>
+export type PopperContentProps = SlotProps<'div', PopperContentOwnProps>
 
 // ----------------- PopperPortalProps -----------------
 export type PopperPortalProps = PortalProps & {

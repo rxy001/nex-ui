@@ -1,30 +1,39 @@
 'use client'
 
-import { useId, useMemo } from 'react'
+import { useId, useMemo, useState } from 'react'
 import { useSlot } from '../utils'
 import { MenuItemGroupProvider } from './MenuContext'
 import type { MenuItemGroupProps } from './types'
-import type { ElementType } from 'react'
+import type { MenuItemGroupContextValue } from './MenuContext'
 
-export const MenuItemGroup = <RootComponent extends ElementType = 'div'>(
-  props: MenuItemGroupProps<RootComponent>,
-) => {
+export const MenuItemGroup = (props: MenuItemGroupProps) => {
   const { children, ...remainingProps } = props
   const ariaId = useId()
   const groupLabelId = `menu-${ariaId}-group-label`
 
+  const [hasLabel, setHasLabel] = useState(false)
+
+  const ariaProps = useMemo(
+    () => ({
+      role: 'group',
+      ...(hasLabel && {
+        'aria-labelledby': groupLabelId,
+      }),
+    }),
+    [groupLabelId, hasLabel],
+  )
+
   const [MenuItemGroupRoot, getMenuItemRootProps] = useSlot({
     elementType: 'div',
     externalForwardedProps: remainingProps,
-    ariaProps: {
-      role: 'group',
-      'aria-labelledby': groupLabelId,
-    },
+    ariaProps,
   })
 
-  const ctx = useMemo(
+  const ctx = useMemo<MenuItemGroupContextValue>(
     () => ({
       groupLabelId,
+      registerLabel: () => setHasLabel(true),
+      unregisterLabel: () => setHasLabel(false),
     }),
     [groupLabelId],
   )

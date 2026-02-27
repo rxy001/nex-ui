@@ -2,7 +2,6 @@
 
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import type { ElementType } from 'react'
 import type { MenuSeparatorProps } from './types'
 
 const recipe = defineRecipe({
@@ -16,9 +15,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const MenuSeparator = <RootComponent extends ElementType = 'hr'>(
-  props: MenuSeparatorProps<RootComponent>,
-) => {
+export const MenuSeparator = (props: MenuSeparatorProps) => {
   const [MenuSeparatorRoot, getMenuSeparatorRootProps] = useSlot({
     style,
     elementType: 'hr',

@@ -6,7 +6,7 @@ import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { RovingFocusItem } from '../rovingFocus'
 import { useMenuContentContext, useRootMenuContext } from './MenuContext'
-import type { ElementType, KeyboardEvent, PointerEvent } from 'react'
+import type { KeyboardEvent, PointerEvent } from 'react'
 import type { MenuItemProps } from './types'
 
 const recipe = defineRecipe({
@@ -14,14 +14,14 @@ const recipe = defineRecipe({
     display: 'flex',
     alignItems: 'center',
     cursor: 'default',
+    outline: 'none',
+    userSelect: 'none',
   },
 })
 
 const style = recipe()
 
-export const MenuItem = <RootElement extends ElementType = 'div'>(
-  props: MenuItemProps<RootElement>,
-) => {
+export const MenuItem = (props: MenuItemProps) => {
   const rootMenuCtx = useRootMenuContext()
   const menuContentCtx = useMenuContentContext()
   const { disabled, children, closeOnClick = true, ...remainingProps } = props

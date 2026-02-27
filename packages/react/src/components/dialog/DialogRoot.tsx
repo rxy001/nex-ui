@@ -6,13 +6,9 @@ import { useDialogPropsContext } from './DialogContext'
 import { dialogRootRecipe } from '../../theme/recipes'
 import type { ReactNode } from 'react'
 
-type DialogRootProps = {
-  children?: ReactNode
-}
-
 const slots = ['root', 'backdrop']
 
-export const DialogRoot = ({ children }: DialogRootProps) => {
+export const DialogRoot = ({ children }: { children?: ReactNode }) => {
   const props = useDialogPropsContext()
 
   const {

@@ -8,17 +8,10 @@ import {
 } from './MenuContext'
 import { MenuItem } from './MenuItem'
 import { useSlot } from '../utils'
-import type { ElementType } from 'react'
 import type { MenuCheckboxItemProps } from './types'
 import type { MenuItemIndicatorContextValue } from './MenuContext'
 
-export const MenuCheckboxItem = <
-  T extends string | number,
-  RootComponent extends ElementType = 'div',
->(
-  inProps: MenuCheckboxItemProps<T, RootComponent>,
-) => {
-  const props = inProps as MenuCheckboxItemProps<T, 'div'>
+export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
   const defaultValue = useId()
 
   const {

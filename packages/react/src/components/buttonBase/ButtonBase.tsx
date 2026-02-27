@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { isFunction } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import type { ElementType, KeyboardEvent, MouseEvent } from 'react'
+import type { KeyboardEvent, MouseEvent } from 'react'
 import type { ButtonBaseProps } from './types'
 
 const recipe = defineRecipe({
@@ -25,10 +25,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ButtonBase = <RootComponent extends ElementType = 'button'>(
-  inProps: ButtonBaseProps<RootComponent>,
-) => {
-  const props = inProps as ButtonBaseProps<'button'>
+export const ButtonBase = (props: ButtonBaseProps) => {
   const {
     as,
     children,

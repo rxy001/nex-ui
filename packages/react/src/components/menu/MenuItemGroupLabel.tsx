@@ -1,15 +1,19 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useSlot } from '../utils'
 import { useMenuItemGroupContext } from './MenuContext'
-import type { ElementType } from 'react'
 import type { MenuItemGroupLabelProps } from './types'
 
-export const MenuItemGroupLabel = <RootComponent extends ElementType = 'div'>(
-  props: MenuItemGroupLabelProps<RootComponent>,
-) => {
+export const MenuItemGroupLabel = (props: MenuItemGroupLabelProps) => {
   const { children, ...remainingProps } = props
-  const { groupLabelId } = useMenuItemGroupContext()
+  const { groupLabelId, registerLabel, unregisterLabel } =
+    useMenuItemGroupContext()
+
+  useEffect(() => {
+    registerLabel()
+    return unregisterLabel
+  }, [registerLabel, unregisterLabel])
 
   const [MenuItemGroupLabelRoot, getMenuItemGroupLabelRootProps] = useSlot({
     elementType: 'div',

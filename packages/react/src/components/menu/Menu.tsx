@@ -9,17 +9,16 @@ import {
   SubMenuProvider,
   useMenuContext,
 } from './MenuContext'
-import type { MenuProps } from './types'
+import type { MenuProps, MenuImplProps, SubMenuProps } from './types'
 import type { MenuContextValue } from './MenuContext'
 
-// eslint-disable-next-line react/display-name
-const MenuImpl = (props: MenuProps) => {
+const MenuImpl = (props: MenuImplProps) => {
   const { open, children, onOpenChange, onClose } = props
 
   const ariaId = useId()
   const contentId = `menu-${ariaId}-content`
   const triggerId = `menu-${ariaId}-trigger`
-  const triggerRef = useRef<HTMLElement>(null)
+  const triggerRef = useRef<HTMLDivElement>(null)
 
   const setOpen = useEvent((value: boolean) => {
     onOpenChange?.(value)
@@ -42,12 +41,13 @@ const MenuImpl = (props: MenuProps) => {
     </Popper>
   )
 }
+MenuImpl.displayName = 'MenuImpl'
 
-// eslint-disable-next-line react/display-name
-const RootMenu = (props: MenuProps) => {
+export const Menu = (props: MenuProps) => {
+  const { children, onOpenChange, ...remainingProps } = props
   const useKeyboardRef = useRef(false)
   const close = useEvent(() => {
-    props.onOpenChange?.(false)
+    onOpenChange?.(false)
   })
 
   const ctx = useMemo(
@@ -83,22 +83,20 @@ const RootMenu = (props: MenuProps) => {
   }, [])
 
   return (
-    <RootMenuProvider value={ctx}>
-      <MenuImpl {...props} />
-    </RootMenuProvider>
+    <MenuImpl onOpenChange={onOpenChange} {...remainingProps}>
+      <RootMenuProvider value={ctx}>{children}</RootMenuProvider>
+    </MenuImpl>
   )
 }
+Menu.displayName = 'Menu'
 
-// eslint-disable-next-line react/display-name
-const SubMenu = (props: MenuProps) => {
+export const SubMenu = (props: SubMenuProps) => {
   const parentMenuCtx = useMenuContext()
-  const menuRootRef = useRef<HTMLDivElement>(null)
+  const subMenuContentRef = useRef<HTMLDivElement>(null)
 
-  const { children, onOpenChange } = props
+  const { children, onOpenChange, ...remainingProps } = props
 
-  const subMenuCtx = useMemo(() => {
-    return { menuRootRef }
-  }, [])
+  const subMenuCtx = useMemo(() => ({ subMenuContentRef }), [])
 
   useLayoutEffect(() => {
     // Close this menu if the parent menu is closed
@@ -109,15 +107,10 @@ const SubMenu = (props: MenuProps) => {
   }, [parentMenuCtx.open, onOpenChange])
 
   return (
-    <MenuImpl {...props}>
+    <MenuImpl onOpenChange={onOpenChange} {...remainingProps}>
       <SubMenuProvider value={subMenuCtx}>{children}</SubMenuProvider>
     </MenuImpl>
   )
 }
 
-export const Menu = (props: MenuProps) => {
-  const rootMenu = !useMenuContext()
-  return rootMenu ? <RootMenu {...props} /> : <SubMenu {...props} />
-}
-
-Menu.displayName = 'Menu'
+SubMenu.displayName = 'SubMenu'
