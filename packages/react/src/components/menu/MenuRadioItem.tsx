@@ -8,17 +8,10 @@ import {
 } from './MenuContext'
 import { MenuItem } from './MenuItem'
 import { useSlot } from '../utils'
-import type { ElementType } from 'react'
 import type { MenuRadioItemProps } from './types'
 import type { MenuItemIndicatorContextValue } from './MenuContext'
 
-export const MenuRadioItem = <
-  T extends string | number,
-  RootComponent extends ElementType = 'div',
->(
-  inProps: MenuRadioItemProps<T, RootComponent>,
-) => {
-  const props = inProps as MenuRadioItemProps<T, 'div'>
+export const MenuRadioItem = (props: MenuRadioItemProps) => {
   const defaultValue = useId()
 
   const {

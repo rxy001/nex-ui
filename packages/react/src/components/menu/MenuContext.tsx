@@ -7,7 +7,7 @@ export interface MenuContextValue {
   setOpen: (open: boolean) => void
   contentId: string
   triggerId: string
-  triggerRef: RefObject<HTMLElement | null>
+  triggerRef: RefObject<HTMLDivElement | null>
 }
 
 export const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
@@ -33,7 +33,7 @@ export const [RootMenuProvider, useRootMenuContext] =
   })
 
 export interface SubMenuContextValue {
-  menuRootRef: RefObject<HTMLDivElement | null>
+  subMenuContentRef: RefObject<HTMLDivElement | null>
 }
 
 export const [SubMenuProvider, useSubMenuContext] =
@@ -46,7 +46,7 @@ export const [SubMenuProvider, useSubMenuContext] =
   })
 
 export interface MenuRadioItemGroupContextValue<T extends string | number> {
-  value: T
+  value?: T
   setValue: (value: T) => void
 }
 
@@ -117,6 +117,8 @@ export const [MenuItemIndicatorProvider, useMenuItemIndicatorContext] =
 
 export interface MenuItemGroupContextValue {
   groupLabelId: string
+  registerLabel: () => void
+  unregisterLabel: () => void
 }
 
 export const [MenuItemGroupProvider, useMenuItemGroupContext] =

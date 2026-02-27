@@ -7,7 +7,7 @@ import { addEventListener, ownerWindow, chain } from '@nex-ui/utils'
 import { useSlot, getOverflowAncestors, computePosition } from '../utils'
 import { DismissibleLayer } from '../dismissibleLayer'
 import { usePopperContext, usePopperPortalPropsContext } from './PopperContext'
-import type { CSSProperties, ElementType } from 'react'
+import type { CSSProperties } from 'react'
 import type { PopperContentProps } from './types'
 import type { Placement } from '../utils'
 
@@ -34,10 +34,7 @@ const DEFAULT_VARS = {
 
 const DEFAULT_FLIP_OPTIONS = { mainAxis: true, crossAxis: true }
 
-export const PopperContent = <RootComponent extends ElementType = 'div'>(
-  inProps: PopperContentProps<RootComponent>,
-) => {
-  const props = inProps as PopperContentProps<'div'>
+export const PopperContent = (props: PopperContentProps) => {
   const { open, triggerRef, popperRootRef, setOpen } = usePopperContext()
   const popperPortalPropsCtx = usePopperPortalPropsContext()
 

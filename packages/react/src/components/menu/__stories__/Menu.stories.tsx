@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CheckOutlined } from '@nex-ui/icons'
 import {
   Menu,
+  SubMenu as SubMenuImpl,
   MenuCheckboxItem,
   MenuCheckboxItemGroup,
   MenuContent,
@@ -16,6 +17,7 @@ import {
   MenuItemGroup,
   MenuItemGroupLabel,
   MenuSeparator,
+  SubMenuContent,
 } from '../index'
 import type { Meta } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
@@ -78,18 +80,18 @@ export function SubMenu() {
           <MenuContent>
             <MenuItem sx={style}>Menu Item 1</MenuItem>
             <MenuItem sx={style}>Menu Item 2</MenuItem>
-            <Menu open={open2} onOpenChange={setOpen2}>
+            <SubMenuImpl open={open2} onOpenChange={setOpen2}>
               <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
               <MenuPortal>
                 <MenuMotion>
-                  <MenuContent>
+                  <SubMenuContent>
                     <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
                     <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
                     <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
-                  </MenuContent>
+                  </SubMenuContent>
                 </MenuMotion>
               </MenuPortal>
-            </Menu>
+            </SubMenuImpl>
           </MenuContent>
         </MenuMotion>
       </MenuPortal>
@@ -121,6 +123,7 @@ export function CheckboxItems() {
   return (
     <MenuWrapper>
       <MenuCheckboxItemGroup value={value} onValueChange={setValue}>
+        <MenuItemGroupLabel>Checkbox Group</MenuItemGroupLabel>
         <MenuCheckboxItem sx={style} value='item-1'>
           Checkbox Item 1
           <MenuItemIndicator>
@@ -150,6 +153,7 @@ export function RadioItems() {
   return (
     <MenuWrapper>
       <MenuRadioItemGroup value={value} onValueChange={setValue}>
+        <MenuItemGroupLabel>Radio Group</MenuItemGroupLabel>
         <MenuRadioItem sx={style} value='item-1'>
           Radio Item 1
           <MenuItemIndicator>
@@ -189,5 +193,66 @@ export function DisableAnimation() {
         </MenuContent>
       </MenuPortal>
     </Menu>
+  )
+}
+
+export function ViewportBoundary() {
+  const [open1, setOpen1] = useState(false)
+  const [open2, setOpen2] = useState(false)
+  const innerRef = useRef<HTMLDivElement>(null)
+  const outerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    outerRef.current?.scrollTo(400, 400)
+  }, [])
+
+  return (
+    <div
+      style={{
+        width: 400,
+        height: 400,
+        overflow: 'auto',
+        border: '1px solid #000',
+      }}
+      ref={outerRef}
+    >
+      <div
+        style={{
+          height: 1200,
+          width: 1200,
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        ref={innerRef}
+      >
+        <Menu open={open1} onOpenChange={setOpen1}>
+          <MenuTrigger>
+            <button>Open Menu</button>
+          </MenuTrigger>
+          <MenuPortal container={() => innerRef.current}>
+            <MenuMotion>
+              <MenuContent>
+                <MenuItem sx={style}>Menu Item 1</MenuItem>
+                <MenuItem sx={style}>Menu Item 2</MenuItem>
+                <SubMenuImpl open={open2} onOpenChange={setOpen2}>
+                  <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
+                  <MenuPortal container={() => innerRef.current}>
+                    <MenuMotion>
+                      <SubMenuContent>
+                        <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
+                        <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
+                        <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
+                      </SubMenuContent>
+                    </MenuMotion>
+                  </MenuPortal>
+                </SubMenuImpl>
+              </MenuContent>
+            </MenuMotion>
+          </MenuPortal>
+        </Menu>
+      </div>
+    </div>
   )
 }

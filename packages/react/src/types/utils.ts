@@ -5,7 +5,7 @@ import type {
   SlotRecipeRuntimeFn,
   Interpolation,
 } from '@nex-ui/system'
-import type { ElementType, ComponentProps } from 'react'
+import type { ElementType, ComponentProps, JSX } from 'react'
 import type { ClassValue } from 'clsx'
 
 export type UniteTokens<T extends {}, U extends {}> = {
@@ -15,10 +15,10 @@ export type UniteTokens<T extends {}, U extends {}> = {
 export type Overwrite<K, T> = Omit<K, keyof T> & T
 
 export type SlotProps<
-  T extends ElementType,
+  T extends keyof JSX.IntrinsicElements,
   Props extends object = {},
 > = Overwrite<
-  ComponentProps<T>,
+  JSX.IntrinsicElements[T],
   { className?: ClassValue; as?: ElementType; sx?: Interpolation } & Props
 >
 
