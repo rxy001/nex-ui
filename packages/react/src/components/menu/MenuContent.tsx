@@ -154,11 +154,17 @@ const MenuContentImpl = (props: MenuContentImplProps) => {
 MenuContentImpl.displayName = 'MenuContentImpl'
 
 export const MenuContent = (props: MenuContentProps) => {
-  const { loop = true, restoreFocus = true, ...remainingProps } = props
+  const {
+    loop = true,
+    restoreFocus = true,
+    placement = 'bottom',
+    ...remainingProps
+  } = props
 
   return (
     <MenuContentImpl
       loop={loop}
+      placement={placement}
       restoreFocus={restoreFocus}
       {...remainingProps}
     />
@@ -173,7 +179,7 @@ export const SubMenuContent = (props: SubMenuContentProps) => {
   const mergedRef = useMergeRefs(subMenuCtx?.subMenuContentRef, props.ref)
 
   return (
-    <MenuContent
+    <MenuContentImpl
       {...props}
       ref={mergedRef}
       placement='right-start'

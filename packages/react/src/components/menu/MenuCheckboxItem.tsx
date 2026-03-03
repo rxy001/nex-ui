@@ -16,6 +16,7 @@ export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
 
   const {
     children,
+    onCheckedChange,
     disabled = false,
     value = defaultValue,
     ...remainingProps
@@ -42,6 +43,7 @@ export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
         ? checkboxGroupCtx.value.filter((val) => val !== value)
         : [...checkboxGroupCtx.value, value],
     )
+    onCheckedChange?.(!checked)
   }
 
   const [MenuCheckboxItemRoot, getMenuCheckboxItemProps] = useSlot({
