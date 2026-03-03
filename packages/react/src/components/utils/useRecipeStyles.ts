@@ -17,6 +17,7 @@ export function useRecipeStyles<
 >({ name, ownerState, recipe }: UseRecipeStylesProps<Recipe>) {
   const { components } = useNexUI()
 
+  // @ts-ignore
   const styleOverrides = components?.[name]?.styleOverrides
 
   const extendedRecipe = useMemo(() => {

@@ -2,14 +2,11 @@
 
 import { useMemo, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
-import { useCollectionContext } from './CollectionContext'
 import type { Simplify } from '../../types/utils'
 import type { Item } from './types'
 import type { CollectionContextValue } from './CollectionContext'
 
 export const useCollection = <ItemData extends {} = {}>() => {
-  const ctx = useCollectionContext()
-
   const itemsRef = useRef<Item<ItemData>[]>([])
 
   const setItems = useEvent(
@@ -58,7 +55,7 @@ export const useCollection = <ItemData extends {} = {}>() => {
     [getItems, setItems],
   )
 
-  return ctx ? ctx : collection
+  return collection
 }
 
 function isElementPreceding(a: HTMLElement, b: HTMLElement) {
