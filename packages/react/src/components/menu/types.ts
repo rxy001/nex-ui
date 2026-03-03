@@ -63,6 +63,7 @@ export type MenuRadioItemGroupProps<
 // ----------------- MenuRadioItemProps -----------------
 export type MenuRadioItemProps = MenuItemProps & {
   value?: string | number
+  onSelect?: () => void
 }
 
 // ----------------- MenuCheckboxItemGroupProps -----------------
@@ -76,6 +77,7 @@ export type MenuCheckboxItemGroupProps<
 // ----------------- MenuCheckboxItemProps -----------------
 export type MenuCheckboxItemProps = MenuItemProps & {
   value?: string | number
+  onCheckedChange?: (checked: boolean) => void
 }
 
 export type MenuItemGroupLabelProps = SlotProps<'div'>
