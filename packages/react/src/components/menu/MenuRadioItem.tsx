@@ -16,6 +16,7 @@ export const MenuRadioItem = (props: MenuRadioItemProps) => {
 
   const {
     children,
+    onSelect,
     disabled = false,
     value = defaultValue,
     ...remainingProps
@@ -41,6 +42,7 @@ export const MenuRadioItem = (props: MenuRadioItemProps) => {
       onClick: () => {
         if (disabled) return
         radioGroupCtx.setValue(value)
+        onSelect?.()
       },
     },
     dataAttrs: {
