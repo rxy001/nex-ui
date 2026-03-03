@@ -75,7 +75,7 @@ export const buttonRecipe = defineSlotRecipe({
           bg: {
             _DEFAULT: 'transparent',
             _hover: 'colorPalette.500/10',
-            _expanded: 'colorPalette.500/10',
+            _expanded: 'transparent',
           },
         },
       },
