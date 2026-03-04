@@ -3,7 +3,6 @@ import {
   testClassNamesForwarding,
   testRefForwarding,
   testSlotPropsForwarding,
-  testVariantDataAttrs,
 } from '~/tests/shared'
 import {
   Dialog,
@@ -15,16 +14,9 @@ import {
 import { dialogContentClasses } from './classes'
 import type { DialogContentProps } from '../index'
 
-function TestDialog({
-  disableAnimation,
-  ...props
-}: DialogContentProps & { disableAnimation?: boolean }) {
+function TestDialog(props: DialogContentProps) {
   return (
-    <Dialog
-      defaultOpen
-      data-testid='dialog-root'
-      disableAnimation={disableAnimation}
-    >
+    <Dialog defaultOpen>
       <DialogContent data-testid='dialog-content' {...props}>
         <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
         <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>
@@ -34,38 +26,93 @@ function TestDialog({
   )
 }
 
-const slots = ['paper', 'closeButton'] as const
+const slots = ['paper', 'closeButton', 'backdrop'] as const
 
 describe('DialogContent', () => {
   testRefForwarding(<TestDialog />, {
     useAct: true,
   })
 
-  testVariantDataAttrs(
-    <TestDialog />,
-    ['size', ['xs', 'sm', 'md', 'lg', 'xl', 'full']],
-    {
-      useAct: true,
-    },
-  )
+  it(`should have the appropriate data-size-* attribute on element based on size prop`, async () => {
+    const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'full'] as const
 
-  testVariantDataAttrs(<TestDialog />, ['scroll', ['inside', 'outside']], {
-    useAct: true,
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <>
+        {sizes.map((value) => (
+          <TestDialog className={`size-${value}`} size={value} key={value} />
+        ))}
+      </>,
+      {
+        useAct: true,
+      },
+    )
+    sizes.forEach((value) => {
+      const attrKey = `data-size`
+      const element = queryByClassName(`size-${value}`)
+      expect(
+        element?.querySelector(`.${dialogContentClasses.paper}`),
+      ).toHaveAttribute(attrKey, value)
+    })
   })
 
-  testVariantDataAttrs(
-    <TestDialog />,
-    ['placement', ['top', 'center', 'bottom']],
-    {
-      useAct: true,
-    },
-  )
+  it(`should have the appropriate data-placement-* attribute on element based on placement prop`, async () => {
+    const placements = ['top', 'center', 'bottom'] as const
+
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <>
+        {placements.map((value) => (
+          <TestDialog
+            className={`placement-${value}`}
+            placement={value}
+            key={value}
+          />
+        ))}
+      </>,
+      {
+        useAct: true,
+      },
+    )
+    placements.forEach((value) => {
+      const attrKey = `data-placement`
+      const element = queryByClassName(`placement-${value}`)
+      expect(
+        element?.querySelector(`.${dialogContentClasses.paper}`),
+      ).toHaveAttribute(attrKey, value)
+    })
+  })
+
+  it(`should have the appropriate data-scroll-* attribute on element based on scroll prop`, async () => {
+    const scrolls = ['inside', 'outside'] as const
+
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <>
+        {scrolls.map((value) => (
+          <TestDialog
+            className={`scroll-${value}`}
+            scroll={value}
+            key={value}
+          />
+        ))}
+      </>,
+      {
+        useAct: true,
+      },
+    )
+    scrolls.forEach((value) => {
+      const attrKey = `data-scroll`
+      const element = queryByClassName(`scroll-${value}`)
+      expect(
+        element?.querySelector(`.${dialogContentClasses.paper}`),
+      ).toHaveAttribute(attrKey, value)
+    })
+  })
 
   testClassNamesForwarding(
     <TestDialog />,
     slots,
     {
       paper: 'test-paper',
+      backdrop: 'test-backdrop',
       closeButton: 'test-close-button',
     },
     dialogContentClasses,
@@ -79,6 +126,7 @@ describe('DialogContent', () => {
     slots,
     {
       paper: { className: 'test-paper' },
+      backdrop: { className: 'test-backdrop' },
       closeButton: { className: 'test-close-button' },
     },
     dialogContentClasses,
@@ -86,19 +134,6 @@ describe('DialogContent', () => {
       useAct: true,
     },
   )
-
-  it('should render with default props', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(<TestDialog />, {
-      useAct: true,
-    })
-
-    const dialogContentRoot = getByTestId('dialog-content')
-
-    expect(dialogContentRoot).toHaveAttribute('data-size', 'md')
-    expect(dialogContentRoot).toHaveAttribute('data-placement', 'top')
-    expect(dialogContentRoot).toHaveAttribute('data-scroll', 'outside')
-    expect(dialogContentRoot).toHaveAttribute('data-hide-close-button', 'false')
-  })
 
   it('should not render close button when hideCloseButton=true', async () => {
     const { queryByRole } = await renderWithNexUIProvider(
@@ -109,6 +144,19 @@ describe('DialogContent', () => {
     )
 
     expect(queryByRole('button')).not.toBeInTheDocument()
+  })
+
+  it('should hide backdrop when hideBackdrop=true', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <TestDialog hideBackdrop />,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(
+      queryByClassName(dialogContentClasses.backdrop),
+    ).not.toBeInTheDocument()
   })
 
   it('should render custom close icon when closeIcon is provided', async () => {
@@ -132,9 +180,9 @@ describe('DialogContent', () => {
       },
     )
 
-    const dialogContentRoot = queryByTestId('dialog-content')
-    expect(dialogContentRoot).toBeInTheDocument()
-    const closeButton = dialogContentRoot?.querySelector(
+    const dialogContent = queryByTestId('dialog-content')
+    expect(dialogContent).toBeInTheDocument()
+    const closeButton = dialogContent?.querySelector(
       `.${dialogContentClasses.closeButton}`,
     )
 
@@ -175,8 +223,22 @@ describe('DialogContent', () => {
     expect(paper?.parentElement).toHaveClass('test-motion')
   })
 
+  it('should render into document.body via Portal when defaultOpen', async () => {
+    const { container, getByTestId } = await renderWithNexUIProvider(
+      <TestDialog disableAnimation />,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(container.firstChild).toBeNull()
+
+    const dialogContent = getByTestId('dialog-content')
+    expect(dialogContent.parentElement).toBe(document.body)
+  })
+
   describe('Accessibility', () => {
-    it('should have aria-labelledby and aria-describedby attributes on the ModalContent element when provided', async () => {
+    it('should have aria-labelledby and aria-describedby attributes on the DialogContent element when provided', async () => {
       const { getByTestId } = await renderWithNexUIProvider(
         <TestDialog
           aria-labelledby='custom-label'

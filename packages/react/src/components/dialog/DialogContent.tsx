@@ -1,31 +1,29 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import * as m from 'motion/react-m'
+import { nex } from '@nex-ui/styled'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
-import { DialogRoot } from './DialogRoot'
+import { LazyMotion } from 'motion/react'
 import {
   useRecipeStyles,
   useDefaultProps,
   useSlot,
   useSlotClasses,
+  motionFeatures,
 } from '../utils'
+import { ModalBackdrop, ModalContent, ModalPortal, ModalMotion } from '../modal'
 import { Ripple } from '../ripple'
 import { DialogClose } from './DialogClose'
 import { dialogContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
-import { ModalContent } from '../modal'
-import {
-  DialogContentPropsProvider,
-  useDialogPropsContext,
-} from './DialogContext'
+import { DialogContentPropsProvider } from './DialogContext'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DialogContentProps } from './types'
 import type { DialogContentPropsContextValue } from './DialogContext'
 
-const slots = ['root', 'paper', 'closeButton'] as const
+const slots = ['root', 'paper', 'backdrop', 'closeButton'] as const
 
 export const DialogContent = <RootComponent extends ElementType = 'div'>(
   inProps: DialogContentProps<RootComponent>,
@@ -36,22 +34,25 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const {
-    disableAnimation,
-    restoreFocus,
-    closeOnEscape,
-    closeOnInteractBackdrop,
-    hideBackdrop,
-  } = useDialogPropsContext()
-
-  const {
     children,
     slotProps,
     closeIcon,
     classNames,
     motionProps,
+    hideBackdrop,
+    container,
+    keepMounted,
+    disableAnimation,
+    preventScroll,
+    restoreFocus,
+    autoFocus,
+    closeOnEscape,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-describedby': ariaDescribedBy,
     placement = 'top',
     scroll = 'outside',
     hideCloseButton = false,
+    closeOnInteractOutside = true,
     size = 'md',
     ...remainingProps
   } = props
@@ -69,11 +70,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     name: 'DialogContent',
     recipe: dialogContentRecipe,
   })
-
-  const {
-    'aria-labelledby': ariaLabelledBy,
-    'aria-describedby': ariaDescribedBy,
-  } = ownerState
 
   const slotAriaProps = useMemo(
     () => ({
@@ -95,16 +91,10 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const [DialogContentRoot, getDialogContentRootProps] = useSlot({
-    component: nex.div,
     style: styles.root,
+    component: nex.div,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
-    dataAttrs: {
-      size,
-      placement,
-      scroll,
-      hideCloseButton,
-    },
   })
 
   const [DialogContentPaper, getDialogContentPaperProps] = useSlot({
@@ -114,9 +104,17 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     externalSlotProps: slotProps?.paper,
     ariaProps: slotAriaProps.paper,
     additionalProps: {
+      preventScroll,
       restoreFocus,
+      autoFocus,
       closeOnEscape,
-      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
+      closeOnInteractOutside,
+    },
+    dataAttrs: {
+      size,
+      placement,
+      scroll,
+      hideCloseButton,
     },
   })
 
@@ -128,6 +126,20 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     ariaProps: slotAriaProps.closeButton,
   })
 
+  const [DialogBackdrop, getDialogBackdropProps] = useSlot({
+    component: ModalBackdrop,
+    style: styles.backdrop,
+    externalSlotProps: slotProps?.backdrop,
+    classNames: slotClasses.backdrop,
+  })
+
+  const ctx = useMemo<DialogContentPropsContextValue>(
+    () => ({
+      scroll,
+    }),
+    [scroll],
+  )
+
   const mergedMotionProps = useMemo(() => {
     const mProps =
       typeof motionProps === 'function' ? motionProps(placement) : motionProps
@@ -137,7 +149,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
         transform: 'scale(1)',
       },
       hidden: {
-        transform: 'scale(1.04)',
+        transform: 'scale(1.03)',
       },
     }
 
@@ -146,13 +158,6 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
       ...mProps,
     }
   }, [motionProps, placement])
-
-  const ctx = useMemo<DialogContentPropsContextValue>(
-    () => ({
-      scroll,
-    }),
-    [scroll],
-  )
 
   const renderPaper = () => (
     <DialogContentPaper {...getDialogContentPaperProps()}>
@@ -171,16 +176,39 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
     </DialogContentPaper>
   )
 
-  return (
-    <DialogRoot>
+  const renderContent = () => (
+    <>
+      {!hideBackdrop && <DialogBackdrop {...getDialogBackdropProps()} />}
       <DialogContentRoot {...getDialogContentRootProps()}>
-        {disableAnimation ? (
-          renderPaper()
-        ) : (
-          <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
-        )}
+        <LazyMotion features={motionFeatures}>
+          {disableAnimation ? (
+            renderPaper()
+          ) : (
+            <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
+          )}
+        </LazyMotion>
       </DialogContentRoot>
-    </DialogRoot>
+    </>
+  )
+
+  return (
+    <ModalPortal
+      disablePresence={disableAnimation}
+      container={container}
+      keepMounted={keepMounted}
+    >
+      {disableAnimation ? (
+        renderContent()
+      ) : (
+        <ModalMotion
+          style={{
+            isolation: 'isolate',
+          }}
+        >
+          {renderContent()}
+        </ModalMotion>
+      )}
+    </ModalPortal>
   )
 }
 

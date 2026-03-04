@@ -3,27 +3,15 @@
 import { useControlledState } from '@nex-ui/hooks'
 import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
-import { DrawerPropsProvider } from './DrawerContext'
-import type { ElementType } from 'react'
 import type { DrawerProps } from './types'
 
-export const Drawer = <RootComponent extends ElementType = 'div'>(
-  inProps: DrawerProps<RootComponent>,
-) => {
+export const Drawer = (inProps: DrawerProps) => {
   const props = useDefaultProps<DrawerProps>({
     name: 'Drawer',
     props: inProps,
   })
 
-  const {
-    children,
-    onOpenChange,
-    defaultOpen,
-    onClose,
-    open: openProp,
-    hideBackdrop = false,
-    ...remainingProps
-  } = props
+  const { children, onOpenChange, defaultOpen, onClose, open: openProp } = props
 
   const [open, setOpen] = useControlledState(
     openProp,
@@ -31,14 +19,9 @@ export const Drawer = <RootComponent extends ElementType = 'div'>(
     onOpenChange,
   )
 
-  const ctx = {
-    ...remainingProps,
-    hideBackdrop,
-  }
-
   return (
     <Modal open={open} onOpenChange={setOpen} onClose={onClose}>
-      <DrawerPropsProvider value={ctx}>{children}</DrawerPropsProvider>
+      {children}
     </Modal>
   )
 }

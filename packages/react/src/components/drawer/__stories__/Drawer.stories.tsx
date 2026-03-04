@@ -16,22 +16,24 @@ import type { ReactNode } from 'react'
 import type { DrawerContentProps, DrawerProps } from '../types'
 
 type DrawerTemplateProps = DrawerProps &
-  Pick<DrawerContentProps, 'hideCloseButton' | 'size' | 'placement'> & {
+  DrawerContentProps & {
     triggerText?: ReactNode
   }
 
 function DrawerTemplate(props: DrawerTemplateProps) {
-  const { hideCloseButton, size, placement, triggerText, ...other } = props
+  const { onClose, onOpenChange, open, defaultOpen, triggerText, ...other } =
+    props
   return (
-    <Drawer {...other}>
+    <Drawer
+      open={open}
+      onOpenChange={onOpenChange}
+      defaultOpen={defaultOpen}
+      onClose={onClose}
+    >
       <DrawerTrigger>
         <Button>{triggerText ?? 'Open Drawer'}</Button>
       </DrawerTrigger>
-      <DrawerContent
-        hideCloseButton={hideCloseButton}
-        size={size}
-        placement={placement}
-      >
+      <DrawerContent {...other}>
         <DrawerHeader>Drawer Header</DrawerHeader>
         <DrawerBody>
           <p>
@@ -73,7 +75,7 @@ const meta = {
     keepMounted: {
       control: 'boolean',
     },
-    closeOnInteractBackdrop: {
+    closeOnInteractOutside: {
       control: 'boolean',
     },
     hideBackdrop: {
@@ -129,7 +131,6 @@ export const keepMounted: Story = {
 export const WithoutBackdrop: Story = {
   args: {
     hideBackdrop: true,
-    defaultOpen: true,
   },
 }
 

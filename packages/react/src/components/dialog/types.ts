@@ -11,22 +11,44 @@ import type { DialogContentVariants } from '../../theme/recipes'
 import type {
   ModalCloseProps,
   ModalContentProps,
-  ModalMotionProps,
   ModalPortalProps,
-  ModalRootProps,
   ModalTriggerProps,
   ModalProps,
 } from '../modal'
 
 // ------------- Dialog --------------
-type DialogSlotProps = {
+type DialogOwnProps = ModalProps & {
+  /**
+   * If true, the Dialog is shown by default. (uncontrolled)
+   */
+  defaultOpen?: boolean
+}
+
+export interface DialogPropsOverrides {}
+
+export type DialogProps = DialogOwnProps & DialogPropsOverrides
+
+// ------------- DialogContent -------------
+type DialogContentSlotProps = {
+  closeButton?: SlotProps<'button'>
+  paper?: SlotProps<'div'>
   backdrop?: SlotProps<'div'>
 }
 
-type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
-  Pick<ModalRootProps, 'preventScroll'> &
-  Pick<ModalPortalProps, 'container' | 'keepMounted'> &
-  Pick<ModalContentProps, 'restoreFocus' | 'closeOnEscape'> & {
+export interface DialogContentPropsOverrides {}
+
+type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
+  ModalPortalProps,
+  'container' | 'keepMounted'
+> &
+  Pick<
+    ModalContentProps,
+    | 'restoreFocus'
+    | 'closeOnEscape'
+    | 'preventScroll'
+    | 'autoFocus'
+    | 'closeOnInteractOutside'
+  > & {
     /**
      * The component or element to render as the root.
      * @default 'div'
@@ -49,16 +71,6 @@ type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
     children?: ReactNode
 
     /**
-     * The props used for each slot.
-     */
-    slotProps?: DialogSlotProps
-
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof DialogSlotProps>
-
-    /**
      * If true, the backdrop is not rendered.
      *
      * @default false
@@ -66,22 +78,14 @@ type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
     hideBackdrop?: boolean
 
     /**
-     * If true, closes the Dialog when the backdrop is clicked.
-     *
-     * @default true
-     */
-    closeOnInteractBackdrop?: boolean
-
-    /**
      * The props to modify the framer motion animation.
      * Use the `variants` API to create your own animation.
      */
-    motionProps?: ModalMotionProps
-
-    /**
-     * If true, the Dialog is shown by default. (uncontrolled)
-     */
-    defaultOpen?: boolean
+    motionProps?:
+      | ((
+          placement: DialogContentVariants['placement'],
+        ) => HTMLMotionProps<'div'>)
+      | HTMLMotionProps<'div'>
 
     /**
      * If true, disables the animation for the Dialog.
@@ -89,106 +93,56 @@ type DialogOwnProps<RootComponent extends ElementType> = ModalProps &
      * @default false
      */
     disableAnimation?: boolean
+
+    /**
+     * The props used for each slot.
+     */
+    slotProps?: DialogContentSlotProps
+
+    /**
+     * The className used for each slot.
+     */
+    classNames?: ComponentSlotClasses<keyof DialogContentSlotProps>
+
+    /**
+     * Determine the max-width of the dialog
+     * @default 'md'
+     */
+    size?: DialogContentVariants['size']
+
+    /**
+     * Custom close button to display on top right corner.
+     */
+    closeIcon?: ReactNode
+
+    /**
+     * If true, the close button is not rendered.
+     * @default false
+     */
+    hideCloseButton?: boolean
+
+    /**
+     * The dialog scroll behavior.
+     * @default 'outside'
+     */
+    scroll?: DialogContentVariants['scroll']
+
+    /**
+     * The dialog position.
+     * @default 'top'
+     */
+    placement?: DialogContentVariants['placement']
+
+    /**
+     * The id(s) of the element(s) that label the dialog.
+     */
+    'aria-labelledby'?: string
+
+    /**
+     * The id(s) of the element(s) that describe the dialog.
+     */
+    'aria-describedby'?: string
   }
-
-export interface DialogPropsOverrides {}
-
-export type DialogProps<RootComponent extends ElementType = 'div'> =
-  OverrideProps<
-    RootComponent,
-    DialogOwnProps<RootComponent>,
-    DialogPropsOverrides
-  >
-
-// ------------- DialogContent -------------
-type DialogContentSlotProps = {
-  closeButton?: SlotProps<'button'>
-  paper?: SlotProps<'section'>
-}
-
-export interface DialogContentPropsOverrides {}
-
-type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = {
-  /**
-   * The component or element to render as the root.
-   * @default 'div'
-   */
-  as?: RootComponent
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: Interpolation
-
-  /**
-   * It's usually the DialogHeader、DialogBody and DialogFooter component.
-   */
-  children?: ReactNode
-
-  /**
-   * The props used for each slot.
-   */
-  slotProps?: DialogContentSlotProps
-
-  /**
-   * Determine the max-width of the dialog
-   * @default 'md'
-   */
-  size?: DialogContentVariants['size']
-
-  /**
-   * Custom close button to display on top right corner.
-   */
-  closeIcon?: ReactNode
-
-  /**
-   * If true, the close button is not rendered.
-   * @default false
-   */
-  hideCloseButton?: boolean
-
-  /**
-   * The className used for each slot.
-   */
-  classNames?: ComponentSlotClasses<keyof DialogContentSlotProps>
-
-  /**
-   * The dialog scroll behavior.
-   * @default 'outside''
-   */
-  scroll?: DialogContentVariants['scroll']
-
-  /**
-   * The dialog position.
-   * @default 'top'
-   */
-  placement?: DialogContentVariants['placement']
-
-  /**
-   * The id(s) of the element(s) that label the dialog.
-   */
-  'aria-labelledby'?: string
-
-  /**
-   * The id(s) of the element(s) that describe the dialog.
-   */
-  'aria-describedby'?: string
-
-  /**
-   * The props to modify the framer motion animation.
-   * Use the `variants` API to create your own animation.
-   */
-  motionProps?:
-    | ((
-        placement: DialogContentVariants['placement'],
-      ) => HTMLMotionProps<'div'>)
-    | HTMLMotionProps<'div'>
-
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
-}
 
 export type DialogContentProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<

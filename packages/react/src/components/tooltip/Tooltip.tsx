@@ -22,7 +22,6 @@ const slots = ['root', 'content'] as const
 
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
-// eslint-disable-next-line react/display-name
 const TooltipImpl = (props: TooltipProps) => {
   const { delayOpen, delayClose, rootId } = useTooltipContext()
   const {
@@ -140,6 +139,8 @@ const TooltipImpl = (props: TooltipProps) => {
     </>
   )
 }
+
+TooltipImpl.displayName = 'TooltipImpl'
 
 export const Tooltip = <RootComponent extends ElementType = 'div'>(
   inProps: TooltipProps<RootComponent>,

@@ -1,13 +1,9 @@
 import { generateSlotClasses } from '../../utils'
 
-export const drawerClasses = generateSlotClasses('nui-drawer', [
-  'root',
-  'backdrop',
-])
-
 export const drawerContentClasses = generateSlotClasses('nui-drawer-content', [
   'root',
   'paper',
+  'backdrop',
   'closeButton',
 ])
 

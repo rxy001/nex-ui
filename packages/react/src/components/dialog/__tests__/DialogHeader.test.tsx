@@ -11,7 +11,7 @@ import type { DialogHeaderProps } from '../index'
 
 function TestDialog(props: DialogHeaderProps) {
   return (
-    <Dialog data-testid='dialog-root' open>
+    <Dialog open>
       <DialogContent data-testid='dialog-content'>
         <DialogHeader data-testid='dialog-header' {...props}>
           Dialog Header

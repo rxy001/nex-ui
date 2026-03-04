@@ -37,8 +37,17 @@ export interface ModalCloseProps {
   }>
 }
 
+// ------------- ModalHeader -------------
+export type ModalHeaderProps = SlotProps<'h2'>
+
+// ------------- ModalBody -------------
+export type ModalBodyProps = SlotProps<'div'>
+
+// ------------- ModalFooter -------------
+export type ModalFooterProps = SlotProps<'div'>
+
 // ------------- ModalContent -------------
-type ModalContentOwnProps = Omit<FocusTrapProps, 'children' | 'active'> &
+type ModalContentOwnProps = Pick<FocusTrapProps, 'restoreFocus' | 'autoFocus'> &
   Omit<DismissibleLayerProps, 'children' | 'onDismiss'> & {
     /**
      * If true, closes the Modal when the escape key is pressed.
@@ -51,29 +60,15 @@ type ModalContentOwnProps = Omit<FocusTrapProps, 'children' | 'active'> &
      * @default true
      */
     closeOnInteractOutside?: boolean
+
+    /**
+     * If true, the Modal prevents page scrolling.
+     * @default false
+     */
+    preventScroll?: boolean
   }
 
-export type ModalContentProps = SlotProps<'section', ModalContentOwnProps>
-
-// ------------- ModalHeader -------------
-export type ModalHeaderProps = SlotProps<'h2'>
-
-// ------------- ModalBody -------------
-export type ModalBodyProps = SlotProps<'div'>
-
-// ------------- ModalFooter -------------
-export type ModalFooterProps = SlotProps<'div'>
-
-// ------------- ModalRoot -------------
-type ModalRootOwnProps = {
-  /**
-   * If true, the Modal prevents page scrolling.
-   * @default false
-   */
-  preventScroll?: boolean
-}
-
-export type ModalRootProps = SlotProps<'div', ModalRootOwnProps>
+export type ModalContentProps = SlotProps<'div', ModalContentOwnProps>
 
 // ------------- ModalBackdrop -------------
 export type ModalBackdropProps = SlotProps<'div'>

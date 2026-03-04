@@ -6,7 +6,6 @@ export { ModalBody } from './ModalBody'
 export { ModalFooter } from './ModalFooter'
 export { ModalClose } from './ModalClose'
 export { ModalBackdrop } from './ModalBackdrop'
-export { ModalRoot } from './ModalRoot'
 export { ModalPortal } from './ModalPortal'
 export { ModalMotion } from './ModalMotion'
 
@@ -19,7 +18,6 @@ export type {
   ModalTriggerProps,
   ModalHeaderProps,
   ModalFooterProps,
-  ModalRootProps,
   ModalPortalProps,
   ModalMotionProps,
 } from './types'

@@ -11,25 +11,46 @@ import type {
 import type {
   ModalCloseProps,
   ModalContentProps,
-  ModalMotionProps,
   ModalPortalProps,
-  ModalRootProps,
   ModalTriggerProps,
   ModalProps,
 } from '../modal'
 
 // ----------------Drawer----------------
-type DrawerSlotProps = {
-  backdrop?: SlotProps<'div'>
+type DrawerOwnProps = ModalProps & {
+  /**
+   * If true, the Drawer is shown by default. (uncontrolled)
+   */
+  defaultOpen?: boolean
 }
 
-type DrawerOwnProps<RootComponent extends ElementType> = ModalProps &
-  Pick<ModalPortalProps, 'container' | 'keepMounted'> &
-  Pick<ModalRootProps, 'preventScroll'> &
-  Pick<ModalContentProps, 'restoreFocus' | 'closeOnEscape'> & {
+export interface DrawerPropsOverrides {}
+
+export type DrawerProps = DrawerOwnProps & DrawerPropsOverrides
+
+// ----------------DrawerContent----------------
+type DrawerContentSlotProps = {
+  closeButton?: SlotProps<'button'>
+  backdrop?: SlotProps<'div'>
+  paper?: SlotProps<'div'>
+}
+
+export interface DrawerContentPropsOverrides {}
+
+type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
+  ModalPortalProps,
+  'container' | 'keepMounted'
+> &
+  Pick<
+    ModalContentProps,
+    | 'restoreFocus'
+    | 'closeOnEscape'
+    | 'preventScroll'
+    | 'autoFocus'
+    | 'closeOnInteractOutside'
+  > & {
     /**
      * The component or element to render as the root.
-     *
      * @default 'div'
      */
     as?: RootComponent
@@ -40,48 +61,19 @@ type DrawerOwnProps<RootComponent extends ElementType> = ModalProps &
     sx?: Interpolation
 
     /**
-     * The content of the drawer. It's usually the `DrawerContent` component.
-     */
-    children?: ReactNode
-
-    /**
      * Additional class names to apply to the root.
      */
     className?: ClassValue
 
     /**
-     * If true, the backdrop is not rendered.
-     * @default false
-     */
-    hideBackdrop?: boolean
-
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: DrawerSlotProps
-
-    /**
      * The className used for each slot.
      */
-    classNames?: ComponentSlotClasses<keyof DrawerSlotProps>
+    classNames?: ComponentSlotClasses<keyof DrawerContentSlotProps>
 
     /**
-     * If true, closes the drawer when the backdrop is clicked.
-     *
-     * @default true
+     * It's usually the DrawerHeader、DrawerBody and DrawerFooter component.
      */
-    closeOnInteractBackdrop?: boolean
-
-    /**
-     * The props to modify the framer motion animation.
-     * Use the `variants` API to create your own animation.
-     */
-    motionProps?: ModalMotionProps
-
-    /**
-     * If true, the Drawer is shown by default. (uncontrolled)
-     */
-    defaultOpen?: boolean
+    children?: ReactNode
 
     /**
      * If true, disables the animation for the Drawer.
@@ -89,100 +81,62 @@ type DrawerOwnProps<RootComponent extends ElementType> = ModalProps &
      * @default false
      */
     disableAnimation?: boolean
+
+    /**
+     * The props used for each slot.
+     */
+    slotProps?: DrawerContentSlotProps
+
+    /**
+     * Custom close button to display on top right corner.
+     */
+    closeIcon?: ReactNode
+
+    /**
+     * If true, the close button is not rendered.
+     * @default false
+     */
+    hideCloseButton?: boolean
+
+    /**
+     * The size of the drawer.
+     * @default 'md'
+     */
+    size?: DrawerContentVariants['size']
+
+    /**
+     * The placement of the drawer.
+     * @default 'right'
+     */
+    placement?: DrawerContentVariants['placement']
+
+    /**
+     * The props to modify the framer motion animation.
+     * Use the `variants` API to create your own animation.
+     */
+    motionProps?:
+      | HTMLMotionProps<'div'>
+      | ((
+          placement: DrawerContentVariants['placement'],
+        ) => HTMLMotionProps<'div'>)
+
+    /**
+     * If true, the backdrop is not rendered.
+     *
+     * @default false
+     */
+    hideBackdrop?: boolean
+
+    /**
+     * The id(s) of the element(s) that label the drawer.
+     */
+    'aria-labelledby'?: string
+
+    /**
+     * The id(s) of the element(s) that describe the drawer.
+     */
+    'aria-describedby'?: string
   }
-
-export interface DrawerPropsOverrides {}
-
-export type DrawerProps<RootComponent extends ElementType = 'div'> =
-  OverrideProps<
-    RootComponent,
-    DrawerOwnProps<RootComponent>,
-    DrawerPropsOverrides
-  >
-
-// ----------------DrawerContent----------------
-type DrawerContentSlotProps = {
-  closeButton?: SlotProps<'button'>
-  paper?: SlotProps<'section'>
-}
-
-export interface DrawerContentPropsOverrides {}
-
-type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = {
-  /**
-   * The component or element to render as the root.
-   * @default 'div'
-   */
-  as?: RootComponent
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: Interpolation
-
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
-
-  /**
-   * The className used for each slot.
-   */
-  classNames?: ComponentSlotClasses<keyof DrawerContentSlotProps>
-
-  /**
-   * It's usually the DrawerHeader、DrawerBody and DrawerFooter component.
-   */
-  children?: ReactNode
-
-  /**
-   * The props used for each slot.
-   */
-  slotProps?: DrawerContentSlotProps
-
-  /**
-   * Custom close button to display on top right corner.
-   */
-  closeIcon?: ReactNode
-
-  /**
-   * If true, the close button is not rendered.
-   * @default false
-   */
-  hideCloseButton?: boolean
-
-  /**
-   * The size of the drawer.
-   * @default 'md'
-   */
-  size?: DrawerContentVariants['size']
-
-  /**
-   * The placement of the drawer.
-   * @default 'right'
-   */
-  placement?: DrawerContentVariants['placement']
-
-  /**
-   * The props to modify the framer motion animation.
-   * Use the `variants` API to create your own animation.
-   */
-  motionProps?:
-    | HTMLMotionProps<'div'>
-    | ((
-        placement: DrawerContentVariants['placement'],
-      ) => HTMLMotionProps<'div'>)
-
-  /**
-   * The id(s) of the element(s) that label the drawer.
-   */
-  'aria-labelledby'?: string
-
-  /**
-   * The id(s) of the element(s) that describe the drawer.
-   */
-  'aria-describedby'?: string
-}
 
 export type DrawerContentProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
