@@ -11,7 +11,6 @@ const recipe = defineRecipe({
     w: 'full',
     boxSizing: 'border-box',
     height: '100%',
-    wordBreak: 'break-word',
   },
 })
 

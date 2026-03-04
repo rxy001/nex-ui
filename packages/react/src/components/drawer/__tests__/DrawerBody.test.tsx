@@ -11,7 +11,7 @@ import type { DrawerBodyProps } from '../index'
 
 function TestDrawer(props: DrawerBodyProps) {
   return (
-    <Drawer data-testid='drawer-root' open>
+    <Drawer open>
       <DrawerContent data-testid='drawer-content'>
         <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
         <DrawerBody data-testid='drawer-body' {...props}>

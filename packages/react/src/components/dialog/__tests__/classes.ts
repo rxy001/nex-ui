@@ -1,13 +1,9 @@
 import { generateSlotClasses } from '../../utils'
 
-export const dialogClasses = generateSlotClasses('nui-dialog', [
-  'root',
-  'backdrop',
-])
-
 export const dialogContentClasses = generateSlotClasses('nui-dialog-content', [
   'root',
   'paper',
+  'backdrop',
   'closeButton',
 ])
 

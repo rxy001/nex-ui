@@ -4,7 +4,6 @@ import { nex } from '@nex-ui/styled'
 import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
-import { DrawerRoot } from './DrawerRoot'
 import {
   useRecipeStyles,
   useDefaultProps,
@@ -15,13 +14,12 @@ import { Ripple } from '../ripple'
 import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
-import { ModalContent } from '../modal'
-import { useDrawerPropsContext } from './DrawerContext'
+import { ModalContent, ModalPortal, ModalBackdrop, ModalMotion } from '../modal'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { DrawerContentProps } from './types'
 
-const slots = ['root', 'paper', 'closeButton'] as const
+const slots = ['root', 'paper', 'closeButton', 'backdrop'] as const
 
 export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   inProps: DrawerContentProps<RootComponent>,
@@ -32,21 +30,22 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const {
-    disableAnimation,
-    restoreFocus,
-    closeOnEscape,
-    closeOnInteractBackdrop,
-    hideBackdrop,
-  } = useDrawerPropsContext()
-
-  const {
     classNames,
     children,
     slotProps,
     closeIcon,
     motionProps,
+    disableAnimation,
+    restoreFocus,
+    closeOnEscape,
+    hideBackdrop,
+    autoFocus,
+    container,
+    keepMounted,
+    preventScroll,
     placement = 'right',
     hideCloseButton = false,
+    closeOnInteractOutside = true,
     size = 'md',
     ...remainingProps
   } = props
@@ -94,11 +93,6 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     style: styles.root,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
-    dataAttrs: {
-      size,
-      placement,
-      hideCloseButton,
-    },
   })
 
   const [DrawerContentPaper, getDrawerContentPaperProps] = useSlot({
@@ -110,7 +104,14 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     additionalProps: {
       restoreFocus,
       closeOnEscape,
-      closeOnInteractOutside: !hideBackdrop && closeOnInteractBackdrop,
+      autoFocus,
+      preventScroll,
+      closeOnInteractOutside,
+    },
+    dataAttrs: {
+      size,
+      placement,
+      hideCloseButton,
     },
   })
 
@@ -120,6 +121,13 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     style: styles.closeButton,
     classNames: slotClasses.closeButton,
     ariaProps: slotAriaProps.closeButton,
+  })
+
+  const [DrawerBackdrop, getDrawerBackdropProps] = useSlot({
+    component: ModalBackdrop,
+    style: styles.backdrop,
+    externalSlotProps: slotProps?.backdrop,
+    classNames: slotClasses.backdrop,
   })
 
   const mergedMotionProps = useMemo(() => {
@@ -193,8 +201,9 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     </DrawerContentPaper>
   )
 
-  return (
-    <DrawerRoot>
+  const renderContent = () => (
+    <>
+      {!hideBackdrop && <DrawerBackdrop {...getDrawerBackdropProps()} />}
       <DrawerContentRoot {...getDrawerContentRootProps()}>
         {disableAnimation ? (
           renderPaper()
@@ -202,7 +211,27 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
           <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
         )}
       </DrawerContentRoot>
-    </DrawerRoot>
+    </>
+  )
+
+  return (
+    <ModalPortal
+      disablePresence={disableAnimation}
+      container={container}
+      keepMounted={keepMounted}
+    >
+      {disableAnimation ? (
+        renderContent()
+      ) : (
+        <ModalMotion
+          style={{
+            isolation: 'isolate',
+          }}
+        >
+          {renderContent()}
+        </ModalMotion>
+      )}
+    </ModalPortal>
   )
 }
 

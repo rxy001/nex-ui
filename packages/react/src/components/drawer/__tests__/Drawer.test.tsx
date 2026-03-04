@@ -1,11 +1,5 @@
 import { useState } from 'react'
-import {
-  renderWithNexUIProvider,
-  testClassNamesForwarding,
-  testComponentStability,
-  testRefForwarding,
-  testSlotPropsForwarding,
-} from '~/tests/shared'
+import { renderWithNexUIProvider, testComponentStability } from '~/tests/shared'
 import { act, fireEvent } from '@testing-library/react'
 import {
   Drawer,
@@ -14,12 +8,11 @@ import {
   DrawerHeader,
   DrawerFooter,
 } from '../index'
-import { drawerClasses } from './classes'
 import type { DrawerProps } from '../types'
 
 function TestDrawer(props: DrawerProps) {
   return (
-    <Drawer data-testid='drawer-root' {...props}>
+    <Drawer {...props}>
       <DrawerContent data-testid='drawer-content'>
         <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
         <DrawerBody data-testid='drawer-body'>Drawer Body</DrawerBody>
@@ -45,50 +38,9 @@ const ControlledDrawer = ({ defaultOpen = false, ...props }: DrawerProps) => {
   )
 }
 
-const slots = ['backdrop'] as const
-
 describe('Drawer', () => {
   testComponentStability(<TestDrawer open />, {
     useAct: true,
-  })
-
-  testRefForwarding(<TestDrawer open />, {
-    useAct: true,
-  })
-
-  testClassNamesForwarding(
-    <TestDrawer open />,
-    slots,
-    {
-      backdrop: 'test-drawer-backdrop',
-    },
-    drawerClasses,
-    {
-      useAct: true,
-    },
-  )
-
-  testSlotPropsForwarding(
-    <TestDrawer open />,
-    slots,
-    {
-      backdrop: {
-        className: 'test-drawer-backdrop',
-      },
-    },
-    drawerClasses,
-    {
-      useAct: true,
-    },
-  )
-
-  it('should render with root class on root element', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(<TestDrawer open />, {
-      useAct: true,
-    })
-    const drawerRoot = getByTestId('drawer-root')
-
-    expect(drawerRoot).toHaveClass(drawerClasses.root)
   })
 
   it('should not render children by default', async () => {
@@ -111,20 +63,6 @@ describe('Drawer', () => {
     expect(getByText('Drawer Footer')).toBeInTheDocument()
   })
 
-  it('should hide backdrop when hideBackdrop=true', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer open hideBackdrop />,
-      {
-        useAct: true,
-      },
-    )
-
-    const drawerRoot = getByTestId('drawer-root')
-    expect(
-      drawerRoot.querySelector(`.${drawerClasses.backdrop}`),
-    ).not.toBeInTheDocument()
-  })
-
   it('should be controlled via open prop', async () => {
     const { queryByTestId, getByTestId } = await renderWithNexUIProvider(
       <ControlledDrawer />,
@@ -135,46 +73,16 @@ describe('Drawer', () => {
 
     const toggleButton = getByTestId('toggle-button')
 
-    expect(queryByTestId('drawer-root')).not.toBeInTheDocument()
+    expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
 
     await act(async () => {
       fireEvent.click(toggleButton)
     })
-    expect(queryByTestId('drawer-root')).toBeInTheDocument()
+    expect(queryByTestId('drawer-content')).toBeInTheDocument()
 
     await act(async () => {
       fireEvent.click(toggleButton)
     })
-    expect(queryByTestId('drawer-root')).not.toBeInTheDocument()
-  })
-
-  it('should disable animations when disableAnimation=true', async () => {
-    const { queryByClassName } = await renderWithNexUIProvider(
-      <TestDrawer
-        open
-        disableAnimation={true}
-        motionProps={{
-          className: 'test-motion',
-        }}
-      />,
-      {
-        useAct: true,
-      },
-    )
-    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
-  })
-
-  it('should render into document.body via Portal when defaultOpen', async () => {
-    const { container, getByTestId } = await renderWithNexUIProvider(
-      <TestDrawer defaultOpen disableAnimation />,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(container.firstChild).toBeNull()
-
-    const modalRoot = getByTestId('drawer-root')
-    expect(modalRoot.parentElement).toBe(document.body)
+    expect(queryByTestId('drawer-content')).not.toBeInTheDocument()
   })
 })

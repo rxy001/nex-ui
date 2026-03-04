@@ -1,12 +1,6 @@
 import { renderWithNexUIProvider } from '~/tests/shared'
 import { useState } from 'react'
-import {
-  Modal,
-  ModalContent,
-  ModalRoot,
-  ModalTrigger,
-  ModalPortal,
-} from '../index'
+import { Modal, ModalContent, ModalTrigger, ModalPortal } from '../index'
 import type { ModalTriggerProps } from '../types'
 
 function TestModal(props: ModalTriggerProps) {
@@ -16,9 +10,7 @@ function TestModal(props: ModalTriggerProps) {
     <Modal open={open} onOpenChange={setOpen}>
       <ModalTrigger {...props} />
       <ModalPortal disablePresence>
-        <ModalRoot data-testid='modal-root'>
-          <ModalContent data-testid='modal-content'>Content</ModalContent>
-        </ModalRoot>
+        <ModalContent data-testid='modal-content'>Content</ModalContent>
       </ModalPortal>
     </Modal>
   )
@@ -32,11 +24,11 @@ describe('ModalTrigger', () => {
       </TestModal>,
     )
 
-    expect(queryByTestId('modal-root')).toBeNull()
+    expect(queryByTestId('modal-content')).toBeNull()
     const openButton = getByTestId('open-button')
 
     await user.click(openButton)
-    expect(queryByTestId('modal-root')).toBeInTheDocument()
+    expect(queryByTestId('modal-content')).toBeInTheDocument()
   })
 
   it("should return children as-is when ModalTrigger's children is not a valid React element", () => {

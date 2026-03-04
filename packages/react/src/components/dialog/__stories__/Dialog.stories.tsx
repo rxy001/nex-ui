@@ -12,14 +12,11 @@ import {
 import { Button } from '../../button'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import type { DialogContentProps, DialogProps } from '../types'
 import type { ReactNode } from 'react'
+import type { DialogContentProps, DialogProps } from '../types'
 
 type DialogTemplateProps = DialogProps &
-  Pick<
-    DialogContentProps,
-    'size' | 'scroll' | 'placement' | 'hideCloseButton'
-  > & {
+  DialogContentProps & {
     triggerText?: ReactNode
   }
 
@@ -29,26 +26,27 @@ const PLACEMENTS = ['top', 'center', 'bottom'] as const
 
 function DialogTemplate(props: DialogTemplateProps) {
   const {
-    size,
-    scroll,
-    placement,
-    hideCloseButton,
     children,
+    open,
+    onOpenChange,
+    defaultOpen,
+    onClose,
     triggerText = 'Open Dialog',
     ...other
   } = props
 
   return (
-    <Dialog {...other}>
+    <Dialog
+      open={open}
+      onOpenChange={onOpenChange}
+      defaultOpen={defaultOpen}
+      onClose={onClose}
+      {...other}
+    >
       <DialogTrigger>
         <Button>{triggerText}</Button>
       </DialogTrigger>
-      <DialogContent
-        size={size}
-        scroll={scroll}
-        placement={placement}
-        hideCloseButton={hideCloseButton}
-      >
+      <DialogContent {...other}>
         <DialogHeader>Dialog Header</DialogHeader>
         <DialogBody>
           <p>
@@ -88,7 +86,7 @@ const meta = {
     keepMounted: {
       control: 'boolean',
     },
-    closeOnInteractBackdrop: {
+    closeOnInteractOutside: {
       control: 'boolean',
     },
     hideBackdrop: {
@@ -181,13 +179,12 @@ export const DisableAnimation: Story = {
 export const WithoutBackdrop: Story = {
   args: {
     hideBackdrop: true,
-    defaultOpen: true,
   },
 }
 
 function ScrollTemplate(props: DialogTemplateProps) {
   return (
-    <DialogTemplate defaultOpen {...props}>
+    <DialogTemplate {...props}>
       <p>
         Magna exercitation reprehenderit magna aute tempor cupidatat consequat
         elit dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum
@@ -233,4 +230,12 @@ export function InsideScroll(props: DialogTemplateProps) {
 
 export function OutsideScroll(props: DialogTemplateProps) {
   return <ScrollTemplate {...props} scroll='outside' />
+}
+
+export function NestedDialogs(props: DialogTemplateProps) {
+  return (
+    <DialogTemplate {...props} triggerText='Open Parent Dialog'>
+      <DialogTemplate {...props} triggerText='Open Child Dialog' size='sm' />
+    </DialogTemplate>
+  )
 }

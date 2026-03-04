@@ -1,21 +1,7 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { DialogProps, DialogContentProps } from './types'
-
-export type DialogPropsContextValue = Omit<
-  DialogProps,
-  'open' | 'children' | 'onOpenChange' | 'defaultOpen' | 'onClose'
->
-
-export const [DialogPropsProvider, useDialogPropsContext] =
-  createContext<DialogPropsContextValue>({
-    contextName: 'DialogPropsContext',
-    hookName: 'useDialogPropsContext',
-    providerName: 'DialogPropsProvider',
-    strict: true,
-    defaultValue: null as unknown as DialogPropsContextValue,
-  })
+import type { DialogContentProps } from './types'
 
 export interface DialogContentPropsContextValue {
   scroll: DialogContentProps['scroll']

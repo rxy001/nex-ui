@@ -1,27 +1,20 @@
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
 import type { RecipeVariants } from '@nex-ui/system'
 
-export const dialogRootRecipe = defineSlotRecipe({
-  slots: {
-    root: {},
-    backdrop: {},
-  },
-})
-
 export const dialogContentRecipe = defineSlotRecipe({
   slots: {
     root: {
       pos: 'fixed',
+      zIndex: 'dialog',
       inset: 0,
       display: 'flex',
       justifyContent: 'center',
-      px: '6',
       py: '15',
     },
     paper: {
       borderRadius: 'lg',
       boxShadow: 'lg',
-      width: 'calc(100vw - {spaces.6} * 2)',
+      maxW: 'calc(100vw - {spaces.6} * 2)',
     },
     closeButton: {
       display: 'inline-flex',
@@ -43,6 +36,9 @@ export const dialogContentRecipe = defineSlotRecipe({
         outline: 'focusVisibleOutline',
       },
     },
+    backdrop: {
+      zIndex: 'dialog',
+    },
   },
   variants: {
     scroll: {
@@ -60,37 +56,37 @@ export const dialogContentRecipe = defineSlotRecipe({
     size: {
       xs: {
         paper: {
-          maxWidth: 300,
+          width: 300,
         },
       },
       sm: {
         paper: {
-          maxWidth: 450,
+          width: 450,
         },
       },
       md: {
         paper: {
-          maxWidth: 600,
+          width: 600,
         },
       },
       lg: {
         paper: {
-          maxWidth: 750,
+          width: 750,
         },
       },
       xl: {
         paper: {
-          maxWidth: 900,
+          width: 900,
         },
       },
       full: {
         root: {
-          px: 0,
           py: 0,
         },
         paper: {
-          width: '100vw',
-          minHeight: '100vh',
+          w: '100vw',
+          maxW: '100vw',
+          minH: '100vh',
           borderRadius: 0,
         },
       },
@@ -156,9 +152,6 @@ export const dialogFooterRecipe = defineRecipe({
     px: '6',
   },
 })
-
-export type DialogRootRecipe = typeof dialogRootRecipe
-export type DialogRootVariants = RecipeVariants<DialogRootRecipe>
 
 export type DialogContentRecipe = typeof dialogContentRecipe
 export type DialogContentVariants = RecipeVariants<DialogContentRecipe>

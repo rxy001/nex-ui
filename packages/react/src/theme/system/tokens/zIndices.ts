@@ -1,7 +1,8 @@
 import { defineTokens } from '@nex-ui/system'
 
 export const zIndices = defineTokens.zIndices({
-  modal: 1000,
-  popover: 2000,
-  tooltip: 3000,
+  dialog: 1000,
+  drawer: 1100,
+  popover: 1200,
+  tooltip: 1300,
 })

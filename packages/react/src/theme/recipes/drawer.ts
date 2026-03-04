@@ -1,23 +1,18 @@
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
 import type { RecipeVariants } from '@nex-ui/system'
 
-export const drawerRootRecipe = defineSlotRecipe({
-  slots: {
-    root: {},
-    backdrop: {},
-  },
-})
-
 export const drawerContentRecipe = defineSlotRecipe({
   slots: {
     root: {
       display: 'flex',
       pos: 'fixed',
       inset: '0',
+      zIndex: 'drawer',
     },
     paper: {
       boxShadow: 'lg',
       w: '100vw',
+      h: '100vh',
     },
     closeButton: {
       display: 'inline-flex',
@@ -38,6 +33,9 @@ export const drawerContentRecipe = defineSlotRecipe({
       _focusVisibleRing: {
         outline: 'focusVisibleOutline',
       },
+    },
+    backdrop: {
+      zIndex: 'drawer',
     },
   },
   variants: {
@@ -102,19 +100,10 @@ export const drawerContentRecipe = defineSlotRecipe({
   compoundVariants: [
     {
       placement: ['left', 'right'],
-      size: ['xs', 'sm', 'md', 'lg', 'xl', 'full'],
-      css: {
-        paper: {
-          height: '100%',
-        },
-      },
-    },
-    {
-      placement: ['left', 'right'],
       size: 'xs',
       css: {
         paper: {
-          maxWidth: 300,
+          w: 300,
         },
       },
     },
@@ -123,7 +112,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'sm',
       css: {
         paper: {
-          maxWidth: 400,
+          w: 400,
         },
       },
     },
@@ -132,7 +121,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'md',
       css: {
         paper: {
-          maxWidth: 500,
+          w: 500,
         },
       },
     },
@@ -141,7 +130,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'lg',
       css: {
         paper: {
-          maxWidth: 600,
+          w: 600,
         },
       },
     },
@@ -150,7 +139,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'xl',
       css: {
         paper: {
-          maxWidth: 700,
+          w: 700,
         },
       },
     },
@@ -159,7 +148,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'xs',
       css: {
         paper: {
-          maxHeight: 300,
+          h: 300,
         },
       },
     },
@@ -168,7 +157,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'sm',
       css: {
         paper: {
-          maxHeight: 400,
+          h: 400,
         },
       },
     },
@@ -177,7 +166,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'md',
       css: {
         paper: {
-          maxHeight: 500,
+          h: 500,
         },
       },
     },
@@ -186,7 +175,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'lg',
       css: {
         paper: {
-          maxHeight: 600,
+          h: 600,
         },
       },
     },
@@ -195,7 +184,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'xl',
       css: {
         paper: {
-          maxHeight: 700,
+          h: 700,
         },
       },
     },
@@ -204,7 +193,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'full',
       css: {
         paper: {
-          maxWidth: '100vw',
+          h: '100vw',
         },
       },
     },
@@ -213,7 +202,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'full',
       css: {
         paper: {
-          maxHeight: '100vh',
+          h: '100vh',
         },
       },
     },
@@ -244,8 +233,6 @@ export const drawerFooterRecipe = defineRecipe({
     px: '6',
   },
 })
-
-export type DrawerRootRecipe = typeof drawerRootRecipe
 
 export type DrawerContentRecipe = typeof drawerContentRecipe
 export type DrawerContentVariants = RecipeVariants<DrawerContentRecipe>

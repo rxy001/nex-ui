@@ -13,23 +13,20 @@ import {
   ModalFooter,
   ModalHeader,
   ModalPortal,
-  ModalRoot,
   ModalTrigger,
 } from '../index'
-import { getScrollBarWidth } from '../ModalRoot'
+import { getScrollBarWidth } from '../ModalContent'
 import type { ModalProps } from '../index'
-import type {
-  ModalPortalProps,
-  ModalRootProps,
-  ModalContentProps,
-} from '../types'
+import type { ModalPortalProps, ModalContentProps } from '../types'
 
 type TestModalProps = ModalProps &
-  Pick<ModalRootProps, 'preventScroll'> &
   ModalPortalProps &
   Pick<
     ModalContentProps,
-    'closeOnEscape' | 'restoreFocus' | 'closeOnInteractOutside'
+    | 'closeOnEscape'
+    | 'restoreFocus'
+    | 'closeOnInteractOutside'
+    | 'preventScroll'
   > & {
     defaultOpen?: boolean
     className?: string
@@ -45,7 +42,7 @@ function TestModal({
   closeOnEscape,
   restoreFocus,
   defaultOpen = false,
-  'data-testid': testid = 'modal-root',
+  'data-testid': dataTestId,
   ...props
 }: TestModalProps) {
   const [open, setOpen] = useState(defaultOpen)
@@ -60,25 +57,21 @@ function TestModal({
         keepMounted={keepMounted}
         container={container}
       >
-        <ModalRoot
+        <ModalBackdrop data-testid='modal-backdrop' />
+        <ModalContent
+          restoreFocus={restoreFocus}
+          closeOnInteractOutside={closeOnInteractOutside}
+          closeOnEscape={closeOnEscape}
+          data-testid={dataTestId || 'modal-content'}
           preventScroll={preventScroll}
-          data-testid={testid}
           className={props.className}
         >
-          <ModalBackdrop data-testid='modal-backdrop' />
-          <ModalContent
-            restoreFocus={restoreFocus}
-            closeOnInteractOutside={closeOnInteractOutside}
-            closeOnEscape={closeOnEscape}
-            data-testid='modal-content'
-          >
-            <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
-            <ModalBody data-testid='modal-body'>{children}</ModalBody>
-            <ModalFooter data-testid='modal-footer'>
-              Test Modal Footer
-            </ModalFooter>
-          </ModalContent>
-        </ModalRoot>
+          <ModalHeader data-testid='modal-header'>Test Modal</ModalHeader>
+          <ModalBody data-testid='modal-body'>{children}</ModalBody>
+          <ModalFooter data-testid='modal-footer'>
+            Test Modal Footer
+          </ModalFooter>
+        </ModalContent>
       </ModalPortal>
     </Modal>
   )
@@ -95,23 +88,23 @@ describe('Modal', () => {
 
   it('should not render children by default', () => {
     const { queryByTestId } = renderWithNexUIProvider(<TestModal />)
-    expect(queryByTestId('modal-root')).toBeNull()
+    expect(queryByTestId('modal-content')).toBeNull()
   })
 
   it('should render into document.body via Portal when open', () => {
     const { getByTestId } = renderWithNexUIProvider(<TestModal open />)
 
-    const modalRoot = getByTestId('modal-root')
-    expect(modalRoot.parentElement).toBe(document.body)
+    const modalContent = getByTestId('modal-content')
+    expect(modalContent.parentElement).toBe(document.body)
 
     const modalHeader = getByTestId('modal-header')
-    expect(modalRoot).toContainElement(modalHeader)
+    expect(modalContent).toContainElement(modalHeader)
 
     const modalBody = getByTestId('modal-body')
-    expect(modalRoot).toContainElement(modalBody)
+    expect(modalContent).toContainElement(modalBody)
 
     const modalFooter = getByTestId('modal-footer')
-    expect(modalRoot).toContainElement(modalFooter)
+    expect(modalContent).toContainElement(modalFooter)
   })
 
   it('should render into custom container when container prop is provided', () => {
@@ -124,8 +117,8 @@ describe('Modal', () => {
 
     expect(container.firstChild).not.toBeNull()
 
-    const modalRoot = getByTestId('modal-root')
-    expect(modalRoot.parentElement).toBe(container)
+    const modalContent = getByTestId('modal-content')
+    expect(modalContent.parentElement).toBe(container)
 
     container.remove()
   })
@@ -135,18 +128,18 @@ describe('Modal', () => {
       <TestModal defaultOpen={false} />,
     )
 
-    expect(queryByTestId('modal-root')).toBeNull()
+    expect(queryByTestId('modal-content')).toBeNull()
 
     const toggleButton = getByTestId('toggle-button')
 
     await user.click(toggleButton)
-    const modalRoot = queryByTestId('modal-root')
+    const modalContent = queryByTestId('modal-content')
 
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
 
     await user.click(toggleButton)
 
-    expect(modalRoot).not.toBeInTheDocument()
+    expect(modalContent).not.toBeInTheDocument()
   })
 
   it('should close when clicking outside the modal', async () => {
@@ -154,23 +147,23 @@ describe('Modal', () => {
       <TestModal defaultOpen />,
     )
 
-    const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
+    const modalContent = queryByTestId('modal-content')
+    expect(modalContent).toBeInTheDocument()
 
     await user.click(document.body)
 
-    expect(modalRoot).not.toBeInTheDocument()
+    expect(modalContent).not.toBeInTheDocument()
   })
 
   it('should not close when clicking its panel and closeOnInteractOutside=false', async () => {
     const { getByTestId, queryByTestId, user } = renderWithNexUIProvider(
       <TestModal closeOnInteractOutside={false} defaultOpen />,
     )
-    const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
+    const modalContent = queryByTestId('modal-content')
+    expect(modalContent).toBeInTheDocument()
 
     await user.click(getByTestId('modal-backdrop'))
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
   })
 
   it('should close when pressing Escape key', async () => {
@@ -178,11 +171,11 @@ describe('Modal', () => {
       <TestModal defaultOpen />,
     )
 
-    const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
+    const modalContent = queryByTestId('modal-content')
+    expect(modalContent).toBeInTheDocument()
 
     await user.keyboard('{Escape}')
-    expect(modalRoot).not.toBeInTheDocument()
+    expect(modalContent).not.toBeInTheDocument()
   })
 
   it('should not close when pressing Escape key if closeOnEscape=false', async () => {
@@ -190,11 +183,11 @@ describe('Modal', () => {
       <TestModal closeOnEscape={false} defaultOpen />,
     )
 
-    const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
+    const modalContent = queryByTestId('modal-content')
+    expect(modalContent).toBeInTheDocument()
 
     await user.keyboard('{Escape}')
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
   })
 
   it('should always keep the children in the DOM when keepMounted=true', () => {
@@ -202,8 +195,8 @@ describe('Modal', () => {
       <TestModal keepMounted open={false} />,
     )
 
-    const modalRoot = getByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
+    const modalContent = getByTestId('modal-content')
+    expect(modalContent).toBeInTheDocument()
   })
 
   it('should have correct style on root element when keepMounted=true', () => {
@@ -211,12 +204,12 @@ describe('Modal', () => {
       <TestModal keepMounted open={false} />,
     )
 
-    const modalRoot = getByTestId('modal-root')
-    expect(modalRoot).toHaveStyle('display: none')
+    const modalContent = getByTestId('modal-content')
+    expect(modalContent).toHaveStyle('display: none')
 
     rerender(<TestModal keepMounted open />)
 
-    expect(modalRoot).toHaveStyle('display: block')
+    expect(modalContent).toHaveStyle('display: block')
   })
 
   it('should call onClose when the modal is closed', async () => {
@@ -225,12 +218,12 @@ describe('Modal', () => {
       <TestModal defaultOpen onClose={onClose} />,
     )
 
-    const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
+    const modalContent = queryByTestId('modal-content')
+    expect(modalContent).toBeInTheDocument()
 
     await user.keyboard('{Escape}')
 
-    expect(modalRoot).not.toBeInTheDocument()
+    expect(modalContent).not.toBeInTheDocument()
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
@@ -375,19 +368,19 @@ describe('Modal', () => {
   })
 
   describe('Accessibility', () => {
-    it('should have role="dialog" on the ModalContent element', () => {
+    it('should have role="dialog" on root element', () => {
       const { getByTestId } = renderWithNexUIProvider(<TestModal open />)
       const content = getByTestId('modal-content')
       expect(content).toHaveAttribute('role', 'dialog')
     })
 
-    it('should have aria-modal="true" on the ModalContent element', () => {
+    it('should have aria-modal="true" on root element', () => {
       const { getByTestId } = renderWithNexUIProvider(<TestModal open />)
       const content = getByTestId('modal-content')
       expect(content).toHaveAttribute('aria-modal', 'true')
     })
 
-    it('should have aria-labelledby and aria-describedby attributes on the ModalContent element', () => {
+    it('should have aria-labelledby and aria-describedby attributes on root element', () => {
       const { getByTestId } = renderWithNexUIProvider(<TestModal open />)
       const content = getByTestId('modal-content')
       const header = getByTestId('modal-header')
@@ -397,7 +390,7 @@ describe('Modal', () => {
       expect(content).toHaveAttribute('aria-describedby', body.id)
     })
 
-    it('should have tabIndex=-1 on the ModalContent element', () => {
+    it('should have tabIndex=-1 on root element', () => {
       const { getByTestId } = renderWithNexUIProvider(<TestModal open />)
       const content = getByTestId('modal-content')
       expect(content).toHaveAttribute('tabIndex', '-1')
@@ -409,11 +402,11 @@ describe('Modal', () => {
       expect(backdrop).toHaveAttribute('aria-hidden', 'true')
     })
 
-    it('should automatically focus the ModalContent when opened', () => {
+    it('should automatically focus root when opened', () => {
       const { getByTestId } = renderWithNexUIProvider(<TestModal open />)
 
-      const content = getByTestId('modal-content')
-      expect(document.activeElement).toBe(content)
+      const modalContent = getByTestId('modal-content')
+      expect(document.activeElement).toBe(modalContent)
     })
 
     it('should restore focus to previously focused element when closed with restoreFocus=true', async () => {
@@ -444,12 +437,12 @@ describe('Modal', () => {
       const { getByTestId, rerender } = renderWithNexUIProvider(
         <TestModal keepMounted open={false} />,
       )
-      const root = getByTestId('modal-root')
-      expect(root).toHaveAttribute('aria-hidden', 'true')
+      const modalContent = getByTestId('modal-content')
+      expect(modalContent).toHaveAttribute('aria-hidden', 'true')
 
       rerender(<TestModal keepMounted open />)
 
-      expect(root).not.toHaveAttribute('aria-hidden')
+      expect(modalContent).not.toHaveAttribute('aria-hidden')
     })
 
     describe('Multiple Modals', () => {
@@ -460,7 +453,7 @@ describe('Modal', () => {
             <TestModal open />
           </>,
         )
-        let roots = getAllByTestId('modal-root')
+        let roots = getAllByTestId('modal-content')
         expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
         expect(roots[1]).not.toHaveAttribute('aria-hidden')
 
@@ -472,7 +465,7 @@ describe('Modal', () => {
           </>,
         )
 
-        roots = getAllByTestId('modal-root')
+        roots = getAllByTestId('modal-content')
         expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
         expect(roots[1]).toHaveAttribute('aria-hidden', 'true')
         expect(roots[2]).not.toHaveAttribute('aria-hidden')
@@ -483,7 +476,7 @@ describe('Modal', () => {
             <TestModal open={false} />
           </>,
         )
-        roots = getAllByTestId('modal-root')
+        roots = getAllByTestId('modal-content')
         expect(roots[0]).not.toHaveAttribute('aria-hidden')
         expect(roots[1]).toBeUndefined()
       })
@@ -495,7 +488,7 @@ describe('Modal', () => {
             <TestModal keepMounted open={false} />
           </>,
         )
-        let roots = getAllByTestId('modal-root')
+        let roots = getAllByTestId('modal-content')
         expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
         expect(roots[1]).toHaveAttribute('aria-hidden', 'true')
 
@@ -506,7 +499,7 @@ describe('Modal', () => {
           </>,
         )
 
-        roots = getAllByTestId('modal-root')
+        roots = getAllByTestId('modal-content')
         expect(roots[0]).not.toHaveAttribute('aria-hidden')
         expect(roots[1]).toHaveAttribute('aria-hidden', 'true')
 
@@ -517,7 +510,7 @@ describe('Modal', () => {
           </>,
         )
 
-        roots = getAllByTestId('modal-root')
+        roots = getAllByTestId('modal-content')
         expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
         expect(roots[1]).not.toHaveAttribute('aria-hidden')
 
@@ -528,7 +521,7 @@ describe('Modal', () => {
           </>,
         )
 
-        roots = getAllByTestId('modal-root')
+        roots = getAllByTestId('modal-content')
         expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
         expect(roots[1]).not.toHaveAttribute('aria-hidden')
 
