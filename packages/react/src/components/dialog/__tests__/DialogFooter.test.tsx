@@ -11,7 +11,7 @@ import type { DialogFooterProps } from '../index'
 
 function TestDialog(props: DialogFooterProps) {
   return (
-    <Dialog data-testid='dialog-root' open>
+    <Dialog open>
       <DialogContent data-testid='dialog-content'>
         <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
         <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>

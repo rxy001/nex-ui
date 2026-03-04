@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import { renderWithNexUIProvider } from '~/tests/shared'
-import {
-  Modal,
-  ModalRoot,
-  ModalClose,
-  ModalPortal,
-  ModalContent,
-} from '../index'
+import { Modal, ModalClose, ModalPortal, ModalContent } from '../index'
 import type { ModalCloseProps } from '../index'
 
 function TestModal(props: ModalCloseProps) {
@@ -15,11 +9,9 @@ function TestModal(props: ModalCloseProps) {
   return (
     <Modal open={open} onOpenChange={setOpen}>
       <ModalPortal disablePresence>
-        <ModalRoot data-testid='modal-root'>
-          <ModalContent>
-            <ModalClose {...props} />
-          </ModalContent>
-        </ModalRoot>
+        <ModalContent data-testid='modal-content'>
+          <ModalClose {...props} />
+        </ModalContent>
       </ModalPortal>
     </Modal>
   )
@@ -33,12 +25,12 @@ describe('ModalClose', () => {
       </TestModal>,
     )
 
-    const modalRoot = queryByTestId('modal-root')
-    expect(modalRoot).toBeInTheDocument()
+    const modalContent = queryByTestId('modal-content')
+    expect(modalContent).toBeInTheDocument()
     const closeButton = getByTestId('close-button')
 
     await user.click(closeButton)
-    expect(modalRoot).not.toBeInTheDocument()
+    expect(modalContent).not.toBeInTheDocument()
   })
 
   it("should return children as-is when ModalClose's children is not a valid React element", () => {
@@ -65,14 +57,14 @@ describe('ModalClose', () => {
       </TestModal>,
     )
 
-    const modalRoot = queryByTestId('modal-root')
+    const modalContent = queryByTestId('modal-content')
     const closeButton = getByTestId('close-button')
 
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
 
     await user.click(closeButton)
 
-    expect(modalRoot).not.toBeInTheDocument()
+    expect(modalContent).not.toBeInTheDocument()
   })
 
   it('should not close when the children onClick prevents default', async () => {
@@ -89,14 +81,14 @@ describe('ModalClose', () => {
       </TestModal>,
     )
 
-    const modalRoot = queryByTestId('modal-root')
+    const modalContent = queryByTestId('modal-content')
     const closeButton = getByTestId('close-button')
 
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
 
     await user.click(closeButton)
 
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
   })
 
   it('should not close when the children onClick is async and calls preventDefault', async () => {
@@ -115,13 +107,13 @@ describe('ModalClose', () => {
         </TestModal>,
       )
 
-    const modalRoot = queryByTestId('modal-root')
+    const modalContent = queryByTestId('modal-content')
     const closeButton = getByTestId('close-button')
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
 
     await user.click(closeButton)
 
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
 
     rerender(
       <TestModal>
@@ -139,7 +131,7 @@ describe('ModalClose', () => {
 
     await user.click(closeButton)
 
-    expect(modalRoot).toBeInTheDocument()
+    expect(modalContent).toBeInTheDocument()
   })
 
   describe('Accessibility', () => {

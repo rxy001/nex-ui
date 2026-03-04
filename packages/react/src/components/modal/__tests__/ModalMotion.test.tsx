@@ -9,7 +9,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalPortal,
-  ModalRoot,
   ModalMotion,
   ModalClose,
 } from '../index'
@@ -42,15 +41,13 @@ function TestModal({
   return (
     <Modal open={open} onOpenChange={setOpen}>
       <ModalPortal keepMounted={keepMounted} disablePresence={disableAnimation}>
-        <ModalRoot data-testid='modal-root'>
-          {disableAnimation ? (
-            renderChildren()
-          ) : (
-            <ModalMotion data-testid='modal-motion'>
-              {renderChildren()}
-            </ModalMotion>
-          )}
-        </ModalRoot>
+        {disableAnimation ? (
+          renderChildren()
+        ) : (
+          <ModalMotion data-testid='modal-motion'>
+            {renderChildren()}
+          </ModalMotion>
+        )}
       </ModalPortal>
     </Modal>
   )

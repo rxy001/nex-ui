@@ -7,7 +7,6 @@ import {
   ModalBody,
   ModalClose,
   ModalContent,
-  ModalRoot,
   ModalMotion,
   ModalHeader,
   ModalFooter,
@@ -25,6 +24,14 @@ const meta: Meta = {
 
 export default meta
 
+const contentStyle = {
+  pos: 'fixed',
+  left: 0,
+  top: 0,
+  bg: 'content',
+  w: '100vw',
+} as const
+
 export function Default() {
   const [open, setOpen] = useState(false)
   const [restoreFocus, setRestoreFocus] = useState(true)
@@ -34,13 +41,15 @@ export function Default() {
   const [keepMounted, setKeepMounted] = useState(false)
   const [disableAnimation, setDisableAnimation] = useState(false)
 
-  const renderRoot = () => (
-    <ModalRoot preventScroll={preventScroll}>
+  const renderContent = () => (
+    <>
       <ModalBackdrop />
       <ModalContent
         restoreFocus={restoreFocus}
         closeOnEscape={closeOnEscape}
         closeOnInteractOutside={closeOnInteractOutside}
+        preventScroll={preventScroll}
+        sx={contentStyle}
       >
         <ModalHeader>Test Modal</ModalHeader>
         <ModalBody>
@@ -72,7 +81,7 @@ export function Default() {
           </ModalClose>
         </ModalFooter>
       </ModalContent>
-    </ModalRoot>
+    </>
   )
 
   return (
@@ -82,6 +91,28 @@ export function Default() {
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <Modal open={open} onOpenChange={setOpen}>
+          <ModalTrigger>
+            <button
+              style={{
+                width: 100,
+              }}
+            >
+              Open Modal
+            </button>
+          </ModalTrigger>
+          <ModalPortal
+            keepMounted={keepMounted}
+            disablePresence={disableAnimation}
+          >
+            {disableAnimation ? (
+              renderContent()
+            ) : (
+              <ModalMotion>{renderContent()}</ModalMotion>
+            )}
+          </ModalPortal>
+        </Modal>
+        <hr style={{ width: '100%' }} />
         <label>
           <input
             type='checkbox'
@@ -96,7 +127,7 @@ export function Default() {
             checked={closeOnEscape}
             onChange={(event) => setCloseOnEscape(event.target.checked)}
           />
-          &nbsp;Dismiss on escape?
+          &nbsp;Close on escape?
         </label>
         <label>
           <input
@@ -106,7 +137,7 @@ export function Default() {
               setCloseOnInteractOutside(event.target.checked)
             }
           />
-          &nbsp;Dismiss on interact outside?
+          &nbsp;Close on interact outside?
         </label>
         <label>
           <input
@@ -132,28 +163,6 @@ export function Default() {
           />
           &nbsp;Prevent scroll when open?
         </label>
-        <hr style={{ width: '100%' }} />
-        <Modal open={open} onOpenChange={setOpen}>
-          <ModalTrigger>
-            <button
-              style={{
-                width: 100,
-              }}
-            >
-              Open Modal
-            </button>
-          </ModalTrigger>
-          <ModalPortal
-            keepMounted={keepMounted}
-            disablePresence={disableAnimation}
-          >
-            {disableAnimation ? (
-              renderRoot()
-            ) : (
-              <ModalMotion>{renderRoot()}</ModalMotion>
-            )}
-          </ModalPortal>
-        </Modal>
       </div>
     </div>
   )
@@ -168,61 +177,49 @@ export function NestedModals() {
         <button>Open Modal</button>
       </ModalTrigger>
       <ModalPortal>
-        <ModalRoot>
-          <ModalMotion>
-            <ModalBackdrop />
-            <ModalContent
-              sx={{
-                width: '100vw',
-              }}
-            >
-              <ModalHeader>Parent Modal</ModalHeader>
-              <ModalBody>
-                <p>This is the parent modal.</p>
-                <Modal open={nestedOpen} onOpenChange={setNestedOpen}>
-                  <ModalTrigger>
-                    <button>Open Nested Modal</button>
-                  </ModalTrigger>
-                  <ModalPortal>
-                    <ModalRoot>
-                      <ModalMotion>
-                        <ModalBackdrop />
-                        <ModalContent
-                          sx={{
-                            width: '100vw',
+        <ModalMotion>
+          <ModalBackdrop />
+          <ModalContent sx={contentStyle}>
+            <ModalHeader>Parent Modal</ModalHeader>
+            <ModalBody>
+              <p>This is the parent modal.</p>
+              <Modal open={nestedOpen} onOpenChange={setNestedOpen}>
+                <ModalTrigger>
+                  <button>Open Nested Modal</button>
+                </ModalTrigger>
+                <ModalPortal>
+                  <ModalMotion>
+                    <ModalBackdrop />
+                    <ModalContent sx={contentStyle}>
+                      <ModalHeader>Nested Modal</ModalHeader>
+                      <ModalBody>
+                        <p>This is the nested modal.</p>
+                      </ModalBody>
+                      <ModalFooter>
+                        <ModalClose>
+                          <button>Close Nested Modal</button>
+                        </ModalClose>
+                        <button
+                          onClick={() => {
+                            setNestedOpen(false)
+                            setOpen(false)
                           }}
                         >
-                          <ModalHeader>Nested Modal</ModalHeader>
-                          <ModalBody>
-                            <p>This is the nested modal.</p>
-                          </ModalBody>
-                          <ModalFooter>
-                            <ModalClose>
-                              <button>Close Nested Modal</button>
-                            </ModalClose>
-                            <button
-                              onClick={() => {
-                                setNestedOpen(false)
-                                setOpen(false)
-                              }}
-                            >
-                              Close Both Modals
-                            </button>
-                          </ModalFooter>
-                        </ModalContent>
-                      </ModalMotion>
-                    </ModalRoot>
-                  </ModalPortal>
-                </Modal>
-              </ModalBody>
-              <ModalFooter>
-                <ModalClose>
-                  <button>Close Parent Modal</button>
-                </ModalClose>
-              </ModalFooter>
-            </ModalContent>
-          </ModalMotion>
-        </ModalRoot>
+                          Close Both Modals
+                        </button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </ModalMotion>
+                </ModalPortal>
+              </Modal>
+            </ModalBody>
+            <ModalFooter>
+              <ModalClose>
+                <button>Close Parent Modal</button>
+              </ModalClose>
+            </ModalFooter>
+          </ModalContent>
+        </ModalMotion>
       </ModalPortal>
     </Modal>
   )
@@ -238,57 +235,45 @@ export function MultipleModals() {
           <button>Open First Modal</button>
         </ModalTrigger>
         <ModalPortal>
-          <ModalRoot>
-            <ModalMotion>
-              <ModalBackdrop />
-              <ModalContent
-                sx={{
-                  width: '100vw',
-                }}
-              >
-                <ModalHeader>First Modal</ModalHeader>
-                <ModalBody>
-                  <p>This is the first modal.</p>
-                  <button
-                    onClick={() => {
-                      setOpenSecond(true)
-                    }}
-                  >
-                    Open Second Modal
-                  </button>
-                </ModalBody>
-                <ModalFooter>
-                  <ModalClose>
-                    <button>Close First Modal</button>
-                  </ModalClose>
-                </ModalFooter>
-              </ModalContent>
-            </ModalMotion>
-          </ModalRoot>
+          <ModalMotion>
+            <ModalBackdrop />
+            <ModalContent sx={contentStyle}>
+              <ModalHeader>First Modal</ModalHeader>
+              <ModalBody>
+                <p>This is the first modal.</p>
+                <button
+                  onClick={() => {
+                    setOpenSecond(true)
+                  }}
+                >
+                  Open Second Modal
+                </button>
+              </ModalBody>
+              <ModalFooter>
+                <ModalClose>
+                  <button>Close First Modal</button>
+                </ModalClose>
+              </ModalFooter>
+            </ModalContent>
+          </ModalMotion>
         </ModalPortal>
       </Modal>
       <Modal open={openSecond} onOpenChange={setOpenSecond}>
         <ModalPortal>
-          <ModalRoot>
-            <ModalMotion>
-              <ModalBackdrop />
-              <ModalContent
-                sx={{
-                  width: '100vw',
-                }}
-              >
-                <ModalHeader>Second Modal</ModalHeader>
-                <ModalBody>
-                  <p>This is the second modal.</p>
-                </ModalBody>
-                <ModalFooter>
-                  <ModalClose>
-                    <button>Close Second Modal</button>
-                  </ModalClose>
-                </ModalFooter>
-              </ModalContent>
-            </ModalMotion>
-          </ModalRoot>
+          <ModalMotion>
+            <ModalBackdrop />
+            <ModalContent sx={contentStyle}>
+              <ModalHeader>Second Modal</ModalHeader>
+              <ModalBody>
+                <p>This is the second modal.</p>
+              </ModalBody>
+              <ModalFooter>
+                <ModalClose>
+                  <button>Close Second Modal</button>
+                </ModalClose>
+              </ModalFooter>
+            </ModalContent>
+          </ModalMotion>
         </ModalPortal>
       </Modal>
     </>
@@ -306,70 +291,64 @@ export function CloseModal() {
         <button>Open Modal</button>
       </ModalTrigger>
       <ModalPortal>
-        <ModalRoot>
-          <ModalMotion>
-            <ModalBackdrop />
-            <ModalContent
-              sx={{
-                width: '100vw',
-              }}
-            >
-              <ModalHeader>Async Close Modal</ModalHeader>
-              <ModalBody>
-                <p>
-                  This modal demonstrates the ability to handle asynchronous
-                  operations.
-                </p>
-                <p>Click the buttons in the footer to see the behavior.</p>
-              </ModalBody>
-              <ModalFooter>
-                <ModalClose>
-                  <button>Close Modal</button>
-                </ModalClose>
-                <ModalClose>
-                  <button
-                    onClick={(event) => {
-                      event.preventDefault()
-                    }}
-                  >
-                    Prevent Close Modal
-                  </button>
-                </ModalClose>
-                <ModalClose>
-                  <button
-                    onClick={() => {
-                      setLoading1(true)
-                      return new Promise<void>((resolve) => {
-                        setTimeout(() => {
-                          setLoading1(false)
-                          resolve()
-                        }, 1000)
-                      })
-                    }}
-                  >
-                    {loading1 ? 'Requesting...' : 'Async Close Modal'}
-                  </button>
-                </ModalClose>
-                <ModalClose>
-                  <button
-                    onClick={(event) => {
-                      setLoading2(true)
-                      return new Promise<void>((resolve) => {
-                        setTimeout(() => {
-                          setLoading2(false)
-                          event.preventDefault()
-                          resolve()
-                        }, 1000)
-                      })
-                    }}
-                  >
-                    {loading2 ? 'Requesting...' : 'Async Prevent Close Modal'}
-                  </button>
-                </ModalClose>
-              </ModalFooter>
-            </ModalContent>
-          </ModalMotion>
-        </ModalRoot>
+        <ModalMotion>
+          <ModalBackdrop />
+          <ModalContent sx={contentStyle}>
+            <ModalHeader>Async Close Modal</ModalHeader>
+            <ModalBody>
+              <p>
+                This modal demonstrates the ability to handle asynchronous
+                operations.
+              </p>
+              <p>Click the buttons in the footer to see the behavior.</p>
+            </ModalBody>
+            <ModalFooter>
+              <ModalClose>
+                <button>Close Modal</button>
+              </ModalClose>
+              <ModalClose>
+                <button
+                  onClick={(event) => {
+                    event.preventDefault()
+                  }}
+                >
+                  Prevent Close Modal
+                </button>
+              </ModalClose>
+              <ModalClose>
+                <button
+                  onClick={() => {
+                    setLoading1(true)
+                    return new Promise<void>((resolve) => {
+                      setTimeout(() => {
+                        setLoading1(false)
+                        resolve()
+                      }, 1000)
+                    })
+                  }}
+                >
+                  {loading1 ? 'Requesting...' : 'Async Close Modal'}
+                </button>
+              </ModalClose>
+              <ModalClose>
+                <button
+                  onClick={(event) => {
+                    setLoading2(true)
+                    return new Promise<void>((resolve) => {
+                      setTimeout(() => {
+                        setLoading2(false)
+                        event.preventDefault()
+                        resolve()
+                      }, 1000)
+                    })
+                  }}
+                >
+                  {loading2 ? 'Requesting...' : 'Async Prevent Close Modal'}
+                </button>
+              </ModalClose>
+            </ModalFooter>
+          </ModalContent>
+        </ModalMotion>
       </ModalPortal>
     </Modal>
   )

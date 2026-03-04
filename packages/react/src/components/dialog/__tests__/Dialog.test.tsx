@@ -1,12 +1,5 @@
 import { useState } from 'react'
-import {
-  renderWithNexUIProvider,
-  testClassNamesForwarding,
-  testComponentStability,
-  testRefForwarding,
-  testSlotPropsForwarding,
-  testVariantDataAttrs,
-} from '~/tests/shared'
+import { renderWithNexUIProvider, testComponentStability } from '~/tests/shared'
 import { act, fireEvent } from '@testing-library/react'
 import {
   Dialog,
@@ -15,12 +8,11 @@ import {
   DialogFooter,
   DialogBody,
 } from '../index'
-import { dialogClasses, dialogContentClasses } from './classes'
 import type { DialogProps } from '../index'
 
 function TestDialog(props: DialogProps) {
   return (
-    <Dialog data-testid='dialog-root' {...props}>
+    <Dialog {...props}>
       <DialogContent data-testid='dialog-content'>
         <DialogHeader data-testid='dialog-header'>Dialog Header</DialogHeader>
         <DialogBody data-testid='dialog-body'>Dialog Body</DialogBody>
@@ -46,52 +38,9 @@ const ControlledDialog = ({ defaultOpen = false, ...props }: DialogProps) => {
   )
 }
 
-const slots = ['backdrop'] as const
-
 describe('Dialog', () => {
   testComponentStability(<TestDialog open />, {
     useAct: true,
-  })
-
-  testRefForwarding(<TestDialog open />, {
-    useAct: true,
-  })
-
-  testClassNamesForwarding(
-    <TestDialog open />,
-    slots,
-    {
-      backdrop: 'test-dialog-backdrop',
-    },
-    dialogClasses,
-    { useAct: true },
-  )
-
-  testSlotPropsForwarding(
-    <TestDialog open />,
-    slots,
-    {
-      backdrop: {
-        className: 'test-dialog-backdrop',
-      },
-    },
-    dialogClasses,
-    {
-      useAct: true,
-    },
-  )
-
-  testVariantDataAttrs(<TestDialog open />, ['hideBackdrop', [true, false]], {
-    useAct: true,
-  })
-
-  it('should render with root class on root element', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(<TestDialog open />, {
-      useAct: true,
-    })
-    const dialogRoot = getByTestId('dialog-root')
-
-    expect(dialogRoot).toHaveClass(dialogClasses.root)
   })
 
   it('should not render children by default', async () => {
@@ -114,20 +63,6 @@ describe('Dialog', () => {
     expect(queryByText('Dialog Footer')).toBeInTheDocument()
   })
 
-  it('should hide backdrop when hideBackdrop=true', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestDialog open hideBackdrop />,
-      {
-        useAct: true,
-      },
-    )
-
-    const dialogRoot = getByTestId('dialog-root')
-    expect(
-      dialogRoot.querySelector(`.${dialogClasses.backdrop}`),
-    ).not.toBeInTheDocument()
-  })
-
   it('should be controlled via open prop', async () => {
     const { queryByTestId, getByTestId } = await renderWithNexUIProvider(
       <ControlledDialog />,
@@ -138,47 +73,16 @@ describe('Dialog', () => {
 
     const toggleButton = getByTestId('toggle-button')
 
-    expect(queryByTestId('dialog-root')).not.toBeInTheDocument()
+    expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
 
     await act(async () => {
       fireEvent.click(toggleButton)
     })
-    expect(queryByTestId('dialog-root')).toBeInTheDocument()
+    expect(queryByTestId('dialog-content')).toBeInTheDocument()
 
     await act(async () => {
       fireEvent.click(toggleButton)
     })
-    expect(queryByTestId('dialog-root')).not.toBeInTheDocument()
-  })
-
-  it('should disable animations when disableAnimation=true', () => {
-    const { queryByClassName } = renderWithNexUIProvider(
-      <TestDialog
-        open
-        disableAnimation={true}
-        motionProps={{
-          className: 'test-motion',
-        }}
-      />,
-    )
-    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
-
-    expect(queryByClassName(dialogContentClasses.paper)).not.toHaveStyle(
-      'transform: scale(1)',
-    )
-  })
-
-  it('should render into document.body via Portal when defaultOpen', async () => {
-    const { container, getByTestId } = await renderWithNexUIProvider(
-      <TestDialog defaultOpen disableAnimation />,
-      {
-        useAct: true,
-      },
-    )
-
-    expect(container.firstChild).toBeNull()
-
-    const modalRoot = getByTestId('dialog-root')
-    expect(modalRoot.parentElement).toBe(document.body)
+    expect(queryByTestId('dialog-content')).not.toBeInTheDocument()
   })
 })

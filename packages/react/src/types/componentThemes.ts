@@ -11,12 +11,10 @@ import type {
   SwitchRecipe,
   AccordionRecipe,
   AccordionItemRecipe,
-  DialogRootRecipe,
   DialogContentRecipe,
   DialogHeaderRecipe,
   DialogBodyRecipe,
   DialogFooterRecipe,
-  DrawerRootRecipe,
   DrawerContentRecipe,
   DrawerHeaderRecipe,
   DrawerBodyRecipe,
@@ -126,7 +124,6 @@ export type ComponentThemes = {
     defaultProps?: AccordionItemProps
   }
   Dialog?: {
-    styleOverrides?: ComponentThemeObject<DialogRootRecipe>
     defaultProps?: DialogProps
   }
   DialogContent?: {
@@ -146,7 +143,6 @@ export type ComponentThemes = {
     defaultProps?: DialogFooterProps
   }
   Drawer?: {
-    styleOverrides?: ComponentThemeObject<DrawerRootRecipe>
     defaultProps?: DrawerProps
   }
   DrawerContent?: {

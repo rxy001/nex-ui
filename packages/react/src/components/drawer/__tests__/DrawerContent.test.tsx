@@ -3,7 +3,6 @@ import {
   testClassNamesForwarding,
   testRefForwarding,
   testSlotPropsForwarding,
-  testVariantDataAttrs,
 } from '~/tests/shared'
 import {
   Drawer,
@@ -15,16 +14,9 @@ import {
 import { drawerContentClasses } from './classes'
 import type { DrawerContentProps } from '../index'
 
-function TestDrawer({
-  disableAnimation,
-  ...props
-}: DrawerContentProps & { disableAnimation?: boolean }) {
+function TestDrawer(props: DrawerContentProps) {
   return (
-    <Drawer
-      defaultOpen
-      data-testid='drawer-root'
-      disableAnimation={disableAnimation}
-    >
+    <Drawer defaultOpen>
       <DrawerContent data-testid='drawer-content' {...props}>
         <DrawerHeader data-testid='drawer-header'>Drawer Header</DrawerHeader>
         <DrawerBody data-testid='drawer-body'>Drawer Body</DrawerBody>
@@ -34,34 +26,67 @@ function TestDrawer({
   )
 }
 
-const slots = ['paper', 'closeButton'] as const
+const slots = ['paper', 'backdrop', 'closeButton'] as const
 
 describe('DrawerContent', () => {
   testRefForwarding(<TestDrawer />, {
     useAct: true,
   })
 
-  testVariantDataAttrs(
-    <TestDrawer />,
-    ['size', ['sm', 'xs', 'md', 'lg', 'xl', 'full']],
-    {
-      useAct: true,
-    },
-  )
+  it(`should have the appropriate data-size-* attribute on element based on size prop`, async () => {
+    const sizes = ['sm', 'xs', 'md', 'lg', 'xl', 'full'] as const
 
-  testVariantDataAttrs(
-    <TestDrawer />,
-    ['placement', ['top', 'right', 'bottom', 'left']],
-    {
-      useAct: true,
-    },
-  )
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <>
+        {sizes.map((value) => (
+          <TestDrawer className={`size-${value}`} size={value} key={value} />
+        ))}
+      </>,
+      {
+        useAct: true,
+      },
+    )
+    sizes.forEach((value) => {
+      const attrKey = `data-size`
+      const element = queryByClassName(`size-${value}`)
+      expect(
+        element?.querySelector(`.${drawerContentClasses.paper}`),
+      ).toHaveAttribute(attrKey, value)
+    })
+  })
+
+  it(`should have the appropriate data-placement-* attribute on element based on placement prop`, async () => {
+    const placements = ['top', 'right', 'bottom', 'left'] as const
+
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <>
+        {placements.map((value) => (
+          <TestDrawer
+            className={`placement-${value}`}
+            placement={value}
+            key={value}
+          />
+        ))}
+      </>,
+      {
+        useAct: true,
+      },
+    )
+    placements.forEach((value) => {
+      const attrKey = `data-placement`
+      const element = queryByClassName(`placement-${value}`)
+      expect(
+        element?.querySelector(`.${drawerContentClasses.paper}`),
+      ).toHaveAttribute(attrKey, value)
+    })
+  })
 
   testClassNamesForwarding(
     <TestDrawer />,
     slots,
     {
       closeButton: 'test-close-button',
+      backdrop: 'test-backdrop',
       paper: 'test-paper',
     },
     drawerContentClasses,
@@ -75,6 +100,7 @@ describe('DrawerContent', () => {
     slots,
     {
       paper: { className: 'test-drawer-content-paper' },
+      backdrop: { className: 'test-drawer-content-backdrop' },
       closeButton: { className: 'test-drawer-content-close-button' },
     },
     drawerContentClasses,
@@ -82,18 +108,6 @@ describe('DrawerContent', () => {
       useAct: true,
     },
   )
-
-  it('should render with default props', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(<TestDrawer />, {
-      useAct: true,
-    })
-
-    const drawerContent = getByTestId('drawer-content')
-    expect(drawerContent).toHaveClass(drawerContentClasses.root)
-    expect(drawerContent).toHaveAttribute('data-placement', 'right')
-    expect(drawerContent).toHaveAttribute('data-size', 'md')
-    expect(drawerContent).toHaveAttribute('data-hide-close-button', 'false')
-  })
 
   it('should not render close button when hideCloseButton=true', async () => {
     const { queryByRole } = await renderWithNexUIProvider(
@@ -127,9 +141,9 @@ describe('DrawerContent', () => {
       },
     )
 
-    const drawerContentRoot = queryByTestId('drawer-content')
-    expect(drawerContentRoot).toBeInTheDocument()
-    const closeButton = drawerContentRoot?.querySelector(
+    const drawerContent = queryByTestId('drawer-content')
+    expect(drawerContent).toBeInTheDocument()
+    const closeButton = drawerContent?.querySelector(
       `.${drawerContentClasses.closeButton}`,
     )
 
@@ -168,6 +182,48 @@ describe('DrawerContent', () => {
 
     const paper = queryByClassName(drawerContentClasses.paper)
     expect(paper?.parentElement).toHaveClass('test-motion')
+  })
+
+  it('should hide backdrop when hideBackdrop=true', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <TestDrawer hideBackdrop />,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(
+      queryByClassName(drawerContentClasses.backdrop),
+    ).not.toBeInTheDocument()
+  })
+
+  it('should disable animations when disableAnimation=true', async () => {
+    const { queryByClassName } = await renderWithNexUIProvider(
+      <TestDrawer
+        disableAnimation={true}
+        motionProps={{
+          className: 'test-motion',
+        }}
+      />,
+      {
+        useAct: true,
+      },
+    )
+    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
+  })
+
+  it('should render into document.body via Portal when defaultOpen', async () => {
+    const { container, getByTestId } = await renderWithNexUIProvider(
+      <TestDrawer disableAnimation />,
+      {
+        useAct: true,
+      },
+    )
+
+    expect(container.firstChild).toBeNull()
+
+    const drawerContent = getByTestId('drawer-content')
+    expect(drawerContent.parentElement).toBe(document.body)
   })
 
   describe('Accessibility', () => {
