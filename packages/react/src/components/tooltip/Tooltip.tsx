@@ -3,7 +3,7 @@
 import { nex } from '@nex-ui/styled'
 import { useCallback, useEffect, useId, useMemo } from 'react'
 import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
-import { addEventListener } from '@nex-ui/utils'
+import { addEventListener, isNumber } from '@nex-ui/utils'
 import { Popper, PopperContent, PopperPortal, PopperMotion } from '../popper'
 import {
   useSlot,
@@ -14,11 +14,12 @@ import {
 import { tooltipRecipe } from '../../theme/recipes'
 import { TooltipTrigger } from './TooltipTrigger'
 import { TooltipProvider, useTooltipContext } from './TooltipContext'
-import type { ElementType } from 'react'
+import { ScaleFloatingMotion } from '../scaleFloatingMotion'
+import type { CSSProperties, ElementType } from 'react'
 import type { TooltipProps } from './types'
 import type { FocusOutsideEvent } from '../dismissibleLayer'
 
-const slots = ['root', 'content'] as const
+const slots = ['root', 'paper'] as const
 
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
@@ -32,30 +33,24 @@ const TooltipImpl = (props: TooltipProps) => {
     keepMounted,
     slotProps,
     motionProps,
-    maxHeight,
-    closeOnEscape,
-    closeOnDetached,
-    onEscapeKeyDown,
-    onFocusOutside,
-    onInteractOutside,
-    onPointerDownOutside,
+    maxWidth,
     interactive = false,
     disableAnimation = false,
-    maxWidth = 360,
     color = 'default',
     size = 'md',
     radius = 'md',
+    placement = 'top',
     ...remainingProps
   } = props
 
   const ownerState = {
     ...props,
     size,
-    maxWidth,
     radius,
     color,
     disableAnimation,
     interactive,
+    placement,
   }
 
   const styles = useRecipeStyles({
@@ -76,28 +71,13 @@ const TooltipImpl = (props: TooltipProps) => {
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     additionalProps: {
-      closeOnEscape,
-      closeOnDetached,
-      onEscapeKeyDown,
-      onInteractOutside,
-      onPointerDownOutside,
       onPointerEnter: interactive ? delayOpen : undefined,
       onPointerLeave: interactive ? delayClose : undefined,
       onFocusOutside: (event: FocusOutsideEvent) => {
-        onFocusOutside?.(event)
         event.preventDefault()
       },
+      placement,
     },
-    dataAttrs: {
-      disableAnimation,
-    },
-  })
-
-  const [TooltipContent, getTooltipContentProps] = useSlot({
-    style: styles.content,
-    component: nex.div,
-    classNames: slotClasses.content,
-    externalSlotProps: slotProps?.content,
     ariaProps: {
       role: 'tooltip',
       id: rootId,
@@ -107,18 +87,35 @@ const TooltipImpl = (props: TooltipProps) => {
       size,
       radius,
       interactive,
-    },
-    additionalProps: {
-      sx: {
-        maxWidth,
-        maxHeight,
-      },
+      disableAnimation,
     },
   })
 
+  const [TooltipPaper, getTooltipPaperProps] = useSlot({
+    style: styles.paper,
+    component: nex.div,
+    classNames: slotClasses.paper,
+    externalSlotProps: slotProps?.paper,
+    additionalProps: {
+      style: {
+        '--tooltip-max-width': isNumber(maxWidth) ? `${maxWidth}px` : maxWidth,
+      } as CSSProperties,
+    },
+  })
+
+  const renderPaper = () => (
+    <TooltipPaper {...getTooltipPaperProps()}>{content}</TooltipPaper>
+  )
+
   const renderTooltipRoot = () => (
     <TooltipRoot {...getTooltipRootProps()}>
-      <TooltipContent {...getTooltipContentProps()}>{content}</TooltipContent>
+      {disableAnimation ? (
+        renderPaper()
+      ) : (
+        <ScaleFloatingMotion motionProps={motionProps} placement={placement}>
+          {renderPaper()}
+        </ScaleFloatingMotion>
+      )}
     </TooltipRoot>
   )
 
@@ -133,7 +130,7 @@ const TooltipImpl = (props: TooltipProps) => {
         {disableAnimation ? (
           renderTooltipRoot()
         ) : (
-          <PopperMotion {...motionProps}>{renderTooltipRoot()}</PopperMotion>
+          <PopperMotion>{renderTooltipRoot()}</PopperMotion>
         )}
       </PopperPortal>
     </>

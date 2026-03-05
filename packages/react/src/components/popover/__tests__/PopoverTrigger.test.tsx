@@ -5,7 +5,7 @@ import type { PopoverTriggerProps } from '../index'
 
 function TestPopover(props: PopoverTriggerProps) {
   return (
-    <Popover data-testid='popover-root'>
+    <Popover>
       <PopoverTrigger {...props} />
       <PopoverContent data-testid='popover-content'>
         This is the popover content.
@@ -27,18 +27,18 @@ describe('PopoverTrigger', () => {
 
     const trigger = getByTestId('popover-trigger')
 
-    expect(queryByTestId('popover-root')).not.toBeInTheDocument()
+    expect(queryByTestId('popover-content')).not.toBeInTheDocument()
 
     await user.click(trigger)
 
     await waitFor(() =>
-      expect(queryByTestId('popover-root')).toBeInTheDocument(),
+      expect(queryByTestId('popover-content')).toBeInTheDocument(),
     )
 
     await user.click(trigger)
 
     await waitFor(() =>
-      expect(queryByTestId('popover-root')).not.toBeInTheDocument(),
+      expect(queryByTestId('popover-content')).not.toBeInTheDocument(),
     )
   })
 
@@ -69,15 +69,15 @@ describe('PopoverTrigger', () => {
 
     const trigger = getByTestId('popover-trigger')
 
-    expect(queryByTestId('popover-root')).not.toBeInTheDocument()
+    expect(queryByTestId('popover-content')).not.toBeInTheDocument()
 
     await user.click(trigger)
 
-    expect(queryByTestId('popover-root')).toBeInTheDocument()
+    expect(queryByTestId('popover-content')).toBeInTheDocument()
 
     await user.click(trigger)
 
-    expect(queryByTestId('popover-root')).toBeInTheDocument()
+    expect(queryByTestId('popover-content')).toBeInTheDocument()
   })
 
   describe('Accessibility', () => {

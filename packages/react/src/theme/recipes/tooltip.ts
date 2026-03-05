@@ -7,7 +7,7 @@ export const tooltipRecipe = defineSlotRecipe({
     root: {
       zIndex: 'tooltip',
     },
-    content: {
+    paper: {
       px: '2.5',
       py: '1',
       fs: 'md',
@@ -15,35 +15,36 @@ export const tooltipRecipe = defineSlotRecipe({
       color: 'colorPalette.contrastText',
       overflow: 'auto',
       boxSizing: 'border-box',
+      maxW: 'var(--tooltip-max-width, 360px)',
+      boxShadow:
+        '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
     },
   },
   variants: {
     size: {
       sm: {
-        content: {
+        paper: {
           fs: 'sm',
         },
       },
       md: {
-        content: {
+        paper: {
           fs: 'md',
         },
       },
       lg: {
-        content: {
+        paper: {
           fs: 'lg',
         },
       },
     },
-    radius: toSlots(radiusVariant, 'content'),
+    radius: toSlots(radiusVariant, 'paper'),
     color: {
-      ...toSlots(colorVariant, 'content'),
+      ...toSlots(colorVariant, 'paper'),
       default: {
-        content: {
+        paper: {
           bg: 'content',
           color: 'inherit',
-          boxShadow:
-            '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
         },
       },
     },

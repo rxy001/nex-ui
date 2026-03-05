@@ -15,7 +15,6 @@ import type { Placement } from '../utils'
 const recipe = defineRecipe({
   base: {
     pos: 'absolute',
-    w: 'max-content',
     left: 'var(--popper-x)',
     top: 'var(--popper-y)',
   },

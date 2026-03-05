@@ -1,20 +1,7 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { PopoverProps } from './types'
-import type { PopperProps } from '../popper'
 import type { RefObject } from 'react'
-
-export type PopoverPropsContextValue = Omit<PopoverProps, keyof PopperProps>
-
-export const [PopoverPropsProvider, usePopoverPropsContext] =
-  createContext<PopoverPropsContextValue>({
-    contextName: 'PopoverPropsContext',
-    hookName: 'usePopoverPropsContext',
-    providerName: 'PopoverPropsProvider',
-    strict: true,
-    defaultValue: null as unknown as PopoverPropsContextValue,
-  })
 
 interface PopoverContextValue {
   open: boolean
