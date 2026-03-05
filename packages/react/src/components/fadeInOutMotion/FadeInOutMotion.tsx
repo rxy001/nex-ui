@@ -5,7 +5,7 @@ import { AnimatePresence, LazyMotion } from 'motion/react'
 import * as m from 'motion/react-m'
 import { motionFeatures } from '../utils/motionFeatures'
 import type { Variants } from 'motion/react'
-import type { PresenceMotionProps } from './types'
+import type { FadeInOutMotionProps } from './types'
 
 const transition = {
   ease: 'easeInOut',
@@ -21,13 +21,13 @@ const variants: Variants = {
   },
 }
 
-export const PresenceMotion = ({
+export const FadeInOutMotion = ({
   keepMounted,
   children,
   open,
   propagate,
-  ...props
-}: PresenceMotionProps) => {
+  motionProps,
+}: FadeInOutMotionProps) => {
   const [display, setDisplay] = useState<'block' | 'none'>(() =>
     keepMounted ? 'none' : 'block',
   )
@@ -38,7 +38,7 @@ export const PresenceMotion = ({
 
   const onAnimationComplete = (animation: string) => {
     if (animation === 'hidden' && keepMounted) setDisplay('none')
-    props.onAnimationComplete?.(animation)
+    motionProps?.onAnimationComplete?.(animation)
   }
 
   return (
@@ -49,8 +49,8 @@ export const PresenceMotion = ({
           animate={open ? 'visible' : 'hidden'}
           transition={transition}
           variants={variants}
-          {...props}
-          style={{ ...props.style, display }}
+          {...motionProps}
+          style={{ ...motionProps?.style, display }}
           onAnimationComplete={onAnimationComplete}
         >
           {children}
@@ -64,7 +64,7 @@ export const PresenceMotion = ({
               exit='hidden'
               transition={transition}
               variants={variants}
-              {...props}
+              {...motionProps}
               onAnimationComplete={onAnimationComplete}
             >
               {children}
@@ -76,4 +76,4 @@ export const PresenceMotion = ({
   )
 }
 
-PresenceMotion.displayName = 'PresenceMotion'
+FadeInOutMotion.displayName = 'FadeInOutMotion'

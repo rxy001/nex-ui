@@ -32,7 +32,7 @@ export const ModalBackdrop = (props: ModalBackdropProps) => {
     additionalProps: {
       style: {
         display:
-          modalPortalPropsCtx?.disablePresence &&
+          modalPortalPropsCtx?.disableAnimatePresence &&
           modalPortalPropsCtx?.keepMounted
             ? open
               ? 'block'

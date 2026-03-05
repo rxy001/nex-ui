@@ -1,13 +1,13 @@
 import { render, act, waitFor } from '@testing-library/react'
-import { PresenceMotion } from '../../presenceMotion/PresenceMotion'
+import { FadeInOutMotion } from '../../fadeInOutMotion/FadeInOutMotion'
 
-describe('PresenceMotion', () => {
+describe('FadeInOutMotion', () => {
   it('should render children when open=true', async () => {
     const { getByTestId } = await act(async () =>
       render(
-        <PresenceMotion open>
+        <FadeInOutMotion open>
           <div data-testid='test-content'>Visible Content</div>
-        </PresenceMotion>,
+        </FadeInOutMotion>,
       ),
     )
 
@@ -17,13 +17,16 @@ describe('PresenceMotion', () => {
   it('should not render anything when open=false and keepMounted=false', async () => {
     const { queryByTestId } = await act(async () =>
       render(
-        <PresenceMotion
+        <FadeInOutMotion
           open={false}
           keepMounted={false}
-          data-testid='test-motion'
+          motionProps={{
+            // @ts-expect-error
+            'data-testid': 'test-motion',
+          }}
         >
           <div data-testid='test-content'>Hidden Content</div>
-        </PresenceMotion>,
+        </FadeInOutMotion>,
       ),
     )
     expect(queryByTestId('test-motion')).not.toBeInTheDocument()
@@ -33,9 +36,16 @@ describe('PresenceMotion', () => {
   it('should keep motion mounted when keepMounted=true', async () => {
     const { rerender, getByTestId } = await act(async () =>
       render(
-        <PresenceMotion open={false} keepMounted data-testid='test-motion'>
+        <FadeInOutMotion
+          open={false}
+          keepMounted
+          motionProps={{
+            // @ts-expect-error
+            'data-testid': 'test-motion',
+          }}
+        >
           <div data-testid='test-content'>Always Mounted Content</div>
-        </PresenceMotion>,
+        </FadeInOutMotion>,
       ),
     )
 
@@ -47,9 +57,16 @@ describe('PresenceMotion', () => {
     // Rerender with open=true
     await act(async () => {
       rerender(
-        <PresenceMotion open keepMounted data-testid='test-motion'>
+        <FadeInOutMotion
+          open
+          keepMounted
+          motionProps={{
+            // @ts-expect-error
+            'data-testid': 'test-motion',
+          }}
+        >
           <div data-testid='test-content'>Always Mounted Content</div>
-        </PresenceMotion>,
+        </FadeInOutMotion>,
       )
     })
     expect(motion).toBeInTheDocument()
@@ -59,9 +76,16 @@ describe('PresenceMotion', () => {
   it('should render correct styles based on open prop (keepMounted=false)', async () => {
     const { queryByTestId } = await act(async () =>
       render(
-        <PresenceMotion open keepMounted={false} data-testid='test-motion'>
+        <FadeInOutMotion
+          open
+          keepMounted={false}
+          motionProps={{
+            // @ts-expect-error
+            'data-testid': 'test-motion',
+          }}
+        >
           <div>Style Test Content</div>
-        </PresenceMotion>,
+        </FadeInOutMotion>,
       ),
     )
 
@@ -73,9 +97,16 @@ describe('PresenceMotion', () => {
   it('should render correct styles based on open prop (keepMounted=true)', async () => {
     const { queryByTestId, rerender } = await act(async () =>
       render(
-        <PresenceMotion open={false} keepMounted data-testid='test-motion'>
+        <FadeInOutMotion
+          open={false}
+          keepMounted
+          motionProps={{
+            // @ts-expect-error
+            'data-testid': 'test-motion',
+          }}
+        >
           <div>Style Test Content</div>
-        </PresenceMotion>,
+        </FadeInOutMotion>,
       ),
     )
 
@@ -89,9 +120,16 @@ describe('PresenceMotion', () => {
 
     await act(async () => {
       rerender(
-        <PresenceMotion open keepMounted data-testid='test-motion'>
+        <FadeInOutMotion
+          open
+          keepMounted
+          motionProps={{
+            // @ts-expect-error
+            'data-testid': 'test-motion',
+          }}
+        >
           <div>Style Test Content</div>
-        </PresenceMotion>,
+        </FadeInOutMotion>,
       )
     })
 

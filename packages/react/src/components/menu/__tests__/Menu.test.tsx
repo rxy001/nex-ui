@@ -14,7 +14,7 @@ function TestMenu({ defaultOpen = false }: TestMenuProps) {
       <MenuTrigger>
         <button data-testid='trigger'>Open Menu</button>
       </MenuTrigger>
-      <MenuPortal disablePresence>
+      <MenuPortal disableAnimatePresence>
         <MenuContent data-testid='menu-content'>
           <MenuItem data-testid='item-1'>Menu Item 1</MenuItem>
           <MenuItem data-testid='item-2'>Menu Item 2</MenuItem>

@@ -185,7 +185,7 @@ export function DisableAnimation() {
       <MenuTrigger>
         <button>Open Menu</button>
       </MenuTrigger>
-      <MenuPortal disablePresence>
+      <MenuPortal disableAnimatePresence>
         <MenuContent>
           <MenuItem sx={style}>Menu Item 1</MenuItem>
           <MenuItem sx={style}>Menu Item 2</MenuItem>

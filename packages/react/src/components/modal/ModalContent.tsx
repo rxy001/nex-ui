@@ -58,7 +58,7 @@ export const ModalContent = (props: ModalContentProps) => {
       ref: rootRef,
       style: {
         display:
-          modalPortalPropsCtx?.disablePresence &&
+          modalPortalPropsCtx?.disableAnimatePresence &&
           modalPortalPropsCtx?.keepMounted
             ? open
               ? 'block'
