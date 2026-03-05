@@ -3,9 +3,6 @@
 exports[`Popper should render with default props 1`] = `
 .emotion-0 {
   position: absolute;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
   left: var(--popper-x);
   top: var(--popper-y);
 }

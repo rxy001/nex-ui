@@ -27,27 +27,21 @@ const PLACEMENTS = [
 const COLORS = ['default', ...DEFAULT_COLORS] as const
 
 type PopoverTemplateProps = PopoverProps &
-  Pick<
-    PopoverContentProps,
-    'restoreFocus' | 'loop' | 'maxHeight' | 'maxWidth' | 'color' | 'radius'
-  > & {
+  PopoverContentProps & {
     triggerText?: ReactNode
   }
 
 function PopoverTemplate(props: PopoverTemplateProps) {
   const {
-    restoreFocus,
-    loop,
-    maxHeight,
-    maxWidth,
-    color,
-    radius,
+    open,
+    onOpenChange,
+    defaultOpen,
     triggerText = 'Click me',
     ...other
   } = props
 
   return (
-    <Popover {...other}>
+    <Popover open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
       <PopoverTrigger>
         <Button
           sx={{
@@ -57,14 +51,7 @@ function PopoverTemplate(props: PopoverTemplateProps) {
           {triggerText}
         </Button>
       </PopoverTrigger>
-      <PopoverContent
-        restoreFocus={restoreFocus}
-        loop={loop}
-        maxHeight={maxHeight}
-        maxWidth={maxWidth}
-        color={color}
-        radius={radius}
-      >
+      <PopoverContent {...other}>
         <Box
           sx={{
             fontWeight: 'bold',
@@ -77,7 +64,7 @@ function PopoverTemplate(props: PopoverTemplateProps) {
             fs: 'sm',
           }}
         >
-          This is the popover content
+          This is the popover content.
         </Box>
       </PopoverContent>
     </Popover>
@@ -112,17 +99,11 @@ const meta = {
       options: RADII,
       control: 'select',
     },
-    loop: {
+    loopFocus: {
       control: 'boolean',
     },
     restoreFocus: {
       control: 'boolean',
-    },
-    maxWidth: {
-      control: 'number',
-    },
-    maxHeight: {
-      control: 'number',
     },
     offset: {
       control: 'number',
@@ -246,22 +227,14 @@ export function WithFlip(props: PopoverTemplateProps) {
 }
 
 export function WithForm(props: PopoverTemplateProps) {
-  const { restoreFocus, loop, maxHeight, maxWidth, color, radius, ...other } =
-    props
+  const { open, onOpenChange, defaultOpen, ...other } = props
 
   return (
-    <Popover {...other}>
+    <Popover open={open} onOpenChange={onOpenChange} defaultOpen={defaultOpen}>
       <PopoverTrigger>
         <Button>Click Me</Button>
       </PopoverTrigger>
-      <PopoverContent
-        restoreFocus={restoreFocus}
-        loop={loop}
-        maxHeight={maxHeight}
-        maxWidth={maxWidth}
-        color={color}
-        radius={radius}
-      >
+      <PopoverContent {...other}>
         <Box as='form'>
           <Flex
             direction='column'

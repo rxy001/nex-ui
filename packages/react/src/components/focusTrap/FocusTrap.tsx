@@ -129,7 +129,6 @@ export const FocusTrap = ({
       }
 
       return () => {
-        // const node = restoredNodeRef.current as HTMLElement
         // eslint-disable-next-line react-hooks/exhaustive-deps
         if (restoreFocusRef.current && previouslyFocusedElement) {
           focus(previouslyFocusedElement)

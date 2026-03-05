@@ -36,7 +36,7 @@ const recipe = defineRecipe({
 const style = recipe()
 
 const MenuContentImpl = (props: MenuContentImplProps) => {
-  const { children, loop, restoreFocus, ...remainingProps } = props
+  const { children, loopFocus = true, restoreFocus, ...remainingProps } = props
   const menuCtx = useMenuContext()
   const rootMenuCtx = useRootMenuContext()
   const ref = useRef<HTMLDivElement>(null)
@@ -142,7 +142,7 @@ const MenuContentImpl = (props: MenuContentImplProps) => {
       active={menuCtx.open}
       restoreFocus={restoreFocus}
     >
-      <RovingFocusGroup orientation='vertical' loop={loop}>
+      <RovingFocusGroup orientation='vertical' loop={loopFocus}>
         <MenuContentRoot {...getMenuContentRootProps()}>
           <MenuContentProvider value={ctx}>{children}</MenuContentProvider>
         </MenuContentRoot>
@@ -154,16 +154,10 @@ const MenuContentImpl = (props: MenuContentImplProps) => {
 MenuContentImpl.displayName = 'MenuContentImpl'
 
 export const MenuContent = (props: MenuContentProps) => {
-  const {
-    loop = true,
-    restoreFocus = true,
-    placement = 'bottom',
-    ...remainingProps
-  } = props
+  const { restoreFocus = true, placement = 'bottom', ...remainingProps } = props
 
   return (
     <MenuContentImpl
-      loop={loop}
       placement={placement}
       restoreFocus={restoreFocus}
       {...remainingProps}
@@ -182,6 +176,7 @@ export const SubMenuContent = (props: SubMenuContentProps) => {
     <MenuContentImpl
       {...props}
       ref={mergedRef}
+      closeOnEscape={false}
       placement='right-start'
       restoreFocus={false}
       onKeyDown={chain(props.onKeyDown, (event: KeyboardEvent<HTMLElement>) => {

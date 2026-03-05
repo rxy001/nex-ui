@@ -1,15 +1,48 @@
 import type { ElementType, ReactElement } from 'react'
-import type { CSSObject, Interpolation } from '@nex-ui/system'
+import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { FocusTrapProps } from '../focusTrap'
 import type { PopperContentProps, PopperProps } from '../popper'
-import type { HTMLMotionProps, OverrideProps } from '../../types/utils'
+import type {
+  ComponentSlotClasses,
+  OverrideProps,
+  SlotProps,
+} from '../../types/utils'
 import type { PopoverContentVariants } from '../../theme/recipes'
 import type { PopperAnchorProps, PopperPortalProps } from '../popper/types'
+import type { ScaleFloatingMotionProps } from '../scaleFloatingMotion'
 
 // ------------------- PopoverProps -------------------
-type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
-  Pick<PopperPortalProps, 'keepMounted' | 'container'> & {
+type PopoverOwnProps = PopperProps & {
+  /**
+   * If true, the Popover is shown by default. (uncontrolled)
+   */
+  defaultOpen?: boolean
+}
+
+export interface PopoverPropsOverrides {}
+
+export type PopoverProps = PopoverOwnProps & PopoverPropsOverrides
+
+// ------------------- PopoverContentProps -------------------
+type PopoverContentSlotProps = {
+  paper: SlotProps<'div'>
+}
+
+type PopoverContentOwnProps<RootComponent extends ElementType> = Pick<
+  FocusTrapProps,
+  'restoreFocus' | 'autoFocus'
+> &
+  Pick<PopperPortalProps, 'keepMounted' | 'container'> &
+  Pick<
+    PopperContentProps,
+    | 'closeOnEscape'
+    | 'closeOnDetached'
+    | 'placement'
+    | 'offset'
+    | 'flip'
+    | 'shift'
+  > & {
     /**
      * The component or element to render as the root.
      *
@@ -28,14 +61,18 @@ type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
     className?: ClassValue
 
     /**
-     * The props to modify the framer motion animation.
+     * The radius of the Popover content.
+     *
+     * @default 'md'
      */
-    motionProps?: HTMLMotionProps<'div'>
+    radius?: PopoverContentVariants['radius']
 
     /**
-     * If true, the Popover is shown by default. (uncontrolled)
+     * The color of the Popover content.
+     *
+     * @default 'default'
      */
-    defaultOpen?: boolean
+    color?: PopoverContentVariants['color']
 
     /**
      * If true, disables the animation for the Popover.
@@ -43,77 +80,44 @@ type PopoverOwnProps<RootComponent extends ElementType> = PopperProps &
      * @default false
      */
     disableAnimation?: boolean
-  } & Pick<
-    PopperContentProps,
-    | 'closeOnEscape'
-    | 'closeOnDetached'
-    | 'onPointerDownOutside'
-    | 'onEscapeKeyDown'
-    | 'onFocusOutside'
-    | 'onInteractOutside'
-    | 'placement'
-    | 'offset'
-    | 'flip'
-    | 'shift'
-  >
 
-export interface PopoverPropsOverrides {}
+    /**
+     * The props to modify the framer motion animation.
+     * Use the `variants` API to create your own animation.
+     */
+    motionProps?: ScaleFloatingMotionProps['motionProps']
 
-export type PopoverProps<RootComponent extends ElementType = 'div'> =
-  OverrideProps<
-    RootComponent,
-    PopoverOwnProps<RootComponent>,
-    PopoverPropsOverrides
-  >
+    /**
+     * The props used for each slot.
+     */
+    slotProps?: PopoverContentSlotProps
 
-// ------------------- PopoverContentProps -------------------
-type PopoverContentOwnProps<RootComponent extends ElementType> = Pick<
-  FocusTrapProps,
-  'restoreFocus' | 'loop' | 'autoFocus'
-> & {
-  /**
-   * The component or element to render as the root.
-   *
-   * @default 'div'
-   */
-  as?: RootComponent
+    /**
+     * The className used for each slot.
+     */
+    classNames?: ComponentSlotClasses<keyof PopoverContentSlotProps>
 
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: Interpolation
+    /**
+     * If true, the focus will loop within the Popover content.
+     *
+     * @default true
+     */
+    loopFocus?: boolean
 
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
+    /**
+     * The maximum width of the popover content.
+     *
+     * @default 360
+     */
+    maxWidth?: string | number
 
-  /**
-   * The radius of the Popover content.
-   *
-   * @default 'md'
-   */
-  radius?: PopoverContentVariants['radius']
-
-  /**
-   * The color of the Popover content.
-   *
-   * @default 'default'
-   */
-  color?: PopoverContentVariants['color']
-
-  /**
-   * The maximum width of the popover content.
-   *
-   * @default 480
-   */
-  maxWidth?: CSSObject['maxWidth']
-
-  /**
-   * The maximum height of the popover content.
-   */
-  maxHeight?: CSSObject['maxHeight']
-}
+    /**
+     * The width of the popover content.
+     *
+     * @default 'auto'
+     */
+    width?: string | number
+  }
 
 export interface PopoverContentPropsOverrides {}
 
