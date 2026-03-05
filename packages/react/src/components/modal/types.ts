@@ -87,7 +87,7 @@ export type ModalPortalProps = PortalProps & {
    *
    * @default false
    */
-  disablePresence?: boolean
+  disableAnimatePresence?: boolean
 }
 
 // ------------- ModalMotion -------------

@@ -24,7 +24,7 @@ export const [ModalProvider, useModalContext] =
 export interface ModalPortalPropsContextValue {
   container: ModalPortalProps['container']
   keepMounted: boolean
-  disablePresence: boolean
+  disableAnimatePresence: boolean
 }
 
 export const [ModalPortalPropsProvider, useModalPortalPropsContext] =

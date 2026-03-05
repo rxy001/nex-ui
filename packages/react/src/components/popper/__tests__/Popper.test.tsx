@@ -62,7 +62,7 @@ function TestPopper({
       </PopperAnchor>
       <PopperPortal
         keepMounted={keepMounted}
-        disablePresence={disableAnimation}
+        disableAnimatePresence={disableAnimation}
       >
         {disableAnimation ? (
           renderPopperContent()

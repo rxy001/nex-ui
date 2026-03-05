@@ -53,7 +53,7 @@ function TestModal({
         <button data-testid='toggle-button'>Toggle Modal</button>
       </ModalTrigger>
       <ModalPortal
-        disablePresence
+        disableAnimatePresence
         keepMounted={keepMounted}
         container={container}
       >

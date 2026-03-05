@@ -1,7 +1,7 @@
 'use client'
 
 import { usePopperContext, usePopperPortalPropsContext } from './PopperContext'
-import { PresenceMotion } from '../presenceMotion'
+import { FadeInOutMotion } from '../fadeInOutMotion'
 import type { PopperMotionProps } from './types'
 
 export const PopperMotion = (props: PopperMotionProps) => {
@@ -10,14 +10,14 @@ export const PopperMotion = (props: PopperMotionProps) => {
   const popperPortalPropsCtx = usePopperPortalPropsContext()
 
   return (
-    <PresenceMotion
+    <FadeInOutMotion
       propagate
       open={open}
       keepMounted={popperPortalPropsCtx?.keepMounted}
-      {...remainingProps}
+      motionProps={remainingProps}
     >
       {children}
-    </PresenceMotion>
+    </FadeInOutMotion>
   )
 }
 

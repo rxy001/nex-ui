@@ -123,7 +123,7 @@ const TooltipImpl = (props: TooltipProps) => {
     <>
       <TooltipTrigger>{children}</TooltipTrigger>
       <PopperPortal
-        disablePresence={disableAnimation}
+        disableAnimatePresence={disableAnimation}
         container={container}
         keepMounted={keepMounted}
       >

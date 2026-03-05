@@ -15,7 +15,7 @@ export const PopperPortal = ({
   children,
   container,
   keepMounted = false,
-  disablePresence = false,
+  disableAnimatePresence = false,
 }: PopperPortalProps) => {
   const { open } = usePopperContext()
   const subPopperPortal = !!usePopperPortalPropsContext()
@@ -23,9 +23,9 @@ export const PopperPortal = ({
   const ctx = useMemo<PopperPortalPropsContextValue>(
     () => ({
       keepMounted,
-      disablePresence,
+      disableAnimatePresence,
     }),
-    [keepMounted, disablePresence],
+    [keepMounted, disableAnimatePresence],
   )
 
   const renderChildren = () =>
@@ -37,7 +37,7 @@ export const PopperPortal = ({
       </Portal>
     ) : null
 
-  if (disablePresence) {
+  if (disableAnimatePresence) {
     return renderChildren()
   }
 

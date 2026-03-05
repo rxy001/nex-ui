@@ -15,7 +15,7 @@ import {
   motionFeatures,
 } from '../utils'
 import { useAccordionGroupContext } from './AccordionContext'
-import { PresenceMotion } from '../presenceMotion'
+import { FadeInOutMotion } from '../fadeInOutMotion'
 import type { ElementType } from 'react'
 import type { Variants } from 'motion/react'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
@@ -284,14 +284,16 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     }
 
     return (
-      <PresenceMotion
+      <FadeInOutMotion
         open={expanded}
         keepMounted={keepMounted}
-        {...contentMotionProps}
-        {...motionProps}
+        motionProps={{
+          ...contentMotionProps,
+          ...motionProps,
+        }}
       >
         {contentElement}
-      </PresenceMotion>
+      </FadeInOutMotion>
     )
   }
 

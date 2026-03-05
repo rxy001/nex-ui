@@ -193,7 +193,7 @@ export const DialogContent = <RootComponent extends ElementType = 'div'>(
 
   return (
     <ModalPortal
-      disablePresence={disableAnimation}
+      disableAnimatePresence={disableAnimation}
       container={container}
       keepMounted={keepMounted}
     >

@@ -8,7 +8,7 @@ function TestModal(props: ModalCloseProps) {
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
-      <ModalPortal disablePresence>
+      <ModalPortal disableAnimatePresence>
         <ModalContent data-testid='modal-content'>
           <ModalClose {...props} />
         </ModalContent>

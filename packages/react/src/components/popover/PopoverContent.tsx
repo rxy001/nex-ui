@@ -132,7 +132,7 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     <PopperPortal
       container={container}
       keepMounted={keepMounted}
-      disablePresence={disableAnimation}
+      disableAnimatePresence={disableAnimation}
     >
       {disableAnimation ? (
         renderContent()
