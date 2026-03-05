@@ -13,38 +13,11 @@ import { Tooltip } from '../index'
 import { tooltipSlotClasses } from './classes'
 import type { TooltipProps } from '../index'
 
-const slots = ['content'] as const
+const slots = ['paper'] as const
 
 const TestTooltip = (props: TooltipProps) => {
   return (
-    <Tooltip
-      content='content'
-      data-testid='tooltip-root'
-      slotProps={{
-        content: {
-          // @ts-ignore
-          'data-testid': 'tooltip-content',
-        },
-      }}
-      {...props}
-    >
-      <button data-testid='tooltip-trigger'>Trigger</button>
-    </Tooltip>
-  )
-}
-
-const TestTooltipVariant = ({ className, ...props }: TooltipProps) => {
-  return (
-    <Tooltip
-      content='content'
-      data-testid='tooltip-root'
-      slotProps={{
-        content: {
-          className,
-        },
-      }}
-      {...props}
-    >
+    <Tooltip content='content' data-testid='tooltip-root' {...props}>
       <button data-testid='tooltip-trigger'>Trigger</button>
     </Tooltip>
   )
@@ -54,7 +27,7 @@ describe('Tooltip', () => {
   testComponentStability(<TestTooltip open />)
 
   testVariantDataAttrs(
-    <TestTooltipVariant open />,
+    <TestTooltip open />,
     [
       'color',
       [
@@ -79,18 +52,18 @@ describe('Tooltip', () => {
     useAct: true,
   })
 
-  testSizeDataAttrs(<TestTooltipVariant open />, {
+  testSizeDataAttrs(<TestTooltip open />, {
     useAct: true,
   })
 
-  testRadiusDataAttrs(<TestTooltipVariant open />, {
+  testRadiusDataAttrs(<TestTooltip open />, {
     useAct: true,
   })
 
   testClassNamesForwarding(
     <TestTooltip open />,
     slots,
-    { content: 'test-content' },
+    { paper: 'test-paper' },
     tooltipSlotClasses,
     {
       useAct: true,
@@ -101,8 +74,8 @@ describe('Tooltip', () => {
     <TestTooltip open />,
     slots,
     {
-      content: {
-        className: 'test-content',
+      paper: {
+        className: 'test-paper',
       },
     },
     tooltipSlotClasses,
@@ -131,13 +104,13 @@ describe('Tooltip', () => {
       },
     )
 
-    const content = getByTestId('tooltip-content')
-    expect(content).toHaveAttribute('data-color', 'default')
-    expect(content).toHaveAttribute('data-size', 'md')
-    expect(content).toHaveAttribute('data-radius', 'md')
+    const root = getByTestId('tooltip-root')
+    expect(root).toHaveAttribute('data-color', 'default')
+    expect(root).toHaveAttribute('data-size', 'md')
+    expect(root).toHaveAttribute('data-radius', 'md')
   })
 
-  it('should render with root, content class', async () => {
+  it('should render with root, paper class', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
       <TestTooltip open />,
       {
@@ -147,10 +120,9 @@ describe('Tooltip', () => {
 
     const tooltipRoot = getByTestId('tooltip-root')
     expect(tooltipRoot).toHaveClass(tooltipSlotClasses.root)
-
-    expect(tooltipRoot.firstElementChild).toHaveClass(
-      tooltipSlotClasses.content,
-    )
+    expect(
+      tooltipRoot.querySelector(`.${tooltipSlotClasses.paper}`),
+    ).toBeInTheDocument()
   })
 
   it('should render null when content={null}', async () => {
@@ -200,8 +172,8 @@ describe('Tooltip', () => {
 
     expect(root).toBeInTheDocument()
 
-    // content element
-    await user.click(root.firstElementChild!)
+    // paper element
+    await user.click(root.querySelector(`.${tooltipSlotClasses.paper}`)!)
 
     expect(root).toBeInTheDocument()
 
@@ -399,9 +371,9 @@ describe('Tooltip', () => {
       )
 
       const trigger = getByTestId('tooltip-trigger')
-      const content = getByTestId('tooltip-content')
+      const root = getByTestId('tooltip-root')
 
-      expect(trigger).toHaveAttribute('aria-describedby', content.id)
+      expect(trigger).toHaveAttribute('aria-describedby', root.id)
     })
 
     it('should not have aria-describedby on the trigger element when the tooltip is closed', async () => {
@@ -421,9 +393,9 @@ describe('Tooltip', () => {
         },
       )
 
-      const content = getByTestId('tooltip-content')
+      const root = getByTestId('tooltip-root')
 
-      expect(content).toHaveAttribute('role', 'tooltip')
+      expect(root).toHaveAttribute('role', 'tooltip')
     })
   })
 })

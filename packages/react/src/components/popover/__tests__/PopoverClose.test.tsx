@@ -4,7 +4,7 @@ import type { PopoverCloseProps } from '../index'
 
 function TestPopover(props: PopoverCloseProps) {
   return (
-    <Popover data-testid='popover-root' defaultOpen>
+    <Popover defaultOpen>
       <PopoverContent data-testid='popover-content'>
         This is the popover content.
         <PopoverClose {...props} />
@@ -24,12 +24,12 @@ describe('PopoverClose', () => {
       },
     )
 
-    const popoverRoot = queryByTestId('popover-root')
-    expect(popoverRoot).toBeInTheDocument()
+    const popoverContent = queryByTestId('popover-content')
+    expect(popoverContent).toBeInTheDocument()
     const closeButton = getByTestId('close-button')
 
     await user.click(closeButton)
-    expect(popoverRoot).not.toBeInTheDocument()
+    expect(popoverContent).not.toBeInTheDocument()
   })
 
   it("should return children as-is when PopoverClose's children is not a valid React element", async () => {

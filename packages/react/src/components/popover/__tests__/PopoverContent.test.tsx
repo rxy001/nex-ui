@@ -11,7 +11,7 @@ import type { PopoverContentProps } from '../index'
 
 function TestPopover(props: PopoverContentProps) {
   return (
-    <Popover data-testid='popover-root' open>
+    <Popover open>
       <PopoverTrigger>
         <Button data-testid='popover-trigger'>Open Popover</Button>
       </PopoverTrigger>
@@ -68,5 +68,25 @@ describe('PopoverContent', () => {
     const content = getByTestId('popover-content')
     expect(content).toHaveAttribute('data-color', 'default')
     expect(content).toHaveAttribute('data-radius', 'md')
+  })
+
+  describe('Accessibility', () => {
+    it('should have role="dialog" on the root element', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(<TestPopover />, {
+        useAct: true,
+      })
+
+      const root = getByTestId('popover-content')
+      expect(root).toHaveRole('dialog')
+    })
+
+    it('should have tabindex="-1" on the content element', async () => {
+      const { getByTestId } = await renderWithNexUIProvider(<TestPopover />, {
+        useAct: true,
+      })
+
+      const content = getByTestId('popover-content')
+      expect(content).toHaveAttribute('tabindex', '-1')
+    })
   })
 })

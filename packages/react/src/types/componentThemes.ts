@@ -28,7 +28,6 @@ import type {
   CardFooterRecipe,
   CardActionAreaRecipe,
   TooltipRecipe,
-  PopoverRecipe,
   PopoverContentRecipe,
   BadgeRecipe,
   BreadcrumbRecipe,
@@ -198,7 +197,6 @@ export type ComponentThemes = {
     defaultProps?: TooltipProps
   }
   Popover?: {
-    styleOverrides?: ComponentThemeObject<PopoverRecipe>
     defaultProps?: PopoverProps
   }
   PopoverContent?: {

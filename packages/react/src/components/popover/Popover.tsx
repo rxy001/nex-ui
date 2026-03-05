@@ -4,13 +4,10 @@ import { useId, useMemo, useRef } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { Popper } from '../popper'
 import { useDefaultProps } from '../utils'
-import { PopoverPropsProvider, PopoverProvider } from './PopoverContext'
-import type { ElementType } from 'react'
+import { PopoverProvider } from './PopoverContext'
 import type { PopoverProps } from './types'
 
-export const Popover = <RootComponent extends ElementType = 'div'>(
-  inProps: PopoverProps<RootComponent>,
-) => {
+export const Popover = (inProps: PopoverProps) => {
   const props = useDefaultProps<PopoverProps>({
     name: 'Popover',
     props: inProps,
@@ -26,7 +23,6 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
     onClose,
     open: openProp,
     defaultOpen = false,
-    ...remainingProps
   } = props
 
   const [open, setOpen] = useControlledState(
@@ -44,11 +40,7 @@ export const Popover = <RootComponent extends ElementType = 'div'>(
 
   return (
     <Popper open={open} onOpenChange={setOpen} onClose={onClose}>
-      <PopoverProvider value={popoverCtx}>
-        <PopoverPropsProvider value={remainingProps}>
-          {children}
-        </PopoverPropsProvider>
-      </PopoverProvider>
+      <PopoverProvider value={popoverCtx}>{children}</PopoverProvider>
     </Popper>
   )
 }

@@ -26,7 +26,7 @@ export interface MenuTriggerProps extends PopperAnchorProps {
 // ----------------- MenuContentProps -----------------
 type MenuContentOwnProps = {
   restoreFocus?: boolean
-  loop?: boolean
+  loopFocus?: boolean
 }
 
 export type MenuContentImplProps = PopperContentProps & MenuContentOwnProps

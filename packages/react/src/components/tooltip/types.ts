@@ -1,5 +1,5 @@
 import type { ReactNode, ElementType } from 'react'
-import type { CSSObject, Interpolation } from '@nex-ui/system'
+import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { PopperContentProps, PopperProps } from '../popper'
 import type { TooltipRecipeVariants } from '../../theme/recipes'
@@ -8,16 +8,13 @@ import type {
   OverrideProps,
   SlotProps,
 } from '../../types/utils'
-import type {
-  PopperAnchorProps,
-  PopperMotionProps,
-  PopperPortalProps,
-} from '../popper/types'
+import type { PopperAnchorProps, PopperPortalProps } from '../popper/types'
+import type { ScaleFloatingMotionProps } from '../scaleFloatingMotion'
 
 export interface TooltipPropsOverrides {}
 
 type TooltipSlotProps = {
-  content?: SlotProps<'div'>
+  paper?: SlotProps<'div'>
 }
 
 export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
@@ -26,10 +23,6 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     PopperContentProps,
     | 'closeOnEscape'
     | 'closeOnDetached'
-    | 'onEscapeKeyDown'
-    | 'onPointerDownOutside'
-    | 'onFocusOutside'
-    | 'onInteractOutside'
     | 'placement'
     | 'offset'
     | 'shift'
@@ -72,7 +65,7 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
     /**
      * The props to modify the framer motion animation.
      */
-    motionProps?: PopperMotionProps
+    motionProps?: ScaleFloatingMotionProps['motionProps']
 
     /**
      * The color of the Tooltip.
@@ -107,14 +100,8 @@ export type TooltipOwnProps<RootComponent extends ElementType> = PopperProps &
 
     /**
      * The maximum width of the Tooltip.
-     * @default 360
      */
-    maxWidth?: CSSObject['maxWidth']
-
-    /**
-     * The maximum height of the Tooltip.
-     */
-    maxHeight?: CSSObject['maxHeight']
+    maxWidth?: string | number
 
     /**
      * If true, the Tooltip is shown by default. (uncontrolled)

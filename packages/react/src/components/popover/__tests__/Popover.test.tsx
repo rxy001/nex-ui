@@ -1,15 +1,10 @@
-import {
-  renderWithNexUIProvider,
-  testComponentStability,
-  testRefForwarding,
-} from '~/tests/shared'
+import { renderWithNexUIProvider, testComponentStability } from '~/tests/shared'
 import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from '../index'
-import { popoverSlotClasses } from './classes'
 import type { PopoverProps } from '../index'
 
 function TestPopover(props: PopoverProps) {
   return (
-    <Popover data-testid='popover-root' {...props}>
+    <Popover {...props}>
       <PopoverTrigger>
         <button data-testid='popover-trigger'>Open Popover</button>
       </PopoverTrigger>
@@ -28,37 +23,6 @@ describe('Popover', () => {
     useAct: true,
   })
 
-  testRefForwarding(<TestPopover open />, {
-    useAct: true,
-  })
-
-  it('should have the correct root class name', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(
-      <TestPopover open />,
-      {
-        useAct: true,
-      },
-    )
-
-    const popoverRoot = getByTestId('popover-root')
-    expect(popoverRoot).toHaveClass(popoverSlotClasses.root)
-
-    expect(popoverRoot).toMatchSnapshot()
-  })
-
-  it('should disable animations when disableAnimation=true', () => {
-    const { queryByClassName } = renderWithNexUIProvider(
-      <TestPopover
-        open
-        disableAnimation
-        motionProps={{
-          className: 'test-motion',
-        }}
-      />,
-    )
-    expect(queryByClassName('test-motion')).not.toBeInTheDocument()
-  })
-
   it('should pointer outside to close the popover', async () => {
     const { queryByTestId, user } = await renderWithNexUIProvider(
       <TestPopover defaultOpen />,
@@ -69,31 +33,5 @@ describe('Popover', () => {
 
     await user.pointer({ keys: '[MouseLeft]', target: document.body })
     expect(queryByTestId('popover-content')).not.toBeInTheDocument()
-  })
-
-  describe('Accessibility', () => {
-    it('should have role="dialog" on the root element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopover open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const root = getByTestId('popover-content')
-      expect(root).toHaveRole('dialog')
-    })
-
-    it('should have tableIndex="-1" on the content element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopover open />,
-        {
-          useAct: true,
-        },
-      )
-
-      const content = getByTestId('popover-content')
-      expect(content).toHaveAttribute('tabindex', '-1')
-    })
   })
 })
