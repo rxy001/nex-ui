@@ -21,7 +21,7 @@ export const [PopperProvider, usePopperContext] =
 
 export interface PopperPortalPropsContextValue {
   keepMounted: boolean
-  disablePresence: boolean
+  disableAnimatePresence: boolean
 }
 
 export const [PopperPortalPropsProvider, usePopperPortalPropsContext] =

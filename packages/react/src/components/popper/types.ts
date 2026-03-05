@@ -101,7 +101,7 @@ export type PopperPortalProps = PortalProps & {
    *
    * @default false
    */
-  disablePresence?: boolean
+  disableAnimatePresence?: boolean
 }
 
 // ----------------- PopperMotionProps -----------------

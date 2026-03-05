@@ -15,7 +15,7 @@ export const ModalPortal = ({
   children,
   container,
   keepMounted = false,
-  disablePresence = false,
+  disableAnimatePresence = false,
 }: ModalPortalProps) => {
   const { open } = useModalContext()
   const subModalPortal = !!useModalPortalPropsContext()
@@ -24,9 +24,9 @@ export const ModalPortal = ({
     () => ({
       container,
       keepMounted,
-      disablePresence,
+      disableAnimatePresence,
     }),
-    [container, keepMounted, disablePresence],
+    [container, keepMounted, disableAnimatePresence],
   )
 
   const renderChildren = () =>
@@ -38,7 +38,7 @@ export const ModalPortal = ({
       </Portal>
     ) : null
 
-  if (disablePresence) {
+  if (disableAnimatePresence) {
     return renderChildren()
   }
 

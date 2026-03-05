@@ -103,7 +103,7 @@ export function Default() {
           </ModalTrigger>
           <ModalPortal
             keepMounted={keepMounted}
-            disablePresence={disableAnimation}
+            disableAnimatePresence={disableAnimation}
           >
             {disableAnimation ? (
               renderContent()

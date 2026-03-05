@@ -1,6 +1,6 @@
 'use client'
 
-import { PresenceMotion } from '../presenceMotion'
+import { FadeInOutMotion } from '../fadeInOutMotion'
 import { useModalContext, useModalPortalPropsContext } from './ModalContext'
 import type { ModalMotionProps } from './types'
 
@@ -10,14 +10,14 @@ export const ModalMotion = (props: ModalMotionProps) => {
   const { children, ...remainingProps } = props
 
   return (
-    <PresenceMotion
+    <FadeInOutMotion
       propagate
       open={open}
       keepMounted={modalPortalPropsCtx?.keepMounted}
-      {...remainingProps}
+      motionProps={remainingProps}
     >
       {children}
-    </PresenceMotion>
+    </FadeInOutMotion>
   )
 }
 

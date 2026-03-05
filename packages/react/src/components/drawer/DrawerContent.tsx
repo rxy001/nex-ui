@@ -216,7 +216,7 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
 
   return (
     <ModalPortal
-      disablePresence={disableAnimation}
+      disableAnimatePresence={disableAnimation}
       container={container}
       keepMounted={keepMounted}
     >

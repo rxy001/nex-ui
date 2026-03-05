@@ -72,7 +72,7 @@ export const PopperContent = (props: PopperContentProps) => {
       style: {
         ...styleVariables,
         display:
-          popperPortalPropsCtx?.disablePresence &&
+          popperPortalPropsCtx?.disableAnimatePresence &&
           popperPortalPropsCtx?.keepMounted
             ? open
               ? 'block'

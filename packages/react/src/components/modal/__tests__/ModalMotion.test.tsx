@@ -19,7 +19,7 @@ function TestModal({
   disableAnimation,
 }: {
   keepMounted?: ModalPortalProps['keepMounted']
-  disableAnimation?: ModalPortalProps['disablePresence']
+  disableAnimation?: ModalPortalProps['disableAnimatePresence']
 }) {
   const [open, setOpen] = useState(true)
 
@@ -40,7 +40,10 @@ function TestModal({
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
-      <ModalPortal keepMounted={keepMounted} disablePresence={disableAnimation}>
+      <ModalPortal
+        keepMounted={keepMounted}
+        disableAnimatePresence={disableAnimation}
+      >
         {disableAnimation ? (
           renderChildren()
         ) : (

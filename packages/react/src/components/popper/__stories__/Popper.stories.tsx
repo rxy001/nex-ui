@@ -252,7 +252,7 @@ export const Default = () => {
             </PopperAnchor>
             <PopperPortal
               keepMounted={keepMounted}
-              disablePresence={disableAnimation}
+              disableAnimatePresence={disableAnimation}
               container={() => innerRef.current}
             >
               {disableAnimation ? (
