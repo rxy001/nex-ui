@@ -4,17 +4,20 @@ import { nex } from '@nex-ui/styled'
 import { useCallback, useEffect, useId, useMemo } from 'react'
 import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
 import { addEventListener, isNumber } from '@nex-ui/utils'
-import { Popper, PopperContent, PopperPortal, PopperMotion } from '../popper'
+import { AnimatePresence, LazyMotion } from 'motion/react'
+import { Popper, PopperContent, PopperPortal } from '../popper'
 import {
   useSlot,
   useRecipeStyles,
   useSlotClasses,
   useDefaultProps,
+  motionFeatures,
+  useKeepMountedState,
 } from '../utils'
 import { tooltipRecipe } from '../../theme/recipes'
 import { TooltipTrigger } from './TooltipTrigger'
 import { TooltipProvider, useTooltipContext } from './TooltipContext'
-import { ScaleFloatingMotion } from '../scaleFloatingMotion'
+import { TooltipPaperMotion } from './TooltipPaperMotion'
 import type { CSSProperties, ElementType } from 'react'
 import type { TooltipProps } from './types'
 import type { FocusOutsideEvent } from '../dismissibleLayer'
@@ -24,9 +27,8 @@ const slots = ['root', 'paper'] as const
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
 const TooltipImpl = (props: TooltipProps) => {
-  const { delayOpen, delayClose, rootId } = useTooltipContext()
+  const { delayOpen, delayClose, rootId, open } = useTooltipContext()
   const {
-    children,
     container,
     content,
     classNames,
@@ -53,6 +55,13 @@ const TooltipImpl = (props: TooltipProps) => {
     placement,
   }
 
+  const { resolvedDisplay, onAnimationComplete, onAnimationStart } =
+    useKeepMountedState({
+      open,
+      keepMounted,
+      disableAnimation,
+    })
+
   const styles = useRecipeStyles({
     ownerState,
     name: 'Tooltip',
@@ -77,10 +86,14 @@ const TooltipImpl = (props: TooltipProps) => {
         event.preventDefault()
       },
       placement,
+      style: {
+        display: resolvedDisplay,
+      },
     },
     ariaProps: {
-      role: 'tooltip',
       id: rootId,
+      role: 'tooltip',
+      'aria-hidden': keepMounted && !open ? 'true' : undefined,
     },
     dataAttrs: {
       color,
@@ -112,28 +125,31 @@ const TooltipImpl = (props: TooltipProps) => {
       {disableAnimation ? (
         renderPaper()
       ) : (
-        <ScaleFloatingMotion motionProps={motionProps} placement={placement}>
+        <TooltipPaperMotion
+          motionProps={motionProps}
+          placement={placement}
+          onAnimationComplete={onAnimationComplete}
+          onAnimationStart={onAnimationStart}
+        >
           {renderPaper()}
-        </ScaleFloatingMotion>
+        </TooltipPaperMotion>
       )}
     </TooltipRoot>
   )
 
-  return (
-    <>
-      <TooltipTrigger>{children}</TooltipTrigger>
-      <PopperPortal
-        disableAnimatePresence={disableAnimation}
-        container={container}
-        keepMounted={keepMounted}
-      >
-        {disableAnimation ? (
-          renderTooltipRoot()
-        ) : (
-          <PopperMotion>{renderTooltipRoot()}</PopperMotion>
-        )}
+  const renderPortal = () =>
+    open || keepMounted ? (
+      <PopperPortal container={container} forceMount>
+        {renderTooltipRoot()}
       </PopperPortal>
-    </>
+    ) : null
+
+  return disableAnimation ? (
+    renderPortal()
+  ) : (
+    <LazyMotion features={motionFeatures}>
+      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
+    </LazyMotion>
   )
 }
 
@@ -228,9 +244,8 @@ export const Tooltip = <RootComponent extends ElementType = 'div'>(
   return (
     <Popper open={open} onOpenChange={setOpen} onClose={onClose}>
       <TooltipProvider value={ctx}>
-        <TooltipImpl content={content} {...remainingProps}>
-          {children}
-        </TooltipImpl>
+        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipImpl content={content} {...remainingProps} />
       </TooltipProvider>
     </Popper>
   )

@@ -1,12 +1,12 @@
 import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
+import type { HTMLMotionProps } from 'motion/react'
 import type { DrawerContentVariants } from '../../theme/recipes'
 import type {
   OverrideProps,
   SlotProps,
   ComponentSlotClasses,
-  HTMLMotionProps,
 } from '../../types/utils'
 import type {
   ModalCloseProps,
@@ -39,7 +39,7 @@ export interface DrawerContentPropsOverrides {}
 
 type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   ModalPortalProps,
-  'container' | 'keepMounted'
+  'container'
 > &
   Pick<
     ModalContentProps,
@@ -126,6 +126,13 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
      * @default false
      */
     hideBackdrop?: boolean
+
+    /**
+     * If true, keeps the Drawer mounted in the DOM when it's closed.
+     *
+     * @default false
+     */
+    keepMounted?: boolean
 
     /**
      * The id(s) of the element(s) that label the drawer.
@@ -247,3 +254,9 @@ export type DrawerFooterProps<RootComponent extends ElementType = 'div'> =
 export interface DrawerTriggerProps extends ModalTriggerProps {}
 
 export interface DrawerCloseProps extends ModalCloseProps {}
+
+export type DrawerPaperMotionProps = {
+  children: ReactNode
+  placement: DrawerContentVariants['placement']
+  motionProps?: DrawerContentOwnProps['motionProps']
+}

@@ -7,7 +7,7 @@ import { useEvent } from '@nex-ui/hooks'
 import { addEventListener, ownerWindow, chain } from '@nex-ui/utils'
 import { useSlot, getOverflowAncestors, computePosition } from '../utils'
 import { DismissibleLayer } from '../dismissibleLayer'
-import { usePopperContext, usePopperPortalPropsContext } from './PopperContext'
+import { usePopperContext } from './PopperContext'
 import type { CSSProperties } from 'react'
 import type { PopperContentProps } from './types'
 import type { Placement } from '../utils'
@@ -34,9 +34,23 @@ const DEFAULT_VARS = {
 
 const DEFAULT_FLIP_OPTIONS = { mainAxis: true, crossAxis: true }
 
+const transformOrigins = {
+  top: 'bottom center',
+  right: 'center left',
+  bottom: 'top center',
+  left: 'center right',
+  'top-start': 'bottom left',
+  'right-end': 'bottom left',
+  'right-start': 'top left',
+  'bottom-start': 'top left',
+  'bottom-end': 'top right',
+  'left-start': 'top right',
+  'left-end': 'bottom right',
+  'top-end': 'bottom right',
+} as const
+
 export const PopperContent = (props: PopperContentProps) => {
   const { open, triggerRef, popperRootRef, setOpen } = usePopperContext()
-  const popperPortalPropsCtx = usePopperPortalPropsContext()
 
   const {
     children,
@@ -71,25 +85,14 @@ export const PopperContent = (props: PopperContentProps) => {
       ref: popperRootRef,
       style: {
         ...styleVariables,
-        display:
-          popperPortalPropsCtx?.disableAnimatePresence &&
-          popperPortalPropsCtx?.keepMounted
-            ? open
-              ? 'block'
-              : 'none'
-            : undefined,
+        '--popper-transform-origin': transformOrigins[computedPlacement],
       } as CSSProperties,
-    },
-    ariaProps: {
-      'aria-hidden':
-        popperPortalPropsCtx?.keepMounted && !open ? true : undefined,
     },
     dataAttrs: {
       closeOnDetached,
       closeOnEscape,
       placement: computedPlacement,
       state: open ? 'open' : 'closed',
-      keepMounted: popperPortalPropsCtx?.keepMounted,
     },
   })
 

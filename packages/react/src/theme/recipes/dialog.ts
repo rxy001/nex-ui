@@ -15,6 +15,7 @@ export const dialogContentRecipe = defineSlotRecipe({
       borderRadius: 'lg',
       boxShadow: 'lg',
       maxW: 'calc(100vw - {spaces.6} * 2)',
+      pos: 'relative',
     },
     closeButton: {
       display: 'inline-flex',
@@ -36,9 +37,7 @@ export const dialogContentRecipe = defineSlotRecipe({
         outline: 'focusVisibleOutline',
       },
     },
-    backdrop: {
-      zIndex: 'dialog',
-    },
+    backdrop: {},
   },
   variants: {
     scroll: {

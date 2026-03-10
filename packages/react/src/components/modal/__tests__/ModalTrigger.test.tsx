@@ -9,7 +9,7 @@ function TestModal(props: ModalTriggerProps) {
   return (
     <Modal open={open} onOpenChange={setOpen}>
       <ModalTrigger {...props} />
-      <ModalPortal disableAnimatePresence>
+      <ModalPortal>
         <ModalContent data-testid='modal-content'>Content</ModalContent>
       </ModalPortal>
     </Modal>

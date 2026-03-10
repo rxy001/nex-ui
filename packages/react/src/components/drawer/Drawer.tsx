@@ -1,9 +1,12 @@
 'use client'
 
+import { useMemo } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
+import { DrawerProvider } from './DrawerContext'
 import type { DrawerProps } from './types'
+import type { DrawerContextValue } from './DrawerContext'
 
 export const Drawer = (inProps: DrawerProps) => {
   const props = useDefaultProps<DrawerProps>({
@@ -19,9 +22,11 @@ export const Drawer = (inProps: DrawerProps) => {
     onOpenChange,
   )
 
+  const ctx = useMemo<DrawerContextValue>(() => ({ open }), [open])
+
   return (
     <Modal open={open} onOpenChange={setOpen} onClose={onClose}>
-      {children}
+      <DrawerProvider value={ctx}>{children}</DrawerProvider>
     </Modal>
   )
 }

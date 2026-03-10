@@ -1,9 +1,12 @@
 'use client'
 
+import { useMemo } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { useDefaultProps } from '../utils'
 import { Modal } from '../modal'
+import { DialogProvider } from './DialogContext'
 import type { DialogProps } from './types'
+import type { DialogContextValue } from './DialogContext'
 
 export const Dialog = (inProps: DialogProps) => {
   const props = useDefaultProps<DialogProps>({
@@ -19,9 +22,11 @@ export const Dialog = (inProps: DialogProps) => {
     onOpenChange,
   )
 
+  const ctx = useMemo<DialogContextValue>(() => ({ open }), [open])
+
   return (
     <Modal open={open} onOpenChange={setOpen} onClose={onClose}>
-      {children}
+      <DialogProvider value={ctx}>{children}</DialogProvider>
     </Modal>
   )
 }

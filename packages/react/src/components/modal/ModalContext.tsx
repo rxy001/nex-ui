@@ -21,11 +21,8 @@ export const [ModalProvider, useModalContext] =
     defaultValue: null as unknown as ModalContextValue,
   })
 
-export interface ModalPortalPropsContextValue {
-  container: ModalPortalProps['container']
-  keepMounted: boolean
-  disableAnimatePresence: boolean
-}
+export interface ModalPortalPropsContextValue
+  extends Pick<ModalPortalProps, 'container' | 'forceMount'> {}
 
 export const [ModalPortalPropsProvider, useModalPortalPropsContext] =
   createContext<ModalPortalPropsContextValue | null>({

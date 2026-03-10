@@ -7,7 +7,6 @@ export { ModalFooter } from './ModalFooter'
 export { ModalClose } from './ModalClose'
 export { ModalBackdrop } from './ModalBackdrop'
 export { ModalPortal } from './ModalPortal'
-export { ModalMotion } from './ModalMotion'
 
 export type {
   ModalProps,

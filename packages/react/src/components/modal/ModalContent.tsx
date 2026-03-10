@@ -18,7 +18,6 @@ const recipe = defineRecipe({
     display: 'flex',
     flexDirection: 'column',
     bg: 'content',
-    position: 'relative',
   },
 })
 
@@ -56,19 +55,8 @@ export const ModalContent = (props: ModalContentProps) => {
     externalForwardedProps: remainingProps,
     additionalProps: {
       ref: rootRef,
-      style: {
-        display:
-          modalPortalPropsCtx?.disableAnimatePresence &&
-          modalPortalPropsCtx?.keepMounted
-            ? open
-              ? 'block'
-              : 'none'
-            : undefined,
-      },
     },
     ariaProps: {
-      'aria-hidden':
-        modalPortalPropsCtx?.keepMounted && !open ? true : undefined,
       id: modalContentId,
       role: 'dialog',
       'aria-modal': true,
@@ -77,7 +65,6 @@ export const ModalContent = (props: ModalContentProps) => {
     },
     dataAttrs: {
       preventScroll,
-      keepMounted: modalPortalPropsCtx?.keepMounted,
       state: open ? 'open' : 'closed',
       closeOnEscape,
       restoreFocus,

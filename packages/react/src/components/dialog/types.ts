@@ -1,10 +1,10 @@
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
+import type { HTMLMotionProps } from 'motion/react'
 import type {
   OverrideProps,
   SlotProps,
   ComponentSlotClasses,
-  HTMLMotionProps,
 } from '../../types/utils'
 import type { ElementType, ReactNode } from 'react'
 import type { DialogContentVariants } from '../../theme/recipes'
@@ -39,7 +39,7 @@ export interface DialogContentPropsOverrides {}
 
 type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   ModalPortalProps,
-  'container' | 'keepMounted'
+  'container'
 > &
   Pick<
     ModalContentProps,
@@ -132,6 +132,13 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
      * @default 'top'
      */
     placement?: DialogContentVariants['placement']
+
+    /**
+     * If true, keeps the Dialog mounted in the DOM when it's closed.
+     *
+     * @default false
+     */
+    keepMounted?: boolean
 
     /**
      * The id(s) of the element(s) that label the dialog.
@@ -255,3 +262,9 @@ export interface DialogTriggerProps extends ModalTriggerProps {}
 
 // ------------- DialogClose -------------
 export interface DialogCloseProps extends ModalCloseProps {}
+
+export type DialogPaperMotionProps = {
+  children?: ReactNode
+  placement: Exclude<DialogContentProps['placement'], undefined>
+  motionProps?: DialogContentProps['motionProps']
+}

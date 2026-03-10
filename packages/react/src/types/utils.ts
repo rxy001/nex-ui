@@ -1,4 +1,3 @@
-import * as m from 'motion/react-m'
 import type {
   CSSObject,
   RecipeRuntimeFn,
@@ -69,9 +68,6 @@ export type ComponentThemeObject<T> = T extends RecipeRuntimeFn
         }
       >
     : never
-
-type Motion = typeof m
-export type HTMLMotionProps<T extends keyof Motion> = ComponentProps<Motion[T]>
 
 export type Simplify<T> = {
   [K in keyof T]: T[K]

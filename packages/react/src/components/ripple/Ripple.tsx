@@ -16,10 +16,9 @@ export const Ripple = ({
   children,
   disabled,
   motionProps,
-  motionStyle,
   onClick,
 }: RippleProps) => {
-  const showEffect = useRippleMotion({ motionProps, motionStyle })
+  const showEffect = useRippleMotion({ motionProps })
 
   if (!isValidElement(children)) {
     return children

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEvent } from '@nex-ui/hooks'
+import clsx from 'clsx'
 import { clamp } from '@nex-ui/utils'
 import { LazyMotion, AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
@@ -8,9 +9,9 @@ import { useRef } from 'react'
 import { createRoot } from 'react-dom/client'
 import { useNexUI } from '../provider'
 import { motionFeatures } from '../utils/motionFeatures'
-import type { CSSProperties, MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
 import type { Root } from 'react-dom/client'
-import type { HTMLMotionProps } from '../../types/utils'
+import type { HTMLMotionProps } from 'motion/react'
 
 type Ripples = {
   size: number
@@ -21,11 +22,10 @@ type Ripples = {
 
 export type UseRippleMotionProps = {
   motionProps?: HTMLMotionProps<'span'>
-  motionStyle?: CSSProperties
 }
 
 export const useRippleMotion = (props?: UseRippleMotionProps) => {
-  const { motionProps, motionStyle } = props ?? {}
+  const { motionProps } = props ?? {}
   const rootRef = useRef<Root | null>(null)
   const ripplesRef = useRef<Ripples[]>([])
   const { prefix } = useNexUI()
@@ -79,9 +79,23 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
             <AnimatePresence mode='popLayout' key={ripple.key}>
               <m.span
                 animate={{ transform: 'scale(2)', opacity: 0 }}
-                className={`${prefix}-ripple`}
                 exit={{ opacity: 0 }}
                 initial={{ transform: 'scale(0)', opacity: 0.35 }}
+                transition={{ duration }}
+                {...motionProps}
+                className={clsx(`${prefix}-ripple`, motionProps?.className)}
+                onAnimationComplete={(definition) => {
+                  ripplesRef.current = ripplesRef.current.filter(
+                    ({ key }) => ripple.key !== key,
+                  )
+                  if (!ripplesRef.current.length) {
+                    rootRef.current?.unmount()
+                    // @ts-expect-error
+                    trigger.removeChild(rootRef.current.stateNode)
+                    rootRef.current = null
+                  }
+                  motionProps?.onAnimationComplete?.(definition)
+                }}
                 style={{
                   position: 'absolute',
                   backgroundColor: 'currentcolor',
@@ -95,22 +109,8 @@ export const useRippleMotion = (props?: UseRippleMotionProps) => {
                   left: ripple.x,
                   width: `${ripple.size}px`,
                   height: `${ripple.size}px`,
-                  ...motionStyle,
+                  ...motionProps?.style,
                 }}
-                transition={{ duration }}
-                onAnimationComplete={() => {
-                  ripplesRef.current = ripplesRef.current.filter(
-                    ({ key }) => ripple.key !== key,
-                  )
-
-                  if (!ripplesRef.current.length) {
-                    rootRef.current?.unmount()
-                    // @ts-expect-error
-                    trigger.removeChild(rootRef.current.stateNode)
-                    rootRef.current = null
-                  }
-                }}
-                {...motionProps}
               />
             </AnimatePresence>
           )
