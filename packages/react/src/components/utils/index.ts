@@ -5,6 +5,8 @@ export { useSlot } from './useSlot'
 export { motionFeatures } from './motionFeatures'
 export { useSlotClasses } from './useSlotClasses'
 export { isFocusVisible } from './isFocusVisible'
+export { useKeepMountedState } from './useKeepMountedState'
+export * from './motionPreset'
 export * from './computePosition'
 
 export type { UseSlotProps } from './useSlot'

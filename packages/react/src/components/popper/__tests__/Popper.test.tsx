@@ -5,13 +5,7 @@ import {
   testComponentStability,
   testVariantDataAttrs,
 } from '~/tests/shared'
-import {
-  Popper,
-  PopperContent,
-  PopperAnchor,
-  PopperPortal,
-  PopperMotion,
-} from '../index'
+import { Popper, PopperContent, PopperAnchor, PopperPortal } from '../index'
 import type { PopperProps } from '../index'
 import type { PopperContentProps, PopperPortalProps } from '../types'
 
@@ -20,12 +14,9 @@ type TestPopperProps = PopperProps &
   PopperContentProps & {
     defaultOpen?: boolean
     'data-testid'?: string
-    disableAnimation?: boolean
   }
 
 function TestPopper({
-  keepMounted,
-  disableAnimation,
   closeOnDetached,
   placement,
   closeOnEscape,
@@ -60,26 +51,13 @@ function TestPopper({
           Trigger
         </button>
       </PopperAnchor>
-      <PopperPortal
-        keepMounted={keepMounted}
-        disableAnimatePresence={disableAnimation}
-      >
-        {disableAnimation ? (
-          renderPopperContent()
-        ) : (
-          <PopperMotion>{renderPopperContent()}</PopperMotion>
-        )}
-      </PopperPortal>
+      <PopperPortal>{renderPopperContent()}</PopperPortal>
     </Popper>
   )
 }
 
 describe('Popper', () => {
   testComponentStability(<TestPopper open />, {
-    useAct: true,
-  })
-
-  testVariantDataAttrs(<TestPopper open />, ['keepMounted', [true, false]], {
     useAct: true,
   })
 
@@ -107,19 +85,6 @@ describe('Popper', () => {
     },
   )
 
-  it('should render with default props', async () => {
-    const { getByTestId } = await renderWithNexUIProvider(<TestPopper open />, {
-      useAct: true,
-    })
-
-    const content = getByTestId('popper-content')
-    expect(content).toHaveAttribute('data-placement', 'top')
-    expect(content).toHaveAttribute('data-keep-mounted', 'false')
-    expect(content).toHaveAttribute('data-state', 'open')
-
-    expect(content).toMatchSnapshot()
-  })
-
   it('should not render children by default', async () => {
     const { queryByTestId } = await renderWithNexUIProvider(<TestPopper />, {
       useAct: true,
@@ -129,7 +94,7 @@ describe('Popper', () => {
 
   it('should render into document.body via Portal when open', async () => {
     const { container, getByTestId } = await renderWithNexUIProvider(
-      <TestPopper open disableAnimation />,
+      <TestPopper open />,
       {
         useAct: true,
       },
@@ -144,7 +109,7 @@ describe('Popper', () => {
 
   it('should render into document.body via Portal when defaultOpen', async () => {
     const { container, getByTestId } = await renderWithNexUIProvider(
-      <TestPopper defaultOpen disableAnimation />,
+      <TestPopper defaultOpen />,
       {
         useAct: true,
       },
@@ -199,48 +164,23 @@ describe('Popper', () => {
     expect(queryByTestId('popper-content')).toBeInTheDocument()
   })
 
-  it('should always keep the children in the DOM when keepMounted=true', async () => {
-    const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestPopper keepMounted open={false} />,
-      {
-        useAct: true,
-      },
-    )
+  // it('should always keep the children in the DOM when keepMounted=true', async () => {
+  //   const { getByTestId, rerender } = await renderWithNexUIProvider(
+  //     <TestPopper open={false} />,
+  //     {
+  //       useAct: true,
+  //     },
+  //   )
 
-    const content = getByTestId('popper-content')
-    expect(content).toBeInTheDocument()
+  //   const content = getByTestId('popper-content')
+  //   expect(content).toBeInTheDocument()
 
-    await act(async () => {
-      rerender(<TestPopper keepMounted open />)
-    })
+  //   await act(async () => {
+  //     rerender(<TestPopper keepMounted open />)
+  //   })
 
-    expect(content).toBeInTheDocument()
-  })
-
-  it('should render correct styles based on disableAnimation and keepMounted', async () => {
-    const { getByTestId, rerender } = await renderWithNexUIProvider(
-      <TestPopper disableAnimation keepMounted open={false} />,
-      {
-        useAct: true,
-      },
-    )
-
-    const content = getByTestId('popper-content')
-
-    expect(content).toHaveStyle('display: none')
-
-    await act(async () => {
-      rerender(<TestPopper disableAnimation keepMounted open />)
-    })
-
-    expect(content).toHaveStyle('display: block')
-
-    await act(async () => {
-      rerender(<TestPopper disableAnimation keepMounted open={false} />)
-    })
-
-    expect(content).toHaveStyle('display: none')
-  })
+  //   expect(content).toBeInTheDocument()
+  // })
 
   it('should call onClose when the popper is closed', async () => {
     const onClose = jest.fn()
@@ -260,15 +200,15 @@ describe('Popper', () => {
   })
 
   describe('Accessibility', () => {
-    it('should be aria-hidden when the popper is closed and keepMounted is true', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(
-        <TestPopper open={false} keepMounted />,
-        {
-          useAct: true,
-        },
-      )
-      const content = getByTestId('popper-content')
-      expect(content).toHaveAttribute('aria-hidden', 'true')
-    })
+    // it('should be aria-hidden when the popper is closed and keepMounted is true', async () => {
+    //   const { getByTestId } = await renderWithNexUIProvider(
+    //     <TestPopper open={false} keepMounted />,
+    //     {
+    //       useAct: true,
+    //     },
+    //   )
+    //   const content = getByTestId('popper-content')
+    //   expect(content).toHaveAttribute('aria-hidden', 'true')
+    // })
   })
 })

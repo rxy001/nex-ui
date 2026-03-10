@@ -7,7 +7,6 @@ import {
   MenuCheckboxItemGroup,
   MenuContent,
   MenuItem,
-  MenuMotion,
   MenuPortal,
   MenuRadioItem,
   MenuRadioItemGroup,
@@ -37,9 +36,7 @@ function MenuWrapper({ children }: { children: ReactNode }) {
         <button>Open Menu</button>
       </MenuTrigger>
       <MenuPortal>
-        <MenuMotion>
-          <MenuContent>{children}</MenuContent>
-        </MenuMotion>
+        <MenuContent>{children}</MenuContent>
       </MenuPortal>
     </Menu>
   )
@@ -76,24 +73,20 @@ export function SubMenu() {
         <button>Open Menu</button>
       </MenuTrigger>
       <MenuPortal>
-        <MenuMotion>
-          <MenuContent>
-            <MenuItem sx={style}>Menu Item 1</MenuItem>
-            <MenuItem sx={style}>Menu Item 2</MenuItem>
-            <SubMenuImpl open={open2} onOpenChange={setOpen2}>
-              <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
-              <MenuPortal>
-                <MenuMotion>
-                  <SubMenuContent>
-                    <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
-                    <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
-                    <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
-                  </SubMenuContent>
-                </MenuMotion>
-              </MenuPortal>
-            </SubMenuImpl>
-          </MenuContent>
-        </MenuMotion>
+        <MenuContent>
+          <MenuItem sx={style}>Menu Item 1</MenuItem>
+          <MenuItem sx={style}>Menu Item 2</MenuItem>
+          <SubMenuImpl open={open2} onOpenChange={setOpen2}>
+            <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
+            <MenuPortal>
+              <SubMenuContent>
+                <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
+                <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
+                <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
+              </SubMenuContent>
+            </MenuPortal>
+          </SubMenuImpl>
+        </MenuContent>
       </MenuPortal>
     </Menu>
   )
@@ -185,7 +178,7 @@ export function DisableAnimation() {
       <MenuTrigger>
         <button>Open Menu</button>
       </MenuTrigger>
-      <MenuPortal disableAnimatePresence>
+      <MenuPortal>
         <MenuContent>
           <MenuItem sx={style}>Menu Item 1</MenuItem>
           <MenuItem sx={style}>Menu Item 2</MenuItem>
@@ -232,24 +225,20 @@ export function ViewportBoundary() {
             <button>Open Menu</button>
           </MenuTrigger>
           <MenuPortal container={() => innerRef.current}>
-            <MenuMotion>
-              <MenuContent>
-                <MenuItem sx={style}>Menu Item 1</MenuItem>
-                <MenuItem sx={style}>Menu Item 2</MenuItem>
-                <SubMenuImpl open={open2} onOpenChange={setOpen2}>
-                  <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
-                  <MenuPortal container={() => innerRef.current}>
-                    <MenuMotion>
-                      <SubMenuContent>
-                        <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
-                        <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
-                        <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
-                      </SubMenuContent>
-                    </MenuMotion>
-                  </MenuPortal>
-                </SubMenuImpl>
-              </MenuContent>
-            </MenuMotion>
+            <MenuContent>
+              <MenuItem sx={style}>Menu Item 1</MenuItem>
+              <MenuItem sx={style}>Menu Item 2</MenuItem>
+              <SubMenuImpl open={open2} onOpenChange={setOpen2}>
+                <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
+                <MenuPortal container={() => innerRef.current}>
+                  <SubMenuContent>
+                    <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
+                    <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
+                    <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
+                  </SubMenuContent>
+                </MenuPortal>
+              </SubMenuImpl>
+            </MenuContent>
           </MenuPortal>
         </Menu>
       </div>

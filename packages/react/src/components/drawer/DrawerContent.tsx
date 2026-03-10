@@ -1,22 +1,26 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import * as m from 'motion/react-m'
 import { useMemo } from 'react'
 import { CloseOutlined } from '@nex-ui/icons'
+import { AnimatePresence, LazyMotion } from 'motion/react'
 import {
   useRecipeStyles,
   useDefaultProps,
   useSlot,
   useSlotClasses,
+  motionFeatures,
+  FadeInOutMotion,
+  useKeepMountedState,
 } from '../utils'
 import { Ripple } from '../ripple'
 import { DrawerClose } from './DrawerClose'
 import { drawerContentRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
-import { ModalContent, ModalPortal, ModalBackdrop, ModalMotion } from '../modal'
+import { ModalContent, ModalPortal, ModalBackdrop } from '../modal'
+import { useDrawerContext } from './DrawerContext'
+import { DrawerPaperMotion } from './DrawerPaperMotion'
 import type { ElementType } from 'react'
-import type { Variants } from 'motion/react'
 import type { DrawerContentProps } from './types'
 
 const slots = ['root', 'paper', 'closeButton', 'backdrop'] as const
@@ -50,6 +54,16 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     ...remainingProps
   } = props
 
+  const { open } = useDrawerContext()
+
+  const { resolvedDisplay, onAnimationStart, onAnimationComplete } =
+    useKeepMountedState({
+      open,
+      keepMounted,
+      disableAnimation,
+      displayValue: 'flex',
+    })
+
   const ownerState: DrawerContentProps = {
     ...props,
     placement,
@@ -74,12 +88,13 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
       paper: {
         'aria-labelledby': ariaLabelledBy,
         'aria-describedby': ariaDescribedBy,
+        'aria-hidden': keepMounted && !open ? true : undefined,
       },
       closeButton: {
         'aria-label': 'Close drawer',
       },
     }),
-    [ariaLabelledBy, ariaDescribedBy],
+    [ariaLabelledBy, ariaDescribedBy, keepMounted, open],
   )
 
   const slotClasses = useSlotClasses({
@@ -93,6 +108,11 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     style: styles.root,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
+    additionalProps: {
+      style: {
+        display: resolvedDisplay,
+      },
+    },
   })
 
   const [DrawerContentPaper, getDrawerContentPaperProps] = useSlot({
@@ -130,62 +150,6 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
     classNames: slotClasses.backdrop,
   })
 
-  const mergedMotionProps = useMemo(() => {
-    const mProps =
-      typeof motionProps === 'function' ? motionProps(placement) : motionProps
-
-    let variants: Variants
-    switch (placement) {
-      case 'left':
-        variants = {
-          visible: {
-            transform: 'translateX(0)',
-          },
-          hidden: {
-            transform: 'translateX(-100%)',
-          },
-        }
-        break
-      case 'right':
-        variants = {
-          visible: {
-            transform: 'translateX(0)',
-          },
-          hidden: {
-            transform: 'translateX(100%)',
-          },
-        }
-        break
-      case 'top':
-        variants = {
-          visible: {
-            transform: 'translateY(0)',
-          },
-          hidden: {
-            transform: 'translateY(-100%)',
-          },
-        }
-        break
-      case 'bottom':
-        variants = {
-          visible: {
-            transform: 'translateY(0)',
-          },
-          hidden: {
-            transform: 'translateY(100%)',
-          },
-        }
-        break
-      default:
-        variants = {}
-    }
-
-    return {
-      variants,
-      ...mProps,
-    }
-  }, [motionProps, placement])
-
   const renderPaper = () => (
     <DrawerContentPaper {...getDrawerContentPaperProps()}>
       {!hideCloseButton && (
@@ -203,35 +167,41 @@ export const DrawerContent = <RootComponent extends ElementType = 'div'>(
 
   const renderContent = () => (
     <>
-      {!hideBackdrop && <DrawerBackdrop {...getDrawerBackdropProps()} />}
       <DrawerContentRoot {...getDrawerContentRootProps()}>
         {disableAnimation ? (
-          renderPaper()
+          <>
+            {!hideBackdrop && <DrawerBackdrop {...getDrawerBackdropProps()} />}
+            {renderPaper()}
+          </>
         ) : (
-          <m.div {...mergedMotionProps}>{renderPaper()}</m.div>
+          <FadeInOutMotion
+            animate={open ? 'visible' : 'hidden'}
+            onAnimationStart={onAnimationStart}
+            onAnimationComplete={onAnimationComplete}
+          >
+            {!hideBackdrop && <DrawerBackdrop {...getDrawerBackdropProps()} />}
+            <DrawerPaperMotion motionProps={motionProps} placement={placement}>
+              {renderPaper()}
+            </DrawerPaperMotion>
+          </FadeInOutMotion>
         )}
       </DrawerContentRoot>
     </>
   )
 
-  return (
-    <ModalPortal
-      disableAnimatePresence={disableAnimation}
-      container={container}
-      keepMounted={keepMounted}
-    >
-      {disableAnimation ? (
-        renderContent()
-      ) : (
-        <ModalMotion
-          style={{
-            isolation: 'isolate',
-          }}
-        >
-          {renderContent()}
-        </ModalMotion>
-      )}
-    </ModalPortal>
+  const renderPortal = () =>
+    open || keepMounted ? (
+      <ModalPortal container={container} forceMount>
+        {renderContent()}
+      </ModalPortal>
+    ) : null
+
+  return disableAnimation ? (
+    renderPortal()
+  ) : (
+    <LazyMotion features={motionFeatures}>
+      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
+    </LazyMotion>
   )
 }
 

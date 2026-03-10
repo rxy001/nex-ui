@@ -1,8 +1,9 @@
 import type { PortalProps } from '@nex-ui/utils'
 import type { ReactNode, ReactElement, MouseEvent } from 'react'
+import type { HTMLMotionProps } from 'motion/react'
 import type { DismissibleLayerProps } from '../dismissibleLayer'
 import type { FocusTrapProps } from '../focusTrap'
-import type { HTMLMotionProps, SlotProps } from '../../types/utils'
+import type { SlotProps } from '../../types/utils'
 
 // ------------- Modal --------------
 export type ModalProps = {
@@ -76,18 +77,11 @@ export type ModalBackdropProps = SlotProps<'div'>
 // ------------- ModalPortal -------------
 export type ModalPortalProps = PortalProps & {
   /**
-   * If true, keeps the Modal mounted in the DOM when it's closed.
+   * If true, keeps the Modal mounted in the DOM.
    *
    * @default false
    */
-  keepMounted?: boolean
-
-  /**
-   * If true, disables the animation for the Modal.
-   *
-   * @default false
-   */
-  disableAnimatePresence?: boolean
+  forceMount?: boolean
 }
 
 // ------------- ModalMotion -------------

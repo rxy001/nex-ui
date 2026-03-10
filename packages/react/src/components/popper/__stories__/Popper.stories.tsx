@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import {
-  Popper,
-  PopperAnchor,
-  PopperContent,
-  PopperMotion,
-  PopperPortal,
-} from '../index'
+import { Popper, PopperAnchor, PopperContent, PopperPortal } from '../index'
 import type { Meta } from '@storybook/react-vite'
 import type { PopperContentProps } from '../types'
 
@@ -52,29 +46,8 @@ export const Default = () => {
     mainAxis: true,
     crossAxis: true,
   })
-  const [disableAnimation, setDisableAnimation] = useState(false)
-  const [keepMounted, setKeepMounted] = useState(false)
   const [closeOnDetached, setCloseOnDetached] = useState(true)
   const [closeOnEscape, setCloseOnEscape] = useState(true)
-
-  const renderPopperContent = () => (
-    <PopperContent
-      closeOnDetached={closeOnDetached}
-      closeOnEscape={closeOnEscape}
-      placement={placement}
-      offset={useAdvancedOffset ? advancedOffset : offset}
-      flip={flip}
-      shift={shift}
-    >
-      <div
-        style={{
-          border: '1px solid #000',
-        }}
-      >
-        This is the popper content.
-      </div>
-    </PopperContent>
-  )
 
   useEffect(() => {
     outerRef.current?.scrollTo(400, 400)
@@ -119,22 +92,6 @@ export const Default = () => {
             onChange={(e) => setCloseOnDetached(e.target.checked)}
           />
           &nbsp;Dismiss on detached from viewport?
-        </label>
-        <label>
-          <input
-            type='checkbox'
-            checked={disableAnimation}
-            onChange={(e) => setDisableAnimation(e.target.checked)}
-          />
-          &nbsp;Disable animation?
-        </label>
-        <label>
-          <input
-            type='checkbox'
-            checked={keepMounted}
-            onChange={(e) => setKeepMounted(e.target.checked)}
-          />
-          &nbsp;Keep mounted when closed?
         </label>
         <div>
           Flip options:&nbsp;
@@ -250,16 +207,23 @@ export const Default = () => {
                 Open Popper
               </button>
             </PopperAnchor>
-            <PopperPortal
-              keepMounted={keepMounted}
-              disableAnimatePresence={disableAnimation}
-              container={() => innerRef.current}
-            >
-              {disableAnimation ? (
-                renderPopperContent()
-              ) : (
-                <PopperMotion>{renderPopperContent()}</PopperMotion>
-              )}
+            <PopperPortal container={() => innerRef.current}>
+              <PopperContent
+                closeOnDetached={closeOnDetached}
+                closeOnEscape={closeOnEscape}
+                placement={placement}
+                offset={useAdvancedOffset ? advancedOffset : offset}
+                flip={flip}
+                shift={shift}
+              >
+                <div
+                  style={{
+                    border: '1px solid #000',
+                  }}
+                >
+                  This is the popper content.
+                </div>
+              </PopperContent>
             </PopperPortal>
           </Popper>
         </div>

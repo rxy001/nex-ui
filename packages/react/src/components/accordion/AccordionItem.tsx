@@ -2,9 +2,10 @@
 
 import * as m from 'motion/react-m'
 import { nex } from '@nex-ui/styled'
-import { LazyMotion } from 'motion/react'
+import { chain } from '@nex-ui/utils'
+import { LazyMotion, AnimatePresence } from 'motion/react'
 import { ChevronDownOutlined } from '@nex-ui/icons'
-import { useId, useMemo, useRef } from 'react'
+import { useId, useMemo } from 'react'
 import { accordionItemRecipe } from '../../theme/recipes'
 import { ButtonBase } from '../buttonBase'
 import {
@@ -13,48 +14,13 @@ import {
   useSlot,
   useSlotClasses,
   motionFeatures,
+  FadeInOutMotion,
+  useKeepMountedState,
 } from '../utils'
 import { useAccordionGroupContext } from './AccordionContext'
-import { FadeInOutMotion } from '../fadeInOutMotion'
 import type { ElementType } from 'react'
-import type { Variants } from 'motion/react'
+import type { HTMLMotionProps } from 'motion/react'
 import type { AccordionItemOwnerState, AccordionItemProps } from './types'
-
-const contentMotionVariants: Variants = {
-  expanded: {
-    opacity: 1,
-    height: 'auto',
-    transition: {
-      opacity: {
-        delay: 0.1,
-      },
-      ease: 'easeInOut',
-      duration: 0.2,
-    },
-  },
-  collapsed: {
-    opacity: 0,
-    height: 0,
-    transition: {
-      ease: 'easeInOut',
-      duration: 0.2,
-    },
-  },
-}
-const indicatorMotionVariants: Variants = {
-  expanded: {
-    rotate: 180,
-    transition: {
-      duration: 0.2,
-    },
-  },
-  collapsed: {
-    rotate: 0,
-    transition: {
-      duration: 0.2,
-    },
-  },
-}
 
 const slots = ['root', 'heading', 'trigger', 'content', 'indicator'] as const
 
@@ -99,6 +65,13 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   } = props
 
   const expanded = expandedKeys.includes(itemKey)
+
+  const { resolvedDisplay, onAnimationStart, onAnimationComplete } =
+    useKeepMountedState({
+      open: expanded,
+      keepMounted,
+      disableAnimation,
+    })
 
   const ownerState: AccordionItemOwnerState = {
     ...props,
@@ -153,34 +126,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     }
   }, [defaultKey, expanded, keepMounted])
 
-  const animate = expanded ? 'expanded' : 'collapsed'
-
-  // Skip initial animation when first rendering and the item is expanded
-  const motionInitialRef = useRef(animate)
-
-  if (motionInitialRef.current === 'expanded' && !expanded) {
-    // Restore open animation for subsequent renders
-    motionInitialRef.current = 'collapsed'
-  }
-
-  const contentMotionProps = keepMounted
-    ? {
-        animate,
-        initial: motionInitialRef.current,
-        variants: contentMotionVariants,
-        style: {
-          overflow: 'hidden',
-        },
-      }
-    : {
-        variants: contentMotionVariants,
-        initial: motionInitialRef.current,
-        animate: 'expanded',
-        exit: 'collapsed',
-        style: {
-          overflow: 'hidden',
-        },
-      }
+  const animate = expanded ? 'visible' : 'hidden'
 
   const [AccordionItemRoot, getAccordionItemRootProps] = useSlot({
     component: nex.div,
@@ -192,7 +138,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       hideIndicator,
       disabled,
       disableAnimation,
-      state: animate,
+      state: expanded ? 'expanded' : 'collapsed',
     },
   })
 
@@ -223,13 +169,11 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     style: styles.content,
     classNames: slotClasses.content,
     ariaProps: slotAriaProps.content,
-    additionalProps: disableAnimation
-      ? {
-          style: {
-            display: keepMounted ? (expanded ? 'block' : 'none') : undefined,
-          },
-        }
-      : undefined,
+    additionalProps: {
+      style: {
+        display: resolvedDisplay,
+      },
+    },
   })
 
   const [AccordionItemIndicator, getAccordionItemIndicatorProps] = useSlot({
@@ -247,6 +191,28 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
       : undefined,
   })
 
+  const resolvedIndicatorMotionProps = useMemo<HTMLMotionProps<'span'>>(() => {
+    return {
+      ...indicatorMotionProps,
+      variants: {
+        ...indicatorMotionProps?.variants,
+        visible: {
+          rotate: 180,
+          ...indicatorMotionProps?.variants?.visible,
+        },
+        hidden: {
+          rotate: 0,
+          ...indicatorMotionProps?.variants?.hidden,
+        },
+      },
+      transition: {
+        duration: 0.2,
+        ease: 'easeInOut',
+        ...indicatorMotionProps?.transition,
+      },
+    }
+  }, [indicatorMotionProps])
+
   const renderIndicator = () => {
     const indicatorElement = (
       <AccordionItemIndicator {...getAccordionItemIndicatorProps()}>
@@ -261,16 +227,52 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     return (
       <LazyMotion features={motionFeatures}>
         <m.span
+          initial={false}
           animate={animate}
-          initial={animate}
-          variants={indicatorMotionVariants}
-          {...indicatorMotionProps}
+          {...resolvedIndicatorMotionProps}
         >
           {indicatorElement}
         </m.span>
       </LazyMotion>
     )
   }
+
+  const resolvedContentMotionProps = useMemo<HTMLMotionProps<'div'>>(() => {
+    return {
+      ...motionProps,
+      style: {
+        overflow: 'hidden',
+        ...motionProps?.style,
+      },
+      variants: {
+        ...motionProps?.variants,
+        visible: {
+          height: 'auto',
+          ...motionProps?.variants?.visible,
+        },
+        hidden: {
+          height: 0,
+          ...motionProps?.variants?.hidden,
+        },
+      },
+      transition: {
+        ...motionProps?.transition,
+        height: {
+          duration: 0.2,
+          ease: 'easeInOut',
+          // @ts-expect-error
+          ...motionProps?.transition?.height,
+        },
+        opacity: {
+          duration: 0.2,
+          delay: 0.1,
+          ease: 'easeInOut',
+          // @ts-expect-error
+          ...motionProps?.transition?.opacity,
+        },
+      },
+    }
+  }, [motionProps])
 
   const renderContent = () => {
     const contentElement = (
@@ -284,16 +286,30 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     }
 
     return (
-      <FadeInOutMotion
-        open={expanded}
-        keepMounted={keepMounted}
-        motionProps={{
-          ...contentMotionProps,
-          ...motionProps,
-        }}
-      >
-        {contentElement}
-      </FadeInOutMotion>
+      <LazyMotion features={motionFeatures}>
+        <AnimatePresence initial={false}>
+          {keepMounted || expanded ? (
+            <FadeInOutMotion
+              animate={animate}
+              {...resolvedContentMotionProps}
+              style={{
+                display: resolvedDisplay,
+                ...resolvedContentMotionProps.style,
+              }}
+              onAnimationStart={chain(
+                onAnimationStart,
+                resolvedContentMotionProps.onAnimationStart,
+              )}
+              onAnimationComplete={chain(
+                onAnimationComplete,
+                resolvedContentMotionProps.onAnimationComplete,
+              )}
+            >
+              {contentElement}
+            </FadeInOutMotion>
+          ) : null}
+        </AnimatePresence>
+      </LazyMotion>
     )
   }
 

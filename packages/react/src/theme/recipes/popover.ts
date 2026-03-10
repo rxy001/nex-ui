@@ -6,7 +6,6 @@ export const popoverContentRecipe = defineSlotRecipe({
   slots: {
     root: {
       zIndex: 'popover',
-      outline: 'none',
     },
     paper: {
       px: '3',
