@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { SIZES as DEFAULT_SIZES, toReadableSize } from '~/sb/utils'
 import { upperFirst } from '@nex-ui/utils'
 import {
@@ -11,8 +12,8 @@ import {
 } from '../index'
 import { Button } from '../../button'
 import { Flex } from '../../flex'
-import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { DialogContentProps, DialogProps } from '../types'
 
 type DialogTemplateProps = DialogProps &
@@ -233,9 +234,32 @@ export function OutsideScroll(props: DialogTemplateProps) {
 }
 
 export function NestedDialogs(props: DialogTemplateProps) {
+  const [open1, setOpen1] = useState(false)
+  const [open2, setOpen2] = useState(false)
+
   return (
-    <DialogTemplate {...props} triggerText='Open Parent Dialog'>
-      <DialogTemplate {...props} triggerText='Open Child Dialog' size='sm' />
+    <DialogTemplate
+      {...props}
+      open={open1}
+      onOpenChange={setOpen1}
+      triggerText='Open Parent Dialog'
+    >
+      <DialogTemplate
+        {...props}
+        open={open2}
+        onOpenChange={setOpen2}
+        triggerText='Open Child Dialog'
+        size='sm'
+      >
+        <Button
+          onClick={() => {
+            setOpen1(false)
+            setOpen2(false)
+          }}
+        >
+          Close Parent Dialog
+        </Button>
+      </DialogTemplate>
     </DialogTemplate>
   )
 }

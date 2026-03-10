@@ -1,8 +1,9 @@
 import type { ReactNode, ReactElement, Ref } from 'react'
 import type { PortalProps } from '@nex-ui/utils'
+import type { HTMLMotionProps } from 'motion/react'
 import type { DismissibleLayerProps } from '../dismissibleLayer'
 import type { Placement, FlipOptions, OffsetOptions } from '../utils'
-import type { HTMLMotionProps, SlotProps } from '../../types/utils'
+import type { SlotProps } from '../../types/utils'
 
 // ----------------- PopperProps -----------------
 export type PopperProps = {
@@ -90,18 +91,11 @@ export type PopperContentProps = SlotProps<'div', PopperContentOwnProps>
 // ----------------- PopperPortalProps -----------------
 export type PopperPortalProps = PortalProps & {
   /**
-   * If true, keeps the popper mounted in the DOM when it's closed.
+   * If true, keeps the popper mounted in the DOM.
    *
    * @default false
    */
-  keepMounted?: boolean
-
-  /**
-   * If true, disables AnimatePresence for the popper.
-   *
-   * @default false
-   */
-  disableAnimatePresence?: boolean
+  forceMount?: boolean
 }
 
 // ----------------- PopperMotionProps -----------------

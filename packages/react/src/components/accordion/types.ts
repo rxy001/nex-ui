@@ -1,11 +1,11 @@
 import type { ClassValue } from 'clsx'
 import type { ElementType, Key, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
+import type { HTMLMotionProps } from 'motion/react'
 import type {
   ComponentSlotClasses,
   OverrideProps,
   SlotProps,
-  HTMLMotionProps,
 } from '../../types/utils'
 import type { AccordionVariants } from '../../theme/recipes'
 

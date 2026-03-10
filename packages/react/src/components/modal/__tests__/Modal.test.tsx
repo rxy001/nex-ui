@@ -1,7 +1,6 @@
 import {
   renderWithNexUIProvider,
   testComponentStability,
-  testStateDataAttrs,
   testVariantDataAttrs,
 } from '~/tests/shared'
 import { useState } from 'react'
@@ -35,7 +34,7 @@ type TestModalProps = ModalProps &
 
 function TestModal({
   container,
-  keepMounted,
+  forceMount,
   children,
   closeOnInteractOutside,
   preventScroll,
@@ -52,11 +51,7 @@ function TestModal({
       <ModalTrigger>
         <button data-testid='toggle-button'>Toggle Modal</button>
       </ModalTrigger>
-      <ModalPortal
-        disableAnimatePresence
-        keepMounted={keepMounted}
-        container={container}
-      >
+      <ModalPortal forceMount={forceMount} container={container}>
         <ModalBackdrop data-testid='modal-backdrop' />
         <ModalContent
           restoreFocus={restoreFocus}
@@ -80,11 +75,7 @@ function TestModal({
 describe('Modal', () => {
   testComponentStability(<TestModal open />)
 
-  testStateDataAttrs(<TestModal keepMounted />)
-
   testVariantDataAttrs(<TestModal open />, ['preventScroll', [true, false]])
-
-  testVariantDataAttrs(<TestModal open />, ['keepMounted', [true, false]])
 
   it('should not render children by default', () => {
     const { queryByTestId } = renderWithNexUIProvider(<TestModal />)
@@ -190,26 +181,13 @@ describe('Modal', () => {
     expect(modalContent).toBeInTheDocument()
   })
 
-  it('should always keep the children in the DOM when keepMounted=true', () => {
+  it('should always keep the children in the DOM when forceMount=true', () => {
     const { getByTestId } = renderWithNexUIProvider(
-      <TestModal keepMounted open={false} />,
+      <TestModal forceMount open={false} />,
     )
 
     const modalContent = getByTestId('modal-content')
     expect(modalContent).toBeInTheDocument()
-  })
-
-  it('should have correct style on root element when keepMounted=true', () => {
-    const { getByTestId, rerender } = renderWithNexUIProvider(
-      <TestModal keepMounted open={false} />,
-    )
-
-    const modalContent = getByTestId('modal-content')
-    expect(modalContent).toHaveStyle('display: none')
-
-    rerender(<TestModal keepMounted open />)
-
-    expect(modalContent).toHaveStyle('display: block')
   })
 
   it('should call onClose when the modal is closed', async () => {
@@ -433,20 +411,8 @@ describe('Modal', () => {
       expect(document.activeElement).not.toBe(toggleButton)
     })
 
-    it('should set aria-hidden on root element when keepMounted=true and open=false', () => {
-      const { getByTestId, rerender } = renderWithNexUIProvider(
-        <TestModal keepMounted open={false} />,
-      )
-      const modalContent = getByTestId('modal-content')
-      expect(modalContent).toHaveAttribute('aria-hidden', 'true')
-
-      rerender(<TestModal keepMounted open />)
-
-      expect(modalContent).not.toHaveAttribute('aria-hidden')
-    })
-
     describe('Multiple Modals', () => {
-      it('should set aria-hidden="true" on root element of non-topmost modals, keepMounted=false', () => {
+      it('should set aria-hidden="true" on root element of non-topmost modals', () => {
         const { getAllByTestId, rerender } = renderWithNexUIProvider(
           <>
             <TestModal open />
@@ -480,65 +446,10 @@ describe('Modal', () => {
         expect(roots[0]).not.toHaveAttribute('aria-hidden')
         expect(roots[1]).toBeUndefined()
       })
-
-      it('should set aria-hidden="true" on root element of non-topmost modals, keepMounted=true', () => {
-        const { getAllByTestId, rerender } = renderWithNexUIProvider(
-          <>
-            <TestModal keepMounted open={false} />
-            <TestModal keepMounted open={false} />
-          </>,
-        )
-        let roots = getAllByTestId('modal-content')
-        expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
-        expect(roots[1]).toHaveAttribute('aria-hidden', 'true')
-
-        rerender(
-          <>
-            <TestModal keepMounted open />
-            <TestModal keepMounted open={false} />
-          </>,
-        )
-
-        roots = getAllByTestId('modal-content')
-        expect(roots[0]).not.toHaveAttribute('aria-hidden')
-        expect(roots[1]).toHaveAttribute('aria-hidden', 'true')
-
-        rerender(
-          <>
-            <TestModal keepMounted open />
-            <TestModal keepMounted open />
-          </>,
-        )
-
-        roots = getAllByTestId('modal-content')
-        expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
-        expect(roots[1]).not.toHaveAttribute('aria-hidden')
-
-        rerender(
-          <>
-            <TestModal keepMounted open={false} />
-            <TestModal keepMounted open />
-          </>,
-        )
-
-        roots = getAllByTestId('modal-content')
-        expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
-        expect(roots[1]).not.toHaveAttribute('aria-hidden')
-
-        rerender(
-          <>
-            <TestModal keepMounted open={false} />
-            <TestModal keepMounted open={false} />
-          </>,
-        )
-
-        expect(roots[0]).toHaveAttribute('aria-hidden', 'true')
-        expect(roots[1]).toHaveAttribute('aria-hidden', 'true')
-      })
     })
 
     describe('Nested Modals', () => {
-      it('should set aria-hidden="true" on root element of non-topmost modals, keepMounted=false', () => {
+      it('should set aria-hidden="true" on root element of non-topmost modals', () => {
         const { getByTestId, rerender, queryByTestId } =
           renderWithNexUIProvider(
             <>
@@ -564,72 +475,6 @@ describe('Modal', () => {
         childModal = queryByTestId('child-modal')
         expect(parentModal).not.toHaveAttribute('aria-hidden')
         expect(childModal).toBeNull()
-      })
-
-      it('should set aria-hidden="true" on root element of non-topmost modals, keepMounted=true', () => {
-        const { getByTestId, rerender } = renderWithNexUIProvider(
-          <>
-            <TestModal data-testid='parent-modal' open={false} keepMounted>
-              <TestModal data-testid='child-modal' open={false} keepMounted />
-            </TestModal>
-          </>,
-        )
-
-        let parentModal = getByTestId('parent-modal')
-        let childModal = getByTestId('child-modal')
-        expect(parentModal).toHaveAttribute('aria-hidden', 'true')
-        expect(childModal).toHaveAttribute('aria-hidden', 'true')
-
-        rerender(
-          <>
-            <TestModal data-testid='parent-modal' open keepMounted>
-              <TestModal data-testid='child-modal' open={false} keepMounted />
-            </TestModal>
-          </>,
-        )
-
-        parentModal = getByTestId('parent-modal')
-        childModal = getByTestId('child-modal')
-        expect(parentModal).not.toHaveAttribute('aria-hidden')
-        expect(childModal).toHaveAttribute('aria-hidden', 'true')
-
-        rerender(
-          <>
-            <TestModal data-testid='parent-modal' open keepMounted>
-              <TestModal data-testid='child-modal' open keepMounted />
-            </TestModal>
-          </>,
-        )
-        parentModal = getByTestId('parent-modal')
-        childModal = getByTestId('child-modal')
-        expect(parentModal).toHaveAttribute('aria-hidden', 'true')
-        expect(childModal).not.toHaveAttribute('aria-hidden')
-
-        rerender(
-          <>
-            <TestModal data-testid='parent-modal' open={false} keepMounted>
-              <TestModal data-testid='child-modal' open keepMounted />
-            </TestModal>
-          </>,
-        )
-
-        parentModal = getByTestId('parent-modal')
-        childModal = getByTestId('child-modal')
-        expect(parentModal).toHaveAttribute('aria-hidden', 'true')
-        expect(childModal).not.toHaveAttribute('aria-hidden')
-
-        rerender(
-          <>
-            <TestModal data-testid='parent-modal' open={false} keepMounted>
-              <TestModal data-testid='child-modal' open={false} keepMounted />
-            </TestModal>
-          </>,
-        )
-
-        parentModal = getByTestId('parent-modal')
-        childModal = getByTestId('child-modal')
-        expect(parentModal).toHaveAttribute('aria-hidden', 'true')
-        expect(childModal).toHaveAttribute('aria-hidden', 'true')
       })
     })
   })

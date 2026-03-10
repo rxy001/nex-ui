@@ -18,17 +18,3 @@ export const [PopperProvider, usePopperContext] =
     strict: true,
     defaultValue: null as unknown as PopperContextValue,
   })
-
-export interface PopperPortalPropsContextValue {
-  keepMounted: boolean
-  disableAnimatePresence: boolean
-}
-
-export const [PopperPortalPropsProvider, usePopperPortalPropsContext] =
-  createContext<PopperPortalPropsContextValue | null>({
-    contextName: 'PopperPortalPropsContext',
-    hookName: 'usePopperPortalPropsContext',
-    providerName: 'PopperPortalPropsProvider',
-    strict: false,
-    defaultValue: null,
-  })

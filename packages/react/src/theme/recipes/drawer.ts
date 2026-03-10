@@ -13,6 +13,9 @@ export const drawerContentRecipe = defineSlotRecipe({
       boxShadow: 'lg',
       w: '100vw',
       h: '100vh',
+      maxW: '100vw',
+      maxH: '100vh',
+      pos: 'relative',
     },
     closeButton: {
       display: 'inline-flex',
@@ -34,9 +37,7 @@ export const drawerContentRecipe = defineSlotRecipe({
         outline: 'focusVisibleOutline',
       },
     },
-    backdrop: {
-      zIndex: 'drawer',
-    },
+    backdrop: {},
   },
   variants: {
     placement: {

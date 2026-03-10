@@ -1,5 +1,6 @@
-import type { ElementType, ReactElement } from 'react'
+import type { ElementType, ReactElement, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
+import type { HTMLMotionProps } from 'motion/react'
 import type { ClassValue } from 'clsx'
 import type { FocusTrapProps } from '../focusTrap'
 import type { PopperContentProps, PopperProps } from '../popper'
@@ -10,7 +11,7 @@ import type {
 } from '../../types/utils'
 import type { PopoverContentVariants } from '../../theme/recipes'
 import type { PopperAnchorProps, PopperPortalProps } from '../popper/types'
-import type { ScaleFloatingMotionProps } from '../scaleFloatingMotion'
+import type { Placement } from '../utils'
 
 // ------------------- PopoverProps -------------------
 type PopoverOwnProps = PopperProps & {
@@ -29,11 +30,11 @@ type PopoverContentSlotProps = {
   paper: SlotProps<'div'>
 }
 
-type PopoverContentOwnProps<RootComponent extends ElementType> = Pick<
+type PopoverContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   FocusTrapProps,
   'restoreFocus' | 'autoFocus'
 > &
-  Pick<PopperPortalProps, 'keepMounted' | 'container'> &
+  Pick<PopperPortalProps, 'container'> &
   Pick<
     PopperContentProps,
     | 'closeOnEscape'
@@ -85,7 +86,9 @@ type PopoverContentOwnProps<RootComponent extends ElementType> = Pick<
      * The props to modify the framer motion animation.
      * Use the `variants` API to create your own animation.
      */
-    motionProps?: ScaleFloatingMotionProps['motionProps']
+    motionProps?:
+      | ((placement: Placement) => HTMLMotionProps<'div'>)
+      | HTMLMotionProps<'div'>
 
     /**
      * The props used for each slot.
@@ -117,6 +120,13 @@ type PopoverContentOwnProps<RootComponent extends ElementType> = Pick<
      * @default 'auto'
      */
     width?: string | number
+
+    /**
+     * If true, keeps the Popover mounted in the DOM when it's closed.
+     *
+     * @default false
+     */
+    keepMounted?: boolean
   }
 
 export interface PopoverContentPropsOverrides {}
@@ -146,4 +156,12 @@ export interface PopoverTriggerProps {
 // ------------------- PopoverCloseProps -------------------
 export interface PopoverCloseProps {
   children?: ReactElement<{}>
+}
+
+export type PopoverPaperMotionProps = {
+  children?: ReactNode
+  motionProps?: PopoverContentOwnProps['motionProps']
+  placement: Placement
+  onAnimationComplete?: HTMLMotionProps<'div'>['onAnimationComplete']
+  onAnimationStart?: HTMLMotionProps<'div'>['onAnimationStart']
 }

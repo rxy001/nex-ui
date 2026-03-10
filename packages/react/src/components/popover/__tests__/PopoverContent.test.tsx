@@ -79,14 +79,5 @@ describe('PopoverContent', () => {
       const root = getByTestId('popover-content')
       expect(root).toHaveRole('dialog')
     })
-
-    it('should have tabindex="-1" on the content element', async () => {
-      const { getByTestId } = await renderWithNexUIProvider(<TestPopover />, {
-        useAct: true,
-      })
-
-      const content = getByTestId('popover-content')
-      expect(content).toHaveAttribute('tabindex', '-1')
-    })
   })
 })

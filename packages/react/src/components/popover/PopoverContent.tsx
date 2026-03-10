@@ -2,17 +2,20 @@
 
 import { nex } from '@nex-ui/styled'
 import { isNumber } from '@nex-ui/utils'
+import { AnimatePresence, LazyMotion } from 'motion/react'
 import {
   useDefaultProps,
   useSlot,
   useRecipeStyles,
   useSlotClasses,
+  motionFeatures,
+  useKeepMountedState,
 } from '../utils'
 import { FocusTrap } from '../focusTrap'
+import { PopoverPaperMotion } from './PopoverPaperMotion'
 import { popoverContentRecipe } from '../../theme/recipes'
 import { usePopoverContext } from './PopoverContext'
-import { PopperContent, PopperMotion, PopperPortal } from '../popper'
-import { ScaleFloatingMotion } from '../scaleFloatingMotion'
+import { PopperContent, PopperPortal } from '../popper'
 import type { CSSProperties, ElementType } from 'react'
 import type { PopoverContentProps } from './types'
 import type { PointerDownOutsideEvent } from '../dismissibleLayer'
@@ -30,17 +33,17 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
   const { open, rootId, triggerRef } = usePopoverContext()
   const {
     children,
-    disableAnimation,
     autoFocus,
     restoreFocus,
     container,
     keepMounted,
     motionProps,
-    placement,
     slotProps,
     classNames,
     width,
     maxWidth,
+    placement = 'bottom',
+    disableAnimation = false,
     loopFocus = true,
     color = 'default',
     radius = 'md',
@@ -51,6 +54,9 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     ...props,
     color,
     radius,
+    placement,
+    disableAnimation,
+    loopFocus,
   }
 
   const styles = useRecipeStyles({
@@ -65,6 +71,13 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     name: 'PopoverContent',
   })
 
+  const { resolvedDisplay, onAnimationComplete, onAnimationStart } =
+    useKeepMountedState({
+      open,
+      keepMounted,
+      disableAnimation,
+    })
+
   const [PopoverContentRoot, getPopoverContentRootProps] = useSlot({
     style: styles.root,
     component: PopperContent,
@@ -78,9 +91,13 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
     ariaProps: {
       id: rootId,
       role: 'dialog',
+      'aria-hidden': keepMounted && !open ? 'true' : undefined,
     },
     additionalProps: {
       placement,
+      style: {
+        display: resolvedDisplay,
+      },
       onPointerDownOutside: (event: PointerDownOutsideEvent) => {
         const target = event.target as HTMLElement
         if (triggerRef.current?.contains(target)) {
@@ -104,42 +121,48 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
   })
 
   const renderPaper = () => (
-    <PopoverContentPaper {...getPopoverContentPaperProps()}>
-      {children}
-    </PopoverContentPaper>
-  )
-
-  const renderContent = () => (
     <FocusTrap
       loop={loopFocus}
       restoreFocus={restoreFocus}
       active={open}
       autoFocus={autoFocus}
     >
-      <PopoverContentRoot {...getPopoverContentRootProps()}>
-        {disableAnimation ? (
-          renderPaper()
-        ) : (
-          <ScaleFloatingMotion motionProps={motionProps} placement={placement}>
-            {renderPaper()}
-          </ScaleFloatingMotion>
-        )}
-      </PopoverContentRoot>
+      <PopoverContentPaper {...getPopoverContentPaperProps()}>
+        {children}
+      </PopoverContentPaper>
     </FocusTrap>
   )
 
-  return (
-    <PopperPortal
-      container={container}
-      keepMounted={keepMounted}
-      disableAnimatePresence={disableAnimation}
-    >
+  const renderContent = () => (
+    <PopoverContentRoot {...getPopoverContentRootProps()}>
       {disableAnimation ? (
-        renderContent()
+        renderPaper()
       ) : (
-        <PopperMotion>{renderContent()}</PopperMotion>
+        <PopoverPaperMotion
+          motionProps={motionProps}
+          placement={placement}
+          onAnimationComplete={onAnimationComplete}
+          onAnimationStart={onAnimationStart}
+        >
+          {renderPaper()}
+        </PopoverPaperMotion>
       )}
-    </PopperPortal>
+    </PopoverContentRoot>
+  )
+
+  const renderPortal = () =>
+    open || keepMounted ? (
+      <PopperPortal container={container} forceMount>
+        {renderContent()}
+      </PopperPortal>
+    ) : null
+
+  return disableAnimation ? (
+    renderPortal()
+  ) : (
+    <LazyMotion features={motionFeatures}>
+      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
+    </LazyMotion>
   )
 }
 
