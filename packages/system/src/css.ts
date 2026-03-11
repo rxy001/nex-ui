@@ -70,11 +70,11 @@ export const createCssFn = ({
             // and those starting with _ are at the back, to support suffix selectors
             const charCode = a.charCodeAt(0)
 
-            if (charCode > 64 && charCode < 91) {
+            if ((charCode > 64 && charCode < 91) || charCode === 45) {
               return -1
             }
 
-            return 96 - a.charCodeAt(0)
+            return 96 - charCode
           })
           .map((p) => {
             // 0 - 9
