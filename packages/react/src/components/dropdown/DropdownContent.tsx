@@ -1,0 +1,147 @@
+'use client'
+
+import { nex } from '@nex-ui/styled'
+import { useMemo, useState } from 'react'
+import { isNumber } from '@nex-ui/utils'
+import { AnimatePresence, LazyMotion } from 'motion/react'
+import { dropdownContentRecipe } from '../../theme/recipes'
+import {
+  useDefaultProps,
+  useSlot,
+  useRecipeStyles,
+  motionFeatures,
+  useKeepMountedState,
+  useSlotClasses,
+} from '../utils'
+import { DropdownContentProvider, useDropdownContext } from './DropdownContext'
+import { DropdownPaperMotion } from './DropdownPaperMotion'
+import { MenuContent, MenuPortal } from '../menu'
+import type { ElementType } from 'react'
+import type { DropdownContentProps } from './types'
+import type { DropdownContentContextValue } from './DropdownContext'
+
+const slots = ['root', 'paper'] as const
+
+export const DropdownContent = <RootComponent extends ElementType>(
+  inProps: DropdownContentProps<RootComponent>,
+) => {
+  const props = useDefaultProps<DropdownContentProps>({
+    name: 'DropdownContent',
+    props: inProps,
+  })
+
+  const {
+    children,
+    container,
+    keepMounted,
+    motionProps,
+    disableAnimation,
+    slotProps,
+    classNames,
+    minWidth,
+    maxHeight,
+    color = 'gray',
+    variant = 'solid',
+    placement = 'bottom',
+    ...remainingProps
+  } = props
+
+  const [indicatorsCount, setIndicatorsCount] = useState(0)
+
+  const { open } = useDropdownContext()
+
+  const { resolvedDisplay, onAnimationComplete, onAnimationStart } =
+    useKeepMountedState({
+      open,
+      keepMounted,
+      disableAnimation,
+    })
+
+  const styles = useRecipeStyles({
+    name: 'DropdownContent',
+    recipe: dropdownContentRecipe,
+    ownerState: props,
+  })
+
+  const slotClasses = useSlotClasses({
+    name: 'DropdownContent',
+    slots,
+    classNames,
+  })
+
+  const [DropdownContentRoot, getDropdownContentRoot] = useSlot({
+    style: styles.root,
+    component: MenuContent,
+    externalForwardedProps: remainingProps,
+    classNames: slotClasses.root,
+    additionalProps: {
+      placement,
+      style: {
+        display: resolvedDisplay,
+        '--dropdown-min-width': isNumber(minWidth) ? `${minWidth}px` : minWidth,
+        '--dropdown-max-height': isNumber(maxHeight)
+          ? `${maxHeight}px`
+          : maxHeight,
+      },
+    },
+  })
+
+  const [DropdownContentPaper, getDropdownContentPaperProps] = useSlot({
+    component: nex.div,
+    style: styles.paper,
+    classNames: slotClasses.paper,
+    externalSlotProps: slotProps?.paper,
+  })
+
+  const ctx = useMemo<DropdownContentContextValue>(
+    () => ({
+      color,
+      variant,
+      indicatorsCount,
+      setIndicatorsCount,
+    }),
+    [color, indicatorsCount, variant],
+  )
+
+  const renderPaper = () => (
+    <DropdownContentProvider value={ctx}>
+      <DropdownContentPaper {...getDropdownContentPaperProps()}>
+        {children}
+      </DropdownContentPaper>
+    </DropdownContentProvider>
+  )
+
+  const renderContent = () => (
+    <DropdownContentRoot {...getDropdownContentRoot()}>
+      {disableAnimation ? (
+        renderPaper()
+      ) : (
+        <DropdownPaperMotion
+          placement={placement}
+          motionProps={motionProps}
+          onAnimationComplete={onAnimationComplete}
+          onAnimationStart={onAnimationStart}
+        >
+          {renderPaper()}
+        </DropdownPaperMotion>
+      )}
+    </DropdownContentRoot>
+  )
+
+  const renderPortal = () =>
+    open || keepMounted ? (
+      <MenuPortal forceMount container={container}>
+        {renderContent()}
+      </MenuPortal>
+    ) : null
+
+  return disableAnimation ? (
+    renderPortal()
+  ) : (
+    <LazyMotion features={motionFeatures}>
+      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
+    </LazyMotion>
+  )
+}
+
+DropdownContent.displayName = 'DropdownContent'

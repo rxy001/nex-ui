@@ -20,7 +20,7 @@ export const useScaleInOutMotionProps = (
         ...props?.variants?.visible,
       },
       hidden: {
-        scale: 0.97,
+        scale: 0.96,
         ...props?.variants?.hidden,
       },
     },

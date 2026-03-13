@@ -37,4 +37,4 @@
 
 15. 将 isValidElement 统一改为 isValidNonFragmentElement
 
-17. Radio、Checkbox 是否应该使用泛性？
+18. 阻止事件的执行，目前有两种形式，1. 传递 prop 2. 使用 event.preventDefault()，是否统一 API ？
