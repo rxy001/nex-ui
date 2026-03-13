@@ -189,24 +189,6 @@ export const drawerContentRecipe = defineSlotRecipe({
         },
       },
     },
-    {
-      placement: ['left', 'right'],
-      size: 'full',
-      css: {
-        paper: {
-          h: '100vw',
-        },
-      },
-    },
-    {
-      placement: ['top', 'bottom'],
-      size: 'full',
-      css: {
-        paper: {
-          h: '100vh',
-        },
-      },
-    },
   ],
 })
 

@@ -46,7 +46,7 @@ export const MenuTriggerItem = (props: MenuTriggerItemProps) => {
       top: rect.top,
       bottom: rect.bottom,
       left: rect.left - (side === 'right' ? EDGE_OFFSET : 0),
-      right: rect.right - (side === 'left' ? EDGE_OFFSET : 0),
+      right: rect.right + (side === 'left' ? EDGE_OFFSET : 0),
     }
 
     menuContentCtx.onPointerGraceIntentChange({

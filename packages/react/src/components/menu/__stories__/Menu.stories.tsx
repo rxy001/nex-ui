@@ -170,25 +170,6 @@ export function RadioItems() {
   )
 }
 
-export function DisableAnimation() {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <Menu open={open} onOpenChange={setOpen}>
-      <MenuTrigger>
-        <button>Open Menu</button>
-      </MenuTrigger>
-      <MenuPortal>
-        <MenuContent>
-          <MenuItem sx={style}>Menu Item 1</MenuItem>
-          <MenuItem sx={style}>Menu Item 2</MenuItem>
-          <MenuItem sx={style}>Menu Item 3</MenuItem>
-        </MenuContent>
-      </MenuPortal>
-    </Menu>
-  )
-}
-
 export function ViewportBoundary() {
   const [open1, setOpen1] = useState(false)
   const [open2, setOpen2] = useState(false)

@@ -18,6 +18,7 @@ export const tooltipRecipe = defineSlotRecipe({
       maxW: 'var(--tooltip-max-width, 360px)',
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
+      width: 'max-content',
     },
   },
   variants: {

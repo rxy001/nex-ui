@@ -8,7 +8,7 @@ import type { MenuSeparatorProps } from './types'
 const recipe = defineRecipe({
   base: {
     border: 'none',
-    my: '1.5',
+    my: '1',
     w: 'full',
     borderBottom: '1px solid {colors.gray.highlight}',
   },
