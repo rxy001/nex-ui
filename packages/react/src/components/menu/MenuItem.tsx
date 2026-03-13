@@ -17,6 +17,7 @@ const recipe = defineRecipe({
     cursor: 'default',
     outline: 'none',
     userSelect: 'none',
+    whiteSpace: 'nowrap',
   },
 })
 

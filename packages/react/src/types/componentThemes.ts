@@ -32,6 +32,17 @@ import type {
   BadgeRecipe,
   BreadcrumbRecipe,
   BreadcrumbItemRecipe,
+  DropdownItemGroupRecipe,
+  DropdownCheckboxItemRecipe,
+  DropdownContentRecipe,
+  DropdownItemGroupLabelRecipe,
+  DropdownItemRecipe,
+  DropdownRadioItemRecipe,
+  DropdownCheckboxItemGroupRecipe,
+  DropdownRadioItemGroupRecipe,
+  DropdownTriggerItemRecipe,
+  SubDropdownContentRecipe,
+  DropdownSeparatorRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -69,6 +80,19 @@ import type {
   BadgeProps,
   BreadcrumbProps,
   BreadcrumbItemProps,
+  DropdownProps,
+  DropdownCheckboxItemProps,
+  DropdownRadioItemProps,
+  DropdownItemGroupProps,
+  DropdownItemGroupLabelProps,
+  DropdownItemProps,
+  DropdownContentProps,
+  DropdownCheckboxItemGroupProps,
+  DropdownRadioItemGroupProps,
+  DropdownTriggerItemProps,
+  SubDropdownProps,
+  SubDropdownContentProps,
+  DropdownSeparatorProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
@@ -214,6 +238,56 @@ export type ComponentThemes = {
   BreadcrumbItem?: {
     styleOverrides?: ComponentThemeObject<BreadcrumbItemRecipe>
     defaultProps?: BreadcrumbItemProps
+  }
+  Dropdown?: {
+    defaultProps?: DropdownProps
+  }
+  DropdownContent?: {
+    styleOverrides?: ComponentThemeObject<DropdownContentRecipe>
+    defaultProps?: DropdownContentProps
+  }
+  DropdownItem?: {
+    styleOverrides?: ComponentThemeObject<DropdownItemRecipe>
+    defaultProps?: DropdownItemProps
+  }
+  DropdownItemGroup?: {
+    styleOverrides?: ComponentThemeObject<DropdownItemGroupRecipe>
+    defaultProps?: DropdownItemGroupProps
+  }
+  DropdownItemGroupLabel?: {
+    styleOverrides?: ComponentThemeObject<DropdownItemGroupLabelRecipe>
+    defaultProps?: DropdownItemGroupLabelProps
+  }
+  DropdownRadioItem?: {
+    styleOverrides?: ComponentThemeObject<DropdownRadioItemRecipe>
+    defaultProps?: DropdownRadioItemProps
+  }
+  DropdownRadioItemGroup?: {
+    styleOverrides?: ComponentThemeObject<DropdownRadioItemGroupRecipe>
+    defaultProps?: DropdownRadioItemGroupProps
+  }
+  DropdownCheckboxItem?: {
+    styleOverrides?: ComponentThemeObject<DropdownCheckboxItemRecipe>
+    defaultProps?: DropdownCheckboxItemProps
+  }
+  DropdownCheckboxItemGroup?: {
+    styleOverrides?: ComponentThemeObject<DropdownCheckboxItemGroupRecipe>
+    defaultProps?: DropdownCheckboxItemGroupProps
+  }
+  DropdownTriggerItem?: {
+    styleOverrides?: ComponentThemeObject<DropdownTriggerItemRecipe>
+    defaultProps?: DropdownTriggerItemProps
+  }
+  SubDropdown?: {
+    defaultProps?: SubDropdownProps
+  }
+  SubDropdownContent?: {
+    styleOverrides?: ComponentThemeObject<SubDropdownContentRecipe>
+    defaultProps?: SubDropdownContentProps
+  }
+  DropdownSeparator?: {
+    styleOverrides?: ComponentThemeObject<DropdownSeparatorRecipe>
+    defaultProps?: DropdownSeparatorProps
   }
 }
 
