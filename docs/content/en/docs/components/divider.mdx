@@ -13,6 +13,12 @@ Divider is used to separate content on the page.
 
 ---
 
+## Anatomy
+
+```tsx
+import { Divider } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...divider.usage} />
@@ -25,12 +31,6 @@ Divider inherits the props of `as` (by default, `'hr'`).
 
 <PropsTable
   dataSource={[
-    {
-      prop: 'orientation',
-      description: 'The orientation of the Divider.',
-      type: ["'horizontal'", "'vertical'"],
-      default: "'horizontal'",
-    },
     {
       prop: 'className',
       description: 'Additional class names to apply to the root.',
@@ -52,6 +52,12 @@ Divider inherits the props of `as` (by default, `'hr'`).
       type: 'ElementType',
       default: "'hr'",
       description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'orientation',
+      description: 'The orientation of the Divider.',
+      type: ["'horizontal'", "'vertical'"],
+      default: "'horizontal'",
     },
   ]}
 />

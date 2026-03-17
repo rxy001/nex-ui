@@ -8,6 +8,7 @@ export interface AvatarGroupContextValue {
   color: AvatarVariants['color']
   radius: AvatarVariants['radius']
   size: AvatarVariants['size']
+  disableAnimation: boolean
 }
 
 export const [AvatarGroupProvider, useAvatarGroupContext] =

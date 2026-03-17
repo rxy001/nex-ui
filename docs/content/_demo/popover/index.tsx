@@ -12,8 +12,6 @@ import shiftCode from './Shift.demo?raw'
 import ShiftDemo from './Shift.demo'
 import controlledCode from './Controlled.demo?raw'
 import ControlledDemo from './Controlled.demo'
-import customMotionCode from './CustomMotion.demo?raw'
-import CustomMotionDemo from './CustomMotion.demo'
 import withFormCode from './WithForm.demo?raw'
 import WithFormDemo from './WithForm.demo'
 
@@ -45,10 +43,6 @@ export const popover = {
   controlled: {
     code: controlledCode,
     demo: <ControlledDemo />,
-  },
-  customMotion: {
-    code: customMotionCode,
-    demo: <CustomMotionDemo />,
   },
   withForm: {
     code: withFormCode,

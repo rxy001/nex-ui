@@ -81,7 +81,6 @@ export const avatarRecipe = defineSlotRecipe({
     inGroup: {
       true: {
         root: {
-          transition: 'transform',
           position: 'relative',
           zIndex: 1,
           ':not(:first-of-type)': {
@@ -95,6 +94,9 @@ export const avatarRecipe = defineSlotRecipe({
           },
         },
       },
+    },
+    disableAnimation: {
+      false: {},
     },
   },
   compoundVariants: [
@@ -128,6 +130,15 @@ export const avatarRecipe = defineSlotRecipe({
           ':not(:first-of-type)': {
             ml: 'var(--avatar-group-spacing, {spaces.-4})',
           },
+        },
+      },
+    },
+    {
+      disableAnimation: false,
+      inGroup: true,
+      css: {
+        root: {
+          transition: 'transform',
         },
       },
     },

@@ -1,4 +1,5 @@
 import { createContext } from '@nex-ui/utils'
+import type { RefObject } from 'react'
 
 export interface TooltipContextValue {
   open: boolean
@@ -6,6 +7,7 @@ export interface TooltipContextValue {
   delayOpen: () => void
   delayClose: () => void
   rootId: string
+  triggerRef: RefObject<HTMLElement | null>
 }
 
 export const [TooltipProvider, useTooltipContext] =

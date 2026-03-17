@@ -11,13 +11,22 @@ import {
   DialogHeader,
   Flex,
 } from '@nex-ui/react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export default function App() {
   const [loading, setLoading] = useState(false)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   return (
-    <Dialog>
+    <Dialog
+      onClose={() => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current)
+          setLoading(false)
+          timerRef.current = null
+        }
+      }}
+    >
       <DialogTrigger>
         <Button>Open Dialog</Button>
       </DialogTrigger>
@@ -52,9 +61,10 @@ export default function App() {
               onClick={() => {
                 setLoading(true)
                 return new Promise((res) => {
-                  setTimeout(() => {
+                  timerRef.current = setTimeout(() => {
                     res(true)
                     setLoading(false)
+                    timerRef.current = null
                   }, 2000)
                 })
               }}

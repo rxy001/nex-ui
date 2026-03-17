@@ -13,6 +13,12 @@ Input 允许用户输入文本。
 
 ---
 
+## Anatomy
+
+```tsx
+import { Input } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...input.usage} />
@@ -67,6 +73,38 @@ Input 继承 `as` (默认为 `'input'`) 的 Props。
 
 <PropsTable
   dataSource={[
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Input 内的 input。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于 Input 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Input Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Input Slots 的 props。',
+    },
     {
       prop: 'color',
       type: [
@@ -147,11 +185,6 @@ Input 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'Input 的 name。',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
       prop: 'prefix',
       type: 'ReactNode',
       description: 'Input 的前缀。',
@@ -160,11 +193,6 @@ Input 继承 `as` (默认为 `'input'`) 的 Props。
       prop: 'suffix',
       type: 'ReactNode',
       description: 'Input 的后缀。',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发 Input 内的 input',
     },
     {
       prop: 'fullWidth',
@@ -211,26 +239,10 @@ Input 继承 `as` (默认为 `'input'`) 的 Props。
       description: '当 Cleat 按钮被点击时触发该回调函数。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'input'",
-      description:
-        '用于 Input 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Input Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Input Slots 的 props。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Input 的动画。',
     },
   ]}
 />

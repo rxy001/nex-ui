@@ -17,6 +17,7 @@ import {
   FadeInOutMotion,
   useKeepMountedState,
 } from '../utils'
+import { RovingFocusItem } from '../rovingFocus'
 import { useAccordionGroupContext } from './AccordionContext'
 import type { ElementType } from 'react'
 import type { HTMLMotionProps } from 'motion/react'
@@ -157,6 +158,7 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
     ariaProps: slotAriaProps.trigger,
     additionalProps: {
       disabled,
+      tabIndex: disabled ? -1 : 0,
       onClick: () => {
         toggleExpandedKey(itemKey)
       },
@@ -316,10 +318,12 @@ export const AccordionItem = <RootComponent extends ElementType = 'div'>(
   return (
     <AccordionItemRoot {...getAccordionItemRootProps()}>
       <AccordionItemHeading {...getAccordionItemHeadingProps()}>
-        <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
-          <span>{title}</span>
-          {!hideIndicator && renderIndicator()}
-        </AccordionItemTrigger>
+        <RovingFocusItem focusable={!disabled}>
+          <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
+            <span>{title}</span>
+            {!hideIndicator && renderIndicator()}
+          </AccordionItemTrigger>
+        </RovingFocusItem>
       </AccordionItemHeading>
       {renderContent()}
     </AccordionItemRoot>

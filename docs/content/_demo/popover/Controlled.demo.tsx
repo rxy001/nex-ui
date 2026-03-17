@@ -14,11 +14,11 @@ export default function App() {
 
   return (
     <>
-      <Popover open={open} onOpenChange={setOpen} placement='top'>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger>
           <Button>Click me</Button>
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent placement='top'>
           <Box
             sx={{
               fontWeight: 'bold',

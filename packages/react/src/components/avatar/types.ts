@@ -103,6 +103,7 @@ export type LoadedState = false | 'error' | 'loaded'
 export type AvatarOwnerState<RootComponent extends ElementType = 'div'> =
   AvatarProps<RootComponent> & {
     inGroup: boolean
+    disableAnimation: boolean
   }
 
 export type UseLoadedOptions = {
@@ -193,6 +194,13 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
    * Additional class names to apply to the root.
    */
   className?: ClassValue
+
+  /**
+   * If true, disables the animation on hover.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 }
 
 export type AvatarGroupProps<RootComponent extends ElementType = 'div'> =

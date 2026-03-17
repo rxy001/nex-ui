@@ -1,6 +1,6 @@
 ---
 title: Dialog
-description: Display a dialog with custom content that requires attention or provides additional information.
+description: Dialog displays custom content that requires attention or provides additional information.
 ---
 
 import { dialog } from '@/content/_demo'
@@ -13,49 +13,73 @@ Dialog displays custom content that requires attention or provides additional in
 
 ---
 
+## Anatomy
+
+NexUI exports 7 Dialog-related components:
+
+- `Dialog`: The root component that displays a Dialog.
+- `DialogContent`: The component that displays the Dialog content.
+- `DialogHeader`: The component that displays the Dialog header.
+- `DialogBody`: The component that displays the Dialog body.
+- `DialogFooter`: The component that displays the Dialog footer.
+- `DialogTrigger`: The component that triggers the Dialog to open.
+- `DialogClose`: The component that triggers the Dialog to close.
+
+```tsx
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  DialogTrigger,
+  DialogClose,
+} from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...dialog.usage} />
 
 ### Hide Backdrop
 
-Set the `hideBackdrop` property of Dialog to `true` to hide the Dialog background overlay.
+Set `hideBackdrop` on `DialogContent` to `true` to hide the Dialog backdrop.
 
 <Example {...dialog.hideBackdrop} />
 
 ### Prevent Scroll
 
-Set the `preventScroll` property of Dialog to `true` to prevent page scrolling when the Dialog is open.
+Set `preventScroll` on `DialogContent` to `true` to prevent page scrolling while the Dialog is open.
 
 <Example {...dialog.preventScroll} />
 
 ### Keep Mounted
 
-Set the `keepMounted` property of Dialog to `true` to keep the Dialog content mounted when closed.
+Set `keepMounted` on `DialogContent` to `true` to keep Dialog content mounted when closed.
 
 <Example {...dialog.keepMounted} />
 
 ### Sizes
 
-Use the `size` property of DialogContent to set the maximum width of the Dialog. Defaults to `md`.
+Use the `size` prop on `DialogContent` to set the Dialog size. Defaults to `md`.
 
 <Example {...dialog.sizes} />
 
 ### Placements
 
-Use the `placement` property of DialogContent to set the display position of the Dialog. Defaults to `top`.
+Use the `placement` prop on `DialogContent` to set where the Dialog appears. Defaults to `top`.
 
 <Example {...dialog.placements} />
 
 ### Custom Motion
 
-Use the `motionProps` property of DialogContent to customize the animation effects for the `visible` and `hidden` states.
+Use the `motionProps` prop on `DialogContent` to customize enter and exit animations.
 
 <Example {...dialog.customMotion} />
 
 ### Overflow Scroll
 
-Use the `scroll` property of DialogContent to control the scrolling behavior of Dialog content.
+Use the `scroll` prop on `DialogContent` to control Dialog scrolling behavior.
 
 - `inside`: Content scrolls inside the Dialog.
 - `outside`: Content scrolls outside the Dialog.
@@ -64,9 +88,15 @@ Use the `scroll` property of DialogContent to control the scrolling behavior of 
 
 ### Asynchronously Close
 
-DialogClose supports asynchronously closing the Dialog. The `onClick` event of its `children` can return a `Promise`, and the Dialog will close when the `Promise` is resolved.
+`DialogClose` supports asynchronous closing. If the `children` `onClick` handler returns a `Promise`, the Dialog closes after the `Promise` resolves or rejects.
 
 <Example {...dialog.asynchronouslyClose} />
+
+### Prevent Close
+
+Call `event.preventDefault()` inside the `children` `onClick` handler of `DialogClose` to prevent closing.
+
+<Example {...dialog.preventClose} />
 
 ### Controlled
 
@@ -77,8 +107,6 @@ Use the `open` and `onOpenChange` props of Dialog to control the open state of t
 ## API
 
 ### Dialog Props
-
-Dialog inherits the props of `as` (by default, `m.div`).
 
 <PropsTable
   dataSource={[
@@ -104,98 +132,10 @@ Dialog inherits the props of `as` (by default, `m.div`).
         'Handler that is called when the Dialog is opened or closed.',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'hideBackdrop',
-      type: 'boolean',
-      description: 'If true, the backdrop is not rendered.',
-      default: 'false',
-    },
-    {
-      prop: 'container',
-      type: ['HTMLElement', 'null', '() => HTMLElement | null'],
-      description: 'The container element for the portal.',
-      default: 'document.body',
-    },
-    {
-      prop: 'keepMounted',
-      type: 'boolean',
-      description: 'If true, always keep the children in the DOM.',
-      default: 'false',
-    },
-    {
-      prop: 'preventScroll',
-      type: 'boolean',
-      description: 'If true, the Dialog prevents page scrolling.',
-      default: 'false',
-    },
-    {
-      prop: 'closeOnInteractBackdrop',
-      type: 'boolean',
-      description: 'If true, closes the Dialog when the backdrop is clicked.',
-      default: 'true',
-    },
-    {
-      prop: 'closeOnEscape',
-      type: 'boolean',
-      description: 'If true, closes the Dialog when the Escape key is pressed.',
-      default: 'true',
-    },
-    {
-      prop: 'restoreFocus',
-      type: 'boolean',
-      description:
-        'If true, the Dialog restores focus to the previously focused element once the Dialog is hidden or unmounted.',
-      default: 'true',
-    },
-    {
       prop: 'onClose',
       type: '() => void',
       description:
         'Callback function that is called when the Dialog is closed.',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      description: 'The component or element to render as the root.',
-      default: 'm.div',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-  ]}
-/>
-
-### Dialog Slots
-
-<SlotsTable
-  dataSource={[
-    {
-      slot: 'backdrop',
-      class: '.nui-dialog-backdrop',
-      component: "'div'",
-      description: 'The backdrop element of the Dialog.',
     },
   ]}
 />
@@ -212,54 +152,9 @@ DialogContent inherits the props of `as` (by default, `'div'`).
       description: 'Usually, DialogHeader, DialogBody, DialogFooter, etc.',
     },
     {
-      prop: 'closeIcon',
-      type: 'ReactNode',
-      description: 'Custom close button to display on top right corner.',
-    },
-    {
-      prop: 'size',
-      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: 'The size of the Dialog.',
-      default: "'md'",
-    },
-    {
-      prop: 'placement',
-      type: ["'top'", "'bottom'", "'left'", "'right'"],
-      description: 'The display position of the Dialog.',
-      default: "'top'",
-    },
-    {
-      prop: 'scroll',
-      type: ["'inside'", "'outside'"],
-      description: 'The Dialog scroll behavior.',
-      default: "'outside'",
-    },
-    {
-      prop: 'hideCloseButton',
-      type: 'boolean',
-      description: 'If true, the close button is not rendered.',
-      default: 'false',
-    },
-    {
       prop: 'className',
       type: 'ClassValue',
       description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'motionProps',
-      type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
-      description: 'The props to modify the framer motion animation.',
-    },
-    {
-      prop: 'aria-labelledby',
-      type: 'string',
-      description: 'The id(s) of the element(s) that label the DialogContent.',
-    },
-    {
-      prop: 'aria-describedby',
-      type: 'string',
-      description:
-        'The id(s) of the element(s) that describe the DialogContent.',
     },
     {
       prop: 'as',
@@ -288,6 +183,101 @@ DialogContent inherits the props of `as` (by default, `'div'`).
       type: 'Ref',
       description: 'Ref for forwarding to the root.',
     },
+    {
+      prop: 'closeIcon',
+      type: 'ReactNode',
+      description: 'Custom close button to display on top right corner.',
+    },
+    {
+      prop: 'size',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
+      description: 'The size of the Dialog.',
+      default: "'md'",
+    },
+    {
+      prop: 'hideCloseButton',
+      type: 'boolean',
+      description: 'If true, the close button is not rendered.',
+      default: 'false',
+    },
+    {
+      prop: 'scroll',
+      type: ["'inside'", "'outside'"],
+      description: 'The Dialog scroll behavior.',
+      default: "'outside'",
+    },
+    {
+      prop: 'placement',
+      type: ["'top'", "'bottom'", "'left'", "'right'"],
+      description: 'The display position of the Dialog.',
+      default: "'top'",
+    },
+    {
+      prop: 'motionProps',
+      type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
+      description: 'The props to modify the framer motion animation.',
+    },
+    {
+      prop: 'aria-labelledby',
+      type: 'string',
+      description: 'The id(s) of the element(s) that label the DialogContent.',
+    },
+    {
+      prop: 'aria-describedby',
+      type: 'string',
+      description:
+        'The id(s) of the element(s) that describe the DialogContent.',
+    },
+    {
+      prop: 'hideBackdrop',
+      type: 'boolean',
+      description: 'If true, the backdrop is not rendered.',
+      default: 'false',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement', 'null', '() => HTMLElement | null'],
+      description: 'The container element for the portal.',
+      default: 'document.body',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      description: 'If true, always keep the children in the DOM.',
+      default: 'false',
+    },
+    {
+      prop: 'preventScroll',
+      type: 'boolean',
+      description: 'If true, the Dialog prevents page scrolling.',
+      default: 'false',
+    },
+    {
+      prop: 'closeOnInteractOutside',
+      type: 'boolean',
+      description:
+        'If true, closes the Dialog when clicking outside the Dialog.',
+      default: 'true',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      description: 'If true, closes the Dialog when the Escape key is pressed.',
+      default: 'true',
+    },
+    {
+      prop: 'restoreFocus',
+      type: 'boolean',
+      description:
+        'If true, the Dialog restores focus to the previously focused element once the Dialog is hidden or unmounted.',
+      default: 'true',
+    },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      description: 'If true, the Dialog animation is disabled.',
+      default: 'false',
+    },
   ]}
 />
 
@@ -304,8 +294,14 @@ DialogContent inherits the props of `as` (by default, `'div'`).
     {
       slot: 'paper',
       class: '.nui-dialog-content-paper',
-      component: 'm.section',
+      component: "'div'",
       description: 'The paper element of the DialogContent.',
+    },
+    {
+      slot: 'backdrop',
+      class: '.nui-dialog-content-backdrop',
+      component: "'div'",
+      description: 'The backdrop element of the DialogContent.',
     },
   ]}
 />
@@ -424,7 +420,7 @@ DialogFooter inherits the props of `as` (by default, `'div'`).
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
+      type: 'ReactElement',
       description:
         'The element that triggers the Dialog to open; must support the `onClick` event.',
     },
@@ -437,7 +433,7 @@ DialogFooter inherits the props of `as` (by default, `'div'`).
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
+      type: 'ReactElement',
       description:
         'The element that triggers the Dialog to close; must support the `onClick` event.',
     },

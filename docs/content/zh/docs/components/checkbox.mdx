@@ -13,6 +13,17 @@ Checkbox 允许用户从一个集合中选择一个或多个项目。
 
 ---
 
+## Anatomy
+
+NexUI 导出了 2 个 Checkbox 相关组件:
+
+- `Checkbox`: 用于显示单个复选框的组件。
+- `CheckboxGroup`: 用于显示一组复选框的组件。
+
+```tsx
+import { Checkbox, CheckboxGroup } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...checkbox.usage} />
@@ -73,6 +84,38 @@ Checkbox 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'Checkbox 的标签。',
     },
     {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Checkbox 内的 input。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于 Checkbox 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Checkbox Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Checkbox Slots 的 props。',
+    },
+    {
       prop: 'color',
       type: [
         "'blue'",
@@ -128,11 +171,6 @@ Checkbox 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'Checkbox 选中时的图标。',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
       prop: 'name',
       type: 'string',
       description: 'Checkbox 的 name。',
@@ -142,11 +180,7 @@ Checkbox 继承 `as` (默认为 `'input'`) 的 Props。
       type: ['string', 'number'],
       description: 'Checkbox 的 value。',
     },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发 Checkbox 内的 input。',
-    },
+
     {
       prop: 'onChange',
       type: '(event: ChangeEvent<HTMLInputElement>) => void',
@@ -158,28 +192,13 @@ Checkbox 继承 `as` (默认为 `'input'`) 的 Props。
       description: '当 Checkbox 状态发生变化时会触发该回调函数。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'input'",
-      description:
-        '用于 Checkbox 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Checkbox 的动画。',
     },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Checkbox Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Checkbox Slots 的 props。',
-    },
-  ]}
+
+]}
 />
 
 ### Checkbox Slots
@@ -217,6 +236,37 @@ CheckboxGroup 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'children',
       type: 'ReactNode',
       description: 'CheckboxGroup 的子元素。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'CheckboxGroup 的根元素组件。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素的 ref。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'CheckboxGroup Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'CheckboxGroup Slots 的 props。',
     },
     {
       prop: 'label',
@@ -280,35 +330,10 @@ CheckboxGroup 继承 `as` (默认为 `'div'`) 的 Props。
       description: 'CheckboxGroup 的排列方向。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description: 'CheckboxGroup 的根元素组件。',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发根元素的 ref。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'CheckboxGroup Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'CheckboxGroup Slots 的 props。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用所有 Checkbox 的动画。',
     },
   ]}
 />

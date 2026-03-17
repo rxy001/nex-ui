@@ -33,7 +33,7 @@ export default function App() {
         sx={{
           w: '300%',
           h: '300%',
-          d: 'flex',
+          display: 'flex',
           pos: 'relative',
           justifyContent: 'center',
           alignItems: 'center',
@@ -41,19 +41,18 @@ export default function App() {
         }}
         ref={innerRef}
       >
-        <Popover
-          open
-          container={() => innerRef.current}
-          placement='top-start'
-          flip={{
-            mainAxis: true,
-            crossAxis: true,
-          }}
-        >
+        <Popover open>
           <PopoverTrigger>
             <Button>Scroll the window</Button>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent
+            placement='top-start'
+            container={() => innerRef.current}
+            flip={{
+              mainAxis: true,
+              crossAxis: true,
+            }}
+          >
             The floating element that flips along the x-axis and y-axis.
           </PopoverContent>
         </Popover>

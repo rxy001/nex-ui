@@ -13,6 +13,12 @@ Flex is an elastic container component used to arrange elements vertically or ho
 
 ---
 
+## Anatomy
+
+```tsx
+import { Flex } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...flex.usage} />
@@ -58,6 +64,23 @@ Flex inherits the props of `as` (by default, `'div'`).
       description: 'Additional class names to apply to the root.',
     },
     {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
       prop: 'inline',
       type: 'boolean',
       default: 'false',
@@ -92,23 +115,6 @@ Flex inherits the props of `as` (by default, `'div'`).
       prop: 'gap',
       type: "CSSObject['gap']",
       description: 'Set the gap between flex items.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description: 'The component or element to render as the root.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
   ]}
 />

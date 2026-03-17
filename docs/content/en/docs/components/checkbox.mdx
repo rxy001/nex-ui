@@ -13,6 +13,17 @@ Checkbox allows users to select one or more items from a collection.
 
 ---
 
+## Anatomy
+
+NexUI exports 2 Checkbox-related components:
+
+- `Checkbox`: The component that displays a single checkbox.
+- `CheckboxGroup`: The component that displays a group of checkboxes.
+
+```tsx
+import { Checkbox, CheckboxGroup } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...checkbox.usage} />
@@ -35,8 +46,7 @@ Checkbox allows users to select one or more items from a collection.
 
 ### Indeterminate
 
-The `indeterminate` prop sets a Checkbox to an indeterminate state, overriding its
-appearance and maintaining it until set to `false`, regardless of user interaction.
+The `indeterminate` prop sets the Checkbox to an indeterminate state. This visual state is preserved regardless of user interaction until you set it back to `false`.
 
 <Example {...checkbox.indeterminate} />
 
@@ -52,7 +62,7 @@ Use the `checked` and `onCheckedChange` props to control the checked state of th
 
 ### Vertical
 
-Set the `orientation` prop to `vertical` to display checkboxes in a vertical layout.
+Set `orientation` to `vertical` to display checkboxes in a vertical layout.
 
 <Example {...checkbox.groupVertical} />
 
@@ -72,6 +82,38 @@ Checkbox inherits the props of `as` (by default, `'input'`).
       prop: 'children',
       type: 'ReactNode',
       description: 'The label of the Checkbox.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the input inside the Checkbox.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description: 'The component or element to render as the input.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
     },
     {
       prop: 'color',
@@ -130,11 +172,6 @@ Checkbox inherits the props of `as` (by default, `'input'`).
       description: 'The icon to display when the Checkbox is checked.',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
       prop: 'name',
       type: 'string',
       description:
@@ -144,11 +181,6 @@ Checkbox inherits the props of `as` (by default, `'input'`).
       prop: 'value',
       type: ['string', 'number'],
       description: 'The value of the Checkbox.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the input inside the Checkbox.',
     },
     {
       prop: 'onChange',
@@ -163,26 +195,10 @@ Checkbox inherits the props of `as` (by default, `'input'`).
         "Handler that is called when the element's checked state changes.",
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'input'",
-      description: 'The component or element to render as the input.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to disable Checkbox animations.',
     },
   ]}
 />
@@ -222,6 +238,38 @@ CheckboxGroup inherits the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description: 'The list of Checkbox items.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
     },
     {
       prop: 'label',
@@ -286,36 +334,11 @@ CheckboxGroup inherits the props of `as` (by default, `'div'`).
       description: 'The axis the CheckboxGroup items should align with.',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description: 'The component or element to render as the root.',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
       description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
+        'Whether to disable animations for all Checkboxes in the group.',
     },
   ]}
 />

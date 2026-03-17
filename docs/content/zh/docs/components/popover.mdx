@@ -13,6 +13,24 @@ Popover 是一种非模态对话框，会悬浮在其触发元素周围。它通
 
 ---
 
+## Anatomy
+
+NexUI 导出了 4 个 Popover 相关组件:
+
+- `Popover`: 用于显示 Popover 的根组件。
+- `PopoverTrigger`: 用于触发 Popover 打开的组件。
+- `PopoverContent`: 用于显示 Popover 内容的组件。
+- `PopoverClose`: 用于触发 Popover 关闭的组件。
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverClose,
+} from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...popover.usage} />
@@ -27,19 +45,19 @@ Popover 是一种非模态对话框，会悬浮在其触发元素周围。它通
 
 ### Offset
 
-使用 `offset` 属性可以设置 Popover 的偏移量，包括主轴和交叉轴的偏移。设置 false 可禁用偏移。
+PopoverContent 的 `offset` 属性可以设置 Popover 偏移量，包括主轴和交叉轴的偏移。设置 false 可禁用偏移。
 
 <Example {...popover.offset} />
 
 ### Flip
 
-使用 `flip` 属性可以更改 Popover 的位置，使其保持在视图中。默认值为 `{ mainAxis: true, crossAxis: true }`。设置 `false` 可禁用翻转行为。
+PopoverContent 的 `flip` 属性可以更改 Popover 的位置，使其保持在视图中。默认值为 `{ mainAxis: true, crossAxis: true }`。设置 `false` 可禁用翻转行为。
 
 <Example {...popover.flip} />
 
 ### Shift
 
-使用 `shift` 属性可以移动 Popover 以保持其在视图中。 默认为 true。
+PopoverContent 的 `shift` 属性可以移动 Popover 以保持其在视图中。 默认为 true。
 
 <Example {...popover.shift} />
 
@@ -53,15 +71,7 @@ Popover 会处理其弹窗内容内的焦点。这意味着您可以将 Popover 
 
 <Example {...popover.controlled} />
 
-### Custom Motion
-
-使用 `motionProps` 属性自定义 `visible` / `hidden` 的动画效果。
-
-<Example {...popover.customMotion} />
-
 ## API
-
-Popover 继承 `as` (默认为 `m.div`) 的 Props。
 
 ### Popover Props
 
@@ -72,12 +82,6 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
       type: 'ReactNode',
       description:
         'Popover 的内容，通常为 PopoverTrigger 和 PopoverContent 组件。',
-    },
-    {
-      prop: 'container',
-      type: ['HTMLElement | null', '() => HTMLElement | null'],
-      description: '放置 Portal 的容器元素。',
-      default: 'document.body',
     },
     {
       prop: 'open',
@@ -95,6 +99,97 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
       description: '当 Popover 打开/关闭时触发回调函数。',
     },
     {
+      prop: 'onClose',
+      type: '() => void',
+      description: '当 Popover 关闭时触发回调函数。',
+    },
+  ]}
+/>
+
+### PopoverContent Props
+
+PopoverContent 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'Popover 的内容。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Popover 根元素的 ref。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于 Popover 根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于 Popover 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于 Popover 根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: '用于 Popover 各个部分的 classNames。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: '用于 Popover 各个部分的 slotProps。',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'default'`,
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: `'default'`,
+      description: 'Popover 的颜色。',
+    },
+    {
+      prop: 'maxWidth',
+      type: ['string', 'number'],
+      description: 'Popover 的最大宽度。',
+    },
+    {
+      prop: 'width',
+      type: ['string', 'number'],
+      default: 'auto',
+      description: 'Popover 的宽度。',
+    },
+    {
+      prop: 'radius',
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      default: `'md'`,
+      description: 'Popover 的圆角大小。',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement | null', '() => HTMLElement | null'],
+      description: '放置 Portal 的容器元素。',
+      default: 'document.body',
+    },
+    {
       prop: 'placement',
       type: [
         `'top'`,
@@ -110,7 +205,7 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
         `'right-start'`,
         `'right-end'`,
       ],
-      default: `'top'`,
+      default: `'bottom'`,
       description: 'Popover 出现的位置。',
     },
     {
@@ -134,7 +229,7 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
       prop: 'shift',
       type: 'boolean',
       default: 'true',
-      description: '移动popper元素以使其保持在可见范围内。',
+      description: '移动 Popover 元素以使其保持在可见范围内。',
     },
     {
       prop: 'keepMounted',
@@ -155,108 +250,41 @@ Popover 继承 `as` (默认为 `m.div`) 的 Props。
       description: '当触发元素被完全遮挡时是否关闭 Popover 。',
     },
     {
-      prop: 'openDelay',
-      type: 'number',
-      default: '0',
-      description: '显示 Popover 前的延迟时间（毫秒）。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Popover 的动画效果。',
     },
     {
-      prop: 'closeDelay',
-      type: 'number',
-      default: '0',
-      description: '隐藏 Popover 前的延迟时间（毫秒）。',
+      prop: 'loopFocus',
+      type: 'boolean',
+      default: 'true',
+      description: '是否在 Popover 内循环焦点。',
     },
     {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发 Popover 根元素的 ref。',
+      prop: 'restoreFocus',
+      type: 'boolean',
+      default: 'true',
+      description: '是否在 Popover 关闭时恢复焦点到之前聚焦的元素。',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className 。',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: 'm.div',
-      description:
-        '用于 Popover 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
+      prop: 'autoFocus',
+      type: 'boolean',
+      default: 'false',
+      description: '是否在 Popover 打开时自动聚焦到第一个可聚焦元素。',
     },
   ]}
 />
 
-### PopoverContent Props
+### PopoverContent Slots
 
-PopoverContent 继承 `as` (默认为 `'div'`) 的 Props。
-
-<PropsTable
+<SlotsTable
   dataSource={[
     {
-      prop: 'children',
-      type: 'ReactNode',
-      description: 'PopoverContent 的内容。',
-    },
-    {
-      prop: 'color',
-      type: [
-        `'default'`,
-        `'blue'`,
-        `'orange'`,
-        `'yellow'`,
-        `'cyan'`,
-        `'red'`,
-        `'green'`,
-        `'pink'`,
-        `'purple'`,
-        `'gray'`,
-      ],
-      default: `'default'`,
-      description: 'PopoverContent 的颜色。',
-    },
-    {
-      prop: 'maxWidth',
-      type: "CSSObject['maxWidth']",
-      default: '480',
-      description: 'PopoverContent 的最大宽度。',
-    },
-    {
-      prop: 'maxHeight',
-      type: "CSSObject['maxHeight']",
-      description: 'PopoverContent 的最大高度。',
-    },
-    {
-      prop: 'radius',
-      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
-      default: `'md'`,
-      description: 'PopoverContent 的圆角大小。',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发 PopoverContent 根元素的 ref。',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description:
-        '用于 PopoverContent 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
+      slot: 'paper',
+      class: '.nui-popover-content-paper',
+      component: "'div'",
+      description: 'Popover 的内容容器。',
     },
   ]}
 />
@@ -267,13 +295,13 @@ PopoverContent 继承 `as` (默认为 `'div'`) 的 Props。
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
+      type: 'ReactElement',
       description: '触发元素，点击时显示 Popover 。',
     },
     {
       prop: 'closeOnClick',
       type: 'boolean',
-      default: 'true',
+      default: 'false',
       description: '点击触发元素时是否关闭 Popover 。',
     },
   ]}
@@ -285,7 +313,7 @@ PopoverContent 继承 `as` (默认为 `'div'`) 的 Props。
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
+      type: 'ReactElement',
       description: '触发元素，点击时关闭 Popover 。',
     },
   ]}

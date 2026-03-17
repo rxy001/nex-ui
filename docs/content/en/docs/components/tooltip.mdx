@@ -1,17 +1,23 @@
 ---
 title: Tooltip
-description: Tooltips display a brief, informative message that appears when a user interacts with an element.
+description: Tooltip displays a short message when users interact with an element.
 ---
 
 import { tooltip } from '@/content/_demo'
 
 # Tooltip
 
-Tooltips display a brief, informative message that appears when a user interacts with an element.
+Tooltip displays a short message when users interact with an element.
 
 <ComponentLinks component='tooltip' ariaCompatible />
 
 ---
+
+## Anatomy
+
+```tsx
+import { Tooltip } from '@nex-ui/react'
+```
 
 ## Usage
 
@@ -31,86 +37,113 @@ Tooltips display a brief, informative message that appears when a user interacts
 
 ### Offset
 
-Use the `offset` prop to set the Tooltip offset, including the main-axis and cross-axis offsets. Set to `false` to disable the offset.
+Use the `offset` prop to set main-axis and cross-axis offsets. Set it to `false` to disable offset.
 
 <Example {...tooltip.offset} />
 
 ### Flip
 
-Use the `flip` prop to change the Tooltip placement to keep it in view. Defaults to `{ mainAxis: true, crossAxis: true }`. Set to `false` to disable the flip behavior.
+Use the `flip` prop to adjust Tooltip placement and keep it in view. The default is `{ mainAxis: true, crossAxis: true }`. Set it to `false` to disable flipping.
 
 <Example {...tooltip.flip} />
 
 ### Shift
 
-Use the `shift` prop to shift the Tooltip to keep it in view. Defaults to `true`.
+Use the `shift` prop to keep the Tooltip in view. Defaults to `true`.
 
 <Example {...tooltip.shift} />
 
 ### Interactive
 
-Use the `interactive` prop to keep the Tooltip open when interacting with its content. Defaults to `true`.
+Use the `interactive` prop to keep Tooltip content visible during interaction. Defaults to `false`.
 
 <Example {...tooltip.interactive} />
 
 ### Delay
 
-Use the `openDelay` and `closeDelay` props to set the delay time (in milliseconds) for showing and hiding the tooltip.
+Use `openDelay` and `closeDelay` to set the show/hide delay (in milliseconds).
 
 <Example {...tooltip.delay} />
 
 ### Controlled
 
-Tooltip supports controlled mode via the `open` and `onOpenChange` props.
-
 <Example {...tooltip.controlled} />
-
-### Custom Motion
-
-Use the `motionProps` prop to customize the animation for the `visible` and `hidden` states.
-
-<Example {...tooltip.customMotion} />
 
 ## API
 
 ### Tooltip Props
 
-Tooltip inherits the props of `as` (by default, `m.div`).
+Tooltip inherits the props of `as` (by default, `'div'`).
 
 <PropsTable
   dataSource={[
     {
       prop: 'content',
       type: 'ReactNode',
-      description: 'The content to render inside the Tooltip.',
+      description: 'The content shown by Tooltip.',
     },
     {
       prop: 'children',
-      type: 'ReactNode',
-      description: 'The children to render. Usually a trigger element.',
+      type: 'ReactElement',
+      description: 'The trigger element of Tooltip.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the Tooltip root element.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'The className for the root element.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        'The component used for the Tooltip root element. It can be an HTML element string or a custom component.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: 'The sx prop for the root element.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'classNames for each Tooltip slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'slotProps for each Tooltip slot.',
     },
     {
       prop: 'container',
       type: ['HTMLElement | null', '() => HTMLElement | null'],
-      description:
-        'The container element in which the overlay portal will be placed.',
+      description: 'The container element where the Portal is rendered.',
       default: 'document.body',
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the Tooltip is shown. (controlled)',
+      description: 'Controls the open state of Tooltip. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the Tooltip is shown by default. (uncontrolled)',
+      description: 'The default open state of Tooltip. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
-      description:
-        'Handler that is called when the Tooltip is opened or closed.',
+      description: 'Callback fired when Tooltip opens or closes.',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: 'Callback fired when Tooltip closes.',
     },
     {
       prop: 'placement',
@@ -129,14 +162,13 @@ Tooltip inherits the props of `as` (by default, `m.div`).
         `'right-end'`,
       ],
       default: `'top'`,
-      description:
-        'The placement of the Tooltip relative to the trigger element.',
+      description: 'The placement of Tooltip.',
     },
     {
       prop: 'size',
       type: `'sm' | 'md' | 'lg'`,
       default: `'md'`,
-      description: 'The size of the Tooltip.',
+      description: 'The size of Tooltip.',
     },
     {
       prop: 'color',
@@ -153,125 +185,91 @@ Tooltip inherits the props of `as` (by default, `m.div`).
         `'gray'`,
       ],
       default: `'default'`,
-      description: 'The color of the Tooltip.',
+      description: 'The color of Tooltip.',
     },
     {
       prop: 'radius',
       type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
       default: `'md'`,
-      description: 'The border radius of the Tooltip.',
+      description: 'The border radius of Tooltip.',
     },
     {
       prop: 'maxWidth',
-      type: "CSSObject['maxWidth']",
-      default: '360',
-      description: 'The maximum width of the Tooltip.',
-    },
-    {
-      prop: 'maxHeight',
-      type: "CSSObject['maxHeight']",
-      description: 'The maximum height of the Tooltip.',
+      type: ['string', 'number'],
+      description: 'The maximum width of Tooltip.',
     },
     {
       prop: 'motionProps',
-      type: 'HTMLMotionProps',
-      description: 'The props to modify the framer motion animation.',
+      type: ['HTMLMotionProps', `(placement: Placement) => HTMLMotionProps`],
+      description: 'Props used to customize Tooltip animations.',
     },
     {
       prop: 'offset',
       type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
       default: '5',
-      description: 'Translates the Tooltip along the specified axes.',
+      description: 'Sets Tooltip offset, or disables offset.',
     },
     {
       prop: 'flip',
       type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
       default: '{ mainAxis: true, crossAxis: true }',
-      description: 'Changes the placement of the Tooltip to keep it in view.',
+      description: 'Changes Tooltip placement to keep it in view.',
     },
     {
       prop: 'shift',
       type: 'boolean',
       default: 'true',
-      description: 'Shifts the Tooltip to keep it in view.',
+      description: 'Moves the popper element to keep it visible.',
     },
     {
       prop: 'interactive',
       type: 'boolean',
-      default: 'true',
-      description:
-        'If true, keeps the Tooltip open when interacting with its content.',
+      default: 'false',
+      description: 'Whether to keep content visible during interaction.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'false',
-      description: 'If true, always keep the children in the DOM.',
+      description: 'Keeps Tooltip mounted even when closed.',
     },
     {
       prop: 'closeOnEscape',
       type: 'boolean',
       default: 'true',
-      description:
-        'If true, closes the Tooltip when the Escape key is pressed.',
+      description: 'Whether to close Tooltip on Escape key press.',
     },
     {
       prop: 'closeOnClick',
       type: 'boolean',
       default: 'true',
       description:
-        'If true, closes the Tooltip when clicking the trigger element.',
+        'Whether to close Tooltip when clicking the trigger element.',
     },
     {
       prop: 'closeOnDetached',
       type: 'boolean',
       default: 'true',
       description:
-        'If true, closes the Tooltip when the trigger element is completely obscured.',
+        'Whether to close Tooltip when the trigger is fully obscured.',
     },
     {
       prop: 'openDelay',
       type: 'number',
       default: '100',
-      description: 'The delay in milliseconds before the Tooltip opens.',
+      description: 'Delay in milliseconds before showing Tooltip.',
     },
     {
       prop: 'closeDelay',
       type: 'number',
       default: '100',
-      description: 'The delay in milliseconds before the Tooltip closes.',
+      description: 'Delay in milliseconds before hiding Tooltip.',
     },
     {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: 'm.div',
-      description: 'The component or element to render as the root.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to disable Tooltip animations.',
     },
   ]}
 />
@@ -281,9 +279,9 @@ Tooltip inherits the props of `as` (by default, `m.div`).
 <SlotsTable
   dataSource={[
     {
-      slot: 'content',
-      description: 'The content container of the Tooltip.',
-      class: '.nui-tooltip-content',
+      slot: 'paper',
+      description: 'The content container of Tooltip.',
+      class: '.nui-tooltip-paper',
       component: "'div'",
     },
   ]}
