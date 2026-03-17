@@ -1,17 +1,35 @@
 ---
 title: Popover
-description: Popover is a non-modal dialog that floats around its disclosure. It's commonly used for displaying additional rich content on top of something.
+description: Popover is a non-modal dialog that floats around its trigger element. It is commonly used to display additional rich content on top of an element.
 ---
 
 import { popover } from '@/content/_demo'
 
 # Popover
 
-Popover is a non-modal dialog that floats around its disclosure. It's commonly used for displaying additional rich content on top of something.
+Popover is a non-modal dialog that floats around its trigger element. It is commonly used to display additional rich content on top of an element.
 
 <ComponentLinks component='popover' />
 
 ---
+
+## Anatomy
+
+NexUI exports 4 Popover-related components:
+
+- `Popover`: The root component that displays the Popover.
+- `PopoverTrigger`: The component that triggers the Popover to open.
+- `PopoverContent`: The component that displays Popover content.
+- `PopoverClose`: The component that triggers the Popover to close.
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverClose,
+} from '@nex-ui/react'
+```
 
 ## Usage
 
@@ -27,45 +45,35 @@ Popover is a non-modal dialog that floats around its disclosure. It's commonly u
 
 ### Offset
 
-Use the `offset` prop to set the Popover offset, including the main-axis and cross-axis offsets. Set to `false` to disable the offset.
+Use the `offset` prop on `PopoverContent` to set main-axis and cross-axis offsets. Set it to `false` to disable offset.
 
 <Example {...popover.offset} />
 
 ### Flip
 
-Use the `flip` prop to change the Popover placement to keep it in view. Defaults to `{ mainAxis: true, crossAxis: true }`. Set to `false` to disable the flip behavior.
+Use the `flip` prop on `PopoverContent` to adjust placement and keep the Popover in view. The default is `{ mainAxis: true, crossAxis: true }`. Set it to `false` to disable flipping.
 
 <Example {...popover.flip} />
 
 ### Shift
 
-Use the `shift` prop to shift the Popover to keep it in view. Defaults to `true`.
+Use the `shift` prop on `PopoverContent` to keep the Popover in view. Defaults to `true`.
 
 <Example {...popover.shift} />
 
 ### With Form
 
-The Popover handles the focus within the Popover content. It means that you can use the Popover with form elements without any problem. The focus returns to the trigger when the Popover closes.
+Popover manages focus within its content, so you can safely use it with form elements. When the Popover closes, focus returns to the trigger element.
 
 <Example {...popover.withForm} />
 
 ### Controlled
 
-Popover supports controlled mode via the `open` and `onOpenChange` props.
-
 <Example {...popover.controlled} />
-
-### Custom Motion
-
-Use the `motionProps` prop to customize the animation effects for `visible` / `hidden`.
-
-<Example {...popover.customMotion} />
 
 ## API
 
 ### Popover Props
-
-Popover inherits the props of `as` (by default, `m.div`).
 
 <PropsTable
   dataSource={[
@@ -73,30 +81,113 @@ Popover inherits the props of `as` (by default, `m.div`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'The content of the Popover, usually consists of PopoverTrigger and PopoverContent components.',
-    },
-    {
-      prop: 'container',
-      type: ['HTMLElement | null', '() => HTMLElement | null'],
-      description:
-        'The container element in which the overlay portal will be placed.',
-      default: 'document.body',
+        'The content of the Popover, usually PopoverTrigger and PopoverContent components.',
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the Popover is shown. (controlled)',
+      description: 'Controls the open state of the Popover. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the Popover is shown by default. (uncontrolled)',
+      description: 'The default open state of the Popover. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
+      description: 'Callback fired when the Popover opens or closes.',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: 'Callback fired when the Popover closes.',
+    },
+  ]}
+/>
+
+### PopoverContent Props
+
+PopoverContent inherits the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the Popover.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the Popover root element.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'The className for the Popover root element.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
       description:
-        'Handler that is called when the Popover is opened or closed.',
+        'The component used for the Popover root element. It can be an HTML element string or a custom component.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: 'The sx prop for the Popover root element.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'classNames for each Popover slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'slotProps for each Popover slot.',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'default'`,
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: `'default'`,
+      description: 'The color of the Popover.',
+    },
+    {
+      prop: 'maxWidth',
+      type: ['string', 'number'],
+      description: 'The maximum width of the Popover.',
+    },
+    {
+      prop: 'width',
+      type: ['string', 'number'],
+      default: 'auto',
+      description: 'The width of the Popover.',
+    },
+    {
+      prop: 'radius',
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      default: `'md'`,
+      description: 'The border radius of the Popover.',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement | null', '() => HTMLElement | null'],
+      description: 'The container element where the Portal is rendered.',
+      default: 'document.body',
     },
     {
       prop: 'placement',
@@ -114,156 +205,89 @@ Popover inherits the props of `as` (by default, `m.div`).
         `'right-start'`,
         `'right-end'`,
       ],
-      default: `'top'`,
-      description:
-        'The placement of the Popover relative to the trigger element.',
+      default: `'bottom'`,
+      description: 'The placement of the Popover.',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: 'The props to modify the framer motion animation.',
+      description: 'Props used to customize Popover animations.',
     },
     {
       prop: 'offset',
       type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
       default: '5',
-      description: 'Translates the Popover along the specified axes.',
+      description: 'Sets the Popover offset, or disables offset.',
     },
     {
       prop: 'flip',
       type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
       default: '{ mainAxis: true, crossAxis: true }',
-      description: 'Changes the placement of the Popover to keep it in view.',
+      description: 'Changes Popover placement to keep it in view.',
     },
     {
       prop: 'shift',
       type: 'boolean',
       default: 'true',
-      description: 'Shifts the Popover to keep it in view.',
+      description: 'Moves the Popover element to keep it visible.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'false',
-      description: 'If true, always keep the children in the DOM.',
+      description: 'Keeps the Popover mounted even when closed.',
     },
     {
       prop: 'closeOnEscape',
       type: 'boolean',
       default: 'true',
-      description:
-        'If true, closes the Popover when the Escape key is pressed.',
+      description: 'Whether to close the Popover when pressing Escape.',
     },
     {
       prop: 'closeOnDetached',
       type: 'boolean',
       default: 'true',
       description:
-        'If true, closes the Popover when the trigger element is completely obscured.',
+        'Whether to close the Popover when the trigger is fully obscured.',
     },
     {
-      prop: 'openDelay',
-      type: 'number',
-      default: '0',
-      description: 'The delay in milliseconds before the Popover opens.',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to disable Popover animations.',
     },
     {
-      prop: 'closeDelay',
-      type: 'number',
-      default: '0',
-      description: 'The delay in milliseconds before the Popover closes.',
+      prop: 'loopFocus',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether to loop focus within the Popover.',
     },
     {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: 'm.div',
-      description: 'The component or element to render as the root.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
+      prop: 'restoreFocus',
+      type: 'boolean',
+      default: 'true',
       description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
+        'Whether to restore focus to the previously focused element when closed.',
+    },
+    {
+      prop: 'autoFocus',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Whether to autofocus the first focusable element when opened.',
     },
   ]}
 />
 
-### PopoverContent Props
+### PopoverContent Slots
 
-PopoverContent inherits the props of `as` (by default, `'div'`).
-
-<PropsTable
+<SlotsTable
   dataSource={[
     {
-      prop: 'children',
-      type: 'ReactNode',
-      description: 'The content of the PopoverContent component.',
-    },
-    {
-      prop: 'color',
-      type: [
-        `'default'`,
-        `'blue'`,
-        `'orange'`,
-        `'yellow'`,
-        `'cyan'`,
-        `'red'`,
-        `'green'`,
-        `'pink'`,
-        `'purple'`,
-        `'gray'`,
-      ],
-      default: `'default'`,
-      description: 'The color of the Popover content.',
-    },
-    {
-      prop: 'maxWidth',
-      type: "CSSObject['maxWidth']",
-      default: '480',
-      description: 'The maximum width of the Popover content.',
-    },
-    {
-      prop: 'maxHeight',
-      type: "CSSObject['maxHeight']",
-      description: 'The maximum height of the Popover content.',
-    },
-    {
-      prop: 'radius',
-      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
-      default: `'md'`,
-      description: 'The border radius of the Popover content.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description: 'The component or element to render as the root.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
+      slot: 'paper',
+      class: '.nui-popover-content-paper',
+      component: "'div'",
+      description: 'The content container of the Popover.',
     },
   ]}
 />
@@ -274,15 +298,14 @@ PopoverContent inherits the props of `as` (by default, `'div'`).
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
-      description: 'The trigger displays the Popover when clicked.',
+      type: 'ReactElement',
+      description: 'The trigger element that opens the Popover when clicked.',
     },
     {
       prop: 'closeOnClick',
       type: 'boolean',
-      default: 'true',
-      description:
-        'If true, closes the Popover when clicking the trigger element.',
+      default: 'false',
+      description: 'Whether to close the Popover when the trigger is clicked.',
     },
   ]}
 />
@@ -293,8 +316,8 @@ PopoverContent inherits the props of `as` (by default, `'div'`).
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
-      description: 'The element closes the Popover when clicked.',
+      type: 'ReactElement',
+      description: 'The trigger element that closes the Popover when clicked.',
     },
   ]}
 />

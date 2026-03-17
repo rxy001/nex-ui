@@ -12,11 +12,11 @@ import {
 
 export default function App() {
   return (
-    <Dialog keepMounted>
+    <Dialog>
       <DialogTrigger>
         <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent keepMounted>
         <DialogHeader>Dialog Header</DialogHeader>
         <DialogBody>
           <Flex direction='column' gap='5'>

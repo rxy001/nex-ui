@@ -1,17 +1,28 @@
 ---
 title: RadioGroup
-description: RadioGroup 允许用户从一组中选择一个项目。
+description: RadioGroup lets users select one option from a group.
 ---
 
 import { radioGroup } from '@/content/_demo'
 
 # RadioGroup
 
-RadioGroup allows users to select a single option from a list of mutually exclusive options.
+RadioGroup lets users select a single option from a set of mutually exclusive choices.
 
 <ComponentLinks component='radioGroup' ariaCompatible />
 
 ---
+
+## Anatomy
+
+NexUI exports 2 RadioGroup-related components:
+
+- `Radio`: The component used to render a radio input.
+- `RadioGroup`: The component used to group multiple radios.
+
+```tsx
+import { Radio, RadioGroup } from '@nex-ui/react'
+```
 
 ## Usage
 
@@ -45,7 +56,7 @@ Use the `orientation` prop to set the layout direction of the RadioGroup. Defaul
 
 ### Controlled
 
-Use the `value` and `onValueChange` props to control the radio input value.
+Use `value` and `onValueChange` to control the selected option.
 
 <Example {...radioGroup.controlled} />
 
@@ -60,7 +71,34 @@ Radio inherits the props of `as` (by default, `'input'`).
     {
       prop: 'children',
       type: 'ReactNode',
-  description: 'The label of the Radio.',
+      description: 'The label of the Radio.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description: 'The component or element to render as the input.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
     },
     {
       prop: 'color',
@@ -76,86 +114,64 @@ Radio inherits the props of `as` (by default, `'input'`).
         "'gray'",
       ],
       default: "'blue'",
-  description: 'The color of the Radio.',
+      description: 'The color of the Radio.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
       default: "'md'",
-  description: 'The size of the Radio.',
+      description: 'The size of the Radio.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-  description: 'If true, the Radio is disabled.',
+      description: 'If true, the Radio is disabled.',
     },
     {
       prop: 'checked',
       type: 'boolean',
-  description: 'If true, the Radio is checked. (controlled)',
+      description: 'If true, the Radio is checked. (controlled)',
 
     },
     {
       prop: 'defaultChecked',
       type: 'boolean',
-
-description: 'If true, the Radio is checked by default. (uncontrolled)',
-},
-{
-prop: 'className',
-type: 'ClassValue',
-description: 'Additional class names to apply to the root.',
-},
-{
-prop: 'name',
-type: 'string',
-description: 'The name of the Radio.',
-},
-{
-prop: 'value',
-type: ['string', 'number'],
-description: 'The value of the Radio.',
-},
-{
-prop: 'ref',
-type: 'Ref',
-description: 'Ref for forwarding to the input inside the Radio.',
-},
-{
-prop: 'onChange',
-type: '(event: ChangeEvent<HTMLInputElement>) => void',
-description:
-"Handler that is called when the element's checked state changes.",
-},
-{
-prop: 'onCheckedChange',
-type: '(checked: boolean) => void',
-description:
-"Handler that is called when the element's checked state changes.",
-},
-{
-prop: 'as',
-type: 'ElementType',
-default: "'input'",
-description: 'The component or element to render as the input.',
-},
-{
-prop: 'sx',
-type: 'Interpolation',
-description:
-'The system prop that allows defining system overrides as well as additional CSS styles.',
-},
-{
-prop: 'classNames',
-type: "Partial<Record<Slots, ClassValue>>",
-description: 'The className used for each slot.',
-},
-{
-prop: 'slotProps',
-type: 'Partial<Record<Slots, ComponentProps>>',
-description: 'The props used for each slot.',
-},
+      description: 'If true, the Radio is checked by default. (uncontrolled)',
+    },
+    {
+      prop: 'name',
+      type: 'string',
+      description: 'The name of the Radio.',
+    },
+    {
+      prop: 'value',
+      type: ['string', 'number'],
+      description: 'The value of the Radio.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the input inside the Radio.',
+    },
+    {
+      prop: 'onChange',
+      type: '(event: ChangeEvent<HTMLInputElement>) => void',
+      description:
+        "Handler that is called when the element's checked state changes.",
+    },
+    {
+      prop: 'onCheckedChange',
+      type: '(checked: boolean) => void',
+      description:
+        "Handler that is called when the element's checked state changes.",
+    },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to disable Radio animations.',
+    },
 
 ]}
 />
@@ -285,6 +301,12 @@ RadioGroup inherits the props of `as` (by default, `'div'`).
       prop: 'slotProps',
       type: 'Partial<Record<Slots, ComponentProps>>',
       description: 'The props used for each slot.',
+    },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to disable animations for all Radios in the group.',
     },
 
 ]}

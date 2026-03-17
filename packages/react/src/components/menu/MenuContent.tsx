@@ -76,7 +76,7 @@ const MenuContentImpl = (props: MenuContentImplProps) => {
         }
       },
       onPointerDownOutside: (event: PointerDownOutsideEvent) => {
-        const target = event.target as HTMLElement
+        const target = event.detail.originalEvent.target as HTMLElement
         if (menuCtx.triggerRef.current?.contains(target)) {
           event.preventDefault()
         }

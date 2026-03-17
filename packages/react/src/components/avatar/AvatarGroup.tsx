@@ -32,6 +32,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     spacing,
     renderSurplus,
     classNames,
+    disableAnimation = false,
     size = 'md',
     color = 'gray',
     outlined = false,
@@ -49,6 +50,7 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
     outlined,
     radius,
     max,
+    disableAnimation,
   }
 
   const slotClasses = useSlotClasses({
@@ -88,8 +90,9 @@ export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
       color,
       outlined,
       radius,
+      disableAnimation,
     }),
-    [color, outlined, radius, size],
+    [color, outlined, radius, size, disableAnimation],
   )
 
   const childrenLength = Array.isArray(children) ? children.length : 1

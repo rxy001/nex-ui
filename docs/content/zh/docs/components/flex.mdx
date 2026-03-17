@@ -13,6 +13,12 @@ Flex 是用于在垂直或水平方向排列元素的弹性容器组件。
 
 ---
 
+## Anatomy
+
+```tsx
+import { Flex } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...flex.usage} />
@@ -58,6 +64,23 @@ Flex 继承 `as` (默认为 `'div'`) 的 Props。
       description: '用于根元素的 className。',
     },
     {
+      prop: 'ref',
+      description: '用于转发根元素。',
+      type: 'Ref',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
       prop: 'inline',
       type: 'boolean',
       default: 'false',
@@ -87,23 +110,6 @@ Flex 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'gap',
       type: "CSSObject['gap']",
       description: '设置子元素之间的间距。',
-    },
-    {
-      prop: 'ref',
-      description: '用于转发根元素。',
-      type: 'Ref',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
     },
   ]}
 />

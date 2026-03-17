@@ -36,10 +36,10 @@ exports[`AvatarGroup should render with default props 1`] = `
   height: var(--nui-sizes-10);
   font-size: var(--nui-font-sizes-lg);
   border-radius: var(--nui-radii-lg);
-  -webkit-transition: var(--nui-transitions-transform);
-  transition: var(--nui-transitions-transform);
   position: relative;
   z-index: 1;
+  -webkit-transition: var(--nui-transitions-transform);
+  transition: var(--nui-transitions-transform);
 }
 
 .emotion-1 svg {

@@ -96,6 +96,7 @@ export const Avatar = <RootComponent extends ElementType = 'div'>(
     color,
     outlined,
     inGroup,
+    disableAnimation: groupCtx?.disableAnimation ?? false,
   }
 
   const styles = useRecipeStyles({

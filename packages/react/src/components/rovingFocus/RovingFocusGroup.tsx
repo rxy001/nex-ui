@@ -193,10 +193,8 @@ function getFocusIntent(
     case 'ArrowRight':
       return 'next'
     case 'Home':
-    case 'PageUp':
       return 'first'
     case 'End':
-    case 'PageDown':
       return 'last'
     default:
       return

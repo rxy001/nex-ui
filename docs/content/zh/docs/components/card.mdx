@@ -13,6 +13,26 @@ Card 包含关于单一主题的内容和操作选项。
 
 ---
 
+## Anatomy
+
+NexUI 导出了 5 个 Card 相关组件:
+
+- `Card`: 用于显示卡片的根组件。
+- `CardHeader`: 用于显示卡片头部的组件。
+- `CardBody`: 用于显示卡片主体内容的组件。
+- `CardFooter`: 用于显示卡片底部的组件。
+- `CardActionArea`: 用于指定卡片的操作区域的组件。
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardActionArea,
+} from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...card.usage} />
@@ -60,6 +80,28 @@ Card 继承 `as` (默认为 `'div'`) 的 Props。
         '通常为 CardHeader、CardBody、CardFooter 以及其他自定义内容。',
     },
     {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
+    {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'none'"],
       default: "'md'",
@@ -82,28 +124,6 @@ Card 继承 `as` (默认为 `'div'`) 的 Props。
       default: 'false',
       description: 'Card 是否显示悬停效果。',
     },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref 用于转发到根元素。',
-    },
   ]}
 />
 
@@ -118,26 +138,6 @@ CardHeader 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'ReactNode',
       description:
         'CardHeader 的内容，将会使 avatar、action、title 和 subtitle 属性失效。',
-    },
-    {
-      prop: 'title',
-      type: 'ReactNode',
-      description: 'CardHeader 的标题。',
-    },
-    {
-      prop: 'subtitle',
-      type: 'ReactNode',
-      description: 'CardHeader 的副标题。',
-    },
-    {
-      prop: 'avatar',
-      type: 'ReactNode',
-      description: 'CardHeader 的头像。',
-    },
-    {
-      prop: 'action',
-      type: 'ReactNode',
-      description: 'CardHeader 的操作区域。',
     },
     {
       prop: 'sx',
@@ -170,6 +170,26 @@ CardHeader 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'ref',
       type: 'Ref',
       description: 'Ref 用于转发到根元素。',
+    },
+    {
+      prop: 'title',
+      type: 'ReactNode',
+      description: 'CardHeader 的标题。',
+    },
+    {
+      prop: 'subtitle',
+      type: 'ReactNode',
+      description: 'CardHeader 的副标题。',
+    },
+    {
+      prop: 'avatar',
+      type: 'ReactNode',
+      description: 'CardHeader 的头像。',
+    },
+    {
+      prop: 'action',
+      type: 'ReactNode',
+      description: 'CardHeader 的操作区域。',
     },
   ]}
 />
@@ -262,6 +282,42 @@ CardFooter 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'children',
       type: 'ReactNode',
       description: 'CardFooter 的内容。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
+  ]}
+/>
+
+### CardActionArea Props
+
+CardActionArea 继承 `as` (默认为 `'button'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'button'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'CardActionArea 的内容。',
     },
     {
       prop: 'ref',

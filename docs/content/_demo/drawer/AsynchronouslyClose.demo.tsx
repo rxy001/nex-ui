@@ -11,13 +11,22 @@ import {
   DrawerHeader,
   Flex,
 } from '@nex-ui/react'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 export default function App() {
   const [loading, setLoading] = useState(false)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   return (
-    <Drawer>
+    <Drawer
+      onClose={() => {
+        if (timerRef.current) {
+          clearTimeout(timerRef.current)
+          setLoading(false)
+          timerRef.current = null
+        }
+      }}
+    >
       <DrawerTrigger>
         <Button>Open Drawer</Button>
       </DrawerTrigger>
@@ -52,9 +61,10 @@ export default function App() {
               onClick={() => {
                 setLoading(true)
                 return new Promise((res) => {
-                  setTimeout(() => {
+                  timerRef.current = setTimeout(() => {
                     res(true)
                     setLoading(false)
+                    timerRef.current = null
                   }, 2000)
                 })
               }}

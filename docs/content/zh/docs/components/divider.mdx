@@ -13,6 +13,12 @@ Divider 用于分隔页面中的内容。
 
 ---
 
+## Anatomy
+
+```tsx
+import { Divider } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...divider.usage} />
@@ -25,12 +31,6 @@ Divider 继承 `as` (默认为 `'hr'`) 的 Props。
 
 <PropsTable
   dataSource={[
-    {
-      prop: 'orientation',
-      description: 'Divider 的方向。',
-      type: ["'horizontal'", "'vertical'"],
-      default: "'horizontal'",
-    },
     {
       prop: 'className',
       description: '用于根元素的 className。',
@@ -52,6 +52,12 @@ Divider 继承 `as` (默认为 `'hr'`) 的 Props。
       default: "'hr'",
       description:
         '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'orientation',
+      description: 'Divider 的方向。',
+      type: ["'horizontal'", "'vertical'"],
+      default: "'horizontal'",
     },
   ]}
 />

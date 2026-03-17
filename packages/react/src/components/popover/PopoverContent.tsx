@@ -99,7 +99,7 @@ export const PopoverContent = <RootComponent extends ElementType = 'div'>(
         display: resolvedDisplay,
       },
       onPointerDownOutside: (event: PointerDownOutsideEvent) => {
-        const target = event.target as HTMLElement
+        const target = event.detail.originalEvent.target as HTMLElement
         if (triggerRef.current?.contains(target)) {
           event.preventDefault()
         }

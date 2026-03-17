@@ -13,6 +13,12 @@ Tooltip 在用户与元素交互时显示一条简短的信息。
 
 ---
 
+## Anatomy
+
+```tsx
+import { Tooltip } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...tooltip.usage} />
@@ -43,13 +49,13 @@ Tooltip 在用户与元素交互时显示一条简短的信息。
 
 ### Shift
 
-使用 `shift` 属性可以移动 Tooltip 以保持其在视图中。 默认为 `true`。
+使用 `shift` 属性可以移动 Tooltip 以保持其在视图中。默认为 `true`。
 
 <Example {...tooltip.shift} />
 
 ### Interactive
 
-使用 `interactive` 属性可以使内容在交互式时保持可见。 默认为 `true`。
+使用 `interactive` 属性可以使内容在交互时保持可见。默认为 `false`。
 
 <Example {...tooltip.interactive} />
 
@@ -63,17 +69,11 @@ Tooltip 在用户与元素交互时显示一条简短的信息。
 
 <Example {...tooltip.controlled} />
 
-### Custom Motion
-
-使用 `motionProps` 属性自定义 `visible` / `hidden` 的动画效果。
-
-<Example {...tooltip.customMotion} />
-
 ## API
 
 ### Tooltip Props
 
-Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
+Tooltip 继承 `as` (默认为 `'div'`) 的 Props。
 
 <PropsTable
   dataSource={[
@@ -84,8 +84,40 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
     },
     {
       prop: 'children',
-      type: 'ReactNode',
+      type: 'ReactElement',
       description: 'Tooltip 的触发元素。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Tooltip 根元素的 ref。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于 Tooltip 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Tooltip Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Tooltip Slots 的 props。',
     },
     {
       prop: 'container',
@@ -107,6 +139,11 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
       description: '当 Tooltip 打开/关闭时触发回调函数。',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: '当 Tooltip 关闭时触发回调函数。',
     },
     {
       prop: 'placement',
@@ -158,19 +195,12 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
     },
     {
       prop: 'maxWidth',
-      type: "CSSObject['maxWidth']",
-      default: '360',
+      type: ['string', 'number'],
       description: 'Tooltip 的最大宽度。',
     },
     {
-      prop: 'maxHeight',
-      type: "CSSObject['maxHeight']",
-      default: '480',
-      description: 'Tooltip 的最大高度。',
-    },
-    {
       prop: 'motionProps',
-      type: 'HTMLMotionProps',
+      type: ['HTMLMotionProps', `(placement: Placement) => HTMLMotionProps`],
       description: '自定义 Tooltip 动画的属性。',
     },
     {
@@ -194,7 +224,7 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
     {
       prop: 'interactive',
       type: 'boolean',
-      default: 'true',
+      default: 'false',
       description: '是否在交互式时保持内容可见。',
     },
     {
@@ -234,36 +264,10 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
       description: '隐藏 Tooltip 前的延迟时间（毫秒）。',
     },
     {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发 Tooltip 根元素的 ref。',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: 'm.div',
-      description:
-        '用于 Tooltip 根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Tooltip Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Tooltip Slots 的 props。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Tooltip 的动画效果。',
     },
   ]}
 />
@@ -273,9 +277,9 @@ Tooltip 继承 `as` (默认为 `m.div`) 的 Props。
 <SlotsTable
   dataSource={[
     {
-      slot: 'content',
+      slot: 'paper',
       description: 'Tooltip 的内容容器。',
-      class: '.nui-tooltip-content',
+      class: '.nui-tooltip-paper',
       component: "'div'",
     },
   ]}

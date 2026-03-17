@@ -1,17 +1,28 @@
 ---
 title: Avatar
-description: Avatar represents users by displaying profile photos, initials, or fallback icons.
+description: Avatar represents users with profile photos, initials, or fallback icons.
 ---
 
 import { avatar } from '@/content/_demo'
 
 # Avatar
 
-Avatar displays user representations through profile images, initials, or alternative icons.
+Avatar represents users with profile images, initials, or fallback icons.
 
 <ComponentLinks component='avatar' />
 
 ---
+
+## Anatomy
+
+NexUI exports 2 Avatar-related components:
+
+- `Avatar`: The component that displays a single user.
+- `AvatarGroup`: The component that displays a group of users.
+
+```tsx
+import { Avatar, AvatarGroup } from '@nex-ui/react'
+```
 
 ## Usage
 
@@ -46,19 +57,19 @@ Avatar provides fallback mechanisms in this order when image loading fails:
 
 ### Group Max Count
 
-Set the `max` prop to limit the number of Avatars displayed in the AvatarGroup. It accepts a number value.
+Use the `max` prop to limit how many Avatars are shown in an AvatarGroup.
 
 <Example {...avatar.groupMaxCount} />
 
 ### Group Total Count
 
-Use the `total` prop to set the total number of Avatars displayed in the AvatarGroup. It accepts a number value.
+Use the `total` prop to set the total number of Avatars in the AvatarGroup.
 
 <Example {...avatar.groupTotalCount} />
 
 ### Custom Spacing
 
-Use the `spacing` prop to set the spacing between Avatars in the AvatarGroup. It accepts a number value.
+Use the `spacing` prop to set the spacing between Avatars in the AvatarGroup.
 
 <Example {...avatar.groupSpacing} />
 
@@ -79,8 +90,36 @@ Avatar inherits the props of `as` (by default, `'div'`).
     {
       prop: 'children',
       type: 'ReactNode',
+      default: '',
       description:
         'Used to render icon or text elements inside the Avatar if src is not set. This can be an element, or just a string.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
     },
     {
       prop: 'size',
@@ -132,37 +171,10 @@ Avatar inherits the props of `as` (by default, `'div'`).
         'Used in combination with src or srcSet to provide an alt attribute for the rendered img element.',
     },
     {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-    {
       prop: 'outlined',
       type: 'boolean',
       default: 'false',
       description: 'If true, adds an outline around the Avatar.',
-    },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description: 'The component or element to render as the root.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
     },
   ]}
 />
@@ -189,11 +201,45 @@ AvatarGroup inherits the props of `as` (by default, `'div'`).
     {
       prop: 'children',
       type: 'ReactNode',
+      default: '',
       description: 'Usually contains Avatar components.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'", "'xl'"],
+      default: "'md'",
       description: 'The size of all Avatars.',
     },
     {
@@ -209,26 +255,19 @@ AvatarGroup inherits the props of `as` (by default, `'div'`).
         "'purple'",
         "'gray'",
       ],
+      default: "'gray'",
       description: 'The color of all Avatars.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
+      default: 'size',
       description: 'The border radius of all Avatars.',
-    },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
     },
     {
       prop: 'outlined',
       type: 'boolean',
+      default: 'false',
       description: 'If true, adds an outline around all Avatars.',
     },
     {
@@ -256,26 +295,11 @@ AvatarGroup inherits the props of `as` (by default, `'div'`).
         'Custom renderer for surplus Avatars. Receives the surplus count based on children and max.',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description: 'The component or element to render as the root.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
       description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
+        'Whether to disable hover animation for Avatars in the AvatarGroup.',
     },
   ]}
 />

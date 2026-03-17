@@ -27,7 +27,7 @@ export default function App() {
         sx={{
           w: '300%',
           h: '300%',
-          d: 'flex',
+          display: 'flex',
           pos: 'relative',
           justifyContent: 'center',
           alignItems: 'center',

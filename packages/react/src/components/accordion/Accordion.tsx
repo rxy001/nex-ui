@@ -11,6 +11,7 @@ import {
   useSlotClasses,
   useSlot,
 } from '../utils'
+import { RovingFocusGroup } from '../rovingFocus'
 import { accordionRecipe } from '../../theme/recipes'
 import type { ElementType, Key } from 'react'
 import type { AccordionProps } from './types'
@@ -88,6 +89,11 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
       variant,
       multiple,
     },
+    additionalProps: {
+      // RovingFocusGroup adds the tabIndex attribute and sets it to null
+      // to prevent the element from being focusable.
+      tabIndex: null as any,
+    },
   })
 
   const toggleExpandedKey = useEvent((key: Key) => {
@@ -133,7 +139,9 @@ export const Accordion = <RootComponent extends ElementType = 'div'>(
 
   return (
     <AccordionGroupProvider value={ctx}>
-      <AccordionRoot {...getAccordionRootProps()}>{children}</AccordionRoot>
+      <RovingFocusGroup loop orientation='vertical'>
+        <AccordionRoot {...getAccordionRootProps()}>{children}</AccordionRoot>
+      </RovingFocusGroup>
     </AccordionGroupProvider>
   )
 }

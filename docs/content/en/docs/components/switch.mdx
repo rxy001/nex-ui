@@ -13,6 +13,12 @@ Switch is used to toggle between the selected and unselected states.
 
 ---
 
+## Anatomy
+
+```tsx
+import { Switch } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...$switch.usage} />
@@ -35,13 +41,13 @@ Switch is used to toggle between the selected and unselected states.
 
 ### With Icons
 
-You can also add icons at the start and end of the Switch by using the `startIcon` and `endIcon` props.
+Use `startIcon` and `endIcon` to add icons to the beginning and end of the Switch.
 
 <Example {...$switch.withIcons} />
 
 ### Controlled
 
-You can use the `checked` and `onCheckedChange` props to control the Switch's checked state.
+Use `checked` and `onCheckedChange` to control the Switch state.
 
 <Example {...$switch.controlled} />
 
@@ -58,6 +64,38 @@ Switch inherits the props of `as` (by default, `'input'`).
       type: 'ReactNode',
       default: '',
       description: 'The label of the Switch.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description: 'The component or element to render as the input.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the input inside the Switch.',
     },
     {
       prop: 'color',
@@ -102,11 +140,6 @@ Switch inherits the props of `as` (by default, `'input'`).
       description: 'The name of the Switch.',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
       prop: 'startIcon',
       type: 'ReactNode',
       description: 'The element placed before the children.',
@@ -122,11 +155,6 @@ Switch inherits the props of `as` (by default, `'input'`).
       description: 'The icon to display when the Switch is checked.',
     },
     {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the input inside the Switch.',
-    },
-    {
       prop: 'onChange',
       type: 'function',
       description:
@@ -139,26 +167,10 @@ Switch inherits the props of `as` (by default, `'input'`).
         "Handler that is called when the element's checked state changes.",
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'input'",
-      description: 'The component or element to render as the input.',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to disable Switch animations.',
     },
   ]}
 />

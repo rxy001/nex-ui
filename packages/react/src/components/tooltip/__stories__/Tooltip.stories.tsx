@@ -85,6 +85,9 @@ const meta = {
     keepMounted: {
       control: 'boolean',
     },
+    closeOnClick: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof TooltipTemplate>
 
