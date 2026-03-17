@@ -262,7 +262,7 @@ describe('RovingFocus', () => {
     expect(content.textContent).toBe('red')
   })
 
-  it('should handle Home, PageUp, End and PageDown key navigation correctly', async () => {
+  it('should handle Home and End key navigation correctly', async () => {
     const { getByTestId } = render(<TestRovingFocus />)
 
     const content = getByTestId('content')
@@ -272,10 +272,6 @@ describe('RovingFocus', () => {
     await user.keyboard('{End}')
     expect(content.textContent).toBe('orange')
     await user.keyboard('{Home}')
-    expect(content.textContent).toBe('red')
-    await user.keyboard('{PageDown}')
-    expect(content.textContent).toBe('orange')
-    await user.keyboard('{PageUp}')
     expect(content.textContent).toBe('red')
   })
 

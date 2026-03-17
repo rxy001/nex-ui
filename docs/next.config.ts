@@ -59,6 +59,7 @@ export default withAnalyzer(
       '@nex-ui/system',
       '@nex-ui/utils',
     ],
+    reactStrictMode: false,
     async redirects() {
       return [
         {
@@ -69,21 +70,5 @@ export default withAnalyzer(
         },
       ]
     },
-    // experimental: {
-    //   // 使用 webpack 代替 turbopack 以支持 resourceQuery
-    //   turbo: {
-    //     rules: {
-    //       './icons/*.svg': {
-    //         loaders: ['@svgr/webpack'],
-    //         as: '*.js',
-    //       },
-    //     },
-    //     resolveAlias: {
-    //       '@': './',
-    //     },
-    //   },
-    //   // 未设置改配置时，webpack 全量导入 icons, why?
-    //   optimizePackageImports: ['@nex-ui/icons'],
-    // },
   }),
 )

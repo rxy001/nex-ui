@@ -166,8 +166,8 @@ type DialogHeaderOwnProps<RootComponent extends ElementType> = {
    * The component or element to render as the root.
    * @default 'h2'
    */
-
   as?: RootComponent
+
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */

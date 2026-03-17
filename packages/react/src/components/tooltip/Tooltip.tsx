@@ -1,7 +1,7 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useCallback, useEffect, useId, useMemo } from 'react'
+import { useCallback, useEffect, useId, useMemo, useRef } from 'react'
 import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
 import { addEventListener, isNumber } from '@nex-ui/utils'
 import { AnimatePresence, LazyMotion } from 'motion/react'
@@ -20,14 +20,18 @@ import { TooltipProvider, useTooltipContext } from './TooltipContext'
 import { TooltipPaperMotion } from './TooltipPaperMotion'
 import type { CSSProperties, ElementType } from 'react'
 import type { TooltipProps } from './types'
-import type { FocusOutsideEvent } from '../dismissibleLayer'
+import type {
+  FocusOutsideEvent,
+  PointerDownOutsideEvent,
+} from '../dismissibleLayer'
 
 const slots = ['root', 'paper'] as const
 
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
 const TooltipImpl = (props: TooltipProps) => {
-  const { delayOpen, delayClose, rootId, open } = useTooltipContext()
+  const { delayOpen, delayClose, rootId, open, triggerRef } =
+    useTooltipContext()
   const {
     container,
     content,
@@ -37,6 +41,7 @@ const TooltipImpl = (props: TooltipProps) => {
     motionProps,
     maxWidth,
     interactive = false,
+    closeOnClick = true,
     disableAnimation = false,
     color = 'default',
     size = 'md',
@@ -80,14 +85,20 @@ const TooltipImpl = (props: TooltipProps) => {
     classNames: slotClasses.root,
     externalForwardedProps: remainingProps,
     additionalProps: {
+      placement,
       onPointerEnter: interactive ? delayOpen : undefined,
       onPointerLeave: interactive ? delayClose : undefined,
       onFocusOutside: (event: FocusOutsideEvent) => {
         event.preventDefault()
       },
-      placement,
       style: {
         display: resolvedDisplay,
+      },
+      onPointerDownOutside: (event: PointerDownOutsideEvent) => {
+        const target = event.detail.originalEvent.target as HTMLElement
+        if (!closeOnClick && triggerRef.current?.contains(target)) {
+          event.preventDefault()
+        }
       },
     },
     ariaProps: {
@@ -178,6 +189,8 @@ export const Tooltip = <RootComponent extends ElementType = 'div'>(
   const ariaId = useId()
   const rootId = `tooltip-${ariaId}-root`
 
+  const triggerRef = useRef<HTMLElement>(null)
+
   const [open, setOpen] = useControlledState(
     openProp,
     defaultOpen,
@@ -219,7 +232,7 @@ export const Tooltip = <RootComponent extends ElementType = 'div'>(
   }, [debouncedClosePopper, debouncedOpenPopper])
 
   const ctx = useMemo(
-    () => ({ open, setOpen, delayOpen, delayClose, rootId }),
+    () => ({ open, setOpen, delayOpen, delayClose, rootId, triggerRef }),
     [delayClose, delayOpen, open, setOpen, rootId],
   )
 

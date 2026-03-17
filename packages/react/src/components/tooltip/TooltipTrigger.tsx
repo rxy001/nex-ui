@@ -7,7 +7,8 @@ import type { FocusEvent } from 'react'
 import type { PopperAnchorProps } from '../popper'
 
 export const TooltipTrigger = ({ children }: PopperAnchorProps) => {
-  const { delayOpen, delayClose, rootId, open, setOpen } = useTooltipContext()
+  const { delayOpen, delayClose, rootId, open, setOpen, triggerRef } =
+    useTooltipContext()
 
   const focusVisibleRef = useRef(false)
 
@@ -40,6 +41,7 @@ export const TooltipTrigger = ({ children }: PopperAnchorProps) => {
             onFocus: handleFocus,
             onBlur: handleBlur,
             'aria-describedby': open ? rootId : undefined,
+            ref: triggerRef,
           },
           children.props,
         ),

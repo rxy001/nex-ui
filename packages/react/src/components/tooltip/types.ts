@@ -140,6 +140,13 @@ export type TooltipOwnProps<RootComponent extends ElementType = 'div'> =
        * @default false
        */
       keepMounted?: boolean
+
+      /**
+       * If true, the Tooltip will close when clicking on its trigger element.
+       *
+       * @default true
+       */
+      closeOnClick?: boolean
     }
 
 export type TooltipProps<RootComponent extends ElementType = 'div'> =

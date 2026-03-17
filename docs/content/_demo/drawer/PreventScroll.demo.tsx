@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Drawer,
   DrawerTrigger,
@@ -12,11 +14,11 @@ import {
 
 export default function App() {
   return (
-    <Drawer preventScroll>
+    <Drawer>
       <DrawerTrigger>
         <Button>Open Drawer</Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent preventScroll>
         <DrawerHeader>Drawer Header</DrawerHeader>
         <DrawerBody>
           <Flex direction='column' gap='5'>

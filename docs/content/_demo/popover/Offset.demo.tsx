@@ -31,11 +31,11 @@ export default function App() {
           </Box>
         </PopoverContent>
       </Popover>
-      <Popover offset={10}>
+      <Popover>
         <PopoverTrigger>
           <Button color='green'>Custom offset (10)</Button>
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent offset={10}>
           <Box
             sx={{
               fontWeight: 'bold',

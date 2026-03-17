@@ -13,6 +13,17 @@ RadioGroup 允许用户从一组中选择一个项目。
 
 ---
 
+## Anatomy
+
+NexUI 导出了 2 个 RadioGroup 相关组件:
+
+- `Radio`: 用于渲染单个 Radio 输入的组件。
+- `RadioGroup`: 用于将多个 Radio 组合在一起的组件。
+
+```tsx
+import { Radio, RadioGroup } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...radioGroup.usage} />
@@ -63,6 +74,33 @@ Radio 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'Radio 的标签。',
     },
     {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于 Radio 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Radio Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Radio Slots 的 props。',
+    },
+    {
       prop: 'color',
       type: [
         "'blue'",
@@ -101,11 +139,6 @@ Radio 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'Radio 是否默认选中。（非受控）',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
       prop: 'name',
       type: 'string',
       description: 'Radio 的 name。',
@@ -131,26 +164,10 @@ Radio 继承 `as` (默认为 `'input'`) 的 Props。
       description: '当 Radio 状态发生变化时会触发该回调函数。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'input'",
-      description:
-        '用于 Radio 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Radio Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Radio Slots 的 props。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Radio 的动画。',
     },
   ]}
 />
@@ -190,6 +207,31 @@ RadioGroup 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'children',
       type: 'ReactNode',
       description: 'RadioGroup 的子元素，通常为 Radio 组件。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发根元素的 ref。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'RadioGroup Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'RadioGroup Slots 的 props。',
     },
     {
       prop: 'label',
@@ -254,29 +296,10 @@ RadioGroup 继承 `as` (默认为 `'div'`) 的 Props。
       description: 'RadioGroup 的根元素组件。',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发根元素的 ref。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'RadioGroup Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'RadioGroup Slots 的 props。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用所有 Radio 的动画。',
     },
   ]}
 />

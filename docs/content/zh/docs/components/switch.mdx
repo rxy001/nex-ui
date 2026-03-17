@@ -13,6 +13,12 @@ Switch 用于在选中和未选中状态之间进行切换。
 
 ---
 
+## Anatomy
+
+```tsx
+import { Switch } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...$switch.usage} />
@@ -60,6 +66,38 @@ Switch 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'Switch 的标签。',
     },
     {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'input'",
+      description:
+        '用于 Switch 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'Switch Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'Switch Slots 的 props。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: '用于转发 Switch 内的 input。',
+    },
+    {
       prop: 'color',
       type: [
         "'blue'",
@@ -102,11 +140,6 @@ Switch 继承 `as` (默认为 `'input'`) 的 Props。
       description: 'Switch 的 name。',
     },
     {
-      prop: 'className',
-      type: 'ClassValue',
-      description: '用于根元素的 className。',
-    },
-    {
       prop: 'startIcon',
       type: 'ReactNode',
       description: 'Switch 开头的图标。',
@@ -122,11 +155,6 @@ Switch 继承 `as` (默认为 `'input'`) 的 Props。
       description: '滑块内部的图标。',
     },
     {
-      prop: 'ref',
-      type: 'Ref',
-      description: '用于转发 Switch 内的 input',
-    },
-    {
       prop: 'onChange',
       type: 'function',
       description: '当 Switch 状态发生变化时会触发该回调函数。',
@@ -137,26 +165,10 @@ Switch 继承 `as` (默认为 `'input'`) 的 Props。
       description: '当 Switch 状态发生变化时会触发该回调函数。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'input'",
-      description:
-        '用于 Switch 内 input 的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'Switch Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'Switch Slots 的 props。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Switch 的动画。',
     },
   ]}
 />

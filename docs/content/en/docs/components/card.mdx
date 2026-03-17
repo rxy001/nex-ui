@@ -13,6 +13,26 @@ Cards contain content and actions about a single subject.
 
 ---
 
+## Anatomy
+
+NexUI exports 5 Card-related components:
+
+- `Card`: The root component that displays the card.
+- `CardHeader`: The component that displays the header of the card.
+- `CardBody`: The component that displays the main content of the card.
+- `CardFooter`: The component that displays the footer of the card.
+- `CardActionArea`: The component that specifies the action area of the card.
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardActionArea,
+} from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...card.usage} />
@@ -61,28 +81,6 @@ Card inherits the props of `as` (by default, `'div'`).
         'Usually, CardHeader, CardBody, CardFooter, and other custom content.',
     },
     {
-      prop: 'radius',
-      type: ["'sm'", "'md'", "'lg'", "'none'"],
-      default: "'md'",
-      description: 'The border radius of the Card.',
-    },
-    {
-      prop: 'shadow',
-      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
-      default: "'md'",
-      description: 'The shadow of the Card.',
-    },
-    {
-      prop: 'blurred',
-      type: 'boolean',
-      description: 'If true, applies a backdrop filter to the Card.',
-    },
-    {
-      prop: 'hoverable',
-      type: 'boolean',
-      description: 'If true, the Card will have a hover effect.',
-    },
-    {
       prop: 'sx',
       type: 'Interpolation',
       description:
@@ -104,6 +102,28 @@ Card inherits the props of `as` (by default, `'div'`).
       type: 'Ref',
       description: 'Ref for forwarding to the root.',
     },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'none'"],
+      default: "'md'",
+      description: 'The border radius of the Card.',
+    },
+    {
+      prop: 'shadow',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
+      default: "'md'",
+      description: 'The shadow of the Card.',
+    },
+    {
+      prop: 'blurred',
+      type: 'boolean',
+      description: 'If true, applies a backdrop filter to the Card.',
+    },
+    {
+      prop: 'hoverable',
+      type: 'boolean',
+      description: 'If true, the Card will have a hover effect.',
+    },
   ]}
 />
 
@@ -118,26 +138,6 @@ CardHeader inherits the props of `as` (by default, `'div'`).
       type: 'ReactNode',
       description:
         'The content of the CardHeader, which disables the avatar, action, title, and subtitle props.',
-    },
-    {
-      prop: 'title',
-      type: 'ReactNode',
-      description: 'The title of the CardHeader.',
-    },
-    {
-      prop: 'subtitle',
-      type: 'ReactNode',
-      description: 'The subtitle of the CardHeader.',
-    },
-    {
-      prop: 'avatar',
-      type: 'ReactNode',
-      description: 'The avatar of the CardHeader.',
-    },
-    {
-      prop: 'action',
-      type: 'ReactNode',
-      description: 'The action area of the CardHeader.',
     },
     {
       prop: 'sx',
@@ -170,6 +170,26 @@ CardHeader inherits the props of `as` (by default, `'div'`).
       prop: 'ref',
       type: 'Ref',
       description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'title',
+      type: 'ReactNode',
+      description: 'The title of the CardHeader.',
+    },
+    {
+      prop: 'subtitle',
+      type: 'ReactNode',
+      description: 'The subtitle of the CardHeader.',
+    },
+    {
+      prop: 'avatar',
+      type: 'ReactNode',
+      description: 'The avatar of the CardHeader.',
+    },
+    {
+      prop: 'action',
+      type: 'ReactNode',
+      description: 'The action area of the CardHeader.',
     },
   ]}
 />
@@ -262,6 +282,42 @@ CardFooter inherits the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description: 'The content of the CardFooter.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+  ]}
+/>
+
+### CardActionArea Props
+
+CardActionArea inherits the props of `as` (by default, `'button'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'button'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the CardActionArea.',
     },
     {
       prop: 'ref',

@@ -1,24 +1,26 @@
+'use client'
+
 import {
-  Drawer,
-  DrawerTrigger,
+  Dialog,
+  DialogTrigger,
   Button,
-  DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-  DrawerFooter,
-  DrawerClose,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
   Flex,
 } from '@nex-ui/react'
 
 export default function App() {
   return (
-    <Drawer>
-      <DrawerTrigger>
-        <Button>Open Drawer</Button>
-      </DrawerTrigger>
-      <DrawerContent keepMounted>
-        <DrawerHeader>Drawer Header</DrawerHeader>
-        <DrawerBody>
+    <Dialog>
+      <DialogTrigger>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>Dialog Header</DialogHeader>
+        <DialogBody>
           <Flex direction='column' gap='5'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
@@ -34,18 +36,24 @@ export default function App() {
               et. Culpa deserunt nostrud ad veniam.
             </p>
           </Flex>
-        </DrawerBody>
-        <DrawerFooter>
-          <DrawerClose>
-            <Button color='red' variant='ghost'>
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose>
+            <Button
+              color='red'
+              variant='ghost'
+              onClick={(event) => {
+                event.preventDefault()
+              }}
+            >
               Cancel
             </Button>
-          </DrawerClose>
-          <DrawerClose>
+          </DialogClose>
+          <DialogClose>
             <Button>Action</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }

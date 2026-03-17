@@ -13,6 +13,17 @@ Accordion 能够在页面上展开和折叠相关的内容部分。
 
 ---
 
+## Anatomy
+
+NexUI 导出了 2 个 Accordion 相关组件:
+
+- `Accordion`: 作为根组件，用于展示多个 AccordionItem。
+- `AccordionItem`: 用于展示一个可展开/折叠的内容项的组件。
+
+```tsx
+import { Accordion, AccordionItem } from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...accordion.usage} />
@@ -75,6 +86,18 @@ Accordion 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'children',
       type: 'ReactNode',
       description: '通常是 AccordionItem 的集合。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
     },
     {
       prop: 'className',
@@ -151,19 +174,12 @@ Accordion 继承 `as` (默认为 `'div'`) 的 Props。
       description: '是否在折叠时保留子元素的挂载状态。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Accordion 的动画。',
     },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-
-]}
+  ]}
 />
 
 ### AccordionItem Props
@@ -186,6 +202,28 @@ AccordionItem 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'ref',
       type: 'Ref',
       description: '用于转发根元素。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'AccordionItem Slots 的 className。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'AccordionItem Slots 的 props。',
     },
     {
       prop: 'indicator',
@@ -230,29 +268,12 @@ AccordionItem 继承 `as` (默认为 `'div'`) 的 Props。
       description: 'AccordionItem 的标题。',
     },
     {
-      prop: 'as',
-      type: 'ElementType',
-      default: "'div'",
-      description:
-        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 AccordionItem 的动画。',
     },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description: '用于根元素的 sx 属性。',
-    },
-    {
-      prop: 'classNames',
-      type: "Partial<Record<Slots, ClassValue>>",
-      description: 'AccordionItem Slots 的 className。',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'AccordionItem Slots 的 props。',
-    },
-
-]}
+  ]}
 />
 
 ### AccordionItem Slots
@@ -263,25 +284,25 @@ AccordionItem 继承 `as` (默认为 `'div'`) 的 Props。
       slot: 'heading',
       class: '.nui-accordion-item-heading',
       component: "'h3'",
-      description: 'accordion item 的标题。',
+      description: 'AccordionItem 的标题。',
     },
     {
       slot: 'content',
       class: '.nui-accordion-item-content',
       component: "'div'",
-      description: 'accordion item 的内容。',
+      description: 'AccordionItem 的内容。',
     },
     {
       slot: 'indicator',
       class: '.nui-accordion-item-indicator',
-      component: 'm.span',
-      description: 'indicator 的容器。',
+      component: "'span'",
+      description: 'AccordionItem 的指示器容器。',
     },
     {
       slot: 'trigger',
       class: '.nui-accordion-item-trigger',
       component: "'button'",
-      description: '控制 accordion item 折叠的按钮。',
+      description: '控制 AccordionItem 折叠的按钮。',
     },
   ]}
 />

@@ -6,12 +6,12 @@ import {
   Flex,
   Box,
 } from '@nex-ui/react'
-import type { PopoverProps } from '@nex-ui/react'
+import type { PopoverContentProps } from '@nex-ui/react'
 
 export default function App() {
-  const renderPopover = (placement: PopoverProps['placement']) => {
+  const renderPopover = (placement: PopoverContentProps['placement']) => {
     return (
-      <Popover placement={placement}>
+      <Popover>
         <PopoverTrigger>
           <Button
             size='sm'
@@ -24,7 +24,7 @@ export default function App() {
             {placement}
           </Button>
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent placement={placement}>
           <Box
             sx={{
               fontWeight: 'bold',

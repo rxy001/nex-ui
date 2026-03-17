@@ -14,8 +14,6 @@ import SizesDemo from './Sizes.demo'
 import sizesCode from './Sizes.demo?raw'
 import InteractiveDemo from './Interactive.demo'
 import interactiveCode from './Interactive.demo?raw'
-import CustomMotionDemo from './CustomMotion.demo'
-import customMotionCode from './CustomMotion.demo?raw'
 import FlipDemo from './Flip.demo'
 import flipCode from './Flip.demo?raw'
 import ShiftDemo from './Shift.demo'
@@ -53,10 +51,6 @@ export const tooltip = {
   interactive: {
     code: interactiveCode,
     demo: <InteractiveDemo />,
-  },
-  customMotion: {
-    code: customMotionCode,
-    demo: <CustomMotionDemo />,
   },
   flip: {
     code: flipCode,

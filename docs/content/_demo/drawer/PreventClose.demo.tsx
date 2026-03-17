@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Drawer,
   DrawerTrigger,
@@ -16,7 +18,7 @@ export default function App() {
       <DrawerTrigger>
         <Button>Open Drawer</Button>
       </DrawerTrigger>
-      <DrawerContent keepMounted>
+      <DrawerContent>
         <DrawerHeader>Drawer Header</DrawerHeader>
         <DrawerBody>
           <Flex direction='column' gap='5'>
@@ -37,7 +39,13 @@ export default function App() {
         </DrawerBody>
         <DrawerFooter>
           <DrawerClose>
-            <Button color='red' variant='ghost'>
+            <Button
+              color='red'
+              variant='ghost'
+              onClick={(event) => {
+                event.preventDefault()
+              }}
+            >
               Cancel
             </Button>
           </DrawerClose>

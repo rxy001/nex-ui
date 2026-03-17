@@ -41,6 +41,9 @@ const meta = {
     spacing: {
       control: 'number',
     },
+    disableAnimation: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof AvatarGroupTemplate>
 

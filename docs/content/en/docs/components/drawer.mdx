@@ -13,51 +13,81 @@ Drawer is a component that slides in from the side of the screen.
 
 ---
 
+## Anatomy
+
+NexUI exports 7 Drawer-related components:
+
+- `Drawer`: The root component that displays the Drawer.
+- `DrawerContent`: The component that displays the content of the Drawer.
+- `DrawerHeader`: The component that displays the header of the Drawer.
+- `DrawerBody`: The component that displays the body content of the Drawer.
+- `DrawerFooter`: The component that displays the footer content of the Drawer.
+- `DrawerTrigger`: The component that triggers the opening of the Drawer.
+- `DrawerClose`: The component that triggers the closing of the Drawer.
+
+```tsx
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  DrawerTrigger,
+  DrawerClose,
+} from '@nex-ui/react'
+```
+
 ## Usage
 
 <Example {...drawer.usage} />
 
 ### Hide Backdrop
 
-Set the `hideBackdrop` property of Drawer to `true` to hide the Drawer background overlay.
+Set `hideBackdrop` on `DrawerContent` to `true` to hide the Drawer backdrop.
 
 <Example {...drawer.hideBackdrop} />
 
 ### Prevent Scroll
 
-Set the `preventScroll` property of Drawer to `true` to prevent page scrolling when the Drawer is open.
+Set `preventScroll` on `DrawerContent` to `true` to prevent page scrolling while the Drawer is open.
 
 <Example {...drawer.preventScroll} />
 
 ### Keep Mounted
 
-Set the `keepMounted` property of Drawer to `true` to keep the Drawer content mounted when closed.
+Set `keepMounted` on `DrawerContent` to `true` to keep Drawer content mounted when closed.
 
 <Example {...drawer.keepMounted} />
 
 ### Sizes
 
-Use the `size` property of DrawerContent to set the size of the Drawer. Defaults to `md`.
+Use the `size` prop on `DrawerContent` to set the Drawer size. Defaults to `md`.
 
 <Example {...drawer.sizes} />
 
 ### Placements
 
-Use the `placement` property of DrawerContent to set the display position of the Drawer. Defaults to `right`.
+Use the `placement` prop on `DrawerContent` to set where the Drawer appears. Defaults to `right`.
 
 <Example {...drawer.placements} />
 
 ### Custom Motion
 
-Use the `motionProps` property of DrawerContent to customize the animation effects for showing/hiding the Drawer.
+Use the `motionProps` prop on `DrawerContent` to customize show/hide animations.
 
 <Example {...drawer.customMotion} />
 
 ### Asynchronously Close
 
-DrawerClose supports asynchronously closing the Drawer. The `onClick` event of its `children` can return a `Promise`, and the Drawer will close after the `Promise` is resolved.
+`DrawerClose` supports asynchronous closing. If the `children` `onClick` handler returns a `Promise`, the Drawer closes after the `Promise` resolves or rejects.
 
 <Example {...drawer.asynchronouslyClose} />
+
+### Prevent Close
+
+Call `event.preventDefault()` inside the `children` `onClick` handler of `DrawerClose` to prevent closing.
+
+<Example {...drawer.preventClose} />
 
 ### Controlled Drawer
 
@@ -68,8 +98,6 @@ Use the `open` and `onOpenChange` props of Drawer to control the open state of t
 ## API
 
 ### Drawer Props
-
-Drawer inherits the props of `as` (by default, `m.div`).
 
 <PropsTable
   dataSource={[
@@ -94,101 +122,15 @@ Drawer inherits the props of `as` (by default, `m.div`).
       description:
         'Handler that is called when the Drawer is opened or closed.',
     },
-    {
-      prop: 'className',
-      type: 'ClassValue',
-      description: 'Additional class names to apply to the root.',
-    },
-    {
-      prop: 'hideBackdrop',
-      type: 'boolean',
-      description: 'If true, the backdrop is not rendered.',
-      default: 'false',
-    },
-    {
-      prop: 'container',
-      type: ['HTMLElement', 'null', '() => HTMLElement | null'],
-      description: 'The container element for the portal.',
-      default: 'document.body',
-    },
-    {
-      prop: 'keepMounted',
-      type: 'boolean',
-      description: 'If true, always keep the children in the DOM.',
-      default: 'false',
-    },
-    {
-      prop: 'preventScroll',
-      type: 'boolean',
-      description: 'If true, the Drawer prevents page scrolling.',
-      default: 'false',
-    },
-    {
-      prop: 'closeOnInteractBackdrop',
-      type: 'boolean',
-      description: 'If true, closes the Drawer when the backdrop is clicked.',
-      default: 'true',
-    },
-    {
-      prop: 'closeOnEscape',
-      type: 'boolean',
-      description: 'If true, closes the Drawer when the Escape key is pressed.',
-      default: 'true',
-    },
-    {
-      prop: 'restoreFocus',
-      type: 'boolean',
-      description:
-        'If true, the Drawer restores focus to the previously focused element once the Drawer is hidden or unmounted.',
-      default: 'true',
-    },
+
     {
       prop: 'onClose',
       type: '() => void',
       description:
         'Callback function that is called when the Drawer is closed.',
     },
-    {
-      prop: 'as',
-      type: 'ElementType',
-      description: 'The component or element to render as the root.',
-      default: 'm.div',
-    },
-    {
-      prop: 'sx',
-      type: 'Interpolation',
-      description:
-        'The system prop that allows defining system overrides as well as additional CSS styles.',
-    },
-    {
-      prop: 'classNames',
-      type: 'Partial<Record<Slots, ClassValue>>',
-      description: 'The className used for each slot.',
-    },
-    {
-      prop: 'slotProps',
-      type: 'Partial<Record<Slots, ComponentProps>>',
-      description: 'The props used for each slot.',
-    },
-    {
-      prop: 'ref',
-      type: 'Ref',
-      description: 'Ref for forwarding to the root.',
-    },
-  ]}
-/>
 
-### Drawer Slots
-
-<SlotsTable
-  dataSource={[
-    {
-      slot: 'backdrop',
-      class: '.nui-drawer-backdrop',
-      component: "'div'",
-      description: 'The backdrop element of the Drawer.',
-    },
-  ]}
+]}
 />
 
 ### DrawerContent Props
@@ -201,45 +143,6 @@ DrawerContent inherits the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description: 'Usually, DrawerHeader, DrawerBody, DrawerFooter, etc.',
-    },
-    {
-      prop: 'closeIcon',
-      type: 'ReactNode',
-      description: 'Custom close button to display on the top-right corner.',
-    },
-    {
-      prop: 'size',
-      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
-      description: 'The size of the Drawer.',
-      default: "'md'",
-    },
-    {
-      prop: 'placement',
-      type: ["'top'", "'bottom'", "'left'", "'right'"],
-      description: 'The display position of the Drawer.',
-      default: "'right'",
-    },
-    {
-      prop: 'hideCloseButton',
-      type: 'boolean',
-      description: 'If true, the close button is not rendered.',
-      default: 'false',
-    },
-    {
-      prop: 'motionProps',
-      type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
-      description: 'The props to modify the framer motion animation.',
-    },
-    {
-      prop: 'aria-labelledby',
-      type: 'string',
-      description: 'The id(s) of the element(s) that label the DrawerContent.',
-    },
-    {
-      prop: 'aria-describedby',
-      type: 'string',
-      description:
-        'The id(s) of the element(s) that describe the DrawerContent.',
     },
     {
       prop: 'as',
@@ -273,6 +176,102 @@ DrawerContent inherits the props of `as` (by default, `'div'`).
       type: 'Ref',
       description: 'Ref for forwarding to the root.',
     },
+    {
+      prop: 'closeIcon',
+      type: 'ReactNode',
+      description: 'Custom close button to display on the top-right corner.',
+    },
+    {
+      prop: 'size',
+      type: ["'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'full'"],
+      description: 'The size of the Drawer.',
+      default: "'md'",
+    },
+    {
+      prop: 'hideCloseButton',
+      type: 'boolean',
+      description: 'If true, the close button is not rendered.',
+      default: 'false',
+    },
+    {
+      prop: 'placement',
+      type: ["'top'", "'bottom'", "'left'", "'right'"],
+      description: 'The display position of the Drawer.',
+      default: "'right'",
+    },
+    {
+      prop: 'motionProps',
+      type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
+      description: 'The props to modify the framer motion animation.',
+    },
+    {
+      prop: 'aria-labelledby',
+      type: 'string',
+      description: 'The id(s) of the element(s) that label the DrawerContent.',
+    },
+    {
+      prop: 'aria-describedby',
+      type: 'string',
+      description:
+        'The id(s) of the element(s) that describe the DrawerContent.',
+    },
+    {
+      prop: 'hideBackdrop',
+      type: 'boolean',
+      description: 'If true, the backdrop is not rendered.',
+      default: 'false',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement', 'null', '() => HTMLElement | null'],
+      description: 'The container element for the portal.',
+      default: 'document.body',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      description: 'If true, always keep the children in the DOM.',
+      default: 'false',
+    },
+    {
+      prop: 'preventScroll',
+      type: 'boolean',
+      description: 'If true, the Drawer prevents page scrolling.',
+      default: 'false',
+    },
+    {
+      prop: 'closeOnInteractOutside',
+      type: 'boolean',
+      description: 'If true, closes the Drawer when clicking outside of it.',
+      default: 'true',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      description: 'If true, closes the Drawer when the Escape key is pressed.',
+      default: 'true',
+    },
+    {
+      prop: 'restoreFocus',
+      type: 'boolean',
+      description:
+        'If true, the Drawer restores focus to the previously focused element once the Drawer is hidden or unmounted.',
+      default: 'true',
+    },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      description:
+        'If true, the Drawer will be shown or hidden without animation.',
+      default: 'false',
+    },
+    {
+      prop: 'autoFocus',
+      type: 'boolean',
+      description:
+        'If true, automatically focuses the first focusable element when the Drawer opens.',
+      default: 'false',
+    },
   ]}
 />
 
@@ -289,8 +288,14 @@ DrawerContent inherits the props of `as` (by default, `'div'`).
     {
       slot: 'paper',
       class: '.nui-drawer-content-paper',
-      component: 'm.section',
+      component: "'div'",
       description: 'The paper element of the DrawerContent.',
+    },
+    {
+      slot: 'backdrop',
+      class: '.nui-drawer-content-backdrop',
+      component: "'div'",
+      description: 'The backdrop element of the DrawerContent.',
     },
   ]}
 />
@@ -409,7 +414,7 @@ DrawerFooter inherits the props of `as` (by default, `'div'`).
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
+      type: 'ReactElement',
       description:
         'The element that triggers the Drawer to open; must support the `onClick` event.',
     },
@@ -422,7 +427,7 @@ DrawerFooter inherits the props of `as` (by default, `'div'`).
   dataSource={[
     {
       prop: 'children',
-      type: 'ReactNode',
+      type: 'ReactElement',
       description:
         'The element that triggers the Drawer to close; must support the `onClick` event.',
     },
