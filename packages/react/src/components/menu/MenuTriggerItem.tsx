@@ -79,11 +79,12 @@ export const MenuTriggerItem = (props: MenuTriggerItemProps) => {
     component: MenuItem,
     externalForwardedProps: remainingProps,
     additionalProps: {
-      closeOnClick: false,
+      disabled,
+      closeOnSelect: false,
       ref: menuCtx.triggerRef,
       onPointerMove: handleOpen,
       onPointerLeave: handlePointerLeave,
-      onClick: handleOpen,
+      onSelect: handleOpen,
       onKeyDown: handleKeyDown,
     },
     ariaProps: {

@@ -318,7 +318,7 @@ export const PreventClosing = (props: DropdownContentProps) => {
       </DropdownTrigger>
       <DropdownContent {...props}>
         <DropdownItem
-          closeOnClick={false}
+          closeOnSelect={false}
           onClick={() => {
             alert('action')
           }}

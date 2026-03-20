@@ -58,13 +58,13 @@ export const RovingFocusGroup = <T extends string | number = string | number>(
       const activeItem = items.find((item) => item.active)
 
       if (activeItem) {
-        focus(activeItem.element)
+        focus(activeItem.element, false)
         return
       }
 
       const focusItem = items.find((item) => item.id === focusItemId)
 
-      focus(focusItem?.element ?? items[0].element)
+      focus(focusItem?.element ?? items[0].element, false)
     }
   }
 
@@ -113,7 +113,7 @@ export const RovingFocusGroup = <T extends string | number = string | number>(
       }
     }
 
-    if (nextItemElement) focus(nextItemElement)
+    if (nextItemElement) focus(nextItemElement, false)
   }
 
   const handleBlur = () => {
