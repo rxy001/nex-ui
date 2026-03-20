@@ -7,7 +7,7 @@ import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { RovingFocusItem } from '../rovingFocus'
 import { useMenuContentContext, useRootMenuContext } from './MenuContext'
-import type { KeyboardEvent, PointerEvent } from 'react'
+import type { KeyboardEvent, PointerEvent, MouseEvent } from 'react'
 import type { MenuItemProps } from './types'
 
 const recipe = defineRecipe({
@@ -26,12 +26,19 @@ const style = recipe()
 export const MenuItem = (props: MenuItemProps) => {
   const rootMenuCtx = useRootMenuContext()
   const menuContentCtx = useMenuContentContext()
-  const { disabled, children, closeOnClick = true, ...remainingProps } = props
+  const {
+    disabled,
+    children,
+    onSelect,
+    closeOnSelect = true,
+    ...remainingProps
+  } = props
   const [focused, setFocused] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     if (disabled) return
-    if (closeOnClick) {
+    onSelect?.(e)
+    if (closeOnSelect) {
       rootMenuCtx.close()
     }
   }

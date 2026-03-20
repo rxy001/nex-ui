@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, MouseEvent } from 'react'
 import type {
   PopperAnchorProps,
   PopperContentProps,
@@ -41,7 +41,8 @@ export type SubMenuContentProps = Omit<
 // ----------------- MenuItemProps -----------------
 type MenuItemOwnProps = {
   disabled?: boolean
-  closeOnClick?: boolean
+  closeOnSelect?: boolean
+  onSelect?: (event: MouseEvent<HTMLDivElement>) => void
 }
 
 export type MenuItemProps = SlotProps<'div', MenuItemOwnProps>
@@ -63,7 +64,6 @@ export type MenuRadioItemGroupProps<
 // ----------------- MenuRadioItemProps -----------------
 export type MenuRadioItemProps = MenuItemProps & {
   value?: string | number
-  onSelect?: () => void
 }
 
 // ----------------- MenuCheckboxItemGroupProps -----------------

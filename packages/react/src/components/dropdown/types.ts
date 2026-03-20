@@ -132,7 +132,7 @@ type DropdownItemSlotProps = {
 
 type DropdownItemOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   MenuItemProps,
-  'closeOnClick' | 'disabled'
+  'closeOnSelect' | 'disabled'
 > & {
   /**
    * The component or element to render as the root.

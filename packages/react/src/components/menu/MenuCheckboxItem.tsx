@@ -34,10 +34,7 @@ export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
 
   const checked = checkboxGroupCtx.value.includes(value)
 
-  const handleClick = () => {
-    if (disabled) {
-      return
-    }
+  const handleSelect = () => {
     checkboxGroupCtx.setValue(
       checked
         ? checkboxGroupCtx.value.filter((val) => val !== value)
@@ -51,7 +48,7 @@ export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
     externalForwardedProps: remainingProps,
     additionalProps: {
       disabled,
-      onClick: handleClick,
+      onSelect: handleSelect,
     },
     dataAttrs: {
       checked,
