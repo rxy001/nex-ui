@@ -36,6 +36,8 @@ export const dropdownItemRecipe = defineSlotRecipe({
       pr: '2',
       borderRadius: 'sm',
       transition: 'colors',
+      color: 'inherit',
+      textDecoration: 'none',
       _disabled: {
         opacity: 0.6,
       },
@@ -56,11 +58,12 @@ export const dropdownItemRecipe = defineSlotRecipe({
         opacity: 1,
       },
     },
-    text: {
+    content: {
       display: 'flex',
       alignItems: 'center',
       flex: 1,
       fs: 'md',
+      color: 'inherit',
     },
     startIcon: {
       display: 'flex',
@@ -210,6 +213,6 @@ export type DropdownCheckboxItemGroupRecipe =
   typeof dropdownCheckboxItemGroupRecipe
 export type DropdownTriggerItemRecipe = typeof dropdownTriggerItemRecipe
 export type SubDropdownContentRecipe = typeof subDropdownContentRecipe
-export type DropdownSeparatorRecipe = typeof dropdownSeparatorRecipe
+export type DropdownDividerRecipe = typeof dropdownSeparatorRecipe
 
 export type DropdownItemVariants = RecipeVariants<DropdownItemRecipe>

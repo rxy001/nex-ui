@@ -17,9 +17,7 @@ export const MenuItemGroup = (props: MenuItemGroupProps) => {
   const ariaProps = useMemo(
     () => ({
       role: 'group',
-      ...(hasLabel && {
-        'aria-labelledby': groupLabelId,
-      }),
+      'aria-labelledby': hasLabel ? groupLabelId : undefined,
     }),
     [groupLabelId, hasLabel],
   )

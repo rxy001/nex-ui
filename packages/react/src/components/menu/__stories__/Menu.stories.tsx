@@ -97,14 +97,17 @@ export function GroupItems() {
     <MenuWrapper>
       <MenuItemGroup>
         <MenuItemGroupLabel>Group 1</MenuItemGroupLabel>
-        <MenuItem sx={style}>Menu Item 1</MenuItem>
-        <MenuItem sx={style}>Menu Item 2</MenuItem>
+        <MenuItem sx={style}>Menu Item 1-1</MenuItem>
+        <MenuItem sx={style} disabled>
+          Menu Item 1-2
+        </MenuItem>
+        <MenuItem sx={style}>Menu Item 1-3</MenuItem>
       </MenuItemGroup>
       <MenuSeparator />
       <MenuItemGroup>
         <MenuItemGroupLabel>Group 2</MenuItemGroupLabel>
-        <MenuItem sx={style}>Menu Item 3</MenuItem>
-        <MenuItem sx={style}>Menu Item 4</MenuItem>
+        <MenuItem sx={style}>Menu Item 2-1</MenuItem>
+        <MenuItem sx={style}>Menu Item 2-2</MenuItem>
       </MenuItemGroup>
     </MenuWrapper>
   )
@@ -129,8 +132,14 @@ export function CheckboxItems() {
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuCheckboxItem>
-        <MenuCheckboxItem sx={style} value='item-3'>
+        <MenuCheckboxItem sx={style} value='item-3' disabled>
           Checkbox Item 3
+          <MenuItemIndicator>
+            <CheckOutlined />
+          </MenuItemIndicator>
+        </MenuCheckboxItem>
+        <MenuCheckboxItem sx={style} value='item-4'>
+          Checkbox Item 4
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
@@ -159,8 +168,14 @@ export function RadioItems() {
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuRadioItem>
-        <MenuRadioItem sx={style} value='item-3'>
+        <MenuRadioItem sx={style} value='item-3' disabled>
           Radio Item 3
+          <MenuItemIndicator>
+            <CheckOutlined />
+          </MenuItemIndicator>
+        </MenuRadioItem>
+        <MenuRadioItem sx={style} value='item-4'>
+          Radio Item 4
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
