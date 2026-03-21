@@ -56,13 +56,13 @@ export const DropdownCheckboxItem = <RootComponent extends ElementType = 'div'>(
     additionalProps: {
       slotProps: {
         shortcut: slotProps?.shortcut,
-        text: slotProps?.text,
+        content: slotProps?.content,
         startIcon: slotProps?.startIcon,
         endIcon: slotProps?.endIcon,
       },
       classNames: {
         shortcut: classNames?.shortcut,
-        text: classNames?.text,
+        content: classNames?.content,
         startIcon: classNames?.startIcon,
         endIcon: classNames?.endIcon,
       },

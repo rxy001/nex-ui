@@ -127,12 +127,12 @@ type DropdownItemSlotProps = {
   shortcut?: SlotProps<'kbd'>
   startIcon?: SlotProps<'span'>
   endIcon?: SlotProps<'span'>
-  text?: SlotProps<'span'>
+  content?: SlotProps<'span'>
 }
 
 type DropdownItemOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   MenuItemProps,
-  'closeOnSelect' | 'disabled'
+  'closeOnSelect' | 'disabled' | 'onSelect'
 > & {
   /**
    * The component or element to render as the root.
@@ -153,7 +153,7 @@ type DropdownItemOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   /**
    * The keyboard shortcut for the item.
    */
-  shortcut?: string
+  shortcut?: ReactNode
 
   /**
    * The props used for each slot.
@@ -277,7 +277,7 @@ type DropdownRadioItemOwnProps<RootComponent extends ElementType> = Omit<
   DropdownItemOwnProps<RootComponent>,
   'slotProps' | 'classNames'
 > &
-  Pick<MenuRadioItemProps, 'value' | 'onSelect'> & {
+  Pick<MenuRadioItemProps, 'value'> & {
     /**
      * The props used for each slot.
      */
@@ -454,8 +454,8 @@ export type SubDropdownContentProps<RootComponent extends ElementType = 'div'> =
     SubDropdownContentPropsOverrides
   >
 
-// ------------- DropdownSeparator --------------
-type DropdownSeparatorOwnProps<RootComponent extends ElementType> = {
+// ------------- DropdownDivider --------------
+type DropdownDividerOwnProps<RootComponent extends ElementType> = {
   /**
    * The component or element to render as the root.
    * @default 'hr'
@@ -473,13 +473,13 @@ type DropdownSeparatorOwnProps<RootComponent extends ElementType> = {
   className?: ClassValue
 }
 
-export interface DropdownSeparatorPropsOverrides {}
+export interface DropdownDividerPropsOverrides {}
 
-export type DropdownSeparatorProps<RootComponent extends ElementType = 'hr'> =
+export type DropdownDividerProps<RootComponent extends ElementType = 'hr'> =
   OverrideProps<
     RootComponent,
-    DropdownSeparatorOwnProps<RootComponent>,
-    DropdownSeparatorPropsOverrides
+    DropdownDividerOwnProps<RootComponent>,
+    DropdownDividerPropsOverrides
   >
 
 // ------------- DropdownPaperMotionProps --------------

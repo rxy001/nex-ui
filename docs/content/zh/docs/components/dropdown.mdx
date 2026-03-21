@@ -1,0 +1,701 @@
+---
+title: Dropdown
+description: Dropdown 是一个用于显示一组选项或操作的浮层组件。
+---
+
+import { dropdown } from '@/content/_demo'
+
+# Dropdown
+
+Dropdown 是一个用于显示一组选项或操作的浮层组件。
+
+<ComponentLinks component='dropdown' ariaCompatible />
+
+---
+
+## Anatomy
+
+NexUI 导出了 14 个 Dropdown 相关组件:
+
+- `Dropdown`: 用于显示 Dropdown 的根组件。
+- `DropdownTrigger`: 用于触发 Dropdown 打开的组件。
+- `DropdownContent`: 用于显示 Dropdown 内容的组件。
+- `DropdownItem`: 用于显示 Dropdown 选项的组件。
+- `DropdownItemGroup`: 用于分组 Dropdown 选项的组件。
+- `DropdownItemGroupLabel`: 用于显示 Dropdown 选项分组标签的组件。
+- `DropdownRadioItemGroup`: 用于显示 Dropdown 单选选项组的组件。
+- `DropdownRadioItem`: 用于显示 Dropdown 单选选项的组件。
+- `DropdownCheckboxItemGroup`: 用于显示 Dropdown 复选选项组的组件。
+- `DropdownCheckboxItem`: 用于显示 Dropdown 复选选项的组件。
+- `DropdownTriggerItem`: 用于触发子 Dropdown 打开的组件。
+- `SubDropdown`: 用于显示子 Dropdown 的根组件。
+- `SubDropdownContent`: 用于显示子 Dropdown 内容的组件。
+- `DropdownDivider`: 用于分隔 Dropdown 选项的组件。
+
+```tsx
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownItemGroup,
+  DropdownItemGroupLabel,
+  DropdownRadioItemGroup,
+  DropdownRadioItem,
+  DropdownCheckboxItemGroup,
+  DropdownCheckboxItem,
+  DropdownTriggerItem,
+  SubDropdown,
+  SubDropdownContent,
+  DropdownDivider,
+} from '@nex-ui/react'
+```
+
+## Usage
+
+<Example {...dropdown.usage} />
+
+### Colors
+
+<Example {...dropdown.colors} />
+
+### Variants
+
+<Example {...dropdown.variants} />
+
+### Placements
+
+<Example {...dropdown.placements} />
+
+### Link Items
+
+<Example {...dropdown.linkItems} />
+
+### Radio Items
+
+<Example {...dropdown.radioItems} />
+
+### Checkbox Items
+
+<Example {...dropdown.checkboxItems} />
+
+### Sub Dropdown
+
+<Example {...dropdown.subDropdown} />
+
+### Custom Trigger
+
+<Example {...dropdown.customTrigger} />
+
+### With Shortcut
+
+通过 DropdownItem 的 `shortcut` 属性，可以为 DropdownItem 显示一个快捷键提示。
+
+<Example {...dropdown.withShortcut} />
+
+### With Groups
+
+<Example {...dropdown.withGroups} />
+
+### With Icons
+
+使用 `startIcon` 和 `endIcon` 属性，可以在 DropdownItem 的开头和结尾添加图标。
+
+<Example {...dropdown.withIcons} />
+
+### Overflow
+
+当 Dropdown 的内容过多时，可以通过设置 `DropdownContent` 的 `maxHeight` 属性来限制其最大高度，并启用滚动。
+
+<Example {...dropdown.overflow} />
+
+### Prevent Closing
+
+默认情况下，选择 DropdownItem 会关闭 Dropdown。通过设置 `closeOnSelect` 属性为 `false`，可以阻止 Dropdown 在选择项时关闭。
+
+<Example {...dropdown.preventClosing} />
+
+## API
+
+### Dropdown Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: '通常是 DropdownTrigger、DropdownContent 等组件。',
+    },
+    {
+      prop: 'open',
+      type: 'boolean',
+      description: '控制 Dropdown 的打开状态。(受控)',
+    },
+    {
+      prop: 'defaultOpen',
+      type: 'boolean',
+      description: 'Dropdown 的默认打开状态。(非受控)',
+    },
+    {
+      prop: 'onOpenChange',
+      type: '(open: boolean) => void',
+      description: '当 Dropdown 打开/关闭时触发回调函数。',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: 'Dropdown 关闭时执行的回调函数。',
+    },
+  ]}
+/>
+
+### DropdownContent Props
+
+DropdownContent 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'Dropdown 的内容。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'DropdownContent Slots 的 props。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'DropdownContent Slots 的 className。',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement', 'null', '() => HTMLElement | null'],
+      description: '放置 Portal 的容器元素。',
+      default: 'document.body',
+    },
+    {
+      prop: 'restoreFocus',
+      type: 'boolean',
+      default: 'true',
+      description: '当 Dropdown 关闭时，是否将焦点恢复到触发元素。',
+    },
+    {
+      prop: 'loopFocus',
+      type: 'boolean',
+      default: 'true',
+      description: '是否在 Dropdown 内循环焦点。',
+    },
+    {
+      prop: 'closeOnDetached',
+      type: 'boolean',
+      default: 'true',
+      description: '当触发元素被完全遮挡时是否关闭 Dropdown。',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: '当按下 Escape 键时是否关闭 Dropdown。',
+    },
+    {
+      prop: 'flip',
+      type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
+      default: '{ mainAxis: true, crossAxis: true }',
+      description: '更改 Dropdown 的位置，使其保持在视图中。',
+    },
+    {
+      prop: 'placement',
+      type: [
+        `'top'`,
+        `'top-start'`,
+        `'top-end'`,
+        `'bottom'`,
+        `'bottom-start'`,
+        `'bottom-end'`,
+        `'left'`,
+        `'left-start'`,
+        `'left-end'`,
+        `'right'`,
+        `'right-start'`,
+        `'right-end'`,
+      ],
+      default: `'bottom'`,
+      description: 'Dropdown 出现的位置。',
+    },
+    {
+      prop: 'offset',
+      type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
+      default: '5',
+      description: '设置 Dropdown 的偏移量，或禁用偏移。',
+    },
+    {
+      prop: 'shift',
+      type: 'boolean',
+      default: 'true',
+      description: '移动 Dropdown 以使其保持在可见范围内。',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: 'gray',
+      description: 'Dropdown 选项高亮时的颜色。',
+    },
+    {
+      prop: 'variant',
+      type: ["'solid'", "'outlined'", "'ghost'", "'faded'"],
+      default: "'solid'",
+      description: 'Dropdown 选项高亮时的样式。',
+    },
+    {
+      prop: 'motionProps',
+      type: ['HTMLMotionProps', `(placement: Placement) => HTMLMotionProps`],
+      description: '自定义 Dropdown 进入/退出动画的属性。',
+    },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 Dropdown 的动画效果。',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      default: 'false',
+      description: '是否在 Dropdown 关闭时保持内容挂载。',
+    },
+    {
+      prop: 'minWidth',
+      type: ['string', 'number'],
+      description: 'Dropdown 的最小宽度。',
+    },
+    {
+      prop: 'maxHeight',
+      type: ['string', 'number'],
+      description: 'Dropdown 的最大高度。',
+    },
+  ]}
+/>
+
+### DropdownContent Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'paper',
+      description: 'DropdownContent 的内容容器。',
+      class: '.nui-dropdown-content-paper',
+      component: "'div'",
+    },
+  ]}
+/>
+
+### DropdownTrigger Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactElement',
+      description: '通常是一个按钮或其他可点击元素。',
+    },
+    {
+      prop: 'closeOnClick',
+      type: 'boolean',
+      default: 'true',
+      description: '点击触发元素时是否关闭 Dropdown。',
+    },
+  ]}
+/>
+
+### DropdownItem Props
+
+DropdownItem 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'DropdownItem 的内容。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'DropdownItem Slots 的 props。',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'DropdownItem Slots 的 className。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用 DropdownItem。',
+    },
+    {
+      prop: 'closeOnSelect',
+      type: 'boolean',
+      default: 'true',
+      description: '选择该项时是否关闭 Dropdown。',
+    },
+    {
+      prop: 'shortcut',
+      type: 'ReactNode',
+      description: '显示在 DropdownItem 右侧的快捷键提示文本。',
+    },
+    {
+      prop: 'startIcon',
+      type: 'ReactNode',
+      description: '显示在 DropdownItem 开头的图标。',
+    },
+    {
+      prop: 'endIcon',
+      type: 'ReactNode',
+      description: '显示在 DropdownItem 结尾的图标。',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: 'gray',
+      description: '当 DropdownItem 高亮时使用的颜色。',
+    },
+    {
+      prop: 'variant',
+      type: ["'solid'", "'outlined'", "'ghost'", "'faded'"],
+      default: "'solid'",
+      description: '当 DropdownItem 高亮时使用的样式。',
+    },
+    {
+      prop: 'onSelect',
+      type: '(event: MouseEvent<HTMLDivElement>) => void',
+      description: '选择该项时触发的回调函数。',
+    },
+  ]}
+/>
+
+### DropdownItem Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'content',
+      description: 'DropdownItem 的内容容器。',
+      class: '.nui-dropdown-item-content',
+      component: "'span'",
+    },
+    {
+      slot: 'shortcut',
+      description: 'DropdownItem 的快捷键提示容器。',
+      class: '.nui-dropdown-item-shortcut',
+      component: "'kbd'",
+    },
+    {
+      slot: 'startIcon',
+      description: 'DropdownItem 的开头图标容器。',
+      class: '.nui-dropdown-item-start-icon',
+      component: "'span'",
+    },
+    {
+      slot: 'endIcon',
+      description: 'DropdownItem 的结尾图标容器。',
+      class: '.nui-dropdown-item-end-icon',
+      component: "'span'",
+    },
+  ]}
+/>
+
+### DropdownItemGroup Props
+
+DropdownItemGroup 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        'DropdownItemGroup 的内容，通常是 DropdownItem、DropdownItemGroupLabel 等。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### DropdownItemGroupLabel Props
+
+DropdownItemGroupLabel 继承 `as` (默认为 `'div'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'DropdownItemGroupLabel 的内容。',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### DropdownRadioItemGroup Props
+
+DropdownRadioItemGroup 继承 DropdownItemGroup 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: 'T',
+      description: '当前选中的值。',
+    },
+    {
+      prop: 'onValueChange',
+      type: '(value: T) => void',
+      description: '当选中项改变时触发的回调函数。',
+    },
+  ]}
+/>
+
+### DropdownRadioItem Props
+
+DropdownRadioItem 继承 DropdownItem 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: ['string', 'number'],
+      description: '该项的值。',
+    },
+    {
+      prop: 'indicator',
+      type: 'ReactNode',
+      description: '自定义 DropdownRadioItem 选中状态指示器。',
+    },
+  ]}
+/>
+
+### DropdownRadioItem Slots
+
+DropdownRadioItem Slots 包括 DropdownItem 的所有 Slots，以及:
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'indicator',
+      description: 'DropdownRadioItem 的选中状态指示器容器。',
+      class: '.nui-dropdown-radio-item-indicator',
+      component: "'span'",
+    },
+  ]}
+/>
+
+### DropdownCheckboxItemGroup Props
+
+DropdownCheckboxItemGroup 继承 DropdownItemGroup 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: 'T[]',
+      description: '当前选中的值数组。',
+    },
+    {
+      prop: 'onValueChange',
+      type: '(value: T[]) => void',
+      description: '当选中项改变时触发的回调函数。',
+    },
+  ]}
+/>
+
+### DropdownCheckboxItem Props
+
+DropdownCheckboxItem 继承 DropdownItem 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: ['string', 'number'],
+      description: '该项的值。',
+    },
+    {
+      prop: 'onCheckedChange',
+      type: '(checked: boolean) => void',
+      description: '当选中状态变化时触发的回调函数。',
+    },
+    {
+      prop: 'indicator',
+      type: 'ReactNode',
+      description: '自定义 DropdownCheckboxItem 选中状态指示器。',
+    },
+  ]}
+/>
+
+### DropdownCheckboxItem Slots
+
+DropdownCheckboxItem Slots 包括 DropdownItem 的所有 Slots，以及:
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'indicator',
+      description: 'DropdownCheckboxItem 的选中状态指示器容器。',
+      class: '.nui-dropdown-checkbox-item-indicator',
+      component: "'span'",
+    },
+  ]}
+/>
+
+### DropdownDivider Props
+
+DropdownDivider 继承 `as` (默认为 `'hr'`) 的 Props。
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref 用于转发到根元素。',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: '用于根元素的 className。',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'hr'",
+      description:
+        '用于根元素的组件。可以是表示 HTML 元素的字符串，也可以是一个组件。',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description: '用于根元素的 sx 属性。',
+    },
+  ]}
+/>
+
+### DropdownTriggerItem Props
+
+DropdownTriggerItem 继承 DropdownItem 的 Props。
+
+### SubDropdown Props
+
+SubDropdown 继承 Dropdown 的 Props。
+
+### SubDropdownContent Props
+
+SubDropdownContent 的 API 与 DropdownContent 基本一致，但不支持 `restoreFocus`、`closeOnEscape` 和 `placement`。

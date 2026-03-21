@@ -22,7 +22,7 @@ type DropdownItemImplProps = DropdownItemProps & {
   indicator?: ReactNode
 }
 
-const slots = ['root', 'shortcut', 'text', 'startIcon', 'endIcon'] as const
+const slots = ['root', 'shortcut', 'content', 'startIcon', 'endIcon'] as const
 
 export const DropdownItemImpl = (inProps: DropdownItemImplProps) => {
   const props = useDefaultProps<DropdownItemImplProps>({
@@ -84,11 +84,11 @@ export const DropdownItemImpl = (inProps: DropdownItemImplProps) => {
     externalSlotProps: slotProps?.shortcut,
   })
 
-  const [DropdownItemText, getDropdownItemTextProps] = useSlot({
+  const [DropdownItemContent, getDropdownItemContentProps] = useSlot({
     component: nex.span,
-    style: styles.text,
-    externalSlotProps: slotProps?.text,
-    classNames: slotClasses.text,
+    style: styles.content,
+    externalSlotProps: slotProps?.content,
+    classNames: slotClasses.content,
   })
 
   const [DropdownItemStartIcon, getDropdownItemStartIconProps] = useSlot({
@@ -113,9 +113,9 @@ export const DropdownItemImpl = (inProps: DropdownItemImplProps) => {
           {startIcon}
         </DropdownItemStartIcon>
       )}
-      <DropdownItemText {...getDropdownItemTextProps()}>
+      <DropdownItemContent {...getDropdownItemContentProps()}>
         {children}
-      </DropdownItemText>
+      </DropdownItemContent>
       {shortcut && (
         <DropdownItemShortcut {...getDropdownItemShortcutProps()}>
           {shortcut}

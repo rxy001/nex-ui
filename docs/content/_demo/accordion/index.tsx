@@ -16,6 +16,8 @@ import disabledCode from './Disabled.demo?raw'
 import DisabledDemo from './Disabled.demo'
 import controlledCode from './Controlled.demo?raw'
 import ControlledDemo from './Controlled.demo'
+import customMotionCode from './CustomMotion.demo?raw'
+import CustomMotionDemo from './CustomMotion.demo'
 
 export const accordion = {
   usage: {
@@ -53,5 +55,9 @@ export const accordion = {
   controlled: {
     code: controlledCode,
     demo: <ControlledDemo />,
+  },
+  customMotion: {
+    code: customMotionCode,
+    demo: <CustomMotionDemo />,
   },
 }

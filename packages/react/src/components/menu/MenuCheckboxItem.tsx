@@ -34,21 +34,20 @@ export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
 
   const checked = checkboxGroupCtx.value.includes(value)
 
-  const handleSelect = () => {
-    checkboxGroupCtx.setValue(
-      checked
-        ? checkboxGroupCtx.value.filter((val) => val !== value)
-        : [...checkboxGroupCtx.value, value],
-    )
-    onCheckedChange?.(!checked)
-  }
-
   const [MenuCheckboxItemRoot, getMenuCheckboxItemProps] = useSlot({
     component: MenuItem,
     externalForwardedProps: remainingProps,
     additionalProps: {
       disabled,
-      onSelect: handleSelect,
+      closeOnSelect: false,
+      onSelect: () => {
+        checkboxGroupCtx.setValue(
+          checked
+            ? checkboxGroupCtx.value.filter((val) => val !== value)
+            : [...checkboxGroupCtx.value, value],
+        )
+        onCheckedChange?.(!checked)
+      },
     },
     dataAttrs: {
       checked,

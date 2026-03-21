@@ -74,6 +74,12 @@ Accordion 组件支持受控模式，您可以通过 `expandedKeys` 和 `onExpan
 
 <Example {...accordion.controlled} />
 
+### Custom Motion
+
+通过 `motionProps` 属性，您可以修改 `visible` / `hidden` 状态下的动画。
+
+<Example {...accordion.customMotion} />
+
 ## API
 
 ### Accordion Props
@@ -113,47 +119,47 @@ Accordion 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'multiple',
       type: 'boolean',
       default: 'false',
-      description: '是否允许同时展开多个 items。',
+      description: '是否允许同时展开多个 AccordionItems',
     },
     {
       prop: 'defaultExpandedKeys',
       type: 'Key[]',
-      description: '默认展开的 items 的 keys。(非受控)',
+      description: '默认展开的 AccordionItems 的 keys。(非受控)',
     },
     {
       prop: 'expandedKeys',
       type: 'Key[]',
-      description: '展开的 items 的 keys。(受控)',
+      description: '展开的 AccordionItems 的 keys。(受控)',
     },
     {
       prop: 'onExpandedKeysChange',
       type: '(keys: Key[]) => void',
-      description: '当展开的 items 发生变化时调用的回调函数。',
+      description: '当展开的 AccordionItems 发生变化时调用的回调函数。',
     },
     {
       prop: 'disabledKeys',
       type: 'Key[]',
-      description: '禁用的 items 的 keys。',
+      description: '禁用的 AccordionItems 的 keys。',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: 'Accordion 的动画属性。',
+      description: '所有 AccordionItems 的动画属性。',
     },
     {
       prop: 'indicator',
       type: 'ReactNode',
-      description: '自定义指示器。',
+      description: '所有 AccordionItems 的自定义指示器。',
     },
     {
       prop: 'hideIndicator',
       type: 'boolean',
-      description: '是否隐藏指示器。',
+      description: '是否隐藏所有 AccordionItems 的指示器。',
     },
     {
       prop: 'indicatorMotionProps',
       type: 'HTMLMotionProps',
-      description: '指示器的动画属性。',
+      description: '所有 AccordionItems 指示器的动画属性。',
     },
     {
       prop: 'variant',
@@ -177,7 +183,7 @@ Accordion 继承 `as` (默认为 `'div'`) 的 Props。
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description: '是否禁用 Accordion 的动画。',
+      description: '是否禁用所有 AccordionItems 的动画。',
     },
   ]}
 />

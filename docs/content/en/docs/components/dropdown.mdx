@@ -1,0 +1,708 @@
+---
+title: Dropdown
+description: Dropdown is a floating layer component used to display a list of options or actions.
+---
+
+import { dropdown } from '@/content/_demo'
+
+# Dropdown
+
+Dropdown is a floating layer component used to display a list of options or actions.
+
+<ComponentLinks component='dropdown' ariaCompatible />
+
+---
+
+## Anatomy
+
+NexUI exports 14 Dropdown-related components:
+
+- `Dropdown`: The root component that controls Dropdown state.
+- `DropdownTrigger`: The trigger component used to open the Dropdown.
+- `DropdownContent`: The component that renders Dropdown content.
+- `DropdownItem`: The component used to render a Dropdown option.
+- `DropdownItemGroup`: The component used to group Dropdown options.
+- `DropdownItemGroupLabel`: The label component for Dropdown option groups.
+- `DropdownRadioItemGroup`: The component used to render a single-select option group.
+- `DropdownRadioItem`: The component used to render a single-select option.
+- `DropdownCheckboxItemGroup`: The component used to render a multi-select option group.
+- `DropdownCheckboxItem`: The component used to render a multi-select option.
+- `DropdownTriggerItem`: The item component used to trigger a nested Dropdown.
+- `SubDropdown`: The root component for nested Dropdowns.
+- `SubDropdownContent`: The content component for nested Dropdowns.
+- `DropdownDivider`: The component used to separate Dropdown options.
+
+```tsx
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownItemGroup,
+  DropdownItemGroupLabel,
+  DropdownRadioItemGroup,
+  DropdownRadioItem,
+  DropdownCheckboxItemGroup,
+  DropdownCheckboxItem,
+  DropdownTriggerItem,
+  SubDropdown,
+  SubDropdownContent,
+  DropdownDivider,
+} from '@nex-ui/react'
+```
+
+## Usage
+
+<Example {...dropdown.usage} />
+
+### Colors
+
+<Example {...dropdown.colors} />
+
+### Variants
+
+<Example {...dropdown.variants} />
+
+### Placements
+
+<Example {...dropdown.placements} />
+
+### Link Items
+
+<Example {...dropdown.linkItems} />
+
+### Radio Items
+
+<Example {...dropdown.radioItems} />
+
+### Checkbox Items
+
+<Example {...dropdown.checkboxItems} />
+
+### Sub Dropdown
+
+<Example {...dropdown.subDropdown} />
+
+### Custom Trigger
+
+<Example {...dropdown.customTrigger} />
+
+### With Shortcut
+
+Use the `shortcut` prop on `DropdownItem` to display keyboard shortcut hints.
+
+<Example {...dropdown.withShortcut} />
+
+### With Groups
+
+<Example {...dropdown.withGroups} />
+
+### With Icons
+
+Use `startIcon` and `endIcon` to add icons before or after `DropdownItem` content.
+
+<Example {...dropdown.withIcons} />
+
+### Overflow
+
+When Dropdown content is long, set `maxHeight` on `DropdownContent` to limit height and enable scrolling.
+
+<Example {...dropdown.overflow} />
+
+### Prevent Closing
+
+By default, selecting a `DropdownItem` closes the Dropdown. Set `closeOnSelect` to `false` to keep it open.
+
+<Example {...dropdown.preventClosing} />
+
+## API
+
+### Dropdown Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        'Typically `DropdownTrigger`, `DropdownContent`, and related components.',
+    },
+    {
+      prop: 'open',
+      type: 'boolean',
+      description: 'Controls whether the Dropdown is open. (controlled)',
+    },
+    {
+      prop: 'defaultOpen',
+      type: 'boolean',
+      description: 'The initial open state of the Dropdown. (uncontrolled)',
+    },
+    {
+      prop: 'onOpenChange',
+      type: '(open: boolean) => void',
+      description: 'Callback fired when the Dropdown opens or closes.',
+    },
+    {
+      prop: 'onClose',
+      type: '() => void',
+      description: 'Callback fired when the Dropdown closes.',
+    },
+  ]}
+/>
+
+### DropdownContent Props
+
+DropdownContent inherits the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the Dropdown.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'container',
+      type: ['HTMLElement', 'null', '() => HTMLElement | null'],
+      description: 'The container element used by Portal.',
+      default: 'document.body',
+    },
+    {
+      prop: 'restoreFocus',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'If true, focus is restored to the trigger when the Dropdown closes.',
+    },
+    {
+      prop: 'loopFocus',
+      type: 'boolean',
+      default: 'true',
+      description: 'If true, focus loops within the Dropdown.',
+    },
+    {
+      prop: 'closeOnDetached',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'If true, closes the Dropdown when the trigger is detached from view.',
+    },
+    {
+      prop: 'closeOnEscape',
+      type: 'boolean',
+      default: 'true',
+      description: 'If true, closes the Dropdown when Escape is pressed.',
+    },
+    {
+      prop: 'flip',
+      type: ['false', '{ mainAxis?: boolean; crossAxis?: boolean }'],
+      default: '{ mainAxis: true, crossAxis: true }',
+      description:
+        'Changes Dropdown placement to keep it visible in the viewport.',
+    },
+    {
+      prop: 'placement',
+      type: [
+        `'top'`,
+        `'top-start'`,
+        `'top-end'`,
+        `'bottom'`,
+        `'bottom-start'`,
+        `'bottom-end'`,
+        `'left'`,
+        `'left-start'`,
+        `'left-end'`,
+        `'right'`,
+        `'right-start'`,
+        `'right-end'`,
+      ],
+      default: `'bottom'`,
+      description: 'The placement of the Dropdown.',
+    },
+    {
+      prop: 'offset',
+      type: ['false', 'number', '{ mainAxis?: number; crossAxis?: number }'],
+      default: '5',
+      description: 'Sets the Dropdown offset, or disables offset.',
+    },
+    {
+      prop: 'shift',
+      type: 'boolean',
+      default: 'true',
+      description: 'Shifts the Dropdown to keep it in view.',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: 'gray',
+      description: 'The highlight color used by Dropdown items.',
+    },
+    {
+      prop: 'variant',
+      type: ["'solid'", "'outlined'", "'ghost'", "'faded'"],
+      default: "'solid'",
+      description: 'The highlight style used by Dropdown items.',
+    },
+    {
+      prop: 'motionProps',
+      type: ['HTMLMotionProps', `(placement: Placement) => HTMLMotionProps`],
+      description: 'Custom props for Dropdown enter/exit animation.',
+    },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to disable Dropdown animation.',
+    },
+    {
+      prop: 'keepMounted',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to keep Dropdown content mounted when closed.',
+    },
+    {
+      prop: 'minWidth',
+      type: ['string', 'number'],
+      description: 'The minimum width of the Dropdown.',
+    },
+    {
+      prop: 'maxHeight',
+      type: ['string', 'number'],
+      description: 'The maximum height of the Dropdown.',
+    },
+  ]}
+/>
+
+### DropdownContent Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'paper',
+      description: 'The content container of `DropdownContent`.',
+      class: '.nui-dropdown-content-paper',
+      component: "'div'",
+    },
+  ]}
+/>
+
+### DropdownTrigger Props
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactElement',
+      description: 'Usually a button or other clickable element.',
+    },
+    {
+      prop: 'closeOnClick',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'Whether clicking the trigger closes the Dropdown when already open.',
+    },
+  ]}
+/>
+
+### DropdownItem Props
+
+DropdownItem inherits the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of the DropdownItem.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    {
+      prop: 'slotProps',
+      type: 'Partial<Record<Slots, ComponentProps>>',
+      description: 'The props used for each slot.',
+    },
+    {
+      prop: 'classNames',
+      type: 'Partial<Record<Slots, ClassValue>>',
+      description: 'The className used for each slot.',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether the DropdownItem is disabled.',
+    },
+    {
+      prop: 'closeOnSelect',
+      type: 'boolean',
+      default: 'true',
+      description: 'Whether selecting this item closes the Dropdown.',
+    },
+    {
+      prop: 'shortcut',
+      type: 'ReactNode',
+      description: 'Shortcut hint content displayed on the right side.',
+    },
+    {
+      prop: 'startIcon',
+      type: 'ReactNode',
+      description: 'The icon displayed at the start of the item.',
+    },
+    {
+      prop: 'endIcon',
+      type: 'ReactNode',
+      description: 'The icon displayed at the end of the item.',
+    },
+    {
+      prop: 'color',
+      type: [
+        `'blue'`,
+        `'orange'`,
+        `'yellow'`,
+        `'cyan'`,
+        `'red'`,
+        `'green'`,
+        `'pink'`,
+        `'purple'`,
+        `'gray'`,
+      ],
+      default: 'gray',
+      description: 'The color used when DropdownItem is highlighted.',
+    },
+    {
+      prop: 'variant',
+      type: ["'solid'", "'outlined'", "'ghost'", "'faded'"],
+      default: "'solid'",
+      description: 'The style used when DropdownItem is highlighted.',
+    },
+    {
+      prop: 'onSelect',
+      type: '(event: MouseEvent<HTMLDivElement>) => void',
+      description: 'Callback fired when this item is selected.',
+    },
+  ]}
+/>
+
+### DropdownItem Slots
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'content',
+      description: 'The content container of `DropdownItem`.',
+      class: '.nui-dropdown-item-content',
+      component: "'span'",
+    },
+    {
+      slot: 'shortcut',
+      description: 'The shortcut hint container of `DropdownItem`.',
+      class: '.nui-dropdown-item-shortcut',
+      component: "'kbd'",
+    },
+    {
+      slot: 'startIcon',
+      description: 'The start icon container of `DropdownItem`.',
+      class: '.nui-dropdown-item-start-icon',
+      component: "'span'",
+    },
+    {
+      slot: 'endIcon',
+      description: 'The end icon container of `DropdownItem`.',
+      class: '.nui-dropdown-item-end-icon',
+      component: "'span'",
+    },
+  ]}
+/>
+
+### DropdownItemGroup Props
+
+DropdownItemGroup inherits the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description:
+        'The content of DropdownItemGroup, typically `DropdownItem`, `DropdownItemGroupLabel`, and related components.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+  ]}
+/>
+
+### DropdownItemGroupLabel Props
+
+DropdownItemGroupLabel inherits the props of `as` (by default, `'div'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'children',
+      type: 'ReactNode',
+      description: 'The content of DropdownItemGroupLabel.',
+    },
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'div'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+  ]}
+/>
+
+### DropdownRadioItemGroup Props
+
+DropdownRadioItemGroup inherits the props of DropdownItemGroup.
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: 'T',
+      description: 'The currently selected value.',
+    },
+    {
+      prop: 'onValueChange',
+      type: '(value: T) => void',
+      description: 'Callback fired when the selected value changes.',
+    },
+  ]}
+/>
+
+### DropdownRadioItem Props
+
+DropdownRadioItem inherits the props of DropdownItem.
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: ['string', 'number'],
+      description: 'The item value.',
+    },
+    {
+      prop: 'indicator',
+      type: 'ReactNode',
+      description: 'Custom selected-state indicator for DropdownRadioItem.',
+    },
+  ]}
+/>
+
+### DropdownRadioItem Slots
+
+DropdownRadioItem slots include all DropdownItem slots, plus:
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'indicator',
+      description:
+        'The selected-state indicator container of DropdownRadioItem.',
+      class: '.nui-dropdown-radio-item-indicator',
+      component: "'span'",
+    },
+  ]}
+/>
+
+### DropdownCheckboxItemGroup Props
+
+DropdownCheckboxItemGroup inherits the props of DropdownItemGroup.
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: 'T[]',
+      description: 'The currently selected value array.',
+    },
+    {
+      prop: 'onValueChange',
+      type: '(value: T[]) => void',
+      description: 'Callback fired when the selected values change.',
+    },
+  ]}
+/>
+
+### DropdownCheckboxItem Props
+
+DropdownCheckboxItem inherits the props of DropdownItem.
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'value',
+      type: ['string', 'number'],
+      description: 'The item value.',
+    },
+    {
+      prop: 'onCheckedChange',
+      type: '(checked: boolean) => void',
+      description: 'Callback fired when checked state changes.',
+    },
+    {
+      prop: 'indicator',
+      type: 'ReactNode',
+      description: 'Custom selected-state indicator for DropdownCheckboxItem.',
+    },
+  ]}
+/>
+
+### DropdownCheckboxItem Slots
+
+DropdownCheckboxItem slots include all DropdownItem slots, plus:
+
+<SlotsTable
+  dataSource={[
+    {
+      slot: 'indicator',
+      description:
+        'The selected-state indicator container of DropdownCheckboxItem.',
+      class: '.nui-dropdown-checkbox-item-indicator',
+      component: "'span'",
+    },
+  ]}
+/>
+
+### DropdownDivider Props
+
+DropdownDivider inherits the props of `as` (by default, `'hr'`).
+
+<PropsTable
+  dataSource={[
+    {
+      prop: 'ref',
+      type: 'Ref',
+      description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'className',
+      type: 'ClassValue',
+      description: 'Additional class names to apply to the root.',
+    },
+    {
+      prop: 'as',
+      type: 'ElementType',
+      default: "'hr'",
+      description: 'The component or element to render as the root.',
+    },
+    {
+      prop: 'sx',
+      type: 'Interpolation',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+  ]}
+/>
+
+### DropdownTriggerItem Props
+
+DropdownTriggerItem inherits the props of DropdownItem.
+
+### SubDropdown Props
+
+SubDropdown inherits the props of Dropdown.
+
+### SubDropdownContent Props
+
+SubDropdownContent has an API very similar to DropdownContent, but it does not support `restoreFocus`, `closeOnEscape`, or `placement`.

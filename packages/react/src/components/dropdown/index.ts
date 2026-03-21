@@ -11,7 +11,7 @@ export { DropdownCheckboxItemGroup } from './DropdownCheckboxItemGroup'
 export { DropdownTriggerItem } from './DropdownTriggerItem'
 export { SubDropdown } from './SubDropdown'
 export { SubDropdownContent } from './SubDropdownContent'
-export { DropdownSeparator } from './DropdownSeparator'
+export { DropdownDivider } from './DropdownDivider'
 
 export type {
   DropdownProps,
@@ -39,6 +39,6 @@ export type {
   SubDropdownPropsOverrides,
   SubDropdownContentProps,
   SubDropdownContentPropsOverrides,
-  DropdownSeparatorProps,
-  DropdownSeparatorPropsOverrides,
+  DropdownDividerProps,
+  DropdownDividerPropsOverrides,
 } from './types'

@@ -38,6 +38,7 @@ export const MenuRadioItem = (props: MenuRadioItemProps) => {
     externalForwardedProps: remainingProps,
     additionalProps: {
       disabled,
+      closeOnSelect: false,
       onSelect: () => {
         radioGroupCtx.setValue(value)
       },
