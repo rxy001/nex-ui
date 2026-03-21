@@ -22,6 +22,7 @@ export default function App() {
         <Avatar
           radius='full'
           src='https://avatars.githubusercontent.com/u/25546323?v=4'
+          alt='User menu'
         />
       </DropdownTrigger>
       <DropdownContent placement='bottom-start'>

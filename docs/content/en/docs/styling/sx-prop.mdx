@@ -1,6 +1,6 @@
 ---
 title: The sx Prop
-description: The sx prop is a shortcut for defining custom styles that can access the theme.
+description: The sx prop is a shorthand for defining custom styles with access to the theme.
 ---
 
 import Image from 'next/image'
@@ -10,14 +10,14 @@ import logo from '@/public/images/logo.png'
 
 # The sx Prop
 
-The `sx` prop is a shortcut for defining custom styles that can access the theme.
+The `sx` prop is a shorthand for defining custom styles with direct access to the theme.
 
-The `sx` prop provides a superset of CSS. In addition to including all CSS properties and selectors, it also has custom properties and selectors built into Nex UI. The values of CSS properties can directly use the predefined theme.
-If you're not satisfied with the existing CSS custom properties, selectors, and themes, Nex UI also offers extensibility. You can read more on [Customizing the Theme page](/docs/customization/theming).
+The `sx` prop provides a superset of CSS. In addition to standard CSS properties and selectors, it includes Nex UI-specific properties and selectors. CSS property values can directly reference the predefined theme.
+If the built-in custom properties, selectors, and theme options are not enough, Nex UI is fully extensible. Learn more on the [Customizing the Theme page](/docs/customization/theming).
 
 ## Usage
 
-The following example demonstrates how to use the `sx` prop. Note that not all values are valid CSS properties. This is because the keys of `sx` are mapped to specific token types. This concept will be introduced in more detail next.
+The following example shows how to use the `sx` prop. Note that `sx` keys are not limited to standard CSS properties, because they map to specific token types. This concept is explained in more detail below.
 
 <FlexCenter justify='center'>
   <Box
@@ -111,7 +111,7 @@ export default function Example() {
 
 ## Theme-Aware Properties
 
-Through Scales, you can associate Tokens and SemanticTokens with CSS properties, enabling CSS properties to map to corresponding token types and allowing CSS properties to use tokens of the appropriate type as values.',
+With Scales, you can map CSS properties to `tokens` and `semanticTokens`, allowing each property to use values from the corresponding token type.
 
 ```tsx {11,12,13}
 import { Box, defineTheme, NexUIProvider } from '@nex-ui/react'
@@ -150,7 +150,7 @@ export default function Example() {
 }
 ```
 
-Note that only when the CSS property value is a string can it be potentially mapped to tokens.
+Note that a CSS property value can be mapped to tokens only when the value is a string.
 
 In the above example, the actual value of `width` is `10px`, while the actual value of `height` is `1px`.
 
@@ -294,13 +294,13 @@ Read more on the [Z-Indices page](/docs/customization/z-indices).
 
 ## Responsive Value
 
-All CSS properties related to the `sx` property also support responsive values for specific breakpoints, and the `sx` property simplifies the process of defining and implementing responsive breakpoints.
+All CSS properties used in `sx` support responsive values at specific breakpoints, which makes defining responsive behavior much easier.
 
 Read more on the [Responsive Design page](/docs/styling/responsive-design).
 
 ## Dark Mode
 
-All CSS properties associated with the `sx` property also support dark mode. When used with the Color Mode system provided by Nex UI, you can apply dark mode styles to components using `_dark`, light mode styles with `_light`, and default component styles through `_DEFAULT`.
+All CSS properties in `sx` also support dark mode. When used with Nex UI's Color Mode system, you can apply dark-mode styles with `_dark`, light-mode styles with `_light`, and default styles with `_DEFAULT`.
 
 The following example demonstrates how to define styles for components in different modes:
 
@@ -352,8 +352,8 @@ Read more on the [Dark Mode page](/docs/customization/dark-mode).
 
 ## `colorPalette` Prop
 
-The `colorPalette` property can create a color placeholder for better theming and customization.
-The basic requirement for using `colorPalette` is that the colors used must have a consistent naming convention. By default, Nex UI provides color values from 50 to 900 for each color. This makes it easier for you to create and use `colorPalette`.
+The `colorPalette` property creates a color placeholder for easier theming and customization.
+To use `colorPalette`, your colors should follow a consistent naming convention. By default, Nex UI provides scales from 50 to 900 for each color, making `colorPalette` straightforward to use.
 
 Suppose we need to create a button with themeable styles from scratch.
 
@@ -397,7 +397,7 @@ Suppose we need to create a button with themeable styles from scratch.
 
 ## Token Reference Syntax
 
-Normally, only when the mapping relationship between CSS properties and token types is defined in `scales` can the corresponding types of tokens be referenced when defining `CSS`. Nex UI has default `Scales` settings:
+Normally, you can reference a token type in CSS only when the mapping between CSS properties and token types is defined in `scales`. Nex UI includes default `scales` settings:
 
 ```tsx
 {
@@ -420,8 +420,8 @@ Therefore, in the `sx` property, you can use:
 </Box>
 ```
 
-However, in special shorthand CSS properties such as `border` and `padding`, tokens cannot be referenced in the above way. To address this, Nex UI provides a token reference syntax,
-allowing you to reference tokens in shorthand properties:
+However, with shorthand properties such as `border` and `padding`, tokens cannot be referenced in the same way. To solve this, Nex UI provides token reference syntax,
+which allows tokens to be used in shorthand properties:
 
 ```tsx
 <Box
@@ -446,13 +446,13 @@ Moreover, you can also use `colorPalette` in the token reference syntax:
 </Box>
 ```
 
-At this time, the `border` will apply the values corresponding to `borderWidths.sm` and `colors.colorPalette.500`.
+In this case, `border` resolves to the values of `borderWidths.sm` and `colors.colorPalette.500`.
 
 ## Color Opacity Modifier
 
-When a CSS property is defined as the `colors` type within `scales`, whether a color value is used directly or a color token is referenced, the `opacity` modifier can be flexibly used to set the color transparency.
+When a CSS property is mapped to the `colors` type in `scales`, you can use the `opacity` modifier to adjust transparency, whether you provide a raw color value or a color token.
 
-This feature also applies to the token reference syntax. When referencing color token, the `opacity` modifier can be conveniently used to achieve diverse visual effect adjustments.
+This also works with token reference syntax. When referencing a color token, you can apply the `opacity` modifier to create a wider range of visual effects.
 
 For example, `color: 'blue.500/50'` sets the transparency to 50%.
 
@@ -481,7 +481,7 @@ For example, `color: 'blue.500/50'` sets the transparency to 50%.
 
 ## Array Values
 
-Array types are useful when you want to partially override some styles in the former index:
+Array syntax is useful when you want later entries to partially override earlier styles:
 
 ```tsx
 <Box
@@ -502,11 +502,11 @@ Array types are useful when you want to partially override some styles in the fo
 />
 ```
 
-When you hover on this element, `color: red; backgroundColor: white;` is applied.
+When you hover over this element, `color: red; backgroundColor: white;` is applied.
 
-If `foo: true`, then `color: red; backgroundColor: grey;` is applied when hovering.
+If `foo: true`, `color: red; backgroundColor: grey;` is applied on hover.
 
-If `bar: true`, then `color: red; backgroundColor: yellow;` is applied when hovering regardless of foo value, because the higher index of the array has higher specificity.
+If `bar: true`, `color: red; backgroundColor: yellow;` is applied on hover regardless of `foo`, because higher array indexes take precedence.
 
 ## Aliases
 
@@ -518,6 +518,6 @@ You can define aliases for CSS properties through [Aliases](/docs/customization/
 
 ## Selector
 
-When you want to combine CSS selectors, such as `'&:not(:disabled):not([data-disabled=true]):hover'`, you can customize more selectors through Selectors and unlock additional usage scenarios.
+If you need to combine complex selectors, such as `'&:not(:disabled):not([data-disabled=true]):hover'`, you can define additional selectors via Selectors to support more advanced use cases.
 
 Read more on the [Selectors page](/docs/customization/selectors).

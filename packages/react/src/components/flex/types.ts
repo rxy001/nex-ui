@@ -19,7 +19,7 @@ type FlexOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The content of the flex.
+   * The content of the Flex.
    */
   children?: ReactNode
 
@@ -29,33 +29,33 @@ type FlexOwnProps<RootComponent extends ElementType> = {
   className?: ClassValue
 
   /**
-   * Set the alignment of elements in the direction of the main axis.
+   * Sets alignment along the main axis.
    */
   justify?: CSSObject['justifyContent']
 
   /**
-   * Set the alignment of elements in the direction of the cross axis.
+   * Sets alignment along the cross axis.
    */
   align?: CSSObject['alignItems']
 
   /**
-   * Set how flex items are placed in the flex container that defines the main axis and the direction.
+   * Controls item direction and defines the main axis in the flex container.
    * @default 'row'
    */
   direction?: CSSObject['flexDirection']
 
   /**
-   * Set whether the element is displayed in a single line or in multiple lines.
+   * Controls whether items wrap to multiple lines.
    */
   wrap?: CSSObject['flexWrap']
 
   /**
-   * Set the gap between flex items.
+   * Sets the gap between flex items.
    */
   gap?: CSSObject['gap']
 
   /**
-   * If true, the flex container is displayed as an inline flex container.
+   * If true, displays the flex container as an inline-flex container.
    * @default false
    */
   inline?: boolean

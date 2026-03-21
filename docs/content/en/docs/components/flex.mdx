@@ -1,13 +1,13 @@
 ---
 title: Flex
-description: Flex is an elastic container component used to arrange elements vertically or horizontally.
+description: Flex is a flexible container component used to arrange elements vertically or horizontally.
 ---
 
 import { flex } from '@/content/_demo'
 
 # Flex
 
-Flex is an elastic container component used to arrange elements vertically or horizontally.
+Flex is a flexible container component used to arrange elements vertically or horizontally.
 
 <ComponentLinks component='flex' />
 
@@ -29,7 +29,7 @@ import { Flex } from '@nex-ui/react'
 
 ### Gap
 
-The `gap` prop sets the spacing between child elements; you can use space tokens and semantic tokens for it.
+The `gap` prop defines spacing between child elements, and supports space tokens and semantic tokens.
 
 <Example {...flex.gap} />
 
@@ -85,36 +85,33 @@ Flex inherits the props of `as` (by default, `'div'`).
       type: 'boolean',
       default: 'false',
       description:
-        'If true, the flex container is displayed as an inline flex container.',
+        'If true, displays the flex container as an inline-flex container.',
     },
     {
       prop: 'justify',
       type: "CSSProperties['justifyContent']",
-      description:
-        'Set the alignment of elements in the direction of the main axis.',
+      description: 'Sets alignment along the main axis.',
     },
     {
       prop: 'align',
       type: "CSSProperties['alignItems']",
-      description:
-        'Set the alignment of elements in the direction of the cross axis.',
+      description: 'Sets alignment along the cross axis.',
     },
     {
       prop: 'wrap',
       type: "CSSProperties['flexWrap']",
-      description:
-        'Set whether the element is displayed in a single line or in multiple lines.',
+      description: 'Controls whether items wrap to multiple lines.',
     },
     {
       prop: 'direction',
       type: "CSSProperties['flexDirection']",
       description:
-        'Set how flex items are placed in the flex container that defines the main axis and the direction.',
+        'Controls item direction and defines the main axis in the flex container.',
     },
     {
       prop: 'gap',
       type: "CSSObject['gap']",
-      description: 'Set the gap between flex items.',
+      description: 'Sets the gap between flex items.',
     },
   ]}
 />

@@ -15,7 +15,7 @@ export type ModalProps = {
   open?: boolean
 
   /**
-   * Handler that is called when the Modal is opened or closed
+   * Callback fired when the Modal is opened or closed
    */
   onOpenChange?: (open: boolean) => void
 

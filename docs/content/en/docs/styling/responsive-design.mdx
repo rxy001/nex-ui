@@ -10,12 +10,12 @@ import { Callout } from 'nextra/components'
 
 Responsive design is a fundamental concept in modern front-end development. It enables websites and applications to seamlessly adapt to different screen sizes and devices.
 
-> Nex UI uses a mobile-first breakpoint system, and when you write responsive styles, it utilizes the minimum width media query `@media (min-width)`.
+> Nex UI uses a mobile-first breakpoint system. Responsive styles are generated with min-width media queries (`@media (min-width)`).
 
-Nex UI provides 5 default breakpoints:
+Nex UI provides five default breakpoints:
 
 ```ts
-const breakoptions = {
+const breakpoints = {
   sm: '640px',
   md: '768px',
   lg: '1024px',
@@ -29,7 +29,7 @@ const breakoptions = {
 You can use the above breakpoints in [the `sx` prop](/docs/styling/sx-prop), [`defineRecipe`](/docs/styling/recipes), or [`defineSlotRecipe`](/docs/styling/slot-recipes).
 In these methods, all CSS properties support responsive values for specific breakpoints.
 
-There are two ways to define a set of breakpoints: as an object or as an array.
+There are two ways to define responsive values: object syntax and array syntax.
 
 ### Object Values
 
@@ -89,7 +89,7 @@ export default function App() {
 
 ### Array Values
 
-The second way is to define your breakpoints as an array, arranged in ascending order. As shown below:
+The second approach is to define values as an array, ordered from small to large breakpoints:
 
 <FlexCenter
   align='center'
@@ -122,7 +122,7 @@ The second way is to define your breakpoints as an array, arranged in ascending 
 ```
 
 <Callout type='info'>
-This way should only be considered when the number of breakpoints in the theme is limited, such as in the case of only three breakpoints.
+Use this approach only when your theme has a small number of breakpoints (for example, three).
 
 If you need to define more than just a few breakpoints, we recommend using the object API.
 
@@ -134,11 +134,11 @@ You can skip the corresponding breakpoint by using `null | undefined`:
 <Box sx={{ width: [200, null, 400] }}>This box has a responsive width.</Box>
 ```
 
-Of course, whether as an array or an object, the `width` property value can be modified to use size tokens or size semantic tokens. This also means that other CSS properties support corresponding token types.
+Whether you use an array or an object, values like `width` can reference size tokens or semantic size tokens. The same principle applies to other CSS properties and their corresponding token types.
 
 ## Breakpoints Selector
 
-Through the above two methods, the process of defining and implementing responsive breakpoints for a single CSS property is greatly simplified. If you want to achieve responsiveness for a group of CSS properties, you can use breakpoints as selectors:
+The two methods above are great for responsive values on a single CSS property. If you need responsive behavior for a group of properties, use breakpoint selectors:
 
 ```tsx
 <Box
@@ -157,7 +157,7 @@ Through the above two methods, the process of defining and implementing responsi
 </Box>
 ```
 
-This approach is more conducive to understanding and maintenance in complex CSS styling scenarios.
+This approach is often easier to read and maintain in complex styling scenarios.
 
 ## Customizing Breakpoints
 

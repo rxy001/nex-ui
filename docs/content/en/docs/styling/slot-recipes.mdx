@@ -1,11 +1,11 @@
 ---
 title: Slot Recipes
-description: Slot Recipes can split a component into multiple parts.
+description: Slot Recipes let you style multiple parts of a single component.
 ---
 
 # Slot Recipes
 
-Slot Recipes can split a component into multiple parts. Before reading this section, it is recommended to learn about [Recipes](/docs/styling/recipes).
+Slot Recipes let you split a component into multiple stylable parts. Before reading this section, we recommend reviewing [Recipes](/docs/styling/recipes).
 
 ## Basic Usage
 
@@ -43,7 +43,7 @@ const { root, control, label } = checkboxSlotRecipe()
 
 ## Slots With Variants
 
-You can change the entire component and its slots by using `Variants`.
+You can use `variants` to update the entire component and all its slots together.
 
 ```tsx {9-20}
 import { defineSlotRecipe } from '@nex-ui/react'
@@ -163,8 +163,8 @@ export const checkboxSlotRecipe = defineSlotRecipe({
 
 ## Slots With Extends
 
-`defineSlotRecipe` can inherit from a SlotRecipe, including its `slots`、`variants`、`defaultVariants`、`compoundVariants`.
-It will automatically merge the values of the same keys and provide TypeScript hints.
+`defineSlotRecipe` can extend another SlotRecipe, including its `slots`, `variants`, `defaultVariants`, and `compoundVariants`.
+It automatically merges matching keys and provides TypeScript hints.
 
 ```tsx {41-45}
 import { defineSlotRecipe } from '@nex-ui/react'

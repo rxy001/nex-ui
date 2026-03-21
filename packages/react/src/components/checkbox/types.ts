@@ -72,17 +72,17 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   value?: string | number
 
   /**
-   * Handler that is called when the element's checked state changes.
+   * Callback fired when the checked state changes.
    */
   onCheckedChange?: (checked: boolean) => void
 
   /**
-   * If true, the Checkbox is checked. (controlled)
+   * If true, checks the Checkbox. (controlled)
    */
   checked?: boolean
 
   /**
-   * If true, the Checkbox is disabled.
+   * If true, disables the Checkbox.
    *
    * @default false
    */
@@ -110,14 +110,14 @@ type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
   radius?: CheckboxVariants['radius']
 
   /**
-   * Indeterminate is presentational only. The indeterminate visual state remains regardless of user interaction.
+   * The indeterminate state is purely visual. It remains regardless of user interaction.
    *
    * @default false
    */
   indeterminate?: boolean
 
   /**
-   * If true, disables the animation for the Checkbox.
+   * If true, disables the animation when the checked state changes.
    *
    * @default false
    */
@@ -191,34 +191,34 @@ type CheckboxGroupOwnProps<
   defaultValue?: T[]
 
   /**
-   * Handler that is called when the value changes.
+   * Callback fired when the value changes.
    */
   onValueChange?: (value: T[]) => void
 
   /**
-   * If true, all checkboxes are disabled.
+   * If true, disables all checkboxes in the group.
    *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * The color of all checkboxes.
+   * The color of all checkboxes in the group.
    */
   color?: CheckboxVariants['color']
 
   /**
-   * The size of all checkboxes.
+   * The size of all checkboxes in the group.
    */
   size?: CheckboxVariants['size']
 
   /**
-   * The border radius of all checkboxes.
+   * The border radius of all checkboxes in the group.
    */
   radius?: CheckboxVariants['radius']
 
   /**
-   * The axis the CheckboxGroup items should align with.
+   * The orientation of the CheckboxGroup.
    *
    * @default 'horizontal'
    */
@@ -235,7 +235,7 @@ type CheckboxGroupOwnProps<
   className?: ClassValue
 
   /**
-   * If true, disables the animation for all checkboxes.
+   * If true, disables the animation for all Checkboxes in the group.
    *
    * @default false
    */

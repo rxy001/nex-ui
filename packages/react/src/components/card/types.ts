@@ -53,7 +53,7 @@ type CardOwnProps<RootComponent extends ElementType> = {
   blurred?: boolean
 
   /**
-   * If true, the Card will have a hover effect.
+   * If true, enables a hover effect on the Card.
    */
   hoverable?: boolean
 }

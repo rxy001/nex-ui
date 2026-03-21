@@ -15,7 +15,7 @@ Cards contain content and actions about a single subject.
 
 ## Anatomy
 
-NexUI exports 5 Card-related components:
+NexUI provides five components for building cards:
 
 - `Card`: The root component that displays the card.
 - `CardHeader`: The component that displays the header of the card.
@@ -39,7 +39,7 @@ import {
 
 ### Composition
 
-You can use other NexUI components inside the Card to compose a more complex Card.
+You can combine Card with other NexUI components to build richer layouts.
 
 <Example {...card.composition} />
 
@@ -49,8 +49,8 @@ You can use other NexUI components inside the Card to compose a more complex Car
 
 ### Primary Action
 
-Often, a Card allows users to interact with the entirety of its surface to trigger its main action.
-The action area of the Card can be specified by wrapping its contents in a `CardActionArea` component.
+In many cases, users can interact with the entire Card surface to trigger its primary action.
+You can define this action area by wrapping the Card content with `CardActionArea`.
 
 <Example {...card.primaryAction} />
 
@@ -122,7 +122,7 @@ Card inherits the props of `as` (by default, `'div'`).
     {
       prop: 'hoverable',
       type: 'boolean',
-      description: 'If true, the Card will have a hover effect.',
+      description: 'If true, enables a hover effect on the Card.',
     },
   ]}
 />

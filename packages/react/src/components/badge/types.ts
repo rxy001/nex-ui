@@ -73,17 +73,17 @@ type BadgeOwnProps<RootComponent extends ElementType> = {
   onClose?: (e: MouseEvent<HTMLButtonElement>) => void
 
   /**
-   * If true, the Badge is disabled.
+   * If true, disables the Badge.
    */
   disabled?: boolean
 
   /**
-   * The element is placed before the children.
+   * The element placed before the children.
    */
   startIcon?: ReactNode
 
   /**
-   * The element is placed after the children.
+   * The element placed after the children.
    */
   endIcon?: ReactNode
 

@@ -70,7 +70,6 @@ type DropdownContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
 
     /**
      * The props to modify the framer motion animation.
-     * Use the `variants` API to create your own animation.
      */
     motionProps?:
       | HTMLMotionProps<'div'>
@@ -101,12 +100,12 @@ type DropdownContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
     classNames?: ComponentSlotClasses<keyof DropdownSlotProps>
 
     /**
-     * The minimum width of the DropdownContent.
+     * The minimum width of the Dropdown.
      */
     minWidth?: number | string
 
     /**
-     * The maximum height of the DropdownContent.
+     * The maximum height of the Dropdown.
      */
     maxHeight?: number | string
   }
@@ -151,7 +150,7 @@ type DropdownItemOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   className?: ClassValue
 
   /**
-   * The keyboard shortcut for the item.
+   * Shortcut hint content displayed on the right side.
    */
   shortcut?: ReactNode
 
@@ -166,26 +165,26 @@ type DropdownItemOwnProps<RootComponent extends ElementType = 'div'> = Pick<
   classNames?: ComponentSlotClasses<keyof DropdownItemSlotProps>
 
   /**
-   * The color of the item.
+   * The color used when DropdownItem is highlighted.
    *
    * @default 'gray'
    */
   color?: DropdownItemVariants['color']
 
   /**
-   * The variant of the item.
+   * The style used when DropdownItem is highlighted.
    *
    * @default 'solid'
    */
   variant?: DropdownItemVariants['variant']
 
   /**
-   * The start icon of the item.
+   * The element placed before the children.
    */
   startIcon?: ReactNode
 
   /**
-   * The end icon of the item.
+   * The element placed after the children.
    */
   endIcon?: ReactNode
 }
@@ -289,7 +288,7 @@ type DropdownRadioItemOwnProps<RootComponent extends ElementType> = Omit<
     classNames?: ComponentSlotClasses<keyof DropdownRadioItemSlotProps>
 
     /**
-     * The indicator element to show when the item is selected.
+     * Custom selected-state indicator for DropdownRadioItem.
      */
     indicator?: ReactNode
   }
@@ -339,7 +338,7 @@ type DropdownCheckboxItemOwnProps<RootComponent extends ElementType> = Omit<
     classNames?: ComponentSlotClasses<keyof DropdownCheckboxItemSlotProps>
 
     /**
-     * The indicator element to show when the item is checked.
+     * Custom selected-state indicator for DropdownCheckboxItem.
      */
     indicator?: ReactNode
   }

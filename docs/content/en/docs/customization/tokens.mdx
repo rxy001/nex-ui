@@ -1,6 +1,6 @@
 ---
 title: Tokens
-description: Design tokens are used to manage design decisions for an application. It is a collection of properties used to describe any basic/atomic visual styles.
+description: Design tokens are used to manage design decisions in an application. They are collections of properties that describe foundational visual styles.
 ---
 
 import { Callout } from 'nextra/components'
@@ -8,7 +8,7 @@ import { AvailableProps } from '@/components/docs'
 
 # Tokens
 
-Design tokens are used to manage design decisions for an application. It is a collection of properties used to describe any basic/atomic visual styles.
+Design tokens are used to manage design decisions in an application. They are collections of properties used to describe foundational visual styles.
 
 ## Customizing Tokens
 
@@ -42,13 +42,13 @@ const theme = defineTheme({
 Tokens are pieces of information associated with an intuitive and readable name, generally in the form of name/value pairs. Except for color tokens, they also support the above object format.
 
 <Callout>
-  It is recommended that you define some objective tokens in `tokens` that have
-  no connection with business scenarios and brand concepts.
+  We recommend defining objective, context-free tokens in `tokens` that are not
+  tied to specific business scenarios or brand concepts.
 </Callout>
 
 ### TypeScript
 
-Later, if you are using TypeScript, you can extend the custom tokens through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+If your project uses TypeScript, you can extend custom tokens through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
 ```ts
 declare module '@nex-ui/react' {
@@ -72,7 +72,7 @@ declare module '@nex-ui/react' {
 
 ## Using Tokens
 
-After being defined, you can use the custom tokens through the [`sx`](/docs/styling/sx-prop) property, [`defineRecipe`](/docs/styling/recipes) or [`defineSlotRecipe`](/docs/styling/slot-recipes).
+After defining tokens, you can use them in the [`sx`](/docs/styling/sx-prop) prop, [`defineRecipe`](/docs/styling/recipes), or [`defineSlotRecipe`](/docs/styling/slot-recipes).
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -168,9 +168,9 @@ const theme = defineTheme({
   <span>&nbsp;property by default.</span>
 </Callout>
 
-### FontSizes
+### Font Sizes
 
-FontSize tokens represent the font size of text elements. Their value type is `string | number`.
+Font size tokens represent the font size of text elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -190,9 +190,9 @@ const theme = defineTheme({
   <span>&nbsp;property by default.</span>
 </Callout>
 
-### FontFamilies
+### Font Families
 
-FontFamiliy tokens represent the font of text elements. Their value type is `string`.
+Font family tokens represent the font of text elements. Their value type is `string`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -212,9 +212,9 @@ const theme = defineTheme({
   <span>&nbsp;property by default.</span>
 </Callout>
 
-### FontWeights
+### Font Weights
 
-FontWeight tokens represent the font weight of text elements. Their value type is `string | number`.
+Font weight tokens represent the font weight of text elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -234,9 +234,9 @@ const theme = defineTheme({
   <span>&nbsp;property by default.</span>
 </Callout>
 
-### LineHeights
+### Line Heights
 
-LineHeight tokens represent the amount of space for multi-line elements, such as the spacing of multi-line text. Their value type is `string | number`.
+Line height tokens represent spacing in multi-line elements, such as multiline text. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -278,9 +278,9 @@ const theme = defineTheme({
   <span>&nbsp;property by default.</span>
 </Callout>
 
-### BorderWidths
+### Border Widths
 
-BorderWidth tokens represent the border width of elements. Their value type is `string | number`.
+Border width tokens represent the border width of elements. Their value type is `string | number`.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'

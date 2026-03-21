@@ -1,6 +1,6 @@
 ---
 title: Aliases
-description: Aliases are used to define aliases for CSS properties, which simplifies CSS property names and supports combining CSS properties.
+description: Aliases let you define shorthand names for CSS properties and combine related properties.
 ---
 
 import { Callout } from 'nextra/components'
@@ -8,7 +8,7 @@ import { AliasTable } from '@/components/docs'
 
 # Aliases
 
-Aliases are used to define aliases for CSS properties, which simplifies CSS property names and supports combining CSS properties.
+Aliases let you define shorthand names for CSS properties and combine multiple properties into a single alias.
 
 ## Customizing Aliases
 
@@ -30,7 +30,7 @@ The type of the alias value is `CSSProperty | CSSProperty[]`.
 
 ### TypeScript
 
-Later, if you are using TypeScript, you can extend the custom aliases through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+If your project uses TypeScript, you can extend custom aliases through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
 ```tsx
 declare module '@nex-ui/react' {
@@ -44,7 +44,7 @@ declare module '@nex-ui/react' {
 
 ## Using Aliases
 
-After being defined, you can use the custom aliases through the [`sx`](/docs/styling/sx-prop) property, [`defineRecipe`](/docs/styling/recipes) or [`defineSlotRecipe`](/docs/styling/slot-recipes).
+After defining aliases, you can use them in the [`sx`](/docs/styling/sx-prop) prop, [`defineRecipe`](/docs/styling/recipes), or [`defineSlotRecipe`](/docs/styling/slot-recipes).
 
 ```tsx
 import { Box } from '@nex-ui/react'

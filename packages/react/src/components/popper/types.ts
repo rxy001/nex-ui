@@ -18,7 +18,7 @@ export type PopperProps = {
   open?: boolean
 
   /**
-   * Handler that is called when the Popper is opened or closed.
+   * Callback fired when the Popper is opened or closed.
    */
   onOpenChange?: (open: boolean) => void
 

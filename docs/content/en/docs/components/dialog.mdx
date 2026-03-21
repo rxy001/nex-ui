@@ -15,15 +15,15 @@ Dialog displays custom content that requires attention or provides additional in
 
 ## Anatomy
 
-NexUI exports 7 Dialog-related components:
+NexUI provides seven components for building dialogs:
 
-- `Dialog`: The root component that displays a Dialog.
+- `Dialog`: The root component that manages Dialog state.
 - `DialogContent`: The component that displays the Dialog content.
 - `DialogHeader`: The component that displays the Dialog header.
 - `DialogBody`: The component that displays the Dialog body.
 - `DialogFooter`: The component that displays the Dialog footer.
-- `DialogTrigger`: The component that triggers the Dialog to open.
-- `DialogClose`: The component that triggers the Dialog to close.
+- `DialogTrigger`: The component used to open the Dialog.
+- `DialogClose`: The component used to close the Dialog.
 
 ```tsx
 import {
@@ -73,7 +73,7 @@ Use the `placement` prop on `DialogContent` to set where the Dialog appears. Def
 
 ### Custom Motion
 
-Use the `motionProps` prop on `DialogContent` to customize enter and exit animations.
+Use the `motionProps` prop on `DialogContent` to customize content animations for `visible`/`hidden` states.
 
 <Example {...dialog.customMotion} />
 
@@ -86,11 +86,11 @@ Use the `scroll` prop on `DialogContent` to control Dialog scrolling behavior.
 
 <Example {...dialog.scrollBehavior} />
 
-### Asynchronously Close
+### Asynchronous Closing
 
-`DialogClose` supports asynchronous closing. If the `children` `onClick` handler returns a `Promise`, the Dialog closes after the `Promise` resolves or rejects.
+`DialogClose` supports asynchronous actions. If the `onClick` handler on `children` returns a `Promise`, the Dialog closes after the `Promise` resolves or rejects.
 
-<Example {...dialog.asynchronouslyClose} />
+<Example {...dialog.asynchronousClosing} />
 
 ### Prevent Close
 
@@ -100,7 +100,7 @@ Call `event.preventDefault()` inside the `children` `onClick` handler of `Dialog
 
 ### Controlled
 
-Use the `open` and `onOpenChange` props of Dialog to control the open state of the Dialog.
+Use the `open` and `onOpenChange` props on `Dialog` to control its open state.
 
 <Example {...dialog.controlled} />
 
@@ -113,23 +113,22 @@ Use the `open` and `onOpenChange` props of Dialog to control the open state of t
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'Usually, DialogContent, DialogTrigger, etc.',
+      description: 'Usually, DialogContent and DialogTrigger components.',
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the Dialog is shown. (controlled)',
+      description: 'If true, shows the Dialog. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the Dialog is shown by default. (uncontrolled)',
+      description: 'If true, shows the Dialog by default. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
-      description:
-        'Handler that is called when the Dialog is opened or closed.',
+      description: 'Callback fired when the Dialog opens or closes.',
     },
     {
       prop: 'onClose',
@@ -186,7 +185,7 @@ DialogContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'closeIcon',
       type: 'ReactNode',
-      description: 'Custom close button to display on top right corner.',
+      description: 'Custom close button to display in the top-right corner.',
     },
     {
       prop: 'size',
@@ -197,7 +196,7 @@ DialogContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'hideCloseButton',
       type: 'boolean',
-      description: 'If true, the close button is not rendered.',
+      description: 'If true, hides the close button when the Dialog is open.',
       default: 'false',
     },
     {
@@ -231,7 +230,7 @@ DialogContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'hideBackdrop',
       type: 'boolean',
-      description: 'If true, the backdrop is not rendered.',
+      description: 'If true, hides the backdrop when the Dialog is open.',
       default: 'false',
     },
     {
@@ -243,13 +242,15 @@ DialogContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'keepMounted',
       type: 'boolean',
-      description: 'If true, always keep the children in the DOM.',
+      description:
+        'If true, keeps the Dialog mounted in the DOM when not open.',
       default: 'false',
     },
     {
       prop: 'preventScroll',
       type: 'boolean',
-      description: 'If true, the Dialog prevents page scrolling.',
+      description:
+        'If true, prevents scrolling of the page when the Dialog is open.',
       default: 'false',
     },
     {
@@ -269,13 +270,13 @@ DialogContent inherits the props of `as` (by default, `'div'`).
       prop: 'restoreFocus',
       type: 'boolean',
       description:
-        'If true, the Dialog restores focus to the previously focused element once the Dialog is hidden or unmounted.',
+        'If true, restores focus to the element that triggered the Dialog when it closes.',
       default: 'true',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
-      description: 'If true, the Dialog animation is disabled.',
+      description: 'If true, disables the animation for the Dialog.',
       default: 'false',
     },
   ]}

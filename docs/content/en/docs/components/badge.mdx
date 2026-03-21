@@ -45,7 +45,7 @@ import { Badge } from '@nex-ui/react'
 
 ### With Close Button
 
-Add `closable` prop to display a close button on the Badge. The `onClose` callback function is triggered when the close button is clicked.
+Set the `closable` prop to show a close button on the Badge. The `onClose` callback is triggered when the close button is clicked.
 
 <Example {...badge.withCloseButton} />
 
@@ -140,7 +140,7 @@ Badge inherits the props of `as` (by default, `'span'`).
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Badge is disabled.',
+      description: 'If true, disables the Badge.',
     },
     {
       prop: 'closable',

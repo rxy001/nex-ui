@@ -7,7 +7,7 @@ import { Checkbox, Button, Switch } from '@nex-ui/react'
 
 # Theming
 
-Customize Nex UI with your theme, you can change colors, typography, and more.
+Customize Nex UI with your own theme to change colors, typography, and more.
 
 Themes let you apply a consistent tone to your app. They allow you to customize all design aspects of your project to meet the specific needs of your business or brand.
 
@@ -15,9 +15,9 @@ To promote greater consistency between apps, light and dark theme types are avai
 
 ## Nex UI Provider
 
-Nex UI comes with a built-in default theme. You can apply a custom theme to your application through the `theme` property of the `NexUIProvider`.
+Nex UI ships with a built-in default theme. You can apply a custom theme through the `theme` prop on `NexUIProvider`.
 
-You can also generate a theme using the `defineTheme` function and pass its return value as a property to `NexUIProvider.theme`.
+You can also generate a theme with `defineTheme` and pass the result to `NexUIProvider.theme`.
 
 ```tsx
 import { defineTheme, NexUIProvider } from '@nex-ui/react'
@@ -51,8 +51,8 @@ export default function App() {
 
 ## Configurable Theme Properties
 
-Changing the theme configuration properties is the most effective way to make Nex UI meet your requirements.
-The following covers all the theme properties:
+Adjusting theme configuration is the most effective way to tailor Nex UI to your needs.
+The following links cover all theme properties:
 
 - [`scales`](/docs/customization/scales)
 - [`tokens`](/docs/customization/tokens)
@@ -90,7 +90,7 @@ const theme = defineTheme({
 
 ## Nested Themes
 
-You can use `NexUIProvider` nestedly to change the theme of local components.
+You can nest `NexUIProvider` to change the theme for specific parts of your UI.
 
 <FlexCenter>
   <Checkbox defaultChecked color='red' />
@@ -132,12 +132,12 @@ export default function App() {
 }
 ```
 
-Only the `theme.components` and `theme.primaryThemeColor` properties are effective for nested `NexUIProvider`,
-and other properties are only effective in the top-level `NexUIProvider`.
+For nested `NexUIProvider` instances, only `theme.components` and `theme.primaryThemeColor` take effect.
+Other theme properties only apply at the top-level `NexUIProvider`.
 
 ## Theme Color
 
-The theme color of the components can be configured through the `theme.primaryThemeColor` property.
+You can configure the default component theme color with `theme.primaryThemeColor`.
 
 <FlexCenter gap='5'>
   <Checkbox defaultChecked color='orange' />
@@ -170,11 +170,13 @@ export default function App() {
 
 `defineTheme(options) => theme`
 
-Generates a theme based on the options. Then, pass it as a property to the theme provider.
+Generates a theme from the provided options. Pass the result to your theme provider.
+
+### defineColorScheme
 
 `defineColorScheme(options) => colorScheme`
 
-Generates a color scheme based on the options. Then, pass it as a property to the theme provider.
+Generates a color scheme from the provided options. Pass the result to your theme provider.
 
 ### NexUIProviderProps
 

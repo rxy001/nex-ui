@@ -15,15 +15,15 @@ Drawer is a component that slides in from the side of the screen.
 
 ## Anatomy
 
-NexUI exports 7 Drawer-related components:
+NexUI provides seven components for building drawers:
 
-- `Drawer`: The root component that displays the Drawer.
+- `Drawer`: The root component that manages Drawer state.
 - `DrawerContent`: The component that displays the content of the Drawer.
 - `DrawerHeader`: The component that displays the header of the Drawer.
 - `DrawerBody`: The component that displays the body content of the Drawer.
 - `DrawerFooter`: The component that displays the footer content of the Drawer.
-- `DrawerTrigger`: The component that triggers the opening of the Drawer.
-- `DrawerClose`: The component that triggers the closing of the Drawer.
+- `DrawerTrigger`: The component used to open the Drawer.
+- `DrawerClose`: The component used to close the Drawer.
 
 ```tsx
 import {
@@ -77,11 +77,11 @@ Use the `motionProps` prop on `DrawerContent` to customize show/hide animations.
 
 <Example {...drawer.customMotion} />
 
-### Asynchronously Close
+### Asynchronous Closing
 
-`DrawerClose` supports asynchronous closing. If the `children` `onClick` handler returns a `Promise`, the Drawer closes after the `Promise` resolves or rejects.
+`DrawerClose` supports asynchronous actions. If the `onClick` handler on `children` returns a `Promise`, the Drawer closes after the `Promise` resolves or rejects.
 
-<Example {...drawer.asynchronouslyClose} />
+<Example {...drawer.asynchronousClosing} />
 
 ### Prevent Close
 
@@ -91,7 +91,7 @@ Call `event.preventDefault()` inside the `children` `onClick` handler of `Drawer
 
 ### Controlled Drawer
 
-Use the `open` and `onOpenChange` props of Drawer to control the open state of the Drawer.
+Use the `open` and `onOpenChange` props on `Drawer` to control its open state.
 
 <Example {...drawer.controlled} />
 
@@ -104,23 +104,22 @@ Use the `open` and `onOpenChange` props of Drawer to control the open state of t
     {
       prop: 'children',
       type: 'ReactNode',
-      description: 'Usually, DrawerContent, DrawerTrigger, etc.',
+      description: 'Usually, DrawerContent and DrawerTrigger components.',
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: 'If true, the Drawer is shown. (controlled)',
+      description: 'If true, shows the Drawer. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'If true, the Drawer is shown by default. (uncontrolled)',
+      description: 'If true, shows the Drawer by default. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
       type: '(open: boolean) => void',
-      description:
-        'Handler that is called when the Drawer is opened or closed.',
+      description: 'Callback fired when the Drawer opens or closes.',
     },
 
     {
@@ -190,7 +189,7 @@ DrawerContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'hideCloseButton',
       type: 'boolean',
-      description: 'If true, the close button is not rendered.',
+      description: 'If true, hides the close button.',
       default: 'false',
     },
     {
@@ -218,7 +217,7 @@ DrawerContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'hideBackdrop',
       type: 'boolean',
-      description: 'If true, the backdrop is not rendered.',
+      description: 'If true, hides the backdrop.',
       default: 'false',
     },
     {
@@ -230,13 +229,14 @@ DrawerContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'keepMounted',
       type: 'boolean',
-      description: 'If true, always keep the children in the DOM.',
+      description:
+        'If true, keeps the Drawer mounted in the DOM when not open.',
       default: 'false',
     },
     {
       prop: 'preventScroll',
       type: 'boolean',
-      description: 'If true, the Drawer prevents page scrolling.',
+      description: 'If true, prevents page scrolling while the Drawer is open.',
       default: 'false',
     },
     {
@@ -255,14 +255,13 @@ DrawerContent inherits the props of `as` (by default, `'div'`).
       prop: 'restoreFocus',
       type: 'boolean',
       description:
-        'If true, the Drawer restores focus to the previously focused element once the Drawer is hidden or unmounted.',
+        'If true, restores focus to the element that triggered the Drawer when it closes.',
       default: 'true',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
-      description:
-        'If true, the Drawer will be shown or hidden without animation.',
+      description: 'If true, disables the animation for the Drawer.',
       default: 'false',
     },
     {

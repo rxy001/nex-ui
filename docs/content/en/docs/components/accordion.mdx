@@ -15,7 +15,7 @@ Accordion allows you to expand and collapse related content sections on the page
 
 ## Anatomy
 
-NexUI exports 2 Accordion-related components:
+NexUI provides two components for building accordions:
 
 - `Accordion`: The root component that displays multiple AccordionItems.
 - `AccordionItem`: The component that displays an expandable/collapsible content item.
@@ -74,6 +74,12 @@ Accordion supports controlled mode through the `expandedKeys` and `onExpandedKey
 
 <Example {...accordion.controlled} />
 
+### Custom Motion
+
+Use the `motionProps` prop to customize content animations for `visible`/`hidden` states.
+
+<Example {...accordion.customMotion} />
+
 ## API
 
 ### Accordion Props
@@ -86,7 +92,7 @@ Accordion inherits the props of `as` (by default, `'div'`).
       prop: 'children',
       type: 'ReactNode',
       description:
-        'The contents of the collection, usually the array of AccordionItem.',
+        'The collection items, typically an array of AccordionItem components.',
     },
     {
       prop: 'as',
@@ -132,7 +138,7 @@ Accordion inherits the props of `as` (by default, `'div'`).
     {
       prop: 'onExpandedKeysChange',
       type: '(keys: Key[]) => void',
-      description: 'Handler that is called when the expanded keys change.',
+      description: 'Callback fired when the expanded keys change.',
     },
     {
       prop: 'disabledKeys',
@@ -154,7 +160,7 @@ Accordion inherits the props of `as` (by default, `'div'`).
       prop: 'hideIndicator',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the indicator is hidden for all AccordionItems.',
+      description: 'If true, hides the indicator for all AccordionItems.',
     },
     {
       prop: 'indicatorMotionProps',
@@ -171,20 +177,20 @@ Accordion inherits the props of `as` (by default, `'div'`).
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, all AccordionItems are disabled.',
+      description: 'If true, disables all AccordionItems.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'false',
       description:
-        'If true, the content for all AccordionItems is always mounted.',
+        'If true, keeps the content for all AccordionItems mounted in the DOM when not expanded.',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the animation is disabled for all AccordionItems.',
+      description: 'If true, disables the animation for all AccordionItems.',
     },
   ]}
 />
@@ -241,29 +247,32 @@ AccordionItem inherits the props of `as` (by default, `'div'`).
     {
       prop: 'hideIndicator',
       type: 'boolean',
-      description: 'If true, the AccordionItem indicator is hidden.',
+      description: 'If true, hides the indicator for the AccordionItem.',
     },
     {
       prop: 'indicatorMotionProps',
       type: 'HTMLMotionProps',
-      description: 'The props to modify the framer motion animation.',
+      description:
+        'The props to modify the framer motion animation for the indicator.',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the AccordionItem is disabled.',
+      description: 'If true, disables the AccordionItem.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the AccordionItem content is always mounted.',
+      description:
+        'If true, keeps the content mounted in the DOM when not expanded.',
     },
     {
       prop: 'motionProps',
       type: 'HTMLMotionProps',
-      description: 'The props to modify the framer motion animation.',
+      description:
+        'The props to modify the framer motion animation for the AccordionItem content.',
     },
     {
       prop: 'itemKey',
@@ -279,7 +288,7 @@ AccordionItem inherits the props of `as` (by default, `'div'`).
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the animation is disabled for the AccordionItem.',
+      description: 'If true, disables the animation for the AccordionItem.',
     },
   ]}
 />

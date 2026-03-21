@@ -1,17 +1,17 @@
 ---
 title: Recipes
-description: Recipes can define multiple versions of styles for the same component.
+description: Recipes let you define multiple style variants for a single component.
 ---
 
 import { Callout } from 'nextra/components'
 
 # Recipes
 
-Recipes can define multiple versions of styles for the same component.
+Recipes let you define multiple style variants for a single component.
 
-Recipes offer a way to write CSS-in-JS with better performance, a superior developer experience, and enhanced composability. One of its key features is the ability to create various Variants styles through a type-safe runtime API.
+Recipes provide a CSS-in-JS approach with better performance, improved developer experience, and strong composability. One key feature is creating multiple variant styles through a type-safe runtime API.
 
-Before reading this section, it is recommended to have an understanding of [The sx prop](/docs/styling/sx-prop).
+Before reading this section, we recommend familiarizing yourself with [The sx prop](/docs/styling/sx-prop).
 
 **Recipes support the same features as the sx property.**
 
@@ -46,7 +46,7 @@ buttonRecipe()
 
 ## Multiple Variants
 
-The `variants` property can add multiple Variants to a Recipe.
+The `variants` property lets you define multiple variants for a Recipe.
 
 ```tsx {9-18, 28-31, 42-45}
 import { defineRecipe } from '@nex-ui/react'
@@ -100,7 +100,7 @@ buttonRecipe({ color: 'secondary', size: 'lg' })
 
 ## Boolean Variants
 
-In addition, you can create boolean-type Variants for a Recipe. This is very useful when you need to create state-type Variants (e.g. `disabled`).
+You can also create boolean variants for a Recipe. This is useful for state-like variants (for example, `disabled`).
 
 ```tsx {15-21,39-41}
 import { defineRecipe } from '@nex-ui/react'
@@ -150,7 +150,7 @@ buttonRecipe({
 
 ## Compound Variants
 
-The `compoundVariants` property is used to define a set of Variants that are based on combinations of other Variants.
+The `compoundVariants` property defines variants that are applied when specific variant combinations are matched.
 
 ```tsx {23-31,46}
 import { defineRecipe } from '@nex-ui/react'
@@ -335,7 +335,7 @@ buttonRecipe()
 
 ## Extends
 
-`defineRecipe` can inherit from a Recipe, including its `base`、`variants`、`defaultVariants`、`compoundVariants`. It will automatically merge the values of the same keys and provide corresponding TypeScript type support.
+`defineRecipe` can extend another Recipe, including its `base`, `variants`, `defaultVariants`, and `compoundVariants`. It automatically merges matching keys and provides corresponding TypeScript type support.
 
 ```tsx {25-34}
 import { defineRecipe } from '@nex-ui/react'

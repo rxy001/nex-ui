@@ -55,7 +55,7 @@ type AvatarOwnProps<RootComponent extends ElementType> = {
   className?: ClassValue
 
   /**
-   * Used to render icon or text elements inside the Avatar if src is not set. This can be an element, or just a string.
+   * Renders icon or text content inside the Avatar when `src` is not provided. This can be a React element or a plain string.
    */
   children?: ReactNode
 
@@ -141,28 +141,28 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   classNames?: ComponentSlotClasses<keyof AvatarGroupSlotProps>
 
   /**
-   * The size of all Avatars.
+   * The size of all Avatars in the group.
    *
    * @default 'md'
    */
   size?: AvatarVariants['size']
 
   /**
-   * The border radius of all Avatars
+   * The border radius of all Avatars in the group.
    *
    * @default size
    */
   radius?: AvatarVariants['radius']
 
   /**
-   * The color of all Avatars
+   * The color of all Avatars in the group.
    *
    * @default 'gray'
    */
   color?: AvatarVariants['color']
 
   /**
-   * If true, adds an outline around all Avatars.
+   * If true, adds an outline around all Avatars in the group.
    *
    * @default false
    */
@@ -196,7 +196,7 @@ type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
   className?: ClassValue
 
   /**
-   * If true, disables the animation on hover.
+   * If true, disables the animation when hovering Avatar.
    *
    * @default false
    */

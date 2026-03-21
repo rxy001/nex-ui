@@ -31,7 +31,7 @@ export type TooltipOwnProps<RootComponent extends ElementType = 'div'> =
       | 'flip'
     > & {
       /**
-       * The children to render. Usually a trigger element.
+       * The trigger element of Tooltip.
        */
       children?: PopperAnchorProps['children']
 
@@ -46,7 +46,7 @@ export type TooltipOwnProps<RootComponent extends ElementType = 'div'> =
       sx?: Interpolation
 
       /**
-       * The content to render inside the Tooltip.
+       * The content shown by Tooltip.
        */
       content?: ReactNode
 
@@ -101,19 +101,19 @@ export type TooltipOwnProps<RootComponent extends ElementType = 'div'> =
       maxWidth?: string | number
 
       /**
-       * If true, the Tooltip is shown by default. (uncontrolled)
+       * If true, opens the Tooltip by default. (uncontrolled)
        */
       defaultOpen?: boolean
 
       /**
-       * The delay in milliseconds before the Tooltip opens.
+       * Delay in milliseconds before showing Tooltip.
        *
        * @default 100
        */
       openDelay?: number
 
       /**
-       * The delay in milliseconds before the Tooltip closes.
+       * Delay in milliseconds before hiding Tooltip.
        *
        * @default 100
        */
@@ -128,21 +128,20 @@ export type TooltipOwnProps<RootComponent extends ElementType = 'div'> =
 
       /**
        * The props to modify the framer motion animation.
-       * Use the `variants` API to create your own animation.
        */
       motionProps?:
         | ((placement: Placement) => HTMLMotionProps<'div'>)
         | HTMLMotionProps<'div'>
 
       /**
-       * If true, keeps the Tooltip mounted in the DOM when it's closed.
+       * If true, keeps the Tooltip mounted in the DOM when not open.
        *
        * @default false
        */
       keepMounted?: boolean
 
       /**
-       * If true, the Tooltip will close when clicking on its trigger element.
+       * If true, closes the Tooltip when the trigger is clicked while the Tooltip is open.
        *
        * @default true
        */

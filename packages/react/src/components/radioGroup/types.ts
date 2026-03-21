@@ -38,7 +38,7 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   children?: ReactNode
 
   /**
-   * If true, the Radio is disabled.
+   * If true, disables the Radio.
    *
    * @default false
    */
@@ -50,17 +50,17 @@ type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
   value?: string | number
 
   /**
-   * If true, the Radio is checked. (controlled)
+   * If true, checks the Radio. (controlled)
    */
   checked?: boolean
 
   /**
-   * If true, the Radio is checked by default. (uncontrolled)
+   * If true, checks the Radio by default. (uncontrolled)
    */
   defaultChecked?: boolean
 
   /**
-   * Handler that is called when the element's checked state changes.
+   * Callback fired when the checked state changes.
    */
   onCheckedChange?: (checked: boolean) => void
 
@@ -147,7 +147,7 @@ type RadioGroupOwnProps<
   classNames?: ComponentSlotClasses<keyof RadioGroupSlotProps>
 
   /**
-   * If true, all radios are disabled.
+   * If true, disables all Radios in the group.
    *
    * @default false
    */
@@ -159,7 +159,7 @@ type RadioGroupOwnProps<
   name?: string
 
   /**
-   * The current selected value. (controlled)
+   * The currently selected value. (controlled)
    */
   value?: T
 
@@ -169,17 +169,17 @@ type RadioGroupOwnProps<
   defaultValue?: T
 
   /**
-   * Handler that is called when the value changes.
+   * Callback fired when the value changes.
    */
   onValueChange?: (value: T) => void
 
   /**
-   * The size of all radios.
+   * The size of all Radios in the group.
    */
   size?: RadioVariants['size']
 
   /**
-   * The color of all radios.
+   * The color of all Radios in the group.
    */
   color?: RadioVariants['color']
 

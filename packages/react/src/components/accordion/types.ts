@@ -14,7 +14,7 @@ export interface AccordionPropsOverrides {}
 
 type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
-   * The Accordion content, usually one or more AccordionItem elements.
+   * The collection items, typically an array of AccordionItem components.
    */
   children?: ReactNode
 
@@ -48,19 +48,19 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   defaultExpandedKeys?: Key[]
 
   /**
-   * Handler that is called when the expanded keys change.
+   * Callback fired when the expanded keys change.
    */
   onExpandedKeysChange?: (keys: Key[]) => void
 
   /**
-   * If true, the content for all AccordionItems is always mounted.
+   * If true, keeps the content for all AccordionItems mounted in the DOM when not expanded.
    *
    * @default false
    */
   keepMounted?: boolean
 
   /**
-   * If true, the indicator is hidden for all AccordionItems.
+   * If true, hides the indicator for all AccordionItems.
    *
    * @default false
    */
@@ -92,7 +92,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   className?: ClassValue
 
   /**
-   * If true, all AccordionItems are disabled.
+   * If true, disables all AccordionItems.
    *
    * @default false
    */
@@ -163,22 +163,22 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   title?: ReactNode
 
   /**
-   * The props to modify the framer motion animation.
+   * The props to modify the framer motion animation for the AccordionItem content.
    */
   motionProps?: HTMLMotionProps<'div'>
 
   /**
-   * If true, the AccordionItem is disabled.
+   * If true, disables the AccordionItem.
    */
   disabled?: boolean
 
   /**
-   * If true, the AccordionItem content is always mounted.
+   * If true, keeps the content mounted in the DOM when not expanded.
    */
   keepMounted?: boolean
 
   /**
-   * If true, the AccordionItem indicator is hidden.
+   * If true, hides the indicator for the AccordionItem.
    */
   hideIndicator?: boolean
 
@@ -188,7 +188,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   indicator?: ReactNode
 
   /**
-   * The props to modify the framer motion animation.
+   * The props to modify the framer motion animation for the indicator.
    */
   indicatorMotionProps?: HTMLMotionProps<'span'>
 
