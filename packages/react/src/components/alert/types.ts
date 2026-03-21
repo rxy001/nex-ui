@@ -106,7 +106,7 @@ type AlertOwnProps<RootComponent extends ElementType> = {
   status?: AlertStatus
 
   /**
-   * If true, the Alert does not display the icon.
+   * If true, hides the icon in the Alert.
    */
   hideIcon?: boolean
 }

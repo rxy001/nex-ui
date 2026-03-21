@@ -29,12 +29,12 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The element is placed before the children.
+   * The element placed before the children.
    */
   startIcon?: ReactNode
 
   /**
-   * The element is placed after the children.
+   * The element placed after the children.
    */
   endIcon?: ReactNode
 
@@ -116,28 +116,28 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
   iconOnly?: boolean
 
   /**
-   * If true, the Button takes the full width of its parent.
+   * If true, makes the Button take the full width of its parent.
    *
    * @default false
    */
   fullWidth?: boolean
 
   /**
-   * If true, the Button is disabled.
+   * If true, disables the Button.
    *
    * @default false
    */
   disabled?: boolean
 
   /**
-   * If true, the ripple effect is disabled.
+   * If true, disables the ripple effect.
    *
    * @default false
    */
   disableRipple?: boolean
 
   /**
-   * If true, the loading indicator is visible and the Button is disabled.
+   * If true, shows the loading indicator and disables the Button.
    *
    * @default false
    */

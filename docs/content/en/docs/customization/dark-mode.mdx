@@ -9,7 +9,7 @@ Nex UI supports two themes, light (the default) and dark.
 
 ## Dark Mode Only
 
-You can apply the dark theme to the application by adding the `colorScheme.defaultMode: 'dark'` property to the `NexUIProvider`, without considering the user's preference.
+You can force dark mode by setting `colorScheme.defaultMode: 'dark'` on `NexUIProvider`, regardless of user preference.
 
 ```tsx
 import { NexUIProvider } from '@nex-ui/react'
@@ -45,7 +45,7 @@ defineTheme({
 
 ## System Preference
 
-Some users may set their preference for light or dark mode at the system level through the operating system. Nex UI has built-in support for this feature. You can set `defaultMode: 'system'`.
+Some users configure light or dark mode at the operating system level. Nex UI supports this out of the box—set `defaultMode: 'system'`.
 
 ```tsx
 import { NexUIProvider } from '@nex-ui/react'
@@ -61,7 +61,7 @@ export default function App() {
 
 ### Accessing User Preference
 
-In addition, you can access the user's system preference through the `useColorScheme` hook.
+You can also access the user's system preference through the `useColorScheme` hook.
 
 ```tsx
 import { NexUIProvider, useColorScheme } from '@nex-ui/react'
@@ -99,7 +99,7 @@ export default function App() {
 
 ## Preventing SSR Flicker
 
-To prevent flickering of the dark mode during the initial server-side rendering, you can add the `InitColorSchemeScript` component. And you must ensure that the `defaultMode`, `modeStorageKey`, `colorSchemeSelector`, and `colorSchemeNode` properties are set to the same values as those passed to `NexUIProvider.colorScheme`.
+To prevent dark-mode flicker during initial server-side rendering, add `InitColorSchemeScript`. Make sure `defaultMode`, `modeStorageKey`, `colorSchemeSelector`, and `colorSchemeNode` use the same values as `NexUIProvider.colorScheme`.
 
 ```tsx
 import { InitColorSchemeScript } from '@nex-ui/react'
@@ -109,7 +109,7 @@ import { InitColorSchemeScript } from '@nex-ui/react'
 
 ## Styling in Dark Mode
 
-Use `_dark` in the `sx` property to set the style of the component in dark mode, `_light` to set the style in light mode, and `_DEFAULT` for the default style of the component.
+In `sx`, use `_dark` for dark-mode styles, `_light` for light-mode styles, and `_DEFAULT` for base styles.
 
 ```tsx
 import { Box } from '@nex-ui/react'
@@ -131,7 +131,7 @@ export default function App() {
 }
 ```
 
-Or use `_dark` and `_light` as CSS selectors to set a group of CSS properties:
+You can also use `_dark` and `_light` as selectors to apply groups of CSS properties:
 
 ```tsx
 <Box
@@ -150,7 +150,7 @@ Or use `_dark` and `_light` as CSS selectors to set a group of CSS properties:
 </Box>
 ```
 
-The above two methods mean that `_light` and `_dark` can be used as [selectors](/docs/customization/selectors).
+These two approaches show that `_light` and `_dark` can be used as [selectors](/docs/customization/selectors).
 
 ## API
 

@@ -15,12 +15,12 @@ Popover is a non-modal dialog that floats around its trigger element. It is comm
 
 ## Anatomy
 
-NexUI exports 4 Popover-related components:
+NexUI provides four components for building popovers:
 
-- `Popover`: The root component that displays the Popover.
-- `PopoverTrigger`: The component that triggers the Popover to open.
+- `Popover`: The root component that manages Popover state.
+- `PopoverTrigger`: The component used to open the Popover.
 - `PopoverContent`: The component that displays Popover content.
-- `PopoverClose`: The component that triggers the Popover to close.
+- `PopoverClose`: The component used to close the Popover.
 
 ```tsx
 import {
@@ -80,18 +80,17 @@ Popover manages focus within its content, so you can safely use it with form ele
     {
       prop: 'children',
       type: 'ReactNode',
-      description:
-        'The content of the Popover, usually PopoverTrigger and PopoverContent components.',
+      description: 'Usually, PopoverTrigger and PopoverContent components.',
     },
     {
       prop: 'open',
       type: 'boolean',
-      description: 'Controls the open state of the Popover. (controlled)',
+      description: 'If true, opens the Popover. (controlled)',
     },
     {
       prop: 'defaultOpen',
       type: 'boolean',
-      description: 'The default open state of the Popover. (uncontrolled)',
+      description: 'If true, opens the Popover by default. (uncontrolled)',
     },
     {
       prop: 'onOpenChange',
@@ -186,7 +185,7 @@ PopoverContent inherits the props of `as` (by default, `'div'`).
     {
       prop: 'container',
       type: ['HTMLElement | null', '() => HTMLElement | null'],
-      description: 'The container element where the Portal is rendered.',
+      description: 'The container element for the portal.',
       default: 'document.body',
     },
     {
@@ -229,52 +228,54 @@ PopoverContent inherits the props of `as` (by default, `'div'`).
       prop: 'shift',
       type: 'boolean',
       default: 'true',
-      description: 'Moves the Popover element to keep it visible.',
+      description: 'If true, shifts the Popover to keep it in view.',
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       default: 'false',
-      description: 'Keeps the Popover mounted even when closed.',
+      description:
+        'If true, keeps the Popover mounted in the DOM when not open.',
     },
     {
       prop: 'closeOnEscape',
       type: 'boolean',
       default: 'true',
-      description: 'Whether to close the Popover when pressing Escape.',
+      description:
+        'If true, closes the Popover when the Escape key is pressed.',
     },
     {
       prop: 'closeOnDetached',
       type: 'boolean',
       default: 'true',
       description:
-        'Whether to close the Popover when the trigger is fully obscured.',
+        'If true, closes the Popover when the trigger element is fully obscured.',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description: 'Whether to disable Popover animations.',
+      description: 'If true, disables the animation for the Popover.',
     },
     {
       prop: 'loopFocus',
       type: 'boolean',
       default: 'true',
-      description: 'Whether to loop focus within the Popover.',
+      description: 'If true, traps focus within the Popover when open.',
     },
     {
       prop: 'restoreFocus',
       type: 'boolean',
       default: 'true',
       description:
-        'Whether to restore focus to the previously focused element when closed.',
+        'If true, restores focus to the previously focused element when the it closes.',
     },
     {
       prop: 'autoFocus',
       type: 'boolean',
       default: 'false',
       description:
-        'Whether to autofocus the first focusable element when opened.',
+        'If true, autofocuses the first focusable element when the Popover opens.',
     },
   ]}
 />
@@ -305,7 +306,8 @@ PopoverContent inherits the props of `as` (by default, `'div'`).
       prop: 'closeOnClick',
       type: 'boolean',
       default: 'false',
-      description: 'Whether to close the Popover when the trigger is clicked.',
+      description:
+        'If true, closes the Popover when the trigger is clicked while the Popover is open.',
     },
   ]}
 />

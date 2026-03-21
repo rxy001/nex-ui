@@ -14,8 +14,8 @@ import controlledCode from './Controlled.demo?raw'
 import ControlledDemo from './Controlled.demo'
 import customMotionCode from './CustomMotion.demo?raw'
 import CustomMotionDemo from './CustomMotion.demo'
-import AsynchronouslyCloseDemo from './AsynchronouslyClose.demo'
-import asynchronouslyCloseCode from './AsynchronouslyClose.demo?raw'
+import AsynchronousClosingDemo from './AsynchronousClosing.demo'
+import asynchronousClosingCode from './AsynchronousClosing.demo?raw'
 import preventCloseCode from './PreventClose.demo?raw'
 import PreventCloseDemo from './PreventClose.demo'
 
@@ -52,9 +52,9 @@ export const drawer = {
     code: customMotionCode,
     demo: <CustomMotionDemo />,
   },
-  asynchronouslyClose: {
-    code: asynchronouslyCloseCode,
-    demo: <AsynchronouslyCloseDemo />,
+  asynchronousClosing: {
+    code: asynchronousClosingCode,
+    demo: <AsynchronousClosingDemo />,
   },
   preventClose: {
     code: preventCloseCode,

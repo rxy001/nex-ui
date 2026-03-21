@@ -73,7 +73,7 @@ DialogContent 的 `placement` 属性可以设置 Dialog 的显示位置，默认
 
 ### Custom Motion
 
-DialogContent 的 `motionProps` 属性可以自定义 `visible` / `hidden` 的动画效果。
+DialogContent 的 `motionProps` 属性可以自定义 `visible`/`hidden` 的动画效果。
 
 <Example {...dialog.customMotion} />
 
@@ -86,11 +86,11 @@ DialogContent 的 `scroll` 属性可以控制 Dialog 内容的滚动行为。
 
 <Example {...dialog.scrollBehavior} />
 
-### Asynchronously Close
+### Asynchronous Closing
 
 DialogClose 支持异步关闭 Dialog，其 `children` 的 `onClick` 事件可返回一个 `Promise`，Dialog 会在 `Promise` 被 `resolve` 或者 `reject` 后关闭。
 
-<Example {...dialog.asynchronouslyClose} />
+<Example {...dialog.asynchronousClosing} />
 
 ### Prevent Close
 

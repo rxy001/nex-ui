@@ -1,13 +1,13 @@
 ---
 title: Switch
-description: Switch is used to toggle between the selected and unselected states.
+description: Switch is used to toggle between on and off states.
 ---
 
 import { $switch } from '@/content/_demo'
 
 # Switch
 
-Switch is used to toggle between the selected and unselected states.
+Switch is used to toggle between on and off states.
 
 <ComponentLinks component='switch' ariaCompatible />
 
@@ -41,7 +41,7 @@ import { Switch } from '@nex-ui/react'
 
 ### With Icons
 
-Use `startIcon` and `endIcon` to add icons to the beginning and end of the Switch.
+Use `startIcon` and `endIcon` to add icons to the start and end of the Switch.
 
 <Example {...$switch.withIcons} />
 
@@ -122,17 +122,17 @@ Switch inherits the props of `as` (by default, `'input'`).
     {
       prop: 'checked',
       type: 'boolean',
-      description: 'If true, the Switch is checked. (controlled)',
+      description: 'If true, checks the Switch. (controlled)',
     },
     {
       prop: 'defaultChecked',
       type: 'boolean',
-      description: 'The default checked state. (uncontrolled)',
+      description: 'If true, checks the Switch by default. (uncontrolled)',
     },
     {
       prop: 'disabled',
       type: 'boolean',
-      description: 'If true, the Switch is disabled.',
+      description: 'If true, disables the Switch.',
     },
     {
       prop: 'name',
@@ -157,20 +157,18 @@ Switch inherits the props of `as` (by default, `'input'`).
     {
       prop: 'onChange',
       type: 'function',
-      description:
-        "Handler that is called when the element's checked state changes.",
+      description: 'Callback fired when the checked state changes.',
     },
     {
       prop: 'onCheckedChange',
       type: '(checked: boolean) => void',
-      description:
-        "Handler that is called when the element's checked state changes.",
+      description: 'Callback fired when the checked state changes.',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description: 'Whether to disable Switch animations.',
+      description: 'If true, disables the animation for the Switch.',
     },
   ]}
 />

@@ -15,7 +15,7 @@ Checkbox allows users to select one or more items from a collection.
 
 ## Anatomy
 
-NexUI exports 2 Checkbox-related components:
+NexUI provides two components for building checkboxes:
 
 - `Checkbox`: The component that displays a single checkbox.
 - `CheckboxGroup`: The component that displays a group of checkboxes.
@@ -46,7 +46,7 @@ import { Checkbox, CheckboxGroup } from '@nex-ui/react'
 
 ### Indeterminate
 
-The `indeterminate` prop sets the Checkbox to an indeterminate state. This visual state is preserved regardless of user interaction until you set it back to `false`.
+Use the `indeterminate` prop to set the Checkbox to an indeterminate state. This visual state remains regardless of user interaction until you set it back to `false`.
 
 <Example {...checkbox.indeterminate} />
 
@@ -147,19 +147,19 @@ Checkbox inherits the props of `as` (by default, `'input'`).
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Checkbox is disabled.',
+      description: 'If true, disables the Checkbox.',
     },
     {
       prop: 'indeterminate',
       type: 'boolean',
       default: 'false',
       description:
-        'Indeterminate is presentational only. The indeterminate visual state remains regardless of user interaction.',
+        'The indeterminate state is purely visual. It remains regardless of user interaction.',
     },
     {
       prop: 'checked',
       type: 'boolean',
-      description: 'If true, the Checkbox is checked. (controlled)',
+      description: 'If true, checks the Checkbox. (controlled)',
     },
     {
       prop: 'defaultChecked',
@@ -185,20 +185,19 @@ Checkbox inherits the props of `as` (by default, `'input'`).
     {
       prop: 'onChange',
       type: '(event: ChangeEvent<HTMLInputElement>) => void',
-      description:
-        "Handler that is called when the element's checked state changes.",
+      description: 'Callback fired when the checked state changes.',
     },
     {
       prop: 'onCheckedChange',
       type: '(checked: boolean) => void',
-      description:
-        "Handler that is called when the element's checked state changes.",
+      description: 'Callback fired when the checked state changes.',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description: 'Whether to disable Checkbox animations.',
+      description:
+        'If true, disables the animation when the checked state changes.',
     },
   ]}
 />
@@ -279,7 +278,7 @@ CheckboxGroup inherits the props of `as` (by default, `'div'`).
     {
       prop: 'disabled',
       type: 'boolean',
-      description: 'If true, all checkboxes are disabled.',
+      description: 'If true, disables all checkboxes in the group.',
     },
     {
       prop: 'name',
@@ -300,17 +299,17 @@ CheckboxGroup inherits the props of `as` (by default, `'div'`).
         "'purple'",
         "'gray'",
       ],
-      description: 'The color of all checkboxes.',
+      description: 'The color of all checkboxes in the group.',
     },
     {
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'"],
-      description: 'The size of all checkboxes.',
+      description: 'The size of all checkboxes in the group.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'full'", "'none'"],
-      description: 'The border radius of all checkboxes.',
+      description: 'The border radius of all checkboxes in the group.',
     },
     {
       prop: 'value',
@@ -325,20 +324,20 @@ CheckboxGroup inherits the props of `as` (by default, `'div'`).
     {
       prop: 'onValueChange',
       type: '(value: T[]) => void',
-      description: 'Handler that is called when the value changes.',
+      description: 'Callback fired when the value changes.',
     },
     {
       prop: 'orientation',
       type: ["'horizontal'", "'vertical'"],
       default: "'horizontal'",
-      description: 'The axis the CheckboxGroup items should align with.',
+      description: 'The orientation of the CheckboxGroup.',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
       description:
-        'Whether to disable animations for all Checkboxes in the group.',
+        'If true, disables the animation for all Checkboxes in the group.',
     },
   ]}
 />

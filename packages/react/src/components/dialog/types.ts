@@ -19,7 +19,7 @@ import type {
 // ------------- Dialog --------------
 type DialogOwnProps = ModalProps & {
   /**
-   * If true, the Dialog is shown by default. (uncontrolled)
+   * If true, shows the Dialog by default. (uncontrolled)
    */
   defaultOpen?: boolean
 }
@@ -66,12 +66,12 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
     className?: ClassValue
 
     /**
-     * Usually, DialogContent, DialogTrigger, etc.
+     * Usually, DialogHeader, DialogBody, DialogFooter, etc.
      */
     children?: ReactNode
 
     /**
-     * If true, the backdrop is not rendered.
+     * If true, hides the backdrop when the Dialog is open.
      *
      * @default false
      */
@@ -79,7 +79,6 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
 
     /**
      * The props to modify the framer motion animation.
-     * Use the `variants` API to create your own animation.
      */
     motionProps?:
       | ((
@@ -105,36 +104,36 @@ type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
     classNames?: ComponentSlotClasses<keyof DialogContentSlotProps>
 
     /**
-     * Determine the max-width of the dialog
+     * The size of the Dialog.
      * @default 'md'
      */
     size?: DialogContentVariants['size']
 
     /**
-     * Custom close button to display on top right corner.
+     * Custom close button to display in the top-right corner.
      */
     closeIcon?: ReactNode
 
     /**
-     * If true, the close button is not rendered.
+     * If true, hides the close button when the Dialog is open.
      * @default false
      */
     hideCloseButton?: boolean
 
     /**
-     * The dialog scroll behavior.
+     * The Dialog scroll behavior.
      * @default 'outside'
      */
     scroll?: DialogContentVariants['scroll']
 
     /**
-     * The dialog position.
+     * The display position of the Dialog.
      * @default 'top'
      */
     placement?: DialogContentVariants['placement']
 
     /**
-     * If true, keeps the Dialog mounted in the DOM when it's closed.
+     * If true, keeps the Dialog mounted in the DOM when not open.
      *
      * @default false
      */

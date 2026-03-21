@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Install Nex UI and develop applications quickly!
+description: Install Nex UI and start building applications quickly.
 ---
 
 import NpmIcon from '@/icons/npm.svg'
@@ -10,16 +10,16 @@ import { Steps, Tabs, Callout, Cards } from 'nextra/components'
 
 # Installation
 
-Install Nex UI to develop applications quickly!
+Install Nex UI and start building applications quickly.
 
-## Scaffolding Your First NexUI Project
+## Scaffolding Your First Project
 
 <Callout type='info'>
-  The CLI requires Node.js version 20+. When your package manager issues a
-  warning, please upgrade your Node.js version.
+  The CLI requires Node.js 20+. If your package manager reports a compatibility
+  warning, please upgrade Node.js.
 </Callout>
 
-Using the CLI is the simplest way to start a NexUI project. You can directly initialize the project with the following command:
+Using the CLI is the easiest way to start a NexUI project. Initialize a project with the following command:
 
 <Tabs
   items={[
@@ -57,9 +57,9 @@ Using the CLI is the simplest way to start a NexUI project. You can directly ini
   </Tabs.Tab>
 </Tabs>
 
-Then follow the prompts!
+Then follow the prompts to finish setup.
 
-You can also specify the project name and template directly via CLI command-line options. For example, if you want to create a Next.js app using the App Router:
+You can also specify the project name and template directly with CLI options. For example, to create a Next.js app using the App Router:
 
 <Tabs
   items={[
@@ -101,7 +101,7 @@ Currently supported templates: `next-app`, `next-pages`, `vite`, `vite-swc`.
 
 ## Manual Installation
 
-In your project, you can install Nex UI using the following methods:
+In an existing project, you can install Nex UI using one of the following package managers:
 
 <Tabs
   items={[
@@ -139,7 +139,7 @@ In your project, you can install Nex UI using the following methods:
   </Tabs.Tab>
 </Tabs>
 
-Note that `react` and `react-dom` are `PeerDependencies`, meaning you should ensure they are installed before installing Nex UI.
+Note that `react` and `react-dom` are peer dependencies, so they must be installed before installing Nex UI.
 
 ```json
 "peerDependencies": {
@@ -148,7 +148,7 @@ Note that `react` and `react-dom` are `PeerDependencies`, meaning you should ens
 }
 ```
 
-After that, add `NexUIProvider` to the entry file of your application.
+After installation, add `NexUIProvider` to your application's entry file.
 
 ```tsx
 import { NexUIProvider } from '@nex-ui/react'
@@ -162,7 +162,7 @@ function App() {
 }
 ```
 
-Next, you can use NexUI components in your application:
+Then you can start using Nex UI components in your application:
 
 ```tsx
 import { Button } from '@nex-ui/react'

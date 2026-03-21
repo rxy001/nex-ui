@@ -1,6 +1,6 @@
 ---
 title: Selectors
-description: Selectors are designed to combine multiple CSS selectors, aiming to apply style rules to page elements more efficiently and flexibly.
+description: Selectors let you compose multiple CSS selectors for more flexible and maintainable styling.
 ---
 
 import { Box } from '@nex-ui/react'
@@ -9,7 +9,7 @@ import { SelectorTable } from '@/components/docs'
 
 # Selectors
 
-Selectors are designed to combine multiple CSS selectors, aiming to apply style rules to page elements more efficiently and flexibly.
+Selectors let you compose multiple CSS selectors to apply style rules more efficiently and flexibly.
 
 ## Customizing Selectors
 
@@ -30,7 +30,7 @@ The type of the Selector value is `string`.
 
 ### TypeScript
 
-Later, if you are using TypeScript, you can extend the custom Aliases through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+If your project uses TypeScript, you can extend custom selectors through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
 ```tsx
 declare module '@nex-ui/react' {
@@ -43,7 +43,7 @@ declare module '@nex-ui/react' {
 
 ## Using Selectors
 
-After being defined, you can use the custom Selectors through the [`sx`](/docs/styling/sx-prop) property, [`defineRecipe`](/docs/styling/recipes) or [`defineSlotRecipe`](/docs/styling/slot-recipes).
+After defining selectors, you can use them in the [`sx`](/docs/styling/sx-prop) prop, [`defineRecipe`](/docs/styling/recipes), or [`defineSlotRecipe`](/docs/styling/slot-recipes).
 
 > The Breakpoints object can be used as Selectors by default.
 
@@ -119,7 +119,7 @@ export default function App() {
 }
 ```
 
-In the above example, the `color` property is separately defined in three different interaction states (normal state, hover state, active state), which is more in line with the structure of traditional CSS. However, you can also simplify the definition process in another form:
+In the example above, `color` is defined separately for three interaction states (default, hover, and active), which mirrors traditional CSS structure. You can also simplify this in another form:
 
 ```tsx
 import { Box, Flex } from '@nex-ui/react'
@@ -142,7 +142,7 @@ export default function App() {
 }
 ```
 
-In the above example, the styles of `color` in different states are encapsulated into an object to form a **state mapping**, and the styles in different states are distinguished by different keys, which can clearly show the logic of style changes visually. In the scenario of a single style, this method is more flexible.
+In this version, `color` styles for different states are grouped into a single object as a **state mapping**. This makes state transitions easier to read, and is especially convenient when managing a single property.
 
 <Callout>
   In complex style scenarios, it is more recommended to use the first form that

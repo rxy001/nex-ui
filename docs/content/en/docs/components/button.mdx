@@ -45,7 +45,7 @@ import { Button } from '@nex-ui/react'
 
 ### Loading
 
-Enable the `loading` prop to display a spinner indicator within the Button.
+Set the `loading` prop to show a spinner inside the Button.
 
 <Example {...button.loading} />
 
@@ -59,7 +59,7 @@ Add icons to the Button using the `startIcon` or `endIcon` props.
 
 ### Icon Only
 
-Enable the `iconOnly` prop for square-shaped, icon-only Buttons.
+Set the `iconOnly` prop to create a square, icon-only Button.
 
 <Example {...button.iconOnly} />
 
@@ -146,20 +146,21 @@ Button inherits the props of `as` (by default, `'button'`).
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Button is disabled.',
+      description: 'If true, disables the Button.',
     },
     {
       prop: 'loading',
       type: 'boolean',
       default: 'false',
       description:
-        'If true, the loading indicator is visible and the Button is disabled.',
+        'If true, shows the loading indicator and disables the Button.',
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Button takes the full width of its parent.',
+      description:
+        'If true, makes the Button take the full width of its parent.',
     },
     {
       prop: 'iconOnly',
@@ -192,7 +193,7 @@ Button inherits the props of `as` (by default, `'button'`).
       prop: 'disableRipple',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the ripple effect is disabled.',
+      description: 'If true, disables the ripple effect.',
     },
     {
       prop: 'href',

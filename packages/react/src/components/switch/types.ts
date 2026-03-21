@@ -70,17 +70,17 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
     | ((ownerState: SwitchProps<SwitchComponent>) => ReactNode)
 
   /**
-   * Handler that is called when the element's checked state changes.
+   * Callback fired when the checked state changes.
    */
   onCheckedChange?: (checked: boolean) => void
 
   /**
-   * If true, the Switch is checked.(controlled)
+   * If true, checks the Switch. (controlled)
    */
   checked?: boolean
 
   /**
-   * If true, the Switch is disabled.
+   * If true, disables the Switch.
    *
    * @default false
    */
@@ -101,14 +101,14 @@ export type SwitchOwnProps<SwitchComponent extends ElementType> = {
   color?: SwitchVariants['color']
 
   /**
-   * The default checked state. (uncontrolled)
+   * If true, checks the Switch by default. (uncontrolled)
    *
    * @default false
    */
   defaultChecked?: boolean
 
   /**
-   * If true, disables the Switch animation.
+   * If true, disables the animation for the Switch.
    *
    * @default false
    */
