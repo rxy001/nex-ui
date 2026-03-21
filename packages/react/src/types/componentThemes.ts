@@ -42,7 +42,7 @@ import type {
   DropdownRadioItemGroupRecipe,
   DropdownTriggerItemRecipe,
   SubDropdownContentRecipe,
-  DropdownSeparatorRecipe,
+  DropdownDividerRecipe,
 } from '../theme/recipes'
 import type {
   ButtonProps,
@@ -92,7 +92,7 @@ import type {
   DropdownTriggerItemProps,
   SubDropdownProps,
   SubDropdownContentProps,
-  DropdownSeparatorProps,
+  DropdownDividerProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
@@ -285,9 +285,9 @@ export type ComponentThemes = {
     styleOverrides?: ComponentThemeObject<SubDropdownContentRecipe>
     defaultProps?: SubDropdownContentProps
   }
-  DropdownSeparator?: {
-    styleOverrides?: ComponentThemeObject<DropdownSeparatorRecipe>
-    defaultProps?: DropdownSeparatorProps
+  DropdownDivider?: {
+    styleOverrides?: ComponentThemeObject<DropdownDividerRecipe>
+    defaultProps?: DropdownDividerProps
   }
 }
 

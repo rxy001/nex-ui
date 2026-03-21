@@ -9,6 +9,7 @@ export default {
   dialog: 'Dialog',
   divider: 'Divider',
   drawer: 'Drawer',
+  dropdown: 'Dropdown',
   flex: 'Flex',
   input: 'Input',
   popover: 'Popover',

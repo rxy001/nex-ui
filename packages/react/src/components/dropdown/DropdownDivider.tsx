@@ -9,37 +9,37 @@ import {
   useSlotClasses,
 } from '../utils'
 import type { ElementType } from 'react'
-import type { DropdownSeparatorProps } from './types'
+import type { DropdownDividerProps } from './types'
 
 const slots = ['root'] as const
 
-export const DropdownSeparator = <RootComponent extends ElementType = 'hr'>(
-  inProps: DropdownSeparatorProps<RootComponent>,
+export const DropdownDivider = <RootComponent extends ElementType = 'hr'>(
+  inProps: DropdownDividerProps<RootComponent>,
 ) => {
-  const props = useDefaultProps<DropdownSeparatorProps>({
-    name: 'DropdownSeparator',
+  const props = useDefaultProps<DropdownDividerProps>({
+    name: 'DropdownDivider',
     props: inProps,
   })
 
   const style = useRecipeStyles({
-    name: 'DropdownSeparator',
+    name: 'DropdownDivider',
     ownerState: props,
     recipe: dropdownSeparatorRecipe,
   })
 
   const slotClasses = useSlotClasses({
-    name: 'DropdownSeparator',
+    name: 'DropdownDivider',
     slots,
   })
 
-  const [DropdownSeparatorRoot, getDropdownSeparatorRootProps] = useSlot({
+  const [DropdownDividerRoot, getDropdownDividerRootProps] = useSlot({
     style,
     component: MenuSeparator,
     externalForwardedProps: props,
     classNames: slotClasses.root,
   })
 
-  return <DropdownSeparatorRoot {...getDropdownSeparatorRootProps()} />
+  return <DropdownDividerRoot {...getDropdownDividerRootProps()} />
 }
 
-DropdownSeparator.displayName = 'DropdownSeparator'
+DropdownDivider.displayName = 'DropdownDivider'

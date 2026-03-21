@@ -32,7 +32,7 @@ const { root, control, label } = checkboxSlotRecipe()
  *   gap: '2'
  * }
  * control: {
- *   borderWith: '1px',
+ *   borderWidth: '1px',
  *   borderRadius: 'sm'
  * }
  * label: {
@@ -80,7 +80,7 @@ const { root, control, label } = checkboxSlotRecipe({
  *   gap: '2'
  * }
  * control: {
- *   borderWith: '1px',
+ *   borderWidth: '1px',
  *   borderRadius: 'sm'
  *   width: '8'
  *   height: '8'
@@ -103,7 +103,7 @@ const { root, control, label } = checkboxSlotRecipe({
  *   gap: '2'
  * }
  * control: {
- *   borderWith: '1px',
+ *   borderWidth: '1px',
  *   borderRadius: 'sm'
  *   width: '10'
  *   height: '10'
@@ -151,7 +151,7 @@ export const checkboxSlotRecipe = defineSlotRecipe({
   compoundVariants: [
     {
       size: ['sm', 'md'],
-      primary: 'primary',
+      color: 'primary',
       css: {
         label: { opacity: 0.7 },
         control: { opacity: 0.5 },
@@ -198,7 +198,7 @@ export const checkboxSlotRecipe = defineSlotRecipe({
   compoundVariants: [
     {
       size: ['sm', 'md'],
-      primary: 'primary',
+      color: 'primary',
       css: {
         label: { opacity: 0.7 },
         control: { opacity: 0.5 },
@@ -211,6 +211,6 @@ const extendedSlotRecipe = defineSlotRecipe({
   extend: checkboxSlotRecipe,
   slots: {},
   variants: {},
-  compoundVariants: {},
+  compoundVariants: [],
 })
 ```

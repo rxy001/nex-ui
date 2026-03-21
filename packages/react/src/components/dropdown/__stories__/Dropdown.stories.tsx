@@ -28,7 +28,7 @@ import {
   SubDropdown,
   DropdownTriggerItem,
   SubDropdownContent,
-  DropdownSeparator,
+  DropdownDivider,
 } from '../index'
 import type { DropdownContentProps } from '../index'
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -227,7 +227,7 @@ export const WithGroups = (props: DropdownContentProps) => (
         <DropdownItem>Orange</DropdownItem>
         <DropdownItem>Grapes</DropdownItem>
       </DropdownItemGroup>
-      <DropdownSeparator />
+      <DropdownDivider />
       <DropdownItemGroup>
         <DropdownItemGroupLabel>Vegetables</DropdownItemGroupLabel>
         <DropdownItem>Carrot</DropdownItem>
@@ -280,7 +280,10 @@ export const RadioItems = (props: DropdownContentProps) => {
           <DropdownItemGroupLabel>Pages</DropdownItemGroupLabel>
           <DropdownRadioItem value='1'>index.ts</DropdownRadioItem>
           <DropdownRadioItem value='2'>README.md</DropdownRadioItem>
-          <DropdownRadioItem value='3'>package.json</DropdownRadioItem>
+          <DropdownRadioItem value='3' disabled>
+            package-lock.json
+          </DropdownRadioItem>
+          <DropdownRadioItem value='4'>package.json</DropdownRadioItem>
         </DropdownRadioItemGroup>
       </DropdownContent>
     </Dropdown>
@@ -305,6 +308,34 @@ export const CheckboxItems = (props: DropdownContentProps) => {
           <DropdownCheckboxItem value='2'>Detect Language</DropdownCheckboxItem>
           <DropdownCheckboxItem value='3'>Spellcheck</DropdownCheckboxItem>
         </DropdownCheckboxItemGroup>
+      </DropdownContent>
+    </Dropdown>
+  )
+}
+
+export const LinkItems = (props: DropdownContentProps) => {
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <Button>Open Dropdown</Button>
+      </DropdownTrigger>
+      <DropdownContent {...props}>
+        <DropdownItem
+          as='a'
+          href='https://www.google.com'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Google
+        </DropdownItem>
+        <DropdownItem
+          as='a'
+          href='https://www.facebook.com'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Facebook
+        </DropdownItem>
       </DropdownContent>
     </Dropdown>
   )
@@ -372,7 +403,7 @@ export const CustomTrigger = (props: DropdownContentProps) => {
         >
           Signed in as <strong>@x1ngYu</strong>
         </Box>
-        <DropdownSeparator />
+        <DropdownDivider />
         <DropdownItem startIcon={<UserOutlined />}>Profile</DropdownItem>
         <DropdownItem startIcon={<StarOutlined />}>Stars</DropdownItem>
         <DropdownItem startIcon={<CodeSquareOutlined />}>Gists</DropdownItem>
@@ -396,7 +427,7 @@ function DropdownShowcase() {
         <DropdownItem>Profile</DropdownItem>
         <DropdownItem shortcut='⌘,'>Settings</DropdownItem>
         <DropdownItem shortcut='⌘Q'>Logout</DropdownItem>
-        <DropdownSeparator />
+        <DropdownDivider />
         <DropdownItemGroup>
           <DropdownItemGroupLabel>Projects</DropdownItemGroupLabel>
           <DropdownItem>Project 1</DropdownItem>

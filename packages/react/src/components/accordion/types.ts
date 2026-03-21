@@ -14,7 +14,7 @@ export interface AccordionPropsOverrides {}
 
 type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   /**
-   * The contents of the collection. Usually the array of AccordionItem.
+   * The Accordion content, usually one or more AccordionItem elements.
    */
   children?: ReactNode
 
@@ -31,7 +31,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   sx?: Interpolation
 
   /**
-   * If true, the Accordion items can be expanded at the same time.
+   * If true, multiple AccordionItems can be expanded at the same time.
    *
    * @default false
    */
@@ -53,36 +53,36 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   onExpandedKeysChange?: (keys: Key[]) => void
 
   /**
-   * If true, the content for all Accordion items is always mounted.
+   * If true, the content for all AccordionItems is always mounted.
    *
    * @default false
    */
   keepMounted?: boolean
 
   /**
-   * If true, the indicator is hidden for all Accordion items.
+   * If true, the indicator is hidden for all AccordionItems.
    *
    * @default false
    */
   hideIndicator?: boolean
 
   /**
-   * The expanded indicator for all Accordion items, usually an arrow icon.
+   * The expanded indicator for all AccordionItems, usually an arrow icon.
    */
   indicator?: ReactNode
 
   /**
-   * The props to modify the framer motion animation.
+   * The motionProps for all AccordionItems.
    */
   motionProps?: HTMLMotionProps<'div'>
 
   /**
-   * The props to modify the framer motion animation.
+   * The indicatorMotionProps for all AccordionItems.
    */
   indicatorMotionProps?: HTMLMotionProps<'span'>
 
   /**
-   * The keys of Accordion items that are disabled.
+   * The keys of AccordionItems that are disabled.
    */
   disabledKeys?: Key[]
 
@@ -92,7 +92,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   className?: ClassValue
 
   /**
-   * If true, all Accordion items are disabled.
+   * If true, all AccordionItems are disabled.
    *
    * @default false
    */
@@ -106,8 +106,7 @@ type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
   variant?: AccordionVariants['variant']
 
   /**
-   *
-   * If true, disables the animation for the AccordionItems.
+   * If true, disables the animation for all AccordionItems.
    *
    * @default false
    */
@@ -149,7 +148,7 @@ type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
   children?: ReactNode
 
   /**
-   * The key of the AccordionItem.
+   * The unique key of the AccordionItem.
    */
   itemKey?: Key
 
