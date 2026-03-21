@@ -10,7 +10,7 @@ export default function App() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button>Open Dropdown </Button>
+        <Button>Open Dropdown</Button>
       </DropdownTrigger>
       <DropdownContent maxHeight={200}>
         <DropdownItem>New File</DropdownItem>

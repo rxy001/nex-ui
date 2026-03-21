@@ -18,8 +18,8 @@ import customMotionCode from './CustomMotion.demo?raw'
 import CustomMotionDemo from './CustomMotion.demo'
 import PreventCloseDemo from './PreventClose.demo'
 import PreventCloseCode from './PreventClose.demo?raw'
-import AsynchronouslyCloseDemo from './AsynchronouslyClose.demo'
-import asynchronouslyCloseCode from './AsynchronouslyClose.demo?raw'
+import AsynchronousClosingDemo from './AsynchronousClosing.demo'
+import asynchronousClosingCode from './AsynchronousClosing.demo?raw'
 
 export const dialog = {
   usage: {
@@ -62,8 +62,8 @@ export const dialog = {
     code: PreventCloseCode,
     demo: <PreventCloseDemo />,
   },
-  asynchronouslyClose: {
-    code: asynchronouslyCloseCode,
-    demo: <AsynchronouslyCloseDemo />,
+  asynchronousClosing: {
+    code: asynchronousClosingCode,
+    demo: <AsynchronousClosingDemo />,
   },
 }

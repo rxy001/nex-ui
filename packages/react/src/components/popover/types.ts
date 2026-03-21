@@ -62,14 +62,14 @@ type PopoverContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
     className?: ClassValue
 
     /**
-     * The radius of the Popover content.
+     * The border radius of the Popover.
      *
      * @default 'md'
      */
     radius?: PopoverContentVariants['radius']
 
     /**
-     * The color of the Popover content.
+     * The color of the Popover.
      *
      * @default 'default'
      */
@@ -84,7 +84,6 @@ type PopoverContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
 
     /**
      * The props to modify the framer motion animation.
-     * Use the `variants` API to create your own animation.
      */
     motionProps?:
       | ((placement: Placement) => HTMLMotionProps<'div'>)
@@ -101,28 +100,28 @@ type PopoverContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
     classNames?: ComponentSlotClasses<keyof PopoverContentSlotProps>
 
     /**
-     * If true, the focus will loop within the Popover content.
+     * If true, traps focus within the Popover when open.
      *
      * @default true
      */
     loopFocus?: boolean
 
     /**
-     * The maximum width of the popover content.
+     * The maximum width of the Popover.
      *
      * @default 360
      */
     maxWidth?: string | number
 
     /**
-     * The width of the popover content.
+     * The width of the Popover.
      *
      * @default 'auto'
      */
     width?: string | number
 
     /**
-     * If true, keeps the Popover mounted in the DOM when it's closed.
+     * If true, keeps the Popover mounted in the DOM when not open.
      *
      * @default false
      */
@@ -141,12 +140,12 @@ export type PopoverContentProps<RootComponent extends ElementType = 'div'> =
 // ------------------- PopoverTriggerProps -------------------
 export interface PopoverTriggerProps {
   /**
-   * The content of the trigger element.
+   * The trigger element that opens the Popover when clicked.
    */
   children?: PopperAnchorProps['children']
 
   /**
-   * If true, closes the Popper when clicking the trigger element.
+   * If true, closes the Popover when the trigger is clicked while the Popover is open.
    *
    * @default true
    */

@@ -37,9 +37,9 @@ import { Alert } from '@nex-ui/react'
 
 ### Status
 
-Change the `status` of the Alert by passing the `status` prop. This affects the color scheme and icon. Alert supports `error`, `success`, `warning`, and `info` statuses.
+Set the Alert `status` prop to control the color scheme and icon. Supported statuses are `error`, `success`, `warning`, and `info`.
 
-Note: The `color` prop can override the default status color.
+Note: The `color` prop overrides the default status color.
 
 <Example {...alert.status} />
 
@@ -169,7 +169,7 @@ Alert inherits the props of `as` (by default, `'div'`).
     {
       prop: 'hideIcon',
       type: 'boolean',
-      description: 'If true, the Alert does not display the icon.',
+      description: 'If true, hides the icon in the Alert.',
     },
     {
       prop: 'onClose',

@@ -19,7 +19,7 @@ import type {
 // ----------------Drawer----------------
 type DrawerOwnProps = ModalProps & {
   /**
-   * If true, the Drawer is shown by default. (uncontrolled)
+   * If true, shows the Drawer by default. (uncontrolled)
    */
   defaultOpen?: boolean
 }
@@ -71,7 +71,7 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
     classNames?: ComponentSlotClasses<keyof DrawerContentSlotProps>
 
     /**
-     * It's usually the DrawerHeader、DrawerBody and DrawerFooter component.
+     * Usually, DrawerHeader, DrawerBody, DrawerFooter, etc.
      */
     children?: ReactNode
 
@@ -88,31 +88,30 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
     slotProps?: DrawerContentSlotProps
 
     /**
-     * Custom close button to display on top right corner.
+     * Custom close button to display on the top-right corner.
      */
     closeIcon?: ReactNode
 
     /**
-     * If true, the close button is not rendered.
+     * If true, hides the close button.
      * @default false
      */
     hideCloseButton?: boolean
 
     /**
-     * The size of the drawer.
+     * The size of the Drawer.
      * @default 'md'
      */
     size?: DrawerContentVariants['size']
 
     /**
-     * The placement of the drawer.
+     * The display position of the Drawer.
      * @default 'right'
      */
     placement?: DrawerContentVariants['placement']
 
     /**
      * The props to modify the framer motion animation.
-     * Use the `variants` API to create your own animation.
      */
     motionProps?:
       | HTMLMotionProps<'div'>
@@ -121,14 +120,14 @@ type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
         ) => HTMLMotionProps<'div'>)
 
     /**
-     * If true, the backdrop is not rendered.
+     * If true, hides the backdrop.
      *
      * @default false
      */
     hideBackdrop?: boolean
 
     /**
-     * If true, keeps the Drawer mounted in the DOM when it's closed.
+     * If true, keeps the Drawer mounted in the DOM when not open.
      *
      * @default false
      */
@@ -168,7 +167,7 @@ type DrawerHeaderOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The content of the drawer header.
+   * The content of the DrawerHeader.
    */
   children?: ReactNode
 
@@ -201,7 +200,7 @@ type DrawerBodyOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The content of the drawer body.
+   * The content of the DrawerBody.
    */
   children?: ReactNode
 
@@ -234,7 +233,7 @@ type DrawerFooterOwnProps<RootComponent extends ElementType> = {
   sx?: Interpolation
 
   /**
-   * The content of the drawer footer.
+   * The content of the DrawerFooter.
    */
   children?: ReactNode
 

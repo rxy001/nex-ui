@@ -1,13 +1,13 @@
 ---
 title: Input
-description: Input allows users to enter text.
+description: Input allows users to provide text input.
 ---
 
 import { input } from '@/content/_demo'
 
 # Input
 
-Input allows users to enter text.
+Input allows users to provide text input.
 
 <ComponentLinks component='input' />
 
@@ -51,13 +51,13 @@ Use the `labelPlacement` prop (`inside`, `outside`, `float-outside`, or `float-i
 
 ### Clear Button
 
-Set `clearable` to `true` to show a clear button at the end of the Input. The button appears only when the Input has a value.
+Set `clearable` to `true` to show a clear button at the end of the Input. The button appears only when the input has a value.
 
 <Example {...input.clearable} />
 
 ### Prefix & Suffix
 
-Use the `prefix` and `suffix` props to add a prefix and suffix.
+Use `prefix` and `suffix` to add elements before or after the input.
 
 <Example {...input.icons} />
 
@@ -177,7 +177,7 @@ Input inherits the props of `as` (by default, `'input'`).
       prop: 'disabled',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Input is disabled.',
+      description: 'If true, disables the Input.',
     },
     {
       prop: 'name',
@@ -198,7 +198,8 @@ Input inherits the props of `as` (by default, `'input'`).
       prop: 'fullWidth',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Input takes the full width of its parent.',
+      description:
+        'If true, makes the Input take the full width of its parent.',
     },
     {
       prop: 'label',
@@ -215,34 +216,34 @@ Input inherits the props of `as` (by default, `'input'`).
       prop: 'invalid',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Input is invalid.',
+      description: 'If true, marks the Input as invalid.',
     },
     {
       prop: 'clearable',
       type: 'boolean',
       default: 'false',
-      description: 'If true, the Input has a clear button.',
+      description: 'If true, shows a clear button for the Input.',
     },
     {
       prop: 'onChange',
       type: 'function',
-      description: "Handler that is called when the element's value changes.",
+      description: 'Callback fired when the value changes.',
     },
     {
       prop: 'onValueChange',
       type: '(value: string) => void',
-      description: "Handler that is called when the element's value changes.",
+      description: 'Callback fired when the value changes.',
     },
     {
       prop: 'onClear',
       type: 'function',
-      description: 'Handler that is called when the clear button is clicked.',
+      description: 'Callback fired when the clear button is clicked.',
     },
     {
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description: 'Whether to disable Input animations.',
+      description: 'If true, disables the animation for the Input.',
     },
   ]}
 />

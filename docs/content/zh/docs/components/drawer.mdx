@@ -77,11 +77,11 @@ DrawerContent 的 `motionProps` 属性可以自定义 Drawer 显示/隐藏的动
 
 <Example {...drawer.customMotion} />
 
-### Asynchronously Close
+### Asynchronous Closing
 
 DrawerClose 支持异步关闭 Drawer，其 `children` 的 `onClick` 事件可返回一个 `Promise`，Drawer 会在 `Promise` 被 `resolve` 或者 `reject` 后关闭。
 
-<Example {...drawer.asynchronouslyClose} />
+<Example {...drawer.asynchronousClosing} />
 
 ### Prevent Close
 

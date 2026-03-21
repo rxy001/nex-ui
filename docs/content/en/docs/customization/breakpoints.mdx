@@ -1,13 +1,13 @@
 ---
 title: Breakpoints
-description: Breakpoints support the use of breakpoints in multiple scenarios.
+description: Breakpoints define responsive thresholds for different screen sizes.
 ---
 
 import { BreakpointTable } from '@/components/docs'
 
 # Breakpoints
 
-Breakpoints support the use of breakpoints in multiple scenarios.
+Breakpoints define responsive thresholds for different screen sizes.
 
 ## Customizing Breakpoints
 
@@ -26,11 +26,11 @@ const theme = defineTheme({
 })
 ```
 
-The type of the Breakpoint value is `string`.
+Breakpoint values must be strings (for example, `'640px'`).
 
 ### TypeScript
 
-Later, if you are using TypeScript, you can extend the custom breakpoints through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+If your project uses TypeScript, you can extend custom breakpoints through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
 ```tsx
 declare module '@nex-ui/react' {

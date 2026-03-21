@@ -47,7 +47,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   suffix?: ReactNode
 
   /**
-   * Handler that is called when the clear button is clicked.
+   * Callback fired when the clear button is clicked.
    */
   onClear?: () => void
 
@@ -57,27 +57,27 @@ type InputOwnProps<InputComponent extends ElementType> = {
   className?: ClassValue
 
   /**
-   * If true, the input is disabled.
+   * If true, disables the Input.
    * @default false
    */
   disabled?: boolean
 
   /**
-   * If true, the Input takes the full width of its parent.
+   * If true, makes the Input take the full width of its parent.
    *
    * @default false
    */
   fullWidth?: boolean
 
   /**
-   * If true, the Input is invalid.
+   * If true, marks the Input as invalid.
    *
    * @default false
    */
   invalid?: boolean
 
   /**
-   * If true, the Input is clearable.
+   * If true, shows a clear button for the Input.
    *
    * @default false
    */
@@ -117,7 +117,7 @@ type InputOwnProps<InputComponent extends ElementType> = {
   labelPlacement?: InputVariants['labelPlacement']
 
   /**
-   * Handler that is called when the element's value changes.
+   * Callback fired when the value changes.
    */
   onValueChange?: (value: string) => void
 

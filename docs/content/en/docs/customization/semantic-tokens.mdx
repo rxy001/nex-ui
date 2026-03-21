@@ -1,13 +1,13 @@
 ---
 title: Semantic Tokens
-description: Semantic tokens are designed for use in specific contexts. Different from tokens, they focus more on conveying semantic information of the content.
+description: Semantic tokens are designed for specific contexts. Unlike raw tokens, they focus on conveying semantic meaning.
 ---
 
 import { Callout } from 'nextra/components'
 
 # Semantic Tokens
 
-Semantic tokens are designed for use in specific contexts. Different from tokens, they focus more on conveying semantic information of the content.
+Semantic tokens are designed for specific contexts. Unlike raw tokens, they focus on conveying semantic meaning.
 
 ## Customizing Semantic Tokens
 
@@ -70,7 +70,7 @@ const theme = defineTheme({
 
 ### TypeScript
 
-Later, if you are using TypeScript, you can extend the custom SemanticTokens through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+If your project uses TypeScript, you can extend custom semantic tokens through [Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
 
 ```tsx
 declare module '@nex-ui/react' {
@@ -87,7 +87,7 @@ It works the same way as [tokens](/docs/customization/tokens).
 
 ## Dark Mode
 
-Semantic tokens can also change according to conditions such as light or dark mode. The dark theme of Nex UI components is implemented in this way.
+Semantic tokens can also change based on conditions such as light or dark mode. Nex UI's dark theme is implemented this way.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -107,7 +107,7 @@ const theme = defineTheme({
 
 ## Nested Semantic Tokens
 
-Semantic tokens can be nested to create a hierarchical structure. This is very useful when combining semantic tokens.
+Semantic tokens can be nested to create a hierarchical structure, which is useful when composing semantic values.
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'
@@ -160,7 +160,7 @@ export default function App() {
 }
 ```
 
-**Of course, you can also use conditions like `_dark` in a nested structure.**
+**You can also use conditions like `_dark` in nested structures.**
 
 ```tsx
 import { defineTheme } from '@nex-ui/react'

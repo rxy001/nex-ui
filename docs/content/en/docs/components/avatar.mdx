@@ -15,7 +15,7 @@ Avatar represents users with profile images, initials, or fallback icons.
 
 ## Anatomy
 
-NexUI exports 2 Avatar-related components:
+NexUI provides two components for building avatars:
 
 - `Avatar`: The component that displays a single user.
 - `AvatarGroup`: The component that displays a group of users.
@@ -75,7 +75,7 @@ Use the `spacing` prop to set the spacing between Avatars in the AvatarGroup.
 
 ### Custom Surplus
 
-`renderSurplus` allows custom rendering of surplus Avatars in the AvatarGroup. Set `renderSurplus` to a function that receives the surplus count based on `children` and `max`.
+`renderSurplus` allows custom rendering of overflow Avatars in `AvatarGroup`. Set it to a function that receives the surplus count based on `children` and `max`.
 
 <Example {...avatar.groupCustomSurplus} />
 
@@ -92,7 +92,7 @@ Avatar inherits the props of `as` (by default, `'div'`).
       type: 'ReactNode',
       default: '',
       description:
-        'Used to render icon or text elements inside the Avatar if src is not set. This can be an element, or just a string.',
+        'Renders icon or text content inside the Avatar when `src` is not provided. This can be a React element or a plain string.',
     },
     {
       prop: 'as',
@@ -240,7 +240,7 @@ AvatarGroup inherits the props of `as` (by default, `'div'`).
       prop: 'size',
       type: ["'sm'", "'md'", "'lg'", "'xl'"],
       default: "'md'",
-      description: 'The size of all Avatars.',
+      description: 'The size of all Avatars in the group.',
     },
     {
       prop: 'color',
@@ -256,19 +256,19 @@ AvatarGroup inherits the props of `as` (by default, `'div'`).
         "'gray'",
       ],
       default: "'gray'",
-      description: 'The color of all Avatars.',
+      description: 'The color of all Avatars in the group.',
     },
     {
       prop: 'radius',
       type: ["'sm'", "'md'", "'lg'", "'xl'", "'full'", "'none'"],
       default: 'size',
-      description: 'The border radius of all Avatars.',
+      description: 'The border radius of all Avatars in the group.',
     },
     {
       prop: 'outlined',
       type: 'boolean',
       default: 'false',
-      description: 'If true, adds an outline around all Avatars.',
+      description: 'If true, adds an outline around all Avatars in the group.',
     },
     {
       prop: 'max',
@@ -298,8 +298,7 @@ AvatarGroup inherits the props of `as` (by default, `'div'`).
       prop: 'disableAnimation',
       type: 'boolean',
       default: 'false',
-      description:
-        'Whether to disable hover animation for Avatars in the AvatarGroup.',
+      description: 'If true, disables the animation when hovering Avatar.',
     },
   ]}
 />
