@@ -39,6 +39,9 @@ const meta = {
     separatorGap: {
       control: 'number',
     },
+    disableAnimation: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof BreadcrumbTemplate>
 
