@@ -93,6 +93,13 @@ type BreadcrumbOwnProps<RootComponent extends ElementType> = {
    * @default 1
    */
   itemsAfterCollapse?: number
+
+  /**
+   * If true, disables the hover animation on all BreadcrumbItems.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 }
 
 export type BreadcrumbProps<RootComponent extends ElementType = 'nav'> =
@@ -151,9 +158,11 @@ type BreadcrumbItemOwnProps<LinkComponent extends ElementType> = {
   size?: BreadcrumbItemVariants['size']
 
   /**
-   * Whether the item is the last one.
+   * If true, disables the hover animation on the BreadcrumbItem.
+   *
+   * @default false
    */
-  isLast?: boolean
+  disableAnimation?: boolean
 }
 
 export type BreadcrumbItemProps<LinkComponent extends ElementType = 'a'> =
@@ -162,3 +171,7 @@ export type BreadcrumbItemProps<LinkComponent extends ElementType = 'a'> =
     BreadcrumbItemOwnProps<LinkComponent>,
     BreadcrumbItemPropsOverrides
   >
+
+export type ItemData = {
+  id: string
+}

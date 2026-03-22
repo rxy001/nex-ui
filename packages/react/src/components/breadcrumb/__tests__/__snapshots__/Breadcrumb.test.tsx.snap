@@ -46,10 +46,10 @@ exports[`Breadcrumb should render with default props 1`] = `
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-transition: var(--nui-transitions-colors);
-  transition: var(--nui-transitions-colors);
   border-radius: 2px;
   font-size: var(--nui-font-sizes-md);
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
 }
 
 .emotion-2:is(:hover, [data-hover=true]):not(:disabled, [data-disabled=true]) {
@@ -101,10 +101,10 @@ exports[`Breadcrumb should render with default props 1`] = `
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-transition: var(--nui-transitions-colors);
-  transition: var(--nui-transitions-colors);
   border-radius: 2px;
   font-size: var(--nui-font-sizes-md);
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
 }
 
 .emotion-8:is(:focus-visible, [data-focus-visible=true]):not(:disabled, [data-disabled=true]) {
@@ -124,6 +124,7 @@ exports[`Breadcrumb should render with default props 1`] = `
     <li
       class="nui-breadcrumb-item-root emotion-1"
       data-color="default"
+      data-disable-animation="false"
       data-size="md"
     >
       <a
@@ -141,6 +142,7 @@ exports[`Breadcrumb should render with default props 1`] = `
     <li
       class="nui-breadcrumb-item-root emotion-1"
       data-color="default"
+      data-disable-animation="false"
       data-size="md"
     >
       <a
@@ -158,6 +160,7 @@ exports[`Breadcrumb should render with default props 1`] = `
     <li
       class="nui-breadcrumb-item-root emotion-1"
       data-color="default"
+      data-disable-animation="false"
       data-size="md"
     >
       <a

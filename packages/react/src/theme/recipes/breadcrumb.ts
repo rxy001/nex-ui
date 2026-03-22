@@ -29,7 +29,6 @@ export const breadcrumbRecipe = defineSlotRecipe({
       fs: 'lg',
       borderRadius: 2,
       cursor: 'pointer',
-      transition: 'colors',
       color: {
         _DEFAULT: 'colorPalette.primary/70',
         _hover: {
@@ -89,6 +88,13 @@ export const breadcrumbRecipe = defineSlotRecipe({
         },
       },
     },
+    disableAnimation: {
+      false: {
+        expandButton: {
+          transition: 'colors',
+        },
+      },
+    },
   },
 })
 
@@ -106,7 +112,6 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
       gap: '1',
       color: 'colorPalette.primary/70',
       userSelect: 'none',
-      transition: 'colors',
       borderRadius: 2,
       _focusVisibleRing: {
         outline: '{borders.md} {colors.colorPalette.primary}',
@@ -115,7 +120,7 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
     },
   },
   variants: {
-    isLast: {
+    last: {
       true: {
         link: {
           cursor: 'default',
@@ -178,11 +183,18 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
         },
       },
     },
+    disableAnimation: {
+      false: {
+        link: {
+          transition: 'colors',
+        },
+      },
+    },
   },
   compoundVariants: [
     {
       color: 'default',
-      isLast: true,
+      last: true,
       css: {
         link: {
           color: 'text',
