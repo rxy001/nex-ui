@@ -13,7 +13,6 @@ export const buttonRecipe = defineSlotRecipe({
   slots: {
     root: {
       position: 'relative',
-      transition: 'colors',
       lineHeight: 'base',
       overflow: 'hidden',
       display: 'inline-flex',
@@ -111,6 +110,13 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     color: toSlots(colorVariant, 'root'),
+    disableAnimation: {
+      false: {
+        root: {
+          transition: 'colors',
+        },
+      },
+    },
   },
   compoundVariants: [
     {

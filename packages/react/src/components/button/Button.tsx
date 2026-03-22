@@ -44,6 +44,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
     startIcon: startIconProp,
     endIcon: endIconProp,
     spinnerPlacement = 'start',
+    disableAnimation = false,
     ...remainingProps
   } = props
 
@@ -51,6 +52,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
 
   const ownerState: ButtonProps = {
     ...props,
+    disableAnimation,
     spinnerPlacement,
     variant,
     size,
@@ -93,6 +95,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
       disabled,
       fullWidth,
       disableRipple,
+      disableAnimation,
     },
   })
 
@@ -135,7 +138,7 @@ export const Button = <RootComponent extends ElementType = 'button'>(
   }
 
   return (
-    <Ripple disabled={disableRipple || disabled}>
+    <Ripple disabled={disableRipple || disableAnimation || disabled}>
       <ButtonRoot {...getButtonRootProps()}>{renderChildren()}</ButtonRoot>
     </Ripple>
   )

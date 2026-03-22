@@ -142,6 +142,13 @@ type ButtonOwnProps<RootComponent extends ElementType> = {
    * @default false
    */
   loading?: boolean
+
+  /**
+   * If true, disables the animation for the Button.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 }
 
 export type ButtonProps<RootComponent extends ElementType = 'button'> =
