@@ -1,13 +1,7 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  useMemo,
-  useState,
-} from 'react'
+import { Children, useMemo, useState } from 'react'
 import { EllipsisFilled } from '@nex-ui/icons'
 import { __DEV__ } from '@nex-ui/utils'
 import { breadcrumbRecipe } from '../../theme/recipes'
@@ -18,8 +12,12 @@ import {
   useRecipeStyles,
 } from '../utils'
 import { ButtonBase } from '../buttonBase'
-import type { ElementType, ReactElement, ReactNode } from 'react'
-import type { BreadcrumbProps } from './types'
+import { BreadcrumbProvider } from './BreadcrumbContext'
+import { Collection, useCollection } from '../collection'
+import type { ElementType, ReactNode } from 'react'
+import type { BreadcrumbContextValue } from './BreadcrumbContext'
+import type { BreadcrumbProps, ItemData } from './types'
+import type { CollectionItemData } from '../collection'
 
 const slots = ['root', 'list', 'separator', 'collapse', 'expandButton'] as const
 
@@ -30,7 +28,6 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     name: 'Breadcrumb',
     props: inProps,
   })
-  const [expanded, setExpanded] = useState(false)
 
   const {
     children,
@@ -43,10 +40,15 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     color = 'default',
     size = 'md',
     separator = '/',
+    disableAnimation = false,
     ...remainingProps
   } = props
 
-  const ownerState = { ...props, size, color }
+  const ownerState = { ...props, size, color, disableAnimation }
+
+  const [expanded, setExpanded] = useState(false)
+  const collection = useCollection<ItemData>()
+  const [items, setItems] = useState<CollectionItemData<ItemData>[]>([])
 
   const styles = useRecipeStyles({
     ownerState,
@@ -160,19 +162,9 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
 
   const insertSeparators = (items: ReactNode[]) => {
     return items.map((child, index) => {
-      if (isValidElement(child)) {
-        const element = child as ReactElement<any, any>
-        const props = {
-          isLast: index === items.length - 1,
-          color: element.props.color ?? color,
-          size: element.props.size ?? size,
-        }
-
+      if (child) {
         return [
-          cloneElement(
-            element,
-            element.type.displayName === 'BreadcrumbItem' ? props : {},
-          ),
+          child,
           index < items.length - 1 ? (
             <BreadcrumbSeparator
               {...getBreadcrumbSeparatorProps()}
@@ -187,10 +179,24 @@ export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
     })
   }
 
+  const ctx = useMemo<BreadcrumbContextValue>(
+    () => ({
+      color,
+      size,
+      disableAnimation,
+      isLast: (id: string) => items[items.length - 1]?.id === id,
+    }),
+    [color, size, disableAnimation, items],
+  )
+
   return (
     <BreadcrumbRoot {...getBreadcrumbRootProps()}>
       <BreadcrumbList {...getBreadcrumbListProps()}>
-        {insertSeparators(renderItems())}
+        <Collection collection={collection} onItemsChange={setItems}>
+          <BreadcrumbProvider value={ctx}>
+            {insertSeparators(renderItems())}
+          </BreadcrumbProvider>
+        </Collection>
       </BreadcrumbList>
     </BreadcrumbRoot>
   )

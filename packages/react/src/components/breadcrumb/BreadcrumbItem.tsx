@@ -1,18 +1,20 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useMemo } from 'react'
+import { useId, useMemo } from 'react'
 import { useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
 import { breadcrumbItemRecipe } from '../../theme/recipes'
+import { useBreadcrumbContext } from './BreadcrumbContext'
 import {
   useDefaultProps,
   useSlot,
   useSlotClasses,
   useRecipeStyles,
 } from '../utils'
+import { CollectionItem } from '../collection'
 import type { ElementType } from 'react'
-import type { BreadcrumbItemProps } from './types'
+import type { BreadcrumbItemProps, ItemData } from './types'
 
 const slots = ['root', 'link'] as const
 
@@ -24,32 +26,48 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
     props: inProps,
   })
 
+  const ctx = useBreadcrumbContext()
+
   const {
     children,
     className,
     slotProps,
     classNames,
-    color,
-    size,
-    isLast,
     href,
+    color = ctx.color,
+    size = ctx.size,
+    disableAnimation = ctx.disableAnimation,
     ...remainingProps
   } = props
 
+  const key = useId()
+
+  const { isLast } = ctx
+
+  const last = useMemo(() => isLast(key), [isLast, key])
+
+  const ownerState = {
+    ...props,
+    color,
+    size,
+    last,
+    disableAnimation,
+  }
+
   const ariaProps = useMemo(
     () => ({
-      'aria-current': isLast ? 'page' : undefined,
+      'aria-current': last ? 'page' : undefined,
       role:
         props.as && props.as !== 'a' && !isFunction(props.as)
           ? 'link'
           : undefined,
     }),
-    [props.as, isLast],
+    [props.as, last],
   )
   const { focusVisible, focusProps } = useFocusRing()
 
   const styles = useRecipeStyles({
-    ownerState: props,
+    ownerState,
     name: 'BreadcrumbItem',
     recipe: breadcrumbItemRecipe,
   })
@@ -71,13 +89,14 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
     dataAttrs: {
       size,
       color,
+      disableAnimation,
     },
   })
 
   let additionalProps = {}
   let dataAttrs = {}
 
-  if (!isLast && href) {
+  if (!last && href) {
     additionalProps = { href, ...focusProps }
     dataAttrs = { focusVisible }
   }
@@ -93,11 +112,13 @@ export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
   })
 
   return (
-    <BreadcrumbItemRoot {...getBreadcrumbItemRootProps()}>
-      <BreadcrumbItemLink {...getBreadcrumbItemLinkProps()}>
-        {children}
-      </BreadcrumbItemLink>
-    </BreadcrumbItemRoot>
+    <CollectionItem<ItemData> id={key}>
+      <BreadcrumbItemRoot {...getBreadcrumbItemRootProps()}>
+        <BreadcrumbItemLink {...getBreadcrumbItemLinkProps()}>
+          {children}
+        </BreadcrumbItemLink>
+      </BreadcrumbItemRoot>
+    </CollectionItem>
   )
 }
 
