@@ -61,6 +61,9 @@ const meta = {
       options: ['start', 'end'],
       control: 'select',
     },
+    disableAnimation: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof ButtonTemplate>
 
