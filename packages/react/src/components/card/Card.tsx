@@ -13,9 +13,9 @@ import type { ElementType } from 'react'
 
 const slots = ['root'] as const
 
-export const Card = <RootComponent extends ElementType = 'div'>(
+export function Card<RootComponent extends ElementType = 'div'>(
   inProps: CardProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<CardProps<'div'>>({
     name: 'Card',
     props: inProps,

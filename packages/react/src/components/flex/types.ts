@@ -5,7 +5,7 @@ import type { OverrideProps } from '../../types/utils'
 
 export interface FlexPropsOverrides {}
 
-type FlexOwnProps<RootComponent extends ElementType> = {
+interface FlexOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    *

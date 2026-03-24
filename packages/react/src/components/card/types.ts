@@ -10,7 +10,7 @@ import type { CardVariants } from '../../theme/recipes'
 
 export interface CardPropsOverrides {}
 
-type CardOwnProps<RootComponent extends ElementType> = {
+interface CardOwnProps<RootComponent extends ElementType> {
   /**
    * Usually, CardHeader, CardBody, CardFooter, and other custom content.
    */
@@ -61,13 +61,13 @@ type CardOwnProps<RootComponent extends ElementType> = {
 export type CardProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<RootComponent, CardOwnProps<RootComponent>, CardPropsOverrides>
 
-type CardHeaderSlotProps = {
+interface CardHeaderSlotProps {
   content?: SlotProps<'div'>
   title?: SlotProps<'div'>
   subtitle?: SlotProps<'div'>
 }
 
-type CardHeaderOwnProps<RootComponent extends ElementType> = {
+interface CardHeaderOwnProps<RootComponent extends ElementType> {
   /**
    * The content of the CardHeader, which disables the avatar, action, title, and subtitle props.
    */
@@ -129,7 +129,7 @@ export type CardHeaderProps<RootComponent extends ElementType = 'div'> =
     CardHeaderPropsOverrides
   >
 
-type CardBodyOwnProps<RootComponent extends ElementType> = {
+interface CardBodyOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -161,7 +161,7 @@ export type CardBodyProps<RootComponent extends ElementType = 'div'> =
     CardBodyPropsOverrides
   >
 
-type CardFooterOwnProps<RootComponent extends ElementType> = {
+interface CardFooterOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -195,7 +195,7 @@ export type CardFooterProps<RootComponent extends ElementType = 'div'> =
 
 export interface CardActionAreaPropsOverrides {}
 
-type CardActionAreaOwnProps<RootComponent extends ElementType> = {
+interface CardActionAreaOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'button'

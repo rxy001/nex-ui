@@ -2,10 +2,10 @@ import cn from 'clsx'
 import { HeadingAnchor } from './heading-anchor.client'
 import type { ComponentProps, FC } from 'react'
 
-const createHeading = (
-  Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`,
-): FC<ComponentProps<typeof Tag>> =>
-  function Heading({ children, id, className, ...props }) {
+const createHeading =
+  (Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`): FC<ComponentProps<typeof Tag>> =>
+  // eslint-disable-next-line react/display-name
+  ({ children, id, className, ...props }) => {
     const _class = // can be added by footnotes
       className === 'sr-only'
         ? 'x:sr-only'

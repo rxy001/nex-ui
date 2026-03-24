@@ -10,7 +10,7 @@ import type {
 
 export interface InputPropsOverrides {}
 
-type InputSlotProps = {
+interface InputSlotProps {
   root?: SlotProps<'div'>
   clearButton?: SlotProps<'button'>
   prefix?: SlotProps<'span'>
@@ -18,7 +18,7 @@ type InputSlotProps = {
   label?: SlotProps<'label'>
 }
 
-type InputOwnProps<InputComponent extends ElementType> = {
+interface InputOwnProps<InputComponent extends ElementType> {
   /**
    * The component or element to render as the input.
    *

@@ -17,7 +17,7 @@ import type { FocusTrapProps } from './types'
 
 const focusTrapManager = new FocusTrapManager()
 
-export const FocusTrap = ({
+export function FocusTrap({
   children,
   active = false,
   loop = true,
@@ -25,7 +25,7 @@ export const FocusTrap = ({
   restoreFocus = true,
   paused = false,
   ...remainingProps
-}: FocusTrapProps) => {
+}: FocusTrapProps) {
   const ref = useRef<HTMLElement>(null)
   const focusTrapScopeRef = useRef(new FocusTrapScope())
   const restoreFocusRef = useLatest(restoreFocus)

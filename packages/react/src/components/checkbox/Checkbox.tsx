@@ -22,9 +22,9 @@ import type { ElementType, ReactElement } from 'react'
 
 const slots = ['root', 'input', 'label', 'icon'] as const
 
-export const Checkbox = <CheckboxComponent extends ElementType = 'input'>(
+export function Checkbox<CheckboxComponent extends ElementType = 'input'>(
   inProps: CheckboxProps<CheckboxComponent>,
-) => {
+) {
   const { primaryThemeColor, css } = useNexUI()
 
   const props = useDefaultProps<CheckboxProps>({

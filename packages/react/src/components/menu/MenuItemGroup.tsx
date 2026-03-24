@@ -7,7 +7,7 @@ import { MenuItemGroupProvider } from './MenuContext'
 import type { MenuItemGroupProps } from './types'
 import type { MenuItemGroupContextValue } from './MenuContext'
 
-export const MenuItemGroup = (props: MenuItemGroupProps) => {
+export function MenuItemGroup(props: MenuItemGroupProps) {
   const { children, ...remainingProps } = props
   const ariaId = useId()
   const groupLabelId = `menu-${ariaId}-group-label`

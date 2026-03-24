@@ -1,24 +1,24 @@
 import { useCallback, useMemo, useState } from 'react'
 
-type UseKeepMountedStateProps = {
+interface UseKeepMountedStateProps {
   open: boolean
   keepMounted?: boolean
   disableAnimation?: boolean
   displayValue?: string
 }
 
-type UseKeepMountedStateResult = {
+interface UseKeepMountedStateResult {
   resolvedDisplay?: string
   onAnimationStart: (animation: string) => void
   onAnimationComplete: (animation: string) => void
 }
 
-export const useKeepMountedState = ({
+export function useKeepMountedState({
   open,
   keepMounted = false,
   disableAnimation = false,
   displayValue = 'block',
-}: UseKeepMountedStateProps): UseKeepMountedStateResult => {
+}: UseKeepMountedStateProps): UseKeepMountedStateResult {
   const [display, setDisplay] = useState(
     keepMounted && !disableAnimation && open,
   )

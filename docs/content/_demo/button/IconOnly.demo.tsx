@@ -1,6 +1,6 @@
 import { Button } from '@nex-ui/react'
 
-export const HeartIcon = () => {
+export function HeartIcon() {
   return (
     <svg
       fill='none'

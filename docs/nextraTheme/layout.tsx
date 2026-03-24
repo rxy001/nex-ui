@@ -5,7 +5,7 @@ import { fromZodError } from 'zod-validation-error'
 import { LastUpdated } from './components/last-updated'
 import { MobileNav } from './components/sidebar'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 const theme = z.strictObject({
   banner: element.optional(),
@@ -75,7 +75,7 @@ export type ThemeConfigProps = z.infer<typeof theme>
 
 type LayoutProps = z.input<typeof theme> & { children: ReactNode }
 
-export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
+export function Layout({ children, ...themeConfig }: LayoutProps) {
   const { data, error } = theme.safeParse(themeConfig)
   if (error) {
     throw fromZodError(error)

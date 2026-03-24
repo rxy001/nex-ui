@@ -3,7 +3,7 @@
 import { CheckOutlined, CopyOutlined } from '@nex-ui/icons'
 import { useClipboard, useEvent } from '@nex-ui/hooks'
 
-export const CopyButton = ({ value }: { value: string }) => {
+export function CopyButton({ value }: { value: string }) {
   const { copy, copied } = useClipboard()
 
   const handleClick = useEvent(() => copy(value))

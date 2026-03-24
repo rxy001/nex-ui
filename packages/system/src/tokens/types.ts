@@ -3,7 +3,7 @@ import type { Token } from './createToken'
 
 export type TokenValue = string | number
 
-export type ResponsiveColor = {
+export interface ResponsiveColor {
   _DEFAULT?: CSSProperties['color']
   _light?: CSSProperties['color']
   _dark?: CSSProperties['color']

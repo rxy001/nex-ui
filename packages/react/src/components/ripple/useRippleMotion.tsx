@@ -20,11 +20,11 @@ type Ripples = {
   key: string
 }
 
-export type UseRippleMotionProps = {
+export interface UseRippleMotionProps {
   motionProps?: HTMLMotionProps<'span'>
 }
 
-export const useRippleMotion = (props?: UseRippleMotionProps) => {
+export function useRippleMotion(props?: UseRippleMotionProps) {
   const { motionProps } = props ?? {}
   const rootRef = useRef<Root | null>(null)
   const ripplesRef = useRef<Ripples[]>([])

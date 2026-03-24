@@ -9,9 +9,9 @@ import type { KeyboardEvent, FocusEvent } from 'react'
 import type { RovingFocusContextValue } from './RovingFocusContext'
 import type { RovingFocusGroupProps, RovingFocusItemData } from './types'
 
-export const RovingFocusGroup = <T extends string | number = string | number>(
+export function RovingFocusGroup<T extends string | number = string | number>(
   props: RovingFocusGroupProps<T>,
-) => {
+) {
   const {
     children,
     defaultFocusItemId,

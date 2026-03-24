@@ -14,7 +14,7 @@ import type { PopperAnchorProps, PopperPortalProps } from '../popper/types'
 import type { Placement } from '../utils'
 
 // ------------------- PopoverProps -------------------
-type PopoverOwnProps = PopperProps & {
+interface PopoverOwnProps extends PopperProps {
   /**
    * If true, the Popover is shown by default. (uncontrolled)
    */
@@ -23,110 +23,108 @@ type PopoverOwnProps = PopperProps & {
 
 export interface PopoverPropsOverrides {}
 
-export type PopoverProps = PopoverOwnProps & PopoverPropsOverrides
+export interface PopoverProps extends PopoverOwnProps, PopoverPropsOverrides {}
 
 // ------------------- PopoverContentProps -------------------
-type PopoverContentSlotProps = {
+interface PopoverContentSlotProps {
   paper: SlotProps<'div'>
 }
 
-type PopoverContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
-  FocusTrapProps,
-  'restoreFocus' | 'autoFocus'
-> &
-  Pick<PopperPortalProps, 'container'> &
-  Pick<
-    PopperContentProps,
-    | 'closeOnEscape'
-    | 'closeOnDetached'
-    | 'placement'
-    | 'offset'
-    | 'flip'
-    | 'shift'
-  > & {
-    /**
-     * The component or element to render as the root.
-     *
-     * @default 'div'
-     */
-    as?: RootComponent
+interface PopoverContentOwnProps<RootComponent extends ElementType = 'div'>
+  extends Pick<FocusTrapProps, 'restoreFocus' | 'autoFocus'>,
+    Pick<PopperPortalProps, 'container'>,
+    Pick<
+      PopperContentProps,
+      | 'closeOnEscape'
+      | 'closeOnDetached'
+      | 'placement'
+      | 'offset'
+      | 'flip'
+      | 'shift'
+    > {
+  /**
+   * The component or element to render as the root.
+   *
+   * @default 'div'
+   */
+  as?: RootComponent
 
-    /**
-     * The system prop that allows defining system overrides as well as additional CSS styles.
-     */
-    sx?: Interpolation
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx?: Interpolation
 
-    /**
-     * Additional class names to apply to the root.
-     */
-    className?: ClassValue
+  /**
+   * Additional class names to apply to the root.
+   */
+  className?: ClassValue
 
-    /**
-     * The border radius of the Popover.
-     *
-     * @default 'md'
-     */
-    radius?: PopoverContentVariants['radius']
+  /**
+   * The border radius of the Popover.
+   *
+   * @default 'md'
+   */
+  radius?: PopoverContentVariants['radius']
 
-    /**
-     * The color of the Popover.
-     *
-     * @default 'default'
-     */
-    color?: PopoverContentVariants['color']
+  /**
+   * The color of the Popover.
+   *
+   * @default 'default'
+   */
+  color?: PopoverContentVariants['color']
 
-    /**
-     * If true, disables the animation for the Popover.
-     *
-     * @default false
-     */
-    disableAnimation?: boolean
+  /**
+   * If true, disables the animation for the Popover.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 
-    /**
-     * The props to modify the framer motion animation.
-     */
-    motionProps?:
-      | ((placement: Placement) => HTMLMotionProps<'div'>)
-      | HTMLMotionProps<'div'>
+  /**
+   * The props to modify the framer motion animation.
+   */
+  motionProps?:
+    | ((placement: Placement) => HTMLMotionProps<'div'>)
+    | HTMLMotionProps<'div'>
 
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: PopoverContentSlotProps
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: PopoverContentSlotProps
 
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof PopoverContentSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof PopoverContentSlotProps>
 
-    /**
-     * If true, traps focus within the Popover when open.
-     *
-     * @default true
-     */
-    loopFocus?: boolean
+  /**
+   * If true, traps focus within the Popover when open.
+   *
+   * @default true
+   */
+  loopFocus?: boolean
 
-    /**
-     * The maximum width of the Popover.
-     *
-     * @default 360
-     */
-    maxWidth?: string | number
+  /**
+   * The maximum width of the Popover.
+   *
+   * @default 360
+   */
+  maxWidth?: string | number
 
-    /**
-     * The width of the Popover.
-     *
-     * @default 'auto'
-     */
-    width?: string | number
+  /**
+   * The width of the Popover.
+   *
+   * @default 'auto'
+   */
+  width?: string | number
 
-    /**
-     * If true, keeps the Popover mounted in the DOM when not open.
-     *
-     * @default false
-     */
-    keepMounted?: boolean
-  }
+  /**
+   * If true, keeps the Popover mounted in the DOM when not open.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
+}
 
 export interface PopoverContentPropsOverrides {}
 

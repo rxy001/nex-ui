@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta
 
-export const Default = () => {
+export function Default() {
   const [trapped, setTrapped] = useState(false)
   const [loop, setLoop] = useState(true)
   const [autoFocus, setAutoFocus] = useState(false)
@@ -107,7 +107,7 @@ export const Default = () => {
   )
 }
 
-export const MultipleTraps = () => {
+export function MultipleTraps() {
   const [trapped1, setTrapped1] = useState(false)
   const [trapped2, setTrapped2] = useState(false)
 

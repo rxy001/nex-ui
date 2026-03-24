@@ -11,7 +11,7 @@ import { useSlot } from '../utils'
 import type { MenuCheckboxItemProps } from './types'
 import type { MenuItemIndicatorContextValue } from './MenuContext'
 
-export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
+export function MenuCheckboxItem(props: MenuCheckboxItemProps) {
   const defaultValue = useId()
 
   const {

@@ -16,9 +16,9 @@ import type { BadgeProps } from './types'
 
 const slots = ['root', 'closeButton', 'startIcon', 'endIcon'] as const
 
-export const Badge = <RootComponent extends ElementType = 'span'>(
+export function Badge<RootComponent extends ElementType = 'span'>(
   inProps: BadgeProps<RootComponent>,
-) => {
+) {
   const { primaryThemeColor } = useNexUI()
 
   const props = useDefaultProps<BadgeProps>({

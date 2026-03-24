@@ -5,7 +5,7 @@ import { cloneElement } from 'react'
 import { useModalContext } from './ModalContext'
 import type { ModalTriggerProps } from './types'
 
-export const ModalTrigger = (props: ModalTriggerProps) => {
+export function ModalTrigger(props: ModalTriggerProps) {
   const { setOpen, open, modalContentId } = useModalContext()
   const { children } = props
 

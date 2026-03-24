@@ -16,9 +16,9 @@ import type { DropdownRadioItemProps } from './types'
 
 const slots = ['root', 'indicator'] as const
 
-export const DropdownRadioItem = <RootComponent extends ElementType = 'div'>(
+export function DropdownRadioItem<RootComponent extends ElementType = 'div'>(
   inProps: DropdownRadioItemProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DropdownRadioItemProps>({
     name: 'DropdownRadioItem',
     props: inProps,

@@ -17,9 +17,9 @@ import type { DropdownCheckboxItemProps } from './types'
 
 const slots = ['root', 'indicator'] as const
 
-export const DropdownCheckboxItem = <RootComponent extends ElementType = 'div'>(
+export function DropdownCheckboxItem<RootComponent extends ElementType = 'div'>(
   inProps: DropdownCheckboxItemProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DropdownCheckboxItemProps>({
     name: 'DropdownCheckboxItem',
     props: inProps,

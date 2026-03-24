@@ -1,10 +1,10 @@
 import { getSide, getAlignment, getAlignmentAxis, getAxisLength } from './utils'
 import type { Placement, Coordinates, Rect } from './types'
 
-export const computeCoordinatesByPlacement = (
+export function computeCoordinatesByPlacement(
   rects: { reference: Rect; popper: Rect },
   placement: Placement,
-): Coordinates => {
+): Coordinates {
   const side = getSide(placement)
   const alignment = getAlignment(placement)
   const crossAxis = getAlignmentAxis(placement)

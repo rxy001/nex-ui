@@ -29,7 +29,7 @@ const meta: Meta = {
 
 export default meta
 
-export const Default = () => {
+export function Default() {
   const [open, setOpen] = useState(false)
   const innerRef = useRef<HTMLDivElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)

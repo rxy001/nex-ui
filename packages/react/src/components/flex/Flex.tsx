@@ -13,9 +13,9 @@ import type { FlexProps } from './types'
 
 const slots = ['root'] as const
 
-export const Flex = <RootComponent extends ElementType = 'div'>(
+export function Flex<RootComponent extends ElementType = 'div'>(
   inProps: FlexProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<FlexProps>({ name: 'Flex', props: inProps })
 
   const {

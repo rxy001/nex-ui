@@ -10,7 +10,7 @@ export interface PortalProps {
   children?: ReactNode
 }
 
-export const Portal = (props: PortalProps) => {
+export function Portal(props: PortalProps) {
   const { children, container } = props
   const [mountNode, setMountNode] = useState<Element | null | undefined>(null)
 

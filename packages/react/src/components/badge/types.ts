@@ -8,13 +8,13 @@ import type {
 } from '../../types/utils'
 import type { BadgeVariants } from '../../theme/recipes'
 
-type BadgeSlotProps = {
+interface BadgeSlotProps {
   closeButton?: SlotProps<'button'>
   startIcon?: SlotProps<'span'>
   endIcon?: SlotProps<'span'>
 }
 
-type BadgeOwnProps<RootComponent extends ElementType> = {
+interface BadgeOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    *

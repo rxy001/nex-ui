@@ -3,8 +3,8 @@
 import { MenuTrigger } from '../menu'
 import type { DropdownTriggerProps } from './types'
 
-export const DropdownTrigger = (props: DropdownTriggerProps) => (
-  <MenuTrigger {...props} />
-)
+export function DropdownTrigger(props: DropdownTriggerProps) {
+  return <MenuTrigger {...props} />
+}
 
 DropdownTrigger.displayName = 'DropdownTrigger'

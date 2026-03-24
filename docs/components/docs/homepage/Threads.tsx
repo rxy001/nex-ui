@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl'
 
 function isSafari() {
@@ -16,13 +16,6 @@ function isSafari() {
   const isEdge = /Edg/i.test(userAgent)
 
   return isSafari && !isChromeIOS && !isFirefoxIOS && !isEdge
-}
-
-interface ThreadsProps {
-  color?: [number, number, number]
-  amplitude?: number
-  distance?: number
-  className?: string
 }
 
 const vertexShader = `
@@ -142,7 +135,7 @@ void main() {
 }
 `
 
-export const Threads: React.FC<ThreadsProps> = () => {
+export function Threads() {
   const containerRef = useRef<HTMLDivElement>(null)
   const animationFrameId = useRef<number>(undefined)
 

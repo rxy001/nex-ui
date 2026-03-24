@@ -13,13 +13,13 @@ type ExampleProps = {
   showOpenInCodeSandbox?: boolean
 }
 
-export const Example = ({
+export function Example({
   code,
   demo,
   showCopyCode,
   showOpenInCodeSandbox,
   showReportBug,
-}: ExampleProps) => {
+}: ExampleProps) {
   const files = useMemo(
     () => ({
       '/App.tsx': code,

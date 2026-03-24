@@ -5,13 +5,13 @@ type IconProps = ComponentPropsWithoutRef<'svg'> & {
   size?: number | string
 }
 
-export const UserIcon = ({
+export function UserIcon({
   fill = 'currentColor',
   size,
   height,
   width,
   ...props
-}: IconProps) => {
+}: IconProps) {
   return (
     <svg
       data-name='Iconly/Curved/Profile'
@@ -42,13 +42,13 @@ export const UserIcon = ({
   )
 }
 
-export const CameraIcon = ({
+export function CameraIcon({
   fill = 'currentColor',
   size,
   height,
   width,
   ...props
-}: IconProps) => {
+}: IconProps) {
   return (
     <svg
       fill='none'

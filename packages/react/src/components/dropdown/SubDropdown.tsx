@@ -7,7 +7,7 @@ import { useDefaultProps } from '../utils'
 import { SubDropdownProvider } from './DropdownContext'
 import type { SubDropdownProps } from './types'
 
-export const SubDropdown = (inProps: SubDropdownProps) => {
+export function SubDropdown(inProps: SubDropdownProps) {
   const props = useDefaultProps<SubDropdownProps>({
     name: 'SubDropdown',
     props: inProps,

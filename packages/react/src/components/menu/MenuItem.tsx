@@ -23,7 +23,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const MenuItem = (props: MenuItemProps) => {
+export function MenuItem(props: MenuItemProps) {
   const rootMenuCtx = useRootMenuContext()
   const menuContentCtx = useMenuContentContext()
   const {

@@ -3,13 +3,13 @@ import { useFadeInOutMotionProps, useScaleInOutMotionProps } from '../utils'
 import { usePopoverContext } from './PopoverContext'
 import type { PopoverPaperMotionProps } from './types'
 
-export const PopoverPaperMotion = ({
+export function PopoverPaperMotion({
   children,
   motionProps,
   placement,
   onAnimationStart,
   onAnimationComplete,
-}: PopoverPaperMotionProps) => {
+}: PopoverPaperMotionProps) {
   const { open } = usePopoverContext()
 
   const resolvedProps =

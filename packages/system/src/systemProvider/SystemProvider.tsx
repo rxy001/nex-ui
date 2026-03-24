@@ -11,7 +11,7 @@ import type { ConditionKey } from '../tokens'
 import type { Dictionary, Interpolation } from '../types'
 import type { SystemProviderProps } from './types'
 
-export const SystemProvider = ({
+export function SystemProvider({
   children,
   prefix,
   aliases,
@@ -26,7 +26,7 @@ export const SystemProvider = ({
   defaultMode = 'system',
   modeStorageKey = 'color-scheme',
   colorSchemeSelector = 'data',
-}: SystemProviderProps) => {
+}: SystemProviderProps) {
   const getColorSchemeSelector = useMemo(
     () => createGetColorSchemeSelector(colorSchemeSelector),
     [colorSchemeSelector],

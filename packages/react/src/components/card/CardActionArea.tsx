@@ -14,9 +14,9 @@ import type { CardActionAreaProps } from './types'
 
 const slots = ['root'] as const
 
-export const CardActionArea = <RootComponent extends ElementType = 'button'>(
+export function CardActionArea<RootComponent extends ElementType = 'button'>(
   inProps: CardActionAreaProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<CardActionAreaProps<'button'>>({
     name: 'CardActionArea',
     props: inProps,

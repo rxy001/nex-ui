@@ -6,7 +6,7 @@ import type { OverrideProps } from '../../types/utils'
 
 export interface IconPropsOverrides {}
 
-export type IconOwnProps = {
+export interface IconOwnProps {
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */

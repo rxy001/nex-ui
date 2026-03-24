@@ -97,7 +97,7 @@ import type {
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
 
-export type ComponentThemes = {
+export interface ComponentThemes {
   Button?: {
     styleOverrides?: ComponentThemeObject<ButtonRecipe>
     defaultProps?: ButtonProps

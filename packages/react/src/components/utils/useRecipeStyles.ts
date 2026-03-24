@@ -4,9 +4,9 @@ import { useNexUI } from '../provider/Context'
 import type { RecipeRuntimeFn, SlotRecipeRuntimeFn } from '@nex-ui/system'
 import type { ComponentNames } from '../../types/componentThemes'
 
-type UseRecipeStylesProps<
+interface UseRecipeStylesProps<
   Recipe extends RecipeRuntimeFn | SlotRecipeRuntimeFn,
-> = {
+> {
   recipe: Recipe
   name: ComponentNames
   ownerState: object

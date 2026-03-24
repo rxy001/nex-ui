@@ -10,7 +10,7 @@ import type { SwitchVariants } from '../../theme/recipes'
 
 export interface SwitchPropsOverrides {}
 
-type SwitchSlotProps = {
+interface SwitchSlotProps {
   root?: SlotProps<'label'>
   track?: SlotProps<'span'>
   startIcon?: SlotProps<'span'>
@@ -19,7 +19,7 @@ type SwitchSlotProps = {
   label?: SlotProps<'span'>
 }
 
-export type SwitchOwnProps<SwitchComponent extends ElementType> = {
+export interface SwitchOwnProps<SwitchComponent extends ElementType> {
   /**
    * The component or element to render as the input.
    *

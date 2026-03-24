@@ -24,7 +24,7 @@ type DropdownItemImplProps = DropdownItemProps & {
 
 const slots = ['root', 'shortcut', 'content', 'startIcon', 'endIcon'] as const
 
-export const DropdownItemImpl = (inProps: DropdownItemImplProps) => {
+export function DropdownItemImpl(inProps: DropdownItemImplProps) {
   const props = useDefaultProps<DropdownItemImplProps>({
     name: 'DropdownItem',
     props: inProps,
@@ -132,9 +132,9 @@ export const DropdownItemImpl = (inProps: DropdownItemImplProps) => {
 
 DropdownItemImpl.displayName = 'DropdownItemImpl'
 
-export const DropdownItem = <RootComponent extends ElementType = 'div'>(
+export function DropdownItem<RootComponent extends ElementType = 'div'>(
   inProps: DropdownItemProps<RootComponent>,
-) => {
+) {
   return (
     <DropdownItemImpl
       {...(inProps as DropdownItemProps)}

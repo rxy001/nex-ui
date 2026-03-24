@@ -7,7 +7,7 @@ type UseDefaultPropsArgs = {
   props: Record<string, any>
 }
 
-export const useDefaultProps = <T>({ name, props }: UseDefaultPropsArgs): T => {
+export function useDefaultProps<T>({ name, props }: UseDefaultPropsArgs): T {
   const { components } = useNexUI()
   const defaultProps = components?.[name]?.defaultProps
 

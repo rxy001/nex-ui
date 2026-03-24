@@ -8,7 +8,7 @@ import {
 } from '../utils'
 import type { MiddlewareState, Middleware } from '../types'
 
-export const shift = (): Middleware => {
+export function shift(): Middleware {
   return {
     name: 'shift',
     fn: (state: MiddlewareState) => {

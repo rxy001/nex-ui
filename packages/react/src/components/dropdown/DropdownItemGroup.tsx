@@ -20,7 +20,7 @@ type DropdownItemGroupImpl = DropdownItemGroupProps & {
   }>
 }
 
-export const DropdownItemGroupImpl = (inProps: DropdownItemGroupImpl) => {
+export function DropdownItemGroupImpl(inProps: DropdownItemGroupImpl) {
   const props = useDefaultProps<DropdownItemGroupImpl>({
     name: 'DropdownItemGroup',
     props: inProps,
@@ -55,13 +55,15 @@ export const DropdownItemGroupImpl = (inProps: DropdownItemGroupImpl) => {
 
 DropdownItemGroupImpl.displayName = 'DropdownItemGroupImpl'
 
-export const DropdownItemGroup = <RootComponent extends ElementType = 'div'>(
+export function DropdownItemGroup<RootComponent extends ElementType = 'div'>(
   inProps: DropdownItemGroupProps<RootComponent>,
-) => (
-  <DropdownItemGroupImpl
-    rootComponent={MenuItemGroup}
-    {...(inProps as DropdownItemGroupProps)}
-  />
-)
+) {
+  return (
+    <DropdownItemGroupImpl
+      rootComponent={MenuItemGroup}
+      {...(inProps as DropdownItemGroupProps)}
+    />
+  )
+}
 
 DropdownItemGroup.displayName = 'DropdownItemGroup'

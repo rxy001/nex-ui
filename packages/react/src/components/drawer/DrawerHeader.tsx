@@ -13,9 +13,9 @@ import type { DrawerHeaderProps } from './types'
 
 const slots = ['root'] as const
 
-export const DrawerHeader = <RootComponent extends ElementType = 'h2'>(
+export function DrawerHeader<RootComponent extends ElementType = 'h2'>(
   inProps: DrawerHeaderProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DrawerHeaderProps>({
     name: 'DrawerHeader',
     props: inProps,

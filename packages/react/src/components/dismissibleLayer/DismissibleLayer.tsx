@@ -18,7 +18,7 @@ const FOCUS_OUTSIDE_EVENT = 'dismissibleLayer.focusoutside'
 const POINTER_DOWN_OUTSIDE_EVENT = 'dismissibleLayer.pointerdownoutside'
 const ESCAPE_KEYDOWN_EVENT = 'dismissibleLayer.escapekeydown'
 
-export const DismissibleLayer = (props: DismissibleLayerProps) => {
+export function DismissibleLayer(props: DismissibleLayerProps) {
   const {
     onPointerDownOutside,
     onEscapeKeyDown,
@@ -82,6 +82,8 @@ export const DismissibleLayer = (props: DismissibleLayerProps) => {
     ),
   )
 }
+
+DismissibleLayer.displayName = 'DismissibleLayer'
 
 function usePointerDownOutside(
   callback: (event: PointerDownOutsideEvent) => void,

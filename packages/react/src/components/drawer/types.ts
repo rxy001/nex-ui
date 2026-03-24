@@ -29,7 +29,7 @@ export interface DrawerPropsOverrides {}
 export type DrawerProps = DrawerOwnProps & DrawerPropsOverrides
 
 // ----------------DrawerContent----------------
-type DrawerContentSlotProps = {
+interface DrawerContentSlotProps {
   closeButton?: SlotProps<'button'>
   backdrop?: SlotProps<'div'>
   paper?: SlotProps<'div'>
@@ -37,112 +37,110 @@ type DrawerContentSlotProps = {
 
 export interface DrawerContentPropsOverrides {}
 
-type DrawerContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
-  ModalPortalProps,
-  'container'
-> &
-  Pick<
-    ModalContentProps,
-    | 'restoreFocus'
-    | 'closeOnEscape'
-    | 'preventScroll'
-    | 'autoFocus'
-    | 'closeOnInteractOutside'
-  > & {
-    /**
-     * The component or element to render as the root.
-     * @default 'div'
-     */
-    as?: RootComponent
+interface DrawerContentOwnProps<RootComponent extends ElementType = 'div'>
+  extends Pick<ModalPortalProps, 'container'>,
+    Pick<
+      ModalContentProps,
+      | 'restoreFocus'
+      | 'closeOnEscape'
+      | 'preventScroll'
+      | 'autoFocus'
+      | 'closeOnInteractOutside'
+    > {
+  /**
+   * The component or element to render as the root.
+   * @default 'div'
+   */
+  as?: RootComponent
 
-    /**
-     * The system prop that allows defining system overrides as well as additional CSS styles.
-     */
-    sx?: Interpolation
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx?: Interpolation
 
-    /**
-     * Additional class names to apply to the root.
-     */
-    className?: ClassValue
+  /**
+   * Additional class names to apply to the root.
+   */
+  className?: ClassValue
 
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof DrawerContentSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof DrawerContentSlotProps>
 
-    /**
-     * Usually, DrawerHeader, DrawerBody, DrawerFooter, etc.
-     */
-    children?: ReactNode
+  /**
+   * Usually, DrawerHeader, DrawerBody, DrawerFooter, etc.
+   */
+  children?: ReactNode
 
-    /**
-     * If true, disables the animation for the Drawer.
-     *
-     * @default false
-     */
-    disableAnimation?: boolean
+  /**
+   * If true, disables the animation for the Drawer.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: DrawerContentSlotProps
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: DrawerContentSlotProps
 
-    /**
-     * Custom close button to display on the top-right corner.
-     */
-    closeIcon?: ReactNode
+  /**
+   * Custom close button to display on the top-right corner.
+   */
+  closeIcon?: ReactNode
 
-    /**
-     * If true, hides the close button.
-     * @default false
-     */
-    hideCloseButton?: boolean
+  /**
+   * If true, hides the close button.
+   * @default false
+   */
+  hideCloseButton?: boolean
 
-    /**
-     * The size of the Drawer.
-     * @default 'md'
-     */
-    size?: DrawerContentVariants['size']
+  /**
+   * The size of the Drawer.
+   * @default 'md'
+   */
+  size?: DrawerContentVariants['size']
 
-    /**
-     * The display position of the Drawer.
-     * @default 'right'
-     */
-    placement?: DrawerContentVariants['placement']
+  /**
+   * The display position of the Drawer.
+   * @default 'right'
+   */
+  placement?: DrawerContentVariants['placement']
 
-    /**
-     * The props to modify the framer motion animation.
-     */
-    motionProps?:
-      | HTMLMotionProps<'div'>
-      | ((
-          placement: DrawerContentVariants['placement'],
-        ) => HTMLMotionProps<'div'>)
+  /**
+   * The props to modify the framer motion animation.
+   */
+  motionProps?:
+    | HTMLMotionProps<'div'>
+    | ((
+        placement: DrawerContentVariants['placement'],
+      ) => HTMLMotionProps<'div'>)
 
-    /**
-     * If true, hides the backdrop.
-     *
-     * @default false
-     */
-    hideBackdrop?: boolean
+  /**
+   * If true, hides the backdrop.
+   *
+   * @default false
+   */
+  hideBackdrop?: boolean
 
-    /**
-     * If true, keeps the Drawer mounted in the DOM when not open.
-     *
-     * @default false
-     */
-    keepMounted?: boolean
+  /**
+   * If true, keeps the Drawer mounted in the DOM when not open.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
 
-    /**
-     * The id(s) of the element(s) that label the drawer.
-     */
-    'aria-labelledby'?: string
+  /**
+   * The id(s) of the element(s) that label the drawer.
+   */
+  'aria-labelledby'?: string
 
-    /**
-     * The id(s) of the element(s) that describe the drawer.
-     */
-    'aria-describedby'?: string
-  }
+  /**
+   * The id(s) of the element(s) that describe the drawer.
+   */
+  'aria-describedby'?: string
+}
 
 export type DrawerContentProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
@@ -154,7 +152,7 @@ export type DrawerContentProps<RootComponent extends ElementType = 'div'> =
 // ------------- DrawerHeader -------------
 export interface DrawerHeaderPropsOverrides {}
 
-type DrawerHeaderOwnProps<RootComponent extends ElementType> = {
+interface DrawerHeaderOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'h2'
@@ -187,7 +185,7 @@ export type DrawerHeaderProps<RootComponent extends ElementType = 'h2'> =
 // ------------- DrawerBody -------------
 export interface DrawerBodyPropsOverrides {}
 
-type DrawerBodyOwnProps<RootComponent extends ElementType> = {
+interface DrawerBodyOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -220,7 +218,7 @@ export type DrawerBodyProps<RootComponent extends ElementType = 'div'> =
 // ------------- DrawerFooter -------------
 export interface DrawerFooterPropsOverrides {}
 
-type DrawerFooterOwnProps<RootComponent extends ElementType> = {
+interface DrawerFooterOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -254,7 +252,7 @@ export interface DrawerTriggerProps extends ModalTriggerProps {}
 
 export interface DrawerCloseProps extends ModalCloseProps {}
 
-export type DrawerPaperMotionProps = {
+export interface DrawerPaperMotionProps {
   children: ReactNode
   placement: DrawerContentVariants['placement']
   motionProps?: DrawerContentOwnProps['motionProps']

@@ -23,7 +23,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalContent = (props: ModalContentProps) => {
+export function ModalContent(props: ModalContentProps) {
   const {
     children,
     onEscapeKeyDown,

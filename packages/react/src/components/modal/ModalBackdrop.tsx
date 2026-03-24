@@ -16,7 +16,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalBackdrop = (props: ModalBackdropProps) => {
+export function ModalBackdrop(props: ModalBackdropProps) {
   const [ModalBackdropRoot, getModalBackdropRootProps] = useSlot({
     style,
     component: nex.div,

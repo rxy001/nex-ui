@@ -21,9 +21,9 @@ import type { CollectionItemData } from '../collection'
 
 const slots = ['root', 'list', 'separator', 'collapse', 'expandButton'] as const
 
-export const Breadcrumb = <RootComponent extends ElementType = 'nav'>(
+export function Breadcrumb<RootComponent extends ElementType = 'nav'>(
   inProps: BreadcrumbProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<BreadcrumbProps>({
     name: 'Breadcrumb',
     props: inProps,

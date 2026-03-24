@@ -1,7 +1,7 @@
 import { Checkbox, Flex } from '@nex-ui/react'
 import type { ComponentProps } from 'react'
 
-const HeartIcon = (props: ComponentProps<'svg'>) => {
+function HeartIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       fill='currentColor'

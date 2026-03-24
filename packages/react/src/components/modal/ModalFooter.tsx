@@ -18,7 +18,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalFooter = (props: ModalFooterProps) => {
+export function ModalFooter(props: ModalFooterProps) {
   const [ModalFooterRoot, getModalFooterRootProps] = useSlot({
     style,
     component: nex.div,

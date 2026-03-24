@@ -19,7 +19,7 @@ export interface NexUIProviderProps {
   cssCascadeLayersDisabled?: boolean
 }
 
-export type NexContextValue = {
+export interface NexContextValue {
   css: CssFn
   layers: Layers
   prefix: string

@@ -85,7 +85,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const InputBase = (props: InputBaseProps) => {
+export function InputBase(props: InputBaseProps) {
   const {
     defaultChecked,
     disabled,

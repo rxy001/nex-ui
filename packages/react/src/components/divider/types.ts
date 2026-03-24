@@ -6,7 +6,7 @@ import type { DividerVariants } from '../../theme/recipes'
 
 export interface DividerPropsOverrides {}
 
-type DividerOwnProps<RootComponent extends ElementType> = {
+interface DividerOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    *

@@ -13,9 +13,9 @@ import type { DrawerFooterProps } from './types'
 
 const slots = ['root'] as const
 
-export const DrawerFooter = <RootComponent extends ElementType = 'div'>(
+export function DrawerFooter<RootComponent extends ElementType = 'div'>(
   inProps: DrawerFooterProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DrawerFooterProps>({
     name: 'DrawerFooter',
     props: inProps,

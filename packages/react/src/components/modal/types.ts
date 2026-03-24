@@ -6,7 +6,7 @@ import type { FocusTrapProps } from '../focusTrap'
 import type { SlotProps } from '../../types/utils'
 
 // ------------- Modal --------------
-export type ModalProps = {
+export interface ModalProps {
   children?: ReactNode
 
   /**
@@ -39,13 +39,13 @@ export interface ModalCloseProps {
 }
 
 // ------------- ModalHeader -------------
-export type ModalHeaderProps = SlotProps<'h2'>
+export interface ModalHeaderProps extends SlotProps<'h2'> {}
 
 // ------------- ModalBody -------------
-export type ModalBodyProps = SlotProps<'div'>
+export interface ModalBodyProps extends SlotProps<'div'> {}
 
 // ------------- ModalFooter -------------
-export type ModalFooterProps = SlotProps<'div'>
+export interface ModalFooterProps extends SlotProps<'div'> {}
 
 // ------------- ModalContent -------------
 type ModalContentOwnProps = Pick<FocusTrapProps, 'restoreFocus' | 'autoFocus'> &
@@ -69,13 +69,14 @@ type ModalContentOwnProps = Pick<FocusTrapProps, 'restoreFocus' | 'autoFocus'> &
     preventScroll?: boolean
   }
 
-export type ModalContentProps = SlotProps<'div', ModalContentOwnProps>
+export interface ModalContentProps
+  extends SlotProps<'div', ModalContentOwnProps> {}
 
 // ------------- ModalBackdrop -------------
-export type ModalBackdropProps = SlotProps<'div'>
+export interface ModalBackdropProps extends SlotProps<'div'> {}
 
 // ------------- ModalPortal -------------
-export type ModalPortalProps = PortalProps & {
+export interface ModalPortalProps extends PortalProps {
   /**
    * If true, keeps the Modal mounted in the DOM.
    *
@@ -85,4 +86,4 @@ export type ModalPortalProps = PortalProps & {
 }
 
 // ------------- ModalMotion -------------
-export type ModalMotionProps = HTMLMotionProps<'div'>
+export interface ModalMotionProps extends HTMLMotionProps<'div'> {}

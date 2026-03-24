@@ -16,7 +16,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const MenuSeparator = (props: MenuSeparatorProps) => {
+export function MenuSeparator(props: MenuSeparatorProps) {
   const [MenuSeparatorRoot, getMenuSeparatorRootProps] = useSlot({
     style,
     component: nex.hr,

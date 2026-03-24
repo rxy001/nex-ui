@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { addEventListener } from '@nex-ui/utils'
 import { useLatest } from './useLatest'
 
-function useEscapeKeydown(
+export function useEscapeKeydown(
   onEscapeKeyDownProp: (event: KeyboardEvent) => void,
   ownerDocument: Document = globalThis.document,
 ) {
@@ -20,5 +20,3 @@ function useEscapeKeydown(
     })
   }, [onEscapeKeyDown, ownerDocument])
 }
-
-export { useEscapeKeydown }

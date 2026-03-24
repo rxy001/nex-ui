@@ -11,7 +11,7 @@ import type { AlertVariants } from '../../theme/recipes'
 
 export interface AlertPropsOverrides {}
 
-type AlertSlotProps = {
+interface AlertSlotProps {
   icon?: SlotProps<'div'>
   content?: SlotProps<'div'>
   title?: SlotProps<'div'>
@@ -21,7 +21,7 @@ type AlertSlotProps = {
 
 type AlertStatus = 'info' | 'success' | 'warning' | 'error'
 
-type AlertOwnProps<RootComponent extends ElementType> = {
+interface AlertOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    *

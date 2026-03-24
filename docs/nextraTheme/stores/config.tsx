@@ -3,7 +3,7 @@
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import { createContext, useContext } from 'react'
-import type { FC, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import type { PageMapItem } from 'nextra'
 
 const ConfigContext = createContext<ReturnType<typeof normalizePages> | null>(
@@ -22,11 +22,15 @@ export function useConfig() {
   }
 }
 
-export const ConfigProvider: FC<{
+export function ConfigProvider({
+  children,
+  pageMap,
+  navbar,
+}: {
   children: ReactNode
   pageMap: PageMapItem[]
   navbar: ReactElement
-}> = ({ children, pageMap, navbar }) => {
+}) {
   const pathname = useFSRoute()
 
   const normalizedPages = normalizePages({

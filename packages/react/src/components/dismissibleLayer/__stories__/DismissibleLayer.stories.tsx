@@ -13,7 +13,7 @@ const meta: Meta = {
 
 export default meta
 
-export const Default = () => {
+export function Default() {
   const [open, setOpen] = useState(false)
   const openButtonRef = useRef(null)
   const [dismissOnEscape, setDismissOnEscape] = useState(false)

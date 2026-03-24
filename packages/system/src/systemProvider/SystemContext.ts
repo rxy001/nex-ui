@@ -6,7 +6,7 @@ import type { Layers } from '../layers'
 
 const DEFAULT_CONTEXT_VALUE = '__nex-system-default-context-value__'
 
-export type SystemContext = {
+export interface SystemContext {
   css: CssFn
   layers: Layers
 }

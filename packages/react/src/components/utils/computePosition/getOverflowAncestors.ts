@@ -1,22 +1,9 @@
 import { ownerWindow } from '@nex-ui/utils'
 import { isHTMLElement, isOverflowElement, getElementName } from './dom'
 
-const getNearestOverflowAncestor = (element: Element): HTMLElement | Window => {
-  const { parentElement } = element
-
-  if (!parentElement) {
-    return ownerWindow(element)
-  }
-
-  if (isHTMLElement(parentElement) && isOverflowElement(parentElement)) {
-    return parentElement
-  }
-  return getNearestOverflowAncestor(parentElement)
-}
-
-export const getOverflowAncestors = (
+export function getOverflowAncestors(
   element: Element,
-): (HTMLElement | Window)[] => {
+): (HTMLElement | Window)[] {
   const scrollableAncestors: (HTMLElement | Window)[] = []
   const win = ownerWindow(element)
 
@@ -37,4 +24,17 @@ export const getOverflowAncestors = (
   }
 
   return scrollableAncestors
+}
+
+function getNearestOverflowAncestor(element: Element): HTMLElement | Window {
+  const { parentElement } = element
+
+  if (!parentElement) {
+    return ownerWindow(element)
+  }
+
+  if (isHTMLElement(parentElement) && isOverflowElement(parentElement)) {
+    return parentElement
+  }
+  return getNearestOverflowAncestor(parentElement)
 }

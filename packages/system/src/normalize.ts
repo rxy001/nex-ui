@@ -43,11 +43,11 @@ function colorMix(color: string, percent: string) {
   return `color-mix(in oklab, ${color} ${percent}%, transparent)`
 }
 
-export const createNormalize = ({
+export function createNormalize({
   getPropertiesByAlias,
   getCategoryByProperty,
   getToken,
-}: CreateNormalizeConfig) => {
+}: CreateNormalizeConfig) {
   function normalizePropValue({
     propValue: originalPropValue,
     category,

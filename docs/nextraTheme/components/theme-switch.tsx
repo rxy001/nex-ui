@@ -7,14 +7,13 @@ import { useColorScheme } from '@nex-ui/react'
 import { MoonFilled, SunFilled } from '@nex-ui/icons'
 import { useThemeConfig } from '../stores'
 import type { Mode } from '@nex-ui/react'
-import type { FC } from 'react'
 
 type ThemeSwitchProps = {
   lite?: boolean
   className?: string
 }
 
-export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
+export function ThemeSwitch({ lite, className }: ThemeSwitchProps) {
   const { mode, setMode, resolvedColorScheme } = useColorScheme()
 
   const mounted = useMounted()

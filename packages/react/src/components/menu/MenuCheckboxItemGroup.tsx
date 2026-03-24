@@ -7,12 +7,12 @@ import { MenuItemGroup } from './MenuItemGroup'
 import type { MenuCheckboxItemGroupProps } from './types'
 
 const DEFAULT_VALUE: (number | string)[] = []
-export const MenuCheckboxItemGroup = <
+export function MenuCheckboxItemGroup<
   T extends string | number = string | number,
->(
-  inProps: MenuCheckboxItemGroupProps<T>,
-) => {
-  const props = inProps as MenuCheckboxItemGroupProps<number | string>
+>(inProps: MenuCheckboxItemGroupProps<T>) {
+  const props = inProps as unknown as MenuCheckboxItemGroupProps<
+    number | string
+  >
 
   const {
     children,

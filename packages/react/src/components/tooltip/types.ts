@@ -14,13 +14,13 @@ import type { Placement } from '../utils'
 
 export interface TooltipPropsOverrides {}
 
-type TooltipSlotProps = {
+interface TooltipSlotProps {
   paper?: SlotProps<'div'>
 }
 
-export type TooltipOwnProps<RootComponent extends ElementType = 'div'> =
-  PopperProps &
-    Pick<PopperPortalProps, 'container'> &
+export interface TooltipOwnProps<RootComponent extends ElementType = 'div'>
+  extends PopperProps,
+    Pick<PopperPortalProps, 'container'>,
     Pick<
       PopperContentProps,
       | 'closeOnEscape'
@@ -29,124 +29,124 @@ export type TooltipOwnProps<RootComponent extends ElementType = 'div'> =
       | 'offset'
       | 'shift'
       | 'flip'
-    > & {
-      /**
-       * The trigger element of Tooltip.
-       */
-      children?: PopperAnchorProps['children']
+    > {
+  /**
+   * The trigger element of Tooltip.
+   */
+  children?: PopperAnchorProps['children']
 
-      /**
-       * Additional class names to apply to the root.
-       */
-      className?: ClassValue
+  /**
+   * Additional class names to apply to the root.
+   */
+  className?: ClassValue
 
-      /**
-       * The system prop that allows defining system overrides as well as additional CSS styles.
-       */
-      sx?: Interpolation
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx?: Interpolation
 
-      /**
-       * The content shown by Tooltip.
-       */
-      content?: ReactNode
+  /**
+   * The content shown by Tooltip.
+   */
+  content?: ReactNode
 
-      /**
-       * The component or element to render as the root.
-       *
-       * @default 'div'
-       */
-      as?: RootComponent
+  /**
+   * The component or element to render as the root.
+   *
+   * @default 'div'
+   */
+  as?: RootComponent
 
-      /**
-       * If true, keeps the Tooltip open when interacting with its content.
-       *
-       * @default false
-       */
-      interactive?: boolean
+  /**
+   * If true, keeps the Tooltip open when interacting with its content.
+   *
+   * @default false
+   */
+  interactive?: boolean
 
-      /**
-       * The color of the Tooltip.
-       *
-       * @default 'default'
-       */
-      color?: TooltipRecipeVariants['color']
+  /**
+   * The color of the Tooltip.
+   *
+   * @default 'default'
+   */
+  color?: TooltipRecipeVariants['color']
 
-      /**
-       * The size of the Tooltip.
-       *
-       * @default 'md'
-       */
-      size?: TooltipRecipeVariants['size']
+  /**
+   * The size of the Tooltip.
+   *
+   * @default 'md'
+   */
+  size?: TooltipRecipeVariants['size']
 
-      /**
-       * The border radius of the Tooltip.
-       *
-       * @default 'md'
-       */
-      radius?: TooltipRecipeVariants['radius']
+  /**
+   * The border radius of the Tooltip.
+   *
+   * @default 'md'
+   */
+  radius?: TooltipRecipeVariants['radius']
 
-      /**
-       * The className used for each slot.
-       */
-      classNames?: ComponentSlotClasses<keyof TooltipSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof TooltipSlotProps>
 
-      /**
-       * The props used for each slot.
-       */
-      slotProps?: TooltipSlotProps
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: TooltipSlotProps
 
-      /**
-       * The maximum width of the Tooltip.
-       */
-      maxWidth?: string | number
+  /**
+   * The maximum width of the Tooltip.
+   */
+  maxWidth?: string | number
 
-      /**
-       * If true, opens the Tooltip by default. (uncontrolled)
-       */
-      defaultOpen?: boolean
+  /**
+   * If true, opens the Tooltip by default. (uncontrolled)
+   */
+  defaultOpen?: boolean
 
-      /**
-       * Delay in milliseconds before showing Tooltip.
-       *
-       * @default 100
-       */
-      openDelay?: number
+  /**
+   * Delay in milliseconds before showing Tooltip.
+   *
+   * @default 100
+   */
+  openDelay?: number
 
-      /**
-       * Delay in milliseconds before hiding Tooltip.
-       *
-       * @default 100
-       */
-      closeDelay?: number
+  /**
+   * Delay in milliseconds before hiding Tooltip.
+   *
+   * @default 100
+   */
+  closeDelay?: number
 
-      /**
-       * If true, disables the animation for the Tooltip.
-       *
-       * @default false
-       */
-      disableAnimation?: boolean
+  /**
+   * If true, disables the animation for the Tooltip.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 
-      /**
-       * The props to modify the framer motion animation.
-       */
-      motionProps?:
-        | ((placement: Placement) => HTMLMotionProps<'div'>)
-        | HTMLMotionProps<'div'>
+  /**
+   * The props to modify the framer motion animation.
+   */
+  motionProps?:
+    | ((placement: Placement) => HTMLMotionProps<'div'>)
+    | HTMLMotionProps<'div'>
 
-      /**
-       * If true, keeps the Tooltip mounted in the DOM when not open.
-       *
-       * @default false
-       */
-      keepMounted?: boolean
+  /**
+   * If true, keeps the Tooltip mounted in the DOM when not open.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
 
-      /**
-       * If true, closes the Tooltip when the trigger is clicked while the Tooltip is open.
-       *
-       * @default true
-       */
-      closeOnClick?: boolean
-    }
+  /**
+   * If true, closes the Tooltip when the trigger is clicked while the Tooltip is open.
+   *
+   * @default true
+   */
+  closeOnClick?: boolean
+}
 
 export type TooltipProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
@@ -155,7 +155,7 @@ export type TooltipProps<RootComponent extends ElementType = 'div'> =
     TooltipPropsOverrides
   >
 
-export type TooltipPaperMotionProps = {
+export interface TooltipPaperMotionProps {
   children?: ReactNode
   motionProps?: TooltipOwnProps['motionProps']
   placement: Placement

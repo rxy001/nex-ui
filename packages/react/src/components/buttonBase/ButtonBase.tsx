@@ -26,7 +26,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ButtonBase = (props: ButtonBaseProps) => {
+export function ButtonBase(props: ButtonBaseProps) {
   const {
     as,
     children,

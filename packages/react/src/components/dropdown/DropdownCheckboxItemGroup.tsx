@@ -14,12 +14,10 @@ import type { DropdownCheckboxItemGroupProps } from './types'
 
 const slots = ['root'] as const
 
-export const DropdownCheckboxItemGroup = <
+export function DropdownCheckboxItemGroup<
   T extends string | number = string | number,
   RootComponent extends ElementType = 'div',
->(
-  inProps: DropdownCheckboxItemGroupProps<T, RootComponent>,
-) => {
+>(inProps: DropdownCheckboxItemGroupProps<T, RootComponent>) {
   const props = useDefaultProps<
     DropdownCheckboxItemGroupProps<string | number, 'div'>
   >({

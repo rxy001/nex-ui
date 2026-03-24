@@ -5,11 +5,11 @@ import { useEffect } from 'react'
 import { CollectionProvider } from './CollectionContext'
 import type { CollectionItemData, CollectionProps } from './types'
 
-export const Collection = <ItemData extends {}>({
+export function Collection<ItemData extends {}>({
   children,
   collection,
   onItemsChange,
-}: CollectionProps<ItemData>) => {
+}: CollectionProps<ItemData>) {
   const listener = useEvent((items: CollectionItemData<ItemData>[]) => {
     onItemsChange?.(items)
   })

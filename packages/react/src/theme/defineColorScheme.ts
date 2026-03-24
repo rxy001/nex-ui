@@ -1,7 +1,7 @@
 import type { ColorSchemeProviderProps } from '@nex-ui/system'
 
-export const defineColorScheme = (
+export function defineColorScheme(
   props: Omit<ColorSchemeProviderProps, 'children'>,
-) => {
+) {
   return props
 }

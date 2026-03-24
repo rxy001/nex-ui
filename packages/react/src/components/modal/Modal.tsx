@@ -13,7 +13,7 @@ import type { ModalContextValue } from './ModalContext'
  * - Drawer
  */
 
-export const Modal = (props: ModalProps) => {
+export function Modal(props: ModalProps) {
   const ariaId = useId()
   const modalContentId = `modal-${ariaId}-content`
   const modalHeaderId = `modal-${ariaId}-header`

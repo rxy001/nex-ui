@@ -7,7 +7,7 @@ import type { EmotionCache } from '@emotion/cache'
 
 const isBrowser = typeof document !== 'undefined'
 
-export const Insertion = ({
+export function Insertion({
   cache,
   serialized,
   isStringTag,
@@ -15,7 +15,7 @@ export const Insertion = ({
   cache: EmotionCache
   serialized: SerializedStyles
   isStringTag: boolean
-}) => {
+}) {
   registerStyles(cache, serialized, isStringTag)
 
   const rules = useInsertionEffectAlwaysWithSyncFallback(() =>

@@ -12,7 +12,7 @@ import type { AccordionVariants } from '../../theme/recipes'
 // Accordion
 export interface AccordionPropsOverrides {}
 
-type AccordionOwnProps<RootComponent extends ElementType = 'div'> = {
+interface AccordionOwnProps<RootComponent extends ElementType = 'div'> {
   /**
    * The collection items, typically an array of AccordionItem components.
    */
@@ -123,14 +123,14 @@ export type AccordionProps<RootComponent extends ElementType = 'div'> =
 // AccordionItem
 export interface AccordionItemPropsOverrides {}
 
-export type AccordionItemSlotProps = {
+interface AccordionItemSlotProps {
   heading?: SlotProps<'h3'>
   indicator?: SlotProps<'span'>
   content?: SlotProps<'div'>
   trigger?: SlotProps<'button'>
 }
 
-type AccordionItemOwnProps<RootComponent extends ElementType = 'div'> = {
+interface AccordionItemOwnProps<RootComponent extends ElementType = 'div'> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -217,7 +217,7 @@ export type AccordionItemProps<RootComponent extends ElementType = 'div'> =
     AccordionItemPropsOverrides
   >
 
-export type AccordionItemOwnerState = AccordionItemProps & {
+export interface AccordionItemOwnerState extends AccordionItemProps {
   expanded: boolean
   variant: AccordionVariants['variant']
 }
