@@ -230,7 +230,7 @@ export function Input<InputComponent extends ElementType = 'input'>(
     ariaProps: slotAriaProps.clearButton,
     additionalProps: {
       onClick: handleClearValue,
-      disabled: disabled,
+      disabled,
       sx: {
         visibility: value ? 'visible' : 'hidden',
       },

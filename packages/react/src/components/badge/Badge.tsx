@@ -60,7 +60,7 @@ export function Badge<RootComponent extends ElementType = 'span'>(
 
   const styles = useRecipeStyles({
     name: 'Badge',
-    ownerState: ownerState,
+    ownerState,
     recipe: badgeRecipe,
   })
 

@@ -62,7 +62,7 @@ export function MenuTriggerItem(props: MenuTriggerItemProps) {
 
     // const side = getSide(placement as Placement) as 'left' | 'right'
 
-    if (event.key === SUB_MENU_OPEN_KEYS['right']) {
+    if (event.key === SUB_MENU_OPEN_KEYS.right) {
       handleOpen()
       event.preventDefault()
     }

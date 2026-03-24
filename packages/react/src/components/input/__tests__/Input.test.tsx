@@ -379,7 +379,7 @@ describe('Input', () => {
 
       expect(input).toHaveAttribute('id', input.id)
 
-      const label = queryByClassName(inputClasses['label'])
+      const label = queryByClassName(inputClasses.label)
       expect(label).toHaveAttribute('for', input.id)
     })
 
@@ -414,7 +414,7 @@ describe('Input', () => {
       expect(input).not.toHaveAttribute('aria-labelledby')
 
       rerender(<Input data-testid='input' label='Test Label' />)
-      const label = queryByClassName(inputClasses['label'])
+      const label = queryByClassName(inputClasses.label)
       expect(input).toHaveAttribute('aria-labelledby', label!.id)
       expect(label).toHaveAttribute('id', label!.id)
     })

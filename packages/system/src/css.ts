@@ -96,7 +96,7 @@ export function createCssFn({
 
       const getColorPalette = (path: string[]): string | undefined => {
         if (path.length === 0) {
-          return cssOjbect['colorPalette']
+          return cssOjbect.colorPalette
         }
 
         return get(
