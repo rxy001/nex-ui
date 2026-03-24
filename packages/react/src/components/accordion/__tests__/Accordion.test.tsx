@@ -166,7 +166,7 @@ describe('Accordion', () => {
       },
     )
 
-    const selector = `${accordionItemSlotClasses['root']}[data-state="expanded"]`
+    const selector = `${accordionItemSlotClasses.root}[data-state="expanded"]`
     expect(queryAllByClassName(selector)).toHaveLength(1)
 
     await act(async () => {

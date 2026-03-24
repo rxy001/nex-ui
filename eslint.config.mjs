@@ -87,15 +87,34 @@ export default tseslint.config(
   {
     files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
     rules: {
+      'no-else-return': 'error',
+      'prefer-destructuring': 'error',
+      'prefer-const': 'error',
+      'prefer-arrow-callback': 'error',
+      'no-useless-rename': 'error',
+      'arrow-body-style': ['error', 'as-needed'],
+      'dot-notation': 'error',
+      'func-style': [
+        'error',
+        'declaration',
+        {
+          allowArrowFunctions: true,
+          overrides: { namedExports: 'declaration' },
+        },
+      ],
+      'object-shorthand': [
+        'error',
+        'always',
+        {
+          avoidQuotes: true,
+        },
+      ],
       'no-console': [
         'warn',
         {
           allow: ['error', 'warn'],
         },
       ],
-      'no-else-return': 'error',
-
-      'prefer-destructuring': 'error',
 
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-use-before-define': [
