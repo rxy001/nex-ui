@@ -16,7 +16,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-export const ModalBody = (props: ModalBodyProps) => {
+export function ModalBody(props: ModalBodyProps) {
   const { modalBodyId } = useModalContext()
 
   const [ModalBodyRoot, getModalBodyRootProps] = useSlot({

@@ -6,18 +6,18 @@ import { useRippleMotion } from './useRippleMotion'
 import type { MouseEvent, ReactElement } from 'react'
 import type { UseRippleMotionProps } from './useRippleMotion'
 
-export type RippleProps = {
+export interface RippleProps extends UseRippleMotionProps {
   children?: ReactElement<{ onClick?: (e: MouseEvent) => void }>
   disabled?: boolean
   onClick?: (v: MouseEvent) => void
-} & UseRippleMotionProps
+}
 
-export const Ripple = ({
+export function Ripple({
   children,
   disabled,
   motionProps,
   onClick,
-}: RippleProps) => {
+}: RippleProps) {
   const showEffect = useRippleMotion({ motionProps })
 
   if (!isValidElement(children)) {

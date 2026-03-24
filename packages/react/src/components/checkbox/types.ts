@@ -13,13 +13,13 @@ import type {
 
 export interface CheckboxPropsOverrides {}
 
-type CheckboxSlotProps = {
+interface CheckboxSlotProps {
   root?: SlotProps<'label'>
   label?: SlotProps<'span'>
   icon?: SlotProps<'span'>
 }
 
-type CheckboxOwnProps<CheckboxComponent extends ElementType> = {
+interface CheckboxOwnProps<CheckboxComponent extends ElementType> {
   /**
    * The component or element to render as the input.
    *
@@ -139,15 +139,15 @@ export type CheckboxOwnerState<
 
 export interface CheckboxGroupPropsOverrides {}
 
-type CheckboxGroupSlotProps = {
+interface CheckboxGroupSlotProps {
   label?: SlotProps<'h3'>
   wrapper?: SlotProps<'div'>
 }
 
-type CheckboxGroupOwnProps<
+interface CheckboxGroupOwnProps<
   T extends number | string = number | string,
   RootComponent extends ElementType = 'div',
-> = {
+> {
   /**
    * The component or element to render as the root.
    *

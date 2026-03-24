@@ -9,6 +9,6 @@ const sx = {
   },
 }
 
-export const IconButton = <T extends ElementType>(props: ButtonProps<T>) => (
-  <Button iconOnly size='sm' sx={sx} variant='ghost' {...props} />
-)
+export function IconButton<T extends ElementType>(props: ButtonProps<T>) {
+  return <Button iconOnly size='sm' sx={sx} variant='ghost' {...props} />
+}

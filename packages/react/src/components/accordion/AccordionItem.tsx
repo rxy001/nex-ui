@@ -25,9 +25,9 @@ import type { AccordionItemOwnerState, AccordionItemProps } from './types'
 
 const slots = ['root', 'heading', 'trigger', 'content', 'indicator'] as const
 
-export const AccordionItem = <RootComponent extends ElementType = 'div'>(
+export function AccordionItem<RootComponent extends ElementType = 'div'>(
   inProps: AccordionItemProps<RootComponent>,
-) => {
+) {
   const defaultKey = useId()
 
   const props = useDefaultProps<AccordionItemProps>({

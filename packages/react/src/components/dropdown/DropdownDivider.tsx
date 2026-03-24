@@ -13,9 +13,9 @@ import type { DropdownDividerProps } from './types'
 
 const slots = ['root'] as const
 
-export const DropdownDivider = <RootComponent extends ElementType = 'hr'>(
+export function DropdownDivider<RootComponent extends ElementType = 'hr'>(
   inProps: DropdownDividerProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DropdownDividerProps>({
     name: 'DropdownDivider',
     props: inProps,

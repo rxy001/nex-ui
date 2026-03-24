@@ -5,13 +5,14 @@ import { cloneElement, useEffect } from 'react'
 import { Pagination, TOC } from '../components'
 import { setToc, useConfig, useThemeConfig } from '../stores'
 import type { MDXWrapper } from 'nextra'
+import type { ComponentProps } from 'react'
 
-export const ClientWrapper: MDXWrapper = ({
+export function ClientWrapper({
   toc,
   children,
   metadata,
   bottomContent,
-}) => {
+}: ComponentProps<MDXWrapper>) {
   const { activeType, activeThemeContext: themeContext } =
     useConfig().normalizePagesResult
 

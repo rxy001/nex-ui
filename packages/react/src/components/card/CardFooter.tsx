@@ -13,9 +13,9 @@ import type { CardFooterProps } from './types'
 
 const slots = ['root'] as const
 
-export const CardFooter = <RootComponent extends ElementType>(
+export function CardFooter<RootComponent extends ElementType>(
   inProps: CardFooterProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<CardFooterProps<'div'>>({
     name: 'CardFooter',
     props: inProps,

@@ -1,7 +1,9 @@
 import type { Interpolation } from '@nex-ui/system'
 import type { ElementType, JSX } from 'react'
 
-export type InputBaseProps = JSX.IntrinsicElements['input'] & {
+type PrimitiveInputProps = JSX.IntrinsicElements['input']
+
+export interface InputBaseProps extends PrimitiveInputProps {
   as?: ElementType
   sx?: Interpolation
   invalid?: boolean

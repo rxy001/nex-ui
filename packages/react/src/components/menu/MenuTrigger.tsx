@@ -7,7 +7,7 @@ import { PopperAnchor } from '../popper'
 import type { KeyboardEvent } from 'react'
 import type { MenuTriggerProps } from './types'
 
-export const MenuTrigger = (props: MenuTriggerProps) => {
+export function MenuTrigger(props: MenuTriggerProps) {
   const { children, closeOnClick = true } = props
 
   const menuCtx = useMenuContext()

@@ -5,7 +5,7 @@ import { cloneElement } from 'react'
 import { usePopperContext } from './PopperContext'
 import type { PopperAnchorProps } from './types'
 
-export const PopperAnchor = ({ children }: PopperAnchorProps) => {
+export function PopperAnchor({ children }: PopperAnchorProps) {
   const { triggerRef } = usePopperContext()
 
   if (!isValidNonFragmentElement(children)) {
@@ -16,3 +16,5 @@ export const PopperAnchor = ({ children }: PopperAnchorProps) => {
     ref: mergeRefs(triggerRef, children.props.ref),
   })
 }
+
+PopperAnchor.displayName = 'PopperAnchor'

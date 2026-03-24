@@ -15,9 +15,9 @@ import type { DropdownTriggerItemProps } from './types'
 
 const slots = ['root'] as const
 
-export const DropdownTriggerItem = <RootComponent extends ElementType = 'div'>(
+export function DropdownTriggerItem<RootComponent extends ElementType = 'div'>(
   inProps: DropdownTriggerItemProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DropdownTriggerItemProps>({
     name: 'DropdownTriggerItem',
     props: inProps,

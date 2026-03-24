@@ -1,8 +1,8 @@
 import type { HTMLMotionProps } from 'motion/react'
 
-export const useScaleInOutMotionProps = (
+export function useScaleInOutMotionProps(
   props?: HTMLMotionProps<'div'>,
-): HTMLMotionProps<'div'> => {
+): HTMLMotionProps<'div'> {
   return {
     initial: 'hidden',
     animate: 'visible',

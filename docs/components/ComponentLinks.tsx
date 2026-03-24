@@ -43,7 +43,7 @@ const STORYBOOK_PATH =
 
 const WAI_ARIA_PATH = 'https://www.w3.org/WAI/ARIA/apg/patterns/'
 
-const ButtonLink = (props: ButtonProps) => {
+function ButtonLink(props: ButtonProps) {
   return (
     <Button
       size='sm'
@@ -62,11 +62,11 @@ const ariaPatternMap: Record<string, string> = {
   dropdown: 'menubar',
 }
 
-export const ComponentLinks = ({
+export function ComponentLinks({
   component,
   rscCompatible = false,
   ariaCompatible = false,
-}: ComponentLinksProps) => {
+}: ComponentLinksProps) {
   return (
     <div className='x:mt-6 x:flex x:flex-row x:gap-4 x:flex-wrap x:md:gap-7'>
       <ButtonLink

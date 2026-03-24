@@ -65,7 +65,7 @@ function Button({ children, value }: { children: ReactNode; value: string }) {
   )
 }
 
-export const Default = () => {
+export function Default() {
   return (
     <Flex direction='column' gap='5'>
       <div>

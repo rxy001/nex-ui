@@ -3,13 +3,13 @@ import { useFadeInOutMotionProps, useScaleInOutMotionProps } from '../utils'
 import { useTooltipContext } from './TooltipContext'
 import type { TooltipPaperMotionProps } from './types'
 
-export const TooltipPaperMotion = ({
+export function TooltipPaperMotion({
   children,
   placement,
   motionProps,
   onAnimationStart,
   onAnimationComplete,
-}: TooltipPaperMotionProps) => {
+}: TooltipPaperMotionProps) {
   const { open } = useTooltipContext()
 
   const resolvedProps =

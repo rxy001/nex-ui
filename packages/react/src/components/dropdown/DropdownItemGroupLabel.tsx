@@ -13,11 +13,9 @@ import type { DropdownItemGroupLabelProps } from './types'
 
 const slots = ['root'] as const
 
-export const DropdownItemGroupLabel = <
+export function DropdownItemGroupLabel<
   RootComponent extends ElementType = 'div',
->(
-  inProps: DropdownItemGroupLabelProps<RootComponent>,
-) => {
+>(inProps: DropdownItemGroupLabelProps<RootComponent>) {
   const props = useDefaultProps<DropdownItemGroupLabelProps>({
     name: 'DropdownItemGroupLabel',
     props: inProps,

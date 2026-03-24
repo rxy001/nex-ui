@@ -14,7 +14,7 @@ export function App({ children }) {
 }
 `
 
-export const DarkMode = () => {
+export function DarkMode() {
   return (
     <div className='x:flex x:gap-12 x:flex-col x:lg:flex-row'>
       <MusicPlayer />

@@ -8,7 +8,7 @@ import { DialogProvider } from './DialogContext'
 import type { DialogProps } from './types'
 import type { DialogContextValue } from './DialogContext'
 
-export const Dialog = (inProps: DialogProps) => {
+export function Dialog(inProps: DialogProps) {
   const props = useDefaultProps<DialogProps>({
     name: 'Dialog',
     props: inProps,

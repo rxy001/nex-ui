@@ -207,7 +207,7 @@ describe('Input', () => {
   })
 
   it('should support clearable props', () => {
-    const ClearableInput: React.FC = () => {
+    function ClearableInput() {
       const [value, setValue] = useState('default')
 
       return (
@@ -261,7 +261,7 @@ describe('Input', () => {
   })
 
   it('should be controlled by value prop', () => {
-    const ControlledInput: React.FC = () => {
+    function ControlledInput() {
       const [value, setValue] = useState('controlled')
 
       return (

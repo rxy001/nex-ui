@@ -49,7 +49,7 @@ const transformOrigins = {
   'top-end': 'bottom right',
 } as const
 
-export const PopperContent = (props: PopperContentProps) => {
+export function PopperContent(props: PopperContentProps) {
   const { open, triggerRef, popperRootRef, setOpen } = usePopperContext()
 
   const {

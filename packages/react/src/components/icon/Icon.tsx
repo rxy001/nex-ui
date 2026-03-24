@@ -14,9 +14,9 @@ import type { IconProps } from './types'
 
 const slots = ['root'] as const
 
-export const Icon = <RootComponent extends ElementType = 'svg'>(
+export function Icon<RootComponent extends ElementType = 'svg'>(
   inProps: IconProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<IconProps>({
     name: 'Icon',
     props: inProps,

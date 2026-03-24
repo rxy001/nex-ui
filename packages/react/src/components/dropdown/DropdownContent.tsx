@@ -22,9 +22,9 @@ import type { DropdownContentContextValue } from './DropdownContext'
 
 const slots = ['root', 'paper'] as const
 
-export const DropdownContent = <RootComponent extends ElementType>(
+export function DropdownContent<RootComponent extends ElementType>(
   inProps: DropdownContentProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DropdownContentProps>({
     name: 'DropdownContent',
     props: inProps,

@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { Button } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { ComponentProps, FC, ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
 const SCROLL_TO_OPTIONS = { top: 0, behavior: 'smooth' } as const
 
@@ -17,11 +17,15 @@ const scrollToTop: ComponentProps<'button'>['onClick'] = (event) => {
   buttonElement.disabled = true
 }
 
-export const BackToTop: FC<{
+export function BackToTop({
+  children,
+  className,
+  hidden,
+}: {
   children: ReactNode
   className?: string
   hidden: boolean
-}> = ({ children, className, hidden }) => {
+}) {
   return (
     <Button
       // elements with `aria-hidden: true` must not be focusable or contain focusable elements

@@ -6,7 +6,7 @@ type CardProps = {
   children?: ReactNode
 }
 
-export const Card = ({ children, icon, title }: CardProps) => {
+export function Card({ children, icon, title }: CardProps) {
   return (
     <div className='x:w-full x:rounded-2xl x:p-3 x:inset-shadow-sm x:shadow-xl x:bg-white/5 x:dark:bg-default-400/10 x:backdrop-blur-lg x:backdrop-saturate-[1.8]'>
       <h3 className='x:flex x:items-center x:gap-3'>

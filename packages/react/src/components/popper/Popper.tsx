@@ -14,7 +14,7 @@ import type { PopperContextValue } from './PopperContext'
  * - Menu
  */
 
-export const Popper = (props: PopperProps) => {
+export function Popper(props: PopperProps) {
   const { open, children, onOpenChange, onClose } = props
   const triggerRef = useRef<HTMLElement>(null)
   const popperRootRef = useRef<HTMLDivElement>(null)

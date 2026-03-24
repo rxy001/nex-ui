@@ -17,7 +17,7 @@ import type {
 } from '../modal'
 
 // ------------- Dialog --------------
-type DialogOwnProps = ModalProps & {
+interface DialogOwnProps extends ModalProps {
   /**
    * If true, shows the Dialog by default. (uncontrolled)
    */
@@ -26,10 +26,10 @@ type DialogOwnProps = ModalProps & {
 
 export interface DialogPropsOverrides {}
 
-export type DialogProps = DialogOwnProps & DialogPropsOverrides
+export interface DialogProps extends DialogOwnProps, DialogPropsOverrides {}
 
 // ------------- DialogContent -------------
-type DialogContentSlotProps = {
+interface DialogContentSlotProps {
   closeButton?: SlotProps<'button'>
   paper?: SlotProps<'div'>
   backdrop?: SlotProps<'div'>
@@ -37,118 +37,116 @@ type DialogContentSlotProps = {
 
 export interface DialogContentPropsOverrides {}
 
-type DialogContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
-  ModalPortalProps,
-  'container'
-> &
-  Pick<
-    ModalContentProps,
-    | 'restoreFocus'
-    | 'closeOnEscape'
-    | 'preventScroll'
-    | 'autoFocus'
-    | 'closeOnInteractOutside'
-  > & {
-    /**
-     * The component or element to render as the root.
-     * @default 'div'
-     */
-    as?: RootComponent
+interface DialogContentOwnProps<RootComponent extends ElementType = 'div'>
+  extends Pick<ModalPortalProps, 'container'>,
+    Pick<
+      ModalContentProps,
+      | 'restoreFocus'
+      | 'closeOnEscape'
+      | 'preventScroll'
+      | 'autoFocus'
+      | 'closeOnInteractOutside'
+    > {
+  /**
+   * The component or element to render as the root.
+   * @default 'div'
+   */
+  as?: RootComponent
 
-    /**
-     * The system prop that allows defining system overrides as well as additional CSS styles.
-     */
-    sx?: Interpolation
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx?: Interpolation
 
-    /**
-     * Additional class names to apply to the root.
-     */
-    className?: ClassValue
+  /**
+   * Additional class names to apply to the root.
+   */
+  className?: ClassValue
 
-    /**
-     * Usually, DialogHeader, DialogBody, DialogFooter, etc.
-     */
-    children?: ReactNode
+  /**
+   * Usually, DialogHeader, DialogBody, DialogFooter, etc.
+   */
+  children?: ReactNode
 
-    /**
-     * If true, hides the backdrop when the Dialog is open.
-     *
-     * @default false
-     */
-    hideBackdrop?: boolean
+  /**
+   * If true, hides the backdrop when the Dialog is open.
+   *
+   * @default false
+   */
+  hideBackdrop?: boolean
 
-    /**
-     * The props to modify the framer motion animation.
-     */
-    motionProps?:
-      | ((
-          placement: DialogContentVariants['placement'],
-        ) => HTMLMotionProps<'div'>)
-      | HTMLMotionProps<'div'>
+  /**
+   * The props to modify the framer motion animation.
+   */
+  motionProps?:
+    | ((
+        placement: DialogContentVariants['placement'],
+      ) => HTMLMotionProps<'div'>)
+    | HTMLMotionProps<'div'>
 
-    /**
-     * If true, disables the animation for the Dialog.
-     *
-     * @default false
-     */
-    disableAnimation?: boolean
+  /**
+   * If true, disables the animation for the Dialog.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: DialogContentSlotProps
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: DialogContentSlotProps
 
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof DialogContentSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof DialogContentSlotProps>
 
-    /**
-     * The size of the Dialog.
-     * @default 'md'
-     */
-    size?: DialogContentVariants['size']
+  /**
+   * The size of the Dialog.
+   * @default 'md'
+   */
+  size?: DialogContentVariants['size']
 
-    /**
-     * Custom close button to display in the top-right corner.
-     */
-    closeIcon?: ReactNode
+  /**
+   * Custom close button to display in the top-right corner.
+   */
+  closeIcon?: ReactNode
 
-    /**
-     * If true, hides the close button when the Dialog is open.
-     * @default false
-     */
-    hideCloseButton?: boolean
+  /**
+   * If true, hides the close button when the Dialog is open.
+   * @default false
+   */
+  hideCloseButton?: boolean
 
-    /**
-     * The Dialog scroll behavior.
-     * @default 'outside'
-     */
-    scroll?: DialogContentVariants['scroll']
+  /**
+   * The Dialog scroll behavior.
+   * @default 'outside'
+   */
+  scroll?: DialogContentVariants['scroll']
 
-    /**
-     * The display position of the Dialog.
-     * @default 'top'
-     */
-    placement?: DialogContentVariants['placement']
+  /**
+   * The display position of the Dialog.
+   * @default 'top'
+   */
+  placement?: DialogContentVariants['placement']
 
-    /**
-     * If true, keeps the Dialog mounted in the DOM when not open.
-     *
-     * @default false
-     */
-    keepMounted?: boolean
+  /**
+   * If true, keeps the Dialog mounted in the DOM when not open.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
 
-    /**
-     * The id(s) of the element(s) that label the dialog.
-     */
-    'aria-labelledby'?: string
+  /**
+   * The id(s) of the element(s) that label the dialog.
+   */
+  'aria-labelledby'?: string
 
-    /**
-     * The id(s) of the element(s) that describe the dialog.
-     */
-    'aria-describedby'?: string
-  }
+  /**
+   * The id(s) of the element(s) that describe the dialog.
+   */
+  'aria-describedby'?: string
+}
 
 export type DialogContentProps<RootComponent extends ElementType = 'div'> =
   OverrideProps<
@@ -160,7 +158,7 @@ export type DialogContentProps<RootComponent extends ElementType = 'div'> =
 // ------------- DialogHeader -------------
 export interface DialogHeaderPropsOverrides {}
 
-type DialogHeaderOwnProps<RootComponent extends ElementType> = {
+interface DialogHeaderOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'h2'
@@ -193,7 +191,7 @@ export type DialogHeaderProps<RootComponent extends ElementType = 'h2'> =
 // ------------- DialogBody -------------
 export interface DialogBodyPropsOverrides {}
 
-type DialogBodyOwnProps<RootComponent extends ElementType> = {
+interface DialogBodyOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -226,7 +224,7 @@ export type DialogBodyProps<RootComponent extends ElementType = 'div'> =
 // ------------- DialogFooter -------------
 export interface DialogFooterPropsOverrides {}
 
-type DialogFooterOwnProps<RootComponent extends ElementType> = {
+interface DialogFooterOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -262,7 +260,7 @@ export interface DialogTriggerProps extends ModalTriggerProps {}
 // ------------- DialogClose -------------
 export interface DialogCloseProps extends ModalCloseProps {}
 
-export type DialogPaperMotionProps = {
+export interface DialogPaperMotionProps {
   children?: ReactNode
   placement: Exclude<DialogContentProps['placement'], undefined>
   motionProps?: DialogContentProps['motionProps']

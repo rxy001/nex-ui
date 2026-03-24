@@ -14,23 +14,23 @@ export type Placement =
   | 'right-start'
   | 'right-end'
 
-export type FlipOptions = {
+export interface FlipOptions {
   mainAxis?: boolean
   crossAxis?: boolean
 }
 
-export type ArrowOptions = {
+export interface ArrowOptions {
   element?: HTMLElement | null
 }
 
-export type Coordinates = {
+export interface Coordinates {
   x: number
   y: number
 }
 
 export type OffsetOptions = number | { mainAxis?: number; crossAxis?: number }
 
-export type Middleware = {
+export interface Middleware {
   name: string
   fn: (state: MiddlewareState) => {
     x?: number
@@ -42,7 +42,7 @@ export type Middleware = {
   }
 }
 
-export type MiddlewareData = {
+export interface MiddlewareData {
   flip?: {
     overflows: Array<{
       placement: Placement
@@ -58,7 +58,7 @@ export type MiddlewareData = {
   [key: string]: any
 }
 
-export type ComputePositionOptions = {
+export interface ComputePositionOptions {
   placement?: Placement
   offset?: OffsetOptions | false
   flip?: FlipOptions | false
@@ -66,7 +66,7 @@ export type ComputePositionOptions = {
   arrow?: ArrowOptions | false
 }
 
-export type MiddlewareState = {
+export interface MiddlewareState {
   placement: Placement
   middlewareData: MiddlewareData
   initialPlacement: Placement
@@ -80,7 +80,7 @@ export type MiddlewareState = {
   }
 }
 
-export type Rect = {
+export interface Rect {
   width: number
   height: number
   x: number

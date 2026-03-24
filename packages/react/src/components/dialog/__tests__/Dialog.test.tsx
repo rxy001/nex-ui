@@ -22,7 +22,7 @@ function TestDialog(props: DialogProps) {
   )
 }
 
-const ControlledDialog = ({ defaultOpen = false, ...props }: DialogProps) => {
+function ControlledDialog({ defaultOpen = false, ...props }: DialogProps) {
   const [open, setOpen] = useState(defaultOpen)
 
   return (

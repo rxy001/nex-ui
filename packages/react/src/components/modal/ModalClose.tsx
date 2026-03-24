@@ -6,7 +6,7 @@ import { useModalContext } from './ModalContext'
 import type { MouseEvent } from 'react'
 import type { ModalCloseProps } from './types'
 
-export const ModalClose = ({ children }: ModalCloseProps) => {
+export function ModalClose({ children }: ModalCloseProps) {
   const { setOpen } = useModalContext()
 
   if (!isValidNonFragmentElement(children)) {

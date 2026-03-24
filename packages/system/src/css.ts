@@ -22,15 +22,15 @@ export interface CssFn {
   (interpolation: Interpolation): EmotionInterpolation
 }
 
-const isCustomSelector = (key: string) => {
+function isCustomSelector(key: string) {
   return key.startsWith('_') && key !== '_DEFAULT'
 }
 
-export const createCssFn = ({
+export function createCssFn({
   normalize,
   isAlias,
   getCustomizedSelector,
-}: CreateCssFnConfig) => {
+}: CreateCssFnConfig) {
   const css: CssFn = (interpolation) => {
     if (!interpolation) {
       return ''

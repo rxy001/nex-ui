@@ -71,7 +71,7 @@ describe('SystemProvider', () => {
 
   function testColorScheme(props: ColorSchemeProviderProps) {
     let mode: Mode | undefined = props.defaultMode
-    const Text = () => {
+    function Text() {
       const { setMode, ...colorScheme } = useColorScheme()
       return (
         <>

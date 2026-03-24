@@ -6,10 +6,10 @@ import { isValidNonFragmentElement } from '@nex-ui/utils'
 import { useCollectionContext } from './CollectionContext'
 import type { CollectionItemProps } from './types'
 
-export const CollectionItem = <ItemData extends {} = {}>({
+export function CollectionItem<ItemData extends {} = {}>({
   children,
   ...itemData
-}: CollectionItemProps<ItemData>) => {
+}: CollectionItemProps<ItemData>) {
   const ctx = useCollectionContext()
   const ref = useRef<HTMLElement>(null)
   const itemDataRef = useLatest({
@@ -34,3 +34,5 @@ export const CollectionItem = <ItemData extends {} = {}>({
     ref: mergedRefs,
   })
 }
+
+CollectionItem.displayName = 'CollectionItem'

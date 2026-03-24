@@ -22,9 +22,9 @@ import type { PointerDownOutsideEvent } from '../dismissibleLayer'
 
 const slots = ['root', 'paper'] as const
 
-export const PopoverContent = <RootComponent extends ElementType = 'div'>(
+export function PopoverContent<RootComponent extends ElementType = 'div'>(
   inProps: PopoverContentProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<PopoverContentProps>({
     name: 'PopoverContent',
     props: inProps,

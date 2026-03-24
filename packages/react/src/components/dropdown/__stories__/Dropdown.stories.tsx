@@ -214,30 +214,32 @@ export const Placements: Story = {
   },
 }
 
-export const WithGroups = (props: DropdownContentProps) => (
-  <Dropdown>
-    <DropdownTrigger>
-      <Button>Open Dropdown</Button>
-    </DropdownTrigger>
-    <DropdownContent {...props}>
-      <DropdownItemGroup>
-        <DropdownItemGroupLabel>Fruits</DropdownItemGroupLabel>
-        <DropdownItem>Apple</DropdownItem>
-        <DropdownItem>Banana</DropdownItem>
-        <DropdownItem>Orange</DropdownItem>
-        <DropdownItem>Grapes</DropdownItem>
-      </DropdownItemGroup>
-      <DropdownDivider />
-      <DropdownItemGroup>
-        <DropdownItemGroupLabel>Vegetables</DropdownItemGroupLabel>
-        <DropdownItem>Carrot</DropdownItem>
-        <DropdownItem>Broccoli</DropdownItem>
-      </DropdownItemGroup>
-    </DropdownContent>
-  </Dropdown>
-)
+export function WithGroups(props: DropdownContentProps) {
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <Button>Open Dropdown</Button>
+      </DropdownTrigger>
+      <DropdownContent {...props}>
+        <DropdownItemGroup>
+          <DropdownItemGroupLabel>Fruits</DropdownItemGroupLabel>
+          <DropdownItem>Apple</DropdownItem>
+          <DropdownItem>Banana</DropdownItem>
+          <DropdownItem>Orange</DropdownItem>
+          <DropdownItem>Grapes</DropdownItem>
+        </DropdownItemGroup>
+        <DropdownDivider />
+        <DropdownItemGroup>
+          <DropdownItemGroupLabel>Vegetables</DropdownItemGroupLabel>
+          <DropdownItem>Carrot</DropdownItem>
+          <DropdownItem>Broccoli</DropdownItem>
+        </DropdownItemGroup>
+      </DropdownContent>
+    </Dropdown>
+  )
+}
 
-export const WithIcons = (props: DropdownContentProps) => {
+export function WithIcons(props: DropdownContentProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -264,7 +266,7 @@ export const WithIcons = (props: DropdownContentProps) => {
   )
 }
 
-export const RadioItems = (props: DropdownContentProps) => {
+export function RadioItems(props: DropdownContentProps) {
   const [selectedRadio, setSelectedRadio] = useState<string>('1')
 
   return (
@@ -290,7 +292,7 @@ export const RadioItems = (props: DropdownContentProps) => {
   )
 }
 
-export const CheckboxItems = (props: DropdownContentProps) => {
+export function CheckboxItems(props: DropdownContentProps) {
   const [checkedItems, setCheckedItems] = useState<string[]>(['1', '3'])
 
   return (
@@ -313,7 +315,7 @@ export const CheckboxItems = (props: DropdownContentProps) => {
   )
 }
 
-export const LinkItems = (props: DropdownContentProps) => {
+export function LinkItems(props: DropdownContentProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -341,7 +343,7 @@ export const LinkItems = (props: DropdownContentProps) => {
   )
 }
 
-export const PreventClosing = (props: DropdownContentProps) => {
+export function PreventClosing(props: DropdownContentProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -368,7 +370,7 @@ export const PreventClosing = (props: DropdownContentProps) => {
   )
 }
 
-export const Shortcut = (props: DropdownContentProps) => {
+export function Shortcut(props: DropdownContentProps) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -384,7 +386,7 @@ export const Shortcut = (props: DropdownContentProps) => {
   )
 }
 
-export const CustomTrigger = (props: DropdownContentProps) => {
+export function CustomTrigger(props: DropdownContentProps) {
   return (
     <Dropdown>
       <DropdownTrigger>

@@ -4,10 +4,10 @@ import type { CascadeLayer, CreateLayersConfig } from './types'
 
 const layerOrder = ['global', 'css'] as const
 
-export const createLayers = ({
+export function createLayers({
   prefix,
   cssCascadeLayersDisabled,
-}: CreateLayersConfig) => {
+}: CreateLayersConfig) {
   return {
     atRules: `@layer ${layerOrder.map((layer) => `${prefix}.${layer}`).join(', ')};`,
     wrapWithLayer: (layer: CascadeLayer, styles: Interpolation) => {

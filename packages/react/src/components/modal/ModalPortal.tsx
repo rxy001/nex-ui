@@ -6,11 +6,11 @@ import { ModalPortalPropsProvider, useModalContext } from './ModalContext'
 import type { ModalPortalPropsContextValue } from './ModalContext'
 import type { ModalPortalProps } from './types'
 
-export const ModalPortal = ({
+export function ModalPortal({
   children,
   container,
   forceMount = false,
-}: ModalPortalProps) => {
+}: ModalPortalProps) {
   const { open } = useModalContext()
 
   const ctx = useMemo<ModalPortalPropsContextValue>(

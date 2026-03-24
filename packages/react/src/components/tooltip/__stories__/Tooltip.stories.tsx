@@ -97,7 +97,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const Colors = (props: TooltipProps) => {
+export function Colors(props: TooltipProps) {
   return (
     <Flex wrap='wrap' gap='5'>
       {COLORS.map((color) => (
@@ -113,7 +113,7 @@ export const Colors = (props: TooltipProps) => {
   )
 }
 
-export const Placements = (props: TooltipProps) => {
+export function Placements(props: TooltipProps) {
   return (
     <Flex
       sx={{
@@ -150,7 +150,7 @@ export const DefaultOpen: Story = {
   },
 }
 
-export const Controlled = (props: TooltipProps) => {
+export function Controlled(props: TooltipProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -165,7 +165,7 @@ export const Controlled = (props: TooltipProps) => {
   )
 }
 
-export const WithOffset = (props: TooltipProps) => {
+export function WithOffset(props: TooltipProps) {
   return (
     <TooltipTemplate
       {...props}
@@ -176,7 +176,7 @@ export const WithOffset = (props: TooltipProps) => {
   )
 }
 
-export const WithFlip = (props: TooltipProps) => {
+export function WithFlip(props: TooltipProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   return (
@@ -207,19 +207,21 @@ export const WithFlip = (props: TooltipProps) => {
   )
 }
 
-export const WithDelay = (props: TooltipProps) => (
-  <Flex gap='5'>
-    <TooltipTemplate
-      {...props}
-      openDelay={500}
-      closeDelay={0}
-      triggerText='Delay open 500ms'
-    />
-    <TooltipTemplate
-      {...props}
-      openDelay={0}
-      closeDelay={500}
-      triggerText='Delay close 500ms'
-    />
-  </Flex>
-)
+export function WithDelay(props: TooltipProps) {
+  return (
+    <Flex gap='5'>
+      <TooltipTemplate
+        {...props}
+        openDelay={500}
+        closeDelay={0}
+        triggerText='Delay open 500ms'
+      />
+      <TooltipTemplate
+        {...props}
+        openDelay={0}
+        closeDelay={500}
+        triggerText='Delay close 500ms'
+      />
+    </Flex>
+  )
+}

@@ -15,7 +15,7 @@ import type { TooltipProps } from '../index'
 
 const slots = ['paper'] as const
 
-const TestTooltip = (props: TooltipProps) => {
+function TestTooltip(props: TooltipProps) {
   return (
     <Tooltip content='content' data-testid='tooltip-root' {...props}>
       <button data-testid='tooltip-trigger'>Trigger</button>

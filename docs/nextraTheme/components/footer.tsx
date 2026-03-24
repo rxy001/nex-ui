@@ -1,11 +1,11 @@
 import cn from 'clsx'
-import type { ComponentProps, FC } from 'react'
+import type { ComponentProps } from 'react'
 
-export const Footer: FC<ComponentProps<'footer'>> = ({
+export function Footer({
   className,
   children,
   ...props
-}) => {
+}: ComponentProps<'footer'>) {
   return (
     children && (
       <footer

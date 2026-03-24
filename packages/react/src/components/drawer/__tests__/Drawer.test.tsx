@@ -22,7 +22,7 @@ function TestDrawer(props: DrawerProps) {
   )
 }
 
-const ControlledDrawer = ({ defaultOpen = false, ...props }: DrawerProps) => {
+function ControlledDrawer({ defaultOpen = false, ...props }: DrawerProps) {
   const [open, setOpen] = useState(defaultOpen)
 
   return (

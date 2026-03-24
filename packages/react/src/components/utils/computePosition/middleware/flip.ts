@@ -2,12 +2,12 @@ import { getSide, getFallbackPlacements, getAlignmentSides } from '../utils'
 import { detectOverflow } from '../detectOverflow'
 import type { MiddlewareState, FlipOptions, Middleware } from '../types'
 
-export const flip = (
+export function flip(
   options: FlipOptions = {
     mainAxis: true,
     crossAxis: true,
   },
-): Middleware => {
+): Middleware {
   return {
     name: 'flip',
     fn: (state: MiddlewareState) => {

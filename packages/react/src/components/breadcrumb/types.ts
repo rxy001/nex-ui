@@ -12,14 +12,14 @@ import type {
 
 export interface BreadcrumbPropsOverrides {}
 
-type BreadcrumbSlotProps = {
+interface BreadcrumbSlotProps {
   list?: SlotProps<'ol'>
   separator?: SlotProps<'li'>
   collapse?: SlotProps<'li'>
   expandButton?: SlotProps<'button'>
 }
 
-type BreadcrumbOwnProps<RootComponent extends ElementType> = {
+interface BreadcrumbOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    *
@@ -111,11 +111,11 @@ export type BreadcrumbProps<RootComponent extends ElementType = 'nav'> =
 
 export interface BreadcrumbItemPropsOverrides {}
 
-type BreadcrumbItemSlotProps = {
+interface BreadcrumbItemSlotProps {
   root?: SlotProps<'li'>
 }
 
-type BreadcrumbItemOwnProps<LinkComponent extends ElementType> = {
+interface BreadcrumbItemOwnProps<LinkComponent extends ElementType> {
   /**
    * The component or element to render as the link.
    *
@@ -172,6 +172,6 @@ export type BreadcrumbItemProps<LinkComponent extends ElementType = 'a'> =
     BreadcrumbItemPropsOverrides
   >
 
-export type ItemData = {
+export interface ItemData {
   id: string
 }

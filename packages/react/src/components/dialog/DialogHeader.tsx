@@ -13,9 +13,9 @@ import type { DialogHeaderProps } from './types'
 
 const slots = ['root'] as const
 
-export const DialogHeader = <RootComponent extends ElementType = 'h2'>(
+export function DialogHeader<RootComponent extends ElementType = 'h2'>(
   inProps: DialogHeaderProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DialogHeaderProps>({
     name: 'DialogHeader',
     props: inProps,

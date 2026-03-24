@@ -14,9 +14,9 @@ import type { DialogBodyProps } from './types'
 
 const slots = ['root'] as const
 
-export const DialogBody = <RootComponent extends ElementType = 'div'>(
+export function DialogBody<RootComponent extends ElementType = 'div'>(
   inProps: DialogBodyProps<RootComponent>,
-) => {
+) {
   const { scroll } = useDialogContentContext()
 
   const props = useDefaultProps<DialogBodyProps>({

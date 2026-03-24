@@ -4,10 +4,10 @@ import * as m from 'motion/react-m'
 import { useFadeInOutMotionProps } from './useFadeInOutMotionProps'
 import type { HTMLMotionProps } from 'motion/react'
 
-export const FadeInOutMotion = ({
+export function FadeInOutMotion({
   children,
   ...props
-}: HTMLMotionProps<'div'>) => {
+}: HTMLMotionProps<'div'>) {
   const motionProps = useFadeInOutMotionProps(props)
 
   return <m.div {...motionProps}>{children}</m.div>

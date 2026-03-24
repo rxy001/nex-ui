@@ -4,7 +4,7 @@ import { getOffsetParent } from './getOffsetParent'
 import { getOverflowAncestors } from './getOverflowAncestors'
 import type { MiddlewareState } from './types'
 
-export const detectOverflow = (state: MiddlewareState) => {
+export function detectOverflow(state: MiddlewareState) {
   const { elements, rects } = state
   const win = ownerWindow(elements.popper)
 

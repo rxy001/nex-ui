@@ -10,12 +10,12 @@ import type {
 
 export interface ButtonPropsOverrides {}
 
-type ButtonSlotProps = {
+interface ButtonSlotProps {
   startIcon?: SlotProps<'span'>
   endIcon?: SlotProps<'span'>
 }
 
-type ButtonOwnProps<RootComponent extends ElementType> = {
+interface ButtonOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    *

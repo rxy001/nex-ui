@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useDropdownContentContext } from './DropdownContext'
 
-type UseDropdownIndicatorProps = {
+interface UseDropdownIndicatorProps {
   trackIndicatorCount?: boolean
 }
 

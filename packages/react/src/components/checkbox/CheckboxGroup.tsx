@@ -17,12 +17,10 @@ import type { CheckboxGroupContextValue } from './CheckboxGroupContext'
 
 const slots = ['root', 'label', 'wrapper'] as const
 
-export const CheckboxGroup = <
+export function CheckboxGroup<
   T extends number | string = number | string,
   CheckboxGroupComponent extends ElementType = 'div',
->(
-  inProps: CheckboxGroupProps<T, CheckboxGroupComponent>,
-) => {
+>(inProps: CheckboxGroupProps<T, CheckboxGroupComponent>) {
   const props = useDefaultProps<CheckboxGroupProps>({
     name: 'CheckboxGroup',
     props: inProps,

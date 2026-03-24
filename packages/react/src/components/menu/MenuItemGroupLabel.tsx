@@ -6,7 +6,7 @@ import { useSlot } from '../utils'
 import { useMenuItemGroupContext } from './MenuContext'
 import type { MenuItemGroupLabelProps } from './types'
 
-export const MenuItemGroupLabel = (props: MenuItemGroupLabelProps) => {
+export function MenuItemGroupLabel(props: MenuItemGroupLabelProps) {
   const { children, ...remainingProps } = props
   const { groupLabelId, registerLabel, unregisterLabel } =
     useMenuItemGroupContext()

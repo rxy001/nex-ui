@@ -4,17 +4,17 @@ import { generateSlotClass } from './generateSlotClass'
 import { useNexUI } from '../provider'
 import type { ClassValue } from 'clsx'
 
-type UseSlotClassesProps<S extends string> = {
+interface UseSlotClassesProps<S extends string> {
   name: string
   slots: S[] | readonly S[]
   classNames?: Partial<Record<string, ClassValue>>
 }
 
-export const useSlotClasses = <S extends string>({
+export function useSlotClasses<S extends string>({
   name,
   slots,
   classNames,
-}: UseSlotClassesProps<S>): Record<S, ClassValue> => {
+}: UseSlotClassesProps<S>): Record<S, ClassValue> {
   const { prefix } = useNexUI()
 
   return useMemo(() => {

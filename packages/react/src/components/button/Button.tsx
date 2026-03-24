@@ -17,9 +17,9 @@ import type { ButtonProps } from './types'
 
 const slots = ['root', 'startIcon', 'endIcon'] as const
 
-export const Button = <RootComponent extends ElementType = 'button'>(
+export function Button<RootComponent extends ElementType = 'button'>(
   inProps: ButtonProps<RootComponent>,
-) => {
+) {
   const { primaryThemeColor } = useNexUI()
 
   const props = useDefaultProps<ButtonProps>({

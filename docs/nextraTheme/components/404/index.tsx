@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { H1 } from '../../mdx-components/heading'
 import { NotFoundLink } from './index.client'
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 type NotFoundPageProps = {
   content?: ReactNode
@@ -10,12 +10,12 @@ type NotFoundPageProps = {
   className?: string
 }
 
-export const NotFoundPage: FC<NotFoundPageProps> = ({
+export function NotFoundPage({
   content = 'Submit an issue about broken link',
   labels = 'bug',
   children,
   className,
-}) => {
+}: NotFoundPageProps) {
   return (
     <div
       className={cn(

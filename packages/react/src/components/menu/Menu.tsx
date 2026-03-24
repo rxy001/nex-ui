@@ -12,7 +12,7 @@ import {
 import type { MenuProps, MenuImplProps, SubMenuProps } from './types'
 import type { MenuContextValue } from './MenuContext'
 
-const MenuImpl = (props: MenuImplProps) => {
+function MenuImpl(props: MenuImplProps) {
   const { open, children, onOpenChange, onClose } = props
 
   const ariaId = useId()
@@ -43,7 +43,7 @@ const MenuImpl = (props: MenuImplProps) => {
 }
 MenuImpl.displayName = 'MenuImpl'
 
-export const Menu = (props: MenuProps) => {
+export function Menu(props: MenuProps) {
   const { children, onOpenChange, ...remainingProps } = props
   const useKeyboardRef = useRef(false)
   const close = useEvent(() => {
@@ -90,7 +90,7 @@ export const Menu = (props: MenuProps) => {
 }
 Menu.displayName = 'Menu'
 
-export const SubMenu = (props: SubMenuProps) => {
+export function SubMenu(props: SubMenuProps) {
   const parentMenuCtx = useMenuContext()
   const subMenuContentRef = useRef<HTMLDivElement>(null)
 

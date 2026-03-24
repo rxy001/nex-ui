@@ -5,7 +5,7 @@ import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
 import { usePopoverContext } from './PopoverContext'
 import type { PopoverCloseProps } from './types'
 
-export const PopoverClose = ({ children }: PopoverCloseProps) => {
+export function PopoverClose({ children }: PopoverCloseProps) {
   const { setOpen } = usePopoverContext()
 
   if (!isValidNonFragmentElement(children)) {

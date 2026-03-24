@@ -21,7 +21,7 @@ import {
 } from '../stores'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
-import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
+import type { FocusEventHandler, MouseEventHandler } from 'react'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { Heading } from 'nextra'
 
@@ -61,7 +61,7 @@ type FolderProps = {
   level: number
 }
 
-const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
+function Folder({ item: _item, anchors, onFocus, level }: FolderProps) {
   const routeOriginal = useFSRoute()
   const route = routeOriginal.split('#', 1)[0]!
 
@@ -185,7 +185,7 @@ function getMenuChildren(menu: MenuItem) {
   }))
 }
 
-const Separator: FC<{ title: string }> = ({ title }) => {
+function Separator({ title }: { title: string }) {
   return (
     <li
       className={cn(
@@ -206,11 +206,15 @@ const handleClick = () => {
   setMenu(false)
 }
 
-const File: FC<{
+function File({
+  item,
+  anchors,
+  onFocus,
+}: {
   item: PageItem | Item
   anchors: Heading[]
   onFocus: FocusEventHandler
-}> = ({ item, anchors, onFocus }) => {
+}) {
   const route = useFSRoute()
   // It is possible that the item doesn't have any route - for example, an external link.
   const active = item.route && [route, `${route}/`].includes(`${item.route}/`)
@@ -287,7 +291,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(
 )
 Menu.displayName = 'Menu'
 
-export const MobileNav: FC = () => {
+export function MobileNav() {
   const { directories } = useConfig().normalizePagesResult
   const toc = useToc()
 
@@ -358,7 +362,7 @@ export const MobileNav: FC = () => {
   )
 }
 
-export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
+export function Sidebar({ toc }: { toc: Heading[] }) {
   const { normalizePagesResult, hideSidebar } = useConfig()
   const themeConfig = useThemeConfig()
   const isExpanded = themeConfig.sidebar.defaultOpen

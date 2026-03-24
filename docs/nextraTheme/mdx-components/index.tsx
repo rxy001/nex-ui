@@ -17,18 +17,20 @@ import { Sidebar } from '../components'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { ClientWrapper } from './wrapper.client'
-import type { ComponentProps, FC } from 'react'
+import type { ComponentProps } from 'react'
 import type { MDXComponents } from 'nextra/mdx-components'
 
-const Blockquote: FC<ComponentProps<'blockquote'>> = (props) => (
-  <blockquote
-    className={cn(
-      'x:not-first:mt-6 x:border-gray-300 x:italic x:text-gray-700 x:dark:border-gray-700 x:dark:text-gray-400',
-      'x:border-s-2 x:ps-6',
-    )}
-    {...props}
-  />
-)
+function Blockquote(props: ComponentProps<'blockquote'>) {
+  return (
+    <blockquote
+      className={cn(
+        'x:not-first:mt-6 x:border-gray-300 x:italic x:text-gray-700 x:dark:border-gray-700 x:dark:text-gray-400',
+        'x:border-s-2 x:ps-6',
+      )}
+      {...props}
+    />
+  )
+}
 
 const DEFAULT_COMPONENTS = getNextraMDXComponents({
   a: Link,

@@ -1,14 +1,14 @@
 import type { Placement, Side, Alignment, Axis, Length, Rect } from './types'
 
-export const getSide = (placement: Placement): Side => {
+export function getSide(placement: Placement): Side {
   return placement.split('-')[0] as Side
 }
 
-export const getAlignment = (placement: Placement): Alignment | undefined => {
+export function getAlignment(placement: Placement): Alignment | undefined {
   return placement.split('-')[1] as Alignment | undefined
 }
 
-export const isWebKit = (): boolean => {
+export function isWebKit(): boolean {
   if (typeof CSS === 'undefined' || !CSS.supports) return false
   return CSS.supports('-webkit-backdrop-filter', 'none')
 }
@@ -20,18 +20,18 @@ const oppositeSide: Record<Side, Side> = {
   left: 'right',
 }
 
-const getOppositeSide = (side: Side): Side => {
+function getOppositeSide(side: Side): Side {
   return oppositeSide[side]
 }
 
-const getOppositeAlignment = (alignment: Alignment): Alignment => {
+export function getOppositeAlignment(alignment: Alignment): Alignment {
   return alignment === 'start' ? 'end' : 'start'
 }
 
-export const getFallbackPlacements = (
+export function getFallbackPlacements(
   placement: Placement,
   flipAlignment: boolean,
-): Placement[] => {
+): Placement[] {
   const side = getSide(placement)
   const alignment = getAlignment(placement)
   const oppositeSide = getOppositeSide(side)
@@ -51,27 +51,27 @@ export const getFallbackPlacements = (
   ]
 }
 
-export const getOppositeAxis = (axis: Axis): Axis => {
+export function getOppositeAxis(axis: Axis): Axis {
   return axis === 'x' ? 'y' : 'x'
 }
 
 const yAxisSides = new Set(['top', 'bottom'])
-export const getSideAxis = (placement: Placement): Axis => {
+export function getSideAxis(placement: Placement): Axis {
   return yAxisSides.has(getSide(placement)) ? 'y' : 'x'
 }
 
-export const getAlignmentAxis = (placement: Placement): Axis => {
+export function getAlignmentAxis(placement: Placement): Axis {
   return getOppositeAxis(getSideAxis(placement))
 }
 
-export const getAxisLength = (axis: Axis): Length => {
+export function getAxisLength(axis: Axis): Length {
   return axis === 'y' ? 'height' : 'width'
 }
 
-export const getAlignmentSides = (
+export function getAlignmentSides(
   placement: Placement,
   rects: { reference: Rect; popper: Rect },
-): [Side, Side] => {
+): [Side, Side] {
   const alignment = getAlignment(placement)
   const alignmentAxis = getAlignmentAxis(placement)
   const length = getAxisLength(alignmentAxis)

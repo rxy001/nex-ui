@@ -18,9 +18,9 @@ import type { BreadcrumbItemProps, ItemData } from './types'
 
 const slots = ['root', 'link'] as const
 
-export const BreadcrumbItem = <LinkComponent extends ElementType = 'a'>(
+export function BreadcrumbItem<LinkComponent extends ElementType = 'a'>(
   inProps: BreadcrumbItemProps<LinkComponent>,
-) => {
+) {
   const props = useDefaultProps<BreadcrumbItemProps>({
     name: 'BreadcrumbItem',
     props: inProps,

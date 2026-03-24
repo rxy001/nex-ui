@@ -13,7 +13,7 @@ import type { AliasesDefinition } from './aliases'
 import type { SelectorsDefinition } from './selectors'
 import type { BreakpointsDefinition } from './breakpoints'
 
-export type SystemConfig = {
+export interface SystemConfig extends CreateLayersConfig {
   prefix?: string
   scales?: ScalesDefinition
   aliases?: AliasesDefinition
@@ -21,9 +21,9 @@ export type SystemConfig = {
   selectors?: SelectorsDefinition
   tokens?: TokensDefinition
   semanticTokens?: SemanticTokensDefinition
-} & CreateLayersConfig
+}
 
-export const createSystem = (config: SystemConfig) => {
+export function createSystem(config: SystemConfig) {
   const {
     cssCascadeLayersDisabled = false,
     prefix = 'system',

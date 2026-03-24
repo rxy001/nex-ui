@@ -10,7 +10,7 @@ import { tags } from './tags'
 import { Insertion } from './Insertion'
 import type { NexFactory } from './types'
 
-const createNexComponent = (tag: any) => {
+function createNexComponent(tag: any) {
   if (__DEV__ && tag === undefined) {
     throw new Error(
       '[Nex UI] nex: You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.',

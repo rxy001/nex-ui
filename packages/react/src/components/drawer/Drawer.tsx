@@ -8,7 +8,7 @@ import { DrawerProvider } from './DrawerContext'
 import type { DrawerProps } from './types'
 import type { DrawerContextValue } from './DrawerContext'
 
-export const Drawer = (inProps: DrawerProps) => {
+export function Drawer(inProps: DrawerProps) {
   const props = useDefaultProps<DrawerProps>({
     name: 'Drawer',
     props: inProps,

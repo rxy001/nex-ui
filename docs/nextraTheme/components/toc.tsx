@@ -6,7 +6,6 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig, useThemeConfig } from '../stores'
 import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { BackToTop } from './back-to-top'
-import type { FC } from 'react'
 import type { Heading } from 'nextra'
 
 type TOCProps = {
@@ -22,7 +21,7 @@ const linkClassName = cn(
   'x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100',
 )
 
-export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
+export function TOC({ toc, filePath, pageTitle }: TOCProps) {
   const activeSlug = useActiveAnchor()
   const tocRef = useRef<HTMLUListElement>(null)
   const themeConfig = useThemeConfig()

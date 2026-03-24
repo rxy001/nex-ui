@@ -2,12 +2,12 @@ import type { Interpolation } from '../types'
 
 export type CascadeLayer = 'global' | 'css'
 
-export type CreateLayersConfig = {
+export interface CreateLayersConfig {
   cssCascadeLayersDisabled?: boolean
   prefix?: string
 }
 
-export type Layers = {
+export interface Layers {
   atRules: string
   wrapWithLayer: (layer: CascadeLayer, styles: Interpolation) => Interpolation
 }

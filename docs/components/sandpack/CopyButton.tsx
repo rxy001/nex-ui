@@ -5,7 +5,7 @@ import { CopyOutlined } from '@nex-ui/icons'
 import { useClipboard, useEvent } from '@nex-ui/hooks'
 import { IconButton } from './IconButton'
 
-export const CopyButton = () => {
+export function CopyButton() {
   const { copy, copied } = useClipboard()
 
   const { sandpack } = useSandpack()

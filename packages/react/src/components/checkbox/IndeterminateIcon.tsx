@@ -1,4 +1,4 @@
-export const IndeterminateIcon = () => {
+export function IndeterminateIcon() {
   return (
     <svg
       stroke='currentColor'

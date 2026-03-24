@@ -13,17 +13,19 @@ import { accordionSlotClasses, accordionItemSlotClasses } from './classes'
 import type { Key } from 'react'
 import type { AccordionItemProps } from '../index'
 
-const TestAccordionItem = (props: AccordionItemProps) => (
-  <AccordionItem
-    itemKey='1'
-    title='Accordion 1'
-    data-testid='accordion-item'
-    {...props}
-  >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-    malesuada lacus ex, sit amet blandit leo lobortis eget.
-  </AccordionItem>
-)
+function TestAccordionItem(props: AccordionItemProps) {
+  return (
+    <AccordionItem
+      itemKey='1'
+      title='Accordion 1'
+      data-testid='accordion-item'
+      {...props}
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+      malesuada lacus ex, sit amet blandit leo lobortis eget.
+    </AccordionItem>
+  )
+}
 
 describe('Accordion', () => {
   testComponentStability(
@@ -179,7 +181,7 @@ describe('Accordion', () => {
 
   it('should be non-interactive AccordionItem when disabled=true', async () => {
     const { getByTestId } = await renderWithNexUIProvider(
-      <Accordion disabled={true}>
+      <Accordion disabled>
         <TestAccordionItem itemKey='1' data-testid='accordion-item-1' />
         <TestAccordionItem itemKey='2' data-testid='accordion-item-2' />
       </Accordion>,
@@ -196,7 +198,7 @@ describe('Accordion', () => {
 
   it('should hide indicator when hideIndicator=true', async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
-      <Accordion hideIndicator={true}>
+      <Accordion hideIndicator>
         <TestAccordionItem />
       </Accordion>,
       {

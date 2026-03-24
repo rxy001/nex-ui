@@ -19,9 +19,9 @@ import type { AccordionGroupContextValue } from './AccordionContext'
 
 const slots = ['root'] as const
 
-export const Accordion = <RootComponent extends ElementType = 'div'>(
+export function Accordion<RootComponent extends ElementType = 'div'>(
   inProps: AccordionProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<AccordionProps>({
     name: 'Accordion',
     props: inProps,

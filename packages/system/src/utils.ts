@@ -141,22 +141,27 @@ type Operand = string | number
 
 type Operator = '+' | '-' | '*' | '/'
 
-const toExpression = (operator: Operator, ...operands: Array<Operand>) =>
-  operands.map(String).join(` ${operator} `).replace(/calc/g, '')
+function toExpression(operator: Operator, ...operands: Array<Operand>) {
+  return operands.map(String).join(` ${operator} `).replace(/calc/g, '')
+}
 
-export const add = (...operands: Array<Operand>) =>
-  `calc(${toExpression('+', ...operands)})`
+export function add(...operands: Array<Operand>) {
+  return `calc(${toExpression('+', ...operands)})`
+}
 
-export const subtract = (...operands: Array<Operand>) =>
-  `calc(${toExpression('-', ...operands)})`
+export function subtract(...operands: Array<Operand>) {
+  return `calc(${toExpression('-', ...operands)})`
+}
 
-export const multiply = (...operands: Array<Operand>) =>
-  `calc(${toExpression('*', ...operands)})`
+export function multiply(...operands: Array<Operand>) {
+  return `calc(${toExpression('*', ...operands)})`
+}
 
-export const divide = (...operands: Array<Operand>) =>
-  `calc(${toExpression('/', ...operands)})`
+export function divide(...operands: Array<Operand>) {
+  return `calc(${toExpression('/', ...operands)})`
+}
 
-export const negate = (x: number | string) => {
+export function negate(x: number | string) {
   const value = String(x)
 
   if (value != null && !Number.isNaN(parseFloat(value))) {
@@ -172,14 +177,14 @@ export const negate = (x: number | string) => {
 
 const ALL_CSS_PROPERTIES = new Set(CSSProperties.map(camelCase))
 
-const isCSSProperty = (key: string) => {
+function isCSSProperty(key: string) {
   // CSS variable
   if (key.startsWith('--')) return true
 
   return ALL_CSS_PROPERTIES.has(key)
 }
 
-export const isSelector = (key: string) => {
+export function isSelector(key: string) {
   // start with &
   if (/&/.test(key)) {
     return true

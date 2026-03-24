@@ -4,9 +4,11 @@ import type { Dictionary } from './types'
 
 export type BreakpointsDefinition = Dictionary<string>
 
-export const toMediaKey = (value: string) => `@media (min-width:${value})`
+export function toMediaKey(value: string) {
+  return `@media (min-width:${value})`
+}
 
-export const createBreakpoints = (breakpoints: BreakpointsDefinition) => {
+export function createBreakpoints(breakpoints: BreakpointsDefinition) {
   const breakpointMap = new Map<string | number, string>()
   const selectorMap = new Map<string | number, string>()
 

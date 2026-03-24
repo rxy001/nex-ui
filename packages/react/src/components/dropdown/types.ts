@@ -25,90 +25,90 @@ import type { DropdownItemVariants } from '../../theme/recipes'
 import type { Placement } from '../utils'
 
 // ------------- Dropdown --------------
-type DropdownOwnProps = MenuProps & {
+interface DropdownOwnProps extends MenuProps {
   defaultOpen?: boolean
 }
 export interface DropdownPropsOverrides {}
-export type DropdownProps = DropdownOwnProps & DropdownPropsOverrides
+export interface DropdownProps
+  extends DropdownOwnProps,
+    DropdownPropsOverrides {}
 
 // ------------- DropdownContent --------------
-type DropdownSlotProps = {
+interface DropdownSlotProps {
   paper: SlotProps<'div'>
 }
 
-type DropdownContentOwnProps<RootComponent extends ElementType = 'div'> = Pick<
-  MenuPortalProps,
-  'container'
-> &
-  Pick<
-    MenuContentProps,
-    | 'restoreFocus'
-    | 'loopFocus'
-    | 'closeOnDetached'
-    | 'closeOnEscape'
-    | 'flip'
-    | 'placement'
-    | 'offset'
-    | 'shift'
-  > &
-  Pick<DropdownItemOwnProps, 'color' | 'variant'> & {
-    /**
-     * The component or element to render as the root.
-     * @default 'div'
-     */
-    as?: RootComponent
+interface DropdownContentOwnProps<RootComponent extends ElementType = 'div'>
+  extends Pick<MenuPortalProps, 'container'>,
+    Pick<
+      MenuContentProps,
+      | 'restoreFocus'
+      | 'loopFocus'
+      | 'closeOnDetached'
+      | 'closeOnEscape'
+      | 'flip'
+      | 'placement'
+      | 'offset'
+      | 'shift'
+    >,
+    Pick<DropdownItemOwnProps, 'color' | 'variant'> {
+  /**
+   * The component or element to render as the root.
+   * @default 'div'
+   */
+  as?: RootComponent
 
-    /**
-     * The system prop that allows defining system overrides as well as additional CSS styles.
-     */
-    sx?: Interpolation
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx?: Interpolation
 
-    /**
-     * Additional class names to apply to the root.
-     */
-    className?: ClassValue
+  /**
+   * Additional class names to apply to the root.
+   */
+  className?: ClassValue
 
-    /**
-     * The props to modify the framer motion animation.
-     */
-    motionProps?:
-      | HTMLMotionProps<'div'>
-      | ((placement?: Placement) => HTMLMotionProps<'div'>)
+  /**
+   * The props to modify the framer motion animation.
+   */
+  motionProps?:
+    | HTMLMotionProps<'div'>
+    | ((placement?: Placement) => HTMLMotionProps<'div'>)
 
-    /**
-     * If true, disables the animation for the Dropdown.
-     *
-     * @default false
-     */
-    disableAnimation?: boolean
+  /**
+   * If true, disables the animation for the Dropdown.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 
-    /**
-     * If true, keeps the Dropdown mounted in the DOM when it's closed.
-     *
-     * @default false
-     */
-    keepMounted?: boolean
+  /**
+   * If true, keeps the Dropdown mounted in the DOM when it's closed.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
 
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: DropdownSlotProps
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: DropdownSlotProps
 
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof DropdownSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof DropdownSlotProps>
 
-    /**
-     * The minimum width of the Dropdown.
-     */
-    minWidth?: number | string
+  /**
+   * The minimum width of the Dropdown.
+   */
+  minWidth?: number | string
 
-    /**
-     * The maximum height of the Dropdown.
-     */
-    maxHeight?: number | string
-  }
+  /**
+   * The maximum height of the Dropdown.
+   */
+  maxHeight?: number | string
+}
 
 export interface DropdownContentPropsOverrides {}
 export type DropdownContentProps<RootComponent extends ElementType = 'div'> =
@@ -122,17 +122,15 @@ export type DropdownContentProps<RootComponent extends ElementType = 'div'> =
 export interface DropdownTriggerProps extends MenuTriggerProps {}
 
 // ------------- DropdownItem --------------
-type DropdownItemSlotProps = {
+interface DropdownItemSlotProps {
   shortcut?: SlotProps<'kbd'>
   startIcon?: SlotProps<'span'>
   endIcon?: SlotProps<'span'>
   content?: SlotProps<'span'>
 }
 
-type DropdownItemOwnProps<RootComponent extends ElementType = 'div'> = Pick<
-  MenuItemProps,
-  'closeOnSelect' | 'disabled' | 'onSelect'
-> & {
+interface DropdownItemOwnProps<RootComponent extends ElementType = 'div'>
+  extends Pick<MenuItemProps, 'closeOnSelect' | 'disabled' | 'onSelect'> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -198,7 +196,7 @@ export type DropdownItemProps<RootComponent extends ElementType = 'div'> =
   >
 
 // ------------- DropdownItemGroup --------------
-type DropdownItemGroupOwnProps<RootComponent extends ElementType> = {
+interface DropdownItemGroupOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -225,7 +223,7 @@ export type DropdownItemGroupProps<RootComponent extends ElementType = 'div'> =
   >
 
 // ------------- DropdownItemGroupLabel --------------
-type DropdownItemGroupLabelOwnProps<RootComponent extends ElementType> = {
+interface DropdownItemGroupLabelOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'
@@ -268,30 +266,28 @@ export type DropdownRadioItemGroupProps<
 >
 
 // ------------- DropdownRadioItem --------------
-type DropdownRadioItemSlotProps = DropdownItemSlotProps & {
+interface DropdownRadioItemSlotProps extends DropdownItemSlotProps {
   indicator?: SlotProps<'span'>
 }
 
-type DropdownRadioItemOwnProps<RootComponent extends ElementType> = Omit<
-  DropdownItemOwnProps<RootComponent>,
-  'slotProps' | 'classNames'
-> &
-  Pick<MenuRadioItemProps, 'value'> & {
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: DropdownRadioItemSlotProps
+interface DropdownRadioItemOwnProps<RootComponent extends ElementType>
+  extends Omit<DropdownItemOwnProps<RootComponent>, 'slotProps' | 'classNames'>,
+    Pick<MenuRadioItemProps, 'value'> {
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: DropdownRadioItemSlotProps
 
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof DropdownRadioItemSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof DropdownRadioItemSlotProps>
 
-    /**
-     * Custom selected-state indicator for DropdownRadioItem.
-     */
-    indicator?: ReactNode
-  }
+  /**
+   * Custom selected-state indicator for DropdownRadioItem.
+   */
+  indicator?: ReactNode
+}
 
 export interface DropdownRadioItemPropsOverrides {}
 export type DropdownRadioItemProps<RootComponent extends ElementType = 'div'> =
@@ -318,30 +314,28 @@ export type DropdownCheckboxItemGroupProps<
 >
 
 // ------------- DropdownCheckboxItem --------------
-type DropdownCheckboxItemSlotProps = DropdownItemSlotProps & {
+interface DropdownCheckboxItemSlotProps extends DropdownItemSlotProps {
   indicator?: SlotProps<'span'>
 }
 
-type DropdownCheckboxItemOwnProps<RootComponent extends ElementType> = Omit<
-  DropdownItemOwnProps<RootComponent>,
-  'slotProps'
-> &
-  Pick<MenuCheckboxItemProps, 'value' | 'onCheckedChange'> & {
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: DropdownCheckboxItemSlotProps
+interface DropdownCheckboxItemOwnProps<RootComponent extends ElementType>
+  extends Omit<DropdownItemOwnProps<RootComponent>, 'slotProps'>,
+    Pick<MenuCheckboxItemProps, 'value' | 'onCheckedChange'> {
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: DropdownCheckboxItemSlotProps
 
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof DropdownCheckboxItemSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof DropdownCheckboxItemSlotProps>
 
-    /**
-     * Custom selected-state indicator for DropdownCheckboxItem.
-     */
-    indicator?: ReactNode
-  }
+  /**
+   * Custom selected-state indicator for DropdownCheckboxItem.
+   */
+  indicator?: ReactNode
+}
 
 export interface DropdownCheckboxItemPropsOverrides {}
 export type DropdownCheckboxItemProps<
@@ -367,83 +361,83 @@ export type DropdownTriggerItemProps<
 >
 
 // ------------- SubDropdown --------------
-type SubDropdownOwnProps = SubMenuProps & {
+interface SubDropdownOwnProps extends SubMenuProps {
   defaultOpen?: boolean
 }
 
 export interface SubDropdownPropsOverrides {}
-export type SubDropdownProps = SubDropdownOwnProps & SubDropdownPropsOverrides
+export interface SubDropdownProps
+  extends SubDropdownOwnProps,
+    SubDropdownPropsOverrides {}
 
 // ------------- SubDropdownContent --------------
-type SubDropdownContentSlotProps = {
+interface SubDropdownContentSlotProps {
   paper: SlotProps<'div'>
 }
 
-type SubDropdownContentOwnProps<RootComponent extends ElementType> = Pick<
-  MenuPortalProps,
-  'container'
-> &
-  Pick<
-    SubMenuContentProps,
-    'loopFocus' | 'closeOnDetached' | 'flip' | 'offset' | 'shift'
-  > &
-  Pick<DropdownItemOwnProps, 'color' | 'variant'> & {
-    /**
-     * The component or element to render as the root.
-     * @default 'div'
-     */
-    as?: RootComponent
+interface SubDropdownContentOwnProps<RootComponent extends ElementType>
+  extends Pick<MenuPortalProps, 'container'>,
+    Pick<
+      SubMenuContentProps,
+      'loopFocus' | 'closeOnDetached' | 'flip' | 'offset' | 'shift'
+    >,
+    Pick<DropdownItemOwnProps, 'color' | 'variant'> {
+  /**
+   * The component or element to render as the root.
+   * @default 'div'
+   */
+  as?: RootComponent
 
-    /**
-     * The system prop that allows defining system overrides as well as additional CSS styles.
-     */
-    sx?: Interpolation
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx?: Interpolation
 
-    /**
-     * Additional class names to apply to the root.
-     */
-    className?: ClassValue
+  /**
+   * Additional class names to apply to the root.
+   */
+  className?: ClassValue
 
-    /**
-     * The props to modify the framer motion animation.
-     * Use the `variants` API to create your own animation.
-     */
-    motionProps?: HTMLMotionProps<'div'>
+  /**
+   * The props to modify the framer motion animation.
+   * Use the `variants` API to create your own animation.
+   */
+  motionProps?: HTMLMotionProps<'div'>
 
-    /**
-     * If true, disables the animation for the SubDropdown.
-     *
-     * @default false
-     */
-    disableAnimation?: boolean
+  /**
+   * If true, disables the animation for the SubDropdown.
+   *
+   * @default false
+   */
+  disableAnimation?: boolean
 
-    /**
-     * If true, keeps the SubDropdown mounted in the DOM when it's closed.
-     *
-     * @default false
-     */
-    keepMounted?: boolean
+  /**
+   * If true, keeps the SubDropdown mounted in the DOM when it's closed.
+   *
+   * @default false
+   */
+  keepMounted?: boolean
 
-    /**
-     * The props used for each slot.
-     */
-    slotProps?: SubDropdownContentSlotProps
+  /**
+   * The props used for each slot.
+   */
+  slotProps?: SubDropdownContentSlotProps
 
-    /**
-     * The className used for each slot.
-     */
-    classNames?: ComponentSlotClasses<keyof SubDropdownContentSlotProps>
+  /**
+   * The className used for each slot.
+   */
+  classNames?: ComponentSlotClasses<keyof SubDropdownContentSlotProps>
 
-    /**
-     * The minimum width of the SubDropdownContent.
-     */
-    minWidth?: number | string
+  /**
+   * The minimum width of the SubDropdownContent.
+   */
+  minWidth?: number | string
 
-    /**
-     * The maximum height of the SubDropdownContent.
-     */
-    maxHeight?: number | string
-  }
+  /**
+   * The maximum height of the SubDropdownContent.
+   */
+  maxHeight?: number | string
+}
 
 export interface SubDropdownContentPropsOverrides {}
 export type SubDropdownContentProps<RootComponent extends ElementType = 'div'> =
@@ -454,7 +448,7 @@ export type SubDropdownContentProps<RootComponent extends ElementType = 'div'> =
   >
 
 // ------------- DropdownDivider --------------
-type DropdownDividerOwnProps<RootComponent extends ElementType> = {
+interface DropdownDividerOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'hr'
@@ -482,7 +476,7 @@ export type DropdownDividerProps<RootComponent extends ElementType = 'hr'> =
   >
 
 // ------------- DropdownPaperMotionProps --------------
-export type DropdownPaperMotionProps = {
+export interface DropdownPaperMotionProps {
   children?: ReactNode
   placement?: Placement
   motionProps?: DropdownContentOwnProps['motionProps']

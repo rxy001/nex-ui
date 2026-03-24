@@ -7,7 +7,7 @@ import {
 } from '../utils'
 import type { ArrowOptions, MiddlewareState, Middleware } from '../types'
 
-export const arrow = (options: ArrowOptions): Middleware => {
+export function arrow(options: ArrowOptions): Middleware {
   const { element } = options
 
   return {

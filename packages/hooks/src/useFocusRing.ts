@@ -45,9 +45,7 @@ export interface AriaFocusRingProps {
  * return <div {...focusProps} className={focusVisible ? 'ring' : ''}>...</div>;
  * ```
  */
-export const useFocusRing = (
-  props?: AriaFocusRingProps,
-): AriaFocusRingResult => {
+export function useFocusRing(props?: AriaFocusRingProps): AriaFocusRingResult {
   const { isFocusVisible, isFocused, focusProps } = useFocus(props)
 
   return {

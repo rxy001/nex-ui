@@ -5,7 +5,7 @@ import {
   useContext as useReactContext,
 } from 'react'
 
-type CreateContextOptions<T> = {
+interface CreateContextOptions<T> {
   contextName?: string
   hookName?: string
   providerName?: string
@@ -18,10 +18,6 @@ export type CreateContextReturn<T> = [
   () => T,
   React.Context<T>,
 ]
-
-function getErrorMessage(hook: string, provider: string) {
-  return `${hook} returned \`undefined\`. Seems you forgot to wrap component within ${provider}`
-}
 
 export function createContext<T>(options: CreateContextOptions<T>) {
   const {
@@ -52,4 +48,8 @@ export function createContext<T>(options: CreateContextOptions<T>) {
   }
 
   return [Context.Provider, useContext, Context] as CreateContextReturn<T>
+}
+
+function getErrorMessage(hook: string, provider: string) {
+  return `${hook} returned \`undefined\`. Seems you forgot to wrap component within ${provider}`
 }

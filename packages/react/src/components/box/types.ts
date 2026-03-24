@@ -4,7 +4,7 @@ import type { Interpolation } from '@nex-ui/system'
 
 export interface BoxPropsOverrides {}
 
-type BoxOwnProps<RootComponent extends ElementType> = {
+interface BoxOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    * @default 'div'

@@ -20,7 +20,7 @@ type PropsTableProps = {
   }[]
 }
 
-export const PropsTable = ({ dataSource = [] }: PropsTableProps) => {
+export function PropsTable({ dataSource = [] }: PropsTableProps) {
   return (
     <Table>
       <Thead>

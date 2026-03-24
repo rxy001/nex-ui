@@ -3,7 +3,7 @@
 import { useMenuItemIndicatorContext } from './MenuContext'
 import type { MenuItemIndicatorProps } from './types'
 
-export const MenuItemIndicator = (props: MenuItemIndicatorProps) => {
+export function MenuItemIndicator(props: MenuItemIndicatorProps) {
   const { children } = props
 
   const { checked } = useMenuItemIndicatorContext()
