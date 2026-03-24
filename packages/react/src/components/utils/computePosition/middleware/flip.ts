@@ -41,7 +41,7 @@ export function flip(
         overflowsToCheck.push(overflow[sides[0]], overflow[sides[1]])
       }
 
-      overflows = [...overflows, { placement: placement, overflowsToCheck }]
+      overflows = [...overflows, { placement, overflowsToCheck }]
 
       if (!overflowsToCheck.every((side) => side <= 0)) {
         const nextIndex = (middlewareData.flip?.index || 0) + 1

@@ -177,7 +177,7 @@ export function FocusTrap({
     mergeProps(
       {
         tabIndex: -1,
-        ref: ref,
+        ref,
         onKeyDown: handleKeydown,
       },
       children.props,
