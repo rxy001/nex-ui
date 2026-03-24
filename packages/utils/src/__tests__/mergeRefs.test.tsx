@@ -34,7 +34,7 @@ describe('mergeRefs', () => {
     const ref1 = createRef<HTMLDivElement>()
     const ref2 = createRef<HTMLDivElement>()
     const ref3 = createRef<HTMLDivElement>()
-    const Component = () => {
+    function Component() {
       const composedRef = mergeRefs<HTMLDivElement>(ref1, ref2, ref3)
       return <div ref={composedRef}>123</div>
     }

@@ -7,7 +7,7 @@ import {
 import { CodeBlock } from '../CodeBlock'
 import type { BundledLanguage } from 'shiki'
 
-export const SandpackCodeViewer = () => {
+export function SandpackCodeViewer() {
   const { sandpack } = useSandpack()
   const { code } = useActiveCode()
   const { activeFile } = sandpack

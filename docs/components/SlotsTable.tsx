@@ -19,7 +19,7 @@ type SlotsTableProps = {
   }[]
 }
 
-export const SlotsTable = ({ dataSource = [] }: SlotsTableProps) => {
+export function SlotsTable({ dataSource = [] }: SlotsTableProps) {
   return (
     <Table>
       <Thead>

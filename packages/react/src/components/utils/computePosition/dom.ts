@@ -2,9 +2,9 @@ import { ownerWindow, ownerDocument, __TEST__ } from '@nex-ui/utils'
 import { isWebKit } from './utils'
 import type { Rect } from './types'
 
-export const isHTMLElement = (
+export function isHTMLElement(
   element: Element | Window,
-): element is HTMLElement => {
+): element is HTMLElement {
   if (typeof window === 'undefined') {
     return false
   }
@@ -12,7 +12,7 @@ export const isHTMLElement = (
   return element instanceof HTMLElement
 }
 
-export const isSVGElement = (element: Element): element is SVGElement => {
+export function isSVGElement(element: Element): element is SVGElement {
   if (typeof window === 'undefined') {
     return false
   }
@@ -20,11 +20,11 @@ export const isSVGElement = (element: Element): element is SVGElement => {
   return element instanceof SVGElement
 }
 
-export const isElement = (node: unknown): node is Element => {
+export function isElement(node: unknown): node is Element {
   return node instanceof Element
 }
 
-export const getElementName = (element: Element | Window): string => {
+export function getElementName(element: Element | Window): string {
   if (isElement(element)) {
     return element.nodeName.toLowerCase()
   }
@@ -34,7 +34,7 @@ export const getElementName = (element: Element | Window): string => {
 
 const rootElements = new Set(['html', 'body', '#document'])
 
-export const isRootElement = (element: Element): boolean => {
+export function isRootElement(element: Element): boolean {
   return rootElements.has(getElementName(element))
 }
 
@@ -56,7 +56,7 @@ const willChangeValues = [
 ]
 const containValues = ['paint', 'layout', 'strict', 'content']
 
-export const isContainingBlock = (element: Element): boolean => {
+export function isContainingBlock(element: Element): boolean {
   const webkit = isWebKit()
 
   const win = ownerWindow(element)
@@ -81,17 +81,17 @@ export const isContainingBlock = (element: Element): boolean => {
 
 const tableElements = new Set(['table', 'td', 'th'])
 
-export const isTableElement = (element: Element): boolean => {
+export function isTableElement(element: Element): boolean {
   return tableElements.has(getElementName(element))
 }
 
-export const isStaticPositioned = (element: Element): boolean => {
+export function isStaticPositioned(element: Element): boolean {
   const win = ownerWindow(element)
 
   return win.getComputedStyle(element).position === 'static'
 }
 
-const getElementScroll = (element: Element | Window) => {
+function getElementScroll(element: Element | Window) {
   if (isElement(element)) {
     return {
       scrollLeft: element.scrollLeft,
@@ -106,7 +106,7 @@ const getElementScroll = (element: Element | Window) => {
 }
 
 const invalidOverflowDisplayValues = new Set(['inline', 'contents'])
-export const isOverflowElement = (element: Element): boolean => {
+export function isOverflowElement(element: Element): boolean {
   const win = ownerWindow(element)
   const overflowRegex = /(auto|scroll|overlay|hidden|clip)/
 
@@ -118,12 +118,12 @@ export const isOverflowElement = (element: Element): boolean => {
   )
 }
 
-export const toClientRect = (rect: {
+export function toClientRect(rect: {
   x: number
   y: number
   width: number
   height: number
-}) => {
+}) {
   return {
     top: rect.y,
     right: rect.x + rect.width,
@@ -136,7 +136,7 @@ export const toClientRect = (rect: {
   }
 }
 
-export const getDimensions = (element: Element) => {
+export function getDimensions(element: Element) {
   const css = ownerWindow(element).getComputedStyle(element)
 
   let width = parseFloat(css.width) || 0
@@ -171,10 +171,10 @@ export const getDimensions = (element: Element) => {
 //   })
 // }
 
-export const getRectRelativeToViewport = (
+export function getRectRelativeToViewport(
   elementRect: Rect,
   offsetParent: Element | Window,
-): Rect => {
+): Rect {
   let scroll = { scrollLeft: 0, scrollTop: 0 }
   let documentElement: HTMLElement
 
@@ -212,10 +212,10 @@ export const getRectRelativeToViewport = (
   }
 }
 
-export const getRectRelativeToOffsetParent = (
+export function getRectRelativeToOffsetParent(
   element: Element,
   offsetParent: Element | Window,
-): Rect => {
+): Rect {
   const { documentElement } = ownerDocument(element)
   const elementRect = element.getBoundingClientRect()
 

@@ -131,6 +131,14 @@ export default tseslint.config(
           extensions: ['.tsx', '.jsx'],
         },
       ],
+      'react/jsx-boolean-value': ['error', 'never'],
+      'react/function-component-definition': [
+        'error',
+        {
+          namedComponents: 'function-declaration',
+          unnamedComponents: 'arrow-function',
+        },
+      ],
 
       'import/no-duplicates': ['error', { considerQueryString: true }],
       'import/no-cycle': 'error',

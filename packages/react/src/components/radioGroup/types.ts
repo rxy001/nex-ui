@@ -8,13 +8,13 @@ import type {
 } from '../../types/utils'
 import type { RadioGroupVariants, RadioVariants } from '../../theme/recipes'
 
-type RadioSlotProps = {
+interface RadioSlotProps {
   root?: SlotProps<'label'>
   indicator?: SlotProps<'span'>
   label?: SlotProps<'span'>
 }
 
-type RadioOwnProps<RadioComponent extends ElementType = 'input'> = {
+interface RadioOwnProps<RadioComponent extends ElementType = 'input'> {
   /**
    * The component or element to render as the input.
    *
@@ -110,15 +110,15 @@ export type RadioOwnerState<RadioComponent extends ElementType = 'input'> =
     inGroup: boolean
   }
 
-type RadioGroupSlotProps = {
+interface RadioGroupSlotProps {
   label?: SlotProps<'h3'>
   wrapper?: SlotProps<'div'>
 }
 
-type RadioGroupOwnProps<
+interface RadioGroupOwnProps<
   T extends string | number,
   RootComponent extends ElementType,
-> = {
+> {
   /**
    * The component or element to render as the root.
    *

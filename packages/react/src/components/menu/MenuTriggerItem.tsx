@@ -21,7 +21,7 @@ const SUB_MENU_OPEN_KEYS = {
 
 const EDGE_OFFSET = 5
 
-export const MenuTriggerItem = (props: MenuTriggerItemProps) => {
+export function MenuTriggerItem(props: MenuTriggerItemProps) {
   const { children, disabled, ...remainingProps } = props
   const menuCtx = useMenuContext()
   const subMenuCtx = useSubMenuContext()

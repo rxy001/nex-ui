@@ -10,6 +10,8 @@ const ThemeConfigContext = createContext<
 
 export const useThemeConfig = () => useContext(ThemeConfigContext)
 
-export const ThemeConfigProvider = (
+export function ThemeConfigProvider(
   props: ComponentProps<typeof ThemeConfigContext.Provider>,
-) => createElement(ThemeConfigContext.Provider, props)
+) {
+  return createElement(ThemeConfigContext.Provider, props)
+}

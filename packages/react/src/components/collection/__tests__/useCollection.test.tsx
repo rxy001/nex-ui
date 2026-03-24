@@ -41,7 +41,7 @@ describe('useCollection', () => {
           <button>item1</button>
         </CollectionItem>
         <div>
-          <CollectionItem value='item2' disabled={true}>
+          <CollectionItem value='item2' disabled>
             <button>item2</button>
           </CollectionItem>
         </div>

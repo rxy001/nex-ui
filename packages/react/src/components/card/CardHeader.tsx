@@ -13,9 +13,9 @@ import type { CardHeaderProps } from './types'
 
 const slots = ['root', 'content', 'title', 'subtitle'] as const
 
-export const CardHeader = <RootComponent extends ElementType>(
+export function CardHeader<RootComponent extends ElementType>(
   inProps: CardHeaderProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<CardHeaderProps<'div'>>({
     name: 'CardHeader',
     props: inProps,

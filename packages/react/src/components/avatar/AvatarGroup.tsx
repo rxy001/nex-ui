@@ -17,9 +17,9 @@ import type { AvatarGroupContextValue } from './AvatarGroupContext'
 
 const slots = ['root', 'surplus'] as const
 
-export const AvatarGroup = <RootComponent extends ElementType = 'div'>(
+export function AvatarGroup<RootComponent extends ElementType = 'div'>(
   inProps: AvatarGroupProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<AvatarGroupProps>({
     name: 'AvatarGroup',
     props: inProps,

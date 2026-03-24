@@ -13,7 +13,7 @@ import { MoonFilled, SunFilled } from '@nex-ui/icons'
 import { useRef } from 'react'
 import type { ChangeEvent } from 'react'
 
-export const ClientGallery = () => {
+export function ClientGallery() {
   const { mode, systemColorScheme, setMode } = useColorScheme()
 
   const ref = useRef<HTMLDivElement>(null)

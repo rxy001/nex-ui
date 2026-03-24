@@ -14,12 +14,10 @@ import type { DropdownRadioItemGroupProps } from './types'
 
 const slots = ['root']
 
-export const DropdownRadioItemGroup = <
+export function DropdownRadioItemGroup<
   T extends string | number = string | number,
   RootComponent extends ElementType = 'div',
->(
-  inProps: DropdownRadioItemGroupProps<T, RootComponent>,
-) => {
+>(inProps: DropdownRadioItemGroupProps<T, RootComponent>) {
   const props = useDefaultProps<
     DropdownRadioItemGroupProps<string | number, 'div'>
   >({

@@ -10,11 +10,11 @@ import type {
 
 export interface AvatarPropsOverrides {}
 
-type AvatarSlotProps = {
+interface AvatarSlotProps {
   img?: SlotProps<'img'>
 }
 
-type AvatarOwnProps<RootComponent extends ElementType> = {
+interface AvatarOwnProps<RootComponent extends ElementType> {
   /**
    * The component or element to render as the root.
    *
@@ -100,24 +100,23 @@ export type AvatarProps<RootComponent extends ElementType = 'div'> =
 
 export type LoadedState = false | 'error' | 'loaded'
 
-export type AvatarOwnerState<RootComponent extends ElementType = 'div'> =
-  AvatarProps<RootComponent> & {
-    inGroup: boolean
-    disableAnimation: boolean
-  }
+export interface AvatarOwnerState extends AvatarProps {
+  inGroup: boolean
+  disableAnimation: boolean
+}
 
-export type UseLoadedOptions = {
+export interface UseLoadedOptions {
   src?: string
   srcSet?: string
 }
 
 export interface AvatarGroupPropsOverrides {}
 
-type AvatarGroupSlotProps = {
+interface AvatarGroupSlotProps {
   surplus?: AvatarProps
 }
 
-type AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> = {
+interface AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> {
   /**
    * The component or element to render as the root.
    *

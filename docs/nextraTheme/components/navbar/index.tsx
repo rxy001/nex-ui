@@ -6,7 +6,6 @@ import { element } from 'nextra/schemas'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
-import type { FC } from 'react'
 
 const propsSchema = z.strictObject({
   children: element.optional(),
@@ -20,7 +19,7 @@ const propsSchema = z.strictObject({
 
 type NavbarProps = z.input<typeof propsSchema>
 
-export const Navbar: FC<NavbarProps> = (props) => {
+export function Navbar(props: NavbarProps) {
   const { data, error } = propsSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)

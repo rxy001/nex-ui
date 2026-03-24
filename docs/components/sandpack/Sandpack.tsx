@@ -22,7 +22,7 @@ type SandpackProps = UseSandpackProps & {
   showCopyCode?: boolean
 }
 
-export const Sandpack = ({
+export function Sandpack({
   files: filesProp,
   template,
   children,
@@ -31,7 +31,7 @@ export const Sandpack = ({
   showOpenInCodeSandbox = true,
   showReportBug = true,
   showCopyCode = true,
-}: SandpackProps) => {
+}: SandpackProps) {
   const { files, customSetup, sandpackTemplate } = useSandpack({
     files: filesProp,
     template,

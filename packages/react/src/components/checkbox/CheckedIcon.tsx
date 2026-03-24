@@ -30,10 +30,7 @@ export type CheckedIconProps = {
   disableAnimation: boolean
 }
 
-export const CheckedIcon = ({
-  checked,
-  disableAnimation,
-}: CheckedIconProps) => {
+export function CheckedIcon({ checked, disableAnimation }: CheckedIconProps) {
   if (disableAnimation) {
     if (!checked) {
       return null

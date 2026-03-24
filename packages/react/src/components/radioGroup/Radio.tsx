@@ -20,9 +20,9 @@ import type { RadioOwnerState, RadioProps } from './types'
 
 const slots = ['root', 'input', 'indicator', 'label'] as const
 
-export const Radio = <InputComponent extends ElementType = 'input'>(
+export function Radio<InputComponent extends ElementType = 'input'>(
   inProps: RadioProps<InputComponent>,
-) => {
+) {
   const props = useDefaultProps<RadioProps>({
     name: 'Radio',
     props: inProps,

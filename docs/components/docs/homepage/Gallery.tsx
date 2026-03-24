@@ -8,7 +8,7 @@ const ClientGallery = dynamic(
   { ssr: false },
 )
 
-export const Gallery = () => {
+export function Gallery() {
   preload('/avatars/avatar-1.jpg', { as: 'image' })
   preload('/avatars/avatar-2.jpg', { as: 'image' })
   preload('/avatars/avatar-3.webp', { as: 'image' })

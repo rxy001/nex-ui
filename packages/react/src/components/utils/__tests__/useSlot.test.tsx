@@ -5,9 +5,11 @@ import type { ButtonHTMLAttributes } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { UseSlotProps } from '../useSlot'
 
-const Component = (
+function Component(
   props: ButtonHTMLAttributes<HTMLButtonElement> & { sx?: Interpolation },
-) => <button {...props} />
+) {
+  return <button {...props} />
+}
 
 describe('useSlot', () => {
   it('should return component and getProps function', () => {

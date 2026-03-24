@@ -10,7 +10,7 @@ import type { AccordionProps } from '../types'
 const Text =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.'
 
-const AccordionTemplate = (props: AccordionProps) => {
+function AccordionTemplate(props: AccordionProps) {
   return (
     <Accordion {...props}>
       <AccordionItem itemKey='1' title='Accordion 1'>
@@ -105,8 +105,8 @@ export const DisableAnimation: Story = {
   },
 }
 
-export const Variants = (props: AccordionProps) =>
-  VARIANTS.map((variant) => (
+export function Variants(props: AccordionProps) {
+  return VARIANTS.map((variant) => (
     <WithLabel key={variant} label={`${upperFirst(variant)}Variant`}>
       <AccordionTemplate
         {...props}
@@ -115,6 +115,7 @@ export const Variants = (props: AccordionProps) =>
       />
     </WithLabel>
   ))
+}
 
 export const CustomIndicator: Story = {
   args: {

@@ -26,9 +26,9 @@ import type { DialogContentContextValue } from './DialogContext'
 
 const slots = ['root', 'paper', 'backdrop', 'closeButton'] as const
 
-export const DialogContent = <RootComponent extends ElementType = 'div'>(
+export function DialogContent<RootComponent extends ElementType = 'div'>(
   inProps: DialogContentProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DialogContentProps>({
     name: 'DialogContent',
     props: inProps,

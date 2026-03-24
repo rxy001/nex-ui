@@ -200,7 +200,7 @@ describe('DrawerContent', () => {
   it('should disable animations when disableAnimation=true', async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
       <TestDrawer
-        disableAnimation={true}
+        disableAnimation
         motionProps={{
           className: 'test-motion',
         }}

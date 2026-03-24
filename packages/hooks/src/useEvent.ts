@@ -9,7 +9,7 @@ import { useCallback, useRef } from 'react'
  * @param fn - The function to wrap.
  * @returns A stable function reference that always points to the latest version of `fn`.
  */
-export const useEvent = <T extends Function>(fn: T) => {
+export function useEvent<T extends Function>(fn: T) {
   const latest = useRef<T>(fn)
 
   latest.current = fn

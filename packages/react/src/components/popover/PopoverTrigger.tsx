@@ -6,10 +6,10 @@ import { PopperAnchor } from '../popper'
 import { usePopoverContext } from './PopoverContext'
 import type { PopoverTriggerProps } from './types'
 
-export const PopoverTrigger = ({
+export function PopoverTrigger({
   children,
   closeOnClick = true,
-}: PopoverTriggerProps) => {
+}: PopoverTriggerProps) {
   const { open, setOpen, triggerRef, rootId } = usePopoverContext()
 
   if (!isValidNonFragmentElement(children)) {

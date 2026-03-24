@@ -8,11 +8,12 @@ import type {
 } from '../popper'
 import type { SlotProps } from '../../types/utils'
 
-// ----------------- MenuProps -----------------
 export interface MenuImplProps extends PopperProps {}
 
+// ----------------- MenuProps -----------------
 export interface MenuProps extends MenuImplProps {}
 
+// ----------------- SubMenuProps -----------------
 export interface SubMenuProps extends MenuImplProps {}
 
 // ----------------- MenuPortalProps -----------------
@@ -24,63 +25,66 @@ export interface MenuTriggerProps extends PopperAnchorProps {
 }
 
 // ----------------- MenuContentProps -----------------
-type MenuContentOwnProps = {
+interface MenuContentOwnProps {
   restoreFocus?: boolean
   loopFocus?: boolean
 }
 
 export type MenuContentImplProps = PopperContentProps & MenuContentOwnProps
 
-export type MenuContentProps = MenuContentImplProps
+export interface MenuContentProps extends MenuContentImplProps {}
 
-export type SubMenuContentProps = Omit<
-  MenuContentProps,
-  'restoreFocus' | 'placement' | 'closeOnEscape'
->
+// ----------------- SubMenuContentProps -----------------
+export interface SubMenuContentProps
+  extends Omit<
+    MenuContentProps,
+    'restoreFocus' | 'placement' | 'closeOnEscape'
+  > {}
 
 // ----------------- MenuItemProps -----------------
-type MenuItemOwnProps = {
+interface MenuItemOwnProps {
   disabled?: boolean
   closeOnSelect?: boolean
   onSelect?: (event: MouseEvent<HTMLDivElement>) => void
 }
 
-export type MenuItemProps = SlotProps<'div', MenuItemOwnProps>
+export interface MenuItemProps extends SlotProps<'div', MenuItemOwnProps> {}
 
 // ----------------- MenuSeparatorProps -----------------
-export type MenuSeparatorProps = SlotProps<'hr'>
+export interface MenuSeparatorProps extends SlotProps<'hr'> {}
 
 // ----------------- MenuItemGroupProps -----------------
-export type MenuItemGroupProps = SlotProps<'div'>
+export interface MenuItemGroupProps extends SlotProps<'div'> {}
 
 // ----------------- MenuRadioItemGroupProps -----------------
-export type MenuRadioItemGroupProps<
+export interface MenuRadioItemGroupProps<
   T extends string | number = string | number,
-> = MenuItemGroupProps & {
+> extends MenuItemGroupProps {
   value?: T
   onValueChange?: (value: T) => void
 }
 
 // ----------------- MenuRadioItemProps -----------------
-export type MenuRadioItemProps = MenuItemProps & {
+export interface MenuRadioItemProps extends MenuItemProps {
   value?: string | number
 }
 
 // ----------------- MenuCheckboxItemGroupProps -----------------
-export type MenuCheckboxItemGroupProps<
+export interface MenuCheckboxItemGroupProps<
   T extends string | number = string | number,
-> = MenuItemGroupProps & {
+> extends MenuItemGroupProps {
   value?: T[]
   onValueChange?: (value: T[]) => void
 }
 
 // ----------------- MenuCheckboxItemProps -----------------
-export type MenuCheckboxItemProps = MenuItemProps & {
+export interface MenuCheckboxItemProps extends MenuItemProps {
   value?: string | number
   onCheckedChange?: (checked: boolean) => void
 }
 
-export type MenuItemGroupLabelProps = SlotProps<'div'>
+// ----------------- MenuGroupLabelProps -----------------
+export interface MenuItemGroupLabelProps extends SlotProps<'div'> {}
 
 // ----------------- MenuMotionProps -----------------
 export interface MenuMotionProps extends PopperMotionProps {}

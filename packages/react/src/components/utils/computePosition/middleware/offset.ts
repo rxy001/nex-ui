@@ -1,7 +1,7 @@
 import { getSideAxis, getSide, getAlignment, getAlignmentAxis } from '../utils'
 import type { OffsetOptions, MiddlewareState, Middleware } from '../types'
 
-export const offset = (options: OffsetOptions = 5): Middleware => {
+export function offset(options: OffsetOptions = 5): Middleware {
   const offsetValue =
     typeof options === 'number'
       ? {

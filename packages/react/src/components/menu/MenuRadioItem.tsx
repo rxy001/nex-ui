@@ -11,7 +11,7 @@ import { useSlot } from '../utils'
 import type { MenuRadioItemProps } from './types'
 import type { MenuItemIndicatorContextValue } from './MenuContext'
 
-export const MenuRadioItem = (props: MenuRadioItemProps) => {
+export function MenuRadioItem(props: MenuRadioItemProps) {
   const defaultValue = useId()
 
   const {

@@ -4,11 +4,11 @@ import { useDrawerContext } from './DrawerContext'
 import type { HTMLMotionProps } from 'motion/react'
 import type { DrawerPaperMotionProps } from './types'
 
-export const DrawerPaperMotion = ({
+export function DrawerPaperMotion({
   children,
   motionProps,
   placement,
-}: DrawerPaperMotionProps) => {
+}: DrawerPaperMotionProps) {
   const { open } = useDrawerContext()
 
   const resolvedMotionProps = useMemo<HTMLMotionProps<'div'>>(() => {

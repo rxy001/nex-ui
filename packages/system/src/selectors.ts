@@ -4,7 +4,7 @@ import type { Dictionary } from './types'
 
 export type SelectorsDefinition = Dictionary<string>
 
-type Config = {
+interface Config {
   selectors: SelectorsDefinition
   getMediaSelectors: Breakpoints['getMediaSelectors']
 }

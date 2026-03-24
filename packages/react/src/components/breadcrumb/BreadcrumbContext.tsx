@@ -1,7 +1,7 @@
 import { createContext } from '@nex-ui/utils'
 import type { BreadcrumbItemProps } from './types'
 
-export type BreadcrumbContextValue = {
+export interface BreadcrumbContextValue {
   disableAnimation: boolean
   isLast: (id: string) => boolean
   color: BreadcrumbItemProps['color']

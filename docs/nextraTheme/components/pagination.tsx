@@ -2,7 +2,6 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig, useThemeConfig } from '../stores'
-import type { FC } from 'react'
 
 const classes = {
   link: cn(
@@ -14,7 +13,7 @@ const classes = {
   icon: cn('x:inline x:shrink-0'),
 }
 
-export const Pagination: FC = () => {
+export function Pagination() {
   const { flatDocsDirectories, activeIndex } = useConfig().normalizePagesResult
   const { navigation } = useThemeConfig()
 

@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation'
 import { Select } from 'nextra/components'
 import { GlobeIcon } from 'nextra/icons'
 import { useThemeConfig } from '../stores'
-import type { FC } from 'react'
 
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
@@ -15,7 +14,7 @@ interface LocaleSwitchProps {
   className?: string
 }
 
-export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
+export function LocaleSwitch({ lite, className }: LocaleSwitchProps) {
   const { i18n } = useThemeConfig()
   const pathname = usePathname()
   if (!i18n.length) return null

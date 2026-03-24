@@ -6,7 +6,7 @@ import { CollectionItem } from '../collection'
 import { useRovingFocusContext } from './RovingFocusContext'
 import type { RovingFocusItemProps } from './types'
 
-export const RovingFocusItem = (props: RovingFocusItemProps) => {
+export function RovingFocusItem(props: RovingFocusItemProps) {
   const {
     children,
     active = false,

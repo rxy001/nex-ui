@@ -7,7 +7,7 @@ import { useDefaultProps } from '../utils'
 import { PopoverProvider } from './PopoverContext'
 import type { PopoverProps } from './types'
 
-export const Popover = (inProps: PopoverProps) => {
+export function Popover(inProps: PopoverProps) {
   const props = useDefaultProps<PopoverProps>({
     name: 'Popover',
     props: inProps,

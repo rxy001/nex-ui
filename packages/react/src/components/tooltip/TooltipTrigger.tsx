@@ -6,7 +6,7 @@ import { PopperAnchor } from '../popper'
 import type { FocusEvent } from 'react'
 import type { PopperAnchorProps } from '../popper'
 
-export const TooltipTrigger = ({ children }: PopperAnchorProps) => {
+export function TooltipTrigger({ children }: PopperAnchorProps) {
   const { delayOpen, delayClose, rootId, open, setOpen, triggerRef } =
     useTooltipContext()
 

@@ -81,14 +81,14 @@ export function createGetColorSchemeSelector(
   }
 }
 
-export const ColorSchemeProvider = ({
+export function ColorSchemeProvider({
   children,
   forcedMode,
   colorSchemeNode,
   modeStorageKey = 'color-scheme',
   defaultMode = 'system',
   colorSchemeSelector = 'data',
-}: ColorSchemeProviderProps) => {
+}: ColorSchemeProviderProps) {
   const [state, setState] = useState<State>(() => {
     const initialMode =
       forcedMode ?? (initializeValue(modeStorageKey, defaultMode) as Mode)

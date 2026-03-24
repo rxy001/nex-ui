@@ -29,7 +29,7 @@ const slots = ['root', 'paper'] as const
 
 const TOOLTIP_OPEN_EVENT = 'tooltip.open'
 
-const TooltipImpl = (props: TooltipProps) => {
+function TooltipImpl(props: TooltipProps) {
   const { delayOpen, delayClose, rootId, open, triggerRef } =
     useTooltipContext()
   const {
@@ -166,9 +166,9 @@ const TooltipImpl = (props: TooltipProps) => {
 
 TooltipImpl.displayName = 'TooltipImpl'
 
-export const Tooltip = <RootComponent extends ElementType = 'div'>(
+export function Tooltip<RootComponent extends ElementType = 'div'>(
   inProps: TooltipProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<TooltipProps>({
     name: 'Tooltip',
     props: inProps,

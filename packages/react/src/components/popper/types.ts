@@ -6,7 +6,7 @@ import type { Placement, FlipOptions, OffsetOptions } from '../utils'
 import type { SlotProps } from '../../types/utils'
 
 // ----------------- PopperProps -----------------
-export type PopperProps = {
+export interface PopperProps {
   /**
    * The content of the Popper.
    */
@@ -29,7 +29,7 @@ export type PopperProps = {
 }
 
 // ----------------- PopperAnchorProps -----------------
-export type PopperAnchorProps = {
+export interface PopperAnchorProps {
   /**
    * The content of the trigger element.
    */
@@ -39,10 +39,8 @@ export type PopperAnchorProps = {
 }
 
 // ----------------- PopperContentProps -----------------
-type PopperContentOwnProps = Omit<
-  DismissibleLayerProps,
-  'children' | 'onDismiss'
-> & {
+interface PopperContentOwnProps
+  extends Omit<DismissibleLayerProps, 'children' | 'onDismiss'> {
   /**
    * If true, closes the Popper when the escape key is pressed.
    *
@@ -86,10 +84,11 @@ type PopperContentOwnProps = Omit<
   offset?: OffsetOptions | false
 }
 
-export type PopperContentProps = SlotProps<'div', PopperContentOwnProps>
+export interface PopperContentProps
+  extends SlotProps<'div', PopperContentOwnProps> {}
 
 // ----------------- PopperPortalProps -----------------
-export type PopperPortalProps = PortalProps & {
+export interface PopperPortalProps extends PortalProps {
   /**
    * If true, keeps the popper mounted in the DOM.
    *
@@ -99,4 +98,4 @@ export type PopperPortalProps = PortalProps & {
 }
 
 // ----------------- PopperMotionProps -----------------
-export type PopperMotionProps = HTMLMotionProps<'div'>
+export interface PopperMotionProps extends HTMLMotionProps<'div'> {}

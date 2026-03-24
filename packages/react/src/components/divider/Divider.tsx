@@ -13,9 +13,9 @@ import type { DividerProps } from './types'
 
 const slots = ['root'] as const
 
-export const Divider = <RootComponent extends ElementType = 'hr'>(
+export function Divider<RootComponent extends ElementType = 'hr'>(
   inProps: DividerProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DividerProps>({
     name: 'Divider',
     props: inProps,

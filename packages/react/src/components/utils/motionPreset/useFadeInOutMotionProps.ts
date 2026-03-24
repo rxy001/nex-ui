@@ -1,8 +1,8 @@
 import type { HTMLMotionProps } from 'motion/react'
 
-export const useFadeInOutMotionProps = (
+export function useFadeInOutMotionProps(
   props?: HTMLMotionProps<'div'>,
-): HTMLMotionProps<'div'> => {
+): HTMLMotionProps<'div'> {
   return {
     initial: 'hidden',
     animate: 'visible',

@@ -3,8 +3,8 @@
 import { PopperPortal } from '../popper'
 import type { MenuPortalProps } from './types'
 
-export const MenuPortal = (props: MenuPortalProps) => (
-  <PopperPortal {...props} />
-)
+export function MenuPortal(props: MenuPortalProps) {
+  return <PopperPortal {...props} />
+}
 
 MenuPortal.displayName = 'MenuPortal'

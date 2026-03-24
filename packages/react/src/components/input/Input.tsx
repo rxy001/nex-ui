@@ -27,9 +27,9 @@ const slots = [
   'label',
 ] as const
 
-export const Input = <InputComponent extends ElementType = 'input'>(
+export function Input<InputComponent extends ElementType = 'input'>(
   inProps: InputProps<InputComponent>,
-) => {
+) {
   const { primaryThemeColor } = useNexUI()
 
   const props = useDefaultProps<InputProps>({

@@ -46,7 +46,7 @@ describe('FocusTrap', () => {
   })
 
   it('should restore focus to previously focused element on unmount when restoreFocus=true', async () => {
-    const Children = () => {
+    function Children() {
       const [active, setActive] = useState(false)
 
       return (
@@ -85,7 +85,7 @@ describe('FocusTrap', () => {
   })
 
   it('should not restore focus on unmount when restoreFocus=false', async () => {
-    const Children = () => {
+    function Children() {
       const [active, setActive] = useState(false)
 
       return (

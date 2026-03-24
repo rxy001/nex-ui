@@ -35,7 +35,7 @@ const recipe = defineRecipe({
 
 const style = recipe()
 
-const MenuContentImpl = (props: MenuContentImplProps) => {
+function MenuContentImpl(props: MenuContentImplProps) {
   const { children, loopFocus = true, restoreFocus, ...remainingProps } = props
   const menuCtx = useMenuContext()
   const rootMenuCtx = useRootMenuContext()
@@ -153,7 +153,7 @@ const MenuContentImpl = (props: MenuContentImplProps) => {
 
 MenuContentImpl.displayName = 'MenuContentImpl'
 
-export const MenuContent = (props: MenuContentProps) => {
+export function MenuContent(props: MenuContentProps) {
   const { restoreFocus = true, placement = 'bottom', ...remainingProps } = props
 
   return (
@@ -167,7 +167,7 @@ export const MenuContent = (props: MenuContentProps) => {
 
 MenuContent.displayName = 'MenuContent'
 
-export const SubMenuContent = (props: SubMenuContentProps) => {
+export function SubMenuContent(props: SubMenuContentProps) {
   const menuCtx = useMenuContext()
   const subMenuCtx = useSubMenuContext()
   const mergedRef = useMergeRefs(subMenuCtx?.subMenuContentRef, props.ref)

@@ -13,9 +13,9 @@ import type { DialogFooterProps } from './types'
 
 const slots = ['root'] as const
 
-export const DialogFooter = <RootComponent extends ElementType = 'div'>(
+export function DialogFooter<RootComponent extends ElementType = 'div'>(
   inProps: DialogFooterProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DialogFooterProps>({
     name: 'DialogFooter',
     props: inProps,

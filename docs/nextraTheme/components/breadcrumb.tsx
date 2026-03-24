@@ -3,11 +3,8 @@ import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import { Fragment } from 'react'
 import type { Item } from 'nextra/normalize-pages'
-import type { FC } from 'react'
 
-export const Breadcrumb: FC<{
-  activePath: Item[]
-}> = ({ activePath }) => {
+export function Breadcrumb({ activePath }: { activePath: Item[] }) {
   return (
     <div className='nextra-breadcrumb x:mt-1.5 x:flex x:items-center x:gap-1 x:overflow-hidden x:text-sm x:text-gray-500 x:dark:text-gray-400 x:contrast-more:text-current'>
       {activePath.map((item, index, arr) => {

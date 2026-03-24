@@ -5,12 +5,15 @@ import { useMounted } from 'nextra/hooks'
 import { Link } from '../../mdx-components/link'
 import { useThemeConfig } from '../../stores'
 import { getGitIssueUrl } from '../../utils'
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
-export const NotFoundLink: FC<{
+export function NotFoundLink({
+  children,
+  labels,
+}: {
   children: ReactNode
   labels: string
-}> = ({ children, labels }) => {
+}) {
   const config = useThemeConfig()
   const pathname = usePathname()
   const mounted = useMounted()

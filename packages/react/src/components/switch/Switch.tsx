@@ -26,9 +26,9 @@ const slots = [
   'label',
 ] as const
 
-export const Switch = <SwitchComponent extends ElementType = 'input'>(
+export function Switch<SwitchComponent extends ElementType = 'input'>(
   inProps: SwitchProps<SwitchComponent>,
-) => {
+) {
   const { primaryThemeColor } = useNexUI()
 
   const props = useDefaultProps<SwitchProps>({

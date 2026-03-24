@@ -9,13 +9,6 @@ import {
   isSVGElement,
 } from './dom'
 
-function _getOffsetParent(element: Element): Element | null {
-  if (!isHTMLElement(element)) {
-    return null
-  }
-  return element.offsetParent
-}
-
 /**
  * A positioned ancestor might be:
  *  - a containing block for absolutely-positioned elements
@@ -24,7 +17,7 @@ function _getOffsetParent(element: Element): Element | null {
  *
  * https://drafts.csswg.org/cssom-view/#dom-htmlelement-offsetparent
  */
-export const getOffsetParent = (element: Element) => {
+export function getOffsetParent(element: Element) {
   const win = ownerWindow(element)
 
   if (isSVGElement(element)) {
@@ -59,4 +52,11 @@ export const getOffsetParent = (element: Element) => {
   }
 
   return offsetParent || win
+}
+
+function _getOffsetParent(element: Element): Element | null {
+  if (!isHTMLElement(element)) {
+    return null
+  }
+  return element.offsetParent
 }

@@ -40,7 +40,7 @@ import type { DefaultSelectors } from './generated/selectors'
 import type { ComponentThemes } from './componentThemes'
 import type { colorVariant } from '../theme/shared'
 
-export type Theme = {
+export interface Theme {
   aliases?: AliasesDefinition & DefaultAliases
   scales?: ScalesDefinition & DefaultScales
   breakpoints?: BreakpointsDefinition & DefaultBreakpoints

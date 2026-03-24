@@ -5,13 +5,13 @@ import { useFadeInOutMotionProps, useScaleInOutMotionProps } from '../utils'
 import { useDropdownContext } from './DropdownContext'
 import type { DropdownPaperMotionProps } from './types'
 
-export const DropdownPaperMotion = ({
+export function DropdownPaperMotion({
   children,
   placement,
   motionProps,
   onAnimationStart,
   onAnimationComplete,
-}: DropdownPaperMotionProps) => {
+}: DropdownPaperMotionProps) {
   const { open } = useDropdownContext()
 
   const resolvedProps =

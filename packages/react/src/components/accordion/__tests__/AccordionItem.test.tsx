@@ -10,19 +10,21 @@ import { Accordion, AccordionItem } from '../index'
 import { accordionItemSlotClasses } from './classes'
 import type { AccordionItemProps } from '../index'
 
-const TestAccordionItem = (props: AccordionItemProps) => (
-  <AccordionItem
-    itemKey='1'
-    title='Accordion 1'
-    data-testid='accordion-item'
-    {...props}
-  >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-    malesuada lacus ex, sit amet blandit leo lobortis eget.
-  </AccordionItem>
-)
+function TestAccordionItem(props: AccordionItemProps) {
+  return (
+    <AccordionItem
+      itemKey='1'
+      title='Accordion 1'
+      data-testid='accordion-item'
+      {...props}
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+      malesuada lacus ex, sit amet blandit leo lobortis eget.
+    </AccordionItem>
+  )
+}
 
-const TestAccordion = (props: AccordionItemProps) => {
+function TestAccordion(props: AccordionItemProps) {
   return (
     <Accordion defaultExpandedKeys={['1']}>
       <TestAccordionItem {...props} />
@@ -207,7 +209,7 @@ describe('AccordionItem', () => {
   it('should hide indicator when hideIndicator=true', async () => {
     const { queryByClassName } = await renderWithNexUIProvider(
       <Accordion>
-        <TestAccordionItem hideIndicator={true} />
+        <TestAccordionItem hideIndicator />
       </Accordion>,
       {
         useAct: true,

@@ -25,9 +25,9 @@ import type { DrawerContentProps } from './types'
 
 const slots = ['root', 'paper', 'closeButton', 'backdrop'] as const
 
-export const DrawerContent = <RootComponent extends ElementType = 'div'>(
+export function DrawerContent<RootComponent extends ElementType = 'div'>(
   inProps: DrawerContentProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<DrawerContentProps>({
     name: 'DrawerContent',
     props: inProps,

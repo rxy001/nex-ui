@@ -147,7 +147,7 @@ describe('Button', () => {
   })
 
   it('should support to change loading', async () => {
-    const DefaultButton: React.FC = () => {
+    function DefaultButton() {
       const [loading, setLoading] = useState<ButtonProps['loading']>(false)
       return (
         <Button loading={loading} onClick={() => setLoading(true)}>

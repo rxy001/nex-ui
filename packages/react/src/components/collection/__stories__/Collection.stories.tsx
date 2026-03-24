@@ -35,35 +35,39 @@ function CollectionWrapper({
   )
 }
 
-export const Default = () => (
-  <CollectionWrapper title='Default'>
-    <CollectionItem item='1'>
-      <li>Item 1</li>
-    </CollectionItem>
-    <CollectionItem item='2'>
-      <li>Item 2</li>
-    </CollectionItem>
-    <CollectionItem item='3'>
-      <li>Item 3</li>
-    </CollectionItem>
-  </CollectionWrapper>
-)
+export function Default() {
+  return (
+    <CollectionWrapper title='Default'>
+      <CollectionItem item='1'>
+        <li>Item 1</li>
+      </CollectionItem>
+      <CollectionItem item='2'>
+        <li>Item 2</li>
+      </CollectionItem>
+      <CollectionItem item='3'>
+        <li>Item 3</li>
+      </CollectionItem>
+    </CollectionWrapper>
+  )
+}
 
-export const WithElementInBetween = () => (
-  <CollectionWrapper title='WithElementInBetween'>
-    <CollectionItem item='1'>
-      <li>Item 1</li>
-    </CollectionItem>
-    <li>Some element in between</li>
-    <CollectionItem item='2'>
-      <li>Item 2</li>
-    </CollectionItem>
-    <li>Another element in between</li>
-    <CollectionItem item='3'>
-      <li>Item 3</li>
-    </CollectionItem>
-  </CollectionWrapper>
-)
+export function WithElementInBetween() {
+  return (
+    <CollectionWrapper title='WithElementInBetween'>
+      <CollectionItem item='1'>
+        <li>Item 1</li>
+      </CollectionItem>
+      <li>Some element in between</li>
+      <CollectionItem item='2'>
+        <li>Item 2</li>
+      </CollectionItem>
+      <li>Another element in between</li>
+      <CollectionItem item='3'>
+        <li>Item 3</li>
+      </CollectionItem>
+    </CollectionWrapper>
+  )
+}
 
 function Item2() {
   return (
@@ -73,59 +77,65 @@ function Item2() {
   )
 }
 
-export const WithWrappedItem = () => (
-  <CollectionWrapper title='WithWrappedItem'>
-    <CollectionItem item='1'>
-      <li>Item 1</li>
-    </CollectionItem>
-    <Item2 />
-    <CollectionItem item='3'>
-      <li>Item 3</li>
-    </CollectionItem>
-  </CollectionWrapper>
-)
+export function WithWrappedItem() {
+  return (
+    <CollectionWrapper title='WithWrappedItem'>
+      <CollectionItem item='1'>
+        <li>Item 1</li>
+      </CollectionItem>
+      <Item2 />
+      <CollectionItem item='3'>
+        <li>Item 3</li>
+      </CollectionItem>
+    </CollectionWrapper>
+  )
+}
 
-export const WithFragment = () => (
-  <CollectionWrapper title='WithFragment'>
-    <>
+export function WithFragment() {
+  return (
+    <CollectionWrapper title='WithFragment'>
+      <>
+        <CollectionItem item='1'>
+          <li>Item 1</li>
+        </CollectionItem>
+        <CollectionItem item='2'>
+          <li>Item 2</li>
+        </CollectionItem>
+      </>
+      <CollectionItem item='3'>
+        <li>Item 3</li>
+      </CollectionItem>
+    </CollectionWrapper>
+  )
+}
+
+export function Nested() {
+  return (
+    <CollectionWrapper title='Nested outer'>
       <CollectionItem item='1'>
         <li>Item 1</li>
       </CollectionItem>
       <CollectionItem item='2'>
-        <li>Item 2</li>
+        <li>
+          Item 2
+          <CollectionWrapper title='Nested inside'>
+            <CollectionItem item='2-1'>
+              <li>Item 2-1</li>
+            </CollectionItem>
+            <CollectionItem item='2-2'>
+              <li>Item 2-2</li>
+            </CollectionItem>
+          </CollectionWrapper>
+        </li>
       </CollectionItem>
-    </>
-    <CollectionItem item='3'>
-      <li>Item 3</li>
-    </CollectionItem>
-  </CollectionWrapper>
-)
+      <CollectionItem item='3'>
+        <li>Item 3</li>
+      </CollectionItem>
+    </CollectionWrapper>
+  )
+}
 
-export const Nested = () => (
-  <CollectionWrapper title='Nested outer'>
-    <CollectionItem item='1'>
-      <li>Item 1</li>
-    </CollectionItem>
-    <CollectionItem item='2'>
-      <li>
-        Item 2
-        <CollectionWrapper title='Nested inside'>
-          <CollectionItem item='2-1'>
-            <li>Item 2-1</li>
-          </CollectionItem>
-          <CollectionItem item='2-2'>
-            <li>Item 2-2</li>
-          </CollectionItem>
-        </CollectionWrapper>
-      </li>
-    </CollectionItem>
-    <CollectionItem item='3'>
-      <li>Item 3</li>
-    </CollectionItem>
-  </CollectionWrapper>
-)
-
-export const WithChangingItem = () => {
+export function WithChangingItem() {
   const [count, setCount] = useState(3)
 
   return (

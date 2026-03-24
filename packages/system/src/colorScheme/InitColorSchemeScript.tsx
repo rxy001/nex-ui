@@ -1,12 +1,12 @@
 import type { InitColorSchemeScriptProps } from './types'
 
-export const InitColorSchemeScript = ({
+export function InitColorSchemeScript({
   forcedMode,
   modeStorageKey = 'color-scheme',
   defaultMode = 'system',
   colorSchemeSelector = 'data',
   colorSchemeNode = 'document.documentElement',
-}: InitColorSchemeScriptProps) => {
+}: InitColorSchemeScriptProps) {
   let setter = ''
   let attribute = colorSchemeSelector
 

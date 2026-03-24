@@ -4,11 +4,11 @@ import { Portal } from '@nex-ui/utils'
 import { usePopperContext } from './PopperContext'
 import type { PopperPortalProps } from './types'
 
-export const PopperPortal = ({
+export function PopperPortal({
   children,
   container,
   forceMount = false,
-}: PopperPortalProps) => {
+}: PopperPortalProps) {
   const { open } = usePopperContext()
 
   return open || forceMount ? (

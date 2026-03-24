@@ -3,11 +3,11 @@ import { ScaleInOutMotion } from '../utils'
 import { useDialogContext } from './DialogContext'
 import type { DialogPaperMotionProps } from './types'
 
-export const DialogPaperMotion = ({
+export function DialogPaperMotion({
   children,
   motionProps,
   placement,
-}: DialogPaperMotionProps) => {
+}: DialogPaperMotionProps) {
   const { open } = useDialogContext()
 
   const resolveMotionProps = useMemo(() => {

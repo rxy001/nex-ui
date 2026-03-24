@@ -4,11 +4,11 @@ import type { ComponentPropsWithoutRef } from 'react'
 
 export const EXTERNAL_URL_RE = /^https?:\/\//
 
-export const Link = ({
+export function Link({
   className: classNameProp,
   href = '',
   ...props
-}: ComponentPropsWithoutRef<'a'>) => {
+}: ComponentPropsWithoutRef<'a'>) {
   const className = cn(
     'x:text-primary-700 x:underline x:hover:text-primary-500 x:decoration-from-font x:[text-underline-position:from-font]',
     classNameProp,

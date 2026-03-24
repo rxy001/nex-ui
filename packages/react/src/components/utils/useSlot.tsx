@@ -6,13 +6,13 @@ import type { CSSObject, Interpolation } from '@nex-ui/system'
 
 type DataAttrs = Record<string, string | number | boolean | undefined>
 
-export type UseSlotProps<
+export interface UseSlotProps<
   Component,
   SlotProps = {},
   ForwardedProps = {},
   AdditionalProps = {},
   AriaProps = {},
-> = {
+> {
   /**
    * The slot's default component
    */
@@ -54,7 +54,7 @@ export type UseSlotProps<
   dataAttrs?: DataAttrs
 }
 
-export const useSlot = <
+export function useSlot<
   ElementType extends ComponentType<{
     sx?: Interpolation
   }>,
@@ -70,7 +70,7 @@ export const useSlot = <
     AdditionalProps,
     AriaProps
   >,
-) => {
+) {
   const {
     ariaProps,
     style,

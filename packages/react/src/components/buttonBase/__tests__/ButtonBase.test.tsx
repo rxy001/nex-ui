@@ -81,9 +81,9 @@ describe('ButtonBase', () => {
   })
 
   it('should not apply role="button" when as prop is custom component', () => {
-    const Component = (props: ButtonHTMLAttributes<HTMLButtonElement>) => (
-      <button {...props}>Custom</button>
-    )
+    function Component(props: ButtonHTMLAttributes<HTMLButtonElement>) {
+      return <button {...props}>Custom</button>
+    }
 
     const { getByRole } = renderWithNexUIProvider(
       <ButtonBase as={Component}>Button</ButtonBase>,

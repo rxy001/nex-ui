@@ -61,9 +61,9 @@ const useLoaded = ({ src, srcSet }: UseLoadedOptions) => {
   return loaded
 }
 
-export const Avatar = <RootComponent extends ElementType = 'div'>(
+export function Avatar<RootComponent extends ElementType = 'div'>(
   inProps: AvatarProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<AvatarProps>({
     name: 'Avatar',
     props: inProps,

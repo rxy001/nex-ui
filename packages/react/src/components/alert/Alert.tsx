@@ -30,9 +30,9 @@ const slots = [
   'closeButton',
 ] as const
 
-export const Alert = <RootComponent extends ElementType = 'div'>(
+export function Alert<RootComponent extends ElementType = 'div'>(
   inProps: AlertProps<RootComponent>,
-) => {
+) {
   const props = useDefaultProps<AlertProps>({
     name: 'Alert',
     props: inProps,
