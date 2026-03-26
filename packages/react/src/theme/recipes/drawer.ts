@@ -28,7 +28,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       p: '1.5',
       overflow: 'hidden',
       borderRadius: 'full',
-      transition: 'colors',
+
       color: 'gray.400',
       _hover: {
         bg: 'gray.muted',
@@ -94,6 +94,13 @@ export const drawerContentRecipe = defineSlotRecipe({
           borderTopRightRadius: 0,
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0,
+        },
+      },
+    },
+    disableAnimation: {
+      false: {
+        closeButton: {
+          transition: 'colors',
         },
       },
     },

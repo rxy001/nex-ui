@@ -22,10 +22,21 @@ export function CardActionArea<RootComponent extends ElementType = 'button'>(
     props: inProps,
   })
 
-  const { children, disabled, ...remainingProps } = props
+  const {
+    children,
+    disabled = false,
+    disableRipple = false,
+    ...remainingProps
+  } = props
+
+  const ownerState = {
+    ...props,
+    disabled,
+    disableRipple,
+  }
 
   const style = useRecipeStyles({
-    ownerState: props,
+    ownerState,
     name: 'CardActionArea',
     recipe: cardActionArea,
   })
@@ -44,12 +55,12 @@ export function CardActionArea<RootComponent extends ElementType = 'button'>(
       disabled,
     },
     dataAttrs: {
-      disabled,
+      disableRipple,
     },
   })
 
   return (
-    <Ripple disabled={disabled}>
+    <Ripple disabled={disableRipple || disabled}>
       <CardActionAreaRoot {...getCardActionAreaProps()}>
         {children}
       </CardActionAreaRoot>

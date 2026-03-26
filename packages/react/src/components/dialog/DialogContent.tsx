@@ -43,13 +43,13 @@ export function DialogContent<RootComponent extends ElementType = 'div'>(
     hideBackdrop,
     container,
     keepMounted,
-    disableAnimation,
     preventScroll,
     restoreFocus,
     autoFocus,
     closeOnEscape,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
+    disableAnimation = false,
     placement = 'top',
     scroll = 'outside',
     hideCloseButton = false,
@@ -64,6 +64,7 @@ export function DialogContent<RootComponent extends ElementType = 'div'>(
     scroll,
     size,
     hideCloseButton,
+    disableAnimation,
   }
 
   const { open } = useDialogContext()

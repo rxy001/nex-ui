@@ -47,6 +47,7 @@ exports[`Breadcrumb should render with default props 1`] = `
   -ms-user-select: none;
   user-select: none;
   border-radius: 2px;
+  white-space: nowrap;
   font-size: var(--nui-font-sizes-md);
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
@@ -102,6 +103,7 @@ exports[`Breadcrumb should render with default props 1`] = `
   -ms-user-select: none;
   user-select: none;
   border-radius: 2px;
+  white-space: nowrap;
   font-size: var(--nui-font-sizes-md);
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);

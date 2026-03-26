@@ -35,7 +35,6 @@ export const dropdownItemRecipe = defineSlotRecipe({
       pl: '2',
       pr: '2',
       borderRadius: 'sm',
-      transition: 'colors',
       color: 'inherit',
       textDecoration: 'none',
       _disabled: {
@@ -53,7 +52,6 @@ export const dropdownItemRecipe = defineSlotRecipe({
       opacity: 0.5,
       letterSpacing: 1,
       fontFamily: 'inherit',
-      transition: 'colors',
       "[data-highlighted='true'] > &": {
         opacity: 1,
       },
@@ -129,6 +127,16 @@ export const dropdownItemRecipe = defineSlotRecipe({
       },
     },
     color: toSlots(colorVariant, 'root'),
+    disableAnimation: {
+      false: {
+        root: {
+          transition: 'colors',
+        },
+        shortcut: {
+          transition: 'colors',
+        },
+      },
+    },
   },
 })
 

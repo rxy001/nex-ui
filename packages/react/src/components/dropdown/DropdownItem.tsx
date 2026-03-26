@@ -30,8 +30,11 @@ export function DropdownItemImpl(inProps: DropdownItemImplProps) {
     props: inProps,
   })
 
-  const { color: defaultColor, variant: defaultVariant } =
-    useDropdownContentContext()
+  const {
+    disableAnimation,
+    color: defaultColor,
+    variant: defaultVariant,
+  } = useDropdownContentContext()
 
   const {
     children,
@@ -56,6 +59,7 @@ export function DropdownItemImpl(inProps: DropdownItemImplProps) {
     color,
     variant,
     hasIndicator,
+    disableAnimation,
   }
 
   const styles = useRecipeStyles({
