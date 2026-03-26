@@ -33,10 +33,6 @@
 
 11. 重构基础组件的 API，尽量减少 Context 的使用
 
-13. computePosition 处理 scale
-
-15. 将 isValidElement 统一改为 isValidNonFragmentElement
-
 18. 阻止事件的执行，目前有两种形式，1. 传递 prop 2. 使用 event.preventDefault()，是否统一 API ？
 
 19. 基于 Poper 构建的组件，motionProps 的 placement 非计算后的

@@ -1,17 +1,10 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { InterItem, Listener } from './types'
+import type { CollectionStore } from './CollectionStore'
 
-export interface CollectionContextValue<ItemData extends {} = {}> {
-  context: {
-    registerItem: (item: InterItem<ItemData>) => void
-    unregisterItem: (item: InterItem<ItemData>) => void
-    registerListener: (listener: Listener<ItemData>) => void
-    unregisterListener: () => void
-  }
-  getItems: () => Array<ItemData & { element: HTMLElement }>
-}
+export interface CollectionContextValue<ItemData extends {} = {}>
+  extends CollectionStore<ItemData> {}
 
 export const [CollectionProvider, useCollectionContext] =
   createContext<CollectionContextValue<any> | null>({

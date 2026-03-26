@@ -1,8 +1,13 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { cloneElement, isValidElement, useId, useMemo } from 'react'
-import { __DEV__, isFunction, isString } from '@nex-ui/utils'
+import { cloneElement, useId, useMemo } from 'react'
+import {
+  __DEV__,
+  isFunction,
+  isString,
+  isValidNonFragmentElement,
+} from '@nex-ui/utils'
 import { useControlledState } from '@nex-ui/hooks'
 import { checkboxRecipe } from '../../theme/recipes'
 import { useNexUI } from '../provider'
@@ -212,7 +217,7 @@ export function Checkbox<CheckboxComponent extends ElementType = 'input'>(
       )
     }
 
-    if (isValidElement(customIcon)) {
+    if (isValidNonFragmentElement(customIcon)) {
       const element = customIcon as ReactElement<any>
 
       return cloneElement(element, {

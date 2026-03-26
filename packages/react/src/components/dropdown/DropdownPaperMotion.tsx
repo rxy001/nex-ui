@@ -14,32 +14,30 @@ export function DropdownPaperMotion({
 }: DropdownPaperMotionProps) {
   const { open } = useDropdownContext()
 
-  const resolvedProps =
-    typeof motionProps === 'function' ? motionProps(placement) : motionProps
-
   const props = useFadeInOutMotionProps(
     useScaleInOutMotionProps({
       initial: 'initial',
       animate: open ? 'visible' : 'hidden',
-      ...resolvedProps,
+      ...motionProps,
       variants: {
+        ...motionProps?.variants,
         initial: {
           scale: 0.96,
           opacity: 0,
-          ...resolvedProps?.variants?.initial,
+          ...motionProps?.variants?.initial,
         },
         hidden: {
           scale: 1,
-          ...resolvedProps?.variants?.hidden,
+          ...motionProps?.variants?.hidden,
         },
       },
       onAnimationStart: (animation) => {
         onAnimationStart?.(animation)
-        resolvedProps?.onAnimationStart?.(animation)
+        motionProps?.onAnimationStart?.(animation)
       },
       onAnimationComplete: (animation) => {
         onAnimationComplete?.(animation)
-        resolvedProps?.onAnimationComplete?.(animation)
+        motionProps?.onAnimationComplete?.(animation)
       },
     }),
   )
