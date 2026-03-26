@@ -33,6 +33,7 @@ export interface DropdownContentContextValue {
   setIndicatorsCount: Dispatch<SetStateAction<number>>
   color: DropdownContentProps['color']
   variant: DropdownContentProps['variant']
+  disableAnimation: DropdownContentProps['disableAnimation']
 }
 
 export const [DropdownContentProvider, useDropdownContentContext] =

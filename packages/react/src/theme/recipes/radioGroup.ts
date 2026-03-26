@@ -44,7 +44,6 @@ export const radioRecipe = defineSlotRecipe({
       alignItems: 'center',
       justifyContent: 'center',
       boxSizing: 'border-box',
-      transition: 'colors',
 
       '::before': {
         content: '""',
@@ -52,7 +51,6 @@ export const radioRecipe = defineSlotRecipe({
         transform: 'scale(0)',
         borderRadius: 'full',
         backgroundColor: 'colorPalette.primary',
-        transition: 'all',
       },
     },
     label: {
@@ -129,11 +127,11 @@ export const radioRecipe = defineSlotRecipe({
       true: {},
     },
     disableAnimation: {
-      true: {
+      false: {
         indicator: {
-          transition: 'none',
+          transition: 'colors',
           '::before': {
-            transition: 'none',
+            transition: 'all',
           },
         },
       },

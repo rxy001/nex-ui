@@ -55,6 +55,9 @@ const meta = {
     hoverable: {
       control: 'boolean',
     },
+    disableAnimation: {
+      control: 'boolean',
+    },
   },
   render: (props) => {
     return (
@@ -105,7 +108,7 @@ export function WithActionArea(props: CardProps) {
   return (
     <Card {...props}>
       <CardHeaderTemplate />
-      <CardActionArea>
+      <CardActionArea disableRipple>
         <CardBody>This action area is clickable.</CardBody>
       </CardActionArea>
     </Card>

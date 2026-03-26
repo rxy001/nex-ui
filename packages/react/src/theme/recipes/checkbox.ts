@@ -68,8 +68,6 @@ export const checkboxRecipe = defineSlotRecipe({
     },
     checkedIcon: {
       opacity: 0,
-      transition: 'all 0.2s linear',
-      transform: 'scale(0.4)',
     },
     icon: {
       display: 'inline-flex',
@@ -83,7 +81,6 @@ export const checkboxRecipe = defineSlotRecipe({
         inset: 0,
         border: 'md',
         borderColor: 'gray.highlight',
-        transition: 'colors',
         background: 'transparent',
         zIndex: -2,
       },
@@ -92,14 +89,29 @@ export const checkboxRecipe = defineSlotRecipe({
         position: 'absolute',
         inset: 0,
         bg: 'colorPalette.primary',
-        transition: 'all 0.2s linear',
-        transform: 'scale(0.4)',
         opacity: 0,
         zIndex: -1,
       },
     },
   },
   variants: {
+    disableAnimation: {
+      false: {
+        checkedIcon: {
+          transition: 'all 0.2s linear',
+          transform: 'scale(0.4)',
+        },
+        icon: {
+          '::before': {
+            transition: 'colors',
+          },
+          '::after': {
+            transition: 'all 0.2s linear',
+            transform: 'scale(0.4)',
+          },
+        },
+      },
+    },
     checked: {
       true: {
         checkedIcon: {
@@ -225,23 +237,6 @@ export const checkboxRecipe = defineSlotRecipe({
     inGroup: {
       true: {
         root: {},
-      },
-    },
-    disableAnimation: {
-      true: {
-        checkedIcon: {
-          transition: 'none',
-          transform: 'none',
-        },
-        icon: {
-          '::before': {
-            transition: 'none',
-          },
-          '::after': {
-            transition: 'none',
-            transform: 'none',
-          },
-        },
       },
     },
   },

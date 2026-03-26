@@ -124,6 +124,12 @@ Card 继承 `as` (默认为 `'div'`) 的 Props。
       default: 'false',
       description: 'Card 是否显示悬停效果。',
     },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用悬停时的过渡效果。',
+    },
   ]}
 />
 
@@ -323,6 +329,18 @@ CardActionArea 继承 `as` (默认为 `'button'`) 的 Props。
       prop: 'ref',
       type: 'Ref',
       description: 'Ref 用于转发到根元素。',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'CardActionArea 是否禁用。',
+    },
+    {
+      prop: 'disableRipple',
+      type: 'boolean',
+      default: 'false',
+      description: '是否禁用点击时的涟漪效果。',
     },
   ]}
 />

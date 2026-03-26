@@ -14,7 +14,6 @@ export const inputRecipe = defineSlotRecipe({
   slots: {
     root: {
       boxSizing: 'border-box',
-      transition: 'colors',
       display: 'inline-flex',
       alignItems: 'center',
       gap: '1',
@@ -46,10 +45,8 @@ export const inputRecipe = defineSlotRecipe({
     },
     label: {
       position: 'absolute',
-      transformOrigin: 'top left',
       pointerEvents: 'none',
-      transitionProperty: 'inset, color, transform',
-      transitionDuration: '0.2s',
+      transformOrigin: 'top left',
     },
     prefix: {
       display: 'flex',
@@ -156,7 +153,6 @@ export const inputRecipe = defineSlotRecipe({
             w: '100%',
             h: '2px',
             bg: 'gray.highlight',
-            transition: 'colors',
           },
           '::after': {
             content: '""',
@@ -167,7 +163,6 @@ export const inputRecipe = defineSlotRecipe({
             width: 0,
             h: '2px',
             bg: 'colorPalette.primary',
-            transition: 'width 0.2s ease',
           },
           _focusWithin: {
             '::after': {
@@ -223,18 +218,13 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     disableAnimation: {
-      true: {
+      false: {
         root: {
-          transition: 'none',
-          '::before': {
-            transition: 'none',
-          },
-          '::after': {
-            transition: 'none',
-          },
+          transition: 'colors',
         },
         label: {
-          transition: 'none',
+          transitionProperty: 'inset, color, transform',
+          transitionDuration: '0.2s',
         },
       },
     },
@@ -447,6 +437,20 @@ export const inputRecipe = defineSlotRecipe({
         },
         input: {
           color: 'red.primary',
+        },
+      },
+    },
+    {
+      disableAnimation: false,
+      variant: 'underlined',
+      css: {
+        root: {
+          '::before': {
+            transition: 'colors',
+          },
+          '::after': {
+            transition: 'width 0.2s ease',
+          },
         },
       },
     },

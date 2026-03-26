@@ -92,8 +92,6 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
   inset: 0;
   border: var(--nui-borders-md);
   border-color: var(--nui-colors-gray-highlight);
-  -webkit-transition: none;
-  transition: none;
   background: transparent;
   z-index: -2;
   border-radius: calc(var(--nui-radii-lg) * .6);
@@ -104,12 +102,6 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
   position: absolute;
   inset: 0;
   background-color: var(--nui-colors-blue-primary);
-  -webkit-transition: none;
-  transition: none;
-  -webkit-transform: none;
-  -moz-transform: none;
-  -ms-transform: none;
-  transform: none;
   opacity: 0;
   z-index: -1;
   border-radius: calc(var(--nui-radii-lg) * .6);
@@ -243,8 +235,6 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
   inset: 0;
   border: var(--nui-borders-md);
   border-color: var(--nui-colors-gray-highlight);
-  -webkit-transition: none;
-  transition: none;
   background: transparent;
   z-index: -2;
   border-radius: calc(var(--nui-radii-lg) * .6);
@@ -255,15 +245,13 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
   position: absolute;
   inset: 0;
   background-color: var(--nui-colors-blue-primary);
-  -webkit-transition: none;
-  transition: none;
-  -webkit-transform: none;
-  -moz-transform: none;
-  -ms-transform: none;
-  transform: none;
   opacity: 1;
   z-index: -1;
   border-radius: calc(var(--nui-radii-lg) * .6);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
 }
 
 .emotion-3 {
@@ -411,11 +399,11 @@ exports[`Checkbox should render with default props 1`] = `
   inset: 0;
   border: var(--nui-borders-md);
   border-color: var(--nui-colors-gray-highlight);
-  -webkit-transition: var(--nui-transitions-colors);
-  transition: var(--nui-transitions-colors);
   background: transparent;
   z-index: -2;
   border-radius: calc(var(--nui-radii-lg) * .6);
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
 }
 
 .emotion-2::after {
@@ -423,15 +411,15 @@ exports[`Checkbox should render with default props 1`] = `
   position: absolute;
   inset: 0;
   background-color: var(--nui-colors-blue-primary);
+  opacity: 0;
+  z-index: -1;
+  border-radius: calc(var(--nui-radii-lg) * .6);
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
   -webkit-transform: scale(0.4);
   -moz-transform: scale(0.4);
   -ms-transform: scale(0.4);
   transform: scale(0.4);
-  opacity: 0;
-  z-index: -1;
-  border-radius: calc(var(--nui-radii-lg) * .6);
 }
 
 .emotion-3 {
