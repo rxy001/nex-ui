@@ -71,9 +71,7 @@ interface DropdownContentOwnProps<RootComponent extends ElementType = 'div'>
   /**
    * The props to modify the framer motion animation.
    */
-  motionProps?:
-    | HTMLMotionProps<'div'>
-    | ((placement?: Placement) => HTMLMotionProps<'div'>)
+  motionProps?: HTMLMotionProps<'div'>
 
   /**
    * If true, disables the animation for the Dropdown.
@@ -400,7 +398,6 @@ interface SubDropdownContentOwnProps<RootComponent extends ElementType>
 
   /**
    * The props to modify the framer motion animation.
-   * Use the `variants` API to create your own animation.
    */
   motionProps?: HTMLMotionProps<'div'>
 

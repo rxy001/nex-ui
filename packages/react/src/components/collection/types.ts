@@ -1,23 +1,19 @@
 import type { ReactElement, ReactNode, Ref, RefObject } from 'react'
-import type { CollectionContextValue } from './CollectionContext'
+import type { CollectionItemData, Listener } from './CollectionStore'
 
-export type CollectionItemData<ItemData extends {} = {}> = {
-  element: HTMLElement | null
-} & ItemData
-
-export type InterItem<ItemData extends {} = {}> = RefObject<
+export type Item<ItemData extends {} = {}> = RefObject<
   {
     element: RefObject<HTMLElement | null>
   } & ItemData
 >
 
-export interface Listener<ItemData extends {} = {}> {
-  (items: Array<CollectionItemData<ItemData>>): void
+export interface CollectionStore<ItemData extends {} = {}> {
+  getItems: () => Array<CollectionItemData<ItemData>>
 }
 
 export interface CollectionProps<ItemData extends {} = {}> {
   children?: ReactNode
-  collection: CollectionContextValue<ItemData>
+  collection: CollectionStore<ItemData>
   // onItemsChange is only fired when the length of the items array changes,
   // not on every item data mutation.
   onItemsChange?: Listener<ItemData>

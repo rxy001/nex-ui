@@ -20,9 +20,9 @@ export function CollectionItem<ItemData extends {} = {}>({
   const mergedRefs = useMergeRefs(ref, children?.props?.ref)
 
   useEffect(() => {
-    ctx?.context?.registerItem(itemDataRef)
+    ctx?.registerItem(itemDataRef)
     return () => {
-      ctx?.context?.unregisterItem(itemDataRef)
+      ctx?.unregisterItem(itemDataRef)
     }
   }, [ctx, itemDataRef])
 
