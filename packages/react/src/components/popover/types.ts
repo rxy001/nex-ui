@@ -83,9 +83,7 @@ interface PopoverContentOwnProps<RootComponent extends ElementType = 'div'>
   /**
    * The props to modify the framer motion animation.
    */
-  motionProps?:
-    | ((placement: Placement) => HTMLMotionProps<'div'>)
-    | HTMLMotionProps<'div'>
+  motionProps?: HTMLMotionProps<'div'>
 
   /**
    * The props used for each slot.

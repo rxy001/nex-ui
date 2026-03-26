@@ -27,7 +27,7 @@ export class ModalManager {
   private modals: Array<Modal> = []
   private listeners: Set<() => void> = new Set()
 
-  register(modal: Modal) {
+  register = (modal: Modal) => {
     let modalIndex = this.modals.indexOf(modal)
     if (modalIndex !== -1) {
       return modalIndex
@@ -40,7 +40,7 @@ export class ModalManager {
   }
 
   // Mount is called after the Modal has been mounted to the DOM.
-  mount(modal: Modal) {
+  mount = (modal: Modal) => {
     const modalIndex = this.modals.indexOf(modal)
 
     if (modalIndex === -1) {
@@ -50,7 +50,7 @@ export class ModalManager {
     this.listeners.forEach((listener) => listener())
   }
 
-  unregister(modal: Modal) {
+  unregister = (modal: Modal) => {
     const modalIndex = this.modals.indexOf(modal)
     if (modalIndex === -1) {
       return modalIndex
@@ -63,7 +63,7 @@ export class ModalManager {
     return modalIndex
   }
 
-  isTopmostModal(modal: Modal) {
+  isTopmostModal = (modal: Modal) => {
     return (
       this.modals.length > 0 && this.modals[this.modals.length - 1] === modal
     )

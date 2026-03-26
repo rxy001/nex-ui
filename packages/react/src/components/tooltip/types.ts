@@ -129,9 +129,7 @@ export interface TooltipOwnProps<RootComponent extends ElementType = 'div'>
   /**
    * The props to modify the framer motion animation.
    */
-  motionProps?:
-    | ((placement: Placement) => HTMLMotionProps<'div'>)
-    | HTMLMotionProps<'div'>
+  motionProps?: HTMLMotionProps<'div'>
 
   /**
    * If true, keeps the Tooltip mounted in the DOM when not open.

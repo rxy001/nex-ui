@@ -12,20 +12,17 @@ export function TooltipPaperMotion({
 }: TooltipPaperMotionProps) {
   const { open } = useTooltipContext()
 
-  const resolvedProps =
-    typeof motionProps === 'function' ? motionProps(placement) : motionProps
-
   const props = useFadeInOutMotionProps(
     useScaleInOutMotionProps({
       animate: open ? 'visible' : 'hidden',
-      ...resolvedProps,
+      ...motionProps,
       onAnimationStart: (animation) => {
         onAnimationStart?.(animation)
-        resolvedProps?.onAnimationStart?.(animation)
+        motionProps?.onAnimationStart?.(animation)
       },
       onAnimationComplete: (animation) => {
         onAnimationComplete?.(animation)
-        resolvedProps?.onAnimationComplete?.(animation)
+        motionProps?.onAnimationComplete?.(animation)
       },
     }),
   )

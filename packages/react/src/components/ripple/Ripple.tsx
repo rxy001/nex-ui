@@ -1,7 +1,7 @@
 'use client'
 
-import { cloneElement, isValidElement } from 'react'
-import { chain } from '@nex-ui/utils'
+import { cloneElement } from 'react'
+import { chain, isValidNonFragmentElement } from '@nex-ui/utils'
 import { useRippleMotion } from './useRippleMotion'
 import type { MouseEvent, ReactElement } from 'react'
 import type { UseRippleMotionProps } from './useRippleMotion'
@@ -20,7 +20,7 @@ export function Ripple({
 }: RippleProps) {
   const showEffect = useRippleMotion({ motionProps })
 
-  if (!isValidElement(children)) {
+  if (!isValidNonFragmentElement(children)) {
     return children
   }
 

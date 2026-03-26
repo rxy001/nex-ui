@@ -163,7 +163,7 @@ interface AccordionItemOwnProps<RootComponent extends ElementType = 'div'> {
   title?: ReactNode
 
   /**
-   * The props to modify the framer motion animation for the AccordionItem content.
+   * The props to modify the framer motion animation.
    */
   motionProps?: HTMLMotionProps<'div'>
 
