@@ -1,5 +1,10 @@
 import { ownerWindow } from '@nex-ui/utils'
-import { isHTMLElement, getRectRelativeToViewport, toClientRect } from './dom'
+import {
+  isHTMLElement,
+  getRectRelativeToViewport,
+  toClientRect,
+  getBoundingClientRect,
+} from './dom'
 import { getOffsetParent } from './getOffsetParent'
 import { getOverflowAncestors } from './getOverflowAncestors'
 import type { MiddlewareState } from './types'
@@ -13,7 +18,7 @@ export function detectOverflow(state: MiddlewareState) {
   )
 
   const clippingAncestorRects = clippingAncestors.map((el) =>
-    toClientRect(el.getBoundingClientRect()),
+    toClientRect(getBoundingClientRect(el, el)),
   )
 
   const { visualViewport } = win

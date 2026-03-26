@@ -1,6 +1,6 @@
 import { ownerWindow, ownerDocument, __TEST__ } from '@nex-ui/utils'
 import { isWebKit } from './utils'
-import type { Rect } from './types'
+import type { Rect, Coordinates } from './types'
 
 export function isHTMLElement(
   element: Element | Window,
@@ -157,19 +157,54 @@ export function getDimensions(element: Element) {
   return {
     width,
     height,
+    $: shouldFallback,
   }
 }
 
-// const getBoundingClientRect = (element: Element) => {
-//   const clientRect = element.getBoundingClientRect()
+function getElementScale(element: Element): Coordinates {
+  const { width, height, $ } = getDimensions(element)
+  const rect = element.getBoundingClientRect()
 
-//   return toClientRect({
-//     width: clientRect.width,
-//     height: clientRect.height,
-//     x: clientRect.left,
-//     y: clientRect.top,
-//   })
-// }
+  let x = ($ ? Math.round(rect.width) : rect.width) / width
+  let y = ($ ? Math.round(rect.height) : rect.height) / height
+
+  if (!x || !Number.isFinite(x)) {
+    x = 1
+  }
+
+  if (!y || !Number.isFinite(y)) {
+    y = 1
+  }
+
+  return {
+    x,
+    y,
+  }
+}
+
+export function getBoundingClientRect(
+  element: Element,
+  offsetParent: Element | Window,
+) {
+  // getBoundingClientRect returns finial rendered size of the element.
+  const clientRect = element.getBoundingClientRect()
+
+  let scale: Coordinates = {
+    x: 1,
+    y: 1,
+  }
+
+  if (offsetParent && isHTMLElement(offsetParent)) {
+    scale = getElementScale(offsetParent)
+  }
+
+  return toClientRect({
+    width: clientRect.width / scale.x,
+    height: clientRect.height / scale.y,
+    x: clientRect.left / scale.x,
+    y: clientRect.top / scale.y,
+  })
+}
 
 export function getRectRelativeToViewport(
   elementRect: Rect,
@@ -194,7 +229,10 @@ export function getRectRelativeToViewport(
   }
 
   if (isHTMLElement(offsetParent)) {
-    ;({ x: offset.x, y: offset.y } = offsetParent.getBoundingClientRect())
+    ;({ x: offset.x, y: offset.y } = getBoundingClientRect(
+      offsetParent,
+      offsetParent,
+    ))
   } else if (!isStaticPositioned(documentElement)) {
     // Handle element positioned within the html element.
     ;({ x: offset.x, y: offset.y } = documentElement.getBoundingClientRect())
@@ -217,7 +255,7 @@ export function getRectRelativeToOffsetParent(
   offsetParent: Element | Window,
 ): Rect {
   const { documentElement } = ownerDocument(element)
-  const elementRect = element.getBoundingClientRect()
+  const elementRect = getBoundingClientRect(element, offsetParent)
 
   let scroll = { scrollLeft: 0, scrollTop: 0 }
 
@@ -233,7 +271,10 @@ export function getRectRelativeToOffsetParent(
   }
 
   if (isHTMLElement(offsetParent)) {
-    ;({ x: offset.x, y: offset.y } = offsetParent.getBoundingClientRect())
+    ;({ x: offset.x, y: offset.y } = getBoundingClientRect(
+      offsetParent,
+      offsetParent,
+    ))
   } else if (!isStaticPositioned(documentElement)) {
     // Handle element positioned within the html element.
     ;({ x: offset.x, y: offset.y } = documentElement.getBoundingClientRect())
