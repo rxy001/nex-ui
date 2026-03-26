@@ -34,7 +34,6 @@ export const switchRecipe = defineSlotRecipe({
       borderRadius: 'full',
       alignItems: 'center',
       boxSizing: 'border-box',
-      transition: 'colors',
       overflow: 'hidden',
       position: 'relative',
       px: '1',
@@ -42,7 +41,6 @@ export const switchRecipe = defineSlotRecipe({
     thumb: {
       bg: 'white',
       borderRadius: 'inherit',
-      transition: 'margin',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -52,7 +50,6 @@ export const switchRecipe = defineSlotRecipe({
       alignItems: 'center',
       justifyContent: 'center',
       position: 'absolute',
-      transition: 'scale',
       insetInlineStart: '1',
       opacity: 0,
       scale: 0,
@@ -62,7 +59,6 @@ export const switchRecipe = defineSlotRecipe({
       alignItems: 'center',
       justifyContent: 'center',
       position: 'absolute',
-      transition: 'transform',
       insetInlineEnd: '1',
     },
     label: {
@@ -159,18 +155,18 @@ export const switchRecipe = defineSlotRecipe({
     },
     disabled: toSlots(disabledVariant, 'root'),
     disableAnimation: {
-      true: {
+      false: {
         track: {
-          transition: 'none',
+          transition: 'colors',
         },
         thumb: {
-          transition: 'none',
+          transition: 'margin',
         },
         startIcon: {
-          transition: 'none',
+          transition: 'scale',
         },
         endIcon: {
-          transition: 'none',
+          transition: 'transform',
         },
       },
     },

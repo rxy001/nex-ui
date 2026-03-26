@@ -50,7 +50,6 @@ export const cardRecipe = defineRecipe({
     },
     hoverable: {
       true: {
-        transition: 'scale',
         _hover: {
           scale: '1.03',
         },
@@ -59,7 +58,19 @@ export const cardRecipe = defineRecipe({
         },
       },
     },
+    disableAnimation: {
+      false: {},
+    },
   },
+  compoundVariants: [
+    {
+      disableAnimation: false,
+      hoverable: true,
+      css: {
+        transition: 'scale',
+      },
+    },
+  ],
 })
 
 export const cardHeaderRecipe = defineSlotRecipe({
@@ -134,6 +145,8 @@ export const cardActionArea = defineRecipe({
     disabled: {
       true: {
         cursor: 'default',
+        pointerEvents: 'none',
+        opacity: 0.6,
       },
     },
   },

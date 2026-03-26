@@ -36,19 +36,22 @@ export function SubDropdownContent<RootComponent extends ElementType>(
 
   const { open } = useSubDropdownContext()
 
-  const { color: defaultColor, variant: defaultVariant } =
-    useDropdownContentContext()
+  const {
+    color: defaultColor,
+    variant: defaultVariant,
+    disableAnimation: defaultDisableAnimation,
+  } = useDropdownContentContext()
 
   const {
     children,
     container,
     keepMounted,
     motionProps,
-    disableAnimation,
     classNames,
     slotProps,
     minWidth,
     maxHeight,
+    disableAnimation = defaultDisableAnimation,
     color = defaultColor,
     variant = defaultVariant,
     ...remainingProps
@@ -104,8 +107,9 @@ export function SubDropdownContent<RootComponent extends ElementType>(
       variant,
       indicatorsCount,
       setIndicatorsCount,
+      disableAnimation,
     }),
-    [color, indicatorsCount, variant],
+    [color, disableAnimation, indicatorsCount, variant],
   )
 
   const renderPaper = () => (

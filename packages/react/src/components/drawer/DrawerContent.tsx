@@ -39,7 +39,6 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
     slotProps,
     closeIcon,
     motionProps,
-    disableAnimation,
     restoreFocus,
     closeOnEscape,
     hideBackdrop,
@@ -50,6 +49,7 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
     placement = 'right',
     hideCloseButton = false,
     closeOnInteractOutside = true,
+    disableAnimation = false,
     size = 'md',
     ...remainingProps
   } = props
@@ -70,6 +70,7 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
     size,
     closeIcon,
     hideCloseButton,
+    disableAnimation,
   }
 
   const styles = useRecipeStyles({

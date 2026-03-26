@@ -26,6 +26,7 @@ export function Card<RootComponent extends ElementType = 'div'>(
     radius = 'md',
     hoverable = false,
     blurred = false,
+    disableAnimation = false,
     ...remainingProps
   } = props
 
@@ -35,6 +36,7 @@ export function Card<RootComponent extends ElementType = 'div'>(
     blurred,
     shadow,
     radius,
+    disableAnimation,
   }
 
   const slotClasses = useSlotClasses({
@@ -58,6 +60,7 @@ export function Card<RootComponent extends ElementType = 'div'>(
       radius,
       hoverable,
       blurred,
+      disableAnimation,
     },
   })
 

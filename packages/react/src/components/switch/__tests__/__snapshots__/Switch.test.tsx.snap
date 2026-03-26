@@ -69,8 +69,6 @@ exports[`Switch should render with default props 1`] = `
   -ms-flex-align: center;
   align-items: center;
   box-sizing: border-box;
-  -webkit-transition: var(--nui-transitions-colors);
-  transition: var(--nui-transitions-colors);
   overflow: hidden;
   position: relative;
   -webkit-padding-start: var(--nui-spaces-1);
@@ -80,6 +78,8 @@ exports[`Switch should render with default props 1`] = `
   width: var(--nui-sizes-12);
   height: var(--nui-sizes-7);
   font-size: var(--nui-font-sizes-lg);
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
 }
 
 [data-nui-color-scheme="dark"] .emotion-2 {
@@ -89,8 +89,6 @@ exports[`Switch should render with default props 1`] = `
 .emotion-3 {
   background-color: var(--nui-colors-white);
   border-radius: inherit;
-  -webkit-transition: var(--nui-transitions-margin);
-  transition: var(--nui-transitions-margin);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -105,6 +103,8 @@ exports[`Switch should render with default props 1`] = `
   align-items: center;
   width: var(--nui-sizes-5);
   height: var(--nui-sizes-5);
+  -webkit-transition: var(--nui-transitions-margin);
+  transition: var(--nui-transitions-margin);
 }
 
 <label

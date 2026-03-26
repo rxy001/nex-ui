@@ -28,7 +28,6 @@ export const dialogContentRecipe = defineSlotRecipe({
       p: '1.5',
       overflow: 'hidden',
       borderRadius: 'full',
-      transition: 'colors',
       color: 'gray.400',
       _hover: {
         bg: 'gray.muted',
@@ -104,6 +103,13 @@ export const dialogContentRecipe = defineSlotRecipe({
       bottom: {
         root: {
           alignItems: 'flex-end',
+        },
+      },
+    },
+    disableAnimation: {
+      false: {
+        closeButton: {
+          transition: 'colors',
         },
       },
     },

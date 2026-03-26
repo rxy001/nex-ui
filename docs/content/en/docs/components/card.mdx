@@ -124,6 +124,11 @@ Card inherits the props of `as` (by default, `'div'`).
       type: 'boolean',
       description: 'If true, enables a hover effect on the Card.',
     },
+    {
+      prop: 'disableAnimation',
+      type: 'boolean',
+      description: 'If true, disables the animation for the Card on hover.',
+    },
   ]}
 />
 
@@ -323,6 +328,18 @@ CardActionArea inherits the props of `as` (by default, `'button'`).
       prop: 'ref',
       type: 'Ref',
       description: 'Ref for forwarding to the root.',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, disables the CardActionArea.',
+    },
+    {
+      prop: 'disableRipple',
+      type: 'boolean',
+      default: 'false',
+      description: 'If true, disables the ripple effect on click.',
     },
   ]}
 />

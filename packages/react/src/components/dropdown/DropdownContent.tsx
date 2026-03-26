@@ -35,11 +35,11 @@ export function DropdownContent<RootComponent extends ElementType>(
     container,
     keepMounted,
     motionProps,
-    disableAnimation,
     slotProps,
     classNames,
     minWidth,
     maxHeight,
+    disableAnimation = false,
     color = 'gray',
     variant = 'solid',
     placement = 'bottom',
@@ -99,8 +99,9 @@ export function DropdownContent<RootComponent extends ElementType>(
       variant,
       indicatorsCount,
       setIndicatorsCount,
+      disableAnimation,
     }),
-    [color, indicatorsCount, variant],
+    [color, disableAnimation, indicatorsCount, variant],
   )
 
   const renderPaper = () => (

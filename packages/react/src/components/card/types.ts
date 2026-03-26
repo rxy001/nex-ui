@@ -56,6 +56,11 @@ interface CardOwnProps<RootComponent extends ElementType> {
    * If true, enables a hover effect on the Card.
    */
   hoverable?: boolean
+
+  /**
+   * If true, disables the animation for the Card on hover.
+   */
+  disableAnimation?: boolean
 }
 
 export type CardProps<RootComponent extends ElementType = 'div'> =
@@ -216,6 +221,13 @@ interface CardActionAreaOwnProps<RootComponent extends ElementType> {
    * Additional class names to apply to the root.
    */
   className?: ClassValue
+
+  /**
+   * If true, disables the ripple effect.
+   *
+   * @default false
+   */
+  disableRipple?: boolean
 }
 
 export type CardActionAreaProps<RootComponent extends ElementType = 'button'> =

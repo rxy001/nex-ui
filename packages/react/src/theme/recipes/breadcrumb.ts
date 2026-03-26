@@ -113,6 +113,7 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
       color: 'colorPalette.primary/70',
       userSelect: 'none',
       borderRadius: 2,
+      whiteSpace: 'nowrap',
       _focusVisibleRing: {
         outline: '{borders.md} {colors.colorPalette.primary}',
         outlineOffset: '2px',

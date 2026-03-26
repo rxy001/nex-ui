@@ -117,11 +117,11 @@ exports[`CheckboxGroup should render with default props 1`] = `
   inset: 0;
   border: var(--nui-borders-md);
   border-color: var(--nui-colors-gray-highlight);
-  -webkit-transition: var(--nui-transitions-colors);
-  transition: var(--nui-transitions-colors);
   background: transparent;
   z-index: -2;
   border-radius: calc(var(--nui-radii-lg) * .6);
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
 }
 
 .emotion-4::after {
@@ -129,15 +129,15 @@ exports[`CheckboxGroup should render with default props 1`] = `
   position: absolute;
   inset: 0;
   background-color: var(--nui-colors-blue-primary);
+  opacity: 0;
+  z-index: -1;
+  border-radius: calc(var(--nui-radii-lg) * .6);
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
   -webkit-transform: scale(0.4);
   -moz-transform: scale(0.4);
   -ms-transform: scale(0.4);
   transform: scale(0.4);
-  opacity: 0;
-  z-index: -1;
-  border-radius: calc(var(--nui-radii-lg) * .6);
 }
 
 .emotion-5 {

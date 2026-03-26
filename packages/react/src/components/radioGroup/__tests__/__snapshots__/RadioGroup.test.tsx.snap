@@ -116,10 +116,10 @@ exports[`RadioGroup should render with default props 1`] = `
   -webkit-justify-content: center;
   justify-content: center;
   box-sizing: border-box;
-  -webkit-transition: var(--nui-transitions-colors);
-  transition: var(--nui-transitions-colors);
   width: var(--nui-sizes-5);
   height: var(--nui-sizes-5);
+  -webkit-transition: var(--nui-transitions-colors);
+  transition: var(--nui-transitions-colors);
 }
 
 .emotion-4::before {
@@ -131,10 +131,10 @@ exports[`RadioGroup should render with default props 1`] = `
   transform: scale(0);
   border-radius: var(--nui-radii-full);
   background-color: var(--nui-colors-blue-primary);
-  -webkit-transition: var(--nui-transitions-all);
-  transition: var(--nui-transitions-all);
   width: var(--nui-sizes-2);
   height: var(--nui-sizes-2);
+  -webkit-transition: var(--nui-transitions-all);
+  transition: var(--nui-transitions-all);
 }
 
 .emotion-5 {

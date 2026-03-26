@@ -23,6 +23,7 @@ exports[`Card should render with default props 1`] = `
 <div
   class="nui-card-root emotion-0"
   data-blurred="false"
+  data-disable-animation="false"
   data-hoverable="false"
   data-radius="md"
   data-shadow="md"
