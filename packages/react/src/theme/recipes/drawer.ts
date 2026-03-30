@@ -28,7 +28,6 @@ export const drawerContentRecipe = defineSlotRecipe({
       p: '1.5',
       overflow: 'hidden',
       borderRadius: 'full',
-
       color: 'gray.400',
       _hover: {
         bg: 'gray.muted',
@@ -40,6 +39,28 @@ export const drawerContentRecipe = defineSlotRecipe({
     backdrop: {},
   },
   variants: {
+    radius: {
+      none: {
+        paper: {
+          '--drawer-border-radius': 'none',
+        },
+      },
+      sm: {
+        paper: {
+          '--drawer-border-radius': '{radii.md}',
+        },
+      },
+      md: {
+        paper: {
+          '--drawer-border-radius': '{radii.lg}',
+        },
+      },
+      lg: {
+        paper: {
+          '--drawer-border-radius': '{radii.2xl}',
+        },
+      },
+    },
     placement: {
       left: {
         root: {
@@ -47,8 +68,8 @@ export const drawerContentRecipe = defineSlotRecipe({
           justifyContent: 'flex-start',
         },
         paper: {
-          borderTopRightRadius: 'lg',
-          borderBottomRightRadius: 'lg',
+          borderTopRightRadius: 'var(--drawer-border-radius)',
+          borderBottomRightRadius: 'var(--drawer-border-radius)',
         },
       },
       right: {
@@ -57,8 +78,8 @@ export const drawerContentRecipe = defineSlotRecipe({
           justifyContent: 'flex-end',
         },
         paper: {
-          borderTopLeftRadius: 'lg',
-          borderBottomLeftRadius: 'lg',
+          borderTopLeftRadius: 'var(--drawer-border-radius)',
+          borderBottomLeftRadius: 'var(--drawer-border-radius)',
         },
       },
       top: {
@@ -67,8 +88,8 @@ export const drawerContentRecipe = defineSlotRecipe({
           justifyContent: 'flex-start',
         },
         paper: {
-          borderBottomLeftRadius: 'lg',
-          borderBottomRightRadius: 'lg',
+          borderBottomLeftRadius: 'var(--drawer-border-radius)',
+          borderBottomRightRadius: 'var(--drawer-border-radius)',
         },
       },
       bottom: {
@@ -77,8 +98,8 @@ export const drawerContentRecipe = defineSlotRecipe({
           justifyContent: 'flex-end',
         },
         paper: {
-          borderTopLeftRadius: 'lg',
-          borderTopRightRadius: 'lg',
+          borderTopLeftRadius: 'var(--drawer-border-radius)',
+          borderTopRightRadius: 'var(--drawer-border-radius)',
         },
       },
     },

@@ -105,7 +105,7 @@ interface CheckboxOwnProps<CheckboxComponent extends ElementType> {
   /**
    * The border radius of the Checkbox.
    *
-   * @default size
+   * @default 'md'
    */
   radius?: CheckboxVariants['radius']
 

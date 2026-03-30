@@ -2,8 +2,8 @@ import { GithubOutlined } from '@nex-ui/icons'
 import { upperFirst } from '@nex-ui/utils'
 import {
   COLORS,
-  SIZES as DEFAULT_SIZES,
-  RADII as DEFAULT_RADII,
+  SIZES,
+  RADII,
   toReadableSize,
   WithLabel,
   toReadableRadius,
@@ -13,8 +13,6 @@ import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { BadgeProps } from '../types'
 
-const SIZES = ['xs', ...DEFAULT_SIZES] as const
-const RADII = ['xs', ...DEFAULT_RADII] as const
 const VARIANTS = ['solid', 'subtle', 'outlined', 'faded'] as const
 
 function BadgeTemplate(props: BadgeProps) {

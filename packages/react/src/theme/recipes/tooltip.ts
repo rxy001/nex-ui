@@ -1,5 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { toSlots, radiusVariant, colorVariant } from '../shared'
+import { toSlots, colorVariant } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const tooltipRecipe = defineSlotRecipe({
@@ -8,44 +8,64 @@ export const tooltipRecipe = defineSlotRecipe({
       zIndex: 'tooltip',
     },
     paper: {
-      px: '2.5',
-      py: '1',
       fs: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
       overflow: 'auto',
       boxSizing: 'border-box',
-      maxW: 'var(--tooltip-max-width, 360px)',
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
-      width: 'max-content',
     },
   },
   variants: {
     size: {
       sm: {
         paper: {
-          fs: 'sm',
+          px: '2',
+          py: '0.5',
         },
       },
       md: {
         paper: {
-          fs: 'md',
+          px: '2.5',
+          py: '1',
         },
       },
       lg: {
         paper: {
-          fs: 'lg',
+          px: '3',
+          py: '1.5',
         },
       },
     },
-    radius: toSlots(radiusVariant, 'paper'),
     color: {
       ...toSlots(colorVariant, 'paper'),
       default: {
         paper: {
           bg: 'content',
           color: 'inherit',
+        },
+      },
+    },
+    radius: {
+      sm: {
+        paper: {
+          borderRadius: 'md',
+        },
+      },
+      md: {
+        paper: {
+          borderRadius: 'lg',
+        },
+      },
+      lg: {
+        paper: {
+          borderRadius: '2xl',
+        },
+      },
+      none: {
+        paper: {
+          borderRadius: 'none',
         },
       },
     },

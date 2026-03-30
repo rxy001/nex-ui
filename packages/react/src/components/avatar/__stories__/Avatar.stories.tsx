@@ -1,8 +1,8 @@
 import { UserOutlined } from '@nex-ui/icons'
 import { upperFirst } from '@nex-ui/utils'
 import {
-  RADII as DEFAULT_RADII,
-  SIZES as DEFAULT_SIZES,
+  RADII,
+  SIZES,
   COLORS,
   toReadableRadius,
   toReadableSize,
@@ -12,10 +12,6 @@ import { Avatar } from '../Avatar'
 import { Flex } from '../../flex'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { AvatarProps } from '../types'
-
-const RADII = [...DEFAULT_RADII, 'xl'] as const
-
-const SIZES = [...DEFAULT_SIZES, 'xl'] as const
 
 const meta = {
   title: 'Components/Avatar',

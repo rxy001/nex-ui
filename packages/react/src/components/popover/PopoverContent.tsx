@@ -1,7 +1,6 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { isNumber } from '@nex-ui/utils'
 import { AnimatePresence, LazyMotion } from 'motion/react'
 import {
   useDefaultProps,
@@ -16,7 +15,7 @@ import { PopoverPaperMotion } from './PopoverPaperMotion'
 import { popoverContentRecipe } from '../../theme/recipes'
 import { usePopoverContext } from './PopoverContext'
 import { PopperContent, PopperPortal } from '../popper'
-import type { CSSProperties, ElementType } from 'react'
+import type { ElementType } from 'react'
 import type { PopoverContentProps } from './types'
 import type { PointerDownOutsideEvent } from '../dismissibleLayer'
 
@@ -41,12 +40,14 @@ export function PopoverContent<RootComponent extends ElementType = 'div'>(
     slotProps,
     classNames,
     width,
-    maxWidth,
+    minWidth,
+    maxWidth = 300,
     placement = 'bottom',
     disableAnimation = false,
     loopFocus = true,
     color = 'default',
     radius = 'md',
+    size = 'md',
     ...remainingProps
   } = props
 
@@ -57,6 +58,7 @@ export function PopoverContent<RootComponent extends ElementType = 'div'>(
     placement,
     disableAnimation,
     loopFocus,
+    size,
   }
 
   const styles = useRecipeStyles({
@@ -87,6 +89,7 @@ export function PopoverContent<RootComponent extends ElementType = 'div'>(
       color,
       radius,
       disableAnimation,
+      size,
     },
     ariaProps: {
       id: rootId,
@@ -113,10 +116,11 @@ export function PopoverContent<RootComponent extends ElementType = 'div'>(
     classNames: slotClasses.paper,
     externalSlotProps: slotProps?.paper,
     additionalProps: {
-      style: {
-        '--popover-max-width': isNumber(maxWidth) ? `${maxWidth}px` : maxWidth,
-        '--popover-width': isNumber(width) ? `${width}px` : width,
-      } as CSSProperties,
+      sx: {
+        width,
+        minWidth,
+        maxWidth,
+      },
     },
   })
 

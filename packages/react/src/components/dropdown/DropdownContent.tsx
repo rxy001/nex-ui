@@ -2,7 +2,6 @@
 
 import { nex } from '@nex-ui/styled'
 import { useMemo, useState } from 'react'
-import { isNumber } from '@nex-ui/utils'
 import { AnimatePresence, LazyMotion } from 'motion/react'
 import { dropdownContentRecipe } from '../../theme/recipes'
 import {
@@ -37,14 +36,30 @@ export function DropdownContent<RootComponent extends ElementType>(
     motionProps,
     slotProps,
     classNames,
-    minWidth,
+    minWidth = 150,
+    width,
+    maxWidth,
+    height,
+    minHeight,
     maxHeight,
     disableAnimation = false,
+    radius = 'md',
     color = 'gray',
     variant = 'solid',
     placement = 'bottom',
+    size = 'md',
     ...remainingProps
   } = props
+
+  const ownerState = {
+    ...props,
+    size,
+    radius,
+    color,
+    variant,
+    placement,
+    disableAnimation,
+  }
 
   const [indicatorsCount, setIndicatorsCount] = useState(0)
 
@@ -58,9 +73,9 @@ export function DropdownContent<RootComponent extends ElementType>(
     })
 
   const styles = useRecipeStyles({
+    ownerState,
     name: 'DropdownContent',
     recipe: dropdownContentRecipe,
-    ownerState: props,
   })
 
   const slotClasses = useSlotClasses({
@@ -78,10 +93,6 @@ export function DropdownContent<RootComponent extends ElementType>(
       placement,
       style: {
         display: resolvedDisplay,
-        '--dropdown-min-width': isNumber(minWidth) ? `${minWidth}px` : minWidth,
-        '--dropdown-max-height': isNumber(maxHeight)
-          ? `${maxHeight}px`
-          : maxHeight,
       },
     },
   })
@@ -91,17 +102,29 @@ export function DropdownContent<RootComponent extends ElementType>(
     style: styles.paper,
     classNames: slotClasses.paper,
     externalSlotProps: slotProps?.paper,
+    additionalProps: {
+      sx: {
+        minWidth,
+        width,
+        maxWidth,
+        height,
+        minHeight,
+        maxHeight,
+      },
+    },
   })
 
   const ctx = useMemo<DropdownContentContextValue>(
     () => ({
       color,
+      radius,
       variant,
       indicatorsCount,
       setIndicatorsCount,
       disableAnimation,
+      size,
     }),
-    [color, disableAnimation, indicatorsCount, variant],
+    [color, disableAnimation, indicatorsCount, radius, size, variant],
   )
 
   const renderPaper = () => (

@@ -47,6 +47,7 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
     keepMounted,
     preventScroll,
     placement = 'right',
+    radius = 'md',
     hideCloseButton = false,
     closeOnInteractOutside = true,
     disableAnimation = false,
@@ -67,6 +68,7 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
   const ownerState: DrawerContentProps = {
     ...props,
     placement,
+    radius,
     size,
     closeIcon,
     hideCloseButton,
@@ -131,6 +133,7 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
     },
     dataAttrs: {
       size,
+      radius,
       placement,
       hideCloseButton,
     },

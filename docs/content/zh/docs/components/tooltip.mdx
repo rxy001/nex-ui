@@ -166,7 +166,7 @@ Tooltip 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'size',
-      type: `'sm' | 'md' | 'lg'`,
+      type: ["'sm'", "'md'", "'lg'"],
       default: `'md'`,
       description: 'Tooltip 的大小。',
     },
@@ -189,14 +189,25 @@ Tooltip 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'radius',
-      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`],
       default: `'md'`,
       description: 'Tooltip 的圆角大小。',
     },
     {
       prop: 'maxWidth',
-      type: ['string', 'number'],
+      type: 'CSSObject["maxWidth"]',
+      default: '300',
       description: 'Tooltip 的最大宽度。',
+    },
+    {
+      prop: 'width',
+      type: 'CSSObject["width"]',
+      description: 'Tooltip 的宽度。',
+    },
+    {
+      prop: 'minWidth',
+      type: 'CSSObject["minWidth"]',
+      description: 'Tooltip 的最小宽度。',
     },
     {
       prop: 'motionProps',

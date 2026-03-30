@@ -92,15 +92,24 @@ interface DrawerContentOwnProps<RootComponent extends ElementType = 'div'>
 
   /**
    * If true, hides the close button.
+   *
    * @default false
    */
   hideCloseButton?: boolean
 
   /**
    * The size of the Drawer.
+   *
    * @default 'md'
    */
   size?: DrawerContentVariants['size']
+
+  /**
+   * The border radius of the Drawer.
+   *
+   * @default 'md'
+   */
+  radius?: DrawerContentVariants['radius']
 
   /**
    * The display position of the Drawer.

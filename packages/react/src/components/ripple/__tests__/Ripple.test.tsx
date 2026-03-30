@@ -6,9 +6,11 @@ MotionGlobalConfig.skipAnimations = false
 
 describe('Ripple', () => {
   it('should return children as-is when children is not a valid React element', () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
     const textChild = 'Not a valid element'
     const { container } = render(<Ripple>{textChild as any}</Ripple>)
     expect(container.textContent).toBe(textChild)
+    consoleErrorSpy.mockRestore()
   })
 
   it('should clone valid React element children with combined onClick handlers', async () => {

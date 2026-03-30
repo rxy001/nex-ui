@@ -3,7 +3,7 @@
 import { nex } from '@nex-ui/styled'
 import { useCallback, useEffect, useId, useMemo, useRef } from 'react'
 import { useControlledState, useDebounce, useUnmount } from '@nex-ui/hooks'
-import { addEventListener, isNumber } from '@nex-ui/utils'
+import { addEventListener } from '@nex-ui/utils'
 import { AnimatePresence, LazyMotion } from 'motion/react'
 import { Popper, PopperContent, PopperPortal } from '../popper'
 import {
@@ -18,7 +18,7 @@ import { tooltipRecipe } from '../../theme/recipes'
 import { TooltipTrigger } from './TooltipTrigger'
 import { TooltipProvider, useTooltipContext } from './TooltipContext'
 import { TooltipPaperMotion } from './TooltipPaperMotion'
-import type { CSSProperties, ElementType } from 'react'
+import type { ElementType } from 'react'
 import type { TooltipProps } from './types'
 import type {
   FocusOutsideEvent,
@@ -39,7 +39,9 @@ function TooltipImpl(props: TooltipProps) {
     keepMounted,
     slotProps,
     motionProps,
-    maxWidth,
+    minWidth,
+    width = 'max-content',
+    maxWidth = 300,
     interactive = false,
     closeOnClick = true,
     disableAnimation = false,
@@ -121,9 +123,11 @@ function TooltipImpl(props: TooltipProps) {
     classNames: slotClasses.paper,
     externalSlotProps: slotProps?.paper,
     additionalProps: {
-      style: {
-        '--tooltip-max-width': isNumber(maxWidth) ? `${maxWidth}px` : maxWidth,
-      } as CSSProperties,
+      sx: {
+        maxWidth,
+        minWidth,
+        width,
+      },
     },
   })
 

@@ -3,7 +3,6 @@ import {
   renderWithNexUIProvider,
   testVariantDataAttrs,
   testSizeDataAttrs,
-  testRadiusDataAttrs,
   testRefForwarding,
   testClassNamesForwarding,
   testSlotPropsForwarding,
@@ -56,9 +55,13 @@ describe('Tooltip', () => {
     useAct: true,
   })
 
-  testRadiusDataAttrs(<TestTooltip open />, {
-    useAct: true,
-  })
+  testVariantDataAttrs(
+    <TestTooltip open />,
+    ['radius', ['none', 'sm', 'md', 'lg']],
+    {
+      useAct: true,
+    },
+  )
 
   testClassNamesForwarding(
     <TestTooltip open />,

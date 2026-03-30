@@ -97,7 +97,7 @@ interface ButtonOwnProps<RootComponent extends ElementType> {
   /**
    * The border radius of the Button.
    *
-   * @default size
+   * @default 'md'
    */
   radius?: ButtonVariants['radius']
 

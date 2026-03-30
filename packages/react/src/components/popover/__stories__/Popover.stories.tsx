@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { COLORS as DEFAULT_COLORS, RADII } from '~/sb/utils'
+import { COLORS as DEFAULT_COLORS, SIZES } from '~/sb/utils'
 import { Box } from '../../box'
 import { Popover, PopoverTrigger, PopoverContent } from '../index'
 import { Button } from '../../button'
@@ -96,7 +96,7 @@ const meta = {
       control: 'select',
     },
     radius: {
-      options: RADII,
+      options: ['none', 'sm', 'md', 'lg'],
       control: 'select',
     },
     loopFocus: {
@@ -110,6 +110,10 @@ const meta = {
     },
     shift: {
       control: 'boolean',
+    },
+    size: {
+      options: SIZES,
+      control: 'select',
     },
   },
 } satisfies Meta<PopoverTemplateProps>

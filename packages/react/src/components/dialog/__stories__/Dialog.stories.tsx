@@ -120,6 +120,10 @@ const meta = {
     hideCloseButton: {
       control: 'boolean',
     },
+    radius: {
+      control: 'select',
+      options: ['none', 'sm', 'md', 'lg'],
+    },
   },
 } satisfies Meta<DialogTemplateProps>
 
