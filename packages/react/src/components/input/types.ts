@@ -100,7 +100,7 @@ interface InputOwnProps<InputComponent extends ElementType> {
   /**
    * The border radius of the Input.
    *
-   * @default size
+   * @default 'md'
    */
   radius?: InputVariants['radius']
 

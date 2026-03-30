@@ -167,7 +167,7 @@ Tooltip inherits the props of `as` (by default, `'div'`).
     },
     {
       prop: 'size',
-      type: `'sm' | 'md' | 'lg'`,
+      type: ["'sm'", "'md'", "'lg'"],
       default: `'md'`,
       description: 'The size of the Tooltip.',
     },
@@ -190,14 +190,25 @@ Tooltip inherits the props of `as` (by default, `'div'`).
     },
     {
       prop: 'radius',
-      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`],
       default: `'md'`,
       description: 'The border radius of the Tooltip.',
     },
     {
       prop: 'maxWidth',
-      type: ['string', 'number'],
+      type: 'CSSObject["maxWidth"]',
+      default: '300',
       description: 'The maximum width of the Tooltip.',
+    },
+    {
+      prop: 'width',
+      type: 'CSSObject["width"]',
+      description: 'The width of the Tooltip.',
+    },
+    {
+      prop: 'minWidth',
+      type: 'CSSObject["minWidth"]',
+      description: 'The minimum width of the Tooltip.',
     },
     {
       prop: 'motionProps',

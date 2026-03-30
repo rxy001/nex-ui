@@ -79,7 +79,7 @@ export function Checkbox<CheckboxComponent extends ElementType = 'input'>(
     color = groupCtx?.color ?? primaryThemeColor,
     disabled = groupCtx?.disabled ?? false,
     size = groupCtx?.size ?? 'md',
-    radius = groupCtx?.radius ?? groupCtx?.size ?? size,
+    radius = groupCtx?.radius ?? 'md',
     ...remainingProps
   } = props
 

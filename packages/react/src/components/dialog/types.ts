@@ -138,6 +138,13 @@ interface DialogContentOwnProps<RootComponent extends ElementType = 'div'>
   keepMounted?: boolean
 
   /**
+   * The border radius of the Dialog.
+   *
+   * @default 'md'
+   */
+  radius?: DialogContentVariants['radius']
+
+  /**
    * The id(s) of the element(s) that label the dialog.
    */
   'aria-labelledby'?: string

@@ -81,7 +81,7 @@ export function Avatar<RootComponent extends ElementType = 'div'>(
     classNames,
     children: childrenProp,
     size = groupCtx?.size ?? 'md',
-    radius = groupCtx?.radius ?? size,
+    radius = groupCtx?.radius ?? 'md',
     color = groupCtx?.color ?? 'gray',
     outlined = groupCtx?.outlined ?? false,
     ...remainingProps

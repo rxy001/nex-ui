@@ -1,5 +1,5 @@
 import type { ReactNode, ElementType } from 'react'
-import type { Interpolation } from '@nex-ui/system'
+import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { HTMLMotionProps } from 'motion/react'
 import type { PopperContentProps, PopperProps } from '../popper'
@@ -97,8 +97,22 @@ export interface TooltipOwnProps<RootComponent extends ElementType = 'div'>
 
   /**
    * The maximum width of the Tooltip.
+   *
+   * @default 300
    */
-  maxWidth?: string | number
+  maxWidth?: CSSObject['maxWidth']
+
+  /**
+   * The width of the Tooltip.
+   *
+   * @default 'max-content'
+   */
+  width?: CSSObject['width']
+
+  /**
+   * The minimum width of the Tooltip.
+   */
+  minWidth?: CSSObject['minWidth']
 
   /**
    * If true, opens the Tooltip by default. (uncontrolled)

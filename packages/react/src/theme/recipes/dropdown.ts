@@ -12,16 +12,53 @@ export const dropdownContentRecipe = defineSlotRecipe({
     paper: {
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
-      borderRadius: 'md',
-      padding: '2',
       display: 'flex',
       flexDirection: 'column',
       gap: '1',
       boxSizing: 'border-box',
       bg: 'content',
-      minW: 'var(--dropdown-min-width, 150px)',
-      maxH: 'var(--dropdown-max-height, auto)',
       overflow: 'auto',
+    },
+  },
+  variants: {
+    radius: {
+      sm: {
+        paper: {
+          borderRadius: 'md',
+        },
+      },
+      md: {
+        paper: {
+          borderRadius: 'lg',
+        },
+      },
+      lg: {
+        paper: {
+          borderRadius: '2xl',
+        },
+      },
+      none: {
+        paper: {
+          borderRadius: 'none',
+        },
+      },
+    },
+    size: {
+      sm: {
+        paper: {
+          padding: '1',
+        },
+      },
+      md: {
+        paper: {
+          padding: '2',
+        },
+      },
+      lg: {
+        paper: {
+          padding: '3',
+        },
+      },
     },
   },
 })
@@ -194,16 +231,54 @@ export const subDropdownContentRecipe = defineSlotRecipe({
     paper: {
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
-      borderRadius: 'md',
       padding: '2',
       display: 'flex',
       flexDirection: 'column',
       gap: '1',
       boxSizing: 'border-box',
       bg: 'content',
-      minW: 'var(--dropdown-min-width)',
-      maxH: 'var(--dropdown-max-height)',
       overflow: 'auto',
+    },
+  },
+  variants: {
+    radius: {
+      sm: {
+        paper: {
+          borderRadius: 'md',
+        },
+      },
+      md: {
+        paper: {
+          borderRadius: 'lg',
+        },
+      },
+      lg: {
+        paper: {
+          borderRadius: 'xl',
+        },
+      },
+      none: {
+        paper: {
+          borderRadius: 'none',
+        },
+      },
+    },
+    size: {
+      sm: {
+        paper: {
+          padding: '1',
+        },
+      },
+      md: {
+        paper: {
+          padding: '2',
+        },
+      },
+      lg: {
+        paper: {
+          padding: '3',
+        },
+      },
     },
   },
 })
@@ -224,3 +299,6 @@ export type SubDropdownContentRecipe = typeof subDropdownContentRecipe
 export type DropdownDividerRecipe = typeof dropdownSeparatorRecipe
 
 export type DropdownItemVariants = RecipeVariants<DropdownItemRecipe>
+export type DropdownContentVariants = RecipeVariants<DropdownContentRecipe>
+export type SubDropdownContentVariants =
+  RecipeVariants<SubDropdownContentRecipe>

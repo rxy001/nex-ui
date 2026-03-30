@@ -1,5 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { radiusVariant, colorVariant, toSlots } from '../shared'
+import { colorVariant, toSlots } from '../shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const popoverContentRecipe = defineSlotRecipe({
@@ -8,26 +8,63 @@ export const popoverContentRecipe = defineSlotRecipe({
       zIndex: 'popover',
     },
     paper: {
-      px: '3',
-      py: '1.5',
       fs: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
-      maxWidth: 'var(--popover-max-width, 360px)',
-      width: 'var(--popover-width, auto)',
       boxSizing: 'border-box',
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
     },
   },
   variants: {
-    radius: toSlots(radiusVariant, 'paper'),
     color: {
       ...toSlots(colorVariant, 'paper'),
       default: {
         paper: {
           bg: 'content',
           color: 'inherit',
+        },
+      },
+    },
+    radius: {
+      sm: {
+        paper: {
+          borderRadius: 'md',
+        },
+      },
+      md: {
+        paper: {
+          borderRadius: 'lg',
+        },
+      },
+      lg: {
+        paper: {
+          borderRadius: '2xl',
+        },
+      },
+      none: {
+        paper: {
+          borderRadius: 'none',
+        },
+      },
+    },
+    size: {
+      sm: {
+        paper: {
+          px: '2',
+          py: '1',
+        },
+      },
+      md: {
+        paper: {
+          px: '3',
+          py: '1.5',
+        },
+      },
+      lg: {
+        paper: {
+          px: '4',
+          py: '2',
         },
       },
     },

@@ -3,9 +3,6 @@ import { Badge, Flex } from '@nex-ui/react'
 export default function App() {
   return (
     <Flex gap='4' wrap='wrap'>
-      <Badge radius='xs' size='lg'>
-        Extra Small
-      </Badge>
       <Badge radius='sm' size='lg'>
         Small
       </Badge>

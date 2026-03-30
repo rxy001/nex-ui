@@ -59,7 +59,7 @@ export function Input<InputComponent extends ElementType = 'input'>(
     fullWidth = false,
     invalid = false,
     size = 'md',
-    radius = size,
+    radius = 'md',
     clearable = false,
     labelPlacement: labelPlacementProp = 'float-outside',
     ...remainingProps

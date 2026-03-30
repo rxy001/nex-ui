@@ -1,8 +1,8 @@
 import {
   testRefForwarding,
   testVariantDataAttrs,
-  testRadiusDataAttrs,
   renderWithNexUIProvider,
+  testSizeDataAttrs,
 } from '~/tests/shared'
 import { Popover, PopoverTrigger, PopoverContent } from '../index'
 import { Button } from '../../button'
@@ -47,9 +47,17 @@ describe('PopoverContent', () => {
     },
   )
 
-  testRadiusDataAttrs(<TestPopover />, {
+  testSizeDataAttrs(<TestPopover />, {
     useAct: true,
   })
+
+  testVariantDataAttrs(
+    <TestPopover />,
+    ['radius', ['none', 'sm', 'md', 'lg']],
+    {
+      useAct: true,
+    },
+  )
 
   it('should render with content class', async () => {
     const { getByTestId } = await renderWithNexUIProvider(<TestPopover />, {

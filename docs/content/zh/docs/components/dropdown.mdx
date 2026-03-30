@@ -300,13 +300,45 @@ DropdownContent 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'minWidth',
-      type: ['string', 'number'],
+      type: "CSSObject['minWidth']",
       description: 'Dropdown 的最小宽度。',
     },
     {
+      prop: 'width',
+      type: "CSSObject['width']",
+      description: 'Dropdown 的宽度。',
+    },
+    {
+      prop: 'maxWidth',
+      type: "CSSObject['maxWidth']",
+      description: 'Dropdown 的最大宽度。',
+    },
+    {
+      prop: 'minHeight',
+      type: "CSSObject['minHeight']",
+      description: 'Dropdown 的最小高度。',
+    },
+    {
+      prop: 'height',
+      type: "CSSObject['height']",
+      description: 'Dropdown 的高度。',
+    },
+    {
       prop: 'maxHeight',
-      type: ['string', 'number'],
+      type: "CSSObject['maxHeight']",
       description: 'Dropdown 的最大高度。',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'none'"],
+      default: "'md'",
+      description: 'Dropdown 的 borderRadius。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'Dropdown 的大小。',
     },
   ]}
 />

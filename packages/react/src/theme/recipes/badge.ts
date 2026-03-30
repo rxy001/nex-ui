@@ -53,25 +53,22 @@ export const badgeRecipe = defineSlotRecipe({
   },
   variants: {
     size: {
-      xs: {
+      sm: {
         root: {
           fs: 'xs',
           h: '4',
           px: '1.5',
         },
       },
-      sm: {
+      md: {
         root: {
           fs: 'sm',
           h: '5',
           px: '2',
         },
       },
-      md: {
-        root: { fs: 'md', px: '2.5', h: '6' },
-      },
       lg: {
-        root: { fs: 'md', px: '3', h: '7' },
+        root: { fs: 'md', px: '2.5', h: '6' },
       },
     },
     radius: {
@@ -80,17 +77,14 @@ export const badgeRecipe = defineSlotRecipe({
           borderRadius: 'none',
         },
       },
-      xs: {
+      sm: {
         root: { borderRadius: 'xs' },
       },
-      sm: {
+      md: {
         root: { borderRadius: 'sm' },
       },
-      md: {
-        root: { borderRadius: 'md' },
-      },
       lg: {
-        root: { borderRadius: 'lg' },
+        root: { borderRadius: 'md' },
       },
       full: {
         root: {

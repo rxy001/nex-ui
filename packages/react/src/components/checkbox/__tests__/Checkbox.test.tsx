@@ -243,7 +243,9 @@ describe('Checkbox', () => {
     })
     expect(getByTestId('custom-icon')).toBeInTheDocument()
 
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
     rerender(<Checkbox icon='123' defaultChecked />)
+    consoleErrorSpy.mockRestore()
 
     expect(queryByClassName(checkboxClasses.icon)).toHaveTextContent('123')
   })

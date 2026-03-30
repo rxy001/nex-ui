@@ -107,6 +107,10 @@ const meta = {
     defaultOpen: {
       control: 'boolean',
     },
+    radius: {
+      control: 'select',
+      options: ['none', 'sm', 'md', 'lg'],
+    },
   },
 } satisfies Meta<DrawerTemplateProps>
 

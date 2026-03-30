@@ -36,7 +36,7 @@ export function AvatarGroup<RootComponent extends ElementType = 'div'>(
     size = 'md',
     color = 'gray',
     outlined = false,
-    radius = size,
+    radius = 'md',
     max: maxProp = 5,
     ...remainingProps
   } = props

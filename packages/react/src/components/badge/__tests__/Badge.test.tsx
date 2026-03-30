@@ -5,8 +5,9 @@ import {
   testRefForwarding,
   testRootClassName,
   testSlotPropsForwarding,
-  testVariantDataAttrs,
+  testRadiusDataAttrs,
   renderWithNexUIProvider,
+  testSizeDataAttrs,
 } from '~/tests/shared'
 import { Badge } from '../index'
 import { badgeSlotClasses } from './classes'
@@ -22,12 +23,9 @@ describe('Badge', () => {
 
   testColorDataAttrs(<Badge />)
 
-  testVariantDataAttrs(<Badge />, ['size', ['sm', 'md', 'lg', 'xl']])
+  testSizeDataAttrs(<Badge />)
 
-  testVariantDataAttrs(<Badge />, [
-    'radius',
-    ['none', 'sm', 'md', 'lg', 'xl', 'full'],
-  ])
+  testRadiusDataAttrs(<Badge />)
 
   testClassNamesForwarding(
     <Badge closable />,

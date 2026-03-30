@@ -35,7 +35,7 @@ interface BadgeOwnProps<RootComponent extends ElementType> {
   /**
    * The border radius of the Badge.
    *
-   * @default size
+   * @default 'md'
    */
   radius?: BadgeVariants['radius']
 

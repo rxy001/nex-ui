@@ -50,6 +50,7 @@ export function DialogContent<RootComponent extends ElementType = 'div'>(
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
     disableAnimation = false,
+    radius = 'md',
     placement = 'top',
     scroll = 'outside',
     hideCloseButton = false,
@@ -60,6 +61,7 @@ export function DialogContent<RootComponent extends ElementType = 'div'>(
 
   const ownerState: DialogContentProps = {
     ...props,
+    radius,
     placement,
     scroll,
     size,
@@ -133,6 +135,7 @@ export function DialogContent<RootComponent extends ElementType = 'div'>(
       placement,
       scroll,
       hideCloseButton,
+      radius,
     },
   })
 

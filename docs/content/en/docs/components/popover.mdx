@@ -167,20 +167,31 @@ PopoverContent inherits the props of `as` (by default, `'div'`).
     },
     {
       prop: 'maxWidth',
-      type: ['string', 'number'],
+      type: 'CSSObject["maxWidth"]',
       description: 'The maximum width of the Popover.',
     },
     {
       prop: 'width',
-      type: ['string', 'number'],
+      type: 'CSSObject["width"]',
       default: 'auto',
       description: 'The width of the Popover.',
     },
     {
+      prop: 'minWidth',
+      type: 'CSSObject["minWidth"]',
+      description: 'The minimum width of the Popover.',
+    },
+    {
       prop: 'radius',
-      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`],
       default: `'md'`,
       description: 'The border radius of the Popover.',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'The size of the Popover.',
     },
     {
       prop: 'container',
