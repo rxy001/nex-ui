@@ -51,25 +51,8 @@ export const avatarRecipe = defineSlotRecipe({
           },
         },
       },
-      xl: {
-        root: {
-          w: '14',
-          h: '14',
-          fs: '2xl',
-          '& svg': {
-            fs: '1.8em',
-          },
-        },
-      },
     },
-    radius: {
-      ...toSlots(radiusVariant, 'root'),
-      xl: {
-        root: {
-          borderRadius: '2xl',
-        },
-      },
-    },
+    radius: toSlots(radiusVariant, 'root'),
     color: toSlots(colorVariant, 'root'),
     outlined: {
       true: {
@@ -118,17 +101,6 @@ export const avatarRecipe = defineSlotRecipe({
         root: {
           ':not(:first-of-type)': {
             ml: 'var(--avatar-group-spacing, {spaces.-3})',
-          },
-        },
-      },
-    },
-    {
-      size: 'xl',
-      inGroup: true,
-      css: {
-        root: {
-          ':not(:first-of-type)': {
-            ml: 'var(--avatar-group-spacing, {spaces.-4})',
           },
         },
       },

@@ -305,13 +305,45 @@ DropdownContent inherits the props of `as` (by default, `'div'`).
     },
     {
       prop: 'minWidth',
-      type: ['string', 'number'],
+      type: "CSSObject['minWidth']",
       description: 'The minimum width of the Dropdown.',
     },
     {
+      prop: 'width',
+      type: "CSSObject['width']",
+      description: 'The width of the Dropdown.',
+    },
+    {
+      prop: 'maxWidth',
+      type: "CSSObject['maxWidth']",
+      description: 'The maximum width of the Dropdown.',
+    },
+    {
+      prop: 'minHeight',
+      type: "CSSObject['minHeight']",
+      description: 'The minimum height of the Dropdown.',
+    },
+    {
+      prop: 'height',
+      type: "CSSObject['height']",
+      description: 'The height of the Dropdown.',
+    },
+    {
       prop: 'maxHeight',
-      type: ['string', 'number'],
+      type: "CSSObject['maxHeight']",
       description: 'The maximum height of the Dropdown.',
+    },
+    {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'none'"],
+      default: "'md'",
+      description: 'The border radius of the Dropdown.',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'The size of the Dropdown.',
     },
   ]}
 />

@@ -38,7 +38,7 @@ export function Badge<RootComponent extends ElementType = 'span'>(
     color = primaryThemeColor,
     size = 'md',
     variant = 'solid',
-    radius = size,
+    radius = 'md',
     ...remainningProps
   } = props
 

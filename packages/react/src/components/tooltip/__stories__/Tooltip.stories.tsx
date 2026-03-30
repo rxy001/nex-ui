@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { COLORS as DEFAULT_COLORS, RADII, SIZES } from '~/sb/utils'
+import { COLORS as DEFAULT_COLORS, SIZES } from '~/sb/utils'
 import { Box } from '../../box'
 import { Tooltip } from '../Tooltip'
 import { Button } from '../../button'
@@ -57,7 +57,7 @@ const meta = {
       control: 'select',
     },
     radius: {
-      options: RADII,
+      options: ['none', 'sm', 'md', 'lg'],
       control: 'select',
     },
     placement: {

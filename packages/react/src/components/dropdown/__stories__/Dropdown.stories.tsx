@@ -9,7 +9,7 @@ import {
   ChevronRightOutlined,
 } from '@nex-ui/icons'
 import { upperFirst } from '@nex-ui/utils'
-import { COLORS, WithLabel } from '~/sb/utils'
+import { COLORS, SIZES, WithLabel } from '~/sb/utils'
 import { Button } from '../../button'
 import { Flex } from '../../flex'
 import { Box } from '../../box'
@@ -111,6 +111,14 @@ const meta = {
     },
     restoreFocus: {
       control: 'boolean',
+    },
+    radius: {
+      options: ['none', 'sm', 'md', 'lg'],
+      control: 'select',
+    },
+    size: {
+      options: SIZES,
+      control: 'select',
     },
   },
 } satisfies Meta<typeof DropdownTemplate>

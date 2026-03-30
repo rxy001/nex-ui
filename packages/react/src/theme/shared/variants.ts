@@ -42,7 +42,7 @@ export const radiusVariant = {
     borderRadius: 'lg',
   },
   lg: {
-    borderRadius: 'xl',
+    borderRadius: '2xl',
   },
   full: {
     borderRadius: 'full',

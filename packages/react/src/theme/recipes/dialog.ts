@@ -12,7 +12,6 @@ export const dialogContentRecipe = defineSlotRecipe({
       py: '15',
     },
     paper: {
-      borderRadius: 'lg',
       boxShadow: 'lg',
       maxW: 'calc(100vw - {spaces.6} * 2)',
       pos: 'relative',
@@ -39,6 +38,28 @@ export const dialogContentRecipe = defineSlotRecipe({
     backdrop: {},
   },
   variants: {
+    radius: {
+      none: {
+        paper: {
+          borderRadius: 'none',
+        },
+      },
+      sm: {
+        paper: {
+          borderRadius: 'md',
+        },
+      },
+      md: {
+        paper: {
+          borderRadius: 'lg',
+        },
+      },
+      lg: {
+        paper: {
+          borderRadius: '2xl',
+        },
+      },
+    },
     scroll: {
       outside: {
         root: {

@@ -1,5 +1,5 @@
 import type { ElementType, ReactNode } from 'react'
-import type { Interpolation } from '@nex-ui/system'
+import type { Interpolation, CSSObject } from '@nex-ui/system'
 import type { HTMLMotionProps } from 'motion/react'
 import type { ClassValue } from 'clsx'
 import type {
@@ -21,7 +21,11 @@ import type {
   Overwrite,
   ComponentSlotClasses,
 } from '../../types/utils'
-import type { DropdownItemVariants } from '../../theme/recipes'
+import type {
+  DropdownContentVariants,
+  DropdownItemVariants,
+  SubDropdownContentVariants,
+} from '../../theme/recipes'
 import type { Placement } from '../utils'
 
 // ------------- Dropdown --------------
@@ -100,12 +104,46 @@ interface DropdownContentOwnProps<RootComponent extends ElementType = 'div'>
   /**
    * The minimum width of the Dropdown.
    */
-  minWidth?: number | string
+  minWidth?: CSSObject['minWidth']
+
+  /**
+   * The width of the Dropdown.
+   */
+  width?: CSSObject['width']
+
+  /**
+   * The maximum width of the Dropdown.
+   */
+  maxWidth?: CSSObject['maxWidth']
+
+  /**
+   * The minimum height of the Dropdown.
+   */
+  minHeight?: CSSObject['minHeight']
+
+  /**
+   * The height of the Dropdown.
+   */
+  height?: CSSObject['height']
 
   /**
    * The maximum height of the Dropdown.
    */
-  maxHeight?: number | string
+  maxHeight?: CSSObject['maxHeight']
+
+  /**
+   * The border radius of the Dropdown.
+   *
+   * @default 'md'
+   */
+  radius?: DropdownContentVariants['radius']
+
+  /**
+   * The size of the Dropdown.
+   *
+   * @default 'md'
+   */
+  size?: DropdownContentVariants['size']
 }
 
 export interface DropdownContentPropsOverrides {}
@@ -426,14 +464,48 @@ interface SubDropdownContentOwnProps<RootComponent extends ElementType>
   classNames?: ComponentSlotClasses<keyof SubDropdownContentSlotProps>
 
   /**
-   * The minimum width of the SubDropdownContent.
+   * The minimum width of the SubDropdown.
    */
-  minWidth?: number | string
+  minWidth?: CSSObject['minWidth']
 
   /**
-   * The maximum height of the SubDropdownContent.
+   * The width of the SubDropdown.
    */
-  maxHeight?: number | string
+  width?: CSSObject['width']
+
+  /**
+   * The maximum width of the SubDropdown.
+   */
+  maxWidth?: CSSObject['maxWidth']
+
+  /**
+   * The minimum height of the SubDropdown.
+   */
+  minHeight?: CSSObject['minHeight']
+
+  /**
+   * The height of the SubDropdown.
+   */
+  height?: CSSObject['height']
+
+  /**
+   * The maximum height of the SubDropdown.
+   */
+  maxHeight?: CSSObject['maxHeight']
+
+  /**
+   * The border radius of the SubDropdown.
+   *
+   * @default 'md'
+   */
+  radius?: SubDropdownContentVariants['radius']
+
+  /**
+   * The size of the SubDropdown.
+   *
+   * @default 'md'
+   */
+  size?: SubDropdownContentVariants['size']
 }
 
 export interface SubDropdownContentPropsOverrides {}

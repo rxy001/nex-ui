@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { nex } from '@nex-ui/styled'
-import { chain, isNumber } from '@nex-ui/utils'
+import { chain } from '@nex-ui/utils'
 import { AnimatePresence, LazyMotion } from 'motion/react'
 import { subDropdownContentRecipe } from '../../theme/recipes'
 import {
@@ -37,6 +37,8 @@ export function SubDropdownContent<RootComponent extends ElementType>(
   const { open } = useSubDropdownContext()
 
   const {
+    size: defaultSize,
+    radius: defaultRadius,
     color: defaultColor,
     variant: defaultVariant,
     disableAnimation: defaultDisableAnimation,
@@ -50,12 +52,27 @@ export function SubDropdownContent<RootComponent extends ElementType>(
     classNames,
     slotProps,
     minWidth,
+    width,
+    maxWidth,
+    minHeight,
+    height,
     maxHeight,
+    radius = defaultRadius,
     disableAnimation = defaultDisableAnimation,
     color = defaultColor,
     variant = defaultVariant,
+    size = defaultSize,
     ...remainingProps
   } = props
+
+  const ownerState = {
+    ...props,
+    size,
+    radius,
+    color,
+    variant,
+    disableAnimation,
+  }
 
   const [indicatorsCount, setIndicatorsCount] = useState(0)
 
@@ -67,9 +84,9 @@ export function SubDropdownContent<RootComponent extends ElementType>(
     })
 
   const styles = useRecipeStyles({
+    ownerState,
     name: 'SubDropdownContent',
     recipe: subDropdownContentRecipe,
-    ownerState: props,
   })
 
   const slotClasses = useSlotClasses({
@@ -86,10 +103,14 @@ export function SubDropdownContent<RootComponent extends ElementType>(
     additionalProps: {
       style: {
         display: resolvedDisplay,
-        '--dropdown-min-width': isNumber(minWidth) ? `${minWidth}px` : minWidth,
-        '--dropdown-max-height': isNumber(maxHeight)
-          ? `${maxHeight}px`
-          : maxHeight,
+      },
+      sx: {
+        minWidth,
+        width,
+        maxWidth,
+        minHeight,
+        height,
+        maxHeight,
       },
     },
   })
@@ -103,13 +124,15 @@ export function SubDropdownContent<RootComponent extends ElementType>(
 
   const ctx = useMemo<DropdownContentContextValue>(
     () => ({
+      size,
       color,
+      radius,
       variant,
       indicatorsCount,
       setIndicatorsCount,
       disableAnimation,
     }),
-    [color, disableAnimation, indicatorsCount, variant],
+    [color, disableAnimation, indicatorsCount, radius, size, variant],
   )
 
   const renderPaper = () => (

@@ -9,6 +9,7 @@ import {
   testSizeDataAttrs,
   testVariantDataAttrs,
   testRefForwarding,
+  testRadiusDataAttrs,
 } from '~/tests/shared'
 import { UserOutlined } from '@nex-ui/icons'
 import { Avatar } from '../index'
@@ -29,10 +30,7 @@ describe('Avatar', () => {
 
   testSizeDataAttrs(<Avatar>Avatar</Avatar>)
 
-  testVariantDataAttrs(<Avatar>Avatar</Avatar>, [
-    'radius',
-    ['none', 'sm', 'md', 'lg', 'xl', 'full'],
-  ])
+  testRadiusDataAttrs(<Avatar>Avatar</Avatar>)
 
   testVariantDataAttrs(<Avatar outlined>Avatar</Avatar>, [
     'outlined',

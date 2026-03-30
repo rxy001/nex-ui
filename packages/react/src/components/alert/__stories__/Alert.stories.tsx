@@ -115,7 +115,11 @@ export const Closable: Story = {
 
 export const WithAction: Story = {
   args: {
-    action: <Button size='sm'>Upgrade</Button>,
+    action: (
+      <Button size='sm' radius='sm'>
+        Upgrade
+      </Button>
+    ),
   },
 }
 

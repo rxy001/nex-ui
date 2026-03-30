@@ -34,6 +34,8 @@ export interface DropdownContentContextValue {
   color: DropdownContentProps['color']
   variant: DropdownContentProps['variant']
   disableAnimation: DropdownContentProps['disableAnimation']
+  radius: DropdownContentProps['radius']
+  size: DropdownContentProps['size']
 }
 
 export const [DropdownContentProvider, useDropdownContentContext] =

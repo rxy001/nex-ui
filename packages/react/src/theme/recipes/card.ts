@@ -40,7 +40,7 @@ export const cardRecipe = defineRecipe({
         borderRadius: 'lg',
       },
       lg: {
-        borderRadius: 'xl',
+        borderRadius: '2xl',
       },
     },
     blurred: {

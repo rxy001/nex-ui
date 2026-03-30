@@ -211,6 +211,12 @@ DialogContent 继承 `as` (默认为 `'div'`) 的 Props。
       default: "'top'",
     },
     {
+      prop: 'radius',
+      type: ["'sm'", "'md'", "'lg'", "'none'"],
+      description: 'Dialog 的边框圆角。',
+      default: "'md'",
+    },
+    {
       prop: 'motionProps',
       type: ['HTMLMotionProps', '(placement) => HTMLMotionProps'],
       description: '自定义 Dialog 的动画效果。',

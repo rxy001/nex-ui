@@ -79,7 +79,7 @@ interface AvatarOwnProps<RootComponent extends ElementType> {
   /**
    * The border radius of the Avatar.
    *
-   * @default size
+   * @default 'md'
    */
   radius?: AvatarVariants['radius']
 
@@ -149,7 +149,7 @@ interface AvatarGroupOwnProps<RootComponent extends ElementType = 'div'> {
   /**
    * The border radius of all Avatars in the group.
    *
-   * @default size
+   * @default 'md'
    */
   radius?: AvatarVariants['radius']
 

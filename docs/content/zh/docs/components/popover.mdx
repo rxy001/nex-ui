@@ -167,18 +167,23 @@ PopoverContent 继承 `as` (默认为 `'div'`) 的 Props。
     },
     {
       prop: 'maxWidth',
-      type: ['string', 'number'],
+      type: 'CSSObject["maxWidth"]',
+      default: '300',
       description: 'Popover 的最大宽度。',
     },
     {
       prop: 'width',
-      type: ['string', 'number'],
-      default: 'auto',
+      type: 'CSSObject["width"]',
       description: 'Popover 的宽度。',
     },
     {
+      prop: 'minWidth',
+      type: 'CSSObject["minWidth"]',
+      description: 'Popover 的最小宽度。',
+    },
+    {
       prop: 'radius',
-      type: [`'none'`, `'sm'`, `'md'`, `'lg'`, `'full'`],
+      type: [`'none'`, `'sm'`, `'md'`, `'lg'`],
       default: `'md'`,
       description: 'Popover 的圆角大小。',
     },
@@ -271,6 +276,12 @@ PopoverContent 继承 `as` (默认为 `'div'`) 的 Props。
       type: 'boolean',
       default: 'false',
       description: '是否在 Popover 打开时自动聚焦到第一个可聚焦元素。',
+    },
+    {
+      prop: 'size',
+      type: ["'sm'", "'md'", "'lg'"],
+      default: "'md'",
+      description: 'Popover 的大小。',
     },
   ]}
 />

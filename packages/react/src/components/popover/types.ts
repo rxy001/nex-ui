@@ -1,5 +1,5 @@
 import type { ElementType, ReactElement, ReactNode } from 'react'
-import type { Interpolation } from '@nex-ui/system'
+import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { HTMLMotionProps } from 'motion/react'
 import type { ClassValue } from 'clsx'
 import type { FocusTrapProps } from '../focusTrap'
@@ -67,6 +67,13 @@ interface PopoverContentOwnProps<RootComponent extends ElementType = 'div'>
   radius?: PopoverContentVariants['radius']
 
   /**
+   * The size of the Popover.
+   *
+   * @default 'md'
+   */
+  size?: PopoverContentVariants['size']
+
+  /**
    * The color of the Popover.
    *
    * @default 'default'
@@ -105,16 +112,19 @@ interface PopoverContentOwnProps<RootComponent extends ElementType = 'div'>
   /**
    * The maximum width of the Popover.
    *
-   * @default 360
+   * @default 300
    */
-  maxWidth?: string | number
+  maxWidth?: CSSObject['maxWidth']
 
   /**
    * The width of the Popover.
-   *
-   * @default 'auto'
    */
-  width?: string | number
+  width?: CSSObject['width']
+
+  /**
+   * The minimum width of the Popover.
+   */
+  minWidth?: CSSObject['minWidth']
 
   /**
    * If true, keeps the Popover mounted in the DOM when not open.

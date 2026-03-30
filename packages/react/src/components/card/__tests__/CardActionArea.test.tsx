@@ -5,7 +5,6 @@ import {
   testRootClassName,
   testVariantDataAttrs,
 } from '~/tests/shared'
-import { fireEvent } from '@testing-library/react'
 import { CardActionArea } from '../index'
 import { cardActionAreaClasses } from './classes'
 
@@ -28,7 +27,7 @@ describe('CardActionArea', () => {
 
   it('should handle click events when not disabled', async () => {
     const handleClick = jest.fn()
-    const { getByRole } = await renderWithNexUIProvider(
+    const { getByRole, user } = await renderWithNexUIProvider(
       <CardActionArea onClick={handleClick}>Click me</CardActionArea>,
       {
         useAct: true,
@@ -36,7 +35,7 @@ describe('CardActionArea', () => {
     )
 
     const button = getByRole('button')
-    fireEvent.click(button)
+    await user.click(button)
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 })
