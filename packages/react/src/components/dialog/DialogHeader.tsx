@@ -6,7 +6,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
-import { dialogHeaderRecipe } from '../../theme/recipes'
+import { dialogHeaderRecipe } from '../../themes/recipes'
 import { ModalHeader } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogHeaderProps } from './types'

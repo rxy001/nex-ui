@@ -1,5 +1,5 @@
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
-import { disabledVariant, toSlots } from '../shared'
+import { disabledVariant, toSlots } from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const accordionRecipe = defineRecipe({

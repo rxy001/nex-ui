@@ -9,7 +9,7 @@ import {
   isValidNonFragmentElement,
 } from '@nex-ui/utils'
 import { useControlledState } from '@nex-ui/hooks'
-import { checkboxRecipe } from '../../theme/recipes'
+import { checkboxRecipe } from '../../themes/recipes'
 import { useNexUI } from '../provider'
 import { useCheckboxGroupContext } from './CheckboxGroupContext'
 import {

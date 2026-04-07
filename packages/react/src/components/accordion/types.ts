@@ -7,7 +7,7 @@ import type {
   OverrideProps,
   SlotProps,
 } from '../../types/utils'
-import type { AccordionVariants } from '../../theme/recipes'
+import type { AccordionVariants } from '../../themes/recipes'
 
 // Accordion
 export interface AccordionPropsOverrides {}

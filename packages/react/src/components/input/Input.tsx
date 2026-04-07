@@ -6,7 +6,7 @@ import { isString } from '@nex-ui/utils'
 import { useControlledState } from '@nex-ui/hooks'
 import { CloseCircleFilled } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
-import { inputRecipe } from '../../theme/recipes'
+import { inputRecipe } from '../../themes/recipes'
 import { ButtonBase } from '../buttonBase'
 import { InputBase } from '../inputBase'
 import {

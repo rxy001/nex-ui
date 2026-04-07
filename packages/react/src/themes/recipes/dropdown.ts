@@ -1,5 +1,5 @@
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, toSlots } from '../shared'
+import { colorVariant, toSlots } from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 const HIGHLIGHTED = "&[data-highlighted='true']"

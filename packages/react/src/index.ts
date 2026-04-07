@@ -1,7 +1,7 @@
 import './types/declare'
 
 export * from './components'
-export * from './theme'
+export * from './themes'
 
 export * from '@nex-ui/styled'
 

@@ -3,7 +3,7 @@ import type { CSSObject, Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { HTMLMotionProps } from 'motion/react'
 import type { PopperContentProps, PopperProps } from '../popper'
-import type { TooltipRecipeVariants } from '../../theme/recipes'
+import type { TooltipRecipeVariants } from '../../themes/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,

@@ -2,7 +2,7 @@
 
 import { nex } from '@nex-ui/styled'
 import { useState, useEffect, useMemo } from 'react'
-import { avatarRecipe } from '../../theme/recipes'
+import { avatarRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useRecipeStyles,

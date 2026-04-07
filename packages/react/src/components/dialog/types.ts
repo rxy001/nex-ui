@@ -7,7 +7,7 @@ import type {
   ComponentSlotClasses,
 } from '../../types/utils'
 import type { ElementType, ReactNode } from 'react'
-import type { DialogContentVariants } from '../../theme/recipes'
+import type { DialogContentVariants } from '../../themes/recipes'
 import type {
   ModalCloseProps,
   ModalContentProps,

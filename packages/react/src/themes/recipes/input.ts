@@ -5,7 +5,7 @@ import {
   radiusVariant,
   toSlots,
   disabledVariant,
-} from '../shared'
+} from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 const WITHIN_SELECTOR = '&:has(~ *:is(:focus-within, [data-focus-within=true]))'

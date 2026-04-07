@@ -6,7 +6,7 @@ import type {
   SlotProps,
   ComponentSlotClasses,
 } from '../../types/utils'
-import type { BadgeVariants } from '../../theme/recipes'
+import type { BadgeVariants } from '../../themes/recipes'
 
 interface BadgeSlotProps {
   closeButton?: SlotProps<'button'>

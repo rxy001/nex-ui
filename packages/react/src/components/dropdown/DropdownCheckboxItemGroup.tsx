@@ -7,7 +7,7 @@ import {
   useRecipeStyles,
   useSlotClasses,
 } from '../utils'
-import { dropdownCheckboxItemGroupRecipe } from '../../theme/recipes'
+import { dropdownCheckboxItemGroupRecipe } from '../../themes/recipes'
 import { DropdownItemGroupImpl } from './DropdownItemGroup'
 import type { ElementType } from 'react'
 import type { DropdownCheckboxItemGroupProps } from './types'

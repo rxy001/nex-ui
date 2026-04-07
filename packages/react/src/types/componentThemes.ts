@@ -43,7 +43,7 @@ import type {
   DropdownTriggerItemRecipe,
   SubDropdownContentRecipe,
   DropdownDividerRecipe,
-} from '../theme/recipes'
+} from '../themes/recipes'
 import type {
   ButtonProps,
   FlexProps,

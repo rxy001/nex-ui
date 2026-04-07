@@ -4,7 +4,7 @@ import { nex } from '@nex-ui/styled'
 import { useId, useMemo } from 'react'
 import { useFocusRing } from '@nex-ui/hooks'
 import { isFunction } from '@nex-ui/utils'
-import { breadcrumbItemRecipe } from '../../theme/recipes'
+import { breadcrumbItemRecipe } from '../../themes/recipes'
 import { useBreadcrumbContext } from './BreadcrumbContext'
 import {
   useDefaultProps,

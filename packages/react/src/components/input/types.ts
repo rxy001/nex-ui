@@ -1,7 +1,7 @@
 import type { ReactNode, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
-import type { InputVariants } from '../../theme/recipes'
+import type { InputVariants } from '../../themes/recipes'
 import type {
   SlotProps,
   ComponentSlotClasses,

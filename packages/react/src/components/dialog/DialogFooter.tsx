@@ -6,7 +6,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
-import { dialogFooterRecipe } from '../../theme/recipes'
+import { dialogFooterRecipe } from '../../themes/recipes'
 import { ModalFooter } from '../modal'
 import type { ElementType } from 'react'
 import type { DialogFooterProps } from './types'

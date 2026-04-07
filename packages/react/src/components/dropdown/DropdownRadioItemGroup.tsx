@@ -8,7 +8,7 @@ import {
   useRecipeStyles,
   useSlotClasses,
 } from '../utils'
-import { dropdownRadioItemGroupRecipe } from '../../theme/recipes'
+import { dropdownRadioItemGroupRecipe } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { DropdownRadioItemGroupProps } from './types'
 

@@ -16,11 +16,11 @@ Define your own design tokens and apply them seamlessly as CSS values. CSS prope
 
 ### Scales
 
-Scales map tokens and semantic tokens to CSS properties, allowing CSS properties to directly reference tokens of the appropriate type. This enables the use of tokens as values for CSS properties, ensuring consistency and scalability across the design system.',
+Scales map tokens and semantic tokens to CSS properties, allowing CSS properties to directly reference tokens of the appropriate type. This enables the use of tokens as values for CSS properties, ensuring consistency and scalability across the design system.
 
 ### Aliases
 
-Aliases are used to define aliases for CSS properties, which simplifies CSS property names and supports combining CSS properties.
+Aliases are used to define shorthands for CSS properties, which simplifies CSS property names and supports combining multiple CSS properties.
 
 ### Selectors
 
@@ -32,12 +32,12 @@ Create multi-variant styles with a type-safe runtime API, heavily inspired by [v
 
 ### Dark Mode
 
-Dark Mode that works out of the box. Additionally, the styles for the Dark Mode can be easily defined in the recipes.
+Dark Mode works out of the box. Additionally, dark mode styles can be easily defined within recipes.
 
 ### Responsive Design
 
-Define custom breakpoints and apply them directly in the recipes to create responsive layouts.
+Define custom breakpoints and apply them directly in recipes to create responsive layouts.
 
 ### Developer Experience
 
-One of our main goals is to provide the best possible developer experience. The system provides a fully-typed API, so when using TypeScript, CSS properties, tokens, and breakpoints etc. will be auto-completed for you.
+One of our core goals is to deliver the best possible developer experience. The system provides a fully typed API, so CSS properties, tokens, breakpoints, and more are auto-completed when using TypeScript.

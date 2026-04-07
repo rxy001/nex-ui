@@ -6,7 +6,7 @@ import { chain } from '@nex-ui/utils'
 import { LazyMotion, AnimatePresence } from 'motion/react'
 import { ChevronDownOutlined } from '@nex-ui/icons'
 import { useId, useMemo } from 'react'
-import { accordionItemRecipe } from '../../theme/recipes'
+import { accordionItemRecipe } from '../../themes/recipes'
 import { ButtonBase } from '../buttonBase'
 import {
   useDefaultProps,

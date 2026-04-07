@@ -2,7 +2,7 @@
 
 import { nex } from '@nex-ui/styled'
 import { MenuItem } from '../menu'
-import { dropdownItemRecipe } from '../../theme/recipes'
+import { dropdownItemRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useSlot,
