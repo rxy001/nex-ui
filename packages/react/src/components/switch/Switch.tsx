@@ -6,7 +6,7 @@ import { isFunction, isString } from '@nex-ui/utils'
 import { useControlledState } from '@nex-ui/hooks'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
-import { switchRecipe } from '../../theme/recipes'
+import { switchRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useRecipeStyles,

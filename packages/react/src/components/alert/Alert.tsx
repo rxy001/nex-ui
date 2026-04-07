@@ -16,7 +16,7 @@ import {
   useRecipeStyles,
   useSlotClasses,
 } from '../utils'
-import { alertRecipe } from '../../theme/recipes'
+import { alertRecipe } from '../../themes/recipes'
 import { Button } from '../button'
 import type { ElementType } from 'react'
 import type { AlertProps } from './types'

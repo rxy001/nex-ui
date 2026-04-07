@@ -13,7 +13,7 @@ import {
   useRecipeStyles,
   useSlotClasses,
 } from '../utils'
-import { radioRecipe } from '../../theme/recipes'
+import { radioRecipe } from '../../themes/recipes'
 import { RovingFocusItem } from '../rovingFocus'
 import type { ElementType, FocusEvent } from 'react'
 import type { RadioOwnerState, RadioProps } from './types'

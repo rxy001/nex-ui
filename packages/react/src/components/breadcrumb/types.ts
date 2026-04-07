@@ -8,7 +8,7 @@ import type {
 import type {
   BreadcrumbVariants,
   BreadcrumbItemVariants,
-} from '../../theme/recipes'
+} from '../../themes/recipes'
 
 export interface BreadcrumbPropsOverrides {}
 

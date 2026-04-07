@@ -1,7 +1,7 @@
 import type { ComponentType, ElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { CSSObject, Interpolation } from '@nex-ui/system'
-import type { IconVariants } from '../../theme/recipes'
+import type { IconVariants } from '../../themes/recipes'
 import type { OverrideProps } from '../../types/utils'
 
 export interface IconPropsOverrides {}

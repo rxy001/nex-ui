@@ -4,7 +4,7 @@ import { nex } from '@nex-ui/styled'
 import { Children, useMemo, useState } from 'react'
 import { EllipsisFilled } from '@nex-ui/icons'
 import { __DEV__ } from '@nex-ui/utils'
-import { breadcrumbRecipe } from '../../theme/recipes'
+import { breadcrumbRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useSlot,

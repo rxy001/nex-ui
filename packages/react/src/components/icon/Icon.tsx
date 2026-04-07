@@ -2,7 +2,7 @@
 
 import { nex } from '@nex-ui/styled'
 import { __DEV__ } from '@nex-ui/utils'
-import { iconRecipe } from '../../theme/recipes'
+import { iconRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useRecipeStyles,

@@ -14,7 +14,7 @@ import {
   motionFeatures,
   useKeepMountedState,
 } from '../utils'
-import { tooltipRecipe } from '../../theme/recipes'
+import { tooltipRecipe } from '../../themes/recipes'
 import { TooltipTrigger } from './TooltipTrigger'
 import { TooltipProvider, useTooltipContext } from './TooltipContext'
 import { TooltipPaperMotion } from './TooltipPaperMotion'

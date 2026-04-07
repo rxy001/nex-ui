@@ -12,7 +12,7 @@ import {
   useSlot,
 } from '../utils'
 import { RovingFocusGroup } from '../rovingFocus'
-import { accordionRecipe } from '../../theme/recipes'
+import { accordionRecipe } from '../../themes/recipes'
 import type { ElementType, Key } from 'react'
 import type { AccordionProps } from './types'
 import type { AccordionGroupContextValue } from './AccordionContext'

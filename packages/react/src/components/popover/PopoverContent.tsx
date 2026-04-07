@@ -12,7 +12,7 @@ import {
 } from '../utils'
 import { FocusTrap } from '../focusTrap'
 import { PopoverPaperMotion } from './PopoverPaperMotion'
-import { popoverContentRecipe } from '../../theme/recipes'
+import { popoverContentRecipe } from '../../themes/recipes'
 import { usePopoverContext } from './PopoverContext'
 import { PopperContent, PopperPortal } from '../popper'
 import type { ElementType } from 'react'

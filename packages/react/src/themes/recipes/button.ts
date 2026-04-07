@@ -6,7 +6,7 @@ import {
   fullWidth,
   sizeVariant,
   disabledVariant,
-} from '../shared'
+} from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const buttonRecipe = defineSlotRecipe({

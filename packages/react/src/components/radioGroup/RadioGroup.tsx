@@ -9,7 +9,7 @@ import {
   useSlotClasses,
   useRecipeStyles,
 } from '../utils'
-import { radioGroupRecipe } from '../../theme/recipes'
+import { radioGroupRecipe } from '../../themes/recipes'
 import { RadioGroupProvider } from './RadioGroupContext'
 import { RovingFocusGroup } from '../rovingFocus'
 import type { ElementType } from 'react'

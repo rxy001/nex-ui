@@ -7,7 +7,7 @@ import {
   useRecipeStyles,
   useSlotClasses,
 } from '../utils'
-import { cardBodyRecipe } from '../../theme/recipes'
+import { cardBodyRecipe } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { CardBodyProps } from './types'
 

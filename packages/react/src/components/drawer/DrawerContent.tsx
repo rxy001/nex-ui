@@ -15,7 +15,7 @@ import {
 } from '../utils'
 import { Ripple } from '../ripple'
 import { DrawerClose } from './DrawerClose'
-import { drawerContentRecipe } from '../../theme/recipes'
+import { drawerContentRecipe } from '../../themes/recipes'
 import { ButtonBase } from '../buttonBase'
 import { ModalContent, ModalPortal, ModalBackdrop } from '../modal'
 import { useDrawerContext } from './DrawerContext'

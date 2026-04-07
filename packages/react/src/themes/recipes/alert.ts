@@ -1,5 +1,5 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { colorVariant, toSlots, radiusVariant } from '../shared'
+import { colorVariant, toSlots, radiusVariant } from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const alertRecipe = defineSlotRecipe({

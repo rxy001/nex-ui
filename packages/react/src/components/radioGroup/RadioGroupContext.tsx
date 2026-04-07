@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { RadioVariants } from '../../theme/recipes'
+import type { RadioVariants } from '../../themes/recipes'
 
 export interface RadioGroupContextValue<
   T extends string | number = string | number,

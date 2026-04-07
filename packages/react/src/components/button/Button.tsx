@@ -4,7 +4,7 @@ import { nex } from '@nex-ui/styled'
 import { LoadingOutlined } from '@nex-ui/icons'
 import { useNexUI } from '../provider'
 import { ButtonBase } from '../buttonBase'
-import { buttonRecipe } from '../../theme/recipes'
+import { buttonRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useRecipeStyles,

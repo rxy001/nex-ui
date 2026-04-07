@@ -3,7 +3,7 @@
 import { nex } from '@nex-ui/styled'
 import { useMemo, useState } from 'react'
 import { AnimatePresence, LazyMotion } from 'motion/react'
-import { dropdownContentRecipe } from '../../theme/recipes'
+import { dropdownContentRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useSlot,

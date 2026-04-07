@@ -7,7 +7,7 @@ import {
   useRecipeStyles,
   useSlotClasses,
 } from '../utils'
-import { cardHeaderRecipe } from '../../theme/recipes'
+import { cardHeaderRecipe } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { CardHeaderProps } from './types'
 

@@ -6,7 +6,7 @@ import {
   useRecipeStyles,
   useSlot,
 } from '../utils'
-import { dialogBodyRecipe } from '../../theme/recipes'
+import { dialogBodyRecipe } from '../../themes/recipes'
 import { useDialogContentContext } from './DialogContext'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'

@@ -7,7 +7,7 @@ import {
   useSlotClasses,
 } from '../utils'
 import { MenuItemGroup } from '../menu'
-import { dropdownItemGroupRecipe } from '../../theme/recipes'
+import { dropdownItemGroupRecipe } from '../../themes/recipes'
 import type { ComponentType, ElementType } from 'react'
 import type { DropdownItemGroupProps } from './types'
 import type { Interpolation } from '@nex-ui/system'

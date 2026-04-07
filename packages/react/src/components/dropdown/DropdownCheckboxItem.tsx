@@ -9,7 +9,7 @@ import {
   useSlotClasses,
 } from '../utils'
 import { MenuCheckboxItem, MenuItemIndicator } from '../menu'
-import { dropdownCheckboxItemRecipe } from '../../theme/recipes'
+import { dropdownCheckboxItemRecipe } from '../../themes/recipes'
 import { DropdownItemImpl } from './DropdownItem'
 import { useDropdownIndicator } from './useDropdownIndicator'
 import type { ElementType } from 'react'
