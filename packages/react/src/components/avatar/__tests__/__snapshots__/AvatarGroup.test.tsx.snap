@@ -60,6 +60,7 @@ exports[`AvatarGroup should render with default props 1`] = `
 
 <div
   class="nui-avatar-group-root emotion-0"
+  data-disable-animation="false"
 >
   <div
     class="nui-avatar-root emotion-1"

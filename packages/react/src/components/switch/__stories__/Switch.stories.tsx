@@ -31,6 +31,11 @@ const meta = {
       control: 'boolean',
     },
   },
+  parameters: {
+    controls: {
+      exclude: ['startIcon', 'endIcon', 'thumbIcon', 'children'],
+    },
+  },
 } satisfies Meta<typeof Switch<'input'>>
 
 export default meta

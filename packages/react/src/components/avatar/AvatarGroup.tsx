@@ -76,6 +76,9 @@ export function AvatarGroup<RootComponent extends ElementType = 'div'>(
           spacing !== undefined ? `${spacing}px` : undefined,
       },
     },
+    dataAttrs: {
+      disableAnimation,
+    },
   })
 
   const [AvatarSurplus, getAvatarSurplusProps] = useSlot({

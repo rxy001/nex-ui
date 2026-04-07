@@ -47,6 +47,11 @@ const meta = {
       control: 'boolean',
     },
   },
+  parameters: {
+    controls: {
+      exclude: ['action', 'icon'],
+    },
+  },
 } satisfies Meta<typeof AlertTemplate>
 
 export default meta

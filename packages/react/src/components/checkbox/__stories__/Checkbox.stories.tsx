@@ -47,6 +47,11 @@ const meta = {
       control: 'boolean',
     },
   },
+  parameters: {
+    controls: {
+      exclude: ['icon'],
+    },
+  },
 } satisfies Meta<typeof CheckboxTemplate>
 
 export default meta

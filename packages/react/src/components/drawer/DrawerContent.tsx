@@ -70,9 +70,9 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
     placement,
     radius,
     size,
-    closeIcon,
     hideCloseButton,
     disableAnimation,
+    closeOnInteractOutside,
   }
 
   const styles = useRecipeStyles({
@@ -136,6 +136,7 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
       radius,
       placement,
       hideCloseButton,
+      disableAnimation,
     },
   })
 

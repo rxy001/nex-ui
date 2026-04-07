@@ -68,6 +68,7 @@ exports[`Button should render with default props 1`] = `
   data-loading="false"
   data-radius="md"
   data-size="md"
+  data-spinner-placement="start"
   data-variant="solid"
   tabindex="0"
   type="button"

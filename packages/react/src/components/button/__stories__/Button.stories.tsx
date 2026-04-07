@@ -65,6 +65,11 @@ const meta = {
       control: 'boolean',
     },
   },
+  parameters: {
+    controls: {
+      exclude: ['startIcon', 'endIcon', 'children'],
+    },
+  },
 } satisfies Meta<typeof ButtonTemplate>
 
 export default meta

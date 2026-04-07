@@ -52,6 +52,11 @@ const meta = {
       control: 'boolean',
     },
   },
+  parameters: {
+    controls: {
+      exclude: ['defaultExpandedKeys', 'disabledKeys'],
+    },
+  },
 } satisfies Meta<typeof AccordionTemplate>
 
 export default meta

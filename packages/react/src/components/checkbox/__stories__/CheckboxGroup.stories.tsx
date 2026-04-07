@@ -42,6 +42,11 @@ const meta = {
       control: 'boolean',
     },
   },
+  parameters: {
+    controls: {
+      exclude: ['value', 'defaultValue', 'onValueChange'],
+    },
+  },
 } satisfies Meta<typeof CheckboxGroupTemplate>
 
 export default meta
