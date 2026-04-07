@@ -6,7 +6,7 @@ import type {
   ComponentSlotClasses,
   SlotProps,
 } from '../../types/utils'
-import type { RadioGroupVariants, RadioVariants } from '../../theme/recipes'
+import type { RadioGroupVariants, RadioVariants } from '../../themes/recipes'
 
 interface RadioSlotProps {
   root?: SlotProps<'label'>

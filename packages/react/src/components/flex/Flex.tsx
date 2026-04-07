@@ -1,7 +1,7 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { flexRecipe } from '../../theme/recipes'
+import { flexRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useRecipeStyles,

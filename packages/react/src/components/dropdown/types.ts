@@ -25,7 +25,7 @@ import type {
   DropdownContentVariants,
   DropdownItemVariants,
   SubDropdownContentVariants,
-} from '../../theme/recipes'
+} from '../../themes/recipes'
 import type { Placement } from '../utils'
 
 // ------------- Dropdown --------------

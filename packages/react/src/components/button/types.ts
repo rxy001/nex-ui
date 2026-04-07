@@ -1,7 +1,7 @@
 import type { ReactNode, ElementType, AnchorHTMLAttributes } from 'react'
 import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
-import type { ButtonVariants } from '../../theme/recipes'
+import type { ButtonVariants } from '../../themes/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,

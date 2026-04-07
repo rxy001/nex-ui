@@ -6,7 +6,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
-import { drawerFooterRecipe } from '../../theme/recipes'
+import { drawerFooterRecipe } from '../../themes/recipes'
 import { ModalFooter } from '../modal'
 import type { ElementType } from 'react'
 import type { DrawerFooterProps } from './types'

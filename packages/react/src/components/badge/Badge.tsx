@@ -8,7 +8,7 @@ import {
   useSlotClasses,
   useRecipeStyles,
 } from '../utils'
-import { badgeRecipe } from '../../theme/recipes'
+import { badgeRecipe } from '../../themes/recipes'
 import { useNexUI } from '../provider'
 import { ButtonBase } from '../buttonBase'
 import type { ElementType } from 'react'

@@ -6,7 +6,7 @@ import type {
   SlotProps,
   ComponentSlotClasses,
 } from '../../types/utils'
-import type { CardVariants } from '../../theme/recipes'
+import type { CardVariants } from '../../themes/recipes'
 
 export interface CardPropsOverrides {}
 

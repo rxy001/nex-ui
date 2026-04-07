@@ -8,7 +8,7 @@ import {
 } from '../utils'
 import { Ripple } from '../ripple'
 import { ButtonBase } from '../buttonBase'
-import { cardActionArea } from '../../theme/recipes'
+import { cardActionArea } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { CardActionAreaProps } from './types'
 

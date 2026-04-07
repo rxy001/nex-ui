@@ -9,7 +9,7 @@ import {
   useSlotClasses,
 } from '../utils'
 import { AvatarGroupProvider } from './AvatarGroupContext'
-import { avatarGroupRecipe } from '../../theme/recipes'
+import { avatarGroupRecipe } from '../../themes/recipes'
 import { Avatar } from './Avatar'
 import type { ElementType } from 'react'
 import type { AvatarGroupProps } from './types'

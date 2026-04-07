@@ -9,7 +9,7 @@ import type {
   OverrideProps,
   SlotProps,
 } from '../../types/utils'
-import type { PopoverContentVariants } from '../../theme/recipes'
+import type { PopoverContentVariants } from '../../themes/recipes'
 import type { PopperAnchorProps, PopperPortalProps } from '../popper/types'
 import type { Placement } from '../utils'
 

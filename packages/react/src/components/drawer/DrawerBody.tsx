@@ -6,7 +6,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
-import { drawerBodyRecipe } from '../../theme/recipes'
+import { drawerBodyRecipe } from '../../themes/recipes'
 import { ModalBody } from '../modal'
 import type { ElementType } from 'react'
 import type { DrawerBodyProps } from './types'

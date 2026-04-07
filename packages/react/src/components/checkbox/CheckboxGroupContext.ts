@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { CheckboxVariants } from '../../theme/recipes'
+import type { CheckboxVariants } from '../../themes/recipes'
 
 export interface CheckboxGroupContextValue<
   T extends number | string = number | string,

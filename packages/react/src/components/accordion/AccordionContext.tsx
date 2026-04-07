@@ -3,7 +3,7 @@
 import { createContext } from '@nex-ui/utils'
 import type { Key, ReactNode } from 'react'
 import type { HTMLMotionProps } from 'motion/react'
-import type { AccordionVariants } from '../../theme/recipes'
+import type { AccordionVariants } from '../../themes/recipes'
 
 export interface AccordionGroupContextValue {
   expandedKeys: Key[]

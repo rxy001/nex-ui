@@ -1,7 +1,7 @@
 'use client'
 
 import { MenuSeparator } from '../menu'
-import { dropdownSeparatorRecipe } from '../../theme/recipes'
+import { dropdownSeparatorRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useRecipeStyles,

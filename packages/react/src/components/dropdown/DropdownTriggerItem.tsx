@@ -9,7 +9,7 @@ import {
   useSlotClasses,
 } from '../utils'
 import { MenuTriggerItem } from '../menu'
-import { dropdownTriggerItemRecipe } from '../../theme/recipes'
+import { dropdownTriggerItemRecipe } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { DropdownTriggerItemProps } from './types'
 

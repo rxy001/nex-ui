@@ -1,5 +1,5 @@
 import { defineSlotRecipe, defineRecipe } from '@nex-ui/system'
-import { toSlots, radiusVariant, colorVariant } from '../shared'
+import { toSlots, radiusVariant, colorVariant } from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
 export const avatarRecipe = defineSlotRecipe({

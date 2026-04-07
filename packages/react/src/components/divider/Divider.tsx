@@ -7,7 +7,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
-import { dividerRecipe } from '../../theme/recipes'
+import { dividerRecipe } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { DividerProps } from './types'
 

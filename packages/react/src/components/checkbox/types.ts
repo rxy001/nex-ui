@@ -4,7 +4,7 @@ import type { ClassValue } from 'clsx'
 import type {
   CheckboxVariants,
   CheckboxGroupVariants,
-} from '../../theme/recipes'
+} from '../../themes/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,

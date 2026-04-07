@@ -10,7 +10,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
-import { checkboxGroupRecipe } from '../../theme/recipes'
+import { checkboxGroupRecipe } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { CheckboxGroupProps } from './types'
 import type { CheckboxGroupContextValue } from './CheckboxGroupContext'

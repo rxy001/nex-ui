@@ -1,43 +1,22 @@
 import { defineSlotRecipe } from '@nex-ui/system'
-import { toSlots, colorVariant } from '../shared'
+import { colorVariant, toSlots } from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
 
-export const tooltipRecipe = defineSlotRecipe({
+export const popoverContentRecipe = defineSlotRecipe({
   slots: {
     root: {
-      zIndex: 'tooltip',
+      zIndex: 'popover',
     },
     paper: {
       fs: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
-      overflow: 'auto',
       boxSizing: 'border-box',
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
     },
   },
   variants: {
-    size: {
-      sm: {
-        paper: {
-          px: '2',
-          py: '0.5',
-        },
-      },
-      md: {
-        paper: {
-          px: '2.5',
-          py: '1',
-        },
-      },
-      lg: {
-        paper: {
-          px: '3',
-          py: '1.5',
-        },
-      },
-    },
     color: {
       ...toSlots(colorVariant, 'paper'),
       default: {
@@ -69,8 +48,28 @@ export const tooltipRecipe = defineSlotRecipe({
         },
       },
     },
+    size: {
+      sm: {
+        paper: {
+          px: '2',
+          py: '1',
+        },
+      },
+      md: {
+        paper: {
+          px: '3',
+          py: '1.5',
+        },
+      },
+      lg: {
+        paper: {
+          px: '4',
+          py: '2',
+        },
+      },
+    },
   },
 })
 
-export type TooltipRecipe = typeof tooltipRecipe
-export type TooltipRecipeVariants = RecipeVariants<TooltipRecipe>
+export type PopoverContentRecipe = typeof popoverContentRecipe
+export type PopoverContentVariants = RecipeVariants<PopoverContentRecipe>

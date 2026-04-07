@@ -1,7 +1,7 @@
 import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
-import type { AvatarVariants } from '../../theme/recipes'
+import type { AvatarVariants } from '../../themes/recipes'
 import type {
   ComponentSlotClasses,
   OverrideProps,

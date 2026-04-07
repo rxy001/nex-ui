@@ -7,7 +7,7 @@ import type {
   SlotProps,
 } from '../../types/utils'
 import type { ButtonProps } from '../button'
-import type { AlertVariants } from '../../theme/recipes'
+import type { AlertVariants } from '../../themes/recipes'
 
 export interface AlertPropsOverrides {}
 

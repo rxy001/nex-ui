@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import { nex } from '@nex-ui/styled'
 import { chain } from '@nex-ui/utils'
 import { AnimatePresence, LazyMotion } from 'motion/react'
-import { subDropdownContentRecipe } from '../../theme/recipes'
+import { subDropdownContentRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
   useSlot,

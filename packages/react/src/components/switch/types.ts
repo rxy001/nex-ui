@@ -6,7 +6,7 @@ import type {
   ComponentSlotClasses,
   OverrideProps,
 } from '../../types/utils'
-import type { SwitchVariants } from '../../theme/recipes'
+import type { SwitchVariants } from '../../themes/recipes'
 
 export interface SwitchPropsOverrides {}
 

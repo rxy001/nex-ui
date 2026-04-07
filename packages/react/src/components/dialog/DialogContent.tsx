@@ -16,7 +16,7 @@ import {
 import { ModalBackdrop, ModalContent, ModalPortal } from '../modal'
 import { Ripple } from '../ripple'
 import { DialogClose } from './DialogClose'
-import { dialogContentRecipe } from '../../theme/recipes'
+import { dialogContentRecipe } from '../../themes/recipes'
 import { ButtonBase } from '../buttonBase'
 import { DialogPaperMotion } from './DialogPaperMotion'
 import { DialogContentProvider, useDialogContext } from './DialogContext'

@@ -2,7 +2,7 @@ import type { ElementType } from 'react'
 import type { ClassValue } from 'clsx'
 import type { Interpolation } from '@nex-ui/system'
 import type { OverrideProps } from '../../types/utils'
-import type { DividerVariants } from '../../theme/recipes'
+import type { DividerVariants } from '../../themes/recipes'
 
 export interface DividerPropsOverrides {}
 

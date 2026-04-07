@@ -2,7 +2,7 @@ import type { ElementType, ReactNode } from 'react'
 import type { Interpolation } from '@nex-ui/system'
 import type { ClassValue } from 'clsx'
 import type { HTMLMotionProps } from 'motion/react'
-import type { DrawerContentVariants } from '../../theme/recipes'
+import type { DrawerContentVariants } from '../../themes/recipes'
 import type {
   OverrideProps,
   SlotProps,

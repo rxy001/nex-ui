@@ -7,7 +7,7 @@ import {
   useRecipeStyles,
   useSlotClasses,
 } from '../utils'
-import { dropdownItemGroupLabelRecipe } from '../../theme/recipes'
+import { dropdownItemGroupLabelRecipe } from '../../themes/recipes'
 import type { ElementType } from 'react'
 import type { DropdownItemGroupLabelProps } from './types'
 

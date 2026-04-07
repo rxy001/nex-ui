@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext } from '@nex-ui/utils'
-import type { AvatarVariants } from '../../theme/recipes'
+import type { AvatarVariants } from '../../themes/recipes'
 
 export interface AvatarGroupContextValue {
   outlined: boolean
