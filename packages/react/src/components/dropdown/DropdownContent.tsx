@@ -95,6 +95,13 @@ export function DropdownContent<RootComponent extends ElementType>(
         display: resolvedDisplay,
       },
     },
+    dataAttrs: {
+      size,
+      radius,
+      color,
+      variant,
+      disableAnimation,
+    },
   })
 
   const [DropdownContentPaper, getDropdownContentPaperProps] = useSlot({

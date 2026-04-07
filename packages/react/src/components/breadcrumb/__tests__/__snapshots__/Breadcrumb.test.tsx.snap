@@ -118,6 +118,7 @@ exports[`Breadcrumb should render with default props 1`] = `
   aria-label="breadcrumb"
   class="nui-breadcrumb-root"
   data-color="default"
+  data-disable-animation="false"
   data-size="md"
 >
   <ol

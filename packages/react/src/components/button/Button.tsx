@@ -96,6 +96,7 @@ export function Button<RootComponent extends ElementType = 'button'>(
       fullWidth,
       disableRipple,
       disableAnimation,
+      spinnerPlacement,
     },
   })
 

@@ -65,9 +65,10 @@ export function ModalContent(props: ModalContentProps) {
     },
     dataAttrs: {
       preventScroll,
-      state: open ? 'open' : 'closed',
       closeOnEscape,
       restoreFocus,
+      closeOnInteractOutside,
+      state: open ? 'open' : 'closed',
     },
   })
 

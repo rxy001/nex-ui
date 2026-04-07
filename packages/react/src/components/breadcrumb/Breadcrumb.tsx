@@ -86,6 +86,7 @@ export function Breadcrumb<RootComponent extends ElementType = 'nav'>(
     dataAttrs: {
       size,
       color,
+      disableAnimation,
     },
   })
 

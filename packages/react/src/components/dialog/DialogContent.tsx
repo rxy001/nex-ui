@@ -136,6 +136,7 @@ export function DialogContent<RootComponent extends ElementType = 'div'>(
       scroll,
       hideCloseButton,
       radius,
+      disableAnimation,
     },
   })
 

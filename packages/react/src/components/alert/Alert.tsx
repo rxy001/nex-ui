@@ -132,8 +132,9 @@ export function Alert<RootComponent extends ElementType = 'div'>(
     dataAttrs: {
       radius,
       variant,
-      color: computedColor,
       status,
+      hideIcon,
+      color: computedColor,
     },
   })
 

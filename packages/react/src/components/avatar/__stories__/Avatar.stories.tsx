@@ -33,6 +33,11 @@ const meta = {
       control: 'boolean',
     },
   },
+  parameters: {
+    controls: {
+      exclude: ['children', 'src'],
+    },
+  },
 } satisfies Meta<typeof Avatar<'div'>>
 
 export default meta
