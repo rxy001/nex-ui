@@ -2,12 +2,11 @@ import {
   isString,
   memoize,
   kebabCase,
-  camelCase,
   isPlainObject,
   mergeWith,
+  isCSSProperty,
 } from '@nex-ui/utils'
 import serialize from '@x1ngyu/serialize-javascript'
-import { all as CSSProperties } from 'known-css-properties'
 import type {
   SemanticTokenValue,
   TokenValue,
@@ -173,15 +172,6 @@ export function negate(x: number | string) {
   }
 
   return multiply(value, -1)
-}
-
-const ALL_CSS_PROPERTIES = new Set(CSSProperties.map(camelCase))
-
-function isCSSProperty(key: string) {
-  // CSS variable
-  if (key.startsWith('--')) return true
-
-  return ALL_CSS_PROPERTIES.has(key)
 }
 
 export function isSelector(key: string) {
