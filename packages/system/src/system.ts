@@ -1,3 +1,4 @@
+import { isCSSProperty } from '@nex-ui/utils'
 import { createTokens } from './tokens'
 import { createScales } from './scales'
 import { createAliases } from './aliases'
@@ -69,10 +70,15 @@ export function createSystem(config: SystemConfig) {
     getCustomizedSelector,
   })
 
+  const isSystemCSSProperty = (property: string) => {
+    return isAlias(property) || isCSSProperty(property)
+  }
+
   return {
     css,
     layers,
     getToken,
     getGlobalCssVars,
+    isSystemCSSProperty,
   }
 }

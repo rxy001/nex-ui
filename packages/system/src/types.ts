@@ -38,45 +38,30 @@ type CSSOthersObject = {
   [propertiesName: string]: Interpolation
 }
 
-type CSSPropertiesWithMultiValues = ExtraCSSPropertyValue<OverriddenCSSProps> &
-  ExtraCSSPropertyValue<CSSPropShorthands> &
-  Conditions<Interpolation>
+export type SystemCSSProps = ConditionalResponsiveProps<TokenizedCSSProps> &
+  ConditionalResponsiveProps<AliasCSSProps>
 
 type CSSPseudos = {
   [K in CSS.Pseudos]?: CSSObject
 }
 
 export interface CSSObject
-  extends CSSPropertiesWithMultiValues,
+  extends SystemCSSProps,
     CSSPseudos,
+    Conditions<Interpolation>,
     CSSOthersObject {
-  colorPalette?: OverriddenCSSProps['color']
+  colorPalette?: TokenizedCSSProps['color']
 }
 
-// Converts a color token string (e.g., "colors.100") to a virtual color mapping (e.g., "colorPalette.100").
-type ConvertToVirtualColor<T> = T extends `${string}.${infer U}`
-  ? `colorPalette.${U}`
-  : 'colorPalette'
-
-// Map color token keys to a virtual color palette string.
-type VirtualColor =
-  | (Tokens extends infer T
-      ? 'colors' extends keyof T
-        ? ConvertToVirtualColor<T['colors']>
-        : never
-      : never)
-  | (SemanticTokens extends infer T
-      ? 'colors' extends keyof T
-        ? ConvertToVirtualColor<T['colors']>
-        : never
-      : never)
+type VirtualColorToken<T> = 'colors' extends keyof T
+  ? T['colors'] extends `${string}.${infer U}`
+    ? `colorPalette.${U}`
+    : 'colorPalette'
+  : never
 
 type TypeValueByKey<T, K> = K extends keyof T ? T[K] : never
 
-/**
- * Add the corresponding token values according to the scales.
- */
-type OverriddenCSSProps = Overwrite<
+type TokenizedCSSProps = Overwrite<
   CSSProperties,
   {
     [K in keyof Scales]?: Exclude<Scales[K], undefined> extends TokenCategory
@@ -85,16 +70,12 @@ type OverriddenCSSProps = Overwrite<
           | TypeValueByKey<Tokens, Scales[K]>
           | TypeValueByKey<SemanticTokens, Scales[K]>
           | (Exclude<Scales[K], undefined> extends 'colors'
-              ? VirtualColor
+              ? VirtualColorToken<Tokens> | VirtualColorToken<SemanticTokens>
               : never)
       : CSSProperties[K]
   }
 >
-/**
- * The Conditions type uses template literal types to prefix keys from Selectors and Breakpoints with an underscore (e.g., _hover, _sm).
- * This enables conditional styling based on selector or breakpoint context, allowing for easy extension and type safety.
- * Additional keys like _dark and _light are included for theme-based conditions.
- */
+
 type Conditions<T> = {
   [K in keyof Selectors | keyof Breakpoints as `_${K}`]?: T
 } & {
@@ -108,11 +89,7 @@ type NestedConditions<T> = {
   _DEFAULT?: T
 } & { [K in keyof Conditions<T>]?: NestedConditions<T> | T }
 
-/**
- * Defines the possible values for each CSS property, supporting direct values, breakpoint arrays, and deeply nested conditional objects.
- * This type enables flexible assignment of CSS property values, including responsive and state-based variations.
- */
-type ExtraCSSPropertyValue<T> = {
+type ConditionalResponsiveProps<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]?:
     | T[K]
     | BreakpointArray
@@ -129,23 +106,15 @@ type ExtraCSSPropertyValue<T> = {
     | NestedConditions<T[K]>
 }
 
-/**
- * CSSPropShorthands maps each key in Aliases to its corresponding CSS property value type.
- *
- * If an alias maps to a string, it checks if that string is a key in OverriddenCSSProps and uses its type.
- * If an alias maps to an array of strings, it uses the type of the first string as a key in OverriddenCSSProps.
- *
- * This enables shorthand properties (like 'bg' for 'backgroundColor') to inherit the correct type from OverriddenCSSProps.
- */
-type CSSPropShorthands = {
+type AliasCSSProps = {
   [K in keyof Aliases]?: Aliases[K] extends infer CSSProps
     ? CSSProps extends string
-      ? CSSProps extends keyof OverriddenCSSProps
-        ? OverriddenCSSProps[CSSProps]
+      ? CSSProps extends keyof TokenizedCSSProps
+        ? TokenizedCSSProps[CSSProps]
         : never
       : CSSProps extends [infer CSSProp, ...unknown[]]
-        ? CSSProp extends keyof OverriddenCSSProps
-          ? OverriddenCSSProps[CSSProp]
+        ? CSSProp extends keyof TokenizedCSSProps
+          ? TokenizedCSSProps[CSSProp]
           : never
         : never
     : never

@@ -8,8 +8,8 @@ import type {
   Mode,
   ColorScheme,
   ColorSchemeProviderProps,
-  ColorSchemeContext,
 } from './types'
+import type { ColorSchemeContextValue } from './ColorSchemeContex'
 
 function initializeValue(key: string, defaultValue: string) {
   // FIXME: mock ssr environment
@@ -204,7 +204,7 @@ export function ColorSchemeProvider({
     }
   }, [colorScheme, colorSchemeNode, colorSchemeSelector])
 
-  const ctx = useMemo<ColorSchemeContext>(
+  const ctx = useMemo<ColorSchemeContextValue>(
     () => ({
       ...state,
       setMode,
