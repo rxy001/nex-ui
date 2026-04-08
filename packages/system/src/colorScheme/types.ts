@@ -17,13 +17,6 @@ export interface ColorSchemeProviderProps {
   colorSchemeNode?: Element
 }
 
-export interface ColorSchemeContext {
-  mode?: Mode
-  setMode: (mode?: Mode) => void
-  systemColorScheme?: ColorScheme
-  resolvedColorScheme?: ColorScheme
-}
-
 export interface InitColorSchemeScriptProps
   extends Pick<
     ColorSchemeProviderProps,

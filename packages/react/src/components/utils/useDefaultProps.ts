@@ -1,5 +1,5 @@
 import { mergeProps } from '@nex-ui/utils'
-import { useNexUI } from '../provider/Context'
+import { useNexUI } from '../provider/ProviderContext'
 import type { ComponentNames } from '../../types/componentThemes'
 
 type UseDefaultPropsArgs = {

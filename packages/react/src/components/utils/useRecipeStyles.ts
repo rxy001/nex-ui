@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { defineRecipe, defineSlotRecipe } from '@nex-ui/system'
-import { useNexUI } from '../provider/Context'
+import { useNexUI } from '../provider/ProviderContext'
 import type { RecipeRuntimeFn, SlotRecipeRuntimeFn } from '@nex-ui/system'
 import type { ComponentNames } from '../../types/componentThemes'
 

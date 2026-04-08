@@ -1,5 +1,5 @@
 export { SystemProvider, useSystem } from './systemProvider'
-export type { SystemContext, SystemProviderProps } from './systemProvider'
+export type { SystemContextValue, SystemProviderProps } from './systemProvider'
 
 export { createSystem } from './system'
 export type { SystemConfig } from './system'
@@ -39,6 +39,7 @@ export type {
   Aliases,
   Breakpoints,
   Scales,
+  SystemCSSProps,
 } from './types'
 
 export type { CssFn } from './css'

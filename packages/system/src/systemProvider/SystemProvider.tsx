@@ -32,7 +32,7 @@ export function SystemProvider({
     [colorSchemeSelector],
   )
 
-  const { css, getGlobalCssVars, layers } = useMemo(() => {
+  const { css, getGlobalCssVars, layers, isSystemCSSProperty } = useMemo(() => {
     return createSystem({
       prefix,
       aliases,
@@ -103,10 +103,11 @@ export function SystemProvider({
 
   const methods = useMemo(
     () => ({
-      css: (styles: Interpolation) => css(layers.wrapWithLayer('css', styles)),
       layers,
+      isSystemCSSProperty,
+      css: (styles: Interpolation) => css(layers.wrapWithLayer('css', styles)),
     }),
-    [css, layers],
+    [css, isSystemCSSProperty, layers],
   )
 
   return (

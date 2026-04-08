@@ -27,10 +27,10 @@ describe('createScales', () => {
 
   it('should throw an error if the scale is invalid', () => {
     createScales({
-      // @ts-expect-error
       a: {},
       b: [],
       c: 1,
+      // @ts-expect-error
       d: () => {},
     })
 

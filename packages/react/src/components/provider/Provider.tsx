@@ -4,9 +4,13 @@ import { useSystem, SystemProvider, mergeRecipeConfigs } from '@nex-ui/system'
 import { useMemo } from 'react'
 import { mergeProps, merge, mergeWith } from '@nex-ui/utils'
 import { defaultConfig } from '../../themes'
-import { NexContextProvider, useNexUI, DEFAULT_CONTEXT_VALUE } from './Context'
-import type { NexUIProviderProps, InnerProviderProps } from './types'
+import {
+  NexContextProvider,
+  useNexUI,
+  DEFAULT_CONTEXT_VALUE,
+} from './ProviderContext'
 import type { SystemProviderProps } from '@nex-ui/system'
+import type { NexUIProviderProps, InnerProviderProps } from './types'
 
 function InnerProvider({
   components,
@@ -14,11 +18,18 @@ function InnerProvider({
   children,
   primaryThemeColor = 'blue',
 }: InnerProviderProps) {
-  const { css, layers } = useSystem()
+  const { css, layers, isSystemCSSProperty } = useSystem()
 
   const contextValue = useMemo(
-    () => ({ components, prefix, css, layers, primaryThemeColor }),
-    [components, css, layers, prefix, primaryThemeColor],
+    () => ({
+      components,
+      prefix,
+      css,
+      isSystemCSSProperty,
+      layers,
+      primaryThemeColor,
+    }),
+    [components, css, isSystemCSSProperty, layers, prefix, primaryThemeColor],
   )
   return (
     <NexContextProvider value={contextValue}>{children}</NexContextProvider>
