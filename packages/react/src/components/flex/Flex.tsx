@@ -1,6 +1,5 @@
 'use client'
 
-import { nex } from '@nex-ui/styled'
 import { flexRecipe } from '../../themes/recipes'
 import {
   useDefaultProps,
@@ -8,6 +7,7 @@ import {
   useSlot,
   useSlotClasses,
 } from '../utils'
+import { Box } from '../box'
 import type { ElementType } from 'react'
 import type { FlexProps } from './types'
 
@@ -19,11 +19,13 @@ export function Flex<RootComponent extends ElementType = 'div'>(
   const props = useDefaultProps<FlexProps>({ name: 'Flex', props: inProps })
 
   const {
-    gap,
     children,
     justify,
     align,
     wrap,
+    gap,
+    gapX,
+    gapY,
     direction = 'row',
     inline = false,
     ...remainingProps
@@ -48,17 +50,17 @@ export function Flex<RootComponent extends ElementType = 'div'>(
 
   const [FlexRoot, getFlexRootProps] = useSlot({
     style,
-    component: nex.div,
+    component: Box,
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     additionalProps: {
-      sx: {
-        gap,
-        flexDirection: direction,
-        alignItems: align,
-        justifyContent: justify,
-        flexWrap: wrap,
-      },
+      gap,
+      flexDirection: direction,
+      alignItems: align,
+      justifyContent: justify,
+      flexWrap: wrap,
+      columnGap: gapX,
+      rowGap: gapY,
     },
   })
 

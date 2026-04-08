@@ -1,33 +1,11 @@
-import type { ElementType, ReactNode } from 'react'
-import type { ClassValue } from 'clsx'
-import type { CSSObject, Interpolation } from '@nex-ui/system'
-import type { OverrideProps } from '../../types/utils'
+import type { ElementType } from 'react'
+import type { CSSObject } from '@nex-ui/system'
+import type { Overwrite } from '../../types/utils'
+import type { BoxProps } from '../box'
 
 export interface FlexPropsOverrides {}
 
-interface FlexOwnProps<RootComponent extends ElementType> {
-  /**
-   * The component or element to render as the root.
-   *
-   * @default 'div'
-   */
-  as?: RootComponent
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: Interpolation
-
-  /**
-   * The content of the Flex.
-   */
-  children?: ReactNode
-
-  /**
-   * Additional class names to apply to the root.
-   */
-  className?: ClassValue
-
+interface FlexOwnProps {
   /**
    * Sets alignment along the main axis.
    */
@@ -50,9 +28,19 @@ interface FlexOwnProps<RootComponent extends ElementType> {
   wrap?: CSSObject['flexWrap']
 
   /**
-   * Sets the gap between flex items.
+   * Sets the size of the gap between flex items.
    */
   gap?: CSSObject['gap']
+
+  /**
+   * Sets the size of the gap between an element's columns. This is a shorthand for `column-gap`.
+   */
+  gapX?: CSSObject['columnGap']
+
+  /**
+   * Sets the size of the gap between an element's rows. This is a shorthand for `row-gap`.
+   */
+  gapY?: CSSObject['rowGap']
 
   /**
    * If true, displays the flex container as an inline-flex container.
@@ -62,4 +50,4 @@ interface FlexOwnProps<RootComponent extends ElementType> {
 }
 
 export type FlexProps<RootComponent extends ElementType = 'div'> =
-  OverrideProps<RootComponent, FlexOwnProps<RootComponent>, FlexPropsOverrides>
+  BoxProps<RootComponent> & Overwrite<FlexOwnProps, FlexPropsOverrides>
