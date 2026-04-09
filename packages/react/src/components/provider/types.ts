@@ -16,5 +16,6 @@ export interface NexUIProviderProps {
   colorScheme?: Omit<ColorSchemeProviderProps, 'children'>
   children?: ReactNode
   prefix?: string
-  cssCascadeLayersDisabled?: boolean
+  disableCascadeLayers?: boolean
+  disablePreflight?: boolean
 }

@@ -43,6 +43,7 @@ import type {
   DropdownTriggerItemRecipe,
   SubDropdownContentRecipe,
   DropdownDividerRecipe,
+  TextRecipe,
 } from '../themes/recipes'
 import type {
   ButtonProps,
@@ -93,6 +94,7 @@ import type {
   SubDropdownProps,
   SubDropdownContentProps,
   DropdownDividerProps,
+  TextProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
@@ -288,6 +290,10 @@ export interface ComponentThemes {
   DropdownDivider?: {
     styleOverrides?: ComponentThemeObject<DropdownDividerRecipe>
     defaultProps?: DropdownDividerProps
+  }
+  Text?: {
+    styleOverrides?: ComponentThemeObject<TextRecipe>
+    defaultProps?: TextProps
   }
 }
 

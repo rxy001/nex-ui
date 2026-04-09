@@ -26,7 +26,7 @@ export interface SystemConfig extends CreateLayersConfig {
 
 export function createSystem(config: SystemConfig) {
   const {
-    cssCascadeLayersDisabled = false,
+    disableCascadeLayers = false,
     prefix = 'system',
     scales = {},
     aliases = {},
@@ -37,7 +37,7 @@ export function createSystem(config: SystemConfig) {
   } = config
 
   const layers = createLayers({
-    cssCascadeLayersDisabled,
+    disableCascadeLayers,
     prefix,
   })
 

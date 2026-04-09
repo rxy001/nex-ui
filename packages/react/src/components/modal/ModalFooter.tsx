@@ -8,7 +8,6 @@ import type { ModalFooterProps } from './types'
 const recipe = defineRecipe({
   base: {
     w: 'full',
-    boxSizing: 'border-box',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',

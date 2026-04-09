@@ -43,13 +43,15 @@ function TopLevelProvider(props: NexUIProviderProps) {
     theme,
     children,
     colorScheme,
-    cssCascadeLayersDisabled,
+    disablePreflight,
+    disableCascadeLayers,
     prefix = 'nui',
   } = props
 
   const systemProviderProps = useMemo<SystemProviderProps>(() => {
     return {
-      cssCascadeLayersDisabled,
+      disablePreflight,
+      disableCascadeLayers,
       prefix,
       scales: {
         ...theme?.scales,
@@ -80,21 +82,7 @@ function TopLevelProvider(props: NexUIProviderProps) {
       forcedMode: colorScheme?.forcedMode,
       defaultMode: colorScheme?.defaultMode ?? 'system',
     }
-  }, [
-    cssCascadeLayersDisabled,
-    prefix,
-    theme?.scales,
-    theme?.selectors,
-    theme?.aliases,
-    theme?.breakpoints,
-    theme?.tokens,
-    theme?.semanticTokens,
-    colorScheme?.colorSchemeNode,
-    colorScheme?.modeStorageKey,
-    colorScheme?.colorSchemeSelector,
-    colorScheme?.forcedMode,
-    colorScheme?.defaultMode,
-  ])
+  }, [disablePreflight, disableCascadeLayers, prefix, theme, colorScheme])
 
   return (
     <SystemProvider {...systemProviderProps}>

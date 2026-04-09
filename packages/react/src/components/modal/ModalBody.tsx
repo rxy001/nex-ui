@@ -9,8 +9,7 @@ import type { ModalBodyProps } from './types'
 const recipe = defineRecipe({
   base: {
     w: 'full',
-    boxSizing: 'border-box',
-    height: '100%',
+    height: 'full',
   },
 })
 

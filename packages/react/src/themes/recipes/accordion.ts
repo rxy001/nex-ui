@@ -21,16 +21,13 @@ export const accordionItemRecipe = defineSlotRecipe({
   slots: {
     root: {},
     heading: {
-      m: 0,
       minH: '12',
     },
     trigger: {
-      color: 'inherit',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       pos: 'relative',
-      boxSizing: 'border-box',
       w: 'full',
       minH: 'inherit',
       px: '4',
@@ -47,7 +44,6 @@ export const accordionItemRecipe = defineSlotRecipe({
     },
     indicator: {
       fs: 'xl',
-      display: 'flex',
     },
   },
   variants: {

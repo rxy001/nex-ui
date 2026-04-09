@@ -9,9 +9,6 @@ export const breadcrumbRecipe = defineSlotRecipe({
       display: 'flex',
       alignItems: 'center',
       wordBreak: 'break-word',
-      listStyle: 'none',
-      m: 0,
-      p: 0,
       lh: 'short',
     },
     separator: {
@@ -21,14 +18,10 @@ export const breadcrumbRecipe = defineSlotRecipe({
     },
     collapse: {
       display: 'inline-flex',
-      alignItems: 'center',
     },
     expandButton: {
-      display: 'inline-flex',
-      alignItems: 'center',
       fs: 'md',
       borderRadius: 'xs',
-      cursor: 'pointer',
       color: {
         _DEFAULT: 'colorPalette.primary/70',
         _hover: {

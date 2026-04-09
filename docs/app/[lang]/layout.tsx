@@ -150,6 +150,7 @@ export default async function RootLayout({ children, params }: any) {
           We&apos;re just working on it. 🚀
         </Banner>
         <NexUIProvider
+          disablePreflight
           colorScheme={{ colorSchemeSelector: 'class', defaultMode: 'dark' }}
         >
           <Layout

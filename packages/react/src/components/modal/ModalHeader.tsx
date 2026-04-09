@@ -9,8 +9,6 @@ import type { ModalHeaderProps } from './types'
 const recipe = defineRecipe({
   base: {
     w: 'full',
-    m: 0,
-    boxSizing: 'border-box',
   },
 })
 

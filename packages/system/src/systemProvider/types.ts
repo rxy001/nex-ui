@@ -3,4 +3,6 @@ import type { SystemConfig } from '../system'
 
 export interface SystemProviderProps
   extends ColorSchemeProviderProps,
-    SystemConfig {}
+    SystemConfig {
+  disablePreflight?: boolean
+}

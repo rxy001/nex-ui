@@ -35,7 +35,7 @@ export function renderWithNexUIProvider(
   function r() {
     const result = render(component, {
       wrapper: (props) => (
-        <NexUIProvider cssCascadeLayersDisabled>{props.children}</NexUIProvider>
+        <NexUIProvider disableCascadeLayers>{props.children}</NexUIProvider>
       ),
       ...other,
     })
@@ -66,7 +66,7 @@ export function renderWithNexUIProvider(
 export const renderWithSystemProvider = (component: ReactNode) => {
   return render(component, {
     wrapper: (props) => (
-      <SystemProvider cssCascadeLayersDisabled>{props.children}</SystemProvider>
+      <SystemProvider disableCascadeLayers>{props.children}</SystemProvider>
     ),
   })
 }

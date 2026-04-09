@@ -33,7 +33,6 @@ export const switchRecipe = defineSlotRecipe({
       display: 'inline-flex',
       borderRadius: 'full',
       alignItems: 'center',
-      boxSizing: 'border-box',
       overflow: 'hidden',
       pos: 'relative',
       px: '1',
