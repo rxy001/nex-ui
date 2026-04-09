@@ -163,7 +163,7 @@ function TooltipImpl(props: TooltipProps) {
     renderPortal()
   ) : (
     <LazyMotion features={motionFeatures}>
-      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
+      <AnimatePresence>{renderPortal()}</AnimatePresence>
     </LazyMotion>
   )
 }
