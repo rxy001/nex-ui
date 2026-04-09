@@ -20,13 +20,13 @@ exports[`Badge should render with default props 1`] = `
   user-select: none;
   white-space: nowrap;
   line-height: 1rem;
-  font-size: var(--nui-font-sizes-sm);
+  font-size: var(--nui-font-sizes-xs);
   height: var(--nui-sizes-5);
   -webkit-padding-start: var(--nui-spaces-2);
   padding-inline-start: var(--nui-spaces-2);
   -webkit-padding-end: var(--nui-spaces-2);
   padding-inline-end: var(--nui-spaces-2);
-  border-radius: var(--nui-radii-sm);
+  border-radius: var(--nui-radii-md);
   background-color: var(--nui-colors-blue-primary);
   color: var(--nui-colors-blue-contrast-text);
 }

@@ -11,18 +11,15 @@ export const dividerRecipe = defineRecipe({
     orientation: {
       vertical: {
         mx: '6',
-        width: 'px',
-        height: '100%',
+        w: 'px',
+        h: 'full',
       },
       horizontal: {
-        height: 'px',
+        h: 'px',
         my: '6',
-        width: '100%',
+        w: 'full',
       },
     },
-  },
-  defaultVariants: {
-    orientation: 'horizontal',
   },
 })
 

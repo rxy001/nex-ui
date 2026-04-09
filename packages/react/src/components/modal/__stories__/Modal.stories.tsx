@@ -27,7 +27,6 @@ const contentStyle = {
   pos: 'fixed',
   left: 0,
   top: 0,
-  bg: 'content',
   w: '100vw',
 } as const
 

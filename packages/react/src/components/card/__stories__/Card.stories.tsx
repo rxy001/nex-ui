@@ -126,8 +126,8 @@ export function BlurredCard(props: CardProps) {
     <Box
       sx={{
         backgroundImage: 'linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%)',
-        maxW: '345px',
-        borderRadius: 'lg',
+        maxW: 'xs',
+        borderRadius: 'xl',
       }}
     >
       <Card

@@ -20,7 +20,7 @@ export const dialogContentRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      position: 'absolute',
+      pos: 'absolute',
       insetInlineEnd: '2',
       insetBlockStart: '2',
       fs: '1.3em',
@@ -46,12 +46,12 @@ export const dialogContentRecipe = defineSlotRecipe({
       },
       sm: {
         paper: {
-          borderRadius: 'md',
+          borderRadius: 'lg',
         },
       },
       md: {
         paper: {
-          borderRadius: 'lg',
+          borderRadius: 'xl',
         },
       },
       lg: {
@@ -68,34 +68,34 @@ export const dialogContentRecipe = defineSlotRecipe({
       },
       inside: {
         paper: {
-          maxHeight: 'calc(100vh - {spaces.15} * 2)',
+          maxH: 'calc(100vh - {spaces.15} * 2)',
         },
       },
     },
     size: {
       xs: {
         paper: {
-          width: 300,
+          w: 'xs',
         },
       },
       sm: {
         paper: {
-          width: 450,
+          w: 'md',
         },
       },
       md: {
         paper: {
-          width: 600,
+          w: 'xl',
         },
       },
       lg: {
         paper: {
-          width: 750,
+          w: '2xl',
         },
       },
       xl: {
         paper: {
-          width: 900,
+          w: '4xl',
         },
       },
       full: {
@@ -106,7 +106,7 @@ export const dialogContentRecipe = defineSlotRecipe({
           w: '100vw',
           maxW: '100vw',
           minH: '100vh',
-          borderRadius: 0,
+          borderRadius: 'none',
         },
       },
     },
@@ -141,7 +141,7 @@ export const dialogContentRecipe = defineSlotRecipe({
       scroll: 'inside',
       css: {
         paper: {
-          maxHeight: '100vh',
+          maxH: '100vh',
         },
       },
     },
@@ -152,9 +152,9 @@ export const dialogHeaderRecipe = defineRecipe({
   base: {
     py: '4',
     px: '6',
-    fontWeight: 500,
-    fs: 'xl',
-    lineHeight: '1.5556',
+    fontWeight: 'medium',
+    fs: 'lg',
+    lh: 'base',
   },
 })
 

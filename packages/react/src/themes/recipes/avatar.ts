@@ -14,8 +14,8 @@ export const avatarRecipe = defineSlotRecipe({
       userSelect: 'none',
     },
     img: {
-      width: '100%',
-      height: '100%',
+      w: 'full',
+      h: 'full',
       objectFit: 'cover',
     },
   },
@@ -25,7 +25,7 @@ export const avatarRecipe = defineSlotRecipe({
         root: {
           w: '8',
           h: '8',
-          fs: 'md',
+          fs: 'sm',
           '& svg': {
             fs: '1.5em',
           },
@@ -35,7 +35,7 @@ export const avatarRecipe = defineSlotRecipe({
         root: {
           w: '10',
           h: '10',
-          fs: 'lg',
+          fs: 'md',
           '& svg': {
             fs: '1.6em',
           },
@@ -45,7 +45,7 @@ export const avatarRecipe = defineSlotRecipe({
         root: {
           w: '12',
           h: '12',
-          fs: 'xl',
+          fs: 'lg',
           '& svg': {
             fs: '1.7em',
           },
@@ -64,7 +64,7 @@ export const avatarRecipe = defineSlotRecipe({
     inGroup: {
       true: {
         root: {
-          position: 'relative',
+          pos: 'relative',
           zIndex: 1,
           ':not(:first-of-type)': {
             ml: 'var(--avatar-group-spacing, {spaces.-2})',
@@ -115,11 +115,6 @@ export const avatarRecipe = defineSlotRecipe({
       },
     },
   ],
-  defaultVariants: {
-    size: 'md',
-    radius: 'md',
-    color: 'gray',
-  },
 })
 
 export const avatarGroupRecipe = defineRecipe({

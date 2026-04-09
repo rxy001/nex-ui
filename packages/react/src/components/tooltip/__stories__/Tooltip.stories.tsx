@@ -117,8 +117,8 @@ export function Placements(props: TooltipProps) {
   return (
     <Flex
       sx={{
-        w: '100%',
-        h: '100%',
+        w: 'full',
+        h: 'full',
       }}
       justify='center'
       align='center'

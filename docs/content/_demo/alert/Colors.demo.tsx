@@ -2,7 +2,7 @@ import { Alert, Flex } from '@nex-ui/react'
 
 export default function App() {
   return (
-    <Flex direction='column' gap='4'>
+    <Flex direction='column' gap='5'>
       <Alert
         color='blue'
         title='Blue Color'

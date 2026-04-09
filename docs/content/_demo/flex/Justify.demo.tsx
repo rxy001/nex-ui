@@ -8,7 +8,7 @@ function Item({ children }: { children: ReactNode }) {
         px: '4',
         py: '2',
         bg: 'gray.muted',
-        borderRadius: 'md',
+        borderRadius: 'lg',
       }}
       as='div'
     >

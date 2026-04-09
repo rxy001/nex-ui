@@ -26,7 +26,7 @@ export default function Playlist() {
         <Box
           as='p'
           sx={{
-            fs: 'md',
+            fs: 'sm',
             color: 'gray.400',
             m: 0,
             mt: 4,
@@ -63,7 +63,7 @@ export default function Playlist() {
                 sx={{
                   w: '140px',
                   h: '210px',
-                  borderRadius: 'sm',
+                  borderRadius: 'md',
                   overflow: 'hidden',
                 }}
               >
@@ -88,7 +88,7 @@ export default function Playlist() {
                 sx={{
                   fontWeight: 'medium',
                   m: 0,
-                  fs: 'md',
+                  fs: 'sm',
                   mt: '3',
                 }}
               >
@@ -98,7 +98,7 @@ export default function Playlist() {
                 as='p'
                 sx={{
                   m: 0,
-                  fs: 'sm',
+                  fs: 'xs',
                   color: 'gray.400',
                 }}
               >

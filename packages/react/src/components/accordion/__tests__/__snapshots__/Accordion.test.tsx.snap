@@ -49,7 +49,7 @@ exports[`Accordion should render with default props 1`] = `
   padding-inline-start: var(--nui-spaces-4);
   -webkit-padding-end: var(--nui-spaces-4);
   padding-inline-end: var(--nui-spaces-4);
-  font-size: var(--nui-font-sizes-xl);
+  font-size: var(--nui-font-sizes-lg);
   font-weight: var(--nui-font-weights-normal);
 }
 
@@ -58,7 +58,7 @@ exports[`Accordion should render with default props 1`] = `
 }
 
 .emotion-4 {
-  font-size: 1.25rem;
+  font-size: var(--nui-font-sizes-xl);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

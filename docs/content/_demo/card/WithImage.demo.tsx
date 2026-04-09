@@ -30,7 +30,7 @@ export default function App() {
           as='img'
           src='/images/card-cover.jpeg'
           sx={{
-            borderRadius: 'lg',
+            borderRadius: 'xl',
             mt: '2',
             w: 270,
           }}

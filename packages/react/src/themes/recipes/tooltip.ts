@@ -8,7 +8,6 @@ export const tooltipRecipe = defineSlotRecipe({
       zIndex: 'tooltip',
     },
     paper: {
-      fs: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
       overflow: 'auto',
@@ -23,18 +22,21 @@ export const tooltipRecipe = defineSlotRecipe({
         paper: {
           px: '2',
           py: '0.5',
+          fs: 'xs',
         },
       },
       md: {
         paper: {
           px: '2.5',
           py: '1',
+          fs: 'sm',
         },
       },
       lg: {
         paper: {
           px: '3',
           py: '1.5',
+          fs: 'md',
         },
       },
     },
@@ -42,7 +44,7 @@ export const tooltipRecipe = defineSlotRecipe({
       ...toSlots(colorVariant, 'paper'),
       default: {
         paper: {
-          bg: 'content',
+          bg: 'panelBg',
           color: 'inherit',
         },
       },
@@ -50,12 +52,12 @@ export const tooltipRecipe = defineSlotRecipe({
     radius: {
       sm: {
         paper: {
-          borderRadius: 'md',
+          borderRadius: 'lg',
         },
       },
       md: {
         paper: {
-          borderRadius: 'lg',
+          borderRadius: 'xl',
         },
       },
       lg: {

@@ -2,7 +2,7 @@ import { Flex, Alert } from '@nex-ui/react'
 
 export default function App() {
   return (
-    <Flex direction='column' gap='4'>
+    <Flex direction='column' gap='5'>
       <Alert
         variant='faded'
         title='Faded Variant'

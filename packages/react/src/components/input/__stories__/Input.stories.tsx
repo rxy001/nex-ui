@@ -183,7 +183,7 @@ export function Controlled(props: InputProps) {
   const [value, setValue] = useState('')
 
   return (
-    <Flex direction='column' gap='5' sx={{ maxWidth: '300px' }}>
+    <Flex direction='column' gap='5' sx={{ maxW: 'xs' }}>
       <Input
         {...props}
         label='Controlled'
@@ -197,7 +197,7 @@ export function Controlled(props: InputProps) {
 
 export function InputTypes(props: InputProps) {
   return (
-    <Flex gap='5' wrap='wrap' sx={{ '& > div': { width: '250px' } }}>
+    <Flex gap='5' wrap='wrap' sx={{ '& > div': { w: '3xs' } }}>
       <Input {...props} label='Text' placeholder='Enter your text' />
       <Input
         {...props}

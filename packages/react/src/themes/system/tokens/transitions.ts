@@ -1,12 +1,13 @@
 import { defineTokens } from '@nex-ui/system'
 
+const DURATION = '0.2s'
+
 export const transitions = defineTokens.transitions({
-  all: 'all 0.2s',
-  colors:
-    'color 0.2s, background-color 0.2s, border-color 0.2s, text-decoration-color 0.2s, fill 0.2s, stroke 0.2s, opacity 0.2s',
-  opacity: 'opacity 0.2s',
-  shadow: 'box-shadow 0.2s',
-  transform: 'transform 0.2s, opacity 0.2s',
-  margin: 'margin 0.2s',
-  scale: 'scale 0.2s, opacity 0.2s',
+  all: `all ${DURATION}`,
+  colors: `color ${DURATION}, background-color ${DURATION}, border-color ${DURATION}, text-decoration-color ${DURATION}, fill ${DURATION}, stroke ${DURATION}, opacity ${DURATION}`,
+  opacity: `opacity ${DURATION}`,
+  shadow: `box-shadow ${DURATION}`,
+  transform: `transform ${DURATION}, opacity ${DURATION}`,
+  margin: `margin ${DURATION}`,
+  scale: `scale ${DURATION}, opacity ${DURATION}`,
 })

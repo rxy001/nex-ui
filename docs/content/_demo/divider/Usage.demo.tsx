@@ -13,7 +13,7 @@ export default function App() {
       </Box>
       <Box
         sx={{
-          fs: 'md',
+          fs: 'sm',
           color: 'gray.secondary',
         }}
         as='p'
@@ -24,7 +24,7 @@ export default function App() {
       <Flex
         sx={{
           h: '6',
-          fs: 'md',
+          fs: 'sm',
         }}
         align='center'
       >

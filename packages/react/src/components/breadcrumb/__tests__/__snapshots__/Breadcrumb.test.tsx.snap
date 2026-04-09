@@ -46,9 +46,9 @@ exports[`Breadcrumb should render with default props 1`] = `
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-radius: 2px;
+  border-radius: var(--nui-radii-xs);
   white-space: nowrap;
-  font-size: var(--nui-font-sizes-md);
+  font-size: var(--nui-font-sizes-sm);
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
 }
@@ -81,7 +81,7 @@ exports[`Breadcrumb should render with default props 1`] = `
   margin-inline-end: var(--breadcrumb-separator-gap, var(--nui-spaces-2));
   cursor: default;
   color: color-mix(in oklab, var(--nui-colors-text) 50%, transparent);
-  font-size: var(--nui-font-sizes-md);
+  font-size: var(--nui-font-sizes-sm);
 }
 
 .emotion-8 {
@@ -102,9 +102,9 @@ exports[`Breadcrumb should render with default props 1`] = `
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-radius: 2px;
+  border-radius: var(--nui-radii-xs);
   white-space: nowrap;
-  font-size: var(--nui-font-sizes-md);
+  font-size: var(--nui-font-sizes-sm);
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
 }
