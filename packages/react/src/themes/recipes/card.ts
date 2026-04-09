@@ -5,10 +5,10 @@ export const cardRecipe = defineRecipe({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    w: 'fit-content',
-    bg: 'content',
-    maxWidth: '345px',
-    position: 'relative',
+    w: 'fit',
+    bg: 'panelBg',
+    maxW: 'xs',
+    pos: 'relative',
     overflow: 'hidden',
   },
   variants: {
@@ -34,10 +34,10 @@ export const cardRecipe = defineRecipe({
         borderRadius: 'none',
       },
       sm: {
-        borderRadius: 'md',
+        borderRadius: 'lg',
       },
       md: {
-        borderRadius: 'lg',
+        borderRadius: 'xl',
       },
       lg: {
         borderRadius: '2xl',
@@ -89,10 +89,10 @@ export const cardHeaderRecipe = defineSlotRecipe({
       alignItems: 'flex-start',
     },
     title: {
-      fs: 'lg',
+      fs: 'md',
     },
     subtitle: {
-      fs: 'md',
+      fs: 'sm',
     },
   },
 })
@@ -114,13 +114,13 @@ export const cardActionArea = defineRecipe({
   base: {
     textAlign: 'inherit',
     color: 'inherit',
-    width: 'full',
-    position: 'relative',
+    w: 'full',
+    pos: 'relative',
     overflow: 'hidden',
     borderRadius: 'inherit',
     fs: 'inherit',
     '::after': {
-      position: 'absolute',
+      pos: 'absolute',
       bg: {
         _DEFAULT: 'gray.200/25',
         _dark: 'gray.800/25',

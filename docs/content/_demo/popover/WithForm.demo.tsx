@@ -27,7 +27,7 @@ export default function App() {
           >
             <Box
               sx={{
-                fs: 'md',
+                fs: 'sm',
                 fontWeight: 'bold',
               }}
             >

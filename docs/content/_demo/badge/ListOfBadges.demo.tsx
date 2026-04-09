@@ -16,7 +16,7 @@ export default function App() {
   }
 
   return (
-    <Flex gap='4'>
+    <Flex gap='5'>
       {fruits.map((fruit) => (
         <Badge key={fruit} closable onClose={() => handleClose(fruit)}>
           {fruit}

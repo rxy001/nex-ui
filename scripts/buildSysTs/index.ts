@@ -20,7 +20,7 @@ const cwd = c()
 
 const outDirPath = path.resolve(cwd, './packages/react/src/types/generated')
 
-const entry = path.resolve(cwd, './packages/react/src/theme/preset.ts')
+const entry = path.resolve(cwd, './packages/react/src/themes/preset.ts')
 
 async function readFile(file: string) {
   async function bundleConfigFile() {

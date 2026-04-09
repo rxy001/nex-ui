@@ -5,16 +5,16 @@ import type { RecipeVariants } from '@nex-ui/system'
 export const radioRecipe = defineSlotRecipe({
   slots: {
     root: {
-      position: 'relative',
+      pos: 'relative',
       display: 'inline-flex',
       alignItems: 'center',
       cursor: 'pointer',
       boxSizing: 'border-box',
-      maxWidth: 'fit-content',
+      maxW: 'fit',
       WebkitTapHighlightColor: 'transparent',
     },
     input: {
-      position: 'absolute',
+      pos: 'absolute',
       inset: 0,
       opacity: 0,
       zIndex: 1,
@@ -50,7 +50,7 @@ export const radioRecipe = defineSlotRecipe({
         display: 'block',
         transform: 'scale(0)',
         borderRadius: 'full',
-        backgroundColor: 'colorPalette.primary',
+        bg: 'colorPalette.primary',
       },
     },
     label: {
@@ -74,7 +74,7 @@ export const radioRecipe = defineSlotRecipe({
           },
         },
         label: {
-          fs: 'md',
+          fs: 'sm',
         },
       },
       md: {
@@ -91,7 +91,7 @@ export const radioRecipe = defineSlotRecipe({
           },
         },
         label: {
-          fs: 'lg',
+          fs: 'md',
         },
       },
       lg: {
@@ -108,7 +108,7 @@ export const radioRecipe = defineSlotRecipe({
           },
         },
         label: {
-          fs: 'xl',
+          fs: 'lg',
         },
       },
     },
@@ -169,10 +169,6 @@ export const radioRecipe = defineSlotRecipe({
       },
     },
   ],
-  defaultVariants: {
-    size: 'md',
-    color: 'blue',
-  },
 })
 
 export const radioGroupRecipe = defineSlotRecipe({
@@ -184,7 +180,7 @@ export const radioGroupRecipe = defineSlotRecipe({
     },
     label: {
       m: 0,
-      fs: 'lg',
+      fs: 'md',
       fontWeight: 'normal',
     },
     wrapper: {

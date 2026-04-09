@@ -24,7 +24,7 @@ export default function App() {
           </Box>
           <Box
             sx={{
-              fs: 'sm',
+              fs: 'xs',
             }}
           >
             This is the popover content
@@ -45,7 +45,7 @@ export default function App() {
           </Box>
           <Box
             sx={{
-              fs: 'sm',
+              fs: 'xs',
             }}
           >
             This is the popover content

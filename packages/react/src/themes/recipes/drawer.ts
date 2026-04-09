@@ -21,7 +21,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      position: 'absolute',
+      pos: 'absolute',
       insetInlineEnd: '2',
       insetBlockStart: '2',
       fs: '1.3em',
@@ -47,12 +47,12 @@ export const drawerContentRecipe = defineSlotRecipe({
       },
       sm: {
         paper: {
-          '--drawer-border-radius': '{radii.md}',
+          '--drawer-border-radius': '{radii.lg}',
         },
       },
       md: {
         paper: {
-          '--drawer-border-radius': '{radii.lg}',
+          '--drawer-border-radius': '{radii.xl}',
         },
       },
       lg: {
@@ -132,7 +132,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'xs',
       css: {
         paper: {
-          w: 300,
+          w: '2xs',
         },
       },
     },
@@ -141,7 +141,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'sm',
       css: {
         paper: {
-          w: 400,
+          w: 'sm',
         },
       },
     },
@@ -150,7 +150,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'md',
       css: {
         paper: {
-          w: 500,
+          w: '30rem',
         },
       },
     },
@@ -159,7 +159,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'lg',
       css: {
         paper: {
-          w: 600,
+          w: 'xl',
         },
       },
     },
@@ -168,7 +168,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'xl',
       css: {
         paper: {
-          w: 700,
+          w: '2xl',
         },
       },
     },
@@ -177,7 +177,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'xs',
       css: {
         paper: {
-          h: 300,
+          h: '2xs',
         },
       },
     },
@@ -186,7 +186,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'sm',
       css: {
         paper: {
-          h: 400,
+          h: 'sm',
         },
       },
     },
@@ -195,7 +195,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'md',
       css: {
         paper: {
-          h: 500,
+          h: '30rem',
         },
       },
     },
@@ -204,7 +204,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'lg',
       css: {
         paper: {
-          h: 600,
+          h: 'xl',
         },
       },
     },
@@ -213,7 +213,7 @@ export const drawerContentRecipe = defineSlotRecipe({
       size: 'xl',
       css: {
         paper: {
-          h: 700,
+          h: '2xl',
         },
       },
     },
@@ -224,9 +224,9 @@ export const drawerHeaderRecipe = defineRecipe({
   base: {
     py: '4',
     px: '6',
-    fontWeight: 500,
-    fs: 'xl',
-    lineHeight: '1.5556',
+    fontWeight: 'medium',
+    fs: 'lg',
+    lh: 'base',
   },
 })
 

@@ -18,7 +18,7 @@ export const inputRecipe = defineSlotRecipe({
       alignItems: 'center',
       gap: '1',
       cursor: 'text',
-      position: 'relative',
+      pos: 'relative',
       px: '3',
     },
     input: {
@@ -44,7 +44,7 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     label: {
-      position: 'absolute',
+      pos: 'absolute',
       pointerEvents: 'none',
       transformOrigin: 'top left',
     },
@@ -63,19 +63,19 @@ export const inputRecipe = defineSlotRecipe({
     size: {
       sm: {
         root: {
-          fs: 'md',
+          fs: 'sm',
           h: '8',
         },
       },
       md: {
         root: {
-          fs: 'lg',
+          fs: 'md',
           h: '10',
         },
       },
       lg: {
         root: {
-          fs: 'lg',
+          fs: 'md',
           h: '12',
         },
       },
@@ -147,26 +147,26 @@ export const inputRecipe = defineSlotRecipe({
           px: '1.5',
           '::before': {
             content: '""',
-            position: 'absolute',
+            pos: 'absolute',
             insetBlockEnd: 0,
             insetInlineStart: 0,
-            w: '100%',
+            w: 'full',
             h: '2px',
             bg: 'gray.highlight',
           },
           '::after': {
             content: '""',
-            position: 'absolute',
+            pos: 'absolute',
             insetBlockEnd: 0,
             insetInlineStart: '50%',
             transform: 'translateX(-50%)',
-            width: 0,
+            w: 0,
             h: '2px',
             bg: 'colorPalette.primary',
           },
           _focusWithin: {
             '::after': {
-              width: '100%',
+              w: 'full',
             },
           },
           _hover: {

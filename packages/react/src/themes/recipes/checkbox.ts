@@ -11,7 +11,7 @@ export const checkboxGroupRecipe = defineSlotRecipe({
     },
     label: {
       m: 0,
-      fs: 'lg',
+      fs: 'md',
       fontWeight: 'normal',
     },
     wrapper: {
@@ -38,15 +38,15 @@ export const checkboxRecipe = defineSlotRecipe({
   slots: {
     root: {
       display: 'inline-flex',
-      position: 'relative',
+      pos: 'relative',
       alignItems: 'center',
       boxSizing: 'border-box',
       cursor: 'pointer',
       WebkitTapHighlightColor: 'transparent',
-      maxWidth: 'fit-content',
+      maxW: 'fit',
     },
     input: {
-      position: 'absolute',
+      pos: 'absolute',
       inset: 0,
       opacity: 0,
       cursor: 'inherit',
@@ -71,13 +71,13 @@ export const checkboxRecipe = defineSlotRecipe({
     },
     icon: {
       display: 'inline-flex',
-      position: 'relative',
+      pos: 'relative',
       justifyContent: 'center',
       alignItems: 'center',
       color: 'colorPalette.contrastText',
       '::before': {
         content: '""',
-        position: 'absolute',
+        pos: 'absolute',
         inset: 0,
         border: 'md',
         borderColor: 'gray.highlight',
@@ -86,7 +86,7 @@ export const checkboxRecipe = defineSlotRecipe({
       },
       '::after': {
         content: '""',
-        position: 'absolute',
+        pos: 'absolute',
         inset: 0,
         bg: 'colorPalette.primary',
         opacity: 0,
@@ -98,7 +98,8 @@ export const checkboxRecipe = defineSlotRecipe({
     disableAnimation: {
       false: {
         checkedIcon: {
-          transition: 'all 0.2s linear',
+          transition: 'all',
+          transitionTimingFunction: 'linear',
           transform: 'scale(0.4)',
         },
         icon: {
@@ -106,7 +107,8 @@ export const checkboxRecipe = defineSlotRecipe({
             transition: 'colors',
           },
           '::after': {
-            transition: 'all 0.2s linear',
+            transition: 'all',
+            transitionTimingFunction: 'linear',
             transform: 'scale(0.4)',
           },
         },
@@ -135,10 +137,10 @@ export const checkboxRecipe = defineSlotRecipe({
         icon: {
           w: '4',
           h: '4',
-          fs: 'sm',
+          fs: 'xs',
         },
         label: {
-          fs: 'md',
+          fs: 'sm',
         },
       },
       md: {
@@ -149,10 +151,10 @@ export const checkboxRecipe = defineSlotRecipe({
         icon: {
           w: '5',
           h: '5',
-          fs: 'md',
+          fs: 'sm',
         },
         label: {
-          fs: 'lg',
+          fs: 'md',
         },
       },
       lg: {
@@ -163,10 +165,10 @@ export const checkboxRecipe = defineSlotRecipe({
         icon: {
           w: '6',
           h: '6',
-          fs: 'xl',
+          fs: 'lg',
         },
         label: {
-          fs: 'xl',
+          fs: 'lg',
         },
       },
     },
@@ -184,30 +186,30 @@ export const checkboxRecipe = defineSlotRecipe({
       sm: {
         icon: {
           '::before': {
-            borderRadius: 'calc({radii.lg} * .5)',
+            borderRadius: 'calc({radii.xl} * .5)',
           },
           '::after': {
-            borderRadius: 'calc({radii.lg} * .5)',
+            borderRadius: 'calc({radii.xl} * .5)',
           },
         },
       },
       md: {
         icon: {
           '::before': {
-            borderRadius: 'calc({radii.lg} * .6)',
+            borderRadius: 'calc({radii.xl} * .6)',
           },
           '::after': {
-            borderRadius: 'calc({radii.lg} * .6)',
+            borderRadius: 'calc({radii.xl} * .6)',
           },
         },
       },
       lg: {
         icon: {
           '::before': {
-            borderRadius: 'calc({radii.lg} * .7)',
+            borderRadius: 'calc({radii.xl} * .7)',
           },
           '::after': {
-            borderRadius: 'calc({radii.lg} * .7)',
+            borderRadius: 'calc({radii.xl} * .7)',
           },
         },
       },
@@ -272,11 +274,6 @@ export const checkboxRecipe = defineSlotRecipe({
       },
     },
   ],
-  defaultVariants: {
-    color: 'blue',
-    size: 'md',
-    radius: 'md',
-  },
 })
 
 export type CheckboxRecipe = typeof checkboxRecipe

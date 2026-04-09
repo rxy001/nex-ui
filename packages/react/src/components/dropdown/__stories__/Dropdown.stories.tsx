@@ -190,8 +190,8 @@ export const Placements: Story = {
   render: (props: DropdownContentProps) => (
     <Flex
       sx={{
-        w: '100%',
-        h: '100%',
+        w: 'full',
+        h: 'full',
       }}
       justify='center'
       align='center'
@@ -408,7 +408,7 @@ export function CustomTrigger(props: DropdownContentProps) {
           sx={{
             px: '2',
             py: '1',
-            fs: 'md',
+            fs: 'xs',
           }}
         >
           Signed in as <strong>@x1ngYu</strong>

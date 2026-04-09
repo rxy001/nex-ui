@@ -22,19 +22,19 @@ export const accordionItemRecipe = defineSlotRecipe({
     root: {},
     heading: {
       m: 0,
-      minHeight: '12',
+      minH: '12',
     },
     trigger: {
       color: 'inherit',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      position: 'relative',
+      pos: 'relative',
       boxSizing: 'border-box',
       w: 'full',
-      minHeight: 'inherit',
+      minH: 'inherit',
       px: '4',
-      fs: 'xl',
+      fs: 'lg',
       fontWeight: 'normal',
       _focusVisibleRing: {
         outline: 'focusVisibleOutline',
@@ -43,10 +43,10 @@ export const accordionItemRecipe = defineSlotRecipe({
     content: {
       px: '4',
       py: '2',
-      fs: 16,
+      fs: 'md',
     },
     indicator: {
-      fs: '1.25rem',
+      fs: 'xl',
       display: 'flex',
     },
   },

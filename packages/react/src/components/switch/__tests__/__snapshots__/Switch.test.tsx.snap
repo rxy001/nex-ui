@@ -77,7 +77,7 @@ exports[`Switch should render with default props 1`] = `
   padding-inline-end: var(--nui-spaces-1);
   width: var(--nui-sizes-12);
   height: var(--nui-sizes-7);
-  font-size: var(--nui-font-sizes-lg);
+  font-size: var(--nui-font-sizes-md);
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
 }

@@ -21,7 +21,7 @@ const colors = [
 
 export default function App() {
   return (
-    <Flex gap='4' wrap='wrap'>
+    <Flex gap='5' wrap='wrap'>
       {colors.map((color) => (
         <Dropdown key={color}>
           <DropdownTrigger>

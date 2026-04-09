@@ -40,7 +40,9 @@ export function ClientGallery() {
           shift={false}
           open
         >
-          <Button color='blue'>Button</Button>
+          <Button color='blue' size='sm' variant='faded'>
+            Button
+          </Button>
         </Tooltip>
       </div>
       <Switch

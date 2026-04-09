@@ -30,7 +30,7 @@ export default function App() {
       <CardBody>
         Beautiful, modern and reliable React component library.
       </CardBody>
-      <CardFooter as={Flex} gap='4'>
+      <CardFooter as={Flex} gap='5'>
         <Button variant='ghost' size='sm'>
           SHARE
         </Button>

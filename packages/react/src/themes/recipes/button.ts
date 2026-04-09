@@ -4,7 +4,6 @@ import {
   radiusVariant,
   toSlots,
   fullWidth,
-  sizeVariant,
   disabledVariant,
 } from './shared'
 import type { RecipeVariants } from '@nex-ui/system'
@@ -12,8 +11,8 @@ import type { RecipeVariants } from '@nex-ui/system'
 export const buttonRecipe = defineSlotRecipe({
   slots: {
     root: {
-      position: 'relative',
-      lineHeight: 'base',
+      pos: 'relative',
+      lh: 'base',
       overflow: 'hidden',
       display: 'inline-flex',
       alignItems: 'center',
@@ -97,7 +96,29 @@ export const buttonRecipe = defineSlotRecipe({
         },
       },
     },
-    size: toSlots(sizeVariant, 'root'),
+    size: {
+      sm: {
+        root: {
+          px: '3',
+          fs: 'sm',
+          h: '8',
+        },
+      },
+      md: {
+        root: {
+          px: '4',
+          fs: 'md',
+          h: '10',
+        },
+      },
+      lg: {
+        root: {
+          px: '5',
+          fs: 'lg',
+          h: '12',
+        },
+      },
+    },
     disabled: toSlots(disabledVariant, 'root'),
     loading: toSlots(disabledVariant, 'root'),
     fullWidth: toSlots(fullWidth, 'root'),
@@ -166,11 +187,6 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
   ],
-  defaultVariants: {
-    variant: 'solid',
-    size: 'md',
-    radius: 'md',
-  },
 })
 
 export type ButtonRecipe = typeof buttonRecipe

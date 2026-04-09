@@ -23,7 +23,7 @@ import type { ReactNode } from 'react'
 
 const style = {
   "&[data-highlighted='true']": {
-    background: 'wheat',
+    bg: 'wheat',
   },
 }
 

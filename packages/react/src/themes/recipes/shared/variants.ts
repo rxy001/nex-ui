@@ -30,16 +30,16 @@ export const colorVariant = {
 
 export const fullWidth = {
   true: {
-    w: '100%',
+    w: 'full',
   },
 } as const
 
 export const radiusVariant = {
   sm: {
-    borderRadius: 'md',
+    borderRadius: 'lg',
   },
   md: {
-    borderRadius: 'lg',
+    borderRadius: 'xl',
   },
   lg: {
     borderRadius: '2xl',
@@ -49,24 +49,6 @@ export const radiusVariant = {
   },
   none: {
     borderRadius: 'none',
-  },
-} as const
-
-export const sizeVariant = {
-  sm: {
-    px: '3',
-    fs: 'md',
-    h: '8',
-  },
-  md: {
-    px: '4',
-    fs: 'lg',
-    h: '10',
-  },
-  lg: {
-    px: '5',
-    fs: 'xl',
-    h: '12',
   },
 } as const
 

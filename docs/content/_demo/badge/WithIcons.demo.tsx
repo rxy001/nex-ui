@@ -3,7 +3,7 @@ import { Badge, Flex } from '@nex-ui/react'
 
 export default function App() {
   return (
-    <Flex gap='4'>
+    <Flex gap='5'>
       <Badge startIcon={<GithubOutlined />}>Github</Badge>
       <Badge endIcon={<GithubOutlined />}>Github</Badge>
     </Flex>

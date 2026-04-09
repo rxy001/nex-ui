@@ -16,7 +16,7 @@ export const dropdownContentRecipe = defineSlotRecipe({
       flexDirection: 'column',
       gap: '1',
       boxSizing: 'border-box',
-      bg: 'content',
+      bg: 'panelBg',
       overflow: 'auto',
     },
   },
@@ -24,12 +24,12 @@ export const dropdownContentRecipe = defineSlotRecipe({
     radius: {
       sm: {
         paper: {
-          borderRadius: 'md',
+          borderRadius: 'lg',
         },
       },
       md: {
         paper: {
-          borderRadius: 'lg',
+          borderRadius: 'xl',
         },
       },
       lg: {
@@ -46,17 +46,20 @@ export const dropdownContentRecipe = defineSlotRecipe({
     size: {
       sm: {
         paper: {
-          padding: '1',
+          p: '1',
+          fs: 'xs',
         },
       },
       md: {
         paper: {
-          padding: '2',
+          p: '2',
+          fs: 'sm',
         },
       },
       lg: {
         paper: {
-          padding: '3',
+          p: '3',
+          fs: 'md',
         },
       },
     },
@@ -71,8 +74,9 @@ export const dropdownItemRecipe = defineSlotRecipe({
       py: '1',
       pl: '2',
       pr: '2',
-      borderRadius: 'sm',
+      borderRadius: 'md',
       color: 'inherit',
+      fs: 'inherit',
       textDecoration: 'none',
       _disabled: {
         opacity: 0.6,
@@ -84,8 +88,8 @@ export const dropdownItemRecipe = defineSlotRecipe({
       py: '1px',
       border: 'sm',
       borderColor: 'inherit',
-      borderRadius: 'sm',
-      fs: 'sm',
+      borderRadius: 'md',
+      fs: 'xs',
       opacity: 0.5,
       letterSpacing: 1,
       fontFamily: 'inherit',
@@ -97,7 +101,6 @@ export const dropdownItemRecipe = defineSlotRecipe({
       display: 'flex',
       alignItems: 'center',
       flex: 1,
-      fs: 'md',
       color: 'inherit',
     },
     startIcon: {
@@ -180,7 +183,7 @@ export const dropdownItemRecipe = defineSlotRecipe({
 export const dropdownItemGroupLabelRecipe = defineRecipe({
   base: {
     p: '1',
-    fs: 'sm',
+    fs: 'xs',
     color: 'gray.primary',
   },
 })
@@ -231,12 +234,12 @@ export const subDropdownContentRecipe = defineSlotRecipe({
     paper: {
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
-      padding: '2',
+      p: '2',
       display: 'flex',
       flexDirection: 'column',
       gap: '1',
       boxSizing: 'border-box',
-      bg: 'content',
+      bg: 'panelBg',
       overflow: 'auto',
     },
   },
@@ -244,17 +247,17 @@ export const subDropdownContentRecipe = defineSlotRecipe({
     radius: {
       sm: {
         paper: {
-          borderRadius: 'md',
+          borderRadius: 'lg',
         },
       },
       md: {
         paper: {
-          borderRadius: 'lg',
+          borderRadius: 'xl',
         },
       },
       lg: {
         paper: {
-          borderRadius: 'xl',
+          borderRadius: '2xl',
         },
       },
       none: {
@@ -266,17 +269,20 @@ export const subDropdownContentRecipe = defineSlotRecipe({
     size: {
       sm: {
         paper: {
-          padding: '1',
+          p: '1',
+          fs: 'xs',
         },
       },
       md: {
         paper: {
-          padding: '2',
+          p: '2',
+          fs: 'sm',
         },
       },
       lg: {
         paper: {
-          padding: '3',
+          p: '3',
+          fs: 'md',
         },
       },
     },
