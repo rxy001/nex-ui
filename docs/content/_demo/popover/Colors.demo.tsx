@@ -22,7 +22,7 @@ const colors = [
 
 export default function App() {
   return (
-    <Flex gap='4' wrap='wrap'>
+    <Flex gap='5' wrap='wrap'>
       {colors.map((color) => {
         return (
           <Popover key={color}>
@@ -44,7 +44,7 @@ export default function App() {
               </Box>
               <Box
                 sx={{
-                  fs: 'sm',
+                  fs: 'xs',
                 }}
               >
                 This is the popover content

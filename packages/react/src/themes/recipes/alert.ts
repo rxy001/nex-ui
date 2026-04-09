@@ -16,11 +16,11 @@ export const alertRecipe = defineSlotRecipe({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 26,
+      fs: '3xl',
     },
     content: {
       flex: 1,
-      minHeight: '8',
+      minH: '8',
       display: 'flex',
       justifyContent: 'center',
       flexDirection: 'column',
@@ -29,11 +29,11 @@ export const alertRecipe = defineSlotRecipe({
     },
     title: {
       fontWeight: 'medium',
-      fs: 'md',
+      fs: 'sm',
       color: 'inherit',
     },
     description: {
-      fs: 'md',
+      fs: 'sm',
       opacity: 0.9,
       color: 'inherit',
     },

@@ -10,8 +10,8 @@ export const breadcrumbRecipe = defineSlotRecipe({
       alignItems: 'center',
       wordBreak: 'break-word',
       listStyle: 'none',
-      margin: 0,
-      padding: 0,
+      m: 0,
+      p: 0,
       lh: 'short',
     },
     separator: {
@@ -26,8 +26,8 @@ export const breadcrumbRecipe = defineSlotRecipe({
     expandButton: {
       display: 'inline-flex',
       alignItems: 'center',
-      fs: 'lg',
-      borderRadius: 2,
+      fs: 'md',
+      borderRadius: 'xs',
       cursor: 'pointer',
       color: {
         _DEFAULT: 'colorPalette.primary/70',
@@ -50,17 +50,17 @@ export const breadcrumbRecipe = defineSlotRecipe({
     size: {
       sm: {
         separator: {
-          fs: 'sm',
+          fs: 'xs',
         },
       },
       md: {
         separator: {
-          fs: 'md',
+          fs: 'sm',
         },
       },
       lg: {
         separator: {
-          fs: 'lg',
+          fs: 'md',
         },
       },
     },
@@ -112,7 +112,7 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
       gap: '1',
       color: 'colorPalette.primary/70',
       userSelect: 'none',
-      borderRadius: 2,
+      borderRadius: 'xs',
       whiteSpace: 'nowrap',
       _focusVisibleRing: {
         outline: '{borders.md} {colors.colorPalette.primary}',
@@ -170,17 +170,17 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
     size: {
       sm: {
         link: {
-          fs: 'sm',
+          fs: 'xs',
         },
       },
       md: {
         link: {
-          fs: 'md',
+          fs: 'sm',
         },
       },
       lg: {
         link: {
-          fs: 'lg',
+          fs: 'md',
         },
       },
     },

@@ -38,9 +38,7 @@ exports[`RadioGroup should render with default props 1`] = `
   align-items: center;
   cursor: pointer;
   box-sizing: border-box;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
+  max-width: var(--nui-sizes-fit);
   -webkit-tap-highlight-color: transparent;
   padding: var(--nui-spaces-1-5);
   height: var(--nui-sizes-8);
@@ -140,7 +138,7 @@ exports[`RadioGroup should render with default props 1`] = `
 .emotion-5 {
   -webkit-margin-start: var(--nui-spaces-2);
   margin-inline-start: var(--nui-spaces-2);
-  font-size: var(--nui-font-sizes-lg);
+  font-size: var(--nui-font-sizes-md);
 }
 
 <div

@@ -11,7 +11,7 @@ const variants = ['solid', 'outlined', 'ghost', 'faded'] as const
 
 export default function App() {
   return (
-    <Flex gap='4' wrap='wrap'>
+    <Flex gap='5' wrap='wrap'>
       {variants.map((variant) => (
         <Dropdown key={variant}>
           <DropdownTrigger>

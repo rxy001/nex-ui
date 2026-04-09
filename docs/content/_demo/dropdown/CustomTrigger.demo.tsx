@@ -30,7 +30,7 @@ export default function App() {
           sx={{
             px: '2',
             py: '1',
-            fs: 'md',
+            fs: 'sm',
           }}
         >
           Signed in as <strong>@x1ngYu</strong>

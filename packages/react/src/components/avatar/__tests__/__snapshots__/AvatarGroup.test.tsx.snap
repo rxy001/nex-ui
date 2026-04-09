@@ -34,8 +34,8 @@ exports[`AvatarGroup should render with default props 1`] = `
   user-select: none;
   width: var(--nui-sizes-10);
   height: var(--nui-sizes-10);
-  font-size: var(--nui-font-sizes-lg);
-  border-radius: var(--nui-radii-lg);
+  font-size: var(--nui-font-sizes-md);
+  border-radius: var(--nui-radii-xl);
   position: relative;
   z-index: 1;
   -webkit-transition: var(--nui-transitions-transform);

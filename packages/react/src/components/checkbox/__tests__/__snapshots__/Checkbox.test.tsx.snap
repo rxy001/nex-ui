@@ -14,9 +14,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
   box-sizing: border-box;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
+  max-width: var(--nui-sizes-fit);
   height: var(--nui-sizes-8);
   padding: var(--nui-spaces-1-5);
 }
@@ -83,7 +81,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
   color: var(--nui-colors-blue-contrast-text);
   width: var(--nui-sizes-5);
   height: var(--nui-sizes-5);
-  font-size: var(--nui-font-sizes-md);
+  font-size: var(--nui-font-sizes-sm);
 }
 
 .emotion-2::before {
@@ -94,7 +92,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
   border-color: var(--nui-colors-gray-highlight);
   background: transparent;
   z-index: -2;
-  border-radius: calc(var(--nui-radii-lg) * .6);
+  border-radius: calc(var(--nui-radii-xl) * .6);
 }
 
 .emotion-2::after {
@@ -104,13 +102,13 @@ exports[`Checkbox should disable animations when disableAnimation=true 1`] = `
   background-color: var(--nui-colors-blue-primary);
   opacity: 0;
   z-index: -1;
-  border-radius: calc(var(--nui-radii-lg) * .6);
+  border-radius: calc(var(--nui-radii-xl) * .6);
 }
 
 .emotion-3 {
   -webkit-margin-start: var(--nui-spaces-2);
   margin-inline-start: var(--nui-spaces-2);
-  font-size: var(--nui-font-sizes-lg);
+  font-size: var(--nui-font-sizes-md);
 }
 
 <label
@@ -157,9 +155,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
   box-sizing: border-box;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
+  max-width: var(--nui-sizes-fit);
   height: var(--nui-sizes-8);
   padding: var(--nui-spaces-1-5);
 }
@@ -226,7 +222,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
   color: var(--nui-colors-blue-contrast-text);
   width: var(--nui-sizes-5);
   height: var(--nui-sizes-5);
-  font-size: var(--nui-font-sizes-md);
+  font-size: var(--nui-font-sizes-sm);
 }
 
 .emotion-2::before {
@@ -237,7 +233,7 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
   border-color: var(--nui-colors-gray-highlight);
   background: transparent;
   z-index: -2;
-  border-radius: calc(var(--nui-radii-lg) * .6);
+  border-radius: calc(var(--nui-radii-xl) * .6);
 }
 
 .emotion-2::after {
@@ -247,17 +243,17 @@ exports[`Checkbox should disable animations when disableAnimation=true 2`] = `
   background-color: var(--nui-colors-blue-primary);
   opacity: 1;
   z-index: -1;
-  border-radius: calc(var(--nui-radii-lg) * .6);
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
+  border-radius: calc(var(--nui-radii-xl) * .6);
 }
 
 .emotion-3 {
   -webkit-margin-start: var(--nui-spaces-2);
   margin-inline-start: var(--nui-spaces-2);
-  font-size: var(--nui-font-sizes-lg);
+  font-size: var(--nui-font-sizes-md);
 }
 
 <label
@@ -321,9 +317,7 @@ exports[`Checkbox should render with default props 1`] = `
   box-sizing: border-box;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
+  max-width: var(--nui-sizes-fit);
   height: var(--nui-sizes-8);
   padding: var(--nui-spaces-1-5);
 }
@@ -390,7 +384,7 @@ exports[`Checkbox should render with default props 1`] = `
   color: var(--nui-colors-blue-contrast-text);
   width: var(--nui-sizes-5);
   height: var(--nui-sizes-5);
-  font-size: var(--nui-font-sizes-md);
+  font-size: var(--nui-font-sizes-sm);
 }
 
 .emotion-2::before {
@@ -401,9 +395,9 @@ exports[`Checkbox should render with default props 1`] = `
   border-color: var(--nui-colors-gray-highlight);
   background: transparent;
   z-index: -2;
-  border-radius: calc(var(--nui-radii-lg) * .6);
   -webkit-transition: var(--nui-transitions-colors);
   transition: var(--nui-transitions-colors);
+  border-radius: calc(var(--nui-radii-xl) * .6);
 }
 
 .emotion-2::after {
@@ -413,19 +407,20 @@ exports[`Checkbox should render with default props 1`] = `
   background-color: var(--nui-colors-blue-primary);
   opacity: 0;
   z-index: -1;
-  border-radius: calc(var(--nui-radii-lg) * .6);
-  -webkit-transition: all 0.2s linear;
-  transition: all 0.2s linear;
+  -webkit-transition: var(--nui-transitions-all);
+  transition: var(--nui-transitions-all);
+  transition-timing-function: linear;
   -webkit-transform: scale(0.4);
   -moz-transform: scale(0.4);
   -ms-transform: scale(0.4);
   transform: scale(0.4);
+  border-radius: calc(var(--nui-radii-xl) * .6);
 }
 
 .emotion-3 {
   -webkit-margin-start: var(--nui-spaces-2);
   margin-inline-start: var(--nui-spaces-2);
-  font-size: var(--nui-font-sizes-lg);
+  font-size: var(--nui-font-sizes-md);
 }
 
 <label

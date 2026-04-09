@@ -117,6 +117,7 @@ export interface DefaultTokens {
     | '15'
     | 'max'
     | 'min'
+    | 'fit'
     | 'full'
     | 'px'
     | '1.5'
@@ -128,6 +129,16 @@ export interface DefaultTokens {
     | '7.5'
     | '8.5'
     | '9.5'
+    | '3xs'
+    | '2xs'
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | '4xl'
   spaces:
     | '1'
     | '2'
@@ -182,7 +193,7 @@ export interface DefaultTokens {
     | '-8.5'
     | '-9.5'
   fontFamilies: 'sans' | 'serif' | 'mono'
-  fontSizes: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  fontSizes: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
   fontWeights:
     | 'hairline'
     | 'thin'
@@ -194,10 +205,20 @@ export interface DefaultTokens {
     | 'extrabold'
     | 'black'
   borders: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  radii: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full' | 'none'
+  radii:
+    | 'none'
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | '4xl'
+    | 'full'
   lineHeights: 'normal' | 'none' | 'shorter' | 'short' | 'base' | 'tall'
   borderWidths: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  shadows: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  shadows: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   transitions:
     | 'all'
     | 'colors'
@@ -340,6 +361,7 @@ export interface SizesToken {
   '15'?: string | number
   max?: string | number
   min?: string | number
+  fit?: string | number
   full?: string | number
   px?: string | number
   '1.5'?: string | number
@@ -351,6 +373,16 @@ export interface SizesToken {
   '7.5'?: string | number
   '8.5'?: string | number
   '9.5'?: string | number
+  '3xs'?: string | number
+  '2xs'?: string | number
+  xs?: string | number
+  sm?: string | number
+  md?: string | number
+  lg?: string | number
+  xl?: string | number
+  '2xl'?: string | number
+  '3xl'?: string | number
+  '4xl'?: string | number
 }
 
 export interface SpacesToken {
@@ -389,12 +421,15 @@ export interface FontFamiliesToken {
 }
 
 export interface FontSizesToken {
+  '2xs'?: string | number
   xs?: string | number
   sm?: string | number
   md?: string | number
   lg?: string | number
   xl?: string | number
   '2xl'?: string | number
+  '3xl'?: string | number
+  '4xl'?: string | number
 }
 
 export interface FontWeightsToken {
@@ -418,6 +453,7 @@ export interface BordersToken {
 }
 
 export interface RadiiToken {
+  none?: string | number
   xs?: string | number
   sm?: string | number
   md?: string | number
@@ -425,8 +461,8 @@ export interface RadiiToken {
   xl?: string | number
   '2xl'?: string | number
   '3xl'?: string | number
+  '4xl'?: string | number
   full?: string | number
-  none?: string | number
 }
 
 export interface LineHeightsToken {
@@ -452,6 +488,7 @@ export interface ShadowsToken {
   md?: string
   lg?: string
   xl?: string
+  '2xl'?: string
 }
 
 export interface TransitionsToken {

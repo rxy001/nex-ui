@@ -64,13 +64,13 @@ export default function MusicPlayer() {
         >
           <Box
             sx={{
-              borderRadius: 'lg',
+              borderRadius: 'xl',
               height: 160,
             }}
           >
             <Box
               sx={{
-                borderRadius: 'lg',
+                borderRadius: 'xl',
                 height: '100%',
               }}
               width={160}
@@ -83,9 +83,9 @@ export default function MusicPlayer() {
           <Box sx={{ flex: 1 }}>
             <Flex justify='space-between' align='flex-start'>
               <Box>
-                <Box sx={{ fontWeight: 'semibold', fs: 'md' }}>Daily Mix</Box>
-                <Box sx={{ fontWeight: 'medium', fs: 'sm' }}>12 Tracks</Box>
-                <Box sx={{ fontWeight: 'semibold', mt: '2', fs: 'xl' }}>
+                <Box sx={{ fontWeight: 'semibold', fs: 'sm' }}>Daily Mix</Box>
+                <Box sx={{ fontWeight: 'medium', fs: 'xs' }}>12 Tracks</Box>
+                <Box sx={{ fontWeight: 'semibold', mt: '2', fs: 'lg' }}>
                   Frontend Radio
                 </Box>
               </Box>
@@ -132,7 +132,7 @@ export default function MusicPlayer() {
               <Flex
                 justify='space-between'
                 sx={{
-                  fs: 'md',
+                  fs: 'xs',
                   fontWeight: 'medium',
                   userSelect: 'none',
                 }}

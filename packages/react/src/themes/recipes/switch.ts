@@ -6,14 +6,14 @@ export const switchRecipe = defineSlotRecipe({
   slots: {
     root: {
       display: 'inline-flex',
-      position: 'relative',
+      pos: 'relative',
       h: '8',
       alignItems: 'center',
       cursor: 'pointer',
       WebkitTapHighlightColor: 'transparent',
     },
     input: {
-      position: 'absolute',
+      pos: 'absolute',
       inset: 0,
       opacity: 0,
       zIndex: 1,
@@ -35,7 +35,7 @@ export const switchRecipe = defineSlotRecipe({
       alignItems: 'center',
       boxSizing: 'border-box',
       overflow: 'hidden',
-      position: 'relative',
+      pos: 'relative',
       px: '1',
     },
     thumb: {
@@ -49,7 +49,7 @@ export const switchRecipe = defineSlotRecipe({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      position: 'absolute',
+      pos: 'absolute',
       insetInlineStart: '1',
       opacity: 0,
       scale: 0,
@@ -58,7 +58,7 @@ export const switchRecipe = defineSlotRecipe({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      position: 'absolute',
+      pos: 'absolute',
       insetInlineEnd: '1',
     },
     label: {
@@ -72,7 +72,7 @@ export const switchRecipe = defineSlotRecipe({
         track: {
           w: '10',
           h: '6',
-          fs: 'sm',
+          fs: 'xs',
         },
         thumb: {
           w: '4',
@@ -87,14 +87,14 @@ export const switchRecipe = defineSlotRecipe({
           h: '4',
         },
         label: {
-          fs: 'md',
+          fs: 'sm',
         },
       },
       md: {
         track: {
           w: '12',
           h: '7',
-          fs: 'lg',
+          fs: 'md',
         },
         thumb: {
           w: '5',
@@ -109,14 +109,14 @@ export const switchRecipe = defineSlotRecipe({
           h: '5',
         },
         label: {
-          fs: 'lg',
+          fs: 'md',
         },
       },
       lg: {
         track: {
           w: '14',
           h: '8',
-          fs: 'xl',
+          fs: 'lg',
         },
         thumb: {
           w: '6',
@@ -131,7 +131,7 @@ export const switchRecipe = defineSlotRecipe({
           h: '6',
         },
         label: {
-          fs: 'xl',
+          fs: 'lg',
         },
       },
     },
@@ -170,10 +170,6 @@ export const switchRecipe = defineSlotRecipe({
         },
       },
     },
-  },
-  defaultVariants: {
-    color: 'blue',
-    size: 'md',
   },
 })
 

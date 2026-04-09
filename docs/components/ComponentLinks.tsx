@@ -20,8 +20,8 @@ const sx = {
     _DEFAULT: 'gray.800',
     _dark: '#fff',
   },
-  '& svg': {
-    fontSize: 20,
+  '& > span > svg': {
+    fs: 'xl',
   },
   _hover: {
     bg: {

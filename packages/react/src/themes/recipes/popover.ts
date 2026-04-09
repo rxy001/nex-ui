@@ -8,7 +8,6 @@ export const popoverContentRecipe = defineSlotRecipe({
       zIndex: 'popover',
     },
     paper: {
-      fs: 'md',
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
       boxSizing: 'border-box',
@@ -21,7 +20,7 @@ export const popoverContentRecipe = defineSlotRecipe({
       ...toSlots(colorVariant, 'paper'),
       default: {
         paper: {
-          bg: 'content',
+          bg: 'panelBg',
           color: 'inherit',
         },
       },
@@ -29,12 +28,12 @@ export const popoverContentRecipe = defineSlotRecipe({
     radius: {
       sm: {
         paper: {
-          borderRadius: 'md',
+          borderRadius: 'lg',
         },
       },
       md: {
         paper: {
-          borderRadius: 'lg',
+          borderRadius: 'xl',
         },
       },
       lg: {
@@ -53,18 +52,21 @@ export const popoverContentRecipe = defineSlotRecipe({
         paper: {
           px: '2',
           py: '1',
+          fs: 'xs',
         },
       },
       md: {
         paper: {
           px: '3',
           py: '1.5',
+          fs: 'sm',
         },
       },
       lg: {
         paper: {
           px: '4',
           py: '2',
+          fs: 'md',
         },
       },
     },

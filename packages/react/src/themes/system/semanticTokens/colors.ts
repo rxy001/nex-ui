@@ -244,7 +244,7 @@ export const colors = defineSemanticTokens.colors({
       _dark: '{colors.white}',
     },
   },
-  content: {
+  panelBg: {
     _DEFAULT: 'white',
     _dark: '{colors.gray.900}',
   },

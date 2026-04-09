@@ -15,7 +15,7 @@ const colors = [
 
 export default function App() {
   return (
-    <Flex gap='4' wrap='wrap'>
+    <Flex gap='5' wrap='wrap'>
       {colors.map((color) => {
         return (
           <Tooltip key={color} color={color} content='Hello, I am a tooltip.'>

@@ -61,7 +61,7 @@ function PopoverTemplate(props: PopoverTemplateProps) {
         </Box>
         <Box
           sx={{
-            fs: 'sm',
+            fs: '0.85em',
           }}
         >
           This is the popover content.
@@ -128,8 +128,8 @@ export function Placements(props: PopoverTemplateProps) {
   return (
     <Flex
       sx={{
-        w: '100%',
-        h: '100%',
+        w: 'full',
+        h: 'full',
       }}
       justify='center'
       align='center'
@@ -249,7 +249,7 @@ export function WithForm(props: PopoverTemplateProps) {
           >
             <Box
               sx={{
-                fs: 'md',
+                fs: 'sm',
                 fontWeight: 'bold',
               }}
             >
