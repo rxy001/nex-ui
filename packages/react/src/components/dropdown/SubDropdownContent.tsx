@@ -177,7 +177,7 @@ export function SubDropdownContent<RootComponent extends ElementType>(
     renderPortal()
   ) : (
     <LazyMotion features={motionFeatures}>
-      <AnimatePresence>{renderPortal()}</AnimatePresence>
+      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
     </LazyMotion>
   )
 }
