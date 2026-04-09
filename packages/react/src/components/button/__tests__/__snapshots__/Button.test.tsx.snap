@@ -2,20 +2,11 @@
 
 exports[`Button should render with default props 1`] = `
 .emotion-0 {
-  padding: 0;
-  margin: 0;
-  outline: none;
-  background: none;
-  border: none;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
   position: relative;
   line-height: var(--nui-line-heights-base);
   overflow: hidden;

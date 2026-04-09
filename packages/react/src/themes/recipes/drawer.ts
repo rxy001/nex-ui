@@ -18,9 +18,6 @@ export const drawerContentRecipe = defineSlotRecipe({
       pos: 'relative',
     },
     closeButton: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
       pos: 'absolute',
       insetInlineEnd: '2',
       insetBlockStart: '2',

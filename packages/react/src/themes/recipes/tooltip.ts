@@ -11,7 +11,6 @@ export const tooltipRecipe = defineSlotRecipe({
       bg: 'colorPalette.primary',
       color: 'colorPalette.contrastText',
       overflow: 'auto',
-      boxSizing: 'border-box',
       boxShadow:
         '0px 0px 5px 0px #00000005,0px 2px 10px 0px #0000000f,0px 0px 1px 0px #0000004d',
     },

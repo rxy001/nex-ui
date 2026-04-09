@@ -55,27 +55,7 @@ const isCheckableControl = (element: HTMLInputElement) => {
 
 const recipe = defineRecipe({
   base: {
-    m: '0',
-    p: '0',
-    border: 'none',
-    background: 'none',
     outline: 'none',
-    appearance: 'none',
-    WebkitAppearance: 'none',
-    MozAppearance: 'none',
-    borderRadius: '0',
-    boxShadow: 'none',
-    boxSizing: 'border-box',
-
-    '&[type="search"]': {
-      '::-webkit-search-decoration': {
-        WebkitAppearance: 'none',
-      },
-      '::-webkit-search-cancel-button': {
-        WebkitAppearance: 'none',
-      },
-    },
-
     '&:is(:-webkit-autofill, :autofill)': {
       bg: 'transparent !important',
       transition: 'background-color 50000s ease-in-out 0s',

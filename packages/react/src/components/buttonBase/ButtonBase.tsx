@@ -11,16 +11,8 @@ import type { ButtonBaseProps } from './types'
 
 const recipe = defineRecipe({
   base: {
-    p: 0,
-    m: 0,
-    outline: 'none',
-    background: 'none',
-    border: 'none',
-    textDecoration: 'none',
     userSelect: 'none',
     cursor: 'pointer',
-    boxSizing: 'border-box',
-    WebkitTapHighlightColor: 'transparent',
   },
 })
 
@@ -123,9 +115,9 @@ export function ButtonBase(props: ButtonBaseProps) {
 
   const [ButtonRoot, getButtonRootProps] = useSlot({
     style,
+    ariaProps,
     component: nex.button,
     externalForwardedProps: remainingProps,
-    ariaProps,
     additionalProps: {
       as: rootElement,
       onKeyUp: handleKeyUp,

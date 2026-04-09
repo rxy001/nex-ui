@@ -13,9 +13,6 @@ export const alertRecipe = defineSlotRecipe({
       overflow: 'hidden',
     },
     icon: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
       fs: '3xl',
     },
     content: {

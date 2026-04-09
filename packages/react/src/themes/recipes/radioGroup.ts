@@ -9,7 +9,6 @@ export const radioRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       cursor: 'pointer',
-      boxSizing: 'border-box',
       maxW: 'fit',
       WebkitTapHighlightColor: 'transparent',
     },
@@ -43,7 +42,6 @@ export const radioRecipe = defineSlotRecipe({
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      boxSizing: 'border-box',
 
       '::before': {
         content: '""',
@@ -179,7 +177,6 @@ export const radioGroupRecipe = defineSlotRecipe({
       gap: '2',
     },
     label: {
-      m: 0,
       fs: 'md',
       fontWeight: 'normal',
     },

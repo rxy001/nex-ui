@@ -23,7 +23,6 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     startIcon: {
-      display: 'inherit',
       ml: '-1',
       mr: '2',
       '& svg': {
@@ -31,7 +30,6 @@ export const buttonRecipe = defineSlotRecipe({
       },
     },
     endIcon: {
-      display: 'inherit',
       ml: '2',
       mr: '-1',
       '& svg': {
