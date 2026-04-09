@@ -165,7 +165,7 @@ export function PopoverContent<RootComponent extends ElementType = 'div'>(
     renderPortal()
   ) : (
     <LazyMotion features={motionFeatures}>
-      <AnimatePresence>{renderPortal()}</AnimatePresence>
+      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
     </LazyMotion>
   )
 }

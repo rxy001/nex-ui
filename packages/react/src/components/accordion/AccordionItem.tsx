@@ -289,7 +289,7 @@ export function AccordionItem<RootComponent extends ElementType = 'div'>(
 
     return (
       <LazyMotion features={motionFeatures}>
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {keepMounted || expanded ? (
             <FadeInOutMotion
               animate={animate}
