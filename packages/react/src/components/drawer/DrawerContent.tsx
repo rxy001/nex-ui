@@ -205,7 +205,7 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
     renderPortal()
   ) : (
     <LazyMotion features={motionFeatures}>
-      <AnimatePresence initial={false}>{renderPortal()}</AnimatePresence>
+      <AnimatePresence>{renderPortal()}</AnimatePresence>
     </LazyMotion>
   )
 }
