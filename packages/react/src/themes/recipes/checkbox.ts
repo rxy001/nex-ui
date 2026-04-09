@@ -10,7 +10,6 @@ export const checkboxGroupRecipe = defineSlotRecipe({
       gap: '2',
     },
     label: {
-      m: 0,
       fs: 'md',
       fontWeight: 'normal',
     },
@@ -40,7 +39,6 @@ export const checkboxRecipe = defineSlotRecipe({
       display: 'inline-flex',
       pos: 'relative',
       alignItems: 'center',
-      boxSizing: 'border-box',
       cursor: 'pointer',
       WebkitTapHighlightColor: 'transparent',
       maxW: 'fit',
@@ -70,10 +68,7 @@ export const checkboxRecipe = defineSlotRecipe({
       opacity: 0,
     },
     icon: {
-      display: 'inline-flex',
       pos: 'relative',
-      justifyContent: 'center',
-      alignItems: 'center',
       color: 'colorPalette.contrastText',
       '::before': {
         content: '""',

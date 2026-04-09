@@ -1,9 +1,9 @@
 import type { Interpolation } from '../types'
 
-export type CascadeLayer = 'global' | 'css'
+export type CascadeLayer = 'preflight' | 'theme' | 'css'
 
 export interface CreateLayersConfig {
-  cssCascadeLayersDisabled?: boolean
+  disableCascadeLayers?: boolean
   prefix?: string
 }
 

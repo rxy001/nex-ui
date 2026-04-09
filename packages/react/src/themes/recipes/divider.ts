@@ -3,9 +3,8 @@ import type { RecipeVariants } from '@nex-ui/system'
 
 export const dividerRecipe = defineRecipe({
   base: {
-    m: 0,
-    border: 'none',
     bg: 'gray.highlight',
+    border: 'none',
   },
   variants: {
     orientation: {

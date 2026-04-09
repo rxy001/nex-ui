@@ -19,7 +19,7 @@ describe('createSystem', () => {
 
 describe('css', () => {
   const sysConfig = defineConfig({
-    cssCascadeLayersDisabled: false,
+    disableCascadeLayers: false,
     prefix: PREFIX,
     aliases: {
       w: 'width',
@@ -150,14 +150,16 @@ describe('css', () => {
   })
 
   it('should support cascade layers', () => {
-    expect(layers.atRules).toBe(`@layer ${PREFIX}.global, ${PREFIX}.css;`)
+    expect(layers.atRules).toBe(
+      `@layer ${PREFIX}.theme, ${PREFIX}.preflight, ${PREFIX}.css;`,
+    )
 
     const objectStyle = {
       color: 'red',
     }
 
-    expect(layers.wrapWithLayer('global', objectStyle)).toEqual({
-      [`@layer ${PREFIX}.global`]: objectStyle,
+    expect(layers.wrapWithLayer('theme', objectStyle)).toEqual({
+      [`@layer ${PREFIX}.theme`]: objectStyle,
     })
 
     const arrayStyle = [

@@ -13,9 +13,6 @@ export const badgeRecipe = defineSlotRecipe({
       lh: '1rem',
     },
     closeButton: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
       color: 'colorPalette.tertiary',
       opacity: 0.7,
       borderRadius: 'full',
@@ -35,7 +32,6 @@ export const badgeRecipe = defineSlotRecipe({
       },
     },
     startIcon: {
-      display: 'inherit',
       ml: '-1',
       mr: '1',
       '& svg': {
@@ -43,7 +39,6 @@ export const badgeRecipe = defineSlotRecipe({
       },
     },
     endIcon: {
-      display: 'inherit',
       ml: '1',
       mr: '-1',
       '& svg': {

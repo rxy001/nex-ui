@@ -13,7 +13,6 @@ const WITHIN_SELECTOR = '&:has(~ *:is(:focus-within, [data-focus-within=true]))'
 export const inputRecipe = defineSlotRecipe({
   slots: {
     root: {
-      boxSizing: 'border-box',
       display: 'inline-flex',
       alignItems: 'center',
       gap: '1',
@@ -23,7 +22,6 @@ export const inputRecipe = defineSlotRecipe({
     },
     input: {
       fs: 'inherit',
-      color: 'inherit',
       cursor: 'inherit',
       flex: 1,
       w: 'full',
@@ -32,12 +30,7 @@ export const inputRecipe = defineSlotRecipe({
       },
     },
     clearButton: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      w: 'auto',
-      h: 'auto',
-      fs: 'inherit',
+      fs: 'md',
       color: 'gray.400',
       _hover: {
         color: 'gray.500',
@@ -49,13 +42,9 @@ export const inputRecipe = defineSlotRecipe({
       transformOrigin: 'top left',
     },
     prefix: {
-      display: 'flex',
-      alignItems: 'center',
       pointerEvents: 'none',
     },
     suffix: {
-      display: 'flex',
-      alignItems: 'center',
       pointerEvents: 'none',
     },
   },
