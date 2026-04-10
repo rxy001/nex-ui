@@ -149,7 +149,12 @@ export function DropdownContent<RootComponent extends ElementType>(
       ) : (
         <DropdownPaperMotion
           placement={placement}
-          motionProps={motionProps}
+          motionProps={{
+            initial: 'hidden',
+            exit: 'hidden',
+            animate: keepMounted ? (open ? 'visible' : 'hidden') : 'visible',
+            ...motionProps,
+          }}
           onAnimationComplete={onAnimationComplete}
           onAnimationStart={onAnimationStart}
         >

@@ -180,7 +180,9 @@ export function DrawerContent<RootComponent extends ElementType = 'div'>(
           </>
         ) : (
           <FadeInOutMotion
-            animate={open ? 'visible' : 'hidden'}
+            initial='hidden'
+            exit='hidden'
+            animate={keepMounted ? (open ? 'visible' : 'hidden') : 'visible'}
             onAnimationStart={onAnimationStart}
             onAnimationComplete={onAnimationComplete}
           >

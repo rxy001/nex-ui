@@ -141,7 +141,12 @@ function TooltipImpl(props: TooltipProps) {
         renderPaper()
       ) : (
         <TooltipPaperMotion
-          motionProps={motionProps}
+          motionProps={{
+            initial: 'hidden',
+            exit: 'hidden',
+            animate: keepMounted ? (open ? 'visible' : 'hidden') : 'visible',
+            ...motionProps,
+          }}
           placement={placement}
           onAnimationComplete={onAnimationComplete}
           onAnimationStart={onAnimationStart}

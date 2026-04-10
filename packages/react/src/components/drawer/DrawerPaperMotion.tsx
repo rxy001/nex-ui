@@ -1,6 +1,5 @@
 import * as m from 'motion/react-m'
 import { useMemo } from 'react'
-import { useDrawerContext } from './DrawerContext'
 import type { HTMLMotionProps } from 'motion/react'
 import type { DrawerPaperMotionProps } from './types'
 
@@ -9,8 +8,6 @@ export function DrawerPaperMotion({
   motionProps,
   placement,
 }: DrawerPaperMotionProps) {
-  const { open } = useDrawerContext()
-
   const resolvedMotionProps = useMemo<HTMLMotionProps<'div'>>(() => {
     const mProps =
       typeof motionProps === 'function' ? motionProps(placement) : motionProps
@@ -82,15 +79,7 @@ export function DrawerPaperMotion({
     }
   }, [motionProps, placement])
 
-  return (
-    <m.div
-      initial='hidden'
-      animate={open ? 'visible' : 'hidden'}
-      {...resolvedMotionProps}
-    >
-      {children}
-    </m.div>
-  )
+  return <m.div {...resolvedMotionProps}>{children}</m.div>
 }
 
 DrawerPaperMotion.displayName = 'DrawerPaperMotion'

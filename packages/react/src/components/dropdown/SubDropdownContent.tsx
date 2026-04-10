@@ -149,7 +149,9 @@ export function SubDropdownContent<RootComponent extends ElementType>(
         renderPaper()
       ) : (
         <FadeInOutMotion
-          animate={open ? 'visible' : 'hidden'}
+          initial='hidden'
+          exit='hidden'
+          animate={keepMounted ? (open ? 'visible' : 'hidden') : 'visible'}
           {...motionProps}
           onAnimationStart={chain(
             onAnimationStart,

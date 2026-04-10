@@ -1,6 +1,5 @@
 import * as m from 'motion/react-m'
 import { useFadeInOutMotionProps, useScaleInOutMotionProps } from '../utils'
-import { usePopoverContext } from './PopoverContext'
 import type { PopoverPaperMotionProps } from './types'
 
 export function PopoverPaperMotion({
@@ -10,11 +9,8 @@ export function PopoverPaperMotion({
   onAnimationStart,
   onAnimationComplete,
 }: PopoverPaperMotionProps) {
-  const { open } = usePopoverContext()
-
   const props = useFadeInOutMotionProps(
     useScaleInOutMotionProps({
-      animate: open ? 'visible' : 'hidden',
       ...motionProps,
       onAnimationStart: (animation) => {
         onAnimationStart?.(animation)

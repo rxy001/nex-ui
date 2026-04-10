@@ -28,8 +28,8 @@ const preview: Preview = {
     },
     chromatic: {
       modes: {
-        light: allModes['light'],
-        dark: allModes['dark'],
+        light: allModes.light,
+        dark: allModes.dark,
       },
       disable: true,
     },

@@ -35,14 +35,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 
 type DropdownTemplateProps = DropdownContentProps & {
   triggerText?: string
+  defaultOpen?: boolean
 }
 
 function DropdownTemplate({
   triggerText = 'Open Dropdown',
+  defaultOpen,
   ...props
 }: DropdownTemplateProps) {
   return (
-    <Dropdown>
+    <Dropdown defaultOpen={defaultOpen}>
       <DropdownTrigger>
         <Button
           sx={{
@@ -119,6 +121,9 @@ const meta = {
     size: {
       options: SIZES,
       control: 'select',
+    },
+    defaultOpen: {
+      control: 'boolean',
     },
   },
 } satisfies Meta<typeof DropdownTemplate>
