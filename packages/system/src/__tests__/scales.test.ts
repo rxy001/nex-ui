@@ -27,11 +27,11 @@ describe('createScales', () => {
 
   it('should throw an error if the scale is invalid', () => {
     createScales({
-      a: {},
-      b: [],
-      c: 1,
       // @ts-expect-error
-      d: () => {},
+      a: {},
+      aa: [],
+      aaa: 1,
+      aaaa: () => {},
     })
 
     expect(consoleSpy).toHaveBeenCalled()

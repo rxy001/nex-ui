@@ -10,7 +10,6 @@ export interface DefaultAliases {
   lh?: 'lineHeight'
   w?: 'width'
   h?: 'height'
-  size?: ['width', 'height']
   maxW?: 'maxWidth'
   minW?: 'minWidth'
   maxH?: 'maxHeight'

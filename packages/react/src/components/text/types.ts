@@ -1,3 +1,4 @@
+import type { TextVariants } from '../../themes/recipes'
 import type { Overwrite } from '../../types/utils'
 import type { BoxProps } from '../box'
 import type { ElementType } from 'react'
@@ -11,7 +12,22 @@ interface TextOwnProps {
    * @default false
    */
   truncate?: boolean
+
+  /**
+   * If true, applies the underline text decoration to the content.
+   */
+  underline?: boolean
+
+  /**
+   * If true, applies the line-through text decoration to the content.
+   */
+  strikethrough?: boolean
+
+  /**
+   * The size of the Text, which determines the font size and line height.
+   */
+  size?: TextVariants['size']
 }
 
-export type TextProps<RootComponent extends ElementType = 'p'> =
+export type TextProps<RootComponent extends ElementType = 'span'> =
   BoxProps<RootComponent> & Overwrite<TextOwnProps, TextPropsOverrides>

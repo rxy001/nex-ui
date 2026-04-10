@@ -11,7 +11,7 @@ import type { TextProps } from './types'
 
 const slots = ['root'] as const
 
-export function Text<RootComponent extends ElementType = 'p'>(
+export function Text<RootComponent extends ElementType = 'span'>(
   inProps: TextProps<RootComponent>,
 ) {
   const props = useDefaultProps<TextProps>({
@@ -19,11 +19,21 @@ export function Text<RootComponent extends ElementType = 'p'>(
     props: inProps,
   })
 
-  const { truncate = false, children, ...remainingProps } = props
+  const {
+    children,
+    size = 'md',
+    truncate = false,
+    underline = false,
+    strikethrough = false,
+    ...remainingProps
+  } = props
 
   const ownerState: TextProps = {
     ...props,
     truncate,
+    underline,
+    size,
+    strikethrough,
   }
 
   const style = useRecipeStyles({
@@ -43,7 +53,10 @@ export function Text<RootComponent extends ElementType = 'p'>(
     externalForwardedProps: remainingProps,
     classNames: slotClasses.root,
     additionalProps: {
-      as: 'p',
+      as: 'span',
+    },
+    dataAttrs: {
+      size,
     },
   })
 
