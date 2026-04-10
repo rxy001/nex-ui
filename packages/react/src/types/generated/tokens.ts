@@ -193,7 +193,21 @@ export interface DefaultTokens {
     | '-8.5'
     | '-9.5'
   fontFamilies: 'sans' | 'serif' | 'mono'
-  fontSizes: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
+  fontSizes:
+    | '2xs'
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | '4xl'
+    | '5xl'
+    | '6xl'
+    | '7xl'
+    | '8xl'
+    | '9xl'
   fontWeights:
     | 'hairline'
     | 'thin'
@@ -430,6 +444,11 @@ export interface FontSizesToken {
   '2xl'?: string | number
   '3xl'?: string | number
   '4xl'?: string | number
+  '5xl'?: string | number
+  '6xl'?: string | number
+  '7xl'?: string | number
+  '8xl'?: string | number
+  '9xl'?: string | number
 }
 
 export interface FontWeightsToken {

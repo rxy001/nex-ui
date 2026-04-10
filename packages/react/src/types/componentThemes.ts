@@ -44,6 +44,7 @@ import type {
   SubDropdownContentRecipe,
   DropdownDividerRecipe,
   TextRecipe,
+  HeadingRecipe,
 } from '../themes/recipes'
 import type {
   ButtonProps,
@@ -95,11 +96,22 @@ import type {
   SubDropdownContentProps,
   DropdownDividerProps,
   TextProps,
+  HeadingProps,
 } from '../components'
 import type { IconProps } from '../components/icon/types'
 import type { ComponentThemeObject } from './utils'
 
 export interface ComponentThemes {
+  // ---------------- Typography ----------------
+  Text?: {
+    styleOverrides?: ComponentThemeObject<TextRecipe>
+    defaultProps?: TextProps
+  }
+  Heading?: {
+    styleOverrides?: ComponentThemeObject<HeadingRecipe>
+    defaultProps?: HeadingProps
+  }
+  // ---------------- Components ----------------
   Button?: {
     styleOverrides?: ComponentThemeObject<ButtonRecipe>
     defaultProps?: ButtonProps
@@ -290,10 +302,6 @@ export interface ComponentThemes {
   DropdownDivider?: {
     styleOverrides?: ComponentThemeObject<DropdownDividerRecipe>
     defaultProps?: DropdownDividerProps
-  }
-  Text?: {
-    styleOverrides?: ComponentThemeObject<TextRecipe>
-    defaultProps?: TextProps
   }
 }
 

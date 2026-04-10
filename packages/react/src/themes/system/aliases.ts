@@ -8,7 +8,6 @@ export const aliases = defineConfig.aliases({
 
   w: 'width',
   h: 'height',
-  size: ['width', 'height'],
 
   maxW: 'maxWidth',
   minW: 'minWidth',
