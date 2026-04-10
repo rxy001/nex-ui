@@ -42,15 +42,18 @@ const preview: Preview = {
         dark: 'dark',
       },
     }),
-    (Story: any) => (
-      <NexUIProvider
-        colorScheme={{
-          colorSchemeSelector: 'class',
-        }}
-      >
-        <Story />
-      </NexUIProvider>
-    ),
+    (Story, context) => {
+      return (
+        <NexUIProvider
+          disablePreflight={context.tags.includes('nui-utility')}
+          colorScheme={{
+            colorSchemeSelector: 'class',
+          }}
+        >
+          <Story />
+        </NexUIProvider>
+      )
+    },
   ],
 
   // tags: ['autodocs'],

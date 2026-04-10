@@ -25,6 +25,7 @@ const meta: Meta = {
       disable: true,
     },
   },
+  tags: ['nui-utility'],
 }
 
 export default meta
