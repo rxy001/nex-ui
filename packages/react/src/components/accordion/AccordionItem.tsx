@@ -286,13 +286,14 @@ export function AccordionItem<RootComponent extends ElementType = 'div'>(
     if (disableAnimation) {
       return keepMounted || expanded ? contentElement : null
     }
-
     return (
       <LazyMotion features={motionFeatures}>
         <AnimatePresence initial={false}>
           {keepMounted || expanded ? (
             <FadeInOutMotion
-              animate={animate}
+              initial='hidden'
+              exit='hidden'
+              animate={keepMounted ? animate : 'visible'}
               {...resolvedContentMotionProps}
               style={{
                 display: resolvedDisplay,

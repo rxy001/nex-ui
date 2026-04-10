@@ -143,7 +143,12 @@ export function PopoverContent<RootComponent extends ElementType = 'div'>(
         renderPaper()
       ) : (
         <PopoverPaperMotion
-          motionProps={motionProps}
+          motionProps={{
+            initial: 'hidden',
+            animate: keepMounted ? (open ? 'visible' : 'hidden') : 'visible',
+            exit: 'hidden',
+            ...motionProps,
+          }}
           placement={placement}
           onAnimationComplete={onAnimationComplete}
           onAnimationStart={onAnimationStart}

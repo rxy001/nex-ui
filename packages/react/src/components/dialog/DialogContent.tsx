@@ -188,7 +188,9 @@ export function DialogContent<RootComponent extends ElementType = 'div'>(
         </>
       ) : (
         <FadeInOutMotion
-          animate={open ? 'visible' : 'hidden'}
+          initial='hidden'
+          animate={keepMounted ? (open ? 'visible' : 'hidden') : 'visible'}
+          exit='hidden'
           onAnimationStart={onAnimationStart}
           onAnimationComplete={onAnimationComplete}
         >

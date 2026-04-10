@@ -4,9 +4,6 @@ export function useScaleInOutMotionProps(
   props?: HTMLMotionProps<'div'>,
 ): HTMLMotionProps<'div'> {
   return {
-    initial: 'hidden',
-    animate: 'visible',
-    exit: 'hidden',
     ...props,
     transition: {
       ease: 'easeInOut',

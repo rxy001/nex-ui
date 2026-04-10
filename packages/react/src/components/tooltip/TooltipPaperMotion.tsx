@@ -1,6 +1,5 @@
 import * as m from 'motion/react-m'
 import { useFadeInOutMotionProps, useScaleInOutMotionProps } from '../utils'
-import { useTooltipContext } from './TooltipContext'
 import type { TooltipPaperMotionProps } from './types'
 
 export function TooltipPaperMotion({
@@ -10,11 +9,8 @@ export function TooltipPaperMotion({
   onAnimationStart,
   onAnimationComplete,
 }: TooltipPaperMotionProps) {
-  const { open } = useTooltipContext()
-
   const props = useFadeInOutMotionProps(
     useScaleInOutMotionProps({
-      animate: open ? 'visible' : 'hidden',
       ...motionProps,
       onAnimationStart: (animation) => {
         onAnimationStart?.(animation)

@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { ScaleInOutMotion } from '../utils'
-import { useDialogContext } from './DialogContext'
 import type { DialogPaperMotionProps } from './types'
 
 export function DialogPaperMotion({
@@ -8,22 +7,14 @@ export function DialogPaperMotion({
   motionProps,
   placement,
 }: DialogPaperMotionProps) {
-  const { open } = useDialogContext()
-
   const resolveMotionProps = useMemo(() => {
-    return typeof motionProps === 'function'
-      ? motionProps(placement)
-      : motionProps
+    const props =
+      typeof motionProps === 'function' ? motionProps(placement) : motionProps
+
+    return props
   }, [motionProps, placement])
 
-  return (
-    <ScaleInOutMotion
-      animate={open ? 'visible' : 'hidden'}
-      {...resolveMotionProps}
-    >
-      {children}
-    </ScaleInOutMotion>
-  )
+  return <ScaleInOutMotion {...resolveMotionProps}>{children}</ScaleInOutMotion>
 }
 
 DialogPaperMotion.displayName = 'DialogPaperMotion'
