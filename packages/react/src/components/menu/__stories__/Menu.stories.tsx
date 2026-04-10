@@ -18,7 +18,6 @@ import {
   MenuSeparator,
   SubMenuContent,
 } from '../index'
-import type { Meta } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
 
 const style = {
@@ -42,13 +41,14 @@ function MenuWrapper({ children }: { children: ReactNode }) {
   )
 }
 
-const meta: Meta = {
+const meta = {
   title: 'Utilities/Menu',
   parameters: {
     controls: {
       disable: true,
     },
   },
+  tags: ['nui-utility'],
 }
 
 export default meta

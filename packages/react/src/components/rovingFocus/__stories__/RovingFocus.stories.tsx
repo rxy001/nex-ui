@@ -7,6 +7,7 @@ import type { RovingFocusGroupProps } from '../types'
 
 const meta = {
   title: 'Utilities/Roving Focus',
+  tags: ['nui-utility'],
 }
 
 export default meta
