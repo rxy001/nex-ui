@@ -2,7 +2,7 @@
 
 import { cloneElement, useEffect, useId } from 'react'
 import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
-import { CollectionItem } from '../collection'
+import { CollectionItem } from './Collection'
 import { useRovingFocusContext } from './RovingFocusContext'
 import type { RovingFocusItemProps } from './types'
 

@@ -1,12 +1,13 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { focus } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { RovingFocusItem } from '../rovingFocus'
 import { useMenuContentContext, useRootMenuContext } from './MenuContext'
+import { CollectionItem } from './Collection'
 import type { KeyboardEvent, PointerEvent, MouseEvent } from 'react'
 import type { MenuItemProps } from './types'
 
@@ -30,10 +31,13 @@ export function MenuItem(props: MenuItemProps) {
     disabled,
     children,
     onSelect,
+    textValue,
     closeOnSelect = true,
     ...remainingProps
   } = props
+  const ref = useRef<HTMLDivElement>(null)
   const [focused, setFocused] = useState(false)
+  const [textContent, setTextContent] = useState('')
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     if (disabled) return
@@ -78,6 +82,7 @@ export function MenuItem(props: MenuItemProps) {
     component: nex.div,
     externalForwardedProps: remainingProps,
     additionalProps: {
+      ref,
       onClick: handleClick,
       onFocus: handleFocus,
       onBlur: handleBlur,
@@ -99,10 +104,18 @@ export function MenuItem(props: MenuItemProps) {
     },
   })
 
+  useEffect(() => {
+    if (!ref.current) return
+
+    setTextContent((ref.current.textContent ?? '').trim())
+  }, [children])
+
   return (
-    <RovingFocusItem focusable={!disabled}>
-      <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
-    </RovingFocusItem>
+    <CollectionItem textValue={textValue ?? textContent} disabled={disabled}>
+      <RovingFocusItem focusable={!disabled}>
+        <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
+      </RovingFocusItem>
+    </CollectionItem>
   )
 }
 

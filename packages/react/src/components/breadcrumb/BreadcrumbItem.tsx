@@ -12,9 +12,9 @@ import {
   useSlotClasses,
   useRecipeStyles,
 } from '../utils'
-import { CollectionItem } from '../collection'
+import { CollectionItem } from './Collection'
 import type { ElementType } from 'react'
-import type { BreadcrumbItemProps, ItemData } from './types'
+import type { BreadcrumbItemProps } from './types'
 
 const slots = ['root', 'link'] as const
 
@@ -112,7 +112,7 @@ export function BreadcrumbItem<LinkComponent extends ElementType = 'a'>(
   })
 
   return (
-    <CollectionItem<ItemData> id={key}>
+    <CollectionItem id={key}>
       <BreadcrumbItemRoot {...getBreadcrumbItemRootProps()}>
         <BreadcrumbItemLink {...getBreadcrumbItemLinkProps()}>
           {children}
