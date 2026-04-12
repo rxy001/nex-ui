@@ -13,10 +13,11 @@ import {
 } from '../utils'
 import { ButtonBase } from '../buttonBase'
 import { BreadcrumbProvider } from './BreadcrumbContext'
-import { Collection, useCollection } from '../collection'
+import { Collection, useCollection } from './Collection'
+import type { BreadcrumbItemData } from './Collection'
 import type { ElementType, ReactNode } from 'react'
 import type { BreadcrumbContextValue } from './BreadcrumbContext'
-import type { BreadcrumbProps, ItemData } from './types'
+import type { BreadcrumbProps } from './types'
 import type { CollectionItemData } from '../collection'
 
 const slots = ['root', 'list', 'separator', 'collapse', 'expandButton'] as const
@@ -46,9 +47,11 @@ export function Breadcrumb<RootComponent extends ElementType = 'nav'>(
 
   const ownerState = { ...props, size, color, disableAnimation }
 
+  const collection = useCollection()
   const [expanded, setExpanded] = useState(false)
-  const collection = useCollection<ItemData>()
-  const [items, setItems] = useState<CollectionItemData<ItemData>[]>([])
+  const [items, setItems] = useState<CollectionItemData<BreadcrumbItemData>[]>(
+    [],
+  )
 
   const styles = useRecipeStyles({
     ownerState,
@@ -193,7 +196,7 @@ export function Breadcrumb<RootComponent extends ElementType = 'nav'>(
   return (
     <BreadcrumbRoot {...getBreadcrumbRootProps()}>
       <BreadcrumbList {...getBreadcrumbListProps()}>
-        <Collection collection={collection} onItemsChange={setItems}>
+        <Collection onItemsChange={setItems} collection={collection}>
           <BreadcrumbProvider value={ctx}>
             {insertSeparators(renderItems())}
           </BreadcrumbProvider>

@@ -20,10 +20,16 @@ import {
 } from '../index'
 import type { ReactNode } from 'react'
 
-const style = {
+const itemStyle = {
   "&[data-highlighted='true']": {
     bg: 'wheat',
   },
+}
+
+const contentStyle = {
+  minW: '120px',
+  border: '1px solid black',
+  p: '2',
 }
 
 function MenuWrapper({ children }: { children: ReactNode }) {
@@ -35,7 +41,7 @@ function MenuWrapper({ children }: { children: ReactNode }) {
         <button>Open Menu</button>
       </MenuTrigger>
       <MenuPortal>
-        <MenuContent>{children}</MenuContent>
+        <MenuContent sx={contentStyle}>{children}</MenuContent>
       </MenuPortal>
     </Menu>
   )
@@ -56,9 +62,13 @@ export default meta
 export function Default() {
   return (
     <MenuWrapper>
-      <MenuItem sx={style}>Menu Item 1</MenuItem>
-      <MenuItem sx={style}>Menu Item 2</MenuItem>
-      <MenuItem sx={style}>Menu Item 3</MenuItem>
+      <MenuItem sx={itemStyle}>Undo</MenuItem>
+      <MenuItem sx={itemStyle}>Redo</MenuItem>
+      <MenuItem sx={itemStyle} disabled>
+        Cut
+      </MenuItem>
+      <MenuItem sx={itemStyle}>Copy</MenuItem>
+      <MenuItem sx={itemStyle}>Paste</MenuItem>
     </MenuWrapper>
   )
 }
@@ -74,15 +84,15 @@ export function SubMenu() {
       </MenuTrigger>
       <MenuPortal>
         <MenuContent>
-          <MenuItem sx={style}>Menu Item 1</MenuItem>
-          <MenuItem sx={style}>Menu Item 2</MenuItem>
+          <MenuItem sx={itemStyle}>Menu Item 1</MenuItem>
+          <MenuItem sx={itemStyle}>Menu Item 2</MenuItem>
           <SubMenuImpl open={open2} onOpenChange={setOpen2}>
-            <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
+            <MenuTriggerItem sx={itemStyle}>Sub Menu</MenuTriggerItem>
             <MenuPortal>
               <SubMenuContent>
-                <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
-                <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
-                <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
+                <MenuItem sx={itemStyle}>Sub Menu Item 1</MenuItem>
+                <MenuItem sx={itemStyle}>Sub Menu Item 2</MenuItem>
+                <MenuItem sx={itemStyle}>Sub Menu Item 3</MenuItem>
               </SubMenuContent>
             </MenuPortal>
           </SubMenuImpl>
@@ -97,17 +107,17 @@ export function GroupItems() {
     <MenuWrapper>
       <MenuItemGroup>
         <MenuItemGroupLabel>Group 1</MenuItemGroupLabel>
-        <MenuItem sx={style}>Menu Item 1-1</MenuItem>
-        <MenuItem sx={style} disabled>
+        <MenuItem sx={itemStyle}>Menu Item 1-1</MenuItem>
+        <MenuItem sx={itemStyle} disabled>
           Menu Item 1-2
         </MenuItem>
-        <MenuItem sx={style}>Menu Item 1-3</MenuItem>
+        <MenuItem sx={itemStyle}>Menu Item 1-3</MenuItem>
       </MenuItemGroup>
       <MenuSeparator />
       <MenuItemGroup>
         <MenuItemGroupLabel>Group 2</MenuItemGroupLabel>
-        <MenuItem sx={style}>Menu Item 2-1</MenuItem>
-        <MenuItem sx={style}>Menu Item 2-2</MenuItem>
+        <MenuItem sx={itemStyle}>Menu Item 2-1</MenuItem>
+        <MenuItem sx={itemStyle}>Menu Item 2-2</MenuItem>
       </MenuItemGroup>
     </MenuWrapper>
   )
@@ -120,25 +130,25 @@ export function CheckboxItems() {
     <MenuWrapper>
       <MenuCheckboxItemGroup value={value} onValueChange={setValue}>
         <MenuItemGroupLabel>Checkbox Group</MenuItemGroupLabel>
-        <MenuCheckboxItem sx={style} value='item-1'>
+        <MenuCheckboxItem sx={itemStyle} value='item-1'>
           Checkbox Item 1
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuCheckboxItem>
-        <MenuCheckboxItem sx={style} value='item-2'>
+        <MenuCheckboxItem sx={itemStyle} value='item-2'>
           Checkbox Item 2
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuCheckboxItem>
-        <MenuCheckboxItem sx={style} value='item-3' disabled>
+        <MenuCheckboxItem sx={itemStyle} value='item-3' disabled>
           Checkbox Item 3
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuCheckboxItem>
-        <MenuCheckboxItem sx={style} value='item-4'>
+        <MenuCheckboxItem sx={itemStyle} value='item-4'>
           Checkbox Item 4
           <MenuItemIndicator>
             <CheckOutlined />
@@ -156,25 +166,25 @@ export function RadioItems() {
     <MenuWrapper>
       <MenuRadioItemGroup value={value} onValueChange={setValue}>
         <MenuItemGroupLabel>Radio Group</MenuItemGroupLabel>
-        <MenuRadioItem sx={style} value='item-1'>
+        <MenuRadioItem sx={itemStyle} value='item-1'>
           Radio Item 1
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuRadioItem>
-        <MenuRadioItem sx={style} value='item-2'>
+        <MenuRadioItem sx={itemStyle} value='item-2'>
           Radio Item 2
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuRadioItem>
-        <MenuRadioItem sx={style} value='item-3' disabled>
+        <MenuRadioItem sx={itemStyle} value='item-3' disabled>
           Radio Item 3
           <MenuItemIndicator>
             <CheckOutlined />
           </MenuItemIndicator>
         </MenuRadioItem>
-        <MenuRadioItem sx={style} value='item-4'>
+        <MenuRadioItem sx={itemStyle} value='item-4'>
           Radio Item 4
           <MenuItemIndicator>
             <CheckOutlined />
@@ -222,15 +232,15 @@ export function ViewportBoundary() {
           </MenuTrigger>
           <MenuPortal container={() => innerRef.current}>
             <MenuContent>
-              <MenuItem sx={style}>Menu Item 1</MenuItem>
-              <MenuItem sx={style}>Menu Item 2</MenuItem>
+              <MenuItem sx={itemStyle}>Menu Item 1</MenuItem>
+              <MenuItem sx={itemStyle}>Menu Item 2</MenuItem>
               <SubMenuImpl open={open2} onOpenChange={setOpen2}>
-                <MenuTriggerItem sx={style}>Sub Menu</MenuTriggerItem>
+                <MenuTriggerItem sx={itemStyle}>Sub Menu</MenuTriggerItem>
                 <MenuPortal container={() => innerRef.current}>
                   <SubMenuContent>
-                    <MenuItem sx={style}>Sub Menu Item 1</MenuItem>
-                    <MenuItem sx={style}>Sub Menu Item 2</MenuItem>
-                    <MenuItem sx={style}>Sub Menu Item 3</MenuItem>
+                    <MenuItem sx={itemStyle}>Sub Menu Item 1</MenuItem>
+                    <MenuItem sx={itemStyle}>Sub Menu Item 2</MenuItem>
+                    <MenuItem sx={itemStyle}>Sub Menu Item 3</MenuItem>
                   </SubMenuContent>
                 </MenuPortal>
               </SubMenuImpl>

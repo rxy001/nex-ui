@@ -61,7 +61,6 @@ export function MenuTriggerItem(props: MenuTriggerItemProps) {
     // const { placement } = subMenuCtx.subMenuContentRef.current.dataset
 
     // const side = getSide(placement as Placement) as 'left' | 'right'
-
     if (event.key === SUB_MENU_OPEN_KEYS.right) {
       handleOpen()
       event.preventDefault()

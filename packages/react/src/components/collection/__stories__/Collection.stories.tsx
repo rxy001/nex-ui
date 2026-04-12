@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Collection, CollectionItem, useCollection } from '../index'
+import { createCollection } from '../index'
 import type { Meta } from '@storybook/react-vite'
 import type { ReactNode } from 'react'
 
@@ -15,6 +15,10 @@ const meta: Meta = {
 
 export default meta
 
+const [Collection, CollectionItem, useCollection] = createCollection<{
+  item: string
+}>('Story')
+
 function CollectionWrapper({
   children,
   title,
@@ -22,7 +26,7 @@ function CollectionWrapper({
   children?: ReactNode
   title: string
 }) {
-  const collection = useCollection<{ item: string }>()
+  const collection = useCollection()
 
   useEffect(() => {
     // eslint-disable-next-line no-console

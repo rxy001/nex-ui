@@ -4,10 +4,10 @@ import { cloneElement, useCallback, useMemo, useState } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import { isValidNonFragmentElement, mergeProps, focus } from '@nex-ui/utils'
 import { RovingFocusProvider } from './RovingFocusContext'
-import { Collection, useCollection } from '../collection'
+import { Collection, useCollection } from './Collection'
 import type { KeyboardEvent, FocusEvent } from 'react'
 import type { RovingFocusContextValue } from './RovingFocusContext'
-import type { RovingFocusGroupProps, RovingFocusItemData } from './types'
+import type { RovingFocusGroupProps } from './types'
 
 export function RovingFocusGroup<T extends string | number = string | number>(
   props: RovingFocusGroupProps<T>,
@@ -32,7 +32,7 @@ export function RovingFocusGroup<T extends string | number = string | number>(
 
   const [useShiftTab, setUseShiftTab] = useState(false)
 
-  const collection = useCollection<RovingFocusItemData>()
+  const collection = useCollection()
 
   const onItemFocus = useCallback(
     (id: string | number) => {

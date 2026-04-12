@@ -2,12 +2,13 @@
 
 import { useCallback, useMemo, useRef } from 'react'
 import { useMergeRefs } from '@nex-ui/hooks'
-import { chain, focus } from '@nex-ui/utils'
+import { chain, focus, ownerDocument } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
 import { PopperContent } from '../popper'
 import { useSlot } from '../utils'
 import { RovingFocusGroup } from '../rovingFocus'
 import { FocusTrap } from '../focusTrap'
+import { Collection, useCollection } from './Collection'
 import {
   useMenuContext,
   MenuContentProvider,
@@ -43,6 +44,9 @@ function MenuContentImpl(props: MenuContentImplProps) {
   const pointerGraceIntentRef = useRef<GraceIntent | null>(null)
   const pointerDirRef = useRef<Side>('right')
   const lastPointerXRef = useRef(0)
+  const searchKeyRef = useRef('')
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const collection = useCollection()
 
   const [MenuContentRoot, getMenuContentRootProps] = useSlot({
     style,
@@ -65,9 +69,45 @@ function MenuContentImpl(props: MenuContentImplProps) {
       },
       onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
         const target = event.target as HTMLElement
-        if (event.currentTarget.contains(target) && event.key === 'Tab') {
-          event.preventDefault()
+        if (!event.currentTarget.contains(target)) {
+          return
         }
+        if (event.key === 'Tab') {
+          event.preventDefault()
+          return
+        }
+        if (
+          event.altKey ||
+          event.ctrlKey ||
+          event.metaKey ||
+          event.key.length !== 1
+        ) {
+          return
+        }
+        const searchKey = searchKeyRef.current + event.key
+        const items = collection.getItems().filter((item) => !item.disabled)
+        const { activeElement } = ownerDocument(target)
+        const currentItem = items.find((item) => item.element === activeElement)
+        const currentItemIndex = currentItem ? items.indexOf(currentItem) : -1
+        const orderedItems = [
+          ...items.slice(currentItemIndex + 1),
+          ...items.slice(0, currentItemIndex + 1),
+        ]
+        const isRepeated =
+          searchKey.length > 1 &&
+          Array.from(searchKey).every((char) => char === searchKey[0])
+        const normalizedSearchKey = isRepeated ? searchKey[0]! : searchKey
+        const nextItem = orderedItems.find((item) =>
+          item.textValue.toLowerCase().startsWith(normalizedSearchKey),
+        )
+        if (nextItem?.element !== currentItem?.element) {
+          focus(nextItem?.element)
+        }
+        searchKeyRef.current = searchKey
+        if (timerRef.current) clearTimeout(timerRef.current)
+        timerRef.current = setTimeout(() => {
+          searchKeyRef.current = ''
+        }, 1000)
       },
       onFocus: (event: FocusEvent<HTMLElement>) => {
         // onItemLeave refocuses on content, blocking RovingFocusGroup's onFocus logic.
@@ -136,18 +176,20 @@ function MenuContentImpl(props: MenuContentImplProps) {
   )
 
   return (
-    <FocusTrap
-      paused
-      loop={false}
-      active={menuCtx.open}
-      restoreFocus={restoreFocus}
-    >
-      <RovingFocusGroup orientation='vertical' loop={loopFocus}>
-        <MenuContentRoot {...getMenuContentRootProps()}>
-          <MenuContentProvider value={ctx}>{children}</MenuContentProvider>
-        </MenuContentRoot>
-      </RovingFocusGroup>
-    </FocusTrap>
+    <Collection collection={collection}>
+      <FocusTrap
+        paused
+        loop={false}
+        active={menuCtx.open}
+        restoreFocus={restoreFocus}
+      >
+        <RovingFocusGroup orientation='vertical' loop={loopFocus}>
+          <MenuContentRoot {...getMenuContentRootProps()}>
+            <MenuContentProvider value={ctx}>{children}</MenuContentProvider>
+          </MenuContentRoot>
+        </RovingFocusGroup>
+      </FocusTrap>
+    </Collection>
   )
 }
 
