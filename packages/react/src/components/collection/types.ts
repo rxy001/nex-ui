@@ -1,15 +1,8 @@
-import type { ReactElement, ReactNode, Ref, RefObject } from 'react'
-import type { CollectionItemData, Listener } from './CollectionStore'
-
-export type Item<ItemData extends {} = {}> = RefObject<
-  {
-    element: RefObject<HTMLElement | null>
-  } & ItemData
->
-
-export interface CollectionStore<ItemData extends {} = {}> {
-  getItems: () => Array<CollectionItemData<ItemData>>
-}
+import type {
+  Listener,
+  CollectionStore as InternalCollectionStore,
+} from './CollectionStore'
+import type { ReactElement, ReactNode, Ref } from 'react'
 
 export interface CollectionProps<ItemData extends {} = {}> {
   children?: ReactNode
@@ -23,4 +16,11 @@ export type CollectionItemProps<ItemData extends {} = {}> = ItemData & {
   children?: ReactElement<{
     ref?: Ref<HTMLElement>
   }>
+}
+
+export interface CollectionContextValue<ItemData extends {} = {}>
+  extends InternalCollectionStore<ItemData> {}
+
+export interface CollectionStore<ItemData extends {} = {}> {
+  getItems: InternalCollectionStore<ItemData>['getItems']
 }

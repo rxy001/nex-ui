@@ -45,6 +45,7 @@ export interface SubMenuContentProps
 interface MenuItemOwnProps {
   disabled?: boolean
   closeOnSelect?: boolean
+  textValue?: string
   onSelect?: (event: MouseEvent<HTMLDivElement>) => void
 }
 

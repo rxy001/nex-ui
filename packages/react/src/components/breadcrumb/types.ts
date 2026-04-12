@@ -171,7 +171,3 @@ export type BreadcrumbItemProps<LinkComponent extends ElementType = 'a'> =
     BreadcrumbItemOwnProps<LinkComponent>,
     BreadcrumbItemPropsOverrides
   >
-
-export interface ItemData {
-  id: string
-}

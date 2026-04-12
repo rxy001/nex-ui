@@ -1,4 +1,5 @@
 import type { ReactElement, Ref } from 'react'
+import type { RovingFocusItemData } from './Collection'
 
 export interface RovingFocusGroupProps<T extends string | number = string> {
   children?: ReactElement<{}>
@@ -18,12 +19,6 @@ export interface RovingFocusGroupProps<T extends string | number = string> {
    * @default false
    */
   loop?: boolean
-}
-
-export interface RovingFocusItemData {
-  id?: string | number
-  focusable?: boolean
-  active?: boolean
 }
 
 export interface RovingFocusItemProps extends RovingFocusItemData {
