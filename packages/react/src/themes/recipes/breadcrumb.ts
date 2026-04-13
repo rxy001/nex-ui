@@ -100,7 +100,6 @@ export const breadcrumbItemRecipe = defineSlotRecipe({
     link: {
       display: 'inline-flex',
       alignItems: 'center',
-      textDecoration: 'none',
       cursor: 'pointer',
       gap: '1',
       color: 'colorPalette.primary/70',

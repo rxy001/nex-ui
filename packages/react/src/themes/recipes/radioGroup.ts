@@ -10,7 +10,6 @@ export const radioRecipe = defineSlotRecipe({
       alignItems: 'center',
       cursor: 'pointer',
       maxW: 'fit',
-      WebkitTapHighlightColor: 'transparent',
     },
     input: {
       pos: 'absolute',

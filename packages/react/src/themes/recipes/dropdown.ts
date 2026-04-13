@@ -76,7 +76,6 @@ export const dropdownItemRecipe = defineSlotRecipe({
       borderRadius: 'md',
       color: 'inherit',
       fs: 'inherit',
-      textDecoration: 'none',
       _disabled: {
         opacity: 0.6,
       },
