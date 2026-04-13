@@ -10,7 +10,6 @@ export const switchRecipe = defineSlotRecipe({
       h: '8',
       alignItems: 'center',
       cursor: 'pointer',
-      WebkitTapHighlightColor: 'transparent',
     },
     input: {
       pos: 'absolute',

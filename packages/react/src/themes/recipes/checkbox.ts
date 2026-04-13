@@ -40,7 +40,6 @@ export const checkboxRecipe = defineSlotRecipe({
       pos: 'relative',
       alignItems: 'center',
       cursor: 'pointer',
-      WebkitTapHighlightColor: 'transparent',
       maxW: 'fit',
     },
     input: {
