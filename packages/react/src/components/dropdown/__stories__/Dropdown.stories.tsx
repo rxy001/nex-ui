@@ -454,13 +454,13 @@ function DropdownShowcase() {
           onValueChange={setCheckedItems}
         >
           <DropdownItemGroupLabel>Languages</DropdownItemGroupLabel>
-          <DropdownCheckboxItem value='1' startIcon='🇨🇳'>
+          <DropdownCheckboxItem value='1' startIcon='🇨🇳' textValue='Chinese'>
             Chinese
           </DropdownCheckboxItem>
-          <DropdownCheckboxItem value='2' startIcon='🇺🇸'>
+          <DropdownCheckboxItem value='2' startIcon='🇺🇸' textValue='English'>
             English
           </DropdownCheckboxItem>
-          <DropdownCheckboxItem value='3' startIcon='🇫🇷'>
+          <DropdownCheckboxItem value='3' startIcon='🇫🇷' textValue='French'>
             French
           </DropdownCheckboxItem>
         </DropdownCheckboxItemGroup>
@@ -469,10 +469,10 @@ function DropdownShowcase() {
           onValueChange={setSelectedRadio}
         >
           <DropdownItemGroupLabel>Country</DropdownItemGroupLabel>
-          <DropdownRadioItem value='1' startIcon='🇨🇳'>
+          <DropdownRadioItem value='1' startIcon='🇨🇳' textValue='China'>
             China
           </DropdownRadioItem>
-          <DropdownRadioItem value='2' startIcon='🇺🇸'>
+          <DropdownRadioItem value='2' startIcon='🇺🇸' textValue='United States'>
             United States
           </DropdownRadioItem>
         </DropdownRadioItemGroup>
