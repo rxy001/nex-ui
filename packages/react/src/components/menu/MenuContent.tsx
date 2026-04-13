@@ -47,6 +47,7 @@ function MenuContentImpl(props: MenuContentImplProps) {
   const searchKeyRef = useRef('')
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const collection = useCollection()
+  const isManualFocusRef = useRef(false)
 
   const [MenuContentRoot, getMenuContentRootProps] = useSlot({
     style,
@@ -101,7 +102,7 @@ function MenuContentImpl(props: MenuContentImplProps) {
           item.textValue.toLowerCase().startsWith(normalizedSearchKey),
         )
         if (nextItem?.element !== currentItem?.element) {
-          focus(nextItem?.element)
+          focus(nextItem?.element, false)
         }
         searchKeyRef.current = searchKey
         if (timerRef.current) clearTimeout(timerRef.current)
@@ -113,6 +114,9 @@ function MenuContentImpl(props: MenuContentImplProps) {
         // onItemLeave refocuses on content, blocking RovingFocusGroup's onFocus logic.
         if (!rootMenuCtx.useKeyboardRef.current) {
           event.preventDefault()
+        } else if (isManualFocusRef.current) {
+          event.preventDefault()
+          isManualFocusRef.current = false
         }
       },
       onPointerDownOutside: (event: PointerDownOutsideEvent) => {
@@ -166,7 +170,10 @@ function MenuContentImpl(props: MenuContentImplProps) {
       },
       onItemLeave: (event: PointerEvent<HTMLElement>) => {
         if (isPointerMovingToSubMenu(event)) return
-        if (ref.current) focus(ref.current)
+        if (ref.current) {
+          isManualFocusRef.current = true
+          focus(ref.current)
+        }
       },
       onPointerGraceIntentChange: (intent: GraceIntent | null) => {
         pointerGraceIntentRef.current = intent

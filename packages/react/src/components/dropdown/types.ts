@@ -166,7 +166,10 @@ interface DropdownItemSlotProps {
 }
 
 interface DropdownItemOwnProps<RootComponent extends ElementType = 'div'>
-  extends Pick<MenuItemProps, 'closeOnSelect' | 'disabled' | 'onSelect'> {
+  extends Pick<
+    MenuItemProps,
+    'closeOnSelect' | 'disabled' | 'onSelect' | 'textValue'
+  > {
   /**
    * The component or element to render as the root.
    * @default 'div'

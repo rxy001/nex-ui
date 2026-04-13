@@ -80,6 +80,10 @@ export const dropdownItemRecipe = defineSlotRecipe({
       _disabled: {
         opacity: 0.6,
       },
+      _focusVisibleRing: {
+        outline: 'focusVisibleOutline',
+        outlineOffset: '0.5',
+      },
     },
     shortcut: {
       ml: '5',
