@@ -69,6 +69,9 @@ export const checkboxRecipe = defineSlotRecipe({
     icon: {
       pos: 'relative',
       color: 'colorPalette.contrastText',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       '::before': {
         content: '""',
         pos: 'absolute',

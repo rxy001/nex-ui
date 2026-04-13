@@ -193,7 +193,7 @@ export const dropdownRadioItemRecipe = defineSlotRecipe({
     },
     indicator: {
       pos: 'absolute',
-      left: '0',
+      left: '0.5',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -210,7 +210,7 @@ export const dropdownCheckboxItemRecipe = defineSlotRecipe({
     },
     indicator: {
       pos: 'absolute',
-      left: '0',
+      left: '0.5',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
