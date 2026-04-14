@@ -11,13 +11,22 @@ import {
   useSlotClasses,
   useSlot,
 } from '../utils'
-import { RovingFocusGroup } from '../rovingFocus'
 import { accordionRecipe } from '../../themes/recipes'
-import type { ElementType, Key } from 'react'
+import { Collection, useCollection } from './Collection'
+import type { ElementType, Key, KeyboardEvent } from 'react'
 import type { AccordionProps } from './types'
 import type { AccordionGroupContextValue } from './AccordionContext'
 
 const slots = ['root'] as const
+
+const navigationKeys = [
+  'Home',
+  'End',
+  'ArrowDown',
+  'ArrowUp',
+  'ArrowLeft',
+  'ArrowRight',
+]
 
 export function Accordion<RootComponent extends ElementType = 'div'>(
   inProps: AccordionProps<RootComponent>,
@@ -50,6 +59,8 @@ export function Accordion<RootComponent extends ElementType = 'div'>(
     defaultExpandedKeys,
     onExpandedKeysChange,
   )
+
+  const collection = useCollection()
 
   if (__DEV__ && !multiple && expandedKeys.length > 1) {
     console.warn(
@@ -90,9 +101,40 @@ export function Accordion<RootComponent extends ElementType = 'div'>(
       multiple,
     },
     additionalProps: {
-      // RovingFocusGroup adds the tabIndex attribute and sets it to null
-      // to prevent the element from being focusable.
-      tabIndex: null as any,
+      onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => {
+        if (!navigationKeys.includes(event.key) || disabled) return
+        const target = event.target as HTMLElement
+        const items = collection.getItems().filter((item) => !item.disabled)
+        const currentItemIndex = items.findIndex(
+          (item) => item.element === target,
+        )
+        const itemCount = items.length
+
+        if (itemCount === 0 || currentItemIndex === -1) return
+
+        let nextItemIndex: number | null = null
+        switch (event.key) {
+          case 'ArrowUp':
+          case 'ArrowLeft':
+            nextItemIndex = currentItemIndex - 1
+            break
+          case 'ArrowDown':
+          case 'ArrowRight':
+            nextItemIndex = currentItemIndex + 1
+            break
+          case 'Home':
+            nextItemIndex = 0
+            break
+          case 'End':
+            nextItemIndex = itemCount - 1
+            break
+        }
+
+        if (nextItemIndex === null) return
+        if (nextItemIndex < 0) nextItemIndex = itemCount - 1
+        const nextItem = items[nextItemIndex % itemCount]
+        nextItem.element.focus()
+      },
     },
   })
 
@@ -139,9 +181,9 @@ export function Accordion<RootComponent extends ElementType = 'div'>(
 
   return (
     <AccordionGroupProvider value={ctx}>
-      <RovingFocusGroup loop orientation='vertical'>
+      <Collection collection={collection}>
         <AccordionRoot {...getAccordionRootProps()}>{children}</AccordionRoot>
-      </RovingFocusGroup>
+      </Collection>
     </AccordionGroupProvider>
   )
 }
