@@ -17,7 +17,7 @@ import {
   FadeInOutMotion,
   useKeepMountedState,
 } from '../utils'
-import { RovingFocusItem } from '../rovingFocus'
+import { CollectionItem } from './Collection'
 import { useAccordionGroupContext } from './AccordionContext'
 import type { ElementType } from 'react'
 import type { HTMLMotionProps } from 'motion/react'
@@ -319,12 +319,12 @@ export function AccordionItem<RootComponent extends ElementType = 'div'>(
   return (
     <AccordionItemRoot {...getAccordionItemRootProps()}>
       <AccordionItemHeading {...getAccordionItemHeadingProps()}>
-        <RovingFocusItem focusable={!disabled}>
+        <CollectionItem disabled={disabled}>
           <AccordionItemTrigger {...getAccordionItemTriggerProps()}>
             <span>{title}</span>
             {!hideIndicator && renderIndicator()}
           </AccordionItemTrigger>
-        </RovingFocusItem>
+        </CollectionItem>
       </AccordionItemHeading>
       {renderContent()}
     </AccordionItemRoot>
