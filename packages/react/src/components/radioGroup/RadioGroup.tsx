@@ -145,7 +145,7 @@ export function RadioGroup<
         </RadioGroupLabel>
       ) : null}
       <RadioGroupProvider value={ctx}>
-        <RovingFocusGroup loop>
+        <RovingFocusGroup loop defaultFocusItemId={value}>
           <RadioGroupWrapper {...getRadioGroupWrapperProps()}>
             {children}
           </RadioGroupWrapper>

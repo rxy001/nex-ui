@@ -11,7 +11,7 @@ export interface RovingFocusGroupProps<T extends string | number = string> {
    * The orientation of the group.
    * Mainly so arrow navigation is done accordingly (left & right vs. up & down)
    */
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: 'horizontal' | 'vertical' | 'both'
 
   /**
    * If true, keyboard navigation loops around.

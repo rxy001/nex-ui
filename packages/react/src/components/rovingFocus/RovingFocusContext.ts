@@ -3,18 +3,16 @@
 import { createContext } from '@nex-ui/utils'
 
 export interface RovingFocusContextValue {
-  onItemFocus: (id: string | number) => void
-  onItemBlur: () => void
-  focusItemId: string | number
-  onFocusableItemMount: () => void
-  onFocusableItemUnmount: () => void
+  onItemFocus: (id: string) => void
+  focusItemId: string
+  firstItemId: string
 }
 
 export const [RovingFocusProvider, useRovingFocusContext] =
-  createContext<RovingFocusContextValue | null>({
+  createContext<RovingFocusContextValue>({
     contextName: 'RovingFocusContext',
     hookName: 'useRovingFocusContext',
     providerName: 'RovingFocusProvider',
-    strict: false,
-    defaultValue: null,
+    strict: true,
+    defaultValue: null as unknown as RovingFocusContextValue,
   })

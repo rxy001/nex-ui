@@ -48,7 +48,7 @@ function Button({ children, value }: { children: ReactNode; value: string }) {
   const selected = valueContext === value
 
   return (
-    <RovingFocusItem active={selected}>
+    <RovingFocusItem id={value}>
       <button
         style={
           selected

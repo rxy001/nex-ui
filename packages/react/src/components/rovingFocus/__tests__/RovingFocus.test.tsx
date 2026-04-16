@@ -37,30 +37,6 @@ describe('RovingFocus', () => {
     user = userEvent.setup()
   })
 
-  it('should focus active item when container is focused', async () => {
-    const { getByTestId } = render(
-      <RovingFocusGroup>
-        <div data-testid='container'>
-          <RovingFocusItem id='red'>
-            <button data-testid='red'>red</button>
-          </RovingFocusItem>
-          <RovingFocusItem id='blue' active>
-            <button data-testid='blue'>blue</button>
-          </RovingFocusItem>
-        </div>
-      </RovingFocusGroup>,
-    )
-
-    const container = getByTestId('container')
-    const blueButton = getByTestId('blue')
-
-    expect(container).not.toHaveFocus()
-    expect(blueButton).not.toHaveFocus()
-
-    await user.tab()
-    expect(blueButton).toHaveFocus()
-  })
-
   it('should focus the first focusable item when container is focused', async () => {
     const { getByTestId } = render(
       <RovingFocusGroup>
@@ -79,33 +55,6 @@ describe('RovingFocus', () => {
 
     const redButton = getByTestId('red')
     expect(redButton).toHaveFocus()
-  })
-
-  it('should navigate to active item', async () => {
-    const { getByTestId } = render(
-      <RovingFocusGroup>
-        <div data-testid='container'>
-          <RovingFocusItem id='red' active>
-            <button data-testid='red'>red</button>
-          </RovingFocusItem>
-          <RovingFocusItem id='blue'>
-            <button data-testid='blue'>blue</button>
-          </RovingFocusItem>
-        </div>
-      </RovingFocusGroup>,
-    )
-
-    const container = getByTestId('container')
-    const redButton = getByTestId('red')
-    const blueButton = getByTestId('blue')
-    expect(container).not.toHaveFocus()
-    expect(blueButton).not.toHaveFocus()
-
-    await user.tab()
-    expect(redButton).toHaveFocus()
-
-    await user.keyboard('{ArrowRight}')
-    expect(blueButton).toHaveFocus()
   })
 
   it('should have tabindex=0 on container', () => {

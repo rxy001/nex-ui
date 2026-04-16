@@ -1,9 +1,8 @@
 import { createCollection } from '../collection'
 
 export interface RovingFocusItemData {
-  id?: string | number
+  id?: string
   focusable?: boolean
-  active?: boolean
 }
 
 export const [Collection, CollectionItem, useCollection] =
