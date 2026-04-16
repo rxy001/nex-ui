@@ -5,18 +5,21 @@ import { useControlledState } from '@nex-ui/hooks'
 import { isValidNonFragmentElement, mergeProps, focus } from '@nex-ui/utils'
 import { RovingFocusProvider } from './RovingFocusContext'
 import { Collection, useCollection } from './Collection'
-import type { KeyboardEvent, FocusEvent } from 'react'
+import type { RovingFocusItemData } from './Collection'
+import type { KeyboardEvent } from 'react'
 import type { RovingFocusContextValue } from './RovingFocusContext'
 import type { RovingFocusGroupProps } from './types'
+import type { CollectionItemData } from '../collection'
 
-export function RovingFocusGroup<T extends string | number = string | number>(
-  props: RovingFocusGroupProps<T>,
+export function RovingFocusGroup<T extends string | number = string>(
+  inProps: RovingFocusGroupProps<T>,
 ) {
+  const props = inProps as unknown as RovingFocusGroupProps
   const {
     children,
     defaultFocusItemId,
     onFocusItemIdChange,
-    orientation,
+    orientation = 'both',
     focusItemId: focusItemIdProp,
     loop = false,
     ...remainingProps
@@ -28,53 +31,18 @@ export function RovingFocusGroup<T extends string | number = string | number>(
     onFocusItemIdChange,
   )
 
-  const [focusableItemsCount, setFocusableItemsCount] = useState(0)
-
-  const [useShiftTab, setUseShiftTab] = useState(false)
+  const [firstItemId, setFirstItemId] = useState('')
 
   const collection = useCollection()
 
   const onItemFocus = useCallback(
-    (id: string | number) => {
-      setFocusItemId(id as T)
+    (id: string) => {
+      setFocusItemId(id)
     },
     [setFocusItemId],
   )
 
-  const onItemBlur = useCallback(() => {
-    setFocusItemId('' as T)
-  }, [setFocusItemId])
-
-  const handleFocus = (event: FocusEvent<HTMLElement>) => {
-    if (
-      event.currentTarget === event.target &&
-      !useShiftTab &&
-      !event.defaultPrevented
-    ) {
-      const items = collection.getItems().filter((item) => item.focusable)
-
-      if (items.length === 0) return
-
-      const activeItem = items.find((item) => item.active)
-
-      if (activeItem) {
-        focus(activeItem.element, false)
-        return
-      }
-
-      const focusItem = items.find((item) => item.id === focusItemId)
-
-      focus(focusItem?.element ?? items[0].element, false)
-    }
-  }
-
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Tab' && event.shiftKey) {
-      // The focus timing of tabbing backwards is later than React render.
-      setUseShiftTab(true)
-      return
-    }
-
     const focusIntent = getFocusIntent(event, orientation)
 
     if (!focusIntent) return
@@ -96,16 +64,13 @@ export function RovingFocusGroup<T extends string | number = string | number>(
     } else if (focusIntent === 'last') {
       nextItemElement = items[items.length - 1].element
     } else {
-      const activeItemIndex = items.findIndex((item) => item.active)
-
-      const currentFocusItemIndex = items.findIndex(
-        (item) => item.id === focusItemId,
+      const currentItemIndex = items.findIndex(
+        (item) => item.element === target,
       )
 
-      let nextItemIndex =
-        activeItemIndex >= 0 ? activeItemIndex : currentFocusItemIndex
+      if (currentItemIndex === -1) return
 
-      nextItemIndex = nextItemIndex + (focusIntent === 'next' ? 1 : -1)
+      let nextItemIndex = currentItemIndex + (focusIntent === 'next' ? 1 : -1)
 
       if (loop || (nextItemIndex >= 0 && nextItemIndex < items.length)) {
         nextItemIndex = (nextItemIndex + items.length) % items.length
@@ -116,33 +81,26 @@ export function RovingFocusGroup<T extends string | number = string | number>(
     if (nextItemElement) focus(nextItemElement, false)
   }
 
-  const handleBlur = () => {
-    setUseShiftTab(false)
+  const handleItemsChange = (
+    items: Array<CollectionItemData<RovingFocusItemData>>,
+  ) => {
+    setFirstItemId(items[0]?.id ?? '')
+
+    if (focusItemId) {
+      const isValidFocusItemId = items.some((item) => item.id === focusItemId)
+      if (!isValidFocusItemId) {
+        setFocusItemId('')
+      }
+    }
   }
-
-  const onFocusableItemMount = useCallback(() => {
-    setFocusableItemsCount((count) => count + 1)
-  }, [])
-
-  const onFocusableItemUnmount = useCallback(() => {
-    setFocusableItemsCount((count) => count - 1)
-  }, [])
 
   const ctx = useMemo<RovingFocusContextValue>(
     () => ({
       onItemFocus,
-      onItemBlur,
       focusItemId,
-      onFocusableItemMount,
-      onFocusableItemUnmount,
+      firstItemId,
     }),
-    [
-      onItemFocus,
-      onItemBlur,
-      focusItemId,
-      onFocusableItemMount,
-      onFocusableItemUnmount,
-    ],
+    [onItemFocus, firstItemId, focusItemId],
   )
 
   if (!isValidNonFragmentElement(children)) {
@@ -150,16 +108,13 @@ export function RovingFocusGroup<T extends string | number = string | number>(
   }
 
   return (
-    <Collection collection={collection}>
+    <Collection collection={collection} onItemsChange={handleItemsChange}>
       <RovingFocusProvider value={ctx}>
         {cloneElement(
           children,
           mergeProps(
             {
               onKeyDown: handleKeyDown,
-              onFocus: handleFocus,
-              onBlur: handleBlur,
-              tabIndex: useShiftTab || !focusableItemsCount ? -1 : 0,
             },
             children.props,
             remainingProps,
@@ -174,16 +129,27 @@ function getFocusIntent(
   event: KeyboardEvent<HTMLElement>,
   orientation: RovingFocusGroupProps['orientation'],
 ) {
+  const homeEndKeys = ['Home', 'End']
+  const verticalKeys = ['ArrowUp', 'ArrowDown']
+  const horizontalKeys = ['ArrowLeft', 'ArrowRight']
+
   if (
     orientation === 'vertical' &&
-    ['ArrowLeft', 'ArrowRight'].includes(event.key)
+    ![...homeEndKeys, ...verticalKeys].includes(event.key)
   )
     return
   if (
     orientation === 'horizontal' &&
-    ['ArrowUp', 'ArrowDown'].includes(event.key)
+    ![...homeEndKeys, ...horizontalKeys].includes(event.key)
   )
     return
+
+  if (
+    orientation === 'both' &&
+    ![...homeEndKeys, ...verticalKeys, ...horizontalKeys].includes(event.key)
+  ) {
+    return
+  }
 
   switch (event.key) {
     case 'ArrowUp':

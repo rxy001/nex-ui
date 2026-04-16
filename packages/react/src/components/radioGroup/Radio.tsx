@@ -20,6 +20,8 @@ import type { RadioOwnerState, RadioProps } from './types'
 
 const slots = ['root', 'input', 'indicator', 'label'] as const
 
+const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
+
 export function Radio<
   T extends string | number = string,
   InputComponent extends ElementType = 'input',
@@ -80,7 +82,7 @@ export function Radio<
     defaultChecked,
     onCheckedChange,
   )
-  const arrowKeyPressedRef = useRef(false)
+  const isArrowKeyPressed = useRef(false)
 
   const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
 
@@ -177,7 +179,7 @@ export function Radio<
          * and we need to "check" it in that case. We click it to "check" it (instead
          * of updating `context.value`) so that the radio change event fires.
          */
-        if (arrowKeyPressedRef.current) {
+        if (isArrowKeyPressed.current) {
           event.currentTarget.click()
         }
       },
@@ -201,13 +203,11 @@ export function Radio<
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (
-        ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)
-      ) {
-        arrowKeyPressedRef.current = true
+      if (arrowKeys.includes(event.key)) {
+        isArrowKeyPressed.current = true
       }
     }
-    const handleKeyUp = () => (arrowKeyPressedRef.current = false)
+    const handleKeyUp = () => (isArrowKeyPressed.current = false)
     const removeKeyDownListener = addEventListener(
       document,
       'keydown',
@@ -232,13 +232,13 @@ export function Radio<
 
   return (
     <RadioRoot {...getRadioRootProps()}>
-      <RovingFocusItem
-        focusable={!disabled}
-        id={value}
-        active={inGroup ? checked : true}
-      >
+      {inGroup ? (
+        <RovingFocusItem focusable={!disabled} id={value}>
+          <RadioInput {...getRadioInputProps()} />
+        </RovingFocusItem>
+      ) : (
         <RadioInput {...getRadioInputProps()} />
-      </RovingFocusItem>
+      )}
       <RadioIndicator {...getRadioIndicatorProps()} />
       {children && (
         <RadioLabel {...getRadioLabelProps()}>{children}</RadioLabel>
