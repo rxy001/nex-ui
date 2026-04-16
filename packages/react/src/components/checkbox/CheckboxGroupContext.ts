@@ -3,11 +3,9 @@
 import { createContext } from '@nex-ui/utils'
 import type { CheckboxVariants } from '../../themes/recipes'
 
-export interface CheckboxGroupContextValue<
-  T extends number | string = number | string,
-> {
-  toggleValue: (value: T) => void
-  isChecked: (value?: T) => boolean
+export interface CheckboxGroupContextValue {
+  toggleValue: (value: string) => void
+  isChecked: (value?: string) => boolean
   name?: string
   disabled?: boolean
   color?: CheckboxVariants['color']

@@ -18,7 +18,7 @@ import type { CheckboxGroupContextValue } from './CheckboxGroupContext'
 const slots = ['root', 'label', 'wrapper'] as const
 
 export function CheckboxGroup<
-  T extends number | string = number | string,
+  T extends number | string = string,
   CheckboxGroupComponent extends ElementType = 'div',
 >(inProps: CheckboxGroupProps<T, CheckboxGroupComponent>) {
   const props = useDefaultProps<CheckboxGroupProps>({
@@ -117,11 +117,11 @@ export function CheckboxGroup<
       color,
       radius,
       disableAnimation,
-      toggleValue: (value: number | string) => {
+      toggleValue: (value: string) => {
         if (disabled) {
           return
         }
-        let newValues: (number | string)[]
+        let newValues: string[]
         if (values.includes(value)) {
           newValues = values.filter((existingValue) => existingValue !== value)
         } else {
@@ -130,7 +130,7 @@ export function CheckboxGroup<
 
         setValues(newValues)
       },
-      isChecked: (value?: number | string) => {
+      isChecked: (value?: string) => {
         return value !== undefined ? values.includes(value) : false
       },
     }),

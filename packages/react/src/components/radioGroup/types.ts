@@ -14,7 +14,10 @@ interface RadioSlotProps {
   label?: SlotProps<'span'>
 }
 
-interface RadioOwnProps<RadioComponent extends ElementType = 'input'> {
+interface RadioOwnProps<
+  T extends string | number = string,
+  RadioComponent extends ElementType = 'input',
+> {
   /**
    * The component or element to render as the input.
    *
@@ -47,7 +50,7 @@ interface RadioOwnProps<RadioComponent extends ElementType = 'input'> {
   /**
    * The value of the Radio.
    */
-  value?: string | number
+  value?: T
 
   /**
    * If true, checks the Radio. (controlled)
@@ -98,17 +101,18 @@ interface RadioOwnProps<RadioComponent extends ElementType = 'input'> {
 
 export interface RadioPropsOverrides {}
 
-export type RadioProps<RadioComponent extends ElementType = 'input'> =
-  OverrideProps<
-    RadioComponent,
-    RadioOwnProps<RadioComponent>,
-    RadioPropsOverrides
-  >
+export type RadioProps<
+  T extends string | number = string,
+  RadioComponent extends ElementType = 'input',
+> = OverrideProps<
+  RadioComponent,
+  RadioOwnProps<T, RadioComponent>,
+  RadioPropsOverrides
+>
 
-export type RadioOwnerState<RadioComponent extends ElementType = 'input'> =
-  RadioProps<RadioComponent> & {
-    inGroup: boolean
-  }
+export type RadioOwnerState = RadioProps & {
+  inGroup: boolean
+}
 
 interface RadioGroupSlotProps {
   label?: SlotProps<'h3'>
@@ -206,7 +210,7 @@ interface RadioGroupOwnProps<
 export interface RadioGroupPropsOverrides {}
 
 export type RadioGroupProps<
-  T extends string | number = string | number,
+  T extends string | number = string,
   RootComponent extends ElementType = 'div',
 > = OverrideProps<
   RootComponent,
