@@ -102,7 +102,7 @@ export const DefaultValue: Story = {
 }
 
 export function Controlled(props: RadioGroupProps) {
-  const [value, setValue] = useState<string | number>('apple')
+  const [value, setValue] = useState('apple')
 
   return (
     <>

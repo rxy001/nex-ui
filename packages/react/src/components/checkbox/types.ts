@@ -19,7 +19,10 @@ interface CheckboxSlotProps {
   icon?: SlotProps<'span'>
 }
 
-interface CheckboxOwnProps<CheckboxComponent extends ElementType> {
+interface CheckboxOwnProps<
+  T extends string | number = string,
+  CheckboxComponent extends ElementType = 'input',
+> {
   /**
    * The component or element to render as the input.
    *
@@ -47,7 +50,7 @@ interface CheckboxOwnProps<CheckboxComponent extends ElementType> {
    */
   icon?:
     | ReactNode
-    | ((ownerState: CheckboxOwnerState<CheckboxComponent>) => ReactNode)
+    | ((ownerState: CheckboxOwnerState<T, CheckboxComponent>) => ReactNode)
 
   /**
    * The props used for each slot.
@@ -69,7 +72,7 @@ interface CheckboxOwnProps<CheckboxComponent extends ElementType> {
   /**
    * The value of the Checkbox.
    */
-  value?: string | number
+  value?: T
 
   /**
    * Callback fired when the checked state changes.
@@ -124,16 +127,19 @@ interface CheckboxOwnProps<CheckboxComponent extends ElementType> {
   disableAnimation?: boolean
 }
 
-export type CheckboxProps<CheckboxComponent extends ElementType = 'input'> =
-  OverrideProps<
-    CheckboxComponent,
-    CheckboxOwnProps<CheckboxComponent>,
-    CheckboxPropsOverrides
-  >
+export type CheckboxProps<
+  T extends string | number = string,
+  CheckboxComponent extends ElementType = 'input',
+> = OverrideProps<
+  CheckboxComponent,
+  CheckboxOwnProps<T, CheckboxComponent>,
+  CheckboxPropsOverrides
+>
 
 export type CheckboxOwnerState<
+  T extends string | number = string,
   CheckboxComponent extends ElementType = 'input',
-> = CheckboxProps<CheckboxComponent> & {
+> = CheckboxProps<T, CheckboxComponent> & {
   inGroup: boolean
 }
 
@@ -145,7 +151,7 @@ interface CheckboxGroupSlotProps {
 }
 
 interface CheckboxGroupOwnProps<
-  T extends number | string = number | string,
+  T extends number | string = string,
   RootComponent extends ElementType = 'div',
 > {
   /**
@@ -243,7 +249,7 @@ interface CheckboxGroupOwnProps<
 }
 
 export type CheckboxGroupProps<
-  T extends number | string = number | string,
+  T extends number | string = string,
   RootComponent extends ElementType = 'div',
 > = OverrideProps<
   RootComponent,

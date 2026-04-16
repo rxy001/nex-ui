@@ -19,7 +19,7 @@ import type { RadioGroupContextValue } from './RadioGroupContext'
 const slots = ['root', 'label', 'wrapper'] as const
 
 export function RadioGroup<
-  T extends string | number = string | number,
+  T extends string | number = string,
   RootComponent extends ElementType = 'div',
 >(inProps: RadioGroupProps<T, RootComponent>) {
   const props = useDefaultProps<RadioGroupProps>({

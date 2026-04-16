@@ -3,11 +3,9 @@
 import { createContext } from '@nex-ui/utils'
 import type { RadioVariants } from '../../themes/recipes'
 
-export interface RadioGroupContextValue<
-  T extends string | number = string | number,
-> {
-  setValue: (value: T) => void
-  isChecked: (value?: T) => boolean
+export interface RadioGroupContextValue {
+  setValue: (value: string) => void
+  isChecked: (value?: string) => boolean
   name?: string
   disabled?: boolean
   color?: RadioVariants['color']
