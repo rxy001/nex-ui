@@ -45,7 +45,7 @@ describe('RovingFocusItem', () => {
     const redButton = getByTestId('red')
     const blueButton = getByTestId('blue')
 
-    expect(redButton).toHaveAttribute('tabindex', '-1')
+    expect(redButton).toHaveAttribute('tabindex', '0')
     expect(blueButton).toHaveAttribute('tabindex', '-1')
 
     await user.tab()
@@ -75,7 +75,7 @@ describe('RovingFocusItem', () => {
     const blueButton = getByTestId('blue')
 
     expect(redButton).toHaveAttribute('tabindex', '-1')
-    expect(blueButton).toHaveAttribute('tabindex', '-1')
+    expect(blueButton).toHaveAttribute('tabindex', '0')
 
     await user.tab()
     expect(redButton).toHaveAttribute('tabindex', '-1')

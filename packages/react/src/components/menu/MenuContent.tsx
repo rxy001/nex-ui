@@ -2,20 +2,18 @@
 
 import { useCallback, useMemo, useRef } from 'react'
 import { useMergeRefs } from '@nex-ui/hooks'
-import { chain, focus, ownerDocument } from '@nex-ui/utils'
+import { chain, focus } from '@nex-ui/utils'
 import { defineRecipe } from '@nex-ui/system'
+import { ListNavigation } from '../listNavigation'
 import { PopperContent } from '../popper'
 import { useSlot } from '../utils'
-import { RovingFocusGroup } from '../rovingFocus'
 import { FocusTrap } from '../focusTrap'
-import { Collection, useCollection } from './Collection'
 import {
   useMenuContext,
   MenuContentProvider,
   useSubMenuContext,
-  useRootMenuContext,
 } from './MenuContext'
-import type { KeyboardEvent, PointerEvent, FocusEvent } from 'react'
+import type { KeyboardEvent, PointerEvent } from 'react'
 import type {
   MenuContentImplProps,
   MenuContentProps,
@@ -37,17 +35,18 @@ const recipe = defineRecipe({
 const style = recipe()
 
 function MenuContentImpl(props: MenuContentImplProps) {
-  const { children, loopFocus = true, restoreFocus, ...remainingProps } = props
+  const {
+    children,
+    initialFocusIntent,
+    restoreFocus,
+    loopFocus = true,
+    ...remainingProps
+  } = props
   const menuCtx = useMenuContext()
-  const rootMenuCtx = useRootMenuContext()
   const ref = useRef<HTMLDivElement>(null)
   const pointerGraceIntentRef = useRef<GraceIntent | null>(null)
   const pointerDirRef = useRef<Side>('right')
   const lastPointerXRef = useRef(0)
-  const searchKeyRef = useRef('')
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
-  const collection = useCollection()
-  const isManualFocusRef = useRef(false)
 
   const [MenuContentRoot, getMenuContentRootProps] = useSlot({
     style,
@@ -68,57 +67,6 @@ function MenuContentImpl(props: MenuContentImplProps) {
           lastPointerXRef.current = event.clientX
         }
       },
-      onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
-        const target = event.target as HTMLElement
-        if (!event.currentTarget.contains(target)) {
-          return
-        }
-        if (event.key === 'Tab') {
-          event.preventDefault()
-          return
-        }
-        if (
-          event.altKey ||
-          event.ctrlKey ||
-          event.metaKey ||
-          event.key.length !== 1
-        ) {
-          return
-        }
-        const searchKey = searchKeyRef.current + event.key
-        const items = collection.getItems().filter((item) => !item.disabled)
-        const { activeElement } = ownerDocument(target)
-        const currentItem = items.find((item) => item.element === activeElement)
-        const currentItemIndex = currentItem ? items.indexOf(currentItem) : -1
-        const orderedItems = [
-          ...items.slice(currentItemIndex + 1),
-          ...items.slice(0, currentItemIndex + 1),
-        ]
-        const isRepeated =
-          searchKey.length > 1 &&
-          Array.from(searchKey).every((char) => char === searchKey[0])
-        const normalizedSearchKey = isRepeated ? searchKey[0]! : searchKey
-        const nextItem = orderedItems.find((item) =>
-          item.textValue.toLowerCase().startsWith(normalizedSearchKey),
-        )
-        if (nextItem?.element !== currentItem?.element) {
-          focus(nextItem?.element, false)
-        }
-        searchKeyRef.current = searchKey
-        if (timerRef.current) clearTimeout(timerRef.current)
-        timerRef.current = setTimeout(() => {
-          searchKeyRef.current = ''
-        }, 1000)
-      },
-      onFocus: (event: FocusEvent<HTMLElement>) => {
-        // onItemLeave refocuses on content, blocking RovingFocusGroup's onFocus logic.
-        if (!rootMenuCtx.useKeyboardRef.current) {
-          event.preventDefault()
-        } else if (isManualFocusRef.current) {
-          event.preventDefault()
-          isManualFocusRef.current = false
-        }
-      },
       onPointerDownOutside: (event: PointerDownOutsideEvent) => {
         const target = event.detail.originalEvent.target as HTMLElement
         if (menuCtx.triggerRef.current?.contains(target)) {
@@ -128,7 +76,14 @@ function MenuContentImpl(props: MenuContentImplProps) {
       onFocusOutside: (event: FocusOutsideEvent) => {
         // Ensure that the submenu remains displayed when hovering over the sub-trigger,
         // and is hidden when hovering over other items.
-        if (event.target === menuCtx.triggerRef.current) {
+        const target = event.detail.originalEvent.target as HTMLElement
+
+        if (target === menuCtx.triggerRef.current) {
+          event.preventDefault()
+        }
+      },
+      onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
+        if (event.key === 'Tab' && menuCtx.open) {
           event.preventDefault()
         }
       },
@@ -165,15 +120,13 @@ function MenuContentImpl(props: MenuContentImplProps) {
 
   const ctx = useMemo<MenuContentContextValue>(
     () => ({
+      onItemLeave: (event: PointerEvent<HTMLElement>) => {
+        if (isPointerMovingToSubMenu(event)) {
+          event.preventDefault()
+        }
+      },
       onItemEnter: () => {
         pointerGraceIntentRef.current = null
-      },
-      onItemLeave: (event: PointerEvent<HTMLElement>) => {
-        if (isPointerMovingToSubMenu(event)) return
-        if (ref.current) {
-          isManualFocusRef.current = true
-          focus(ref.current)
-        }
       },
       onPointerGraceIntentChange: (intent: GraceIntent | null) => {
         pointerGraceIntentRef.current = intent
@@ -183,20 +136,13 @@ function MenuContentImpl(props: MenuContentImplProps) {
   )
 
   return (
-    <Collection collection={collection}>
-      <FocusTrap
-        paused
-        loop={false}
-        active={menuCtx.open}
-        restoreFocus={restoreFocus}
-      >
-        <RovingFocusGroup orientation='vertical' loop={loopFocus}>
-          <MenuContentRoot {...getMenuContentRootProps()}>
-            <MenuContentProvider value={ctx}>{children}</MenuContentProvider>
-          </MenuContentRoot>
-        </RovingFocusGroup>
-      </FocusTrap>
-    </Collection>
+    <FocusTrap loop={false} active={menuCtx.open} restoreFocus={restoreFocus}>
+      <ListNavigation loop={loopFocus} initialFocusIntent={initialFocusIntent}>
+        <MenuContentRoot {...getMenuContentRootProps()}>
+          <MenuContentProvider value={ctx}>{children}</MenuContentProvider>
+        </MenuContentRoot>
+      </ListNavigation>
+    </FocusTrap>
   )
 }
 
@@ -204,11 +150,13 @@ MenuContentImpl.displayName = 'MenuContentImpl'
 
 export function MenuContent(props: MenuContentProps) {
   const { restoreFocus = true, placement = 'bottom', ...remainingProps } = props
+  const menuCtx = useMenuContext()
 
   return (
     <MenuContentImpl
       placement={placement}
       restoreFocus={restoreFocus}
+      initialFocusIntent={menuCtx.intialFocusIntentRef.current}
       {...remainingProps}
     />
   )
@@ -228,6 +176,7 @@ export function SubMenuContent(props: SubMenuContentProps) {
       closeOnEscape={false}
       placement='right-start'
       restoreFocus={false}
+      initialFocusIntent='first'
       onKeyDown={chain(props.onKeyDown, (event: KeyboardEvent<HTMLElement>) => {
         if (event.key === 'ArrowLeft') {
           event.preventDefault()

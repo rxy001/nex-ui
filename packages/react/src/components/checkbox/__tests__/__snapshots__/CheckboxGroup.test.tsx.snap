@@ -33,7 +33,6 @@ exports[`CheckboxGroup should render with default props 1`] = `
   -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
   max-width: var(--nui-sizes-fit);
   height: var(--nui-sizes-8);
   padding: var(--nui-spaces-1-5);
@@ -70,6 +69,18 @@ exports[`CheckboxGroup should render with default props 1`] = `
 .emotion-4 {
   position: relative;
   color: var(--nui-colors-blue-contrast-text);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
   width: var(--nui-sizes-5);
   height: var(--nui-sizes-5);
   font-size: var(--nui-font-sizes-sm);
@@ -145,13 +156,15 @@ exports[`CheckboxGroup should render with default props 1`] = `
           aria-hidden="true"
           fill="none"
           focusable="false"
+          height="1.25em"
           stroke="currentColor"
           stroke-width="1.5"
           viewBox="0 0 24 24"
+          width="1.25em"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="m7 12.9l3.143 3.6L18 7.5"
+            d="M4 12 L9 17 L20 6"
             opacity="0"
             pathLength="1"
             stroke-dasharray="0px 1px"
@@ -194,13 +207,15 @@ exports[`CheckboxGroup should render with default props 1`] = `
           aria-hidden="true"
           fill="none"
           focusable="false"
+          height="1.25em"
           stroke="currentColor"
           stroke-width="1.5"
           viewBox="0 0 24 24"
+          width="1.25em"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="m7 12.9l3.143 3.6L18 7.5"
+            d="M4 12 L9 17 L20 6"
             opacity="0"
             pathLength="1"
             stroke-dasharray="0px 1px"
@@ -243,13 +258,15 @@ exports[`CheckboxGroup should render with default props 1`] = `
           aria-hidden="true"
           fill="none"
           focusable="false"
+          height="1.25em"
           stroke="currentColor"
           stroke-width="1.5"
           viewBox="0 0 24 24"
+          width="1.25em"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="m7 12.9l3.143 3.6L18 7.5"
+            d="M4 12 L9 17 L20 6"
             opacity="0"
             pathLength="1"
             stroke-dasharray="0px 1px"

@@ -126,3 +126,18 @@ export function Default() {
     </Flex>
   )
 }
+
+export function Test() {
+  return (
+    <RovingFocusGroup>
+      <div data-testid='container'>
+        <RovingFocusItem id='non-focusable' focusable={false}>
+          <button data-testid='non-focusable'>non-focusable</button>
+        </RovingFocusItem>
+        <RovingFocusItem id='red'>
+          <button data-testid='red'>red</button>
+        </RovingFocusItem>
+      </div>
+    </RovingFocusGroup>
+  )
+}

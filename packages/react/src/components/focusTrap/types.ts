@@ -31,6 +31,4 @@ export interface FocusTrapProps {
    * @default false
    */
   autoFocus?: boolean
-
-  paused?: boolean
 }

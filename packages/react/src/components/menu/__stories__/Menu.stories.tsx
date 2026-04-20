@@ -21,8 +21,11 @@ import {
 import type { ReactNode } from 'react'
 
 const itemStyle = {
-  "&[data-highlighted='true']": {
+  '&[data-highlighted="true"]': {
     bg: 'wheat',
+  },
+  '&[data-disabled="true"]': {
+    opacity: 0.4,
   },
 }
 
@@ -62,7 +65,9 @@ export default meta
 export function Default() {
   return (
     <MenuWrapper>
-      <MenuItem sx={itemStyle}>Undo</MenuItem>
+      <MenuItem disabled sx={itemStyle}>
+        Undo
+      </MenuItem>
       <MenuItem sx={itemStyle}>Redo</MenuItem>
       <MenuItem sx={itemStyle} disabled>
         Cut

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useLayoutEffect, useMemo, useRef } from 'react'
+import { useId, useLayoutEffect, useMemo, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { Popper } from '../popper'
 import {
@@ -9,7 +9,12 @@ import {
   SubMenuProvider,
   useMenuContext,
 } from './MenuContext'
-import type { MenuProps, MenuImplProps, SubMenuProps } from './types'
+import type {
+  MenuProps,
+  MenuImplProps,
+  SubMenuProps,
+  MenuContentImplProps,
+} from './types'
 import type { MenuContextValue } from './MenuContext'
 
 function MenuImpl(props: MenuImplProps) {
@@ -19,6 +24,8 @@ function MenuImpl(props: MenuImplProps) {
   const contentId = `menu-${ariaId}-content`
   const triggerId = `menu-${ariaId}-trigger`
   const triggerRef = useRef<HTMLDivElement>(null)
+  const intialFocusIntentRef =
+    useRef<MenuContentImplProps['initialFocusIntent']>(undefined)
 
   const setOpen = useEvent((value: boolean) => {
     onOpenChange?.(value)
@@ -31,6 +38,7 @@ function MenuImpl(props: MenuImplProps) {
       triggerRef,
       contentId,
       triggerId,
+      intialFocusIntentRef,
     }),
     [contentId, open, setOpen, triggerId],
   )
@@ -45,42 +53,11 @@ MenuImpl.displayName = 'MenuImpl'
 
 export function Menu(props: MenuProps) {
   const { children, onOpenChange, ...remainingProps } = props
-  const useKeyboardRef = useRef(false)
   const close = useEvent(() => {
     onOpenChange?.(false)
   })
 
-  const ctx = useMemo(
-    () => ({ useKeyboardRef, close }),
-    [useKeyboardRef, close],
-  )
-
-  useEffect(() => {
-    // Capture phase ensures we set the boolean before any side effects execute
-    // in response to the key or pointer event as they might depend on this value.
-    const handlePointer = () => (useKeyboardRef.current = false)
-    const handleKeyDown = () => {
-      useKeyboardRef.current = true
-      document.addEventListener('pointerdown', handlePointer, {
-        capture: true,
-        once: true,
-      })
-      document.addEventListener('pointermove', handlePointer, {
-        capture: true,
-        once: true,
-      })
-    }
-    document.addEventListener('keydown', handleKeyDown, { capture: true })
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown, { capture: true })
-      document.removeEventListener('pointerdown', handlePointer, {
-        capture: true,
-      })
-      document.removeEventListener('pointermove', handlePointer, {
-        capture: true,
-      })
-    }
-  }, [])
+  const ctx = useMemo(() => ({ close }), [close])
 
   return (
     <MenuImpl onOpenChange={onOpenChange} {...remainingProps}>
@@ -96,7 +73,13 @@ export function SubMenu(props: SubMenuProps) {
 
   const { children, onOpenChange, ...remainingProps } = props
 
-  const subMenuCtx = useMemo(() => ({ subMenuContentRef }), [])
+  const intialFocusIntentRef =
+    useRef<MenuContentImplProps['initialFocusIntent']>(undefined)
+
+  const subMenuCtx = useMemo(
+    () => ({ subMenuContentRef, intialFocusIntentRef }),
+    [],
+  )
 
   useLayoutEffect(() => {
     // Close this menu if the parent menu is closed

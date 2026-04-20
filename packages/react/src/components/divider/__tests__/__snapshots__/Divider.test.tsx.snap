@@ -3,7 +3,6 @@
 exports[`Divider should render with default props 1`] = `
 .emotion-0 {
   background-color: var(--nui-colors-gray-highlight);
-  border: none;
   height: var(--nui-sizes-px);
   margin-block-start: var(--nui-spaces-6);
   margin-block-end: var(--nui-spaces-6);
