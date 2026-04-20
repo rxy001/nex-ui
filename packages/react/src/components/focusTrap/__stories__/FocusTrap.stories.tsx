@@ -19,7 +19,6 @@ export function Default() {
   const [loop, setLoop] = useState(true)
   const [autoFocus, setAutoFocus] = useState(false)
   const [restoreFocus, setRestoreFocus] = useState(true)
-  const [paused, setPaused] = useState(false)
 
   return (
     <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 10 }}>
@@ -54,14 +53,6 @@ export function Default() {
           />
           &nbsp;Restore focus to trigger on close?
         </label>
-        <label>
-          <input
-            type='checkbox'
-            checked={paused}
-            onChange={(event) => setPaused(event.target.checked)}
-          />
-          &nbsp;Paused?
-        </label>
         <hr
           style={{
             width: '100%',
@@ -79,7 +70,6 @@ export function Default() {
           active={trapped}
           autoFocus={autoFocus}
           restoreFocus={restoreFocus}
-          paused={paused}
         >
           <form
             style={{

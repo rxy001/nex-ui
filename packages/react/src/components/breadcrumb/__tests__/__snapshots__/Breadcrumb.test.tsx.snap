@@ -34,8 +34,6 @@ exports[`Breadcrumb should render with default props 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   cursor: pointer;
   gap: var(--nui-spaces-1);
   color: color-mix(in oklab, var(--nui-colors-text) 50%, transparent);
@@ -90,8 +88,6 @@ exports[`Breadcrumb should render with default props 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   cursor: default;
   gap: var(--nui-spaces-1);
   color: var(--nui-colors-text);

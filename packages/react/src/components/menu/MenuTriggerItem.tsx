@@ -14,11 +14,6 @@ import type { KeyboardEvent } from 'react'
 import type { MenuTriggerItemProps } from './types'
 import type { Placement } from '../utils'
 
-const SUB_MENU_OPEN_KEYS = {
-  left: 'ArrowLeft',
-  right: 'ArrowRight',
-} as const
-
 const EDGE_OFFSET = 5
 
 export function MenuTriggerItem(props: MenuTriggerItemProps) {
@@ -56,12 +51,8 @@ export function MenuTriggerItem(props: MenuTriggerItemProps) {
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    // if (!subMenuCtx.subMenuContentRef.current) return
-
-    // const { placement } = subMenuCtx.subMenuContentRef.current.dataset
-
-    // const side = getSide(placement as Placement) as 'left' | 'right'
-    if (event.key === SUB_MENU_OPEN_KEYS.right) {
+    if (event.key === 'ArrowRight') {
+      subMenuCtx.intialFocusIntentRef.current = 'first'
       handleOpen()
       event.preventDefault()
     }
@@ -83,8 +74,8 @@ export function MenuTriggerItem(props: MenuTriggerItemProps) {
       ref: menuCtx.triggerRef,
       onPointerMove: handleOpen,
       onPointerLeave: handlePointerLeave,
-      onSelect: handleOpen,
       onKeyDown: handleKeyDown,
+      onSelect: handleOpen,
     },
     ariaProps: {
       'aria-haspopup': 'menu',

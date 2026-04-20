@@ -11,6 +11,10 @@ import type { RovingFocusContextValue } from './RovingFocusContext'
 import type { RovingFocusGroupProps } from './types'
 import type { CollectionItemData } from '../collection'
 
+/**
+ * RovingFocusGroup is a low-level focus primitive.
+ * It manages roving focus (and tabIndex) across items and supports controlled/uncontrolled focus state.
+ */
 export function RovingFocusGroup<T extends string | number = string>(
   inProps: RovingFocusGroupProps<T>,
 ) {
@@ -43,16 +47,16 @@ export function RovingFocusGroup<T extends string | number = string>(
   )
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement
+
+    if (!event.currentTarget.contains(target)) return
+
     const focusIntent = getFocusIntent(event, orientation)
 
     if (!focusIntent) return
 
     if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return
     event.preventDefault()
-
-    const target = event.target as HTMLElement
-
-    if (!event.currentTarget.contains(target)) return
 
     const items = collection.getItems().filter((item) => item.focusable)
 
@@ -84,10 +88,14 @@ export function RovingFocusGroup<T extends string | number = string>(
   const handleItemsChange = (
     items: Array<CollectionItemData<RovingFocusItemData>>,
   ) => {
-    setFirstItemId(items[0]?.id ?? '')
+    const filteredItems = items.filter((item) => item.focusable)
+
+    setFirstItemId(filteredItems[0]?.id ?? '')
 
     if (focusItemId) {
-      const isValidFocusItemId = items.some((item) => item.id === focusItemId)
+      const isValidFocusItemId = filteredItems.some(
+        (item) => item.id === focusItemId,
+      )
       if (!isValidFocusItemId) {
         setFocusItemId('')
       }

@@ -38,7 +38,6 @@ exports[`RadioGroup should render with default props 1`] = `
   align-items: center;
   cursor: pointer;
   max-width: var(--nui-sizes-fit);
-  -webkit-tap-highlight-color: transparent;
   padding: var(--nui-spaces-1-5);
   height: var(--nui-sizes-8);
   -webkit-margin-start: calc(var(--nui-spaces-1-5) * -1);
@@ -125,7 +124,6 @@ exports[`RadioGroup should render with default props 1`] = `
 >
   <div
     class="nui-radio-group-wrapper emotion-1"
-    tabindex="0"
   >
     <label
       class="nui-radio-root emotion-2"
@@ -140,7 +138,7 @@ exports[`RadioGroup should render with default props 1`] = `
         aria-labelledby="radio-_r_1q_-label"
         class="nui-radio-input emotion-3"
         name="_r_1o_"
-        tabindex="-1"
+        tabindex="0"
         type="radio"
         value="orange"
       />

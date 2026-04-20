@@ -7,6 +7,7 @@ import type {
   PopperProps,
 } from '../popper'
 import type { SlotProps } from '../../types/utils'
+import type { ListNavigationProps } from '../listNavigation'
 
 export interface MenuImplProps extends PopperProps {}
 
@@ -30,9 +31,14 @@ interface MenuContentOwnProps {
   loopFocus?: boolean
 }
 
-export type MenuContentImplProps = PopperContentProps & MenuContentOwnProps
+export interface MenuContentImplProps
+  extends PopperContentProps,
+    MenuContentOwnProps {
+  initialFocusIntent?: ListNavigationProps['initialFocusIntent']
+}
 
-export interface MenuContentProps extends MenuContentImplProps {}
+export interface MenuContentProps
+  extends Omit<MenuContentImplProps, 'initialFocusIntent'> {}
 
 // ----------------- SubMenuContentProps -----------------
 export interface SubMenuContentProps

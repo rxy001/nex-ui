@@ -5,6 +5,7 @@ import { defineRecipe } from '@nex-ui/system'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { addEventListener, ownerWindow, chain } from '@nex-ui/utils'
+import { flushSync } from 'react-dom'
 import { useSlot, getOverflowAncestors, computePosition } from '../utils'
 import { DismissibleLayer } from '../dismissibleLayer'
 import { usePopperContext } from './PopperContext'
@@ -114,6 +115,7 @@ export function PopperContent(props: PopperContentProps) {
       '--popper-x': x + 'px',
       '--popper-y': y + 'px',
     }
+
     setComputedPlacement(newComputedPlacement)
     setStyleVariables(newStyleVars)
   }, [triggerRef, popperRootRef, placement, offset, flip, shift])
@@ -178,7 +180,11 @@ export function PopperContent(props: PopperContentProps) {
   useEffect(() => {
     if (!open) return
 
-    setPosition()
+    queueMicrotask(() => {
+      flushSync(() => {
+        setPosition()
+      })
+    })
   }, [setPosition, open])
 
   useEffect(() => {

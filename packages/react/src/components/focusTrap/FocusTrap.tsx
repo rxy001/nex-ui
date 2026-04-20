@@ -23,14 +23,12 @@ export function FocusTrap({
   loop = true,
   autoFocus = false,
   restoreFocus = true,
-  paused = false,
   ...remainingProps
 }: FocusTrapProps) {
   const ref = useRef<HTMLElement>(null)
   const focusTrapScopeRef = useRef(new FocusTrapScope())
   const restoreFocusRef = useLatest(restoreFocus)
   const autoFocusRef = useLatest(autoFocus)
-  const pausedRef = useLatest(paused)
   const lastFocusedElementRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -42,12 +40,7 @@ export function FocusTrap({
       doc,
       'focusin',
       (event: FocusEvent) => {
-        if (
-          focusTrapScopeRef.current.paused ||
-          pausedRef.current ||
-          !ref.current
-        )
-          return
+        if (focusTrapScopeRef.current.paused || !ref.current) return
 
         const target = event.target as HTMLElement
         if (ref.current.contains(target)) {
@@ -63,12 +56,7 @@ export function FocusTrap({
       doc,
       'focusout',
       (event: FocusEvent) => {
-        if (
-          focusTrapScopeRef.current.paused ||
-          pausedRef.current ||
-          !ref.current
-        )
-          return
+        if (focusTrapScopeRef.current.paused || !ref.current) return
 
         const relatedTarget = event.relatedTarget as HTMLElement | null
         if (relatedTarget === null) return
@@ -107,40 +95,45 @@ export function FocusTrap({
       mutationObserver.disconnect()
       lastFocusedElementRef.current = null
     }
-  }, [active, pausedRef])
+  }, [active])
 
   useEffect(() => {
-    if (ref.current && active) {
-      const focusTrapScope = focusTrapScopeRef.current
-      focusTrapManager.register(focusTrapScope)
+    if (!ref.current || !active) return
 
-      const doc = ownerDocument(ref.current)
-      const previouslyFocusedElement = doc.activeElement as HTMLElement | null
-      const focusInside = ref.current.contains(previouslyFocusedElement)
+    const focusTrapScope = focusTrapScopeRef.current
+    focusTrapManager.register(focusTrapScope)
 
-      if (!focusInside) {
-        if (autoFocusRef.current) {
-          const [first] = getTabbable(ref.current)
-          focus(first)
-        }
-        if (doc.activeElement === previouslyFocusedElement) {
-          focus(ref.current)
-        }
+    return () => {
+      focusTrapManager.unregister(focusTrapScope)
+    }
+  }, [active])
+
+  useEffect(() => {
+    if (!ref.current || !active) return
+
+    const doc = ownerDocument(ref.current)
+    const previouslyFocusedElement = doc.activeElement as HTMLElement | null
+    const focusInside = ref.current.contains(previouslyFocusedElement)
+
+    if (!focusInside) {
+      if (autoFocusRef.current) {
+        const [first] = getTabbable(ref.current)
+        focus(first)
       }
-
-      return () => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        if (restoreFocusRef.current && previouslyFocusedElement) {
-          focus(previouslyFocusedElement)
-        }
-        focusTrapManager.unregister(focusTrapScope)
+      if (doc.activeElement === previouslyFocusedElement) {
+        focus(ref.current)
+      }
+    }
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      if (restoreFocusRef.current && previouslyFocusedElement) {
+        focus(previouslyFocusedElement)
       }
     }
   }, [active, autoFocusRef, restoreFocusRef])
 
   const handleKeydown = (event: KeyboardEvent) => {
-    if (!active || focusTrapScopeRef.current.paused || pausedRef.current) return
-
+    if (!active || focusTrapScopeRef.current.paused) return
     const tabKey =
       event.key === 'Tab' && !event.altKey && !event.ctrlKey && !event.metaKey
 

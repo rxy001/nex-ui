@@ -1,14 +1,12 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useEffect, useRef, useState } from 'react'
-import { focus } from '@nex-ui/utils'
+import { useRef } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import { RovingFocusItem } from '../rovingFocus'
 import { useMenuContentContext, useRootMenuContext } from './MenuContext'
-import { CollectionItem } from './Collection'
-import type { KeyboardEvent, PointerEvent, MouseEvent } from 'react'
+import { ListNavigationItem } from '../listNavigation'
+import type { KeyboardEvent, MouseEvent } from 'react'
 import type { MenuItemProps } from './types'
 
 const recipe = defineRecipe({
@@ -36,8 +34,6 @@ export function MenuItem(props: MenuItemProps) {
     ...remainingProps
   } = props
   const ref = useRef<HTMLDivElement>(null)
-  const [focused, setFocused] = useState(false)
-  const [textContent, setTextContent] = useState('')
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     if (disabled) return
@@ -45,28 +41,6 @@ export function MenuItem(props: MenuItemProps) {
     if (closeOnSelect) {
       rootMenuCtx.close()
     }
-  }
-
-  const handleFocus = () => {
-    setFocused(true)
-  }
-
-  const handleBlur = () => {
-    setFocused(false)
-  }
-
-  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (disabled) {
-      menuContentCtx.onItemLeave(event)
-      event.preventDefault()
-      return
-    }
-    menuContentCtx.onItemEnter(event)
-    focus(event.currentTarget)
-  }
-
-  const handlePointerLeave = (event: PointerEvent<HTMLDivElement>) => {
-    menuContentCtx.onItemLeave(event)
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -84,19 +58,12 @@ export function MenuItem(props: MenuItemProps) {
     additionalProps: {
       ref,
       onClick: handleClick,
-      onFocus: handleFocus,
-      onBlur: handleBlur,
-      /**
-       * If we used `mouseOver`/`mouseEnter` it would not re-focus when the mouse
-       * wiggles. This is to match native menu implementation.
-       */
-      onPointerMove: handlePointerMove,
-      onPointerLeave: handlePointerLeave,
       onKeyDown: handleKeyDown,
+      onPointerMove: menuContentCtx.onItemEnter,
+      onPointerLeave: menuContentCtx.onItemLeave,
     },
     dataAttrs: {
       disabled,
-      highlighted: focused,
     },
     ariaProps: {
       role: 'menuitem',
@@ -104,18 +71,10 @@ export function MenuItem(props: MenuItemProps) {
     },
   })
 
-  useEffect(() => {
-    if (!ref.current) return
-
-    setTextContent((ref.current.textContent ?? '').trim())
-  }, [children])
-
   return (
-    <CollectionItem textValue={textValue ?? textContent} disabled={disabled}>
-      <RovingFocusItem focusable={!disabled}>
-        <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
-      </RovingFocusItem>
-    </CollectionItem>
+    <ListNavigationItem disabled={disabled} textValue={textValue}>
+      <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
+    </ListNavigationItem>
   )
 }
 

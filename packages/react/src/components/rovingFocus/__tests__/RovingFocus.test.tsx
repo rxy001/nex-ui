@@ -57,14 +57,6 @@ describe('RovingFocus', () => {
     expect(redButton).toHaveFocus()
   })
 
-  it('should have tabindex=0 on container', () => {
-    const { getByTestId } = render(<TestRovingFocus />)
-
-    const container = getByTestId('container')
-
-    expect(container).toHaveAttribute('tabindex', '0')
-  })
-
   it('should handle keyboard navigation (no orientation (both) + no looping)', async () => {
     const { getByTestId } = render(<TestRovingFocus loop={false} />)
 
@@ -304,30 +296,6 @@ describe('RovingFocus', () => {
         </RovingFocusGroup>
       )
     }
-
-    it('should have tabindex=-1 on container', () => {
-      const { getByTestId } = render(<NoFocusableItems />)
-
-      const container = getByTestId('container')
-
-      expect(container).toHaveAttribute('tabindex', '-1')
-    })
-
-    it('should not focus any item when container is focused', async () => {
-      const { getByTestId } = render(<NoFocusableItems />)
-
-      const container = getByTestId('container')
-      const redButton = getByTestId('red')
-
-      expect(container).not.toHaveFocus()
-      expect(redButton).not.toHaveFocus()
-
-      await act(async () => {
-        container.focus()
-      })
-      expect(container).toHaveFocus()
-      expect(redButton).not.toHaveFocus()
-    })
 
     it('should ignore keyboard navigation', async () => {
       const { getByTestId } = render(<NoFocusableItems />)
