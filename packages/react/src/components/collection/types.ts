@@ -7,8 +7,6 @@ import type { ReactElement, ReactNode, Ref } from 'react'
 export interface CollectionProps<ItemData extends {} = {}> {
   children?: ReactNode
   collection: CollectionStore<ItemData>
-  // onItemsChange is only fired when the length of the items array changes,
-  // not on every item data mutation.
   onItemsChange?: Listener<ItemData>
 }
 

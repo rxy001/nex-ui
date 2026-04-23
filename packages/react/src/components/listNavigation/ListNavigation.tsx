@@ -1,48 +1,46 @@
-import { cloneElement, useEffect, useMemo, useRef, useState } from 'react'
-import { isValidNonFragmentElement, mergeProps, focus } from '@nex-ui/utils'
-import { useEvent, useLatest } from '@nex-ui/hooks'
+import { cloneElement, useEffect, useMemo, useRef } from 'react'
+import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
+import { useControlledState, useEvent, useLatest } from '@nex-ui/hooks'
 import { useCollection, Collection } from './Collection'
 import { ListNavigationProvider } from './ListNavigationContext'
 import type { KeyboardEvent, FocusEvent, PointerEvent } from 'react'
 import type { ListNavigationProps } from './types'
 import type { ListNavigationContextValue } from './ListNavigationContext'
 
-/**
- * ListNavigation is a higher-level list interaction pattern.
- * It adds list-specific behavior such as initial focus intent and typeahead keyboard search.
- */
-
 export function ListNavigation(props: ListNavigationProps) {
   const {
     children,
-    initialFocusIntent,
-    getInitialFocusElement: getInitialFocusElementProp,
+    active,
+    highlightedId: highlightedIdProp,
+    onHighlightedChange,
+    defaultHighlightedId = '',
     loop = false,
     orientation = 'vertical',
     onTypingChange: onTypingChangeProp,
     ...remainingProps
   } = props
 
-  const [highlightedId, setHighlightedId] = useState<string>('')
+  const [highlightedId, setHighlightedId] = useControlledState(
+    highlightedIdProp,
+    defaultHighlightedId,
+    onHighlightedChange,
+  )
+
   const searchKeyRef = useRef('')
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const onTypingChangeRef = useLatest(onTypingChangeProp)
-  const getInitialFocusElementRef = useLatest(getInitialFocusElementProp)
-
   const ref = useRef<HTMLElement>(null)
 
   const collection = useCollection()
 
   const handleNavigation = (event: KeyboardEvent<HTMLElement>) => {
-    const target = event.target as HTMLElement
-
     let focusIntent: string | undefined = undefined
 
     const items = collection.getItems()
 
     if (items.length === 0) return
 
-    if (!highlightedId && event.currentTarget === target) {
+    if (!highlightedId) {
       if (event.key === 'ArrowDown') {
         focusIntent = 'first'
       } else if (event.key === 'ArrowUp') {
@@ -56,12 +54,12 @@ export function ListNavigation(props: ListNavigationProps) {
 
     event.preventDefault()
 
-    let nextItemElement: HTMLElement | null = null
+    let nextItemId: string | undefined
 
     if (focusIntent === 'first') {
-      nextItemElement = items[0].element
+      nextItemId = items[0].id
     } else if (focusIntent === 'last') {
-      nextItemElement = items[items.length - 1].element
+      nextItemId = items[items.length - 1].id
     } else {
       const currentItemIndex = items.findIndex(
         (item) => item.id === highlightedId,
@@ -70,11 +68,13 @@ export function ListNavigation(props: ListNavigationProps) {
 
       if (loop || (nextItemIndex >= 0 && nextItemIndex < items.length)) {
         nextItemIndex = (nextItemIndex + items.length) % items.length
-        nextItemElement = items[nextItemIndex].element
+        nextItemId = items[nextItemIndex].id
       }
     }
 
-    if (nextItemElement) focus(nextItemElement, false)
+    if (nextItemId) {
+      setHighlightedId(nextItemId)
+    }
   }
 
   const handleTypeahead = (event: KeyboardEvent<HTMLElement>) => {
@@ -104,8 +104,8 @@ export function ListNavigation(props: ListNavigationProps) {
       item.textValue.toLowerCase().startsWith(normalizedSearchKey),
     )
 
-    if (nextItem && nextItem.element !== currentItem?.element) {
-      focus(nextItem?.element, false)
+    if (nextItem && nextItem.id !== currentItem?.id) {
+      setHighlightedId(nextItem.id)
     }
     searchKeyRef.current = searchKey
     if (timerRef.current) clearTimeout(timerRef.current)
@@ -116,7 +116,8 @@ export function ListNavigation(props: ListNavigationProps) {
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (!event.currentTarget.contains(event.target as HTMLElement)) return
+    if (!active || !event.currentTarget.contains(event.target as HTMLElement))
+      return
 
     if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return
 
@@ -124,60 +125,23 @@ export function ListNavigation(props: ListNavigationProps) {
     handleTypeahead(event)
   }
 
-  // Handles focus entry into the navigation container and applies initial focus
-  // in priority order: custom resolver first, then first/last intent fallback.
-  const handleFocus = (e: FocusEvent<HTMLElement>) => {
-    if (e.currentTarget !== e.target || e.defaultPrevented) return
-
-    // Prevent internal item focus on pointerleave.
-    if (e.currentTarget.contains(e.relatedTarget as HTMLElement)) return
-
-    const items = collection.getItems().filter((item) => !item.disabled)
-
-    if (items.length === 0) return
-
-    const initialFocusElement =
-      getInitialFocusElementRef.current?.(items) ?? null
-
-    if (initialFocusElement) {
-      // Wait for the position update of PopContent.
-      queueMicrotask(() => {
-        focus(initialFocusElement, false)
-      })
-      return
-    }
-
-    if (!initialFocusIntent) return
-
-    let nextItemElement: HTMLElement | null = null
-
-    if (initialFocusIntent === 'first') {
-      nextItemElement = items[0].element
-    } else if (initialFocusIntent === 'last') {
-      nextItemElement = items[items.length - 1].element
-    }
-
-    if (nextItemElement) {
-      // Wait for the position update of PopContent.
-      queueMicrotask(() => {
-        focus(nextItemElement, false)
-      })
-    }
-  }
-
   const onItemEnter = useEvent((id: string) => {
+    if (!active) return
+
     setHighlightedId(id)
   })
 
   const onItemLeave = useEvent(
-    (
-      id: string,
-      event: FocusEvent<HTMLElement> | PointerEvent<HTMLElement>,
-    ) => {
-      setHighlightedId((current) => (current === id ? '' : current))
-      if (event.type === 'pointerleave' && !event.defaultPrevented) {
-        ref.current?.focus()
+    (event: FocusEvent<HTMLElement> | PointerEvent<HTMLElement>) => {
+      if (!active) return
+
+      setHighlightedId('')
+
+      const relatedTarget = event.relatedTarget as HTMLElement | null
+      if (ref.current?.contains(relatedTarget)) {
+        return
       }
+      ref.current?.focus()
     },
   )
 
@@ -214,7 +178,6 @@ export function ListNavigation(props: ListNavigationProps) {
             {
               ref,
               tabIndex: -1,
-              onFocus: handleFocus,
               onKeyDown: handleKeyDown,
             },
             children.props,

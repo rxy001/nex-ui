@@ -9,12 +9,7 @@ import {
   SubMenuProvider,
   useMenuContext,
 } from './MenuContext'
-import type {
-  MenuProps,
-  MenuImplProps,
-  SubMenuProps,
-  MenuContentImplProps,
-} from './types'
+import type { MenuProps, MenuImplProps, SubMenuProps } from './types'
 import type { MenuContextValue } from './MenuContext'
 
 function MenuImpl(props: MenuImplProps) {
@@ -24,8 +19,6 @@ function MenuImpl(props: MenuImplProps) {
   const contentId = `menu-${ariaId}-content`
   const triggerId = `menu-${ariaId}-trigger`
   const triggerRef = useRef<HTMLDivElement>(null)
-  const intialFocusIntentRef =
-    useRef<MenuContentImplProps['initialFocusIntent']>(undefined)
 
   const setOpen = useEvent((value: boolean) => {
     onOpenChange?.(value)
@@ -38,7 +31,6 @@ function MenuImpl(props: MenuImplProps) {
       triggerRef,
       contentId,
       triggerId,
-      intialFocusIntentRef,
     }),
     [contentId, open, setOpen, triggerId],
   )
@@ -73,13 +65,7 @@ export function SubMenu(props: SubMenuProps) {
 
   const { children, onOpenChange, ...remainingProps } = props
 
-  const intialFocusIntentRef =
-    useRef<MenuContentImplProps['initialFocusIntent']>(undefined)
-
-  const subMenuCtx = useMemo(
-    () => ({ subMenuContentRef, intialFocusIntentRef }),
-    [],
-  )
+  const subMenuCtx = useMemo(() => ({ subMenuContentRef }), [])
 
   useLayoutEffect(() => {
     // Close this menu if the parent menu is closed

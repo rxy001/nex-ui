@@ -12,7 +12,7 @@ export default meta
 export function Default() {
   return (
     <div className='keyboard-navigation-story'>
-      <ListNavigation>
+      <ListNavigation active>
         <ul>
           <ListNavigationItem id='apple'>
             <li>Apple</li>

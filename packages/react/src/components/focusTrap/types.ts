@@ -31,4 +31,11 @@ export interface FocusTrapProps {
    * @default false
    */
   autoFocus?: boolean
+
+  /**
+   * If true, pauses the focus trap behavior, allowing focus to escape the trap via tabbing,
+   *
+   * @default false
+   */
+  paused?: boolean
 }

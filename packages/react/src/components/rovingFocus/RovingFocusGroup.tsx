@@ -11,10 +11,6 @@ import type { RovingFocusContextValue } from './RovingFocusContext'
 import type { RovingFocusGroupProps } from './types'
 import type { CollectionItemData } from '../collection'
 
-/**
- * RovingFocusGroup is a low-level focus primitive.
- * It manages roving focus (and tabIndex) across items and supports controlled/uncontrolled focus state.
- */
 export function RovingFocusGroup<T extends string | number = string>(
   inProps: RovingFocusGroupProps<T>,
 ) {

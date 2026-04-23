@@ -32,6 +32,8 @@ export function ListNavigationItem(props: ListNavigationItemProps) {
     return null
   }
 
+  const isHighlighted = ctx.highlightedId === id
+
   return (
     <CollectionItem
       id={id}
@@ -43,14 +45,13 @@ export function ListNavigationItem(props: ListNavigationItemProps) {
         mergeProps(
           {
             ref,
-            tabIndex: -1,
-            onPointerMove: () => ref.current?.focus(),
+            onPointerMove: () => ctx.onItemEnter(id),
+            onPointerDown: () => ref.current?.focus(),
             onPointerLeave: (event: PointerEvent<HTMLElement>) =>
-              ctx.onItemLeave(id, event),
+              ctx.onItemLeave(event),
             onFocus: () => ctx.onItemEnter(id),
-            onBlur: (event: FocusEvent<HTMLElement>) =>
-              ctx.onItemLeave(id, event),
-            'data-highlighted': ctx.highlightedId === id ? 'true' : undefined,
+            onBlur: (event: FocusEvent<HTMLElement>) => ctx.onItemLeave(event),
+            'data-highlighted': isHighlighted ? 'true' : undefined,
           },
           children.props,
           remainingProps,

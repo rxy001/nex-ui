@@ -52,7 +52,6 @@ export function MenuTriggerItem(props: MenuTriggerItemProps) {
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'ArrowRight') {
-      subMenuCtx.intialFocusIntentRef.current = 'first'
       handleOpen()
       event.preventDefault()
     }

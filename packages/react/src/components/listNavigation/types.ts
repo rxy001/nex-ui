@@ -1,6 +1,4 @@
 import type { ReactElement } from 'react'
-import type { ListNavigationItemData } from './Collection'
-import type { CollectionItemData } from '../collection'
 
 export interface ListNavigationProps {
   children: ReactElement<{}>
@@ -9,13 +7,15 @@ export interface ListNavigationProps {
 
   loop?: boolean
 
-  initialFocusIntent?: 'first' | 'last'
-
-  getInitialFocusElement?: (
-    items: CollectionItemData<ListNavigationItemData>[],
-  ) => HTMLElement | null | undefined
-
   onTypingChange?: (value: boolean) => void
+
+  active?: boolean
+
+  highlightedId?: string
+
+  defaultHighlightedId?: string
+
+  onHighlightedChange?: (id: string) => void
 }
 
 export interface ListNavigationItemProps {

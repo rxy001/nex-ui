@@ -36,3 +36,5 @@
 18. 阻止事件的执行，目前有两种形式，1. 传递 prop 2. 使用 event.preventDefault()，是否统一 API ？
 
 19. 添加 Coderabbitai/Gemini 对代码风格的 Review
+
+20. listNavigation 组件不应该使用 focus 控制 highlightId

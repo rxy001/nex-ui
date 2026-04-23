@@ -7,12 +7,12 @@ import { defineRecipe } from '@nex-ui/system'
 import { ListNavigation } from '../listNavigation'
 import { PopperContent } from '../popper'
 import { useSlot } from '../utils'
-import { FocusTrap } from '../focusTrap'
 import {
   useMenuContext,
   MenuContentProvider,
   useSubMenuContext,
 } from './MenuContext'
+import { FocusTrap } from '../focusTrap'
 import type { KeyboardEvent, PointerEvent } from 'react'
 import type {
   MenuContentImplProps,
@@ -35,13 +35,7 @@ const recipe = defineRecipe({
 const style = recipe()
 
 function MenuContentImpl(props: MenuContentImplProps) {
-  const {
-    children,
-    initialFocusIntent,
-    restoreFocus,
-    loopFocus = true,
-    ...remainingProps
-  } = props
+  const { children, restoreFocus, loopFocus = true, ...remainingProps } = props
   const menuCtx = useMenuContext()
   const ref = useRef<HTMLDivElement>(null)
   const pointerGraceIntentRef = useRef<GraceIntent | null>(null)
@@ -136,8 +130,8 @@ function MenuContentImpl(props: MenuContentImplProps) {
   )
 
   return (
-    <FocusTrap loop={false} active={menuCtx.open} restoreFocus={restoreFocus}>
-      <ListNavigation loop={loopFocus} initialFocusIntent={initialFocusIntent}>
+    <FocusTrap paused active={menuCtx.open} restoreFocus={restoreFocus}>
+      <ListNavigation active={menuCtx.open} loop={loopFocus}>
         <MenuContentRoot {...getMenuContentRootProps()}>
           <MenuContentProvider value={ctx}>{children}</MenuContentProvider>
         </MenuContentRoot>
@@ -150,13 +144,11 @@ MenuContentImpl.displayName = 'MenuContentImpl'
 
 export function MenuContent(props: MenuContentProps) {
   const { restoreFocus = true, placement = 'bottom', ...remainingProps } = props
-  const menuCtx = useMenuContext()
 
   return (
     <MenuContentImpl
       placement={placement}
       restoreFocus={restoreFocus}
-      initialFocusIntent={menuCtx.intialFocusIntentRef.current}
       {...remainingProps}
     />
   )
@@ -176,7 +168,6 @@ export function SubMenuContent(props: SubMenuContentProps) {
       closeOnEscape={false}
       placement='right-start'
       restoreFocus={false}
-      initialFocusIntent='first'
       onKeyDown={chain(props.onKeyDown, (event: KeyboardEvent<HTMLElement>) => {
         if (event.key === 'ArrowLeft') {
           event.preventDefault()

@@ -1,7 +1,6 @@
 import { createContext } from '@nex-ui/utils'
 import type { RefObject, PointerEvent } from 'react'
 import type { Side } from '../utils'
-import type { MenuContentImplProps } from './types'
 
 export interface MenuContextValue {
   open?: boolean
@@ -9,7 +8,6 @@ export interface MenuContextValue {
   contentId: string
   triggerId: string
   triggerRef: RefObject<HTMLDivElement | null>
-  intialFocusIntentRef: RefObject<MenuContentImplProps['initialFocusIntent']>
 }
 
 export const [MenuProvider, useMenuContext] = createContext<MenuContextValue>({
@@ -35,7 +33,6 @@ export const [RootMenuProvider, useRootMenuContext] =
 
 export interface SubMenuContextValue {
   subMenuContentRef: RefObject<HTMLDivElement | null>
-  intialFocusIntentRef: RefObject<MenuContentImplProps['initialFocusIntent']>
 }
 
 export const [SubMenuProvider, useSubMenuContext] =

@@ -5,7 +5,6 @@ export interface ListNavigationContextValue {
   highlightedId: string
   onItemEnter: (id: string) => void
   onItemLeave: (
-    id: string,
     event: FocusEvent<HTMLElement> | PointerEvent<HTMLElement>,
   ) => void
 }
