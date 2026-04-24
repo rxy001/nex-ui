@@ -19,7 +19,6 @@ export function MenuTrigger(props: MenuTriggerProps) {
   const handleClick = () => {
     if (!menuCtx.open) {
       menuCtx.setOpen(true)
-      menuCtx.intialFocusIntentRef.current = undefined
     } else if (closeOnClick) {
       menuCtx.setOpen(false)
     }
@@ -28,8 +27,6 @@ export function MenuTrigger(props: MenuTriggerProps) {
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(event.key)) {
       menuCtx.setOpen(true)
-      menuCtx.intialFocusIntentRef.current =
-        event.key === 'ArrowUp' ? 'last' : 'first'
       event.preventDefault()
     }
   }

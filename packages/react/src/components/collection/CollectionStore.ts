@@ -4,7 +4,7 @@ export class CollectionStore<ItemData extends {} = {}> {
   #items: Item<ItemData>[] = []
   #listener: Listener<ItemData> | null = null
 
-  #notifyListener = () => {
+  notifyListener = () => {
     if (this.#listener) {
       this.#listener(this.getItems())
     }
@@ -12,7 +12,7 @@ export class CollectionStore<ItemData extends {} = {}> {
 
   #setItems = (updater: (args: Item<ItemData>[]) => Item<ItemData>[]) => {
     this.#items = updater(this.#items)
-    this.#notifyListener()
+    this.notifyListener()
   }
 
   getItems = (): Array<CollectionItemData<ItemData>> => {
@@ -47,7 +47,7 @@ export class CollectionStore<ItemData extends {} = {}> {
 
   registerListener = (listener: Listener<ItemData>) => {
     this.#listener = listener
-    this.#notifyListener()
+    this.notifyListener()
   }
 
   unregisterListener = () => {

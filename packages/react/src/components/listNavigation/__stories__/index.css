@@ -1,7 +1,0 @@
-.keyboard-navigation-story li {
-  padding: 4px;
-}
-
-.keyboard-navigation-story li[data-highlighted='true'] {
-  background-color: wheat;
-}

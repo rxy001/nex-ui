@@ -1,11 +1,13 @@
 import type { ReactElement, Ref } from 'react'
-import type { RovingFocusItemData } from './Collection'
 
-export interface RovingFocusGroupProps<T extends string | number = string> {
-  children?: ReactElement<{}>
-  focusItemId?: T
-  defaultFocusItemId?: T
-  onFocusItemIdChange?: (id: T) => void
+export interface CompositeProps<T extends string | number = string> {
+  activeId?: T
+
+  defaultActiveId?: T
+
+  onActiveIdChange?: (activeId: T) => void
+
+  children: ReactElement<{}>
 
   /**
    * The orientation of the group.
@@ -19,9 +21,15 @@ export interface RovingFocusGroupProps<T extends string | number = string> {
    * @default false
    */
   loop?: boolean
+
+  virtualFocus?: boolean
 }
 
-export interface RovingFocusItemProps extends RovingFocusItemData {
+export interface CompositeItemProps<T extends string | number = string> {
+  id?: T
+
+  disabled?: boolean
+
   children?: ReactElement<{
     ref?: Ref<HTMLElement>
   }>

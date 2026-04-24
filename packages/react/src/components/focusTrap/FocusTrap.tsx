@@ -6,7 +6,6 @@ import {
   isValidNonFragmentElement,
   mergeProps,
   ownerDocument,
-  focus,
 } from '@nex-ui/utils'
 import { cloneElement, useEffect, useRef } from 'react'
 import { useLatest } from '@nex-ui/hooks'
@@ -23,12 +22,14 @@ export function FocusTrap({
   loop = true,
   autoFocus = false,
   restoreFocus = true,
+  paused = false,
   ...remainingProps
 }: FocusTrapProps) {
   const ref = useRef<HTMLElement>(null)
   const focusTrapScopeRef = useRef(new FocusTrapScope())
   const restoreFocusRef = useLatest(restoreFocus)
   const autoFocusRef = useLatest(autoFocus)
+  const pausedRef = useLatest(paused)
   const lastFocusedElementRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -40,7 +41,12 @@ export function FocusTrap({
       doc,
       'focusin',
       (event: FocusEvent) => {
-        if (focusTrapScopeRef.current.paused || !ref.current) return
+        if (
+          !ref.current ||
+          focusTrapScopeRef.current.paused ||
+          pausedRef.current
+        )
+          return
 
         const target = event.target as HTMLElement
         if (ref.current.contains(target)) {
@@ -56,7 +62,12 @@ export function FocusTrap({
       doc,
       'focusout',
       (event: FocusEvent) => {
-        if (focusTrapScopeRef.current.paused || !ref.current) return
+        if (
+          !ref.current ||
+          focusTrapScopeRef.current.paused ||
+          pausedRef.current
+        )
+          return
 
         const relatedTarget = event.relatedTarget as HTMLElement | null
         if (relatedTarget === null) return
@@ -95,7 +106,7 @@ export function FocusTrap({
       mutationObserver.disconnect()
       lastFocusedElementRef.current = null
     }
-  }, [active])
+  }, [active, pausedRef])
 
   useEffect(() => {
     if (!ref.current || !active) return
@@ -133,7 +144,7 @@ export function FocusTrap({
   }, [active, autoFocusRef, restoreFocusRef])
 
   const handleKeydown = (event: KeyboardEvent) => {
-    if (!active || focusTrapScopeRef.current.paused) return
+    if (!active || focusTrapScopeRef.current.paused || pausedRef.current) return
     const tabKey =
       event.key === 'Tab' && !event.altKey && !event.ctrlKey && !event.metaKey
 
@@ -177,6 +188,13 @@ export function FocusTrap({
       remainingProps,
     ),
   )
+}
+
+function focus(element: HTMLElement | null | undefined, preventScroll = true) {
+  if (element && typeof element.focus === 'function') {
+    if (globalThis.document?.activeElement === element) return
+    element.focus({ preventScroll })
+  }
 }
 
 FocusTrap.displayName = 'FocusTrap'

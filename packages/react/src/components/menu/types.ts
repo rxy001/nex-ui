@@ -7,7 +7,6 @@ import type {
   PopperProps,
 } from '../popper'
 import type { SlotProps } from '../../types/utils'
-import type { ListNavigationProps } from '../listNavigation'
 
 export interface MenuImplProps extends PopperProps {}
 
@@ -33,12 +32,9 @@ interface MenuContentOwnProps {
 
 export interface MenuContentImplProps
   extends PopperContentProps,
-    MenuContentOwnProps {
-  initialFocusIntent?: ListNavigationProps['initialFocusIntent']
-}
+    MenuContentOwnProps {}
 
-export interface MenuContentProps
-  extends Omit<MenuContentImplProps, 'initialFocusIntent'> {}
+export interface MenuContentProps extends MenuContentImplProps {}
 
 // ----------------- SubMenuContentProps -----------------
 export interface SubMenuContentProps

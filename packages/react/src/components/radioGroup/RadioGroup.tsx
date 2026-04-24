@@ -1,7 +1,7 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useCallback, useId, useMemo } from 'react'
+import { useCallback, useEffect, useId, useMemo, useState } from 'react'
 import { useControlledState } from '@nex-ui/hooks'
 import {
   useDefaultProps,
@@ -11,7 +11,8 @@ import {
 } from '../utils'
 import { radioGroupRecipe } from '../../themes/recipes'
 import { RadioGroupProvider } from './RadioGroupContext'
-import { RovingFocusGroup } from '../rovingFocus'
+import { Collection, useCollection } from './Collection'
+import { Composite } from '../composite'
 import type { ElementType } from 'react'
 import type { RadioGroupProps } from './types'
 import type { RadioGroupContextValue } from './RadioGroupContext'
@@ -26,6 +27,8 @@ export function RadioGroup<
     name: 'RadioGroup',
     props: inProps,
   })
+
+  const collection = useCollection()
 
   // Generate a unique name for the radio group to ensure that Tab moves to the correct position.
   const defaultName = useId()
@@ -52,6 +55,8 @@ export function RadioGroup<
     defaultValue,
     onValueChange,
   )
+
+  const [activeId, setActiveId] = useState<string>(value)
 
   const ownerState: RadioGroupProps = {
     ...props,
@@ -137,21 +142,32 @@ export function RadioGroup<
     }
   }, [size, color, disabled, name, setValue, isChecked, disableAnimation])
 
+  useEffect(() => {
+    if (!value) {
+      const items = collection.getItems().filter((item) => !item.disabled)
+      if (items.length > 0) {
+        setActiveId(items[0].id)
+      }
+    }
+  }, [collection, value])
+
   return (
-    <RadioGroupRoot {...getRadioGroupRootProps()}>
-      {label ? (
-        <RadioGroupLabel {...getRadioGroupLabelProps()}>
-          {label}
-        </RadioGroupLabel>
-      ) : null}
-      <RadioGroupProvider value={ctx}>
-        <RovingFocusGroup loop defaultFocusItemId={value}>
-          <RadioGroupWrapper {...getRadioGroupWrapperProps()}>
-            {children}
-          </RadioGroupWrapper>
-        </RovingFocusGroup>
-      </RadioGroupProvider>
-    </RadioGroupRoot>
+    <Collection collection={collection}>
+      <Composite loop activeId={activeId} onActiveIdChange={setActiveId}>
+        <RadioGroupRoot {...getRadioGroupRootProps()}>
+          {label ? (
+            <RadioGroupLabel {...getRadioGroupLabelProps()}>
+              {label}
+            </RadioGroupLabel>
+          ) : null}
+          <RadioGroupProvider value={ctx}>
+            <RadioGroupWrapper {...getRadioGroupWrapperProps()}>
+              {children}
+            </RadioGroupWrapper>
+          </RadioGroupProvider>
+        </RadioGroupRoot>
+      </Composite>
+    </Collection>
   )
 }
 

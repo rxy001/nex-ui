@@ -1,12 +1,13 @@
 'use client'
 
 import { nex } from '@nex-ui/styled'
-import { useControlledState } from '@nex-ui/hooks'
+import { useControlledState, useLatest, useUnmount } from '@nex-ui/hooks'
 import { __DEV__, addEventListener } from '@nex-ui/utils'
-import { useId, useEffect, useMemo, useRef } from 'react'
+import { useEffect, useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { useRadioGroupContext } from './RadioGroupContext'
+import { CollectionItem } from './Collection'
 import {
   useDefaultProps,
   useSlot,
@@ -14,13 +15,20 @@ import {
   useSlotClasses,
 } from '../utils'
 import { radioRecipe } from '../../themes/recipes'
-import { RovingFocusItem } from '../rovingFocus'
+import { CompositeItem } from '../composite'
 import type { ElementType, FocusEvent } from 'react'
 import type { RadioOwnerState, RadioProps } from './types'
 
 const slots = ['root', 'input', 'indicator', 'label'] as const
 
-const arrowKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
+const arrowKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'Home',
+  'End',
+]
 
 export function Radio<
   T extends string | number = string,
@@ -82,9 +90,11 @@ export function Radio<
     defaultChecked,
     onCheckedChange,
   )
+
   const isArrowKeyPressed = useRef(false)
 
   const checked = inGroup ? groupCtx.isChecked(value) : rawChecked
+  const checkedRef = useLatest(checked)
 
   const ownerState: RadioOwnerState = {
     ...props,
@@ -173,32 +183,17 @@ export function Radio<
       checked,
       value,
       onCheckedChange: handleChange,
-      onFocus: (event: FocusEvent<HTMLInputElement>) => {
-        /**
-         * Our `RovingFocusGroup` will focus the radio when navigating with arrow keys
-         * and we need to "check" it in that case. We click it to "check" it (instead
-         * of updating `context.value`) so that the radio change event fires.
-         */
+      onFocus: (event: FocusEvent<HTMLElement>) => {
+        if (disabled) {
+          event.preventDefault()
+          event.stopPropagation()
+          return
+        }
         if (isArrowKeyPressed.current) {
-          event.currentTarget.click()
+          handleChange(true)
         }
       },
     },
-  })
-
-  const [RadioLabel, getRadioLabelProps] = useSlot({
-    component: nex.span,
-    style: styles.label,
-    externalSlotProps: slotProps?.label,
-    classNames: slotClasses.label,
-    ariaProps: slotAriaProps.label,
-  })
-
-  const [RadioIndicator, getRadioIndicatorProps] = useSlot({
-    component: nex.span,
-    externalSlotProps: slotProps?.indicator,
-    style: styles.indicator,
-    classNames: slotClasses.indicator,
   })
 
   useEffect(() => {
@@ -230,12 +225,35 @@ export function Radio<
     }
   }, [])
 
+  const [RadioLabel, getRadioLabelProps] = useSlot({
+    component: nex.span,
+    style: styles.label,
+    externalSlotProps: slotProps?.label,
+    classNames: slotClasses.label,
+    ariaProps: slotAriaProps.label,
+  })
+
+  const [RadioIndicator, getRadioIndicatorProps] = useSlot({
+    component: nex.span,
+    externalSlotProps: slotProps?.indicator,
+    style: styles.indicator,
+    classNames: slotClasses.indicator,
+  })
+
+  useUnmount(() => {
+    if (inGroup && checkedRef.current) {
+      groupCtx.setValue('')
+    }
+  })
+
   return (
     <RadioRoot {...getRadioRootProps()}>
       {inGroup ? (
-        <RovingFocusItem focusable={!disabled} id={value}>
-          <RadioInput {...getRadioInputProps()} />
-        </RovingFocusItem>
+        <CollectionItem disabled={disabled} id={value ?? ariaId}>
+          <CompositeItem disabled={disabled} id={value ?? ariaId}>
+            <RadioInput {...getRadioInputProps()} />
+          </CompositeItem>
+        </CollectionItem>
       ) : (
         <RadioInput {...getRadioInputProps()} />
       )}

@@ -5,7 +5,6 @@ import { useRef } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
 import { useMenuContentContext, useRootMenuContext } from './MenuContext'
-import { ListNavigationItem } from '../listNavigation'
 import type { KeyboardEvent, MouseEvent } from 'react'
 import type { MenuItemProps } from './types'
 
@@ -29,7 +28,6 @@ export function MenuItem(props: MenuItemProps) {
     disabled,
     children,
     onSelect,
-    textValue,
     closeOnSelect = true,
     ...remainingProps
   } = props
@@ -71,11 +69,7 @@ export function MenuItem(props: MenuItemProps) {
     },
   })
 
-  return (
-    <ListNavigationItem disabled={disabled} textValue={textValue}>
-      <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
-    </ListNavigationItem>
-  )
+  return <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
 }
 
 MenuItem.displayName = 'MenuItem'

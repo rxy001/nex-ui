@@ -12,9 +12,9 @@ import type {
   CollectionStore,
 } from './types'
 
-export function createCollection<ItemData extends {}>(scope: string) {
+export function createCollection<ItemData extends {} = {}>(scope: string) {
   const [CollectionProvider, useCollectionContext] =
-    createContext<CollectionContextValue<any> | null>({
+    createContext<CollectionContextValue<ItemData> | null>({
       contextName: `${scope}-CollectionContext`,
       hookName: `${scope}-useCollectionContext`,
       providerName: `${scope}-CollectionProvider`,
@@ -52,11 +52,14 @@ export function createCollection<ItemData extends {}>(scope: string) {
     ...itemData
   }: CollectionItemProps<ItemData>) {
     const ctx = useCollectionContext()
+    const isMountedRef = useRef(false)
     const ref = useRef<HTMLElement>(null)
     const itemDataRef = useLatest({
       element: ref,
-      ...itemData,
+      ...(itemData as ItemData),
     })
+
+    const previousItemDataRef = useRef(itemDataRef.current)
 
     const mergedRefs = useMergeRefs(ref, children?.props?.ref)
 
@@ -66,6 +69,23 @@ export function createCollection<ItemData extends {}>(scope: string) {
         ctx?.unregisterItem(itemDataRef)
       }
     }, [ctx, itemDataRef])
+
+    useEffect(() => {
+      if (!isMountedRef.current) return
+      isMountedRef.current = true
+
+      const { element: previousElement, ...previousItemData } =
+        previousItemDataRef.current
+      const { element: currentElement, ...currentItemData } =
+        itemDataRef.current
+
+      if (
+        previousElement.current !== currentElement.current ||
+        JSON.stringify(previousItemData) !== JSON.stringify(currentItemData)
+      ) {
+        ctx?.notifyListener()
+      }
+    })
 
     if (!isValidNonFragmentElement(children)) {
       return children
@@ -88,5 +108,10 @@ export function createCollection<ItemData extends {}>(scope: string) {
     return storeRef.current as CollectionStore<ItemData>
   }
 
-  return [Collection, CollectionItem, useCollection] as const
+  return [
+    Collection,
+    CollectionItem,
+    useCollection,
+    useCollectionContext,
+  ] as const
 }
