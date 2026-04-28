@@ -7,6 +7,7 @@ export default {
   },
   stories: [
     '../../packages/*/src/**/__stories__/**/*.stories.@(js|jsx|ts|tsx)',
+    '../stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
     '@storybook/addon-themes',

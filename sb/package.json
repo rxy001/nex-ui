@@ -15,6 +15,7 @@
     "@nex-ui/styled": "workspace:*",
     "@nex-ui/system": "workspace:*",
     "@nex-ui/utils": "workspace:*",
+    "@nex-ui/primitives": "workspace:*",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

@@ -328,6 +328,22 @@ importers:
         specifier: 19.2.4
         version: 19.2.4(react@19.2.4)
 
+  packages/primitives:
+    dependencies:
+      '@nex-ui/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@nex-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+
   packages/react:
     dependencies:
       '@emotion/react':
@@ -487,6 +503,9 @@ importers:
       '@nex-ui/icons':
         specifier: workspace:*
         version: link:../packages/icons
+      '@nex-ui/primitives':
+        specifier: workspace:*
+        version: link:../packages/primitives
       '@nex-ui/react':
         specifier: workspace:*
         version: link:../packages/react
