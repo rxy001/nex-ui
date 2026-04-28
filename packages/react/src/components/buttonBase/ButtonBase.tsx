@@ -49,7 +49,6 @@ export function ButtonBase(props: ButtonBaseProps) {
     }
 
     if (
-      focusVisible &&
       event.target === event.currentTarget &&
       event.currentTarget.tagName !== 'BUTTON'
     ) {
@@ -72,7 +71,6 @@ export function ButtonBase(props: ButtonBaseProps) {
     }
 
     if (
-      focusVisible &&
       event.target === event.currentTarget &&
       event.key === ' ' &&
       event.currentTarget.tagName !== 'BUTTON'

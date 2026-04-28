@@ -45,7 +45,10 @@ const preview: Preview = {
     (Story, context) => {
       return (
         <NexUIProvider
-          disablePreflight={context.tags.includes('nui-utility')}
+          disablePreflight={
+            context.title.includes('Primitives') ||
+            context.title.includes('Utilities')
+          }
           colorScheme={{
             colorSchemeSelector: 'class',
           }}

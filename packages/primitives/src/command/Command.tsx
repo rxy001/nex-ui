@@ -1,0 +1,234 @@
+'use client'
+
+/**
+ * https://w3c.github.io/aria/#command
+ */
+
+import { useMemo, useRef } from 'react'
+import { isTextField } from '@nex-ui/utils'
+import { useEvent, useMergeRefs } from '@nex-ui/hooks'
+import { useTagName, useFocusRing, createPrimitive, createHook } from '../utils'
+import type { HookProps, HTMLElements, RenderProp } from '../utils/types'
+
+export const useCommand = createHook<'div', CommandOwnProps, CommandState>(
+  function useCommand({
+    clickOnEnter = true,
+    clickOnSpace = true,
+    ...props
+  }: UseCommandProps) {
+    const activeRef = useRef(false)
+    const ref = useRef<HTMLDivElement>(null)
+    const mergedRefs = useMergeRefs(ref, props.ref)
+    const tagName = useTagName(ref)
+    const supportsDisabled = useSupportsDisabled(tagName)
+    const tabIndex = useTabIndex({
+      tagName,
+      supportsDisabled,
+      disabled: props.disabled,
+      tabIndex: props.tabIndex,
+    })
+
+    const { onKeyDown } = props
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      activeRef.current = false
+      if (props.disabled) return
+      onKeyDown?.(event)
+
+      if (event.defaultPrevented) return
+
+      const element = event.currentTarget
+
+      // Avoid treating text inputs as clickable buttons activated via Space or Enter.
+      if (isTextField(element)) return
+      if (event.target !== event.currentTarget) return
+      if (element.isContentEditable) return
+
+      const shouldClickOnEnter = clickOnEnter && event.key === 'Enter'
+      const shouldClickOnSpace = clickOnSpace && event.key === ' '
+
+      if (
+        (event.key === 'Enter' && !clickOnEnter) ||
+        (event.key === ' ' && !clickOnSpace)
+      ) {
+        event.preventDefault()
+        return
+      }
+
+      if (!shouldClickOnEnter && !shouldClickOnSpace) return
+      if (isNativeClick(event)) return
+
+      if (event.metaKey) return
+
+      if (shouldClickOnEnter) {
+        element.click()
+        event.preventDefault()
+      }
+
+      if (event.ctrlKey || event.altKey) return
+      if (shouldClickOnSpace) {
+        activeRef.current = true
+        event.preventDefault()
+      }
+    }
+
+    const { onKeyUp } = props
+    const handleKeyUp = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (props.disabled) return
+      onKeyUp?.(event)
+      if (event.defaultPrevented) return
+      if (activeRef.current && event.key === ' ') {
+        activeRef.current = false
+        event.currentTarget.click()
+        event.preventDefault()
+      }
+    }
+
+    const handleClick = useDisableEvent(props.onClick, props.disabled)
+
+    const handleMouseDown = useDisableEvent(props.onMouseDown, props.disabled)
+
+    const handlePointerDown = useDisableEvent(
+      props.onPointerDown,
+      props.disabled,
+    )
+
+    props = {
+      'aria-disabled': !supportsDisabled ? props.disabled : undefined,
+      ...props,
+      tabIndex,
+      ref: mergedRefs,
+      onKeyDown: handleKeyDown,
+      onKeyUp: handleKeyUp,
+      onClick: handleClick,
+      onMouseDown: handleMouseDown,
+      onPointerDown: handlePointerDown,
+    }
+
+    const state: CommandState = {
+      disabled: props.disabled,
+    }
+
+    ;({ props, focusVisible: state.focusVisible } = useFocusRing(props))
+
+    return {
+      props,
+      state,
+    }
+  },
+)
+
+export function Command({ render, ...other }: CommandProps) {
+  const { props, state } = useCommand(other)
+
+  return createPrimitive('div', props, {
+    render,
+    state,
+  })
+}
+
+Command.displayName = 'Command'
+
+export interface CommandProps extends UseCommandProps {
+  render?: RenderProp<CommandState>
+}
+
+function useDisableEvent(
+  onEvent?: React.EventHandler<React.SyntheticEvent>,
+  disabled?: boolean,
+) {
+  return useEvent((event: React.SyntheticEvent) => {
+    if (disabled) {
+      event.stopPropagation()
+      event.preventDefault()
+
+      return
+    }
+    onEvent?.(event)
+  })
+}
+
+function isNativeClick(event: React.KeyboardEvent) {
+  if (!event.isTrusted) return false
+  const element = event.currentTarget
+  if (event.key === 'Enter') {
+    return (
+      element.tagName === 'BUTTON' ||
+      element.tagName === 'SUMMARY' ||
+      element.tagName === 'A'
+    )
+  }
+  if (event.key === ' ') {
+    return (
+      element.tagName === 'BUTTON' ||
+      element.tagName === 'SUMMARY' ||
+      element.tagName === 'INPUT' ||
+      element.tagName === 'SELECT'
+    )
+  }
+  return false
+}
+
+function useTabIndex({
+  tagName,
+  disabled,
+  tabIndex,
+  supportsDisabled,
+}: {
+  tagName?: string
+  disabled?: boolean
+  tabIndex?: number
+  supportsDisabled?: boolean
+}) {
+  const isNativeTabbable = useMemo(() => {
+    if (!tagName) return true
+    return (
+      tagName === 'button' ||
+      tagName === 'summary' ||
+      tagName === 'input' ||
+      tagName === 'select' ||
+      tagName === 'textarea' ||
+      tagName === 'a'
+    )
+  }, [tagName])
+
+  // Elements that support the `disabled` attribute don't need tabIndex.
+  if (disabled) return isNativeTabbable && !supportsDisabled ? -1 : undefined
+  if (tabIndex !== undefined) return tabIndex
+  if (isNativeTabbable) return undefined
+  return 0
+}
+
+function useSupportsDisabled(tagName?: string) {
+  return useMemo(() => {
+    if (!tagName) return true
+    return (
+      tagName === 'button' ||
+      tagName === 'input' ||
+      tagName === 'select' ||
+      tagName === 'textarea' ||
+      tagName === 'optgroup' ||
+      tagName === 'option' ||
+      tagName === 'fieldset'
+    )
+  }, [tagName])
+}
+
+interface CommandOwnProps {
+  clickOnEnter?: boolean
+
+  clickOnSpace?: boolean
+
+  disabled?: boolean
+
+  autoFocus?: boolean
+}
+
+export interface CommandState {
+  focusVisible?: boolean
+  disabled?: boolean
+}
+
+export type UseCommandProps<Element extends HTMLElements = 'div'> = HookProps<
+  Element,
+  CommandOwnProps
+>
