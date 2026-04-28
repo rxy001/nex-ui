@@ -1,0 +1,46 @@
+{
+  "name": "@nex-ui/primitives",
+  "version": "0.0.0",
+  "author": "X1ng Yu",
+  "private": false,
+  "description": "Unstyled, accessible React components.",
+  "keywords": [
+    "react",
+    "react-component",
+    "nui",
+    "nex-ui",
+    "primitives"
+  ],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rxy001/nex-ui.git",
+    "directory": "packages/primitives"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsx ../../scripts/build.ts --dts",
+    "build:fast": "tsx ../../scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "type": "module",
+  "main": "src/index.ts",
+  "sideEffects": false,
+  "dependencies": {
+    "@nex-ui/hooks": "workspace:*",
+    "@nex-ui/utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0",
+    "react-dom": "^19.0"
+  },
+  "devDependencies": {
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "clean-package": "../../clean-package.config.json"
+}
