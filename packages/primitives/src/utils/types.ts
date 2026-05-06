@@ -18,3 +18,5 @@ export type HookProps<
   Element extends HTMLElements,
   OwnProps extends Record<string, any>,
 > = Overwrite<HTMLProps<Element>, OwnProps>
+
+export type Directory<T = any> = Record<string, T>

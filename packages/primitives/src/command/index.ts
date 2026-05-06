@@ -1,9 +1,3 @@
-export { useCommand } from './useCommand'
-export { Command } from './Command'
+export { Command, useCommand } from './Command'
 
-export type {
-  UseCommandProps,
-  UseCommandOwnProps,
-  CommandState,
-} from './useCommand'
-export type { CommandProps } from './Command'
+export type { UseCommandProps, CommandState, CommandProps } from './Command'

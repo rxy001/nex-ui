@@ -1,16 +1,18 @@
-import type { HookProps, HTMLProps, HTMLElements } from './types'
+import type { HookProps, HTMLProps, HTMLElements, Directory } from './types'
 
-type HookReturnType<Element extends HTMLElements, State> = {
+type HookReturnType<Element extends HTMLElements, State, Context> = {
   props: HTMLProps<Element>
   state: State
+  context: Context extends Directory ? Context : never
 }
 
 export function createHook<
   E extends HTMLElements,
-  P extends Record<string, any>,
-  S extends Record<string, any>,
+  P extends Directory,
+  S extends Directory,
+  C extends Directory | never = never,
 >(hook: (props: HookProps<E, P>) => any) {
   return <T extends HTMLElements = E>(
     props: HookProps<T, P>,
-  ): HookReturnType<T, S> => hook(props as unknown as HookProps<E, P>)
+  ): HookReturnType<T, S, C> => hook(props as unknown as HookProps<E, P>)
 }
