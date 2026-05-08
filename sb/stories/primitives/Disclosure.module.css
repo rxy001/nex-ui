@@ -1,0 +1,74 @@
+.Collapsible {
+  display: flex;
+  width: 14rem;
+  min-height: 9rem;
+  flex-direction: column;
+  justify-content: center;
+  color: oklch(12% 5% 264deg / 90%);
+}
+
+.Trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: oklch(12% 9.5% 264deg / 5%);
+  color: oklch(12% 5% 264deg / 90%);
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: oklch(12% 9% 264deg / 7%);
+    }
+  }
+
+  &:active {
+    background-color: oklch(12% 9% 264deg / 7%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid oklch(45% 50% 264deg);
+  }
+
+  &[data-panel-open] .Icon {
+    transform: rotate(90deg);
+  }
+}
+
+.Panel {
+  display: flex;
+  height: var(--collapsible-panel-height);
+  flex-direction: column;
+  justify-content: end;
+  overflow: hidden;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition: all 150ms ease-out;
+
+  &[hidden]:not([hidden='until-found']) {
+    display: none;
+  }
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    height: 0;
+  }
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  border-radius: 0.25rem;
+  background-color: oklch(12% 9.5% 264deg / 5%);
+  cursor: text;
+}
