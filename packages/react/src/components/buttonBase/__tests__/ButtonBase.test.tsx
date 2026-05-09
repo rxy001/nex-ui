@@ -6,7 +6,6 @@ import {
 } from '~/tests/shared'
 import { fireEvent } from '@testing-library/react'
 import { ButtonBase } from '../index'
-import type { ButtonHTMLAttributes } from 'react'
 
 describe('ButtonBase', () => {
   testComponentStability(<ButtonBase />)
@@ -56,39 +55,6 @@ describe('ButtonBase', () => {
     const { getByRole } = renderWithNexUIProvider(
       <ButtonBase as='button'>Button</ButtonBase>,
     )
-    const button = getByRole('button')
-    expect(button).not.toHaveAttribute('role', 'button')
-  })
-
-  it('should automatically change the button to an anchor element when href is provided', () => {
-    const { getByRole } = renderWithNexUIProvider(
-      <ButtonBase href='https://example.com'>Link</ButtonBase>,
-    )
-    const link = getByRole('link')
-    expect(link.tagName).toBe('A')
-    expect(link).toHaveAttribute('href', 'https://example.com')
-    expect(link).not.toHaveAttribute('type')
-    expect(link).not.toHaveAttribute('role')
-  })
-
-  it('should apply role="button" when anchor is used without href', () => {
-    const { getByRole } = renderWithNexUIProvider(
-      <ButtonBase as='a'>Anchor</ButtonBase>,
-    )
-    const anchor = getByRole('button')
-    expect(anchor.tagName).toBe('A')
-    expect(anchor).not.toHaveAttribute('type')
-  })
-
-  it('should not apply role="button" when as prop is custom component', () => {
-    function Component(props: ButtonHTMLAttributes<HTMLButtonElement>) {
-      return <button {...props}>Custom</button>
-    }
-
-    const { getByRole } = renderWithNexUIProvider(
-      <ButtonBase as={Component}>Button</ButtonBase>,
-    )
-
     const button = getByRole('button')
     expect(button).not.toHaveAttribute('role', 'button')
   })

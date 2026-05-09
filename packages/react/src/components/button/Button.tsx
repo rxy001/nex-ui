@@ -28,6 +28,7 @@ export function Button<RootComponent extends ElementType = 'button'>(
   })
 
   const {
+    as,
     children,
     slotProps,
     spinner,
@@ -83,6 +84,10 @@ export function Button<RootComponent extends ElementType = 'button'>(
     classNames: slotClasses.root,
     style: styles.root,
     additionalProps: {
+      as: (as ??
+        (typeof props.href === 'string' && props.href
+          ? 'a'
+          : 'button')) as 'button',
       disabled,
     },
     dataAttrs: {

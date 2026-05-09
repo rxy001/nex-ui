@@ -158,7 +158,6 @@ export function AccordionItem<RootComponent extends ElementType = 'div'>(
     ariaProps: slotAriaProps.trigger,
     additionalProps: {
       disabled,
-      tabIndex: disabled ? -1 : 0,
       onClick: () => {
         toggleExpandedKey(itemKey)
       },
