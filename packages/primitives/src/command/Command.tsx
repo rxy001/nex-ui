@@ -29,59 +29,64 @@ export const useCommand = createHook<'div', CommandOwnProps, CommandState>(
     })
 
     const { onKeyDown } = props
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-      activeRef.current = false
-      if (props.disabled) return
-      onKeyDown?.(event)
+    const handleKeyDown = useDisableEvent(
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        activeRef.current = false
+        onKeyDown?.(event)
 
-      if (event.defaultPrevented) return
+        if (event.defaultPrevented) return
 
-      const element = event.currentTarget
+        const element = event.currentTarget
 
-      // Avoid treating text inputs as clickable buttons activated via Space or Enter.
-      if (isTextField(element)) return
-      if (event.target !== event.currentTarget) return
-      if (element.isContentEditable) return
+        // Avoid treating text inputs as clickable buttons activated via Space or Enter.
+        if (isTextField(element)) return
+        if (event.target !== event.currentTarget) return
+        if (element.isContentEditable) return
 
-      const shouldClickOnEnter = clickOnEnter && event.key === 'Enter'
-      const shouldClickOnSpace = clickOnSpace && event.key === ' '
+        const shouldClickOnEnter = clickOnEnter && event.key === 'Enter'
+        const shouldClickOnSpace = clickOnSpace && event.key === ' '
 
-      if (
-        (event.key === 'Enter' && !clickOnEnter) ||
-        (event.key === ' ' && !clickOnSpace)
-      ) {
-        event.preventDefault()
-        return
-      }
+        if (
+          (event.key === 'Enter' && !clickOnEnter) ||
+          (event.key === ' ' && !clickOnSpace)
+        ) {
+          event.preventDefault()
+          return
+        }
 
-      if (!shouldClickOnEnter && !shouldClickOnSpace) return
-      if (isNativeClick(event)) return
+        if (!shouldClickOnEnter && !shouldClickOnSpace) return
+        if (isNativeClick(event)) return
 
-      if (event.metaKey) return
+        if (event.metaKey) return
 
-      if (shouldClickOnEnter) {
-        element.click()
-        event.preventDefault()
-      }
+        if (shouldClickOnEnter) {
+          element.click()
+          event.preventDefault()
+        }
 
-      if (event.ctrlKey || event.altKey) return
-      if (shouldClickOnSpace) {
-        activeRef.current = true
-        event.preventDefault()
-      }
-    }
+        if (event.ctrlKey || event.altKey) return
+        if (shouldClickOnSpace) {
+          activeRef.current = true
+          event.preventDefault()
+        }
+      },
+      props.disabled,
+    )
 
     const { onKeyUp } = props
-    const handleKeyUp = (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (props.disabled) return
-      onKeyUp?.(event)
-      if (event.defaultPrevented) return
-      if (activeRef.current && event.key === ' ') {
-        activeRef.current = false
-        event.currentTarget.click()
-        event.preventDefault()
-      }
-    }
+    const handleKeyUp = useDisableEvent(
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        onKeyUp?.(event)
+        if (event.defaultPrevented) return
+
+        if (activeRef.current && event.key === ' ') {
+          activeRef.current = false
+          event.currentTarget.click()
+          event.preventDefault()
+        }
+      },
+      props.disabled,
+    )
 
     const handleClick = useDisableEvent(props.onClick, props.disabled)
 
