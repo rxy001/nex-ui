@@ -21,8 +21,6 @@ export interface CompositeProps<T extends string | number = string> {
    * @default false
    */
   loop?: boolean
-
-  virtualFocus?: boolean
 }
 
 export interface CompositeItemProps<T extends string | number = string> {

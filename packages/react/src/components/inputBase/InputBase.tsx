@@ -74,6 +74,7 @@ export function InputBase(props: InputBaseProps) {
     onClick,
     onKeyUp,
     onChange,
+    onFocus,
     checked: checkProp,
     type = 'text',
     as = 'input',
@@ -164,6 +165,16 @@ export function InputBase(props: InputBaseProps) {
     onChange?.(event)
   }
 
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (disabled) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    onFocus?.(event)
+    focusProps.onFocus?.(event)
+  }
+
   const ariaProps = useMemo(() => {
     if (isFunction(as)) {
       return {}
@@ -212,10 +223,11 @@ export function InputBase(props: InputBaseProps) {
       disabled,
       autoFocus,
       checked: currentChecked,
+      ...focusProps,
       onKeyUp: handleKeyUp,
       onClick: handleClick,
       onChange: handleChange,
-      ...focusProps,
+      onFocus: handleFocus,
     },
     dataAttrs: {
       focusVisible: focusVisible || undefined,

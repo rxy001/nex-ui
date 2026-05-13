@@ -7,7 +7,6 @@ import { useEffect, useId, useMemo, useRef } from 'react'
 import { useNexUI } from '../provider'
 import { InputBase } from '../inputBase'
 import { useRadioGroupContext } from './RadioGroupContext'
-import { CollectionItem } from './Collection'
 import {
   useDefaultProps,
   useSlot,
@@ -16,7 +15,7 @@ import {
 } from '../utils'
 import { radioRecipe } from '../../themes/recipes'
 import { CompositeItem } from '../composite'
-import type { ElementType, FocusEvent } from 'react'
+import type { ElementType } from 'react'
 import type { RadioOwnerState, RadioProps } from './types'
 
 const slots = ['root', 'input', 'indicator', 'label'] as const
@@ -183,13 +182,8 @@ export function Radio<
       checked,
       value,
       onCheckedChange: handleChange,
-      onFocus: (event: FocusEvent<HTMLElement>) => {
-        if (disabled) {
-          event.preventDefault()
-          event.stopPropagation()
-          return
-        }
-        if (isArrowKeyPressed.current) {
+      onFocus: () => {
+        if (inGroup && isArrowKeyPressed.current) {
           handleChange(true)
         }
       },
@@ -197,6 +191,8 @@ export function Radio<
   })
 
   useEffect(() => {
+    if (!inGroup) return
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (arrowKeys.includes(event.key)) {
         isArrowKeyPressed.current = true
@@ -223,7 +219,7 @@ export function Radio<
       removeKeyDownListener()
       removeKeyUpListener()
     }
-  }, [])
+  }, [inGroup])
 
   const [RadioLabel, getRadioLabelProps] = useSlot({
     component: nex.span,
@@ -249,11 +245,9 @@ export function Radio<
   return (
     <RadioRoot {...getRadioRootProps()}>
       {inGroup ? (
-        <CollectionItem disabled={disabled} id={value ?? ariaId}>
-          <CompositeItem disabled={disabled} id={value ?? ariaId}>
-            <RadioInput {...getRadioInputProps()} />
-          </CompositeItem>
-        </CollectionItem>
+        <CompositeItem disabled={disabled} id={value ?? ariaId}>
+          <RadioInput {...getRadioInputProps()} />
+        </CompositeItem>
       ) : (
         <RadioInput {...getRadioInputProps()} />
       )}

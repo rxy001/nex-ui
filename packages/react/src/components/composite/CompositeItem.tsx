@@ -1,9 +1,9 @@
+'use client'
+
 import { isValidNonFragmentElement, mergeProps } from '@nex-ui/utils'
 import { cloneElement, useId, useMemo } from 'react'
 import { CollectionItem, useCollectionContext } from './Collection'
 import { useCompositeContext } from './CompositeContext'
-import { HOME_AND_END, VERTICAL_KEYS, HORIZONTAL_KEYS } from './constants'
-
 import type { KeyboardEvent, FocusEvent } from 'react'
 import type { CompositeItemData } from './Collection'
 import type { CompositeItemProps } from './types'
@@ -14,8 +14,7 @@ export function CompositeItem<T extends string | number = string>(
   inProps: CompositeItemProps<T>,
 ) {
   const props = inProps as unknown as CompositeItemProps
-  const { orientation, loop, setActiveId, activeId, virtualFocus } =
-    useCompositeContext()
+  const { orientation, loop, setActiveId, activeId } = useCompositeContext()
   const collection = useCollectionContext()
   const defaultId = useId()
   const { children, disabled, id = defaultId, ...remainingProps } = props
@@ -65,10 +64,10 @@ export function CompositeItem<T extends string | number = string>(
   }
 
   const isTabbable = useMemo(() => {
-    if (disabled || virtualFocus) return false
+    if (disabled) return false
 
     return activeId === id
-  }, [activeId, disabled, id, virtualFocus])
+  }, [activeId, disabled, id])
 
   if (!isValidNonFragmentElement(children)) {
     return children
@@ -94,24 +93,30 @@ export function CompositeItem<T extends string | number = string>(
 
 CompositeItem.displayName = 'CompositeItem'
 
+const HOME_END_KEYS = ['Home', 'End']
+const VERTICAL_KEYS = ['ArrowUp', 'ArrowDown']
+const HORIZONTAL_KEYS = ['ArrowLeft', 'ArrowRight']
+
 function getNavigationIntent(
   event: KeyboardEvent<HTMLElement>,
   orientation: CompositeContextValue['orientation'],
 ) {
   if (
     orientation === 'vertical' &&
-    ![...HOME_AND_END, ...VERTICAL_KEYS].includes(event.key)
+    ![...HOME_END_KEYS, ...VERTICAL_KEYS].includes(event.key)
   )
     return
   if (
     orientation === 'horizontal' &&
-    ![...HOME_AND_END, ...HORIZONTAL_KEYS].includes(event.key)
+    ![...HOME_END_KEYS, ...HORIZONTAL_KEYS].includes(event.key)
   )
     return
 
   if (
     orientation === 'both' &&
-    ![...HOME_AND_END, ...VERTICAL_KEYS, ...HORIZONTAL_KEYS].includes(event.key)
+    ![...HOME_END_KEYS, ...VERTICAL_KEYS, ...HORIZONTAL_KEYS].includes(
+      event.key,
+    )
   ) {
     return
   }

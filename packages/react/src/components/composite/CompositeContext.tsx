@@ -4,7 +4,6 @@ import type { CompositeProps } from './types'
 export interface CompositeContextValue {
   orientation: Exclude<CompositeProps['orientation'], undefined>
   loop: boolean
-  virtualFocus: boolean
   activeId: string
   setActiveId: (id: string) => void
 }
