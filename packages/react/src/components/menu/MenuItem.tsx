@@ -4,7 +4,8 @@ import { nex } from '@nex-ui/styled'
 import { useRef } from 'react'
 import { defineRecipe } from '@nex-ui/system'
 import { useSlot } from '../utils'
-import { useMenuContentContext, useRootMenuContext } from './MenuContext'
+import { useRootMenuContext } from './MenuContext'
+import { ListNavigationItem } from '../listNavigation'
 import type { KeyboardEvent, MouseEvent } from 'react'
 import type { MenuItemProps } from './types'
 
@@ -23,7 +24,6 @@ const style = recipe()
 
 export function MenuItem(props: MenuItemProps) {
   const rootMenuCtx = useRootMenuContext()
-  const menuContentCtx = useMenuContentContext()
   const {
     disabled,
     children,
@@ -57,8 +57,6 @@ export function MenuItem(props: MenuItemProps) {
       ref,
       onClick: handleClick,
       onKeyDown: handleKeyDown,
-      onPointerMove: menuContentCtx.onItemEnter,
-      onPointerLeave: menuContentCtx.onItemLeave,
     },
     dataAttrs: {
       disabled,
@@ -69,7 +67,11 @@ export function MenuItem(props: MenuItemProps) {
     },
   })
 
-  return <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
+  return (
+    <ListNavigationItem disabled={disabled}>
+      <MenuItemRoot {...getMenuItemRootProps()}>{children}</MenuItemRoot>
+    </ListNavigationItem>
+  )
 }
 
 MenuItem.displayName = 'MenuItem'

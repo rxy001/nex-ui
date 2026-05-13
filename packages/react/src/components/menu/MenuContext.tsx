@@ -1,6 +1,5 @@
 import { createContext } from '@nex-ui/utils'
-import type { RefObject, PointerEvent } from 'react'
-import type { Side } from '../utils'
+import type { RefObject } from 'react'
 
 export interface MenuContextValue {
   open?: boolean
@@ -29,19 +28,6 @@ export const [RootMenuProvider, useRootMenuContext] =
     providerName: 'RootMenuProvider',
     strict: true,
     defaultValue: null as unknown as RootMenuContextValue,
-  })
-
-export interface SubMenuContextValue {
-  subMenuContentRef: RefObject<HTMLDivElement | null>
-}
-
-export const [SubMenuProvider, useSubMenuContext] =
-  createContext<SubMenuContextValue>({
-    contextName: 'SubMenuContext',
-    hookName: 'useSubMenuContext',
-    providerName: 'SubMenuProvider',
-    strict: false,
-    defaultValue: null as unknown as SubMenuContextValue,
   })
 
 export interface MenuRadioItemGroupContextValue<T extends string | number> {
@@ -74,31 +60,6 @@ export const [MenuCheckboxItemGroupProvider, useMenuCheckboxItemGroupContext] =
     defaultValue: null as unknown as MenuCheckboxItemGroupContextValue<
       number | string
     >,
-  })
-
-export interface GraceIntent {
-  area: {
-    top: number
-    bottom: number
-    left: number
-    right: number
-  }
-  side: Side
-}
-
-export interface MenuContentContextValue {
-  onItemEnter: (event: PointerEvent<HTMLElement>) => void
-  onItemLeave: (event: PointerEvent<HTMLElement>) => void
-  onPointerGraceIntentChange(intent: GraceIntent | null): void
-}
-
-export const [MenuContentProvider, useMenuContentContext] =
-  createContext<MenuContentContextValue>({
-    contextName: 'MenuContentContext',
-    hookName: 'useMenuContentContext',
-    providerName: 'MenuContentProvider',
-    strict: true,
-    defaultValue: null as unknown as MenuContentContextValue,
   })
 
 export interface MenuItemIndicatorContextValue {

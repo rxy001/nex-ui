@@ -64,17 +64,21 @@ export default meta
 
 export function Default() {
   return (
-    <MenuWrapper>
-      <MenuItem disabled sx={itemStyle}>
-        Undo
-      </MenuItem>
-      <MenuItem sx={itemStyle}>Redo</MenuItem>
-      <MenuItem sx={itemStyle} disabled>
-        Cut
-      </MenuItem>
-      <MenuItem sx={itemStyle}>Copy</MenuItem>
-      <MenuItem sx={itemStyle}>Paste</MenuItem>
-    </MenuWrapper>
+    <>
+      <button>Previous</button>
+      <MenuWrapper>
+        <MenuItem disabled sx={itemStyle}>
+          Undo
+        </MenuItem>
+        <MenuItem sx={itemStyle}>Redo</MenuItem>
+        <MenuItem sx={itemStyle} disabled>
+          Cut
+        </MenuItem>
+        <MenuItem sx={itemStyle}>Copy</MenuItem>
+        <MenuItem sx={itemStyle}>Paste</MenuItem>
+      </MenuWrapper>
+      <button>Next</button>
+    </>
   )
 }
 

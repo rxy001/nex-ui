@@ -3,12 +3,8 @@
 import { useId, useLayoutEffect, useMemo, useRef } from 'react'
 import { useEvent } from '@nex-ui/hooks'
 import { Popper } from '../popper'
-import {
-  MenuProvider,
-  RootMenuProvider,
-  SubMenuProvider,
-  useMenuContext,
-} from './MenuContext'
+import { ListNavigationProvider } from '../listNavigation'
+import { MenuProvider, RootMenuProvider, useMenuContext } from './MenuContext'
 import type { MenuProps, MenuImplProps, SubMenuProps } from './types'
 import type { MenuContextValue } from './MenuContext'
 
@@ -52,20 +48,19 @@ export function Menu(props: MenuProps) {
   const ctx = useMemo(() => ({ close }), [close])
 
   return (
-    <MenuImpl onOpenChange={onOpenChange} {...remainingProps}>
-      <RootMenuProvider value={ctx}>{children}</RootMenuProvider>
-    </MenuImpl>
+    <ListNavigationProvider>
+      <MenuImpl onOpenChange={onOpenChange} {...remainingProps}>
+        <RootMenuProvider value={ctx}>{children}</RootMenuProvider>
+      </MenuImpl>
+    </ListNavigationProvider>
   )
 }
 Menu.displayName = 'Menu'
 
 export function SubMenu(props: SubMenuProps) {
   const parentMenuCtx = useMenuContext()
-  const subMenuContentRef = useRef<HTMLDivElement>(null)
 
   const { children, onOpenChange, ...remainingProps } = props
-
-  const subMenuCtx = useMemo(() => ({ subMenuContentRef }), [])
 
   useLayoutEffect(() => {
     // Close this menu if the parent menu is closed
@@ -76,9 +71,11 @@ export function SubMenu(props: SubMenuProps) {
   }, [parentMenuCtx.open, onOpenChange])
 
   return (
-    <MenuImpl onOpenChange={onOpenChange} {...remainingProps}>
-      <SubMenuProvider value={subMenuCtx}>{children}</SubMenuProvider>
-    </MenuImpl>
+    <ListNavigationProvider>
+      <MenuImpl onOpenChange={onOpenChange} {...remainingProps}>
+        {children}
+      </MenuImpl>
+    </ListNavigationProvider>
   )
 }
 
